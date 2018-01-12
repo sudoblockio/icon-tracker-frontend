@@ -12,12 +12,17 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
-          <Header />
-          <Route exact path='/' component={MainPage}/>
-          <Route path='/wallet' component={WalletPage}/>
-          <Route path='/transactions' component={TransactionsPage}/>
-          <Route path='/blocks' component={BlocksPage}/>
+        <div>
+          <div className="root">
+            <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
+              <Header />
+              <Route exact path='/' component={MainPage}/>
+              <Route path='/wallet' component={WalletPage}/>
+              <Route path='/transactions' component={TransactionsPage}/>
+              <Route path='/blocks' component={BlocksPage}/>
+            </div>
+            <div className="blank"></div>
+          </div>
           <Footer />
         </div>
       </Provider>
