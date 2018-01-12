@@ -7,6 +7,7 @@ import TransactionsPage from './TransactionsPage/TransactionsPage'
 import BlocksPage from './BlocksPage/BlocksPage'
 
 import LoadingComponent from './Common/LoadingComponent'
+import Pagination from './Common/Pagination'
 
 export {
   Header,
@@ -17,5 +18,6 @@ export {
   TransactionsPage,
   BlocksPage,
 
-  LoadingComponent
+  LoadingComponent,
+  Pagination
 }

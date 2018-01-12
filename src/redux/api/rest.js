@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-const axiosApi = axios.create({
+let axiosApi = axios.create({
   baseURL: 'http://13.125.99.181:8080',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
 })
 
@@ -20,13 +21,11 @@ export function postMainInfo() {
 }
 
 export function getBlocksApi(payload) {
-  const data = {
-    "page": payload || 0
-  }
+  const pageNum = payload || 0
   return new Promise((resolve, reject) => {
-    axiosApi.post('/v0/block/recentBlock', JSON.stringify(data))
+    axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
       .then(result => {
-        resolve(result.data)
+        resolve(result.data.data)
       })
       .catch(error => {
         alert(error)

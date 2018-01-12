@@ -5,7 +5,8 @@ import { getBlocks } from '../../redux/actions/blocksActions';
 function mapStateToProps(state) {
   return {
     loading: state.blocks.blocks.loading,
-    data: state.blocks.blocks.data
+    data: state.blocks.blocks.data,
+    pageNum: state.blocks.blocks.pageNum,
   };
 }
 

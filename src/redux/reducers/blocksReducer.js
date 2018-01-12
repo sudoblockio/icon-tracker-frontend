@@ -4,6 +4,7 @@ const initialState = {
     blocks: {
       loading: true,
       data: [],
+      pageNum: 0,
       error: ''
     },
     block: {

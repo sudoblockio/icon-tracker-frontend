@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
+import { postMainInfo } from '../../redux/api/rest'
 
 class MainPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {}
+  }
+
+  componentDidMount() {
+    postMainInfo().then(
+      result => {
+        console.log(result)
+      }
+    )
   }
 
   render() {
