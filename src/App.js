@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <div id="app-root">
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
               <Header />

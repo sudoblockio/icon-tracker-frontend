@@ -1,3 +1,11 @@
+#root {
+  height: 100%;
+}
+
+#app-root {
+  height: 100%;
+}
+
 .header-wrap .logo em{font-weight: 500; font-size: 20px;     margin: 7px 96px; display: inline-block; color: #fff;}
 .header-wrap .link > ul li{display: inline-block; margin: 0 20px; cursor: pointer; color: rgba(255,255,255, 0.5);}
 .header-wrap .link > ul li:after{content: ""; display: none; width: 6px; height: 6px; background: #fff;border-radius: 50%; margin: 4px auto;}
