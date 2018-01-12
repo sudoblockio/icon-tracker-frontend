@@ -11,6 +11,9 @@ import WalletPage from './WalletPage/WalletPage'
 import TransactionsPage from './TransactionsPage/TransactionsPage'
 import BlocksPage from './BlocksPage/BlocksPage'
 
+import LoadingComponent from './Common/LoadingComponent'
+import Pagination from './Common/Pagination'
+
 export {
   Header,
   Footer,
@@ -24,4 +27,7 @@ export {
   WalletPage,
   TransactionsPage,
   BlocksPage,
+
+  LoadingComponent,
+  Pagination
 }

@@ -11,3 +11,18 @@
 .header-wrap .link > ul li:after{content: ""; display: none; width: 6px; height: 6px; background: #fff;border-radius: 50%; margin: 4px auto;}
 .header-wrap .link > ul li:hover::after{display: block;}
 .header-wrap .link > ul li:hover{color: rgba(255,255,255,1);}
+
+/* 로딩 컴포넌트 */
+.loadingDiv {
+  width: 100%;
+  height: inherit;
+  position: relative;
+}
+.loading {
+	  margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}

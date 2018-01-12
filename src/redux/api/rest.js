@@ -4,6 +4,7 @@ let axiosApi = axios.create({
   baseURL: 'http://13.125.99.181:8080',
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
 })
 
@@ -14,6 +15,20 @@ export function getMainInfo() {
         resolve(result.data)
       })
       .catch(error => {
+        reject(error)
+      })
+  })
+}
+
+export function getBlocksApi(payload) {
+  const pageNum = payload || 0
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
+      .then(result => {
+        resolve(result.data.data)
+      })
+      .catch(error => {
+        alert(error)
         reject(error)
       })
   })
