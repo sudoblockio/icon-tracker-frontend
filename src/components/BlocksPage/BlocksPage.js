@@ -16,7 +16,7 @@ class BlocksPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum, getBlocks } = this.props;
+    const { loading, data, pageNum, getBlocks, totalNum } = this.props;
     return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -53,6 +53,7 @@ class BlocksPage extends Component {
 
 							<Pagination
                 pageNum={pageNum}
+                maxPageNum={Math.floor(totalNum / 20)}
                 getData={getBlocks} />
 						</div>
 					</div>
