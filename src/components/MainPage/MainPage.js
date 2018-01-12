@@ -15,7 +15,6 @@ class MainPage extends Component {
   }
 
   render() {
-    console.log(this.props.mainPage)
     return (
       <div className="content-wrap">
         <div className="screen0">
