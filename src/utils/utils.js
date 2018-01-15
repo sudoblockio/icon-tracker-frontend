@@ -7,6 +7,7 @@ const CURRENCY_ROUND = {
 };
 
 export function numberWithCommas(x) {
+  if (!x) { x = 0 }
 	let parts = x.toString().split('.');
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	return parts.join('.');
@@ -27,5 +28,5 @@ export function isInt(value) {
 }
 
 export function dateToUTC9(date) {
-    return moment(date).utcOffset(9).format('YYYY-MM-DD HH:mm:ss')
+    return moment(date).utcOffset(9).format('YYYY-MM-DD HH:mm:ss [(UTC+9)]')
 }

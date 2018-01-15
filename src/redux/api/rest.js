@@ -8,9 +8,9 @@ let axiosApi = axios.create({
   }
 })
 
-export function postMainInfo() {
+export function getMainInfo() {
   return new Promise((resolve, reject) => {
-    axiosApi.post('/v0/main/mainInfo')
+    axiosApi.get('/v0/main/mainInfo')
       .then(result => {
         resolve(result.data)
       })
