@@ -33,3 +33,19 @@ export function getBlocksApi(payload) {
       })
   })
 }
+
+export function getBlockApi(payload) {
+  const height = payload.height;
+  const pageNum = payload.pageNum || 0;
+
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/block/blockDetail?height='+height+'&page='+pageNum )
+      .then(result => {
+        resolve(result.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}

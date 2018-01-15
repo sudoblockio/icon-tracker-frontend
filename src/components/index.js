@@ -1,4 +1,5 @@
 import Header from './Header/Header'
+import SearchBox from './Header/SearchBox'
 import Footer from './Footer/Footer'
 
 import MainPage from './MainPage/MainPage'
@@ -16,6 +17,7 @@ import Pagination from './Common/Pagination'
 
 export {
   Header,
+  SearchBox,
   Footer,
 
   MainPage,

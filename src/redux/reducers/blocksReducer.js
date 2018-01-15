@@ -9,7 +9,7 @@ const initialState = {
     },
     block: {
       loading: true,
-      data: [],
+      data: {},
       error: ''
     }
 }

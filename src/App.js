@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage';
 import WalletPage from './pages/WalletPage';
 import TransactionsPage from './pages/TransactionsPage';
 import BlocksPage from './pages/BlocksPage';
+import BlockDetailPage from './pages/BlockDetailPage';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route path='/wallet' component={WalletPage}/>
               <Route path='/transactions' component={TransactionsPage}/>
               <Route path='/blocks' component={BlocksPage}/>
+              <Route path='/blocks/:id' component={BlockDetailPage}/>
             </div>
             <div className="blank"></div>
           </div>
