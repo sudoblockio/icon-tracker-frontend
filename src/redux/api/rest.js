@@ -33,3 +33,17 @@ export function getBlocksApi(payload) {
       })
   })
 }
+
+export function getTransactionsApi(payload){
+  const pageNum = payload || 0;
+  return new Promise((resolve, reject) => {
+    axiosApi.get('v0/transaction/recentTx?page=' + pageNum)
+      .then(result => {
+        resolve(result.data.data);
+      })
+      .catch(error => {
+        alert(error);
+        reject(error);
+      })
+  });
+}
