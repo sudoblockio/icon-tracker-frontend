@@ -1,11 +1,13 @@
 import MainPageContainer from './MainPage/MainPageContainer'
-import WalletPageContainer from './WalletPage/WalletPageContainer'
+import AddressesPageContainer from './AddressesPage/AddressesPageContainer'
+import AddressDetailPageContainer from './AddressesPage/AddressDetailPageContainer'
 import TransactionsPageContainer from './TransactionsPage/TransactionsPageContainer'
 import BlocksPageContainer from './BlocksPage/BlocksPageContainer'
 
 export {
   MainPageContainer,
-  WalletPageContainer,
+  AddressesPageContainer,
+  AddressDetailPageContainer,
   TransactionsPageContainer,
   BlocksPageContainer,
 }

@@ -10,7 +10,7 @@ class MainPage extends Component {
     this.state = {}
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getMainInfo()
   }
 

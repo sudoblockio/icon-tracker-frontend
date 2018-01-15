@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { mainPageReducer } from './mainPageReducer'
-import { walletReducer } from './walletReducer'
+import { addressesReducer } from './addressesReducer'
 import { transactionsReducer } from './transactionsReducer'
 import { blocksReducer } from './blocksReducer'
 
 const rootReducer = combineReducers({
   mainPage: mainPageReducer,
-  wallet: walletReducer,
+  addresses: addressesReducer,
   transactions: transactionsReducer,
   blocks: blocksReducer,
 });

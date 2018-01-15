@@ -20,6 +20,33 @@ export function getMainInfo() {
   })
 }
 
+export function getAddressesApi(payload) {
+  const pageNum = payload || 0
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/wallet/addrList?page=' + pageNum)
+      .then(result => {
+        resolve(result.data.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}
+
+export function getAddressDetailApi(payload) {
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + payload)
+      .then(result => {
+        resolve(result.data.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}
+
 export function getBlocksApi(payload) {
   const pageNum = payload || 0
   return new Promise((resolve, reject) => {

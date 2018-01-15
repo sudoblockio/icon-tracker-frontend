@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { numberWithCommas, dateToUTC9 } from '../../utils/utils'
+import { convertNumberToText, dateToUTC9 } from '../../utils/utils'
 
 class RecentTransactions extends Component {
   render() {
@@ -10,14 +10,14 @@ class RecentTransactions extends Component {
         <p className="title">Recent Transactions<Link to='/transactions'><span>View all<em className="img"></em></span></Link></p>
         <div className="list-group">
           <ul className="list">
-            {tmainTx.map((tx, i) => {
+            {tmainTx.map(tx => {
               const { txHash, amount, fee } = tx
               return (
-                <li key={i}>
+                <li key={txHash}>
                   <p className="icon"><img src="../image/icon_01.png" /></p>
                   <p className="a">TX Hash<em>{txHash.substr(0, 42)}</em></p>
-                  <p className="b">Amount<em>{`${numberWithCommas(amount)} ICX`}</em></p>
-                  <p className="c">Fee<em>{`${numberWithCommas(fee)} ICX`}</em></p>
+                  <p className="b">Amount<em>{`${convertNumberToText(amount, 'icx')} ICX`}</em></p>
+                  <p className="c">Fee<em>{`${convertNumberToText(fee, 'icx')} ICX`}</em></p>
                 </li>
               )
             })}
