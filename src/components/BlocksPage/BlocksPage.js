@@ -13,12 +13,12 @@ class BlocksPage extends Component {
 
   componentWillMount() {
     const { params } = this.props.match;
+  //  this.props.resetReducer();
     this.props.getBlocks(params['pageId']);
   }
 
   viewBlockDetail = (height) => {
-    const { history } = this.props;
-    history.push('/block/'+height)
+    this.props.history.push('/block/'+height)
   }
 
   getBlocksData = (pageId) => {

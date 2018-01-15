@@ -15,10 +15,12 @@ const actionTypes = {
   getBlocks: 'GET_BLOCKS',
   getBlocksFulfilled: 'GET_BLOCKS_FULFILLED',
   getBlocksRejected:'GET_BLOCKS_REJECTED',
+  resetBlocksReducer: 'RESET_BLOCKS_REDUCER',
 
   getBlock: 'GET_BLOCK',
   getBlockFulfilled: 'GET_BLOCK_FULFILLED',
   getBlockRejected:'GET_BLOCK_REJECTED',
+  resetBlockReducer: 'RESET_BLOCK_REDUCER',
 }
 
 export default actionTypes
