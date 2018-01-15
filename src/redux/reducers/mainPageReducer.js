@@ -1,4 +1,4 @@
-import actionTypes from '../actions/actionTypes'
+import actionTypes from '../actionTypes/actionTypes'
 
 const initialState = {
   loading: true,
@@ -14,7 +14,7 @@ export function mainPageReducer(state = initialState, action) {
       let { payload } = action
       payload.loading = false
       return Object.assign({}, state, payload)
-            
+
     default: {
       return state
     }

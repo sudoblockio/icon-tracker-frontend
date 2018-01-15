@@ -7,12 +7,13 @@ function mapStateToProps(state) {
     loading: state.blocks.blocks.loading,
     data: state.blocks.blocks.data,
     pageNum: state.blocks.blocks.pageNum,
+    maxPageNum: state.blocks.blocks.maxPageNum
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBlocks: () => dispatch(getBlocks())
+    getBlocks: (pageId) => dispatch(getBlocks(pageId))
   };
 }
 

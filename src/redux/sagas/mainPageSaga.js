@@ -1,5 +1,5 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
-import AT from '../actions/actionTypes';
+import AT from '../actionTypes/actionTypes';
 import { getMainInfo as GET_MAIN_INFO_API } from '../api/rest'
 
 function* getMainInfo(action) {

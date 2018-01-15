@@ -1,15 +1,20 @@
-import actionTypes from '../actionTypes/actionTypes'
+import actionTypes from '../actionTypes/actionTypes';
+import { calcMaxPageNum } from '../../utils/utils';
 
 const initialState = {
     blocks: {
       loading: true,
       data: [],
-      pageNum: 0,
+      pageNum: 1,
+      maxPageNum: 1,
       error: ''
     },
     block: {
       loading: true,
-      data: {},
+      data: {
+        blockDetail: {},
+        blockTx: []
+      },
       error: ''
     }
 }
@@ -17,11 +22,13 @@ const initialState = {
 export function blocksReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.getBlocks: {
+      console.log(action.payload)
       return {
         ...state,
         blocks : {
           ...state.blocks,
-          loading: true
+          loading: true,
+          pageNum: Number(action.payload) || 1
         }
       }
     }
@@ -32,7 +39,8 @@ export function blocksReducer(state = initialState, action) {
         blocks : {
           ...state.blocks,
           loading: false,
-          data : action.payload,
+          maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
+          data : action.payload.data,
           error: ''
         }
       }
