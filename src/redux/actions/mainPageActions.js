@@ -1,4 +1,4 @@
-import actionTypes from '../actions/actionTypes';
+import actionTypes from '../actionTypes/actionTypes';
 
 export function getMainInfo(action) {
   return {

@@ -10,10 +10,10 @@ class RecentBlocks extends Component {
         <p className="title">Recent Block<Link to='/blocks'><span>View all<em className="img"></em></span></Link></p>
         <div className="list-group">
           <ul className="list">
-            {tmainBlock.map((block, i) => {
+            {tmainBlock.map(block => {
               const { blockHeight, createDate, hash, txCount } = block
               return (
-                <li key={i}>
+                <li key={blockHeight}>
                   <p className="icon">
                     <img src="../image/icon_02.png" />
                     <span>Block</span>
@@ -21,7 +21,7 @@ class RecentBlocks extends Component {
                   </p>
                   <p className="a">C-rep<em>{hash.substr(0, 42)}</em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>
-                  <p className="c">Time stamp<em>{dateToUTC9(createDate)}</em></p>
+                  <p className="c">Time stamp<em>{dateToUTC9(createDate, true)}</em></p>
                 </li>
               )
             })}
