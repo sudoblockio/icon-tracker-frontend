@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { AddressDetailPage } from '../../components/';
-import { getAddressDetail } from '../../redux/actions/addressesActions';
+import { initAddressDetail, getAddressDetail } from '../../redux/actions/addressesActions';
 
 function mapStateToProps(state) {
   return {
@@ -12,6 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    initAddressDetail: () => dispatch(initAddressDetail()),
     getAddressDetail: (address) => dispatch(getAddressDetail(address))
   };
 }

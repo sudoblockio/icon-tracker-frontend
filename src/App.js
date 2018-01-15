@@ -18,8 +18,8 @@ class App extends Component {
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
               <Header />
               <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/wallet' component={AddressesPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/wallet-detail' component={AddressDetailPage}/>
+              <Route onEnter={window.scroll(0, 0)} exact path='/wallet/:pageId' component={AddressesPage}/>
+              <Route onEnter={window.scroll(0, 0)} path='/wallet/:addressId/:pageId' component={AddressDetailPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/blocks' component={BlocksPage}/>
             </div>

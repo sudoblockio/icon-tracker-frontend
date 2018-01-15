@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let axiosApi = axios.create({
-  baseURL: 'http://13.125.99.181:8080',
+  baseURL: 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -21,14 +21,13 @@ export function getMainInfo() {
 }
 
 export function getAddressesApi(payload) {
-  const pageNum = payload || 0
+  const pageNum = payload || 1
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/wallet/addrList?page=' + pageNum)
       .then(result => {
         resolve(result.data.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
@@ -38,6 +37,7 @@ export function getAddressDetailApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/wallet/walletDetailTxList?address=' + payload)
       .then(result => {
+        console.log(result)
         resolve(result.data.data)
       })
       .catch(error => {
@@ -48,7 +48,7 @@ export function getAddressDetailApi(payload) {
 }
 
 export function getBlocksApi(payload) {
-  const pageNum = payload || 0
+  const pageNum = payload || 1
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
       .then(result => {

@@ -16,7 +16,7 @@ class Header extends Component {
             <Link to='/'><span className="logo"><em>Tracker</em></span></Link>
 						<div className="link">
 							<ul>
-                <Link to='/wallet'><li>Wallet</li></Link>
+                <Link to='/wallet/1'><li>Wallet</li></Link>
                 <Link to='/transactions'><li>Transactions</li></Link>
                 <Link to='/blocks'><li>Blocks</li></Link>
               </ul>
