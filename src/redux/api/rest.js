@@ -1,11 +1,7 @@
 import axios from 'axios'
 
 let axiosApi = axios.create({
-<<<<<<< HEAD
   baseURL: 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com',
-=======
-  baseURL: 'http://ec2-13-124-239-185.ap-northeast-2.compute.amazonaws.com:8080',
->>>>>>> 449e121f7b935100fa3eb20b079eeca5acd38bbb
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
