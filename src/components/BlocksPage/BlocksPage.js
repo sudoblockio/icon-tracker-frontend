@@ -12,11 +12,22 @@ class BlocksPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getBlocks();
+    const { params } = this.props.match;
+    this.props.getBlocks(params['pageId']);
+  }
+
+  viewBlockDetail = (height) => {
+    const { history } = this.props;
+    history.push('/block/'+height)
+  }
+
+  getBlocksData = (pageId) => {
+    this.props.history.push('/blocks/'+pageId);
+    this.props.getBlocks(pageId);
   }
 
   render() {
-    const { loading, data, pageNum, getBlocks } = this.props;
+    const { loading, data, pageNum, getBlocks, maxPageNum } = this.props;
     return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -43,7 +54,10 @@ class BlocksPage extends Component {
     								<tbody>
                     {
                       data.map((row) => (
-                        <TableRow key={row.height} data={row} />
+                        <TableRow
+                          key={row.height}
+                          data={row}
+                          viewBlockDetail={() => this.viewBlockDetail(row.height)} />
                       ))
                     }
     								</tbody>
@@ -53,7 +67,8 @@ class BlocksPage extends Component {
 
 							<Pagination
                 pageNum={pageNum}
-                getData={getBlocks} />
+                maxPageNum={maxPageNum}
+                getData={this.getBlocksData} />
 						</div>
 					</div>
 				</div>
@@ -62,17 +77,26 @@ class BlocksPage extends Component {
   }
 }
 
-const TableRow = ({data}) => {
-  return (
-    <tr>
-      <td>{data.height}</td>
-      <td>{dateToUTC9(data.createDate)}</td>
-      <td>{data.txCount}</td>
-      <td className="break">{data.crep}</td>
-      <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
-      <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
-    </tr>
-  )
+class TableRow extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  render() {
+    const { data, viewBlockDetail } = this.props;
+    return (
+      <tr>
+        <td><span onClick={viewBlockDetail}>{data.height}</span></td>
+        <td>{dateToUTC9(data.createDate)}</td>
+        <td>{data.txCount}</td>
+        <td className="break">{data.crep}</td>
+        <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
+        <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
+      </tr>
+    );
+  }
 }
 
 export default withRouter(BlocksPage);

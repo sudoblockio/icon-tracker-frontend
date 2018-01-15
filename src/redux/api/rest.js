@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 let axiosApi = axios.create({
+<<<<<<< HEAD
   baseURL: 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com',
+=======
+  baseURL: 'http://ec2-13-124-239-185.ap-northeast-2.compute.amazonaws.com:8080',
+>>>>>>> 449e121f7b935100fa3eb20b079eeca5acd38bbb
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -52,7 +56,23 @@ export function getBlocksApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
       .then(result => {
-        resolve(result.data.data)
+        resolve(result.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}
+
+export function getBlockApi(payload) {
+  const height = payload.height;
+  const pageNum = payload.pageNum || 1;
+
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/block/blockDetail?height='+height+'&page='+pageNum )
+      .then(result => {
+        resolve(result.data)
       })
       .catch(error => {
         alert(error)
