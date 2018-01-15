@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
+import { LoadingComponent } from '../../components'
 
 class WalletTransactions extends Component {
   render() {
