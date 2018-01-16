@@ -17,7 +17,7 @@ const initialState = {
       walletDetail: {
         address: "",
         balance: 0,
-        exchangeKrw: 0,
+        icxUsd: 0,
         txCount: 0,
         nodeType: ""
       },
@@ -98,7 +98,7 @@ export function addressesReducer(state = initialState, action) {
         }
       }
     }
-    
+
     default: {
       return state
     }
