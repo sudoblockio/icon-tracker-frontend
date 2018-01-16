@@ -8,6 +8,7 @@ class AddressesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+    this.pageId = this.props.match.params.pageId;
   }
 
   componentWillMount() {
@@ -23,7 +24,7 @@ class AddressesPage extends Component {
 						<p className="title">Addresses List</p>
             {
               loading ?
-              <div style={{height: '590px'}}>
+              <div style={{height: '400px'}}>
                 <LoadingComponent />
               </div>
               :
@@ -78,7 +79,7 @@ class AddressesPage extends Component {
 const TableRow = ({data}) => {
   return (
     <tr>
-      <td className="on"><Link to={`/wallet-detail?address=${data.address}`}>{data.address}</Link></td>
+      <td className="on"><Link to={`/wallet/${data.address}/1`}>{data.address}</Link></td>
       <td><span>{convertNumberToText(data.balance, 'icx')}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(data.icxUsd, 'usd')}</span><em>USD</em></td>
       <td><span>{data.percentage}</span><em>%</em></td>

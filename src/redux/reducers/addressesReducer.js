@@ -4,7 +4,7 @@ const initialState = {
   addresses: {
     loading: true,
     data: [],
-    pageNum: 0,
+    pageNum: 1,
     error: ''
   },
   address: {

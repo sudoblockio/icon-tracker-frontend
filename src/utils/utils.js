@@ -30,3 +30,8 @@ export function isInt(value) {
 export function dateToUTC9(date, showUTC9) {
     return moment(date).utcOffset(9).format(`YYYY-MM-DD HH:mm:ss${!!showUTC9 ? ' [(UTC+9)]' : ''}`)
 }
+
+export function calcMaxPageNum(total, rowNum) {
+    if(!Number(total)) return 1;
+    return Math.ceil(total / rowNum);
+}

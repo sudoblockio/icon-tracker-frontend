@@ -12,15 +12,16 @@ class Pagination extends Component {
   }
 
   getData = (target) => {
-    const { getData, pageNum, maxPageNum } = this.props;
-
+    let { getData, pageNum, maxPageNum } = this.props;
+    pageNum = Number(pageNum);
+    maxPageNum = Number(maxPageNum);
     switch (target) {
       case 'start':
-        if (pageNum === 0) return false;
-        getData();
+        if (pageNum === 1) return false;
+        getData(1);
         break;
       case 'prev':
-        if (pageNum === 0) return false;
+        if (pageNum === 1) return false;
         getData(pageNum-1);
         break;
       case 'next':
@@ -47,7 +48,7 @@ class Pagination extends Component {
         </li>
         <li className="pageNum">
           <p>Page</p>
-          <input disabled type="text" className="txt-type-page" placeholder="" value={pageNum} /> / 10000
+          <input disabled type="text" className="txt-type-page" placeholder="" value={pageNum} /> / {maxPageNum}
         </li>
         <li onClick={() => this.getData('next')}>
           <span name="next" className="next"><em className="img"></em></span>

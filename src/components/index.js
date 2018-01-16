@@ -1,4 +1,5 @@
 import Header from './Header/Header'
+import SearchBox from './Header/SearchBox'
 import Footer from './Footer/Footer'
 
 import MainPage from './MainPage/MainPage'
@@ -13,7 +14,11 @@ import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
+
 import BlocksPage from './BlocksPage/BlocksPage'
+import BlockDetailPage from './BlocksPage/BlockDetailPage'
+import BlockInformation from './BlocksPage/BlockInformation'
+import BlockTransactions from './BlocksPage/BlockTransactions'
 
 import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
@@ -21,6 +26,7 @@ import NoData from './Common/NoData'
 
 export {
   Header,
+  SearchBox,
   Footer,
 
   MainPage,
@@ -35,7 +41,11 @@ export {
   WalletTransactions,
 
   TransactionsPage,
+
   BlocksPage,
+  BlockDetailPage,
+  BlockInformation,
+  BlockTransactions,
 
   LoadingComponent,
   Pagination,
