@@ -62,13 +62,13 @@ export function getBlocksApi(payload) {
 }
 
 export function getBlockApi(payload) {
-  const height = payload.height;
-  const pageNum = payload.pageNum || 1;
+  const blockId = payload.blockId;
+  const pageId = payload.pageId || 1;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/block/blockDetail?height='+height+'&page='+pageNum )
+    axiosApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
       .then(result => {
-        resolve(result.data)
+        resolve(result.data.data)
       })
       .catch(error => {
         alert(error)

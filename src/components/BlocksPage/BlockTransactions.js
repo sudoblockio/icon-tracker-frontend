@@ -70,7 +70,7 @@ class BlockInformation extends Component {
             </thead>
             <tbody>
               <tr>
-                <td colspan="5" className="notrans">No transactions in this block</td>
+                <td colSpan="5" className="notrans">No transactions in this block</td>
               </tr>
             </tbody>
           </table>

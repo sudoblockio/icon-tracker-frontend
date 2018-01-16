@@ -1,22 +1,26 @@
 import actionTypes from '../actionTypes/actionTypes';
 import { calcMaxPageNum } from '../../utils/utils';
 
+const blocksInitState = {
+  loading: true,
+  data: [],
+  pageNum: 1,
+  maxPageNum: 1,
+  error: ''
+};
+
+const blockInitState = {
+  loading: true,
+  data: {
+    blockDetail: {},
+    blockTx: []
+  },
+  error: ''
+};
+
 const initialState = {
-    blocks: {
-      loading: true,
-      data: [],
-      pageNum: 1,
-      maxPageNum: 1,
-      error: ''
-    },
-    block: {
-      loading: true,
-      data: {
-        blockDetail: {},
-        blockTx: []
-      },
-      error: ''
-    }
+    blocks: blocksInitState,
+    block: blockInitState
 }
 
 export function blocksReducer(state = initialState, action) {
@@ -28,7 +32,7 @@ export function blocksReducer(state = initialState, action) {
         blocks : {
           ...state.blocks,
           loading: true,
-          pageNum: Number(action.payload) || 1
+          pageNum: action.payload || 1
         }
       }
     }
@@ -73,7 +77,11 @@ export function blocksReducer(state = initialState, action) {
         block : {
           ...state.block,
           loading: false,
-          data : action.payload,
+          data : {
+            ...state.block.data,
+            blockDetail: action.payload.blockDetail,
+            blockTx: action.payload.txInBlock
+          },
           error: ''
         }
       }
@@ -87,6 +95,20 @@ export function blocksReducer(state = initialState, action) {
           loading: false,
           error: action.error
         }
+      }
+    }
+
+    case actionTypes.resetBlocksReducer: {
+      return {
+        ...state,
+        blocks: blocksInitState
+      }
+    }
+
+    case actionTypes.resetBlockReducer: {
+      return {
+        ...state,
+        block: blockInitState
       }
     }
 

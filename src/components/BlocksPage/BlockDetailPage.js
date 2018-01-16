@@ -12,8 +12,15 @@ class BlockDetailPage extends Component {
   }
 
   componentWillMount() {
-    const id = this.props.match.params.id
-    this.props.getBlock(id);
+    this.getBlock(this.props.match.params.blockId)
+  }
+
+  getBlock = (blockId, pageId = 1) => {
+    const data = {
+      blockId: blockId,
+      pageId: pageId
+    };
+    this.props.getBlock(data);
   }
 
   render() {
@@ -26,14 +33,14 @@ class BlockDetailPage extends Component {
         )
       }
       else {
-        const { walletDetail, walletTx } = data;
+        const { blockDetail, blockTx } = data;
         return (
           <div className="content-wrap">
     				<div className="screen0">
-    					<BlockInformation />
+    					<BlockInformation blockDetail={blockDetail} getBlock={this.getBlock} />
     				</div>
     				<div className="screen1">
-    					<BlockTransactions />
+    					<BlockTransactions blockTx={blockTx} />
     				</div>
     			</div>
         )

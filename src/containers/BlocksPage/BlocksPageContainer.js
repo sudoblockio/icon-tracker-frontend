@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { BlocksPage } from '../../components/';
-import { getBlocks } from '../../redux/actions/blocksActions';
+import { getBlocks, resetBlocksReducer } from '../../redux/actions/blocksActions';
 
 function mapStateToProps(state) {
   return {
@@ -13,7 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBlocks: (pageId) => dispatch(getBlocks(pageId))
+    getBlocks: (pageId) => dispatch(getBlocks(pageId)),
+    resetReducer: () => dispatch(resetBlocksReducer())
   };
 }
 

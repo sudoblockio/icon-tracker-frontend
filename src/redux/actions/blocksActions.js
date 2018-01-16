@@ -13,3 +13,16 @@ export function getBlock(payload) {
     payload
   };
 }
+
+export function resetBlocksReducer() {
+  return {
+    type: actionTypes.resetBlocksReducer
+  };
+}
+
+
+export function resetBlockReducer() {
+  return {
+    type: actionTypes.resetBlockReducer
+  };
+}
