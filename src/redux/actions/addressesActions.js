@@ -7,12 +7,6 @@ export function getAddresses(payload) {
   };
 }
 
-export function initAddressDetail() {
-  return {
-    type: actionTypes.initAddressDetail
-  };
-}
-
 export function getAddressDetail(payload) {
   return {
     type: actionTypes.getAddressDetail,

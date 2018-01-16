@@ -7,7 +7,6 @@ const actionTypes = {
   getAddressesFulfilled: 'GET_ADDRESSES_FULFILLED',
   getAddressesRejected:'GET_ADDRESSES_REJECTED',
 
-  initAddressDetail: 'INIT_ADDRESS_DETAIL',
   getAddressDetail: 'GET_ADDRESS_DETAIL',
   getAddressDetailFulfilled: 'GET_ADDRESS_DETAIL_FULFILLED',
   getAddressDetailRejected:'GET_ADDRESS_DETAIL_REJECTED',

@@ -7,12 +7,13 @@ function mapStateToProps(state) {
     loading: state.addresses.addresses.loading,
     data: state.addresses.addresses.data,
     pageNum: state.addresses.addresses.pageNum,
+    maxPageNum: state.addresses.addresses.maxPageNum
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAddresses: () => dispatch(getAddresses())
+    getAddresses: (pageNum) => dispatch(getAddresses(pageNum))
   };
 }
 

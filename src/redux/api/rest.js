@@ -25,7 +25,7 @@ export function getAddressesApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/wallet/addrList?page=' + pageNum)
       .then(result => {
-        resolve(result.data.data)
+        resolve(result.data)
       })
       .catch(error => {
         reject(error)
@@ -34,14 +34,15 @@ export function getAddressesApi(payload) {
 }
 
 export function getAddressDetailApi(payload) {
+  const address = payload.address;
+  const pageNum = payload.pageNum || 1;
+
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + payload)
+    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + address + '&page=' + pageNum)
       .then(result => {
-        console.log(result)
-        resolve(result.data.data)
+        resolve(result.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
