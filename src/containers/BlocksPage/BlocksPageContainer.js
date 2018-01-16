@@ -7,7 +7,8 @@ function mapStateToProps(state) {
     loading: state.blocks.blocks.loading,
     data: state.blocks.blocks.data,
     pageNum: state.blocks.blocks.pageNum,
-    maxPageNum: state.blocks.blocks.maxPageNum
+    maxPageNum: state.blocks.blocks.maxPageNum,
+    location: state.router.location
   };
 }
 

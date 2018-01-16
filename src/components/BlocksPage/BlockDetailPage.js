@@ -12,7 +12,14 @@ class BlockDetailPage extends Component {
   }
 
   componentWillMount() {
+    this.props.resetReducer();
     this.getBlock(this.props.match.params.blockId)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.getBlock(nextProps.location.pathname.split("/")[2]);
+    }
   }
 
   getBlock = (blockId, pageId = 1) => {
@@ -24,7 +31,7 @@ class BlockDetailPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum } = this.props;
+    const { loading, data, pageNum, maxPageNum} = this.props;
     const content = (data) => {
       // 데이터가 없을 경우
       if (data === "") {
@@ -40,7 +47,7 @@ class BlockDetailPage extends Component {
     					<BlockInformation blockDetail={blockDetail} getBlock={this.getBlock} />
     				</div>
     				<div className="screen1">
-    					<BlockTransactions blockTx={blockTx} />
+    					<BlockTransactions blockTx={blockTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
     				</div>
     			</div>
         )

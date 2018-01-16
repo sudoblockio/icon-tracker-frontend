@@ -16,7 +16,6 @@ class BlockInformation extends Component {
     if (blockDetail.height === 0) return;
     const prevHeight = blockDetail.height - 1;
     this.props.history.push('/block/'+prevHeight);
-    this.props.getBlock(prevHeight);
   }
 
   handleNextBlock = () => {
@@ -24,7 +23,6 @@ class BlockInformation extends Component {
     if (blockDetail.lastBlock !== "-") return;
     const nextHeight = blockDetail.height + 1;
     this.props.history.push('/block/'+nextHeight);
-    this.props.getBlock(nextHeight);
   }
 
   render() {

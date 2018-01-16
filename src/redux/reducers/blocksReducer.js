@@ -15,6 +15,8 @@ const blockInitState = {
     blockDetail: {},
     blockTx: []
   },
+  pageNum: 1,
+  maxPageNum: 1,
   error: ''
 };
 

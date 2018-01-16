@@ -18,19 +18,17 @@ class BlocksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const locationChanged = nextProps.location !== this.props.location;
-    console.log(nextProps.location, this.props.location)
-    if (locationChanged) {
-      nextProps.getBlocks(nextProps.location.split("/")[2]);
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      nextProps.getBlocks(nextProps.location.pathname.split("/")[2]);
     }
   }
 
   viewBlockDetail = (height) => {
-    this.props.history.push('/block/'+height)
+    this.props.history.push('/block/' + height)
   }
 
   getBlocksData = (pageId) => {
-    this.props.history.push('/blocks/'+pageId);
+    this.props.history.push('/blocks/' + pageId);
   }
 
   render() {
