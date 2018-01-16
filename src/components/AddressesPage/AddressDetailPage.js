@@ -8,7 +8,7 @@ class AddressesDetailPage extends Component {
 
   constructor(props) {
     super(props);
-    this.id = this.props.match.params.id;
+    this.id = this.props.match.params.addressId;
     this.pageId = this.props.match.params.pageId || 1;
   }
 

@@ -8,6 +8,7 @@ function mapStateToProps(state) {
     data: state.addresses.address.data,
     pageNum: state.addresses.address.pageNum,
     maxPageNum: state.addresses.address.maxPageNum,
+    location: state.router.location
   };
 }
 

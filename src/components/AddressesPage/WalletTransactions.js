@@ -4,6 +4,12 @@ import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/u
 import { LoadingComponent, Pagination } from '../../components'
 
 class WalletTransactions extends Component {
+
+  getWalletData = (pageId) => {
+    const { walletTx } = this.props
+    this.props.history.push('/wallet/' + walletTx + '/' + pageId);
+  }
+
   render() {
     const { walletTx, pageNum, maxPageNum } = this.props
     return (
@@ -42,7 +48,7 @@ class WalletTransactions extends Component {
           <Pagination
             pageNum={pageNum}
             maxPageNum={maxPageNum}
-            getData={this.getBlocksData}
+            getData={this.getWalletData}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
-import { LoadingComponent, Pagination } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
 class AddressesPage extends Component {
 
@@ -15,9 +15,14 @@ class AddressesPage extends Component {
     this.props.getAddresses(this.pageId);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      nextProps.getAddresses(nextProps.location.pathname.split("/")[2]);
+    }
+  }
+
   getAddressesData = (pageId) => {
-    this.props.history.push('/wallet/' + pageId);
-    this.props.getAddresses(pageId);
+    this.props.history.push('/wallets/' + pageId);
   }
 
   render() {
@@ -71,7 +76,7 @@ class AddressesPage extends Component {
 const TableRow = ({data}) => {
   return (
     <tr>
-      <td className="on"><Link to={`/address/${data.address}`}>{data.address}</Link></td>
+      <td className="on"><WalletLink to={data.address} /></td>
       <td><span>{convertNumberToText(data.balance, 'icx')}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(data.icxUsd, 'usd')}</span><em>USD</em></td>
       <td><span>{data.percentage}</span><em>%</em></td>
