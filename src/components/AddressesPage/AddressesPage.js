@@ -76,7 +76,7 @@ class AddressesPage extends Component {
 const TableRow = ({data}) => {
   return (
     <tr>
-      <td className="on"><WalletLink to={data.address} /></td>
+      <td className="on"><WalletLink to={data.address}/></td>
       <td><span>{convertNumberToText(data.balance, 'icx')}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(data.icxUsd, 'usd')}</span><em>USD</em></td>
       <td><span>{data.percentage}</span><em>%</em></td>

@@ -7,13 +7,13 @@ class AddressesDetailPage extends Component {
 
   constructor(props) {
     super(props);
-    this.id = this.props.match.params.addressId;
+    this.addressId = this.props.match.params.addressId;
     this.pageId = this.props.match.params.pageId || 1;
   }
 
   componentWillMount() {
     this.props.getAddressDetail({
-      address: this.id,
+      address: this.addressId,
       pageNum: this.pageId
     });
   }
@@ -24,7 +24,7 @@ class AddressesDetailPage extends Component {
       // 데이터가 없을 경우
       if (data === "") {
         return (
-          <NoData string={this.id}/>
+          <NoData string={this.addressId}/>
         )
       }
 
