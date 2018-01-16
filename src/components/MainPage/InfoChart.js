@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import chart from '../../style/image/chart.png'
 
 class InfoChart extends Component {
   render() {
@@ -7,7 +8,7 @@ class InfoChart extends Component {
       <li className="right">
         <p className="subTitle">Daily Transactions</p>
         <div className="graph">
-          <img src="../image/chart.png" />
+          <img src={chart}/>
         </div>
       </li>
     );

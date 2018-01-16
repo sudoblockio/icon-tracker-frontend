@@ -8,8 +8,8 @@ import {
 
 function* getAddressesFunc(action) {
   try {
-    const payload = yield call(GET_ADDRESSES_API, action.payload);
-    yield delay(2000)
+    const payload = yield call(GET_ADDRESSES_API, action.payload)
+    // yield delay(2000)
     yield put({type: AT.getAddressesFulfilled, payload: payload});
   } catch (e) {
     yield put({type: AT.getAddressesRejected, error: e});
@@ -19,7 +19,7 @@ function* getAddressesFunc(action) {
 function* getAddressDetailFunc(action) {
   try {
     const payload = yield call(GET_ADDRESS_DETAIL_API, action.payload);
-    yield delay(2000)
+    // yield delay(2000)
     yield put({type: AT.getAddressDetailFulfilled, payload: payload});
   } catch (e) {
     yield put({type: AT.getAddressDetailRejected, error: e});
