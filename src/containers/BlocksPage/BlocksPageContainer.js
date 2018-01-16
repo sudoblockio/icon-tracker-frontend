@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { BlocksPage } from '../../components/';
+import { withRouter } from 'react-router-dom';
 import { getBlocks, resetBlocksReducer } from '../../redux/actions/blocksActions';
 
 function mapStateToProps(state) {
@@ -8,7 +9,7 @@ function mapStateToProps(state) {
     data: state.blocks.blocks.data,
     pageNum: state.blocks.blocks.pageNum,
     maxPageNum: state.blocks.blocks.maxPageNum,
-    location: state.router.location
+    url: state.router.location
   };
 }
 
@@ -19,6 +20,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const BlocksPageContainer = connect(mapStateToProps, mapDispatchToProps)(BlocksPage);
+const BlocksPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(BlocksPage));
 
 export default BlocksPageContainer;

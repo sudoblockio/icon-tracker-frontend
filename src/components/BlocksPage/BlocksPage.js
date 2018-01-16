@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink } from '../../components/';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
 
@@ -18,8 +18,8 @@ class BlocksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      nextProps.getBlocks(nextProps.location.pathname.split("/")[2]);
+    if (nextProps.url.pathname !== this.props.url.pathname) {
+      nextProps.getBlocks(nextProps.url.pathname.split("/")[2]);
     }
   }
 
@@ -99,4 +99,4 @@ class TableRow extends Component {
   }
 }
 
-export default withRouter(BlocksPage);
+export default BlocksPage;

@@ -8,14 +8,14 @@ import AddressDetailPage from './pages/AddressDetailPage';
 import TransactionsPage from './pages/TransactionsPage';
 import BlocksPage from './pages/BlocksPage';
 import BlockDetailPage from './pages/BlockDetailPage';
-import { ConnectedRouter } from 'react-router-redux'
 
 class Routes extends Component {
+
   render() {
     return (
         <div id="app-root">
           <div className="root">
-            <div className={`wrap ${this.props.location.pathname === '/' ? 'home' : 'sub'}`}>
+            <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
               <Header />
               <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/wallets' component={AddressesPage} exact />

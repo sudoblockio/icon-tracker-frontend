@@ -62,7 +62,7 @@ class BlockInformation extends Component {
               </tr>
               <tr>
                 <td>Prev Hash</td>
-                <td>{ blockDetail.prevHash !== "-" ? (<BlockLink to={blockDetail.height - 1} label={blockDetail.prevHash} />) : blockDetail.prevHash}</td>
+                <td>{ blockDetail.prevHash ? (<BlockLink to={blockDetail.height - 1} label={blockDetail.prevHash} />) : "-"}</td>
               </tr>
               <tr>
                 <td>Block size</td>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { WalletInformation, WalletTransactions, NoData, LoadingComponent } from '../../components'
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
@@ -46,4 +45,4 @@ class AddressesDetailPage extends Component {
   }
 }
 
-export default withRouter(AddressesDetailPage);
+export default AddressesDetailPage;

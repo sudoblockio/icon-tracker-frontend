@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
 import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
@@ -16,8 +16,8 @@ class AddressesPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      nextProps.getAddresses(nextProps.location.pathname.split("/")[2]);
+    if (nextProps.url.pathname !== this.props.url.pathname) {
+      nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
     }
   }
 
@@ -86,4 +86,4 @@ const TableRow = ({data}) => {
   )
 }
 
-export default withRouter(AddressesPage);
+export default AddressesPage;

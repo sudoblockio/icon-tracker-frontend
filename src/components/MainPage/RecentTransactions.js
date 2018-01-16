@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { convertNumberToText, dateToUTC9 } from '../../utils/utils'
 import icon_01 from '../../style/image/icon_01.png'
 
@@ -29,4 +29,4 @@ class RecentTransactions extends Component {
   }
 }
 
-export default withRouter(RecentTransactions);
+export default RecentTransactions;

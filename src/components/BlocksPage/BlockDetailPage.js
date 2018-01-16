@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { withRouter } from 'react-router-dom';
 import { NoData, BlockInformation, BlockTransactions } from '../../components/';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
 
@@ -13,12 +12,12 @@ class BlockDetailPage extends Component {
 
   componentWillMount() {
     this.props.resetReducer();
-    this.getBlock(this.props.location.pathname.split("/")[2], this.props.location.pathname.split("/")[3] || 1)
+    this.getBlock(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.getBlock(nextProps.location.pathname.split("/")[2], nextProps.location.pathname.split("/")[3] || 1);
+    if (nextProps.url.pathname !== this.props.url.pathname) {
+      this.getBlock(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
     }
   }
 
@@ -63,4 +62,4 @@ class BlockDetailPage extends Component {
   }
 }
 
-export default withRouter(BlockDetailPage);
+export default BlockDetailPage;
