@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { store, history } from './redux/store/store';
-import { Header, Footer } from './components/';
+import { Footer } from './components/';
+import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
 import AddressesPage from './pages/AddressesPage';
 import AddressDetailPage from './pages/AddressDetailPage';
@@ -16,7 +17,7 @@ class Routes extends Component {
         <div id="app-root">
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
-              <Header />
+              <HeaderContainer />
               <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/wallets' component={AddressesPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/wallets/:pageId' component={AddressesPage}/>

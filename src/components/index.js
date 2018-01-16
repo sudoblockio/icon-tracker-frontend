@@ -32,7 +32,7 @@ export {
   Header,
   SearchBox,
   Footer,
-
+  
   MainPage,
   InfoSummary,
   InfoChart,

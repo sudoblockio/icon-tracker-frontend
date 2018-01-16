@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class SearchBox extends Component {
 
@@ -16,12 +16,16 @@ class SearchBox extends Component {
     })
   }
 
+  handleSubmit = () => {
+    this.props.search(this.state.value)
+  }
+
   render() {
     const { value } = this.state;
     return (
       <div className="search-group">
         <input onChange={this.handleInputChange} type="text" className="txt-type-normal" placeholder="Enter Address, Tx hash, Block Height" value={value}/>
-        <span><em className="img"></em></span>
+        <span onClick={this.handleSubmit}><em className="img"></em></span>
       </div>
     );
   }

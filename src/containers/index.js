@@ -4,6 +4,7 @@ import AddressDetailPageContainer from './AddressesPage/AddressDetailPageContain
 import TransactionsPageContainer from './TransactionsPage/TransactionsPageContainer'
 import BlocksPageContainer from './BlocksPage/BlocksPageContainer'
 import BlockDetailPageContainer from './BlocksPage/BlockDetailPageContainer'
+import HeaderContainer from './Common/HeaderContainer'
 
 export {
   MainPageContainer,
@@ -12,4 +13,5 @@ export {
   TransactionsPageContainer,
   BlocksPageContainer,
   BlockDetailPageContainer,
+  HeaderContainer
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { SearchBox } from '../';
+import { SearchBox } from '../../components/';
 
 class Header extends Component {
 
@@ -21,7 +21,7 @@ class Header extends Component {
                 <Link to='/transactions'><li>Transactions</li></Link>
                 <Link to='/blocks'><li>Blocks</li></Link>
               </ul>
-							<SearchBox />
+							<SearchBox {...this.props} />
 						</div>
 					</div>
 				</div>
@@ -30,4 +30,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+export default Header;
