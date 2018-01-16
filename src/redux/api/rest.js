@@ -76,3 +76,16 @@ export function getBlockApi(payload) {
       })
   })
 }
+
+export function searchApi(payload) {
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/search/Search?data=' + payload)
+      .then(result => {
+        resolve(result.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}

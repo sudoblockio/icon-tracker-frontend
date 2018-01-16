@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { LoadingComponent, Pagination } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 
 class BlockInformation extends Component {
@@ -12,8 +12,13 @@ class BlockInformation extends Component {
 
   }
 
+  getBlockData = (pageId) => {
+    const { height, history } = this.props
+    this.props.history.push('/block/' + height + '/'+ pageId);
+  }
+
   render() {
-    const { blockTx, pageNum, maxPageNum } = this.props
+    const { blockTx, pageNum, maxPageNum, loading } = this.props
     return (
       <div className="wrap-holder">
         <p className="title">Transactions in The Block</p>
@@ -30,21 +35,22 @@ class BlockInformation extends Component {
             </thead>
             <tbody>
             {
-              blockTx.length > 0
-                ? blockTx.map((row) => (
-                    <TableRow
-                      key={row.txHash}
-                      data={row}
-                      viewBlockDetail={() => this.viewBlockDetail(row.height)} />
-                  ))
-                : (<tr><td colSpan="5" className="notrans">No transactions in this block</td></tr>)
+              loading ? (
+                <tr><td colSpan="5" className="notrans"><LoadingComponent /></td></tr>
+              ) : blockTx.length > 0
+                  ? blockTx.map((row) => (
+                      <TableRow
+                        key={row.txHash}
+                        data={row} />
+                    ))
+                  : (<tr><td colSpan="5" className="notrans">No transactions in this block</td></tr>)
             }
             </tbody>
           </table>
           <Pagination
             pageNum={pageNum}
             maxPageNum={maxPageNum}
-            getData={this.getBlocksData} />
+            getData={this.getBlockData} />
         </div>
       </div>
     );
@@ -59,12 +65,12 @@ class TableRow extends Component {
   }
 
   render() {
-    const { data, viewBlockDetail } = this.props;
+    const { data } = this.props;
     return (
       <tr>
         <td className="on break">{data.txHash}</td>
-        <td className="on break"><Link to={'/wallet/' + data.fromAddr}>{data.fromAddr}</Link></td>
-        <td className="on break"><Link to={'/wallet/' + data.toAddr}>{data.toAddr}</Link></td>
+        <td className="on break"><WalletLink to={data.fromAddr} /></td>
+        <td className="on break"><WalletLink to={data.toAddr} /></td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
         <td className={!data.fee ? "no" : ""}><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
       </tr>

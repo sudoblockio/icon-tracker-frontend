@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { withRouter } from 'react-router-dom';
-import { LoadingComponent, Pagination } from '../../components/';
+import { withRouter, Link } from 'react-router-dom';
+import { LoadingComponent, Pagination, BlockLink } from '../../components/';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
 
 class BlocksPage extends Component {
@@ -21,10 +21,6 @@ class BlocksPage extends Component {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       nextProps.getBlocks(nextProps.location.pathname.split("/")[2]);
     }
-  }
-
-  viewBlockDetail = (height) => {
-    this.props.history.push('/block/' + height)
   }
 
   getBlocksData = (pageId) => {
@@ -61,8 +57,7 @@ class BlocksPage extends Component {
                       data.map((row) => (
                         <TableRow
                           key={row.height}
-                          data={row}
-                          viewBlockDetail={() => this.viewBlockDetail(row.height)} />
+                          data={row} />
                       ))
                     }
     								</tbody>
@@ -93,7 +88,7 @@ class TableRow extends Component {
     const { data, viewBlockDetail } = this.props;
     return (
       <tr>
-        <td><span onClick={viewBlockDetail}>{data.height}</span></td>
+        <td><BlockLink to={data.height} /></td>
         <td>{dateToUTC9(data.createDate)}</td>
         <td>{data.txCount}</td>
         <td className="break">{data.crep}</td>

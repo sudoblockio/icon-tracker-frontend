@@ -13,12 +13,12 @@ class BlockDetailPage extends Component {
 
   componentWillMount() {
     this.props.resetReducer();
-    this.getBlock(this.props.match.params.blockId)
+    this.getBlock(this.props.location.pathname.split("/")[2], this.props.location.pathname.split("/")[3] || 1)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.getBlock(nextProps.location.pathname.split("/")[2]);
+      this.getBlock(nextProps.location.pathname.split("/")[2], nextProps.location.pathname.split("/")[3] || 1);
     }
   }
 
@@ -44,10 +44,16 @@ class BlockDetailPage extends Component {
         return (
           <div className="content-wrap">
     				<div className="screen0">
-    					<BlockInformation blockDetail={blockDetail} getBlock={this.getBlock} />
+    					<BlockInformation
+                blockDetail={blockDetail} />
     				</div>
     				<div className="screen1">
-    					<BlockTransactions blockTx={blockTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
+    					<BlockTransactions
+                height={blockDetail.height}
+                loading={loading}
+                blockTx={blockTx}
+                pageNum={pageNum}
+                maxPageNum={maxPageNum} />
     				</div>
     			</div>
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { BlockLink } from '../../components/';
 import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
 
 class BlockInformation extends Component {
@@ -61,7 +62,7 @@ class BlockInformation extends Component {
               </tr>
               <tr>
                 <td>Prev Hash</td>
-                <td><span>{blockDetail.prevHash}</span></td>
+                <td>{ blockDetail.prevHash !== "-" ? (<BlockLink to={blockDetail.height - 1} label={blockDetail.prevHash} />) : blockDetail.prevHash}</td>
               </tr>
               <tr>
                 <td>Block size</td>

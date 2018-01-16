@@ -68,7 +68,8 @@ export function blocksReducer(state = initialState, action) {
         ...state,
         block : {
           ...state.block,
-          loading: true
+          loading: true,
+          pageNum: action.payload.pageId || 1
         }
       }
     }
@@ -84,6 +85,7 @@ export function blocksReducer(state = initialState, action) {
             blockDetail: action.payload.blockDetail,
             blockTx: action.payload.txInBlock
           },
+          maxPageNum: calcMaxPageNum(action.payload.blockDetail.txCount, 10),
           error: ''
         }
       }

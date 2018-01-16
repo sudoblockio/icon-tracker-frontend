@@ -21,6 +21,10 @@ const actionTypes = {
   getBlockFulfilled: 'GET_BLOCK_FULFILLED',
   getBlockRejected:'GET_BLOCK_REJECTED',
   resetBlockReducer: 'RESET_BLOCK_REDUCER',
+
+  search: 'SEARCH',
+  searchFulfilled: 'SEARCH_FULFILLED',
+  searchRejected: 'SEARCH_REJECTED'
 }
 
 export default actionTypes
