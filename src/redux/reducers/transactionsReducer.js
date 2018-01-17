@@ -4,7 +4,7 @@ const initialState = {
   transactions: {
     loading: true,
     data: [],
-    pageNum: 0,
+    pageNum: 1,
     error: ''
   },
   transaction: {
@@ -21,7 +21,8 @@ export function transactionsReducer(state = initialState, action) {
         ...state,
         transactions : {
           ...state.transactions,
-          loading: true
+          loading: true,
+          pageNum: Number(action.payload) || 1
         }
       }
     }

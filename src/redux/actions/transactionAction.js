@@ -1,4 +1,4 @@
-import actionTypes from '../actionTypes';
+import actionTypes from '../actionTypes/actionTypes';
 
 export function getTransactions(payload){
   return {

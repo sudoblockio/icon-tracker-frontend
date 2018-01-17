@@ -21,7 +21,8 @@ class App extends Component {
               <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
               <Route onEnter={window.scroll(0, 0)} exact path='/wallet/:pageId' component={AddressesPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/wallet/:addressId/:pageId' component={AddressDetailPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage}/>
+              <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={TransactionsPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/blocks' component={BlocksPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/block/:id' component={BlockDetailPage} exact />

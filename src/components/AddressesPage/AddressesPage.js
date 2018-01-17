@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
-import { LoadingComponent, Pagination } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
 class AddressesPage extends Component {
 
@@ -12,11 +12,21 @@ class AddressesPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getAddresses();
+    this.props.getAddresses(this.pageId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.url.pathname !== this.props.url.pathname) {
+      nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
+    }
+  }
+
+  getAddressesData = (pageId) => {
+    this.props.history.push('/wallets/' + pageId);
   }
 
   render() {
-    const { loading, data, pageNum, getAddresses } = this.props;
+    const { loading, data, pageNum, getAddresses, maxPageNum } = this.props;
     return (
       <div className="content-wrap">
 				<div className="screen0">
@@ -43,30 +53,17 @@ class AddressesPage extends Component {
   								<tbody>
                   {
                     data.map((row) => (
-                      <TableRow key={row.address} data={row} />
+                      <TableRow key={row.address} data={row}/>
                     ))
                   }
   								</tbody>
   							</table>
 
-  							<ul className="page">
-  								<li>
-  									<span className="start"><em className="img"></em></span>
-  								</li>
-  								<li>
-  									<span className="prev"><em className="img"></em></span>
-  								</li>
-  								<li className="pageNum">
-  									<p>Page</p>
-  									<input type="text" className="txt-type-page" placeholder="" value=""/> / 10000
-  								</li>
-  								<li>
-  									<span className="next"><em className="img"></em></span>
-  								</li>
-  								<li>
-  									<span className="end"><em className="img"></em></span>
-  								</li>
-  							</ul>
+                <Pagination
+                  pageNum={pageNum}
+                  maxPageNum={maxPageNum}
+                  getData={this.getAddressesData}
+                />
   						</div>
             }
 					</div>
@@ -79,7 +76,7 @@ class AddressesPage extends Component {
 const TableRow = ({data}) => {
   return (
     <tr>
-      <td className="on"><Link to={`/wallet/${data.address}/1`}>{data.address}</Link></td>
+      <td className="on"><WalletLink to={data.address}/></td>
       <td><span>{convertNumberToText(data.balance, 'icx')}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(data.icxUsd, 'usd')}</span><em>USD</em></td>
       <td><span>{data.percentage}</span><em>%</em></td>
@@ -89,4 +86,4 @@ const TableRow = ({data}) => {
   )
 }
 
-export default withRouter(AddressesPage);
+export default AddressesPage;
