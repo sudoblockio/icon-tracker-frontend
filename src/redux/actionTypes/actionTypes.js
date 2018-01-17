@@ -7,7 +7,6 @@ const actionTypes = {
   getAddressesFulfilled: 'GET_ADDRESSES_FULFILLED',
   getAddressesRejected:'GET_ADDRESSES_REJECTED',
 
-  initAddressDetail: 'INIT_ADDRESS_DETAIL',
   getAddressDetail: 'GET_ADDRESS_DETAIL',
   getAddressDetailFulfilled: 'GET_ADDRESS_DETAIL_FULFILLED',
   getAddressDetailRejected:'GET_ADDRESS_DETAIL_REJECTED',
@@ -15,10 +14,12 @@ const actionTypes = {
   getBlocks: 'GET_BLOCKS',
   getBlocksFulfilled: 'GET_BLOCKS_FULFILLED',
   getBlocksRejected:'GET_BLOCKS_REJECTED',
+  resetBlocksReducer: 'RESET_BLOCKS_REDUCER',
 
   getBlock: 'GET_BLOCK',
   getBlockFulfilled: 'GET_BLOCK_FULFILLED',
   getBlockRejected:'GET_BLOCK_REJECTED',
+
 
   getTransactions: 'GET_TRANSACTIONS',
   getTransactionsFulfilled: 'GET_TRANSACTIONS_FULFILLED',
@@ -26,7 +27,13 @@ const actionTypes = {
 
   getTransaction: 'GET_TRANSACTION',
   getTransactionFulfilled: 'GET_TRANSACTION_FULFILLED',
-  getTransactionRejected: 'GET_TRANSACTION_REJECTED'
+  getTransactionRejected: 'GET_TRANSACTION_REJECTED',
+  
+  resetBlockReducer: 'RESET_BLOCK_REDUCER',
+
+  search: 'SEARCH',
+  searchFulfilled: 'SEARCH_FULFILLED',
+  searchRejected: 'SEARCH_REJECTED'
 }
 
 export default actionTypes

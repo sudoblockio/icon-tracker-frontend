@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 import { getMainInfo } from '../../redux/api/rest'
 import { InfoSummary, InfoChart, RecentBlocks, RecentTransactions } from '../../components'
 
@@ -38,4 +37,4 @@ class MainPage extends Component {
   }
 }
 
-export default withRouter(MainPage);
+export default MainPage;

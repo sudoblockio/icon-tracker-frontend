@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './redux/store/store';
-import { Header, Footer } from './components/';
-import MainPage from './pages/MainPage';
-import AddressesPage from './pages/AddressesPage';
-import AddressDetailPage from './pages/AddressDetailPage';
-import TransactionsPage from './pages/TransactionsPage';
-import BlocksPage from './pages/BlocksPage';
-import BlockDetailPage from './pages/BlockDetailPage';
+import { store, history } from './redux/store/store';
+import Routes from './Routes.js';
+import { ConnectedRouter } from 'react-router-redux'
 
 class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
+<<<<<<< HEAD
         <div id="app-root">
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
@@ -32,6 +29,11 @@ class App extends Component {
           </div>
           <Footer />
         </div>
+=======
+        <ConnectedRouter history={history}>
+          <Routes />
+        </ConnectedRouter>
+>>>>>>> origin/development
       </Provider>
     );
   }

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { TransactionsPage } from '../../components';
 import { getTransactions } from '../../redux/actions/transactionAction';
+import { withRouter } from 'react-router-dom';
 
 function mapStateToProps(state) {
   console.log(state.transactions.transactions.data);
@@ -17,6 +18,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TransactionsPageContainer = connect(mapStateToProps, mapDispatchToProps)(TransactionsPage);
+const TransactionsPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TransactionsPage));
 
 export default TransactionsPageContainer;

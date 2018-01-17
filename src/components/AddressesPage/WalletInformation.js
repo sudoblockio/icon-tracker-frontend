@@ -16,7 +16,7 @@ class WalletInformation extends Component {
 
   render() {
     const { walletDetail } = this.props
-    const { address, nodeType, balance, exchangeKrw, txCount } = walletDetail
+    const { address, nodeType, balance, icxUsd, txCount } = walletDetail
     return (
       <div className="wrap-holder">
         <p className="title">Wallet Information</p>
@@ -35,7 +35,7 @@ class WalletInformation extends Component {
               </tr>
               <tr>
                 <td>Balance</td>
-                <td>{`${convertNumberToText(balance, 'icx')} ICX`}<em className="img"></em><span>{`${convertNumberToText(exchangeKrw, 'krw')} KRW`}</span></td>
+                <td>{`${convertNumberToText(balance, 'icx')} ICX`}<em className="img"></em><span>{`${convertNumberToText(icxUsd, 'usd')} USD`}</span></td>
               </tr>
               <tr>
                 <td>No of Txns</td>

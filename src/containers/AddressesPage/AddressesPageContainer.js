@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { AddressesPage } from '../../components/';
+import { withRouter } from 'react-router-dom';
 import { getAddresses } from '../../redux/actions/addressesActions';
 
 function mapStateToProps(state) {
@@ -7,15 +8,17 @@ function mapStateToProps(state) {
     loading: state.addresses.addresses.loading,
     data: state.addresses.addresses.data,
     pageNum: state.addresses.addresses.pageNum,
+    maxPageNum: state.addresses.addresses.maxPageNum,
+    url: state.router.location
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAddresses: () => dispatch(getAddresses())
+    getAddresses: (pageNum) => dispatch(getAddresses(pageNum))
   };
 }
 
-const AddressDetailPageContainer = connect(mapStateToProps, mapDispatchToProps)(AddressesPage);
+const AddressDetailPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressesPage));
 
 export default AddressDetailPageContainer;

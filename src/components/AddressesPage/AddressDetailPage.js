@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { WalletInformation, WalletTransactions, NoData, LoadingComponent } from '../../components'
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
@@ -9,19 +8,18 @@ class AddressesDetailPage extends Component {
   constructor(props) {
     super(props);
     this.addressId = this.props.match.params.addressId;
-    this.pageId = this.props.match.params.pageId;
+    this.pageId = this.props.match.params.pageId || 1;
   }
 
   componentWillMount() {
-    this.props.getAddressDetail(this.addressId);
-  }
-
-  componentWillUnmount() {
-    this.props.initAddressDetail();
+    this.props.getAddressDetail({
+      address: this.addressId,
+      pageNum: this.pageId
+    });
   }
 
   render() {
-    const { loading, data, pageNum } = this.props;
+    const { loading, data, pageNum, maxPageNum } = this.props;
     const content = (data) => {
       // 데이터가 없을 경우
       if (data === "") {
@@ -37,7 +35,7 @@ class AddressesDetailPage extends Component {
             <WalletInformation walletDetail={walletDetail}/>
           </div>
           <div className="screen1">
-            <WalletTransactions walletTx={walletTx}/>
+            <WalletTransactions walletTx={walletTx} pageNum={this.pageId} maxPageNum={maxPageNum}/>
           </div>
         </div>
       )
@@ -47,4 +45,4 @@ class AddressesDetailPage extends Component {
   }
 }
 
-export default withRouter(AddressesDetailPage);
+export default AddressesDetailPage;

@@ -37,7 +37,6 @@ class Pagination extends Component {
 
   render() {
     const { pageNum, maxPageNum } = this.props;
-    console.log(pageNum, typeof pageNum)
     return (
       <ul className="page">
         <li onClick={() => this.getData('start')}>

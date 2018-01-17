@@ -24,7 +24,11 @@ import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
 import NoData from './Common/NoData'
 
+import WalletLink from './Common/WalletLink'
+import BlockLink from './Common/BlockLink'
+
 export {
+
   Header,
   SearchBox,
   Footer,
@@ -49,5 +53,7 @@ export {
 
   LoadingComponent,
   Pagination,
-  NoData
+  NoData,
+  WalletLink,
+  BlockLink
 }

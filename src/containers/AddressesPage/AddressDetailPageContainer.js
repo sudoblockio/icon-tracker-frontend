@@ -1,22 +1,24 @@
 import { connect } from 'react-redux';
 import { AddressDetailPage } from '../../components/';
-import { initAddressDetail, getAddressDetail } from '../../redux/actions/addressesActions';
+import { withRouter } from 'react-router-dom';
+import { getAddressDetail } from '../../redux/actions/addressesActions';
 
 function mapStateToProps(state) {
   return {
     loading: state.addresses.address.loading,
     data: state.addresses.address.data,
     pageNum: state.addresses.address.pageNum,
+    maxPageNum: state.addresses.address.maxPageNum,
+    url: state.router.location
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    initAddressDetail: () => dispatch(initAddressDetail()),
-    getAddressDetail: (address) => dispatch(getAddressDetail(address))
+    getAddressDetail: (address, pageNum) => dispatch(getAddressDetail(address, pageNum))
   };
 }
 
-const AddressesPageContainer = connect(mapStateToProps, mapDispatchToProps)(AddressDetailPage);
+const AddressesPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressDetailPage));
 
 export default AddressesPageContainer;

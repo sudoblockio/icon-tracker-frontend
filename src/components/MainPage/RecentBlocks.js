@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { numberWithCommas, dateToUTC9 } from '../../utils/utils'
+import icon_02 from '../../style/image/icon_02.png'
 
 class RecentBlocks extends Component {
   render() {
@@ -15,7 +16,7 @@ class RecentBlocks extends Component {
               return (
                 <li key={blockHeight}>
                   <p className="icon">
-                    <img src="../image/icon_02.png" />
+                    <img src={icon_02} />
                     <span>Block</span>
                     <span>{blockHeight}</span>
                   </p>
@@ -33,4 +34,4 @@ class RecentBlocks extends Component {
   }
 }
 
-export default withRouter(RecentBlocks);
+export default RecentBlocks;

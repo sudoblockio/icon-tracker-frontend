@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { numberWithCommas, convertNumberToText } from '../../utils/utils'
+import { BlockLink } from '../../components/';
+import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
 
 class BlockInformation extends Component {
   constructor(props) {
@@ -9,6 +10,20 @@ class BlockInformation extends Component {
 
   componentWillUnmount() {
 
+  }
+
+  handlePrevBlock = () => {
+    const { blockDetail } = this.props;
+    if (blockDetail.height === 0) return;
+    const prevHeight = blockDetail.height - 1;
+    this.props.history.push('/block/'+prevHeight);
+  }
+
+  handleNextBlock = () => {
+    const { blockDetail } = this.props;
+    if (blockDetail.lastBlock !== "-") return;
+    const nextHeight = blockDetail.height + 1;
+    this.props.history.push('/block/'+nextHeight);
   }
 
   render() {
@@ -27,39 +42,39 @@ class BlockInformation extends Component {
             <tbody>
               <tr>
                 <td>Address</td>
-                <td><p className="prev"><em className="img"></em></p><em className="value">99999</em><p className="next"><em className="img"></em></p></td>
+                <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{blockDetail.height}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
               </tr>
               <tr>
                 <td>Time</td>
-                <td>2017-12-14 01:53:49 (UTC+9)</td>
+                <td>{dateToUTC9(blockDetail.createDate)} (UTC+9)</td>
               </tr>
               <tr>
                 <td>C-rep</td>
-                <td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
+                <td><span>{blockDetail.crep}</span></td>
               </tr>
               <tr>
                 <td>No of Txns</td>
-                <td>{`${numberWithCommas(0)}`}</td>
+                <td>{numberWithCommas(blockDetail.txCount)}</td>
               </tr>
               <tr>
                 <td>Hash</td>
-                <td>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</td>
+                <td>{blockDetail.hash}</td>
               </tr>
               <tr>
                 <td>Prev Hash</td>
-                <td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
+                <td>{ blockDetail.prevHash ? (<BlockLink to={blockDetail.height - 1} label={blockDetail.prevHash} />) : "-"}</td>
               </tr>
               <tr>
                 <td>Block size</td>
-                <td>37,975 bytes</td>
+                <td>{numberWithCommas(blockDetail.blockSize)} bytes</td>
               </tr>
               <tr>
                 <td>Amount</td>
-                <td>100.000005 ICX</td>
+                <td>{convertNumberToText(blockDetail.amount, 'icx')} ICX</td>
               </tr>
               <tr>
                 <td>Fee</td>
-                <td>0.1 ICX</td>
+                <td>{convertNumberToText(blockDetail.fee, 'icx')} ICX</td>
               </tr>
             </tbody>
           </table>

@@ -1,19 +1,23 @@
 import actionTypes from '../actionTypes/actionTypes'
+import { calcMaxPageNum } from '../../utils/utils';
 
 const initialState = {
   addresses: {
     loading: true,
-    data: [],
     pageNum: 1,
+    maxPageNum: 1,
+    data: [],
     error: ''
   },
   address: {
     loading: true,
+    pageNum: 1,
+    maxPageNum: 1,
     data: {
       walletDetail: {
         address: "",
         balance: 0,
-        exchangeKrw: 0,
+        icxUsd: 0,
         txCount: 0,
         nodeType: ""
       },
@@ -30,7 +34,8 @@ export function addressesReducer(state = initialState, action) {
         ...state,
         addresses : {
           ...state.addresses,
-          loading: true
+          loading: true,
+          pageNum: Number(action.payload) || 1
         }
       }
     }
@@ -41,7 +46,8 @@ export function addressesReducer(state = initialState, action) {
         addresses : {
           ...state.addresses,
           loading: false,
-          data : action.payload,
+          maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
+          data : action.payload.data,
           error: ''
         }
       }
@@ -58,32 +64,13 @@ export function addressesReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.initAddressDetail: {
-      return {
-        ...state,
-        address : {
-          loading: true,
-          data: {
-            walletDetail: {
-              address: "",
-              balance: 0,
-              exchangeKrw: 0,
-              txCount: 0,
-              nodeType: ""
-            },
-            walletTx: []
-          },
-          error: ''
-        }
-      }
-    }
-
     case actionTypes.getAddressDetail: {
       return {
         ...state,
         address : {
           ...state.address,
-          loading: true
+          loading: true,
+          pageNum: Number(action.payload.pageNum) || 1
         }
       }
     }
@@ -94,7 +81,8 @@ export function addressesReducer(state = initialState, action) {
         address : {
           ...state.address,
           loading: false,
-          data : action.payload,
+          maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
+          data : action.payload.data,
           error: ''
         }
       }

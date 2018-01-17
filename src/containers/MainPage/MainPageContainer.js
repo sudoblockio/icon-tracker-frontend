@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { MainPage } from '../../components/';
+import { withRouter } from 'react-router-dom';
 import { getMainInfo } from '../../redux/actions/mainPageActions'
 
 function mapStateToProps(state) {
@@ -14,6 +15,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const MainPageContainer = connect(mapStateToProps, mapDispatchToProps)(MainPage);
+const MainPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
 
 export default MainPageContainer;

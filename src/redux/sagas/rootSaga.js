@@ -3,6 +3,7 @@ import mainPageSaga from './mainPageSaga';
 import addressesSaga from './addressesSaga';
 import blocksSaga from './blocksSaga';
 import transactionsSaga from './transactionsSaga';
+import searchSaga from './searchSaga';
 
 
 export default function* rootSaga() {
@@ -10,6 +11,7 @@ export default function* rootSaga() {
     fork(mainPageSaga),
     fork(addressesSaga),
     fork(blocksSaga),
-    fork(transactionsSaga)
+    fork(transactionsSaga),
+    fork(searchSaga)
   ];
 }

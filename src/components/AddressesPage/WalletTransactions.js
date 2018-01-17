@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
-import { LoadingComponent } from '../../components'
+import { LoadingComponent, Pagination, BlockLink } from '../../components'
 
 class WalletTransactions extends Component {
-  render() {
+
+  getWalletData = (pageId) => {
     const { walletTx } = this.props
+    this.props.history.push('/wallet/' + walletTx + '/' + pageId);
+  }
+
+  render() {
+    const { walletTx, pageNum, maxPageNum } = this.props
     return (
       <div className="wrap-holder">
         <p className="title">Transaction List</p>
@@ -23,44 +29,34 @@ class WalletTransactions extends Component {
               </tr>
             </thead>
             <tbody>
-              {walletTx.map(tx => {
-                const { txHash, height, createDate, fromAddr, toAddr, amount, fee, totalTx } = tx
-                return (
-                  <tr key={txHash}>
-                    <td className="on break">{txHash}</td>
-                    <td className="on">{numberWithCommas(height)}</td>
-                    <td>{dateToUTC9(createDate)}</td>
-                    <td className="break">{fromAddr}</td>
-                    <td className="break">{toAddr}</td>
-                    <td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
-                    <td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
-                  </tr>
-                )
-              })}
+              {walletTx.map(tx => (
+                <TableRow key={tx.txHash} data={tx}/>
+              ))}
             </tbody>
           </table>
-          <ul className="page">
-            <li>
-              <span className="start"><em className="img"></em></span>
-            </li>
-            <li>
-              <span className="prev"><em className="img"></em></span>
-            </li>
-            <li className="pageNum">
-              <p>Page</p>
-              <input type="text" className="txt-type-page" placeholder="" value=""/> / 10000
-            </li>
-            <li>
-              <span className="next"><em className="img"></em></span>
-            </li>
-            <li>
-              <span className="end"><em className="img"></em></span>
-            </li>
-          </ul>
+          <Pagination
+            pageNum={pageNum}
+            maxPageNum={maxPageNum}
+            getData={this.getWalletData}
+          />
         </div>
       </div>
     );
   }
+}
+
+const TableRow = ({data}) => {
+  return (
+    <tr>
+      <td className="on break">{data.txHash}</td>
+      <td className="on"><BlockLink to={numberWithCommas(data.height)}/></td>
+      <td>{dateToUTC9(data.createDate)}</td>
+      <td className="break">{data.fromAddr}</td>
+      <td className="break">{data.toAddr}</td>
+      <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
+      <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
+    </tr>
+  )
 }
 
 export default withRouter(WalletTransactions);
