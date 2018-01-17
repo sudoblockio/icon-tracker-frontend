@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import { WalletInformation, WalletTransactions, NoData, LoadingComponent } from '../../components'
+import { WalletInformation, WalletTransactions, NotFound, LoadingComponent } from '../../components'
 import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
 
 class AddressesDetailPage extends Component {
@@ -24,7 +24,7 @@ class AddressesDetailPage extends Component {
       // 데이터가 없을 경우
       if (data === "") {
         return (
-          <NoData string={this.addressId}/>
+          <NotFound string={this.addressId}/>
         )
       }
 

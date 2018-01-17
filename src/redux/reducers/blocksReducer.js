@@ -6,7 +6,6 @@ const blocksInitState = {
   data: [],
   pageNum: 1,
   maxPageNum: 1,
-  error: ''
 };
 
 const blockInitState = {
@@ -17,7 +16,6 @@ const blockInitState = {
   },
   pageNum: 1,
   maxPageNum: 1,
-  error: ''
 };
 
 const initialState = {
@@ -46,8 +44,7 @@ export function blocksReducer(state = initialState, action) {
           ...state.blocks,
           loading: false,
           maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
-          data : action.payload.data,
-          error: ''
+          data : action.payload.data
         }
       }
     }
@@ -57,8 +54,7 @@ export function blocksReducer(state = initialState, action) {
         ...state,
         blocks : {
           ...state.blocks,
-          loading: false,
-          error: action.error
+          loading: false
         }
       }
     }
@@ -85,8 +81,7 @@ export function blocksReducer(state = initialState, action) {
             blockDetail: action.payload.blockDetail,
             blockTx: action.payload.txInBlock
           },
-          maxPageNum: calcMaxPageNum(action.payload.blockDetail.txCount, 10),
-          error: ''
+          maxPageNum: calcMaxPageNum(action.payload.blockDetail.txCount, 10)
         }
       }
     }
@@ -96,8 +91,7 @@ export function blocksReducer(state = initialState, action) {
         ...state,
         block : {
           ...state.block,
-          loading: false,
-          error: action.error
+          loading: false
         }
       }
     }

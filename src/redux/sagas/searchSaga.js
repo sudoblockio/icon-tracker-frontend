@@ -11,39 +11,43 @@ function* searchFunc(action) {
     // 검색어가 숫자면, 블록 height로 검색
     if (!isNaN(action.payload)) {
       yield put(routerActions.push('/block/' + action.payload));
+
     // 검색어가 길이 40개의 string이면 지갑 ID 검색
     } else if (action.payload.length === 40) {
       yield put(routerActions.push('/wallet/' + action.payload));
+
     // 그 이외는 HASH (TX, BLOCK) 구분을 위한 검색
     } else if (action.payload.length === 64){
-      console.log(action.payload)
-      const payload = yield call(SEARCH_API, action.payload);
-      //payload === 'Block Hash(블록 해쉬)'
-      if (payload.result === "OK") {
-        switch (payload.data) {
-          case 'Block Hash(블록 해쉬)':
+      const searchPayload = yield call(SEARCH_API, action.payload);
+      if (searchPayload.result === "OK") {
+        switch (searchPayload.data.split(" ")[0]) {
+          // Block Hash일 경우 Block Height을 가져와서 라우터에 Push.
+          case 'Block': {
             const query = {
-              blockHash: action.payload
+               hash: action.payload
             }
-            const payload = yield call(GET_BLOCK_BY_HASH_API, { payload: query });
-            yield put(routerActions.push('/block/' + payload.blockDetail.height));
+            const blockPayload = yield call(GET_BLOCK_BY_HASH_API, query);
+            yield put(routerActions.push('/block/' + blockPayload.blockDetail.height));
             break;
-          case 'Transaction Hash(트랜잭션 해쉬)':
-
+          }
+          // Transaction Hash일 경우 바로 라우터에 Push.
+          case 'Transaction': {
+            yield put(routerActions.push('/transaction/' + action.payload));
             break;
+          }
           default:
             break;
         }
       }
-      if (payload.result === "NO_DATA") {
-        yield put({type: AT.searchRejected, error: payload.result});
+      if (searchPayload.result === "NO_DATA") {
+        yield put({type: AT.searchRejected});
       }
     } else {
-      yield put({type: AT.searchRejected, error: 'NO_DATA'});
+      yield put({type: AT.searchRejected});
     }
     yield put({type: AT.searchFulfilled, payload: ''});
   } catch (e) {
-    yield put({type: AT.searchRejected, error: e});
+    yield put({type: AT.searchRejected});
   }
 }
 

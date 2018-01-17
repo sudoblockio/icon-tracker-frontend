@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { NoData, BlockInformation, BlockTransactions } from '../../components/';
+import { NotFound, BlockInformation, BlockTransactions } from '../../components/';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
 
 class BlockDetailPage extends Component {
@@ -32,31 +32,23 @@ class BlockDetailPage extends Component {
   render() {
     const { loading, data, pageNum, maxPageNum} = this.props;
     const content = (data) => {
-      // 데이터가 없을 경우
-      if (data === "") {
-        return (
-          <NoData string={this.address}/>
-        )
-      }
-      else {
-        const { blockDetail, blockTx } = data;
-        return (
-          <div className="content-wrap">
-    				<div className="screen0">
-    					<BlockInformation
-                blockDetail={blockDetail} />
-    				</div>
-    				<div className="screen1">
-    					<BlockTransactions
-                height={blockDetail.height}
-                loading={loading}
-                blockTx={blockTx}
-                pageNum={pageNum}
-                maxPageNum={maxPageNum} />
-    				</div>
-    			</div>
-        )
-      }
+      const { blockDetail, blockTx } = data;
+      return (
+        <div className="content-wrap">
+  				<div className="screen0">
+  					<BlockInformation
+              blockDetail={blockDetail} />
+  				</div>
+  				<div className="screen1">
+  					<BlockTransactions
+              height={blockDetail.height}
+              loading={loading}
+              blockTx={blockTx}
+              pageNum={pageNum}
+              maxPageNum={maxPageNum} />
+  				</div>
+  			</div>
+      )
     }
     return (content(data));
   }

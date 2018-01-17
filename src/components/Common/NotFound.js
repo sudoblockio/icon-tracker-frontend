@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
-class NoData extends Component {
+class NotFound extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
   render() {
     return (
       <div className="content-wrap nodata">
@@ -11,7 +16,7 @@ class NoData extends Component {
               <p className="txt">The string below is invalid.<br/>
                       Please double check your key.
               </p>
-              <p className="address">{this.props.string}</p>
+              <p className="address">{this.props.url.state.error || ''}</p>
             </div>
           </div>
         </div>
@@ -20,4 +25,4 @@ class NoData extends Component {
   }
 }
 
-export default NoData;
+export default NotFound;
