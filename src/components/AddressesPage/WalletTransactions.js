@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
-import { LoadingComponent, Pagination } from '../../components'
+import { LoadingComponent, Pagination, BlockLink } from '../../components'
 
 class WalletTransactions extends Component {
 
@@ -29,20 +29,9 @@ class WalletTransactions extends Component {
               </tr>
             </thead>
             <tbody>
-              {walletTx.map(tx => {
-                const { txHash, height, createDate, fromAddr, toAddr, amount, fee, totalTx } = tx
-                return (
-                  <tr key={txHash}>
-                    <td className="on break">{txHash}</td>
-                    <td className="on">{numberWithCommas(height)}</td>
-                    <td>{dateToUTC9(createDate)}</td>
-                    <td className="break">{fromAddr}</td>
-                    <td className="break">{toAddr}</td>
-                    <td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
-                    <td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
-                  </tr>
-                )
-              })}
+              {walletTx.map(tx => (
+                <TableRow key={tx.txHash} data={tx}/>
+              ))}
             </tbody>
           </table>
           <Pagination
@@ -54,6 +43,20 @@ class WalletTransactions extends Component {
       </div>
     );
   }
+}
+
+const TableRow = ({data}) => {
+  return (
+    <tr>
+      <td className="on break">{data.txHash}</td>
+      <td className="on"><BlockLink to={numberWithCommas(data.height)}/></td>
+      <td>{dateToUTC9(data.createDate)}</td>
+      <td className="break">{data.fromAddr}</td>
+      <td className="break">{data.toAddr}</td>
+      <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
+      <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
+    </tr>
+  )
 }
 
 export default withRouter(WalletTransactions);
