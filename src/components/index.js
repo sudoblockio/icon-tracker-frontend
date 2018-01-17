@@ -14,6 +14,7 @@ import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
+import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
@@ -26,6 +27,7 @@ import NoData from './Common/NoData'
 
 import WalletLink from './Common/WalletLink'
 import BlockLink from './Common/BlockLink'
+import TransactionLink from './Common/TransactionLink'
 
 export {
 
@@ -45,6 +47,7 @@ export {
   WalletTransactions,
 
   TransactionsPage,
+  TransactionDetailPage,
 
   BlocksPage,
   BlockDetailPage,
@@ -55,5 +58,6 @@ export {
   Pagination,
   NoData,
   WalletLink,
-  BlockLink
+  BlockLink,
+  TransactionLink
 }

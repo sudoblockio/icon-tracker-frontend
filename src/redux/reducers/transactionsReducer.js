@@ -1,10 +1,12 @@
 import actionTypes from '../actionTypes/actionTypes';
+import { calcMaxPageNum } from '../../utils/utils';
 
 const initialState = {
   transactions: {
     loading: true,
     data: [],
     pageNum: 1,
+    maxPageNum: 1,
     error: ''
   },
   transaction: {
@@ -33,7 +35,8 @@ export function transactionsReducer(state = initialState, action) {
         transactions : {
           ...state.transactions,
           loading: false,
-          data : action.payload,
+          maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
+          data : action.payload.data,
           error: ''
         }
       }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { LoadingComponent, Pagination } from '../../components/';
+import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
 
 class TransactionsPage extends Component {
@@ -14,6 +14,16 @@ class TransactionsPage extends Component {
 	componentWillMount() {
 		const { params } = this.props.match;
 		this.props.getTransactions(params['pageId']);
+	}
+	
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.url.pathname !== this.props.url.pathname) {
+			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
+		}
+	}
+
+	getTransactionsData = (pageId) => {
+		this.props.history.push('/transactions/' + pageId);
 	}
 
 	render() {
@@ -55,16 +65,13 @@ class TransactionsPage extends Component {
 										</table>
 									)
 							}
-
 							{<Pagination
 								pageNum={pageNum}
+								maxPageNum={maxPageNum}
 								getData={this.getTransactionsData} />}
 						</div>
-
 					</div>
 				</div>
-
-
 			</div>
 		);
 	}
@@ -81,11 +88,11 @@ class TableRow extends Component {
 		const { data } = this.props;
 		return (
 			<tr>
-				<td className="on break">{data.txHash}</td>
-				<td>{data.height}</td>
+				<td className="on break"><TransactionLink to = {data.txHash}/></td>
+				<td><BlockLink to={data.height} /></td>
 				<td>{dateToUTC9(data.createDate)}</td>
-				<td className="break">{data.fromAddr}</td>
-				<td className="break">{data.toAddr}</td>
+				<td className="break"><WalletLink to = {data.fromAddr}/></td>
+				<td className="break"><WalletLink to = {data.toAddr}/></td>
 				<td><span>{data.amount}</span><em>ICX</em></td>
 				<td><span>{data.fee}</span><em>ICX</em></td>
 			</tr>

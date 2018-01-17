@@ -112,10 +112,23 @@ export function getTransactionsApi(payload){
   return new Promise((resolve, reject) => {
     axiosApi.get('v0/transaction/recentTx?page=' + pageNum)
       .then(result => {
-        resolve(result.data.data);
+        resolve(result.data);
       })
       .catch(error => {
         alert(error);
+        reject(error);
+      })
+  });
+}
+
+export function getTransactionApi(payload){
+  const txHash = payload;
+  return new Promise((resolve, reject) => {
+    axiosApi.get('v0/transaction/txDetail?txHash=' + txHash)
+      .then(result => {
+        resolve(result.data.data);
+      })
+      .catch(error => {
         reject(error);
       })
   });
