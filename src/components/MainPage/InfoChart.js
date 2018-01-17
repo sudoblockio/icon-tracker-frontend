@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js'
+import moment from 'moment'
 import chartImg from '../../style/image/chart.png'
 
 class InfoChart extends Component {
-  componentDidMount() {
-    var ctx = document.getElementById("txChart");
-    var myChart = new Chart(ctx, {
+
+  componentWillReceiveProps(nextProps) {
+    const { tmainChart } = nextProps.mainPage
+    if (!tmainChart || tmainChart.length === 0) {
+      return
+    }
+    const chartData = this.makeChartData(tmainChart)
+    const ctx = document.getElementById("txChart");
+    let txChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['JAN 3', 'JAN 4', 'JAN 5', 'JAN 6', 'JAN 7', 'JAN 8'],
+        labels: chartData.labels,
         datasets: [{
-          data: [12, 19, 3, 5, 2, 3],
+          data: chartData.data,
         }]
       },
       options: {
@@ -19,10 +26,10 @@ class InfoChart extends Component {
         },
         layout: {
           padding: {
-            left: 15,
-            right: 40,
-            top: 25,
-            bottom: 15
+            left: 25,
+            right: 30,
+            top: 40,
+            bottom: 20
           }
         },
         elements: {
@@ -36,18 +43,69 @@ class InfoChart extends Component {
           line: {
             tension: 0,
             borderColor: '#1aaaba',
-            borderWidth: 2
-          }
+            borderWidth: 2,
+            backgroundColor: 'rgba(0,0,0,0)'
+          },
         },
         scales: {
-          yAxes: [{
+          xAxes: [{
+            gridLines: {
+              color: 'rgba(100,100,100,0.2)',
+              // color: 'green',
+              drawTicks: true,
+              drawBorder: false
+            },
             ticks: {
-              beginAtZero:false
+              padding: 5,
+              fontSize: 9,
+              fontColor: '#aaa',
+              fontFamily: 'NanumSquare',
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              color: 'rgba(100,100,100,0.4)',
+              zeroLineColor: 'rgba(100,100,100,0.7)',
+              // color: 'yellow',
+              // zeroLineColor: 'red',
+              borderDash: [2,2],
+              drawTicks: false,
+              drawBorder: false
+            },
+            ticks: {
+              padding: 10,
+              fontSize: 9,
+              fontColor: '#aaa',
+              fontFamily: 'NanumSquare',
+              beginAtZero: true,
+              suggestedMax: chartData.max,
+              suggestedMin: chartData.min,
+              stepSize: chartData.step
             }
           }]
         }
       }
     });
+  }
+
+  makeChartData(chartData) {
+    let labels = []
+    let data = []
+
+    chartData.reverse().forEach((c, i) => {
+      labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
+      data.push(c.txCount)
+    })
+
+    let max = Math.max.apply(null, data)
+    let min = Math.min.apply(null, data)
+    let step = Math.round((max - min) / 4)
+
+    max += step
+    min = min > step ? min - step : step
+    step = Math.ceil((max - min) / 3 / 10) * 10
+
+    return { labels, data, max, min, step }
   }
 
   render() {
