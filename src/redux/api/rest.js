@@ -78,6 +78,22 @@ export function getBlockApi(payload) {
   })
 }
 
+export function getBlockByHashApi(payload) {
+  const blockId = payload.blockHash;
+  const pageId = payload.pageId || 1;
+
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
+      .then(result => {
+        resolve(result.data.data)
+      })
+      .catch(error => {
+        alert(error)
+        reject(error)
+      })
+  })
+}
+
 export function searchApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/search/Search?data=' + payload)

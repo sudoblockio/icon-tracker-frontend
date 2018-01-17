@@ -4,7 +4,7 @@ import { search } from '../../redux/actions/searchActions';
 
 function mapStateToProps(state) {
   return {
-
+    loading: state.search.loading,
   };
 }
 

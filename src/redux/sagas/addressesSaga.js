@@ -16,7 +16,7 @@ function* getAddressesFunc(action) {
   }
 }
 
-function* getAddressDetailFunc(action) {
+export function* getAddressDetailFunc(action) {
   try {
     const payload = yield call(GET_ADDRESS_DETAIL_API, action.payload);
     // yield delay(2000)

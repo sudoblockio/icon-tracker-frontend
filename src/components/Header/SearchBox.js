@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { LoadingComponent } from '../../components/';
 
 class SearchBox extends Component {
 
@@ -16,16 +17,32 @@ class SearchBox extends Component {
     })
   }
 
+  handleKeyPress = (e) => {
+    if (!this.state.value) return;
+    if (e.key === 'Enter') {
+      this.props.search(this.state.value)
+    }
+  }
+
   handleSubmit = () => {
+    if (!this.state.value) return;
     this.props.search(this.state.value)
+    this.setState({
+      value: ''
+    })
   }
 
   render() {
+    const { loading } = this.props;
     const { value } = this.state;
     return (
       <div className="search-group">
-        <input onChange={this.handleInputChange} type="text" className="txt-type-normal" placeholder="Enter Address, Tx hash, Block Height" value={value}/>
-        <span onClick={this.handleSubmit}><em className="img"></em></span>
+        <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-normal" placeholder="Enter Address, Tx hash, Block Height" value={value}/>
+        <span>
+          {
+            loading ? <LoadingComponent />
+                    : <em onClick={this.handleSubmit} className="img"></em>
+          }</span>
       </div>
     );
   }

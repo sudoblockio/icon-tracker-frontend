@@ -14,7 +14,7 @@ function* getBlocksFunc(action) {
   }
 }
 
-function* getBlockFunc(action) {
+export function* getBlockFunc(action) {
   try {
     const payload = yield call(GET_BLOCK_API, action.payload);
     yield put({type: AT.getBlockFulfilled, payload: payload});
