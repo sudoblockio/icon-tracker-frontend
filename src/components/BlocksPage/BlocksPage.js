@@ -30,49 +30,49 @@ class BlocksPage extends Component {
   render() {
     const { loading, data, pageNum, getBlocks, maxPageNum } = this.props;
     return (
-			<div className="content-wrap">
-				<div className="screen0">
-					<div className="wrap-holder">
-						<p className="title">Recent Blocks</p>
-						<div className="contents">
+      <div className="content-wrap">
+        <div className="screen0">
+          <div className="wrap-holder">
+            <p className="title">Recent Blocks</p>
+            <div className="contents">
               {
                 loading ? (
-                  <div style={{height: '600px'}}>
+                  <div style={{ height: '600px' }}>
                     <LoadingComponent />
                   </div>
                 ) : (
-                  <table className="table-typeE">
-    								<thead>
-    									<tr>
-    										<th>Block Height</th>
-    										<th>Time Stamp<em>(UTC+9)</em></th>
-    										<th>No of Txns</th>
-    										<th>C-Rep Address</th>
-    										<th>Amount</th>
-    										<th>Fee</th>
-    									</tr>
-    								</thead>
-    								<tbody>
-                    {
-                      data.map((row) => (
-                        <TableRow
-                          key={row.height}
-                          data={row} />
-                      ))
-                    }
-    								</tbody>
-    							</table>
-                )
+                    <table className="table-typeE">
+                      <thead>
+                        <tr>
+                          <th>Block Height</th>
+                          <th>Time Stamp<em>(UTC+9)</em></th>
+                          <th>No of Txns</th>
+                          <th>C-Rep Address</th>
+                          <th>Amount</th>
+                          <th>Fee</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          data.map((row) => (
+                            <TableRow
+                              key={row.height}
+                              data={row} />
+                          ))
+                        }
+                      </tbody>
+                    </table>
+                  )
               }
 
-							<Pagination
+              <Pagination
                 pageNum={pageNum}
                 maxPageNum={maxPageNum}
                 getData={this.getBlocksData} />
-						</div>
-					</div>
-				</div>
-			</div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

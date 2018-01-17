@@ -10,7 +10,6 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-<<<<<<< HEAD
         <div id="app-root">
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
@@ -29,11 +28,6 @@ class App extends Component {
           </div>
           <Footer />
         </div>
-=======
-        <ConnectedRouter history={history}>
-          <Routes />
-        </ConnectedRouter>
->>>>>>> origin/development
       </Provider>
     );
   }
