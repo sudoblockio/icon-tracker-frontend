@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
+import { BlockLink } from '../../components/';
 
 class TransactionDetailPage extends Component {
 
@@ -35,7 +36,7 @@ class TransactionDetailPage extends Component {
 									</tr>
 									<tr>
 										<td>Block</td>
-										<td><span>{data.height}</span></td>
+										<td><span><BlockLink to = {data.height} /></span></td>
 									</tr>
 									<tr>
 										<td>Time Stamp</td>

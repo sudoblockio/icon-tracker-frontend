@@ -27,6 +27,7 @@ import NoData from './Common/NoData'
 
 import WalletLink from './Common/WalletLink'
 import BlockLink from './Common/BlockLink'
+import TransactionLink from './Common/TransactionLink'
 
 export {
 
@@ -57,5 +58,6 @@ export {
   Pagination,
   NoData,
   WalletLink,
-  BlockLink
+  BlockLink,
+  TransactionLink
 }
