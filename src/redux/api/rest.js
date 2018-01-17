@@ -34,11 +34,11 @@ export function getAddressesApi(payload) {
 }
 
 export function getAddressDetailApi(payload) {
-  const address = payload.address;
-  const pageNum = payload.pageNum || 1;
+  const addressId = payload.addressId;
+  const pageId = payload.pageId || 1;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + address + '&page=' + pageNum)
+    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + addressId + '&page=' + pageId)
       .then(result => {
         resolve(result.data)
       })

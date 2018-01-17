@@ -7,15 +7,24 @@ class AddressesDetailPage extends Component {
 
   constructor(props) {
     super(props);
-    this.addressId = this.props.match.params.addressId;
-    this.pageId = this.props.match.params.pageId || 1;
   }
 
   componentWillMount() {
-    this.props.getAddressDetail({
-      address: this.addressId,
-      pageNum: this.pageId
-    });
+    this.getAddressDetail(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/wallet/')) {
+      this.getAddressDetail(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
+    }
+  }
+
+  getAddressDetail = (addressId, pageId = 1) => {
+    const data = {
+      addressId: addressId,
+      pageId: pageId
+    };
+    this.props.getAddressDetail(data);
   }
 
   render() {

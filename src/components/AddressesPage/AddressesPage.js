@@ -8,15 +8,15 @@ class AddressesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-    this.pageId = this.props.match.params.pageId;
   }
 
   componentWillMount() {
-    this.props.getAddresses(this.pageId);
+    this.props.getAddresses(this.props.url.pathname.split("/")[2]);
+
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname) {
+    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/wallets/')) {
       nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
     }
   }
