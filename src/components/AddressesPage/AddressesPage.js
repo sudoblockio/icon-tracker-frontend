@@ -39,7 +39,7 @@ class AddressesPage extends Component {
               </div>
               :
               <div className="contents">
-  							<table className="table-typeA">
+  							<table className="table-typeA link-in-table">
   								<thead>
   									<tr>
   										<th>Address</th>

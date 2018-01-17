@@ -1,4 +1,5 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import AT from '../actionTypes/actionTypes';
 import { getMainInfo as GET_MAIN_INFO_API } from '../api/rest'
 

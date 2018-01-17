@@ -12,8 +12,8 @@
 .header-wrap .link > ul li:hover::after{display: block;}
 .header-wrap .link > ul li:hover{color: rgba(255,255,255,1);}
 
-.table-typeA a { text-decoration:none; color:#1aaaba; }
-.table-typeA a:hover { text-decoration:underline; color:#1aaaba; opacity: 0.5; }
+.link-in-table a { text-decoration:none; color:#1aaaba; }
+.link-in-table a:hover{ text-decoration:underline; color:#1aaaba; opacity: 0.5; }
 
 /* 로딩 컴포넌트 */
 .loadingDiv {
