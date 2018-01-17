@@ -16,7 +16,7 @@ class WalletTransactions extends Component {
       <div className="wrap-holder">
         <p className="title">Transaction List</p>
         <div className="contents">
-          <table className="table-typeC link-in-table">
+          <table className="table-typeC">
             <thead>
               <tr>
                 <th>Tx Hash</th>

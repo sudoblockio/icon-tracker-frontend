@@ -21,7 +21,7 @@ class WalletInformation extends Component {
       <div className="wrap-holder">
         <p className="title">Wallet Information</p>
         <div className="contents">
-          <table className="table-typeB address link-in-table">
+          <table className="table-typeB address">
             <thead>
               <tr>
                 <th>Address</th>

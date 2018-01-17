@@ -21,7 +21,7 @@ class RecentBlocks extends Component {
             {tmainBlock.map(block => {
               const { blockHeight, createDate, hash, txCount } = block
               return (
-                <li key={blockHeight} className='link-in-table'>
+                <li key={blockHeight}>
                   <p className="icon">
                     <img src={icon_02} />
                     <span>Block</span>
