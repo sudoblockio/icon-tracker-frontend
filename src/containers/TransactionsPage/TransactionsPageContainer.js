@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
-import { TransactionsPage } from '../../components';
-import { getTransactions } from '../../redux/actions/transactionAction';
+import { TransactionsPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
+import { getTransactions } from '../../redux/actions/transactionAction';
 
 function mapStateToProps(state) {
-  console.log(state.transactions.transactions.data);
   return {
     loading: state.transactions.transactions.loading,
     data: state.transactions.transactions.data,
-    pageNum: state.transactions.transactions.pageNum
+    pageNum: state.transactions.transactions.pageNum,
+    maxPageNum: state.transactions.transactions.maxPageNum,
+    url: state.router.location
   };
 }
 

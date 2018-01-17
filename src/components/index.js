@@ -14,6 +14,7 @@ import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
+import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
@@ -45,6 +46,7 @@ export {
   WalletTransactions,
 
   TransactionsPage,
+  TransactionDetailPage,
 
   BlocksPage,
   BlockDetailPage,

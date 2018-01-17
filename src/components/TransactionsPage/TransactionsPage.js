@@ -15,6 +15,16 @@ class TransactionsPage extends Component {
 		const { params } = this.props.match;
 		this.props.getTransactions(params['pageId']);
 	}
+	
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.url.pathname !== this.props.url.pathname) {
+			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
+		}
+	}
+
+	getTransactionsData = (pageId) => {
+		this.props.history.push('/transactions/' + pageId);
+	}
 
 	render() {
 		const { loading, data, pageNum, getTransactions, maxPageNum } = this.props;
@@ -55,16 +65,13 @@ class TransactionsPage extends Component {
 										</table>
 									)
 							}
-
 							{<Pagination
 								pageNum={pageNum}
+								maxPageNum={maxPageNum}
 								getData={this.getTransactionsData} />}
 						</div>
-
 					</div>
 				</div>
-
-
 			</div>
 		);
 	}
