@@ -16,7 +16,7 @@ class BlockDetailPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname) {
+    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/block/')) {
       this.getBlock(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
     }
   }

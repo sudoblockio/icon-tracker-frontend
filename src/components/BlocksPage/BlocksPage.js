@@ -12,13 +12,12 @@ class BlocksPage extends Component {
   }
 
   componentWillMount() {
-    const { params } = this.props.match;
     this.props.resetReducer();
-    this.props.getBlocks(params['pageId']);
+    this.props.getBlocks(this.props.url.pathname.split("/")[2]);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname) {
+    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/blocks/')) {
       nextProps.getBlocks(nextProps.url.pathname.split("/")[2]);
     }
   }
