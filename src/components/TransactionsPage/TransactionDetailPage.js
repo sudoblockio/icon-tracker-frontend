@@ -53,11 +53,7 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Time Stamp</td>
-<<<<<<< HEAD
-  										<td>{dateToUTC(data.createDate)}</td>
-=======
-  										<td>{dateToUTC9(data.createDate)} (UTC+9, {calcTime(data.createDate)})</td>
->>>>>>> 61fb4cb0b3898c0e7c33b2a885a8c4415eb147c0
+  										<td>{dateToUTC(data.createDate)} (UTC+9, {calcTime(data.createDate)})</td>
   									</tr>
                     <tr>
   										<td>From</td>
