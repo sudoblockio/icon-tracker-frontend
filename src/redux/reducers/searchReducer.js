@@ -2,7 +2,7 @@ import actionTypes from '../actionTypes/actionTypes'
 
 const initialState = {
   loading: false,
-  data: {}
+  error: ''
 }
 
 export function searchReducer(state = initialState, action) {
@@ -14,11 +14,12 @@ export function searchReducer(state = initialState, action) {
     case actionTypes.searchFulfilled:
       return Object.assign({}, state, {
         loading: false,
-        data: action.payload
+        error: ''
       })
     case actionTypes.searchRejected:
       return Object.assign({}, state, {
-        loading: false
+        loading: false,
+        error: action.error
       })
     default: {
       return state

@@ -1,5 +1,6 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import { routerActions } from 'react-router-redux'
 import AT from '../actionTypes/actionTypes';
 import {
   getAddressesApi as GET_ADDRESSES_API,
@@ -12,17 +13,20 @@ function* getAddressesFunc(action) {
     // yield delay(2000)
     yield put({type: AT.getAddressesFulfilled, payload: payload});
   } catch (e) {
-    yield put({type: AT.getAddressesRejected, error: e});
+    yield put({type: AT.getAddressesRejected});
   }
 }
 
 export function* getAddressDetailFunc(action) {
   try {
     const payload = yield call(GET_ADDRESS_DETAIL_API, action.payload);
-    // yield delay(2000)
-    yield put({type: AT.getAddressDetailFulfilled, payload: payload});
+    if (payload.result === 'OK') {
+      yield put({type: AT.getAddressDetailFulfilled, payload: payload});
+    } else {
+      throw '';
+    }
   } catch (e) {
-    yield put({type: AT.getAddressDetailRejected, error: e});
+    yield put({type: AT.getAddressDetailRejected, error: action.payload.address});
   }
 }
 
