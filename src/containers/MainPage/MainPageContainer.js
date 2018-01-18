@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import { MainPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { getMainInfo } from '../../redux/actions/mainPageActions'
+import { getMainInfo, getMainChart } from '../../redux/actions/mainPageActions'
 
 function mapStateToProps(state) {
   return {
-    mainPage: state.mainPage
+    info: state.mainPage.info,
+    chart: state.mainPage.chart
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getMainInfo: () => dispatch(getMainInfo())
+    getMainInfo: () => dispatch(getMainInfo()),
+    getMainChart: () => dispatch(getMainChart())
   };
 }
 

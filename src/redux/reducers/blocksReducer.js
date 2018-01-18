@@ -20,8 +20,8 @@ const blockInitState = {
 };
 
 const initialState = {
-    blocks: blocksInitState,
-    block: blockInitState
+  blocks: blocksInitState,
+  block: blockInitState
 }
 
 export function blocksReducer(state = initialState, action) {

@@ -3,6 +3,10 @@ const actionTypes = {
   getMainInfoFulfilled: 'GET_MAIN_INFO_FULFILLED',
   getMainInfoRejected: 'GET_MAIN_INFO_REJECTED',
 
+  getMainChart: 'GET_MAIN_CHART',
+  getMainChartFulfilled: 'GET_MAIN_CHART_FULFILLED',
+  getMainChartRejected: 'GET_MAIN_CHART_REJECTED',
+
   getAddresses: 'GET_ADDRESSES',
   getAddressesFulfilled: 'GET_ADDRESSES_FULFILLED',
   getAddressesRejected:'GET_ADDRESSES_REJECTED',
@@ -28,7 +32,7 @@ const actionTypes = {
   getTransaction: 'GET_TRANSACTION',
   getTransactionFulfilled: 'GET_TRANSACTION_FULFILLED',
   getTransactionRejected: 'GET_TRANSACTION_REJECTED',
-  
+
   resetBlockReducer: 'RESET_BLOCK_REDUCER',
 
   search: 'SEARCH',

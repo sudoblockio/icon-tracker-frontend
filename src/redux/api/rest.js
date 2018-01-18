@@ -20,6 +20,19 @@ export function getMainInfo() {
   })
 }
 
+export function getMainChart() {
+  return new Promise((resolve, reject) => {
+    axiosApi.get('/v0/main/mainChart')
+      .then(result => {
+        resolve(result.data.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
+
 export function getAddressesApi(payload) {
   const pageNum = payload || 1
   return new Promise((resolve, reject) => {

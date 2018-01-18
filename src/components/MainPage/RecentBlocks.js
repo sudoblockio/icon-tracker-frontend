@@ -6,7 +6,7 @@ import icon_02 from '../../style/image/icon_02.png'
 
 class RecentBlocks extends Component {
   render() {
-    const { loading, tmainBlock } = this.props.mainPage
+    const { loading, tmainBlock } = this.props.info
     return (
       <li className="left">
         <p className="title">Recent Block<Link to='/blocks'><span>View all<em className="img"></em></span></Link></p>

@@ -6,7 +6,7 @@ import icon_01 from '../../style/image/icon_01.png'
 
 class RecentTransactions extends Component {
   render() {
-    const { loading, tmainTx } = this.props.mainPage
+    const { loading, tmainTx } = this.props.info
     return (
       <li className="right">
         <p className="title">Recent Transactions<Link to='/transactions'><span>View all<em className="img"></em></span></Link></p>

@@ -11,8 +11,13 @@ class InfoChart extends Component {
     this.txChart = null
   }
 
+  componentWillMount() {
+    this.props.getMainChart()
+  }
+
   componentDidUpdate() {
-    const { tmainChart } = this.props.mainPage
+    console.log(this.props)
+    const { tmainChart } = this.props.chart
     const ctx = document.getElementById("txChart");
     // canvas 가 랜더링 되기 전, 미리 생성된 차트가 있을 경우, 차트 데이터가 비어 있을 경우 return
     if (!ctx || !!this.txChart || tmainChart.length === 0) {
@@ -122,7 +127,7 @@ class InfoChart extends Component {
   }
 
   render() {
-    const { loading, tmainChart } = this.props.mainPage
+    const { loading } = this.props.chart
     return (
       <li className="right">
         <p className="subTitle">Daily Transactions</p>

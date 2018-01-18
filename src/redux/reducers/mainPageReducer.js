@@ -1,29 +1,74 @@
 import actionTypes from '../actionTypes/actionTypes'
 
 const initialState = {
-  loading: true,
-  tmainInfo: {},
-  tmainChart: [],
-  tmainBlock: [],
-  tmainTx: []
+  info: {
+    loading: true,
+    tmainInfo: {},
+    tmainBlock: [],
+    tmainTx: []
+  },
+  chart: {
+    loading: true,
+    tmainChart: []
+  }
 }
+
 
 export function mainPageReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.getMainInfo:
-      return Object.assign({}, state, {
-        loading: true
-      })
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          loading: true
+        }
+      }
 
     case actionTypes.getMainInfoFulfilled:
-      let { payload } = action
-      payload.loading = false
-      return Object.assign({}, state, payload)
+      return {
+        ...state,
+        info: {
+          ...action.payload,
+          loading: false
+        }
+      }
 
     case actionTypes.getMainInfoRejected:
-      return Object.assign({}, state, {
-        loading: true
-      })
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          loading: false
+        }
+      }
+
+    case actionTypes.getMainChart:
+      return {
+        ...state,
+        chart: {
+          ...state.chart,
+          loading: true
+        }
+      }
+
+    case actionTypes.getMainChartFulfilled:
+      return {
+        ...state,
+        chart: {
+          tmainChart: [...action.payload],
+          loading: false
+        }
+      }
+
+    case actionTypes.getMainChartRejected:
+    return {
+      ...state,
+      chart: {
+        ...state.chart,
+        loading: false
+      }
+    }
 
     default: {
       return state

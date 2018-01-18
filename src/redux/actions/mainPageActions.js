@@ -5,3 +5,9 @@ export function getMainInfo(action) {
     type: actionTypes.getMainInfo
   }
 }
+
+export function getMainChart(action) {
+  return {
+    type: actionTypes.getMainChart
+  }
+}
