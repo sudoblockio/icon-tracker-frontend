@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { convertNumberToText, dateToUTC9 } from '../../utils/utils'
+import { convertNumberToText, dateToUTC } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import icon_01 from '../../style/image/icon_01.png'
 

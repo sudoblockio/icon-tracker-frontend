@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { WalletInformation, WalletTransactions, NotFound, LoadingComponent } from '../../components'
-import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
+import { dateToUTC, numberWithCommas, convertNumberToText } from '../../utils/utils';
 
 class AddressesDetailPage extends Component {
 

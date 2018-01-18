@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC9, convertNumberToText } from '../../utils/utils';
+import { dateToUTC, convertNumberToText } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 import clipboard from 'clipboard';
 
@@ -51,7 +51,7 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Time Stamp</td>
-  										<td>{dateToUTC9(data.createDate)}</td>
+  										<td>{dateToUTC(data.createDate)}</td>
   									</tr>
                     <tr>
   										<td>From</td>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { dateToUTC9, numberWithCommas, convertNumberToText } from '../../utils/utils';
+import { dateToUTC, numberWithCommas, convertNumberToText } from '../../utils/utils';
 import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
 class AddressesPage extends Component {
