@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
 import { LoadingComponent, Pagination, BlockLink, TransactionLink } from '../../components'
 
 class WalletTransactions extends Component {
@@ -50,7 +50,7 @@ const TableRow = ({data}) => {
     <tr>
       <td className="on break"><TransactionLink to={data.txHash}/></td>
       <td className="on"><BlockLink to={numberWithCommas(data.height)}/></td>
-      <td>{dateToUTC(data.createDate)}</td>
+      <td>{dateToUTC9(data.createDate)}</td>
       <td className="break">{data.fromAddr}</td>
       <td className="break">{data.toAddr}</td>
       <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>

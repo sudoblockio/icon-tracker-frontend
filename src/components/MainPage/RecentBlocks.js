@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { numberWithCommas, dateToUTC } from '../../utils/utils'
+import { numberWithCommas, dateToUTC9 } from '../../utils/utils'
 import { LoadingComponent, BlockLink } from '../../components'
 import icon_02 from '../../style/image/icon_02.png'
 
 class RecentBlocks extends Component {
-
   render() {
     const { loading, tmainBlock } = this.props.mainPage
     return (
@@ -30,7 +29,7 @@ class RecentBlocks extends Component {
                   </p>
                   <p className="a">C-rep<em><BlockLink to={blockHeight} label={hash.substr(0, 42)}/></em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>
-                  <p className="c">Time stamp<em>{dateToUTC(createDate, true)}</em></p>
+                  <p className="c">Time stamp<em>{dateToUTC9(createDate, true)}</em></p>
                 </li>
               )
             })}

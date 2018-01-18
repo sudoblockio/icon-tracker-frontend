@@ -100,23 +100,27 @@ class InfoChart extends Component {
     });
   }
 
-  makeChartData(tmainChart) {
+  makeChartData(chartData) {
     let labels = []
     let data = []
-    let chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
 
-    chartData.forEach((c, i) => {
+    chartData.reverse().forEach((c, i) => {
       labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
-      data.push(c.txCount)
+      data.push(c.txCount + 30)
     })
 
     let max = Math.max.apply(null, data)
     let min = Math.min.apply(null, data)
     let step = Math.round((max - min) / 4)
 
+    console.log(max, min, step)
+
     max += step
     min = min > step ? min - step : step
+    // step = Math.ceil((max - min) / 6 / 50) * 50
     step = Math.round(Math.round((max - min) / 3) / 50) * 50
+
+    console.log(max, min, step)
 
     return { labels, data, max, min, step }
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BlockLink } from '../../components/';
-import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC9 } from '../../utils/utils'
 
 class BlockInformation extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class BlockInformation extends Component {
               </tr>
               <tr>
                 <td>Time</td>
-                <td>{dateToUTC(blockDetail.createDate)} (UTC+9)</td>
+                <td>{dateToUTC9(blockDetail.createDate)} (UTC+9)</td>
               </tr>
               <tr>
                 <td>C-rep</td>

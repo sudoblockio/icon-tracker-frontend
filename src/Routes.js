@@ -19,7 +19,7 @@ class Routes extends Component {
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
               <HeaderContainer />
-              <Route onEnter={window.scroll(0, 0)} path='/' component={MainPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/wallets' component={AddressesPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/wallets/:pageId' component={AddressesPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/wallet/:addressId' component={AddressDetailPage} exact/>
