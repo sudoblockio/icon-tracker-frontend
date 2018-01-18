@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC9, convertNumberToText } from '../../utils/utils';
+import { dateToUTC9, convertNumberToText, calcTime } from '../../utils/utils';
 import { BlockLink, WalletLink } from '../../components/';
 import clipboard from 'clipboard';
+import NoData from '../Common/NoData';
 
 class TransactionDetailPage extends Component {
 
@@ -14,16 +15,18 @@ class TransactionDetailPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getTransaction(this.props.url.pathname.split("/")[2]);
+		this.props.getTransaction(this.props.url.pathname.split("/")[2]);
 	}
-	
+
 	componentWillUnmount() {
     this.clipboard.destroy();
   }
 
   render() {
-    const { loading, data } = this.props;
-    console.log(data);
+		const { loading, data } = this.props;
+		if(!data) {
+			return <NoData/>
+		}
     return (
       <div className="content-wrap">
 				<div className="screen0">
@@ -38,7 +41,7 @@ class TransactionDetailPage extends Component {
 									</tr>
 									<tr>
 										<td>Status</td>
-										<td> - </td>
+										<td> {data.status} </td>
 									</tr>
 									<tr>
 										<td>Block</td>
@@ -46,7 +49,7 @@ class TransactionDetailPage extends Component {
 									</tr>
 									<tr>
 										<td>Time Stamp</td>
-										<td>{dateToUTC9(data.createDate)}</td>
+										<td>{dateToUTC9(data.createDate)} (UTC+9, {calcTime(data.createDate)})</td>
 									</tr>
 									<tr>
 										<td>From</td>
