@@ -21,7 +21,8 @@ const initialState = {
         nodeType: ""
       },
       walletTx: []
-    }
+    },
+    error: ''
   }
 }
 
@@ -78,8 +79,9 @@ export function addressesReducer(state = initialState, action) {
           ...state.address,
           loading: false,
           maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
-          data : action.payload.data
-        }
+          data : action.payload.data,
+          error: ''
+        },
       }
     }
 
@@ -88,8 +90,9 @@ export function addressesReducer(state = initialState, action) {
         ...state,
         address : {
           ...state.address,
-          loading: false
-        }
+          loading: false,
+          error: action.error
+        },
       }
     }
 

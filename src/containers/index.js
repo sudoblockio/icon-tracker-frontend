@@ -6,8 +6,7 @@ import TransactionDetailPageContainer from './TransactionsPage/TransactionDetail
 import BlocksPageContainer from './BlocksPage/BlocksPageContainer'
 import BlockDetailPageContainer from './BlocksPage/BlockDetailPageContainer'
 import HeaderContainer from './Common/HeaderContainer'
-import NotFoundPageContainer from './NotFoundPage/NotFoundPageContainer'
-
+import NotFoundPageContainer from './Common/NotFoundPageContainer'
 export {
   MainPageContainer,
   AddressesPageContainer,

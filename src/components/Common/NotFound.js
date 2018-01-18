@@ -16,7 +16,7 @@ class NotFound extends Component {
               <p className="txt">The string below is invalid.<br/>
                       Please double check your key.
               </p>
-              <p className="address">{this.props.url.state.error || ''}</p>
+              <p className="address">{this.props.error || ''}</p>
             </div>
           </div>
         </div>

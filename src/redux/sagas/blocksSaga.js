@@ -29,13 +29,7 @@ export function* getBlockFunc(action) {
       throw '';
     }
   } catch (e) {
-    yield put(routerActions.push({
-      pathname: '/notfound',
-      state: {
-        error: action.payload.blockId
-      }
-    }));
-    yield put({type: AT.getBlockRejected});
+    yield put({type: AT.getBlockRejected, error: action.payload.blockId});
   }
 }
 

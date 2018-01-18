@@ -10,7 +10,8 @@ const initialState = {
   },
   transaction: {
     loading: true,
-    data: {}
+    data: {},
+    error: ''
   }
 }
 
@@ -65,7 +66,8 @@ export function transactionsReducer(state = initialState, action) {
         transaction : {
           ...state.transaction,
           loading: false,
-          data : action.payload
+          data : action.payload,
+          error: ''
         }
       }
     }
@@ -75,7 +77,8 @@ export function transactionsReducer(state = initialState, action) {
         ...state,
         transaction : {
           ...state.transaction,
-          loading: false
+          loading: false,
+          error: action.error
         }
       }
     }

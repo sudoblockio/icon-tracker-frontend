@@ -122,7 +122,7 @@ export function getTransactionApi(payload){
   return new Promise((resolve, reject) => {
     axiosApi.get('v0/transaction/txDetail?txHash=' + txHash)
       .then(result => {
-        resolve(result.data.data);
+        resolve(result.data);
       })
       .catch(error => {
         reject(error);

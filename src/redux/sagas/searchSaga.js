@@ -40,14 +40,15 @@ function* searchFunc(action) {
         }
       }
       if (searchPayload.result === "NO_DATA") {
-        yield put({type: AT.searchRejected});
+        throw '';
       }
     } else {
-      yield put({type: AT.searchRejected});
+      throw '';
     }
-    yield put({type: AT.searchFulfilled, payload: ''});
+    yield put({type: AT.searchFulfilled});
   } catch (e) {
-    yield put({type: AT.searchRejected});
+    yield put({type: AT.searchRejected, error: action.payload});
+    yield put(routerActions.push('/notfound'));
   }
 }
 

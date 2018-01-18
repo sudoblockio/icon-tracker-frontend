@@ -26,13 +26,7 @@ export function* getAddressDetailFunc(action) {
       throw '';
     }
   } catch (e) {
-    yield put(routerActions.push({
-      pathname: '/notfound',
-      state: {
-        error: action.payload.address
-      }
-    }));
-    yield put({type: AT.getAddressDetailRejected});
+    yield put({type: AT.getAddressDetailRejected, error: action.payload.address});
   }
 }
 
