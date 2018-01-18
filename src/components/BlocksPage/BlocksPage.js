@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
+import { dateToUTC, convertNumberToText } from '../../utils/utils';
 
 class BlocksPage extends Component {
 
@@ -87,9 +87,9 @@ class TableRow extends Component {
     const { data, viewBlockDetail } = this.props;
     return (
       <tr>
-        <td><BlockLink to={numberWithCommas(data.height)} /></td>
+        <td><BlockLink to={data.height} /></td>
         <td>{dateToUTC(data.createDate)}</td>
-        <td>{numberWithCommas(data.txCount)}</td>
+        <td>{data.txCount}</td>
         <td className="break">{data.crep}</td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
         <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>

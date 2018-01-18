@@ -7,8 +7,7 @@ function mapStateToProps(state) {
   return {
     loading: state.transactions.transaction.loading,
     data: state.transactions.transaction.data,
-    url: state.router.location,
-    error: state.transactions.transaction.error
+    url: state.router.location
   };
 }
 

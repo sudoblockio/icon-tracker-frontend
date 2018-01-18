@@ -6,7 +6,8 @@ const initialState = {
     loading: true,
     pageNum: 1,
     maxPageNum: 1,
-    data: []
+    data: [],
+    error: ''
   },
   address: {
     loading: true,
@@ -46,7 +47,8 @@ export function addressesReducer(state = initialState, action) {
           ...state.addresses,
           loading: false,
           maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
-          data : action.payload.data
+          data : action.payload.data,
+          error: ''
         }
       }
     }
@@ -56,7 +58,8 @@ export function addressesReducer(state = initialState, action) {
         ...state,
         addresses : {
           ...state.addresses,
-          loading: false
+          loading: false,
+          error: action.error
         }
       }
     }
@@ -81,7 +84,7 @@ export function addressesReducer(state = initialState, action) {
           maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
           data : action.payload.data,
           error: ''
-        },
+        }
       }
     }
 
@@ -92,7 +95,7 @@ export function addressesReducer(state = initialState, action) {
           ...state.address,
           loading: false,
           error: action.error
-        },
+        }
       }
     }
 

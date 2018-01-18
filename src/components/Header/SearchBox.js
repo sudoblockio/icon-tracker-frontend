@@ -21,9 +21,6 @@ class SearchBox extends Component {
     if (!this.state.value) return;
     if (e.key === 'Enter') {
       this.props.search(this.state.value)
-      this.setState({
-        value: ''
-      })
     }
   }
 

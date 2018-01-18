@@ -23,7 +23,7 @@ import BlockTransactions from './BlocksPage/BlockTransactions'
 
 import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
-import NotFound from './Common/NotFound'
+import NoData from './Common/NoData'
 
 import WalletLink from './Common/WalletLink'
 import BlockLink from './Common/BlockLink'
@@ -34,7 +34,7 @@ export {
   Header,
   SearchBox,
   Footer,
-
+  
   MainPage,
   InfoSummary,
   InfoChart,
@@ -56,7 +56,7 @@ export {
 
   LoadingComponent,
   Pagination,
-  NotFound,
+  NoData,
   WalletLink,
   BlockLink,
   TransactionLink

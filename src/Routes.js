@@ -10,7 +10,6 @@ import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import BlocksPage from './pages/BlocksPage';
 import BlockDetailPage from './pages/BlockDetailPage';
-import NotFoundPage from './pages/NotFoundPage';
 
 class Routes extends Component {
 
@@ -31,7 +30,6 @@ class Routes extends Component {
               <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
               <Route onEnter={window.scroll(0, 0)} path='/block/:blockId' component={BlockDetailPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/block/:blockId/:pageId' component={BlockDetailPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
             </div>
             <div className="blank"></div>
           </div>

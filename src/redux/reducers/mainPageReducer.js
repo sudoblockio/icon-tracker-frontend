@@ -5,7 +5,8 @@ const initialState = {
   tmainInfo: {},
   tmainChart: [],
   tmainBlock: [],
-  tmainTx: []
+  tmainTx: [],
+  error: ''
 }
 
 export function mainPageReducer(state = initialState, action) {
@@ -22,7 +23,8 @@ export function mainPageReducer(state = initialState, action) {
 
     case actionTypes.getMainInfoRejected:
       return Object.assign({}, state, {
-        loading: true
+        loading: true,
+        error: action.error
       })
 
     default: {
