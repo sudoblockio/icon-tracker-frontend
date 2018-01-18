@@ -5,6 +5,7 @@ const CURRENCY_ROUND = {
   'usd': 2,
   'icx': 4
 };
+const today = new Date();
 
 export function numberWithCommas(x) {
   if (!x) { x = 0 }
@@ -35,4 +36,23 @@ export function dateToUTC(date, showUTC) {
 export function calcMaxPageNum(total, rowNum) {
   if(!Number(total)) return 1;
   return Math.ceil(total / rowNum);
+}
+
+export function calcTime(createDate){
+  const todayMiliSeconds = today.getTime();
+  const createDateMiliSeconds = new Date(createDate).getTime();
+  const pastTimeHour = (todayMiliSeconds - createDateMiliSeconds) / (1000 * 3600);
+  if(pastTimeHour >= 24){
+    if(Math.round(pastTimeHour / 24) === 1){
+      return "1 Day ago";
+    }else{
+      return `${Math.round(pastTimeHour/24)} Days ago`;
+    }
+  }else{
+    if(Math.round(pastTimeHour) === 1){
+      return "1 Hour ago";
+    }else{
+      return `${Math.round(pastTimeHour)} Hours ago`;
+    }
+  }
 }

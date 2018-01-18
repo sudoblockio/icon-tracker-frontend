@@ -17,7 +17,7 @@ class TransactionsPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.url.pathname !== this.props.url.pathname) {
+		if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/transactions/') ) {
 			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
 		}
 	}

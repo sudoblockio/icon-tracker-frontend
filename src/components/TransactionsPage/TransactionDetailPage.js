@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC, convertNumberToText } from '../../utils/utils';
+
+import { dateToUTC, convertNumberToText, calcTime } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
+
 import clipboard from 'clipboard';
 
 class TransactionDetailPage extends Component {
@@ -14,7 +16,7 @@ class TransactionDetailPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getTransaction(this.props.url.pathname.split("/")[2]);
+		this.props.getTransaction(this.props.url.pathname.split("/")[2]);
 	}
 
 	componentWillUnmount() {
@@ -51,7 +53,11 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Time Stamp</td>
+<<<<<<< HEAD
   										<td>{dateToUTC(data.createDate)}</td>
+=======
+  										<td>{dateToUTC9(data.createDate)} (UTC+9, {calcTime(data.createDate)})</td>
+>>>>>>> 61fb4cb0b3898c0e7c33b2a885a8c4415eb147c0
   									</tr>
                     <tr>
   										<td>From</td>
@@ -77,6 +83,7 @@ class TransactionDetailPage extends Component {
   			</div>
       )
     }
+
   }
 }
 
