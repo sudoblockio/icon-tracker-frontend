@@ -6,7 +6,6 @@ import { dateToUTC9, convertNumberToText, calcTime } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 
 import clipboard from 'clipboard';
-import NoData from '../Common/NoData';
 
 class TransactionDetailPage extends Component {
 
