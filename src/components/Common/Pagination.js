@@ -9,6 +9,17 @@ class Pagination extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      pageNum: props.pageNum
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.pageNum !== nextProps.pageNum && nextProps.pageNum) {
+      this.setState({
+        pageNum: nextProps.pageNum
+      })
+    }
   }
 
   getData = (target) => {
@@ -35,8 +46,27 @@ class Pagination extends Component {
     }
   }
 
+  handleInputChange = (e) => {
+    if (!isNaN(e.target.value)) {
+      if(Number(e.target.value) <= this.props.maxPageNum) {
+        this.setState({
+          pageNum: e.target.value
+        })
+      }
+    }
+  }
+
+  handleKeyPress = (e) => {
+    const { getData } = this.props;
+    if (!Number(this.state.pageNum)) return;
+    if (e.key === 'Enter') {
+      getData(this.state.pageNum)
+    }
+  }
+
   render() {
-    const { pageNum, maxPageNum } = this.props;
+    const { maxPageNum } = this.props;
+    const { pageNum } = this.state;
     return (
       <ul className="page">
         <li onClick={() => this.getData('start')}>
@@ -47,7 +77,7 @@ class Pagination extends Component {
         </li>
         <li className="pageNum">
           <p>Page</p>
-          <input disabled type="text" className="txt-type-page" placeholder="" value={pageNum} /> / {maxPageNum}
+          <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-page" placeholder="" value={pageNum} /> / {maxPageNum}
         </li>
         <li onClick={() => this.getData('next')}>
           <span name="next" className="next"><em className="img"></em></span>

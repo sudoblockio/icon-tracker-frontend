@@ -8,7 +8,7 @@ function* getMainInfo(action) {
     const payload = yield call(GET_MAIN_INFO_API);
     yield put({type: AT.getMainInfoFulfilled, payload: payload});
   } catch (e) {
-    yield put({type: AT.getMainInfoRejected, error: e});
+    yield put({type: AT.getMainInfoRejected});
   }
 }
 

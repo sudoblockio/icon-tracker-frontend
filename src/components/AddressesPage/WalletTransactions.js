@@ -49,7 +49,7 @@ const TableRow = ({data}) => {
   return (
     <tr>
       <td className="on break"><TransactionLink to={data.txHash}/></td>
-      <td className="on"><BlockLink to={numberWithCommas(data.height)}/></td>
+      <td className="on"><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>
       <td>{dateToUTC9(data.createDate)}</td>
       <td className="break">{data.fromAddr}</td>
       <td className="break">{data.toAddr}</td>
