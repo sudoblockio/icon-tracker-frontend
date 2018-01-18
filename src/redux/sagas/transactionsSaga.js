@@ -8,16 +8,20 @@ function* getTransactionsFunc(action) {
     const payload = yield call(GET_TRANSACTIONS_API, action.payload);
     yield put({type: AT.getTransactionsFulfilled, payload: payload});
   } catch (e) {
-    yield put({type: AT.getTransactionsRejected, error: e});
+    yield put({type: AT.getTransactionsRejected});
   }
 }
 
 function* getTransactionFunc(action){
   try {
     const payload = yield call(GET_TRANSACTION_API, action.payload);
-    yield put({type: AT.getTransactionFulfilled, payload: payload});
+    if (payload.result === 'OK') {
+      yield put({type: AT.getTransactionFulfilled, payload: payload.data});
+    } else {
+      throw '';
+    }
   } catch (e) {
-    yield put({type: AT.getTransactionRejected, error: e});
+    yield put({type: AT.getTransactionRejected, error: action.payload});
   }
 }
 

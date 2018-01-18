@@ -42,7 +42,7 @@ class BlockInformation extends Component {
             <tbody>
               <tr>
                 <td>Address</td>
-                <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{blockDetail.height}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
+                <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{numberWithCommas(blockDetail.height)}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
               </tr>
               <tr>
                 <td>Time</td>

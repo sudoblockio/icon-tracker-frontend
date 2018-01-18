@@ -56,7 +56,6 @@ export function getBlocksApi(payload) {
         resolve(result.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
@@ -69,26 +68,25 @@ export function getBlockApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
       .then(result => {
-        resolve(result.data.data)
+        resolve(result.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
 }
 
 export function getBlockByHashApi(payload) {
-  const blockId = payload.blockHash;
+  const blockHash = payload.hash;
   const pageId = payload.pageId || 1;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
+    axiosApi.get('/v0/block/blockDetailByHash?hash='+blockHash+'&page='+pageId )
       .then(result => {
+        console.log(result)
         resolve(result.data.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
@@ -98,10 +96,9 @@ export function searchApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/search/Search?data=' + payload)
       .then(result => {
-        resolve(result.data)
+        resolve(result.data.data)
       })
       .catch(error => {
-        alert(error)
         reject(error)
       })
   })
@@ -115,7 +112,6 @@ export function getTransactionsApi(payload){
         resolve(result.data);
       })
       .catch(error => {
-        alert(error);
         reject(error);
       })
   });
@@ -126,7 +122,7 @@ export function getTransactionApi(payload){
   return new Promise((resolve, reject) => {
     axiosApi.get('v0/transaction/txDetail?txHash=' + txHash)
       .then(result => {
-        resolve(result.data.data);
+        resolve(result.data);
       })
       .catch(error => {
         reject(error);
