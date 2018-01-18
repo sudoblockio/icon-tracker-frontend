@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
-import { dateToUTC9, convertNumberToText } from '../../utils/utils';
+import { dateToUTC, convertNumberToText } from '../../utils/utils';
 
 class TransactionsPage extends Component {
 
@@ -90,7 +90,7 @@ class TableRow extends Component {
 			<tr>
 				<td className="on break"><TransactionLink to = {data.txHash}/></td>
 				<td><BlockLink to={data.height} /></td>
-				<td>{dateToUTC9(data.createDate)}</td>
+				<td>{dateToUTC(data.createDate)}</td>
 				<td className="break"><WalletLink to = {data.fromAddr}/></td>
 				<td className="break"><WalletLink to = {data.toAddr}/></td>
 				<td><span>{`${convertNumberToText(data.amount, 'icx')}`}</span><em>ICX</em></td>
