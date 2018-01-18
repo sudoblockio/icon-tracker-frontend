@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
-import { dateToUTC9, convertNumberToText } from '../../utils/utils';
+import { dateToUTC9, convertNumberToText, numberWithCommas } from '../../utils/utils';
 
 class TransactionsPage extends Component {
 
@@ -15,7 +15,7 @@ class TransactionsPage extends Component {
 		const { params } = this.props.match;
 		this.props.getTransactions(params['pageId']);
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.url.pathname !== this.props.url.pathname) {
 			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
@@ -89,12 +89,12 @@ class TableRow extends Component {
 		return (
 			<tr>
 				<td className="on break"><TransactionLink to = {data.txHash}/></td>
-				<td><BlockLink to={data.height} /></td>
+				<td><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>
 				<td>{dateToUTC9(data.createDate)}</td>
 				<td className="break"><WalletLink to = {data.fromAddr}/></td>
 				<td className="break"><WalletLink to = {data.toAddr}/></td>
-				<td><span>{data.amount}</span><em>ICX</em></td>
-				<td><span>{data.fee}</span><em>ICX</em></td>
+				<td><span>{`${convertNumberToText(data.amount, 'icx')}`}</span><em>ICX</em></td>
+				<td><span>{`${convertNumberToText(data.fee, 'icx')}`}</span><em>ICX</em></td>
 			</tr>
 		);
 	}
