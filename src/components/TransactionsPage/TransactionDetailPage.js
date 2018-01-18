@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { dateToUTC9, convertNumberToText } from '../../utils/utils';
-import { BlockLink } from '../../components/';
+import { BlockLink, WalletLink } from '../../components/';
+import clipboard from 'clipboard';
 
 class TransactionDetailPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+		this.state = {};
+		this.clipboard = new clipboard('.clipboard-btn');
   }
 
   componentWillMount() {
     this.props.getTransaction(this.props.url.pathname.split("/")[2]);
+	}
+	
+	componentWillUnmount() {
+    this.clipboard.destroy();
   }
 
   render() {
@@ -27,8 +33,8 @@ class TransactionDetailPage extends Component {
 							<table className="table-typeB">
 								<tbody>
 									<tr>
-										<td>Address</td>
-										<td> {data.txHash} <em className="img"></em></td>
+										<td>Tx Hash</td>
+										<td> {data.txHash} <em className="img clipboard-btn" data-clipboard-text={data.txHash}></em></td>
 									</tr>
 									<tr>
 										<td>Status</td>
@@ -44,19 +50,19 @@ class TransactionDetailPage extends Component {
 									</tr>
 									<tr>
 										<td>From</td>
-										<td><span>{data.fromAddr}</span><em className="img"></em></td>
+										<td><span><WalletLink to = {data.fromAddr}/></span><em className="img clipboard-btn" data-clipboard-text={data.fromAddr}></em></td>
 									</tr>
 									<tr>
 										<td>To</td>
-										<td><span>{data.toAddr}</span><em className="img"></em></td>
+										<td><span><WalletLink to = {data.toAddr}/></span><em className="img clipboard-btn" data-clipboard-text={data.toAddr}></em></td>
 									</tr>
 									<tr>
 										<td>Amount</td>
-										<td>{data.amount}</td>
+										<td>{`${convertNumberToText(data.amount, 'icx')} ICX`}</td>
 									</tr>
 									<tr>
 										<td>Fee</td>
-										<td>{data.fee} ICX</td>
+										<td>{`${convertNumberToText(data.fee, 'icx')} ICX`}</td>
 									</tr>
 								</tbody>
 							</table>

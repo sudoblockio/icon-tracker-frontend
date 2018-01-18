@@ -93,8 +93,8 @@ class TableRow extends Component {
 				<td>{dateToUTC9(data.createDate)}</td>
 				<td className="break"><WalletLink to = {data.fromAddr}/></td>
 				<td className="break"><WalletLink to = {data.toAddr}/></td>
-				<td><span>{data.amount}</span><em>ICX</em></td>
-				<td><span>{data.fee}</span><em>ICX</em></td>
+				<td><span>{`${convertNumberToText(data.amount, 'icx')}`}</span><em>ICX</em></td>
+				<td><span>{`${convertNumberToText(data.fee, 'icx')}`}</span><em>ICX</em></td>
 			</tr>
 		);
 	}
