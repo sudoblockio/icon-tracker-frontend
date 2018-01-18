@@ -43,7 +43,7 @@ class AddressesDetailPage extends Component {
               <WalletInformation walletDetail={walletDetail}/>
             </div>
             <div className="screen1">
-              <WalletTransactions walletTx={walletTx} pageNum={this.pageId} maxPageNum={maxPageNum}/>
+              <WalletTransactions walletTx={walletTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
             </div>
           </div>
         )
