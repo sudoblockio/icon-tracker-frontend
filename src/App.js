@@ -5,6 +5,8 @@ import { store, history } from './redux/store/store';
 import Routes from './Routes.js';
 import { ConnectedRouter } from 'react-router-redux'
 
+console.log(process.env)
+
 class App extends Component {
 
   render() {

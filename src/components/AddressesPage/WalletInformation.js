@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import clipboard from 'clipboard'
-import { numberWithCommas, convertNumberToText } from '../../utils/utils'
+import { numberWithCommas, convertNumberToText, isValidNodeType } from '../../utils/utils'
 import { LoadingComponent } from '../../components'
 
 class WalletInformation extends Component {
@@ -31,7 +31,7 @@ class WalletInformation extends Component {
             <tbody>
               <tr className="">
                 <td>Address</td>
-                <td>{address}<em className="img clipboard-btn" data-clipboard-text={address}></em><span className="crep">{`${nodeType} Node`}</span></td>
+                <td>{address}<em className="img clipboard-btn" data-clipboard-text={address}></em>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType} Node`}</span>}</td>
               </tr>
               <tr>
                 <td>Balance</td>
