@@ -19,7 +19,7 @@ function* searchFunc(action) {
     // 그 이외는 HASH (TX, BLOCK) 구분을 위한 검색
     } else if (action.payload.length === 64){
       const searchPayload = yield call(SEARCH_API, action.payload);
-      if (searchPayload.result === "OK") {
+      if (searchPayload.result === "200") {
         switch (searchPayload.data.split(" ")[0]) {
           // Block Hash일 경우 Block Height을 가져와서 라우터에 Push.
           case 'Block': {
@@ -39,7 +39,8 @@ function* searchFunc(action) {
             break;
         }
       }
-      if (searchPayload.result === "NO_DATA") {
+    
+      if (searchPayload.result === "No Data") {
         throw '';
       }
     } else {
