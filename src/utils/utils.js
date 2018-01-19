@@ -36,15 +36,12 @@ export function isInt(value) {
 export function dateToUTC(date, showUTC, showAgo) {
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
-
   if (showUTC) {
     result += ` (UTC+${timezoneOffset})`
   }
-
   if (showAgo) {
     result += ` (UTC+${timezoneOffset}, ${calcTime(date)})`
   }
-
   return result
 }
 
@@ -70,4 +67,12 @@ export function calcTime(createDate){
       return `${Math.round(pastTimeHour)} Hours ago`;
     }
   }
+}
+
+export function isValidNodeType(nodeType) {
+  if (!nodeType) return false
+  if (nodeType === '') return false
+  if (nodeType === '-') return false
+
+  return true
 }
