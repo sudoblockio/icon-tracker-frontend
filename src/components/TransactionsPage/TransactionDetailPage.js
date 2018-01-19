@@ -45,7 +45,7 @@ class TransactionDetailPage extends Component {
                     </tr>
   									<tr>
   										<td>Status</td>
-  										<td> - </td>
+  										<td> {data.status} </td>
   									</tr>
   									<tr>
   										<td>Block</td>
@@ -65,11 +65,11 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Amount</td>
-  										<td>{data.amount}</td>
+  										<td>{`${convertNumberToText(data.amount, 'icx')} ICX`}</td>
   									</tr>
   									<tr>
   										<td>Fee</td>
-  										<td>{data.fee} ICX</td>
+  										<td>{`${convertNumberToText(data.fee, 'icx')} ICX`}</td>
   									</tr>
   								</tbody>
   							</table>
