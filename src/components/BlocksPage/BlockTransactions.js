@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { LoadingComponent, Pagination, WalletLink } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink, TransactionLink } from '../../components/';
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 
 class BlockInformation extends Component {
@@ -68,7 +68,7 @@ class TableRow extends Component {
     const { data } = this.props;
     return (
       <tr>
-        <td className="on break">{data.txHash}</td>
+        <td className="on break"><TransactionLink to={data.txHash} /></td>
         <td className="on break"><WalletLink to={data.fromAddr} /></td>
         <td className="on break"><WalletLink to={data.toAddr} /></td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
