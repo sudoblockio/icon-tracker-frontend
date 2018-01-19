@@ -28,9 +28,24 @@ export function isInt(value) {
          !isNaN(parseInt(value, 10));
 }
 
-export function dateToUTC(date, showUTC) {
+// export function dateToUTC(date, showUTC) {
+//   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
+//   return moment(date).utcOffset(timezoneOffset).format(`YYYY-MM-DD HH:mm:ss${!!showUTC ? ` [(UTC+${timezoneOffset})]` : ''}`)
+// }
+
+export function dateToUTC(date, showUTC, showAgo) {
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  return moment(date).utcOffset(timezoneOffset).format(`YYYY-MM-DD HH:mm:ss${!!showUTC ? ` [(UTC+${timezoneOffset})]` : ''}`)
+  let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+
+  if (showUTC) {
+    result += ` (UTC+${timezoneOffset})`
+  }
+
+  if (showAgo) {
+    result += ` (UTC+${timezoneOffset}, ${calcTime(date)})`
+  }
+
+  return result
 }
 
 export function calcMaxPageNum(total, rowNum) {

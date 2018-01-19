@@ -30,6 +30,7 @@ class AddressesDetailPage extends Component {
   render() {
     const { loading, data, pageNum, maxPageNum, error } = this.props;
     const content = (data) => {
+      console.log(data)
       // 데이터가 없을 경우
       if (error !== "" && !loading) {
         return (

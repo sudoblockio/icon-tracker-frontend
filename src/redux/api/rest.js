@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-let axiosApi = axios.create({
-  baseURL: 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com',
+const productURL = 'http://icon-lb-1450281316.ap-northeast-2.elb.amazonaws.com'
+const developmentURL = 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com'
+const axiosApi = axios.create({
+  baseURL: process.env.NODE_ENV !== 'development' ? productURL : developmentURL,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'

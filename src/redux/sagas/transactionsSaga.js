@@ -15,7 +15,7 @@ function* getTransactionsFunc(action) {
 function* getTransactionFunc(action){
   try {
     const payload = yield call(GET_TRANSACTION_API, action.payload);
-    if (payload.result === 'OK') {
+    if (payload.result === '200') {
       yield put({type: AT.getTransactionFulfilled, payload: payload.data});
     } else {
       throw '';

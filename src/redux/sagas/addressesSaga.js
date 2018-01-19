@@ -10,8 +10,12 @@ import {
 function* getAddressesFunc(action) {
   try {
     const payload = yield call(GET_ADDRESSES_API, action.payload)
-    // yield delay(2000)
-    yield put({type: AT.getAddressesFulfilled, payload: payload});
+    if (payload.result === '200') {
+      yield put({type: AT.getAddressesFulfilled, payload: payload});
+    }
+    else {
+      yield put({type: AT.getAddressesRejected});
+    }
   } catch (e) {
     yield put({type: AT.getAddressesRejected});
   }
@@ -20,13 +24,14 @@ function* getAddressesFunc(action) {
 export function* getAddressDetailFunc(action) {
   try {
     const payload = yield call(GET_ADDRESS_DETAIL_API, action.payload);
-    if (payload.result === 'OK') {
+    if (payload.result === '200') {
       yield put({type: AT.getAddressDetailFulfilled, payload: payload});
-    } else {
+    }
+    else {
       throw '';
     }
   } catch (e) {
-    yield put({type: AT.getAddressDetailRejected, error: action.payload.address});
+    yield put({type: AT.getAddressDetailRejected, error: action.payload.addressId});
   }
 }
 

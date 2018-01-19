@@ -16,7 +16,6 @@ class InfoChart extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props)
     const { tmainChart } = this.props.chart
     const ctx = document.getElementById("txChart");
     // canvas 가 랜더링 되기 전, 미리 생성된 차트가 있을 경우, 차트 데이터가 비어 있을 경우 return
@@ -38,7 +37,16 @@ class InfoChart extends Component {
           display: false
         },
         tooltips: {
-          enabled: false
+          enabled: true,
+          titleFontFamily: 'NanumSquare',
+          titleFontSize: 9,
+          bodyFontStyle: 'normal',
+          bodyFontFamily: 'NanumSquare',
+          bodyFontSize: 10,
+          bodyFontStyle: 'bold',
+          displayColors: false,
+          cornerRadius: 0,
+          caretPadding: 7,
         },
         layout: {
           padding: {
@@ -68,7 +76,6 @@ class InfoChart extends Component {
           xAxes: [{
             gridLines: {
               color: 'rgba(100,100,100,0.2)',
-              // color: 'green',
               drawTicks: true,
               drawBorder: false
             },
@@ -83,8 +90,6 @@ class InfoChart extends Component {
             gridLines: {
               color: 'rgba(100,100,100,0.4)',
               zeroLineColor: 'rgba(100,100,100,0.7)',
-              // color: 'yellow',
-              // zeroLineColor: 'red',
               borderDash: [2,2],
               drawTicks: false,
               drawBorder: false
@@ -111,7 +116,8 @@ class InfoChart extends Component {
     let chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
 
     chartData.forEach((c, i) => {
-      labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
+      // labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
+      labels.push(moment(c.targetDate).format('MMM D'))
       data.push(c.txCount)
     })
 

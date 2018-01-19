@@ -10,7 +10,7 @@ function* getBlocksFunc(action) {
   try {
     const payload = yield call(GET_BLOCKS_API, action.payload);
     console.log(payload.result)
-    if (payload.result === 'OK') {
+    if (payload.result === '200') {
       yield put({type: AT.getBlocksFulfilled, payload: payload});
     } else {
       yield put({type: AT.getBlocksRejected});
@@ -23,7 +23,7 @@ function* getBlocksFunc(action) {
 export function* getBlockFunc(action) {
   try {
     const payload = yield call(GET_BLOCK_API, action.payload);
-    if (payload.result === 'OK') {
+    if (payload.result === '200') {
       yield put({type: AT.getBlockFulfilled, payload: payload.data});
     } else {
       throw '';

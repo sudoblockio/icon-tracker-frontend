@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 
-import { dateToUTC, convertNumberToText, calcTime } from '../../utils/utils';
+import { dateToUTC, convertNumberToText } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 
 import clipboard from 'clipboard';
@@ -53,7 +53,7 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Time Stamp</td>
-  										<td>{dateToUTC(data.createDate)} (UTC+9, {calcTime(data.createDate)})</td>
+  										<td>{dateToUTC(data.createDate, false, true)}</td>
   									</tr>
                     <tr>
   										<td>From</td>
