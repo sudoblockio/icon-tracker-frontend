@@ -4,7 +4,7 @@ import { BlockLink } from '../../components/';
 import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
 
 class BlockInformation extends Component {
-  
+
   handlePrevBlock = () => {
     const { blockDetail } = this.props;
     if (blockDetail.height === 0) return;
@@ -39,7 +39,11 @@ class BlockInformation extends Component {
               </tr>
               <tr>
                 <td>Time</td>
-                <td>{dateToUTC(blockDetail.createDate, true)}</td>
+                {
+                  blockDetail.height === 0
+                    ? (<td></td>)
+                    : (<td>{dateToUTC(blockDetail.createDate, true)}</td>)
+                }
               </tr>
               <tr>
                 <td>C-rep</td>
@@ -69,6 +73,15 @@ class BlockInformation extends Component {
                 <td>Fee</td>
                 <td>{convertNumberToText(blockDetail.fee, 'icx')} ICX</td>
               </tr>
+              {
+                blockDetail.height === 0
+                  && (
+                      <tr>
+                        <td>Message</td>
+                        <td>{blockDetail.message}</td>
+                      </tr>
+                    )
+              }
             </tbody>
           </table>
         </div>
