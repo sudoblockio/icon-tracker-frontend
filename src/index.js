@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import './style/css/font.css'
 import './style/css/common.css'
-import './style/css/common-modified.css'
 
 ReactDOM.render(
   <BrowserRouter>

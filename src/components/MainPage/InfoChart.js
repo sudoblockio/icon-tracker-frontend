@@ -125,8 +125,10 @@ class InfoChart extends Component {
 
     max += step
     min = min > step ? min - step : step
-    step = step < 3 ? step : Math.round(Math.round((max - min) / 3) / 50) * 50 
+    step = step < 3 ? step : Math.round(Math.round((max - min) / 3) / 50) * 50
 
+    // TODO
+    // step 계산 함수 수정 필요
     return { labels, data, max, min, step }
   }
 

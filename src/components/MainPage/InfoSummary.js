@@ -5,10 +5,11 @@ class InfoSummary extends Component {
   render() {
     const { tmainInfo } = this.props.info
     const { crepCount, icxSupply, marketCap, transactionCount } = tmainInfo
+    const marketCapStr = numberWithCommas(marketCap)
     return (
       <li className="left">
         <p className="subTitle">Market Cap</p>
-        <p className="num a">{numberWithCommas(marketCap)}<em className="subTitle">USD</em></p>
+        <p className={`num a ${marketCapStr.length >= 17 && 'small'}`}>{marketCapStr}<em className="subTitle">USD</em></p>
         <p className="subTitle">ICX Supply</p>
         <p className="num b">{numberWithCommas(icxSupply)}<em className="subTitle">ICX</em></p>
         <hr className="hr" />
