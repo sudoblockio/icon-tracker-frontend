@@ -4,14 +4,7 @@ import { BlockLink } from '../../components/';
 import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
 
 class BlockInformation extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentWillUnmount() {
-
-  }
-
+  
   handlePrevBlock = () => {
     const { blockDetail } = this.props;
     if (blockDetail.height === 0) return;
@@ -35,18 +28,18 @@ class BlockInformation extends Component {
           <table className="table-typeB detail">
             <thead>
               <tr>
-                <th>Address</th>
+                <th>Block Height</th>
                 <th>value</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Address</td>
+                <td>Block Height</td>
                 <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{numberWithCommas(blockDetail.height)}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
               </tr>
               <tr>
                 <td>Time</td>
-                <td>{dateToUTC(blockDetail.createDate)} (UTC+9)</td>
+                <td>{dateToUTC(blockDetail.createDate, true)}</td>
               </tr>
               <tr>
                 <td>C-rep</td>

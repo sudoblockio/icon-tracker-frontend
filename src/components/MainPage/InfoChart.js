@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js'
 import moment from 'moment'
-import chartImg from '../../style/image/chart.png'
 import { LoadingComponent } from '../../components'
 
 class InfoChart extends Component {
@@ -40,7 +39,6 @@ class InfoChart extends Component {
           enabled: true,
           titleFontFamily: 'NanumSquare',
           titleFontSize: 9,
-          bodyFontStyle: 'normal',
           bodyFontFamily: 'NanumSquare',
           bodyFontSize: 10,
           bodyFontStyle: 'bold',

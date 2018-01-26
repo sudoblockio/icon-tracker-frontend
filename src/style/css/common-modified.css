@@ -15,8 +15,11 @@
 [class *="table-type"] a { text-decoration:none; color:#1aaaba; }
 [class *="table-type"] a:hover{ text-decoration:underline; opacity: 0.5; }
 
-.home .content-wrap .screen1 .content .list li p em a { text-decoration:none; color:#1aaaba; }
+.home .content-wrap .screen1 .content .list li p em a{ text-decoration:none; color:#1aaaba; }
 .home .content-wrap .screen1 .content .list li p em a:hover{ text-decoration:underline; opacity: 0.5; }
+
+.home .content-wrap .screen1 .content .left .list li .icon span:nth-child(3) a{color: #1aaaba; cursor: pointer;}
+.home .content-wrap .screen1 .content .left .list li .icon span:nth-child(3):hover a{text-decoration: underline;}
 
 /* 로딩 컴포넌트 */
 .loadingDiv {

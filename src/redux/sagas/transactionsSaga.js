@@ -18,7 +18,7 @@ function* getTransactionFunc(action){
     if (payload.result === '200') {
       yield put({type: AT.getTransactionFulfilled, payload: payload.data});
     } else {
-      throw '';
+      throw new Error();
     }
   } catch (e) {
     yield put({type: AT.getTransactionRejected, error: action.payload});

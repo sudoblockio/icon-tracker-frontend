@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { NotFound, BlockInformation, BlockTransactions } from '../../components/';
-import { dateToUTC, convertNumberToText } from '../../utils/utils';
 
 class BlockDetailPage extends Component {
 

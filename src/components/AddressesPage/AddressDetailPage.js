@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
-import { WalletInformation, WalletTransactions, NotFound, LoadingComponent } from '../../components'
-import { dateToUTC, numberWithCommas, convertNumberToText } from '../../utils/utils';
+import { WalletInformation, WalletTransactions, NotFound } from '../../components'
 
 class AddressesDetailPage extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     this.getAddressDetail(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)

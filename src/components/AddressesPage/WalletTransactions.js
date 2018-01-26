@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
-import { LoadingComponent, Pagination, BlockLink, TransactionLink } from '../../components'
+import { Pagination, BlockLink, TransactionLink } from '../../components'
 
 class WalletTransactions extends Component {
 

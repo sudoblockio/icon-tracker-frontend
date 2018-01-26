@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
 import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
@@ -27,7 +26,7 @@ class TransactionsPage extends Component {
 	}
 
 	render() {
-		const { loading, data, pageNum, getTransactions, maxPageNum } = this.props;
+		const { loading, data, pageNum, maxPageNum } = this.props;
 		return (
 			<div className="content-wrap">
 				<div className="screen0">

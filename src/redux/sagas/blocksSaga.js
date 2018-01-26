@@ -1,5 +1,4 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
-import { routerActions } from 'react-router-redux'
 import AT from '../actionTypes/actionTypes';
 import {
   getBlocksApi as GET_BLOCKS_API,
@@ -26,7 +25,7 @@ export function* getBlockFunc(action) {
     if (payload.result === '200') {
       yield put({type: AT.getBlockFulfilled, payload: payload.data});
     } else {
-      throw '';
+      throw new Error();
     }
   } catch (e) {
     yield put({type: AT.getBlockRejected, error: action.payload.blockId});

@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, WalletLink, TransactionLink } from '../../components/';
-import { numberWithCommas, convertNumberToText } from '../../utils/utils'
+import { convertNumberToText } from '../../utils/utils'
 
 class BlockInformation extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentWillUnmount() {
-
-  }
-
   getBlockData = (pageId) => {
-    const { height, history } = this.props
+    const { height } = this.props
     this.props.history.push('/block/' + height + '/'+ pageId);
   }
 

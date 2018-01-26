@@ -23,11 +23,11 @@ class RecentBlocks extends Component {
               return (
                 <li key={blockHeight}>
                   <p className="icon">
-                    <img src={icon_02} />
+                    <img src={icon_02} alt="block-img"/>
                     <span>Block</span>
-                    <span>{numberWithCommas(blockHeight)}</span>
+                    <span><BlockLink to={numberWithCommas(blockHeight)}/></span>
                   </p>
-                  <p className="a">C-rep<em><BlockLink to={blockHeight} label={hash.substr(0, 42)}/></em></p>
+                  <p className="a">Hash<em><BlockLink to={numberWithCommas(blockHeight)} label={hash.substr(0, 42)}/></em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>
                   <p className="c">Time stamp<em>{dateToUTC(createDate, true)}</em></p>
                 </li>

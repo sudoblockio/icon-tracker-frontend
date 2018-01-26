@@ -1,9 +1,5 @@
-
-
 /* eslint-disable no-undef */
-
 import React, { Component } from 'react';
-import { isInt } from '../../utils/utils';
 
 class Pagination extends Component {
 
@@ -43,6 +39,7 @@ class Pagination extends Component {
         if (pageNum === maxPageNum) return false;
         getData(maxPageNum);
         break;
+      default:        
     }
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { convertNumberToText, dateToUTC } from '../../utils/utils'
+import { convertNumberToText } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import icon_01 from '../../style/image/icon_01.png'
 
@@ -22,7 +22,7 @@ class RecentTransactions extends Component {
               const { txHash, amount, fee } = tx
               return (
                 <li key={txHash}>
-                  <p className="icon"><img src={icon_01}/></p>
+                  <p className="icon"><img src={icon_01} alt="transaction-img"/></p>
                   <p className="a">TX Hash<em><TransactionLink to={txHash} label={txHash.substr(0, 42)}/></em></p>
                   <p className="b">Amount<em>{`${convertNumberToText(amount, 'icx')} ICX`}</em></p>
                   <p className="c">Fee<em>{`${convertNumberToText(fee, 'icx')} ICX`}</em></p>

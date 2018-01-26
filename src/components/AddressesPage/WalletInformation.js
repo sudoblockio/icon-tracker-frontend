@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import clipboard from 'clipboard'
 import { numberWithCommas, convertNumberToText, isValidNodeType } from '../../utils/utils'
-import { LoadingComponent } from '../../components'
 
 class WalletInformation extends Component {
   constructor(props) {

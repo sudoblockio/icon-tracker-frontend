@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { dateToUTC, numberWithCommas, convertNumberToText } from '../../utils/utils';
+import { numberWithCommas, convertNumberToText } from '../../utils/utils';
 import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
 class AddressesPage extends Component {
@@ -26,12 +25,12 @@ class AddressesPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum, getAddresses, maxPageNum } = this.props;
+    const { loading, data, pageNum, maxPageNum } = this.props;
     return (
       <div className="content-wrap">
 				<div className="screen0">
 					<div className="wrap-holder">
-						<p className="title">Addresses List</p>
+						<p className="title">List of Addresses</p>
             {
               loading ?
               <div style={{height: '400px'}}>
@@ -43,10 +42,10 @@ class AddressesPage extends Component {
   								<thead>
   									<tr>
   										<th>Address</th>
-  										<th>ICX Balance<em className="img"></em></th>
+  										<th>ICX Balance</th>
   										<th>ICX USD Value</th>
   										<th>Percentage<em>%</em></th>
-  										<th>No of Tx</th>
+  										<th>No of Txns</th>
   										<th>Node type</th>
   									</tr>
   								</thead>

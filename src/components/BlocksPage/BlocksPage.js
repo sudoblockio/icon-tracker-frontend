@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink } from '../../components/';
 import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
 
 class BlocksPage extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
 
   componentWillMount() {
     this.props.resetReducer();
@@ -27,7 +20,7 @@ class BlocksPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum, getBlocks, maxPageNum } = this.props;
+    const { loading, data, pageNum, maxPageNum } = this.props;
     return (
       <div className="content-wrap">
         <div className="screen0">
@@ -84,7 +77,7 @@ class TableRow extends Component {
   }
 
   render() {
-    const { data, viewBlockDetail } = this.props;
+    const { data } = this.props;
     return (
       <tr>
         <td><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>

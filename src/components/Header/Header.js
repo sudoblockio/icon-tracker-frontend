@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SearchBox } from '../../components/';
 
 class Header extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
   render() {
     return (
@@ -17,9 +12,9 @@ class Header extends Component {
             <Link to='/'><span className="logo"><em>Tracker</em></span></Link>
 						<div className="link">
 							<ul>
-                <Link to='/wallets'><li>Wallet</li></Link>
-                <Link to='/transactions'><li>Transactions</li></Link>
-                <Link to='/blocks'><li>Blocks</li></Link>
+                <Link to='/wallets'><li>Address</li></Link>
+                <Link to='/blocks'><li>Block</li></Link>
+                <Link to='/transactions'><li>Transaction</li></Link>
               </ul>
 							<SearchBox {...this.props} />
 						</div>

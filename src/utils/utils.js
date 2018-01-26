@@ -24,7 +24,7 @@ export function convertNumberToText(num, unit) {
 
 export function isInt(value) {
   return !isNaN(value) &&
-         parseInt(Number(value)) == value &&
+         parseInt(Number(value), 10) === value &&
          !isNaN(parseInt(value, 10));
 }
 
@@ -34,6 +34,8 @@ export function isInt(value) {
 // }
 
 export function dateToUTC(date, showUTC, showAgo) {
+  if (!date) return '-'
+
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
   if (showUTC) {

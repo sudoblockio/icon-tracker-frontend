@@ -4,7 +4,7 @@ import AT from '../actionTypes/actionTypes';
 import {
   searchApi as SEARCH_API,
   getBlockByHashApi as GET_BLOCK_BY_HASH_API } from '../api/rest'
-import { getBlockFunc, getAddressDetailFunc } from './blocksSaga';
+// import { getAddressDetailFunc } from './blocksSaga';
 
 function* searchFunc(action) {
   try {
@@ -39,12 +39,12 @@ function* searchFunc(action) {
             break;
         }
       }
-    
+
       if (searchPayload.result === "No Data") {
-        throw '';
+        throw new Error();
       }
     } else {
-      throw '';
+      throw new Error();
     }
     yield put({type: AT.searchFulfilled});
   } catch (e) {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-
 import { dateToUTC, convertNumberToText } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 
