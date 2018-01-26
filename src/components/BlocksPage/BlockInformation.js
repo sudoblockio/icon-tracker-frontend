@@ -41,12 +41,16 @@ class BlockInformation extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>Address</td>
+                <td>Block Height</td>
                 <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{numberWithCommas(blockDetail.height)}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
               </tr>
               <tr>
                 <td>Time</td>
-                <td>{dateToUTC(blockDetail.createDate)} (UTC+9)</td>
+                {
+                  blockDetail.height === 0
+                    ? (<td></td>)
+                    : (<td>{dateToUTC(blockDetail.createDate)} (UTC+9)</td>)
+                }
               </tr>
               <tr>
                 <td>C-rep</td>
@@ -76,6 +80,15 @@ class BlockInformation extends Component {
                 <td>Fee</td>
                 <td>{convertNumberToText(blockDetail.fee, 'icx')} ICX</td>
               </tr>
+              {
+                blockDetail.height === 0
+                  && (
+                      <tr>
+                        <td>Message</td>
+                        <td>{blockDetail.message}</td>
+                      </tr>
+                    )
+              }
             </tbody>
           </table>
         </div>
