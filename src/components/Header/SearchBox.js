@@ -19,7 +19,7 @@ class SearchBox extends Component {
   handleKeyPress = (e) => {
     if (!this.state.value) return;
     if (e.key === 'Enter') {
-      this.props.search(this.state.value)
+      this.props.search(this.state.value.replace(/\s/gi, ""))
       this.setState({
         value: ''
       })
@@ -28,7 +28,7 @@ class SearchBox extends Component {
 
   handleSubmit = () => {
     if (!this.state.value) return;
-    this.props.search(this.state.value)
+    this.props.search(this.state.value.replace(/\s/gi, ""))
     this.setState({
       value: ''
     })

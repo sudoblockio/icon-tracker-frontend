@@ -20,7 +20,7 @@ class WalletTransactions extends Component {
             <thead>
               <tr>
                 <th>Tx Hash</th>
-                <th>Block</th>
+                <th>Block Height</th>
                 <th>Time Stamp<em>(UTC+9)</em></th>
                 <th>From</th>
                 <th>To</th>

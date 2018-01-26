@@ -23,6 +23,7 @@ class TransactionDetailPage extends Component {
 
   render() {
     const { loading, data, error } = this.props;
+    console.log(data)
     // 데이터가 없을 경우
     if (error !== "" && !loading) {
       return (
@@ -46,7 +47,7 @@ class TransactionDetailPage extends Component {
   										<td> {data.status} </td>
   									</tr>
   									<tr>
-  										<td>Block</td>
+  										<td>Block Height</td>
   										<td><span><BlockLink to = {data.height} /></span></td>
   									</tr>
   									<tr>
