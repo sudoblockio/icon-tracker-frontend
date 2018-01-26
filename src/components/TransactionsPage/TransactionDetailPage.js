@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC, convertNumberToText } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 
 import clipboard from 'clipboard';
@@ -23,7 +23,6 @@ class TransactionDetailPage extends Component {
 
   render() {
     const { loading, data, error } = this.props;
-    console.log(data)
     // 데이터가 없을 경우
     if (error !== "" && !loading) {
       return (
@@ -48,7 +47,7 @@ class TransactionDetailPage extends Component {
   									</tr>
   									<tr>
   										<td>Block Height</td>
-  										<td><span><BlockLink to = {data.height} /></span></td>
+  										<td><span><BlockLink to = {data.height}/></span>{` (${numberWithCommas(data.confirmation)} Confirmations)`}</td>
   									</tr>
   									<tr>
   										<td>Time Stamp</td>
