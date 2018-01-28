@@ -13,7 +13,7 @@ function* searchFunc(action) {
       yield put(routerActions.push('/block/' + action.payload));
 
     // 검색어가 길이 40개의 string이면 지갑 ID 검색
-    } else if (action.payload.length === 40) {
+    } else if (action.payload.length === 42) {
       yield put(routerActions.push('/wallet/' + action.payload));
 
     // 그 이외는 HASH (TX, BLOCK) 구분을 위한 검색
