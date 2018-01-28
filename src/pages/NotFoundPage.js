@@ -9,7 +9,4 @@ class NotFoundPage extends Component {
   }
 }
 
-
-test // test   
-
 export default NotFoundPage;
