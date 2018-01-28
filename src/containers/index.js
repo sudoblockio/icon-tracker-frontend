@@ -16,5 +16,5 @@ export {
   BlockDetailPageContainer,
   HeaderContainer,
   TransactionDetailPageContainer,
-  NotFoundPageContainer
+  NotFoundPageContainer,
 }

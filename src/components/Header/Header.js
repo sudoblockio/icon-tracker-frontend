@@ -12,7 +12,7 @@ class Header extends Component {
             <Link to='/'><span className="logo"><em>Tracker</em></span></Link>
 						<div className="link">
 							<ul>
-                <Link to='/wallets'><li>Address</li></Link>
+                <Link to='/addresses'><li>Address</li></Link>
                 <Link to='/blocks'><li>Block</li></Link>
                 <Link to='/transactions'><li>Transaction</li></Link>
               </ul>

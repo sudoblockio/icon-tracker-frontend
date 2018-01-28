@@ -1,6 +1,6 @@
 {
-  "name": "icon-block-explorer",
-  "version": "0.1.0",
+  "name": "icon-tracker",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",

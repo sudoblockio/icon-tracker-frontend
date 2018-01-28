@@ -7,7 +7,7 @@ class WalletTransactions extends Component {
 
   getWalletData = (pageId) => {
     const { walletTx } = this.props
-    this.props.history.push('/wallet/' + walletTx + '/' + pageId);
+    this.props.history.push('/address/' + walletTx + '/' + pageId);
   }
 
   render() {

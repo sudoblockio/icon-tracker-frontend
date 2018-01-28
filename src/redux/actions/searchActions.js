@@ -6,3 +6,9 @@ export function search(payload) {
     payload
   }
 }
+
+export function searchErrorReset() {
+  return {
+    type: actionTypes.searchErrorReset
+  }
+}

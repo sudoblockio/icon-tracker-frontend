@@ -15,13 +15,13 @@ class AddressesPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/wallets/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/addresses/')) {
       nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
     }
   }
 
   getAddressesData = (pageId) => {
-    this.props.history.push('/wallets/' + pageId);
+    this.props.history.push('/addresses/' + pageId);
   }
 
   render() {

@@ -21,6 +21,11 @@ export function searchReducer(state = initialState, action) {
         loading: false,
         error: action.error
       })
+    case actionTypes.searchErrorReset:
+      return Object.assign({}, state, {
+        loading: false,
+        error: ''
+      })
     default: {
       return state
     }

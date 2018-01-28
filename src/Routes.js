@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Footer } from './components/';
 import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
@@ -19,18 +19,21 @@ class Routes extends Component {
           <div className="root">
             <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
               <HeaderContainer />
-              <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/wallets' component={AddressesPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path='/wallets/:pageId' component={AddressesPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/wallet/:addressId' component={AddressDetailPage} exact/>
-              <Route onEnter={window.scroll(0, 0)} path='/wallet/:addressId/:pageId' component={AddressDetailPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/blocks' component={BlocksPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/block/:blockId' component={BlockDetailPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path='/block/:blockId/:pageId' component={BlockDetailPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage}/>
-              <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
+              <Switch>
+                <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/addresses' component={AddressesPage} />
+                <Route onEnter={window.scroll(0, 0)} path='/addresses/:pageId' component={AddressesPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/address/:addressId' component={AddressDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/address/:addressId/:pageId' component={AddressDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/blocks' component={BlocksPage} />
+                <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/block/:blockId' component={BlockDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/block/:blockId/:pageId' component={BlockDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
+                <Route onEnter={window.scroll(0, 0)} component={NotFoundPage}/>
+              </Switch>
             </div>
             <div className="blank"></div>
           </div>

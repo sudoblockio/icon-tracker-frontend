@@ -57,6 +57,7 @@ export {
   LoadingComponent,
   Pagination,
   NotFound,
+  
   WalletLink,
   BlockLink,
   TransactionLink

@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-// const productionURL = 'https://icon-lb-1450281316.ap-northeast-2.elb.amazonaws.com'
 const productionURL = 'https://tracker.icon.foundation'
-const developmentURL = 'http://ec2-13-125-144-157.ap-northeast-2.compute.amazonaws.com'
-//const developmentURL = 'http://10.130.109.23:8080'
+const developmentURL = 'https://trackerdev.icon.foundation'
 const axiosApi = axios.create({
   baseURL: process.env.NODE_ENV !== 'development' ? productionURL : developmentURL,
   headers: {

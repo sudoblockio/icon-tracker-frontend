@@ -37,7 +37,8 @@ const actionTypes = {
 
   search: 'SEARCH',
   searchFulfilled: 'SEARCH_FULFILLED',
-  searchRejected: 'SEARCH_REJECTED'
+  searchRejected: 'SEARCH_REJECTED',
+  searchErrorReset: 'SEARCH_ERROR_RESET',
 }
 
 export default actionTypes
