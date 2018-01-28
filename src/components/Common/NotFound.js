@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class NotFound extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+  }
+
+  componentDidMount() {
+    if (!this.state.error) {
+      setTimeout(()=>{
+        this.props.history.push('/');
+      }, 5000)
+    }
   }
 
   componentWillUnmount() {
@@ -45,4 +54,4 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound;
+export default withRouter(NotFound);

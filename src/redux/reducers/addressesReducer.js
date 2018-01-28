@@ -67,7 +67,7 @@ export function addressesReducer(state = initialState, action) {
         address : {
           ...state.address,
           loading: true,
-          pageNum: Number(action.payload.pageNum) || 1
+          pageNum: Number(action.payload.pageId) || 1
         }
       }
     }

@@ -18,6 +18,7 @@ class AddressesDetailPage extends Component {
       addressId: addressId,
       pageId: pageId
     };
+    console.log(addressId, pageId)
     this.props.getAddressDetail(data);
   }
 
@@ -37,7 +38,7 @@ class AddressesDetailPage extends Component {
               <WalletInformation walletDetail={walletDetail}/>
             </div>
             <div className="screen1">
-              <WalletTransactions walletTx={walletTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
+              <WalletTransactions walletAddress={walletDetail.address} walletTx={walletTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
             </div>
           </div>
         )

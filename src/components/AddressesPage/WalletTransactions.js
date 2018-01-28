@@ -6,8 +6,8 @@ import { Pagination, BlockLink, TransactionLink } from '../../components'
 class WalletTransactions extends Component {
 
   getWalletData = (pageId) => {
-    const { walletTx } = this.props
-    this.props.history.push('/address/' + walletTx + '/' + pageId);
+    const { walletAddress } = this.props
+    this.props.history.push('/address/' + walletAddress + '/' + pageId);
   }
 
   render() {
