@@ -5,7 +5,7 @@ class InfoSummary extends Component {
   render() {
     const { tmainInfo } = this.props.info
     const { crepCount, icxSupply, marketCap, transactionCount } = tmainInfo
-    const marketCapStr = numberWithCommas(marketCap)
+    const marketCapStr = numberWithCommas(Math.floor(marketCap))
     return (
       <li className="left">
         <p className="subTitle">Market Cap</p>
