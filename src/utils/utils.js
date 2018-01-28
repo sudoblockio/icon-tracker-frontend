@@ -71,6 +71,11 @@ export function calcTime(createDate){
   }
 }
 
+export function getUtcLabel() {
+  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
+  return `(UTC+${timezoneOffset})`
+}
+
 export function isValidNodeType(nodeType) {
   if (!nodeType) return false
   if (nodeType === '') return false

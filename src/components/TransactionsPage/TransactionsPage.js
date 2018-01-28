@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel } from '../../utils/utils';
 
 class TransactionsPage extends Component {
 
@@ -27,6 +27,7 @@ class TransactionsPage extends Component {
 
 	render() {
 		const { loading, data, pageNum, maxPageNum } = this.props;
+		const utcLabel = getUtcLabel()
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -44,7 +45,7 @@ class TransactionsPage extends Component {
 												<tr>
 													<th>Tx Hash</th>
 													<th>Block</th>
-													<th>Time Stamp<em>(UTC+9)</em></th>
+													<th>Time Stamp<em>{utcLabel}</em></th>
 													<th>From</th>
 													<th>To</th>
 													<th>Amount</th>
