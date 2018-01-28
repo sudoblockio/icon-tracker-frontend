@@ -15,6 +15,8 @@ class NotFound extends Component {
 
   render() {
     const { error } =  this.props
+    // error 가 정의되어 있을 경우 search not found
+    // error 가 정의되어 있지 않을 경우 page not found
     return (
       <div className="content-wrap nodata">
         <div className="screen0">
