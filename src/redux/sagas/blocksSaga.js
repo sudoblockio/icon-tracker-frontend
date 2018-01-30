@@ -8,7 +8,6 @@ import {
 function* getBlocksFunc(action) {
   try {
     const payload = yield call(GET_BLOCKS_API, action.payload);
-    console.log(payload.result)
     if (payload.result === '200') {
       yield put({type: AT.getBlocksFulfilled, payload: payload});
     } else {

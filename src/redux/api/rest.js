@@ -98,7 +98,6 @@ export function getBlockByHashApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/block/blockDetailByHash?hash='+blockHash+'&page='+pageId )
       .then(result => {
-        console.log(result)
         resolve(result.data.data)
       })
       .catch(error => {

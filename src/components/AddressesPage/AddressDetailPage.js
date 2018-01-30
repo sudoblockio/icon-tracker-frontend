@@ -18,7 +18,6 @@ class AddressesDetailPage extends Component {
       addressId: addressId,
       pageId: pageId
     };
-    console.log(addressId, pageId)
     this.props.getAddressDetail(data);
   }
 
