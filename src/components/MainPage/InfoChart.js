@@ -123,13 +123,14 @@ class InfoChart extends Component {
     let min = Math.min.apply(null, data)
     let step = Math.round((max - min) / 4)
 
-    // console.log(max, min, step)
+    console.log(max, min, step)
 
-    let a = step.toString().length - 1
+    let a = step.toString().length - 2
     let b = Math.pow(10, a) * 5
-    step = (Math.floor(step / b) + 1) * b
+    // step = (Math.floor(step / b) + 1) * b
+    step = Math.ceil(step / b) * b
 
-    // console.log(a, b, step)
+    console.log(a, b, step)
 
     max += step
     min = min > step ? min - step : min

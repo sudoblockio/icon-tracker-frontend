@@ -30,7 +30,7 @@ class WalletInformation extends Component {
             <tbody>
               <tr className="">
                 <td>Address</td>
-                <td>{address}<em className="img clipboard-btn" data-clipboard-text={address}></em>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType} Node`}</span>}</td>
+                <td>{address}<em className="img clipboard-btn" data-clipboard-text={address}></em>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
               </tr>
               <tr>
                 <td>Balance</td>
