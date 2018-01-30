@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { numberWithCommas, convertNumberToText, dateToUTC, getUtcLabel } from '../../utils/utils'
-import { Pagination, BlockLink, TransactionLink } from '../../components'
+import { Pagination, BlockLink, TransactionLink, WalletLink } from '../../components'
 
 class WalletTransactions extends Component {
 
@@ -11,7 +11,7 @@ class WalletTransactions extends Component {
   }
 
   render() {
-    const { walletTx, pageNum, maxPageNum } = this.props
+    const { walletAddress, walletTx, pageNum, maxPageNum } = this.props
     const utcLabel = getUtcLabel()
     return (
       <div className="wrap-holder">
@@ -31,7 +31,7 @@ class WalletTransactions extends Component {
             </thead>
             <tbody>
               {walletTx.map(tx => (
-                <TableRow key={tx.txHash} data={tx}/>
+                <TableRow key={tx.txHash} data={tx} address={walletAddress}/>
               ))}
             </tbody>
           </table>
@@ -46,16 +46,17 @@ class WalletTransactions extends Component {
   }
 }
 
-const TableRow = ({data}) => {
+const TableRow = ({data, address}) => {
+  const { txHash, height, createDate, fromAddr, toAddr, amount, fee} = data
   return (
     <tr>
-      <td className="on break"><TransactionLink to={data.txHash}/></td>
-      <td className="on"><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>
-      <td>{dateToUTC(data.createDate)}</td>
-      <td className="break">{data.fromAddr}</td>
-      <td className="break">{data.toAddr}</td>
-      <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
-      <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
+      <td className="on break"><TransactionLink to={txHash}/></td>
+      <td className="on"><BlockLink to={height} label={numberWithCommas(height)}/></td>
+      <td>{dateToUTC(createDate)}</td>
+      <td className="break">{fromAddr === address ? fromAddr : <WalletLink to={fromAddr}/>}</td>
+      <td className="break">{toAddr === address ? toAddr : <WalletLink to={toAddr}/>}</td>
+      <td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
+      <td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
     </tr>
   )
 }

@@ -298,7 +298,7 @@ html, body{height: 100%;}
 .page .pageNum{margin: 0 20px; font-family: "NanumSquare"; font-weight: 700;}
 .page .pageNum p{font-family: "Montserrat"; font-weight: 600;}
 .page p{display: inline-block;}
-.page li{display: inline-block; vertical-align: top;}
+.page li{display: inline-block; vertical-align: top; margin-left: 4px;}
 .page li span{display: inline-block;width: 30px; height: 30px; background:#262626; text-align: center; padding-top: 7px; cursor: pointer; }
 .page li span em{width:12px; height: 14px; }
 .page li span:hover{background: #1aaaba;}
