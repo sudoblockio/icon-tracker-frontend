@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 class NotFound extends Component {
+
   constructor(props) {
     super(props);
     this.state = {}
+    // this.timeout = null
   }
 
   componentDidMount() {
-    if (!this.state.error) {
-      setTimeout(()=>{
-        this.props.history.push('/');
-      }, 5000)
-    }
+    // if (!this.state.error) {
+    //   this.timeout = setTimeout(()=>{
+    //     this.props.history.push('/');
+    //   }, 5000)
+    // }
   }
 
   componentWillUnmount() {
@@ -20,6 +22,7 @@ class NotFound extends Component {
     if (typeof this.props.searchErrorReset === 'function') {
       this.props.searchErrorReset();
     }
+    // clearTimeout(this.timeout)
   }
 
   render() {
