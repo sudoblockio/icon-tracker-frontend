@@ -83,3 +83,8 @@ export function isValidNodeType(nodeType) {
 
   return true
 }
+
+export function startsWith(text, search) {
+  if (typeof text !== 'string') return false
+  return text.indexOf(search) === 0
+}

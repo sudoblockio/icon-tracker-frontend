@@ -302,7 +302,7 @@ html, body{height: 100%;}
 .page li span{display: inline-block;width: 30px; height: 30px; background:#262626; text-align: center; padding-top: 7px; cursor: pointer; }
 .page li span em{width:12px; height: 14px; }
 .page li span:hover{background: #1aaaba;}
-.page input{height: 30px;margin:0 8px; text-align: center;}
+.page input{height: 30px;margin:0 8px; text-align: center; padding: 0;}
 .page .start .img{background-position:-20px -145px; }
 .page .prev .img{background-position:0px -145px; }
 .page .next .img{background-position:-40px -145px; }
