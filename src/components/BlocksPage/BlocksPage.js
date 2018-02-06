@@ -40,7 +40,7 @@ class BlocksPage extends Component {
                           <th>Block Height</th>
                           <th>Time Stamp<em>{utcLabel}</em></th>
                           <th>No of Txns</th>
-                          <th>C-Rep Address</th>
+                          <th>Block Hash</th>
                           <th>Amount</th>
                           <th>Fee</th>
                         </tr>

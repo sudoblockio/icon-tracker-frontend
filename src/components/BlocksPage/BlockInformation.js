@@ -45,10 +45,10 @@ class BlockInformation extends Component {
                     : (<td>{dateToUTC(blockDetail.createDate, true)}</td>)
                 }
               </tr>
-              <tr>
+              {/*<tr>
                 <td>C-rep</td>
                 <td><span>{blockDetail.crep}</span></td>
-              </tr>
+              </tr>*/}
               <tr>
                 <td>No of Txns</td>
                 <td>{numberWithCommas(blockDetail.txCount)}</td>

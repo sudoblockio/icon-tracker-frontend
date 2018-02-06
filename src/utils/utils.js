@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { BigNumber } from 'bignumber.js'
 
 const CURRENCY_ROUND = {
   'krw': 0,
@@ -14,18 +15,20 @@ export function numberWithCommas(x) {
 }
 
 export function convertNumberToText(num, unit) {
-  let roundNum = CURRENCY_ROUND[unit];
-  if (num === "-" || Number(num) === 0) {
-    return '0'
-  }
-  return numberWithCommas(Number(num).toString())
+  // let roundNum = CURRENCY_ROUND[unit];
+  // if (num === "-" || Number(num) === 0) {
+  //   return '0'
+  // }
+  // return numberWithCommas(Number(num).toFixed(roundNum).toString())
+  if (!num || num === "-") return '0'
+  return numberWithCommas(num)
 }
 
-export function isInt(value) {
-  return !isNaN(value) &&
-         parseInt(Number(value), 10) === value &&
-         !isNaN(parseInt(value, 10));
-}
+// export function isInt(value) {
+//   return !isNaN(value) &&
+//          parseInt(Number(value), 10) === value &&
+//          !isNaN(parseInt(value, 10));
+// }
 
 // export function dateToUTC(date, showUTC) {
 //   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
