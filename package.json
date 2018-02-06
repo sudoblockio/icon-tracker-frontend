@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
-    "bignumber.js": "^6.0.0",
     "chart.js": "^2.7.1",
     "clipboard": "^1.7.1",
     "express": "^4.16.2",

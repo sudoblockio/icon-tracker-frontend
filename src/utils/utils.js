@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { BigNumber } from 'bignumber.js'
 
 const CURRENCY_ROUND = {
   'krw': 0,
