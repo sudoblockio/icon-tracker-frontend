@@ -39,7 +39,7 @@ class Pagination extends Component {
         if (pageNum === maxPageNum) return false;
         getData(maxPageNum);
         break;
-      default:        
+      default:
     }
   }
 
@@ -74,7 +74,8 @@ class Pagination extends Component {
         </li>
         <li className="pageNum">
           <p>Page</p>
-          <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-page" placeholder="" value={pageNum} /> / {maxPageNum}
+          <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-page" placeholder="" value={pageNum} />
+          <p> / {maxPageNum}</p>
         </li>
         <li onClick={() => this.getData('next')}>
           <span name="next" className="next"><em className="img"></em></span>

@@ -25,7 +25,7 @@ class RecentBlocks extends Component {
                   <p className="icon">
                     <img src={icon_02} alt="block-img"/>
                     <span>Block</span>
-                    <span><BlockLink to={numberWithCommas(blockHeight)}/></span>
+                    <span><BlockLink to={blockHeight} label={numberWithCommas(blockHeight)}/></span>
                   </p>
                   <p className="a">Hash<em><BlockLink to={numberWithCommas(blockHeight)} label={hash}/></em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>

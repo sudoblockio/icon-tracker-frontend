@@ -189,7 +189,7 @@ html, body{height: 100%;}
 .home .content-wrap .screen1 .content .right{padding-left: 27px;}
 .home .content-wrap .screen1 .content .list li .a em a,
 .home .content-wrap .screen1 .content .left .list li p em a{color: #1aaaba}
-.home .content-wrap .screen1 .content .left .list li p em{left: 205px;     text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 320px;}
+.home .content-wrap .screen1 .content .left .list li p em{left: 205px;     text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 300px;}
 .home .content-wrap .screen1 .content .left .list li .icon img{position: absolute;    left: 20px;}
 .home .content-wrap .screen1 .content .left .list li .icon span{position: relative; z-index: 1;     display: block; }
 .home .content-wrap .screen1 .content .left .list li .icon span:nth-child(2){font-weight: 500; margin-top: 14px;}
@@ -297,12 +297,13 @@ html, body{height: 100%;}
 .page{font-size: 16px; text-align: right; margin-top: 20px;}
 .page .pageNum{margin: 0 20px; font-family: "NanumSquare"; font-weight: 700;}
 .page .pageNum p{font-family: "Montserrat"; font-weight: 600;}
+.page .pageNum p:last-child{font-family: "NanumSquare"; font-weight: 600;}
 .page p{display: inline-block;}
 .page li{display: inline-block; vertical-align: top; margin-left: 4px;}
 .page li span{display: inline-block;width: 30px; height: 30px; background:#262626; text-align: center; padding-top: 7px; cursor: pointer; }
 .page li span em{width:12px; height: 14px; }
 .page li span:hover{background: #1aaaba;}
-.page input{height: 30px;margin:0 8px; text-align: center; padding: 0;}
+.page input{height: 30px;margin:0 8px; text-align: center; padding: 0}
 .page .start .img{background-position:-20px -145px; }
 .page .prev .img{background-position:0px -145px; }
 .page .next .img{background-position:-40px -145px; }
