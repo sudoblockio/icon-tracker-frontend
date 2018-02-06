@@ -18,7 +18,7 @@ export function convertNumberToText(num, unit) {
   if (num === "-" || Number(num) === 0) {
     return '0'
   }
-  return numberWithCommas(Number(num).toFixed(roundNum).toString())
+  return numberWithCommas(Number(num).toString())
 }
 
 export function isInt(value) {

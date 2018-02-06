@@ -318,7 +318,7 @@ html, body{height: 100%;}
 
 /*nodata*/
 .sub .content-wrap.nodata .screen0{margin: 160px 0 0px;}
-.nodata .contents{background: url(../image/nodata.png) center center no-repeat; width: 566px; height: 360px; margin: 0 auto; text-align: center;padding: 56px 40px 50px;}
+.nodata .contents{background: url(../image/nodata.png) center center no-repeat; width: 566px; height: 360px; margin: 0 auto; text-align: center;padding: 56px 30px 50px;}
 .nodata .contents .title{font-size: 60px;}
 .nodata .contents .txt{font-size: 16px; color: #aaaaaa; font-weight: 700;}
 .nodata .contents .address{font-size: 20px; color: #1aaaba; word-break: break-all; margin-top: 40px; font-weight: 800; font-family: "NanumSquare";}

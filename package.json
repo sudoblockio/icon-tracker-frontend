@@ -19,7 +19,8 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "bignumber.js": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
