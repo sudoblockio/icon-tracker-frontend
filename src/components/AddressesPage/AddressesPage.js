@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numberWithCommas, convertNumberToText } from '../../utils/utils';
+import { numberWithCommas, convertNumberToText, startsWith } from '../../utils/utils';
 import { LoadingComponent, Pagination, WalletLink } from '../../components/';
 
 class AddressesPage extends Component {
@@ -15,7 +15,7 @@ class AddressesPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/addresses/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/addresses/')) {
       nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
     }
   }

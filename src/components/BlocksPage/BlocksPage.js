@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { LoadingComponent, Pagination, BlockLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel, startsWith } from '../../utils/utils';
 
 class BlocksPage extends Component {
 
@@ -10,7 +10,7 @@ class BlocksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/blocks/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/blocks/')) {
       nextProps.getBlocks(nextProps.url.pathname.split("/")[2]);
     }
   }

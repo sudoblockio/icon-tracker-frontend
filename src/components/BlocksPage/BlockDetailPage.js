@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NotFound, BlockInformation, BlockTransactions } from '../../components/';
+import { startsWith } from '../../utils/utils'
 
 class BlockDetailPage extends Component {
 
@@ -14,7 +15,7 @@ class BlockDetailPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/block/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/block/')) {
       this.getBlock(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
     }
   }

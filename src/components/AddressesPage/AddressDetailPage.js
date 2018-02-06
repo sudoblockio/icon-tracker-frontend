@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { WalletInformation, WalletTransactions, NotFound } from '../../components'
+import { startsWith } from '../../utils/utils'
 
 class AddressesDetailPage extends Component {
 
@@ -8,7 +9,7 @@ class AddressesDetailPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/address/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/address/')) {
       this.getAddressDetail(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
     }
   }

@@ -27,7 +27,7 @@ class RecentBlocks extends Component {
                     <span>Block</span>
                     <span><BlockLink to={blockHeight} label={numberWithCommas(blockHeight)}/></span>
                   </p>
-                  <p className="a">Hash<em><BlockLink to={numberWithCommas(blockHeight)} label={hash}/></em></p>
+                  <p className="a">Hash<em><BlockLink to={blockHeight} label={hash}/></em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>
                   <p className="c">Time stamp<em>{dateToUTC(createDate, true)}</em></p>
                 </li>

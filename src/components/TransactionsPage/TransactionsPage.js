@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel, startsWith } from '../../utils/utils';
 
 class TransactionsPage extends Component {
 
@@ -16,7 +16,7 @@ class TransactionsPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.url.pathname !== this.props.url.pathname && nextProps.url.pathname.startsWith('/transactions/') ) {
+		if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transactions/') ) {
 			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
 		}
 	}
