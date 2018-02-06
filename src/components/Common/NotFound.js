@@ -38,7 +38,8 @@ class NotFound extends Component {
               {error ?
                 <p className="txt">
                   The string below is invalid.<br/>
-                  Please double check your key.
+                  Please double check your key.<br/>
+                  Transactions being processed may not be seen.
                 </p>
                 :
                 <p className="txt">

@@ -5,7 +5,6 @@ const CURRENCY_ROUND = {
   'usd': 2,
   'icx': 4
 };
-const today = new Date();
 
 export function numberWithCommas(x) {
   if (!x) { x = 0 }
@@ -53,21 +52,16 @@ export function calcMaxPageNum(total, rowNum) {
 }
 
 export function calcTime(createDate){
-  const todayMiliSeconds = today.getTime();
-  const createDateMiliSeconds = new Date(createDate).getTime();
-  const pastTimeHour = (todayMiliSeconds - createDateMiliSeconds) / (1000 * 3600);
-  if(pastTimeHour >= 24){
-    if(Math.round(pastTimeHour / 24) === 1){
-      return "1 Day ago";
-    }else{
-      return `${Math.round(pastTimeHour/24)} Days ago`;
-    }
-  }else{
-    if(Math.round(pastTimeHour) === 1){
-      return "1 Hour ago";
-    }else{
-      return `${Math.round(pastTimeHour)} Hours ago`;
-    }
+  const createMoment = moment(createDate)
+  const todayMoment = moment()
+  const diffDay = todayMoment.diff(createMoment, 'day')
+  const diffHour = todayMoment.diff(createMoment, 'hour')
+
+  if (diffDay === 0) {
+    return diffHour > 1 ? `${diffHour} Hours ago` : `${diffHour} Hour ago`
+  }
+  else {
+    return diffDay > 1 ? `${diffDay} Days ago` : `${diffDay} Day ago`
   }
 }
 
