@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC, convertNumberToText, numberWithCommas } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, startsWith } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound } from '../../components/';
 
 import clipboard from 'clipboard';
@@ -14,11 +14,21 @@ class TransactionDetailPage extends Component {
   }
 
   componentWillMount() {
-		this.props.getTransaction(this.props.url.pathname.split("/")[2]);
+		this.getTransaction(this.props.url.pathname.split("/")[2]);
 	}
 
 	componentWillUnmount() {
     this.clipboard.destroy();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transaction/')) {
+      this.getTransaction(nextProps.url.pathname.split("/")[2]);
+    }
+  }
+
+  getTransaction(txHash) {
+    this.props.getTransaction(txHash);
   }
 
   render() {

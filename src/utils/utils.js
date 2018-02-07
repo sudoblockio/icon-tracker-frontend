@@ -1,10 +1,10 @@
 import moment from 'moment';
 
-const CURRENCY_ROUND = {
-  'krw': 0,
-  'usd': 2,
-  'icx': 4
-};
+// const CURRENCY_ROUND = {
+//   'krw': 0,
+//   'usd': 2,
+//   'icx': 4
+// };
 
 export function numberWithCommas(x) {
   if (!x) { x = 0 }
