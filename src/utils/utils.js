@@ -1,4 +1,5 @@
 import moment from 'moment';
+import BigNumber from 'bignumber.js'
 
 // const CURRENCY_ROUND = {
 //   'krw': 0,
@@ -13,14 +14,19 @@ export function numberWithCommas(x) {
 	return parts.join('.');
 }
 
-export function convertNumberToText(num, unit) {
+export function convertNumberToText(num, unit, round) {
   // let roundNum = CURRENCY_ROUND[unit];
   // if (num === "-" || Number(num) === 0) {
   //   return '0'
   // }
   // return numberWithCommas(Number(num).toFixed(roundNum).toString())
   if (!num || num === "-") return '0'
-  return numberWithCommas(num)
+  if (round) {
+    return numberWithCommas(BigNumber(num).toFixed(round))
+  }
+  else {
+    return numberWithCommas(num)
+  }
 }
 
 // export function isInt(value) {

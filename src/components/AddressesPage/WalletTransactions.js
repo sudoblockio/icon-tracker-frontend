@@ -55,7 +55,7 @@ const TableRow = ({data, address}) => {
       <td>{dateToUTC(createDate)}</td>
       <td className="break">{fromAddr === address ? fromAddr : <WalletLink to={fromAddr}/>}</td>
       <td className="break">{toAddr === address ? toAddr : <WalletLink to={toAddr}/>}</td>
-      <td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
+      <td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
     </tr>
   )

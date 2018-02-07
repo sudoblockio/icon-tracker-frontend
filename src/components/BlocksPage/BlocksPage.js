@@ -84,7 +84,7 @@ class TableRow extends Component {
         <td><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>
         <td>{dateToUTC(data.createDate)}</td>
         <td>{numberWithCommas(data.txCount)}</td>
-        <td className="break">{data.crep}</td>
+        <td className="break">{data.hash}</td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
         <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
       </tr>
