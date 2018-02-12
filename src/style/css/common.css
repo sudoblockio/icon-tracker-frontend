@@ -247,6 +247,7 @@ html, body{height: 100%;}
 .table-typeB tr .img{background-position:-130px 0; width:18px; height: 20px; margin-left: 20px;     vertical-align: top; cursor: pointer;}
 .table-typeB tr .img:hover{background-position:-130px -23px; }
 .table-typeB td span{color: #1aaaba; font-family: "NanumSquare";font-weight: 800;     word-break: break-all;}
+.table-typeB a{font-family: "NanumSquare"; font-weight: 800;}
 
 .table-typeB.address tr:nth-child(2) span{color: #999999; }
 .table-typeB.address tr:first-child .crep{background: #1aaaba; border-radius:20px; font-size: 12px; color: #fff;     padding: 3px 14px; margin-right: 10px; float: right;}
@@ -264,6 +265,7 @@ html, body{height: 100%;}
 
 .table-typeB.detail .value{display: inline-block;width: 200px; text-align: center;font-family: "NanumSquare"; font-weight: 800; color: #262626;}
 .table-typeB.detail p:hover{background: #1aaaba;}
+
 
 
 .table-typeC td:nth-child(2){text-align: center;}
@@ -303,7 +305,7 @@ html, body{height: 100%;}
 .page li span{display: inline-block;width: 30px; height: 30px; background:#262626; text-align: center; padding-top: 7px; cursor: pointer; }
 .page li span em{width:12px; height: 14px; }
 .page li span:hover{background: #1aaaba;}
-.page input{height: 30px;margin:0 8px; text-align: center; padding: 0}
+.page input{height: 30px;margin:0 8px; text-align: center; padding: 0;}
 .page .start .img{background-position:-20px -145px; }
 .page .prev .img{background-position:0px -145px; }
 .page .next .img{background-position:-40px -145px; }
@@ -318,7 +320,7 @@ html, body{height: 100%;}
 
 /*nodata*/
 .sub .content-wrap.nodata .screen0{margin: 160px 0 0px;}
-.nodata .contents{background: url(../image/nodata.png) center center no-repeat; width: 566px; height: 360px; margin: 0 auto; text-align: center;padding: 56px 30px 50px;}
+.nodata .contents{background: url(../image/nodata.png) center center no-repeat; width: 566px; height: 360px; margin: 0 auto; text-align: center;padding: 56px 40px 50px;}
 .nodata .contents .title{font-size: 60px;}
 .nodata .contents .txt{font-size: 16px; color: #aaaaaa; font-weight: 700;}
 .nodata .contents .address{font-size: 20px; color: #1aaaba; word-break: break-all; margin-top: 40px; font-weight: 800; font-family: "NanumSquare";}
