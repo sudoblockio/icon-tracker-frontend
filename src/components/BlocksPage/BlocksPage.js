@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { LoadingComponent, Pagination, BlockLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel, startsWith } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, getUTCString, startsWith } from '../../utils/utils';
 
 class BlocksPage extends Component {
 
@@ -21,7 +21,7 @@ class BlocksPage extends Component {
 
   render() {
     const { loading, data, pageNum, maxPageNum } = this.props;
-    const utcLabel = getUtcLabel()
+    const utcLabel = `(${getUTCString()})`
     return (
       <div className="content-wrap">
         <div className="screen0">

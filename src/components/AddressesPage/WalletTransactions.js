@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { numberWithCommas, convertNumberToText, dateToUTC, getUtcLabel } from '../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC, getUTCString } from '../../utils/utils'
 import { Pagination, BlockLink, TransactionLink, WalletLink } from '../../components'
 
 class WalletTransactions extends Component {
@@ -12,7 +12,7 @@ class WalletTransactions extends Component {
 
   render() {
     const { walletAddress, walletTx, pageNum, maxPageNum } = this.props
-    const utcLabel = getUtcLabel()
+    const utcLabel = `(${getUTCString()})`
     return (
       <div className="wrap-holder">
         <p className="title">Transaction List</p>

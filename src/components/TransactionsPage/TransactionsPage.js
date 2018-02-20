@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink } from '../../components/';
-import { dateToUTC, convertNumberToText, numberWithCommas, getUtcLabel, startsWith } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, startsWith, getUTCString } from '../../utils/utils';
 
 class TransactionsPage extends Component {
 
@@ -27,7 +27,7 @@ class TransactionsPage extends Component {
 
 	render() {
 		const { loading, data, pageNum, maxPageNum } = this.props;
-		const utcLabel = getUtcLabel()
+		const utcLabel = `(${getUTCString()})`
 		return (
 			<div className="content-wrap">
 				<div className="screen0">

@@ -45,10 +45,10 @@ export function dateToUTC(date, showUTC, showAgo) {
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
   if (showUTC) {
-    result += ` (UTC+${timezoneOffset})`
+    result += ` (${getUTCString()})`
   }
   if (showAgo) {
-    result += ` (UTC+${timezoneOffset}, ${calcTime(date)})`
+    result += ` (${getUTCString()}, ${calcTime(date)})`
   }
   return result
 }
@@ -72,9 +72,10 @@ export function calcTime(createDate){
   }
 }
 
-export function getUtcLabel() {
-  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  return `(UTC+${timezoneOffset})`
+export function getUTCString() {
+  let timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
+  if (timezoneOffset > 0) {timezoneOffset = `+${timezoneOffset}`}
+  return `UTC${timezoneOffset === 0 ? '' : `${timezoneOffset}`}`
 }
 
 export function isValidNodeType(nodeType) {
