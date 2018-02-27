@@ -3,7 +3,7 @@ import axios from 'axios'
 const productionURL = 'https://tracker.icon.foundation'
 const developmentURL = 'https://trackerdev.icon.foundation'
 const axiosApi = axios.create({
-  baseURL: process.env.NODE_ENV !== 'development' ? productionURL : developmentURL,
+  baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -33,7 +33,6 @@ export function getMainChart() {
       })
   })
 }
-
 
 export function getAddressesApi(payload) {
   const pageNum = payload || 1

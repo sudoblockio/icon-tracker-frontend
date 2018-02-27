@@ -82,7 +82,6 @@ export function isValidNodeType(nodeType) {
   if (!nodeType) return false
   if (nodeType === '') return false
   if (nodeType === '-') return false
-
   return true
 }
 
