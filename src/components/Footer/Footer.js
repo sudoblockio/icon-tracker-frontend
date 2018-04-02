@@ -21,7 +21,7 @@ class Footer extends Component {
                 <li className="brunch"><a target='_black' href="https://brunch.co.kr/@helloiconworld"><span className="img"></span></a></li>
     						<li className="twitter"><a target='_black' href="https://twitter.com/helloiconworld"><span className="img"></span></a></li>
     						<li className="facebook"><a target='_black' href="https://www.facebook.com/helloicon"><span className="img"></span></a></li>
-    						<li className="github"><a target='_black' href="https://github.com/theloopkr/loopchain"><span className="img"></span></a></li>
+    						<li className="github"><a target='_black' href="https://github.com/icon-project"><span className="img"></span></a></li>
     					</ul>
     				</div>
     			</div>
