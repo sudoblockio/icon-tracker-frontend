@@ -2,8 +2,10 @@ import axios from 'axios'
 
 const productionURL = 'https://tracker.icon.foundation'
 const developmentURL = 'https://trackerdev.icon.foundation'
+const devLocalUrl = 'https://trackerlocaldev.icon.foundation'
 const axiosApi = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
+  // baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
+  baseURL: devLocalUrl,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
