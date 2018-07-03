@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { SearchBox } from '../../components/';
+import { withRouter } from "react-router-dom";
 
 class Header extends Component {
-
   render() {
     return (
       <div className="header-wrap">
@@ -12,9 +12,22 @@ class Header extends Component {
             <Link to='/'><span className="logo"><em>Tracker</em></span></Link>
 						<div className="link">
 							<ul>
-                <Link to='/addresses'><li>Address</li></Link>
-                <Link to='/blocks'><li>Block</li></Link>
-                <Link to='/transactions'><li>Transaction</li></Link>
+                <li>
+                  <span>Address</span>
+									<ol className="sub-menu">                    
+                    <li><span onClick={() => {this.props.history.push('/addresses')}}>Addresses List</span></li>                    
+										<li><span onClick={() => {this.props.history.push('/contracts')}}>Contracts List</span></li>
+									</ol>
+                </li>
+                <li><span onClick={() => {this.props.history.push('/blocks')}}>Block</span></li>
+                <li><span onClick={() => {this.props.history.push('/transactions')}}>Transaction</span></li>
+                <li>
+                  <span>Token</span>
+									<ol className="sub-menu">                    
+                    <li><span onClick={() => {this.props.history.push('/tokens')}}>Token List</span></li>                    
+										<li><span onClick={() => {this.props.history.push('/transfers')}}>Token Transfer List</span></li>
+									</ol>
+                </li>
               </ul>
 							<SearchBox {...this.props} />
 						</div>
@@ -25,4 +38,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
