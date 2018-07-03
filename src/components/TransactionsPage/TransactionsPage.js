@@ -11,12 +11,16 @@ class TransactionsPage extends Component {
 	}
 
 	componentWillMount() {
-		const { params } = this.props.match;
-		this.props.getTransactions(params['pageId']);
+		const { pathname } = this.props.url;
+		if (pathname === '/transactions') this.props.getTransactions()
+	
+		const page = pathname.split("/")[2]
+		if (!isNaN(page)) this.props.getTransactions(page);
+		else this.props.history.push('/transactions');
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transactions/') ) {
+		if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transactions') ) {
 			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
 		}
 	}

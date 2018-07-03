@@ -30,7 +30,6 @@ import BlockLink from './Common/BlockLink'
 import TransactionLink from './Common/TransactionLink'
 
 export {
-
   Header,
   SearchBox,
   Footer,

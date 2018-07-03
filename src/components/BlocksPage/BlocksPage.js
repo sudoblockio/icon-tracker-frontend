@@ -6,11 +6,17 @@ class BlocksPage extends Component {
 
   componentWillMount() {
     this.props.resetReducer();
-    this.props.getBlocks(this.props.url.pathname.split("/")[2]);
+
+    const { pathname } = this.props.url;
+    if (pathname === '/blocks') this.props.getBlocks()
+
+    const page = pathname.split("/")[2]
+    if (!isNaN(page)) this.props.getBlocks(page);
+    else this.props.history.push('/blocks');
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/blocks/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/blocks')) {
       nextProps.getBlocks(nextProps.url.pathname.split("/")[2]);
     }
   }

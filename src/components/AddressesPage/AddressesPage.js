@@ -10,12 +10,16 @@ class AddressesPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getAddresses(this.props.url.pathname.split("/")[2]);
+    const { pathname } = this.props.url;
+    if (pathname === '/addresses') this.props.getAddresses()
 
+    const page = pathname.split("/")[2]
+    if (!isNaN(page)) this.props.getAddresses(page);
+    else this.props.history.push('/addresses');
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/addresses/')) {
+    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/addresses')) {
       nextProps.getAddresses(nextProps.url.pathname.split("/")[2]);
     }
   }

@@ -29,8 +29,9 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/block/:blockId' component={BlockDetailPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/block/:blockId/:pageId' component={BlockDetailPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/transactions' component={TransactionsPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/transactions' component={TransactionsPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={TransactionsPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/transaction/:txHash' component={TransactionDetailPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage}/>
               </Switch>
