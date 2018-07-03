@@ -13,13 +13,15 @@ import AddressDetailPage from './AddressesPage/AddressDetailPage'
 import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
-import TransactionsPage from './TransactionsPage/TransactionsPage'
-import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
+import ContractsPage from './ContractsPage/ContractsPage'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
 import BlockInformation from './BlocksPage/BlockInformation'
 import BlockTransactions from './BlocksPage/BlockTransactions'
+
+import TransactionsPage from './TransactionsPage/TransactionsPage'
+import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
 
 import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
@@ -45,13 +47,15 @@ export {
   WalletInformation,
   WalletTransactions,
 
-  TransactionsPage,
-  TransactionDetailPage,
+  ContractsPage,
 
   BlocksPage,
   BlockDetailPage,
   BlockInformation,
   BlockTransactions,
+
+  TransactionsPage,
+  TransactionDetailPage,
 
   LoadingComponent,
   Pagination,
@@ -59,5 +63,5 @@ export {
   
   WalletLink,
   BlockLink,
-  TransactionLink
+  TransactionLink,
 }
