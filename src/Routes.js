@@ -12,6 +12,8 @@ import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 
+import AddressTxListPage from './pages/AddressTxListPage'
+
 class Routes extends Component {
 
   render() {
@@ -24,8 +26,11 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/addresses' component={AddressesPage} />
                 <Route onEnter={window.scroll(0, 0)} path='/addresses/:pageId' component={AddressesPage}/>
+                
                 <Route onEnter={window.scroll(0, 0)} exact path='/address/:addressId' component={AddressDetailPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/address/:addressId/:pageId' component={AddressDetailPage}/>
+                
+                <Route onEnter={window.scroll(0, 0)} exact path='/address/:addressId/transactions' component={AddressTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/address/:addressId/transactions:pageId' component={AddressTxListPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
                 <Route onEnter={window.scroll(0, 0)} path='/contracts/:pageId' component={ContractsPage}/>

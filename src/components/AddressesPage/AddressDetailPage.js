@@ -5,47 +5,50 @@ import { startsWith } from '../../utils/utils'
 class AddressesDetailPage extends Component {
 
   componentWillMount() {
-    this.getAddressDetail(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
+    // this.getAddressDetail(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
+    this.props.setAddress(this.props.url.pathname.split("/")[2])
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/address/')) {
-      this.getAddressDetail(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
+      // this.getAddressDetail(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
+      this.props.setAddress(this.props.url.pathname.split("/")[2])
     }
   }
 
-  getAddressDetail = (addressId, pageId = 1) => {
-    const data = {
-      addressId: addressId,
-      pageId: pageId
-    };
-    this.props.getAddressDetail(data);
-  }
-
   render() {
-    const { loading, data, pageNum, maxPageNum, error } = this.props;
-    const content = (data) => {
+    const { loading, walletDetail, walletTx, tokenTx , error } = this.props;
+    const content = () => {
       // 데이터가 없을 경우
       if (error !== "" && !loading) {
         return (
           <NotFound error={error}/>
         )
-      } else {
-        const { walletDetail, walletTx } = data;
+      } 
+      else {
         return (
           <div className="content-wrap">
             <div className="screen0">
-              <WalletInformation walletDetail={walletDetail}/>
+              <WalletInformation 
+                walletDetail={walletDetail}
+                addressInfo={this.props.addressInfo}
+              />
             </div>
             <div className="screen1">
-              <WalletTransactions walletAddress={walletDetail.address} walletTx={walletTx} pageNum={pageNum} maxPageNum={maxPageNum}/>
+              <WalletTransactions 
+                walletDetail={walletDetail}
+                walletTx={walletTx} 
+                tokenTx={tokenTx}
+                addressTxList={this.props.addressTxList}
+                addressTokenTxList={this.props.addressTokenTxList}
+              />
             </div>
           </div>
         )
       }
     }
 
-    return (content(data));
+    return content();
   }
 }
 

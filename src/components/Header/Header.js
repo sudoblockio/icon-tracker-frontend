@@ -9,11 +9,11 @@ class Header extends Component {
       <div className="header-wrap">
 				<div className="wrap-holder">
 					<div className="content">
-            <Link to='/'><span className="logo"><em>Tracker</em></span></Link>
+            <Link to='/'><span className="logo"></span></Link>
 						<div className="link">
 							<ul>
                 <li>
-                  <span>Address</span>
+                  <span>Address<em className="img"></em></span>
 									<ol className="sub-menu">                    
                     <li><span onClick={() => {this.props.history.push('/addresses')}}>Addresses List</span></li>                    
 										<li><span onClick={() => {this.props.history.push('/contracts')}}>Contracts List</span></li>
@@ -22,7 +22,7 @@ class Header extends Component {
                 <li><span onClick={() => {this.props.history.push('/blocks')}}>Block</span></li>
                 <li><span onClick={() => {this.props.history.push('/transactions')}}>Transaction</span></li>
                 <li>
-                  <span>Token</span>
+                  <span>Token<em className="img"></em></span>
 									<ol className="sub-menu">                    
                     <li><span onClick={() => {this.props.history.push('/tokens')}}>Token List</span></li>                    
 										<li><span onClick={() => {this.props.history.push('/transfers')}}>Token Transfer List</span></li>

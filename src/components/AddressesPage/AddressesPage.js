@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { numberWithCommas, convertNumberToText, startsWith } from '../../utils/utils';
-import { LoadingComponent, Pagination, WalletLink } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink, SortHolder } from '../../components/';
 
 class AddressesPage extends Component {
 
@@ -34,10 +34,10 @@ class AddressesPage extends Component {
       <div className="content-wrap">
 				<div className="screen0">
 					<div className="wrap-holder">
-						<p className="title">List of Addresses</p>
+						{!loading && <p className="title">Addresses</p>}
             {
               loading ?
-              <div style={{height: '400px'}}>
+              <div style={{height: 'calc(100vh - 120px - 144px)'}}>
                 <LoadingComponent />
               </div>
               :
@@ -62,6 +62,8 @@ class AddressesPage extends Component {
   								</tbody>
   							</table>
 
+                <SortHolder />
+                
                 <Pagination
                   pageNum={pageNum}
                   maxPageNum={maxPageNum}
@@ -79,7 +81,7 @@ class AddressesPage extends Component {
 const TableRow = ({data}) => {
   return (
     <tr>
-      <td className="on"><WalletLink to={data.address}/></td>
+      <td className="on"><span className="ellipsis"><WalletLink to={data.address}/></span></td>
       <td><span>{convertNumberToText(data.balance, 'icx')}</span><em>ICX</em></td>
       <td><span>{convertNumberToText(data.icxUsd, 'usd')}</span><em>USD</em></td>
       <td><span>{data.percentage}</span><em>%</em></td>

@@ -17,8 +17,9 @@ class InfoChart extends Component {
   componentDidUpdate() {
     const { tmainChart } = this.props.chart
     const ctx = document.getElementById("txChart");
+
     // canvas 가 랜더링 되기 전, 미리 생성된 차트가 있을 경우, 차트 데이터가 비어 있을 경우 return
-    if (!ctx || !!this.txChart || tmainChart.length === 0) {
+    if (!ctx || !!this.txChart || !tmainChart || tmainChart.length === 0) {
       return
     }
 
@@ -48,10 +49,10 @@ class InfoChart extends Component {
         },
         layout: {
           padding: {
-            left: 25,
-            right: 30,
-            top: 35,
-            bottom: 20
+            // left: 25,
+            // right: 30,
+            // top: 35,
+            // bottom: 20
           }
         },
         elements: {
@@ -59,13 +60,13 @@ class InfoChart extends Component {
             radius: 2.5,
             hoverRadius: 2.5,
             pointStyle: 'circle',
-            backgroundColor: '#fff',
-            borderColor: '#1aaaba',
+            backgroundColor: '#1aaaba',
+            borderColor: '#fff',
             borderWidth: 1.5,
           },
           line: {
             tension: 0,
-            borderColor: '#1aaaba',
+            borderColor: '#fff',
             borderWidth: 2,
             backgroundColor: 'rgba(0,0,0,0)'
           },
@@ -73,21 +74,21 @@ class InfoChart extends Component {
         scales: {
           xAxes: [{
             gridLines: {
-              color: 'rgba(100,100,100,0.2)',
+              color: '#56c0cc',
               drawTicks: true,
               drawBorder: false
             },
             ticks: {
               padding: 5,
               fontSize: 9,
-              fontColor: '#aaa',
+              fontColor: '#9deaf2',
               fontFamily: 'NanumSquare',
             }
           }],
           yAxes: [{
             gridLines: {
-              color: 'rgba(100,100,100,0.4)',
-              zeroLineColor: 'rgba(100,100,100,0.7)',
+              color: '#56c0cc',
+              zeroLineColor: '#fff',
               borderDash: [2,2],
               drawTicks: false,
               drawBorder: false
@@ -95,7 +96,7 @@ class InfoChart extends Component {
             ticks: {
               padding: 10,
               fontSize: 9,
-              fontColor: '#aaa',
+              fontColor: '#9deaf2',
               fontFamily: 'NanumSquare',
               beginAtZero: true,
               suggestedMax: chartData.max,
@@ -109,9 +110,9 @@ class InfoChart extends Component {
   }
 
   makeChartData(tmainChart) {
-    let labels = []
-    let data = []
-    let chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
+    const labels = []
+    const data = []
+    const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
 
     chartData.forEach((c, i) => {
       // labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
@@ -122,28 +123,30 @@ class InfoChart extends Component {
     let max = Math.max.apply(null, data)
     let min = Math.min.apply(null, data)
     let step = Math.round((max - min) / 4)
-    let division = Math.pow(10, step.toString().length - 2) * 5
+    let division = Math.pow(10, step.toString().length - 2) * 100
 
     step = Math.ceil(step / division) * division
-    max += step
-    min = min > step ? min - step : min
+    // max += step
+    // min = min < step ? min : min - step
 
     return { labels, data, max, min, step }
   }
 
   render() {
     const { loading } = this.props.chart
+    const ChartHeight = 236
+    const ChartWidth = 720
     return (
       <li className="right">
         <p className="subTitle">Daily Transactions</p>
-        <div className="graph">
+        <div className="graph" style={{background: '#1aaaba'}}>
           {
             loading ?
-            <div style={{height: '315px'}}>
+            <div style={{ width: `${ChartWidth}px`, height: `${ChartHeight}px` }}>
               <LoadingComponent />
             </div>
             :
-            <canvas id="txChart" width="580" height="315"></canvas>
+            <canvas id="txChart" width={`${ChartWidth}`} height={`${ChartHeight}`}></canvas>
           }
         </div>
       </li>

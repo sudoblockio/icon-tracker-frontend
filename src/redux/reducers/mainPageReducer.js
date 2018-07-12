@@ -56,7 +56,7 @@ export function mainPageReducer(state = initialState, action) {
       return {
         ...state,
         chart: {
-          tmainChart: [...action.payload],
+          tmainChart: [...(action.payload || [])],
           loading: false
         }
       }

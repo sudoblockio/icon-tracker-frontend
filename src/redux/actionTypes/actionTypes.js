@@ -11,9 +11,9 @@ const actionTypes = {
   getAddressesFulfilled: 'GET_ADDRESSES_FULFILLED',
   getAddressesRejected:'GET_ADDRESSES_REJECTED',
 
-  getAddressDetail: 'GET_ADDRESS_DETAIL',
-  getAddressDetailFulfilled: 'GET_ADDRESS_DETAIL_FULFILLED',
-  getAddressDetailRejected:'GET_ADDRESS_DETAIL_REJECTED',
+  // getAddressDetail: 'GET_ADDRESS_DETAIL',
+  // getAddressDetailFulfilled: 'GET_ADDRESS_DETAIL_FULFILLED',
+  // getAddressDetailRejected:'GET_ADDRESS_DETAIL_REJECTED',
 
   getBlocks: 'GET_BLOCKS',
   getBlocksFulfilled: 'GET_BLOCKS_FULFILLED',
@@ -23,7 +23,6 @@ const actionTypes = {
   getBlock: 'GET_BLOCK',
   getBlockFulfilled: 'GET_BLOCK_FULFILLED',
   getBlockRejected:'GET_BLOCK_REJECTED',
-
 
   getTransactions: 'GET_TRANSACTIONS',
   getTransactionsFulfilled: 'GET_TRANSACTIONS_FULFILLED',
@@ -39,6 +38,20 @@ const actionTypes = {
   searchFulfilled: 'SEARCH_FULFILLED',
   searchRejected: 'SEARCH_REJECTED',
   searchErrorReset: 'SEARCH_ERROR_RESET',
+
+  setAddress: 'SET_ADDRESS',
+
+  addressInfo: 'ADDRESS_INFO',
+  addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
+  addressInfoRejected: 'ADDRESS_INFO_REJECTED',
+  
+  addressTxList: 'ADDRESS_TX_LIST',
+  addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
+  addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
+
+  addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
+  addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
+  addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
 }
 
 export default actionTypes

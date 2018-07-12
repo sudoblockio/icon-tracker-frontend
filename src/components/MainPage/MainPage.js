@@ -17,18 +17,20 @@ class MainPage extends Component {
       <div className="content-wrap">
         <div className="screen0">
           <div className="wrap-holder">
-            <ul className="content half">
+            <ul className="content">
               <InfoSummary {...this.props}/>
               <InfoChart {...this.props}/>
             </ul>
           </div>
         </div>
         <div className="screen1">
-          <div className="wrap-holder">
-            <ul className="content half">
-              <RecentBlocks {...this.props}/>
-              <RecentTransactions {...this.props}/>
-            </ul>
+          <div className="bg">
+            <div className="wrap-holder">
+              <ul className="content half">
+                <RecentBlocks {...this.props}/>
+                <RecentTransactions {...this.props}/>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

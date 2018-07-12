@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import img_sorry from '../../style/image/img-sorry.png'
 
 class NotFound extends Component {
 
@@ -34,7 +35,8 @@ class NotFound extends Component {
         <div className="screen0">
           <div className="wrap-holder">
             <div className="contents">
-              <p className="title">SORRY.</p>
+              <span><img src={img_sorry}/></span>
+              <p className="title">Sorry.</p>
               {error ?
                 <p className="txt">
                   The string below is invalid.<br/>
@@ -43,10 +45,9 @@ class NotFound extends Component {
                 </p>
                 :
                 <p className="txt">
-                  <br/>
-                  <br/>
                   The requested order can not be processed.<br/>
-                  Please check again as this may be abnormal access or unpredicted error.
+                  Please check again as this may be <br/>
+                  abnormal access or unpredicted error.
                 </p>
               }
               {error && <p className="address">{error}</p>}

@@ -31,6 +31,11 @@ import WalletLink from './Common/WalletLink'
 import BlockLink from './Common/BlockLink'
 import TransactionLink from './Common/TransactionLink'
 
+import SortHolder from './Common/SortHolder'
+import CopyButton from './Common/CopyButton'
+
+import AddressTxList from './AddressesPage/AddressTxList'
+
 export {
   Header,
   SearchBox,
@@ -64,4 +69,9 @@ export {
   WalletLink,
   BlockLink,
   TransactionLink,
+
+  SortHolder,
+  CopyButton,
+
+  AddressTxList
 }

@@ -10,8 +10,7 @@ const initialState = {
   },
   address: {
     loading: true,
-    pageNum: 1,
-    maxPageNum: 1,
+    error: '',
     data: {
       walletDetail: {
         address: "",
@@ -20,9 +19,29 @@ const initialState = {
         txCount: 0,
         nodeType: ""
       },
-      walletTx: []
-    },
-    error: ''
+      walletTx: [],
+      tokenTx: []
+    }
+  },
+
+
+
+
+  walletDetail: {
+    address: "",
+    balance: 0,
+    icxUsd: 0,
+    nodeType: "",
+    txCount: 0,
+    tokenTxCount: 0,
+  },
+  walletTx: {
+    data: [],
+    totalData: 0.
+  },
+  tokenTx: {
+    data: [],
+    totalData: 0,
   }
 }
 
@@ -61,39 +80,102 @@ export function addressesReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.getAddressDetail: {
+    // case actionTypes.getAddressDetail: {
+    //   return {
+    //     ...state,
+    //     address : {
+    //       ...state.address,
+    //       loading: true,
+    //       pageNum: Number(action.payload.pageId) || 1
+    //     }
+    //   }
+    // }
+
+    // case actionTypes.getAddressDetailFulfilled: {
+    //   return {
+    //     ...state,
+    //     address : {
+    //       ...state.address,
+    //       loading: false,
+    //       maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
+    //       totalData: action.payload.totalData,
+    //       data : action.payload.data,
+    //       error: ''
+    //     },
+    //   }
+    // }
+
+    // case actionTypes.getAddressDetailRejected: {
+    //   return {
+    //     ...state,
+    //     address : {
+    //       ...state.address,
+    //       loading: false,
+    //       error: action.error
+    //     },
+    //   }
+    // }
+
+    case actionTypes.setAddress: {
       return {
         ...state,
-        address : {
-          ...state.address,
-          loading: true,
-          pageNum: Number(action.payload.pageId) || 1
+        walletDetail: {
+          ...state.walletDetail,
+          address: action.address
         }
       }
     }
 
-    case actionTypes.getAddressDetailFulfilled: {
+    case actionTypes.addressInfo: {
+      return state
+    }
+
+    case actionTypes.addressInfoFulfilled: {
       return {
         ...state,
-        address : {
-          ...state.address,
-          loading: false,
-          maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
-          data : action.payload.data,
-          error: ''
-        },
+        walletDetail: action.payload.data.walletDetail,
+      } 
+    }
+
+    case actionTypes.addressInfoRejected: {
+      return state
+    }
+
+    case actionTypes.addressTxList: {
+      return state
+    }
+
+    case actionTypes.addressTxListFulfilled: {
+      return {
+        ...state,
+        walletTx: {
+          data: action.payload.data.walletTx,
+          totalData: action.payload.data.listSize,
+        }        
       }
     }
 
-    case actionTypes.getAddressDetailRejected: {
+    case actionTypes.addressTxListRejected: {
+      return state
+
+    }
+
+    case actionTypes.addressTokenTxList: {
+      return state
+    }
+
+    case actionTypes.addressTokenTxListFulfilled: {
       return {
         ...state,
-        address : {
-          ...state.address,
-          loading: false,
-          error: action.error
-        },
+        tokenTx: {
+          data: action.payload.data.tokenTx,
+          totalData: action.payload.data.listSize,
+        }
       }
+    }
+
+    case actionTypes.addressTokenTxListRejected: {
+      return state
     }
 
     default: {

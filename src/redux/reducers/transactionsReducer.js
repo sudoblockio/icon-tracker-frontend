@@ -5,6 +5,7 @@ const initialState = {
   transactions: {
     loading: true,
     data: [],
+    totalData: 0,
     pageNum: 1,
     maxPageNum: 1
   },
@@ -35,6 +36,7 @@ export function transactionsReducer(state = initialState, action) {
           ...state.transactions,
           loading: false,
           maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
+          totalData: action.payload.totalData,
           data : action.payload.data
         }
       }

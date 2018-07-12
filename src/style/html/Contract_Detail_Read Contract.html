@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>ICON:Tracker</title>
+	<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="../js/commonFx.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/font.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+<body>
+	<div class="root">
+		<div class="wrap sub">
+			<!-- header -->
+			<div class="header-wrap">
+				<div class="wrap-holder">
+					<div class="content">
+						<span class="logo"></span>
+						<div class="link">
+							<ul>
+								<li>
+									<span>Address<em class="img"></em></span>
+									<ol class="sub-menu">
+										<li><span>Addresses List</span></li>
+										<li><span>Contracts List</span></li>
+									</ol>
+								</li>
+								<li><span>Block</span></li>
+								<li><span>Transaction</span></li>
+								<li>
+									<span>Token<em class="img"></em></span>
+									<ol class="sub-menu">
+										<li><span>Token List</span></li>
+										<li><span>Token Transfer List</span></li>
+									</ol>
+								</li>
+							</ul>
+							<div class="search-group">
+								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, Block height" value="">
+								<span><em class="img"></em></span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- // header -->
+
+			<!-- content -->
+			<div class="content-wrap">
+				<div class="screen0">
+					<div class="wrap-holder">
+						<p class="title">Contract</p>
+						<div class="contents">
+							<table class="table-typeB contract">
+								<thead>
+									<tr>
+										<th>Balance</th>
+										<th>value</th>
+										<th>Balance</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="qr">
+										<td>Address</td>
+										<td colspan="3">0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="copy on">Copy Complete</span></td>
+									</tr>
+									<tr class="">
+										<td>Balance</td>
+										<td>0.1234 ICX<span class="gray">(11 USD)</span></td>
+										<td>Token Contract</td>
+										<td>
+											<span class="link token">TOKEN(TKN)</span>
+											<span class="help token">IRC01 - 0xB704eC3E412910C97d120424f5De0e7b63b2c04E</span>
+										</td>
+									</tr>
+									<tr>
+										<td>ICX Value</td>
+										<td>900,000,000.01</td>
+										<td>Contract Creator</td>
+										<td>
+											<span class="link address">0x31nsadzzx34nk…</span><em>at Txn</em><span class="link hash">0x31nsadzzx34nk…</span>
+											<span class="help address">Creator Address</span>
+											<span class="help hash">Creator Transaction Hash</span>
+										</td>
+									</tr>
+									<tr>
+										<td>Transactions</td>
+										<td>100 Txns</td>
+										<td>Status</td>
+										<td>In progress<button class="btn-type-normal status">Detail</button></td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+				<div class="screen1">
+					<div class="wrap-holder">
+						<div class="tab-holder">
+							<ul>
+								<li>Transactions</li>
+								<li>Token Transfers</li>
+								<li>Code</li>
+								<li class="on">Read Contract</li>
+								<li>Events</li>
+							</ul>
+						</div>
+						<div class="contents">
+							<div class="code-box read">
+								<div class="title-group">
+									<span class="title">Read contract information</span>
+								</div>
+								<div class="scroll">
+									<ul class="list">
+										<li>1. Name > <span>XXXXXX</span><em>String</em></li>
+										<li>2. TotalSupply > <span>XXXXXXXXXXXXXXX</span><em>Unit256</em></li>
+										<li>3. Decimals > <span>XXXXXXXXXXXXXXX</span><em>Unit256</em></li>
+										<li>3. Decimals > <input type="text" class="txt-type over" placeholder="_owner (address)" value=""><button class="btn-type-query">Query</button></li>
+										<li class="result">
+											<p>┗<em>Unit256</em></p>
+											<div>
+												<p>[ balanceOf method Response ]</p>
+												<p>>><em>Unit256</em>:  BigNumber Error: new BigNumber() not a number: AAA</p>
+
+											</div>
+										</li>
+										<li>3. Decimals > <span>XXXXXXXXXXXXXXX</span><em>Unit256</em></li>
+										<li>3. Allowance > <input type="text" class="txt-type over" placeholder="_owner (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><button class="btn-type-query">Query</button></li>
+										<li class="result"><p>┗<em>Unit256</em></p></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //content -->
+
+		</div>
+		<div class="blank"></div>
+
+	</div>
+
+	<!-- footer -->
+	<div class="footer-wrap">
+		<div class="screen0">
+			<div class="wrap-holder">
+				<p>©2018 ICON Foundation</p>
+				<div class="sns">
+					<ul>
+						<li class="icon"><a href=""><span class="img"></span></a></li>
+						<li class="medium"><a href=""><span class="img"></span></a></li>
+						<li class="brunch"><a href=""><span class="img"></span></a></li>
+						<li class="twitter"><a href=""><span class="img"></span></a></li>
+						<li class="facebook"><a href=""><span class="img"></span></a></li>
+						<li class="github"><a href=""><span class="img"></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //footer -->
+	<!-- popup -->
+	<div class="popup-wrap qr">
+		<div class="dimmed"></div>
+		<div class="popup">
+			<span class="close"><em class="img"></em></span>
+			<h1 class="title">Address</h1>
+			<div class="qr">
+				<img src="../image/qr.png">
+			</div>
+			<p>3H3svYGqXxAAHSAJy2Eu1TGagC3H3svYGqXxAAHSbU2kz5KR</p>
+
+		</div>
+	</div>
+	<!-- //popup -->
+	<!-- popup -->
+	<div class="popup-wrap detail">
+		<div class="dimmed"></div>
+		<div class="popup contract">
+			<span class="close"><em class="img"></em></span>
+			<h1 class="title">Contract detail</h1>
+			<div class="scroll">
+				<p class="label">Stauts</p>
+				<p class="txt">Accepted</p>
+				<p class="label">TxHash</p>
+				<p class="txt hash">hx4ab2bfc2bf70c4e386cd288b49dfd7536d554f79</p>
+				<p class="label">검증 Tx hash</p>
+				<p class="txt hash">hx4ab2bfc2bf70c4e386cd288b49dfd7536d554f79</p>
+				<p class="label">검증인</p>
+				<p class="txt">aaa</p>
+				<p class="label">제출인</p>
+				<p class="txt">bbb</p>
+				<p class="label">패키지 Checksum</p>
+				<p class="txt">hx4ab2bfc2bf70c4e386cd288b49dfd7536d554f79</p>
+				<p class="label">Comment</p>
+				<p class="txt">hx4ab2bfc2<br>bf7<br>0c4<br>e386c<br>d28<br>8b49dfd<br>7536d554f79
+
+				</p>
+			</div>
+
+		</div>
+	</div>
+	<!-- //popup -->
+
+</body>
+</html>

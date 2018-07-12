@@ -10,6 +10,7 @@
     "history": "^4.7.2",
     "moment": "^2.20.1",
     "path": "^0.12.7",
+    "qrcode": "^1.2.0",
     "query-string": "^5.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

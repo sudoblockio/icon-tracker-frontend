@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { Component } from 'react';
 
 class Pagination extends Component {
@@ -74,7 +73,7 @@ class Pagination extends Component {
         </li>
         <li className="pageNum">
           <p>Page</p>
-          <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-page" placeholder="" value={pageNum} />
+          <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-page over" placeholder="" value={pageNum} />
           <p> / {maxPageNum}</p>
         </li>
         <li onClick={() => this.getData('next')}>

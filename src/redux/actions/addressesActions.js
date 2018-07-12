@@ -7,9 +7,37 @@ export function getAddresses(payload) {
   };
 }
 
-export function getAddressDetail(payload) {
+// export function getAddressDetail(payload) {
+//   return {
+//     type: actionTypes.getAddressDetail,
+//     payload
+//   };
+// }
+
+export function setAddress(address) {
   return {
-    type: actionTypes.getAddressDetail,
+    type: actionTypes.setAddress,
+    address
+  }
+}
+
+export function addressInfo(payload) {
+  return {
+    type: actionTypes.addressInfo,
     payload
-  };
+  }
+}
+
+export function addressTxList(payload) {
+  return {
+    type: actionTypes.addressTxList,
+    payload
+  }
+}
+
+export function addressTokenTxList(payload) {
+  return {
+    type: actionTypes.addressTokenTxList,
+    payload
+  }
 }

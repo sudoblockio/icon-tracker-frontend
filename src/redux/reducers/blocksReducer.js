@@ -4,6 +4,7 @@ import { calcMaxPageNum } from '../../utils/utils';
 const blocksInitState = {
   loading: true,
   data: [],
+  totalData: 0,
   pageNum: 1,
   maxPageNum: 1
 };
@@ -14,6 +15,7 @@ const blockInitState = {
     blockDetail: {},
     blockTx: []
   },
+  totalData: 0,
   pageNum: 1,
   maxPageNum: 1,
   error: ''
@@ -44,6 +46,7 @@ export function blocksReducer(state = initialState, action) {
           ...state.blocks,
           loading: false,
           maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
+          totalData: action.payload.totalData,
           data : action.payload.data
         }
       }

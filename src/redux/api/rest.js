@@ -2,10 +2,10 @@ import axios from 'axios'
 
 const productionURL = 'https://tracker.icon.foundation'
 const developmentURL = 'https://trackerdev.icon.foundation'
-const devLocalUrl = 'https://trackerlocaldev.icon.foundation'
+const localDevUrl = 'https://trackerlocaldev.icon.foundation'
 const axiosApi = axios.create({
   // baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
-  baseURL: devLocalUrl,
+  baseURL: localDevUrl,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -52,10 +52,13 @@ export function getAddressesApi(payload) {
 export function getAddressDetailApi(payload) {
   const addressId = payload.addressId;
   const pageId = payload.pageId || 1;
+  const count = payload.count || 10;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + addressId + '&page=' + pageId)
+    // axiosApi.get('/v0/wallet/walletDetailTxList?address=' + addressId + '&page=' + pageId + '&count=' + count)
+    axiosApi.get('/v3/address/info?address=' + addressId + '&page=' + pageId)
       .then(result => {
+        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -69,6 +72,7 @@ export function getBlocksApi(payload) {
   return new Promise((resolve, reject) => {
     axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
       .then(result => {
+        console.log(result)
         resolve(result.data)
       })
       .catch(error => {

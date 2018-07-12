@@ -9,7 +9,8 @@ function mapStateToProps(state) {
     data: state.transactions.transactions.data,
     pageNum: state.transactions.transactions.pageNum,
     maxPageNum: state.transactions.transactions.maxPageNum,
-    url: state.router.location
+    url: state.router.location,
+    totalData: state.transactions.transactions.totalData,
   };
 }
 

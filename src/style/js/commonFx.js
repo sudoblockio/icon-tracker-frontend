@@ -17,10 +17,42 @@ var createMenu = function(){
 		$(this).find(".sub-menu").slideUp(300, 'swing');
 		$(this).find("span").removeClass("on");
 	});
+
+	$('.sort-holder ').mouseenter(function(){
+		$(".sort-holder ul").slideDown(300, 'swing');
+	}).mouseleave(function(){
+		$(".sort-holder ul").slideUp(300, 'swing');
+	});
+
+	$(".table-typeB td .balance").click(function(){
+		$(".combo-group").css({"display":"block"});
+		$(this).addClass("on");
+	});
+
+	$(".qrcode").click(function(){
+		$(".popup-wrap.qr").fadeIn(350);
+	});
+
+	$(".status").click(function(){
+		$(".popup-wrap.detail").css({"display":"block"});
+	});
+
+	$(".close").click(function(){
+		$(".popup-wrap").fadeOut(350);
+	});
 }
 
 $(document).ready(function(){
 	var init = function(){}
+
+	$(document).mouseup(function(e){
+		var container = $(".combo-group");
+		if(container.has(e.target).length===0){
+			container.css("display","none");
+			$(".table-typeB td .balance").removeClass("on");
+		}
+	});
+
 	ctreteContract();
 	createMenu();
 

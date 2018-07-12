@@ -3,8 +3,8 @@ import { numberWithCommas } from '../../utils/utils'
 
 class InfoSummary extends Component {
   render() {
-    const { tmainInfo } = this.props.info
-    const { crepCount, icxSupply, marketCap, transactionCount } = tmainInfo
+    const { tmainInfo } = this.props.info || {}
+    const { crepCount, icxSupply, marketCap, transactionCount } = tmainInfo || {}
     const marketCapStr = numberWithCommas(Math.floor(marketCap))
     return (
       <li className="left">

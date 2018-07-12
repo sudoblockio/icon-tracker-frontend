@@ -39,7 +39,7 @@ class SearchBox extends Component {
     const { value } = this.state;
     return (
       <div className="search-group">
-        <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-normal" placeholder="Enter Address, Tx hash, Block Height" value={value}/>
+        <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} type="text" className="txt-type-normal" placeholder="Address, TxHash, BLOCK height" value={value}/>
         <span>
           {
             loading ? <LoadingComponent />

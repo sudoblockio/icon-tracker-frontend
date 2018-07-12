@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoadingComponent, Pagination, BlockLink } from '../../components/';
+import { LoadingComponent, Pagination, BlockLink, SortHolder } from '../../components/';
 import { dateToUTC, convertNumberToText, numberWithCommas, getUTCString, startsWith } from '../../utils/utils';
 
 class BlocksPage extends Component {
@@ -26,49 +26,56 @@ class BlocksPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum, maxPageNum } = this.props;
+    const { loading, data, pageNum, maxPageNum, totalData } = this.props;
     const utcLabel = `(${getUTCString()})`
     return (
       <div className="content-wrap">
         <div className="screen0">
           <div className="wrap-holder">
-            <p className="title">Recent Blocks</p>
-            <div className="contents">
-              {
-                loading ? (
-                  <div style={{ height: '600px' }}>
-                    <LoadingComponent />
-                  </div>
-                ) : (
-                    <table className="table-typeE">
-                      <thead>
-                        <tr>
-                          <th>Block Height</th>
-                          <th>Time Stamp<em>{utcLabel}</em></th>
-                          <th>No of Txns</th>
-                          <th>Block Hash</th>
-                          <th>Amount</th>
-                          <th>Fee</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          data.map((row) => (
-                            <TableRow
-                              key={row.height}
-                              data={row} />
-                          ))
-                        }
-                      </tbody>
-                    </table>
-                  )
-              }
+            {!loading && 
+              <p className="title">
+                Blocks
+                <span className="right"><em>{totalData}</em> Total blocks</span>
+              </p>
+            }
+            {
+              loading ?
+              <div style={{height: 'calc(100vh - 120px - 144px)'}}>
+                <LoadingComponent />
+              </div>
+              :
+              <div className="contents">
+                <table className="table-typeE">
+                  <thead>
+                    <tr>
+                      <th>Block Height</th>
+                      <th>Time Stamp<em>{utcLabel}</em></th>
+                      <th>No of Txns</th>
+                      <th>Block Hash</th>
+                      <th>Amount</th>
+                      <th>TxFee</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {
+                    data.map((row) => (
+                      <TableRow
+                        key={row.height}
+                        data={row} />
+                    ))
+                  }
+                  </tbody>
+                </table>
 
-              <Pagination
-                pageNum={pageNum}
-                maxPageNum={maxPageNum}
-                getData={this.getBlocksData} />
-            </div>
+                <SortHolder />              
+
+                <Pagination
+                  pageNum={pageNum}
+                  maxPageNum={maxPageNum}
+                  getData={this.getBlocksData} 
+                />
+              </div>
+            }
           </div>
         </div>
       </div>
@@ -87,10 +94,10 @@ class TableRow extends Component {
     const { data } = this.props;
     return (
       <tr>
-        <td><BlockLink to={data.height} label={numberWithCommas(data.height)}/></td>
-        <td>{dateToUTC(data.createDate)}</td>
+        <td><BlockLink to={data.height} label={numberWithCommas(data.height)} /></td>
+        <td className="break">{dateToUTC(data.createDate)}</td>
         <td>{numberWithCommas(data.txCount)}</td>
-        <td className="break"><BlockLink to={data.height} label={data.hash}/></td>
+        <td className="break"><BlockLink to={data.height} label={data.hash} /></td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
         <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
       </tr>

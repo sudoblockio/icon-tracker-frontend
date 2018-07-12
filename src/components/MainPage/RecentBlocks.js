@@ -6,10 +6,11 @@ import icon_02 from '../../style/image/icon_02.png'
 
 class RecentBlocks extends Component {
   render() {
-    const { loading, tmainBlock } = this.props.info
+    const { loading, tmainBlock } = this.props.info 
+    const list = tmainBlock || []
     return (
       <li className="left">
-        <p className="title">Recent Block<Link to='/blocks'><span>View all<em className="img"></em></span></Link></p>
+        <p className="title">Blocks<Link to='/blocks'><span>View all<em className="img"></em></span></Link></p>
         <div className="list-group">
         {
           loading ?
@@ -18,18 +19,18 @@ class RecentBlocks extends Component {
           </div>
           :
           <ul className="list">
-            {tmainBlock.map(block => {
+            {list.map((block, index) => {
               const { blockHeight, createDate, hash, txCount } = block
               return (
                 <li key={blockHeight}>
                   <p className="icon">
                     <img src={icon_02} alt="block-img"/>
-                    <span>Block</span>
+                    <span>BLOCK</span>
                     <span><BlockLink to={blockHeight} label={numberWithCommas(blockHeight)}/></span>
                   </p>
                   <p className="a">Hash<em><BlockLink to={blockHeight} label={hash}/></em></p>
                   <p className="b">Transactions<em>{numberWithCommas(txCount)}</em></p>
-                  <p className="c">Time stamp<em>{dateToUTC(createDate, true)}</em></p>
+                  <p className="c">Time Stamp<em>{dateToUTC(createDate, true)}</em></p>
                 </li>
               )
             })}
