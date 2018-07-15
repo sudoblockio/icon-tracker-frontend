@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { BlockLink } from '../../components/';
+import { BlockLink, LoadingComponent } from '../../components/';
 import { numberWithCommas, convertNumberToText, dateToUTC } from '../../utils/utils'
 
 class BlockInformation extends Component {
@@ -8,83 +8,86 @@ class BlockInformation extends Component {
   handlePrevBlock = () => {
     const { blockDetail } = this.props;
     if (blockDetail.height === 0) return;
+    
     const prevHeight = blockDetail.height - 1;
-    this.props.history.push('/block/'+prevHeight);
+    this.props.history.push('/block/' + prevHeight);
   }
 
   handleNextBlock = () => {
     const { blockDetail } = this.props;
     if (blockDetail.lastBlock !== "-") return;
+    
     const nextHeight = blockDetail.height + 1;
-    this.props.history.push('/block/'+nextHeight);
+    this.props.history.push('/block/' + nextHeight);
   }
 
   render() {
     const { blockDetail } = this.props;
+    const { loading, height, createDate, crep, txCount, hash, prevHash, blockSize, amount, fee, message } = blockDetail
+
     return (
       <div className="wrap-holder">
-        <p className="title">Block Detail</p>
-        <div className="contents">
-          <table className="table-typeB detail">
-            <thead>
-              <tr>
-                <th>Block Height</th>
-                <th>value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Block Height</td>
-                <td><p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p><em className="value">{numberWithCommas(blockDetail.height)}</em><p onClick={this.handleNextBlock} className="next"><em className="img"></em></p></td>
-              </tr>
-              <tr>
-                <td>Time</td>
+        {!loading && <p className="title">Block</p>}
+        {
+          loading ?
+          <div style={{height: '366px'}}>
+            <LoadingComponent />
+          </div>
+          :
+          <div className="contents">
+            <table className="table-typeB detail">
+              <tbody>
+                <tr>
+                  <td>Block Height</td>
+                  <td>
+                    <p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p>
+                    <em className="value">{numberWithCommas(height)}</em>
+                    <p onClick={this.handleNextBlock} className="next"><em className="img"></em></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Time</td>
+                  <td>{height === 0 ? '-' :dateToUTC(createDate, true)}</td>
+                </tr>
+                {/*<tr>
+                  <td>C-rep</td>
+                  <td><span>{crep}</span></td>
+                </tr>*/}
+                <tr>
+                  <td>Transactions</td>
+                  <td><span>{numberWithCommas(txCount)} Transactions</span> in this block</td>
+                </tr>
+                <tr>
+                  <td>Hash</td>
+                  <td>{hash}</td>
+                </tr>
+                <tr>
+                  <td>Prev Hash</td>
+                  <td>{prevHash ? (<BlockLink to={height - 1} label={prevHash}/>) : "-"}</td>
+                </tr>
+                <tr>
+                  <td>Block size</td>
+                  <td>{numberWithCommas(blockSize)} bytes</td>
+                </tr>
+                <tr>
+                  <td>Amount</td>
+                  <td>{convertNumberToText(amount, 'icx')} ICX</td>
+                </tr>
+                <tr>
+                  <td>TxFee</td>
+                  <td>{convertNumberToText(fee, 'icx')} ICX</td>
+                </tr>
                 {
-                  blockDetail.height === 0
-                    ? (<td></td>)
-                    : (<td>{dateToUTC(blockDetail.createDate, true)}</td>)
+                  height === 0 && 
+                  <tr>
+                    <td>Message</td>
+                    <td>{message}</td>
+                  </tr>
                 }
-              </tr>
-              {/*<tr>
-                <td>C-rep</td>
-                <td><span>{blockDetail.crep}</span></td>
-              </tr>*/}
-              <tr>
-                <td>No of Txns</td>
-                <td>{numberWithCommas(blockDetail.txCount)}</td>
-              </tr>
-              <tr>
-                <td>Hash</td>
-                <td>{blockDetail.hash}</td>
-              </tr>
-              <tr>
-                <td>Prev Hash</td>
-                <td>{ blockDetail.prevHash ? (<BlockLink to={blockDetail.height - 1} label={blockDetail.prevHash} />) : "-"}</td>
-              </tr>
-              <tr>
-                <td>Block size</td>
-                <td>{numberWithCommas(blockDetail.blockSize)} bytes</td>
-              </tr>
-              <tr>
-                <td>Amount</td>
-                <td>{convertNumberToText(blockDetail.amount, 'icx')} ICX</td>
-              </tr>
-              <tr>
-                <td>Fee</td>
-                <td>{convertNumberToText(blockDetail.fee, 'icx')} ICX</td>
-              </tr>
-              {
-                blockDetail.height === 0
-                  && (
-                      <tr>
-                        <td>Message</td>
-                        <td>{blockDetail.message}</td>
-                      </tr>
-                    )
-              }
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        } 
       </div>
     );
   }

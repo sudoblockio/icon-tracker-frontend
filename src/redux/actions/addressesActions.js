@@ -7,20 +7,6 @@ export function getAddresses(payload) {
   };
 }
 
-// export function getAddressDetail(payload) {
-//   return {
-//     type: actionTypes.getAddressDetail,
-//     payload
-//   };
-// }
-
-export function setAddress(address) {
-  return {
-    type: actionTypes.setAddress,
-    address
-  }
-}
-
 export function addressInfo(payload) {
   return {
     type: actionTypes.addressInfo,

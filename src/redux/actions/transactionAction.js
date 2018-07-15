@@ -1,10 +1,10 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function getTransactions(payload){
+export function transactionRecentTx(payload) {
   return {
-    type: actionTypes.getTransactions,
+    type: actionTypes.transactionRecentTx,
     payload
-  };
+  }
 }
 
 export function getTransaction(payload){

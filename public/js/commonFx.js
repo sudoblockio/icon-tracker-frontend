@@ -53,10 +53,8 @@ $(document).ready(function(){
 		}
 	});
 
-	setTimeout(()=>{
-		ctreteContract();
-		createMenu();	
-	}, 100)
+	ctreteContract();
+	createMenu();	
 
 
 });

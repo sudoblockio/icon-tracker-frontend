@@ -34,7 +34,10 @@ import TransactionLink from './Common/TransactionLink'
 import SortHolder from './Common/SortHolder'
 import CopyButton from './Common/CopyButton'
 
-import AddressTxList from './AddressesPage/AddressTxList'
+import AddressTotalTxList from './AddressesPage/AddressTotalTxList'
+import AddressTableRow from './Common/AddressTableRow'
+
+import TokenListPage from './TokensPage/TokenListPage'
 
 export {
   Header,
@@ -73,5 +76,8 @@ export {
   SortHolder,
   CopyButton,
 
-  AddressTxList
+  AddressTotalTxList,
+  AddressTableRow,
+
+  TokenListPage
 }

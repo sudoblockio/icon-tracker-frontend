@@ -10,14 +10,22 @@ class BlockDetailPage extends Component {
   }
 
   componentWillMount() {
-    this.props.resetReducer();
-    this.getBlock(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
+    this.allBlockInfo(this.props.url.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/block/')) {
-      this.getBlock(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
-    }
+    const current = this.props.url.pathname
+		const next = nextProps.url.pathname
+		if (current !== next && startsWith(next, '/block')) {
+			this.allBlockInfo(next)
+		}
+  }
+
+  allBlockInfo = (pathname) => {
+    const height = pathname.split("/")[2]
+    console.log(height)
+    this.props.blockInfo({ height })
+    this.props.blockTxList({ height, page: 1, count: 10 })
   }
 
   getBlock = (blockId, pageId = 1) => {
@@ -29,10 +37,9 @@ class BlockDetailPage extends Component {
   }
 
   render() {
-    const { loading, data, pageNum, maxPageNum, error } = this.props;
-    const content = (data) => {
-      const { blockDetail, blockTx } = data;
-      // 데이터가 없을 경우
+    const { blockDetail, blockTx } = this.props;
+    const { loading, error } = blockDetail
+    const content = () => {
       if (error !== "" && !loading) {
         return (
           <NotFound error={error}/>
@@ -42,21 +49,20 @@ class BlockDetailPage extends Component {
           <div className="content-wrap">
     				<div className="screen0">
     					<BlockInformation
-                blockDetail={blockDetail} />
+                blockDetail={blockDetail}
+              />
     				</div>
     				<div className="screen1">
     					<BlockTransactions
-                height={blockDetail.height}
-                loading={loading}
+                blockDetail={blockDetail}
                 blockTx={blockTx}
-                pageNum={pageNum}
-                maxPageNum={maxPageNum} />
+              />
     				</div>
     			</div>
         )
       }
     }
-    return (content(data));
+    return content();
   }
 }
 

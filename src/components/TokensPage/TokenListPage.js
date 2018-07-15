@@ -1,0 +1,92 @@
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { convertNumberToText } from '../../utils/utils'
+
+class TokenListPage extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			value: ''
+		}
+	}
+
+	componentWillMount() {
+		this.props.tokenGetTokenList({})
+	}
+	
+	handleChange = (e) => {
+		const { value } = e.target
+		this.setState({ value })
+	}
+
+	render() {
+		const { value } = this.state
+		const { tokenList } = this.props
+		const { data, totalData } = tokenList
+		const list = data.filter(token => token.tokenName.indexOf(value) !== -1 || token.symbol.indexOf(value) !== -1)
+		return (
+			<div className="content-wrap">
+				<div className="screen0">
+					<div className="wrap-holder">
+						<p className="title">Tokens</p>
+						<div className="search-holder">
+							<div className="search-group">
+								<input type="text" className="txt-type-search" placeholder="Search for any ICX Token Name/Address"
+									value={value}
+									onChange={this.handleChange}
+								/>
+								<span><em className="img"></em></span>
+							</div>
+						</div>
+						<div className="contents tokens">
+							<p className="txt cont">
+								<span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
+								<span>A total of<em>{totalData} ICX Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
+							</p>
+							<table className="table-typeI">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Token</th>
+										<th>Price<span className="img"></span></th>
+										<th>% Change</th>
+										<th>Volume (24h)</th>
+										<th>MarketCap</th>
+									</tr>
+								</thead>
+								<tbody>
+								{
+									list.map((token, index) => {
+										const { tokenName, symbol, price, changeVal, volume, marketCap, overview } = token
+										const { usd, icx, btc, eth } = price || {}
+										const _changeVal = changeVal || 0
+										const className = _changeVal > 0 ? 'red' : _changeVal < 0 ? 'blue' : ''
+										const sign = _changeVal > 0 ? '+' : _changeVal < 0 ? '-' : ''
+										return (
+											<tr key={index}>
+												<td>{index + 1}</td>
+												<td>{tokenName} ({symbol})</td>
+												<td>
+													<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
+													<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>
+													<p>{convertNumberToText(btc, 'icx')  || '-'}<em>BTC</em></p>
+													<p>{convertNumberToText(eth, 'icx')  || '-'}<em>ETH</em></p>
+												</td>
+												<td className={className}><span>{sign}{_changeVal || '-'}</span> %</td>
+												<td>{convertNumberToText(volume, 'usd') || '-'}<em>USD</em></td>
+												<td>{convertNumberToText(marketCap, 'usd') || '-'}<em>USD</em></td>
+											</tr>
+										)
+									})
+								}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+export default withRouter(TokenListPage);

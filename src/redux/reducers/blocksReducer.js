@@ -23,7 +23,20 @@ const blockInitState = {
 
 const initialState = {
   blocks: blocksInitState,
-  block: blockInitState
+  block: blockInitState,
+
+  blockDetail: {
+    loading: false,
+    error: '',
+  },
+  blockTx: {
+    loading: false,
+    page: 1,
+    count: 20,
+    data: [],
+    totalData: 0,
+    error: ''
+  }
 }
 
 export function blocksReducer(state = initialState, action) {
@@ -62,39 +75,71 @@ export function blocksReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.getBlock: {
+    case actionTypes.blockInfo: {
       return {
         ...state,
-        block : {
-          ...state.block,
+        blockDetail: {
+          ...state.blockDetail,
           loading: true,
-          pageNum: action.payload.pageId || 1
+          error: ''
         }
       }
     }
 
-    case actionTypes.getBlockFulfilled: {
+    case actionTypes.blockInfoFulfilled: {
       return {
         ...state,
-        block : {
-          ...state.block,
+        blockDetail: {
+          ...action.payload.data.blockDetail,
           loading: false,
-          data : {
-            ...state.block.data,
-            blockDetail: action.payload.blockDetail,
-            blockTx: action.payload.txInBlock
-          },
-          error: '',
-          maxPageNum: calcMaxPageNum(action.payload.blockDetail.txCount, 10)
+          error: ''
         }
       }
     }
 
-    case actionTypes.getBlockRejected: {
+    case actionTypes.blockInfoRejected: {
       return {
         ...state,
-        block : {
-          ...state.block,
+        blockDetail: {
+          ...state.blockDetail,
+          loading: false,
+          error: action.error
+        }
+      }
+    }
+
+    case actionTypes.blockTxList: {
+      return {
+        ...state,
+        blockTx: {
+          ...state.blockTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || 20,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.blockTxListFulfilled: {
+      console.log(action.payload)
+      return {
+        ...state,
+        blockTx: {
+          ...state.blockTx,
+          loading: false,
+          data: action.payload.data.txInBlock || [],
+          totalData: action.payload.listSize || 0,
+          error: ''  
+        }
+      }
+    }
+
+    case actionTypes.blockTxListRejected: {
+      return {
+        ...state,
+        blockTx: {
+          ...state.blockTx,
           loading: false,
           error: action.error
         }

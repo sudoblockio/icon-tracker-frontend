@@ -19,7 +19,7 @@ export function convertNumberToText(num, unit, round) {
   //   return '0'
   // }
   // return numberWithCommas(Number(num).toFixed(roundNum).toString())
-  if (!num || num === "-") return '0'
+  if (!num || num === "-") return 0
   if (round) {
     return numberWithCommas(Number(num).toFixed(round))
   }
@@ -48,10 +48,15 @@ export function dateToUTC(date, showUTC, showAgo) {
     result += ` (${getUTCString()})`
   }
   if (showAgo) {
-    result += ` (${getUTCString()}, ${calcTime(date)})`
+    result += `(${getUTCString()}, ${calcTime(date)})`
   }
   return result
 }
+
+export function utcDateInfo(date) {
+  return `(${getUTCString()}, ${calcTime(date)})`
+}
+
 
 export function calcMaxPageNum(total, rowNum) {
   if(!Number(total)) return 1;
@@ -88,4 +93,20 @@ export function isValidNodeType(nodeType) {
 export function startsWith(text, search) {
   if (typeof text !== 'string') return false
   return text.indexOf(search) === 0
+}
+
+export function isContractAddress(address) {
+  return startsWith(address, 'cx')
+}
+
+export function makeUrl(url, payload) {
+  if (!payload) {
+    return url
+  }
+
+  let result = url
+  Object.keys(payload).forEach((key, index) => {
+    result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+  })
+  return result
 }

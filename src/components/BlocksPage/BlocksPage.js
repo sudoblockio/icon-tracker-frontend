@@ -8,11 +8,17 @@ class BlocksPage extends Component {
     this.props.resetReducer();
 
     const { pathname } = this.props.url;
-    if (pathname === '/blocks') this.props.getBlocks()
+    if (pathname === '/blocks') {
+      this.props.getBlocks()
+    }
 
     const page = pathname.split("/")[2]
-    if (!isNaN(page)) this.props.getBlocks(page);
-    else this.props.history.push('/blocks');
+    if (!isNaN(page)) {
+      this.props.getBlocks(page);
+    }
+    else {
+      this.props.history.push('/blocks');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -95,9 +101,9 @@ class TableRow extends Component {
     return (
       <tr>
         <td><BlockLink to={data.height} label={numberWithCommas(data.height)} /></td>
-        <td className="break">{dateToUTC(data.createDate)}</td>
+        <td>{dateToUTC(data.createDate)}</td>
         <td>{numberWithCommas(data.txCount)}</td>
-        <td className="break"><BlockLink to={data.height} label={data.hash} /></td>
+        <td><BlockLink to={data.height} label={data.hash} /></td>
         <td><span>{convertNumberToText(data.amount, 'icx')}</span><em>ICX</em></td>
         <td><span>{convertNumberToText(data.fee, 'icx')}</span><em>ICX</em></td>
       </tr>

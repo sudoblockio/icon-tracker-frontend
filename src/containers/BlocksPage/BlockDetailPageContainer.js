@@ -1,23 +1,26 @@
 import { connect } from 'react-redux';
 import { BlockDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { getBlock, resetBlockReducer } from '../../redux/actions/blocksActions';
+import { 
+  blockInfo,
+  blockTxList,
+  resetBlockReducer 
+} from '../../redux/actions/blocksActions';
 
 function mapStateToProps(state) {
   return {
-    loading: state.blocks.block.loading,
-    data: state.blocks.block.data,
-    pageNum: state.blocks.block.pageNum,
-    maxPageNum: state.blocks.block.maxPageNum,
     url: state.router.location,
-    error: state.blocks.block.error
+    blockDetail: state.blocks.blockDetail,
+    blockTx: state.blocks.blockTx,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBlock: (payload) => dispatch(getBlock(payload)),
-    resetReducer: () => dispatch(resetBlockReducer())
+    blockInfo: (payload) => dispatch(blockInfo(payload)),
+    blockTxList: (payload) => dispatch(blockTxList(payload)),
+    resetReducer: () => dispatch(resetBlockReducer()),
+
   };
 }
 

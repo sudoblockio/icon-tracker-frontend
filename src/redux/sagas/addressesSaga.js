@@ -2,7 +2,6 @@ import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
   getAddressesApi as GET_ADDRESSES_API,
-  // getAddressDetailApi as GET_ADDRESS_DETAIL_API
 } from '../api/rest';
 
 import {
@@ -25,28 +24,9 @@ function* getAddressesFunc(action) {
   }
 }
 
-// export function* getAddressDetailFunc(action) {
-//   try {
-//     const payload = yield call(GET_ADDRESS_DETAIL_API, action.payload);
-//     if (payload.result === '200') {
-//       yield put({type: AT.getAddressDetailFulfilled, payload: payload});
-//     }
-//     else {
-//       throw new Error();
-//     }
-//   } catch (e) {
-//     yield put({type: AT.getAddressDetailRejected, error: action.payload.addressId});
-//   }
-// }
-
 function* watchGetAddresses() {
   yield takeLatest(AT.getAddresses, getAddressesFunc)
 }
-
-// function* watchGetAddressDetail() {
-//   yield takeLatest(AT.getAddressDetail, getAddressDetailFunc)
-// }
-
 
 export function* addressInfoFunc(action) {
   try {
@@ -107,7 +87,6 @@ function* watchAddressTokenTxList() {
 
 export default function* addressesSaga() {
   yield fork(watchGetAddresses);
-  // yield fork(watchGetAddressDetail);
   yield fork(watchAddressInfo);
   yield fork(watchAddressTxList);
   yield fork(watchAddressTokenTxList);

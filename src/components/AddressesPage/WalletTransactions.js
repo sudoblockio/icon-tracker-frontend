@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { numberWithCommas, convertNumberToText, dateToUTC, getUTCString, startsWith } from '../../utils/utils'
-import { Pagination, BlockLink, TransactionLink, WalletLink } from '../../components'
+import { getUTCString } from '../../utils/utils'
+import { AddressTableRow } from '../../components'
+import { LoadingComponent } from '../../components/';
 
 const Tabs = ['Transactions', 'Token Transfers']
 
 class WalletTransactions extends Component {
 
-  // getWalletData = (pageId) => {
-  //   const { walletAddress } = this.props
-  //   this.props.history.push('/address/' + walletAddress + '/' + pageId);
-  // }
-
   constructor(props) {
     super(props)
     this.state = {
-      on: 0
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const currentAddress = this.props.walletDetail.address
-    const nextAddress = nextProps.walletDetail.address
-    if (currentAddress !== nextAddress) {
-      this.props.addressTxList({ address: nextAddress, page: 1, count: 10 })
+      on: 0,
+      txType: 'addresstx'
     }
   }
 
   setTab = (index) => {
     this.setState({on: index}, () => {
-      const { address } = this.props.walletDetail.address
+      const { address } = this.props.walletDetail
       switch (index) {
         case 0:
+          this.setState({txType: 'addresstx'})
           this.props.addressTxList({ address, page: 1, count: 10 })
           break
         
         case 1:
+          this.setState({txType: 'addresstokentx'})
           this.props.addressTokenTxList({ address, page: 1, count: 10 })
           break
         
@@ -44,38 +35,58 @@ class WalletTransactions extends Component {
     })
   }
 
+  goAllTx = () => {
+    const { txType } = this.state
+    const { walletDetail } = this.props
+    const { address } = walletDetail
+		this.props.history.push(`/${txType}/${address}`);
+  }
+
   render() {
+    const { txType } = this.state
     const { walletDetail, walletTx, tokenTx } = this.props
-    const { address, txCount, tokenTxCount } = walletDetail
+    const { address } = walletDetail
     const utcLabel = `(${getUTCString()})`
-    const isTx = this.state.on === 0
-    const count = isTx ? txCount : tokenTxCount
-    const list = isTx ? walletTx.data : tokenTx.data
-    const noTx = list.length === 0
+		const isTokenTx = txType === 'addresstokentx'
+    const tx = isTokenTx ? tokenTx : walletTx
+    const { loading, data, totalData } = tx
+    const noTx = data.length === 0
 
     return (
       <div className="wrap-holder">
-        <div className="tab-holder">
-          <ul>
-            {Tabs.map((tab, index) => (
-              <li key={index} className={index === this.state.on ? 'on' : ''} onClick={()=>{this.setState({on: index})}}>{tab}</li>
-            ))}
-          </ul>
-        </div>
         {
-          noTx ?
+          !loading && 
+          <div className="tab-holder">
+            <ul>
+              {Tabs.map((tab, index) => (
+                <li key={index} className={index === this.state.on ? 'on' : ''} onClick={()=>{this.setTab(index)}}>{tab}</li>
+              ))}
+            </ul>
+          </div>
+        }
+        {
+          loading ?
+          <div style={{height: '513px'}}>
+            <LoadingComponent />
+          </div>
+          :
           <div className="contents">
+          {
+            noTx && 
             <table className="table-type">
               <tbody>
                 <tr>
                   <td colSpan="7" className="notrans">No Transaction</td>
                 </tr>
               </tbody>
-            </table>
-          </div>
-          :
-          <div className="contents">
-            <p className="txt"><span>Latest<em>{count < 10 ? count : 10}</em> ICX Txns from a total of<em>{count} {Tabs[this.state.on]}</em></span></p>
+            </table>            
+          }
+          { 
+            !noTx && 
+            <p className="txt"><span>Latest<em>{totalData < 10 ? totalData : 10}</em> ICX Txns from a total of<em onClick={this.goAllTx}>{totalData} {Tabs[this.state.on]}</em></span></p> 
+          }
+          {
+            !noTx && 
             <table className="table-typeC">
               <thead>
                 <tr>
@@ -85,57 +96,23 @@ class WalletTransactions extends Component {
                   <th>From</th>
                   <th className="table-sign"></th>
                   <th>To</th>
-                  <th>{isTx ? 'Amount' : 'Quantity'}</th>
-                  <th>{isTx ? 'Fee' : 'Token'}</th>
+                  <th>{isTokenTx ? 'Quantity' : 'Amount'}</th>
+                  <th>{isTokenTx ? 'Token' : 'TxFee'}</th>
                 </tr>
               </thead>
               <tbody>
-                {list.map(tx => (
-                  <TableRow key={tx.txHash} data={tx} address={address} isTx={isTx} />
+                {data.map(tx => (
+                  <AddressTableRow key={tx.txHash} data={tx} address={address} txType={txType}/>
                 ))}
               </tbody>
             </table>
-          </div>
+          }            
+          </div>          
         }
+        
       </div>
     );
   }
-}
-
-const TableRow = ({data, address}) => {
-  const { txHash, height, createDate, fromAddr, toAddr, amount, fee, state, isTx } = data
-  const isOut = fromAddr === address
-  const isError = state === 0
-  return (
-    <tr>
-      <td className={`on ${!isError ? '' : 'icon error'}`}>{isError && <i className="img"></i>}<span className="ellipsis"><TransactionLink to={txHash}/></span></td>
-      <td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
-      <td className={!createDate ? 'no': 'break'}>{dateToUTC(createDate)}</td>
-      <AddressCell targetAddr={fromAddr} address={address}/>
-      <td className={`table-sign ${isOut ? 'out' : ''}`}><span>{isOut ? 'OUT' : 'IN'}</span></td>
-      <AddressCell targetAddr={toAddr} address={address}/>
-      <td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
-      <td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
-    </tr>
-  )
-}
-
-const AddressCell = ({targetAddr, address}) => {
-  const isContract = startsWith(targetAddr, 'cx')
-  let _targetAddr, className
-  if (!targetAddr) {
-    _targetAddr = '-'
-    className = 'no'
-  }
-  else if (targetAddr === address) {
-    _targetAddr = address
-    className = isContract ? 'icon' : ''
-  }
-  else {
-    _targetAddr = <WalletLink to={targetAddr} />
-    className = `on ${isContract ? 'icon' : ''}`
-  }
-  return <td className={className}>{isContract && <i className="img"></i>}<span className="ellipsis">{_targetAddr}</span></td>
 }
 
 export default withRouter(WalletTransactions);

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
+const CountType = [20, 40, 80, 160]
+
 class SortHolder extends Component {
   render() {
     return (
       <div className="sort-holder">
-        <p>160<span>(Show)</span><em className="img"></em></p>
+        <p>{this.props.count}<span>(Show)</span><em className="img"></em></p>
         <ul>
-          <li><span>20</span></li>
-          <li><span>40</span></li>
-          <li><span>80</span></li>
-          <li><span>160</span></li>
+          {CountType.map((count, index) => (
+            <li key={index} onClick={()=>{this.props.getData(count)}}><span>{count}</span></li>
+          ))}
         </ul>
       </div>
     );

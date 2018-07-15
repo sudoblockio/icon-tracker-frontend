@@ -8,40 +8,31 @@ const initialState = {
     maxPageNum: 1,
     data: []
   },
-  address: {
-    loading: true,
-    error: '',
-    data: {
-      walletDetail: {
-        address: "",
-        balance: 0,
-        icxUsd: 0,
-        txCount: 0,
-        nodeType: ""
-      },
-      walletTx: [],
-      tokenTx: []
-    }
-  },
-
-
-
-
   walletDetail: {
+    loading: false,
     address: "",
     balance: 0,
     icxUsd: 0,
     nodeType: "",
     txCount: 0,
     tokenTxCount: 0,
+    error: '',
   },
   walletTx: {
-    data: [],
-    totalData: 0.
-  },
-  tokenTx: {
+    loading: false,
+    page: 1,
+    count: 20,
     data: [],
     totalData: 0,
+    error: '',
+  },
+  tokenTx: {
+    loading: false,
+    page: 1,
+    count: 20,
+    data: [],
+    totalData: 0,
+    error: '',
   }
 }
 
@@ -80,102 +71,111 @@ export function addressesReducer(state = initialState, action) {
       }
     }
 
-    // case actionTypes.getAddressDetail: {
-    //   return {
-    //     ...state,
-    //     address : {
-    //       ...state.address,
-    //       loading: true,
-    //       pageNum: Number(action.payload.pageId) || 1
-    //     }
-    //   }
-    // }
-
-    // case actionTypes.getAddressDetailFulfilled: {
-    //   return {
-    //     ...state,
-    //     address : {
-    //       ...state.address,
-    //       loading: false,
-    //       maxPageNum: calcMaxPageNum(action.payload.totalData, 10),
-    //       totalData: action.payload.totalData,
-    //       data : action.payload.data,
-    //       error: ''
-    //     },
-    //   }
-    // }
-
-    // case actionTypes.getAddressDetailRejected: {
-    //   return {
-    //     ...state,
-    //     address : {
-    //       ...state.address,
-    //       loading: false,
-    //       error: action.error
-    //     },
-    //   }
-    // }
-
-    case actionTypes.setAddress: {
+    case actionTypes.addressInfo: {
       return {
         ...state,
         walletDetail: {
           ...state.walletDetail,
-          address: action.address
-        }
+          loading: true,
+          error: ''
+        }        
       }
-    }
-
-    case actionTypes.addressInfo: {
-      return state
     }
 
     case actionTypes.addressInfoFulfilled: {
       return {
         ...state,
-        walletDetail: action.payload.data.walletDetail,
+        walletDetail: {
+          ...action.payload.data.walletDetail,
+          loading: false,
+          error: ''
+        },
       } 
     }
 
     case actionTypes.addressInfoRejected: {
-      return state
+      return {
+        ...state,
+        walletDetail: {
+          ...state.walletDetail,
+          loading: false,
+          error: action.error
+        }        
+      }
     }
 
     case actionTypes.addressTxList: {
-      return state
+      return {
+        ...state,
+        walletTx: {
+          ...state.walletTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || 20,
+          error: ''
+        }        
+      }
     }
 
     case actionTypes.addressTxListFulfilled: {
       return {
         ...state,
         walletTx: {
-          data: action.payload.data.walletTx,
-          totalData: action.payload.data.listSize,
+          ...state.walletTx,
+          loading: false,
+          data: action.payload.data.walletTx || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
         }        
       }
     }
 
     case actionTypes.addressTxListRejected: {
-      return state
-
+      return {
+        ...state,
+        walletTx: {
+          ...state.walletTx,
+          loading: false,
+          error: action.error
+        }        
+      }
     }
 
     case actionTypes.addressTokenTxList: {
-      return state
+      return {
+        ...state,
+        tokenTx: {
+          ...state.tokenTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || 20,
+          error: ''
+        }        
+      }
     }
 
     case actionTypes.addressTokenTxListFulfilled: {
       return {
         ...state,
         tokenTx: {
-          data: action.payload.data.tokenTx,
-          totalData: action.payload.data.listSize,
+          ...state.tokenTx,
+          loading: false,
+          data: action.payload.data.tokenTx || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
         }
       }
     }
 
     case actionTypes.addressTokenTxListRejected: {
-      return state
+      return {
+        ...state,
+        tokenTx: {
+          ...state.tokenTx,
+          loading: false,
+          error: action.error
+        }        
+      }
     }
 
     default: {

@@ -2,12 +2,13 @@ import actionTypes from '../actionTypes/actionTypes';
 import { calcMaxPageNum } from '../../utils/utils';
 
 const initialState = {
-  transactions: {
-    loading: true,
+  recentTx: {
+    loading: false,
+    page: 1,
+    count: 20,
     data: [],
     totalData: 0,
-    pageNum: 1,
-    maxPageNum: 1
+    error: '',
   },
   transaction: {
     loading: true,
@@ -18,39 +19,42 @@ const initialState = {
 
 export function transactionsReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.getTransactions: {
+    case actionTypes.transactionRecentTx: {
       return {
         ...state,
-        transactions : {
-          ...state.transactions,
+        recentTx: {
+          ...state.recentTx,
           loading: true,
-          pageNum: Number(action.payload) || 1
-        }
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || 20,
+          error: ''
+        }        
       }
     }
 
-    case actionTypes.getTransactionsFulfilled: {
+    case actionTypes.transactionRecentTxFulfilled: {
       return {
         ...state,
-        transactions : {
-          ...state.transactions,
+        recentTx: {
+          ...state.recentTx,
           loading: false,
-          maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
-          totalData: action.payload.totalData,
-          data : action.payload.data
+          data: action.payload.data || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
         }
       }
     }
 
-    case actionTypes.getTransactionsRejected: {
+    case actionTypes.transactionRecentTxRejected: {
       return {
         ...state,
-        transactions : {
-          ...state.transactions,
-          loading: false
-        }
+        recentTx: {
+          ...state.recentTx,
+          loading: false,
+          error: action.error
+        }        
       }
-    }
+    }    
 
     case actionTypes.getTransaction: {
       return {

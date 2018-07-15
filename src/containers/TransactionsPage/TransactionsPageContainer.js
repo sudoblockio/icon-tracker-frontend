@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { TransactionsPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { getTransactions } from '../../redux/actions/transactionAction';
 
 function mapStateToProps(state) {
   return {
@@ -16,7 +15,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTransactions : (pageId) => dispatch(getTransactions(pageId))
   };
 }
 

@@ -4,7 +4,7 @@ import addressesSaga from './addressesSaga';
 import blocksSaga from './blocksSaga';
 import transactionsSaga from './transactionsSaga';
 import searchSaga from './searchSaga';
-
+import tokensSaga from './tokensSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -12,6 +12,7 @@ export default function* rootSaga() {
     fork(addressesSaga),
     fork(blocksSaga),
     fork(transactionsSaga),
-    fork(searchSaga)
+    fork(searchSaga),
+    fork(tokensSaga)
   ]);
 }

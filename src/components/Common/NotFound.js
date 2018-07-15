@@ -35,7 +35,7 @@ class NotFound extends Component {
         <div className="screen0">
           <div className="wrap-holder">
             <div className="contents">
-              <span><img src={img_sorry}/></span>
+              <span><img alt='Not Found' src={img_sorry}/></span>
               <p className="title">Sorry.</p>
               {error ?
                 <p className="txt">

@@ -7,11 +7,18 @@ export function getBlocks(payload) {
   };
 }
 
-export function getBlock(payload) {
+export function blockInfo(payload) {
   return {
-    type: actionTypes.getBlock,
+    type: actionTypes.blockInfo,
     payload
-  };
+  }
+}
+
+export function blockTxList(payload) {
+  return {
+    type: actionTypes.blockTxList,
+    payload
+  }
 }
 
 export function resetBlocksReducer() {

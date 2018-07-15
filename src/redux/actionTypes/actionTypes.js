@@ -20,9 +20,9 @@ const actionTypes = {
   getBlocksRejected:'GET_BLOCKS_REJECTED',
   resetBlocksReducer: 'RESET_BLOCKS_REDUCER',
 
-  getBlock: 'GET_BLOCK',
-  getBlockFulfilled: 'GET_BLOCK_FULFILLED',
-  getBlockRejected:'GET_BLOCK_REJECTED',
+  // getBlock: 'GET_BLOCK',
+  // getBlockFulfilled: 'GET_BLOCK_FULFILLED',
+  // getBlockRejected:'GET_BLOCK_REJECTED',
 
   getTransactions: 'GET_TRANSACTIONS',
   getTransactionsFulfilled: 'GET_TRANSACTIONS_FULFILLED',
@@ -39,8 +39,6 @@ const actionTypes = {
   searchRejected: 'SEARCH_REJECTED',
   searchErrorReset: 'SEARCH_ERROR_RESET',
 
-  setAddress: 'SET_ADDRESS',
-
   addressInfo: 'ADDRESS_INFO',
   addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
   addressInfoRejected: 'ADDRESS_INFO_REJECTED',
@@ -52,6 +50,23 @@ const actionTypes = {
   addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
   addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
   addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
+
+  blockInfo: 'BLOCK_INFO',
+  blockInfoFulfilled: 'BLOCK_INFO_FULFILLED',
+  blockInfoRejected: 'BLOCK_INFO_REJECTED',
+
+  blockTxList: 'BLOCK_TX_LIST',
+  blockTxListFulfilled: 'BLOCL_TX_LIST_FULFILLED',
+  blockTxListRejected: 'BLOCK_TX_LIST_REJECTED',
+
+  transactionRecentTx: 'TRANSACTION_RECENT_TX',
+  transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
+  transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',
+
+  tokenGetTokenList: 'TOKEN_GET_TOKEN_LIST',
+  tokenGetTokenListFulfilled: 'TOKEN_GET_TOKEN_LIST_FULFILLED',
+  tokenGetTokenListRejected: 'TOKEN_GET_TOKEN_LIST_REJECTED',
+
 }
 
 export default actionTypes

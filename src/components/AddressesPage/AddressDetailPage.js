@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import { WalletInformation, WalletTransactions, NotFound } from '../../components'
+import { NotFound, WalletInformation, WalletTransactions } from '../../components'
 import { startsWith } from '../../utils/utils'
 
 class AddressesDetailPage extends Component {
 
   componentWillMount() {
-    // this.getAddressDetail(this.props.url.pathname.split("/")[2], this.props.url.pathname.split("/")[3] || 1)
-    this.props.setAddress(this.props.url.pathname.split("/")[2])
+    this.allAddressInfo(this.props.url.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/address/')) {
-      // this.getAddressDetail(nextProps.url.pathname.split("/")[2], nextProps.url.pathname.split("/")[3] || 1);
-      this.props.setAddress(this.props.url.pathname.split("/")[2])
-    }
+    const current = this.props.url.pathname
+		const next = nextProps.url.pathname
+		if (current !== next && startsWith(next, '/address')) {
+			this.allAddressInfo(next)
+		}
   }
 
+  allAddressInfo = (pathname) => {
+    const address = pathname.split("/")[2]
+    this.props.addressInfo({ address })
+    this.props.addressTxList({ address, page: 1, count: 10 })
+	}
+
   render() {
-    const { loading, walletDetail, walletTx, tokenTx , error } = this.props;
+    const { walletDetail, walletTx, tokenTx } = this.props;
+    const { loading, error } = walletDetail
     const content = () => {
-      // 데이터가 없을 경우
       if (error !== "" && !loading) {
         return (
           <NotFound error={error}/>
@@ -31,7 +37,6 @@ class AddressesDetailPage extends Component {
             <div className="screen0">
               <WalletInformation 
                 walletDetail={walletDetail}
-                addressInfo={this.props.addressInfo}
               />
             </div>
             <div className="screen1">

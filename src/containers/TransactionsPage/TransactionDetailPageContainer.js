@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getTransaction } from '../../redux/actions/transactionAction';
 
 function mapStateToProps(state) {
+  // TODO 여기 정리 필요
   return {
     loading: state.transactions.transaction.loading,
     data: state.transactions.transaction.data,

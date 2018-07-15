@@ -5,6 +5,7 @@ import { transactionsReducer } from './transactionsReducer'
 import { blocksReducer } from './blocksReducer'
 import { searchReducer } from './searchReducer'
 import { routerReducer } from 'react-router-redux'
+import { tokensReducer } from './tokensReducer'
 
 const rootReducer = combineReducers({
   mainPage: mainPageReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   blocks: blocksReducer,
   search: searchReducer,
   router: routerReducer,
+  tokens: tokensReducer,
 });
 
 export default rootReducer;

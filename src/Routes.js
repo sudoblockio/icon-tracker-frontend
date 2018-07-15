@@ -11,8 +11,8 @@ import BlockDetailPage from './pages/BlockDetailPage';
 import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
-
-import AddressTxListPage from './pages/AddressTxListPage'
+import AddressTotalTxListPage from './pages/AddressTotalTxListPage'
+import TokenListPage from './pages/TokenListPage'
 
 class Routes extends Component {
 
@@ -24,25 +24,32 @@ class Routes extends Component {
               <HeaderContainer />
               <Switch>
                 <Route onEnter={window.scroll(0, 0)} exact path='/' component={MainPage}/>
+                
                 <Route onEnter={window.scroll(0, 0)} exact path='/addresses' component={AddressesPage} />
                 <Route onEnter={window.scroll(0, 0)} path='/addresses/:pageId' component={AddressesPage}/>
-                
                 <Route onEnter={window.scroll(0, 0)} exact path='/address/:addressId' component={AddressDetailPage}/>
                 
-                <Route onEnter={window.scroll(0, 0)} exact path='/address/:addressId/transactions' component={AddressTxListPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/address/:addressId/transactions:pageId' component={AddressTxListPage}/>
-
-                <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
-                <Route onEnter={window.scroll(0, 0)} path='/contracts/:pageId' component={ContractsPage}/>
-
                 <Route onEnter={window.scroll(0, 0)} exact path='/blocks' component={BlocksPage} />
                 <Route onEnter={window.scroll(0, 0)} path='/blocks/:pageId' component={BlocksPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/block/:blockId' component={BlockDetailPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/block/:blockId/:pageId' component={BlockDetailPage}/>
 
-                <Route onEnter={window.scroll(0, 0)} exact path='/transactions' component={TransactionsPage}/>
-                <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={TransactionsPage}/>
+                {/* <Route onEnter={window.scroll(0, 0)} exact path='/transactions' component={TransactionsPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={TransactionsPage}/> */}
                 <Route onEnter={window.scroll(0, 0)} exact path='/transaction/:txHash' component={TransactionDetailPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
+
+                <Route onEnter={window.scroll(0, 0)} exact path='/addresstx/:addressId/' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/addresstx/:addressId/:pageId' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/addresstokentx/:addressId/' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/addresstokentx/:addressId/:pageId' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/blocktx/:heightId/' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/blocktx/:heightId/:pageId' component={AddressTotalTxListPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} exact path='/transactions' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={AddressTotalTxListPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage}/>

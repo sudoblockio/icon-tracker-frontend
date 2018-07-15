@@ -3,19 +3,13 @@ import { withRouter } from 'react-router-dom';
 import clipboard from 'clipboard'
 import { numberWithCommas, convertNumberToText, isValidNodeType } from '../../utils/utils'
 import CopyButton from '../Common/CopyButton'
+import { LoadingComponent } from '../../components/';
+
 
 class WalletInformation extends Component {
   constructor(props) {
     super(props)
     this.clipboard = new clipboard('.clipboard-btn');
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const currentAddress = this.props.walletDetail.address
-    const nextAddress = nextProps.walletDetail.address
-    if (currentAddress !== nextAddress) {
-      this.props.addressInfo({ address: nextAddress })
-    }
   }
 
   componentWillUnmount() {
@@ -24,38 +18,45 @@ class WalletInformation extends Component {
 
   render() {
     const { walletDetail } = this.props
-    const { address, nodeType, balance, icxUsd, txCount, tokenList } = walletDetail
+    const { loading, address, nodeType, balance, icxUsd, txCount, tokenList } = walletDetail
     return (
       <div className="wrap-holder">
-        <p className="title">Address</p>
-        <div className="contents">
-          <table className="table-typeB address">
-            <thead>
-              <tr>
-                <th>Address</th>
-                <th>value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="">
-                <td>Address</td>
-                <td>{address} <span className="qrcode"><em className="img"></em></span><CopyButton address={address}/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
-              </tr>
-              <tr>
-                <td>Balance</td>
-                <td>{`${convertNumberToText(balance, 'icx')} ICX`}<span className="gray">{`(${convertNumberToText(icxUsd, 'usd')} USD)`}</span></td>
-              </tr>
-              <tr>
-                <td>No of Txns</td>
-                <td>{`${numberWithCommas(txCount)}`}</td>
-              </tr>
-              <tr>
-                <td>Token Balance</td>
-                <TokenBalance tokenList={tokenList}/>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {!loading && <p className="title">Address</p>}
+        {
+          loading ?
+          <div style={{height: '206px'}}>
+            <LoadingComponent />
+          </div>
+          :
+          <div className="contents">
+            <table className="table-typeB address">
+              <thead>
+                <tr>
+                  <th>Address</th>
+                  <th>value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="">
+                  <td>Address</td>
+                  <td>{address} <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Address'}/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                </tr>
+                <tr>
+                  <td>Balance</td>
+                  <td>{`${convertNumberToText(balance, 'icx')} ICX`}<span className="gray">{`(${convertNumberToText(icxUsd, 'usd')} USD)`}</span></td>
+                </tr>
+                <tr>
+                  <td>No of Txns</td>
+                  <td>{`${numberWithCommas(txCount)}`}</td>
+                </tr>
+                <tr>
+                  <td>Token Balance</td>
+                  <TokenBalance tokenList={tokenList}/>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        }
       </div>
     );
   }
