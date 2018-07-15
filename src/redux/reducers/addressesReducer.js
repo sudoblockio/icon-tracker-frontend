@@ -26,7 +26,7 @@ const initialState = {
     totalData: 0,
     error: '',
   },
-  tokenTx: {
+  walletTokenTx: {
     loading: false,
     page: 1,
     count: 20,
@@ -144,8 +144,8 @@ export function addressesReducer(state = initialState, action) {
     case actionTypes.addressTokenTxList: {
       return {
         ...state,
-        tokenTx: {
-          ...state.tokenTx,
+        walletTokenTx: {
+          ...state.walletTokenTx,
           loading: true,
           page: Number(action.payload.page) || 1,
           count: Number(action.payload.count) || 20,
@@ -157,8 +157,8 @@ export function addressesReducer(state = initialState, action) {
     case actionTypes.addressTokenTxListFulfilled: {
       return {
         ...state,
-        tokenTx: {
-          ...state.tokenTx,
+        walletTokenTx: {
+          ...state.walletTokenTx,
           loading: false,
           data: action.payload.data.tokenTx || [],
           totalData: action.payload.listSize || 0,
@@ -170,8 +170,8 @@ export function addressesReducer(state = initialState, action) {
     case actionTypes.addressTokenTxListRejected: {
       return {
         ...state,
-        tokenTx: {
-          ...state.tokenTx,
+        walletTokenTx: {
+          ...state.walletTokenTx,
           loading: false,
           error: action.error
         }        

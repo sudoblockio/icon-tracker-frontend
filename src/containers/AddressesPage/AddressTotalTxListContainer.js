@@ -16,7 +16,7 @@ function mapStateToProps(state) {
   return {
     url: state.router.location,
     walletTx: state.addresses.walletTx,
-    tokenTx: state.addresses.tokenTx,
+    walletTokenTx: state.addresses.walletTokenTx,
     blockTx: state.blocks.blockTx,
     recentTx: state.transactions.recentTx,
   };

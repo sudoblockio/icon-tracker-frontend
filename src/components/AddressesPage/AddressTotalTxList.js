@@ -40,6 +40,7 @@ class AddressTotalTxList extends Component {
 				this.totalTxList = this.props.transactionRecentTx	
 				break
 			default:
+				this.totalTxList = () => {}	
 		}
 		
 		this.getTotalTxList(pathname, 20)
@@ -72,7 +73,6 @@ class AddressTotalTxList extends Component {
 	}
 
 	getTotalTxListByPage = (page) => {
-		console.log(page)
 		if (this.txType === 'transactions') {
 			this.props.history.push(`/${this.txType}/${page}`);	
 		}
@@ -90,7 +90,8 @@ class AddressTotalTxList extends Component {
 				return 'Transactions'
 			case 'addresstokentx':
 				return 'Token Transfers'
-			default:		
+			default:
+				return ''	
 		}
 	}
 
@@ -99,25 +100,26 @@ class AddressTotalTxList extends Component {
 			case 'addresstx':
 				return this.props.walletTx
 			case 'addresstokentx':
-				return this.props.tokenTx
+				return this.props.walletTokenTx
 			case 'blocktx':
 				return this.props.blockTx
 			case 'transactions':
 				return this.props.recentTx
-			default:		
+			default:
+				return {}
 		}
 	}
 
 	render() {
+		// TODO 이거 정리
 		const urlIndex = this.props.url.pathname.split("/")[2]
 		const tx = this.getTx(this.txType)
 		const { loading, page, count, data, totalData } = tx;
-		
+		const _data = data || []
 		const isBlockTx = this.txType === 'blocktx'
 		const isTokenTx = this.txType === 'addresstokentx'
 		const isRecentTx = this.txType === 'transactions'
-		const noTx = data.length === 0
-
+		const noTx = _data.length === 0
 		const utcLabel = `(${getUTCString()})`
 		return (
 			<div className="content-wrap">
@@ -164,7 +166,7 @@ class AddressTotalTxList extends Component {
 								</thead>
 								<tbody>
 								{
-									data.map((row) => (
+									_data.map((row) => (
 										<AddressTableRow key={row.txHash} data={row} address={urlIndex} txType={this.txType}/>
 									))
 								}

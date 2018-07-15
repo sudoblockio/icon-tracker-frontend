@@ -12,7 +12,7 @@ function mapStateToProps(state) {
     url: state.router.location,
     walletDetail: state.addresses.walletDetail,
     walletTx: state.addresses.walletTx,
-    tokenTx: state.addresses.tokenTx,
+    walletTokenTx: state.addresses.walletTokenTx,
   };
 }
 

@@ -2,7 +2,7 @@ import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import { 
   tokenGetTokenListApi as TOKEN_GET_TOKEN_LIST_API
-} from '../api/restV3Api';
+} from '../api/restV3';
 
 function* tokenGetTokenListFunc(action) {
   try {

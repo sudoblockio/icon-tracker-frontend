@@ -23,7 +23,7 @@ class AddressesDetailPage extends Component {
 	}
 
   render() {
-    const { walletDetail, walletTx, tokenTx } = this.props;
+    const { walletDetail, walletTx, walletTokenTx } = this.props;
     const { loading, error } = walletDetail
     const content = () => {
       if (error !== "" && !loading) {
@@ -43,7 +43,7 @@ class AddressesDetailPage extends Component {
               <WalletTransactions 
                 walletDetail={walletDetail}
                 walletTx={walletTx} 
-                tokenTx={tokenTx}
+                walletTokenTx={walletTokenTx}
                 addressTxList={this.props.addressTxList}
                 addressTokenTxList={this.props.addressTokenTxList}
               />

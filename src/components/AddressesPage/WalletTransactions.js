@@ -44,11 +44,11 @@ class WalletTransactions extends Component {
 
   render() {
     const { txType } = this.state
-    const { walletDetail, walletTx, tokenTx } = this.props
+    const { walletDetail, walletTx, walletTokenTx } = this.props
     const { address } = walletDetail
     const utcLabel = `(${getUTCString()})`
 		const isTokenTx = txType === 'addresstokentx'
-    const tx = isTokenTx ? tokenTx : walletTx
+    const tx = isTokenTx ? walletTokenTx : walletTx
     const { loading, data, totalData } = tx
     const noTx = data.length === 0
 

@@ -45,9 +45,10 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path='/addresstokentx/:addressId/:pageId' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/blocktx/:heightId/' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/blocktx/:heightId/:pageId' component={AddressTotalTxListPage}/>
-
                 <Route onEnter={window.scroll(0, 0)} exact path='/transactions' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/tokentransfers' component={AddressTotalTxListPage}/>
+                <Route onEnter={window.scroll(0, 0)} path='/tokentransfers/:pageId' component={AddressTotalTxListPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
 
