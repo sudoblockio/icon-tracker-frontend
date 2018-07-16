@@ -8,8 +8,9 @@ class AddressTotalTxList extends Component {
 
 	constructor(props) {
 		super(props);
-		this.txType = 'addresstx'
-		this.totalTxList = this.props.addressTxList
+		this.txType = ''
+		this.urlIndex = ''
+		this.totalTxList = () => {}
 	}
 
 	componentWillMount() {
@@ -26,6 +27,7 @@ class AddressTotalTxList extends Component {
 
 	initPageType = (pathname) => {
 		this.txType = pathname.split("/")[1]
+		this.urlIndex = pathname.split("/")[2]
 		switch(this.txType) {
 			case 'addresstx':
 				this.totalTxList = this.props.addressTxList	
@@ -112,7 +114,6 @@ class AddressTotalTxList extends Component {
 
 	render() {
 		// TODO 이거 정리
-		const urlIndex = this.props.url.pathname.split("/")[2]
 		const tx = this.getTx(this.txType)
 		const { loading, page, count, data, totalData } = tx;
 		const _data = data || []
@@ -128,7 +129,7 @@ class AddressTotalTxList extends Component {
 					{
 						!loading && 
 						<p className="title">{this.getName(this.txType)}
-							{!isRecentTx && <span>for {isBlockTx ? 'Block Height' : 'Address' } {urlIndex}</span>}
+							{!isRecentTx && <span>for {isBlockTx ? 'Block Height' : 'Address' } {this.urlIndex}</span>}
 							<span className="right">{!isRecentTx && "A total of"}<em>{totalData}</em> {isTokenTx ? 'Token transfers found' : 'Total Transactions'}</span>
 						</p>
 					}
@@ -167,7 +168,7 @@ class AddressTotalTxList extends Component {
 								<tbody>
 								{
 									_data.map((row) => (
-										<AddressTableRow key={row.txHash} data={row} address={urlIndex} txType={this.txType}/>
+										<AddressTableRow key={row.txHash} data={row} address={this.urlIndex} txType={this.txType}/>
 									))
 								}
 								</tbody>

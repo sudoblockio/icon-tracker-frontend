@@ -16,14 +16,28 @@ class AddressTableRow extends Component {
 				{!isBlockTx && <td className="on break"><BlockLink to={height || 0} label={numberWithCommas(height)} /></td>}
 				{!isBlockTx && <td className={!createDate ? 'no' : 'break'}>{dateToUTC(createDate)}</td>}
 				<AddressCell targetAddr={fromAddr} address={address} />
-				{isBlockTx && <td className={`table-sign`}><i className="img"></i></td>}
-				{!isBlockTx && <td className={`table-sign ${isOut ? 'out' : ''}`}><span>{isOut ? 'OUT' : 'IN'}</span></td>}
+				<SignCell address={address} fromAddr={fromAddr} toAddr={toAddr}/>
 				<AddressCell targetAddr={toAddr} address={address} />
 				<td><span>{convertNumberToText((isTokenTx ? tokenQuantity : amount) , 'icx', 4)}</span><em>{isTokenTx ? tokenSymbol : 'ICX'}</em></td>
 				<LastCell isTokenTx={isTokenTx} fee={fee} tokenName={tokenName} tokenSymbol={tokenSymbol} />
 			</tr>
 		)
 	}
+}
+
+const SignCell = ({ address, fromAddr, toAddr }) => {
+	let signItem, className = 'table-sign'
+	if (fromAddr === address) {
+		signItem = <span>OUT</span>
+		className += ' out'
+	}
+	else if (toAddr === address) {
+		signItem = <span>IN</span>
+	}
+	else {
+		signItem = <i className="img"></i>
+	}
+	return <td className={className}>{signItem}</td>
 }
 
 const LastCell = ({ isTokenTx, fee, tokenName, tokenSymbol }) => {

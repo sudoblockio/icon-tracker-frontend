@@ -20,7 +20,6 @@ class BlockInformation extends Component {
     const { height } = blockDetail
     const { loading, data, totalData } = blockTx
     const noTx = data.length === 0
-
     return (
       <div className="wrap-holder">
       {
