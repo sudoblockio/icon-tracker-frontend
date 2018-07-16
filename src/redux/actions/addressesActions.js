@@ -1,10 +1,10 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function getAddresses(payload) {
+export function addressList(payload) {
   return {
-    type: actionTypes.getAddresses,
+    type: actionTypes.addressList,
     payload
-  };
+  }
 }
 
 export function addressInfo(payload) {

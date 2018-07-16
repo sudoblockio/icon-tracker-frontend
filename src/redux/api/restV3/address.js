@@ -1,6 +1,19 @@
 import { makeUrl } from '../../../utils/utils'
 import { axiosApi } from './config'
 
+export function addressListApi(payload) {
+    return new Promise((resolve, reject) => {
+        axiosApi.get(makeUrl(`/v3/address/list`, payload))
+            .then(result => {
+                console.log(result.data)
+                resolve(result.data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
+
 export function addressInfoApi(payload) {
     return new Promise((resolve, reject) => {
         axiosApi.get(makeUrl(`/v3/address/info`, payload))

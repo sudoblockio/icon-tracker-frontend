@@ -8,8 +8,10 @@ import TransactionsPageContainer from './TransactionsPage/TransactionsPageContai
 import TransactionDetailPageContainer from './TransactionsPage/TransactionDetailPageContainer'
 import HeaderContainer from './Common/HeaderContainer'
 import NotFoundPageContainer from './Common/NotFoundPageContainer'
+
 import AddressTotalTxListContainer from './AddressesPage/AddressTotalTxListContainer'
 import TokenListPageContainer from './TokensPage/TokenListPageContainer'
+import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
 export {
   MainPageContainer,
@@ -24,5 +26,6 @@ export {
   NotFoundPageContainer,
 
   AddressTotalTxListContainer,
-  TokenListPageContainer
+  TokenListPageContainer,
+  TokenDetailPageContainer
 }

@@ -5,27 +5,25 @@ import {
 } from '../api/rest';
 
 import {
+  addressListApi as ADDRESS_LIST_API,
   addressInfoApi as ADDRESS_INFO_API,
   addressTxListApi as ADDRESS_TX_LIST,
   addressTokenTxListApi as ADDRESS_TOKEN_TX_LIST,
 } from '../api/restV3';
 
-function* getAddressesFunc(action) {
+export function* addressListFunc(action) {
   try {
-    const payload = yield call(GET_ADDRESSES_API, action.payload)
+    const payload = yield call(ADDRESS_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.getAddressesFulfilled, payload: payload});
+      yield put({type: AT.addressListFulfilled, payload: payload});
     }
     else {
-      yield put({type: AT.getAddressesRejected});
+      throw new Error();
     }
-  } catch (e) {
-    yield put({type: AT.getAddressesRejected});
   }
-}
-
-function* watchGetAddresses() {
-  yield takeLatest(AT.getAddresses, getAddressesFunc)
+  catch(e) {
+    yield put({type: AT.addressListRejected, error: e.message});
+  }
 }
 
 export function* addressInfoFunc(action) {
@@ -73,6 +71,10 @@ export function* addressTokenTxListFunc(action) {
   }
 }
 
+function* watchAddressList() {
+  yield takeLatest(AT.addressList, addressListFunc)
+}
+
 function* watchAddressInfo() {
   yield takeLatest(AT.addressInfo, addressInfoFunc)
 }
@@ -86,7 +88,7 @@ function* watchAddressTokenTxList() {
 }
 
 export default function* addressesSaga() {
-  yield fork(watchGetAddresses);
+  yield fork(watchAddressList);
   yield fork(watchAddressInfo);
   yield fork(watchAddressTxList);
   yield fork(watchAddressTokenTxList);

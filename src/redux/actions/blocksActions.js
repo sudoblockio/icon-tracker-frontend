@@ -1,10 +1,10 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function getBlocks(payload) {
+export function blockList(payload) {
   return {
-    type: actionTypes.getBlocks,
+    type: actionTypes.blockList,
     payload
-  };
+  }
 }
 
 export function blockInfo(payload) {
@@ -19,17 +19,4 @@ export function blockTxList(payload) {
     type: actionTypes.blockTxList,
     payload
   }
-}
-
-export function resetBlocksReducer() {
-  return {
-    type: actionTypes.resetBlocksReducer
-  };
-}
-
-
-export function resetBlockReducer() {
-  return {
-    type: actionTypes.resetBlockReducer
-  };
 }

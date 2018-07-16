@@ -55,7 +55,7 @@ class BlockInformation extends Component {
                 </tr>*/}
                 <tr>
                   <td>Transactions</td>
-                  <td><span>{numberWithCommas(txCount)} Transactions</span> in this block</td>
+                  <td><span onClick={this.props.goAllTx}>{numberWithCommas(txCount)} Transactions</span> in this block</td>
                 </tr>
                 <tr>
                   <td>Hash</td>

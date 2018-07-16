@@ -9,31 +9,32 @@ const initialState = {
     totalData: 0,
     error: '',
   },
-  tokenTransfers: {
-    loading: true,
-    data: {},
-    error: ''
+  recentTokenTx: {
+    loading: false,
+    page: 1,
+    count: 20,
+    data: [],
+    totalData: 0,
+    error: '',
   }
 }
 
 export function tokensReducer(state = initialState, action) {
   switch (action.type) {  
     case actionTypes.tokenGetTokenList: {
-      console.log(actionTypes.tokenGetTokenList)
       return {
         ...state,
         tokenList: {
           ...state.tokenList,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || 20,
+          count: Number(action.payload.count) || state.tokenList.count,
           error: ''
         }        
       }
     }
 
     case actionTypes.tokenGetTokenListFulfilled: {
-      console.log(actionTypes.tokenGetTokenListFulfilled, action.payload)
       return {
         ...state,
         tokenList: {
@@ -47,11 +48,47 @@ export function tokensReducer(state = initialState, action) {
     }
 
     case actionTypes.tokenGetTokenListRejected: {
-      console.log(actionTypes.tokenGetTokenListRejected)
       return {
         ...state,
         tokenList: {
           ...state.tokenList,
+          loading: false,
+          error: action.error
+        }        
+      }
+    }
+
+    case actionTypes.tokenGetTokenTransferList: {
+      return {
+        ...state,
+        recentTokenTx: {
+          ...state.recentTokenTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || state.recentTokenTx.count,
+          error: ''
+        }        
+      }
+    }
+
+    case actionTypes.tokenGetTokenTransferListFulfilled: {
+      return {
+        ...state,
+        recentTokenTx: {
+          ...state.recentTokenTx,
+          loading: false,
+          data: action.payload.data.tokenTransferList || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.tokenGetTokenTransferListRejected: {
+      return {
+        ...state,
+        recentTokenTx: {
+          ...state.recentTokenTx,
           loading: false,
           error: action.error
         }        

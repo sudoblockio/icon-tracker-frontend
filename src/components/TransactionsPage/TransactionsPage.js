@@ -44,6 +44,7 @@ class TransactionsPage extends Component {
 							</p>
 						}
 						{
+							// TODO 상위로 옮기기
 							loading ?
 							<div style={{height: 'calc(100vh - 120px - 144px)'}}>
 								<LoadingComponent />

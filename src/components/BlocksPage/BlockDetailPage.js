@@ -36,6 +36,12 @@ class BlockDetailPage extends Component {
     this.props.getBlock(data);
   }
 
+  goAllTx = () => {
+    const { blockDetail } = this.props
+    const { height } = blockDetail
+		this.props.history.push(`/blocktx/${height}`);
+  }
+
   render() {
     const { blockDetail, blockTx } = this.props;
     const { loading, error } = blockDetail
@@ -50,12 +56,14 @@ class BlockDetailPage extends Component {
     				<div className="screen0">
     					<BlockInformation
                 blockDetail={blockDetail}
+                goAllTx={this.goAllTx}
               />
     				</div>
     				<div className="screen1">
     					<BlockTransactions
                 blockDetail={blockDetail}
                 blockTx={blockTx}
+                goAllTx={this.goAllTx}
               />
     				</div>
     			</div>

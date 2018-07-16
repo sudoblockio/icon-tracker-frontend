@@ -13,6 +13,7 @@ import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AddressTotalTxListPage from './pages/AddressTotalTxListPage'
 import TokenListPage from './pages/TokenListPage'
+import TokenDetailPage from './pages/TokenDetailPage'
 
 class Routes extends Component {
 
@@ -39,6 +40,10 @@ class Routes extends Component {
 
                 <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
 
+                <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
+                
+                <Route onEnter={window.scroll(0, 0)} exact path='/token/:contractId' component={TokenDetailPage}/>
+
                 <Route onEnter={window.scroll(0, 0)} exact path='/addresstx/:addressId/' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/addresstx/:addressId/:pageId' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/addresstokentx/:addressId/' component={AddressTotalTxListPage}/>
@@ -49,8 +54,6 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path='/transactions/:pageId' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/tokentransfers' component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path='/tokentransfers/:pageId' component={AddressTotalTxListPage}/>
-
-                <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage}/>

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { 
   blockInfo,
   blockTxList,
-  resetBlockReducer 
 } from '../../redux/actions/blocksActions';
 
 function mapStateToProps(state) {
@@ -19,8 +18,6 @@ function mapDispatchToProps(dispatch) {
   return {
     blockInfo: (payload) => dispatch(blockInfo(payload)),
     blockTxList: (payload) => dispatch(blockTxList(payload)),
-    resetReducer: () => dispatch(resetBlockReducer()),
-
   };
 }
 

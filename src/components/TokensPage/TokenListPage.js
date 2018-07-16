@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { convertNumberToText } from '../../utils/utils'
+import { LoadingComponent, TokenLink } from '../../components'
 
 class TokenListPage extends Component {
 	constructor(props) {
@@ -22,11 +23,17 @@ class TokenListPage extends Component {
 	render() {
 		const { value } = this.state
 		const { tokenList } = this.props
-		const { data, totalData } = tokenList
+		const { data, totalData, loading } = tokenList
 		const list = data.filter(token => token.tokenName.indexOf(value) !== -1 || token.symbol.indexOf(value) !== -1)
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
+				{
+					loading ?
+					<div style={{height: 'calc(100vh - 120px - 144px)'}}>
+						<LoadingComponent />
+					</div>
+					:
 					<div className="wrap-holder">
 						<p className="title">Tokens</p>
 						<div className="search-holder">
@@ -57,7 +64,7 @@ class TokenListPage extends Component {
 								<tbody>
 								{
 									list.map((token, index) => {
-										const { tokenName, symbol, price, changeVal, volume, marketCap, overview } = token
+										const { tokenName, symbol, price, changeVal, volume, marketCap, contractAddr, overview } = token
 										const { usd, icx, btc, eth } = price || {}
 										const _changeVal = changeVal || 0
 										const className = _changeVal > 0 ? 'red' : _changeVal < 0 ? 'blue' : ''
@@ -65,7 +72,7 @@ class TokenListPage extends Component {
 										return (
 											<tr key={index}>
 												<td>{index + 1}</td>
-												<td>{tokenName} ({symbol})</td>
+												<td><TokenLink label={`${tokenName} (${symbol})`} to={contractAddr}/></td>
 												<td>
 													<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
 													<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>
@@ -83,6 +90,7 @@ class TokenListPage extends Component {
 							</table>
 						</div>
 					</div>
+				}
 				</div>
 			</div>
 		);

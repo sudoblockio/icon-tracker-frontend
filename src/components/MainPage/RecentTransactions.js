@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { convertNumberToText } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import icon_01 from '../../style/image/icon_01.png'
+import icon_03 from '../../style/image/icon_03.png'
 
 class RecentTransactions extends Component {
   render() {
@@ -19,11 +20,14 @@ class RecentTransactions extends Component {
           </div>
           :
           <ul className="list">
-            {list.map(tx => {
-              const { txHash, amount, fee } = tx
+            {list.map((tx, index) => {
+              const { txHash, amount, fee, state } = tx
+              const isSuccess = Number(state) === 1
+              const src = isSuccess ? icon_01 : icon_03
+              const text = isSuccess ? 'SUCCESS' : 'FAIL'
               return (
-                <li key={txHash}>
-                  <p className="icon"><img src={icon_01} alt="transaction-img"/><span>SUCCESS</span></p>
+                <li key={index}>
+                  <p className="icon"><img src={src} alt="transaction-img"/><span>{text}</span></p>
                   <p className="a">TX Hash<em><TransactionLink to={txHash} label={txHash}/></em></p>
                   <p className="b">Amount<em>{`${convertNumberToText(amount, 'icx')} ICX`}</em></p>
                   <p className="c">Fee<em>{`${convertNumberToText(fee, 'icx')} ICX`}</em></p>

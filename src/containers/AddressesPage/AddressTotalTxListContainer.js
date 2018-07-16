@@ -11,6 +11,9 @@ import {
 import {
   transactionRecentTx,
 } from '../../redux/actions/transactionAction'
+import {
+  tokenGetTokenTransferList,
+} from '../../redux/actions/tokensActions'
 
 function mapStateToProps(state) {
   return {
@@ -19,6 +22,7 @@ function mapStateToProps(state) {
     walletTokenTx: state.addresses.walletTokenTx,
     blockTx: state.blocks.blockTx,
     recentTx: state.transactions.recentTx,
+    recentTokenTx: state.tokens.recentTokenTx
   };
 }
 
@@ -28,6 +32,7 @@ function mapDispatchToProps(dispatch) {
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
     blockTxList: (payload) => dispatch(blockTxList(payload)),
     transactionRecentTx: (payload) => dispatch(transactionRecentTx(payload)),
+    tokenGetTokenTransferList: (payload) => dispatch(tokenGetTokenTransferList(payload)),
   };
 }
 

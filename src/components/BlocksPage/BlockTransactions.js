@@ -9,12 +9,6 @@ class BlockInformation extends Component {
     this.props.history.push('/block/' + height + '/'+ pageId);
   }
 
-  goAllTx = () => {
-    const { blockDetail } = this.props
-    const { height } = blockDetail
-		this.props.history.push(`/blocktx/${height}`);
-  }
-
   render() {
     const { blockDetail, blockTx } = this.props
     const { height } = blockDetail
@@ -49,7 +43,7 @@ class BlockInformation extends Component {
         }
         { 
           !noTx && 
-          <p className="txt"><span>Latest<em>{totalData < 10 ? totalData : 10}</em> ICX Txns from a total of<em onClick={this.goAllTx}>{totalData} Transactions</em></span></p> 
+          <p className="txt"><span>Latest<em>{totalData < 10 ? totalData : 10}</em> ICX Txns from a total of<em onClick={this.props.goAllTx}>{totalData} Transactions</em></span></p> 
         }
         {
           !noTx && 

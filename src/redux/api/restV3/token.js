@@ -12,3 +12,16 @@ export function tokenGetTokenListApi(payload) {
       })
   })
 }
+
+export function tokenGetTokenTransferListApi(payload) {
+  return new Promise((resolve, reject) => {
+    axiosApi.get(makeUrl('/v3/token/getTokenTransferList', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}

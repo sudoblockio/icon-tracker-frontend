@@ -22,7 +22,7 @@ class RecentBlocks extends Component {
             {list.map((block, index) => {
               const { blockHeight, createDate, hash, txCount } = block
               return (
-                <li key={blockHeight}>
+                <li key={index}>
                   <p className="icon">
                     <img src={icon_02} alt="block-img"/>
                     <span>BLOCK</span>

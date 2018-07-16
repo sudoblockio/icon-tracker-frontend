@@ -3,11 +3,18 @@ import { calcMaxPageNum } from '../../utils/utils';
 
 const initialState = {
   addresses: {
-    loading: true,
-    pageNum: 1,
-    maxPageNum: 1,
-    data: []
+    // loading: true,
+    // pageNum: 1,
+    // maxPageNum: 1,
+    // data: []
+    loading: false,
+    page: 1,
+    count: 20,
+    data: [],
+    totalData: 0,
+    error: '',
   },
+
   walletDetail: {
     loading: false,
     address: "",
@@ -38,36 +45,40 @@ const initialState = {
 
 export function addressesReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.getAddresses: {
+    case actionTypes.addressList: {
       return {
         ...state,
-        addresses : {
+        addresses: {
           ...state.addresses,
           loading: true,
-          pageNum: Number(action.payload) || 1
-        }
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || state.addresses.count,
+          error: ''
+        }        
       }
     }
 
-    case actionTypes.getAddressesFulfilled: {
+    case actionTypes.addressListFulfilled: {
       return {
         ...state,
-        addresses : {
+        addresses: {
           ...state.addresses,
           loading: false,
-          maxPageNum: calcMaxPageNum(action.payload.totalData, 20),
-          data : action.payload.data
-        }
+          data: action.payload.data || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
+        }        
       }
     }
 
-    case actionTypes.getAddressesRejected: {
+    case actionTypes.addressListRejected: {
       return {
         ...state,
-        addresses : {
+        addresses: {
           ...state.addresses,
-          loading: false
-        }
+          loading: false,
+          error: action.error
+        }        
       }
     }
 
@@ -111,7 +122,7 @@ export function addressesReducer(state = initialState, action) {
           ...state.walletTx,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || 20,
+          count: Number(action.payload.count) || state.walletTx.count,
           error: ''
         }        
       }
@@ -148,7 +159,7 @@ export function addressesReducer(state = initialState, action) {
           ...state.walletTokenTx,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || 20,
+          count: Number(action.payload.count) || state.walletTokenTx.count,
           error: ''
         }        
       }

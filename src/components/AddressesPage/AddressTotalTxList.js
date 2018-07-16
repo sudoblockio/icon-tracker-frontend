@@ -41,6 +41,9 @@ class AddressTotalTxList extends Component {
 			case 'transactions':
 				this.totalTxList = this.props.transactionRecentTx	
 				break
+			case 'tokentransfers':
+				this.totalTxList = this.props.tokenGetTokenTransferList	
+				break
 			default:
 				this.totalTxList = () => {}	
 		}
@@ -63,6 +66,7 @@ class AddressTotalTxList extends Component {
 				this.totalTxList({ height, page, count })
 				break
 			case 'transactions':
+			case 'tokentransfers':
 				page = pathname.split("/")[2] || 1
 				this.totalTxList({ page, count })
 				break
@@ -84,19 +88,6 @@ class AddressTotalTxList extends Component {
 		}
 	}
 
-	getName = (type) => {
-		switch(type) {
-			case 'addresstx':
-			case 'blocktx':
-			case 'transactions':
-				return 'Transactions'
-			case 'addresstokentx':
-				return 'Token Transfers'
-			default:
-				return ''	
-		}
-	}
-
 	getTx = (type) => {
 		switch(type) {
 			case 'addresstx':
@@ -107,38 +98,32 @@ class AddressTotalTxList extends Component {
 				return this.props.blockTx
 			case 'transactions':
 				return this.props.recentTx
+			case 'tokentransfers':
+				return this.props.recentTokenTx
 			default:
 				return {}
 		}
 	}
 
 	render() {
-		// TODO 이거 정리
 		const tx = this.getTx(this.txType)
 		const { loading, page, count, data, totalData } = tx;
 		const _data = data || []
 		const isBlockTx = this.txType === 'blocktx'
-		const isTokenTx = this.txType === 'addresstokentx'
-		const isRecentTx = this.txType === 'transactions'
+		const isTokenTx = this.txType === 'addresstokentx' || this.txType === 'tokentransfers'
 		const noTx = _data.length === 0
 		const utcLabel = `(${getUTCString()})`
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
+				{
+					loading ?
+					<div style={{height: 'calc(100vh - 120px - 144px)'}}>
+						<LoadingComponent />
+					</div>
+					:
 					<div className="wrap-holder">
-					{
-						!loading && 
-						<p className="title">{this.getName(this.txType)}
-							{!isRecentTx && <span>for {isBlockTx ? 'Block Height' : 'Address' } {this.urlIndex}</span>}
-							<span className="right">{!isRecentTx && "A total of"}<em>{totalData}</em> {isTokenTx ? 'Token transfers found' : 'Total Transactions'}</span>
-						</p>
-					}
-					{
-						loading ?
-						<div style={{height: 'calc(100vh - 120px - 144px)'}}>
-							<LoadingComponent />
-						</div>
-						:
+						<Header txType={this.txType} urlIndex={this.urlIndex} totalData={totalData} />
 						<div className="contents">		
 						{
 							noTx &&
@@ -190,11 +175,53 @@ class AddressTotalTxList extends Component {
 							/>
 						}
 						</div>
-					}
-					</div>
+					</div>					
+				}				
 				</div>
 			</div>
 		);
+	}
+}
+
+const Header = ({txType, urlIndex, totalData}) => {
+	switch(txType) {
+		case 'addresstx':
+			return (
+				<p className="title">Transactions
+					<span>for Address {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
+				</p>
+			)
+		case 'addresstokentx':
+			return (
+				<p className="title">Token Transfers
+					<span>for Address {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+				</p>
+			)
+		case 'blocktx':
+			return (
+				<p className="title">Transactions
+					<span>for Block Height {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
+				</p>
+			)
+		case 'transactions':
+			return (
+				<p className="title">Transactions
+					<span></span>
+					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
+				</p>
+			)
+		case 'tokentransfers':
+			return (
+				<p className="title">Token Transfers
+					<span></span>
+					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+				</p>
+			)
+		default:
+			return <p></p>
 	}
 }
 

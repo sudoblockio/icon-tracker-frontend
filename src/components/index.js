@@ -38,6 +38,9 @@ import AddressTotalTxList from './AddressesPage/AddressTotalTxList'
 import AddressTableRow from './Common/AddressTableRow'
 
 import TokenListPage from './TokensPage/TokenListPage'
+import TokenDetailPage from './TokensPage/TokenDetailPage'
+
+import TokenLink from './Common/TokenLink'
 
 export {
   Header,
@@ -79,5 +82,8 @@ export {
   AddressTotalTxList,
   AddressTableRow,
 
-  TokenListPage
+  TokenListPage,
+  TokenDetailPage,
+
+  TokenLink,
 }

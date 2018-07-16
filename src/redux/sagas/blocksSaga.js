@@ -1,25 +1,21 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
-  getBlocksApi as GET_BLOCKS_API,
-} from '../api/rest';
-
-import {
+  blockListApi as BLOCK_LIST_API,
   blockInfoApi as BLOCK_INFO_API,
   blockTxListApi as BLOCK_TX_LIST_API
 } from '../api/restV3';
 
-
-function* getBlocksFunc(action) {
+function* blockListFunc(action) {
   try {
-    const payload = yield call(GET_BLOCKS_API, action.payload);
+    const payload = yield call(BLOCK_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.getBlocksFulfilled, payload: payload});
+      yield put({type: AT.blockListFulfilled, payload: payload});
     } else {
-      yield put({type: AT.getBlocksRejected});
+      yield put({type: AT.blockListRejected});
     }
   } catch (e) {
-    yield put({type: AT.getBlocksRejected});
+    yield put({type: AT.blockListRejected});
   }
 }
 
@@ -49,8 +45,8 @@ function* blockTxListFunc(action) {
   }
 }
 
-function* watchGetBlocks() {
-  yield takeLatest(AT.getBlocks, getBlocksFunc)
+function* watchBlockList() {
+  yield takeLatest(AT.blockList, blockListFunc)
 }
 
 function* watchBlockInfo() {
@@ -62,7 +58,7 @@ function* watchBlockTxList() {
 }
 
 export default function* blocksSaga() {
-  yield fork(watchGetBlocks);
+  yield fork(watchBlockList)
   yield fork(watchBlockInfo);
   yield fork(watchBlockTxList);
 }
