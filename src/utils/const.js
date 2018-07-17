@@ -5,5 +5,7 @@ export const TX_TYPE = {
     TRANSACTIONS: 'transactions',
     TOKEN_TRANSFERS: 'tokentransfers',
     TOKEN_TX: 'tokentx',
-    TOKEN_HOLDERS: 'tokenholders'
+    TOKEN_HOLDERS: 'tokenholders',
+    CONTRACT_TX: 'contracttx',
+    CONTRACT_TOKEN_TX: 'contracttokentx'
 }

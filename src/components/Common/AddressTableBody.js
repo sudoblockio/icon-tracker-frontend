@@ -7,7 +7,22 @@ import { TX_TYPE } from '../../utils/const'
 class AddressTableBody extends Component {
 	render() {
 		const TableRow = (_txType, _data, _address) => {
-			if (_txType === TX_TYPE.TOKEN_TX) {
+			if (_txType === TX_TYPE.TOKEN_TRANSFERS) {
+				const { txHash, age, fromAddr, toAddr, quantity, state, tokenSymbol } = _data
+				const isError = state === 0
+				return (
+					<tr>
+						<TxHashCell isError={isError} txHash={txHash}/>
+						<td>{calcTime(age)}</td>
+						<AddressCell targetAddr={fromAddr} address={undefined}/>
+						<SignCell address={undefined} fromAddr={fromAddr} toAddr={toAddr}/>
+						<AddressCell targetAddr={toAddr} address={undefined}/>
+						<td><span>{convertNumberToText(quantity , 'icx')}</span><em>{tokenSymbol}</em></td>
+						<td>{tokenSymbol}</td>
+					</tr>
+				)
+			}			
+			else if (_txType === TX_TYPE.TOKEN_TX) {
 				const { txHash, age, fromAddr, toAddr, quantity, state, tokenSymbol } = _data
 				const isError = state === 0
 				return (

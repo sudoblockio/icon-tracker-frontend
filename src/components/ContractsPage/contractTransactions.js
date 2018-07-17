@@ -8,7 +8,6 @@ import {
 } from '../../components'
 import { TX_TYPE } from '../../utils/const'
 
-// TODO LoadingComponent 추가 필요
 class TokenTransfers extends Component {
     
     render() {   

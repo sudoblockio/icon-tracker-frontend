@@ -1,12 +1,12 @@
 import actionTypes from '../actionTypes/actionTypes';
 
 const initialState = {
-  token: {
+  contract: {
     loading: false,
     data: {},
     error: ''
   },
-  tokenTransfers: {
+  contractTx: {
     loading: false,
     page: 1,
     count: 20,
@@ -14,7 +14,7 @@ const initialState = {
     totalData: 0,
     error: '',
   },
-  tokenHolders: {
+  contractTokenTx: {
     loading: false,
     page: 1,
     count: 20,
@@ -24,24 +24,24 @@ const initialState = {
   }
 }
 
-export function tokenReducer(state = initialState, action) {
+export function contractReducer(state = initialState, action) {
   switch (action.type) {  
-    case actionTypes.tokenGetTokenSummary: {
+    case actionTypes.selectContractInfo: {
       return {
         ...state,
-        token: {
-          ...state.token,
+        contract: {
+          ...state.contract,
           loading: true,
           error: ''
         }
       }
     }
 
-    case actionTypes.tokenGetTokenSummaryFulfilled: {
+    case actionTypes.selectContractInfoFulfilled: {
       return {
         ...state,
-        token: {
-          ...state.token,
+        contract: {
+          ...state.contract,
           loading: false,
           data: action.payload.data,
           error: ''
@@ -49,86 +49,85 @@ export function tokenReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.tokenGetTokenSummaryRejected: {
+    case actionTypes.selectContractInfoRejected: {
       return {
         ...state,
-        token: {
-          ...state.token,
+        contract: {
+          ...state.contract,
           loading: false,
           error: action.error
         }
       }
     }
 
-    case actionTypes.tokenGetTokenTransfers: {
+    case actionTypes.selectContractTransactionList: {
       return {
         ...state,
-        tokenTransfers: {
-          ...state.tokenTransfers,
+        contractTx: {
+          ...state.contractTx,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.tokenTransfers.count,
+          count: Number(action.payload.count) || state.contractTx.count,
           error: ''
         }
       }
     }
 
-    case actionTypes.tokenGetTokenTransfersFulfilled: {
+    case actionTypes.selectContractTransactionListFulfilled: {
       return {
         ...state,
-        tokenTransfers: {
-          ...state.tokenTransfers,
+        contractTx: {
+          ...state.contractTx,
           loading: false,
-          data: action.payload.data.tokenTransferList || [],
+          data: action.payload.data.contractTransactionList || [],
           totalData: action.payload.listSize || 0,
           error: ''
         }
       }
     }
 
-    case actionTypes.tokenGetTokenTransfersRejected: {
+    case actionTypes.selectContractTransactionListRejected: {
       return {
         ...state,
-        tokenTransfers: {
-          ...state.tokenTransfers,
+        contractTx: {
+          ...state.contractTx,
           loading: false,
           error: action.error
         }
       }
     }
 
-    case actionTypes.tokenGetTokenHolders: {
+    case actionTypes.selectContractTokenTransferList: {
       return {
         ...state,
-        tokenHolders: {
-          ...state.tokenHolders,
+        contractTokenTx: {
+          ...state.contractTokenTx,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.tokenHolders.count, // TODO 전체 조사
+          count: Number(action.payload.count) || state.contractTokenTx.count,
           error: ''
         }
       }
     }
 
-    case actionTypes.tokenGetTokenHoldersFulfilled: {
-      console.log(action)
+    case actionTypes.selectContractTokenTransferListFulfilled: {
       return {
         ...state,
-        tokenHolders: {
-          ...state.tokenHolders,
+        contractTokenTx: {
+          ...state.contractTokenTx,
           loading: false,
-          data: action.payload.data.holderList || [],
+          data: action.payload.data.contractTokenTransferList || [],
           totalData: action.payload.listSize || 0,
           error: ''
         }
       }
     }
 
-    case actionTypes.tokenGetTokenHoldersRejected: {
+    case actionTypes.selectContractTokenTransferListRejected: {
       return {
         ...state,
-        tokenHolders: {
-          ...state.tokenHolders,
+        contractTokenTx: {
+          ...state.contractTokenTx,
           loading: false,
           error: action.error
         }

@@ -71,6 +71,22 @@ const actionTypes = {
   tokenGetTokenHolders: 'TOKEN_GET_TOKEN_HOLDERS',
   tokenGetTokenHoldersFulfilled: 'TOKEN_GET_TOKEN_HOLDERS_FULFILLED',
   tokenGetTokenHoldersRejected: 'TOKEN_GET_TOKEN_HOLDERS_REJECTED',
+
+  selectContractList: 'SELECT_CONTRACT_LIST',
+  selectContractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
+  selectContractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
+
+  selectContractInfo: 'SELECT_CONTRACT_INFO',
+  selectContractInfoFulfilled: 'SELECT_CONTRACT_INFO_FULFILLED',
+  selectContractInfoRejected: 'SELECT_CONTRACT_INFO_REJECTED',
+
+  selectContractTransactionList: 'SELECT_CONTRACT_TRANSACTION_LIST',
+  selectContractTransactionListFulfilled: 'SELECT_CONTRACT_TRANSACTION_LIST_FULFILLED',
+  selectContractTransactionListRejected: 'SELECT_CONTRACT_TRANSACTION_LIST_REJECTED',
+ 
+  selectContractTokenTransferList: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST',
+  selectContractTokenTransferListFulfilled: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST_FULFILLED',
+  selectContractTokenTransferListRejected: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST_REJECTED',
 }
 
 export default actionTypes

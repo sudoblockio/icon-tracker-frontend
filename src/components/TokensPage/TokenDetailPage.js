@@ -36,9 +36,7 @@ class TokenDetailPage extends Component {
         const { token, tokenTransfers, tokenHolders } = this.props        
         return (
             <div className="content-wrap">
-                <TokenSummary 
-                    token={token}
-                />
+                <TokenSummary token={token}/>
                 <TokenTabs
                     loading={token.loading}
                     contractAddr={contractAddr}

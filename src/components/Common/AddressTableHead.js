@@ -6,13 +6,25 @@ import { TX_TYPE } from '../../utils/const'
 class AddressTableHead extends Component {
 	render() {
 		const TableHead = (_txType) => {
-            const isBlockTx = this.txType === TX_TYPE.BLOCK_TX
-            const isTokenTx = this.txType === TX_TYPE.ADDRESS_TOKEN_TX || 
-                            this.txType === TX_TYPE.TOKEN_TRANSFERS ||
-                            this.txType === TX_TYPE.TOKEN_TX ||
-                            this.txType === TX_TYPE.TOKEN_HOLDERS
+            const isBlockTx = _txType === TX_TYPE.BLOCK_TX
+            const isTokenTx = _txType === TX_TYPE.ADDRESS_TOKEN_TX || 
+                            _txType === TX_TYPE.TOKEN_TX ||
+                            _txType === TX_TYPE.TOKEN_HOLDERS
     
-			if (_txType === TX_TYPE.TOKEN_TX) {
+            if (_txType === TX_TYPE.TOKEN_TRANSFERS) {
+                return (
+                    <tr>
+                        <th>TxHash</th>
+                        <th>Age</th>
+                        <th>From</th>
+                        <th className="table-sign"></th>
+                        <th>To</th>
+                        <th>Quantity</th>
+                        <th>Token</th>
+                    </tr>
+                )
+            }                
+            else if (_txType === TX_TYPE.TOKEN_TX) {
 				return (
                     <tr>
                         <th>TxHash</th>

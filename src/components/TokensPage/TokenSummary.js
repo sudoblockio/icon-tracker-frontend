@@ -10,7 +10,7 @@ class TokenSummary extends Component {
         const { loading, data, error } = token
         const { tokenName, tokenSymbol, totalSupply, contract, price, decimals, holderAddr, transfers, totalSupplyUsd, priceUsd } = data
         const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
-        const _priceUsd = convertNumberToText(priceUsd)
+        const _priceUsd = convertNumberToText(priceUsd, 'usd')
         return (
             <div className="screen0">
             {

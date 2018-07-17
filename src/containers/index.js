@@ -1,7 +1,10 @@
 import MainPageContainer from './MainPage/MainPageContainer'
 import AddressesPageContainer from './AddressesPage/AddressesPageContainer'
 import AddressDetailPageContainer from './AddressesPage/AddressDetailPageContainer'
+
+import ContractDetailPageContainer from './ContractsPage/ContractDetailPageContainer'
 import ContractsPageContainer from './ContractsPage/ContractsPageContainer'
+
 import BlocksPageContainer from './BlocksPage/BlocksPageContainer'
 import BlockDetailPageContainer from './BlocksPage/BlockDetailPageContainer'
 import TransactionsPageContainer from './TransactionsPage/TransactionsPageContainer'
@@ -18,7 +21,10 @@ export {
   HeaderContainer,
   AddressesPageContainer,
   AddressDetailPageContainer,
+
+  ContractDetailPageContainer,
   ContractsPageContainer,
+
   BlocksPageContainer,
   BlockDetailPageContainer,
   TransactionsPageContainer,
@@ -27,5 +33,5 @@ export {
 
   AddressTotalTxListContainer,
   TokenListPageContainer,
-  TokenDetailPageContainer
+  TokenDetailPageContainer,
 }

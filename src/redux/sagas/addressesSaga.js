@@ -1,10 +1,6 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
-  getAddressesApi as GET_ADDRESSES_API,
-} from '../api/rest';
-
-import {
   addressListApi as ADDRESS_LIST_API,
   addressInfoApi as ADDRESS_INFO_API,
   addressTxListApi as ADDRESS_TX_LIST,

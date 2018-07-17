@@ -13,7 +13,10 @@ import AddressDetailPage from './AddressesPage/AddressDetailPage'
 import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
+import ContractDetailPage from './ContractsPage/ContractDetailPage'
 import ContractsPage from './ContractsPage/ContractsPage'
+import ContractInfo from './ContractsPage/ContractInfo'
+import ContractTabs from './ContractsPage/ContractTabs'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
@@ -49,6 +52,11 @@ import TokenLink from './Common/TokenLink'
 import ContractLink from './Common/ContractLink'
 import NoBox from './Common/NoBox'
 
+import TxBottom from './Common/TxComponents/TxBottom'
+import TxPage from './Common/TxComponents/TxPage'
+import TxTableHead from './Common/TxComponents/TxTableHead'
+import TxTableRow from './Common/TxComponents/TxTableRow'
+
 export {
   Header,
   SearchBox,
@@ -65,7 +73,10 @@ export {
   WalletInformation,
   WalletTransactions,
 
+  ContractDetailPage,
   ContractsPage,
+  ContractInfo,
+  ContractTabs,
 
   BlocksPage,
   BlockDetailPage,
@@ -99,5 +110,10 @@ export {
 
   TokenLink,
   ContractLink,
-  NoBox
+  NoBox,
+
+  TxBottom,
+  TxPage,
+  TxTableHead,
+  TxTableRow,
 }

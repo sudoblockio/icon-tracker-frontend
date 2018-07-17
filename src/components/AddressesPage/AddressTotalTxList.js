@@ -185,7 +185,6 @@ const Header = ({txType, urlIndex, totalData}) => {
 				</p>
 			)
 		case TX_TYPE.ADDRESS_TOKEN_TX:
-		case TX_TYPE.TOKEN_TX:
 			return (
 				<p className="title">Token Transfers
 					<span>for Address {urlIndex}</span>

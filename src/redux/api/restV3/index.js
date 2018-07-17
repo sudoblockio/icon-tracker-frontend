@@ -21,12 +21,19 @@ import {
     tokenGetTokenHoldersApi
 } from './token'
 
+import {
+    selectContractListApi,
+    selectContractInfoApi,
+    selectContractTransactionListApi,
+    selectContractTokenTransferListApi
+} from './contract'
+
 export {
     addressListApi,
     addressInfoApi,
     addressTxListApi,
     addressTokenTxListApi,
-    
+
     blockListApi,
     blockInfoApi,
     blockTxListApi,
@@ -38,5 +45,10 @@ export {
     tokenGetTokenTransferListApi,
     tokenGetTokenSummaryApi,
     tokenGetTokenTransfersApi,
-    tokenGetTokenHoldersApi
+    tokenGetTokenHoldersApi,
+
+    selectContractListApi,
+    selectContractInfoApi,
+    selectContractTransactionListApi,
+    selectContractTokenTransferListApi
 }

@@ -5,6 +5,7 @@ import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
 import AddressesPage from './pages/AddressesPage';
 import AddressDetailPage from './pages/AddressDetailPage';
+import ContractDetailPage from './pages/ContractDetailPage'
 import ContractsPage from './pages/ContractsPage'
 import BlocksPage from './pages/BlocksPage';
 import BlockDetailPage from './pages/BlockDetailPage';
@@ -37,8 +38,9 @@ class Routes extends Component {
 
                 <Route onEnter={window.scroll(0, 0)} exact path='/transaction/:txHash' component={TransactionDetailPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
+                <Route onEnter={window.scroll(0, 0)} exact path='/contract/:contractId' component={ContractDetailPage} />
                 <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
-                <Route onEnter={window.scroll(0, 0)} exact path='/token/:contractId' component={TokenDetailPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/token/:tokenId' component={TokenDetailPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={AddressTotalTxListPage}/>

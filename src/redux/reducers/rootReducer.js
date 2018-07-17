@@ -7,6 +7,8 @@ import { searchReducer } from './searchReducer'
 import { routerReducer } from 'react-router-redux'
 import { tokenReducer } from './tokenReducer'
 import { tokensReducer } from './tokensReducer'
+import { contractReducer } from './contractReducer'
+import { contractsReducer } from './contractsReducer'
 
 const rootReducer = combineReducers({
   mainPage: mainPageReducer,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   router: routerReducer,
   token: tokenReducer,
   tokens: tokensReducer,
+  contract: contractReducer,
+  contracts: contractsReducer,
 });
 
 export default rootReducer;

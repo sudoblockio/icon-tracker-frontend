@@ -39,11 +39,21 @@ export function convertNumberToText(num, unit, round) {
 //   return moment(date).utcOffset(timezoneOffset).format(`YYYY-MM-DD HH:mm:ss${!!showUTC ? ` [(UTC+${timezoneOffset})]` : ''}`)
 // }
 
+export function onlyDate (date) {
+  if (!date) return '-'
+  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
+  return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD')
+}
+
+export function getTimezoneMomentTime(date) {
+  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
+  return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+}
+
 export function dateToUTC(date, showUTC, showAgo) {
   if (!date) return '-'
-
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+  let result =  moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
   if (showUTC) {
     result += ` (${getUTCString()})`
   }
