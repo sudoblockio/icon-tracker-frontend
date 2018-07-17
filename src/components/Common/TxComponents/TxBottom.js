@@ -10,7 +10,6 @@ import {
     numberWithCommas
 } from '../../../utils/utils'
 
-
 class TxBottom extends Component {
 
     render() {

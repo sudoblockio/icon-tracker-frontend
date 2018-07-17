@@ -16,6 +16,7 @@ export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const TX_TYPE = {
     CONTRACT_TX: 'contracttx',
     ADDRESS_TX: 'addresstx',
+    ADDRESS_TOKEN_TX: 'addresstokentx',
 
 
 
@@ -25,7 +26,6 @@ export const TX_TYPE = {
 
     CONTRACT_TOKEN_TX: 'contracttokentx',
 
-    ADDRESS_TOKEN_TX: 'addresstokentx',
     BLOCK_TX: 'blocktx',
     TRANSACTIONS: 'transactions',
     TOKEN_TRANSFERS: 'tokentransfers',
@@ -44,6 +44,12 @@ export const TX_TYPE_DATA = {
 		tx: 'walletTx',
 		getTxList: 'addressTxList',
         className: 'table-typeC',
+        noBoxText: 'No Transaction'
+    },
+	[TX_TYPE.ADDRESS_TOKEN_TX]: {
+		tx: 'walletTokenTx',
+		getTxList: 'addressTokenTxList',
+        className: 'table-typeC token',
         noBoxText: 'No Transaction'
     },
 

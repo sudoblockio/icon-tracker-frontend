@@ -4,12 +4,14 @@ import {
     convertNumberToText,
 	isContractAddress,
 	numberWithCommas,
-	dateToUTC
+	dateToUTC,
+	tokenText
 } from '../../../utils/utils'
 import {
     TransactionLink,
 	WalletLink,
-	BlockLink
+	BlockLink,
+	TokenLink
 } from '../../../components'
 import { 
     TX_TYPE
@@ -81,11 +83,13 @@ class TxTableBody extends Component {
 				toAddr, 
 				quantity, 
 				state, 
-				tokenSymbol, 
 				height, 
 				amount, 
 				createDate,
-				fee
+				fee,
+				contractSymbol,
+				contractName,
+				contractAddr
 			} = data
 
 			const isError = state === 0
@@ -113,6 +117,18 @@ class TxTableBody extends Component {
                             <AddressCell targetAddr={toAddr} address={address}/>
 							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>ICX</em></td>
 							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+                        </tr>   
+                    )                       
+				case TX_TYPE.ADDRESS_TOKEN_TX:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+							<td className={'break'}>{dateToUTC(createDate)}</td>
+                            <AddressCell targetAddr={fromAddr} address={address} />
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
+                            <AddressCell targetAddr={toAddr} address={address}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>{contractSymbol}</em></td>
+							<td><TokenLink label={contractSymbol} to={contractAddr}/>{/*tokenText(contractName, contractSymbol, contractAddr)*/}</td>
                         </tr>   
                     )                       
 

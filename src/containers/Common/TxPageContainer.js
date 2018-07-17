@@ -6,6 +6,7 @@ import {
 } from '../../redux/actions/contractAction';
 import { 
   addressTxList,
+  addressTokenTxList
 } from '../../redux/actions/addressesActions';
 
 function mapStateToProps(state) {
@@ -13,13 +14,15 @@ function mapStateToProps(state) {
     url: state.router.location,
     contractTx: state.contract.contractTx,
     walletTx: state.addresses.walletTx,
+    walletTokenTx: state.addresses.walletTokenTx,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     contractTxList: payload => dispatch(contractTxList(payload)),
-    addressTxList: payload => dispatch(addressTxList(payload))
+    addressTxList: payload => dispatch(addressTxList(payload)),
+    addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
   };
 }
 

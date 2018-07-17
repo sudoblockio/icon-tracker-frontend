@@ -6,10 +6,10 @@ import {
   TX_TYPE_DATA
 } from '../../utils/const'
 
-class WalletTransactions extends Component {
+class WalletTokenTransfers extends Component {
   render() {
     const {
-      walletTx,
+      walletTokenTx,
       goAllTx,
       txType,
       address
@@ -24,16 +24,16 @@ class WalletTransactions extends Component {
 
     return (
       <TxBottom
-        txData={walletTx}
+        txData={walletTokenTx}
         goAllTx={goAllTx}
         txType={txType}
         address={address}
         tableClassName={tableClassName}
         noDataText={noDataText}
-        totalText='Transactions'
+        totalText='Token transfers'
       />
     )
   }
 }
 
-export default WalletTransactions;
+export default WalletTokenTransfers;

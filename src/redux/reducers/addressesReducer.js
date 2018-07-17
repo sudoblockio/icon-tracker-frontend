@@ -111,6 +111,43 @@ export function addressesReducer(state = initialState, action) {
       }
     }
 
+    case actionTypes.addressTokenTxList: {
+      return {
+        ...state,
+        walletTokenTx: {
+          ...state.walletTokenTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || state.walletTokenTx.count,
+          error: ''
+        }        
+      }
+    }
+
+    case actionTypes.addressTokenTxListFulfilled: {
+      return {
+        ...state,
+        walletTokenTx: {
+          ...state.walletTokenTx,
+          loading: false,
+          data: action.payload.data.tokenTx || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.addressTokenTxListRejected: {
+      return {
+        ...state,
+        walletTokenTx: {
+          ...state.walletTokenTx,
+          loading: false,
+          error: action.error
+        }        
+      }
+    }
+
 
 
 
@@ -161,43 +198,6 @@ export function addressesReducer(state = initialState, action) {
         ...state,
         addresses: {
           ...state.addresses,
-          loading: false,
-          error: action.error
-        }        
-      }
-    }
-
-    case actionTypes.addressTokenTxList: {
-      return {
-        ...state,
-        walletTokenTx: {
-          ...state.walletTokenTx,
-          loading: true,
-          page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.walletTokenTx.count,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.addressTokenTxListFulfilled: {
-      return {
-        ...state,
-        walletTokenTx: {
-          ...state.walletTokenTx,
-          loading: false,
-          data: action.payload.data.tokenTx || [],
-          totalData: action.payload.listSize || 0,
-          error: ''
-        }
-      }
-    }
-
-    case actionTypes.addressTokenTxListRejected: {
-      return {
-        ...state,
-        walletTokenTx: {
-          ...state.walletTokenTx,
           loading: false,
           error: action.error
         }        

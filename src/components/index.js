@@ -13,6 +13,7 @@ import AddressDetailPage from './AddressesPage/AddressDetailPage'
 import WalletInfo from './AddressesPage/WalletInfo'
 import WalletTabs from './AddressesPage/WalletTabs'
 import WalletTransactions from './AddressesPage/WalletTransactions'
+import WalletTokenTransfers from './AddressesPage/WalletTokenTransfers'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
@@ -77,6 +78,7 @@ export {
   WalletInfo,
   WalletTabs,
   WalletTransactions,
+  WalletTokenTransfers,
 
   BlocksPage,
   BlockDetailPage,

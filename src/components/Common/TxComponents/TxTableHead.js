@@ -32,6 +32,19 @@ class TxTableHead extends Component {
                             <th>TxFee</th>
                         </tr>
                     )
+                case TX_TYPE.ADDRESS_TOKEN_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Quantity</th>
+                            <th>Token</th>
+                        </tr>
+                    )
+
                 default:
                     return (
                         <tr></tr>

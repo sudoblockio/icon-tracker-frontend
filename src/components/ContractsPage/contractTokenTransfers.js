@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { 
     TxBottom
 } from '../../components'
@@ -31,4 +30,4 @@ class ContractTokenTransfers extends Component {
     }
 }
 
-export default withRouter(ContractTokenTransfers);
+export default ContractTokenTransfers;

@@ -8,6 +8,7 @@ import {
     LoadingComponent,
     NoBox,
     WalletTransactions,
+    WalletTokenTransfers,
 } from '../../components'
 
 class WalletTabs extends Component {
@@ -66,7 +67,14 @@ class WalletTabs extends Component {
                         />
                     )
                 case 1:
-                    // return <ContractTokenTransfers contractTokenTx={contractTokenTx} goAllTx={this.goAllTx} />
+                    return (
+                        <WalletTokenTransfers 
+                            walletTokenTx={walletTokenTx} 
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.ADDRESS_TOKEN_TX} 
+                            address={walletDetail.address} 
+                        />
+                    )
                 default:
                     return <NoBox text="No Data" />
             }
