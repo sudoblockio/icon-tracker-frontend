@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { LoadingComponent, AddressTableRow, WalletLink, TransactionLink } from '../../components/';
-import { convertNumberToText } from '../../utils/utils'
+import { LoadingComponent, AddressTableBody } from '../../components/';
+import { TX_TYPE } from '../../utils/const'
 
 class BlockInformation extends Component {
   getBlockData = (pageId) => {
@@ -26,9 +26,7 @@ class BlockInformation extends Component {
       }
       {
         loading ?
-        <div style={{height: '513px'}}>
-          <LoadingComponent />
-        </div>
+        <LoadingComponent height='513px'/>
         :
         <div className="contents">
         {
@@ -60,7 +58,7 @@ class BlockInformation extends Component {
             </thead>
             <tbody>
               {data.map(tx => (
-                <AddressTableRow key={tx.txHash} data={tx} txType={'blocktx'} />
+                <AddressTableBody key={tx.txHash} data={tx} txType={TX_TYPE.BLOCK_TX} />
               ))}
             </tbody>
           </table>

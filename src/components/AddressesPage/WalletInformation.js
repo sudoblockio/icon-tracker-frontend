@@ -5,7 +5,6 @@ import { numberWithCommas, convertNumberToText, isValidNodeType } from '../../ut
 import CopyButton from '../Common/CopyButton'
 import { LoadingComponent } from '../../components/';
 
-
 class WalletInformation extends Component {
   constructor(props) {
     super(props)

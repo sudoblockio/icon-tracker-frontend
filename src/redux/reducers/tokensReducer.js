@@ -16,6 +16,11 @@ const initialState = {
     data: [],
     totalData: 0,
     error: '',
+  },
+  token: {
+    loading: false,
+    data: {},
+    error: ''
   }
 }
 
@@ -94,6 +99,40 @@ export function tokensReducer(state = initialState, action) {
         }        
       }
     }  
+
+    case actionTypes.tokenGetTokenSummary: {
+      return {
+        ...state,
+        token: {
+          ...state.token,
+          loading: true,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.tokenGetTokenSummaryFulfilled: {
+      return {
+        ...state,
+        token: {
+          ...state.token,
+          loading: false,
+          data: action.payload.data,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.tokenGetTokenSummaryRejected: {
+      return {
+        ...state,
+        token: {
+          ...state.token,
+          loading: false,
+          error: action.error
+        }
+      }
+    }
 
     default: {
       return state

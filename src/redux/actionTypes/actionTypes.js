@@ -59,6 +59,18 @@ const actionTypes = {
   tokenGetTokenTransferList: 'TOKEN_GET_TOKEN_TRANSFER_LIST',
   tokenGetTokenTransferListFulfilled: 'TOKEN_GET_TOKEN_TRANSFER_LIST_FULFILLED',
   tokenGetTokenTransferListRejected: 'TOKEN_GET_TOKEN_TRANSFER_LIST_REJECTED',
+
+  tokenGetTokenSummary: 'TOKEN_GET_TOKEN_SUMMARY',
+  tokenGetTokenSummaryFulfilled: 'TOKEN_GET_TOKEN_SUMMARY_FULFILLED',
+  tokenGetTokenSummaryRejected: 'TOKEN_GET_TOKEN_SUMMARY_REJECTED',
+
+  tokenGetTokenTransfers: 'TOKEN_GET_TOKEN_TRANSFERS',
+  tokenGetTokenTransfersFulfilled: 'TOKEN_GET_TOKEN_TRANSFERS_FULFILLED',
+  tokenGetTokenTransfersRejected: 'TOKEN_GET_TOKEN_TRANSFERS_REJECTED',
+
+  tokenGetTokenHolders: 'TOKEN_GET_TOKEN_HOLDERS',
+  tokenGetTokenHoldersFulfilled: 'TOKEN_GET_TOKEN_HOLDERS_FULFILLED',
+  tokenGetTokenHoldersRejected: 'TOKEN_GET_TOKEN_HOLDERS_REJECTED',
 }
 
 export default actionTypes

@@ -30,9 +30,7 @@ class TokenListPage extends Component {
 				<div className="screen0">
 				{
 					loading ?
-					<div style={{height: 'calc(100vh - 120px - 144px)'}}>
-						<LoadingComponent />
-					</div>
+					<LoadingComponent height='calc(100vh - 120px - 144px)' />
 					:
 					<div className="wrap-holder">
 						<p className="title">Tokens</p>

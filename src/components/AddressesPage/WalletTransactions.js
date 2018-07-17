@@ -1,36 +1,39 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getUTCString } from '../../utils/utils'
-import { AddressTableRow } from '../../components'
+import { AddressTableBody } from '../../components'
 import { LoadingComponent } from '../../components/';
+import { TX_TYPE } from '../../utils/const'
 
 const Tabs = ['Transactions', 'Token Transfers']
 
+// TODO 전반적인 정리 필요
+// TokenTabs 참고
 class WalletTransactions extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       on: 0,
-      txType: 'addresstx'
+      txType: TX_TYPE.ADDRESS_TX
     }
   }
 
   setTab = (index) => {
     this.setState({on: index}, () => {
       const { address } = this.props.walletDetail
-      switch (index) {
+      switch(index) {
         case 0:
-          this.setState({txType: 'addresstx'})
+          this.setState({txType: TX_TYPE.ADDRESS_TX})
           this.props.addressTxList({ address, page: 1, count: 10 })
           break
         
         case 1:
-          this.setState({txType: 'addresstokentx'})
+          this.setState({txType: TX_TYPE.ADDRESS_TOKEN_TX})
           this.props.addressTokenTxList({ address, page: 1, count: 10 })
           break
         
-          default:
+        default:
       }
     })
   }
@@ -47,7 +50,7 @@ class WalletTransactions extends Component {
     const { walletDetail, walletTx, walletTokenTx } = this.props
     const { address } = walletDetail
     const utcLabel = `(${getUTCString()})`
-		const isTokenTx = txType === 'addresstokentx'
+		const isTokenTx = txType === TX_TYPE.ADDRESS_TOKEN_TX
     const tx = isTokenTx ? walletTokenTx : walletTx
     const { loading, data, totalData } = tx
     const noTx = data.length === 0
@@ -102,7 +105,7 @@ class WalletTransactions extends Component {
               </thead>
               <tbody>
                 {data.map(tx => (
-                  <AddressTableRow key={tx.txHash} data={tx} address={address} txType={txType}/>
+                  <AddressTableBody key={tx.txHash} data={tx} address={address} txType={txType}/>
                 ))}
               </tbody>
             </table>

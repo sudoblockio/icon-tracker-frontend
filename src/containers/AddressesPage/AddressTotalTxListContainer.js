@@ -14,6 +14,10 @@ import {
 import {
   tokenGetTokenTransferList,
 } from '../../redux/actions/tokensActions'
+import { 
+  tokenGetTokenTransfers,
+  tokenGetTokenHolders
+} from '../../redux/actions/tokenActions';
 
 function mapStateToProps(state) {
   return {
@@ -22,7 +26,9 @@ function mapStateToProps(state) {
     walletTokenTx: state.addresses.walletTokenTx,
     blockTx: state.blocks.blockTx,
     recentTx: state.transactions.recentTx,
-    recentTokenTx: state.tokens.recentTokenTx
+    recentTokenTx: state.tokens.recentTokenTx,
+    tokenTransfers: state.token.tokenTransfers,
+    tokenHolders: state.token.tokenHolders,
   };
 }
 
@@ -33,6 +39,8 @@ function mapDispatchToProps(dispatch) {
     blockTxList: (payload) => dispatch(blockTxList(payload)),
     transactionRecentTx: (payload) => dispatch(transactionRecentTx(payload)),
     tokenGetTokenTransferList: (payload) => dispatch(tokenGetTokenTransferList(payload)),
+    tokenGetTokenTransfers: payload => dispatch(tokenGetTokenTransfers(payload)),
+    tokenGetTokenHolders: payload => dispatch(tokenGetTokenHolders(payload))
   };
 }
 

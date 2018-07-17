@@ -1,16 +1,55 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { LoadingComponent, Pagination, SortHolder, AddressTableRow } from '../../components/';
-import { getUTCString, calcMaxPageNum, startsWith } from '../../utils/utils';
-import { runInThisContext } from 'vm';
+import { LoadingComponent, Pagination, SortHolder, AddressTableBody, AddressTableHead, NoBox } from '../../components/';
+import { calcMaxPageNum } from '../../utils/utils';
+import { TX_TYPE } from '../../utils/const'
+
+const TxTypeSelector = {
+	[TX_TYPE.ADDRESS_TX]: {
+		tx: 'walletTx',
+		getTxList: 'addressTxList',
+		className: 'table-typeA'
+	},
+	[TX_TYPE.ADDRESS_TOKEN_TX]: {
+		tx: 'walletTokenTx',
+		getTxList: 'addressTokenTxList',
+		className: 'table-typeC token'	
+	},
+	[TX_TYPE.BLOCK_TX]: {
+		tx: 'blockTx',
+		getTxList: 'blockTxList',
+		className: 'table-typeD'
+	},
+	[TX_TYPE.TRANSACTIONS]: {
+		tx: 'recentTx',
+		getTxList: 'transactionRecentTx',
+		className: 'table-typeJ'
+	},
+	[TX_TYPE.TOKEN_TRANSFERS]: {
+		tx: 'recentTokenTx',
+		getTxList: 'tokenGetTokenTransferList',
+		className: 'table-typeN'
+	},
+	[TX_TYPE.TOKEN_TX]: {
+		tx: 'tokenTransfers',
+		getTxList: 'tokenGetTokenTransfers',
+		className: 'table-typeF'
+	},
+	[TX_TYPE.TOKEN_HOLDERS]: {
+		tx: 'tokenHolders',
+		getTxList: 'tokenGetTokenHolders',
+		className: 'table-typeG'
+	}
+}
 
 class AddressTotalTxList extends Component {
 
 	constructor(props) {
 		super(props);
+		
 		this.txType = ''
 		this.urlIndex = ''
-		this.totalTxList = () => {}
+		this.getTxList = () => {}
 	}
 
 	componentWillMount() {
@@ -28,47 +67,38 @@ class AddressTotalTxList extends Component {
 	initPageType = (pathname) => {
 		this.txType = pathname.split("/")[1]
 		this.urlIndex = pathname.split("/")[2]
-		switch(this.txType) {
-			case 'addresstx':
-				this.totalTxList = this.props.addressTxList	
-				break
-			case 'addresstokentx':
-				this.totalTxList = this.props.addressTokenTxList	
-				break			
-			case 'blocktx':
-				this.totalTxList = this.props.blockTxList	
-				break
-			case 'transactions':
-				this.totalTxList = this.props.transactionRecentTx	
-				break
-			case 'tokentransfers':
-				this.totalTxList = this.props.tokenGetTokenTransferList	
-				break
-			default:
-				this.totalTxList = () => {}	
-		}
-		
+		this.getTxList = this.props[this.getTxTypeSelector()['getTxList']] || (()=>{})
 		this.getTotalTxList(pathname, 20)
+	}
+
+	getTxTypeSelector = () => {
+		return TxTypeSelector[this.txType] || {}
 	}
 
 	getTotalTxList = (pathname, count) => {
 		let page
 		switch(this.txType) {
-			case 'addresstx':
-			case 'addresstokentx':
+			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_TOKEN_TX:
 				page = pathname.split("/")[3] || 1
 				const address = pathname.split("/")[2]
-				this.totalTxList({ address, page, count })
+				this.getTxList({ address, page, count })
 				break	
-			case 'blocktx':
+			case TX_TYPE.BLOCK_TX:
 				page = pathname.split("/")[3] || 1
 				const height = pathname.split("/")[2]
-				this.totalTxList({ height, page, count })
+				this.getTxList({ height, page, count })
 				break
-			case 'transactions':
-			case 'tokentransfers':
+			case TX_TYPE.TRANSACTIONS:
+			case TX_TYPE.TOKEN_TRANSFERS:
 				page = pathname.split("/")[2] || 1
-				this.totalTxList({ page, count })
+				this.getTxList({ page, count })
+				break
+			case TX_TYPE.TOKEN_TX:
+			case TX_TYPE.TOKEN_HOLDERS:
+				page = pathname.split("/")[3] || 1
+				const contractAddr = pathname.split("/")[2]
+				this.getTxList({ contractAddr, page, count })
 				break
 			default:
 		}
@@ -79,102 +109,64 @@ class AddressTotalTxList extends Component {
 	}
 
 	getTotalTxListByPage = (page) => {
-		if (this.txType === 'transactions') {
-			this.props.history.push(`/${this.txType}/${page}`);	
-		}
-		else {
-			const index = this.props.url.pathname.split("/")[2]
-			this.props.history.push(`/${this.txType}/${index}/${page}`);	
-		}
-	}
-
-	getTx = (type) => {
-		switch(type) {
-			case 'addresstx':
-				return this.props.walletTx
-			case 'addresstokentx':
-				return this.props.walletTokenTx
-			case 'blocktx':
-				return this.props.blockTx
-			case 'transactions':
-				return this.props.recentTx
-			case 'tokentransfers':
-				return this.props.recentTokenTx
+		switch(this.txType) {
+			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_TOKEN_TX:
+			case TX_TYPE.BLOCK_TX:
+			case TX_TYPE.TOKEN_TX:
+			case TX_TYPE.TOKEN_HOLDERS:
+				const index = this.props.url.pathname.split("/")[2]
+				this.props.history.push(`/${this.txType}/${index}/${page}`);	
+				break
+			case TX_TYPE.TRANSACTIONS:
+			case TX_TYPE.TOKEN_TRANSFERS:
+				this.props.history.push(`/${this.txType}/${page}`);	
+				break
 			default:
-				return {}
 		}
 	}
 
 	render() {
-		const tx = this.getTx(this.txType)
+		const className = this.getTxTypeSelector()['className'] || ''
+		const tx = this.props[this.getTxTypeSelector()['tx']] || {}
 		const { loading, page, count, data, totalData } = tx;
-		const _data = data || []
-		const isBlockTx = this.txType === 'blocktx'
-		const isTokenTx = this.txType === 'addresstokentx' || this.txType === 'tokentransfers'
-		const noTx = _data.length === 0
-		const utcLabel = `(${getUTCString()})`
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
 				{
 					loading ?
-					<div style={{height: 'calc(100vh - 120px - 144px)'}}>
-						<LoadingComponent />
-					</div>
+					<LoadingComponent height='calc(100vh - 120px - 144px)'/>
 					:
 					<div className="wrap-holder">
 						<Header txType={this.txType} urlIndex={this.urlIndex} totalData={totalData} />
-						<div className="contents">		
 						{
-							noTx &&
-							<table className="table-type">
-								<tbody>
-									<tr>
-										<td colSpan="7" className="notrans">No Transaction</td>
-									</tr>
-								</tbody>
-							</table>
+							(!data || data.length === 0) ?
+							<NoBox text={this.txType === TX_TYPE.TOKEN_HOLDERS ? 'No Holder' : 'No Transaction'}/>
+							:
+							<div className="contents">	
+								<table className={className}>
+									<thead>
+										<AddressTableHead txType={this.txType}/>
+									</thead>
+									<tbody>
+									{
+										data.map(row => (
+											<AddressTableBody key={row.txHash} data={row} address={this.urlIndex} txType={this.txType}/>
+										))
+									}
+									</tbody>
+								</table>
+								<SortHolder
+									count={count}
+									getData={this.getTotalTxListByCount}
+								/>
+								<Pagination
+									pageNum={page}
+									maxPageNum={calcMaxPageNum(totalData, count)}
+									getData={this.getTotalTxListByPage} 
+								/>								
+							</div>
 						}
-						{
-							!noTx &&
-							<table className={`table-type${isBlockTx ? 'D' : 'C'}`}>
-								<thead>
-									<tr>
-										<th>Tx Hash</th>
-										{!isBlockTx && <th>Block</th>}
-										{!isBlockTx && <th>Time Stamp<em>{utcLabel}</em></th>}
-										<th>From</th>
-										<th className="table-sign"></th>
-										<th>To</th>
-										<th>{isTokenTx ? 'Quantity' : 'Amount'}</th>
-										<th>{isTokenTx ? 'Token' : 'TxFee'}</th>
-									</tr>
-								</thead>
-								<tbody>
-								{
-									_data.map((row) => (
-										<AddressTableRow key={row.txHash} data={row} address={this.urlIndex} txType={this.txType}/>
-									))
-								}
-								</tbody>
-							</table>
-						}							
-						{
-							!noTx &&
-							<SortHolder
-								count={count}
-								getData={this.getTotalTxListByCount}
-							/>
-						}
-						{
-							!noTx &&
-							<Pagination
-								pageNum={page}
-								maxPageNum={calcMaxPageNum(totalData, count)}
-								getData={this.getTotalTxListByPage} 
-							/>
-						}
-						</div>
 					</div>					
 				}				
 				</div>
@@ -185,39 +177,54 @@ class AddressTotalTxList extends Component {
 
 const Header = ({txType, urlIndex, totalData}) => {
 	switch(txType) {
-		case 'addresstx':
+		case TX_TYPE.ADDRESS_TX:
 			return (
 				<p className="title">Transactions
 					<span>for Address {urlIndex}</span>
 					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
 				</p>
 			)
-		case 'addresstokentx':
+		case TX_TYPE.ADDRESS_TOKEN_TX:
+		case TX_TYPE.TOKEN_TX:
 			return (
 				<p className="title">Token Transfers
 					<span>for Address {urlIndex}</span>
 					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
 				</p>
 			)
-		case 'blocktx':
+		case TX_TYPE.BLOCK_TX:
 			return (
 				<p className="title">Transactions
 					<span>for Block Height {urlIndex}</span>
 					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
 				</p>
 			)
-		case 'transactions':
+		case TX_TYPE.TRANSACTIONS:
 			return (
 				<p className="title">Transactions
 					<span></span>
 					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
 				</p>
 			)
-		case 'tokentransfers':
+		case TX_TYPE.TOKEN_TRANSFERS:
 			return (
 				<p className="title">Token Transfers
 					<span></span>
 					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+				</p>
+			)
+		case TX_TYPE.TOKEN_TX:
+			return (
+				<p className="title">Token Transfers
+					<span>for Token Contract {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+				</p>
+			)
+		case TX_TYPE.TOKEN_HOLDERS:
+			return (
+				<p className="title">Token Holders
+					<span>for Token Contract {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Holders found</span>
 				</p>
 			)
 		default:

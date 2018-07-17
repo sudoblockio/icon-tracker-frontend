@@ -15,7 +15,10 @@ import {
 } from './transaction'
 import { 
     tokenGetTokenListApi,
-    tokenGetTokenTransferListApi
+    tokenGetTokenTransferListApi,    
+    tokenGetTokenSummaryApi,
+    tokenGetTokenTransfersApi,
+    tokenGetTokenHoldersApi
 } from './token'
 
 export {
@@ -32,5 +35,8 @@ export {
     transactionTxDetailApi,
     
     tokenGetTokenListApi,
-    tokenGetTokenTransferListApi
+    tokenGetTokenTransferListApi,
+    tokenGetTokenSummaryApi,
+    tokenGetTokenTransfersApi,
+    tokenGetTokenHoldersApi
 }
