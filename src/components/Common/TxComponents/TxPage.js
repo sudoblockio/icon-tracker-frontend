@@ -32,7 +32,6 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount')
 		this.initPageType(this.props.url.pathname)
 	}
 
@@ -49,6 +48,7 @@ class TxPage extends Component {
         this.urlIndex = pathname.split("/")[2] || ''
         this.pageId = pathname.split("/")[3] || 1
 		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (()=>{})
+		console.log(this.props[this.getTxTypeData()['getTxList']])
 		this.getTxListByCount(20)
 	}
 
@@ -56,6 +56,9 @@ class TxPage extends Component {
 		switch(this.txType) {
             case TX_TYPE.CONTRACT_TX:
                 this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
+                break
+			case TX_TYPE.ADDRESS_TX:
+                this.getTxList({ address: this.urlIndex, page: this.pageId, count })
                 break
             
             default:
@@ -66,6 +69,9 @@ class TxPage extends Component {
 		switch(this.txType) {
             case TX_TYPE.CONTRACT_TX:
                 this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);	
+                break
+			case TX_TYPE.ADDRESS_TX:
+				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);	
                 break
 
             default:
@@ -128,6 +134,13 @@ const Header = ({txType, urlIndex, totalData}) => {
 			return (
 				<p className="title">Transactions
 					<span>for Contract {urlIndex}</span>
+					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
+				</p>
+			)		
+		case TX_TYPE.ADDRESS_TX:
+			return (
+				<p className="title">Transactions
+					<span>for Address {urlIndex}</span>
 					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
 				</p>
 			)		

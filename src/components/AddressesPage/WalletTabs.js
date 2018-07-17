@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
+    TX_TYPE,
+    WALLET_TABS,
+} from '../../utils/const'
+import {
     LoadingComponent,
     NoBox,
-    ContractTransactions,
-    ContractTokenTransfers,
-    ContractCode
+    WalletTransactions,
 } from '../../components'
-import {
-    TX_TYPE,
-    CONTRACT_TABS,
-} from '../../utils/const'
 
-class ContractTabs extends Component {
+class WalletTabs extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -21,22 +19,17 @@ class ContractTabs extends Component {
     }
 
     setTab = (index) => {
-        const { contract } = this.props
-        const { data } = contract
+        const { walletDetail } = this.props
+        const { data } = walletDetail
         const { address } = data
-        const addr = address
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
-                    this.props.contractTxList({ addr, page: 1, count: 10 })
+                    this.props.addressTxList({ address, page: 1, count: 10 })
                     break
                 case 1:
-                    this.props.contractTokenTxList({ addr, page: 1, count: 10 })
+                    this.props.addressTokenTxList({ address, page: 1, count: 10 })
                     break
-                case 2:
-                    this.props.icxGetScore({ address })
-                case 3:
-                case 4:
                 default:
             }
         })
@@ -44,42 +37,36 @@ class ContractTabs extends Component {
 
     goAllTx = () => {
         const { on } = this.state
-        const { contract } = this.props
-        const { data } = contract
+        const { walletDetail } = this.props
+        const { data } = walletDetail
         const { address } = data
         switch (on) {
             case 0:
-                this.props.history.push(`/${TX_TYPE.CONTRACT_TX}/${address}`);
+                this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`);
                 break
             case 1:
-                this.props.history.push(`/${TX_TYPE.CONTRACT_TOKEN_TX}/${address}`);
+                this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`);
                 break
-            case 2:
-            case 3:
-            case 4:
             default:
         }
     }
 
     render() {
         const { on } = this.state
-        const { contract, contractTx, contractTokenTx } = this.props
+        const { walletDetail, walletTx, walletTokenTx } = this.props
         const TableContents = (_on) => {
             switch (_on) {
                 case 0:
                     return (
-                        <ContractTransactions 
-                            contractTx={contractTx}
+                        <WalletTransactions 
+                            walletTx={walletTx} 
                             goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.CONTRACT_TX}
+                            txType={TX_TYPE.ADDRESS_TX} 
+                            address={walletDetail.address} 
                         />
                     )
                 case 1:
-                    return <ContractTokenTransfers contractTokenTx={contractTokenTx} goAllTx={this.goAllTx} txType={TX_TYPE.CONTRACT_TOKEN_TX}/>
-                case 2:
-                    return <ContractCode contract={contract} />
-                case 3:
-                case 4:
+                    // return <ContractTokenTransfers contractTokenTx={contractTokenTx} goAllTx={this.goAllTx} />
                 default:
                     return <NoBox text="No Data" />
             }
@@ -97,7 +84,7 @@ class ContractTabs extends Component {
                             <div className="tab-holder">
                                 <ul>
                                     {
-                                        CONTRACT_TABS.map((tab, index) => (
+                                        WALLET_TABS.map((tab, index) => (
                                             <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
                                         ))
                                     }
@@ -109,8 +96,8 @@ class ContractTabs extends Component {
                 )
             }
         }
-        return Contents(contract.loading)
+        return Contents(walletDetail.loading)
     }
 }
 
-export default withRouter(ContractTabs);
+export default withRouter(WalletTabs);

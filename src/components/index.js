@@ -10,7 +10,8 @@ import RecentTransactions from './MainPage/RecentTransactions'
 
 import AddressesPage from './AddressesPage/AddressesPage'
 import AddressDetailPage from './AddressesPage/AddressDetailPage'
-import WalletInformation from './AddressesPage/WalletInformation'
+import WalletInfo from './AddressesPage/WalletInfo'
+import WalletTabs from './AddressesPage/WalletTabs'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
 import BlocksPage from './BlocksPage/BlocksPage'
@@ -73,7 +74,8 @@ export {
 
   AddressesPage,
   AddressDetailPage,
-  WalletInformation,
+  WalletInfo,
+  WalletTabs,
   WalletTransactions,
 
   BlocksPage,

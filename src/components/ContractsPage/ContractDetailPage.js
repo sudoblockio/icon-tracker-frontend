@@ -6,12 +6,8 @@ import {
     ContractTabs
 } from '../../components'
 
+// TODO Notfound 추가
 class ContractDetailPage extends Component {
-    constructor(props) {
-        super(props)
-        this.addr = ''
-    }
-
     componentWillMount() {
         this.allContractInfo(this.props.url.pathname)
     }
@@ -25,21 +21,23 @@ class ContractDetailPage extends Component {
     }
 
     allContractInfo = (pathname) => {
-        this.addr = pathname.split("/")[2]
-        const { addr } = this
+        const addr = pathname.split("/")[2]
         this.props.contractInfo({ addr })
         this.props.contractTxList({ addr, page: 1, count: 10 })
     }
 
     render() {
-        const { addr } = this
-        const { contract, contractTx, contractTokenTx } = this.props
+        const { 
+            contract, 
+            contractTx, 
+            contractTokenTx 
+        } = this.props
+        
         return (
             <div className="content-wrap">
 				<ContractInfo contract={contract}/>
                 <ContractTabs
                     contract={contract}
-                    addr={addr}
                     contractTx={contractTx}
                     contractTokenTx={contractTokenTx}
                     contractTxList={this.props.contractTxList}

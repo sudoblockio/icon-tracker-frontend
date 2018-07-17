@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { 
     calcTime,
     convertNumberToText,
-    isContractAddress,
+	isContractAddress,
+	numberWithCommas,
+	dateToUTC
 } from '../../../utils/utils'
 import {
     TransactionLink,
-    WalletLink,
+	WalletLink,
+	BlockLink
 } from '../../../components'
 import { 
     TX_TYPE
@@ -65,10 +68,29 @@ const SignCell = ({ address, fromAddr, toAddr }) => {
 class TxTableBody extends Component {
 	render() {
 		const TableRow = (_props) => {
-            const { txType, data, address } = _props
-            const { txHash, age, fromAddr, toAddr, quantity, state, tokenSymbol } = data
-            const isError = state === 0
-            switch (txType) {
+            const { 
+				txType, 
+				data, 
+				address 
+			} = _props
+			
+			const { 
+				txHash, 
+				age, 
+				fromAddr, 
+				toAddr, 
+				quantity, 
+				state, 
+				tokenSymbol, 
+				height, 
+				amount, 
+				createDate,
+				fee
+			} = data
+
+			const isError = state === 0
+			
+			switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <tr>
@@ -78,6 +100,19 @@ class TxTableBody extends Component {
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
                             <td><span>{convertNumberToText(quantity , 'icx')}</span><em>ICX</em></td>
+                        </tr>   
+                    )                       
+				case TX_TYPE.ADDRESS_TX:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+							<td className="on break"><BlockLink to={height || 0} label={numberWithCommas(height)}/></td>
+							<td className={'break'}>{dateToUTC(createDate)}</td>
+                            <AddressCell targetAddr={fromAddr} address={address} />
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
+                            <AddressCell targetAddr={toAddr} address={address}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
                         </tr>   
                     )                       
 

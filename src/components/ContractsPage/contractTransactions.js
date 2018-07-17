@@ -4,24 +4,29 @@ import {
     TxBottom
 } from '../../components'
 import { 
-    TX_TYPE,
     TX_TYPE_DATA
  } from '../../utils/const'
 
 class ContractTransactions extends Component {
     render() {
-        const { contractTx, goAllTx } = this.props
+        const { 
+            contractTx, 
+            goAllTx,
+            txType
+        } = this.props
+        
         const tableClassName = 
-            TX_TYPE_DATA[TX_TYPE.CONTRACT_TX] ? 
-            TX_TYPE_DATA[TX_TYPE.CONTRACT_TX]['className'] : ''
+            TX_TYPE_DATA[txType] ? 
+            TX_TYPE_DATA[txType]['className'] : ''
         const noDataText = 
-            TX_TYPE_DATA[TX_TYPE.CONTRACT_TX] ? 
-            TX_TYPE_DATA[TX_TYPE.CONTRACT_TX]['noDataText'] : ''
+            TX_TYPE_DATA[txType] ? 
+            TX_TYPE_DATA[txType]['noDataText'] : ''
+        
         return (
             <TxBottom 
                 txData={contractTx}
                 goAllTx={goAllTx}
-                txType={TX_TYPE.CONTRACT_TX}
+                txType={txType}
                 address={undefined}
                 tableClassName={tableClassName}
                 noDataText={noDataText}

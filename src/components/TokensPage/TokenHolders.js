@@ -25,8 +25,8 @@ class TokenHolders extends Component {
             else {
                 return (
                     <div className="contents">
-                        <p class="txt"><span>Top<em class="mint" onClick={this.props.goAllTx}>{_totalData} Holders</em><em class="gray">(from a total of 999,999 holders)</em></span></p>
-                        <table class="table-typeM">
+                        <p className="txt"><span>Top<em className="mint" onClick={this.props.goAllTx}>{_totalData} Holders</em><em className="gray">(from a total of 999,999 holders)</em></span></p>
+                        <table className="table-typeM">
                             <thead>
                                 <tr>
                                     <th>Rank</th>

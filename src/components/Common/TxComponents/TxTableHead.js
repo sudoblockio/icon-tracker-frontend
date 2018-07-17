@@ -6,6 +6,7 @@ class TxTableHead extends Component {
 	render() {
 		const TableHead = (_props) => {
             const { txType } = _props
+            const utcLabel = `(${getUTCString()})`
             switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
                     return (
@@ -18,6 +19,19 @@ class TxTableHead extends Component {
                             <th>Quantity</th>
                         </tr>
                     )                      
+                case TX_TYPE.ADDRESS_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Block</th>
+                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
                 default:
                     return (
                         <tr></tr>

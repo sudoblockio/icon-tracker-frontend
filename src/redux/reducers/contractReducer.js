@@ -46,9 +46,8 @@ export function contractReducer(state = initialState, action) {
       return {
         ...state,
         contract: {
-          ...state.contract,
           loading: false,
-          data: action.payload.data,
+          data: action.payload.data || {},
           error: ''
         }
       }

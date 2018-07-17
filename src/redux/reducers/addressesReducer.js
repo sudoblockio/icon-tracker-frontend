@@ -17,13 +17,8 @@ const initialState = {
 
   walletDetail: {
     loading: false,
-    address: "",
-    balance: 0,
-    icxUsd: 0,
-    nodeType: "",
-    txCount: 0,
-    tokenTxCount: 0,
-    error: '',
+    data: {},
+    error: ''
   },
   walletTx: {
     loading: false,
@@ -45,6 +40,96 @@ const initialState = {
 
 export function addressesReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.addressInfo: {
+      return {
+        ...state,
+        walletDetail: {
+          ...state.walletDetail,
+          loading: true,
+          error: ''
+        }        
+      }
+    }
+
+    case actionTypes.addressInfoFulfilled: {
+      return {
+        ...state,
+        walletDetail: {
+          loading: false,
+          data: action.payload.data.walletDetail || {},
+          error: ''
+        },
+      } 
+    }
+
+    case actionTypes.addressInfoRejected: {
+      return {
+        ...state,
+        walletDetail: {
+          ...state.walletDetail,
+          loading: false,
+          error: action.error
+        }        
+      }
+    }
+
+    case actionTypes.addressTxList: {
+      return {
+        ...state,
+        walletTx: {
+          ...state.walletTx,
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || state.walletTx.count,
+          error: ''
+        }        
+      }
+    }
+
+    case actionTypes.addressTxListFulfilled: {
+      console.log(action.payload)
+      return {
+        ...state,
+        walletTx: {
+          ...state.walletTx,
+          loading: false,
+          data: action.payload.data.walletTx || [],
+          totalData: action.payload.listSize || 0,
+          error: ''
+        }        
+      }
+    }
+
+    case actionTypes.addressTxListRejected: {
+      return {
+        ...state,
+        walletTx: {
+          ...state.walletTx,
+          loading: false,
+          error: action.error
+        }        
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     case actionTypes.addressList: {
       return {
         ...state,
@@ -76,76 +161,6 @@ export function addressesReducer(state = initialState, action) {
         ...state,
         addresses: {
           ...state.addresses,
-          loading: false,
-          error: action.error
-        }        
-      }
-    }
-
-    case actionTypes.addressInfo: {
-      return {
-        ...state,
-        walletDetail: {
-          ...state.walletDetail,
-          loading: true,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.addressInfoFulfilled: {
-      return {
-        ...state,
-        walletDetail: {
-          ...action.payload.data.walletDetail,
-          loading: false,
-          error: ''
-        },
-      } 
-    }
-
-    case actionTypes.addressInfoRejected: {
-      return {
-        ...state,
-        walletDetail: {
-          ...state.walletDetail,
-          loading: false,
-          error: action.error
-        }        
-      }
-    }
-
-    case actionTypes.addressTxList: {
-      return {
-        ...state,
-        walletTx: {
-          ...state.walletTx,
-          loading: true,
-          page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.walletTx.count,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.addressTxListFulfilled: {
-      return {
-        ...state,
-        walletTx: {
-          ...state.walletTx,
-          loading: false,
-          data: action.payload.data.walletTx || [],
-          totalData: action.payload.listSize || 0,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.addressTxListRejected: {
-      return {
-        ...state,
-        walletTx: {
-          ...state.walletTx,
           loading: false,
           error: action.error
         }        
