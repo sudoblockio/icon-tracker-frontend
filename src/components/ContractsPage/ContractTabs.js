@@ -64,8 +64,10 @@ class ContractTabs extends Component {
     render() {
         const { on } = this.state
         const { contract, contractTx, contractTokenTx } = this.props
-        const TableContents = (_on) => {
-            switch (_on) {
+        const { loading } = contract
+
+        const TableContents = () => {
+            switch (on) {
                 case 0:
                     return (
                         <ContractTransactions 
@@ -84,8 +86,8 @@ class ContractTabs extends Component {
                     return <NoBox text="No Data" />
             }
         }
-        const Contents = (_loading) => {
-            if (_loading) {
+        const Contents = () => {
+            if (loading) {
                 return (
                     <LoadingComponent height='513px' />
                 )
@@ -103,13 +105,13 @@ class ContractTabs extends Component {
                                     }
                                 </ul>
                             </div>
-                            {TableContents(on)}
+                            {TableContents()}
                         </div>
                     </div>
                 )
             }
         }
-        return Contents(contract.loading)
+        return Contents()
     }
 }
 

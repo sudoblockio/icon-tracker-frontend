@@ -33,15 +33,10 @@ class AddressesDetailPage extends Component {
       walletTokenTx 
     } = this.props;
 
-    const { 
-      loading, 
-      error 
-    } = walletDetail
-    
-    const content = () => {
-      if (!loading && error) {
+    const content = (_loading, _error) => {
+      if (!_loading && _error) {
         return (
-          <NotFound error={error} />
+          <NotFound error={_error} />
         )
       }
       else {
@@ -55,19 +50,18 @@ class AddressesDetailPage extends Component {
               addressTxList={this.props.addressTxList}
               addressTokenTxList={this.props.addressTokenTxList}
             />
-            {/* <WalletTransactions
-              walletDetail={walletDetail}
-              walletTx={walletTx}
-              walletTokenTx={walletTokenTx}
-              addressTxList={this.props.addressTxList}
-              addressTokenTxList={this.props.addressTokenTxList}
-            /> */}
+
           </div>
         )
       }
     }
 
-    return content();
+    const { 
+      loading, 
+      error 
+    } = walletDetail
+    
+    return content(loading, error);
   }
 }
 

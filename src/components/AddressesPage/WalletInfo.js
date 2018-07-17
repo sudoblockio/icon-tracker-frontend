@@ -14,14 +14,14 @@ class WalletInfo extends Component {
   render() {
     const { walletDetail } = this.props
     const { loading, data } = walletDetail
-    const Contents = (_data) => {
+    const Contents = () => {
       if (loading) {
         return (
           <LoadingComponent height='206px' />
         )
       }
       else {
-        const { address, nodeType, balance, icxUsd, txCount, tokenList } = _data
+        const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
         return (
           <div className="screen0">
             <div className="wrap-holder">
@@ -59,7 +59,7 @@ class WalletInfo extends Component {
         )
       }
     }
-    return Contents(data)
+    return Contents()
   }
 }
 

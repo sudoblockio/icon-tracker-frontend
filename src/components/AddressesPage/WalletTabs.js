@@ -55,15 +55,18 @@ class WalletTabs extends Component {
     render() {
         const { on } = this.state
         const { walletDetail, walletTx, walletTokenTx } = this.props
-        const TableContents = (_on) => {
-            switch (_on) {
+        const { loading, data } = walletDetail
+        const { address } = data
+        
+        const TableContents = () => {
+            switch (on) {
                 case 0:
                     return (
                         <WalletTransactions 
                             walletTx={walletTx} 
                             goAllTx={this.goAllTx} 
                             txType={TX_TYPE.ADDRESS_TX} 
-                            address={walletDetail.address} 
+                            address={address} 
                         />
                     )
                 case 1:
@@ -72,15 +75,15 @@ class WalletTabs extends Component {
                             walletTokenTx={walletTokenTx} 
                             goAllTx={this.goAllTx} 
                             txType={TX_TYPE.ADDRESS_TOKEN_TX} 
-                            address={walletDetail.address} 
+                            address={address} 
                         />
                     )
                 default:
                     return <NoBox text="No Data" />
             }
         }
-        const Contents = (_loading) => {
-            if (_loading) {
+        const Contents = () => {
+            if (loading) {
                 return (
                     <LoadingComponent height='513px' />
                 )
@@ -98,13 +101,13 @@ class WalletTabs extends Component {
                                     }
                                 </ul>
                             </div>
-                            {TableContents(on)}
+                            {TableContents()}
                         </div>
                     </div>
                 )
             }
         }
-        return Contents(walletDetail.loading)
+        return Contents()
     }
 }
 

@@ -20,7 +20,7 @@ class TxBottom extends Component {
                 goAllTx,
                 address,
                 tableClassName, 
-                noDataText, 
+                noBoxText, 
                 totalText,
             } = _props
             
@@ -36,8 +36,9 @@ class TxBottom extends Component {
                 )
             }
             else if (data.length === 0) {
+                console.log(noBoxText)
                 return (
-                    <NoBox text={noDataText} />
+                    <NoBox text={noBoxText} />
                 )
             }
             else {
