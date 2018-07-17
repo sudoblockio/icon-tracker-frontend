@@ -21,12 +21,17 @@ const initialState = {
     data: [],
     totalData: 0,
     error: '',
+  },
+  contractCode: {
+    loading: false,
+    data: {},
+    error: ''
   }
 }
 
 export function contractReducer(state = initialState, action) {
   switch (action.type) {  
-    case actionTypes.selectContractInfo: {
+    case actionTypes.contractInfo: {
       return {
         ...state,
         contract: {
@@ -37,7 +42,7 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractInfoFulfilled: {
+    case actionTypes.contractInfoFulfilled: {
       return {
         ...state,
         contract: {
@@ -49,7 +54,7 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractInfoRejected: {
+    case actionTypes.contractInfoRejected: {
       return {
         ...state,
         contract: {
@@ -60,7 +65,7 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractTransactionList: {
+    case actionTypes.contractTxList: {
       return {
         ...state,
         contractTx: {
@@ -73,20 +78,20 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractTransactionListFulfilled: {
+    case actionTypes.contractTxListFulfilled: {
       return {
         ...state,
         contractTx: {
           ...state.contractTx,
           loading: false,
-          data: action.payload.data.contractTransactionList || [],
+          data: action.payload.data || [],
           totalData: action.payload.listSize || 0,
           error: ''
         }
       }
     }
 
-    case actionTypes.selectContractTransactionListRejected: {
+    case actionTypes.contractTxListRejected: {
       return {
         ...state,
         contractTx: {
@@ -97,7 +102,7 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractTokenTransferList: {
+    case actionTypes.contractTokenTxList: {
       return {
         ...state,
         contractTokenTx: {
@@ -110,24 +115,60 @@ export function contractReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.selectContractTokenTransferListFulfilled: {
+    case actionTypes.contractTokenTxListFulfilled: {
       return {
         ...state,
         contractTokenTx: {
           ...state.contractTokenTx,
           loading: false,
-          data: action.payload.data.contractTokenTransferList || [],
+          data: action.payload.data || [],
           totalData: action.payload.listSize || 0,
           error: ''
         }
       }
     }
 
-    case actionTypes.selectContractTokenTransferListRejected: {
+    case actionTypes.contractTokenTxListRejected: {
       return {
         ...state,
         contractTokenTx: {
           ...state.contractTokenTx,
+          loading: false,
+          error: action.error
+        }
+      }
+    }
+
+    case actionTypes.icxGetScore: {
+      return {
+        ...state,
+        contractCode: {
+          ...state.contractCode,
+          loading: true,
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.icxGetScoreFulfilled: {
+      console.log(action.payload)
+      return {
+        ...state,
+        contractCode: {
+          ...state.contractCode,
+          loading: false,
+          data: action.payload.data || {},
+          error: ''
+        }
+      }
+    }
+
+    case actionTypes.icxGetScoreRejected: {
+      console.log(action)
+      return {
+        ...state,
+        contractCode: {
+          ...state.contractCode,
           loading: false,
           error: action.error
         }

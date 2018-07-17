@@ -1,4 +1,9 @@
+import React from 'react';
 import moment from 'moment';
+import { localDevUrl } from '../redux/api/restV3/config'
+import {
+	TokenLink,
+} from '../components'
 
 // const CURRENCY_ROUND = {
 //   'krw': 0,
@@ -119,4 +124,33 @@ export function makeUrl(url, payload) {
     result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
   })
   return result
+}
+
+export function randomUint32() {
+  if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {
+      var o = new Uint32Array(1);
+      window.crypto.getRandomValues(o);
+      return o[0];
+  } else {
+      console.warn('Falling back to pseudo-random client seed');
+      return Math.floor(Math.random() * Math.pow(2, 32));
+  }
+}
+
+export function makeDownloadLink(address) {
+  return `${localDevUrl}/score/${address}_1.zip`
+}
+
+export function tokenText(name, symbol, address) {
+  const isSymbol = symbol && symbol !== "-"
+  if (!isSymbol) {
+    return "-"
+  }
+  const text = `${name || "-"} (${symbol})`
+  if (!address) {
+    return text
+  }
+  else {
+    return <TokenLink label={text} to={address}/>
+  }
 }

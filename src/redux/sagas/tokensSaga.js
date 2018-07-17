@@ -3,7 +3,7 @@ import AT from '../actionTypes/actionTypes';
 import { 
   tokenGetTokenListApi as TOKEN_GET_TOKEN_LIST_API,
   tokenGetTokenTransferListApi as TOKEN_GET_TOKEN_TRANSFER_LIST_API
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 function* tokenGetTokenListFunc(action) {
   try {

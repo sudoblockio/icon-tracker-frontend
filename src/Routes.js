@@ -17,6 +17,8 @@ import TokenListPage from './pages/TokenListPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import { TX_TYPE } from './utils/const'
 
+import TxPage from './pages/TxPage'
+
 class Routes extends Component {
 
   render() {
@@ -41,6 +43,14 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} exact path='/contract/:contractId' component={ContractDetailPage} />
                 <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/token/:tokenId' component={TokenDetailPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/:pageId`} component={TxPage}/>
+
+
+
+
+
 
                 <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={AddressTotalTxListPage}/>

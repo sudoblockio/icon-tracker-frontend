@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import { ContractDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
 import {
-    selectContractInfo,
-    selectContractTransactionList,
-    selectContractTokenTransferList
+    contractInfo,
+    contractTxList,
+    contractTokenTxList,
+    icxGetScore
 } from '../../redux/actions/contractAction'
 
 function mapStateToProps(state) {
@@ -18,9 +19,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        selectContractInfo: payload => dispatch(selectContractInfo(payload)),
-        selectContractTransactionList: payload => dispatch(selectContractTransactionList(payload)),
-        selectContractTokenTransferList: payload => dispatch(selectContractTokenTransferList(payload)),
+        contractInfo: payload => dispatch(contractInfo(payload)),
+        contractTxList: payload => dispatch(contractTxList(payload)),
+        contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
+        icxGetScore: payload => dispatch(icxGetScore(payload))
     };
 }
 

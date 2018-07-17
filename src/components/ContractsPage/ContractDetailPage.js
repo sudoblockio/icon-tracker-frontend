@@ -27,7 +27,8 @@ class ContractDetailPage extends Component {
     allContractInfo = (pathname) => {
         this.addr = pathname.split("/")[2]
         const { addr } = this
-        this.props.selectContractInfo({ addr })
+        this.props.contractInfo({ addr })
+        this.props.contractTxList({ addr, page: 1, count: 10 })
     }
 
     render() {
@@ -37,13 +38,14 @@ class ContractDetailPage extends Component {
             <div className="content-wrap">
 				<ContractInfo contract={contract}/>
                 <ContractTabs
-                    loading={contract.loading}
+                    contract={contract}
                     addr={addr}
                     contractTx={contractTx}
                     contractTokenTx={contractTokenTx}
-                    selectContractTransactionList={this.props.selectContractTransactionList}
-                    selectContractTokenTransferList={this.props.selectContractTokenTransferList}
-                />   
+                    contractTxList={this.props.contractTxList}
+                    contractTokenTxList={this.props.contractTokenTxList}
+                    icxGetScore={this.props.icxGetScore}
+                />
             </div>
         )
     }

@@ -1,9 +1,9 @@
 import { makeUrl } from '../../../utils/utils'
-import { axiosApi } from './config'
+import { trackerApi } from './config'
 
 export function transactionRecentTxApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/transaction/recentTx', payload))
+    trackerApi.get(makeUrl('/v3/transaction/recentTx', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -15,7 +15,7 @@ export function transactionRecentTxApi(payload) {
 
 export function transactionTxDetailApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/transaction/txDetail', payload))
+    trackerApi.get(makeUrl('/v3/transaction/txDetail', payload))
       .then(result => {
         resolve(result.data)
       })

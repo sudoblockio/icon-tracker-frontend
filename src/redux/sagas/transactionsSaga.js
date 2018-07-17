@@ -3,7 +3,7 @@ import AT from '../actionTypes/actionTypes';
 import { 
   transactionTxDetailApi as TRANSACTION_TX_DETAIL_API,
   transactionRecentTxApi as TRANSACTION_RECENT_TX_API 
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 function* transactionRecentTxFunc(action) {
   try {

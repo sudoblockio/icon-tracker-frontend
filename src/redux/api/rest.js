@@ -3,7 +3,7 @@ import axios from 'axios'
 // const productionURL = 'https://tracker.icon.foundation'
 // const developmentURL = 'https://trackerdev.icon.foundation'
 const localDevUrl = 'https://trackerlocaldev.icon.foundation'
-const axiosApi = axios.create({
+const trackerApi = axios.create({
   // baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
   baseURL: localDevUrl,
   headers: {
@@ -14,7 +14,7 @@ const axiosApi = axios.create({
 
 export function getMainInfo() {
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/main/mainInfo')
+    trackerApi.get('/v0/main/mainInfo')
       .then(result => {
         resolve(result.data)
       })
@@ -26,7 +26,7 @@ export function getMainInfo() {
 
 export function getMainChart() {
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/main/mainChart')
+    trackerApi.get('/v0/main/mainChart')
       .then(result => {
         resolve(result.data.data)
       })
@@ -39,7 +39,7 @@ export function getMainChart() {
 export function getAddressesApi(payload) {
   const pageNum = payload || 1
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/wallet/addrList?page=' + pageNum)
+    trackerApi.get('/v0/wallet/addrList?page=' + pageNum)
       .then(result => {
         resolve(result.data)
       })
@@ -55,8 +55,8 @@ export function getAddressDetailApi(payload) {
   const count = payload.count || 10;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/wallet/walletDetailTxList?address=' + addressId + '&page=' + pageId + '&count=' + count)
-    // axiosApi.get('/v3/address/info?address=' + addressId + '&page=' + pageId)
+    trackerApi.get('/v0/wallet/walletDetailTxList?address=' + addressId + '&page=' + pageId + '&count=' + count)
+    // trackerApi.get('/v3/address/info?address=' + addressId + '&page=' + pageId)
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -70,7 +70,7 @@ export function getAddressDetailApi(payload) {
 export function getBlocksApi(payload) {
   const pageNum = payload || 1
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/block/recentBlock?page=' + pageNum)
+    trackerApi.get('/v0/block/recentBlock?page=' + pageNum)
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -86,7 +86,7 @@ export function getBlockApi(payload) {
   const pageId = payload.pageId || 1;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
+    trackerApi.get('/v0/block/blockDetail?height='+blockId+'&page='+pageId )
       .then(result => {
         resolve(result.data)
       })
@@ -101,7 +101,7 @@ export function getBlockByHashApi(payload) {
   const pageId = payload.pageId || 1;
 
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/block/blockDetailByHash?hash='+blockHash+'&page='+pageId )
+    trackerApi.get('/v0/block/blockDetailByHash?hash='+blockHash+'&page='+pageId )
       .then(result => {
         resolve(result.data.data)
       })
@@ -113,7 +113,7 @@ export function getBlockByHashApi(payload) {
 
 export function searchApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get('/v0/search/Search?data=' + payload)
+    trackerApi.get('/v0/search/Search?data=' + payload)
       .then(result => {
         resolve(result.data.data)
       })
@@ -126,7 +126,7 @@ export function searchApi(payload) {
 export function getTransactionsApi(payload){
   const pageNum = payload || 1;
   return new Promise((resolve, reject) => {
-    axiosApi.get('v0/transaction/recentTx?page=' + pageNum)
+    trackerApi.get('v0/transaction/recentTx?page=' + pageNum)
       .then(result => {
         resolve(result.data);
       })
@@ -139,7 +139,7 @@ export function getTransactionsApi(payload){
 export function getTransactionApi(payload){
   const txHash = payload;
   return new Promise((resolve, reject) => {
-    axiosApi.get('v0/transaction/txDetail?txHash=' + txHash)
+    trackerApi.get('v0/transaction/txDetail?txHash=' + txHash)
       .then(result => {
         resolve(result.data);
       })

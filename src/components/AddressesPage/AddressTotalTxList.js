@@ -49,6 +49,7 @@ class AddressTotalTxList extends Component {
 		
 		this.txType = ''
 		this.urlIndex = ''
+		this.pageId = 1
 		this.getTxList = () => {}
 	}
 
@@ -66,7 +67,8 @@ class AddressTotalTxList extends Component {
 
 	initPageType = (pathname) => {
 		this.txType = pathname.split("/")[1]
-		this.urlIndex = pathname.split("/")[2]
+		this.urlIndex = pathname.split("/")[2] || ''
+		this.pageId = pathname.split("/")[3] || 1
 		this.getTxList = this.props[this.getTxTypeSelector()['getTxList']] || (()=>{})
 		this.getTotalTxList(pathname, 20)
 	}

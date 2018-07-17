@@ -2,7 +2,7 @@ import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
     selectContractListApi as SELECT_CONTRACT_LIST_API,
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 export function* selectContractListFunc(action) {
   try {

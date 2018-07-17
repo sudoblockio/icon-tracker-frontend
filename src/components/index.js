@@ -13,11 +13,6 @@ import AddressDetailPage from './AddressesPage/AddressDetailPage'
 import WalletInformation from './AddressesPage/WalletInformation'
 import WalletTransactions from './AddressesPage/WalletTransactions'
 
-import ContractDetailPage from './ContractsPage/ContractDetailPage'
-import ContractsPage from './ContractsPage/ContractsPage'
-import ContractInfo from './ContractsPage/ContractInfo'
-import ContractTabs from './ContractsPage/ContractTabs'
-
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
 import BlockInformation from './BlocksPage/BlockInformation'
@@ -55,7 +50,15 @@ import NoBox from './Common/NoBox'
 import TxBottom from './Common/TxComponents/TxBottom'
 import TxPage from './Common/TxComponents/TxPage'
 import TxTableHead from './Common/TxComponents/TxTableHead'
-import TxTableRow from './Common/TxComponents/TxTableRow'
+import TxTableBody from './Common/TxComponents/TxTableBody'
+
+import ContractDetailPage from './ContractsPage/ContractDetailPage'
+import ContractsPage from './ContractsPage/ContractsPage'
+import ContractInfo from './ContractsPage/ContractInfo'
+import ContractTabs from './ContractsPage/ContractTabs'
+import ContractTransactions from './ContractsPage/ContractTransactions'
+import ContractTokenTransfers from './ContractsPage/ContractTokenTransfers'
+import ContractCode from './ContractsPage/ContractCode'
 
 export {
   Header,
@@ -72,11 +75,6 @@ export {
   AddressDetailPage,
   WalletInformation,
   WalletTransactions,
-
-  ContractDetailPage,
-  ContractsPage,
-  ContractInfo,
-  ContractTabs,
 
   BlocksPage,
   BlockDetailPage,
@@ -115,5 +113,13 @@ export {
   TxBottom,
   TxPage,
   TxTableHead,
-  TxTableRow,
+  TxTableBody,
+
+  ContractDetailPage,
+  ContractsPage,
+  ContractInfo,
+  ContractTabs,
+  ContractTransactions,
+  ContractTokenTransfers,
+  ContractCode
 }

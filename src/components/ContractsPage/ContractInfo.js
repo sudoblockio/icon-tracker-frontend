@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { convertNumberToText, numberWithCommas } from '../../utils/utils'
+import { 
+    convertNumberToText, 
+    numberWithCommas,
+    tokenText
+} from '../../utils/utils'
+import { CONTRACT_STATUS } from '../../utils/const'
 import {
 	CopyButton,
-	TokenLink,
     TransactionLink,
     LoadingComponent
 } from '../../components'
@@ -14,12 +18,13 @@ class ContractInfo extends Component {
         const { contract } = this.props
         // TODO 에러 처리
         const { loading, data, error } = contract
-        const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance } = data
+        const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
+        const isSymbol = symbol && symbol !== "-"
         return (
             <div className="screen0">
             {
                 loading ?
-                <LoadingComponent height='206px' />
+                <LoadingComponent height='206px'/>
                 :
                 <div className="wrap-holder">
                     <p className="title">Contract</p>
@@ -28,14 +33,14 @@ class ContractInfo extends Component {
                             <tbody>
                                 <tr className="qr">
                                     <td>Address</td>
-                                    <td colSpan="3">{address}  <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Address'}/></td>
+                                    <td colSpan="3">{address}  <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'}/></td>
                                 </tr>
                                 <tr className="">
                                     <td>Balance</td>
-                                    <td>{convertNumberToText(balance, 'icx', 4)} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
+                                    <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                     <td>Token Contract</td>
                                     <td>
-                                        <span className="link token"><TokenLink label={symbol} to={address}/></span>
+                                        <span className={`${!isSymbol ? '' : 'link'} `}>{tokenText(tokenName, symbol, address)}</span>
                                         <span className="help token">{ircVersion} - {address}</span>
                                     </td>
                                 </tr>
@@ -53,7 +58,7 @@ class ContractInfo extends Component {
                                     <td>Transactions</td>
                                     <td>{numberWithCommas(txCount)} Txns</td>
                                     <td>Status</td>
-                                    <td>In progress<button className="btn-type-normal status">Detail</button></td>
+                                    <td>{CONTRACT_STATUS[status]}<button className="btn-type-normal status">Detail</button></td>
                                 </tr>
                             </tbody>
                         </table>

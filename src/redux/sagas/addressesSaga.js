@@ -5,7 +5,7 @@ import {
   addressInfoApi as ADDRESS_INFO_API,
   addressTxListApi as ADDRESS_TX_LIST,
   addressTokenTxListApi as ADDRESS_TOKEN_TX_LIST,
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 export function* addressListFunc(action) {
   try {

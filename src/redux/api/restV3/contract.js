@@ -1,21 +1,9 @@
 import { makeUrl } from '../../../utils/utils'
-import { axiosApi } from './config'
+import { trackerApi } from './config'
 
-export function selectContractListApi(payload) {
+export function contractInfo(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/Contract/selectContractList', payload))
-      .then(result => {
-        resolve(result.data)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
-
-export function selectContractInfoApi(payload) {
-  return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/Contract/selectContractInfo', payload))
+    trackerApi.get(makeUrl('/v3/contract/info', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -26,9 +14,9 @@ export function selectContractInfoApi(payload) {
   })
 }
 
-export function selectContractTransactionListApi(payload) {
+export function contractTxList(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/Contract/selectContractTransactionList', payload))
+    trackerApi.get(makeUrl('/v3/contract/txList', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -39,9 +27,9 @@ export function selectContractTransactionListApi(payload) {
   })
 }
 
-export function selectContractTokenTransferListApi(payload) {
+export function contractTokenTxList(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/Contract/selectContractTokenTransferList', payload))
+    trackerApi.get(makeUrl('/v3/contract/tokenTxList', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)

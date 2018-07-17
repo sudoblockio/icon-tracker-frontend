@@ -4,7 +4,7 @@ import {
     tokenGetTokenSummaryApi as TOKEN_GET_TOKEN_SUMMARY_API,
     tokenGetTokenTransfersApi as TOKEN_GET_TOKEN_TRANSFERS_API,
     tokenGetTokenHoldersApi as TOKEN_GET_TOKEN_HOLDERS_API
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 function* tokenGetTokenSummaryFunc(action) {
     try {

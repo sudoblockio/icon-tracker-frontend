@@ -4,7 +4,7 @@ import {
   blockListApi as BLOCK_LIST_API,
   blockInfoApi as BLOCK_INFO_API,
   blockTxListApi as BLOCK_TX_LIST_API
-} from '../api/restV3';
+} from '../api/restV3_old';
 
 function* blockListFunc(action) {
   try {

@@ -76,17 +76,39 @@ const actionTypes = {
   selectContractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
   selectContractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
 
-  selectContractInfo: 'SELECT_CONTRACT_INFO',
-  selectContractInfoFulfilled: 'SELECT_CONTRACT_INFO_FULFILLED',
-  selectContractInfoRejected: 'SELECT_CONTRACT_INFO_REJECTED',
+  contractTokenTxList: 'CONTRACT_TOKEN_TX_LIST',
+  contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',
+  contractTokenTxListRejected: 'CONTRACT_TOKEN_TX_LIST_REJECTED',
 
-  selectContractTransactionList: 'SELECT_CONTRACT_TRANSACTION_LIST',
-  selectContractTransactionListFulfilled: 'SELECT_CONTRACT_TRANSACTION_LIST_FULFILLED',
-  selectContractTransactionListRejected: 'SELECT_CONTRACT_TRANSACTION_LIST_REJECTED',
- 
-  selectContractTokenTransferList: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST',
-  selectContractTokenTransferListFulfilled: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST_FULFILLED',
-  selectContractTokenTransferListRejected: 'SELECT_CONTRACT_TOKEN_TRANSFER_LIST_REJECTED',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  contractInfo: 'CONTRACT_INFO',
+  contractInfoFulfilled: 'CONTRACT_INFO_FULFILLED',
+  contractInfoRejected: 'CONTRACT_INFO_REJECTED',
+
+  contractTxList: 'CONTRACT_TX_LIST',
+  contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
+  contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
+
+  
+
+  
+  icxGetScore: 'ICX_GET_SCORE',
+  icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
+  icxGetScoreRejected: 'ICX_GET_SCORE_REJECTED',
 }
 
 export default actionTypes

@@ -8,9 +8,20 @@ class TxTableHead extends Component {
             const { txType } = _props
             switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
-                    
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Quantity</th>
+                        </tr>
+                    )                      
                 default:
-                    return <div></div>
+                    return (
+                        <tr></tr>
+                    )
             }
         }
             

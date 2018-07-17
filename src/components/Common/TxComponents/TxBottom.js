@@ -3,28 +3,33 @@ import { withRouter } from 'react-router-dom';
 import {
     LoadingComponent,
     TxTableHead,
-    TxTableRow,
+    TxTableBody,
     NoBox
 } from '../../../components'
+import {
+    numberWithCommas
+} from '../../../utils/utils'
 
-class TokenTransfers extends Component {
+
+class TxBottom extends Component {
 
     render() {
         const Contents = (_props) => {
             const { 
-                tokenTransfers, 
-                noDataText, 
-                goAllTx,
-                totalText, 
-                tableClassName, 
+                txData, 
                 txType, 
+                goAllTx,
+                address,
+                tableClassName, 
+                noDataText, 
+                totalText,
             } = _props
             
             const {             
                 data, 
                 totalData,
                 loading
-            } = tokenTransfers
+            } = txData
             
             if (loading) {
                 return (
@@ -40,7 +45,10 @@ class TokenTransfers extends Component {
                 return (
                     <div className="contents">
                         <p className="txt">
-                            <span>A Total of<em className="mint" onClick={goAllTx}>{totalData} {totalText}</em></span>
+                            <span>
+                                Latest<em>{totalData < 10 ? totalData : 10}</em> txns from a total of
+                                <em className="mint" onClick={goAllTx}>{numberWithCommas(totalData)} {totalText}</em>
+                            </span>
                         </p>
                         <table className={tableClassName}>
                             <thead>
@@ -49,7 +57,7 @@ class TokenTransfers extends Component {
                             <tbody>
                                 {
                                     data.map((item, index) => (
-                                        <TxTableRow key={index} txType={txType} data={item} />
+                                        <TxTableBody key={index} data={item} txType={txType} address={address}/>
                                     ))
                                 }
                             </tbody>
@@ -62,4 +70,4 @@ class TokenTransfers extends Component {
     }
 }
 
-export default withRouter(TokenTransfers);
+export default withRouter(TxBottom);

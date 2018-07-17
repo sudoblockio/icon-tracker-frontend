@@ -1,9 +1,9 @@
 import { makeUrl } from '../../../utils/utils'
-import { axiosApi } from './config'
+import { trackerApi } from './config'
 
 export function tokenGetTokenListApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/token/getTokenList', payload))
+    trackerApi.get(makeUrl('/v3/token/getTokenList', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -15,7 +15,7 @@ export function tokenGetTokenListApi(payload) {
 
 export function tokenGetTokenTransferListApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/token/getTokenTransferList', payload))
+    trackerApi.get(makeUrl('/v3/token/getTokenTransferList', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -28,7 +28,7 @@ export function tokenGetTokenTransferListApi(payload) {
 
 export function tokenGetTokenSummaryApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/token/getTokenSummary', payload))
+    trackerApi.get(makeUrl('/v3/token/getTokenSummary', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -41,7 +41,7 @@ export function tokenGetTokenSummaryApi(payload) {
 
 export function tokenGetTokenTransfersApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/token/getTokenTransfers', payload))
+    trackerApi.get(makeUrl('/v3/token/getTokenTransfers', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)
@@ -54,7 +54,7 @@ export function tokenGetTokenTransfersApi(payload) {
 
 export function tokenGetTokenHoldersApi(payload) {
   return new Promise((resolve, reject) => {
-    axiosApi.get(makeUrl('/v3/token/getTokenHolders', payload))
+    trackerApi.get(makeUrl('/v3/token/getTokenHolders', payload))
       .then(result => {
         console.log(result)
         resolve(result.data)

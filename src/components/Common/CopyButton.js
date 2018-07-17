@@ -24,14 +24,14 @@ class CopyButton extends Component {
     render() {
       const { data, title } = this.props
       const { style } = this.state
-      const text = style === 'on' ? 'Complete' : title
+      const text = style === 'on' ? 'Copy Complete' : title
       return (
         <span 
           className={`copy clipboard-btn ${style}`} 
           data-clipboard-text={data} 
           onClick={this.handleClick}
         >
-          {`Copy ${text}`}
+          {text}
         </span>
       );
     }

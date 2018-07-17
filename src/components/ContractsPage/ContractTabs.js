@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { 
     LoadingComponent, 
-    NoBox
+    NoBox,
+    ContractTransactions,
+    ContractTokenTransfers,
+    ContractCode
 } from '../../components'
 import { TX_TYPE } from '../../utils/const'
 
@@ -21,12 +24,13 @@ class ContractTabs extends Component {
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
-                    this.props.selectContractTransactionList({ addr, page: 1, count: 10 })
+                    this.props.contractTxList({ addr, page: 1, count: 10 })
                     break
                 case 1:
-                    this.props.selectContractTokenTransferList({ addr, page: 1, count: 10 })
+                    this.props.contractTokenTxList({ addr, page: 1, count: 10 })
                     break
                 case 2:                                
+                    this.props.icxGetScore({ address: addr })
                 case 3:                                
                 case 4:                                
                 default:       
@@ -54,15 +58,16 @@ class ContractTabs extends Component {
 
     render() {
         const { on } = this.state
-        const { loading, contractTx, contractTokenTx } = this.props
+        const { contract, contractTx, contractTokenTx } = this.props
 
         const TableContents = (_on) => {
             switch(_on) {
                 case 0:
-                    // return <TokenTransfers contractTx={contractTx} goAllTx={this.goAllTx}/>
+                    return <ContractTransactions contractTx={contractTx} goAllTx={this.goAllTx}/>
                 case 1:
-                    // return <TokenHolders contractTokenTx={contractTokenTx} goAllTx={this.goAllTx}/>
-                case 2:                                
+                    return <ContractTokenTransfers contractTokenTx={contractTokenTx} goAllTx={this.goAllTx}/>
+                case 2:           
+                    return <ContractCode contract={contract}/>
                 case 3:                                
                 case 4:                                
                 default:
@@ -73,7 +78,7 @@ class ContractTabs extends Component {
         return (
             <div className="screen1">
             {
-                loading ?
+                contract.loading ?
                 <LoadingComponent height='513px'/>
                 :
                 <div className="wrap-holder">
@@ -81,11 +86,7 @@ class ContractTabs extends Component {
                         <ul>
                         {
                             Tabs.map((tab, index) => (
-                                <li key={index} className={on === index ? 'on' : ''} 
-                                    onClick={() => {this.setTab(index)}}
-                                >
-                                    {tab}
-                                </li>
+                                <li key={index} className={on === index ? 'on' : ''} onClick={() => {this.setTab(index)}}>{tab}</li>
                             ))
                         }
                         </ul>

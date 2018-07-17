@@ -1,9 +1,9 @@
 import { makeUrl } from '../../../utils/utils'
-import { axiosApi } from './config'
+import { trackerApi } from './config'
 
 export function addressListApi(payload) {
     return new Promise((resolve, reject) => {
-        axiosApi.get(makeUrl(`/v3/address/list`, payload))
+        trackerApi.get(makeUrl(`/v3/address/list`, payload))
             .then(result => {
                 console.log(result.data)
                 resolve(result.data)
@@ -16,7 +16,7 @@ export function addressListApi(payload) {
 
 export function addressInfoApi(payload) {
     return new Promise((resolve, reject) => {
-        axiosApi.get(makeUrl(`/v3/address/info`, payload))
+        trackerApi.get(makeUrl(`/v3/address/info`, payload))
             .then(result => {
                 console.log(result.data)
                 resolve(result.data)
@@ -29,7 +29,7 @@ export function addressInfoApi(payload) {
 
 export function addressTxListApi(payload) {
     return new Promise((resolve, reject) => {
-        axiosApi.get(makeUrl(`/v3/address/txList`, payload))
+        trackerApi.get(makeUrl(`/v3/address/txList`, payload))
             .then(result => {
                 resolve(result.data)
             })
@@ -41,7 +41,7 @@ export function addressTxListApi(payload) {
 
 export function addressTokenTxListApi(payload) {
     return new Promise((resolve, reject) => {
-        axiosApi.get(makeUrl(`/v3/address/tokenTxList`, payload))
+        trackerApi.get(makeUrl(`/v3/address/tokenTxList`, payload))
             .then(result => {
                 resolve(result.data)
             })

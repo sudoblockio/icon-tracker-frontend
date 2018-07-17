@@ -1,70 +1,95 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
-  selectContractInfoApi as SELECT_CONTRACT_INFO_API,
-  selectContractTransactionListApi as SELECT_CONTRACT_TRANSACTION_LIST_API,
-  selectContractTokenTransferListApi as SELECT_CONTRACT_TOKEN_TRANSFER_LIST_API
+} from '../api/restV3_old';
+
+import {
+  contractInfo as CONTRACT_INFO_API,
+  contractTxList as CONTRACT_TX_LIST_API,
+  contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
+  icxGetScore as ICX_GET_SCORE_API
 } from '../api/restV3';
 
-export function* selectContractInfoFunc(action) {
+export function* contractInfoFunc(action) {
   try {
-    const payload = yield call(SELECT_CONTRACT_INFO_API, action.payload);
+    const payload = yield call(CONTRACT_INFO_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.selectContractInfoFulfilled, payload: payload});
+      yield put({type: AT.contractInfoFulfilled, payload: payload});
     }
     else {
       throw new Error();
     }
   }
   catch(e) {
-    yield put({type: AT.selectContractInfoRejected, error: e.message});
+    yield put({type: AT.contractInfoRejected, error: e.message});
   }
 }
 
-export function* selectContractTransactionListFunc(action) {
+export function* contractTxListFunc(action) {
   try {
-    const payload = yield call(SELECT_CONTRACT_TRANSACTION_LIST_API, action.payload);
+    const payload = yield call(CONTRACT_TX_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.selectContractTransactionListFulfilled, payload: payload});
+      yield put({type: AT.contractTxListFulfilled, payload: payload});
     }
     else {
       throw new Error();
     }
   }
   catch(e) {
-    yield put({type: AT.selectContractTransactionListRejected, error: e.message});
+    yield put({type: AT.contractTxListRejected, error: e.message});
   }
 }
 
-export function* selectContractTokenTransferListFunc(action) {
+export function* contractTokenTxListFunc(action) {
   try {
-    const payload = yield call(SELECT_CONTRACT_TOKEN_TRANSFER_LIST_API, action.payload);
+    const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.selectContractTokenTransferListFulfilled, payload: payload});
+      yield put({type: AT.contractTokenTxListFulfilled, payload: payload});
     }
     else {
       throw new Error();
     }
   }
   catch(e) {
-    yield put({type: AT.selectContractTokenTransferListRejected, error: e.message});
+    yield put({type: AT.contractTokenTxListRejected, error: e.message});
   }
 }
 
-function* watchSelectContractInfo() {
-  yield takeLatest(AT.selectContractInfo, selectContractInfoFunc)
+export function* icxGetSroreFunc(action) {
+  try {
+    const payload = yield call(ICX_GET_SCORE_API, action.payload);
+    console.log(payload)
+    if (payload.result === '200') {
+      yield put({type: AT.icxGetScoreFulfilled, payload: payload});
+    }
+    else {
+      yield put({type: AT.icxGetScoreRejected});
+    }
+  }
+  catch(e) {
+    yield put({type: AT.icxGetScoreRejected, error: e.message});
+  }
 }
 
-function* watchSelectContractTransactionList() {
-  yield takeLatest(AT.selectContractTransactionList, selectContractTransactionListFunc)
+function* watchContractInfo() {
+  yield takeLatest(AT.contractInfo, contractInfoFunc)
 }
 
-function* watchSelectContractTokenTransferList() {
-  yield takeLatest(AT.selectContractTokenTransferList, selectContractTokenTransferListFunc)
+function* watchContractTxList() {
+  yield takeLatest(AT.contractTxList, contractTxListFunc)
+}
+
+function* watchContractTokenTxList() {
+  yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc)
+}
+
+function* watchIcxGetSrore() {
+  yield takeLatest(AT.icxGetScore, icxGetSroreFunc)
 }
 
 export default function* contractSaga() {
-  yield fork(watchSelectContractInfo);
-  yield fork(watchSelectContractTransactionList);
-  yield fork(watchSelectContractTokenTransferList);
+  yield fork(watchContractInfo);
+  yield fork(watchContractTxList);
+  yield fork(watchContractTokenTxList);
+  yield fork(watchIcxGetSrore);
 }

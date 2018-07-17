@@ -4,16 +4,10 @@ import axios from 'axios'
 // const developmentURL = 'https://trackerdev.icon.foundation'
 export const localDevUrl = 'https://trackerlocaldev.icon.foundation'
 export const trackerApi = axios.create({
+  // baseURL: process.env.NODE_ENV === 'development' ? developmentURL : productionURL,
   baseURL: localDevUrl,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
-})
-
-export const loopChainDevUrl = 'https://testwallet.icon.foundation'
-export const walletApi  = axios.create({
-  baseURL: loopChainDevUrl,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 })

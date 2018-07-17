@@ -16,6 +16,8 @@ import AddressTotalTxListContainer from './AddressesPage/AddressTotalTxListConta
 import TokenListPageContainer from './TokensPage/TokenListPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
+import TxPageContainer from './Common/TxPageContainer'
+
 export {
   MainPageContainer,
   HeaderContainer,
@@ -34,4 +36,6 @@ export {
   AddressTotalTxListContainer,
   TokenListPageContainer,
   TokenDetailPageContainer,
+
+  TxPageContainer,
 }

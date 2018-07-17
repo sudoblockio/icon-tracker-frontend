@@ -1,22 +1,31 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function selectContractInfo(payload) {
+export function contractInfo(payload) {
   return {
-    type: actionTypes.selectContractInfo,
+    type: actionTypes.contractInfo,
     payload
   }
 }
 
-export function selectContractTransactionList(payload) {
+export function contractTxList(payload) {
   return {
-    type: actionTypes.selectContractTransactionList,
+    type: actionTypes.contractTxList,
     payload
   }
 }
 
-export function selectContractTokenTransferList(payload) {
+export function contractTokenTxList(payload) {
   return {
-    type: actionTypes.selectContractTokenTransferList,
+    type: actionTypes.contractTokenTxList,
     payload
   }
 }
+
+export function icxGetScore(payload) {
+  return {
+    type: actionTypes.icxGetScore,
+    payload
+  }
+}
+
+
