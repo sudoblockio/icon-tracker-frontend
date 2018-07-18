@@ -71,6 +71,32 @@ const TokenCell = ({name, symbol, address}) => {
 	return <td><TokenLink label={name} to={address}/>{/*tokenText(name, symbol, address)*/}</td>
 }
 
+const AgeCell = ({ age }) => {
+	let className, ageText
+	if (!age || age === "-") {
+		className = "no"
+		ageText = "-"
+	}
+	else {
+		className = "break"
+		ageText = calcTime(age)
+	}
+	return <td className={className}>{ageText}</td>
+}
+
+const DateCell = ({ date }) => {
+	let className, dateText
+	if (!date || date === "-") {
+		className = "no"
+		dateText = "-"
+	}
+	else {
+		className = "break"
+		dateText = dateToUTC(date)
+	}
+	return <td className={className}>{dateText}</td>
+}
+
 class TxTableBody extends Component {
 	render() {
 		const TableRow = (_props) => {
@@ -106,7 +132,7 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-                            <td className='break'>{calcTime(age)}</td>
+                            <AgeCell age={age}/>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
@@ -118,8 +144,8 @@ class TxTableBody extends Component {
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
 							<td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
-							<td className='break'>{dateToUTC(createDate)}</td>
-                            <AddressCell targetAddr={fromAddr} address={address} />
+							<DateCell date={createDate}/>
+							<AddressCell targetAddr={fromAddr} address={address} />
                             <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
                             <AddressCell targetAddr={toAddr} address={address}/>
 							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>ICX</em></td>
@@ -130,7 +156,7 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-							<td className='break'>{dateToUTC(createDate)}</td>
+							<DateCell date={createDate}/>
                             <AddressCell targetAddr={fromAddr} address={address} />
                             <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
                             <AddressCell targetAddr={toAddr} address={address}/>

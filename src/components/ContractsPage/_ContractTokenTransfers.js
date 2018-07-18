@@ -13,9 +13,9 @@ class ContractTokenTransfers extends Component {
         const tableClassName = 
             TX_TYPE_DATA[TX_TYPE.CONTRACT_TOKEN_TX] ? 
             TX_TYPE_DATA[TX_TYPE.CONTRACT_TOKEN_TX]['className'] : ''        
-        const noDataText = 
+        const noBoxText = 
             TX_TYPE_DATA[TX_TYPE.CONTRACT_TOKEN_TX] ? 
-            TX_TYPE_DATA[TX_TYPE.CONTRACT_TOKEN_TX]['noDataText'] : ''
+            TX_TYPE_DATA[TX_TYPE.CONTRACT_TOKEN_TX]['noBoxText'] : ''
         return (
             <TxBottom 
                 txData={contractTokenTx}
@@ -23,7 +23,7 @@ class ContractTokenTransfers extends Component {
                 txType={TX_TYPE.CONTRACT_TOKEN_TX}
                 address={undefined}
                 tableClassName={tableClassName}
-                noDataText={noDataText}
+                noBoxText={noBoxText}
                 totalText='Transactions'
             />        
         )

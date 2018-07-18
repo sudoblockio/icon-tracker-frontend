@@ -19,8 +19,8 @@ class ContractInfo extends Component {
     render() {
         const { contract } = this.props
         const { loading, data } = contract
-        const Contents = (_loading) => {
-            if (_loading) {
+        const Contents = () => {
+            if (loading) {
                 return (
                     <LoadingComponent height='206px' />
                 )
@@ -72,7 +72,7 @@ class ContractInfo extends Component {
                 )
             }
         }
-        return Contents(loading, data)
+        return Contents()
     }
 }
 

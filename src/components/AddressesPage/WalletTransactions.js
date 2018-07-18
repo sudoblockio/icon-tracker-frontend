@@ -18,9 +18,9 @@ class WalletTransactions extends Component {
     const tableClassName =
       TX_TYPE_DATA[txType] ?
       TX_TYPE_DATA[txType]['className'] : ''
-    const noDataText =
+    const noBoxText =
       TX_TYPE_DATA[txType] ?
-      TX_TYPE_DATA[txType]['noDataText'] : ''
+      TX_TYPE_DATA[txType]['noBoxText'] : ''
 
     return (
       <TxBottom
@@ -29,7 +29,7 @@ class WalletTransactions extends Component {
         txType={txType}
         address={address}
         tableClassName={tableClassName}
-        noDataText={noDataText}
+        noBoxText={noBoxText}
         totalText='Transactions'
       />
     )

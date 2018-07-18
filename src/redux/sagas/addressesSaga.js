@@ -7,6 +7,7 @@ import {
   addressTokenTxListApi as ADDRESS_TOKEN_TX_LIST,
 } from '../api/restV3_old';
 
+// TODO addressListFunc 다시 확인 에러 처리 어떻게 할지
 export function* addressListFunc(action) {
   try {
     const payload = yield call(ADDRESS_LIST_API, action.payload);
@@ -18,7 +19,7 @@ export function* addressListFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.addressListRejected, error: e.message});
+    yield put({type: AT.addressListRejected});
   }
 }
 
@@ -48,7 +49,7 @@ export function* addressTxListFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.addressTxListRejected, error: action.payload.address});
+    yield put({type: AT.addressTxListRejected});
   }
 }
 
@@ -63,7 +64,7 @@ export function* addressTokenTxListFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.addressTokenTxListRejected, error: action.payload.address});
+    yield put({type: AT.addressTokenTxListRejected});
   }
 }
 

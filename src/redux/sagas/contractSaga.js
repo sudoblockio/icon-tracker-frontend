@@ -1,7 +1,5 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
-import {
-} from '../api/restV3_old';
 
 import {
   contractInfo as CONTRACT_INFO_API,
@@ -10,10 +8,11 @@ import {
   icxGetScore as ICX_GET_SCORE_API
 } from '../api/restV3';
 
+// TODO 나머지들도 같이 맞추기
 export function* contractInfoFunc(action) {
   try {
     const payload = yield call(CONTRACT_INFO_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.result === '200' && payload.data !== "NO_DATA") {
       yield put({type: AT.contractInfoFulfilled, payload: payload});
     }
     else {
@@ -21,7 +20,7 @@ export function* contractInfoFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.contractInfoRejected, error: e.message});
+    yield put({type: AT.contractInfoRejected, error: action.payload.addr});
   }
 }
 
@@ -36,7 +35,7 @@ export function* contractTxListFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.contractTxListRejected, error: e.message});
+    yield put({type: AT.contractTxListRejected});
   }
 }
 
@@ -51,10 +50,11 @@ export function* contractTokenTxListFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.contractTokenTxListRejected, error: e.message});
+    yield put({type: AT.contractTokenTxListRejected});
   }
 }
 
+// TODO 서버 이슈 해결 뒤 다시 확인
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_SCORE_API, action.payload);
@@ -63,11 +63,11 @@ export function* icxGetSroreFunc(action) {
       yield put({type: AT.icxGetScoreFulfilled, payload: payload});
     }
     else {
-      yield put({type: AT.icxGetScoreRejected});
+      throw new Error();
     }
   }
   catch(e) {
-    yield put({type: AT.icxGetScoreRejected, error: e.message});
+    yield put({type: AT.icxGetScoreRejected});
   }
 }
 

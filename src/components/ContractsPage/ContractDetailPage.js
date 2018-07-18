@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { startsWith } from '../../utils/utils'
 import {
+    NotFound,
     ContractInfo,
     ContractTabs
 } from '../../components'
@@ -27,25 +28,41 @@ class ContractDetailPage extends Component {
     }
 
     render() {
-        const { 
-            contract, 
-            contractTx, 
-            contractTokenTx 
+        const {
+            contract,
+            contractTx,
+            contractTokenTx
         } = this.props
-        
-        return (
-            <div className="content-wrap">
-				<ContractInfo contract={contract}/>
-                <ContractTabs
-                    contract={contract}
-                    contractTx={contractTx}
-                    contractTokenTx={contractTokenTx}
-                    contractTxList={this.props.contractTxList}
-                    contractTokenTxList={this.props.contractTokenTxList}
-                    icxGetScore={this.props.icxGetScore}
-                />
-            </div>
-        )
+
+        const content = (_loading, _error) => {
+            if (!_loading && _error) {
+                return (
+                    <NotFound error={_error} />
+                )
+            }
+            else {
+                return (
+                    <div className="content-wrap">
+                        <ContractInfo contract={contract} />
+                        <ContractTabs
+                            contract={contract}
+                            contractTx={contractTx}
+                            contractTokenTx={contractTokenTx}
+                            contractTxList={this.props.contractTxList}
+                            contractTokenTxList={this.props.contractTokenTxList}
+                            icxGetScore={this.props.icxGetScore}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const {
+            loading,
+            error
+        } = contract
+
+        return content(loading, error);
     }
 }
 
