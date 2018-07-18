@@ -33,12 +33,12 @@ const TxTypeSelector = {
 	},
 	[TX_TYPE.TOKEN_TX]: {
 		tx: 'tokenTransfers',
-		getTxList: 'tokenGetTokenTransfers',
+		getTxList: 'tokenTransfersList',
 		className: 'table-typeF'
 	},
 	[TX_TYPE.TOKEN_HOLDERS]: {
 		tx: 'tokenHolders',
-		getTxList: 'tokenGetTokenHolders',
+		getTxList: 'tokenHoldersList',
 		className: 'table-typeG'
 	}
 }

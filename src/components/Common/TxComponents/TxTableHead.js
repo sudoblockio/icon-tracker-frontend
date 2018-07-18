@@ -80,6 +80,26 @@ class TxTableHead extends Component {
                             <th>TxFee</th>
                         </tr>
                     )
+                case TX_TYPE.TOKEN_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Quantity</th>
+                        </tr>
+                    )
+                case TX_TYPE.TOKEN_HOLDERS:
+                    return (
+                        <tr>
+                            <th>Rank</th>
+                            <th>Addresses</th>
+                            <th>Quantity</th>
+                            <th>Percentage<em>%</em></th>
+                        </tr>
+                    )
                 default:
                     return (
                         <tr></tr>

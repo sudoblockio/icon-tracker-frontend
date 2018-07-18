@@ -6,6 +6,7 @@ import {
 	SortHolder,
 	TxTableHead,
 	TxTableBody,
+	TxPageTitle,
 	NoBox
 } from '../../../components/';
 import {
@@ -71,6 +72,12 @@ class TxPage extends Component {
 			case TX_TYPE.BLOCK_TX:
 				this.getTxList({ height: this.urlIndex, page: this.pageId, count })
 				break
+			case TX_TYPE.TOKEN_TX:
+				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
+				break
+			case TX_TYPE.TOKEN_HOLDERS:
+				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
+				break
 
 			default:
 		}
@@ -96,6 +103,12 @@ class TxPage extends Component {
 			case TX_TYPE.BLOCK_TX:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
+			case TX_TYPE.TOKEN_TX:
+				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
+				break
+			case TX_TYPE.TOKEN_HOLDERS:
+				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
+				break
 
 			default:
 		}
@@ -105,7 +118,14 @@ class TxPage extends Component {
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
 		const className = this.getTxTypeData()['className'] || ''
 		const noBoxText = this.getTxTypeData()['noBoxText'] || ''
-		const { loading, page, count, data, listSize } = tx;
+		const { 
+			loading, 
+			page, 
+			count, 
+			data, 
+			listSize, 
+			totalSize 
+		} = tx;
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -114,7 +134,7 @@ class TxPage extends Component {
 							<LoadingComponent height='calc(100vh - 120px - 144px)' />
 							:
 							<div className={`wrap-holder`}>
-								<Header txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} />
+								<TxPageTitle txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} totalSize={totalSize} />
 								{
 									(!data || data.length === 0) ?
 										<NoBox text={noBoxText} />
@@ -148,61 +168,6 @@ class TxPage extends Component {
 				</div>
 			</div>
 		);
-	}
-}
-
-const Header = ({ txType, urlIndex, listSize }) => {
-	const _listSize = listSize || 0
-	switch (txType) {
-		case TX_TYPE.CONTRACT_TX:
-			return (
-				<p className="title"
-				>Transactions
-					<span>for Contract {urlIndex}</span>
-					<span className="right">A total of<em>{_listSize}</em> transactions found</span>
-				</p>
-			)
-		case TX_TYPE.ADDRESS_TX:
-			return (
-				<p className="title">
-					Transactions
-					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{_listSize}</em> transactions found</span>
-				</p>
-			)
-		case TX_TYPE.ADDRESS_TOKEN_TX:
-			return (
-				<p className="title">
-					Token Transfers
-					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{_listSize}</em> token transfers found</span>
-				</p>
-			)
-		case TX_TYPE.TRANSACTIONS:
-			return (
-				<p className="title">
-					Transactions
-					<span></span>
-					<span className="right"><em>{_listSize}</em> total transactions</span>
-				</p>
-			)
-		case TX_TYPE.TOKEN_TRANSFERS:
-			return (
-				<p className="title">
-					Token transfers
-					<span>(IRC01)</span>
-					<span className="right">A total of<em>{_listSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
-				</p>
-			)
-		case TX_TYPE.BLOCK_TX:
-			return (
-				<p className="title">Transactions
-					<span>for Block Height {urlIndex}</span>
-					<span className="right">A total of<em>{_listSize}</em> total transactions found</span>
-				</p>
-			)
-		default:
-			return <p></p>
 	}
 }
 

@@ -5,6 +5,7 @@ import { BlockLink, WalletLink, NotFound, CopyButton } from '../../components/';
 
 import clipboard from 'clipboard';
 
+// TODO 다른 디테일 페이지 참고
 class TransactionDetailPage extends Component {
 
   constructor(props) {
@@ -14,7 +15,7 @@ class TransactionDetailPage extends Component {
   }
 
   componentWillMount() {
-		this.getTransaction(this.props.url.pathname.split("/")[2]);
+		this.transactionTxDetail(this.props.url.pathname.split("/")[2]);
 	}
 
 	componentWillUnmount() {
@@ -23,20 +24,22 @@ class TransactionDetailPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transaction/')) {
-      this.getTransaction(nextProps.url.pathname.split("/")[2]);
+      this.transactionTxDetail(nextProps.url.pathname.split("/")[2]);
     }
   }
 
-  getTransaction(txHash) {
-    this.props.getTransaction({ txHash });
+  transactionTxDetail(txHash) {
+    this.props.transactionTxDetail({ txHash });
   }
 
   render() {
-		const { loading, data, error } = this.props;
+		const { transaction } = this.props;
+		const { loading, data, error } = transaction;
+		console.log(this.props)
 		const { txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString } = data
 		const actualTxFee = stepUsedByTxn * stepPrice
 
-		if (error !== "" && !loading) {
+		if (!loading && error) {
       return (
         <NotFound error={error}/>
       )
@@ -122,6 +125,5 @@ const AddressCell = ({ address }) => {
 	}
 	return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to = {address}/></span><CopyButton data={address} title={'Copy Address'}/></td>
 }
-
 
 export default withRouter(TransactionDetailPage);

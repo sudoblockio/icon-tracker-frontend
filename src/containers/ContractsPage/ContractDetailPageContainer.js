@@ -6,7 +6,7 @@ import {
     contractTxList,
     contractTokenTxList,
     icxGetScore
-} from '../../redux/actions/contractAction'
+} from '../../redux/actions/contractsActions'
 
 function mapStateToProps(state) {
     return {

@@ -1,5 +1,12 @@
 import actionTypes from '../actionTypes/actionTypes';
 
+export function contractList(payload) {
+  return {
+    type: actionTypes.contractList,
+    payload
+  }
+}
+
 export function contractInfo(payload) {
   return {
     type: actionTypes.contractInfo,
@@ -27,5 +34,3 @@ export function icxGetScore(payload) {
     payload
   }
 }
-
-

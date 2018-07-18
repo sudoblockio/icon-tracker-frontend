@@ -14,11 +14,11 @@ import {
     transactionTxDetailApi
 } from './transaction'
 import { 
-    tokenGetTokenListApi,
+    tokenListApi,
     tokenTxListApi,    
-    tokenGetTokenSummaryApi,
-    tokenGetTokenTransfersApi,
-    tokenGetTokenHoldersApi
+    tokenSummaryApi,
+    tokenTransfersListApi,
+    tokenHoldersListApi
 } from './token'
 
 import {
@@ -41,11 +41,11 @@ export {
     transactionRecentTxApi,
     transactionTxDetailApi,
     
-    tokenGetTokenListApi,
+    tokenListApi,
     tokenTxListApi,
-    tokenGetTokenSummaryApi,
-    tokenGetTokenTransfersApi,
-    tokenGetTokenHoldersApi,
+    tokenSummaryApi,
+    tokenTransfersListApi,
+    tokenHoldersListApi,
 
     contractListApi,
     selectContractInfoApi,

@@ -11,7 +11,11 @@ import {
 } from './transaction'
 
 import {
+    tokenList,
     tokenTxList,
+    tokenSummary,
+    tokenTransfersList,
+    tokenHoldersList
 } from './token'
 
 import {
@@ -25,7 +29,11 @@ export {
     contractTokenTxList,
     transactionRecentTx,
     transactionTxDetail,
+    tokenList,
     tokenTxList,
+    tokenSummary,
+    tokenTransfersList,
+    tokenHoldersList,
 
     icxGetScore,
 }

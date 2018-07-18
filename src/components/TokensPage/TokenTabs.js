@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { 
+    TX_TYPE,
+    TOKEN_TABS
+} from '../../utils/const'
+import { 
     LoadingComponent, 
     TokenTransfers,
     TokenHolders,
     NoBox
 } from '../../components'
-import { TX_TYPE } from '../../utils/const'
-
-const Tabs = ['Token Transfer', 'Token Holders', 'Read Contract']
 
 class TokenTabs extends Component {
     constructor(props) {
@@ -19,14 +20,17 @@ class TokenTabs extends Component {
     }
 
     setTab = (index) => {
-        const { contractAddr } = this.props
+        const { token } = this.props
+        const { data } = token
+        const { contract } = data
+        const contractAddr = contract
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
-                    this.props.tokenGetTokenTransfers({ contractAddr, page: 1, count: 10 })
+                    this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
                     break
                 case 1:
-                    this.props.tokenGetTokenHolders({ contractAddr, page: 1, count: 10 })
+                    this.props.tokenHoldersList({ contractAddr, page: 1, count: 10 })
                     break
                 case 2:                                
                 default:       
@@ -35,62 +39,77 @@ class TokenTabs extends Component {
         })
     }
 
+    // TODO 컴포넌트 안으로
     goAllTx = () => {
         const { on } = this.state
-        const { contractAddr } = this.props
+        const { token } = this.props
+        const { data } = token
+        const { contract } = data
         switch (on) {
             case 0:
-                this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${contractAddr}`);
+                this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${contract}`);
                 break
             case 1:
-                this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contractAddr}`);
+                this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`);
                 break
             case 2:                                
             default:
         }
     }
 
-    render() {
+    render() {        
         const { on } = this.state
-        const { loading, tokenTransfers, tokenHolders } = this.props
+        const { token, tokenTransfers, tokenHolders } = this.props
+        const { loading } = token
 
-        const TableContents = (_on) => {
-            switch(_on) {
+        const TableContents = () => {
+            switch (on) {
                 case 0:
-                    return <TokenTransfers tokenTransfers={tokenTransfers} goAllTx={this.goAllTx}/>
+                    return (
+                        <TokenTransfers 
+                            txData={tokenTransfers} 
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.TOKEN_TX} 
+                        />
+                    )
                 case 1:
-                    return <TokenHolders tokenHolders={tokenHolders} goAllTx={this.goAllTx}/>
-                case 2:                                
+                    return (
+                        <TokenHolders 
+                            txData={tokenHolders} 
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.TOKEN_HOLDERS} 
+                        />
+                    )
                 default:
-                    return <NoBox text="No Data"/>
+                    return <NoBox text="No Data" />
             }
         }
-
-        return (
-            <div className="screen1">
-            {
-                loading ?
-                <LoadingComponent height='513px'/>
-                :
-                <div className="wrap-holder">
-                    <div className="tab-holder">
-                        <ul>
-                        {
-                            Tabs.map((tab, index) => (
-                                <li key={index} className={on === index ? 'on' : ''} 
-                                    onClick={() => {this.setTab(index)}}
-                                >
-                                    {tab}
-                                </li>
-                            ))
-                        }
-                        </ul>
+        const Contents = () => {
+            if (loading) {
+                return (
+                    <LoadingComponent height='513px' />
+                )
+            }
+            else {
+                return (
+                    <div className="screen1">
+                        <div className="wrap-holder">
+                            <div className="tab-holder">
+                                <ul>
+                                    {
+                                        TOKEN_TABS.map((tab, index) => (
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                            {TableContents()}
+                        </div>
                     </div>
-                    {TableContents(on)}
-                </div>
-            }        
-            </div>
-        )
+                )
+            }
+        }
+        return Contents()
     }
 }
 

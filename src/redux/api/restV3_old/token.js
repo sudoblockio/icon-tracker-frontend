@@ -1,7 +1,7 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApi } from './config'
 
-export function tokenGetTokenListApi(payload) {
+export function tokenListApi(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/getTokenList', payload))
       .then(result => {
@@ -26,7 +26,7 @@ export function tokenTxListApi(payload) {
   })
 }
 
-export function tokenGetTokenSummaryApi(payload) {
+export function tokenSummaryApi(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/getTokenSummary', payload))
       .then(result => {
@@ -39,7 +39,7 @@ export function tokenGetTokenSummaryApi(payload) {
   }) 
 }
 
-export function tokenGetTokenTransfersApi(payload) {
+export function tokenTransfersListApi(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/getTokenTransfers', payload))
       .then(result => {
@@ -52,7 +52,7 @@ export function tokenGetTokenTransfersApi(payload) {
   }) 
 }
 
-export function tokenGetTokenHoldersApi(payload) {
+export function tokenHoldersListApi(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/getTokenHolders', payload))
       .then(result => {

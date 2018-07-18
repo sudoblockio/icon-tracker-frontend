@@ -123,7 +123,7 @@ export function searchApi(payload) {
   })
 }
 
-export function getTransactionsApi(payload){
+export function transactionTxDetailsApi(payload){
   const pageNum = payload || 1;
   return new Promise((resolve, reject) => {
     trackerApi.get('v0/transaction/recentTx?page=' + pageNum)
@@ -136,7 +136,7 @@ export function getTransactionsApi(payload){
   });
 }
 
-export function getTransactionApi(payload){
+export function transactionTxDetailApi(payload){
   const txHash = payload;
   return new Promise((resolve, reject) => {
     trackerApi.get('v0/transaction/txDetail?txHash=' + txHash)

@@ -39,7 +39,7 @@ import AddressTotalTxList from './AddressesPage/AddressTotalTxList'
 import AddressTableHead from './Common/AddressTableHead'
 import AddressTableBody from './Common/AddressTableBody'
 
-import TokenListPage from './TokensPage/TokenListPage'
+import TokensPage from './TokensPage/TokensPage'
 import TokenDetailPage from './TokensPage/TokenDetailPage'
 import TokenSummary from './TokensPage/TokenSummary'
 import TokenTabs from './TokensPage/TokenTabs'
@@ -52,7 +52,9 @@ import NoBox from './Common/NoBox'
 
 import TxBottom from './Common/TxComponents/TxBottom'
 import TxBottomWrapper from './Common/TxComponents/TxBottomWrapper'
+import TxBottomTitle from './Common/TxComponents/TxBottomTitle'
 import TxPage from './Common/TxComponents/TxPage'
+import TxPageTitle from './Common/TxComponents/TxPageTitle'
 import TxTableHead from './Common/TxComponents/TxTableHead'
 import TxTableBody from './Common/TxComponents/TxTableBody'
 
@@ -106,7 +108,7 @@ export {
   AddressTableHead,
   AddressTableBody,
 
-  TokenListPage,
+  TokensPage,
   TokenDetailPage,
   TokenSummary,
   TokenTabs,
@@ -119,7 +121,9 @@ export {
 
   TxBottom,
   TxBottomWrapper,
+  TxBottomTitle,
   TxPage,
+  TxPageTitle,
   TxTableHead,
   TxTableBody,
 

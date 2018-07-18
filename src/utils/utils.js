@@ -174,11 +174,12 @@ export function getArrayState(step, state, action, dataType) {
     case REDUX_STEP.FULFILLED:
       const { payload } = action
       const { data } = payload
-      const _data = 
+      const _data =
         dataType === 'walletTx' ? data['walletTx'] :
-        dataType === 'walletTokenTx' ? data['tokenTx'] :
-        dataType === 'blockTx' ? data['txInBlock'] :
-        data
+          dataType === 'walletTokenTx' ? data['tokenTx'] :
+            dataType === 'blockTx' ? data['txInBlock'] :
+              dataType === 'tokens' ? data['tokenInfoList'] :
+                data
       return {
         ...state,
         [dataType]: {
@@ -199,6 +200,8 @@ export function getArrayState(step, state, action, dataType) {
           error: action.error
         }
       }
+    default:
+      return state
   }
 }
 
@@ -216,9 +219,10 @@ export function getObjectState(step, state, action, dataType) {
     case REDUX_STEP.FULFILLED:
       const { payload } = action
       const { data } = payload
-      const _data = 
-        dataType === 'block' ? data['blockDetail'] :
-        data
+      const _data =
+        dataType === 'wallet' ? data['walletDetail'] :
+          dataType === 'block' ? data['blockDetail'] :
+            data
       return {
         ...state,
         [dataType]: {
@@ -237,90 +241,18 @@ export function getObjectState(step, state, action, dataType) {
           error: action.error
         }
       }
+    default:
+      return state
   }
 }
 
-
 export function getState(type, step, state, action, dataType) {
-  if (type === 'ARR') {
-    switch (step) {
-      case REDUX_STEP.READY:
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: true,
-            page: Number(action.payload.page) || 1,
-            count: Number(action.payload.count) || state[dataType].count,
-            error: ''
-          }
-        }
-      case REDUX_STEP.FULFILLED:
-        const { payload } = action
-        const { data } = payload
-        const _data = 
-          dataType === 'walletTx' ? data['walletTx'] :
-          dataType === 'walletTokenTx' ? data['tokenTx'] :
-          dataType === 'blockTx' ? data['txInBlock'] :
-          data
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: false,
-            data: _data || [],
-            listSize: action.payload.listSize || 0,
-            totalSize: action.payload.totalSize || 0,
-            error: ''
-          }
-        }
-      case REDUX_STEP.REJECTED:
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: false,
-            error: action.error
-          }
-        }
-    }
-  }
-  else {
-    switch (step) {
-      case REDUX_STEP.READY:
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: true,
-            error: ''
-          }
-        }
-      case REDUX_STEP.FULFILLED:
-        const { payload } = action
-        const { data } = payload
-        const _data = 
-          dataType === 'wallet' ? data['walletDetail'] :
-          dataType === 'block' ? data['blockDetail'] :
-          data
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: false,
-            data: _data || {},
-            error: ''
-          }
-        }
-      case REDUX_STEP.REJECTED:
-        return {
-          ...state,
-          [dataType]: {
-            ...state[dataType],
-            loading: false,
-            error: action.error
-          }
-        }
-    }
+  switch (type) {
+    case 'ARR':
+      return getArrayState(step, state, action, dataType)
+    case 'OBJ':
+      return getObjectState(step, state, action, dataType)
+    default:
+      return state
   }
 }

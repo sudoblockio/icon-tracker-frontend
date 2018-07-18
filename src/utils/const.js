@@ -4,37 +4,25 @@ export const REDUX_STEP = {
     REJECTED: 'rejected',
 }
 
-export const INITIAL_STATE = {
-    'ARR': {
-        loading: false,
-        page: 1,
-        count: 20,
-        data: [],
-        listSize: 0,
-        error: '',    
-    },
-    'OBJ': {
-        loading: false,
-        data: {},
-        error: '',    
-    }
-}
-
-// TODO 지울 예정
 export const INITIAL_ARRAY_STATE = {
     loading: false,
     page: 1,
     count: 20,
     data: [],
     listSize: 0,
-    error: '',
+    totalSize: 0,
+    error: '',    
 }
 
-// TODO 지울 예정
 export const INITIAL_OBJECT_STATE = {
     loading: false,
     data: {},
-    error: '',
+    error: '',    
+}
+
+export const INITIAL_STATE = {
+    'ARR': INITIAL_ARRAY_STATE,
+    'OBJ': INITIAL_OBJECT_STATE
 }
 
 export const CONTRACT_STATUS = {
@@ -45,6 +33,7 @@ export const CONTRACT_STATUS = {
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
+export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
 
 export const TX_TYPE = {
     CONTRACT_TX: 'contracttx',
@@ -52,18 +41,11 @@ export const TX_TYPE = {
     ADDRESS_TOKEN_TX: 'addresstokentx',
     TRANSACTIONS: 'transactions',
     TOKEN_TRANSFERS: 'tokentransfers',
-
-
-
-
-
-
-
-    CONTRACT_TOKEN_TX: 'contracttokentx',
-
     BLOCK_TX: 'blocktx',
     TOKEN_TX: 'tokentx',
     TOKEN_HOLDERS: 'tokenholders',
+
+    CONTRACT_TOKEN_TX: 'contracttokentx',
 }
 
 export const TX_TYPE_DATA = {
@@ -72,21 +54,21 @@ export const TX_TYPE_DATA = {
 		getTxList: 'contractTxList',
         className: 'table-typeF',
         noBoxText: 'No Transaction',
-        totalText: 'Transactions'
+        totalText: 'transactions'
     },
 	[TX_TYPE.ADDRESS_TX]: {
 		tx: 'walletTx',
 		getTxList: 'addressTxList',
         className: 'table-typeC',
         noBoxText: 'No Transaction',
-        totalText: 'Transactions'
+        totalText: 'transactions'
     },
 	[TX_TYPE.ADDRESS_TOKEN_TX]: {
 		tx: 'walletTokenTx',
 		getTxList: 'addressTokenTxList',
         className: 'table-typeC token',
         noBoxText: 'No Transaction',
-        totalText: 'Token transfers'
+        totalText: 'token transfers'
     },
     [TX_TYPE.TRANSACTIONS]: {
 		tx: 'recentTx',
@@ -107,20 +89,22 @@ export const TX_TYPE_DATA = {
 		getTxList: 'blockTxList',
 		className: 'table-typeD',
         noBoxText: 'No Transaction',
-        totalText: 'Transactions'
+        totalText: 'transactions'
 	},
-    
-
-
-
-
-
-
-
-
-
-
-
+    [TX_TYPE.TOKEN_TX]: {
+		tx: 'tokenTransfers',
+		getTxList: 'tokenTransfersList',
+		className: 'table-typeF',
+        noBoxText: 'No Transaction',
+        totalText: 'token transfers'
+	},
+    [TX_TYPE.TOKEN_HOLDERS]: {
+		tx: 'tokenHolders',
+		getTxList: 'tokenHoldersList',
+		className: 'table-typeM',
+        noBoxText: 'No Holders',
+        totalText: 'token holders'
+    },
 
     [TX_TYPE.CONTRACT_TOKEN_TX]: {
 		tx: 'contractTokenTx',

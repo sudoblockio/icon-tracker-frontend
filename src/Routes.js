@@ -13,7 +13,7 @@ import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AddressTotalTxListPage from './pages/AddressTotalTxListPage'
-import TokenListPage from './pages/TokenListPage'
+import TokensPage from './pages/TokensPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import { TX_TYPE } from './utils/const'
 
@@ -41,7 +41,7 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} exact path='/transaction/:txHash' component={TransactionDetailPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
                 <Route onEnter={window.scroll(0, 0)} exact path='/contract/:contractId' component={ContractDetailPage} />
-                <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokenListPage}/>
+                <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokensPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/token/:tokenId' component={TokenDetailPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/`} component={TxPage} exact/>
@@ -62,17 +62,12 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/`} component={TxPage} exact/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/:pageId`} component={TxPage}/>
                                 
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:tokenId`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:tokenId/:pageId`} component={TxPage}/>
 
-
-
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_HOLDERS}/:tokenId`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_HOLDERS}/:tokenId/:pageId`} component={TxPage}/>
                 
-                
-                <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.TOKEN_TX}/:contractId`} component={AddressTotalTxListPage}/>
-                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:contractId/:pageId`} component={AddressTotalTxListPage}/>
-                
-                <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.TOKEN_HOLDERS}/:contractId`} component={AddressTotalTxListPage}/>
-                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_HOLDERS}/:contractId/:pageId`} component={AddressTotalTxListPage}/>
-
                 <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage}/>
                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage}/>
               </Switch>

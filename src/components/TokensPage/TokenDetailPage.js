@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { startsWith } from '../../utils/utils'
-import { 
+import {
+    startsWith
+} from '../../utils/utils'
+import {
+    NotFound,
     TokenSummary,
     TokenTabs
 } from '../../components'
 
 class TokenDetailPage extends Component {
-    constructor(props) {
-        super(props)
-        this.contractAddr = ''
-    }
-
     componentWillMount() {
         this.allTokenInfo(this.props.url.pathname)
     }
@@ -25,29 +22,51 @@ class TokenDetailPage extends Component {
     }
 
     allTokenInfo = (pathname) => {
-        this.contractAddr = pathname.split("/")[2]
-        const { contractAddr } = this
-        this.props.tokenGetTokenSummary({ contractAddr })
-        this.props.tokenGetTokenTransfers({ contractAddr, page: 1, count: 10 })
+        const contractAddr = pathname.split("/")[2]
+        this.props.tokenSummary({ contractAddr })
+        this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
     }
 
     render() {
-        const { contractAddr } = this
-        const { token, tokenTransfers, tokenHolders } = this.props        
-        return (
-            <div className="content-wrap">
-                <TokenSummary token={token}/>
-                <TokenTabs
-                    loading={token.loading}
-                    contractAddr={contractAddr}
-                    tokenTransfers={tokenTransfers}
-                    tokenHolders={tokenHolders}
-                    tokenGetTokenTransfers={this.props.tokenGetTokenTransfers}
-                    tokenGetTokenHolders={this.props.tokenGetTokenHolders}
-                />           
-            </div>
-        )
+        const {
+            token,
+            tokenTransfers,
+            tokenHolders,
+        } = this.props;
+
+        const {
+            loading,
+            error
+        } = token
+
+        console.log(this.props)
+
+        const Content = () => {
+            if (!loading && error) {
+                return (
+                    <NotFound error={error}/>
+                )
+            }
+            else {
+                return (
+                    <div className="content-wrap">
+                        <TokenSummary
+                            token={token}
+                        />
+                    <TokenTabs
+                        token={token}
+                        tokenTransfers={tokenTransfers}
+                        tokenHolders={tokenHolders}
+                        tokenTransfersList={this.props.tokenTransfersList}
+                        tokenHoldersList={this.props.tokenHoldersList}
+                    />
+                    </div>
+                )
+            }
+        }
+
+        return Content();
     }
 }
 
-export default withRouter(TokenDetailPage);
+export default TokenDetailPage;

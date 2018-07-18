@@ -2,25 +2,25 @@ import { connect } from 'react-redux';
 import { TokenDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
 import { 
-  tokenGetTokenSummary,
-  tokenGetTokenTransfers,
-  tokenGetTokenHolders
-} from '../../redux/actions/tokenActions'
+  tokenSummary,
+  tokenTransfersList,
+  tokenHoldersList
+} from '../../redux/actions/tokensActions'
 
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    token: state.token.token,
-    tokenTransfers: state.token.tokenTransfers,
-    tokenHolders: state.token.tokenHolders
+    token: state.tokens.token,
+    tokenTransfers: state.tokens.tokenTransfers,
+    tokenHolders: state.tokens.tokenHolders
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    tokenGetTokenSummary: payload => dispatch(tokenGetTokenSummary(payload)),
-    tokenGetTokenTransfers: payload => dispatch(tokenGetTokenTransfers(payload)),
-    tokenGetTokenHolders: payload => dispatch(tokenGetTokenHolders(payload)),
+    tokenSummary: payload => dispatch(tokenSummary(payload)),
+    tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
+    tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
   };
 }
 

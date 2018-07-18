@@ -7,7 +7,7 @@ function mapStateToProps(state) {
   return {
     url: state.router.location,
     addresses: state.addresses.addresses,
-};
+  };
 }
 
 function mapDispatchToProps(dispatch) {

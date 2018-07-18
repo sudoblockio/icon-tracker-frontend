@@ -10,14 +10,14 @@ import {
 } from '../../redux/actions/blocksActions'
 import {
   transactionRecentTx,
-} from '../../redux/actions/transactionAction'
+} from '../../redux/actions/transactionsActions'
 import {
   tokenTxList,
 } from '../../redux/actions/tokensActions'
 import { 
-  tokenGetTokenTransfers,
-  tokenGetTokenHolders
-} from '../../redux/actions/tokenActions';
+  tokenTransfersList,
+  tokenHoldersList
+} from '../../redux/actions/tokensActions';
 
 function mapStateToProps(state) {
   return {
@@ -39,8 +39,8 @@ function mapDispatchToProps(dispatch) {
     blockTxList: (payload) => dispatch(blockTxList(payload)),
     transactionRecentTx: (payload) => dispatch(transactionRecentTx(payload)),
     tokenTxList: (payload) => dispatch(tokenTxList(payload)),
-    tokenGetTokenTransfers: payload => dispatch(tokenGetTokenTransfers(payload)),
-    tokenGetTokenHolders: payload => dispatch(tokenGetTokenHolders(payload))
+    tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
+    tokenHoldersList: payload => dispatch(tokenHoldersList(payload))
   };
 }
 

@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { LoadingComponent, Pagination, BlockLink, WalletLink, TransactionLink, SortHolder } from '../../components/';
 import { dateToUTC, convertNumberToText, numberWithCommas, startsWith, getUTCString } from '../../utils/utils';
 
+// TODO 
+// 아래는 코드는 더이상 쓰지 않음
+// TxPage 래핑 하는 형태로 정리 필요
 class TransactionsPage extends Component {
 
 	constructor(props) {
@@ -12,20 +15,20 @@ class TransactionsPage extends Component {
 
 	componentWillMount() {
 		const { pathname } = this.props.url;
-		if (pathname === '/transactions') this.props.getTransactions()
+		if (pathname === '/transactions') this.props.transactionTxDetails()
 
 		const page = pathname.split("/")[2]
-		if (!isNaN(page)) this.props.getTransactions(page);
+		if (!isNaN(page)) this.props.transactionTxDetails(page);
 		else this.props.history.push('/transactions');
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.url.pathname !== this.props.url.pathname && startsWith(nextProps.url.pathname, '/transactions')) {
-			nextProps.getTransactions(nextProps.url.pathname.split("/")[2]);
+			nextProps.transactionTxDetails(nextProps.url.pathname.split("/")[2]);
 		}
 	}
 
-	getTransactionsData = (pageId) => {
+	transactionTxDetailsData = (pageId) => {
 		this.props.history.push('/transactions/' + pageId);
 	}
 
@@ -81,7 +84,7 @@ class TransactionsPage extends Component {
 								<Pagination
 									pageNum={pageNum}
 									maxPageNum={maxPageNum}
-									getData={this.getTransactionsData} 
+									getData={this.transactionTxDetailsData} 
 								/>
 							</div>
 						}

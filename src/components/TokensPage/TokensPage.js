@@ -12,7 +12,7 @@ class TokenListPage extends Component {
 	}
 
 	componentWillMount() {
-		this.props.tokenGetTokenList({})
+		this.props.tokenList({})
 	}
 	
 	handleChange = (e) => {
@@ -22,9 +22,13 @@ class TokenListPage extends Component {
 
 	render() {
 		const { value } = this.state
-		const { tokenList } = this.props
-		const { data, listSize, loading } = tokenList
-		const list = data.filter(token => token.tokenName.indexOf(value) !== -1 || token.symbol.indexOf(value) !== -1)
+		const { tokens } = this.props
+		const { data, listSize, loading } = tokens
+		const list = data.filter(token => {
+			const { tokenName, symbol } = token
+			const lowerValue = value.toLowerCase()
+			return tokenName.toLowerCase().indexOf(lowerValue) !== -1 || symbol.toLowerCase().indexOf(lowerValue) !== -1}
+		)
 		return (
 			<div className="content-wrap">
 				<div className="screen0">

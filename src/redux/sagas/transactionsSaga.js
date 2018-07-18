@@ -1,13 +1,17 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import { 
-  transactionTxDetailApi as TRANSACTION_TX_DETAIL_API,
-  // transactionRecentTxApi as TRANSACTION_RECENT_TX_API 
-} from '../api/restV3_old';
-
-import { 
-  transactionRecentTx as TRANSACTION_RECENT_TX_API 
+  transactionRecentTx as TRANSACTION_RECENT_TX_API,
+  transactionTxDetail as TRANSACTION_TX_DETAIL_API,
 } from '../api/restV3';
+
+function* watchTransactionRecentTx() { yield takeLatest (AT.transactionRecentTx, transactionRecentTxFunc) }
+function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
+
+export default function* transactionsSaga() {
+  yield fork(watchTransactionRecentTx);
+  yield fork(watchTransactionTxDetail);
+}
 
 function* transactionRecentTxFunc(action) {
   try {
@@ -22,23 +26,16 @@ function* transactionRecentTxFunc(action) {
   }
 }
 
-function* getTransactionFunc(action){
+function* transactionTxDetailFunc(action){
   try {
+    console.log('transactionTxDetailFunc')
     const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.getTransactionFulfilled, payload: payload.data});
+      yield put({type: AT.transactionTxDetailFulfilled, payload: payload});
     } else {
       throw new Error();
     }
   } catch (e) {
-    yield put({type: AT.getTransactionRejected});
+    yield put({type: AT.transactionTxDetailRejected, error: action.payload.txHash});
   }
-}
-
-function* watchTransactionRecentTx() { yield takeLatest (AT.transactionRecentTx, transactionRecentTxFunc) }
-function* watchGetTransaction() { yield takeLatest(AT.getTransaction, getTransactionFunc) }
-
-export default function* transactionsSaga() {
-  yield fork(watchTransactionRecentTx);
-  yield fork(watchGetTransaction);
 }

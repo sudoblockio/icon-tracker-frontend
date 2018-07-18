@@ -13,7 +13,8 @@ import HeaderContainer from './Common/HeaderContainer'
 import NotFoundPageContainer from './Common/NotFoundPageContainer'
 
 import AddressTotalTxListContainer from './AddressesPage/AddressTotalTxListContainer'
-import TokenListPageContainer from './TokensPage/TokenListPageContainer'
+
+import TokensPageContainer from './TokensPage/TokensPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
 import TxPageContainer from './Common/TxPageContainer'
@@ -34,7 +35,7 @@ export {
   NotFoundPageContainer,
 
   AddressTotalTxListContainer,
-  TokenListPageContainer,
+  TokensPageContainer,
   TokenDetailPageContainer,
 
   TxPageContainer,

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { ContractsPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { contractList } from '../../redux/actions/contractsAction';
+import { contractList } from '../../redux/actions/contractsActions';
 
 function mapStateToProps(state) {
   return {

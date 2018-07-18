@@ -12,15 +12,3 @@ export function transactionRecentTxApi(payload) {
       })
   })
 }
-
-export function transactionTxDetailApi(payload) {
-  return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/transaction/txDetail', payload))
-      .then(result => {
-        resolve(result.data)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}

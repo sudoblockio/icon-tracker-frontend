@@ -34,7 +34,7 @@ const TxHashCell = ({ isError, txHash }) => {
 	return <td className={className}>{isError && <i className="img"></i>}<span className="ellipsis">{_txHash}</span></td>
 }
 
-const AddressCell = ({ targetAddr, address }) => {
+const AddressCell = ({ targetAddr, address, noEllipsis }) => {
 	const isContract = isContractAddress(targetAddr)
 	let _targetAddr, className
 	if (!targetAddr) {
@@ -49,7 +49,7 @@ const AddressCell = ({ targetAddr, address }) => {
 		_targetAddr = <WalletLink to={targetAddr} />
 		className = `on ${isContract ? 'icon' : ''}`
 	}
-	return <td className={className}>{isContract && <i className="img"></i>}<span className="ellipsis">{_targetAddr}</span></td>
+	return <td className={className}>{isContract && <i className="img"></i>}<span className={noEllipsis ? '' : 'ellipsis' }>{_targetAddr}</span></td>
 }
 
 const SignCell = ({ address, fromAddr, toAddr }) => {
@@ -122,9 +122,13 @@ class TxTableBody extends Component {
 				contractAddr,
 				tokenName,
 				symbol,
-				tokenQuantity
+				tokenQuantity,
+				rank,
+				tokenSymbol,
+				percentage
 			} = data
 
+			const addressInData = data.address
 			const isError = state === 0
 			
 			// TODO calcAgeTime 새로 만들 것
@@ -202,6 +206,26 @@ class TxTableBody extends Component {
 							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
                         </tr>   
                     )                       
+				case TX_TYPE.TOKEN_TX:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+							<td className='break'>{calcTime(createDate)}</td>
+                            <AddressCell targetAddr={fromAddr}/>
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
+                            <AddressCell targetAddr={toAddr}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>{symbol}</em></td>
+                        </tr>   
+                    )
+				case TX_TYPE.TOKEN_HOLDERS:
+                    return (
+                        <tr>
+							<td>{rank}</td>
+							<AddressCell targetAddr={addressInData} noEllipsis={true}/>
+							<td><span>{convertNumberToText(quantity , 'icx', 4)}</span><em>{symbol}</em></td>
+							<td><span>{percentage}</span><em>%</em></td>
+                        </tr>   
+                    )
                 default:
                     return <tr></tr>
             }

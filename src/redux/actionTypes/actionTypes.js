@@ -15,13 +15,9 @@ const actionTypes = {
   blockListFulfilled: 'BLOCK_LIST_FULFILLED',
   blockListRejected: 'BLOCK_LIST_REJECTED',
 
-  getTransactions: 'GET_TRANSACTIONS',
-  getTransactionsFulfilled: 'GET_TRANSACTIONS_FULFILLED',
-  getTransactionsRejected: 'GET_TranSACTIONS_REJECTED',
-
-  getTransaction: 'GET_TRANSACTION',
-  getTransactionFulfilled: 'GET_TRANSACTION_FULFILLED',
-  getTransactionRejected: 'GET_TRANSACTION_REJECTED',
+  transactionTxDetail: 'TRANSACTION_TX_DETAIL',
+  transactionTxDetailFulfilled: 'TRANSACTION_TX_DETAIL_FULFILLED',
+  transactionTxDetailRejected: 'TRANSACTION_TX_DETAIL_REJECTED',
 
   search: 'SEARCH',
   searchFulfilled: 'SEARCH_FULFILLED',
@@ -47,22 +43,6 @@ const actionTypes = {
   transactionRecentTx: 'TRANSACTION_RECENT_TX',
   transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
   transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',
-
-  tokenGetTokenList: 'TOKEN_GET_TOKEN_LIST',
-  tokenGetTokenListFulfilled: 'TOKEN_GET_TOKEN_LIST_FULFILLED',
-  tokenGetTokenListRejected: 'TOKEN_GET_TOKEN_LIST_REJECTED',
-
-  tokenGetTokenSummary: 'TOKEN_GET_TOKEN_SUMMARY',
-  tokenGetTokenSummaryFulfilled: 'TOKEN_GET_TOKEN_SUMMARY_FULFILLED',
-  tokenGetTokenSummaryRejected: 'TOKEN_GET_TOKEN_SUMMARY_REJECTED',
-
-  tokenGetTokenTransfers: 'TOKEN_GET_TOKEN_TRANSFERS',
-  tokenGetTokenTransfersFulfilled: 'TOKEN_GET_TOKEN_TRANSFERS_FULFILLED',
-  tokenGetTokenTransfersRejected: 'TOKEN_GET_TOKEN_TRANSFERS_REJECTED',
-
-  tokenGetTokenHolders: 'TOKEN_GET_TOKEN_HOLDERS',
-  tokenGetTokenHoldersFulfilled: 'TOKEN_GET_TOKEN_HOLDERS_FULFILLED',
-  tokenGetTokenHoldersRejected: 'TOKEN_GET_TOKEN_HOLDERS_REJECTED',
 
   contractList: 'SELECT_CONTRACT_LIST',
   contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
@@ -98,17 +78,39 @@ const actionTypes = {
   addressTxList: 'ADDRESS_TX_LIST',
   addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
   addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
-
-  tokenTxList: 'TOKEN_TX_LIST',
-  tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
-  tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
-
-
-
   
   icxGetScore: 'ICX_GET_SCORE',
   icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
   icxGetScoreRejected: 'ICX_GET_SCORE_REJECTED',
+
+
+
+
+
+
+
+
+
+
+  tokenList: 'TOKEN_LIST',
+  tokenListFulfilled: 'TOKEN_LIST_FULFILLED',
+  tokenListRejected: 'TOKEN_LIST_REJECTED',
+  
+  tokenTxList: 'TOKEN_TX_LIST',
+  tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
+  tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
+
+  tokenSummary: 'TOKEN_SUMMARY',
+  tokenSummaryFulfilled: 'TOKEN_SUMMARY_FULFILLED',
+  tokenSummaryRejected: 'TOKEN_SUMMARY_REJECTED',
+
+  tokenTransfersList: 'TOKEN_TRANSFERS_LIST',
+  tokenTransfersListFulfilled: 'TOKEN_TRANSFERS_LIST_FULFILLED',
+  tokenTransfersListRejected: 'TOKEN_TRANSFERS_LIST_REJECTED',
+
+  tokenHoldersList: 'TOKEN_HOLDERS_LIST',
+  tokenHoldersListFulfilled: 'TOKEN_HOLDERS_LIST_FULFILLED',
+  tokenHoldersListRejected: 'TOKEN_HOLDERS_LIST_REJECTED',
 }
 
 export default actionTypes

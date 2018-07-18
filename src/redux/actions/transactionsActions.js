@@ -7,9 +7,9 @@ export function transactionRecentTx(payload) {
   }
 }
 
-export function getTransaction(payload){
+export function transactionTxDetail(payload){
   return {
-    type: actionTypes.getTransaction,
+    type: actionTypes.transactionTxDetail,
     payload
   };
 }

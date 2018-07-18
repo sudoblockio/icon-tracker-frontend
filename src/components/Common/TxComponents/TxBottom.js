@@ -4,7 +4,8 @@ import {
     LoadingComponent,
     TxTableHead,
     TxTableBody,
-    NoBox
+    NoBox,
+    TxBottomTitle
 } from '../../../components'
 import {
     numberWithCommas
@@ -26,6 +27,7 @@ class TxBottom extends Component {
         const {             
             data, 
             listSize,
+            totalSize,
             loading
         } = txData
         
@@ -36,7 +38,6 @@ class TxBottom extends Component {
                 )
             }
             else if (data.length === 0) {
-                console.log(noBoxText)
                 return (
                     <NoBox text={noBoxText} />
                 )
@@ -44,15 +45,17 @@ class TxBottom extends Component {
             else {
                 return (
                     <div className="contents">
-                        <p className="txt">
-                            <span>
-                                Latest<em>{listSize < 10 ? listSize : 10}</em> txns from a total of
-                                <em className="mint" onClick={goAllTx}>{numberWithCommas(listSize)} {totalText}</em>
-                            </span>
-                        </p>
+                        <TxBottomTitle 
+                            txType={txType}
+                            listSize={listSize}
+                            totalSize={totalSize}
+                            goAllTx={goAllTx}
+                        />
                         <table className={tableClassName}>
                             <thead>
-                                <TxTableHead txType={txType} />
+                                <TxTableHead 
+                                    txType={txType}
+                                />
                             </thead>
                             <tbody>
                                 {

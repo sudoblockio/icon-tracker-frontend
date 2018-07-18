@@ -4,7 +4,6 @@ import addressesSaga from './addressesSaga';
 import blocksSaga from './blocksSaga';
 import transactionsSaga from './transactionsSaga';
 import searchSaga from './searchSaga';
-import tokenSaga from './tokenSaga'
 import tokensSaga from './tokensSaga'
 import contractsSaga from './contractsSaga'
 
@@ -15,7 +14,6 @@ export default function* rootSaga() {
     fork(blocksSaga),
     fork(transactionsSaga),
     fork(searchSaga),
-    fork(tokenSaga),
     fork(tokensSaga),
     fork(contractsSaga),
   ]);
