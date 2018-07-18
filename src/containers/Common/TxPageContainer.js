@@ -8,6 +8,12 @@ import {
   addressTxList,
   addressTokenTxList
 } from '../../redux/actions/addressesActions';
+import { 
+  transactionRecentTx,
+} from '../../redux/actions/transactionAction';
+import { 
+  tokenTxList,
+} from '../../redux/actions/tokensActions';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +21,8 @@ function mapStateToProps(state) {
     contractTx: state.contract.contractTx,
     walletTx: state.addresses.walletTx,
     walletTokenTx: state.addresses.walletTokenTx,
+    recentTx: state.transactions.recentTx,
+    recentTokenTx: state.tokens.recentTokenTx
   };
 }
 
@@ -23,6 +31,8 @@ function mapDispatchToProps(dispatch) {
     contractTxList: payload => dispatch(contractTxList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
+    transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),
+    tokenTxList: payload => dispatch(tokenTxList(payload)),
   };
 }
 

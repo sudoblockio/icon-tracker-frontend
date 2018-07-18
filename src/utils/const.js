@@ -6,17 +6,12 @@ export const CONTRACT_STATUS = {
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 
-
-
-
-
-
-
-
 export const TX_TYPE = {
     CONTRACT_TX: 'contracttx',
     ADDRESS_TX: 'addresstx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
+    TRANSACTIONS: 'transactions',
+    TOKEN_TRANSFERS: 'tokentransfers',
 
 
 
@@ -27,8 +22,6 @@ export const TX_TYPE = {
     CONTRACT_TOKEN_TX: 'contracttokentx',
 
     BLOCK_TX: 'blocktx',
-    TRANSACTIONS: 'transactions',
-    TOKEN_TRANSFERS: 'tokentransfers',
     TOKEN_TX: 'tokentx',
     TOKEN_HOLDERS: 'tokenholders',
 }
@@ -52,6 +45,20 @@ export const TX_TYPE_DATA = {
         className: 'table-typeC token',
         noBoxText: 'No Transaction'
     },
+    [TX_TYPE.TRANSACTIONS]: {
+		tx: 'recentTx',
+		getTxList: 'transactionRecentTx',
+        className: 'table-typeJ',
+        noBoxText: 'No Transaction'
+    },
+    [TX_TYPE.TOKEN_TRANSFERS]: {
+		tx: 'recentTokenTx',
+		getTxList: 'tokenTxList',
+		className: 'table-typeN',
+        noBoxText: 'No Transaction'
+	},
+
+
 
 
 

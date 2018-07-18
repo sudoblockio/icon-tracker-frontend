@@ -2,8 +2,12 @@ import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import { 
   transactionTxDetailApi as TRANSACTION_TX_DETAIL_API,
-  transactionRecentTxApi as TRANSACTION_RECENT_TX_API 
+  // transactionRecentTxApi as TRANSACTION_RECENT_TX_API 
 } from '../api/restV3_old';
+
+import { 
+  transactionRecentTx as TRANSACTION_RECENT_TX_API 
+} from '../api/restV3';
 
 function* transactionRecentTxFunc(action) {
   try {
@@ -14,7 +18,7 @@ function* transactionRecentTxFunc(action) {
       throw new Error();
     }
   } catch (e) {
-    yield put({type: AT.transactionRecentTxRejected, error: action.payload});
+    yield put({type: AT.transactionRecentTxRejected});
   }
 }
 
@@ -31,13 +35,8 @@ function* getTransactionFunc(action){
   }
 }
 
-function* watchTransactionRecentTx() {
-  yield takeLatest (AT.transactionRecentTx, transactionRecentTxFunc)
-}
-
-function* watchGetTransaction() {
-  yield takeLatest(AT.getTransaction, getTransactionFunc);
-}
+function* watchTransactionRecentTx() { yield takeLatest (AT.transactionRecentTx, transactionRecentTxFunc) }
+function* watchGetTransaction() { yield takeLatest(AT.getTransaction, getTransactionFunc) }
 
 export default function* transactionsSaga() {
   yield fork(watchTransactionRecentTx);

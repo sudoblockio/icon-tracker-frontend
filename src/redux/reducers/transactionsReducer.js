@@ -26,7 +26,7 @@ export function transactionsReducer(state = initialState, action) {
           ...state.recentTx,
           loading: true,
           page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || 20,
+          count: Number(action.payload.count) || state.recentTx.count,
           error: ''
         }        
       }
@@ -55,6 +55,19 @@ export function transactionsReducer(state = initialState, action) {
         }        
       }
     }    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     case actionTypes.getTransaction: {
       return {

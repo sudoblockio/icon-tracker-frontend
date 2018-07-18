@@ -7,9 +7,9 @@ export function tokenGetTokenList(payload) {
   }
 }
 
-export function tokenGetTokenTransferList(payload) {
+export function tokenTxList(payload) {
   return {
-    type: actionTypes.tokenGetTokenTransferList,
+    type: actionTypes.tokenTxList,
     payload
   }
 }

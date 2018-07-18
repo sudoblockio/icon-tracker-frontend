@@ -13,7 +13,7 @@ export function tokenGetTokenListApi(payload) {
   })
 }
 
-export function tokenGetTokenTransferListApi(payload) {
+export function tokenTxListApi(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/getTokenTransferList', payload))
       .then(result => {

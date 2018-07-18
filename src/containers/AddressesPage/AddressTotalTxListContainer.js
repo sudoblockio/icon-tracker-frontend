@@ -12,7 +12,7 @@ import {
   transactionRecentTx,
 } from '../../redux/actions/transactionAction'
 import {
-  tokenGetTokenTransferList,
+  tokenTxList,
 } from '../../redux/actions/tokensActions'
 import { 
   tokenGetTokenTransfers,
@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
     blockTxList: (payload) => dispatch(blockTxList(payload)),
     transactionRecentTx: (payload) => dispatch(transactionRecentTx(payload)),
-    tokenGetTokenTransferList: (payload) => dispatch(tokenGetTokenTransferList(payload)),
+    tokenTxList: (payload) => dispatch(tokenTxList(payload)),
     tokenGetTokenTransfers: payload => dispatch(tokenGetTokenTransfers(payload)),
     tokenGetTokenHolders: payload => dispatch(tokenGetTokenHolders(payload))
   };

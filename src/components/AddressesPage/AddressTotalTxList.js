@@ -27,7 +27,7 @@ const TxTypeSelector = {
 	},
 	[TX_TYPE.TOKEN_TRANSFERS]: {
 		tx: 'recentTokenTx',
-		getTxList: 'tokenGetTokenTransferList',
+		getTxList: 'tokenTxList',
 		className: 'table-typeN'
 	},
 	[TX_TYPE.TOKEN_TX]: {

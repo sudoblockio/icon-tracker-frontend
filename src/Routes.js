@@ -53,6 +53,11 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/`} component={TxPage} exact/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/:pageId`} component={TxPage}/>
 
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TxPage}/>
+                
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}/:pageId`} component={TxPage}/>
 
 
 
@@ -61,13 +66,7 @@ class Routes extends Component {
                 
                 <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.BLOCK_TX}/:heightId/`} component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/:pageId`} component={AddressTotalTxListPage}/>
-                
-                <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.TRANSACTIONS}`} component={AddressTotalTxListPage}/>
-                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={AddressTotalTxListPage}/>
-                
-                <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={AddressTotalTxListPage}/>
-                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}/:pageId`} component={AddressTotalTxListPage}/>
-                
+                                
                 <Route onEnter={window.scroll(0, 0)} exact path={`/${TX_TYPE.TOKEN_TX}/:contractId`} component={AddressTotalTxListPage}/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:contractId/:pageId`} component={AddressTotalTxListPage}/>
                 

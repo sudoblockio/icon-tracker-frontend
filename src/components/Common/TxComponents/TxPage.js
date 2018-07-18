@@ -62,6 +62,12 @@ class TxPage extends Component {
 			case TX_TYPE.ADDRESS_TOKEN_TX:
                 this.getTxList({ address: this.urlIndex, page: this.pageId, count })
                 break
+			case TX_TYPE.TRANSACTIONS:
+                this.getTxList({ page: this.pageId, count })
+                break
+			case TX_TYPE.TOKEN_TRANSFERS:
+                this.getTxList({ page: this.pageId, count })
+                break
             
             default:
 		}
@@ -78,6 +84,12 @@ class TxPage extends Component {
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);	
                 break
+			case TX_TYPE.TRANSACTIONS:
+				this.props.history.push(`/${this.txType}/${page}`);	
+				break
+			case TX_TYPE.TOKEN_TRANSFERS:
+				this.props.history.push(`/${this.txType}/${page}`);	
+				break
 
             default:
 		}
@@ -95,7 +107,7 @@ class TxPage extends Component {
 					loading ?
 					<LoadingComponent height='calc(100vh - 120px - 144px)'/>
 					:
-					<div className="wrap-holder">
+					<div className={`wrap-holder ${TX_TYPE.TOKEN_TRANSFERS ? 'token' : ''}`}> {/* TODO 퍼블리싱 요청 */}
 						<Header txType={this.txType} urlIndex={this.urlIndex} totalData={totalData} />
 						{
 							(!data || data.length === 0) ?
@@ -134,26 +146,46 @@ class TxPage extends Component {
 }
 
 const Header = ({txType, urlIndex, totalData}) => {
+	const _totalData = totalData || 0
 	switch(txType) {
 		case TX_TYPE.CONTRACT_TX:
 			return (
-				<p className="title">Transactions
+				<p className="title"
+					>Transactions
 					<span>for Contract {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
+					<span className="right">A total of<em>{_totalData}</em> transactions found</span>
 				</p>
 			)		
 		case TX_TYPE.ADDRESS_TX:
 			return (
-				<p className="title">Transactions
+				<p className="title">
+					Transactions
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
+					<span className="right">A total of<em>{_totalData}</em> transactions found</span>
 				</p>
 			)		
 		case TX_TYPE.ADDRESS_TOKEN_TX:
 			return (
-				<p className="title">Token Transfers
+				<p className="title">
+					Token Transfers
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+					<span className="right">A total of<em>{_totalData}</em> token transfers found</span>
+				</p>
+			)		
+		case TX_TYPE.TRANSACTIONS:
+			return (
+				<p className="title">
+					Transactions
+					<span></span>
+					<span className="right"><em>{_totalData}</em> total transactions</span>
+				</p>
+			)		
+		case TX_TYPE.TOKEN_TRANSFERS:
+			return (
+				<p className="title">
+					Token transfers
+					<span>(IRC01)</span>
+					<span className="right">A total of<em>{_totalData}</em> token transfers found<em className="gray">(Showing the last {_totalData} records only)</em></span>
 				</p>
 			)		
 		default:

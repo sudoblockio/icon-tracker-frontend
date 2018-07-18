@@ -32,10 +32,6 @@ const actionTypes = {
   addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
   addressInfoRejected: 'ADDRESS_INFO_REJECTED',
   
-  addressTxList: 'ADDRESS_TX_LIST',
-  addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
-  addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
-
   addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
   addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
   addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
@@ -55,10 +51,6 @@ const actionTypes = {
   tokenGetTokenList: 'TOKEN_GET_TOKEN_LIST',
   tokenGetTokenListFulfilled: 'TOKEN_GET_TOKEN_LIST_FULFILLED',
   tokenGetTokenListRejected: 'TOKEN_GET_TOKEN_LIST_REJECTED',
-
-  tokenGetTokenTransferList: 'TOKEN_GET_TOKEN_TRANSFER_LIST',
-  tokenGetTokenTransferListFulfilled: 'TOKEN_GET_TOKEN_TRANSFER_LIST_FULFILLED',
-  tokenGetTokenTransferListRejected: 'TOKEN_GET_TOKEN_TRANSFER_LIST_REJECTED',
 
   tokenGetTokenSummary: 'TOKEN_GET_TOKEN_SUMMARY',
   tokenGetTokenSummaryFulfilled: 'TOKEN_GET_TOKEN_SUMMARY_FULFILLED',
@@ -103,7 +95,15 @@ const actionTypes = {
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
   contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
 
-  
+  addressTxList: 'ADDRESS_TX_LIST',
+  addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
+  addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
+
+  tokenTxList: 'TOKEN_TX_LIST',
+  tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
+  tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
+
+
 
   
   icxGetScore: 'ICX_GET_SCORE',

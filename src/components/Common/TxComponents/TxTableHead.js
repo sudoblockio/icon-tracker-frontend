@@ -44,6 +44,31 @@ class TxTableHead extends Component {
                             <th>Token</th>
                         </tr>
                     )
+                case TX_TYPE.TRANSACTIONS:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Block</th>
+                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
+                case TX_TYPE.TOKEN_TRANSFERS:
+                    return (
+                        <tr>
+                            <th>Tx Hash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Value</th>
+                            <th>Token</th>
+                        </tr>
+                    )
 
                 default:
                     return (

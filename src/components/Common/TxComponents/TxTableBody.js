@@ -67,6 +67,10 @@ const SignCell = ({ address, fromAddr, toAddr }) => {
 	return <td className={className}>{signItem}</td>
 }
 
+const TokenCell = ({name, symbol, address}) => {
+	return <td><TokenLink label={name} to={address}/>{/*tokenText(name, symbol, address)*/}</td>
+}
+
 class TxTableBody extends Component {
 	render() {
 		const TableRow = (_props) => {
@@ -89,17 +93,20 @@ class TxTableBody extends Component {
 				fee,
 				contractSymbol,
 				contractName,
-				contractAddr
+				contractAddr,
+				tokenName,
+				symbol
 			} = data
 
 			const isError = state === 0
 			
+			// TODO calcAgeTime 새로 만들 것
 			switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-                            <td>{calcTime(age)}</td>
+                            <td className='break'>{calcTime(age)}</td>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
@@ -110,8 +117,8 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-							<td className="on break"><BlockLink to={height || 0} label={numberWithCommas(height)}/></td>
-							<td className={'break'}>{dateToUTC(createDate)}</td>
+							<td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
+							<td className='break'>{dateToUTC(createDate)}</td>
                             <AddressCell targetAddr={fromAddr} address={address} />
                             <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
                             <AddressCell targetAddr={toAddr} address={address}/>
@@ -123,12 +130,37 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-							<td className={'break'}>{dateToUTC(createDate)}</td>
+							<td className='break'>{dateToUTC(createDate)}</td>
                             <AddressCell targetAddr={fromAddr} address={address} />
                             <SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
                             <AddressCell targetAddr={toAddr} address={address}/>
 							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>{contractSymbol}</em></td>
-							<td><TokenLink label={contractSymbol} to={contractAddr}/>{/*tokenText(contractName, contractSymbol, contractAddr)*/}</td>
+							<TokenCell name={contractName} symbol={contractSymbol} address={contractAddr}/>
+                        </tr>   
+                    )                       
+				case TX_TYPE.TRANSACTIONS:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+							<td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
+							<td className='break'>{dateToUTC(createDate)}</td>
+                            <AddressCell targetAddr={fromAddr}/>
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
+                            <AddressCell targetAddr={toAddr}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+                        </tr>   
+                    )                       
+				case TX_TYPE.TOKEN_TRANSFERS:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+							<td className='break'>{calcTime(createDate)}</td>
+                            <AddressCell targetAddr={fromAddr}/>
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
+                            <AddressCell targetAddr={toAddr}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>{symbol}</em></td>
+							<TokenCell name={tokenName} symbol={symbol} address={contractAddr}/>
                         </tr>   
                     )                       
 

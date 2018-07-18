@@ -5,6 +5,15 @@ import {
 } from './contract'
 
 import {
+    transactionRecentTx,
+    transactionTxDetail
+} from './transaction'
+
+import {
+    tokenTxList,
+} from './token'
+
+import {
     icxGetScore
 } from './icx'
 
@@ -12,5 +21,9 @@ export {
     contractInfo,
     contractTxList,
     contractTokenTxList,
-    icxGetScore
+    transactionRecentTx,
+    transactionTxDetail,
+    tokenTxList,
+
+    icxGetScore,
 }
