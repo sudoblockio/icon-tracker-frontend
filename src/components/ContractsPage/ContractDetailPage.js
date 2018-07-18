@@ -34,16 +34,23 @@ class ContractDetailPage extends Component {
             contractTokenTx
         } = this.props
 
-        const content = (_loading, _error) => {
-            if (!_loading && _error) {
+        const {
+            loading,
+            error
+        } = contract
+
+        const Content = () => {
+            if (!loading && error) {
                 return (
-                    <NotFound error={_error} />
+                    <NotFound error={error} />
                 )
             }
             else {
                 return (
                     <div className="content-wrap">
-                        <ContractInfo contract={contract} />
+                        <ContractInfo 
+                            contract={contract} 
+                        />
                         <ContractTabs
                             contract={contract}
                             contractTx={contractTx}
@@ -57,12 +64,7 @@ class ContractDetailPage extends Component {
             }
         }
 
-        const {
-            loading,
-            error
-        } = contract
-
-        return content(loading, error);
+        return Content();
     }
 }
 

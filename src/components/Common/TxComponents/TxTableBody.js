@@ -121,12 +121,14 @@ class TxTableBody extends Component {
 				contractName,
 				contractAddr,
 				tokenName,
-				symbol
+				symbol,
+				tokenQuantity
 			} = data
 
 			const isError = state === 0
 			
 			// TODO calcAgeTime 새로 만들 것
+			// TODO amount, tokenQuantity, quantity 구분
 			switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
                     return (
@@ -185,11 +187,21 @@ class TxTableBody extends Component {
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
-							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>{symbol}</em></td>
+							<td><span>{convertNumberToText(tokenQuantity , 'icx', 4)}</span><em>{symbol}</em></td>
 							<TokenCell name={tokenName} symbol={symbol} address={contractAddr}/>
                         </tr>   
                     )                       
-
+				case TX_TYPE.BLOCK_TX:
+                    return (
+                        <tr>
+							<TxHashCell isError={isError} txHash={txHash} />
+                            <AddressCell targetAddr={fromAddr}/>
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
+                            <AddressCell targetAddr={toAddr}/>
+							<td><span>{convertNumberToText(amount , 'icx', 4)}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+                        </tr>   
+                    )                       
                 default:
                     return <tr></tr>
             }

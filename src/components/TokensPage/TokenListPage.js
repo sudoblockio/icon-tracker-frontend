@@ -23,7 +23,7 @@ class TokenListPage extends Component {
 	render() {
 		const { value } = this.state
 		const { tokenList } = this.props
-		const { data, totalData, loading } = tokenList
+		const { data, listSize, loading } = tokenList
 		const list = data.filter(token => token.tokenName.indexOf(value) !== -1 || token.symbol.indexOf(value) !== -1)
 		return (
 			<div className="content-wrap">
@@ -46,7 +46,7 @@ class TokenListPage extends Component {
 						<div className="contents tokens">
 							<p className="txt cont">
 								<span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
-								<span>A total of<em>{totalData} ICX Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
+								<span>A total of<em>{listSize} ICX Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
 							</p>
 							<table className="table-typeI">
 								<thead>

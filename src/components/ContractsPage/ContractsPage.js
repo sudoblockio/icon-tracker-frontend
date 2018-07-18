@@ -45,7 +45,7 @@ class ContractsPage extends Component {
 
   render() {
     const { contracts } = this.props
-    const { loading, data, page, totalData, count } = contracts;
+    const { loading, data, page, listSize, count } = contracts;
     console.log(data)
     return (
       <div className="content-wrap">
@@ -65,7 +65,7 @@ class ContractsPage extends Component {
             <div className="contents">
               <p className="txt cont">
                 <span>With verified source codes only</span>
-                <span>A total of<em>{totalData}</em> verified contract source codes found</span>
+                <span>A total of<em>{listSize}</em> verified contract source codes found</span>
               </p>
               <table className="table-typeA contract">
                 <thead>
@@ -95,7 +95,7 @@ class ContractsPage extends Component {
 
               <Pagination
                 pageNum={page}
-                maxPageNum={calcMaxPageNum(totalData, count)}
+                maxPageNum={calcMaxPageNum(listSize, count)}
                 getData={this.addressListByPage}
               />
             </div>

@@ -30,7 +30,7 @@ class TransactionsPage extends Component {
 	}
 
 	render() {
-		const { loading, data, pageNum, maxPageNum, totalData } = this.props;
+		const { loading, data, pageNum, maxPageNum, listSize } = this.props;
 		const utcLabel = `(${getUTCString()})`
 		return (
 			<div className="content-wrap">
@@ -40,7 +40,7 @@ class TransactionsPage extends Component {
 							!loading && 
 							<p className="title">
 								Transactions
-								<span className="right"><em>{totalData}</em> Total Transactions</span>
+								<span className="right"><em>{listSize}</em> Total Transactions</span>
 							</p>
 						}
 						{

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { NotFound, BlockInformation, BlockTransactions } from '../../components/';
-import { startsWith } from '../../utils/utils'
+import { 
+  startsWith 
+} from '../../utils/utils'
+import {
+  NotFound,
+  BlockInfo,
+  BlockTabs
+} from '../../components/';
 
 class BlockDetailPage extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
 
   componentWillMount() {
     this.allBlockInfo(this.props.url.pathname)
@@ -23,54 +24,43 @@ class BlockDetailPage extends Component {
 
   allBlockInfo = (pathname) => {
     const height = pathname.split("/")[2]
-    console.log(height)
     this.props.blockInfo({ height })
     this.props.blockTxList({ height, page: 1, count: 10 })
   }
 
-  getBlock = (blockId, pageId = 1) => {
-    const data = {
-      blockId: blockId,
-      pageId: pageId
-    };
-    this.props.getBlock(data);
-  }
-
-  goAllTx = () => {
-    const { blockDetail } = this.props
-    const { height } = blockDetail
-		this.props.history.push(`/blocktx/${height}`);
-  }
-
   render() {
-    const { blockDetail, blockTx } = this.props;
-    const { loading, error } = blockDetail
-    const content = () => {
+    const { 
+      block, 
+      blockTx 
+    } = this.props;
+    
+    const { 
+      loading, 
+      error 
+    } = block
+    
+    const Content = () => {
       if (error !== "" && !loading) {
         return (
           <NotFound error={error}/>
         )
-      } else {
+      } 
+      else {
         return (
           <div className="content-wrap">
-    				<div className="screen0">
-    					<BlockInformation
-                blockDetail={blockDetail}
-                goAllTx={this.goAllTx}
-              />
-    				</div>
-    				<div className="screen1">
-    					<BlockTransactions
-                blockDetail={blockDetail}
-                blockTx={blockTx}
-                goAllTx={this.goAllTx}
-              />
-    				</div>
+            <BlockInfo 
+              block={block}
+            />
+            <BlockTabs 
+              block={block}
+              blockTx={blockTx}
+              blockTxList={this.props.blockTxList}
+            />
     			</div>
         )
       }
     }
-    return content();
+    return Content();
   }
 }
 

@@ -131,7 +131,7 @@ class AddressTotalTxList extends Component {
 	render() {
 		const className = this.getTxTypeSelector()['className'] || ''
 		const tx = this.props[this.getTxTypeSelector()['tx']] || {}
-		const { loading, page, count, data, totalData } = tx;
+		const { loading, page, count, data, listSize } = tx;
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -140,7 +140,7 @@ class AddressTotalTxList extends Component {
 					<LoadingComponent height='calc(100vh - 120px - 144px)'/>
 					:
 					<div className="wrap-holder">
-						<Header txType={this.txType} urlIndex={this.urlIndex} totalData={totalData} />
+						<Header txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} />
 						{
 							(!data || data.length === 0) ?
 							<NoBox text={this.txType === TX_TYPE.TOKEN_HOLDERS ? 'No Holder' : 'No Transaction'}/>
@@ -164,7 +164,7 @@ class AddressTotalTxList extends Component {
 								/>
 								<Pagination
 									pageNum={page}
-									maxPageNum={calcMaxPageNum(totalData, count)}
+									maxPageNum={calcMaxPageNum(listSize, count)}
 									getData={this.getTotalTxListByPage} 
 								/>								
 							</div>
@@ -177,55 +177,55 @@ class AddressTotalTxList extends Component {
 	}
 }
 
-const Header = ({txType, urlIndex, totalData}) => {
+const Header = ({txType, urlIndex, listSize}) => {
 	switch(txType) {
 		case TX_TYPE.ADDRESS_TX:
 			return (
 				<p className="title">Transactions
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Total transactions</span>
+					<span className="right">A total of<em>{listSize}</em> Total transactions</span>
 				</p>
 			)
 		case TX_TYPE.ADDRESS_TOKEN_TX:
 			return (
 				<p className="title">Token Transfers
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+					<span className="right">A total of<em>{listSize}</em> Token transfers found</span>
 				</p>
 			)
 		case TX_TYPE.BLOCK_TX:
 			return (
 				<p className="title">Transactions
 					<span>for Block Height {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
+					<span className="right">A total of<em>{listSize}</em> Token transactions</span>
 				</p>
 			)
 		case TX_TYPE.TRANSACTIONS:
 			return (
 				<p className="title">Transactions
 					<span></span>
-					<span className="right">A total of<em>{totalData}</em> Token transactions</span>
+					<span className="right">A total of<em>{listSize}</em> Token transactions</span>
 				</p>
 			)
 		case TX_TYPE.TOKEN_TRANSFERS:
 			return (
 				<p className="title">Token Transfers
 					<span></span>
-					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+					<span className="right">A total of<em>{listSize}</em> Token transfers found</span>
 				</p>
 			)
 		case TX_TYPE.TOKEN_TX:
 			return (
 				<p className="title">Token Transfers
 					<span>for Token Contract {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Token transfers found</span>
+					<span className="right">A total of<em>{listSize}</em> Token transfers found</span>
 				</p>
 			)
 		case TX_TYPE.TOKEN_HOLDERS:
 			return (
 				<p className="title">Token Holders
 					<span>for Token Contract {urlIndex}</span>
-					<span className="right">A total of<em>{totalData}</em> Holders found</span>
+					<span className="right">A total of<em>{listSize}</em> Holders found</span>
 				</p>
 			)
 		default:

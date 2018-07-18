@@ -13,23 +13,23 @@ import {
 class TxBottom extends Component {
 
     render() {
-        const Contents = (_props) => {
-            const { 
-                txData, 
-                txType, 
-                goAllTx,
-                address,
-                tableClassName, 
-                noBoxText, 
-                totalText,
-            } = _props
-            
-            const {             
-                data, 
-                totalData,
-                loading
-            } = txData
-            
+        const { 
+            txData, 
+            txType, 
+            goAllTx,
+            address,
+            tableClassName, 
+            noBoxText, 
+            totalText,
+        } = this.props
+        
+        const {             
+            data, 
+            listSize,
+            loading
+        } = txData
+        
+        const Content = () => {
             if (loading) {
                 return (
                     <LoadingComponent height='349px' />
@@ -46,8 +46,8 @@ class TxBottom extends Component {
                     <div className="contents">
                         <p className="txt">
                             <span>
-                                Latest<em>{totalData < 10 ? totalData : 10}</em> txns from a total of
-                                <em className="mint" onClick={goAllTx}>{numberWithCommas(totalData)} {totalText}</em>
+                                Latest<em>{listSize < 10 ? listSize : 10}</em> txns from a total of
+                                <em className="mint" onClick={goAllTx}>{numberWithCommas(listSize)} {totalText}</em>
                             </span>
                         </p>
                         <table className={tableClassName}>
@@ -66,7 +66,7 @@ class TxBottom extends Component {
                 )
             }
         }
-        return Contents(this.props)
+        return Content()
     }
 }
 

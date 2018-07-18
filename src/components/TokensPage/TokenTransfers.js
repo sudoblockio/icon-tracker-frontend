@@ -12,7 +12,7 @@ import { TX_TYPE } from '../../utils/const'
 class TokenTransfers extends Component {
     
     render() {   
-        const Contents = (_data, _totalData, _loading) => {
+        const Contents = (_data, _listSize, _loading) => {
             if (_loading) {
                 return (
                     <LoadingComponent height='349px' />
@@ -26,7 +26,7 @@ class TokenTransfers extends Component {
             else {
                 return (
                     <div className="contents">
-                        <p className="txt"><span>A Total of<em className="mint" onClick={this.props.goAllTx}>{_totalData} Token transfers</em> found</span></p>
+                        <p className="txt"><span>A Total of<em className="mint" onClick={this.props.goAllTx}>{_listSize} Token transfers</em> found</span></p>
                         <table className="table-typeF">
                             <thead>
                                 <AddressTableHead txType={TX_TYPE.TOKEN_TX}/>
@@ -45,8 +45,8 @@ class TokenTransfers extends Component {
         }
 
         const { tokenTransfers } = this.props 
-        const { data, totalData, loading } = tokenTransfers
-        return Contents(data, totalData, loading)
+        const { data, listSize, loading } = tokenTransfers
+        return Contents(data, listSize, loading)
     }
 }
 

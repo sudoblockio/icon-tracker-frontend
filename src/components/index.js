@@ -17,7 +17,8 @@ import WalletTokenTransfers from './AddressesPage/WalletTokenTransfers'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
-import BlockInformation from './BlocksPage/BlockInformation'
+import BlockInfo from './BlocksPage/BlockInfo'
+import BlockTabs from './BlocksPage/BlockTabs'
 import BlockTransactions from './BlocksPage/BlockTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
@@ -50,6 +51,7 @@ import ContractLink from './Common/ContractLink'
 import NoBox from './Common/NoBox'
 
 import TxBottom from './Common/TxComponents/TxBottom'
+import TxBottomWrapper from './Common/TxComponents/TxBottomWrapper'
 import TxPage from './Common/TxComponents/TxPage'
 import TxTableHead from './Common/TxComponents/TxTableHead'
 import TxTableBody from './Common/TxComponents/TxTableBody'
@@ -82,7 +84,8 @@ export {
 
   BlocksPage,
   BlockDetailPage,
-  BlockInformation,
+  BlockInfo,
+  BlockTabs,
   BlockTransactions,
 
   TransactionsPage,
@@ -115,6 +118,7 @@ export {
   NoBox,
 
   TxBottom,
+  TxBottomWrapper,
   TxPage,
   TxTableHead,
   TxTableBody,

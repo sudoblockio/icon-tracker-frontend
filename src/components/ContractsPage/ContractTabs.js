@@ -71,15 +71,25 @@ class ContractTabs extends Component {
                 case 0:
                     return (
                         <ContractTransactions 
-                            contractTx={contractTx}
+                            txData={contractTx}
                             goAllTx={this.goAllTx} 
                             txType={TX_TYPE.CONTRACT_TX}
                         />
                     )
                 case 1:
-                    return <ContractTokenTransfers contractTokenTx={contractTokenTx} goAllTx={this.goAllTx} txType={TX_TYPE.CONTRACT_TOKEN_TX}/>
+                    return (
+                        <ContractTokenTransfers 
+                            txData={contractTokenTx}
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.CONTRACT_TOKEN_TX}
+                        />
+                    )
                 case 2:
-                    return <ContractCode contract={contract} />
+                    return (
+                        <ContractCode 
+                            contract={contract} 
+                        />
+                    )
                 case 3:
                 case 4:
                 default:

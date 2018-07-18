@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
     TX_TYPE,
-    WALLET_TABS,
+    BLOCK_TABS,
 } from '../../utils/const'
 import {
     LoadingComponent,
     NoBox,
-    WalletTransactions,
-    WalletTokenTransfers,
+    BlockTransactions,
 } from '../../components'
 
-class WalletTabs extends Component {
+class BlockTabs extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,16 +19,13 @@ class WalletTabs extends Component {
     }
 
     setTab = (index) => {
-        const { walletDetail } = this.props
-        const { data } = walletDetail
-        const { address } = data
+        const { block } = this.props
+        const { data } = block
+        const { height } = data
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
-                    this.props.addressTxList({ address, page: 1, count: 10 })
-                    break
-                case 1:
-                    this.props.addressTokenTxList({ address, page: 1, count: 10 })
+                    this.props.blockTxList({ height, page: 1, count: 10 })
                     break
                 default:
             }
@@ -38,15 +34,12 @@ class WalletTabs extends Component {
 
     goAllTx = () => {
         const { on } = this.state
-        const { walletDetail } = this.props
-        const { data } = walletDetail
-        const { address } = data
+        const { block } = this.props
+        const { data } = block
+        const { height } = data
         switch (on) {
             case 0:
-                this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`);
-                break
-            case 1:
-                this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`);
+                this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${height}`);
                 break
             default:
         }
@@ -54,28 +47,17 @@ class WalletTabs extends Component {
 
     render() {
         const { on } = this.state
-        const { walletDetail, walletTx, walletTokenTx } = this.props
-        const { loading, data } = walletDetail
-        const { address } = data
+        const { block, blockTx } = this.props
+        const { loading } = block
         
         const TableContents = () => {
             switch (on) {
                 case 0:
                     return (
-                        <WalletTransactions 
-                            txData={walletTx} 
+                        <BlockTransactions
+                            txData={blockTx} 
                             goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.ADDRESS_TX} 
-                            address={address} 
-                        />
-                    )
-                case 1:
-                    return (
-                        <WalletTokenTransfers 
-                            txData={walletTokenTx} 
-                            goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.ADDRESS_TOKEN_TX} 
-                            address={address} 
+                            txType={TX_TYPE.BLOCK_TX} 
                         />
                     )
                 default:
@@ -95,7 +77,7 @@ class WalletTabs extends Component {
                             <div className="tab-holder">
                                 <ul>
                                     {
-                                        WALLET_TABS.map((tab, index) => (
+                                        BLOCK_TABS.map((tab, index) => (
                                             <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
                                         ))
                                     }
@@ -111,4 +93,4 @@ class WalletTabs extends Component {
     }
 }
 
-export default withRouter(WalletTabs);
+export default withRouter(BlockTabs);

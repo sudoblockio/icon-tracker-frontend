@@ -1,15 +1,14 @@
 import actionTypes from '../actionTypes/actionTypes';
-import { calcMaxPageNum } from '../../utils/utils';
+import {
+  getArrayState
+} from '../../utils/utils'
+import {
+  REDUX_STEP,
+  INITIAL_ARRAY_STATE
+} from '../../utils/const'
 
 const initialState = {
-  recentTx: {
-    loading: false,
-    page: 1,
-    count: 20,
-    data: [],
-    totalData: 0,
-    error: '',
-  },
+  recentTx: INITIAL_ARRAY_STATE,
   transaction: {
     loading: true,
     data: {},
@@ -19,55 +18,9 @@ const initialState = {
 
 export function transactionsReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.transactionRecentTx: {
-      return {
-        ...state,
-        recentTx: {
-          ...state.recentTx,
-          loading: true,
-          page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.recentTx.count,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.transactionRecentTxFulfilled: {
-      return {
-        ...state,
-        recentTx: {
-          ...state.recentTx,
-          loading: false,
-          data: action.payload.data || [],
-          totalData: action.payload.listSize || 0,
-          error: ''
-        }
-      }
-    }
-
-    case actionTypes.transactionRecentTxRejected: {
-      return {
-        ...state,
-        recentTx: {
-          ...state.recentTx,
-          loading: false,
-          error: action.error
-        }        
-      }
-    }    
-
-
-
-
-
-
-
-
-
-
-
-
-
+    case actionTypes.transactionRecentTx: return getArrayState(REDUX_STEP.READY, state, action, 'recentTx') 
+    case actionTypes.transactionRecentTxFulfilled: return getArrayState(REDUX_STEP.FULFILLED, state, action, 'recentTx') 
+    case actionTypes.transactionRecentTxRejected: return getArrayState(REDUX_STEP.REJECTED, state, action, 'recentTx') 
 
     case actionTypes.getTransaction: {
       return {

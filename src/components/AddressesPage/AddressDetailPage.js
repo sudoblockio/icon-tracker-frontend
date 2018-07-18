@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { startsWith } from '../../utils/utils'
+import { 
+  startsWith 
+} from '../../utils/utils'
 import {
   NotFound,
   WalletInfo,
-  WalletTransactions,
   WalletTabs
 } from '../../components'
 
@@ -33,16 +34,23 @@ class AddressesDetailPage extends Component {
       walletTokenTx 
     } = this.props;
 
-    const content = (_loading, _error) => {
-      if (!_loading && _error) {
+    const { 
+      loading, 
+      error 
+    } = walletDetail
+    
+    const Content = () => {
+      if (!loading && error) {
         return (
-          <NotFound error={_error} />
+          <NotFound error={error} />
         )
       }
       else {
         return (
           <div className="content-wrap">
-            <WalletInfo walletDetail={walletDetail}/>
+            <WalletInfo 
+              walletDetail={walletDetail}
+            />
             <WalletTabs 
               walletDetail={walletDetail}
               walletTx={walletTx}
@@ -50,18 +58,12 @@ class AddressesDetailPage extends Component {
               addressTxList={this.props.addressTxList}
               addressTokenTxList={this.props.addressTokenTxList}
             />
-
           </div>
         )
       }
     }
 
-    const { 
-      loading, 
-      error 
-    } = walletDetail
-    
-    return content(loading, error);
+    return Content();
   }
 }
 

@@ -2,8 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import { localDevUrl } from '../redux/api/restV3/config'
 import {
-	TokenLink,
+  TokenLink,
 } from '../components'
+import {
+  REDUX_STEP
+} from './const'
 
 // const CURRENCY_ROUND = {
 //   'krw': 0,
@@ -13,9 +16,9 @@ import {
 
 export function numberWithCommas(x) {
   if (!x) { return 0 }
-	let parts = x.toString().split('.');
-	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	return parts.join('.');
+  let parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
 }
 
 export function convertNumberToText(num, unit, round) {
@@ -44,7 +47,7 @@ export function convertNumberToText(num, unit, round) {
 //   return moment(date).utcOffset(timezoneOffset).format(`YYYY-MM-DD HH:mm:ss${!!showUTC ? ` [(UTC+${timezoneOffset})]` : ''}`)
 // }
 
-export function onlyDate (date) {
+export function onlyDate(date) {
   if (!date) return '-'
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD')
@@ -58,7 +61,7 @@ export function getTimezoneMomentTime(date) {
 export function dateToUTC(date, showUTC, showAgo) {
   if (!date) return '-'
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  let result =  moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+  let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
   if (showUTC) {
     result += ` (${getUTCString()})`
   }
@@ -74,11 +77,11 @@ export function utcDateInfo(date) {
 
 
 export function calcMaxPageNum(total, rowNum) {
-  if(!Number(total)) return 1;
+  if (!Number(total)) return 1;
   return Math.ceil(total / rowNum);
 }
 
-export function calcTime(createDate){
+export function calcTime(createDate) {
   const createMoment = moment(createDate)
   const todayMoment = moment()
   const diffDay = todayMoment.diff(createMoment, 'day')
@@ -94,7 +97,7 @@ export function calcTime(createDate){
 
 export function getUTCString() {
   let timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  if (timezoneOffset > 0) {timezoneOffset = `+${timezoneOffset}`}
+  if (timezoneOffset > 0) { timezoneOffset = `+${timezoneOffset}` }
   return `UTC${timezoneOffset === 0 ? '' : `${timezoneOffset}`}`
 }
 
@@ -128,12 +131,12 @@ export function makeUrl(url, payload) {
 
 export function randomUint32() {
   if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {
-      var o = new Uint32Array(1);
-      window.crypto.getRandomValues(o);
-      return o[0];
+    var o = new Uint32Array(1);
+    window.crypto.getRandomValues(o);
+    return o[0];
   } else {
-      console.warn('Falling back to pseudo-random client seed');
-      return Math.floor(Math.random() * Math.pow(2, 32));
+    console.warn('Falling back to pseudo-random client seed');
+    return Math.floor(Math.random() * Math.pow(2, 32));
   }
 }
 
@@ -151,6 +154,88 @@ export function tokenText(name, symbol, address) {
     return text
   }
   else {
-    return <TokenLink label={text} to={address}/>
+    return <TokenLink label={text} to={address} />
+  }
+}
+
+export function getArrayState(step, state, action, dataType) {
+  switch (step) {
+    case REDUX_STEP.READY:
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: true,
+          page: Number(action.payload.page) || 1,
+          count: Number(action.payload.count) || state[dataType].count,
+          error: ''
+        }
+      }
+    case REDUX_STEP.FULFILLED:
+      const { payload } = action
+      const { data } = payload
+      const _data = 
+        dataType === 'walletTx' ? data['walletTx'] :
+        dataType === 'walletTokenTx' ? data['tokenTx'] :
+        dataType === 'blockTx' ? data['txInBlock'] :
+        data
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: false,
+          data: _data || [],
+          listSize: action.payload.listSize || 0,
+          totalSize: action.payload.totalSize || 0,
+          error: ''
+        }
+      }
+    case REDUX_STEP.REJECTED:
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: false,
+          error: action.error
+        }
+      }
+  }
+}
+
+export function getObjectState(step, state, action, dataType) {
+  switch (step) {
+    case REDUX_STEP.READY:
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: true,
+          error: ''
+        }
+      }
+    case REDUX_STEP.FULFILLED:
+      const { payload } = action
+      const { data } = payload
+      const _data = 
+        dataType === 'block' ? data['blockDetail'] :
+        data
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: false,
+          data: _data || {},
+          error: ''
+        }
+      }
+    case REDUX_STEP.REJECTED:
+      return {
+        ...state,
+        [dataType]: {
+          ...state[dataType],
+          loading: false,
+          error: action.error
+        }
+      }
   }
 }

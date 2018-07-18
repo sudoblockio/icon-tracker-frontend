@@ -49,7 +49,7 @@ class BlocksPage extends Component {
 
   render() {
     const { blocks } = this.props
-    const { loading, data, page, totalData, count } = blocks;
+    const { loading, data, page, listSize, count } = blocks;
     const utcLabel = `(${getUTCString()})`
     return (
       <div className="content-wrap">
@@ -63,7 +63,7 @@ class BlocksPage extends Component {
           <div className="wrap-holder">
             <p className="title">
               Blocks
-              <span className="right"><em>{totalData}</em> Total blocks</span>
+              <span className="right"><em>{listSize}</em> Total blocks</span>
             </p>
             <div className="contents">
               <table className="table-typeE">
@@ -95,7 +95,7 @@ class BlocksPage extends Component {
 
               <Pagination
                 pageNum={page}
-                maxPageNum={calcMaxPageNum(totalData, count)}
+                maxPageNum={calcMaxPageNum(listSize, count)}
                 getData={this.blockListByPage} 
               />
             </div>

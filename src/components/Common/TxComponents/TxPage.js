@@ -99,7 +99,7 @@ class TxPage extends Component {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
 		const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
-		const { loading, page, count, data, totalData } = tx;
+		const { loading, page, count, data, listSize } = tx;
 		return (
 			<div className="content-wrap">
 				<div className="screen0">
@@ -107,8 +107,8 @@ class TxPage extends Component {
 					loading ?
 					<LoadingComponent height='calc(100vh - 120px - 144px)'/>
 					:
-					<div className={`wrap-holder ${TX_TYPE.TOKEN_TRANSFERS ? 'token' : ''}`}> {/* TODO 퍼블리싱 요청 */}
-						<Header txType={this.txType} urlIndex={this.urlIndex} totalData={totalData} />
+					<div className={`wrap-holder`}>
+						<Header txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} />
 						{
 							(!data || data.length === 0) ?
 							<NoBox text={noBoxText}/>
@@ -132,7 +132,7 @@ class TxPage extends Component {
 								/>
 								<Pagination
 									pageNum={page}
-									maxPageNum={calcMaxPageNum(totalData, count)}
+									maxPageNum={calcMaxPageNum(listSize, count)}
 									getData={this.getTxListByPage} 
 								/>								
 							</div>
@@ -145,15 +145,15 @@ class TxPage extends Component {
 	}
 }
 
-const Header = ({txType, urlIndex, totalData}) => {
-	const _totalData = totalData || 0
+const Header = ({txType, urlIndex, listSize}) => {
+	const _listSize = listSize || 0
 	switch(txType) {
 		case TX_TYPE.CONTRACT_TX:
 			return (
 				<p className="title"
 					>Transactions
 					<span>for Contract {urlIndex}</span>
-					<span className="right">A total of<em>{_totalData}</em> transactions found</span>
+					<span className="right">A total of<em>{_listSize}</em> transactions found</span>
 				</p>
 			)		
 		case TX_TYPE.ADDRESS_TX:
@@ -161,7 +161,7 @@ const Header = ({txType, urlIndex, totalData}) => {
 				<p className="title">
 					Transactions
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{_totalData}</em> transactions found</span>
+					<span className="right">A total of<em>{_listSize}</em> transactions found</span>
 				</p>
 			)		
 		case TX_TYPE.ADDRESS_TOKEN_TX:
@@ -169,7 +169,7 @@ const Header = ({txType, urlIndex, totalData}) => {
 				<p className="title">
 					Token Transfers
 					<span>for Address {urlIndex}</span>
-					<span className="right">A total of<em>{_totalData}</em> token transfers found</span>
+					<span className="right">A total of<em>{_listSize}</em> token transfers found</span>
 				</p>
 			)		
 		case TX_TYPE.TRANSACTIONS:
@@ -177,7 +177,7 @@ const Header = ({txType, urlIndex, totalData}) => {
 				<p className="title">
 					Transactions
 					<span></span>
-					<span className="right"><em>{_totalData}</em> total transactions</span>
+					<span className="right"><em>{_listSize}</em> total transactions</span>
 				</p>
 			)		
 		case TX_TYPE.TOKEN_TRANSFERS:
@@ -185,7 +185,7 @@ const Header = ({txType, urlIndex, totalData}) => {
 				<p className="title">
 					Token transfers
 					<span>(IRC01)</span>
-					<span className="right">A total of<em>{_totalData}</em> token transfers found<em className="gray">(Showing the last {_totalData} records only)</em></span>
+					<span className="right">A total of<em>{_listSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
 				</p>
 			)		
 		default:

@@ -1,73 +1,30 @@
 import actionTypes from '../actionTypes/actionTypes';
+import {
+  getArrayState
+} from '../../utils/utils'
+import {
+  REDUX_STEP,
+  INITIAL_ARRAY_STATE
+} from '../../utils/const'
 
 const initialState = {
-  recentTokenTx: {
-    loading: false,
-    page: 1,
-    count: 20,
-    data: [],
-    totalData: 0,
-    error: '',
-  },
+  recentTokenTx: INITIAL_ARRAY_STATE,
   tokenList: {
     loading: false,
     page: 1,
     count: 20,
     data: [],
-    totalData: 0,
+    listSize: 0,
     error: '',
   }
 }
 
 export function tokensReducer(state = initialState, action) {
   switch (action.type) { 
-    case actionTypes.tokenTxList: {
-      return {
-        ...state,
-        recentTokenTx: {
-          ...state.recentTokenTx,
-          loading: true,
-          page: Number(action.payload.page) || 1,
-          count: Number(action.payload.count) || state.recentTokenTx.count,
-          error: ''
-        }        
-      }
-    }
-
-    case actionTypes.tokenTxListFulfilled: {
-      return {
-        ...state,
-        recentTokenTx: {
-          ...state.recentTokenTx,
-          loading: false,
-          data: action.payload.data || [],
-          totalData: action.payload.listSize || 0,
-          error: ''
-        }
-      }
-    }
-
-    case actionTypes.tokenTxListRejected: {
-      return {
-        ...state,
-        recentTokenTx: {
-          ...state.recentTokenTx,
-          loading: false,
-          error: action.error
-        }        
-      }
-    } 
+    case actionTypes.tokenTxList: return getArrayState(REDUX_STEP.READY, state, action, 'recentTokenTx') 
+    case actionTypes.tokenTxListFulfilled: return getArrayState(REDUX_STEP.FULFILLED, state, action, 'recentTokenTx') 
+    case actionTypes.tokenTxListRejected: return getArrayState(REDUX_STEP.REJECTED, state, action, 'recentTokenTx') 
     
-
-
-
-
-
-
-
-
-
-
     case actionTypes.tokenGetTokenList: {
       return {
         ...state,
@@ -88,7 +45,7 @@ export function tokensReducer(state = initialState, action) {
           ...state.tokenList,
           loading: false,
           data: action.payload.data.tokenInfoList || [],
-          totalData: action.payload.listSize || 0,
+          listSize: action.payload.listSize || 0,
           error: ''
         }
       }

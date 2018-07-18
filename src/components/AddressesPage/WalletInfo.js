@@ -12,9 +12,16 @@ import {
 
 class WalletInfo extends Component {
   render() {
-    const { walletDetail } = this.props
-    const { loading, data } = walletDetail
-    const Contents = () => {
+    const { 
+      walletDetail 
+    } = this.props
+    
+    const { 
+      loading, 
+      data 
+    } = walletDetail
+    
+    const Content = () => {
       if (loading) {
         return (
           <LoadingComponent height='206px' />
@@ -59,7 +66,7 @@ class WalletInfo extends Component {
         )
       }
     }
-    return Contents()
+    return Content()
   }
 }
 

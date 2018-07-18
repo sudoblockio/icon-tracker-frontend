@@ -11,9 +11,9 @@ import {
 function mapStateToProps(state) {
     return {
         url: state.router.location,
-        contract: state.contract.contract,
-        contractTx: state.contract.contractTx,
-        contractTokenTx: state.contract.contractTokenTx,
+        contract: state.contracts.contract,
+        contractTx: state.contracts.contractTx,
+        contractTokenTx: state.contracts.contractTokenTx,
     };
 }
 

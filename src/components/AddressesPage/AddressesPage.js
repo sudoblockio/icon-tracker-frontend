@@ -45,7 +45,7 @@ class AddressesPage extends Component {
 
   render() {
     const { addresses } = this.props
-    const { loading, data, page, totalData, count } = addresses;
+    const { loading, data, page, listSize, count } = addresses;
     return (
       <div className="content-wrap">
         <div className="screen0">
@@ -83,7 +83,7 @@ class AddressesPage extends Component {
 
               <Pagination
                 pageNum={page}
-                maxPageNum={calcMaxPageNum(totalData, count)}
+                maxPageNum={calcMaxPageNum(listSize, count)}
                 getData={this.addressListByPage}
               />
             </div>

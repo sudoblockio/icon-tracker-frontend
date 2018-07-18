@@ -69,7 +69,17 @@ class TxTableHead extends Component {
                             <th>Token</th>
                         </tr>
                     )
-
+                case TX_TYPE.BLOCK_TX:
+                    return (
+                        <tr>
+                            <th>Tx Hash</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
                 default:
                     return (
                         <tr></tr>

@@ -11,7 +11,7 @@ import { TX_TYPE } from '../../utils/const'
 class TokenHolders extends Component {
     
     render() {   
-        const Contents = (_data, _totalData, _loading) => {
+        const Contents = (_data, _listSize, _loading) => {
             if (_loading) {
                 return (
                     <LoadingComponent height='349px'/>
@@ -25,7 +25,7 @@ class TokenHolders extends Component {
             else {
                 return (
                     <div className="contents">
-                        <p className="txt"><span>Top<em className="mint" onClick={this.props.goAllTx}>{_totalData} Holders</em><em className="gray">(from a total of 999,999 holders)</em></span></p>
+                        <p className="txt"><span>Top<em className="mint" onClick={this.props.goAllTx}>{_listSize} Holders</em><em className="gray">(from a total of 999,999 holders)</em></span></p>
                         <table className="table-typeM">
                             <thead>
                                 <tr>
@@ -49,8 +49,8 @@ class TokenHolders extends Component {
         }
 
         const { tokenHolders } = this.props 
-        const { data, totalData, loading } = tokenHolders
-        return Contents(data, totalData, loading)
+        const { data, listSize, loading } = tokenHolders
+        return Contents(data, listSize, loading)
     }
 }
 

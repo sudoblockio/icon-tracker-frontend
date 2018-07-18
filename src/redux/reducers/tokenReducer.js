@@ -11,7 +11,7 @@ const initialState = {
     page: 1,
     count: 20,
     data: [],
-    totalData: 0,
+    listSize: 0,
     error: '',
   },
   tokenHolders: {
@@ -19,7 +19,7 @@ const initialState = {
     page: 1,
     count: 20,
     data: [],
-    totalData: 0,
+    listSize: 0,
     error: '',
   }
 }
@@ -80,7 +80,7 @@ export function tokenReducer(state = initialState, action) {
           ...state.tokenTransfers,
           loading: false,
           data: action.payload.data.tokenTransferList || [],
-          totalData: action.payload.listSize || 0,
+          listSize: action.payload.listSize || 0,
           error: ''
         }
       }
@@ -118,7 +118,7 @@ export function tokenReducer(state = initialState, action) {
           ...state.tokenHolders,
           loading: false,
           data: action.payload.data.holderList || [],
-          totalData: action.payload.listSize || 0,
+          listSize: action.payload.listSize || 0,
           error: ''
         }
       }

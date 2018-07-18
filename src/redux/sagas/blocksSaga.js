@@ -25,10 +25,10 @@ function* blockInfoFunc(action) {
     if (payload.result === '200') {
       yield put({type: AT.blockInfoFulfilled, payload: payload});
     } else {
-      yield put({type: AT.blockInfoRejected});
+      throw new Error();
     }
   } catch (e) {
-    yield put({type: AT.blockInfoRejected});
+    yield put({type: AT.blockInfoRejected, error: action.payload.height});
   }
 }
 

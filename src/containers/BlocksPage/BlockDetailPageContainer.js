@@ -9,7 +9,7 @@ import {
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    blockDetail: state.blocks.blockDetail,
+    block: state.blocks.block,
     blockTx: state.blocks.blockTx,
   };
 }
