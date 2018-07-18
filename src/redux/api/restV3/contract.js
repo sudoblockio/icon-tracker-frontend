@@ -1,6 +1,18 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApi } from './config'
 
+export function contractList(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/contract/list', payload))
+      .then(result => {
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 export function contractInfo(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/info', payload))

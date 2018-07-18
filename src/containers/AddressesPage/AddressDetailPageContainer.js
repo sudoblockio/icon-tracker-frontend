@@ -10,7 +10,7 @@ import {
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    walletDetail: state.addresses.walletDetail,
+    wallet: state.addresses.wallet,
     walletTx: state.addresses.walletTx,
     walletTokenTx: state.addresses.walletTokenTx,
   };

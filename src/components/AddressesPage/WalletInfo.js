@@ -13,13 +13,13 @@ import {
 class WalletInfo extends Component {
   render() {
     const { 
-      walletDetail 
+      wallet 
     } = this.props
     
     const { 
       loading, 
       data 
-    } = walletDetail
+    } = wallet
     
     const Content = () => {
       if (loading) {

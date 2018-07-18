@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { numberWithCommas, convertNumberToText, startsWith, calcMaxPageNum } from '../../utils/utils';
 import { LoadingComponent, Pagination, WalletLink, SortHolder } from '../../components/';
 
+// TODO TxPage 참조
 class AddressesPage extends Component {
 
   componentWillMount() {

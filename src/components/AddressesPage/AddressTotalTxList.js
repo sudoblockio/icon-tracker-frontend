@@ -4,6 +4,7 @@ import { LoadingComponent, Pagination, SortHolder, AddressTableBody, AddressTabl
 import { calcMaxPageNum } from '../../utils/utils';
 import { TX_TYPE } from '../../utils/const'
 
+// TODO 지워질 페이지
 const TxTypeSelector = {
 	[TX_TYPE.ADDRESS_TX]: {
 		tx: 'walletTx',

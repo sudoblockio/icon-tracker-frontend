@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { ContractsPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { selectContractList } from '../../redux/actions/contractsAction';
+import { contractList } from '../../redux/actions/contractsAction';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectContractList: payload => dispatch(selectContractList(payload))
+    contractList: payload => dispatch(contractList(payload))
   };
 }
 

@@ -1,28 +1,102 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
-import {
-    selectContractListApi as SELECT_CONTRACT_LIST_API,
-} from '../api/restV3_old';
 
-export function* selectContractListFunc(action) {
+import {
+  contractList as CONTRACT_LIST_API,
+  contractInfo as CONTRACT_INFO_API,
+  contractTxList as CONTRACT_TX_LIST_API,
+  contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
+  icxGetScore as ICX_GET_SCORE_API
+} from '../api/restV3';
+
+export default function* contractSaga() {
+  yield fork(watchContractList);
+  yield fork(watchContractInfo);
+  yield fork(watchContractTxList);
+  yield fork(watchContractTokenTxList);
+  yield fork(watchIcxGetSrore);
+}
+
+function* watchContractList() { yield takeLatest(AT.contractList, contractListFunc) }
+function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFunc) }
+function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
+function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
+function* watchIcxGetSrore() { yield takeLatest(AT.icxGetScore, icxGetSroreFunc) }
+
+export function* contractListFunc(action) {
   try {
-    const payload = yield call(SELECT_CONTRACT_LIST_API, action.payload);
+    const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({type: AT.selectContractListFulfilled, payload: payload});
+      yield put({type: AT.contractListFulfilled, payload: payload});
     }
     else {
       throw new Error();
     }
   }
   catch(e) {
-    yield put({type: AT.selectContractListRejected, error: e.message});
+    yield put({type: AT.contractListRejected});
   }
 }
 
-function* watchselectContractList() {
-  yield takeLatest(AT.selectContractList, selectContractListFunc)
+// TODO 나머지들도 같이 맞추기
+export function* contractInfoFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_INFO_API, action.payload);
+    if (payload.result === '200' && payload.data !== "NO_DATA") {
+      yield put({type: AT.contractInfoFulfilled, payload: payload});
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch(e) {
+    yield put({type: AT.contractInfoRejected, error: action.payload.addr});
+  }
 }
 
-export default function* contractsSaga() {
-  yield fork(watchselectContractList);
+export function* contractTxListFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_TX_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({type: AT.contractTxListFulfilled, payload: payload});
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch(e) {
+    yield put({type: AT.contractTxListRejected});
+  }
+}
+
+export function* contractTokenTxListFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({type: AT.contractTokenTxListFulfilled, payload: payload});
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch(e) {
+    yield put({type: AT.contractTokenTxListRejected});
+  }
+}
+
+// TODO 서버 이슈 해결 뒤 다시 확인
+export function* icxGetSroreFunc(action) {
+  try {
+    const payload = yield call(ICX_GET_SCORE_API, action.payload);
+    console.log(payload)
+    if (payload.result === '200') {
+      yield put({type: AT.icxGetScoreFulfilled, payload: payload});
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch(e) {
+    yield put({type: AT.icxGetScoreRejected});
+  }
 }

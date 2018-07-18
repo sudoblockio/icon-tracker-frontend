@@ -6,13 +6,23 @@ import {
   blockTxListApi as BLOCK_TX_LIST_API
 } from '../api/restV3_old';
 
+export default function* blocksSaga() {
+  yield fork(watchBlockList)
+  yield fork(watchBlockInfo);
+  yield fork(watchBlockTxList);
+}
+
+function* watchBlockList() { yield takeLatest(AT.blockList, blockListFunc) }
+function* watchBlockInfo() { yield takeLatest(AT.blockInfo, blockInfoFunc) }
+function* watchBlockTxList() { yield takeLatest(AT.blockTxList, blockTxListFunc) }
+
 function* blockListFunc(action) {
   try {
     const payload = yield call(BLOCK_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.blockListFulfilled, payload: payload});
     } else {
-      yield put({type: AT.blockListRejected});
+      throw new Error();
     }
   } catch (e) {
     yield put({type: AT.blockListRejected});
@@ -38,27 +48,9 @@ function* blockTxListFunc(action) {
     if (payload.result === '200') {
       yield put({type: AT.blockTxListFulfilled, payload: payload});
     } else {
-      yield put({type: AT.blockTxListRejected});
+      throw new Error();
     }
   } catch (e) {
     yield put({type: AT.blockTxListRejected});
   }
-}
-
-function* watchBlockList() {
-  yield takeLatest(AT.blockList, blockListFunc)
-}
-
-function* watchBlockInfo() {
-  yield takeLatest(AT.blockInfo, blockInfoFunc)
-}
-
-function* watchBlockTxList() {
-  yield takeLatest(AT.blockTxList, blockTxListFunc)
-}
-
-export default function* blocksSaga() {
-  yield fork(watchBlockList)
-  yield fork(watchBlockInfo);
-  yield fork(watchBlockTxList);
 }

@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { numberWithCommas, convertNumberToText, startsWith, calcMaxPageNum, onlyDate } from '../../utils/utils';
 import { LoadingComponent, Pagination, ContractLink, SortHolder } from '../../components/';
 
+// TODO TxPage 참조
 class ContractsPage extends Component {
 
   componentWillMount() {
     const { pathname } = this.props.url;
     if (pathname === '/contracts') {
-      this.selectContractList()
+      this.contractList()
     }
 
     const page = pathname.split("/")[2]
     if (!isNaN(page)) {
-      this.selectContractList(page)
+      this.contractList(page)
     }
     else {
       this.props.history.push('/contracts');
@@ -24,29 +25,28 @@ class ContractsPage extends Component {
     const next = nextProps.url.pathname
     if (current !== next && startsWith(next, '/contracts')) {
       const page = next.split("/")[2]
-      this.selectContractList(page)
+      this.contractList(page)
     }
   }
 
-  selectContractList = (_page, _count) => {
+  contractList = (_page, _count) => {
     const { contracts } = this.props
     const page = _page || contracts.page
     const count = _count || contracts.count
-    this.props.selectContractList({ page, count })
+    this.props.contractList({ page, count })
   }
 
-  selectContractListByCount = (count) => {
-    this.selectContractList(1, count)
+  contractListByCount = (count) => {
+    this.contractList(1, count)
   }
 
-  selectContractListByPage = (page) => {
+  contractListByPage = (page) => {
     this.props.history.push('/contracts/' + page);
   }
 
   render() {
     const { contracts } = this.props
     const { loading, data, page, listSize, count } = contracts;
-    console.log(data)
     return (
       <div className="content-wrap">
         <div className="screen0">

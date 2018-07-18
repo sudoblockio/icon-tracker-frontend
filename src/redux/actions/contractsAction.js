@@ -1,8 +1,8 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function selectContractList(payload) {
+export function contractList(payload) {
   return {
-    type: actionTypes.selectContractList,
+    type: actionTypes.contractList,
     payload
   }
 }

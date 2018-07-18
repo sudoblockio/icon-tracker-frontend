@@ -22,7 +22,7 @@ import {
 } from './token'
 
 import {
-    selectContractListApi,
+    contractListApi,
     selectContractInfoApi,
     selectContractTransactionListApi,
     contractTokenTxListApi
@@ -47,7 +47,7 @@ export {
     tokenGetTokenTransfersApi,
     tokenGetTokenHoldersApi,
 
-    selectContractListApi,
+    contractListApi,
     selectContractInfoApi,
     selectContractTransactionListApi,
     contractTokenTxListApi

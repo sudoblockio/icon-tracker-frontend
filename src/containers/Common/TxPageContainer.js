@@ -14,15 +14,19 @@ import {
 import { 
   tokenTxList,
 } from '../../redux/actions/tokensActions';
+import { 
+  blockTxList,
+} from '../../redux/actions/blocksActions';
 
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    contractTx: state.contract.contractTx,
+    contractTx: state.contracts.contractTx,
     walletTx: state.addresses.walletTx,
     walletTokenTx: state.addresses.walletTokenTx,
     recentTx: state.transactions.recentTx,
-    recentTokenTx: state.tokens.recentTokenTx
+    recentTokenTx: state.tokens.recentTokenTx,
+    blockTx: state.blocks.blockTx
   };
 }
 
@@ -33,6 +37,7 @@ function mapDispatchToProps(dispatch) {
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),
     tokenTxList: payload => dispatch(tokenTxList(payload)),
+    blockTxList: payload => dispatch(blockTxList(payload)),
   };
 }
 

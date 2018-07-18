@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LoadingComponent, Pagination, BlockLink, SortHolder } from '../../components/';
 import { calcMaxPageNum, dateToUTC, convertNumberToText, numberWithCommas, getUTCString, startsWith } from '../../utils/utils';
 
+// TODO TxPage 참조
 class BlocksPage extends Component {
 
   componentWillMount() {

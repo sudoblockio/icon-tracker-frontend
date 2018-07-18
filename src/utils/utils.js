@@ -239,3 +239,88 @@ export function getObjectState(step, state, action, dataType) {
       }
   }
 }
+
+
+export function getState(type, step, state, action, dataType) {
+  if (type === 'ARR') {
+    switch (step) {
+      case REDUX_STEP.READY:
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: true,
+            page: Number(action.payload.page) || 1,
+            count: Number(action.payload.count) || state[dataType].count,
+            error: ''
+          }
+        }
+      case REDUX_STEP.FULFILLED:
+        const { payload } = action
+        const { data } = payload
+        const _data = 
+          dataType === 'walletTx' ? data['walletTx'] :
+          dataType === 'walletTokenTx' ? data['tokenTx'] :
+          dataType === 'blockTx' ? data['txInBlock'] :
+          data
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: false,
+            data: _data || [],
+            listSize: action.payload.listSize || 0,
+            totalSize: action.payload.totalSize || 0,
+            error: ''
+          }
+        }
+      case REDUX_STEP.REJECTED:
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: false,
+            error: action.error
+          }
+        }
+    }
+  }
+  else {
+    switch (step) {
+      case REDUX_STEP.READY:
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: true,
+            error: ''
+          }
+        }
+      case REDUX_STEP.FULFILLED:
+        const { payload } = action
+        const { data } = payload
+        const _data = 
+          dataType === 'wallet' ? data['walletDetail'] :
+          dataType === 'block' ? data['blockDetail'] :
+          data
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: false,
+            data: _data || {},
+            error: ''
+          }
+        }
+      case REDUX_STEP.REJECTED:
+        return {
+          ...state,
+          [dataType]: {
+            ...state[dataType],
+            loading: false,
+            error: action.error
+          }
+        }
+    }
+  }
+}

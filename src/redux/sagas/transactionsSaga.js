@@ -31,7 +31,7 @@ function* getTransactionFunc(action){
       throw new Error();
     }
   } catch (e) {
-    yield put({type: AT.getTransactionRejected, error: action.payload});
+    yield put({type: AT.getTransactionRejected});
   }
 }
 

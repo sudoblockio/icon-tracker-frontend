@@ -7,6 +7,18 @@ import {
   addressTokenTxListApi as ADDRESS_TOKEN_TX_LIST,
 } from '../api/restV3_old';
 
+export default function* addressesSaga() {
+  yield fork(watchAddressList);
+  yield fork(watchAddressInfo);
+  yield fork(watchAddressTxList);
+  yield fork(watchAddressTokenTxList);
+}
+
+function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
+function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc) }
+function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
+function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
+
 // TODO addressListFunc 다시 확인 에러 처리 어떻게 할지
 export function* addressListFunc(action) {
   try {
@@ -66,27 +78,4 @@ export function* addressTokenTxListFunc(action) {
   catch(e) {
     yield put({type: AT.addressTokenTxListRejected});
   }
-}
-
-function* watchAddressList() {
-  yield takeLatest(AT.addressList, addressListFunc)
-}
-
-function* watchAddressInfo() {
-  yield takeLatest(AT.addressInfo, addressInfoFunc)
-}
-
-function* watchAddressTxList() {
-  yield takeLatest(AT.addressTxList, addressTxListFunc)
-}
-
-function* watchAddressTokenTxList() {
-  yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc)
-}
-
-export default function* addressesSaga() {
-  yield fork(watchAddressList);
-  yield fork(watchAddressInfo);
-  yield fork(watchAddressTxList);
-  yield fork(watchAddressTokenTxList);
 }

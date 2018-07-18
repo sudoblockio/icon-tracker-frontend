@@ -4,6 +4,23 @@ export const REDUX_STEP = {
     REJECTED: 'rejected',
 }
 
+export const INITIAL_STATE = {
+    'ARR': {
+        loading: false,
+        page: 1,
+        count: 20,
+        data: [],
+        listSize: 0,
+        error: '',    
+    },
+    'OBJ': {
+        loading: false,
+        data: {},
+        error: '',    
+    }
+}
+
+// TODO 지울 예정
 export const INITIAL_ARRAY_STATE = {
     loading: false,
     page: 1,
@@ -13,6 +30,7 @@ export const INITIAL_ARRAY_STATE = {
     error: '',
 }
 
+// TODO 지울 예정
 export const INITIAL_OBJECT_STATE = {
     loading: false,
     data: {},

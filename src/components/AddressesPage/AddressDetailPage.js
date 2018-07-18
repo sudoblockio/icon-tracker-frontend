@@ -29,7 +29,7 @@ class AddressesDetailPage extends Component {
 
   render() {
     const { 
-      walletDetail, 
+      wallet, 
       walletTx, 
       walletTokenTx 
     } = this.props;
@@ -37,7 +37,7 @@ class AddressesDetailPage extends Component {
     const { 
       loading, 
       error 
-    } = walletDetail
+    } = wallet
     
     const Content = () => {
       if (!loading && error) {
@@ -49,10 +49,10 @@ class AddressesDetailPage extends Component {
         return (
           <div className="content-wrap">
             <WalletInfo 
-              walletDetail={walletDetail}
+              wallet={wallet}
             />
             <WalletTabs 
-              walletDetail={walletDetail}
+              wallet={wallet}
               walletTx={walletTx}
               walletTokenTx={walletTokenTx}
               addressTxList={this.props.addressTxList}

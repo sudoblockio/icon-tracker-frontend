@@ -1,4 +1,5 @@
 import {
+    contractList,
     contractInfo,
     contractTxList,
     contractTokenTxList
@@ -18,6 +19,7 @@ import {
 } from './icx'
 
 export {
+    contractList,
     contractInfo,
     contractTxList,
     contractTokenTxList,

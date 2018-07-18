@@ -64,9 +64,9 @@ const actionTypes = {
   tokenGetTokenHoldersFulfilled: 'TOKEN_GET_TOKEN_HOLDERS_FULFILLED',
   tokenGetTokenHoldersRejected: 'TOKEN_GET_TOKEN_HOLDERS_REJECTED',
 
-  selectContractList: 'SELECT_CONTRACT_LIST',
-  selectContractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
-  selectContractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
+  contractList: 'SELECT_CONTRACT_LIST',
+  contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
+  contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
 
   contractTokenTxList: 'CONTRACT_TOKEN_TX_LIST',
   contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',

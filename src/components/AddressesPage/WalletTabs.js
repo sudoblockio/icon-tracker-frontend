@@ -20,8 +20,8 @@ class WalletTabs extends Component {
     }
 
     setTab = (index) => {
-        const { walletDetail } = this.props
-        const { data } = walletDetail
+        const { wallet } = this.props
+        const { data } = wallet
         const { address } = data
         this.setState({ on: index }, () => {
             switch (index) {
@@ -38,8 +38,8 @@ class WalletTabs extends Component {
 
     goAllTx = () => {
         const { on } = this.state
-        const { walletDetail } = this.props
-        const { data } = walletDetail
+        const { wallet } = this.props
+        const { data } = wallet
         const { address } = data
         switch (on) {
             case 0:
@@ -54,8 +54,8 @@ class WalletTabs extends Component {
 
     render() {
         const { on } = this.state
-        const { walletDetail, walletTx, walletTokenTx } = this.props
-        const { loading, data } = walletDetail
+        const { wallet, walletTx, walletTokenTx } = this.props
+        const { loading, data } = wallet
         const { address } = data
         
         const TableContents = () => {
