@@ -1,10 +1,10 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
-  blockListApi as BLOCK_LIST_API,
-  blockInfoApi as BLOCK_INFO_API,
-  blockTxListApi as BLOCK_TX_LIST_API
-} from '../api/restV3_old';
+  blockList as BLOCK_LIST_API,
+  blockInfo as BLOCK_INFO_API,
+  blockTxList as BLOCK_TX_LIST_API
+} from '../api/restV3';
 
 export default function* blocksSaga() {
   yield fork(watchBlockList)

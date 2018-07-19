@@ -18,37 +18,47 @@ import {
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
-	if (txHash === '-') {
-		_txHash = txHash
+	if (!txHash || txHash === '-') {
+		_txHash = '-'
 		className = 'no'
 	}
 	else if (isError) {
-		_txHash = <TransactionLink to={txHash}/>
+		_txHash = <span className="ellipsis"><TransactionLink to={txHash}/></span>
 		className = 'icon error'
 	}
 	else {
-		_txHash = <TransactionLink to={txHash}/>
+		_txHash = <span className="ellipsis"><TransactionLink to={txHash}/></span>
 		className = 'on'
 	}
-	return <td className={className}>{isError && <i className="img"></i>}<span className="ellipsis">{_txHash}</span></td>
+	return (
+		<td className={className}>
+			{(_txHash !== '-' && isError) && <i className="img"></i>}
+			{_txHash}
+		</td>
+	)
 }
 
 const AddressCell = ({ targetAddr, address, noEllipsis }) => {
 	const isContract = isContractAddress(targetAddr)
 	let _targetAddr, className
-	if (!targetAddr) {
+	if (!targetAddr || targetAddr === '-') {
 		_targetAddr = '-'
 		className = 'no'
 	}
 	else if (targetAddr === address) {
-		_targetAddr = address
+		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis' }>address</span>
 		className = isContract ? 'icon' : ''
 	}
 	else {
-		_targetAddr = <WalletLink to={targetAddr} />
+		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis' }><WalletLink to={targetAddr}/></span>
 		className = `on ${isContract ? 'icon' : ''}`
 	}
-	return <td className={className}>{isContract && <i className="img"></i>}<span className={noEllipsis ? '' : 'ellipsis' }>{_targetAddr}</span></td>
+	return (
+		<td className={className}>
+			{(_targetAddr !== '-' && isContract) && <i className="img"></i>}
+			{_targetAddr}
+		</td>
+	)
 }
 
 const SignCell = ({ address, fromAddr, toAddr }) => {

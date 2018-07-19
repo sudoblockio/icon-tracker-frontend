@@ -1,11 +1,11 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
-  addressListApi as ADDRESS_LIST_API,
-  addressInfoApi as ADDRESS_INFO_API,
-  addressTxListApi as ADDRESS_TX_LIST,
-  addressTokenTxListApi as ADDRESS_TOKEN_TX_LIST,
-} from '../api/restV3_old';
+  addressList as ADDRESS_LIST_API,
+  addressInfo as ADDRESS_INFO_API,
+  addressTxList as ADDRESS_TX_LIST,
+  addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
+} from '../api/restV3';
 
 export default function* addressesSaga() {
   yield fork(watchAddressList);

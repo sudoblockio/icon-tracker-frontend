@@ -10,21 +10,23 @@ import {
 
 class AddressesDetailPage extends Component {
   componentWillMount() {
-    this.allAddressInfo(this.props.url.pathname)
+    this.allDetailInfo(this.props.url.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
     const current = this.props.url.pathname
     const next = nextProps.url.pathname
     if (current !== next && startsWith(next, '/address')) {
-      this.allAddressInfo(next)
+      this.allDetailInfo(next)
     }
   }
 
-  allAddressInfo = (pathname) => {
+  allDetailInfo = (pathname) => {
     const address = pathname.split("/")[2]
-    this.props.addressInfo({ address })
-    this.props.addressTxList({ address, page: 1, count: 10 })
+    if (address) {
+      this.props.addressInfo({ address })
+      this.props.addressTxList({ address, page: 1, count: 10 })        
+    }
   }
 
   render() {

@@ -11,21 +11,23 @@ import {
 class BlockDetailPage extends Component {
 
   componentWillMount() {
-    this.allBlockInfo(this.props.url.pathname)
+    this.allDetailInfo(this.props.url.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
     const current = this.props.url.pathname
 		const next = nextProps.url.pathname
 		if (current !== next && startsWith(next, '/block')) {
-			this.allBlockInfo(next)
+			this.allDetailInfo(next)
 		}
   }
 
-  allBlockInfo = (pathname) => {
+  allDetailInfo = (pathname) => {
     const height = pathname.split("/")[2]
-    this.props.blockInfo({ height })
-    this.props.blockTxList({ height, page: 1, count: 10 })
+    if (height) {
+      this.props.blockInfo({ height })
+      this.props.blockTxList({ height, page: 1, count: 10 })  
+    }
   }
 
   render() {

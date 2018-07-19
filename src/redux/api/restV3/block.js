@@ -1,7 +1,7 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApi } from './config'
 
-export function blockListApi(payload) {
+export function blockList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/block/list', payload))
       .then(result => {
@@ -14,7 +14,7 @@ export function blockListApi(payload) {
   })
 }
 
-export function blockInfoApi(payload) {
+export function blockInfo(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/block/info', payload))
       .then(result => {
@@ -27,7 +27,7 @@ export function blockInfoApi(payload) {
   })
 }
 
-export function blockTxListApi(payload) {
+export function blockTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/block/txList', payload))
       .then(result => {

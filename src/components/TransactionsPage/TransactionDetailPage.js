@@ -6,20 +6,22 @@ import { BlockLink, WalletLink, NotFound, CopyButton } from '../../components/';
 class TransactionDetailPage extends Component {
 
 	componentWillMount() {
-		this.allTransactionInfo(this.props.url.pathname)
+		this.allDetailInfo(this.props.url.pathname)
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const current = this.props.url.pathname
 		const next = nextProps.url.pathname
 		if (current !== next && startsWith(next, '/contract')) {
-			this.allTransactionInfo(next)
+			this.allDetailInfo(next)
 		}
 	}
 
-	allTransactionInfo = (pathname) => {
+	allDetailInfo = (pathname) => {
 		const txHash = pathname.split("/")[2]
-		this.props.transactionTxDetail({ txHash });
+		if (txHash) {
+			this.props.transactionTxDetail({ txHash });			
+		}
 	}
 
 	render() {

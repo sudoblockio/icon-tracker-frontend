@@ -12,7 +12,8 @@ export const trackerApi = axios.create({
 
 export const loopChainDevUrl = 'https://testwallet.icon.foundation'
 export const walletApi  = axios.create({
-  baseURL: loopChainDevUrl,
+  // baseURL: loopChainDevUrl,
+  baseURL: localDevUrl,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -9,21 +9,23 @@ import {
 
 class ContractDetailPage extends Component {
     componentWillMount() {
-        this.allContractInfo(this.props.url.pathname)
+        this.allDetailInfo(this.props.url.pathname)
     }
 
     componentWillReceiveProps(nextProps) {
         const current = this.props.url.pathname
         const next = nextProps.url.pathname
         if (current !== next && startsWith(next, '/contract')) {
-            this.allContractInfo(next)
+            this.allDetailInfo(next)
         }
     }
 
-    allContractInfo = (pathname) => {
+    allDetailInfo = (pathname) => {
         const addr = pathname.split("/")[2]
-        this.props.contractInfo({ addr })
-        this.props.contractTxList({ addr, page: 1, count: 10 })
+        if (addr) {
+            this.props.contractInfo({ addr })
+            this.props.contractTxList({ addr, page: 1, count: 10 })
+        }
     }
 
     render() {

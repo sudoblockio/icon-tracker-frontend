@@ -1,4 +1,17 @@
 import {
+    addressList,
+    addressInfo,
+    addressTxList,
+    addressTokenTxList
+} from './address'
+
+import {
+    blockList,
+    blockInfo,
+    blockTxList,
+} from './block'
+
+import {
     contractList,
     contractInfo,
     contractTxList,
@@ -23,12 +36,23 @@ import {
 } from './icx'
 
 export {
+    addressList,
+    addressInfo,
+    addressTxList,
+    addressTokenTxList,
+
+    blockList,
+    blockInfo,
+    blockTxList,
+
     contractList,
     contractInfo,
     contractTxList,
     contractTokenTxList,
+
     transactionRecentTx,
     transactionTxDetail,
+
     tokenList,
     tokenTxList,
     tokenSummary,

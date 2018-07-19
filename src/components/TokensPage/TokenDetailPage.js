@@ -10,21 +10,23 @@ import {
 
 class TokenDetailPage extends Component {
     componentWillMount() {
-        this.allTokenInfo(this.props.url.pathname)
+        this.allDetailInfo(this.props.url.pathname)
     }
 
     componentWillReceiveProps(nextProps) {
         const current = this.props.url.pathname
         const next = nextProps.url.pathname
         if (current !== next && startsWith(next, '/token')) {
-            this.allTokenInfo(next)
+            this.allDetailInfo(next)
         }
     }
 
-    allTokenInfo = (pathname) => {
+    allDetailInfo = (pathname) => {
         const contractAddr = pathname.split("/")[2]
-        this.props.tokenSummary({ contractAddr })
-        this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
+        if (contractAddr) {
+            this.props.tokenSummary({ contractAddr })
+            this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })                
+        }
     }
 
     render() {
