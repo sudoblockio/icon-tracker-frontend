@@ -1,5 +1,5 @@
 import { randomUint32 } from '../../../utils/utils'
-import { walletApi } from './config'
+import { trackerApi } from './config'
 
 export function icxGetScore(payload) {
   const { address } = payload
@@ -12,8 +12,8 @@ export function icxGetScore(payload) {
       },
       id: randomUint32()
     }
-
-    walletApi.post(`/api/v3`, JSON.stringify(param))
+    
+    trackerApi.post(`/api/v3`, JSON.stringify(param))
       .then(res => {
         console.log(res)
         resolve(res.data.result);

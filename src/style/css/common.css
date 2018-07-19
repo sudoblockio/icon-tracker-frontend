@@ -307,7 +307,7 @@ html, body{height: 100%;}
 .table-typeB td span:hover{text-decoration: underline;}
 .table-typeB a{ font-weight: 800;}
 .table-typeB .copy{font-size: 12px; color: #262626; border: 1px solid #262626; height: 26px ;border-radius: 2px; margin-left: 4px; display: inline-block;      line-height: 18px;  padding: 4px 14px; cursor: pointer; font-weight: 600;}
-.table-typeB .copy:hover{/*background: #1aaaba; */color: #1aaaba;border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
+.table-typeB .copy:hover{/*background: #1aaaba; */color: #1aaaba;border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05); text-decoration: none;}
 
 .table-typeB .copy.on{background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
 
@@ -336,7 +336,7 @@ html, body{height: 100%;}
 .table-typeB td .balance{display: inline-block; cursor: pointer;border: 1px solid #fff;height: 26px;border-radius: 2px;padding: 6px 14px; margin-left: -16px;}
 .table-typeB td .balance:hover{ color: #1aaaba; ;border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
 .table-typeB td .balance.on .gray,
-.table-typeB td .balance:hover .gray{color: #1aaaba;}
+.table-typeB td .balance:hover .gray{color: #1aaaba; cursor: pointer;}
 
 .table-typeB td .balance.on .img,
 .table-typeB td .balance:hover .img{background-position: 0 -100px;}
@@ -367,9 +367,9 @@ html, body{height: 100%;}
 .table-typeB .combo-layer input::-moz-placeholder { color: #b3b3b3; }
 .table-typeB .combo-layer input::-moz-placeholder { color: #b3b3b3; }
 
-.table-typeB .gray{color: #b3b3b3; margin-left: 6px; font-weight: 400;}
-
-.table-typeB.address tr:first-child .crep{background: rgba(38, 38, 38, 1); border-radius:20px; font-size: 12px; color: #fff; display: inline-block; height: 26px;    padding: 7px 14px; margin-right: 0px; float: right;  font-weight: 400;}
+.table-typeB .gray{color: #b3b3b3; margin-left: 6px; font-weight: 400; cursor: default;}
+.table-typeB .gray:hover{text-decoration: none; }
+.table-typeB.address tr:first-child .crep{background: rgba(38, 38, 38, 1); border-radius:20px; font-size: 12px; color: #fff; display: inline-block; height: 26px;    padding: 7px 14px; margin-right: 0px; float: right;  font-weight: 400; cursor: default; text-decoration: none;}
 .table-typeB.address tr:nth-child(2) .img{background-position: -150px 0; width: 14px; height: 14px; margin: 0 10px 0 20px;     vertical-align: baseline; cursor: default; }
 
 .table-typeB.detail td .next,

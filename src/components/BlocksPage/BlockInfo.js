@@ -59,7 +59,7 @@ class BlockInfo extends Component {
         )
       }
       else {
-        const { height, createDate, crep, txCount, hash, prevHash, blockSize, amount, fee, message } = data
+        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message } = data
         return (
           <div className="screen0">
             <div className="wrap-holder">

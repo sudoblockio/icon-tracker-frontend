@@ -7,9 +7,6 @@ import {
     NoBox,
     TxBottomTitle
 } from '../../../components'
-import {
-    numberWithCommas
-} from '../../../utils/utils'
 
 class TxBottom extends Component {
 

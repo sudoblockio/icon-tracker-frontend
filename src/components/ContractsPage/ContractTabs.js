@@ -35,6 +35,7 @@ class ContractTabs extends Component {
                     break
                 case 2:
                     this.props.icxGetScore({ address })
+                    break
                 case 3:
                 case 4:
                 default:

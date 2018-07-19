@@ -5,9 +5,11 @@ export function contractList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/list', payload))
       .then(result => {
+        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
+        console.log(error)
         reject(error)
       })
   })

@@ -9,7 +9,7 @@ import ContractDetailPage from './pages/ContractDetailPage'
 import ContractsPage from './pages/ContractsPage'
 import BlocksPage from './pages/BlocksPage';
 import BlockDetailPage from './pages/BlockDetailPage';
-import TransactionsPage from './pages/TransactionsPage';
+// import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import TokensPage from './pages/TokensPage'
@@ -38,10 +38,12 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} exact path='/block/:blockId' component={BlockDetailPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} exact path='/transaction/:txHash' component={TransactionDetailPage}/>
-                <Route onEnter={window.scroll(0, 0)} exact path='/contracts' component={ContractsPage} />
                 <Route onEnter={window.scroll(0, 0)} exact path='/contract/:contractId' component={ContractDetailPage} />
                 <Route onEnter={window.scroll(0, 0)} exact path='/tokens' component={TokensPage}/>
                 <Route onEnter={window.scroll(0, 0)} exact path='/token/:tokenId' component={TokenDetailPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} path='/contracts' component={ContractsPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path='/contracts/:pageId' component={ContractsPage} />
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/`} component={TxPage} exact/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/:pageId`} component={TxPage}/>
