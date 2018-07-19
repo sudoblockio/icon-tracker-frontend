@@ -1,9 +1,23 @@
 var ctreteContract = function(){
 	$(".table-typeB .link").mouseover(function(){
-		var _class = $(this).attr("class").substr(5);
+		var _class;
+		if($(this).hasClass("address")){
+			_class = "address";
+		} else if($(this).hasClass("hash")){
+			_class = "hash";
+		} else {
+			_class = "token";
+		}
 		$(".table-typeB .help."+_class).addClass("animate");
 	}).mouseout(function(){
-		var _class = $(this).attr("class").substr(5);
+		var _class;
+		if($(this).hasClass("address")){
+			_class = "address";
+		} else if($(this).hasClass("hash")){
+			_class = "hash";
+		} else {
+			_class = "token";
+		}
 		$(".table-typeB .help."+_class).removeClass("animate");
 	});
 
@@ -11,17 +25,17 @@ var ctreteContract = function(){
 
 var createMenu = function(){
 	$('.header-wrap ul li').mouseenter(function(){
-		$(this).find(".sub-menu").slideDown(300, 'swing');
+		$(this).find(".sub-menu").stop().slideDown(300, 'swing');
 		$(this).find("span").addClass("on");
 	}).mouseleave(function(){
-		$(this).find(".sub-menu").slideUp(300, 'swing');
+		$(this).find(".sub-menu").stop().slideUp(300, 'swing');
 		$(this).find("span").removeClass("on");
 	});
 
 	$('.sort-holder ').mouseenter(function(){
-		$(".sort-holder ul").slideDown(300, 'swing');
+		$(".sort-holder ul").stop().slideDown(300, 'swing');
 	}).mouseleave(function(){
-		$(".sort-holder ul").slideUp(300, 'swing');
+		$(".sort-holder ul").stop().slideUp(300, 'swing');
 	});
 
 	$(".table-typeB td .balance").click(function(){
@@ -54,7 +68,7 @@ $(document).ready(function(){
 	});
 
 	ctreteContract();
-	createMenu();	
+	createMenu();
 
 
 });

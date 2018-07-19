@@ -28,6 +28,14 @@ class TxPageTitle extends Component {
                             <span className="right">A total of<em>{_listSize}</em> transactions found</span>
                         </p>
                     )
+                case TX_TYPE.CONTRACT_TOKEN_TX:
+                    return (
+                        <p className="title">
+                            Token Transfers
+                            <span>for Contract {urlIndex}</span>
+                            <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <p className="title">
@@ -54,7 +62,7 @@ class TxPageTitle extends Component {
                     )
                 case TX_TYPE.TOKEN_TRANSFERS:
                     return (
-                        <p className="title">
+                        <p className="title token">
                             Token Transfers
                             <span>(IRC01)</span>
                             <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>

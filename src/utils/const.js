@@ -54,62 +54,53 @@ export const TX_TYPE_DATA = {
 		getTxList: 'contractTxList',
         className: 'table-typeF',
         noBoxText: 'No Transaction',
-        totalText: 'transactions'
+    },
+    [TX_TYPE.CONTRACT_TOKEN_TX]: {
+		tx: 'contractTokenTx',
+		getTxList: 'contractTokenTxList',
+        className: 'table-typeC token tap2',
+        noBoxText: 'No Transaction'
     },
 	[TX_TYPE.ADDRESS_TX]: {
 		tx: 'walletTx',
 		getTxList: 'addressTxList',
         className: 'table-typeC',
         noBoxText: 'No Transaction',
-        totalText: 'transactions'
     },
 	[TX_TYPE.ADDRESS_TOKEN_TX]: {
 		tx: 'walletTokenTx',
 		getTxList: 'addressTokenTxList',
         className: 'table-typeC token',
         noBoxText: 'No Transaction',
-        totalText: 'token transfers'
     },
     [TX_TYPE.TRANSACTIONS]: {
 		tx: 'recentTx',
 		getTxList: 'transactionRecentTx',
         className: 'table-typeJ',
         noBoxText: 'No Transaction',
-        totalText: ''
     },
     [TX_TYPE.TOKEN_TRANSFERS]: {
 		tx: 'recentTokenTx',
 		getTxList: 'tokenTxList',
 		className: 'table-typeN',
         noBoxText: 'No Transaction',
-        totalText: ''
 	},
     [TX_TYPE.BLOCK_TX]: {
 		tx: 'blockTx',
 		getTxList: 'blockTxList',
 		className: 'table-typeD',
         noBoxText: 'No Transaction',
-        totalText: 'transactions'
 	},
     [TX_TYPE.TOKEN_TX]: {
 		tx: 'tokenTransfers',
 		getTxList: 'tokenTransfersList',
 		className: 'table-typeF',
         noBoxText: 'No Transaction',
-        totalText: 'token transfers'
 	},
     [TX_TYPE.TOKEN_HOLDERS]: {
 		tx: 'tokenHolders',
 		getTxList: 'tokenHoldersList',
 		className: 'table-typeM',
         noBoxText: 'No Holders',
-        totalText: 'token holders'
     },
-
-    [TX_TYPE.CONTRACT_TOKEN_TX]: {
-		tx: 'contractTokenTx',
-		getTxList: 'contractTokenTxList',
-        className: 'table-typeC token tap2',
-        noBoxText: 'No Transaction'
-    }
 }

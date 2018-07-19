@@ -12,7 +12,6 @@ import BlockDetailPage from './pages/BlockDetailPage';
 import TransactionsPage from './pages/TransactionsPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
-import AddressTotalTxListPage from './pages/AddressTotalTxListPage'
 import TokensPage from './pages/TokensPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import { TX_TYPE } from './utils/const'
@@ -46,6 +45,9 @@ class Routes extends Component {
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/`} component={TxPage} exact/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/:pageId`} component={TxPage}/>
+
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TOKEN_TX}/:contractId/`} component={TxPage} exact/>
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TOKEN_TX}/:contractId/:pageId`} component={TxPage}/>
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={TxPage} exact/>
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={TxPage}/>

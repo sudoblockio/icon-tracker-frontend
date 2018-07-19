@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { 
-    calcTime,
+	calcFromNow,
     convertNumberToText,
 	isContractAddress,
 	numberWithCommas,
 	dateToUTC,
-	tokenText
 } from '../../../utils/utils'
 import {
     TransactionLink,
@@ -71,20 +70,7 @@ const TokenCell = ({name, symbol, address}) => {
 	return <td><TokenLink label={name} to={address}/>{/*tokenText(name, symbol, address)*/}</td>
 }
 
-const AgeCell = ({ age }) => {
-	let className, ageText
-	if (!age || age === "-") {
-		className = "no"
-		ageText = "-"
-	}
-	else {
-		className = "break"
-		ageText = calcTime(age)
-	}
-	return <td className={className}>{ageText}</td>
-}
-
-const DateCell = ({ date }) => {
+const DateCell = ({ date, isAge }) => {	
 	let className, dateText
 	if (!date || date === "-") {
 		className = "no"
@@ -92,7 +78,12 @@ const DateCell = ({ date }) => {
 	}
 	else {
 		className = "break"
-		dateText = dateToUTC(date)
+		if (isAge) {
+			dateText = calcFromNow(date)
+		}
+		else {
+			dateText = dateToUTC(date)
+		}
 	}
 	return <td className={className}>{dateText}</td>
 }
@@ -106,7 +97,8 @@ class TxTableBody extends Component {
 				address 
 			} = _props
 			
-			const { 
+			const {
+				name,
 				txHash, 
 				age, 
 				fromAddr, 
@@ -124,25 +116,35 @@ class TxTableBody extends Component {
 				symbol,
 				tokenQuantity,
 				rank,
-				tokenSymbol,
-				percentage
+				percentage,
+				tradeTokenAddr
 			} = data
 
 			const addressInData = data.address
 			const isError = state === 0
 			
-			// TODO calcAgeTime 새로 만들 것
-			// TODO amount, tokenQuantity, quantity 구분
 			switch (txType) {
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-                            <AgeCell age={age}/>
+                            <DateCell isAge date={age}/>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
                             <td><span>{convertNumberToText(quantity , 'icx')}</span><em>ICX</em></td>
+                        </tr>   
+                    )                       
+				case TX_TYPE.CONTRACT_TOKEN_TX:
+                    return (
+                        <tr>
+                            <TxHashCell isError={isError} txHash={txHash}/>
+                            <DateCell isAge date={age}/>
+                            <AddressCell targetAddr={fromAddr}/>
+                            <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
+                            <AddressCell targetAddr={toAddr}/>
+							<td><span>{convertNumberToText(quantity , 'icx', 4)}</span><em>{contractSymbol}</em></td>
+							<TokenCell name={name} symbol={symbol} address={tradeTokenAddr}/>
                         </tr>   
                     )                       
 				case TX_TYPE.ADDRESS_TX:
@@ -175,7 +177,7 @@ class TxTableBody extends Component {
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
 							<td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
-							<td className='break'>{dateToUTC(createDate)}</td>
+                            <DateCell date={createDate}/>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
@@ -187,7 +189,7 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-							<td className='break'>{calcTime(createDate)}</td>
+							<DateCell isAge date={age}/>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>
@@ -210,7 +212,7 @@ class TxTableBody extends Component {
                     return (
                         <tr>
                             <TxHashCell isError={isError} txHash={txHash}/>
-							<td className='break'>{calcTime(createDate)}</td>
+							<DateCell isAge date={createDate}/>
                             <AddressCell targetAddr={fromAddr}/>
                             <SignCell fromAddr={fromAddr} toAddr={toAddr}/>
                             <AddressCell targetAddr={toAddr}/>

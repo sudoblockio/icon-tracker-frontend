@@ -38,7 +38,6 @@ export function* contractListFunc(action) {
   }
 }
 
-// TODO 나머지들도 같이 맞추기
 export function* contractInfoFunc(action) {
   try {
     const payload = yield call(CONTRACT_INFO_API, action.payload);

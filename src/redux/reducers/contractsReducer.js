@@ -13,7 +13,6 @@ const initialState = {
   contractTx: INITIAL_STATE['ARR'],
   contractTokenTx: INITIAL_STATE['ARR'],
   
-  // TODO
   contractCode: INITIAL_STATE['OBJ']
 }
 

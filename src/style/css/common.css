@@ -147,8 +147,8 @@ html, body{height: 100%;}
 .content-wrap .title span{font-size: 12px; color: #b3b3b3; font-weight: 500; margin-left: 10px;}
 .content-wrap .title .right{float: right; margin-top: 8px; color:#262626; font-weight: 400; }
 .content-wrap .title .right em{font-weight: 600; margin-left: 6px;}
-.content-wrap .wrap-holder.token > .title .right .gray{color: #b3b3b3;font-weight: 400;}
-.content-wrap .wrap-holder.token > .title span:first-child{font-size:20px; color: #262626; }
+.content-wrap .wrap-holder > .title.token  .right .gray{color: #b3b3b3;font-weight: 400;}
+.content-wrap .wrap-holder > .title.token  span:first-child{font-size:20px; color: #262626; }
 .content-wrap .subTitle{font-size: 16px; font-weight: 300; color: rgba(255,255,255,1);font-family: 'Montserrat';   }
 
 
@@ -300,8 +300,11 @@ html, body{height: 100%;}
 .table-typeB tr .qrcode:hover {border: 1px solid #1aaaba; box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
 .table-typeB tr .qrcode:hover em.img{background-position:-250px 0; }
 
+.table-typeB td p{margin: 5px 0;}
+.table-typeB td span{color: #1aaaba; font-weight: 800;     word-break: break-all; cursor: pointer;}
+.table-typeB td span.ellipsis{width: 300px; vertical-align: top;}
 
-.table-typeB td span{color: #1aaaba; font-weight: 800;     word-break: break-all;}
+.table-typeB td span:hover{text-decoration: underline;}
 .table-typeB a{ font-weight: 800;}
 .table-typeB .copy{font-size: 12px; color: #262626; border: 1px solid #262626; height: 26px ;border-radius: 2px; margin-left: 4px; display: inline-block;      line-height: 18px;  padding: 4px 14px; cursor: pointer; font-weight: 600;}
 .table-typeB .copy:hover{/*background: #1aaaba; */color: #1aaaba;border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
@@ -313,7 +316,8 @@ html, body{height: 100%;}
 .table-typeB .help{position: absolute; height: 26px; border-radius: 26px; background:  rgba(38, 38, 38, 0.9);; color: #fff; font-size: 12px;line-height: 28px; padding: 0 16px; font-weight: 500; }
 .table-typeB .help.token{top: -14px; left: 10px; }
 .table-typeB .help.address{top: -14px; left: 10px; }
-.table-typeB .help.hash{top: -14px; left: 190px; }
+.table-typeB .help.hash{top: -14px; left: 240px; }
+.table-typeB .link{width: 170px !important;     vertical-align: top;}
 .table-typeB .link.address{margin-right: 10px;}
 .table-typeB .link.hash{margin-left: 10px;}
 .table-typeB .qr{padding: 10px 40px;}
@@ -663,17 +667,18 @@ input[type="text"]:focus.over {border: 1px solid #262626;}
 /*tap*/
 .contents .txt{font-size: 12px; color: #262626;padding: 0 0px; margin-bottom: -7px;}
 .contents .txt span:nth-child(2){float: right;}
-.contents .txt em{font-weight: 600; margin-left: 6px;color: #1aaaba;}
-.contents .txt em:first-child{color: #262626;}
+.contents .txt em{font-weight: 600; margin-left: 6px;color: #1aaaba; cursor: pointer;}
+.contents .txt em:hover{text-decoration: underline;}
+.contents .txt em:first-child{color: #262626; cursor: default; text-decoration: none;}
 .contents .txt em.mint{color: #1aaaba;}
 .contents .txt em.gray{color: #b3b3b3; font-weight: 400;}
 .contents .txt em:nth-child(2){margin-left: 6px;/*color:#b3b3b3;  font-weight: 400;*/}
 .contents .txt.cont{margin-top: 36px;}
-.contents.tokens .txt em:nth-child(2){color: #b3b3b3; font-weight: 400; }
+.contents.tokens .txt em:nth-child(2){color: #b3b3b3; font-weight: 400; cursor: default; text-decoration: none;}
 
 .content-wrap .search-group{width: 350px;  }
 .content-wrap .search-group span{position: absolute; right: 50px; top: 0px; width: 30px; height:  30px; cursor: pointer; background: #fff;  }
-.content-wrap .search-group span .img{width: 15px; height: 14px; background-position: -300px -100px;     margin: 8px 7px;}
+.content-wrap .search-group span .img{width: 16px; height: 16px; background-position: -300px -100px;     margin: 8px 8px;}
 
 .content-wrap .search-holder{   float: right; margin-top: -30px; }
 .content-wrap .search-holder .txt{font-size: 20px; color: rgba(38, 38, 38, 0.5); padding: 0; height: 28px; display: inline-block;margin-top: 3px;}
@@ -778,3 +783,5 @@ input[type="text"]:focus.over {border: 1px solid #262626;}
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+
+/* .table-typeB tr em.img */

@@ -70,7 +70,6 @@ class WalletInfo extends Component {
   }
 }
 
-// TODO 코드 정리
 class TokenBalance extends Component {
   constructor(props) {
     super(props)
@@ -97,8 +96,12 @@ class TokenBalance extends Component {
         return <td>None</td>
       }
       else {
-        const { search } = this.state
-        const list = _tokenList.filter(token => token.contractName.indexOf(search) !== -1 || token.contractSymbol.indexOf(search) !== -1)
+        const { search } = this.state        
+        const list = _tokenList.filter(token => {
+          const { contractName, contractSymbol } = token
+          const searchValue = search.toLowerCase()
+          return contractName.toLowerCase().indexOf(searchValue) !== -1 || contractSymbol.toLowerCase().indexOf(contractSymbol) !== -1
+        })
         return (
           <td>
             <p className="balance">11 USD<span className="gray">(Total)</span><em className="img"></em></p>

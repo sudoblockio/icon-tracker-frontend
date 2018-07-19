@@ -57,6 +57,9 @@ class TxPage extends Component {
 			case TX_TYPE.CONTRACT_TX:
 				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
 				break
+			case TX_TYPE.CONTRACT_TOKEN_TX:
+				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
+				break
 			case TX_TYPE.ADDRESS_TX:
 				this.getTxList({ address: this.urlIndex, page: this.pageId, count })
 				break
@@ -86,6 +89,9 @@ class TxPage extends Component {
 	getTxListByPage = (page) => {
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
+				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
+				break
+			case TX_TYPE.CONTRACT_TOKEN_TX:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
 			case TX_TYPE.ADDRESS_TX:

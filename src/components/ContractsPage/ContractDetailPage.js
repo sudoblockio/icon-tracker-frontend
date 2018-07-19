@@ -7,7 +7,6 @@ import {
     ContractTabs
 } from '../../components'
 
-// TODO Notfound 추가
 class ContractDetailPage extends Component {
     componentWillMount() {
         this.allContractInfo(this.props.url.pathname)

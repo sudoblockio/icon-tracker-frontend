@@ -53,7 +53,7 @@ class ContractInfo extends Component {
                                             <td>{convertNumberToText(usdBalance, 'usd')} USD</td>
                                             <td>Contract Creator</td>
                                             <td>
-                                                <span className="link address"><WalletLink to={creator} /></span><em>at Txn</em><span className="link hash"><TransactionLink to={createTx} /></span>
+                                                <span className="link address ellipsis"><WalletLink to={creator} /></span><em>at Txn</em><span className="link hash ellipsis"><TransactionLink to={createTx} /></span>
                                                 <span className="help address">Creator Address</span>
                                                 <span className="help hash">Creator Transaction Hash</span>
                                             </td>

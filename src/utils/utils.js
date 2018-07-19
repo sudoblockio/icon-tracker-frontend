@@ -66,13 +66,13 @@ export function dateToUTC(date, showUTC, showAgo) {
     result += ` (${getUTCString()})`
   }
   if (showAgo) {
-    result += `(${getUTCString()}, ${calcTime(date)})`
+    result += `(${getUTCString()}, ${calcFromNow(date)})`
   }
   return result
 }
 
 export function utcDateInfo(date) {
-  return `(${getUTCString()}, ${calcTime(date)})`
+  return `(${getUTCString()}, ${calcFromNow(date)})`
 }
 
 
@@ -81,18 +81,19 @@ export function calcMaxPageNum(total, rowNum) {
   return Math.ceil(total / rowNum);
 }
 
-export function calcTime(createDate) {
-  const createMoment = moment(createDate)
-  const todayMoment = moment()
-  const diffDay = todayMoment.diff(createMoment, 'day')
-  const diffHour = todayMoment.diff(createMoment, 'hour')
+export function calcFromNow(createDate) {
+  // const createMoment = moment(createDate)
+  // const todayMoment = moment()
+  // const diffDay = todayMoment.diff(createMoment, 'day')
+  // const diffHour = todayMoment.diff(createMoment, 'hour')
 
-  if (diffDay === 0) {
-    return diffHour > 1 ? `${diffHour} Hours ago` : `${diffHour} Hour ago`
-  }
-  else {
-    return diffDay > 1 ? `${diffDay} Days ago` : `${diffDay} Day ago`
-  }
+  // if (diffDay === 0) {
+  //   return diffHour > 1 ? `${diffHour} Hours ago` : `${diffHour} Hour ago`
+  // }
+  // else {
+  //   return diffDay > 1 ? `${diffDay} Days ago` : `${diffDay} Day ago`
+  // }
+  return moment(createDate).fromNow()
 }
 
 export function getUTCString() {

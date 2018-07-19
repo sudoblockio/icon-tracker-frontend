@@ -19,6 +19,18 @@ class TxTableHead extends Component {
                             <th>Quantity</th>
                         </tr>
                     )                      
+                case TX_TYPE.CONTRACT_TOKEN_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Quantity</th>
+                            <th>Token</th>
+                        </tr>
+                    )                      
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>

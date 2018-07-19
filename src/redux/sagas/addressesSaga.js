@@ -19,7 +19,6 @@ function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc)
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
 function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
 
-// TODO addressListFunc 다시 확인 에러 처리 어떻게 할지
 export function* addressListFunc(action) {
   try {
     const payload = yield call(ADDRESS_LIST_API, action.payload);

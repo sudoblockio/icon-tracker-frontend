@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { numberWithCommas, convertNumberToText, startsWith, calcMaxPageNum, onlyDate } from '../../utils/utils';
 import { LoadingComponent, Pagination, ContractLink, SortHolder } from '../../components/';
 
-// TODO TxPage 참조
 class ContractsPage extends Component {
 
   componentWillMount() {

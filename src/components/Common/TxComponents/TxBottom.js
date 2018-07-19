@@ -21,7 +21,6 @@ class TxBottom extends Component {
             address,
             tableClassName, 
             noBoxText, 
-            totalText,
         } = this.props
         
         const {             

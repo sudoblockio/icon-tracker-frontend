@@ -6,6 +6,9 @@ import {
   dateToUTC
 } from '../../utils/utils'
 import {
+  TX_TYPE
+} from '../../utils/const'
+import {
   BlockLink,
   LoadingComponent
 } from '../../components/';
@@ -32,7 +35,13 @@ class BlockInfo extends Component {
     this.props.history.push('/block/' + nextHeight);
   }
 
-  // TODO goAllTx 가져오기
+  goAllTx = () => {
+    const { block } = this.props
+    const { data } = block
+    const { height } = data
+    this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${height}`);
+  }
+
   render() {
     const {
       block
@@ -76,7 +85,7 @@ class BlockInfo extends Component {
                     </tr>*/}
                     <tr>
                       <td>Transactions</td>
-                      <td><span onClick={this.props.goAllTx}>{numberWithCommas(txCount)} Transactions</span> in this block</td>
+                      <td><span onClick={this.goAllTx}>{numberWithCommas(txCount)} Transactions</span> in this block</td>
                     </tr>
                     <tr>
                       <td>Hash</td>

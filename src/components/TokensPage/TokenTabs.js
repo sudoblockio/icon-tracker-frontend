@@ -39,7 +39,6 @@ class TokenTabs extends Component {
         })
     }
 
-    // TODO 컴포넌트 안으로
     goAllTx = () => {
         const { on } = this.state
         const { token } = this.props

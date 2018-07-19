@@ -32,6 +32,15 @@ class TxPageTitle extends Component {
                             </span>
                         </p>
                     )
+                case TX_TYPE.CONTRACT_TOKEN_TX:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} token transfers</em>
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <p className="txt">

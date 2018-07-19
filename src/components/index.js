@@ -35,10 +35,6 @@ import TransactionLink from './Common/TransactionLink'
 import SortHolder from './Common/SortHolder'
 import CopyButton from './Common/CopyButton'
 
-import AddressTotalTxList from './AddressesPage/AddressTotalTxList'
-import AddressTableHead from './Common/AddressTableHead'
-import AddressTableBody from './Common/AddressTableBody'
-
 import TokensPage from './TokensPage/TokensPage'
 import TokenDetailPage from './TokensPage/TokenDetailPage'
 import TokenSummary from './TokensPage/TokenSummary'
@@ -103,10 +99,6 @@ export {
 
   SortHolder,
   CopyButton,
-
-  AddressTotalTxList,
-  AddressTableHead,
-  AddressTableBody,
 
   TokensPage,
   TokenDetailPage,

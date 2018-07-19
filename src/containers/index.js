@@ -12,8 +12,6 @@ import TransactionDetailPageContainer from './TransactionsPage/TransactionDetail
 import HeaderContainer from './Common/HeaderContainer'
 import NotFoundPageContainer from './Common/NotFoundPageContainer'
 
-import AddressTotalTxListContainer from './AddressesPage/AddressTotalTxListContainer'
-
 import TokensPageContainer from './TokensPage/TokensPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
@@ -34,7 +32,6 @@ export {
   TransactionDetailPageContainer,
   NotFoundPageContainer,
 
-  AddressTotalTxListContainer,
   TokensPageContainer,
   TokenDetailPageContainer,
 

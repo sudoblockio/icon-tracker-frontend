@@ -23,10 +23,6 @@ class TxBottomWrapper extends Component {
       TX_TYPE_DATA[txType] ?
       TX_TYPE_DATA[txType]['noBoxText'] : ''
 
-    const totalText =
-      TX_TYPE_DATA[txType] ?
-      TX_TYPE_DATA[txType]['totalText'] : ''
-
     return (
       <TxBottom
         txData={txData}
@@ -35,7 +31,6 @@ class TxBottomWrapper extends Component {
         address={address}
         tableClassName={tableClassName}
         noBoxText={noBoxText}
-        totalText={totalText}
       />
     )
   }
