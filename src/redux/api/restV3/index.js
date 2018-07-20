@@ -32,7 +32,8 @@ import {
 } from './token'
 
 import {
-    icxGetScore
+    icxGetScore,
+    icxCall
 } from './icx'
 
 export {
@@ -60,4 +61,5 @@ export {
     tokenHoldersList,
 
     icxGetScore,
+    icxCall
 }

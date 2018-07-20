@@ -5,7 +5,8 @@ import {
     contractInfo,
     contractTxList,
     contractTokenTxList,
-    icxGetScore
+    icxGetScore,
+    readContractInformation
 } from '../../redux/actions/contractsActions'
 
 // TODO 다른 컨테이너에도 통일적으로 적용
@@ -21,7 +22,8 @@ function mapDispatchToProps(dispatch) {
         contractInfo: payload => dispatch(contractInfo(payload)),
         contractTxList: payload => dispatch(contractTxList(payload)),
         contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
-        icxGetScore: payload => dispatch(icxGetScore(payload))
+        icxGetScore: payload => dispatch(icxGetScore(payload)),
+        readContractInformation: payload => dispatch(readContractInformation(payload))
     };
 }
 

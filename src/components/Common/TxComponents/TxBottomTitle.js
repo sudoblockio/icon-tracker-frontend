@@ -8,12 +8,12 @@ import {
 
 class TxPageTitle extends Component {
 
-	render() {
+    render() {
         const {
             txType,
             listSize,
             totalSize,
-            goAllTx,             
+            goAllTx,
         } = this.props
 
         const Content = () => {
@@ -87,17 +87,17 @@ class TxPageTitle extends Component {
                 case TX_TYPE.TOKEN_HOLDERS:
                     return (
                         <p className="txt">
-							<span>Top<em class="mint" onClick={goAllTx}>{_listSize} Holders</em><em class="gray">(from a total of {_totalSize} holders)</em></span>
+                            <span>Top<em className="mint" onClick={goAllTx}>{_listSize} Holders</em><em className="gray">(from a total of {_totalSize} holders)</em></span>
                         </p>
                     )
                 default:
                     return (
                         <p></p>
                     )
+            }
         }
-        }
-		return Content()
-	}
+        return Content()
+    }
 }
 
 export default TxPageTitle;

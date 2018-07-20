@@ -43,10 +43,11 @@ class TokensPage extends Component {
 			const lowerSearch = search.toLowerCase()
 			return tokenName.toLowerCase().indexOf(lowerSearch) !== -1 || symbol.toLowerCase().indexOf(lowerSearch) !== -1
 		})
+		const noData = list.length === 0
 
 		const TableContent = () => {
-			if (list.length === 0) {
-				return <NoBox text='No Data' />
+			if (noData) {
+				return <NoBox text={search ? 'No Data' : 'No Token'}/>
 			}
 			else {
 				return (
@@ -93,7 +94,7 @@ class TokensPage extends Component {
 		}
 		const Content = () => {
 			if (loading) {
-				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
+				return <LoadingComponent height='calc(100vh - 120px - 144px)'/>
 			}
 			else {
 				return (

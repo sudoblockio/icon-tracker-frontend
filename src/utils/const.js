@@ -30,10 +30,16 @@ export const CONTRACT_STATUS = {
     "1": 'Success', 
     "2": 'Fail'
 }
+
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
+
+export const POPUP_TYPE = {
+    AddressQrCode: 'AddressQrCode',
+    ContractDetail: 'ContractDetail'
+}
 
 export const TX_TYPE = {
     CONTRACT_TX: 'contracttx',
@@ -44,7 +50,6 @@ export const TX_TYPE = {
     BLOCK_TX: 'blocktx',
     TOKEN_TX: 'tokentx',
     TOKEN_HOLDERS: 'tokenholders',
-
     CONTRACT_TOKEN_TX: 'contracttokentx',
 }
 

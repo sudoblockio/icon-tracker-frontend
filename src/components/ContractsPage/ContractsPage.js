@@ -83,14 +83,18 @@ class ContractsPage extends Component {
       const lowerSearch = search.toLowerCase()
       return contractName.toLowerCase().indexOf(lowerSearch) !== -1
     })
+    const noData = list.length === 0
 
     const TableContent = () => {
-      if (list.length === 0) {
-        return <NoBox text='No Data' />
+      if (noData) {
+				return <NoBox text={search ? 'No Data' : 'No Contract'}/>
       }
       else {
-        return (
-          <table className="table-typeA contract">
+        return ([
+          <table 
+            key='table'          
+            className="table-typeA contract"
+          >
             <thead>
               <tr>
                 <th>Address</th>
@@ -109,8 +113,21 @@ class ContractsPage extends Component {
                 ))
               }
             </tbody>
-          </table>
-        )
+          </table>,
+          (!search &&
+          <SortHolder
+            key='SortHolder'            
+            count={count}
+            getData={this.contractListByCount}
+          />),
+          (!search &&
+          <Pagination
+            key='Pagination'  
+            pageNum={page}
+            maxPageNum={calcMaxPageNum(listSize, count)}
+            getData={this.contractListByPage}
+          />)
+        ])
       }
     }
 
@@ -138,25 +155,7 @@ class ContractsPage extends Component {
                   <span>With verified source codes only</span>
                   <span>A total of<em>{listSize}</em> verified contract source codes found</span>
                 </p>
-
                 {TableContent()}
-
-                {
-                  !search &&
-                  <SortHolder
-                    count={count}
-                    getData={this.contractListByCount}
-                  />
-                }
-
-                {
-                  !search &&
-                  <Pagination
-                    pageNum={page}
-                    maxPageNum={calcMaxPageNum(listSize, count)}
-                    getData={this.contractListByPage}
-                  />
-                }
               </div>
             </div>
           </div>

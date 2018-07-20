@@ -62,6 +62,10 @@ import ContractTabs from './ContractsPage/ContractTabs'
 import ContractTransactions from './ContractsPage/ContractTransactions'
 import ContractTokenTransfers from './ContractsPage/ContractTokenTransfers'
 import ContractCode from './ContractsPage/ContractCode'
+import ContractRead from './ContractsPage/ContractRead'
+
+import QrCodeButton from './Common/QrCode/QrCodeButton'
+import QrCodeComponent from './Common/QrCode/QrCodeComponent'
 
 export {
   Header,
@@ -127,5 +131,9 @@ export {
   ContractTabs,
   ContractTransactions,
   ContractTokenTransfers,
-  ContractCode
+  ContractCode,
+  ContractRead,
+
+  QrCodeButton,
+  QrCodeComponent
 }

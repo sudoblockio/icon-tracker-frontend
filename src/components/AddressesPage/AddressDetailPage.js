@@ -30,16 +30,8 @@ class AddressesDetailPage extends Component {
   }
 
   render() {
-    const { 
-      wallet, 
-      walletTx, 
-      walletTokenTx 
-    } = this.props;
-
-    const { 
-      loading, 
-      error 
-    } = wallet
+    const { wallet } = this.props;
+    const { loading, error } = wallet
     
     const Content = () => {
       if (!loading && error) {
@@ -50,17 +42,8 @@ class AddressesDetailPage extends Component {
       else {
         return (
           <div className="content-wrap">
-            <WalletInfo 
-              wallet={wallet}
-              setPopup={this.props.setPopup}
-            />
-            <WalletTabs 
-              wallet={wallet}
-              walletTx={walletTx}
-              walletTokenTx={walletTokenTx}
-              addressTxList={this.props.addressTxList}
-              addressTokenTxList={this.props.addressTokenTxList}
-            />
+            <WalletInfo wallet={wallet} setPopup={this.props.setPopup}/>
+            <WalletTabs {...this.props}/>
           </div>
         )
       }

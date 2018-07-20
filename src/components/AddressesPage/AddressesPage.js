@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { numberWithCommas, convertNumberToText, startsWith, calcMaxPageNum } from '../../utils/utils';
-import { LoadingComponent, Pagination, WalletLink, SortHolder } from '../../components/';
+import { LoadingComponent, Pagination, WalletLink, SortHolder, NoBox } from '../../components/';
 
 class AddressesPage extends Component {
 
@@ -46,50 +46,70 @@ class AddressesPage extends Component {
   render() {
     const { addresses } = this.props
     const { loading, data, page, listSize, count } = addresses;
-    return (
-      <div className="content-wrap">
-        <div className="screen0">
-        {
-          loading ?
-          <LoadingComponent height='calc(100vh - 120px - 144px)'/>
-          :
+    const noData = data.length === 0
+
+    const TableContent = () => {
+      if (noData) {
+        return <NoBox text='No Address'/>
+      }
+      else {
+        return ([
+          <table 
+            key='table'          
+            className="table-typeA"
+          >
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>ICX Balance</th>
+                <th>ICX USD Value</th>
+                <th>Percentage<em>%</em></th>
+                <th>No of Txns</th>
+                <th>Node type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                data.map((row, index) => (
+                  <TableRow key={index} data={row} />
+                ))
+              }
+            </tbody>
+          </table>,
+          <SortHolder
+            key='SortHolder'  
+            count={count}
+            getData={this.addressListByCount}
+          />,
+          <Pagination
+            key='Pagination'  
+            pageNum={page}
+            maxPageNum={calcMaxPageNum(listSize, count)}
+            getData={this.addressListByPage}
+          />
+        ])
+      }
+    }
+
+    const Content = () => {
+      if (loading) {
+        return <LoadingComponent height='calc(100vh - 120px - 144px)'/>
+      }
+      else {
+        return (
           <div className="wrap-holder">
             <p className="title">Addresses</p>
             <div className="contents">
-              <table className="table-typeA">
-                <thead>
-                  <tr>
-                    <th>Address</th>
-                    <th>ICX Balance</th>
-                    <th>ICX USD Value</th>
-                    <th>Percentage<em>%</em></th>
-                    <th>No of Txns</th>
-                    <th>Node type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    data.map((row) => (
-                      <TableRow key={row.address} data={row} />
-                    ))
-                  }
-                </tbody>
-              </table>
-
-              <SortHolder
-                count={count}
-                getData={this.addressListByCount}
-              />
-
-              <Pagination
-                pageNum={page}
-                maxPageNum={calcMaxPageNum(listSize, count)}
-                getData={this.addressListByPage}
-              />
+              {TableContent()}
             </div>
           </div>
-        }
-        </div>
+        )
+      }
+    }
+
+    return (
+      <div className="content-wrap">
+        {Content()}
       </div>
     );
   }

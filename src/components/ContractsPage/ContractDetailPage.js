@@ -31,8 +31,6 @@ class ContractDetailPage extends Component {
     render() {
         const {
             contract,
-            contractTx,
-            contractTokenTx
         } = this.props
 
         const {

@@ -9,7 +9,6 @@ export function icxGetScore(params) {
       params: params,
       id: randomUint32()
     }
-
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
         console.log(response)
@@ -22,6 +21,7 @@ export function icxGetScore(params) {
   });
 }
 
+// TODO 에러 처리
 export function icxCall(params) {
   return new Promise((resolve, reject) => {
     const param = {
@@ -30,11 +30,10 @@ export function icxCall(params) {
       params: params,
       id: randomUint32()
     }
-
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log(response)
-        resolve(response);
+        console.log(response.data.result)
+        resolve(response.data.result);
       })
       .catch(error => {
         console.log(error)

@@ -5,7 +5,8 @@ import {
     NoBox,
     ContractTransactions,
     ContractTokenTransfers,
-    ContractCode
+    ContractCode,
+    ContractRead
 } from '../../components'
 import {
     TX_TYPE,
@@ -37,6 +38,8 @@ class ContractTabs extends Component {
                     this.props.icxGetScore({ address })
                     break
                 case 3:
+                    this.props.readContractInformation({ address })
+                    break
                 case 4:
                 default:
             }
@@ -64,7 +67,7 @@ class ContractTabs extends Component {
 
     render() {
         const { on } = this.state
-        const { contract, contractTx, contractTokenTx, contractAbi } = this.props
+        const { contract, contractTx, contractTokenTx, contractAbi, contractReadInfo } = this.props
         const { loading } = contract
 
         const TableContents = () => {
@@ -93,6 +96,11 @@ class ContractTabs extends Component {
                         />
                     )
                 case 3:
+                    return (
+                        <ContractRead 
+                            contractReadInfo={contractReadInfo}
+                        />
+                    )
                 case 4:
                 default:
                     return <NoBox text="No Data" />

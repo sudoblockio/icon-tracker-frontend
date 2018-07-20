@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AddressQrCode from './AddressQrCode'
 import ContractDetail from './ContractDetail'
 import { initPopup } from '../../redux/actions/popupActions'
+import { POPUP_TYPE } from '../../utils/const'
 
 class Popup extends Component {
     render() {
@@ -14,18 +15,28 @@ class Popup extends Component {
 
         const Content = () => {
             switch (type) {
-                case 'QrCode':
+                case POPUP_TYPE.AddressQrCode:
                     return <AddressQrCode data={data} initPopup={initPopup} />
 
-                case 'ContractDetail':
+                case POPUP_TYPE.ContractDetail:
                     return <ContractDetail data={data} initPopup={initPopup} />
 
                 default:
-                    return <AddressQrCode data={data} initPopup={initPopup} />
+                    return []
             }
         }
 
-        return Content()
+        return (
+            <div className="popup-wrap qr">
+                <div className="dimmed"></div>
+                <div className="popup">
+                    <span className="close" onClick={initPopup}>
+                        <em className="img"></em>
+                    </span>
+                    {Content()}
+                </div>
+            </div>
+        )
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoadingComponent, Pagination, BlockLink, SortHolder } from '../../components/';
+import { LoadingComponent, Pagination, BlockLink, SortHolder, NoBox } from '../../components/';
 import { calcMaxPageNum, dateToUTC, convertNumberToText, numberWithCommas, getUTCString, startsWith } from '../../utils/utils';
 
 class BlocksPage extends Component {
@@ -51,57 +51,77 @@ class BlocksPage extends Component {
     const { blocks } = this.props
     const { loading, data, page, listSize, count } = blocks;
     const utcLabel = `(${getUTCString()})`
+    const noData = !data || data.length === 0
+
+    const TableContent = () => {
+      if (noData) {
+        return <NoBox text='No Block'/>
+      }
+      else {
+        return ([
+          <table 
+            key='table'
+            className="table-typeE"
+          >
+            <thead>
+              <tr>
+                <th>Block Height</th>
+                <th>Time Stamp<em>{utcLabel}</em></th>
+                <th>No of Txns</th>
+                <th>Block Hash</th>
+                <th>Amount</th>
+                <th>TxFee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                data.map((row) => (
+                  <TableRow
+                    key={row.height}
+                    data={row} />
+                ))
+              }
+            </tbody>
+          </table>,
+          <SortHolder
+            key='SortHolder'
+            count={count}
+            getData={this.blockListByCount}
+          />,
+          <Pagination
+            key='Pagination'
+            pageNum={page}
+            maxPageNum={calcMaxPageNum(listSize, count)}
+            getData={this.blockListByPage}
+          />
+        ])
+      }
+    }
+
+    const Content = () => {
+      if (loading) {
+        return <LoadingComponent height='calc(100vh - 120px - 144px)' />
+      }
+      else {
+        return (
+          <div className="screen0">
+            <div className="wrap-holder">
+              <p className="title">
+                Blocks
+              <span className="right"><em>{listSize}</em> Total blocks</span>
+              </p>
+              <div className="contents">
+                {TableContent()}
+              </div>
+            </div>
+          </div>
+        )
+      }
+    }
+
     return (
       <div className="content-wrap">
-        <div className="screen0">
-        {
-          loading ?
-          <div style={{height: 'calc(100vh - 120px - 144px)'}}>
-            <LoadingComponent />
-          </div>
-          :
-          <div className="wrap-holder">
-            <p className="title">
-              Blocks
-              <span className="right"><em>{listSize}</em> Total blocks</span>
-            </p>
-            <div className="contents">
-              <table className="table-typeE">
-                <thead>
-                  <tr>
-                    <th>Block Height</th>
-                    <th>Time Stamp<em>{utcLabel}</em></th>
-                    <th>No of Txns</th>
-                    <th>Block Hash</th>
-                    <th>Amount</th>
-                    <th>TxFee</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                  data.map((row) => (
-                    <TableRow
-                      key={row.height}
-                      data={row} />
-                  ))
-                }
-                </tbody>
-              </table>
-
-              <SortHolder 
-                count={count}
-                getData={this.blockListByCount}
-              />              
-
-              <Pagination
-                pageNum={page}
-                maxPageNum={calcMaxPageNum(listSize, count)}
-                getData={this.blockListByPage} 
-              />
-            </div>
-          </div>          
-        }          
-        </div>
+        {Content()}
       </div>
     );
   }

@@ -34,3 +34,10 @@ export function icxGetScore(payload) {
     payload
   }
 }
+
+export function readContractInformation(payload) {
+  return {
+    type: actionTypes.readContractInformation,
+    payload
+  }
+}

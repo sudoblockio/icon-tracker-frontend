@@ -124,54 +124,73 @@ class TxPage extends Component {
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
 		const className = this.getTxTypeData()['className'] || ''
 		const noBoxText = this.getTxTypeData()['noBoxText'] || ''
-		const { 
-			loading, 
-			page, 
-			count, 
-			data, 
-			listSize, 
-			totalSize 
+		const {
+			loading,
+			page,
+			count,
+			data,
+			listSize,
+			totalSize
 		} = tx;
+		const noData = !data || data.length === 0
+
+		const TableContent = () => {
+			if (noData) {
+				return <NoBox text={noBoxText} />
+			}
+			else {
+				return ([
+					<table 
+						key='table'
+						className={className}
+					>
+						<thead>
+							<TxTableHead txType={this.txType} />
+						</thead>
+						<tbody>
+							{
+								data.map((item, index) => (
+									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex} />
+								))
+							}
+						</tbody>
+					</table >,
+					<SortHolder
+						key='SortHolder'
+						count={count}
+						getData={this.getTxListByCount}
+					/>,
+					<Pagination
+						key='Pagination'
+						pageNum={page}
+						maxPageNum={calcMaxPageNum(listSize, count)}
+						getData={this.getTxListByPage}
+					/>
+				])
+			}
+		}
+
+		const Content = () => {
+			if (loading) {
+				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
+			}
+			else {
+				return (
+					<div className="screen0">
+						<div className={`wrap-holder`}>
+							<TxPageTitle txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} totalSize={totalSize} />
+							<div className="contents">
+								{TableContent()}
+							</div>
+						</div>
+					</div>
+				)
+			}
+		}
+
 		return (
 			<div className="content-wrap">
-				<div className="screen0">
-					{
-						loading ?
-							<LoadingComponent height='calc(100vh - 120px - 144px)' />
-							:
-							<div className={`wrap-holder`}>
-								<TxPageTitle txType={this.txType} urlIndex={this.urlIndex} listSize={listSize} totalSize={totalSize} />
-								{
-									(!data || data.length === 0) ?
-										<NoBox text={noBoxText} />
-										:
-										<div className="contents">
-											<table className={className}>
-												<thead>
-													<TxTableHead txType={this.txType} />
-												</thead>
-												<tbody>
-													{
-														data.map((item, index) => (
-															<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex} />
-														))
-													}
-												</tbody>
-											</table>
-											<SortHolder
-												count={count}
-												getData={this.getTxListByCount}
-											/>
-											<Pagination
-												pageNum={page}
-												maxPageNum={calcMaxPageNum(listSize, count)}
-												getData={this.getTxListByPage}
-											/>
-										</div>
-								}
-							</div>
-					}
-				</div>
+				{Content()}
 			</div>
 		);
 	}

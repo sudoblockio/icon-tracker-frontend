@@ -15,9 +15,9 @@ const initialState = {
 
 export function blocksReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.blockList: return getState('OBJ', REDUX_STEP.READY, state, action, 'blocks')
-    case actionTypes.blockListFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'blocks')
-    case actionTypes.blockListRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'blocks')
+    case actionTypes.blockList: return getState('ARR', REDUX_STEP.READY, state, action, 'blocks')
+    case actionTypes.blockListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blocks')
+    case actionTypes.blockListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blocks')
 
     case actionTypes.blockInfo: return getState('OBJ', REDUX_STEP.READY, state, action, 'block')
     case actionTypes.blockInfoFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'block')

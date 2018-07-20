@@ -73,6 +73,8 @@ input::-moz-placeholder { color: #a7d7de; }
 
 .btn-type-query{ border-radius: 0 2px 2px 0; background: #fff; margin-left: -2px;}
 
+[class ^="btn-type"].on{   background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
+[class ^="btn-type"].on:hover{   background: #1aaaba !important; color: #fff !important;border: 1px solid #1aaaba !important;}
 /*radio*/
 .rbox-holder {}
 [class ^="rbox-type"] {position: absolute; left: -99999px;}
