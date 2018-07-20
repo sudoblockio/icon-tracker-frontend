@@ -111,6 +111,9 @@ const actionTypes = {
   tokenHoldersList: 'TOKEN_HOLDERS_LIST',
   tokenHoldersListFulfilled: 'TOKEN_HOLDERS_LIST_FULFILLED',
   tokenHoldersListRejected: 'TOKEN_HOLDERS_LIST_REJECTED',
+
+  initPopup: 'INIT_POPUP',
+  setPopup: 'SET_POPUP',
 }
 
 export default actionTypes

@@ -115,7 +115,6 @@ class InfoChart extends Component {
     const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
 
     chartData.forEach((c, i) => {
-      // labels.push(i % 2 === 0 ? '' : moment(c.targetDate).format('MMM D'))
       labels.push(moment(c.targetDate).format('MMM D'))
       data.push(c.txCount)
     })
@@ -123,11 +122,10 @@ class InfoChart extends Component {
     let max = Math.max.apply(null, data)
     let min = Math.min.apply(null, data)
     let step = Math.round((max - min) / 4)
-    let division = Math.pow(10, step.toString().length - 2) * 100
+    let division = Math.pow(10, step.toString().length - 1)
 
     step = Math.ceil(step / division) * division
-    // max += step
-    // min = min < step ? min : min - step
+    min = min < step ? min : min - step
 
     return { labels, data, max, min, step }
   }

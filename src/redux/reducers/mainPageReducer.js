@@ -13,7 +13,6 @@ const initialState = {
   }
 }
 
-
 export function mainPageReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.getMainInfo:

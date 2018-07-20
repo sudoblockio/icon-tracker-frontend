@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { dateToUTC, convertNumberToText, numberWithCommas, startsWith, utcDateInfo, isContractAddress } from '../../utils/utils';
+import { dateToUTC, convertNumberToText, numberWithCommas, startsWith, utcDateInfo, isContractAddress, isVaildData } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound, CopyButton } from '../../components/';
 
 class TransactionDetailPage extends Component {
@@ -110,12 +110,18 @@ class TransactionDetailPage extends Component {
 }
 
 const AddressCell = ({ address }) => {
-	const isContract = isContractAddress(address)
-	let className = ''
-	if (isContract) {
-		className = 'trans'
+	const isAddress = isVaildData(address)
+	if (isAddress) {
+		const isContract = isContractAddress(address)
+		let className = ''
+		if (isContract) {
+			className = 'trans'
+		}
+		return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} /></td>	
 	}
-	return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} /></td>
+	else {
+		return <td>-</td>
+	}
 }
 
 export default withRouter(TransactionDetailPage);

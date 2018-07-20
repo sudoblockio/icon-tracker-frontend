@@ -27,7 +27,6 @@ class ContractInfo extends Component {
             }
             else {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
-                const isSymbol = symbol && symbol !== "-"
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -43,10 +42,7 @@ class ContractInfo extends Component {
                                             <td>Balance</td>
                                             <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                             <td>Token Contract</td>
-                                            <td>
-                                                <span className={`${!isSymbol ? '' : 'link'} `}>{tokenText(tokenName, symbol, address)}</span>
-                                                <span className="help token">{ircVersion} - {address}</span>
-                                            </td>
+                                            <TokenCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion}/>
                                         </tr>
                                         <tr>
                                             <td>ICX Value</td>
@@ -73,6 +69,22 @@ class ContractInfo extends Component {
             }
         }
         return Contents()
+    }
+}
+
+const TokenCell = ({tokenName, symbol, address, ircVersion}) => {
+    const isSymbol = symbol && symbol !== "-"
+    if (isSymbol) {
+        const isIrcVersion = ircVersion && ircVersion !== '-'
+        return (
+            <td>
+                <span className='link'>{tokenText(tokenName, symbol, address)}</span>
+                <span className="help token">{isIrcVersion ? `${ircVersion} - ${address}` : address}</span>
+            </td>
+        )
+    }
+    else {
+        return <td>-</td>
     }
 }
 

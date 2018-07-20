@@ -49,17 +49,8 @@ class ContractDetailPage extends Component {
             else {
                 return (
                     <div className="content-wrap">
-                        <ContractInfo 
-                            contract={contract} 
-                        />
-                        <ContractTabs
-                            contract={contract}
-                            contractTx={contractTx}
-                            contractTokenTx={contractTokenTx}
-                            contractTxList={this.props.contractTxList}
-                            contractTokenTxList={this.props.contractTokenTxList}
-                            icxGetScore={this.props.icxGetScore}
-                        />
+                        <ContractInfo contract={contract}/>
+                        <ContractTabs {...this.props}/>
                     </div>
                 )
             }

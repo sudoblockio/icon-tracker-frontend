@@ -177,10 +177,10 @@ export function getArrayState(step, state, action, dataType) {
       const { data } = payload
       const _data =
         dataType === 'walletTx' ? data['walletTx'] :
-          dataType === 'walletTokenTx' ? data['tokenTx'] :
-            dataType === 'blockTx' ? data['txInBlock'] :
-              dataType === 'tokens' ? data['tokenInfoList'] :
-                data
+        dataType === 'walletTokenTx' ? data['tokenTx'] :
+        dataType === 'blockTx' ? data['txInBlock'] :
+        dataType === 'tokens' ? data['tokenInfoList'] :
+        data
       return {
         ...state,
         [dataType]: {
@@ -222,8 +222,9 @@ export function getObjectState(step, state, action, dataType) {
       const { data } = payload
       const _data =
         dataType === 'wallet' ? data['walletDetail'] :
-          dataType === 'block' ? data['blockDetail'] :
-            data
+        dataType === 'block' ? data['blockDetail'] :
+        dataType === 'contractCode' ? data['response'] :
+        data
       return {
         ...state,
         [dataType]: {
@@ -256,4 +257,9 @@ export function getState(type, step, state, action, dataType) {
     default:
       return state
   }
+}
+
+export function isVaildData(data) {
+  if (!!data && data !== '-') return true
+  else return false
 }

@@ -46,7 +46,7 @@ const AddressCell = ({ targetAddr, address, noEllipsis }) => {
 		className = 'no'
 	}
 	else if (targetAddr === address) {
-		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis' }>address</span>
+		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis' }>{address}</span>
 		className = isContract ? 'icon' : ''
 	}
 	else {

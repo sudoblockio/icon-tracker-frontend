@@ -1,6 +1,7 @@
 import Header from './Header/Header'
 import SearchBox from './Header/SearchBox'
 import Footer from './Footer/Footer'
+import Popup from './Popup'
 
 import MainPage from './MainPage/MainPage'
 import InfoSummary from './MainPage/InfoSummary'
@@ -66,6 +67,7 @@ export {
   Header,
   SearchBox,
   Footer,
+  Popup,
 
   MainPage,
   InfoSummary,

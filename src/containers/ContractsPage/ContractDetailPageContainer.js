@@ -14,6 +14,7 @@ function mapStateToProps(state) {
         contract: state.contracts.contract,
         contractTx: state.contracts.contractTx,
         contractTokenTx: state.contracts.contractTokenTx,
+        contractCode: state.contracts.contractCode,
     };
 }
 

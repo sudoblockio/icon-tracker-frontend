@@ -5,7 +5,7 @@ import {
 import {
   NotFound,
   WalletInfo,
-  WalletTabs
+  WalletTabs,
 } from '../../components'
 
 class AddressesDetailPage extends Component {
@@ -52,6 +52,7 @@ class AddressesDetailPage extends Component {
           <div className="content-wrap">
             <WalletInfo 
               wallet={wallet}
+              setPopup={this.props.setPopup}
             />
             <WalletTabs 
               wallet={wallet}

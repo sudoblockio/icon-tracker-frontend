@@ -7,9 +7,12 @@ import {
 
 class ContractCode extends Component {
     render() {
-        const { contract } = this.props
+        const { contract, contractCode } = this.props
         const { data } = contract
         const { address, tokenName, symbol, compiler } = data
+        const codeData = contractCode.data
+
+        console.log(contractCode)
         return (
             <div className="contents">
                 <table className="table-typeL">
@@ -36,6 +39,7 @@ class ContractCode extends Component {
                     </div>
                     <div className="scroll">
                         <p className="txt">
+                            {JSON.stringify(codeData)}
                         </p>
                     </div>
                 </div>

@@ -15,17 +15,17 @@ class Header extends Component {
                 <li>
                   <span>Address<em className="img"></em></span>
 									<ol className="sub-menu">                    
-                    <li><span onClick={() => {this.props.history.push('/addresses')}}>Addresses List</span></li>                    
-										<li><span onClick={() => {this.props.history.push('/contracts')}}>Contracts List</span></li>
+                    <li onClick={() => {this.props.history.push('/addresses')}}><span>Addresses List</span></li>                    
+										<li onClick={() => {this.props.history.push('/contracts')}}><span>Contracts List</span></li>
 									</ol>
                 </li>
-                <li><span onClick={() => {this.props.history.push('/blocks')}}>Block</span></li>
-                <li><span onClick={() => {this.props.history.push('/transactions')}}>Transaction</span></li>
+                <li onClick={() => {this.props.history.push('/blocks')}}><span>Block</span></li>
+                <li onClick={() => {this.props.history.push('/transactions')}}><span>Transaction</span></li>
                 <li>
                   <span>Token<em className="img"></em></span>
 									<ol className="sub-menu">                    
-                    <li><span onClick={() => {this.props.history.push('/tokens')}}>Token List</span></li>                    
-										<li><span onClick={() => {this.props.history.push('/tokentransfers')}}>Token Transfer List</span></li>
+                    <li onClick={() => {this.props.history.push('/tokens')}}><span>Token List</span></li>                    
+										<li onClick={() => {this.props.history.push('/tokentransfers')}}><span>Token Transfer List</span></li>
 									</ol>
                 </li>
               </ul>
