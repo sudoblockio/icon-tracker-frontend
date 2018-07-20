@@ -223,7 +223,7 @@ export function getObjectState(step, state, action, dataType) {
       const _data =
         dataType === 'wallet' ? data['walletDetail'] :
         dataType === 'block' ? data['blockDetail'] :
-        dataType === 'contractCode' ? data['response'] :
+        dataType === 'contractAbi' ? data['result'] :
         data
       return {
         ...state,

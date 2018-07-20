@@ -114,6 +114,10 @@ const actionTypes = {
 
   initPopup: 'INIT_POPUP',
   setPopup: 'SET_POPUP',
+
+  readContractInformation: 'READ_CONTRACT_INFORMATION',
+  readContractInformationFulfilled: 'READ_CONTRACT_INFORMATION_FULFILLED',
+  readContractInformationRejected: 'READ_CONTRACT_INFORMATION_REJECTED',
 }
 
 export default actionTypes

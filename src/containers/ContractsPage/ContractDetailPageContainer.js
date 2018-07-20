@@ -8,13 +8,11 @@ import {
     icxGetScore
 } from '../../redux/actions/contractsActions'
 
+// TODO 다른 컨테이너에도 통일적으로 적용
 function mapStateToProps(state) {
     return {
         url: state.router.location,
-        contract: state.contracts.contract,
-        contractTx: state.contracts.contractTx,
-        contractTokenTx: state.contracts.contractTokenTx,
-        contractCode: state.contracts.contractCode,
+        ...state.contracts
     };
 }
 

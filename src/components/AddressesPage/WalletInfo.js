@@ -44,7 +44,7 @@ class WalletInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{address} <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'} />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td>{address} <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
                     </tr>
                     <tr>
                       <td>Balance</td>

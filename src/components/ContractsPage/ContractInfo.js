@@ -36,7 +36,7 @@ class ContractInfo extends Component {
                                     <tbody>
                                         <tr className="qr">
                                             <td>Address</td>
-                                            <td colSpan="3">{address}  <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'} /></td>
+                                            <td colSpan="3">{address}  <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'} isSpan/></td>
                                         </tr>
                                         <tr className="">
                                             <td>Balance</td>

@@ -83,13 +83,13 @@ export function* contractTokenTxListFunc(action) {
   }
 }
 
-// TODO 서버 이슈 해결 뒤 다시 확인
-// response_code 처리
+// TODO 서버 이슈 해결 뒤 다시 확인, response_code 처리
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_SCORE_API, action.payload);
-    if (payload.response_code === 0) {
-      yield put({type: AT.icxGetScoreFulfilled, payload: payload.response});
+    console.log(payload)
+    if (payload.status === 200) {
+      yield put({type: AT.icxGetScoreFulfilled, payload: payload});
     }
     else {
       throw new Error();

@@ -12,7 +12,10 @@ const initialState = {
   contract: INITIAL_STATE['OBJ'],
   contractTx: INITIAL_STATE['ARR'],
   contractTokenTx: INITIAL_STATE['ARR'],
-  contractCode: INITIAL_STATE['OBJ']
+  contractAbi: INITIAL_STATE['OBJ'],
+  contractRead: {
+    funcList: [],
+  }
 }
 
 export function contractsReducer(state = initialState, action) {
@@ -33,9 +36,34 @@ export function contractsReducer(state = initialState, action) {
     case actionTypes.contractTokenTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'contractTokenTx') 
     case actionTypes.contractTokenTxListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'contractTokenTx') 
 
-    case actionTypes.icxGetScore: return getState('OBJ', REDUX_STEP.READY, state, action, 'contractCode') 
-    case actionTypes.icxGetScoreFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'contractCode') 
-    case actionTypes.icxGetScoreRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'contractCode') 
+    case actionTypes.icxGetScore: return getState('OBJ', REDUX_STEP.READY, state, action, 'contractAbi') 
+    case actionTypes.icxGetScoreFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'contractAbi') 
+    case actionTypes.icxGetScoreRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'contractAbi') 
+
+    case actionTypes.readContractInformation:
+      const abiData = state.contractAbi.data || []
+      const funcList = []
+      abiData.map( func => {
+          if (func['readOnly'] === "0x1") {
+            funcList.push(func)
+          }
+      })
+      return {
+        ...state,
+        contractRead: {
+          ...state.contractRead,
+          funcList
+        }        
+      }
+    case actionTypes.readContractInformationFulfilled:
+      return {
+        
+      }
+    case actionTypes.readContractInformationRejected:
+      return {
+        
+      }
+
 
     default: {
       return state

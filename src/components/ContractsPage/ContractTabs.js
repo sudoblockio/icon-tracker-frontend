@@ -64,7 +64,7 @@ class ContractTabs extends Component {
 
     render() {
         const { on } = this.state
-        const { contract, contractTx, contractTokenTx, contractCode } = this.props
+        const { contract, contractTx, contractTokenTx, contractAbi } = this.props
         const { loading } = contract
 
         const TableContents = () => {
@@ -89,7 +89,7 @@ class ContractTabs extends Component {
                     return (
                         <ContractCode 
                             contract={contract} 
-                            contractCode={contractCode}
+                            contractAbi={contractAbi}
                         />
                     )
                 case 3:

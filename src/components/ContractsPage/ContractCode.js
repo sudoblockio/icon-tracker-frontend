@@ -4,15 +4,31 @@ import {
     makeDownloadLink,
     tokenText
 } from '../../utils/utils'
+import { 
+    CopyButton
+} from '../../components/';
 
+// TODO 로딩
 class ContractCode extends Component {
     render() {
-        const { contract, contractCode } = this.props
-        const { data } = contract
-        const { address, tokenName, symbol, compiler } = data
-        const codeData = contractCode.data
-
-        console.log(contractCode)
+        const { 
+            contract, 
+            contractAbi 
+        } = this.props
+        
+        const { 
+            data 
+        } = contract
+        
+        const { 
+            address, 
+            tokenName, 
+            symbol, 
+            compiler
+        } = data
+        
+        const abiData = JSON.stringify(contractAbi.data)
+        
         return (
             <div className="contents">
                 <table className="table-typeL">
@@ -34,12 +50,12 @@ class ContractCode extends Component {
 
                 <div className="code-box api">
                     <div className="title-group">
-                        <span className="title">Contract API</span>
-                        <button className="btn-type">Copy</button>
+                        <span className="title">Contract ABI</span>
+                        <CopyButton data={abiData} title={'Copy ABI'}/>
                     </div>
                     <div className="scroll">
                         <p className="txt">
-                            {JSON.stringify(codeData)}
+                            {abiData}
                         </p>
                     </div>
                 </div>

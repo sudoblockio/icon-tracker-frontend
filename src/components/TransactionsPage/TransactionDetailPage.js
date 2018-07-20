@@ -47,7 +47,7 @@ class TransactionDetailPage extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<CopyButton data={txHash} title={'Copy TxHash'} /></td>
+											<td>{txHash}<CopyButton data={txHash} title={'Copy TxHash'} isSpan/></td>
 										</tr>
 										<tr>
 											<td>Status</td>
@@ -117,7 +117,7 @@ const AddressCell = ({ address }) => {
 		if (isContract) {
 			className = 'trans'
 		}
-		return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} /></td>	
+		return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} isSpan/></td>	
 	}
 	else {
 		return <td>-</td>
