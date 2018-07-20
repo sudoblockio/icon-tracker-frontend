@@ -10,12 +10,13 @@ import {
   icxCall as ICX_CALL_API
 } from '../api/restV3';
 
-export default function* contractSaga() {
+export default function* contractsSaga() {
   yield fork(watchContractList);
   yield fork(watchContractInfo);
   yield fork(watchContractTxList);
   yield fork(watchContractTokenTxList);
   yield fork(watchIcxGetSrore);
+  yield fork(watchIcxCall);
   yield fork(watchReadContractInformation);
 }
 
@@ -24,6 +25,7 @@ function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFu
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
 function* watchIcxGetSrore() { yield takeLatest(AT.icxGetScore, icxGetSroreFunc) }
+function* watchIcxCall() { yield takeLatest(AT.icxCall, icxCallFunc) }
 function* watchReadContractInformation() { yield takeLatest(AT.readContractInformation, readContractInformationFunc) }
 
 export function* contractListFunc(action) {
@@ -100,6 +102,23 @@ export function* icxGetSroreFunc(action) {
   }
   catch (e) {
     yield put({ type: AT.icxGetScoreRejected });
+  }
+}
+
+// TODO 정리
+export function* icxCallFunc(action) {
+  try {
+    const payload = yield call(ICX_CALL_API, action.payload);
+    yield put({ type: AT.icxCallFulfilled, payload: payload });
+    // if (payload.status === 200) {
+    //   yield put({ type: AT.icxCallFulfilled, payload: payload });
+    // }
+    // else {
+    //   throw new Error();
+    // }
+  }
+  catch (e) {
+    yield put({ type: AT.icxCallRejected });
   }
 }
 

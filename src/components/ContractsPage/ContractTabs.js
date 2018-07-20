@@ -97,7 +97,8 @@ class ContractTabs extends Component {
                     )
                 case 3:
                     return (
-                        <ContractRead 
+                        <ContractRead
+                            contract={contract}
                             contractReadInfo={contractReadInfo}
                         />
                     )

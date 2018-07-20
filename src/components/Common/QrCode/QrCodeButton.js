@@ -27,8 +27,8 @@ class QrCodeButton extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { };
+function mapStateToProps() {
+    return {}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -37,4 +37,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(QrCodeButton)
+export default connect(mapStateToProps, mapDispatchToProps)(QrCodeButton)
