@@ -7,25 +7,12 @@ import {
   isValidNodeType
 } from '../../utils/utils'
 import {
-  POPUP_TYPE
-} from '../../utils/const'
-import {
   LoadingComponent,
   QrCodeButton
 } from '../../components/';
 
 class WalletInfo extends Component {
-  handleClick = () => {
-    const { wallet } = this.props    
-    const { data } = wallet
-    const { address } = data
-
-    this.props.setPopup({
-      type: POPUP_TYPE.AddressQrCode,
-      data: { address }
-    })
-  }
-
+  
   render() {
     const { wallet } = this.props    
     const { loading, data } = wallet
@@ -53,7 +40,7 @@ class WalletInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{address} <QrCodeButton onClick={this.handleClick}/><CopyButton data={address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td>{address} <QrCodeButton address={address}/><CopyButton data={address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
                     </tr>
                     <tr>
                       <td>Balance</td>

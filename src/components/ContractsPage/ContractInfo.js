@@ -12,10 +12,12 @@ import {
 import {
     CopyButton,
     TransactionLink,
-    LoadingComponent
+    LoadingComponent,
+    QrCodeButton
 } from '../../components'
 
 class ContractInfo extends Component {
+
     render() {
         const { contract } = this.props
         const { loading, data } = contract
@@ -36,13 +38,13 @@ class ContractInfo extends Component {
                                     <tbody>
                                         <tr className="qr">
                                             <td>Address</td>
-                                            <td colSpan="3">{address}  <span className="qrcode"><em className="img"></em></span><CopyButton data={address} title={'Copy Address'} isSpan/></td>
+                                            <td colSpan="3">{address} <QrCodeButton address={address}/><CopyButton data={address} title={'Copy Address'} isSpan /></td>
                                         </tr>
                                         <tr className="">
                                             <td>Balance</td>
                                             <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                             <td>Token Contract</td>
-                                            <TokenCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion}/>
+                                            <TokenCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion} />
                                         </tr>
                                         <tr>
                                             <td>ICX Value</td>
@@ -72,7 +74,7 @@ class ContractInfo extends Component {
     }
 }
 
-const TokenCell = ({tokenName, symbol, address, ircVersion}) => {
+const TokenCell = ({ tokenName, symbol, address, ircVersion }) => {
     const isSymbol = symbol && symbol !== "-"
     if (isSymbol) {
         const isIrcVersion = ircVersion && ircVersion !== '-'

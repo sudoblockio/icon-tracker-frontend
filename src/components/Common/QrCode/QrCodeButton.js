@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { POPUP_TYPE } from '../../../utils/const'
+import { setPopup } from '../../../redux/actions/popupActions'
 
 class QrCodeButton extends Component {
     componentDidMount() {
@@ -7,10 +10,13 @@ class QrCodeButton extends Component {
     }
 
     handleClick = () => {
-        if (typeof this.props.onClick === 'function') {
-            this.props.onClick()
-        }
+        const { address } = this.props
+        this.props.setPopup({
+            type: POPUP_TYPE.AddressQrCode,
+            data: { address }
+        })
     }
+
 
     render() {
         return (
@@ -21,4 +27,14 @@ class QrCodeButton extends Component {
     }
 }
 
-export default QrCodeButton
+function mapStateToProps(state) {
+    return { };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setPopup: payload => dispatch(setPopup(payload))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(QrCodeButton)

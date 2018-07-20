@@ -6,9 +6,6 @@ import {
   addressTxList,
   addressTokenTxList
 } from '../../redux/actions/addressesActions';
-import { 
-  setPopup,
-} from '../../redux/actions/popupActions';
 
 function mapStateToProps(state) {
   return {
@@ -24,7 +21,6 @@ function mapDispatchToProps(dispatch) {
     addressInfo: (payload) => dispatch(addressInfo(payload)),
     addressTxList: (payload) => dispatch(addressTxList(payload)),
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
-    setPopup: (payload) => dispatch(setPopup(payload))
   };
 }
 
