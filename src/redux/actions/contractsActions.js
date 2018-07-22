@@ -28,6 +28,13 @@ export function contractTokenTxList(payload) {
   }
 }
 
+export function contractEventLogList(payload) {
+  return {
+    type: actionTypes.contractEventLogList,
+    payload
+  }
+}
+
 export function icxGetScore(payload) {
   return {
     type: actionTypes.icxGetScore,

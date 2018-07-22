@@ -3,7 +3,8 @@ import { TxPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
 import { 
   contractTxList,
-  contractTokenTxList
+  contractTokenTxList,
+  contractEventLogList
 } from '../../redux/actions/contractsActions';
 import { 
   addressTxList,
@@ -26,13 +27,14 @@ function mapStateToProps(state) {
     url: state.router.location,
     contractTx: state.contracts.contractTx,
     contractTokenTx: state.contracts.contractTokenTx,
+    contractEvents: state.contracts.contractEvents,
     walletTx: state.addresses.walletTx,
     walletTokenTx: state.addresses.walletTokenTx,
     recentTx: state.transactions.recentTx,
     recentTokenTx: state.tokens.recentTokenTx,
     blockTx: state.blocks.blockTx,
     tokenTransfers: state.tokens.tokenTransfers,
-    tokenHolders: state.tokens.tokenHolders,
+    tokenHolders: state.tokens.tokenHolders,    
   };
 }
 
@@ -40,6 +42,7 @@ function mapDispatchToProps(dispatch) {
   return {
     contractTxList: payload => dispatch(contractTxList(payload)),
     contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
+    contractEventLogList: payload => dispatch(contractEventLogList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),

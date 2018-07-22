@@ -5,6 +5,7 @@ import {
     contractInfo,
     contractTxList,
     contractTokenTxList,
+    contractEventLogList,
     icxGetScore,
     icxCall,
     readContractInformation
@@ -23,6 +24,8 @@ function mapDispatchToProps(dispatch) {
         contractInfo: payload => dispatch(contractInfo(payload)),
         contractTxList: payload => dispatch(contractTxList(payload)),
         contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
+        contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
+        contractEventLogList: payload => dispatch(contractEventLogList(payload)),
         icxGetScore: payload => dispatch(icxGetScore(payload)),
         icxCall: payload => dispatch(icxCall(payload)),        
         readContractInformation: payload => dispatch(readContractInformation(payload))

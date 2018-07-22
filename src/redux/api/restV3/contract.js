@@ -53,3 +53,16 @@ export function contractTokenTxList(payload) {
       })
   })
 }
+
+export function contractEventLogList(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/contract/eventLogList', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}

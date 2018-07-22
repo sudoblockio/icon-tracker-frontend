@@ -43,6 +43,8 @@ export const POPUP_TYPE = {
 
 export const TX_TYPE = {
     CONTRACT_TX: 'contracttx',
+    CONTRACT_TOKEN_TX: 'contracttokentx',
+    CONTRACT_EVENTS: 'contractevents',
     ADDRESS_TX: 'addresstx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
     TRANSACTIONS: 'transactions',
@@ -50,7 +52,6 @@ export const TX_TYPE = {
     BLOCK_TX: 'blocktx',
     TOKEN_TX: 'tokentx',
     TOKEN_HOLDERS: 'tokenholders',
-    CONTRACT_TOKEN_TX: 'contracttokentx',
 }
 
 export const TX_TYPE_DATA = {
@@ -65,6 +66,12 @@ export const TX_TYPE_DATA = {
 		getTxList: 'contractTokenTxList',
         className: 'table-typeC token tap2',
         noBoxText: 'No Transaction'
+    },
+    [TX_TYPE.CONTRACT_EVENTS]: {
+		tx: 'contractEvents',
+		getTxList: 'contractEventLogList',
+        className: 'table-typeH',
+        noBoxText: 'No Event'
     },
 	[TX_TYPE.ADDRESS_TX]: {
 		tx: 'walletTx',

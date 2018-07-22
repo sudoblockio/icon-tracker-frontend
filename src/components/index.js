@@ -63,6 +63,7 @@ import ContractTransactions from './ContractsPage/ContractTransactions'
 import ContractTokenTransfers from './ContractsPage/ContractTokenTransfers'
 import ContractCode from './ContractsPage/ContractCode'
 import ContractRead from './ContractsPage/ContractRead'
+import ContractEvents from './ContractsPage/ContractEvents'
 
 import QrCodeButton from './Common/QrCode/QrCodeButton'
 import QrCodeComponent from './Common/QrCode/QrCodeComponent'
@@ -133,6 +134,7 @@ export {
   ContractTokenTransfers,
   ContractCode,
   ContractRead,
+  ContractEvents,
 
   QrCodeButton,
   QrCodeComponent

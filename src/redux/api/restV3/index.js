@@ -15,7 +15,8 @@ import {
     contractList,
     contractInfo,
     contractTxList,
-    contractTokenTxList
+    contractTokenTxList,
+    contractEventLogList
 } from './contract'
 
 import {
@@ -50,6 +51,7 @@ export {
     contractInfo,
     contractTxList,
     contractTokenTxList,
+    contractEventLogList,
 
     transactionRecentTx,
     transactionTxDetail,

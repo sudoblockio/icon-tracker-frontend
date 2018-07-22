@@ -36,6 +36,14 @@ class TxPageTitle extends Component {
                             <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
                         </p>
                     )
+                case TX_TYPE.CONTRACT_EVENTS:
+                    return (
+                        <p className="title">
+                            Events
+                            <span>for Contract {urlIndex}</span>
+                            <span className="right">A total of<em>{_listSize}</em> contract events found</span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <p className="title">

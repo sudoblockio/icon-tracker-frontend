@@ -75,6 +75,10 @@ const actionTypes = {
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
   contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
 
+  contractEventLogList: 'CONTRACT_EVENT_LOG_LIST',
+  contractEventLogListFulfilled: 'CONTRACT_EVENT_LOG_LIST_FULFILLED',
+  contractEventLogListRejected: 'CONTRACT_EVENT_LOG_LIST_REJECTED',
+
   addressTxList: 'ADDRESS_TX_LIST',
   addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
   addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',

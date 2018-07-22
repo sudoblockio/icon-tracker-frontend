@@ -6,7 +6,8 @@ import {
     ContractTransactions,
     ContractTokenTransfers,
     ContractCode,
-    ContractRead
+    ContractRead,
+    ContractEvents
 } from '../../components'
 import {
     TX_TYPE,
@@ -41,6 +42,8 @@ class ContractTabs extends Component {
                     this.props.readContractInformation({ address })
                     break
                 case 4:
+                    this.props.contractEventLogList({ address, page: 1, count: 10  })
+                    break
                 default:
             }
         })
@@ -61,13 +64,15 @@ class ContractTabs extends Component {
             case 2:
             case 3:
             case 4:
+                this.props.history.push(`/${TX_TYPE.CONTRACT_EVENTS}/${address}`);
+                break
             default:
         }
     }
 
     render() {
         const { on } = this.state
-        const { contract, contractTx, contractTokenTx, contractAbi, contractReadInfo } = this.props
+        const { contract, contractTx, contractTokenTx, contractEvents, contractAbi, contractReadInfo } = this.props
         const { loading } = contract
 
         const TableContents = () => {
@@ -104,6 +109,13 @@ class ContractTabs extends Component {
                         />
                     )
                 case 4:
+                    return (
+                        <ContractEvents
+                            txData={contractEvents}                            
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.CONTRACT_EVENTS}
+                        />
+                    )
                 default:
                     return <NoBox text="No Data" />
             }

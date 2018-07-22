@@ -3,8 +3,8 @@ import { getUTCString } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 
 class TxTableHead extends Component {
-	render() {
-		const TableHead = (_props) => {
+    render() {
+        const TableHead = (_props) => {
             const { txType } = _props
             const utcLabel = `(${getUTCString()})`
             switch (txType) {
@@ -18,7 +18,7 @@ class TxTableHead extends Component {
                             <th>To</th>
                             <th>Quantity</th>
                         </tr>
-                    )                      
+                    )
                 case TX_TYPE.CONTRACT_TOKEN_TX:
                     return (
                         <tr>
@@ -30,7 +30,15 @@ class TxTableHead extends Component {
                             <th>Quantity</th>
                             <th>Token</th>
                         </tr>
-                    )                      
+                    )
+                case TX_TYPE.CONTRACT_EVENTS:
+                    return (
+                        <tr>
+                            <th>TxHash / Block / Age</th>
+                            <th>Method</th>
+                            <th>Event Logs</th>
+                        </tr>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>
@@ -118,9 +126,9 @@ class TxTableHead extends Component {
                     )
             }
         }
-            
-		return TableHead(this.props)
-	}
+
+        return TableHead(this.props)
+    }
 }
 
 export default TxTableHead

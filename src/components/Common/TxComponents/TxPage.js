@@ -55,20 +55,15 @@ class TxPage extends Component {
 	getTxListByCount = (count) => {
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
-				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
-				break
 			case TX_TYPE.CONTRACT_TOKEN_TX:
+			case TX_TYPE.CONTRACT_EVENTS:
 				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
 				break
 			case TX_TYPE.ADDRESS_TX:
-				this.getTxList({ address: this.urlIndex, page: this.pageId, count })
-				break
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 				this.getTxList({ address: this.urlIndex, page: this.pageId, count })
 				break
 			case TX_TYPE.TRANSACTIONS:
-				this.getTxList({ page: this.pageId, count })
-				break
 			case TX_TYPE.TOKEN_TRANSFERS:
 				this.getTxList({ page: this.pageId, count })
 				break
@@ -76,8 +71,6 @@ class TxPage extends Component {
 				this.getTxList({ height: this.urlIndex, page: this.pageId, count })
 				break
 			case TX_TYPE.TOKEN_TX:
-				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
-				break
 			case TX_TYPE.TOKEN_HOLDERS:
 				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
 				break
@@ -89,31 +82,18 @@ class TxPage extends Component {
 	getTxListByPage = (page) => {
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
-				break
 			case TX_TYPE.CONTRACT_TOKEN_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
-				break
+			case TX_TYPE.CONTRACT_EVENTS:
 			case TX_TYPE.ADDRESS_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
-				break
 			case TX_TYPE.ADDRESS_TOKEN_TX:
+			case TX_TYPE.BLOCK_TX:
+			case TX_TYPE.TOKEN_TX:
+			case TX_TYPE.TOKEN_HOLDERS:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
 			case TX_TYPE.TRANSACTIONS:
-				this.props.history.push(`/${this.txType}/${page}`);
-				break
 			case TX_TYPE.TOKEN_TRANSFERS:
 				this.props.history.push(`/${this.txType}/${page}`);
-				break
-			case TX_TYPE.BLOCK_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
-				break
-			case TX_TYPE.TOKEN_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
-				break
-			case TX_TYPE.TOKEN_HOLDERS:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
 
 			default:

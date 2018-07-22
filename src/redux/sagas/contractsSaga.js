@@ -6,6 +6,7 @@ import {
   contractInfo as CONTRACT_INFO_API,
   contractTxList as CONTRACT_TX_LIST_API,
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
+  contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
   icxGetScore as ICX_GET_SCORE_API,
   icxCall as ICX_CALL_API
 } from '../api/restV3';
@@ -15,6 +16,7 @@ export default function* contractsSaga() {
   yield fork(watchContractInfo);
   yield fork(watchContractTxList);
   yield fork(watchContractTokenTxList);
+  yield fork(watchContractEventLogList);
   yield fork(watchIcxGetSrore);
   yield fork(watchIcxCall);
   yield fork(watchReadContractInformation);
@@ -24,6 +26,7 @@ function* watchContractList() { yield takeLatest(AT.contractList, contractListFu
 function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFunc) }
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
+function* watchContractEventLogList() { yield takeLatest(AT.contractEventLogList, contractEventLogListFunc) }
 function* watchIcxGetSrore() { yield takeLatest(AT.icxGetScore, icxGetSroreFunc) }
 function* watchIcxCall() { yield takeLatest(AT.icxCall, icxCallFunc) }
 function* watchReadContractInformation() { yield takeLatest(AT.readContractInformation, readContractInformationFunc) }
@@ -85,6 +88,21 @@ export function* contractTokenTxListFunc(action) {
   }
   catch (e) {
     yield put({ type: AT.contractTokenTxListRejected });
+  }
+}
+
+export function* contractEventLogListFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_EVENT_LOG_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.contractEventLogListFulfilled, payload: payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    yield put({ type: AT.contractEventLogListRejected });
   }
 }
 
