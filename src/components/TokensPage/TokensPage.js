@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-	convertNumberToText
+	convertNumberToText,
+	searchLowerCase
 } from '../../utils/utils'
 import {
 	NoBox,
@@ -40,8 +41,7 @@ class TokensPage extends Component {
 		const { data, listSize, loading } = tokens
 		const list = data.filter(token => {
 			const { tokenName, symbol } = token
-			const lowerSearch = search.toLowerCase()
-			return tokenName.toLowerCase().indexOf(lowerSearch) !== -1 || symbol.toLowerCase().indexOf(lowerSearch) !== -1
+			return searchLowerCase(search, [tokenName, symbol])
 		})
 		const noData = list.length === 0
 

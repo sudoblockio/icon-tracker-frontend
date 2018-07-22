@@ -4,7 +4,8 @@ import {
   convertNumberToText,
   startsWith,
   calcMaxPageNum,
-  onlyDate
+  onlyDate,
+  searchLowerCase
 } from '../../utils/utils';
 import {
   LoadingComponent,
@@ -80,8 +81,7 @@ class ContractsPage extends Component {
     const { loading, data, page, listSize, count } = contracts;
     const list = data.filter(token => {
       const { contractName } = token
-      const lowerSearch = search.toLowerCase()
-      return contractName.toLowerCase().indexOf(lowerSearch) !== -1
+      return searchLowerCase(search, [contractName])
     })
     const noData = list.length === 0
 

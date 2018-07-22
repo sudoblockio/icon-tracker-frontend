@@ -4,7 +4,8 @@ import CopyButton from '../Common/CopyButton'
 import {
   numberWithCommas,
   convertNumberToText,
-  isValidNodeType
+  isValidNodeType,
+  searchLowerCase
 } from '../../utils/utils'
 import {
   LoadingComponent,
@@ -95,8 +96,7 @@ class TokenBalance extends Component {
         const { search } = this.state        
         const list = _tokenList.filter(token => {
           const { contractName, contractSymbol } = token
-          const searchValue = search.toLowerCase()
-          return contractName.toLowerCase().indexOf(searchValue) !== -1 || contractSymbol.toLowerCase().indexOf(contractSymbol) !== -1
+          return searchLowerCase(search, [contractName, contractSymbol])
         })
         return (
           <td>

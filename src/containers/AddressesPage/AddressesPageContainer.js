@@ -6,7 +6,7 @@ import { addressList } from '../../redux/actions/addressesActions';
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    addresses: state.addresses.addresses,
+    ...state.addresses
   };
 }
 

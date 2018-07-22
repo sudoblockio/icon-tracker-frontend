@@ -6,7 +6,7 @@ import { transactionTxDetail } from '../../redux/actions/transactionsActions';
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    transaction: state.transactions.transaction,
+    ...state.transactions
   };
 }
 

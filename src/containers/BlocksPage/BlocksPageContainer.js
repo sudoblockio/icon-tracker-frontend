@@ -6,7 +6,7 @@ import { blockList } from '../../redux/actions/blocksActions';
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    blocks: state.blocks.blocks,
+    ...state.blocks
   };
 }
 

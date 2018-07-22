@@ -10,9 +10,7 @@ import {
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    token: state.tokens.token,
-    tokenTransfers: state.tokens.tokenTransfers,
-    tokenHolders: state.tokens.tokenHolders
+    ...state.tokens
   };
 }
 

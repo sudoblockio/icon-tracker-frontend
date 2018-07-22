@@ -5,11 +5,7 @@ import {
 
 class WalletTransactions extends Component {
   render() {
-    return (
-      <TxBottomWrapper
-        {...this.props}
-      />
-    )
+    return <TxBottomWrapper {...this.props}/>
   }
 }
 

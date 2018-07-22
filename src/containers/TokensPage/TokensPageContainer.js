@@ -6,7 +6,7 @@ import { tokenList } from '../../redux/actions/tokensActions'
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    tokens: state.tokens.tokens,
+    ...state.tokens
   };
 }
 

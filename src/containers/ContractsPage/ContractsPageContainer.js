@@ -6,7 +6,7 @@ import { contractList } from '../../redux/actions/contractsActions';
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    contracts: state.contracts.contracts
+    ...state.contracts
   };
 }
 

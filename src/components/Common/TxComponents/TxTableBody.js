@@ -5,6 +5,7 @@ import {
 	isContractAddress,
 	numberWithCommas,
 	dateToUTC,
+	isVaildData
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -18,7 +19,7 @@ import {
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
-	if (!txHash || txHash === '-') {
+	if (!isVaildData(txHash)) {
 		_txHash = '-'
 		className = 'no'
 	}

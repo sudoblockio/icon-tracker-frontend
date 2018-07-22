@@ -146,7 +146,7 @@ export function makeDownloadLink(address) {
 }
 
 export function tokenText(name, symbol, address) {
-  const isSymbol = symbol && symbol !== "-"
+  const isSymbol = isVaildData(symbol)
   if (!isSymbol) {
     return "-"
   }
@@ -177,10 +177,10 @@ export function getArrayState(step, state, action, dataType) {
       const { data } = payload
       const _data =
         dataType === 'walletTx' ? data['walletTx'] :
-        dataType === 'walletTokenTx' ? data['tokenTx'] :
-        dataType === 'blockTx' ? data['txInBlock'] :
-        dataType === 'tokens' ? data['tokenInfoList'] :
-        data
+          dataType === 'walletTokenTx' ? data['tokenTx'] :
+            dataType === 'blockTx' ? data['txInBlock'] :
+              dataType === 'tokens' ? data['tokenInfoList'] :
+                data
       return {
         ...state,
         [dataType]: {
@@ -222,9 +222,9 @@ export function getObjectState(step, state, action, dataType) {
       const { data } = payload
       const _data =
         dataType === 'wallet' ? data['walletDetail'] :
-        dataType === 'block' ? data['blockDetail'] :
-        dataType === 'contractAbi' ? data['result'] :
-        data
+          dataType === 'block' ? data['blockDetail'] :
+            dataType === 'contractAbi' ? data['result'] :
+              data
       return {
         ...state,
         [dataType]: {
@@ -262,4 +262,14 @@ export function getState(type, step, state, action, dataType) {
 export function isVaildData(data) {
   if (!!data && data !== '-') return true
   else return false
+}
+
+export function searchLowerCase(search, items) {
+  const lowerSearch = search.toLowerCase()
+  let result = false
+  for (let i = 0; i < items.length; i++) {
+    result = items[i].toLowerCase().indexOf(lowerSearch) !== -1
+    if (result) break
+  }
+  return result
 }

@@ -5,11 +5,7 @@ import {
 
 class BlockTransactions extends Component {
   render() {
-    return (
-      <TxBottomWrapper
-        {...this.props}
-      />
-    )
+    return <TxBottomWrapper {...this.props}/>
   }
 }
 

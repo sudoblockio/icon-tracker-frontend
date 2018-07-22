@@ -4,10 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getMainInfo, getMainChart } from '../../redux/actions/mainPageActions'
 
 function mapStateToProps(state) {
-  return {
-    info: state.mainPage.info,
-    chart: state.mainPage.chart
-  };
+  return state.mainPage;
 }
 
 function mapDispatchToProps(dispatch) {

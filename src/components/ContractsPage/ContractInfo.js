@@ -4,7 +4,8 @@ import WalletLink from '../Common/WalletLink';
 import {
     convertNumberToText,
     numberWithCommas,
-    tokenText
+    tokenText,
+    isVaildData
 } from '../../utils/utils'
 import {
     CONTRACT_STATUS
@@ -75,9 +76,9 @@ class ContractInfo extends Component {
 }
 
 const TokenCell = ({ tokenName, symbol, address, ircVersion }) => {
-    const isSymbol = symbol && symbol !== "-"
+    const isSymbol = isVaildData(symbol)
     if (isSymbol) {
-        const isIrcVersion = ircVersion && ircVersion !== '-'
+        const isIrcVersion = isVaildData(ircVersion)
         return (
             <td>
                 <span className='link'>{tokenText(tokenName, symbol, address)}</span>

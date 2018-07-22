@@ -5,11 +5,7 @@ import {
 
 class TokenTransfers extends Component {
   render() {
-    return (
-      <TxBottomWrapper
-        {...this.props}
-      />
-    )
+    return <TxBottomWrapper {...this.props}/>
   }
 }
 

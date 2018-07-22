@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { BlockDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { 
+import {
   blockInfo,
   blockTxList,
 } from '../../redux/actions/blocksActions';
@@ -9,8 +9,7 @@ import {
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    block: state.blocks.block,
-    blockTx: state.blocks.blockTx,
+    ...state.blocks
   };
 }
 
