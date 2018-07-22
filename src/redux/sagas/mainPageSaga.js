@@ -1,5 +1,4 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import AT from '../actionTypes/actionTypes';
 import {
   getMainInfo as GET_MAIN_INFO_API,
@@ -18,7 +17,6 @@ function* getMainInfo(action) {
 function* getMainChart(action) {
   try {
     const payload = yield call(GET_MAIN_CHART_API);
-    // yield delay(1500)
     yield put({type: AT.getMainChartFulfilled, payload: payload});
   } catch (e) {
     yield put({type: AT.getMainChartRejected});

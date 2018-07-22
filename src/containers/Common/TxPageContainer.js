@@ -7,6 +7,7 @@ import {
   contractEventLogList
 } from '../../redux/actions/contractsActions';
 import { 
+  addressList,
   addressTxList,
   addressTokenTxList
 } from '../../redux/actions/addressesActions';
@@ -19,6 +20,7 @@ import {
   tokenHoldersList
 } from '../../redux/actions/tokensActions';
 import { 
+  blockList,
   blockTxList,
 } from '../../redux/actions/blocksActions';
 
@@ -45,10 +47,12 @@ function mapDispatchToProps(dispatch) {
     contractTxList: payload => dispatch(contractTxList(payload)),
     contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
     contractEventLogList: payload => dispatch(contractEventLogList(payload)),
+    addressList: payload => dispatch(addressList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),
     tokenTxList: payload => dispatch(tokenTxList(payload)),
+    blockList: payload => dispatch(blockList(payload)),
     blockTxList: payload => dispatch(blockTxList(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),

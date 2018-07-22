@@ -5,7 +5,7 @@ import {
 	isContractAddress,
 	numberWithCommas,
 	dateToUTC,
-	isVaildData
+	isVaildData,
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -135,7 +135,7 @@ class TxTableBody extends Component {
 				icxUsd,
 				txCount,
 				nodeType,
-				hash
+				hash,
 			} = data
 
 			const addressInData = data.address
@@ -145,19 +145,19 @@ class TxTableBody extends Component {
 				case TX_TYPE.BLOCKS:
 					return (
 						<tr>
-					        <td><BlockLink label={numberWithCommas(height)} to={height}/></td>
-							<DateCell date={createDate}/>
+							<td><BlockLink label={numberWithCommas(height)} to={height} /></td>
+							<DateCell date={createDate} />
 							<td>{numberWithCommas(txCount)}</td>
-							<td><BlockLink label={hash} to={height}/></td>
-							<td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
-							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+							<td><BlockLink label={hash} to={height} /></td>
+							<td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx', 4)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
 					return (
 						<tr>
-							<AddressCell targetAddr={addressInData}/>
-							<td><span>{convertNumberToText(balance, 'icx')}</span><em>ICX</em></td>
+							<AddressCell targetAddr={addressInData} />
+							<td><span>{convertNumberToText(balance, 'icx', 4)}</span><em>ICX</em></td>
 							<td><span>{convertNumberToText(icxUsd, 'usd')}</span><em>USD</em></td>
 							<td><span>{percentage}</span><em>%</em></td>
 							<td>{numberWithCommas(txCount)}</td>
@@ -172,14 +172,14 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={fromAddr} />
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
-							<td><span>{convertNumberToText(quantity, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(quantity, 'icx', 4)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={txHash} />
-							<DateCell isAge date={age}/>
+							<DateCell isAge date={age} />
 							<AddressCell targetAddr={fromAddr} />
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
@@ -191,8 +191,8 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on">
-								<span className=" ellipsis"><TransactionLink to={txHash}/></span><br/>
-								<span><BlockLink label={`# ${height}`} to={height}/></span>
+								<span className=" ellipsis"><TransactionLink to={txHash} /></span><br />
+								<span><BlockLink label={`# ${height}`} to={height} /></span>
 								<p>{calcFromNow(age)}</p>
 							</td>
 							<td>{method}</td>
@@ -209,7 +209,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} address={address} />
 							<AddressCell targetAddr={toAddr} address={address} />
 							<td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
-							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx', 4)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:
@@ -234,7 +234,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
 							<td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
-							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx', 4)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
@@ -257,7 +257,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
 							<td><span>{convertNumberToText(amount, 'icx', 4)}</span><em>ICX</em></td>
-							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx', 4)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
