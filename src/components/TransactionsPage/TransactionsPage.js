@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import {
 	TxPage
 } from '../../components'
@@ -9,4 +8,4 @@ class TransactionsPage extends Component {
 		return <TxPage {...this.props}/>
 	}
 }
-export default withRouter(TransactionsPage);
+export default TransactionsPage

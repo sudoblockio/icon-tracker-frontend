@@ -8,6 +8,28 @@ class TxTableHead extends Component {
             const { txType } = _props
             const utcLabel = `(${getUTCString()})`
             switch (txType) {
+                case TX_TYPE.BLOCKS:
+                    return (
+                        <tr>
+                            <th>Block Height</th>
+                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>No of Txns</th>
+                            <th>Block Hash</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
+                case TX_TYPE.ADDRESSES:
+                    return (
+                        <tr>
+                            <th>Address</th>
+                            <th>ICX Balance</th>
+                            <th>ICX USD Value</th>
+                            <th>Percentage<em>%</em></th>
+                            <th>No of Txns</th>
+                            <th>Node type</th>
+                        </tr>
+                    )
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <tr>

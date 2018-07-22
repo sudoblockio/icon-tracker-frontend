@@ -5,7 +5,7 @@ import { setPopup } from '../../../redux/actions/popupActions'
 
 class QrCodeButton extends Component {
     componentDidMount() {
-        const event = new CustomEvent('CUSTOM_FX_QRCODE')
+        const event = new CustomEvent('CUSTOM_FX_QR_CODE')
         window.dispatchEvent(event)
     }
 

@@ -4,7 +4,7 @@ const CountType = [20, 40, 80, 160]
 
 class SortHolder extends Component {
   componentDidMount() {
-    const event = new CustomEvent('CUSTOM_FX_SORTHOLDER')
+    const event = new CustomEvent('CUSTOM_FX_SORT_HOLDER')
     window.dispatchEvent(event)
   }
 

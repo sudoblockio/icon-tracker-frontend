@@ -33,7 +33,7 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
-		this.initPageType(this.props.url.pathname)
+		this.initPageType(this.props.url.pathname, 20)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -44,12 +44,40 @@ class TxPage extends Component {
 		}
 	}
 
-	initPageType = (pathname) => {
+	initPageType = (pathname, sort) => {
+		// this.txType = pathname.split("/")[1] || ''
+		// this.urlIndex = pathname.split("/")[2] || ''
+		// this.pageId = pathname.split("/")[3] || 1
+		this.getParams(pathname)
+		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => {})
+		const tx = this.props[this.getTxTypeData()['tx']] || {}
+		const { count } = tx
+		this.getTxListByCount(sort || count)
+	}
+
+	getParams = (pathname) => {
 		this.txType = pathname.split("/")[1] || ''
-		this.urlIndex = pathname.split("/")[2] || ''
-		this.pageId = pathname.split("/")[3] || 1
-		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
-		this.getTxListByCount(20)
+		switch (this.txType) {
+			case TX_TYPE.CONTRACT_TX:
+			case TX_TYPE.CONTRACT_TOKEN_TX:
+			case TX_TYPE.CONTRACT_EVENTS:
+			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_TOKEN_TX:
+			case TX_TYPE.BLOCK_TX:
+			case TX_TYPE.TOKEN_TX:
+			case TX_TYPE.TOKEN_HOLDERS:
+				this.urlIndex = pathname.split("/")[2] || ''
+				this.pageId = pathname.split("/")[3] || 1
+				break
+			case TX_TYPE.BLOCKS:
+			case TX_TYPE.ADDRESSES:
+			case TX_TYPE.TRANSACTIONS:
+			case TX_TYPE.TOKEN_TRANSFERS:
+				this.pageId = pathname.split("/")[2] || 1
+				break
+
+			default:
+		}
 	}
 
 	getTxListByCount = (count) => {
@@ -63,10 +91,6 @@ class TxPage extends Component {
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 				this.getTxList({ address: this.urlIndex, page: this.pageId, count })
 				break
-			case TX_TYPE.TRANSACTIONS:
-			case TX_TYPE.TOKEN_TRANSFERS:
-				this.getTxList({ page: this.pageId, count })
-				break
 			case TX_TYPE.BLOCK_TX:
 				this.getTxList({ height: this.urlIndex, page: this.pageId, count })
 				break
@@ -74,7 +98,13 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_HOLDERS:
 				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
 				break
-
+			case TX_TYPE.BLOCKS:
+			case TX_TYPE.ADDRESSES:
+			case TX_TYPE.TRANSACTIONS:
+			case TX_TYPE.TOKEN_TRANSFERS:
+				this.getTxList({ page: this.pageId, count })
+				break
+	
 			default:
 		}
 	}
@@ -91,6 +121,8 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_HOLDERS:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
+			case TX_TYPE.BLOCKS:
+			case TX_TYPE.ADDRESSES:
 			case TX_TYPE.TRANSACTIONS:
 			case TX_TYPE.TOKEN_TRANSFERS:
 				this.props.history.push(`/${this.txType}/${page}`);
@@ -152,7 +184,7 @@ class TxPage extends Component {
 
 		const Content = () => {
 			if (loading) {
-				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
+				return <LoadingComponent height='calc(100vh - 120px - 144px)'/>
 			}
 			else {
 				return (

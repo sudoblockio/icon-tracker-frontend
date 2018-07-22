@@ -131,12 +131,39 @@ class TxTableBody extends Component {
 				tradeTokenAddr,
 				method,
 				eventLog,
+				balance,
+				icxUsd,
+				txCount,
+				nodeType,
+				hash
 			} = data
 
 			const addressInData = data.address
 			const isError = state === 0
 
 			switch (txType) {
+				case TX_TYPE.BLOCKS:
+					return (
+						<tr>
+					        <td><BlockLink label={numberWithCommas(height)} to={height}/></td>
+							<DateCell date={createDate}/>
+							<td>{numberWithCommas(txCount)}</td>
+							<td><BlockLink label={hash} to={height}/></td>
+							<td><span>{convertNumberToText(amount, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(fee, 'icx')}</span><em>ICX</em></td>
+						</tr>
+					)
+				case TX_TYPE.ADDRESSES:
+					return (
+						<tr>
+							<AddressCell targetAddr={addressInData}/>
+							<td><span>{convertNumberToText(balance, 'icx')}</span><em>ICX</em></td>
+							<td><span>{convertNumberToText(icxUsd, 'usd')}</span><em>USD</em></td>
+							<td><span>{percentage}</span><em>%</em></td>
+							<td>{numberWithCommas(txCount)}</td>
+							<td>{nodeType}</td>
+						</tr>
+					)
 				case TX_TYPE.CONTRACT_TX:
 					return (
 						<tr>

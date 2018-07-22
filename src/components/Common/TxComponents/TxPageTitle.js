@@ -20,6 +20,19 @@ class TxPageTitle extends Component {
             const _listSize = numberWithCommas(listSize || 0)
             const _totalSize = numberWithCommas(totalSize || 0)
             switch (txType) {
+                case TX_TYPE.BLOCKS:
+                    return (
+                        <p className="title">
+                            Blocks       
+                            <span className="right"><em>{_listSize}</em> total blocks</span>
+                        </p>
+                    )
+                case TX_TYPE.ADDRESSES:
+                    return (
+                        <p className="title">
+                            Addresses                        
+                        </p>
+                    )
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <p className="title">
@@ -64,7 +77,6 @@ class TxPageTitle extends Component {
                     return (
                         <p className="title">
                             Transactions
-                            <span></span>
                             <span className="right"><em>{_listSize}</em> total transactions</span>
                         </p>
                     )
