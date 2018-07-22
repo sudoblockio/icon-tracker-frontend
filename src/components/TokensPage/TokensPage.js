@@ -7,7 +7,8 @@ import {
 import {
 	NoBox,
 	LoadingComponent,
-	TokenLink
+	TokenLink,
+	SearchInput
 } from '../../components'
 
 class TokensPage extends Component {
@@ -23,16 +24,12 @@ class TokensPage extends Component {
 		this.props.tokenList({})
 	}
 
-	handleChange = (e) => {
-		const { name, value } = e.target
-		this.setState({ [name]: value })
-	}
-
-	handleKeyDown = (e) => {
-		if (e.keyCode === 27) {
-			const { name } = e.target
-			this.setState({ [name]: '' })
+	setSearch = (nextSearch) => {
+		const { search } = this.state
+		if (search === '' && nextSearch === '') {
+			return
 		}
+		this.setState({ search: nextSearch })
 	}
 
 	render() {
@@ -47,7 +44,7 @@ class TokensPage extends Component {
 
 		const TableContent = () => {
 			if (noData) {
-				return <NoBox text={search ? 'No Data' : 'No Token'}/>
+				return <NoBox text={search ? 'No Data' : 'No Token'} />
 			}
 			else {
 				return (
@@ -94,23 +91,18 @@ class TokensPage extends Component {
 		}
 		const Content = () => {
 			if (loading) {
-				return <LoadingComponent height='calc(100vh - 120px - 144px)'/>
+				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
 			}
 			else {
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
 							<p className="title">Tokens</p>
-							<div className="search-holder">
-								<div className="search-group">
-									<input name="search" type="text" className="txt-type-search" placeholder="Search for any ICX Token Name/Address"
-										value={search}
-										onChange={this.handleChange}
-										onKeyDown={this.handleKeyDown}
-									/>
-									<span><em className="img"></em></span>
-								</div>
-							</div>
+							
+								<SearchInput 
+									placeholder="Search for any ICX Token Name/Address"
+									setSearch={this.setSearch}
+								/>
 							<div className="contents tokens">
 								<p className="txt cont">
 									<span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>

@@ -18,7 +18,7 @@ function* getMainInfo(action) {
 function* getMainChart(action) {
   try {
     const payload = yield call(GET_MAIN_CHART_API);
-    yield delay(1500)
+    // yield delay(1500)
     yield put({type: AT.getMainChartFulfilled, payload: payload});
   } catch (e) {
     yield put({type: AT.getMainChartRejected});

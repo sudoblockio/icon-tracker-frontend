@@ -14,7 +14,8 @@ import {
 	TX_TYPE_DATA
 } from '../../../utils/const'
 import {
-	calcMaxPageNum
+	calcMaxPageNum,
+	searchLowerCase
 } from '../../../utils/utils';
 
 class TxPage extends Component {
@@ -26,10 +27,10 @@ class TxPage extends Component {
 		this.urlIndex = ''
 		this.pageId = 1
 		this.getTxList = () => { }
-	}
 
-	getTxTypeData = () => {
-		return TX_TYPE_DATA[this.txType] || {}
+		this.state = {
+			search: ''
+		}
 	}
 
 	componentWillMount() {
@@ -44,15 +45,25 @@ class TxPage extends Component {
 		}
 	}
 
+	setSearch = (nextSearch) => {
+		const { search } = this.state
+		if (search === '' && nextSearch === '') {
+			return
+		}
+		this.setState({ search: nextSearch })
+	}
+
+
 	initPageType = (pathname, sort) => {
-		// this.txType = pathname.split("/")[1] || ''
-		// this.urlIndex = pathname.split("/")[2] || ''
-		// this.pageId = pathname.split("/")[3] || 1
 		this.getParams(pathname)
-		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => {})
+		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
 		const { count } = tx
 		this.getTxListByCount(sort || count)
+	}
+
+	getTxTypeData = () => {
+		return TX_TYPE_DATA[this.txType] || {}
 	}
 
 	getParams = (pathname) => {
@@ -104,7 +115,7 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_TRANSFERS:
 				this.getTxList({ page: this.pageId, count })
 				break
-	
+
 			default:
 		}
 	}
@@ -144,24 +155,25 @@ class TxPage extends Component {
 			listSize,
 			totalSize
 		} = tx;
-		const noData = !data || data.length === 0
-
+		const { search } = this.state
+		const list = (data || []).filter(item => {
+			const { contractName, tokenName, symbol } = item
+			return searchLowerCase(search, [contractName, tokenName, symbol])
+		})
+		const noData = list.length === 0
 		const TableContent = () => {
 			if (noData) {
 				return <NoBox text={noBoxText} />
 			}
 			else {
 				return ([
-					<table 
-						key='table'
-						className={className}
-					>
+					<table key='table' className={className}>
 						<thead>
 							<TxTableHead txType={this.txType} />
 						</thead>
 						<tbody>
 							{
-								data.map((item, index) => (
+								list.map((item, index) => (
 									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex} />
 								))
 							}
@@ -184,7 +196,7 @@ class TxPage extends Component {
 
 		const Content = () => {
 			if (loading) {
-				return <LoadingComponent height='calc(100vh - 120px - 144px)'/>
+				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
 			}
 			else {
 				return (

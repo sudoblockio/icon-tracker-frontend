@@ -46,6 +46,7 @@ import TokenHolders from './TokensPage/TokenHolders'
 import TokenLink from './Common/TokenLink'
 import ContractLink from './Common/ContractLink'
 import NoBox from './Common/NoBox'
+import SearchInput from './Common/SearchInput'
 
 import TxBottom from './Common/TxComponents/TxBottom'
 import TxBottomWrapper from './Common/TxComponents/TxBottomWrapper'
@@ -117,6 +118,7 @@ export {
   TokenLink,
   ContractLink,
   NoBox,
+  SearchInput,
 
   TxBottom,
   TxBottomWrapper,

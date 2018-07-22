@@ -12,7 +12,8 @@ import {
   Pagination,
   ContractLink,
   SortHolder,
-  NoBox
+  NoBox,
+  SearchInput
 } from '../../components/';
 
 class ContractsPage extends Component {
@@ -63,16 +64,12 @@ class ContractsPage extends Component {
     this.props.history.push('/contracts/' + page);
   }
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
-  }
-
-  handleKeyDown = (e) => {
-    if (e.keyCode === 27) {
-      const { name } = e.target
-      this.setState({ [name]: '' })
+  setSearch = (nextSearch) => {
+    const { search } = this.state
+    if (search === '' && nextSearch === '') {
+      return
     }
+    this.setState({ search: nextSearch })
   }
 
   render() {
@@ -87,12 +84,12 @@ class ContractsPage extends Component {
 
     const TableContent = () => {
       if (noData) {
-				return <NoBox text={search ? 'No Data' : 'No Contract'}/>
+        return <NoBox text={search ? 'No Data' : 'No Contract'} />
       }
       else {
         return ([
-          <table 
-            key='table'          
+          <table
+            key='table'
             className="table-typeA contract"
           >
             <thead>
@@ -115,18 +112,18 @@ class ContractsPage extends Component {
             </tbody>
           </table>,
           (!search &&
-          <SortHolder
-            key='SortHolder'            
-            count={count}
-            getData={this.contractListByCount}
-          />),
+            <SortHolder
+              key='SortHolder'
+              count={count}
+              getData={this.contractListByCount}
+            />),
           (!search &&
-          <Pagination
-            key='Pagination'  
-            pageNum={page}
-            maxPageNum={calcMaxPageNum(listSize, count)}
-            getData={this.contractListByPage}
-          />)
+            <Pagination
+              key='Pagination'
+              pageNum={page}
+              maxPageNum={calcMaxPageNum(listSize, count)}
+              getData={this.contractListByPage}
+            />)
         ])
       }
     }
@@ -140,16 +137,10 @@ class ContractsPage extends Component {
           <div className="screen0">
             <div className="wrap-holder">
               <p className="title">Contracts</p>
-              <div className="search-holder">
-                <div className="search-group">
-                  <input name="search" type="text" className="txt-type-search" placeholder="Search for contract name"
-                    value={search}
-                    onChange={this.handleChange}
-                    onKeyDown={this.handleKeyDown}
-                  />
-                  <span><em className="img"></em></span>
-                </div>
-              </div>
+              <SearchInput 
+                placeholder="Search for contract name"
+                setSearch={this.setSearch}
+              />
               <div className="contents">
                 <p className="txt cont">
                   <span>With verified source codes only</span>
@@ -170,6 +161,7 @@ class ContractsPage extends Component {
     );
   }
 }
+
 
 const TableRow = ({ data }) => {
   return (

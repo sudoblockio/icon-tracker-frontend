@@ -42,6 +42,7 @@ export const POPUP_TYPE = {
 }
 
 export const TX_TYPE = {
+    CONTRACTS: 'contracts',
     BLOCKS: 'blocks',
     ADDRESSES: 'addresses',
     CONTRACT_TX: 'contracttx',
@@ -57,6 +58,12 @@ export const TX_TYPE = {
 }
 
 export const TX_TYPE_DATA = {
+	[TX_TYPE.CONTRACTS]: {
+		tx: 'contracts',
+		getTxList: 'contractList',
+        className: 'table-typeE',
+        noBoxText: 'No Block',
+    },
 	[TX_TYPE.BLOCKS]: {
 		tx: 'blocks',
 		getTxList: 'blockList',
