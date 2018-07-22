@@ -11,19 +11,24 @@ class ContractRead extends Component {
 
     handleChange = (e) => {
         const { name, value } = e.target
-        this.setState({ 
+        this.setState({
             params: {
                 ...this.state.params,
-                [name]: value 
+                [name]: value
             }
         })
     }
 
-    handleClick = (e) => {
-        const { name } = e.target
-
+    handleClick = (address, params, index, method) => {
+        const payload = {
+            address,
+            params,
+            index,
+            method,
+        }
+        this.props.icxCall(payload)
     }
- 
+
     render() {
         const {
             params
@@ -44,10 +49,10 @@ class ContractRead extends Component {
 
         const {
             funcList,
-            funcOutput
+            funcOutputs
         } = contractReadInfo
 
-        console.log(funcList, funcOutput)
+        console.log(funcList, funcOutputs)
 
         return (
             <div className="contents">
@@ -59,52 +64,23 @@ class ContractRead extends Component {
                         <ul className="list">
                             {
                                 funcList.map((func, index) => {
-                                    const outputs = funcOutput[index]
-                                    const isArray = Array.isArray(outputs)
+                                    const outputs = funcOutputs[index]
                                     const inputs = func["inputs"]
                                     const isQuery = inputs.length > 0
                                     if (isQuery) {
                                         return [
                                             <li key="li0">{index + 1}. {func["name"]} > {
-                                                inputs.map((item, i) => {
-                                                    const name = item["name"], type = item["type"]
-                                                    const placeholder = `${name} (${type})`
-                                                    const value = this.state.params[name] || ''
-                                                    return <input type="text" key={i} name={name} placeholder={placeholder} value={value} onChange={this.handleChange} />
-                                                })
-                                            }<button key='button' className="btn-type-query" onClick={()=>{
-                                                const payload = {
-                                                    address,
-                                                    params,
-                                                    index,
-                                                    method: func["name"],
-                                                }
-                                            }} name="1">Query</button></li>,
+                                                <Inputs inputs={inputs} params={params} handleChange={this.handleChange}/>}
+                                                <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, params, index, func["name"]) }}>Query</button>
+                                            </li>,
                                             <li key="li1" className="result">
-                                                <p>┗<em>Unit256</em></p>
-                                                {<div>
-                                                    <p>[ {func["name"]} method response ]</p>
-                                                    <p>>><em>Unit256</em>:  BigNumber Error: new BigNumber() not a number: AAA</p>
-                                                </div>}
+                                                <OutputTypes func={func} />
+                                                {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs}/>}
                                             </li>
                                         ]
                                     }
-                                    else if (isArray) {
-                                        return <li key={index}>{index + 1}. {func["name"]} > {
-                                            outputs.map((value, i) => {
-                                                const outType = func["outputs"][i]["type"]
-                                                const outValue = outType === 'int' ? new BigNumber(value).toString() : value
-                                                return [
-                                                    <span key='span'>{outValue}</span>,
-                                                    <em key='em'>{outType}</em>
-                                                ]
-                                            })
-                                        }</li>
-                                    }
                                     else {
-                                        const outType = func["outputs"][0]["type"]
-                                        const outValue = outType === 'int' ? new BigNumber(outputs).toString() : outputs
-                                        return <li key={index}>{index + 1}. {func["name"]} > <span>{outValue}</span><em>{outType}</em></li>
+                                        return <Outputs key={index} func={func} outputs={outputs} index={index} />
                                     }
                                 })
                             }
@@ -113,6 +89,81 @@ class ContractRead extends Component {
                 </div>
             </div>
 
+        )
+    }
+}
+
+function isEmptyOutput(outputs) {
+    if (!outputs) {
+        return true
+    }
+    else {
+        const { valueArray, error } = outputs
+        return valueArray.length === 0 && !error
+    }
+}
+
+function getOutValue(type, value) {
+    return type === 'int' ? new BigNumber(value).toString() : value
+}
+
+const Inputs = ({inputs, params, handleChange}) => {
+    return (
+        inputs.map((item, i) => {
+            const name = item["name"]
+            const type = item["type"]
+            const placeholder = `${name} (${type})`
+            const value = params[name] || ''
+            return <input type="text" key={i} name={name} placeholder={placeholder} value={value} onChange={handleChange} />
+        })
+    )
+}
+
+const OutputTypes = ({ func }) => {
+    const list = func["outputs"]
+    return (
+        list.map((output, index) => {
+            const type = output["type"]
+            return <p key={index}>┗<em key={index}>{type}</em></p>
+        })
+    )
+}
+
+const OutputResults = ({ func, outputs }) => {
+    const name = func["name"]
+    const { valueArray, error } = outputs
+    return (
+        <div>
+            <p>[ {name} method response ]</p>
+            {
+                error ?
+                <p>>> {error}</p>
+                :
+                valueArray.map((value, i) => {
+                    const outType = func["outputs"][i]["type"]
+                    const outValue = getOutValue(outType, value)
+                    return <p key={i}>>><em>{outType}</em>: {outValue}</p>
+                })
+
+            }
+        </div>
+    )
+}
+
+const Outputs = ({ func, outputs, index }) => {
+    const { valueArray, error } = outputs
+    if (error) {
+        return <li key={index}>{index + 1}. {func["name"]} > <span>{error}</span></li>
+    }
+    else {
+        return (
+            <li key={index}>{index + 1}. {func["name"]} > {
+                valueArray.map((value, i) => {
+                    const outType = func["outputs"][i]["type"]
+                    const outValue = getOutValue(outType, value)
+                    return [<span key='span'>{outValue}</span>, <em key='em'>{outType}</em>]
+                })
+            }</li>
         )
     }
 }

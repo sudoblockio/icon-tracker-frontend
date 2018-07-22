@@ -1,4 +1,4 @@
-import { fork, put, takeLatest, call, all } from 'redux-saga/effects'
+import { fork, put, takeLatest, call, all, select } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 
 import {
@@ -92,7 +92,6 @@ export function* contractTokenTxListFunc(action) {
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_SCORE_API, action.payload);
-    console.log(payload)
     if (payload.status === 200) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: payload });
     }
@@ -108,14 +107,40 @@ export function* icxGetSroreFunc(action) {
 // TODO 정리
 export function* icxCallFunc(action) {
   try {
-    const payload = yield call(ICX_CALL_API, action.payload);
-    yield put({ type: AT.icxCallFulfilled, payload: payload });
-    // if (payload.status === 200) {
-    //   yield put({ type: AT.icxCallFulfilled, payload: payload });
-    // }
-    // else {
-    //   throw new Error();
-    // }
+    console.log(action)
+    const {
+      address,
+      params,
+      index,
+      method
+    } = action.payload
+    const funcOutputs = yield select(state => state.contracts.contractReadInfo.funcOutputs);
+    const outputs = yield call(ICX_CALL_API, {
+      from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
+      to: address,
+      dataType: "call",
+      data: {
+        method,
+        params
+      }
+    })
+    if (outputs.status === 200){
+      const { result } = outputs.data
+      const valueArray = Array.isArray(result) ? result : [result]
+      funcOutputs[index] = {
+        valueArray,
+        error: ''
+      }
+    }
+    else {
+      const { message } = outputs.error
+      funcOutputs[index] = {
+        valueArray: [],
+        error: message
+      }
+    }
+    const payload = { funcOutputs }
+    yield put({ type: AT.icxCallFulfilled, payload})
   }
   catch (e) {
     yield put({ type: AT.icxCallRejected });
@@ -130,11 +155,11 @@ export function* readContractInformationFunc(action) {
     const abiData = score.data.result
     const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
     const funcList = [...readOnlyFunc]
-    const funcOutput = yield all(readOnlyFunc.map(
+    const _funcOutputs = yield all(readOnlyFunc.map(
       func => {
         if (func["inputs"].length === 0) {
           return call(ICX_CALL_API, {
-            from: "hxbe258ceb872e08851f1f59694dac2558708ece11", 
+            from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
             to: address,
             dataType: "call",
             data: {
@@ -147,8 +172,30 @@ export function* readContractInformationFunc(action) {
         }
       }
     ))
-    const payload = { funcList, funcOutput }
-    console.log(payload)
+    const funcOutputs = []
+    _funcOutputs.forEach(output => {
+      if (output === '') {
+        funcOutputs.push({
+          valueArray: [],
+          error: ''
+        })
+      }
+      else if (output.status === 200){
+        const { result } = output.data
+        const valueArray = Array.isArray(result) ? result : [result]
+        funcOutputs.push({
+          valueArray,
+          error: ''
+        })
+      }
+      else {
+        funcOutputs.push({
+          valueArray: [],
+          error: 'error'
+        })
+      }
+    })
+    const payload = { funcList, funcOutputs }
     yield put({ type: AT.readContractInformationFulfilled, payload })
   }
   catch (e) {

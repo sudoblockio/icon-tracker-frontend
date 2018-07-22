@@ -35,6 +35,13 @@ export function icxGetScore(payload) {
   }
 }
 
+export function icxCall(payload) {
+  return {
+    type: actionTypes.icxCall,
+    payload
+  }
+}
+
 export function readContractInformation(payload) {
   return {
     type: actionTypes.readContractInformation,

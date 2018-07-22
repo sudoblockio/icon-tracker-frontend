@@ -25,43 +25,25 @@ class TokenDetailPage extends Component {
         const contractAddr = pathname.split("/")[2]
         if (contractAddr) {
             this.props.tokenSummary({ contractAddr })
-            this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })                
+            this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
         }
     }
 
     render() {
-        const {
-            token,
-            tokenTransfers,
-            tokenHolders,
-        } = this.props;
-
-        const {
-            loading,
-            error
-        } = token
-
-        console.log(this.props)
+        const { token } = this.props;
+        const { loading, error } = token
 
         const Content = () => {
             if (!loading && error) {
                 return (
-                    <NotFound error={error}/>
+                    <NotFound error={error} />
                 )
             }
             else {
                 return (
                     <div className="content-wrap">
-                        <TokenSummary
-                            token={token}
-                        />
-                    <TokenTabs
-                        token={token}
-                        tokenTransfers={tokenTransfers}
-                        tokenHolders={tokenHolders}
-                        tokenTransfersList={this.props.tokenTransfersList}
-                        tokenHoldersList={this.props.tokenHoldersList}
-                    />
+                        <TokenSummary token={token} />
+                        <TokenTabs {...this.props} />
                     </div>
                 )
             }

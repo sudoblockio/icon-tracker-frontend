@@ -6,6 +6,7 @@ import {
     contractTxList,
     contractTokenTxList,
     icxGetScore,
+    icxCall,
     readContractInformation
 } from '../../redux/actions/contractsActions'
 
@@ -23,6 +24,7 @@ function mapDispatchToProps(dispatch) {
         contractTxList: payload => dispatch(contractTxList(payload)),
         contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
         icxGetScore: payload => dispatch(icxGetScore(payload)),
+        icxCall: payload => dispatch(icxCall(payload)),        
         readContractInformation: payload => dispatch(readContractInformation(payload))
     };
 }

@@ -98,8 +98,9 @@ class ContractTabs extends Component {
                 case 3:
                     return (
                         <ContractRead
-                            contract={contract}
+                            contract={contract}                            
                             contractReadInfo={contractReadInfo}
+                            icxCall={this.props.icxCall}
                         />
                     )
                 case 4:

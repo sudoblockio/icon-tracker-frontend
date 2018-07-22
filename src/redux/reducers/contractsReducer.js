@@ -17,7 +17,7 @@ const initialState = {
     loading: false,
     queryIndex: 0,
     funcList: [],
-    funcOutput: [],
+    funcOutputs: [],
     funcError: [],
     error: ''
   }
@@ -58,7 +58,7 @@ export function contractsReducer(state = initialState, action) {
         ...state,
         contractReadInfo: {
           ...state.contractReadInfo,
-          funcOutput: action.payload.funcOutput
+          funcOutputs: action.payload.funcOutputs
         }
       }
     case actionTypes.icxCallRejected: 

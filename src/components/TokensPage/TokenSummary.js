@@ -11,14 +11,8 @@ import {
 
 class TokenSummary extends Component {
     render() {
-        const {
-            token
-        } = this.props
-
-        const {
-            loading,
-            data
-        } = token
+        const { token } = this.props
+        const { loading, data } = token
 
         const Content = () => {
             if (loading) {
@@ -27,18 +21,18 @@ class TokenSummary extends Component {
                 )
             }
             else {
-                const { tokenName, tokenSymbol, totalSupply, contract, price, decimals, holderAddr, transfers, totalSupplyUsd, priceUsd } = data
+                const { tokenName, totalSupply, contract, price, decimals, holderAddr, transfers, totalSupplyUsd, priceUsd, symbol } = data
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
-                            <p className="title dapp">{tokenName}</p>
+                            <p className="title dapp">{tokenName} ({symbol})</p>
                             <div className="contents">
                                 <table className="table-typeB contract">
                                     <tbody>
                                         <tr>
                                             <td>Total Supply</td>
-                                            <td>{numberWithCommas(totalSupply)} {tokenSymbol}{!!_totalSupplyUsd && <em>({_totalSupplyUsd} USD)</em>}</td>
+                                            <td>{numberWithCommas(totalSupply)} {symbol}{!!_totalSupplyUsd && <em>({_totalSupplyUsd} USD)</em>}</td>
                                             <td>Contract </td>
                                             <td><span>{contract ? <ContractLink to={contract}/> : '-'}</span></td>
                                         </tr>
