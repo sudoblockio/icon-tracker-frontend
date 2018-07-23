@@ -15,8 +15,9 @@ export function icxGetScore(params) {
         resolve(response);
       })
       .catch(error => {
-        console.log(error)
-        reject(error);
+        const { response } = error
+        const { status } = response
+        resolve({ status, error });
       })
   });
 }

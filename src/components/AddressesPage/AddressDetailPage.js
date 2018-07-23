@@ -17,14 +17,17 @@ class AddressesDetailPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      initialTab: 0
+      on: 0
     }
   }
 
   componentWillMount() {
     const { pathname, hash } = this.props.url
-    this.allDetailInfo(pathname)
-    this.setState({initialTab: findTabIndex(WALLET_TABS, hash)})
+    this.setState({ on: findTabIndex(WALLET_TABS, hash) },
+      () => {
+        this.allDetailInfo(pathname)
+      }
+    )
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,8 +42,26 @@ class AddressesDetailPage extends Component {
     const address = pathname.split("/")[2]
     if (address) {
       this.props.addressInfo({ address })
-      this.props.addressTxList({ address, page: 1, count: 10 })
+      this.setTab(this.state.on)
     }
+  }
+
+  setTab = (index) => {
+    const { pathname } = this.props.url
+    const address = pathname.split("/")[2]
+    this.setState({ on: index },
+      () => {
+        switch (index) {
+          case 0:
+            this.props.addressTxList({ address, page: 1, count: 10 })
+            break
+          case 1:
+            this.props.addressTokenTxList({ address, page: 1, count: 10 })
+            break
+          default:
+        }
+      }
+    )
   }
 
   render() {
@@ -55,7 +76,7 @@ class AddressesDetailPage extends Component {
         return (
           <div className="content-wrap">
             <WalletInfo wallet={wallet} setPopup={this.props.setPopup} />
-            <WalletTabs {...this.props} {...this.state}/>
+            <WalletTabs {...this.props} {...this.state} setTab={this.setTab}/>
           </div>
         )
       }

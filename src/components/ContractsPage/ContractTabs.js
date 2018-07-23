@@ -15,43 +15,9 @@ import {
 } from '../../utils/const'
 
 class ContractTabs extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            on: this.props.initialTab || 0
-        }
-    }
-
-    setTab = (index) => {
-        const { contract } = this.props
-        const { data } = contract
-        const { address } = data
-        const addr = address
-        this.setState({ on: index }, () => {
-            switch (index) {
-                case 0:
-                    this.props.contractTxList({ addr, page: 1, count: 10 })
-                    break
-                case 1:
-                    this.props.contractTokenTxList({ addr, page: 1, count: 10 })
-                    break
-                case 2:
-                    this.props.icxGetScore({ address })
-                    break
-                case 3:
-                    this.props.readContractInformation({ address })
-                    break
-                case 4:
-                    this.props.contractEventLogList({ address, page: 1, count: 10  })
-                    break
-                default:
-            }
-        })
-    }
 
     goAllTx = () => {
-        const { on } = this.state
-        const { contract } = this.props
+        const { on, contract } = this.props
         const { data } = contract
         const { address } = data
         switch (on) {
@@ -71,8 +37,7 @@ class ContractTabs extends Component {
     }
 
     render() {
-        const { on } = this.state
-        const { contract, contractTx, contractTokenTx, contractEvents, contractAbi, contractReadInfo } = this.props
+        const { on, contract, contractTx, contractTokenTx, contractEvents, contractAbi, contractReadInfo } = this.props
         const { loading } = contract
 
         const TableContents = () => {
@@ -134,7 +99,7 @@ class ContractTabs extends Component {
                                 <ul>
                                     {
                                         CONTRACT_TABS.map((tab, index) => (
-                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
                                 </ul>

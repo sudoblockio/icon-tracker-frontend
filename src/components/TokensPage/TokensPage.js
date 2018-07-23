@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
 	convertNumberToText,
-	searchLowerCase
+	searchLowerCase,
+	tokenText
 } from '../../utils/utils'
 import {
 	NoBox,
 	LoadingComponent,
-	TokenLink,
 	SearchInput
 } from '../../components'
 
@@ -62,7 +62,7 @@ class TokensPage extends Component {
 						<tbody>
 							{
 								list.map((token, index) => {
-									const { tokenName, symbol, price, changeVal, volume, marketCap, contractAddr } = token
+									const { name, symbol, price, changeVal, volume, marketCap, contractAddr } = token
 									const { usd, icx, btc, eth } = price || {}
 									const _changeVal = changeVal || 0
 									const className = _changeVal > 0 ? 'red' : _changeVal < 0 ? 'blue' : ''
@@ -70,7 +70,7 @@ class TokensPage extends Component {
 									return (
 										<tr key={index}>
 											<td>{index + 1}</td>
-											<td><TokenLink label={`${tokenName} (${symbol})`} to={contractAddr} /></td>
+											<td>{tokenText(name, symbol,contractAddr)}</td>											
 											<td>
 												<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
 												<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>

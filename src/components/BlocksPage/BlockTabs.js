@@ -11,30 +11,9 @@ import {
 } from '../../components'
 
 class BlockTabs extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            on: this.props.initialTab || 0
-        }
-    }
-
-    setTab = (index) => {
-        const { block } = this.props
-        const { data } = block
-        const { height } = data
-        this.setState({ on: index }, () => {
-            switch (index) {
-                case 0:
-                    this.props.blockTxList({ height, page: 1, count: 10 })
-                    break
-                default:
-            }
-        })
-    }
 
     goAllTx = () => {
-        const { on } = this.state
-        const { block } = this.props
+        const { on, block } = this.props
         const { data } = block
         const { height } = data
         switch (on) {
@@ -46,8 +25,7 @@ class BlockTabs extends Component {
     }
 
     render() {
-        const { on } = this.state
-        const { block, blockTx } = this.props
+        const { on, block, blockTx } = this.props
         const { loading } = block
         
         const TableContents = () => {
@@ -78,7 +56,7 @@ class BlockTabs extends Component {
                                 <ul>
                                     {
                                         BLOCK_TABS.map((tab, index) => (
-                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
                                 </ul>

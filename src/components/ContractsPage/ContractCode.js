@@ -14,8 +14,7 @@ class ContractCode extends Component {
         const { contract, contractAbi } = this.props
         const { data } = contract
         const { address, tokenName, symbol, compiler } = data
-        const { loading, data: abiData } = contractAbi
-
+        const { loading, data: abiData, error } = contractAbi
         return (
             <div className="contents">
                 <table className="table-typeL">
@@ -45,7 +44,7 @@ class ContractCode extends Component {
                             :
                             <div className="scroll">
                                 <p className="txt">
-                                    {JSON.stringify(abiData)}
+                                    {!error ? JSON.stringify(abiData) : error}
                                 </p>
                             </div>
                     }

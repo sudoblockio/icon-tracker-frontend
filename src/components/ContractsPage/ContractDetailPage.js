@@ -18,16 +18,19 @@ class ContractDetailPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            initialTab: 0
+            on: 0
         }
     }
 
     componentWillMount() {
         const { pathname, hash } = this.props.url
-        this.allDetailInfo(pathname)
-        this.setState({ initialTab: findTabIndex(CONTRACT_TABS, hash) })
-    }
-
+        this.setState({ on: findTabIndex(CONTRACT_TABS, hash) },
+          () => {
+            this.allDetailInfo(pathname)
+          }
+        )
+      }
+    
     componentWillReceiveProps(nextProps) {
         const { pathname: current } = this.props.url
         const { pathname: next } = nextProps.url
@@ -40,8 +43,34 @@ class ContractDetailPage extends Component {
         const addr = pathname.split("/")[2]
         if (addr) {
             this.props.contractInfo({ addr })
-            this.props.contractTxList({ addr, page: 1, count: 10 })
+            this.setTab(this.state.on)
         }
+    }
+
+    setTab = (index) => {
+        const { pathname } = this.props.url
+        const address = pathname.split("/")[2]    
+        const addr = address
+        this.setState({ on: index }, () => {
+            switch (index) {
+                case 0:
+                    this.props.contractTxList({ addr, page: 1, count: 10 })
+                    break
+                case 1:
+                    this.props.contractTokenTxList({ addr, page: 1, count: 10 })
+                    break
+                case 2:
+                    this.props.icxGetScore({ address })
+                    break
+                case 3:
+                    this.props.readContractInformation({ address })
+                    break
+                case 4:
+                    this.props.contractEventLogList({ address, page: 1, count: 10  })
+                    break
+                default:
+            }
+        })
     }
 
     render() {
@@ -56,7 +85,7 @@ class ContractDetailPage extends Component {
                 return (
                     <div className="content-wrap">
                         <ContractInfo contract={contract} />
-                        <ContractTabs {...this.props} {...this.state} />
+                        <ContractTabs {...this.props} {...this.state} setTab={this.setTab}/>
                     </div>
                 )
             }

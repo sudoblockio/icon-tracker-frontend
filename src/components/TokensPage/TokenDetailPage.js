@@ -13,18 +13,21 @@ import {
 } from '../../components'
 
 class TokenDetailPage extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
-            initialTab: 0
+            on: 0
         }
     }
 
     componentWillMount() {
         const { pathname, hash } = this.props.url
-        this.allDetailInfo(pathname)
-        this.setState({ initialTab: findTabIndex(TOKEN_TABS, hash) })
+        this.setState({ on: findTabIndex(TOKEN_TABS, hash) },
+            () => {
+                this.allDetailInfo(pathname)
+            }
+        )
     }
 
     componentWillReceiveProps(nextProps) {
@@ -39,8 +42,28 @@ class TokenDetailPage extends Component {
         const contractAddr = pathname.split("/")[2]
         if (contractAddr) {
             this.props.tokenSummary({ contractAddr })
-            this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
+            this.setTab(this.state.on)
         }
+    }
+
+    setTab = (index) => {
+        const { pathname } = this.props.url
+        const contractAddr = pathname.split("/")[2]
+        const address = contractAddr
+        this.setState({ on: index }, () => {
+            switch (index) {
+                case 0:
+                    this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
+                    break
+                case 1:
+                    this.props.tokenHoldersList({ contractAddr, page: 1, count: 10 })
+                    break
+                case 2:
+                    this.props.readContractInformation({ address })
+                    break
+                default:
+            }
+        })
     }
 
     render() {
@@ -56,8 +79,8 @@ class TokenDetailPage extends Component {
             else {
                 return (
                     <div className="content-wrap">
-                        <TokenSummary token={token}/>
-                        <TokenTabs {...this.props} {...this.state}/>
+                        <TokenSummary token={token} />
+                        <TokenTabs {...this.props} {...this.state} setTab={this.setTab} />
                     </div>
                 )
             }

@@ -114,11 +114,11 @@ export function* icxGetSroreFunc(action) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: payload });
     }
     else {
-      throw new Error();
+      throw new Error(payload.error);
     }
   }
   catch (e) {
-    yield put({ type: AT.icxGetScoreRejected });
+    yield put({ type: AT.icxGetScoreRejected, error: e.message});
   }
 }
 

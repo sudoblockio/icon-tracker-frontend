@@ -12,33 +12,9 @@ import {
 } from '../../components'
 
 class WalletTabs extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            on: this.props.initialTab || 0
-        }
-    }
-
-    setTab = (index) => {
-        const { wallet } = this.props
-        const { data } = wallet
-        const { address } = data
-        this.setState({ on: index }, () => {
-            switch (index) {
-                case 0:
-                    this.props.addressTxList({ address, page: 1, count: 10 })
-                    break
-                case 1:
-                    this.props.addressTokenTxList({ address, page: 1, count: 10 })
-                    break
-                default:
-            }
-        })
-    }
-
+    
     goAllTx = () => {
-        const { on } = this.state
-        const { wallet } = this.props
+        const { on, wallet } = this.props
         const { data } = wallet
         const { address } = data
         switch (on) {
@@ -53,8 +29,7 @@ class WalletTabs extends Component {
     }
 
     render() {
-        const { on } = this.state
-        const { wallet, walletTx, walletTokenTx } = this.props
+        const { on, wallet, walletTx, walletTokenTx } = this.props
         const { loading, data } = wallet
         const { address } = data
         
@@ -96,7 +71,7 @@ class WalletTabs extends Component {
                                 <ul>
                                     {
                                         WALLET_TABS.map((tab, index) => (
-                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
                                 </ul>

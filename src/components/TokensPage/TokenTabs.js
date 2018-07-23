@@ -13,38 +13,9 @@ import {
 } from '../../components'
 
 class TokenTabs extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            on: this.props.initialTab || 0
-        }
-    }
-
-    setTab = (index) => {
-        const { token } = this.props
-        const { data } = token
-        const { contract } = data
-        const contractAddr = contract
-        this.setState({ on: index }, () => {
-            switch (index) {
-                case 0:
-                    this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
-                    break
-                case 1:
-                    this.props.tokenHoldersList({ contractAddr, page: 1, count: 10 })
-                    break
-                case 2:
-                    this.props.readContractInformation({ address: contractAddr })
-                    break
-                default:
-            }
-
-        })
-    }
 
     goAllTx = () => {
-        const { on } = this.state
-        const { token } = this.props
+        const { on, token } = this.props
         const { data } = token
         const { contract } = data
         switch (on) {
@@ -60,8 +31,7 @@ class TokenTabs extends Component {
     }
 
     render() {
-        const { on } = this.state
-        const { token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
+        const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
         const { loading, data } = token
         const { contract } = data
 
@@ -107,7 +77,7 @@ class TokenTabs extends Component {
                                 <ul>
                                     {
                                         TOKEN_TABS.map((tab, index) => (
-                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.setTab(index) }}>{tab}</li>
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
                                 </ul>

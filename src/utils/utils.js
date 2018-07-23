@@ -175,18 +175,12 @@ export function getArrayState(step, state, action, dataType) {
     case REDUX_STEP.FULFILLED:
       const { payload } = action
       const { data } = payload
-      const _data =
-        dataType === 'walletTx' ? data['walletTx'] :
-          dataType === 'walletTokenTx' ? data['tokenTx'] :
-            dataType === 'blockTx' ? data['txInBlock'] :
-              dataType === 'tokens' ? data['tokenInfoList'] :
-                data
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
-          data: _data || [],
+          data: data || [],
           listSize: action.payload.listSize || 0,
           totalSize: action.payload.totalSize || 0,
           error: ''
@@ -220,11 +214,7 @@ export function getObjectState(step, state, action, dataType) {
     case REDUX_STEP.FULFILLED:
       const { payload } = action
       const { data } = payload
-      const _data =
-        dataType === 'wallet' ? data['walletDetail'] :
-          dataType === 'block' ? data['blockDetail'] :
-            dataType === 'contractAbi' ? data['result'] :
-              data
+      const _data = dataType === 'contractAbi' ? data['result'] : data
       return {
         ...state,
         [dataType]: {

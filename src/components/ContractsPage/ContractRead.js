@@ -104,7 +104,7 @@ const Inputs = ({ inputs, params, handleChange }) => {
             const type = item["type"]
             const placeholder = `${name} (${type})`
             const value = params[name] || ''
-            return <input type="text" key={i} name={name} placeholder={placeholder} value={value} onChange={handleChange} />
+            return <input type="text" className="over" key={i} name={name} placeholder={placeholder} value={value} onChange={handleChange} />
         })
     )
 }
