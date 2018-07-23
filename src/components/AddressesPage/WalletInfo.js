@@ -109,7 +109,7 @@ class TokenBalance extends Component {
             <div className="combo-group">
               <div className="combo-layer">
                 <div className="search-group">
-                  <input type="text" className="txt-type-page over" placeholder="Search for Token Name"
+                  <input type="text" className="txt-type-page over" placeholder="Search for token name"
                     name={'search'}
                     value={this.state.search}
                     onChange={this.handleChange}
