@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { 
+import {
     TX_TYPE,
     TOKEN_TABS
 } from '../../utils/const'
-import { 
-    LoadingComponent, 
+import {
+    LoadingComponent,
     TokenTransfers,
     TokenHolders,
-    NoBox
+    NoBox,
+    ContractRead
 } from '../../components'
 
 class TokenTabs extends Component {
@@ -32,10 +33,12 @@ class TokenTabs extends Component {
                 case 1:
                     this.props.tokenHoldersList({ contractAddr, page: 1, count: 10 })
                     break
-                case 2:                                
-                default:       
+                case 2:
+                    this.props.readContractInformation({ address: contractAddr })
+                    break
+                default:
             }
-            
+
         })
     }
 
@@ -51,32 +54,41 @@ class TokenTabs extends Component {
             case 1:
                 this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`);
                 break
-            case 2:                                
+            case 2:
             default:
         }
     }
 
-    render() {        
+    render() {
         const { on } = this.state
-        const { token, tokenTransfers, tokenHolders } = this.props
-        const { loading } = token
+        const { token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
+        const { loading, data } = token
+        const { contract } = data
 
         const TableContents = () => {
             switch (on) {
                 case 0:
                     return (
-                        <TokenTransfers 
-                            txData={tokenTransfers} 
-                            goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.TOKEN_TX} 
+                        <TokenTransfers
+                            txData={tokenTransfers}
+                            goAllTx={this.goAllTx}
+                            txType={TX_TYPE.TOKEN_TX}
                         />
                     )
                 case 1:
                     return (
-                        <TokenHolders 
-                            txData={tokenHolders} 
-                            goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.TOKEN_HOLDERS} 
+                        <TokenHolders
+                            txData={tokenHolders}
+                            goAllTx={this.goAllTx}
+                            txType={TX_TYPE.TOKEN_HOLDERS}
+                        />
+                    )
+                case 2:
+                    return (
+                        <ContractRead
+                            contract={{ data: { address: contract } }}
+                            contractReadInfo={contractReadInfo}
+                            icxCall={this.props.icxCall}
                         />
                     )
                 default:

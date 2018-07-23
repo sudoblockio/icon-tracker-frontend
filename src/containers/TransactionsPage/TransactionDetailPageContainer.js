@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { TransactionDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
-import { transactionTxDetail } from '../../redux/actions/transactionsActions';
+import { 
+  transactionTxDetail 
+} from '../../redux/actions/transactionsActions';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +14,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    transactionTxDetail: (payload) => dispatch(transactionTxDetail(payload))
+    transactionTxDetail: (payload) => dispatch(transactionTxDetail(payload)),
   };
 }
 

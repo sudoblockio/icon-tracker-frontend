@@ -30,29 +30,11 @@ class ContractRead extends Component {
     }
 
     render() {
-        const {
-            params
-        } = this.state
-
-        const {
-            contract,
-            contractReadInfo
-        } = this.props
-
-        const {
-            data
-        } = contract
-
-        const {
-            address
-        } = data
-
-        const {
-            funcList,
-            funcOutputs
-        } = contractReadInfo
-
-        console.log(funcList, funcOutputs)
+        const { params } = this.state
+        const { contract, contractReadInfo } = this.props
+        const { data } = contract
+        const { address } = data
+        const { funcList, funcOutputs } = contractReadInfo
 
         return (
             <div className="contents">
@@ -70,12 +52,12 @@ class ContractRead extends Component {
                                     if (isQuery) {
                                         return [
                                             <li key="li0">{index + 1}. {func["name"]} > {
-                                                <Inputs inputs={inputs} params={params} handleChange={this.handleChange}/>}
+                                                <Inputs inputs={inputs} params={params} handleChange={this.handleChange} />}
                                                 <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, params, index, func["name"]) }}>Query</button>
                                             </li>,
                                             <li key="li1" className="result">
                                                 <OutputTypes func={func} />
-                                                {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs}/>}
+                                                {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs} />}
                                             </li>
                                         ]
                                     }
@@ -107,7 +89,7 @@ function getOutValue(type, value) {
     return type === 'int' ? new BigNumber(value).toString() : value
 }
 
-const Inputs = ({inputs, params, handleChange}) => {
+const Inputs = ({ inputs, params, handleChange }) => {
     return (
         inputs.map((item, i) => {
             const name = item["name"]
@@ -137,13 +119,13 @@ const OutputResults = ({ func, outputs }) => {
             <p>[ {name} method response ]</p>
             {
                 error ?
-                <p>>> {error}</p>
-                :
-                valueArray.map((value, i) => {
-                    const outType = func["outputs"][i]["type"]
-                    const outValue = getOutValue(outType, value)
-                    return <p key={i}>>><em>{outType}</em>: {outValue}</p>
-                })
+                    <p>>> {error}</p>
+                    :
+                    valueArray.map((value, i) => {
+                        const outType = func["outputs"][i]["type"]
+                        const outValue = getOutValue(outType, value)
+                        return <p key={i}>>><em>{outType}</em>: {outValue}</p>
+                    })
 
             }
         </div>
