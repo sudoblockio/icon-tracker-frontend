@@ -16,7 +16,7 @@ class TokenTabs extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            on: 0
+            on: this.props.initialTab || 0
         }
     }
 
@@ -97,9 +97,7 @@ class TokenTabs extends Component {
         }
         const Contents = () => {
             if (loading) {
-                return (
-                    <LoadingComponent height='513px' />
-                )
+                return <LoadingComponent height='513px'/>
             }
             else {
                 return (

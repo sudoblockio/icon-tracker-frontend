@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import web3Utils from 'web3-utils'
 import { dateToUTC, convertNumberToText, numberWithCommas, startsWith, utcDateInfo, isContractAddress, isVaildData } from '../../utils/utils';
 import { BlockLink, WalletLink, NotFound, CopyButton } from '../../components/';
 
@@ -25,11 +26,11 @@ class TransactionDetailPage extends Component {
 	}
 
 	render() {
-		console.log(this.props)
-
 		const { transaction } = this.props;
 		const { loading, data, error } = transaction;
 		const { txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
+		const stepPriceLoop = web3Utils.toWei(stepPrice || "0", "ether")
+		// const stepPriceGloop = web3Utils.fromWei(stepPriceLoop, "Gwei")
 
 		if (!loading && error) {
 			return (
@@ -75,19 +76,19 @@ class TransactionDetailPage extends Component {
 										</tr>
 										<tr>
 											<td>STEP limit</td>
-											<td>{`${convertNumberToText(stepLimit, 'icx')} ICX`}</td>
+											<td>{convertNumberToText(stepLimit, 'icx')}</td>
 										</tr>
 										<tr>
 											<td>STEP used by Txn</td>
-											<td>{`${convertNumberToText(stepUsedByTxn, 'icx')} ICX`}</td>
+											<td>{convertNumberToText(stepUsedByTxn, 'icx')}</td>
 										</tr>
 										<tr>
 											<td>STEP price</td>
-											<td>{`${convertNumberToText(stepPrice, 'icx')} ICX`}</td>
+											<td>{`${convertNumberToText(stepPrice, 'icx')} ICX`}<em>{`(${convertNumberToText(stepPriceLoop, 'icx')} loop)`}</em></td>
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
-											<td>{`${convertNumberToText(fee, 'icx')} ICX`}<em>{`${convertNumberToText(feeUsd, 'usd')} USD`}</em></td>
+											<td>{`${convertNumberToText(fee, 'icx')} ICX`}<em>{`(${convertNumberToText(feeUsd, 'usd')} USD)`}</em></td>
 										</tr>
 										<tr>
 											<td>Data</td>

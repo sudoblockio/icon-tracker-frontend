@@ -26,26 +26,38 @@ class Routes extends Component {
           <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
             <HeaderContainer />
             <Switch>
-              <Route onEnter={window.scroll(0, 0)} path='/' component={MainPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/' component={MainPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}`} component={AddressesPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}`} component={AddressesPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}/:pageId`} component={AddressesPage} />
-              <Route onEnter={window.scroll(0, 0)} path='/address/:addressId' component={AddressDetailPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/address/:addressId' component={AddressDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}`} component={BlocksPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}`} component={BlocksPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}/:pageId`} component={BlocksPage} />
-              <Route onEnter={window.scroll(0, 0)} path='/block/:blockId' component={BlockDetailPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/block/:blockId' component={BlockDetailPage} exact />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}`} component={TransactionsPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TransactionsPage} />
-              <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact />
 
               <Route onEnter={window.scroll(0, 0)} path='/contracts' component={ContractsPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/contracts/:pageId' component={ContractsPage} />
-              <Route onEnter={window.scroll(0, 0)} path='/contract/:contractId' component={ContractDetailPage} exact/>
-              
-              <Route onEnter={window.scroll(0, 0)} path='/tokens' component={TokensPage} exact/>
-              <Route onEnter={window.scroll(0, 0)} path='/token/:tokenId' component={TokenDetailPage} exact/>
+              <Route onEnter={window.scroll(0, 0)} path='/contract/:contractId' component={ContractDetailPage} exact />
+
+              <Route onEnter={window.scroll(0, 0)} path='/tokens' component={TokensPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path='/token/:tokenId' component={TokenDetailPage} exact />
+
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}/:pageId`} component={TxPage} />
+
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={TxPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={TxPage} />
+
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/`} component={TxPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/:pageId`} component={TxPage} />
+
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/`} component={TxPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/:pageId`} component={TxPage} />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/`} component={TxPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_TX}/:contractId/:pageId`} component={TxPage} />
@@ -55,18 +67,6 @@ class Routes extends Component {
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_EVENTS}/:contractId/`} component={TxPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.CONTRACT_EVENTS}/:contractId/:pageId`} component={TxPage} />
-
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={TxPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={TxPage} />
-
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/`} component={TxPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TOKEN_TX}/:addressId/:pageId`} component={TxPage} />
-
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}/:pageId`} component={TxPage} />
-
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/`} component={TxPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCK_TX}/:heightId/:pageId`} component={TxPage} />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:tokenId`} component={TxPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TX}/:tokenId/:pageId`} component={TxPage} />

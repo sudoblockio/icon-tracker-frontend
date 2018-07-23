@@ -21,7 +21,6 @@ export function icxGetScore(params) {
   });
 }
 
-// TODO 에러 처리
 export function icxCall(params) {
   return new Promise((resolve, reject) => {
     const param = {
@@ -36,8 +35,9 @@ export function icxCall(params) {
         resolve(response);
       })
       .catch(error => {
-        console.log(error)
-        reject(error);
+        const { response } = error
+        const { status } = response
+        resolve({ status, error });
       })
   });
 }

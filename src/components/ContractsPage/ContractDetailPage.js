@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { startsWith } from '../../utils/utils'
+import {
+    startsWith,
+    findTabIndex
+} from '../../utils/utils'
+import {
+    CONTRACT_TABS
+} from '../../utils/const'
 import {
     NotFound,
     ContractInfo,
@@ -8,13 +14,23 @@ import {
 } from '../../components'
 
 class ContractDetailPage extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            initialTab: 0
+        }
+    }
+
     componentWillMount() {
-        this.allDetailInfo(this.props.url.pathname)
+        const { pathname, hash } = this.props.url
+        this.allDetailInfo(pathname)
+        this.setState({ initialTab: findTabIndex(CONTRACT_TABS, hash) })
     }
 
     componentWillReceiveProps(nextProps) {
-        const current = this.props.url.pathname
-        const next = nextProps.url.pathname
+        const { pathname: current } = this.props.url
+        const { pathname: next } = nextProps.url
         if (current !== next && startsWith(next, '/contract')) {
             this.allDetailInfo(next)
         }
@@ -29,26 +45,18 @@ class ContractDetailPage extends Component {
     }
 
     render() {
-        const {
-            contract,
-        } = this.props
-
-        const {
-            loading,
-            error
-        } = contract
+        const { contract } = this.props
+        const { loading, error } = contract
 
         const Content = () => {
             if (!loading && error) {
-                return (
-                    <NotFound error={error} />
-                )
+                return <NotFound error={error} />
             }
             else {
                 return (
                     <div className="content-wrap">
-                        <ContractInfo contract={contract}/>
-                        <ContractTabs {...this.props}/>
+                        <ContractInfo contract={contract} />
+                        <ContractTabs {...this.props} {...this.state} />
                     </div>
                 )
             }

@@ -276,3 +276,27 @@ export function searchLowerCase(searchValue, searchItems) {
   }
   return result
 }
+
+export function findTabIndex(Tabs, hash) {
+  for (let i = 0; i < Tabs.length; i++) {
+    const _tab = noSpaceLowerCase(Tabs[i])
+    const _hash = noHashLowerCase(hash)
+    if (_tab === _hash) {
+      return i
+    }
+    else {
+      continue
+    }
+  }
+  return 0
+}
+
+export function noSpaceLowerCase(str) {
+  if (!str) return ''
+  return str.replace(/\s/gi, "").toLowerCase()
+}
+
+export function noHashLowerCase(str) {
+  if (!str) return ''
+  return str.replace("#", "").toLowerCase()
+}

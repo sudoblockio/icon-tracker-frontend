@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import {
-    startsWith
+    startsWith,
+    findTabIndex
 } from '../../utils/utils'
+import {
+    TOKEN_TABS
+} from '../../utils/const'
 import {
     NotFound,
     TokenSummary,
@@ -9,13 +13,23 @@ import {
 } from '../../components'
 
 class TokenDetailPage extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+            initialTab: 0
+        }
+    }
+
     componentWillMount() {
-        this.allDetailInfo(this.props.url.pathname)
+        const { pathname, hash } = this.props.url
+        this.allDetailInfo(pathname)
+        this.setState({ initialTab: findTabIndex(TOKEN_TABS, hash) })
     }
 
     componentWillReceiveProps(nextProps) {
-        const current = this.props.url.pathname
-        const next = nextProps.url.pathname
+        const { pathname: current } = this.props.url
+        const { pathname: next } = nextProps.url
         if (current !== next && startsWith(next, '/token')) {
             this.allDetailInfo(next)
         }
@@ -42,8 +56,8 @@ class TokenDetailPage extends Component {
             else {
                 return (
                     <div className="content-wrap">
-                        <TokenSummary token={token} />
-                        <TokenTabs {...this.props} />
+                        <TokenSummary token={token}/>
+                        <TokenTabs {...this.props} {...this.state}/>
                     </div>
                 )
             }

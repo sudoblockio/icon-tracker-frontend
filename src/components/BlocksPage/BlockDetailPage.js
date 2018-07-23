@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { 
-  startsWith 
+  startsWith,
+  findTabIndex
 } from '../../utils/utils'
+import {
+  BLOCK_TABS
+} from '../../utils/const'
 import {
   NotFound,
   BlockInfo,
@@ -10,13 +14,22 @@ import {
 
 class BlockDetailPage extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      initialTab: 0
+    }
+  }
+
   componentWillMount() {
-    this.allDetailInfo(this.props.url.pathname)
+    const { pathname, hash } = this.props.url
+    this.allDetailInfo(pathname)
+    this.setState({initialTab: findTabIndex(BLOCK_TABS, hash)})
   }
 
   componentWillReceiveProps(nextProps) {
-    const current = this.props.url.pathname
-		const next = nextProps.url.pathname
+    const { pathname: current } = this.props.url
+    const { pathname: next } = nextProps.url
 		if (current !== next && startsWith(next, '/block')) {
 			this.allDetailInfo(next)
 		}
@@ -31,15 +44,8 @@ class BlockDetailPage extends Component {
   }
 
   render() {
-    const { 
-      block, 
-      blockTx 
-    } = this.props;
-    
-    const { 
-      loading, 
-      error 
-    } = block
+    const { block } = this.props;
+    const { loading, error } = block
     
     const Content = () => {
       if (error !== "" && !loading) {
@@ -50,14 +56,8 @@ class BlockDetailPage extends Component {
       else {
         return (
           <div className="content-wrap">
-            <BlockInfo 
-              block={block}
-            />
-            <BlockTabs 
-              block={block}
-              blockTx={blockTx}
-              blockTxList={this.props.blockTxList}
-            />
+            <BlockInfo block={block}/>
+            <BlockTabs {...this.props} {...this.state}/>
     			</div>
         )
       }

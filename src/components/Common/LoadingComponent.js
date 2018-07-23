@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
 
 class LoadingComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      display: 'none'
+    }
+    this.timeout = 0
+  }
+
+  componentDidMount() {
+    this.timeout = setTimeout(() => {
+      this.setState({ display: 'block' })
+    }, 500)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
+  }
+
   render() {
-    const Contents = (_height) => {
-      if (_height) {
+    const { display } = this.state
+    const { height } = this.props
+    const Content = () => {
+      if (height) {
         return (
-          <div style={{height: _height}}>
-            <LoadingDiv />
+          <div style={{ height }}>
+            <LoadingDiv display={display} />
           </div>
         )
       }
       else {
         return (
-          <LoadingDiv />
-        )        
+          <LoadingDiv display={display} />
+        )
       }
     }
 
-    const { height } = this.props
-    return Contents(height)
+    return Content()
   }
 }
 
-const LoadingDiv = () => (
-  <div className='loadingDiv'>
+const LoadingDiv = ({ display }) => (
+  <div className='loadingDiv' style={{ display }}>
     <div className="loading">
       <svg className="lds-spinner" width="49px" height="49px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style={{ background: 'none' }}>
         <g transform="rotate(0 50 50)">

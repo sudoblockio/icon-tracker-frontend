@@ -29,6 +29,7 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
+		console.log(this.props.url)
 		this.initPageType(this.props.url.pathname, 20)
 	}
 
@@ -141,8 +142,6 @@ class TxPage extends Component {
 			listSize,
 			totalSize
 		} = tx;
-
-		console.log(tx)
 		const noData = !data || data.length === 0
 		const TableContent = () => {
 			if (noData) {

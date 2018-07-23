@@ -76,7 +76,7 @@ class TokenBalance extends Component {
   }
 
   componentDidMount() {
-    const event = new CustomEvent('CUSTOM_FX_TOKEN_BALANCE')
+    const event = new CustomEvent('CUSTOM_FX', { detail: "TOKEN_BALANCE" })
     window.dispatchEvent(event)
   }
 

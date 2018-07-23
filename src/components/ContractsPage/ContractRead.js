@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import BigNumber from 'bignumber.js'
+import {
+    LoadingComponent
+} from '../../components'
 
 class ContractRead extends Component {
     constructor(props) {
@@ -34,7 +37,7 @@ class ContractRead extends Component {
         const { contract, contractReadInfo } = this.props
         const { data } = contract
         const { address } = data
-        const { funcList, funcOutputs } = contractReadInfo
+        const { loading, funcList, funcOutputs } = contractReadInfo
 
         return (
             <div className="contents">
@@ -42,32 +45,37 @@ class ContractRead extends Component {
                     <div className="title-group">
                         <span className="title">Read contract information</span>
                     </div>
-                    <div className="scroll">
-                        <ul className="list">
-                            {
-                                funcList.map((func, index) => {
-                                    const outputs = funcOutputs[index]
-                                    const inputs = func["inputs"]
-                                    const isQuery = inputs.length > 0
-                                    if (isQuery) {
-                                        return [
-                                            <li key="li0">{index + 1}. {func["name"]} > {
-                                                <Inputs inputs={inputs} params={params} handleChange={this.handleChange} />}
-                                                <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, params, index, func["name"]) }}>Query</button>
-                                            </li>,
-                                            <li key="li1" className="result">
-                                                <OutputTypes func={func} />
-                                                {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs} />}
-                                            </li>
-                                        ]
+                    {
+                        loading ?
+                            <LoadingComponent height="322px" />
+                            :
+                            <div className="scroll">
+                                <ul className="list">
+                                    {
+                                        funcList.map((func, index) => {
+                                            const outputs = funcOutputs[index]
+                                            const inputs = func["inputs"]
+                                            const isQuery = inputs.length > 0
+                                            if (isQuery) {
+                                                return [
+                                                    <li key="li0">{index + 1}. {func["name"]} > {
+                                                        <Inputs inputs={inputs} params={params} handleChange={this.handleChange} />}
+                                                        <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, params, index, func["name"]) }}>Query</button>
+                                                    </li>,
+                                                    <li key="li1" className="result">
+                                                        <OutputTypes func={func} />
+                                                        {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs} />}
+                                                    </li>
+                                                ]
+                                            }
+                                            else {
+                                                return <Outputs key={index} func={func} outputs={outputs} index={index} />
+                                            }
+                                        })
                                     }
-                                    else {
-                                        return <Outputs key={index} func={func} outputs={outputs} index={index} />
-                                    }
-                                })
-                            }
-                        </ul>
-                    </div>
+                                </ul>
+                            </div>
+                    }
                 </div>
             </div>
 

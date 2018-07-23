@@ -1,4 +1,5 @@
 import { fork, put, takeLatest, call, all, select } from 'redux-saga/effects'
+// import { delay } from 'redux-saga'
 import AT from '../actionTypes/actionTypes';
 
 import {
@@ -106,7 +107,6 @@ export function* contractEventLogListFunc(action) {
   }
 }
 
-// TODO 서버 이슈 해결 뒤 다시 확인, response_code 처리
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_SCORE_API, action.payload);
@@ -122,10 +122,8 @@ export function* icxGetSroreFunc(action) {
   }
 }
 
-// TODO 정리
 export function* icxCallFunc(action) {
   try {
-    console.log(action)
     const {
       address,
       params,
@@ -134,7 +132,7 @@ export function* icxCallFunc(action) {
     } = action.payload
     const funcOutputs = yield select(state => state.contracts.contractReadInfo.funcOutputs);
     const outputs = yield call(ICX_CALL_API, {
-      from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
+      from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
       to: address,
       dataType: "call",
       data: {
@@ -142,7 +140,7 @@ export function* icxCallFunc(action) {
         params
       }
     })
-    if (outputs.status === 200){
+    if (outputs.status === 200) {
       const { result } = outputs.data
       const valueArray = Array.isArray(result) ? result : [result]
       funcOutputs[index] = {
@@ -158,14 +156,13 @@ export function* icxCallFunc(action) {
       }
     }
     const payload = { funcOutputs }
-    yield put({ type: AT.icxCallFulfilled, payload})
+    yield put({ type: AT.icxCallFulfilled, payload })
   }
   catch (e) {
     yield put({ type: AT.icxCallRejected });
   }
 }
 
-// TODO 에러 처리
 export function* readContractInformationFunc(action) {
   try {
     const { address } = action.payload
@@ -177,7 +174,7 @@ export function* readContractInformationFunc(action) {
       func => {
         if (func["inputs"].length === 0) {
           return call(ICX_CALL_API, {
-            from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
+            from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
             to: address,
             dataType: "call",
             data: {
@@ -198,7 +195,7 @@ export function* readContractInformationFunc(action) {
           error: ''
         })
       }
-      else if (output.status === 200){
+      else if (output.status === 200) {
         const { result } = output.data
         const valueArray = Array.isArray(result) ? result : [result]
         funcOutputs.push({
@@ -207,9 +204,10 @@ export function* readContractInformationFunc(action) {
         })
       }
       else {
+        const { message } = output.error
         funcOutputs.push({
           valueArray: [],
-          error: 'error'
+          error: message
         })
       }
     })

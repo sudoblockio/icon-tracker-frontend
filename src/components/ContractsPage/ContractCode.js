@@ -4,31 +4,18 @@ import {
     makeDownloadLink,
     tokenText
 } from '../../utils/utils'
-import { 
-    CopyButton
+import {
+    CopyButton,
+    LoadingComponent
 } from '../../components/';
 
-// TODO 로딩
 class ContractCode extends Component {
     render() {
-        const { 
-            contract, 
-            contractAbi 
-        } = this.props
-        
-        const { 
-            data 
-        } = contract
-        
-        const { 
-            address, 
-            tokenName, 
-            symbol, 
-            compiler
-        } = data
-        
-        const abiData = JSON.stringify(contractAbi.data)
-        
+        const { contract, contractAbi } = this.props
+        const { data } = contract
+        const { address, tokenName, symbol, compiler } = data
+        const { loading, data: abiData } = contractAbi
+
         return (
             <div className="contents">
                 <table className="table-typeL">
@@ -47,17 +34,21 @@ class ContractCode extends Component {
                         </tr>
                     </tbody>
                 </table>
-
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
-                        <CopyButton data={abiData} title={'Copy ABI'}/>
+                        <CopyButton data={abiData} title={'Copy ABI'} />
                     </div>
-                    <div className="scroll">
-                        <p className="txt">
-                            {abiData}
-                        </p>
-                    </div>
+                    {
+                        loading ?
+                            <LoadingComponent height="230px" />
+                            :
+                            <div className="scroll">
+                                <p className="txt">
+                                    {JSON.stringify(abiData)}
+                                </p>
+                            </div>
+                    }
                 </div>
             </div>
         )

@@ -29,14 +29,10 @@ class TxBottom extends Component {
         
         const Content = () => {
             if (loading) {
-                return (
-                    <LoadingComponent height='349px' />
-                )
+                return <LoadingComponent height='349px'/>
             }
             else if (data.length === 0) {
-                return (
-                    <NoBox text={noBoxText} />
-                )
+                return <NoBox text={noBoxText}/>
             }
             else {
                 return (
