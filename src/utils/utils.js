@@ -146,16 +146,28 @@ export function makeDownloadLink(address) {
 }
 
 export function tokenText(name, symbol, address) {
+  const isName = isVaildData(name)
   const isSymbol = isVaildData(symbol)
-  if (!isSymbol) {
-    return "-"
+  let text = ""
+  if (isName) {
+    text += name
+    if (isSymbol) {
+      text += ` (${symbol})`
+    }
   }
-  const text = `${name || "-"} (${symbol})`
+  else {    
+    if (isSymbol) {
+      text += symbol
+    }
+    else {
+      text += "-"
+    }
+  }
   if (!address) {
     return text
   }
   else {
-    return <TokenLink label={text} to={address} />
+    return <span className="ellipsis"><TokenLink label={text} to={address}/></span>
   }
 }
 
@@ -214,13 +226,12 @@ export function getObjectState(step, state, action, dataType) {
     case REDUX_STEP.FULFILLED:
       const { payload } = action
       const { data } = payload
-      const _data = dataType === 'contractAbi' ? data['result'] : data
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
-          data: _data || {},
+          data: data || {},
           error: ''
         }
       }

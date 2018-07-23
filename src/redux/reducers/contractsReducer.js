@@ -16,7 +16,6 @@ const initialState = {
   contractAbi: INITIAL_STATE['OBJ'],
   contractReadInfo: {
     loading: false,
-    queryIndex: 0,
     funcList: [],
     funcOutputs: [],
     funcError: [],
@@ -50,15 +49,9 @@ export function contractsReducer(state = initialState, action) {
     case actionTypes.icxGetScoreFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'contractAbi')
     case actionTypes.icxGetScoreRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'contractAbi')
 
-    case actionTypes.icxCall: 
-      return {
-        ...state,
-        contractReadInfo: {
-          ...state.contractReadInfo,
-          queryIndex: action.payload.index
-        }
-      }
-    case actionTypes.icxCallFulfilled: 
+    case actionTypes.icxCall:
+      return state      
+    case actionTypes.icxCallFulfilled:
       return {
         ...state,
         contractReadInfo: {
@@ -66,7 +59,7 @@ export function contractsReducer(state = initialState, action) {
           funcOutputs: action.payload.funcOutputs
         }
       }
-    case actionTypes.icxCallRejected: 
+    case actionTypes.icxCallRejected:
       return state
 
     case actionTypes.readContractInformation:
@@ -92,7 +85,7 @@ export function contractsReducer(state = initialState, action) {
         ...state,
         contractReadInfo: {
           ...state.contractReadInfo,
-          loading: true,
+          loading: false,
           error: action.error
         }
       }

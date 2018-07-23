@@ -81,7 +81,7 @@ const TokenCell = ({ tokenName, symbol, address, ircVersion }) => {
         const isIrcVersion = isVaildData(ircVersion)
         return (
             <td>
-                <span className='link'>{tokenText(tokenName, symbol, address)}</span>
+                {tokenText(tokenName, symbol, address)}
                 <span className="help token">{isIrcVersion ? `${ircVersion} - ${address}` : address}</span>
             </td>
         )

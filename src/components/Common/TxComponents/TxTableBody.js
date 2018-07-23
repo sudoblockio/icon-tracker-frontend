@@ -6,12 +6,12 @@ import {
 	numberWithCommas,
 	dateToUTC,
 	isVaildData,
+	tokenText
 } from '../../../utils/utils'
 import {
 	TransactionLink,
 	WalletLink,
 	BlockLink,
-	TokenLink
 } from '../../../components'
 import {
 	TX_TYPE
@@ -77,8 +77,8 @@ const SignCell = ({ address, fromAddr, toAddr }) => {
 	return <td className={className}>{signItem}</td>
 }
 
-const TokenCell = ({ name, symbol, address }) => {
-	return <td><TokenLink label={name} to={address} />{/*tokenText(name, symbol, address)*/}</td>
+const TokenCell = ({ name, address }) => {
+	return <td>{tokenText(name, undefined, address)}</td>
 }
 
 const DateCell = ({ date, isAge }) => {
@@ -191,7 +191,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
 							<AmountCell type="icx" amount={quantity} decimal={4} symbol={contractSymbol}/>
-							<TokenCell name={name} symbol={symbol} address={tradeTokenAddr} />
+							<TokenCell name={name} address={tradeTokenAddr} />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:
@@ -228,7 +228,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} address={address} />
 							<AddressCell targetAddr={toAddr} address={address} />
 							<AmountCell type="icx" amount={amount} decimal={4} symbol={contractSymbol}/>
-							<TokenCell name={contractName} symbol={contractSymbol} address={contractAddr} />
+							<TokenCell name={contractName} address={contractAddr} />
 						</tr>
 					)
 				case TX_TYPE.TRANSACTIONS:
@@ -253,7 +253,7 @@ class TxTableBody extends Component {
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
 							<AddressCell targetAddr={toAddr} />
 							<AmountCell type="icx" amount={quantity} decimal={4} symbol={symbol}/>
-							<TokenCell name={tokenName} symbol={symbol} address={contractAddr} />
+							<TokenCell name={tokenName} address={contractAddr}/>
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:

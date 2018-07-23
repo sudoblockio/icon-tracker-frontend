@@ -40,11 +40,11 @@ class ContractCode extends Component {
                     </div>
                     {
                         loading ?
-                            <LoadingComponent height="230px" />
+                            <LoadingComponent height="230px"/>
                             :
                             <div className="scroll">
                                 <p className="txt">
-                                    {!error ? JSON.stringify(abiData) : error}
+                                    {!!error ? error : JSON.stringify(abiData)}
                                 </p>
                             </div>
                     }

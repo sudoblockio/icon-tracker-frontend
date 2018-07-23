@@ -111,7 +111,7 @@ export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_SCORE_API, action.payload);
     if (payload.status === 200) {
-      yield put({ type: AT.icxGetScoreFulfilled, payload: payload });
+      yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload.data.result } });
     }
     else {
       throw new Error(payload.error);
@@ -165,9 +165,13 @@ export function* icxCallFunc(action) {
 
 export function* readContractInformationFunc(action) {
   try {
-    const { address } = action.payload
     const score = yield call(ICX_GET_SCORE_API, action.payload);
+    if (score.status !== 200) {
+      throw new Error(score.error);
+    }
+
     const abiData = score.data.result
+    const { address } = action.payload
     const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
     const funcList = [...readOnlyFunc]
     const _funcOutputs = yield all(readOnlyFunc.map(
@@ -215,6 +219,6 @@ export function* readContractInformationFunc(action) {
     yield put({ type: AT.readContractInformationFulfilled, payload })
   }
   catch (e) {
-    yield put({ type: AT.readContractInformationRejected })
+    yield put({ type: AT.readContractInformationRejected, error: e.message })
   }
 }

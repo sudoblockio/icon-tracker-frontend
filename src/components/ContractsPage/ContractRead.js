@@ -37,7 +37,7 @@ class ContractRead extends Component {
         const { contract, contractReadInfo } = this.props
         const { data } = contract
         const { address } = data
-        const { loading, funcList, funcOutputs } = contractReadInfo
+        const { loading, funcList, funcOutputs, error } = contractReadInfo
 
         return (
             <div className="contents">
@@ -47,11 +47,14 @@ class ContractRead extends Component {
                     </div>
                     {
                         loading ?
-                            <LoadingComponent height="322px" />
+                            <LoadingComponent height="322px"/>
                             :
                             <div className="scroll">
                                 <ul className="list">
                                     {
+                                        !!error ?
+                                        <li>{error}</li>
+                                        :
                                         funcList.map((func, index) => {
                                             const outputs = funcOutputs[index]
                                             const inputs = func["inputs"]
