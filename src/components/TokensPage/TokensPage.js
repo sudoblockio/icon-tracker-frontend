@@ -100,7 +100,7 @@ class TokensPage extends Component {
 							<p className="title">Tokens</p>
 							
 								<SearchInput 
-									placeholder="Search for any ICX Token name / address"
+									placeholder="Search for any ICX token name / address"
 									setSearch={this.setSearch}
 								/>
 							<div className="contents tokens">

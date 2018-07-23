@@ -141,6 +141,8 @@ class TxPage extends Component {
 			listSize,
 			totalSize
 		} = tx;
+
+		console.log(tx)
 		const noData = !data || data.length === 0
 		const TableContent = () => {
 			if (noData) {
