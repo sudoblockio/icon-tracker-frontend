@@ -265,6 +265,8 @@ export function isVaildData(data) {
 }
 
 export function searchLowerCase(searchValue, searchItems) {
+  if (!searchValue) return true
+  
   const lowerSearch = searchValue.toLowerCase()
   let result = false
   for (let i = 0; i < searchItems.length; i++) {

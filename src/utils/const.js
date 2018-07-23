@@ -58,13 +58,7 @@ export const TX_TYPE = {
 }
 
 export const TX_TYPE_DATA = {
-	[TX_TYPE.CONTRACTS]: {
-		tx: 'contracts',
-		getTxList: 'contractList',
-        className: 'table-typeE',
-        noBoxText: 'No Block',
-    },
-	[TX_TYPE.BLOCKS]: {
+    [TX_TYPE.BLOCKS]: {
 		tx: 'blocks',
 		getTxList: 'blockList',
         className: 'table-typeE',
