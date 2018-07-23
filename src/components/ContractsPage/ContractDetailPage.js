@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
     startsWith,
-    findTabIndex
+    findTabIndex,
+    noSpaceLowerCase
 } from '../../utils/utils'
 import {
     CONTRACT_TABS
@@ -25,7 +26,8 @@ class ContractDetailPage extends Component {
 
     componentWillMount() {
         const { pathname, hash } = this.props.url
-        this.setState({ on: findTabIndex(CONTRACT_TABS, hash) },
+        const index = findTabIndex(CONTRACT_TABS, hash)
+        this.setState({ on: index },
           () => {
             this.allDetailInfo(pathname)
           }
@@ -50,8 +52,9 @@ class ContractDetailPage extends Component {
     }
 
     setTab = (index) => {
-        const { addr } = this
+        window.location.hash = noSpaceLowerCase(CONTRACT_TABS[index])
         this.setState({ on: index }, () => {
+            const { addr } = this
             switch (index) {
                 case 0:
                     this.props.contractTxList({ addr, page: 1, count: 10 })

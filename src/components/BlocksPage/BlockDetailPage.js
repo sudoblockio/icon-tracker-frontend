@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   startsWith,
-  findTabIndex
+  findTabIndex,
+  noSpaceLowerCase
 } from '../../utils/utils'
 import {
   BLOCK_TABS
@@ -24,7 +25,8 @@ class BlockDetailPage extends Component {
 
   componentWillMount() {
     const { pathname, hash } = this.props.url
-    this.setState({ on: findTabIndex(BLOCK_TABS, hash) },
+    const index = findTabIndex(BLOCK_TABS, hash)
+    this.setState({ on: index },
       () => {
         this.allDetailInfo(pathname)
       }
@@ -49,9 +51,10 @@ class BlockDetailPage extends Component {
   }
 
   setTab = (index) => {
-    const { height } = this
+    window.location.hash = noSpaceLowerCase(BLOCK_TABS[index])
     this.setState({ on: index },
       () => {
+        const { height } = this
         switch (index) {
           case 0:
             this.props.blockTxList({ height, page: 1, count: 10 })

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   startsWith,
-  findTabIndex
+  findTabIndex,
+  noSpaceLowerCase
 } from '../../utils/utils'
 import {
   WALLET_TABS
@@ -16,42 +17,46 @@ class AddressesDetailPage extends Component {
 
   constructor(props) {
     super(props)
-    this.address = ''
     this.state = {
       on: 0
     }
   }
 
   componentWillMount() {
-    const { pathname, hash } = this.props.url
-    this.setState({ on: findTabIndex(WALLET_TABS, hash) },
-      () => {
-        this.allDetailInfo(pathname)
-      }
-    )
+    this.allDetailInfo(this.props.url)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { pathname: current } = this.props.url
-    const { pathname: next } = nextProps.url
-    if (current !== next && startsWith(next, '/address')) {
-      this.allDetailInfo(next)
+    const { pathname: currentPath } = this.props.url
+    const { pathname: nextPath } = nextProps.url
+    if (currentPath !== nextPath && startsWith(nextPath, '/address')) {
+      this.allDetailInfo(nextProps.url)
+      return
+    }
+
+    const { hash: currentHash } = this.props.url
+    const { hash: nextHash } = nextProps.url
+    if (currentHash !== nextHash) {
+      this.setTab(findTabIndex(WALLET_TABS, nextHash))
     }
   }
 
-  allDetailInfo = (pathname) => {
-    this.address = pathname.split("/")[2]
-    const { address } = this
+  allDetailInfo = (url) => {
+    const address = url.pathname.split("/")[2]
     if (address) {
       this.props.addressInfo({ address })
-      this.setTab(this.state.on)
+      this.setTab(findTabIndex(WALLET_TABS, url.hash), address)
     }
   }
 
-  setTab = (index) => {
-    const { address } = this
+  setTab = (_index, _address) => {
+    if (_index !== -1) {
+      window.location.hash = noSpaceLowerCase(WALLET_TABS[_index])
+    }
+    const index = _index !== -1 ? _index : 0
     this.setState({ on: index },
       () => {
+        const address = _address ? _address : this.props.url.pathname.split("/")[2]
         switch (index) {
           case 0:
             this.props.addressTxList({ address, page: 1, count: 10 })

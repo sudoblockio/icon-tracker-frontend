@@ -289,7 +289,7 @@ export function findTabIndex(Tabs, hash) {
       continue
     }
   }
-  return 0
+  return -1
 }
 
 export function noSpaceLowerCase(str) {

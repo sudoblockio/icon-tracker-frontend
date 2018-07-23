@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     startsWith,
-    findTabIndex
+    findTabIndex,
+    noSpaceLowerCase
 } from '../../utils/utils'
 import {
     TOKEN_TABS
@@ -24,7 +25,8 @@ class TokenDetailPage extends Component {
 
     componentWillMount() {
         const { pathname, hash } = this.props.url
-        this.setState({ on: findTabIndex(TOKEN_TABS, hash) },
+        const index = findTabIndex(TOKEN_TABS, hash)
+        this.setState({ on: index },
             () => {
                 this.allDetailInfo(pathname)
             }
@@ -49,8 +51,9 @@ class TokenDetailPage extends Component {
     }
 
     setTab = (index) => {
-        const { contractAddr } = this
+        window.location.hash = noSpaceLowerCase(TOKEN_TABS[index])
         this.setState({ on: index }, () => {
+            const { contractAddr } = this
             switch (index) {
                 case 0:
                     this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })
