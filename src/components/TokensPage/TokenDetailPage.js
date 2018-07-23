@@ -16,6 +16,7 @@ class TokenDetailPage extends Component {
 
     constructor(props) {
         super(props)
+        this.contractAddr = ''
         this.state = {
             on: 0
         }
@@ -39,7 +40,8 @@ class TokenDetailPage extends Component {
     }
 
     allDetailInfo = (pathname) => {
-        const contractAddr = pathname.split("/")[2]
+        this.contractAddr = pathname.split("/")[2]
+        const { contractAddr } = this
         if (contractAddr) {
             this.props.tokenSummary({ contractAddr })
             this.setTab(this.state.on)
@@ -47,9 +49,7 @@ class TokenDetailPage extends Component {
     }
 
     setTab = (index) => {
-        const { pathname } = this.props.url
-        const contractAddr = pathname.split("/")[2]
-        const address = contractAddr
+        const { contractAddr } = this
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
@@ -59,7 +59,7 @@ class TokenDetailPage extends Component {
                     this.props.tokenHoldersList({ contractAddr, page: 1, count: 10 })
                     break
                 case 2:
-                    this.props.readContractInformation({ address })
+                    this.props.readContractInformation({ address: contractAddr })
                     break
                 default:
             }

@@ -16,6 +16,7 @@ class AddressesDetailPage extends Component {
 
   constructor(props) {
     super(props)
+    this.address = ''
     this.state = {
       on: 0
     }
@@ -39,7 +40,8 @@ class AddressesDetailPage extends Component {
   }
 
   allDetailInfo = (pathname) => {
-    const address = pathname.split("/")[2]
+    this.address = pathname.split("/")[2]
+    const { address } = this
     if (address) {
       this.props.addressInfo({ address })
       this.setTab(this.state.on)
@@ -47,8 +49,7 @@ class AddressesDetailPage extends Component {
   }
 
   setTab = (index) => {
-    const { pathname } = this.props.url
-    const address = pathname.split("/")[2]
+    const { address } = this
     this.setState({ on: index },
       () => {
         switch (index) {
@@ -76,7 +77,7 @@ class AddressesDetailPage extends Component {
         return (
           <div className="content-wrap">
             <WalletInfo wallet={wallet} setPopup={this.props.setPopup} />
-            <WalletTabs {...this.props} {...this.state} setTab={this.setTab}/>
+            <WalletTabs {...this.props} {...this.state} setTab={this.setTab} />
           </div>
         )
       }

@@ -16,6 +16,7 @@ class BlockDetailPage extends Component {
 
   constructor(props) {
     super(props)
+    this.height = ''
     this.state = {
       on: 0
     }
@@ -39,14 +40,16 @@ class BlockDetailPage extends Component {
   }
 
   allDetailInfo = (pathname) => {
-    const height = pathname.split("/")[2]
+    this.height = pathname.split("/")[2]
+    const { height } = this
     if (height) {
       this.props.blockInfo({ height })
       this.setTab(height, this.state.on)
     }
   }
 
-  setTab = (height, index) => {
+  setTab = (index) => {
+    const { height } = this
     this.setState({ on: index },
       () => {
         switch (index) {
@@ -73,7 +76,7 @@ class BlockDetailPage extends Component {
         return (
           <div className="content-wrap">
             <BlockInfo block={block} />
-            <BlockTabs {...this.props} {...this.state} setTab={this.setTab}/>
+            <BlockTabs {...this.props} {...this.state} setTab={this.setTab} />
           </div>
         )
       }

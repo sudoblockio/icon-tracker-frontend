@@ -17,6 +17,7 @@ class ContractDetailPage extends Component {
 
     constructor(props) {
         super(props)
+        this.addr = ''
         this.state = {
             on: 0
         }
@@ -40,7 +41,8 @@ class ContractDetailPage extends Component {
     }
 
     allDetailInfo = (pathname) => {
-        const addr = pathname.split("/")[2]
+        this.addr = pathname.split("/")[2]
+        const { addr } = this
         if (addr) {
             this.props.contractInfo({ addr })
             this.setTab(this.state.on)
@@ -48,9 +50,7 @@ class ContractDetailPage extends Component {
     }
 
     setTab = (index) => {
-        const { pathname } = this.props.url
-        const address = pathname.split("/")[2]    
-        const addr = address
+        const { addr } = this
         this.setState({ on: index }, () => {
             switch (index) {
                 case 0:
@@ -60,13 +60,13 @@ class ContractDetailPage extends Component {
                     this.props.contractTokenTxList({ addr, page: 1, count: 10 })
                     break
                 case 2:
-                    this.props.icxGetScore({ address })
+                    this.props.icxGetScore({ address: addr })
                     break
                 case 3:
-                    this.props.readContractInformation({ address })
+                    this.props.readContractInformation({ address: addr })
                     break
                 case 4:
-                    this.props.contractEventLogList({ address, page: 1, count: 10  })
+                    this.props.contractEventLogList({ address: addr, page: 1, count: 10  })
                     break
                 default:
             }
