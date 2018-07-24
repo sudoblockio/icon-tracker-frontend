@@ -26,9 +26,13 @@ class TransactionInfo extends Component {
                 return <LoadingComponent height='206px'/>
             }
             else {
-                const { txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
+                const { txTokenInfoList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
                 const stepPriceLoop = web3Utils.toWei(stepPrice || "0", "ether")
-                // const stepPriceGloop = web3Utils.fromWei(stepPriceLoop, "Gwei")
+				// const stepPriceGloop = web3Utils.fromWei(stepPriceLoop, "Gwei")
+				
+				const _txTokenInfoList = txTokenInfoList || []
+				const isTx = txType === "0"
+				const isTokenTx = txType === "1"
 
                 return (
                     <div className="screen0">
@@ -61,10 +65,28 @@ class TransactionInfo extends Component {
 											<td>To</td>
 											<AddressCell address={toAddr} />
 										</tr>
-										<tr>
-											<td>Amount</td>
-											<td>{`${convertNumberToText(amount, 'icx')} ICX`}</td>
-										</tr>
+										{
+											isTx &&
+											<tr>
+												<td>Amount</td>
+												<td>{`${convertNumberToText(amount, 'icx')} ICX`}</td>
+											</tr>
+										}
+										{
+											isTokenTx &&
+											<tr>
+												<td>Token transfer</td>
+												<td>
+													{
+														_txTokenInfoList.map((tokenTx, index) => {
+															const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+															return <p key={index}>{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;<WalletLink to={fromAddr}/>&emsp;to&emsp;<WalletLink to={toAddr}/></p>
+														})
+													}
+												</td>
+											</tr>
+										}
+
 										<tr>
 											<td>STEP limit</td>
 											<td>{convertNumberToText(stepLimit, 'icx')}</td>
