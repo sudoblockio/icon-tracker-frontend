@@ -44,6 +44,10 @@ const actionTypes = {
   transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
   transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',
 
+  transactionEventLogList: 'TRANSACTION_EVENT_LOG_LIST',
+  transactionEventLogListFulfilled: 'TRANSACTION_EVENT_LOG_LIST_FULFILLED',
+  transactionEventLogListRejected: 'TRANSACTION_EVENT_LOG_LIST_REJECTED',
+
   contractList: 'SELECT_CONTRACT_LIST',
   contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
   contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',

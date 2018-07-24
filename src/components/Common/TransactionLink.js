@@ -1,15 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// const TransactionLink = ({ to, from = window.location.pathname }) => {
-//   return (
-//     <Link className="on" to={'/transaction/' + to}>{ to }</Link>
-//   )
-// }
-
-const TransactionLink = ({ to, label = '' }) => {
+const TransactionLink = ({ to, label = '', spanClass }) => {
   return (
-    <Link className="on" to={'/transaction/' + to}>{ label || to }</Link>
+    <Link to={'/transaction/' + to}><span className={spanClass ? spanClass : 'ellipsis'}>{ label || to }</span></Link>
   )
 }
 

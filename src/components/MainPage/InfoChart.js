@@ -133,7 +133,7 @@ class InfoChart extends Component {
   render() {
     const { loading } = this.props.chart
     const ChartHeight = 236
-    const ChartWidth = 720
+    const ChartWidth = 724
     return (
       <li className="right">
         <p className="subTitle">Daily Transactions</p>

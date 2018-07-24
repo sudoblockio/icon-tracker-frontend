@@ -24,11 +24,11 @@ const TxHashCell = ({ isError, txHash }) => {
 		className = 'no'
 	}
 	else if (isError) {
-		_txHash = <span className="ellipsis"><TransactionLink to={txHash} /></span>
-		className = 'icon error'
+		_txHash = <TransactionLink to={txHash}/>
+		className = 'icon error on'
 	}
 	else {
-		_txHash = <span className="ellipsis"><TransactionLink to={txHash} /></span>
+		_txHash = <TransactionLink to={txHash}/>
 		className = 'on'
 	}
 	return (
@@ -171,14 +171,14 @@ class TxTableBody extends Component {
 							<td>{nodeType}</td>
 						</tr>
 					)
-				case TX_TYPE.CONTRACT_TX:
+				case TX_TYPE.CONTRACT_TX:						
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={txHash} />
+							<TxHashCell isError={isError} txHash={txHash}/>
 							<DateCell isAge date={age} />
-							<AddressCell targetAddr={fromAddr} />
-							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
-							<AddressCell targetAddr={toAddr} />
+							<AddressCell targetAddr={fromAddr} address={address}/>
+							<SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
+							<AddressCell targetAddr={toAddr} address={address}/>
 							<AmountCell type="icx" amount={quantity} decimal={4} symbol="ICX"/>
 						</tr>
 					)
@@ -187,9 +187,9 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={txHash} />
 							<DateCell isAge date={age} />
-							<AddressCell targetAddr={fromAddr} />
-							<SignCell fromAddr={fromAddr} toAddr={toAddr} />
-							<AddressCell targetAddr={toAddr} />
+							<AddressCell targetAddr={fromAddr} address={address}/>
+							<SignCell fromAddr={fromAddr} toAddr={toAddr} address={address}/>
+							<AddressCell targetAddr={toAddr} address={address}/>
 							<AmountCell type="icx" amount={quantity} decimal={4} symbol={contractSymbol}/>
 							<TokenCell name={name} address={tradeTokenAddr} />
 						</tr>
@@ -198,8 +198,8 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on">
-								<span className=" ellipsis"><TransactionLink to={txHash} /></span><br />
-								<span><BlockLink label={`# ${height}`} to={height} /></span>
+								<TransactionLink to={txHash}/><br/>
+								<span><BlockLink label={`# ${height}`} to={height}/></span>
 								<p>{calcFromNow(age)}</p>
 							</td>
 							<td>{method}</td>
@@ -282,9 +282,15 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td>{rank}</td>
-							<AddressCell targetAddr={addressInData} noEllipsis={true} />
+							<AddressCell targetAddr={addressInData} noEllipsis/>
 							<AmountCell type="icx" amount={quantity} decimal={4} symbol={symbol}/>
 							<td><span>{percentage}</span><em>%</em></td>
+						</tr>
+					)
+				case TX_TYPE.TRANSACTION_EVENTS:
+					return (
+						<tr>
+							<td>{eventLog}</td>
 						</tr>
 					)
 				default:

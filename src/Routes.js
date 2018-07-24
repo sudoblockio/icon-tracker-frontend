@@ -74,6 +74,9 @@ class Routes extends Component {
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_HOLDERS}/:tokenId`} component={TxPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_HOLDERS}/:tokenId/:pageId`} component={TxPage} />
 
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTION_EVENTS}/:txHash`} component={TxPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTION_EVENTS}/:txHash/:pageId`} component={TxPage} />
+
               <Route onEnter={window.scroll(0, 0)} path='/notfound' component={NotFoundPage} />
               <Route onEnter={window.scroll(0, 0)} component={NotFoundPage} />
             </Switch>

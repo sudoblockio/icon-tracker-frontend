@@ -70,7 +70,7 @@ class TokensPage extends Component {
 									return (
 										<tr key={index}>
 											<td>{index + 1}</td>
-											<td>{tokenText(name, symbol, contractAddr)}</td>											
+											<td>{tokenText(name, symbol, contractAddr, true)}</td>											
 											<td>
 												<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
 												<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>

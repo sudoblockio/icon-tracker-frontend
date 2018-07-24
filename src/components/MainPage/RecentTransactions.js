@@ -27,7 +27,7 @@ class RecentTransactions extends Component {
               const text = isSuccess ? 'SUCCESS' : 'FAIL'
               return (
                 <li key={index}>
-                  <p className="icon"><img src={src} alt="transaction-img"/><span>{text}</span></p>
+                  <p className={`icon ${!isSuccess ? 'fail' : ''}`}><img src={src} alt="transaction-img"/><span>{text}</span></p>
                   <p className="a">TX Hash<em><TransactionLink to={txHash} label={txHash}/></em></p>
                   <p className="b">Amount<em>{`${convertNumberToText(amount, 'icx')} ICX`}</em></p>
                   <p className="c">Fee<em>{`${convertNumberToText(fee, 'icx')} ICX`}</em></p>

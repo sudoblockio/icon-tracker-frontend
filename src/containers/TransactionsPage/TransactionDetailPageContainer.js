@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { TransactionDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
 import { 
-  transactionTxDetail 
+  transactionTxDetail,
+  transactionEventLogList
 } from '../../redux/actions/transactionsActions';
 
 function mapStateToProps(state) {
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     transactionTxDetail: (payload) => dispatch(transactionTxDetail(payload)),
+    transactionEventLogList: (payload) => dispatch(transactionEventLogList(payload)),
   };
 }
 

@@ -21,7 +21,8 @@ import {
 
 import {
     transactionRecentTx,
-    transactionTxDetail
+    transactionTxDetail,
+    transactionEventLogList
 } from './transaction'
 
 import {
@@ -55,6 +56,7 @@ export {
 
     transactionRecentTx,
     transactionTxDetail,
+    transactionEventLogList,
 
     tokenList,
     tokenTxList,

@@ -17,44 +17,46 @@ class BlockDetailPage extends Component {
 
   constructor(props) {
     super(props)
-    this.height = ''
     this.state = {
       on: 0
     }
   }
 
   componentWillMount() {
-    const { pathname, hash } = this.props.url
-    const index = findTabIndex(BLOCK_TABS, hash)
-    this.setState({ on: index },
-      () => {
-        this.allDetailInfo(pathname)
-      }
-    )
+    this.allDetailInfo(this.props.url)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { pathname: current } = this.props.url
-    const { pathname: next } = nextProps.url
-    if (current !== next && startsWith(next, '/block')) {
-      this.allDetailInfo(next)
+    const { pathname: currentPath } = this.props.url
+    const { pathname: nextPath } = nextProps.url
+    if (currentPath !== nextPath && startsWith(nextPath, '/block')) {
+      this.allDetailInfo(nextProps.url)
+      return
+    }
+
+    const { hash: currentHash } = this.props.url
+    const { hash: nextHash } = nextProps.url
+    if (currentHash !== nextHash) {
+      this.setTab(findTabIndex(BLOCK_TABS, nextHash))
     }
   }
 
-  allDetailInfo = (pathname) => {
-    this.height = pathname.split("/")[2]
-    const { height } = this
+  allDetailInfo = (url) => {
+    const height = url.pathname.split("/")[2]
     if (height) {
       this.props.blockInfo({ height })
-      this.setTab(height, this.state.on)
+      this.setTab(findTabIndex(BLOCK_TABS, url.hash), height)
     }
   }
 
-  setTab = (index) => {
-    window.location.hash = noSpaceLowerCase(BLOCK_TABS[index])
+  setTab = (_index, _height) => {
+    if (_index !== -1) {
+      window.location.hash = noSpaceLowerCase(BLOCK_TABS[_index])
+    }
+    const index = _index !== -1 ? _index : 0
     this.setState({ on: index },
       () => {
-        const { height } = this
+        const height = _height ? _height : this.props.url.pathname.split("/")[2]
         switch (index) {
           case 0:
             this.props.blockTxList({ height, page: 1, count: 10 })

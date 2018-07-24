@@ -45,9 +45,7 @@ class TxBottom extends Component {
                         />
                         <table className={tableClassName}>
                             <thead>
-                                <TxTableHead 
-                                    txType={txType}
-                                />
+                                <TxTableHead txType={txType}/>
                             </thead>
                             <tbody>
                                 {

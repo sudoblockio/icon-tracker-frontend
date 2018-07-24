@@ -17,43 +17,46 @@ class TokenDetailPage extends Component {
 
     constructor(props) {
         super(props)
-        this.contractAddr = ''
         this.state = {
             on: 0
         }
     }
 
     componentWillMount() {
-        const { pathname, hash } = this.props.url
-        const index = findTabIndex(TOKEN_TABS, hash)
-        this.setState({ on: index },
-            () => {
-                this.allDetailInfo(pathname)
-            }
-        )
+        this.allDetailInfo(this.props.url)
     }
 
     componentWillReceiveProps(nextProps) {
-        const { pathname: current } = this.props.url
-        const { pathname: next } = nextProps.url
-        if (current !== next && startsWith(next, '/token')) {
-            this.allDetailInfo(next)
+        const { pathname: currentPath } = this.props.url
+        const { pathname: nextPath } = nextProps.url
+        if (currentPath !== nextPath && startsWith(nextPath, '/token')) {
+            this.allDetailInfo(nextProps.url)
+            return
+        }
+
+        const { hash: currentHash } = this.props.url
+        const { hash: nextHash } = nextProps.url
+        if (currentHash !== nextHash) {
+            this.setTab(findTabIndex(TOKEN_TABS, nextHash))
         }
     }
 
-    allDetailInfo = (pathname) => {
-        this.contractAddr = pathname.split("/")[2]
-        const { contractAddr } = this
+    allDetailInfo = (url) => {
+        const contractAddr = url.pathname.split("/")[2]
         if (contractAddr) {
             this.props.tokenSummary({ contractAddr })
-            this.setTab(this.state.on)
+            this.setTab(findTabIndex(TOKEN_TABS, url.hash), contractAddr)
         }
     }
 
-    setTab = (index) => {
-        window.location.hash = noSpaceLowerCase(TOKEN_TABS[index])
+
+    setTab = (_index, _contractAddr) => {
+        if (_index !== -1) {
+            window.location.hash = noSpaceLowerCase(TOKEN_TABS[_index])
+        }
+        const index = _index !== -1 ? _index : 0
         this.setState({ on: index }, () => {
-            const { contractAddr } = this
+            const contractAddr = _contractAddr ? _contractAddr : this.props.url.pathname.split("/")[2]
             switch (index) {
                 case 0:
                     this.props.tokenTransfersList({ contractAddr, page: 1, count: 10 })

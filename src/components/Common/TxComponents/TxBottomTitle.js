@@ -99,6 +99,15 @@ class TxPageTitle extends Component {
                             <span>Top<em className="mint" onClick={goAllTx}>{_listSize} Holders</em><em className="gray">(from a total of {_totalSize} holders)</em></span>
                         </p>
                     )
+                case TX_TYPE.TRANSACTION_EVENTS:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> events from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} events</em>
+                            </span>
+                        </p>
+                    )
                 default:
                     return (
                         <p></p>

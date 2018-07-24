@@ -35,6 +35,7 @@ export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read C
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
+export const TRANSACTIONS_TABS = ['Events']
 
 export const POPUP_TYPE = {
     AddressQrCode: 'AddressQrCode',
@@ -55,6 +56,7 @@ export const TX_TYPE = {
     BLOCK_TX: 'blocktx',
     TOKEN_TX: 'tokentx',
     TOKEN_HOLDERS: 'tokenholders',
+    TRANSACTION_EVENTS: 'transactionevents',
 }
 
 export const TX_TYPE_DATA = {
@@ -130,4 +132,10 @@ export const TX_TYPE_DATA = {
 		className: 'table-typeM',
         noBoxText: 'No Holders',
     },
+    [TX_TYPE.TRANSACTION_EVENTS]: {
+		tx: 'transactionEvents',
+		getTxList: 'transactionEventLogList',
+		className: 'table-typeH',
+        noBoxText: 'No Event',
+    }
 }

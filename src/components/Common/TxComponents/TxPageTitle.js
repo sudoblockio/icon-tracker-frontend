@@ -54,7 +54,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Events
                             <span>for Contract {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> contract events found</span>
+                            <span className="right">A total of<em>{_listSize}</em> events found</span>
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TX:
@@ -110,6 +110,14 @@ class TxPageTitle extends Component {
                             Token Holders
                             <span>for Token {urlIndex}</span>
                             <span className="right">A total of<em>{_totalSize}</em> holders found<em className="gray">(Showing the top {_listSize} holders only)</em></span>
+                        </p>
+                    )
+                case TX_TYPE.TRANSACTION_EVENTS:
+                    return (
+                        <p className="title">
+                            Events
+                            <span>for Transactions {urlIndex}</span>
+                            <span className="right">A total of<em>{_totalSize}</em> events found</span>
                         </p>
                     )
                 default:

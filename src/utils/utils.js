@@ -145,7 +145,7 @@ export function makeDownloadLink(address) {
   return `${localDevUrl}/score/${address}_1.zip`
 }
 
-export function tokenText(name, symbol, address) {
+export function tokenText(name, symbol, address, noSpan) {
   const isName = isVaildData(name)
   const isSymbol = isVaildData(symbol)
   let text = ""
@@ -167,7 +167,12 @@ export function tokenText(name, symbol, address) {
     return text
   }
   else {
-    return <span className="ellipsis"><TokenLink label={text} to={address}/></span>
+    if (noSpan) {
+      return <TokenLink label={text} to={address}/>
+    }
+    else {
+      return <span className="ellipsis"><TokenLink label={text} to={address}/></span>
+    }
   }
 }
 

@@ -11,7 +11,7 @@ class TxTableHead extends Component {
                 case TX_TYPE.BLOCKS:
                     return (
                         <tr>
-                            <th>Block Height</th>
+                            <th>Block</th>
                             <th>Time Stamp<em>{utcLabel}</em></th>
                             <th>No of Txns</th>
                             <th>Block Hash</th>
@@ -142,6 +142,12 @@ class TxTableHead extends Component {
                             <th>Percentage<em>%</em></th>
                         </tr>
                     )
+                case TX_TYPE.TRANSACTION_EVENTS:
+                    return (
+                        <tr>
+                            <th>Event Logs</th>
+                        </tr>
+                    )                    
                 default:
                     return (
                         <tr></tr>

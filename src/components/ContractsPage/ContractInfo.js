@@ -19,14 +19,20 @@ import {
 
 class ContractInfo extends Component {
 
+    componentDidMount() {
+        const event = new CustomEvent('CUSTOM_FX', { detail: "CONTRACT" })
+        // TODO timeout 제거
+        setTimeout(() => {
+            window.dispatchEvent(event)
+        }, 100)
+    }
+
     render() {
         const { contract } = this.props
         const { loading, data } = contract
         const Contents = () => {
             if (loading) {
-                return (
-                    <LoadingComponent height='206px' />
-                )
+                return <LoadingComponent height='206px'/>
             }
             else {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
@@ -39,9 +45,9 @@ class ContractInfo extends Component {
                                     <tbody>
                                         <tr className="qr">
                                             <td>Address</td>
-                                            <td colSpan="3">{address} <QrCodeButton address={address}/><CopyButton data={address} title={'Copy Address'} isSpan /></td>
+                                            <td colSpan="3">{address} <QrCodeButton address={address} /><CopyButton data={address} title={'Copy Address'} isSpan /></td>
                                         </tr>
-                                        <tr className="">
+                                        <tr>
                                             <td>Balance</td>
                                             <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                             <td>Token Contract</td>
@@ -52,7 +58,7 @@ class ContractInfo extends Component {
                                             <td>{convertNumberToText(usdBalance, 'usd')} USD</td>
                                             <td>Contract Creator</td>
                                             <td>
-                                                <span className="link address ellipsis"><WalletLink to={creator} /></span><em>at Txn</em><span className="link hash ellipsis"><TransactionLink to={createTx} /></span>
+                                                <span className="link address ellipsis"><WalletLink to={creator} /></span><em>at Txn</em><TransactionLink to={createTx} spanClass="link hash ellipsis" />
                                                 <span className="help address">Creator Address</span>
                                                 <span className="help hash">Creator Transaction Hash</span>
                                             </td>

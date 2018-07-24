@@ -13,3 +13,10 @@ export function transactionTxDetail(payload){
     payload
   };
 }
+
+export function transactionEventLogList(payload){
+  return {
+    type: actionTypes.transactionEventLogList,
+    payload
+  };
+}

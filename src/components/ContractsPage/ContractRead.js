@@ -97,7 +97,7 @@ function isEmptyOutput(outputs) {
 }
 
 function getOutValue(type, value) {
-    return type === 'int' ? new BigNumber(value).toString() : value
+    return type === 'int' ? new BigNumber(value).toString(10) : value
 }
 
 const Inputs = ({ inputs, params, handleChange }) => {

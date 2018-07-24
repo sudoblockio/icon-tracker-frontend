@@ -28,7 +28,9 @@ class ContractTabs extends Component {
                 this.props.history.push(`/${TX_TYPE.CONTRACT_TOKEN_TX}/${address}`);
                 break
             case 2:
+                break
             case 3:
+                break
             case 4:
                 this.props.history.push(`/${TX_TYPE.CONTRACT_EVENTS}/${address}`);
                 break
@@ -38,7 +40,8 @@ class ContractTabs extends Component {
 
     render() {
         const { on, contract, contractTx, contractTokenTx, contractEvents, contractAbi, contractReadInfo } = this.props
-        const { loading } = contract
+        const { loading, data } = contract
+        const { address } = data
 
         const TableContents = () => {
             switch (on) {
@@ -48,6 +51,7 @@ class ContractTabs extends Component {
                             txData={contractTx}
                             goAllTx={this.goAllTx} 
                             txType={TX_TYPE.CONTRACT_TX}
+                            address={address}
                         />
                     )
                 case 1:
@@ -56,6 +60,7 @@ class ContractTabs extends Component {
                             txData={contractTokenTx}
                             goAllTx={this.goAllTx} 
                             txType={TX_TYPE.CONTRACT_TOKEN_TX}
+                            address={address}
                         />
                     )
                 case 2:

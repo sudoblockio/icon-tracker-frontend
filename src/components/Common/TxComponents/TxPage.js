@@ -29,7 +29,6 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
-		console.log(this.props.url)
 		this.initPageType(this.props.url.pathname, 20)
 	}
 
@@ -45,7 +44,7 @@ class TxPage extends Component {
 		this.getParams(pathname)
 		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
-		const { count } = tx
+		const { count } = tx	
 		this.getTxListByCount(sort || count)
 	}
 
@@ -64,6 +63,7 @@ class TxPage extends Component {
 			case TX_TYPE.BLOCK_TX:
 			case TX_TYPE.TOKEN_TX:
 			case TX_TYPE.TOKEN_HOLDERS:
+			case TX_TYPE.TRANSACTION_EVENTS:
 				this.urlIndex = pathname.split("/")[2] || ''
 				this.pageId = pathname.split("/")[3] || 1
 				break
@@ -102,6 +102,9 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_TRANSFERS:
 				this.getTxList({ page: this.pageId, count })
 				break
+			case TX_TYPE.TRANSACTION_EVENTS:
+				this.getTxList({ txHash: this.urlIndex, page: this.pageId, count })
+				break
 
 			default:
 		}
@@ -117,6 +120,7 @@ class TxPage extends Component {
 			case TX_TYPE.BLOCK_TX:
 			case TX_TYPE.TOKEN_TX:
 			case TX_TYPE.TOKEN_HOLDERS:
+			case TX_TYPE.TRANSACTION_EVENTS:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
 			case TX_TYPE.BLOCKS:

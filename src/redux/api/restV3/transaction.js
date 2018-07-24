@@ -25,3 +25,16 @@ export function transactionTxDetail(payload) {
       })
   })
 }
+
+export function transactionEventLogList(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/transaction/eventLogList', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}

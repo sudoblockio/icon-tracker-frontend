@@ -24,6 +24,9 @@ import BlockTransactions from './BlocksPage/BlockTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
 import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
+import TransactionInfo from './TransactionsPage/TransactionInfo'
+import TransactionTabs from './TransactionsPage/TransactionTabs'
+import TransactionEvents from './TransactionsPage/TransactionEvents'
 
 import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
@@ -96,6 +99,9 @@ export {
 
   TransactionsPage,
   TransactionDetailPage,
+  TransactionInfo,
+  TransactionEvents,
+  TransactionTabs,
 
   LoadingComponent,
   Pagination,

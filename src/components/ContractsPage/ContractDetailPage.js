@@ -18,49 +18,52 @@ class ContractDetailPage extends Component {
 
     constructor(props) {
         super(props)
-        this.addr = ''
         this.state = {
             on: 0
         }
     }
 
     componentWillMount() {
-        const { pathname, hash } = this.props.url
-        const index = findTabIndex(CONTRACT_TABS, hash)
-        this.setState({ on: index },
-          () => {
-            this.allDetailInfo(pathname)
-          }
-        )
-      }
-    
+        this.allDetailInfo(this.props.url)
+    }
+
     componentWillReceiveProps(nextProps) {
-        const { pathname: current } = this.props.url
-        const { pathname: next } = nextProps.url
-        if (current !== next && startsWith(next, '/contract')) {
-            this.allDetailInfo(next)
+        const { pathname: currentPath } = this.props.url
+        const { pathname: nextPath } = nextProps.url
+        if (currentPath !== nextPath && startsWith(nextPath, '/contract')) {
+            this.allDetailInfo(nextProps.url)
+            return
+        }
+
+        const { hash: currentHash } = this.props.url
+        const { hash: nextHash } = nextProps.url
+        if (currentHash !== nextHash) {
+            this.setTab(findTabIndex(CONTRACT_TABS, nextHash))
         }
     }
 
-    allDetailInfo = (pathname) => {
-        this.addr = pathname.split("/")[2]
-        const { addr } = this
+    allDetailInfo = (url) => {
+        const addr = url.pathname.split("/")[2]
         if (addr) {
             this.props.contractInfo({ addr })
-            this.setTab(this.state.on)
+            this.setTab(findTabIndex(CONTRACT_TABS, url.hash), addr)
         }
     }
 
-    setTab = (index) => {
-        window.location.hash = noSpaceLowerCase(CONTRACT_TABS[index])
+    setTab = (_index, _addr) => {
+        if (_index !== -1) {
+            window.location.hash = noSpaceLowerCase(CONTRACT_TABS[_index])
+        }
+        const index = _index !== -1 ? _index : 0
         this.setState({ on: index }, () => {
-            const { addr } = this
+            const addr = _addr ? _addr : this.props.url.pathname.split("/")[2]
+			const page = 1, count = 10
             switch (index) {
                 case 0:
-                    this.props.contractTxList({ addr, page: 1, count: 10 })
+                    this.props.contractTxList({ addr, page, count })
                     break
                 case 1:
-                    this.props.contractTokenTxList({ addr, page: 1, count: 10 })
+                    this.props.contractTokenTxList({ addr, page, count })
                     break
                 case 2:
                     this.props.icxGetScore({ address: addr })
@@ -69,7 +72,7 @@ class ContractDetailPage extends Component {
                     this.props.readContractInformation({ address: addr })
                     break
                 case 4:
-                    this.props.contractEventLogList({ address: addr, page: 1, count: 10  })
+                    this.props.contractEventLogList({ address: addr, page, count })
                     break
                 default:
             }
@@ -88,7 +91,7 @@ class ContractDetailPage extends Component {
                 return (
                     <div className="content-wrap">
                         <ContractInfo contract={contract} />
-                        <ContractTabs {...this.props} {...this.state} setTab={this.setTab}/>
+                        <ContractTabs {...this.props} {...this.state} setTab={this.setTab} />
                     </div>
                 )
             }

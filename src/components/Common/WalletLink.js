@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  isContractAddress
+} from '../../utils/utils'
 
 const WalletLink = ({to}) => {
   return (
-    <Link className="on" to={`/address/${to}`}>{to}</Link>
+    <Link className="on" to={`/${isContractAddress(to) ? 'contract' : 'address'}/${to}`}>{to}</Link>
   )
 }
 
