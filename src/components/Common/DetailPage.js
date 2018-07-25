@@ -5,12 +5,7 @@ import {
     noSpaceLowerCase
 } from '../../utils/utils'
 import {
-    BLOCK_TABS
-} from '../../utils/const'
-import {
     NotFound,
-    BlockInfo,
-    BlockTabs
 } from '../../components/';
 
 class DetailPage extends Component {
@@ -29,7 +24,8 @@ class DetailPage extends Component {
     componentWillReceiveProps(nextProps) {
         const { pathname: currentPath } = this.props.url
         const { pathname: nextPath } = nextProps.url
-        if (currentPath !== nextPath && startsWith(nextPath, this.props.ROUTE)) { //
+        const { ROUTE } = this.props
+        if (currentPath !== nextPath && startsWith(nextPath, ROUTE)) {
             this.allDetailInfo(nextProps.url)
             return
         }
@@ -37,51 +33,52 @@ class DetailPage extends Component {
         const { hash: currentHash } = this.props.url
         const { hash: nextHash } = nextProps.url
         if (currentHash !== nextHash) {
-            this.setTab(findTabIndex(this.props.TABS, nextHash)) //
+            const { TABS } = this.props
+            this.setTab(findTabIndex(TABS, nextHash))
         }
     }
 
     allDetailInfo = (url) => {
         const query = url.pathname.split("/")[2]
         if (query) {
-            this.props.getInfo({ [this.props.QUERY]: query }) //
-            this.setTab(findTabIndex(this.props.TABS, url.hash), query) //
+            const { TABS } = this.props
+            this.props.getInfo(query)
+            this.setTab(findTabIndex(TABS, url.hash), query)
         }
     }
 
-    setTab = (_index, _query) => {
-        if (_index !== -1) {
-            window.location.hash = noSpaceLowerCase(this.props.TABS[_index]) //
+    setTab = (index, query) => {
+        if (index !== -1) {
+            const { TABS } = this.props
+            window.location.hash = noSpaceLowerCase(TABS[index])
         }
-        const index = _index !== -1 ? _index : 0
-        this.setState({ on: index },
+        const _index = index !== -1 ? index : 0
+        this.setState({ on: _index },
             () => {
-                const query = _query ? _query : this.props.url.pathname.split("/")[2] //
-                switch (index) {
-                    case 0:
-                        this.props.getTxList({ [this.props.QUERY]: query, page: 1, count: 10 }) //
-                        break
-                    default:
-                }
+                this.setList(this.props.getList[_index], query)
             }
         )
     }
 
-    render() {
-        const { loading, error } = this.props //
+    setList = (getListFunc, query) => {
+        const _query = query ? query : this.props.url.pathname.split("/")[2]
+        if (typeof getListFunc === 'function') {
+            getListFunc(_query)
+        }
+    }
 
+    render() {
+        const { loading, error } = this.props
         const Content = () => {
             if (error !== "" && !loading) {
-                return (
-                    <NotFound error={error} />
-                )
+                return <NotFound error={error}/>
             }
             else {
-                const { Info, Tabs } = this.props
+                const { InfoComponent, TabsComponent } = this.props
                 return (
                     <div className="content-wrap">
-                        <Info {...this.props}/>
-                        <Tabs {...this.props} {...this.state} setTab={this.setTab}/>
+                        <InfoComponent {...this.props}/>
+                        <TabsComponent {...this.props} {...this.state} setTab={this.setTab}/>
                     </div>
                 )
             }
