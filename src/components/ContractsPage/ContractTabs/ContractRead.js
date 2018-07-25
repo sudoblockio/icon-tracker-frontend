@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import BigNumber from 'bignumber.js'
 import {
     LoadingComponent
-} from '../../components'
+} from '../../../components'
 
 class ContractRead extends Component {
     constructor(props) {

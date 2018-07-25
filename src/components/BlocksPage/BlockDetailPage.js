@@ -71,6 +71,21 @@ class BlockDetailPage extends Component {
     const { block } = this.props;
     const { loading, error } = block
 
+    // return (
+    //   <DetailPage
+    //     {...this.props}
+    //     loading={loading}
+    //     error={error}
+    //     TABS={BLOCK_TABS}
+    //     ROUTE="/block"
+    //     QUERY="height"
+    //     getInfo={this.props.blockInfo}
+    //     getTxList={this.props.blockTxList}
+    //     Info={BlockInfo}
+    //     Tabs={BlockTabs}
+    //   />
+    // )
+
     const Content = () => {
       if (error !== "" && !loading) {
         return (

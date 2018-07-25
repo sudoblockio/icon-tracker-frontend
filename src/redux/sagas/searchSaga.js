@@ -6,6 +6,10 @@ import {
   getBlockByHashApi as GET_BLOCK_BY_HASH_API } from '../api/rest'
 // import { getAddressDetailFunc } from './blocksSaga';
 
+import {
+  blockList as BLOCK_LIST_API
+} from '../api/restV3'
+
 function* searchFunc(action) {
   try {
     // 검색어가 숫자면, 블록 height로 검색
@@ -26,7 +30,7 @@ function* searchFunc(action) {
             const query = {
                hash: action.payload
             }
-            const blockPayload = yield call(GET_BLOCK_BY_HASH_API, query);
+            const blockPayload = yield call(BLOCK_LIST_API, query);
             yield put(routerActions.push('/block/' + blockPayload.blockDetail.height));
             break;
           }

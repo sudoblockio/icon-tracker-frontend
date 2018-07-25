@@ -1,41 +1,42 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-    TX_TYPE,
-    BLOCK_TABS,
-} from '../../utils/const'
-import {
     LoadingComponent,
     NoBox,
-    BlockTransactions,
-} from '../../components'
+    TransactionEvents
+} from '../../../components'
+import {
+    TX_TYPE,
+    TRANSACTIONS_TABS,
+} from '../../../utils/const'
 
-class BlockTabs extends Component {
+class TransactionTabs extends Component {
 
     goAllTx = () => {
-        const { on, block } = this.props
-        const { data } = block
-        const { height } = data
+        const { on, transaction } = this.props
+        const { data } = transaction
+        const { txHash } = data
         switch (on) {
             case 0:
-                this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${height}`);
+                this.props.history.push(`/${TX_TYPE.TRANSACTION_EVENTS}/${txHash}`);
                 break
+
             default:
         }
     }
 
     render() {
-        const { on, block, blockTx } = this.props
-        const { loading } = block
-        
+        const { on, transaction, transactionEvents } = this.props
+        const { loading } = transaction
+
         const TableContents = () => {
             switch (on) {
                 case 0:
                     return (
-                        <BlockTransactions
-                            txData={blockTx} 
-                            goAllTx={this.goAllTx} 
-                            txType={TX_TYPE.BLOCK_TX} 
+                        <TransactionEvents
+                            txData={transactionEvents}
+                            goAllTx={this.goAllTx}
+                            txType={TX_TYPE.TRANSACTION_EVENTS}
                         />
                     )
                 default:
@@ -44,9 +45,7 @@ class BlockTabs extends Component {
         }
         const Contents = () => {
             if (loading) {
-                return (
-                    <LoadingComponent height='513px' />
-                )
+                return <LoadingComponent height='513px' />
             }
             else {
                 return (
@@ -55,7 +54,7 @@ class BlockTabs extends Component {
                             <div className="tab-holder">
                                 <ul>
                                     {
-                                        BLOCK_TABS.map((tab, index) => (
+                                        TRANSACTIONS_TABS.map((tab, index) => (
                                             <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
@@ -71,4 +70,4 @@ class BlockTabs extends Component {
     }
 }
 
-export default withRouter(BlockTabs);
+export default withRouter(TransactionTabs);

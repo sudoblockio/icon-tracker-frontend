@@ -8,11 +8,11 @@ import {
     ContractCode,
     ContractRead,
     ContractEvents
-} from '../../components'
+} from '../../../components'
 import {
     TX_TYPE,
     CONTRACT_TABS,
-} from '../../utils/const'
+} from '../../../utils/const'
 
 class ContractTabs extends Component {
 

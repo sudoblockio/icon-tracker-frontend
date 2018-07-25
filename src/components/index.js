@@ -13,20 +13,20 @@ import AddressesPage from './AddressesPage/AddressesPage'
 import AddressDetailPage from './AddressesPage/AddressDetailPage'
 import WalletInfo from './AddressesPage/WalletInfo'
 import WalletTabs from './AddressesPage/WalletTabs'
-import WalletTransactions from './AddressesPage/WalletTransactions'
-import WalletTokenTransfers from './AddressesPage/WalletTokenTransfers'
+import WalletTransactions from './AddressesPage/WalletTabs/WalletTransactions'
+import WalletTokenTransfers from './AddressesPage/WalletTabs/WalletTokenTransfers'
 
 import BlocksPage from './BlocksPage/BlocksPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
 import BlockInfo from './BlocksPage/BlockInfo'
 import BlockTabs from './BlocksPage/BlockTabs'
-import BlockTransactions from './BlocksPage/BlockTransactions'
+import BlockTransactions from './BlocksPage/BlockTabs/BlockTransactions'
 
 import TransactionsPage from './TransactionsPage/TransactionsPage'
 import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
 import TransactionInfo from './TransactionsPage/TransactionInfo'
 import TransactionTabs from './TransactionsPage/TransactionTabs'
-import TransactionEvents from './TransactionsPage/TransactionEvents'
+import TransactionEvents from './TransactionsPage/TransactionTabs/TransactionEvents'
 
 import LoadingComponent from './Common/LoadingComponent'
 import Pagination from './Common/Pagination'
@@ -43,8 +43,9 @@ import TokensPage from './TokensPage/TokensPage'
 import TokenDetailPage from './TokensPage/TokenDetailPage'
 import TokenSummary from './TokensPage/TokenSummary'
 import TokenTabs from './TokensPage/TokenTabs'
-import TokenTransfers from './TokensPage/TokenTransfers'
-import TokenHolders from './TokensPage/TokenHolders'
+import TokenTransfers from './TokensPage/TokenTabs/TokenTransfers'
+import TokenHolders from './TokensPage/TokenTabs/TokenHolders'
+import TokenContractRead from './TokensPage/TokenTabs/TokenContractRead'
 
 import TokenLink from './Common/TokenLink'
 import ContractLink from './Common/ContractLink'
@@ -63,14 +64,16 @@ import ContractDetailPage from './ContractsPage/ContractDetailPage'
 import ContractsPage from './ContractsPage/ContractsPage'
 import ContractInfo from './ContractsPage/ContractInfo'
 import ContractTabs from './ContractsPage/ContractTabs'
-import ContractTransactions from './ContractsPage/ContractTransactions'
-import ContractTokenTransfers from './ContractsPage/ContractTokenTransfers'
-import ContractCode from './ContractsPage/ContractCode'
-import ContractRead from './ContractsPage/ContractRead'
-import ContractEvents from './ContractsPage/ContractEvents'
+import ContractTransactions from './ContractsPage/ContractTabs/ContractTransactions'
+import ContractTokenTransfers from './ContractsPage/ContractTabs/ContractTokenTransfers'
+import ContractCode from './ContractsPage/ContractTabs/ContractCode'
+import ContractRead from './ContractsPage/ContractTabs/ContractRead'
+import ContractEvents from './ContractsPage/ContractTabs/ContractEvents'
 
 import QrCodeButton from './Common/QrCode/QrCodeButton'
 import QrCodeComponent from './Common/QrCode/QrCodeComponent'
+
+import DetailPage from './Common/DetailPage'
 
 export {
   Header,
@@ -120,6 +123,7 @@ export {
   TokenTabs,
   TokenTransfers,
   TokenHolders,
+  TokenContractRead,
 
   TokenLink,
   ContractLink,
@@ -145,5 +149,7 @@ export {
   ContractEvents,
 
   QrCodeButton,
-  QrCodeComponent
+  QrCodeComponent,
+
+  DetailPage
 }

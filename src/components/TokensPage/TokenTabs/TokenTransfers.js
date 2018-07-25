@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
   TxBottomWrapper
-} from '../../components'
+} from '../../../components'
 
-class BlockTransactions extends Component {
+class TokenTransfers extends Component {
   render() {
     return <TxBottomWrapper {...this.props}/>
   }
 }
 
-export default BlockTransactions;
+export default TokenTransfers;

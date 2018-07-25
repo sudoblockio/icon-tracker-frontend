@@ -2,63 +2,55 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
     TX_TYPE,
-    TOKEN_TABS
-} from '../../utils/const'
+    WALLET_TABS,
+} from '../../../utils/const'
 import {
     LoadingComponent,
-    TokenTransfers,
-    TokenHolders,
     NoBox,
-    ContractRead
-} from '../../components'
+    WalletTransactions,
+    WalletTokenTransfers,
+} from '../../../components'
 
-class TokenTabs extends Component {
-
+class WalletTabs extends Component {
+    
     goAllTx = () => {
-        const { on, token } = this.props
-        const { data } = token
-        const { contract } = data
+        const { on, wallet } = this.props
+        const { data } = wallet
+        const { address } = data
         switch (on) {
             case 0:
-                this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${contract}`);
+                this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`);
                 break
             case 1:
-                this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`);
+                this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`);
                 break
-            case 2:
             default:
         }
     }
 
     render() {
-        const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
-        const { loading, data } = token
-        const { contract } = data
-
+        const { on, wallet, walletTx, walletTokenTx } = this.props
+        const { loading, data } = wallet
+        const { address } = data
+        
         const TableContents = () => {
             switch (on) {
                 case 0:
                     return (
-                        <TokenTransfers
-                            txData={tokenTransfers}
-                            goAllTx={this.goAllTx}
-                            txType={TX_TYPE.TOKEN_TX}
+                        <WalletTransactions 
+                            txData={walletTx} 
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.ADDRESS_TX} 
+                            address={address} 
                         />
                     )
                 case 1:
                     return (
-                        <TokenHolders
-                            txData={tokenHolders}
-                            goAllTx={this.goAllTx}
-                            txType={TX_TYPE.TOKEN_HOLDERS}
-                        />
-                    )
-                case 2:
-                    return (
-                        <ContractRead
-                            contract={{ data: { address: contract } }}
-                            contractReadInfo={contractReadInfo}
-                            icxCall={this.props.icxCall}
+                        <WalletTokenTransfers 
+                            txData={walletTokenTx} 
+                            goAllTx={this.goAllTx} 
+                            txType={TX_TYPE.ADDRESS_TOKEN_TX} 
+                            address={address} 
                         />
                     )
                 default:
@@ -67,7 +59,9 @@ class TokenTabs extends Component {
         }
         const Contents = () => {
             if (loading) {
-                return <LoadingComponent height='513px'/>
+                return (
+                    <LoadingComponent height='513px' />
+                )
             }
             else {
                 return (
@@ -76,7 +70,7 @@ class TokenTabs extends Component {
                             <div className="tab-holder">
                                 <ul>
                                     {
-                                        TOKEN_TABS.map((tab, index) => (
+                                        WALLET_TABS.map((tab, index) => (
                                             <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.setTab(index) }}>{tab}</li>
                                         ))
                                     }
@@ -92,4 +86,4 @@ class TokenTabs extends Component {
     }
 }
 
-export default withRouter(TokenTabs);
+export default withRouter(WalletTabs);

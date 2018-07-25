@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom';
 import {
     makeDownloadLink,
     tokenText
-} from '../../utils/utils'
+} from '../../../utils/utils'
 import {
     CopyButton,
     LoadingComponent
-} from '../../components/';
+} from '../../../components/';
 
 class ContractCode extends Component {
     render() {

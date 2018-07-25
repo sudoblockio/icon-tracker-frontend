@@ -5,7 +5,7 @@ import {
   getMainChart as GET_MAIN_CHART_API,
  } from '../api/rest'
 
-function* getMainInfo(action) {
+function* getMainInfo() {
   try {
     const payload = yield call(GET_MAIN_INFO_API);
     yield put({type: AT.getMainInfoFulfilled, payload: payload});
@@ -14,7 +14,7 @@ function* getMainInfo(action) {
   }
 }
 
-function* getMainChart(action) {
+function* getMainChart() {
   try {
     const payload = yield call(GET_MAIN_CHART_API);
     yield put({type: AT.getMainChartFulfilled, payload: payload});

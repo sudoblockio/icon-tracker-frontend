@@ -5,6 +5,7 @@ export function transactionRecentTx(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/transaction/recentTx', payload))
       .then(result => {
+        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
