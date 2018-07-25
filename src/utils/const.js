@@ -31,6 +31,8 @@ export const CONTRACT_STATUS = {
     "2": 'Fail'
 }
 
+export const SORT_TYPE = [10, 20, 40, 80, 160]
+
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
@@ -135,7 +137,7 @@ export const TX_TYPE_DATA = {
     [TX_TYPE.TRANSACTION_EVENTS]: {
 		tx: 'transactionEvents',
 		getTxList: 'transactionEventLogList',
-		className: 'table-typeH',
+		className: 'table-typeH log',
         noBoxText: 'No Event',
     }
 }

@@ -28,9 +28,9 @@ class RecentTransactions extends Component {
               return (
                 <li key={index}>
                   <p className={`icon ${!isSuccess ? 'fail' : ''}`}><img src={src} alt="transaction-img"/><span>{text}</span></p>
-                  <p className="a">TX Hash<em><TransactionLink to={txHash} label={txHash}/></em></p>
-                  <p className="b">Amount<em>{`${convertNumberToText(amount, 'icx')} ICX`}</em></p>
-                  <p className="c">Fee<em>{`${convertNumberToText(fee, 'icx')} ICX`}</em></p>
+                  <p className="a">TX Hash<em><TransactionLink to={txHash} label={txHash} noSpan/></em></p>
+                  <p className="b">Amount<em>{convertNumberToText(amount, 'icx')} <span>ICX</span></em></p>
+                  <p className="c">Fee<em>{convertNumberToText(fee, 'icx')} <span>ICX</span></em></p>
                 </li>
               )
             })}
@@ -40,6 +40,6 @@ class RecentTransactions extends Component {
       </li>
     );
   }
-}
+} 
 
 export default RecentTransactions;

@@ -8,6 +8,9 @@ import {
   searchLowerCase
 } from '../../utils/utils';
 import {
+  CONTRACT_STATUS
+} from '../../utils/const'
+import {
   LoadingComponent,
   Pagination,
   ContractLink,
@@ -171,7 +174,7 @@ const TableRow = ({ data }) => {
       <td>{data.compiler}</td>
       <td><span>{convertNumberToText(data.balance, 'icx', 4)}</span><em>ICX</em></td>
       <td>{numberWithCommas(data.txCount)}</td>
-      <td>{data.status}</td>
+      <td>{CONTRACT_STATUS[data.status]}</td>
       <td>{onlyDate(data.verifiedDate)}</td>
     </tr>
   )

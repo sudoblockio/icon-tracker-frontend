@@ -2,40 +2,39 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import web3Utils from 'web3-utils'
 import {
-    convertNumberToText,
-    numberWithCommas,
-    isVaildData,
-    dateToUTC,
-    utcDateInfo,
-    isContractAddress
+	convertNumberToText,
+	numberWithCommas,
+	isVaildData,
+	dateToUTC,
+	utcDateInfo,
+	isContractAddress
 } from '../../utils/utils'
 import {
-    CopyButton,
-    LoadingComponent,
-    WalletLink,
-    BlockLink 
+	CopyButton,
+	LoadingComponent,
+	WalletLink,
+	BlockLink
 } from '../../components'
 
 class TransactionInfo extends Component {
 
-    render() {
-        const { transaction } = this.props
-        const { loading, data } = transaction
-        const Contents = () => {
-            if (loading) {
-                return <LoadingComponent height='206px'/>
-            }
-            else {
-                const { txTokenInfoList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
-                const stepPriceLoop = web3Utils.toWei(stepPrice || "0", "ether")
+	render() {
+		const { transaction } = this.props
+		const { loading, data } = transaction
+		const Contents = () => {
+			if (loading) {
+				return <LoadingComponent height='206px' />
+			}
+			else {
+				const { errorMsg, tokenTxList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
+				const stepPriceLoop = web3Utils.toWei(stepPrice || "0", "ether")
 				// const stepPriceGloop = web3Utils.fromWei(stepPriceLoop, "Gwei")
-				
-				const _txTokenInfoList = txTokenInfoList || []
-				const isTx = txType === "0"
+
+				const _tokenTxList = tokenTxList || []
 				const isTokenTx = txType === "1"
 
-                return (
-                    <div className="screen0">
+				return (
+					<div className="screen0">
 						<div className="wrap-holder">
 							<p className="title">Transaction</p>
 							<div className="contents">
@@ -43,11 +42,11 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<CopyButton data={txHash} title={'Copy TxHash'} isSpan/></td>
+											<td>{txHash}<CopyButton data={txHash} title={'Copy TxHash'} isSpan /></td>
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td>{status}</td>
+											<td>{status}{isVaildData(errorMsg) && <em>({errorMsg})</em>}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
@@ -66,25 +65,23 @@ class TransactionInfo extends Component {
 											<AddressCell address={toAddr} />
 										</tr>
 										{
-											isTx &&
-											<tr>
-												<td>Amount</td>
-												<td>{`${convertNumberToText(amount, 'icx')} ICX`}</td>
-											</tr>
-										}
-										{
-											isTokenTx &&
-											<tr>
-												<td>Token transfer</td>
-												<td>
-													{
-														_txTokenInfoList.map((tokenTx, index) => {
-															const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
-															return <p key={index}>{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;<WalletLink to={fromAddr}/>&emsp;to&emsp;<WalletLink to={toAddr}/></p>
-														})
-													}
-												</td>
-											</tr>
+											!isTokenTx ?
+												<tr>
+													<td>Amount</td>
+													<td>{`${convertNumberToText(amount, 'icx')} ICX`}</td>
+												</tr>
+												:
+												<tr>
+													<td>Token transfer</td>
+													<td>
+														{
+															_tokenTxList.map((tokenTx, index) => {
+																const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+																return <p key={index}>{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;<WalletLink to={fromAddr} />&emsp;to&emsp;<WalletLink to={toAddr} /></p>
+															})
+														}
+													</td>
+												</tr>
 										}
 
 										<tr>
@@ -117,11 +114,11 @@ class TransactionInfo extends Component {
 							</div>
 						</div>
 					</div>
-                )
-            }
-        }
-        return Contents()
-    }
+				)
+			}
+		}
+		return Contents()
+	}
 }
 
 const AddressCell = ({ address }) => {
@@ -132,7 +129,7 @@ const AddressCell = ({ address }) => {
 		if (isContract) {
 			className = 'trans'
 		}
-		return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} isSpan/></td>	
+		return <td className={className}>{isContract && <i className="img"></i>}<span><WalletLink to={address} /></span><CopyButton data={address} title={'Copy Address'} isSpan /></td>
 	}
 	else {
 		return <td>-</td>

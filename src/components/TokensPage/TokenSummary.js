@@ -16,12 +16,10 @@ class TokenSummary extends Component {
 
         const Content = () => {
             if (loading) {
-                return (
-                    <LoadingComponent height='206px' />
-                )
+                return <LoadingComponent height='206px'/>
             }
             else {
-                const { tokenName, totalSupply, contract, price, decimals, holderAddr, transfers, totalSupplyUsd, priceUsd, symbol } = data
+                const { tokenName, totalSupply, contract, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
                 return (
                     <div className="screen0">
@@ -49,7 +47,7 @@ class TokenSummary extends Component {
                                         </tr>
                                         <tr>
                                             <td>Holders</td>
-                                            <td>{numberWithCommas(holderAddr)} addresses</td>
+                                            <td>{numberWithCommas(holders)} addresses</td>
                                             <td>Transfers</td>
                                             <td>{numberWithCommas(transfers)}</td>
                                         </tr>

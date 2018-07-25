@@ -114,7 +114,8 @@ export function* icxGetSroreFunc(action) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload.data.result } });
     }
     else {
-      throw new Error(payload.error);
+      const { message } = payload.data.error
+      throw new Error(message)
     }
   }
   catch (e) {
@@ -167,7 +168,8 @@ export function* readContractInformationFunc(action) {
   try {
     const score = yield call(ICX_GET_SCORE_API, action.payload);
     if (score.status !== 200) {
-      throw new Error(score.error);
+      const { message } = score.data.error
+      throw new Error(message)
     }
 
     const abiData = score.data.result
