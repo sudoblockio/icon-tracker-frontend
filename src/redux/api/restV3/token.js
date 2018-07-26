@@ -5,6 +5,7 @@ export function tokenList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/list', payload))
       .then(result => {
+        console.log(result)
         resolve(result.data)
       })
       .catch(error => {

@@ -5,7 +5,7 @@ import {
     convertNumberToText,
     numberWithCommas,
     tokenText,
-    isVaildData
+    isValidData
 } from '../../utils/utils'
 import {
     CONTRACT_STATUS
@@ -82,9 +82,9 @@ class ContractInfo extends Component {
 }
 
 const TokenCell = ({ tokenName, symbol, address, ircVersion }) => {
-    const isSymbol = isVaildData(symbol)
+    const isSymbol = isValidData(symbol)
     if (isSymbol) {
-        const isIrcVersion = isVaildData(ircVersion)
+        const isIrcVersion = isValidData(ircVersion)
         return (
             <td>
                 {tokenText(tokenName, symbol, address)}

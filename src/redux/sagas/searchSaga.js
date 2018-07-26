@@ -2,57 +2,68 @@ import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import { routerActions } from 'react-router-redux'
 import AT from '../actionTypes/actionTypes';
 import {
-  searchApi as SEARCH_API,
-  getBlockByHashApi as GET_BLOCK_BY_HASH_API } from '../api/rest'
-// import { getAddressDetailFunc } from './blocksSaga';
-
+  isHxAddress,
+  isCxAddress,
+  is0xAddress,
+} from '../../utils/utils'
 import {
-  blockList as BLOCK_LIST_API
+  searchData as SEARCH_DATA_API,
+  blockInfo as BLOCK_INFO_API
 } from '../api/restV3'
 
 function* searchFunc(action) {
   try {
-    // 검색어가 숫자면, 블록 height로 검색
-    if (!isNaN(action.payload)) {
-      yield put(routerActions.push('/block/' + action.payload));
-
-    // 검색어가 길이 40개의 string이면 지갑 ID 검색
-    } else if (action.payload.length === 42) {
-      yield put(routerActions.push('/address/' + action.payload));
-
-    // 그 이외는 HASH (TX, BLOCK) 구분을 위한 검색
-    } else if (action.payload.length === 64){
-      const searchPayload = yield call(SEARCH_API, action.payload);
-      if (searchPayload.result === "200") {
-        switch (searchPayload.data.split(" ")[0]) {
-          // Block Hash일 경우 Block Height을 가져와서 라우터에 Push.
-          case 'Block': {
-            const query = {
-               hash: action.payload
-            }
-            const blockPayload = yield call(BLOCK_LIST_API, query);
-            yield put(routerActions.push('/block/' + blockPayload.blockDetail.height));
-            break;
-          }
-          // Transaction Hash일 경우 바로 라우터에 Push.
-          case 'Transaction': {
-            yield put(routerActions.push('/transaction/' + action.payload));
-            break;
-          }
-          default:
-            break;
-        }
-      }
-
-      if (searchPayload.result === "No Data") {
-        throw new Error();
-      }
-    } else {
+    const { payload } = action
+    if (!payload) {
       throw new Error();
     }
-    yield put({type: AT.searchFulfilled});
+    else if (isHxAddress(payload)) {
+      yield put(routerActions.push(`/address/${payload}`));
+    }
+    else if (isCxAddress(payload)) {
+      const result = yield call(SEARCH_DATA_API, { data: action.payload });
+      if (result.result === "200") {
+        switch (result.data) {
+          case 'IRC1':
+            yield put(routerActions.push(`/token/${payload}`));
+            break
+          default:
+            yield put(routerActions.push(`/contract/${payload}`));
+        }
+      }
+      else {
+        throw new Error();
+      }
+    }
+    else if (is0xAddress(payload)) {
+      const result = yield call(SEARCH_DATA_API, { data: action.payload });
+      if (result.result === "200") {
+        const type = result.data.split(" ")[0]
+        switch (type) {
+          case 'Transaction':
+            yield put(routerActions.push(`/transaction/${payload}`));
+            break
+          case 'Block':
+            const block = yield call(BLOCK_INFO_API, { hash: payload });
+            yield put(routerActions.push(`/block/${block.data.height}`));
+            break
+          default:
+            throw new Error();
+        }
+      }
+      else {
+        throw new Error();
+      }
+    }
+    else if (!isNaN(payload)) {
+      yield put(routerActions.push(`/block/${payload}`));
+    }
+    else {
+      throw new Error();
+    }
+    yield put({ type: AT.searchFulfilled });
   } catch (e) {
-    yield put({type: AT.searchRejected, error: action.payload});
+    yield put({ type: AT.searchRejected, error: action.payload });
     yield put(routerActions.push('/notfound'));
   }
 }

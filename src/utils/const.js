@@ -29,9 +29,6 @@ export const CONTRACT_STATUS = {
     "0": 'Pending', 
     "1": 'Success', 
     "2": 'Reject',
-    0: 'Pending', 
-    1: 'Success', 
-    2: 'Reject'
 }
 
 export const SORT_TYPE = [10, 20, 40, 80, 160]

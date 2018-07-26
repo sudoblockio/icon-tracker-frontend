@@ -84,7 +84,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="title token">
                             Token Transfers
-                            <span>(IRC01)</span>
+                            <span>(IRC1)</span>
                             <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
                         </p>
                     )

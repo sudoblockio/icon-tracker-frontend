@@ -48,7 +48,7 @@ export function convertNumberToText(num, unit, round) {
 // }
 
 export function onlyDate(date) {
-  if (!isVaildData(date)) return "-"
+  if (!isValidData(date)) return "-"
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD')
 }
@@ -146,8 +146,8 @@ export function makeDownloadLink(address) {
 }
 
 export function tokenText(name, symbol, address, noSpan) {
-  const isName = isVaildData(name)
-  const isSymbol = isVaildData(symbol)
+  const isName = isValidData(name)
+  const isSymbol = isValidData(symbol)
   let text = ""
   if (isName) {
     text += name
@@ -184,6 +184,7 @@ export function getArrayState(step, state, action, dataType) {
         [dataType]: {
           ...state[dataType],
           loading: true,
+          data: [],
           page: Number(action.payload.page) || 1,
           count: Number(action.payload.count) || state[dataType].count,
           error: ''
@@ -225,6 +226,7 @@ export function getObjectState(step, state, action, dataType) {
         [dataType]: {
           ...state[dataType],
           loading: true,
+          data: {},
           error: ''
         }
       }
@@ -265,7 +267,7 @@ export function getState(type, step, state, action, dataType) {
   }
 }
 
-export function isVaildData(data) {
+export function isValidData(data) {
   if (!!data && data !== '-') return true
   else return false
 }
@@ -305,4 +307,19 @@ export function noSpaceLowerCase(str) {
 export function noHashLowerCase(str) {
   if (!str) return ''
   return str.replace("#", "").toLowerCase()
+}
+
+export function isHxAddress(str) {
+  if (!str) return false
+  return startsWith(str, 'hx') && str.length === 42
+}
+
+export function isCxAddress(str) {
+  if (!str) return false
+  return startsWith(str, 'cx') && str.length === 42
+}
+
+export function is0xAddress(str) {
+  if (!str) return false
+  return startsWith(str, '0x') && str.length === 66
 }

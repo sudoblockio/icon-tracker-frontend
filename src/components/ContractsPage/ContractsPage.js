@@ -141,7 +141,7 @@ class ContractsPage extends Component {
             <div className="wrap-holder">
               <p className="title">Contracts</p>
               <SearchInput 
-                placeholder="Search for contract name"
+                placeholder="Search for contract name / address"
                 setSearch={this.setSearch}
               />
               <div className="contents">

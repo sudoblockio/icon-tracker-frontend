@@ -1,4 +1,13 @@
 import {
+    getMainInfo,
+    getMainChart,
+} from './main'
+
+import {
+    searchData,
+} from './search'
+
+import {
     addressList,
     addressInfo,
     addressTxList,
@@ -39,6 +48,11 @@ import {
 } from './icx'
 
 export {
+    getMainInfo,
+    getMainChart,
+
+    searchData,
+
     addressList,
     addressInfo,
     addressTxList,

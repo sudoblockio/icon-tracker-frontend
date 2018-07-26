@@ -5,7 +5,7 @@ import {
 	isContractAddress,
 	numberWithCommas,
 	dateToUTC,
-	isVaildData,
+	isValidData,
 	tokenText
 } from '../../../utils/utils'
 import {
@@ -19,7 +19,7 @@ import {
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
-	if (!isVaildData(txHash)) {
+	if (!isValidData(txHash)) {
 		_txHash = '-'
 		className = 'no'
 	}
@@ -227,7 +227,7 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={fromAddr} address={address} />
 							<SignCell fromAddr={fromAddr} toAddr={toAddr} address={address} />
 							<AddressCell targetAddr={toAddr} address={address} />
-							<AmountCell type="icx" amount={amount} decimal={4} symbol={contractSymbol}/>
+							<AmountCell type="icx" amount={quantity} decimal={4} symbol={contractSymbol}/>
 							<TokenCell name={contractName} address={contractAddr} />
 						</tr>
 					)

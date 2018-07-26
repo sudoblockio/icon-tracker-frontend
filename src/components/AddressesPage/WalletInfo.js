@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import BigNumber from 'bignumber.js';
 import CopyButton from '../Common/CopyButton'
 import {
   numberWithCommas,
   convertNumberToText,
   isValidNodeType,
-  searchLowerCase
+  searchLowerCase,
+  isValidData
 } from '../../utils/utils'
 import {
   LoadingComponent,
@@ -92,6 +94,18 @@ class TokenBalance extends Component {
     }
   }
 
+  calcTotalTokenBalance = (tokenList) => {
+    let result = "0"
+		tokenList.forEach(token => {
+      const prev = new BigNumber(result)
+      const { totalTokenPrice } = token
+      const _totalTokenPrice = isValidData(totalTokenPrice) ? totalTokenPrice : "0"
+      const next = prev.plus(_totalTokenPrice)      
+      result = next.toString(10)
+    })
+    return result.toString(10)
+	}
+
   render() {
     const TableData = (_tokenList) => {
       if (_tokenList.length === 0) {
@@ -103,9 +117,10 @@ class TokenBalance extends Component {
           const { contractName, contractSymbol } = token
           return searchLowerCase(search, [contractName, contractSymbol])
         })
+        const totalBalance = this.calcTotalTokenBalance(_tokenList)
         return (
           <td>
-            <p className="balance">11 USD<span className="gray">(Total)</span><em className="img"></em></p>
+            <p className="balance">{totalBalance} USD<span className="gray">(Total)</span><em className="img"></em></p>
             <div className="combo-group">
               <div className="combo-layer">
                 <div className="search-group">
@@ -123,12 +138,11 @@ class TokenBalance extends Component {
                     <ul className="list-group">
                       {
                         list.map((token, index) => {
-                          const { contractName, contractSymbol, quantity, unit } = token
-                          const value = unit ? quantity * unit : '-'
+                          const { contractName, contractSymbol, quantity, unit, totalTokenPrice } = token
                           return (
                             <li key={index}>
-                              <p><em>{contractName}</em><em>{value}</em><em>USD</em></p>
-                              <p><em>{quantity} {contractSymbol}</em><em>{unit ? unit : '-'}</em><em>@</em></p>
+                              <p><em>{contractName}</em><em>{totalTokenPrice ? totalTokenPrice : "-"}</em><em>USD</em></p>
+                              <p><em>{quantity} {contractSymbol}</em><em>{unit ? unit : "-"}</em><em>@</em></p>
                             </li>
                           )
                         })
