@@ -18,7 +18,7 @@ class DetailPage extends Component {
     }
 
     componentWillMount() {
-        this.allDetailInfo(this.props.url)
+        this.setInitialData(this.props.url)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,19 +26,20 @@ class DetailPage extends Component {
         const { pathname: nextPath } = nextProps.url
         const { ROUTE } = this.props
         if (currentPath !== nextPath && startsWith(nextPath, ROUTE)) {
-            this.allDetailInfo(nextProps.url)
+            this.setInitialData(nextProps.url)
             return
         }
-
-        const { hash: currentHash } = this.props.url
-        const { hash: nextHash } = nextProps.url
-        if (currentHash !== nextHash) {
-            const { TABS } = this.props
-            this.setTab(findTabIndex(TABS, nextHash))
+        else {
+            const { hash: currentHash } = this.props.url
+            const { hash: nextHash } = nextProps.url
+            if (currentHash !== nextHash) {
+                const { TABS } = this.props
+                this.setTab(findTabIndex(TABS, nextHash))
+            }    
         }
     }
 
-    allDetailInfo = (url) => {
+    setInitialData = (url) => {
         const query = url.pathname.split("/")[2]
         if (query) {
             const { TABS } = this.props
@@ -48,10 +49,6 @@ class DetailPage extends Component {
     }
 
     setTab = (index, query) => {
-        if (index !== -1) {
-            const { TABS } = this.props
-            window.location.hash = noSpaceLowerCase(TABS[index])
-        }
         const _index = index !== -1 ? index : 0
         this.setState({ on: _index },
             () => {
@@ -67,6 +64,11 @@ class DetailPage extends Component {
         }
     }
 
+    changeTab = (index) => {
+        const { TABS } = this.props
+        window.location.hash = noSpaceLowerCase(TABS[index])
+    }
+
     render() {
         const { loading, error } = this.props
         const Content = () => {
@@ -78,7 +80,7 @@ class DetailPage extends Component {
                 return (
                     <div className="content-wrap">
                         <InfoComponent {...this.props}/>
-                        <TabsComponent {...this.props} {...this.state} setTab={this.setTab}/>
+                        <TabsComponent {...this.props} {...this.state} changeTab={this.changeTab}/>
                     </div>
                 )
             }

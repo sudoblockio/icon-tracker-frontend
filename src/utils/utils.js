@@ -48,7 +48,7 @@ export function convertNumberToText(num, unit, round) {
 // }
 
 export function onlyDate(date) {
-  if (!date) return '-'
+  if (!isVaildData(date)) return "-"
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
   return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD')
 }

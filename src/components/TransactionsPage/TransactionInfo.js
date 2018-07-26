@@ -27,10 +27,7 @@ class TransactionInfo extends Component {
 			}
 			else {
 				const { errorMsg, tokenTxList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
-				const stepPriceLoop = web3Utils.toWei(stepPrice || "0", "ether")
-				// const stepPriceGloop = web3Utils.fromWei(stepPriceLoop, "Gwei")
-
-				const _tokenTxList = tokenTxList || []
+				const stepPriceIcx = web3Utils.fromWei(stepPrice || "0", "ether")
 				const isTokenTx = txType === "1"
 
 				return (
@@ -75,7 +72,7 @@ class TransactionInfo extends Component {
 													<td>Token transfer</td>
 													<td>
 														{
-															_tokenTxList.map((tokenTx, index) => {
+															(tokenTxList || []).map((tokenTx, index) => {
 																const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
 																return <p key={index}>{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;<WalletLink to={fromAddr} />&emsp;to&emsp;<WalletLink to={toAddr} /></p>
 															})
@@ -94,11 +91,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>STEP price</td>
-											<td>{`${convertNumberToText(stepPrice, 'icx')} ICX`}<em>{`(${convertNumberToText(stepPriceLoop, 'icx')} loop)`}</em></td>
+											<td>{`${convertNumberToText(stepPrice, 'icx')} Loop`}<em>{`(${convertNumberToText(stepPriceIcx, 'icx')} ICX)`}</em></td>
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
-											<td>{`${convertNumberToText(fee, 'icx')} ICX`}<em>{`(${convertNumberToText(feeUsd, 'usd')} USD)`}</em></td>
+											<td>{`${convertNumberToText(fee, 'icx')} ICX`}<em>{`(${convertNumberToText(feeUsd, 'usd', 2)} USD)`}</em></td>
 										</tr>
 										<tr>
 											<td>Data</td>

@@ -28,7 +28,10 @@ export const INITIAL_STATE = {
 export const CONTRACT_STATUS = {
     "0": 'Pending', 
     "1": 'Success', 
-    "2": 'Fail'
+    "2": 'Reject',
+    0: 'Pending', 
+    1: 'Success', 
+    2: 'Reject'
 }
 
 export const SORT_TYPE = [10, 20, 40, 80, 160]
@@ -37,7 +40,7 @@ export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read C
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
-export const TRANSACTIONS_TABS = ['Events']
+export const TRANSACTION_TABS = ['Events']
 
 export const POPUP_TYPE = {
     AddressQrCode: 'AddressQrCode',

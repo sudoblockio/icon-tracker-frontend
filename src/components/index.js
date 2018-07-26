@@ -74,6 +74,7 @@ import QrCodeButton from './Common/QrCode/QrCodeButton'
 import QrCodeComponent from './Common/QrCode/QrCodeComponent'
 
 import DetailPage from './Common/DetailPage'
+import TabTable from './Common/TabTable'
 
 export {
   Header,
@@ -151,5 +152,6 @@ export {
   QrCodeButton,
   QrCodeComponent,
 
-  DetailPage
+  DetailPage,
+  TabTable
 }
