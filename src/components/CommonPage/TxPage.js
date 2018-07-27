@@ -8,20 +8,19 @@ import {
 	TxTableBody,
 	TxPageTitle,
 	NoBox
-} from '../../../components/';
+} from '../../components/';
 import {
 	TX_TYPE,
 	TX_TYPE_DATA
-} from '../../../utils/const'
+} from '../../utils/const'
 import {
 	calcMaxPageNum,
-} from '../../../utils/utils';
+} from '../../utils/utils';
 
 class TxPage extends Component {
 
 	constructor(props) {
 		super(props);
-
 		this.txType = ''
 		this.urlIndex = ''
 		this.pageId = 1
@@ -29,18 +28,18 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
-		this.initPageType(this.props.url.pathname, 20)
+		this.setInitialData(this.props.url.pathname, 20)
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const current = this.props.url.pathname
 		const next = nextProps.url.pathname
 		if (current !== next) {
-			this.initPageType(next)
+			this.setInitialData(next)
 		}
 	}
 
-	initPageType = (pathname, sort) => {
+	setInitialData = (pathname, sort) => {
 		this.getParams(pathname)
 		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
@@ -155,12 +154,12 @@ class TxPage extends Component {
 				return ([
 					<table key='table' className={className}>
 						<thead>
-							<TxTableHead txType={this.txType} />
+							<TxTableHead txType={this.txType}/>
 						</thead>
 						<tbody>
 							{
 								data.map((item, index) => (
-									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex} />
+									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex}/>
 								))
 							}
 						</tbody>

@@ -65,8 +65,9 @@ class DetailPage extends Component {
     }
 
     changeTab = (index) => {
-        const { TABS } = this.props
-        window.location.hash = noSpaceLowerCase(TABS[index])
+        const { TABS, url } = this.props
+        const { pathname } = url
+        this.props.history.push(`${pathname}#${noSpaceLowerCase(TABS[index])}`);
     }
 
     render() {

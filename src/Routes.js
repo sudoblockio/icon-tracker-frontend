@@ -15,7 +15,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import TokensPage from './pages/TokensPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import TxPage from './pages/TxPage'
-import { TX_TYPE } from './utils/const'
+import { TX_TYPE, SUB_SEARCH_TYPE } from './utils/const'
 
 class Routes extends Component {
 
@@ -40,11 +40,11 @@ class Routes extends Component {
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TransactionsPage} />
               <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path='/contracts' component={ContractsPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path='/contracts/:pageId' component={ContractsPage} />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SUB_SEARCH_TYPE.CONTRACTS}`} component={ContractsPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SUB_SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractsPage} />
               <Route onEnter={window.scroll(0, 0)} path='/contract/:contractId' component={ContractDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path='/tokens' component={TokensPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SUB_SEARCH_TYPE.TOKENS}`} component={TokensPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/token/:tokenId' component={TokenDetailPage} exact />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact />

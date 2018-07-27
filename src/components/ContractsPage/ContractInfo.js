@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import WalletLink from '../Common/WalletLink';
 import {
     convertNumberToText,
     numberWithCommas,
@@ -14,7 +13,8 @@ import {
     CopyButton,
     TransactionLink,
     LoadingComponent,
-    QrCodeButton
+    QrCodeButton,
+    WalletLink
 } from '../../components'
 
 class ContractInfo extends Component {

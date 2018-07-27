@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import BigNumber from 'bignumber.js';
-import CopyButton from '../Common/CopyButton'
 import {
   numberWithCommas,
   convertNumberToText,
@@ -10,6 +9,7 @@ import {
   isValidData
 } from '../../utils/utils'
 import {
+  CopyButton,
   LoadingComponent,
   QrCodeButton
 } from '../../components/';

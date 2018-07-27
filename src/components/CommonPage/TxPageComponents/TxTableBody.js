@@ -114,7 +114,7 @@ class TxTableBody extends Component {
 				txType,
 				data,
 				address
-			} = _props
+			} = this.props
 
 			const {
 				name,
