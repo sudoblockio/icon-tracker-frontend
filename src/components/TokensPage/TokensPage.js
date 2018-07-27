@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-	SubSearchPage
+	SearchPage
 } from '../../components'
 
 class TokensPage extends Component {
 	render() {
-		return <SubSearchPage {...this.props}/>
+		return <SearchPage {...this.props}/>
 	}
 }
 export default TokensPage

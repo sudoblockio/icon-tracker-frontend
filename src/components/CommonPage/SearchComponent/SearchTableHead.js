@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-    SUB_SEARCH_TYPE
+    SEARCH_TYPE
 } from '../../../utils/const'
 
-class SubSearchTableHead extends Component {
+class SearchTableHead extends Component {
     render() {
         const TableHead = () => {
-            const { subSearchType } = this.props
-            switch (subSearchType) {
-                case SUB_SEARCH_TYPE.CONTRACTS:
+            const { searchType } = this.props
+            switch (searchType) {
+                case SEARCH_TYPE.CONTRACTS:
                     return (
                         <tr>
                             <th>Address</th>
@@ -20,7 +20,7 @@ class SubSearchTableHead extends Component {
                             <th>Confirmed date</th>
                         </tr>
                     )
-                case SUB_SEARCH_TYPE.TOKENS:
+                case SEARCH_TYPE.TOKENS:
                     return (
                         <tr>
                             <th>No.</th>
@@ -42,4 +42,4 @@ class SubSearchTableHead extends Component {
     }
 }
 
-export default SubSearchTableHead
+export default SearchTableHead

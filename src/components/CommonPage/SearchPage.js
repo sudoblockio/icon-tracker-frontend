@@ -5,8 +5,8 @@ import {
   calcMaxPageNum,
 } from '../../utils/utils';
 import {
-  SUB_SEARCH_TYPE,
-  SUB_SEARCH_TYPE_DATA,
+  SEARCH_TYPE,
+  SEARCH_TYPE_DATA,
 } from '../../utils/const'
 import {
   LoadingComponent,
@@ -14,16 +14,16 @@ import {
   SortHolder,
   NoBox,
   SearchInput,
-  SubSearchTableHead,
-  SubSearchTableBody,
-  SubSearchTableDesc
+  SearchTableHead,
+  SearchTableBody,
+  SearchTableDesc
 } from '../../components/';
 
 class ContractsPage extends Component {
 
   constructor(props) {
     super(props)
-    this.subSearchType = ''
+    this.searchType = ''
     this.pageId = 1
     this.getList = () => { }
     this.getListSearch = () => { }
@@ -39,7 +39,7 @@ class ContractsPage extends Component {
   componentWillReceiveProps(nextProps) {
     const { pathname: currentPath } = this.props.url
     const { pathname: nextPath } = nextProps.url
-    if (currentPath !== nextPath && startsWith(nextPath, `/${this.subSearchType}`)) {
+    if (currentPath !== nextPath && startsWith(nextPath, `/${this.searchType}`)) {
       this.setInitialData(nextProps.url)
     }
     else {
@@ -53,9 +53,9 @@ class ContractsPage extends Component {
 
   setInitialData = (url, sort) => {
     this.getParams(url)
-    this.getList = this.props[this.getSubSearchTypeData()['getList']] || (() => { })
-    this.getListSearch = this.props[`${this.getSubSearchTypeData()['getList']}Search`] || (() => { })
-    const list = this.props[this.getSubSearchTypeData()['list']] || {}
+    this.getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
+    this.getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
+    const list = this.props[this.getSearchTypeData()['list']] || {}
     const { count } = list
     this.getListByCount(sort || count)
     const { search } = url
@@ -64,22 +64,22 @@ class ContractsPage extends Component {
     }
   }
 
-  getSubSearchTypeData = () => {
-    return SUB_SEARCH_TYPE_DATA[this.subSearchType] || {}
+  getSearchTypeData = () => {
+    return SEARCH_TYPE_DATA[this.searchType] || {}
   }
 
   getParams = (url) => {
     const { pathname } = url
-    this.subSearchType = pathname.split("/")[1] || ''
+    this.searchType = pathname.split("/")[1] || ''
     this.pageId = pathname.split("/")[2] || 1
   }
 
   getListByCount = (count) => {
-    switch (this.subSearchType) {
-      case SUB_SEARCH_TYPE.CONTRACTS:
+    switch (this.searchType) {
+      case SEARCH_TYPE.CONTRACTS:
         this.getList({ page: this.pageId, count })
         break
-      case SUB_SEARCH_TYPE.TOKENS:
+      case SEARCH_TYPE.TOKENS:
         this.getList({})
         break
 
@@ -88,7 +88,7 @@ class ContractsPage extends Component {
   }
 
   getListByPage = (page) => {
-    this.props.history.push(`/${this.subSearchType}/${page}`);
+    this.props.history.push(`/${this.searchType}/${page}`);
   }
 
   setSearch = (_search) => {
@@ -105,28 +105,28 @@ class ContractsPage extends Component {
     const { search } = this.state
     if (search === '' && nextSearch === '') return
     if (nextSearch) {
-      this.props.history.push(`/${this.subSearchType}?search=${nextSearch}`);
+      this.props.history.push(`/${this.searchType}?search=${nextSearch}`);
     }
     else {
-      this.props.history.push(`/${this.subSearchType}`);
+      this.props.history.push(`/${this.searchType}`);
     }
   }
 
   render() {
     const { searchKeyword } = this.state
-    const list = this.props[this.getSubSearchTypeData()['list']] || {}
-    const listSearch = this.props[`${this.getSubSearchTypeData()['list']}Search`]
-    const tableClassName = this.getSubSearchTypeData()['tableClassName'] || ''
-    const contentsClassName = this.getSubSearchTypeData()['contentsClassName'] || ''
-    const noBoxText = this.getSubSearchTypeData()['noBoxText'] || ''
-    const placeholder = this.getSubSearchTypeData()['placeholder'] || ''
-    const title = this.getSubSearchTypeData()['title'] || ''
+    const list = this.props[this.getSearchTypeData()['list']] || {}
+    const listSearch = this.props[`${this.getSearchTypeData()['list']}Search`]
+    const tableClassName = this.getSearchTypeData()['tableClassName'] || ''
+    const contentsClassName = this.getSearchTypeData()['contentsClassName'] || ''
+    const noBoxText = this.getSearchTypeData()['noBoxText'] || ''
+    const placeholder = this.getSearchTypeData()['placeholder'] || ''
+    const title = this.getSearchTypeData()['title'] || ''
 
     const ListData = !searchKeyword ? list : listSearch //
     const { loading, data, page, listSize, count } = ListData;
     const noData = data.length === 0
 
-    const needOption = !searchKeyword && this.subSearchType === SUB_SEARCH_TYPE.CONTRACTS
+    const needOption = !searchKeyword && this.searchType === SEARCH_TYPE.CONTRACTS
 
     const TableContent = () => {
       if (noData) {
@@ -139,12 +139,12 @@ class ContractsPage extends Component {
             className={tableClassName} //
           >
             <thead>
-              <SubSearchTableHead subSearchType={this.subSearchType} />
+              <SearchTableHead searchType={this.searchType} />
             </thead>
             <tbody>
               {
                 data.map((item, index) => (
-                  <SubSearchTableBody key={index} data={item} subSearchType={this.subSearchType} index={index} />
+                  <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} />
                 ))
               }
             </tbody>
@@ -182,7 +182,7 @@ class ContractsPage extends Component {
                 changeSearch={this.changeSearch}
               />
               <div className={contentsClassName}>
-                <SubSearchTableDesc subSearchType={this.subSearchType} listSize={listSize} />
+                <SearchTableDesc searchType={this.searchType} listSize={listSize} />
                 {TableContent()}
               </div>
             </div>

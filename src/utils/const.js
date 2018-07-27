@@ -44,13 +44,13 @@ export const POPUP_TYPE = {
     ContractDetail: 'ContractDetail'
 }
 
-export const SUB_SEARCH_TYPE = {
+export const SEARCH_TYPE = {
     CONTRACTS: 'contracts',
     TOKENS: 'tokens'
 }
 
-export const SUB_SEARCH_TYPE_DATA = {
-    [SUB_SEARCH_TYPE.CONTRACTS]: {
+export const SEARCH_TYPE_DATA = {
+    [SEARCH_TYPE.CONTRACTS]: {
         list: 'contracts',
         getList: 'contractList',
         tableClassName: 'table-typeA contract',
@@ -59,11 +59,11 @@ export const SUB_SEARCH_TYPE_DATA = {
         placeholder: "Search for contract name / address / symbol",
         title: 'Contracts',
     },
-    [SUB_SEARCH_TYPE.TOKENS]: {
+    [SEARCH_TYPE.TOKENS]: {
         list: 'tokens',
         getList: 'tokenList',
         tableClassName: 'table-typeI',
-        contentsClassName: 'contents token',
+        contentsClassName: 'contents tokens',
         noBoxText: 'No Token',      
         placeholder: "Search for any ICX token name / address / symbol",
         title: 'Tokens',

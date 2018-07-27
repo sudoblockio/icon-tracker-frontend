@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import {
-    SUB_SEARCH_TYPE
+    SEARCH_TYPE
 } from '../../../utils/const'
 import {
     numberWithCommas
 } from '../../../utils/utils'
 
-class SubSearchTableDesc extends Component {
+class SearchTableDesc extends Component {
 
     render() {
         const {
-            subSearchType,
+            searchType,
             listSize,
         } = this.props
 
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
-            switch (subSearchType) {
-                case SUB_SEARCH_TYPE.CONTRACTS:
+            switch (searchType) {
+                case SEARCH_TYPE.CONTRACTS:
                     return (
                         <p className="txt cont">
                             <span>With verified source codes only</span>
                             <span>A total of<em>{_listSize}</em> verified contract source codes found</span>
                         </p>
                     )
-                case SUB_SEARCH_TYPE.TOKENS:
+                case SEARCH_TYPE.TOKENS:
                     return (
                         <p className="txt cont">
                             <span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
@@ -39,4 +39,4 @@ class SubSearchTableDesc extends Component {
     }
 }
 
-export default SubSearchTableDesc;
+export default SearchTableDesc;

@@ -60,10 +60,10 @@ import TxPageTitle from './CommonPage/TxPageComponents/TxPageTitle'
 import TxTableHead from './CommonPage/TxPageComponents/TxTableHead'
 import TxTableBody from './CommonPage/TxPageComponents/TxTableBody'
 
-import SubSearchPage from './CommonPage/SubSearchPage'
-import SubSearchTableHead from './CommonPage/SubSearchComponent/SubSearchTableHead'
-import SubSearchTableBody from './CommonPage/SubSearchComponent/SubSearchTableBody'
-import SubSearchTableDesc from './CommonPage/SubSearchComponent/SubSearchTableDesc'
+import SearchPage from './CommonPage/SearchPage'
+import SearchTableHead from './CommonPage/SearchComponent/SearchTableHead'
+import SearchTableBody from './CommonPage/SearchComponent/SearchTableBody'
+import SearchTableDesc from './CommonPage/SearchComponent/SearchTableDesc'
 
 import ContractDetailPage from './ContractsPage/ContractDetailPage'
 import ContractsPage from './ContractsPage/ContractsPage'
@@ -144,10 +144,10 @@ export {
   TxTableHead,
   TxTableBody,
 
-  SubSearchPage,
-  SubSearchTableHead,
-  SubSearchTableBody,
-  SubSearchTableDesc,
+  SearchPage,
+  SearchTableHead,
+  SearchTableBody,
+  SearchTableDesc,
 
   ContractDetailPage,
   ContractsPage,
