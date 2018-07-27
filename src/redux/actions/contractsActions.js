@@ -7,6 +7,13 @@ export function contractList(payload) {
   }
 }
 
+export function contractListSearch(payload) {
+  return {
+    type: actionTypes.contractListSearch,
+    payload
+  }
+}
+
 export function contractInfo(payload) {
   return {
     type: actionTypes.contractInfo,

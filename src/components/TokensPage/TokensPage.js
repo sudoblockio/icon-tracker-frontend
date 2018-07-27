@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string'
 import {
 	convertNumberToText,
-	searchLowerCase,
-	tokenText
+	tokenText,
+	startsWith
 } from '../../utils/utils'
 import {
 	NoBox,
@@ -11,40 +12,75 @@ import {
 	SearchInput
 } from '../../components'
 
+const ROUTE = '/tokens'
+
 class TokensPage extends Component {
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			search: ''
+			searchKeyword: ''
 		}
 	}
 
 	componentWillMount() {
-		this.props.tokenList({})
+		this.setInitialData(this.props.url)
 	}
 
-	setSearch = (nextSearch) => {
-		const { search } = this.state
-		if (search === '' && nextSearch === '') {
-			return
+	componentWillReceiveProps(nextProps) {
+		const { pathname: currentPath } = this.props.url
+		const { pathname: nextPath } = nextProps.url
+		if (currentPath !== nextPath && startsWith(nextPath, ROUTE)) {
+			this.setInitialData(nextProps.url)
 		}
-		this.setState({ search: nextSearch })
+		else {
+			const { search: currentSearch } = this.props.url
+			const { search: nextSearch } = nextProps.url
+			if (currentSearch !== nextSearch) {
+				this.setSearch(nextSearch)
+			}
+		}
+	}
+
+	setInitialData = (url) => {
+		const { search } = url
+		this.props.tokenList({})
+		if (search) {
+			this.setSearch(search)
+		}
+	}
+
+	setSearch = (_search) => {
+		const parsed = queryString.parse(_search)
+		const { search } = parsed
+		this.setState({ searchKeyword: search || '' }, () => {
+			if (search) {
+				this.props.tokenListSearch({ keyword: search })
+			}
+		})
+	}
+
+	changeSearch = (nextSearch) => {
+		const { search } = this.state
+		if (search === '' && nextSearch === '') return
+		if (nextSearch) {
+			this.props.history.push(`${ROUTE}?search=${nextSearch}`);
+		}
+		else {
+			this.props.history.push(ROUTE);
+		}
 	}
 
 	render() {
-		const { search } = this.state
-		const { tokens } = this.props
-		const { data, listSize, loading } = tokens
-		const list = data.filter(token => {
-			const { tokenName, symbol } = token
-			return searchLowerCase(search, [tokenName, symbol])
-		})
-		const noData = list.length === 0
+		const { searchKeyword } = this.state
+		const { tokens, tokensSearch } = this.props
+		const ListData = !searchKeyword ? tokens : tokensSearch
+		const { data, listSize, loading } = ListData
+		const noData = data.length === 0
 
 		const TableContent = () => {
 			if (noData) {
-				return <NoBox text={search ? 'No Data' : 'No Token'} />
+				return <NoBox text={searchKeyword ? 'No Data' : 'No Token'} />
 			}
 			else {
 				return (
@@ -61,7 +97,7 @@ class TokensPage extends Component {
 						</thead>
 						<tbody>
 							{
-								list.map((token, index) => {
+								data.map((token, index) => {
 									const { name, symbol, price, changeVal, volume, marketCap, contractAddr } = token
 									const { usd, icx, btc, eth } = price || {}
 									const _changeVal = changeVal || 0
@@ -70,7 +106,7 @@ class TokensPage extends Component {
 									return (
 										<tr key={index}>
 											<td>{index + 1}</td>
-											<td>{tokenText(name, symbol, contractAddr, true)}</td>											
+											<td>{tokenText(name, symbol, contractAddr, true)}</td>
 											<td>
 												<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
 												<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>
@@ -98,11 +134,13 @@ class TokensPage extends Component {
 					<div className="screen0">
 						<div className="wrap-holder">
 							<p className="title">Tokens</p>
-							
-								<SearchInput 
-									placeholder="Search for any ICX token name / address"
-									setSearch={this.setSearch}
-								/>
+
+							<SearchInput
+								id="sub-search-input"
+								placeholder="Search for any ICX token name / address"
+								searchKeyword={searchKeyword}
+								changeSearch={this.changeSearch}
+							/>
 							<div className="contents tokens">
 								<p className="txt cont">
 									<span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>

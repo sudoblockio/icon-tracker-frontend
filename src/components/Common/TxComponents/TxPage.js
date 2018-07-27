@@ -25,7 +25,7 @@ class TxPage extends Component {
 		this.txType = ''
 		this.urlIndex = ''
 		this.pageId = 1
-		this.getTxList = () => { }
+		this.getTxList = () => {}
 	}
 
 	componentWillMount() {

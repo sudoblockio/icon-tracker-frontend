@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   tokens: INITIAL_STATE['ARR'],
+  tokensSearch: INITIAL_STATE['ARR'],
   recentTokenTx: INITIAL_STATE['ARR'],
   token: INITIAL_STATE['OBJ'],
   tokenTransfers: INITIAL_STATE['ARR'],
@@ -20,6 +21,10 @@ export function tokensReducer(state = initialState, action) {
     case actionTypes.tokenList: return getState('ARR', REDUX_STEP.READY, state, action, 'tokens') 
     case actionTypes.tokenListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'tokens') 
     case actionTypes.tokenListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'tokens') 
+
+    case actionTypes.tokenListSearch: return getState('ARR', REDUX_STEP.READY, state, action, 'tokensSearch') 
+    case actionTypes.tokenListSearchFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'tokensSearch') 
+    case actionTypes.tokenListSearchRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'tokensSearch') 
 
     case actionTypes.tokenTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'recentTokenTx') 
     case actionTypes.tokenTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'recentTokenTx') 

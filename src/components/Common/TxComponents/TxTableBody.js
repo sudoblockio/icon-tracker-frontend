@@ -155,7 +155,7 @@ class TxTableBody extends Component {
 							<BlockCell height={height}/>
 							<DateCell date={createDate} />
 							<td>{numberWithCommas(txCount)}</td>
-							<td><BlockLink label={hash} to={height} /></td>
+							<td><BlockLink label={hash} to={height} isEllipsis/></td>
 							<AmountCell type="icx" amount={amount} decimal={4} symbol="ICX"/>
 							<AmountCell type="icx" amount={fee} decimal={4} symbol="ICX"/>
 						</tr>

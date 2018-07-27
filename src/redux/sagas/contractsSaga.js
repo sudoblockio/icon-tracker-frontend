@@ -14,6 +14,7 @@ import {
 
 export default function* contractsSaga() {
   yield fork(watchContractList);
+  yield fork(watchContractListSearch);
   yield fork(watchContractInfo);
   yield fork(watchContractTxList);
   yield fork(watchContractTokenTxList);
@@ -24,6 +25,7 @@ export default function* contractsSaga() {
 }
 
 function* watchContractList() { yield takeLatest(AT.contractList, contractListFunc) }
+function* watchContractListSearch() { yield takeLatest(AT.contractListSearch, contractListSearchFunc) }
 function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFunc) }
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
@@ -44,6 +46,21 @@ export function* contractListFunc(action) {
   }
   catch (e) {
     yield put({ type: AT.contractListRejected });
+  }
+}
+
+export function* contractListSearchFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.contractListSearchFulfilled, payload: payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    yield put({ type: AT.contractListSearchRejected });
   }
 }
 

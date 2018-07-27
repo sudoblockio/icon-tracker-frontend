@@ -51,6 +51,10 @@ const actionTypes = {
   contractList: 'SELECT_CONTRACT_LIST',
   contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
   contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
+  
+  contractListSearch: 'SELECT_CONTRACT_LIST_SEARCH',
+  contractListSearchFulfilled: 'SELECT_CONTRACT_LIST_SEARCH_FULFILLED',
+  contractListSearchRejected: 'SELECT_CONTRACT_LIST_SEARCH_REJECTED',
 
   contractTokenTxList: 'CONTRACT_TOKEN_TX_LIST',
   contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',
@@ -103,6 +107,10 @@ const actionTypes = {
   tokenList: 'TOKEN_LIST',
   tokenListFulfilled: 'TOKEN_LIST_FULFILLED',
   tokenListRejected: 'TOKEN_LIST_REJECTED',
+  
+  tokenListSearch: 'TOKEN_LIST_SEARCH',
+  tokenListSearchFulfilled: 'TOKEN_LIST_FULFILLED_SEARCH',
+  tokenListSearchRejected: 'TOKEN_LIST_REJECTED_SEARCH',
   
   tokenTxList: 'TOKEN_TX_LIST',
   tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BlockLink = ({to, label = ''}) => {
+const BlockLink = ({to, label = '', isEllipsis}) => {
   return (
-    <Link className="on" to={'/block/' + to}>{ label || to }</Link>
+    <Link className={`on ${isEllipsis ? 'ellipsis' : ''}`} to={'/block/' + to}>{ label || to }</Link>
   )
 }
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import queryString from 'query-string'
 import {
   numberWithCommas,
   convertNumberToText,
   startsWith,
   calcMaxPageNum,
   onlyDate,
-  searchLowerCase
 } from '../../utils/utils';
 import {
   CONTRACT_STATUS
@@ -19,75 +19,87 @@ import {
   SearchInput
 } from '../../components/';
 
+const ROUTE = '/contracts'
+
 class ContractsPage extends Component {
 
   constructor(props) {
     super(props)
+    this.pageId = 1
     this.state = {
-      search: ''
+      searchKeyword: ''
     }
   }
 
   componentWillMount() {
-    const { pathname } = this.props.url;
-    if (pathname === '/contracts') {
-      this.contractList()
-    }
-
-    const page = pathname.split("/")[2]
-    if (!isNaN(page)) {
-      this.contractList(page)
-    }
-    else {
-      this.props.history.push('/contracts');
-    }
+    this.setInitialData(this.props.url)
   }
 
   componentWillReceiveProps(nextProps) {
-    const current = this.props.url.pathname
-    const next = nextProps.url.pathname
-    if (current !== next && startsWith(next, '/contracts')) {
-      const page = next.split("/")[2]
-      this.contractList(page)
+    const { pathname: currentPath } = this.props.url
+    const { pathname: nextPath } = nextProps.url
+    if (currentPath !== nextPath && startsWith(nextPath, ROUTE)) {
+      this.setInitialData(nextProps.url)
+    }
+    else {
+      const { search: currentSearch } = this.props.url
+      const { search: nextSearch } = nextProps.url
+      if (currentSearch !== nextSearch) {
+        this.setSearch(nextSearch)
+      }
     }
   }
 
-  contractList = (_page, _count) => {
+  setInitialData = (url, sort) => {
+    const { pathname, search } = url
+    this.pageId = pathname.split("/")[2] || 1
     const { contracts } = this.props
-    const page = _page || contracts.page
-    const count = _count || contracts.count
-    this.props.contractList({ page, count })
+    const { count } = contracts
+    this.contractListByCount(sort || count)
+    if (search) {
+      this.setSearch(search)
+    }
   }
 
   contractListByCount = (count) => {
-    this.contractList(1, count)
+    this.props.contractList({ page: this.pageId, count })
   }
 
   contractListByPage = (page) => {
-    this.props.history.push('/contracts/' + page);
+    this.props.history.push(`${ROUTE}/${page}`);
   }
 
-  setSearch = (nextSearch) => {
+  setSearch = (_search) => {
+    const parsed = queryString.parse(_search)
+    const { search } = parsed
+    this.setState({ searchKeyword: search || '' }, () => {
+      if (search) {
+        this.props.contractListSearch({ keyword: search, page: 1, count: 100 })
+      }
+    })
+  }
+
+  changeSearch = (nextSearch) => {
     const { search } = this.state
-    if (search === '' && nextSearch === '') {
-      return
+    if (search === '' && nextSearch === '') return
+    if (nextSearch) {
+      this.props.history.push(`${ROUTE}?search=${nextSearch}`);
     }
-    this.setState({ search: nextSearch })
+    else {
+      this.props.history.push(ROUTE);
+    }
   }
 
   render() {
-    const { search } = this.state
-    const { contracts } = this.props
-    const { loading, data, page, listSize, count } = contracts;
-    const list = data.filter(token => {
-      const { contractName } = token
-      return searchLowerCase(search, [contractName])
-    })
-    const noData = list.length === 0
+    const { searchKeyword } = this.state
+    const { contracts, contractsSearch } = this.props
+    const ListData = !searchKeyword ? contracts : contractsSearch
+    const { loading, data, page, listSize, count } = ListData;
+    const noData = data.length === 0
 
     const TableContent = () => {
       if (noData) {
-        return <NoBox text={search ? 'No Data' : 'No Contract'} />
+        return <NoBox text={searchKeyword ? 'No Data' : 'No Contract'} />
       }
       else {
         return ([
@@ -108,19 +120,19 @@ class ContractsPage extends Component {
             </thead>
             <tbody>
               {
-                list.map((row, index) => (
+                data.map((row, index) => (
                   <TableRow key={index} data={row} />
                 ))
               }
             </tbody>
           </table>,
-          (!search &&
+          (!searchKeyword &&
             <SortHolder
               key='SortHolder'
               count={count}
               getData={this.contractListByCount}
             />),
-          (!search &&
+          (!searchKeyword &&
             <Pagination
               key='Pagination'
               pageNum={page}
@@ -140,9 +152,11 @@ class ContractsPage extends Component {
           <div className="screen0">
             <div className="wrap-holder">
               <p className="title">Contracts</p>
-              <SearchInput 
+              <SearchInput
+                id="sub-search-input"
                 placeholder="Search for contract name / address"
-                setSearch={this.setSearch}
+                searchKeyword={searchKeyword}
+                changeSearch={this.changeSearch}
               />
               <div className="contents">
                 <p className="txt cont">

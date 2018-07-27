@@ -7,6 +7,13 @@ export function tokenList(payload) {
   }
 }
 
+export function tokenListSearch(payload) {
+  return {
+    type: actionTypes.tokenListSearch,
+    payload
+  }
+}
+
 export function tokenTxList(payload) {
   return {
     type: actionTypes.tokenTxList,

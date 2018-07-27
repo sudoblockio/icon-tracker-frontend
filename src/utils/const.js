@@ -31,7 +31,7 @@ export const CONTRACT_STATUS = {
     "2": 'Reject',
 }
 
-export const SORT_TYPE = [10, 20, 40, 80, 160]
+export const SORT_TYPE = [2, 10, 20, 40, 80, 160]
 
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']

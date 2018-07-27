@@ -3,8 +3,16 @@ import React, { Component } from 'react';
 class SearchInput extends Component {
   constructor(props) {
     super(props)
+    const { searchKeyword } = this.props
     this.state = {
-      search: ''
+      search: searchKeyword
+    }
+  }
+
+  componentDidMount = () => {
+    const { searchKeyword, id } = this.props
+    if (searchKeyword && id) {
+      document.getElementById(id).focus()
     }
   }
 
@@ -30,22 +38,30 @@ class SearchInput extends Component {
     }
   }
 
+  handleFocus = (e) => {
+    const { value } = e.target
+    e.target.value = ''
+    e.target.value = value
+  }
+
   handleClick = () => {
     const { search } = this.state
-    this.props.setSearch(search)
+    this.props.changeSearch(search)
   }
 
   render() {
     const { search } = this.state
-    const { placeholder } = this.props
+    const { placeholder, id } = this.props
     return (
       <div className="search-holder">
         <div className="search-group">
           <input name="search" type="text" className="txt-type-search"
+            id={id}
             placeholder={placeholder}
             value={search}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
+            onFocus={this.handleFocus}
           />
           <span onClick={this.handleClick}><em className="img"></em></span>
         </div>

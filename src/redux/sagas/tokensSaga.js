@@ -9,6 +9,7 @@ import {
 } from '../api/restV3';
 
 function* watchTokenList() { yield takeLatest(AT.tokenList, tokenListFunc) }
+function* watchTokenListSearch() { yield takeLatest(AT.tokenListSearch, tokenListSearchFunc) }
 function* watchTokenTxList() { yield takeLatest(AT.tokenTxList, tokenTxListFunc) }
 function* watchTokenSummary() { yield takeLatest(AT.tokenSummary, tokenSummaryFunc) }
 function* watchTokenTransfersList() { yield takeLatest(AT.tokenTransfersList, tokenTransfersListFunc) }
@@ -16,6 +17,7 @@ function* watchTokenHoldersList() { yield takeLatest(AT.tokenHoldersList, tokenH
 
 export default function* tokensSaga() {
   yield fork(watchTokenList)
+  yield fork(watchTokenListSearch)
   yield fork(watchTokenTxList)
   yield fork(watchTokenSummary)
   yield fork(watchTokenTransfersList)
@@ -32,6 +34,19 @@ function* tokenListFunc(action) {
     }
   } catch (e) {
     yield put({ type: AT.tokenListRejected });
+  }
+}
+
+function* tokenListSearchFunc(action) {
+  try {
+    const payload = yield call(TOKEN_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.tokenListSearchFulfilled, payload: payload });
+    } else {
+      throw new Error();
+    }
+  } catch (e) {
+    yield put({ type: AT.tokenListSearchRejected });
   }
 }
 
