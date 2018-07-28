@@ -22,6 +22,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const AddressesPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressDetailPage));
+const AddressListPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressDetailPage));
 
-export default AddressesPageContainer;
+export default AddressListPageContainer;

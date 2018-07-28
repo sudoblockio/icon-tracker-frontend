@@ -3,9 +3,9 @@ import {
 	SearchPage
 } from 'components'
 
-class ContractsPage extends Component {
+class ContractListPage extends Component {
 	render() {
 		return <SearchPage {...this.props}/>
 	}
 }
-export default ContractsPage
+export default ContractListPage

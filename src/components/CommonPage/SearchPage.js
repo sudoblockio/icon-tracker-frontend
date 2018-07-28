@@ -19,7 +19,7 @@ import {
   SearchTableDesc
 } from 'components';
 
-class ContractsPage extends Component {
+class SearchPage extends Component {
 
   constructor(props) {
     super(props)
@@ -199,4 +199,4 @@ class ContractsPage extends Component {
   }
 }
 
-export default ContractsPage;
+export default SearchPage;

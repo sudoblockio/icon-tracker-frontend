@@ -17,5 +17,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TransactionsPageContainer = connect(mapStateToProps, mapDispatchToProps)(TransactionListPage);
-export default TransactionsPageContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionListPage);

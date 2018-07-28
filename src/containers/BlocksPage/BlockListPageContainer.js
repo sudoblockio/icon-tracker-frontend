@@ -16,6 +16,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const BlocksPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(BlockListPage));
-
-export default BlocksPageContainer;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlockListPage));

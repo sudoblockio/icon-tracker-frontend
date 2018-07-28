@@ -1,18 +1,18 @@
 import MainPageContainer from './MainPage/MainPageContainer'
-import AddressesPageContainer from './AddressesPage/AddressesPageContainer'
+import AddressListPageContainer from './AddressesPage/AddressListPageContainer'
 import AddressDetailPageContainer from './AddressesPage/AddressDetailPageContainer'
 
 import ContractDetailPageContainer from './ContractsPage/ContractDetailPageContainer'
-import ContractsPageContainer from './ContractsPage/ContractsPageContainer'
+import ContractListPageContainer from './ContractsPage/ContractListPageContainer'
 
-import BlocksPageContainer from './BlocksPage/BlocksPageContainer'
+import BlockListPageContainer from './BlocksPage/BlockListPageContainer'
 import BlockDetailPageContainer from './BlocksPage/BlockDetailPageContainer'
-import TransactionsPageContainer from './TransactionsPage/TransactionsPageContainer'
+import TransactionListPageContainer from './TransactionsPage/TransactionListPageContainer'
 import TransactionDetailPageContainer from './TransactionsPage/TransactionDetailPageContainer'
 import HeaderContainer from './Common/HeaderContainer'
 import NotFoundPageContainer from './Common/NotFoundPageContainer'
 
-import TokensPageContainer from './TokensPage/TokensPageContainer'
+import TokenListPageContainer from './TokensPage/TokenListPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
 import TxPageContainer from './Common/TxPageContainer'
@@ -20,19 +20,19 @@ import TxPageContainer from './Common/TxPageContainer'
 export {
   MainPageContainer,
   HeaderContainer,
-  AddressesPageContainer,
+  AddressListPageContainer,
   AddressDetailPageContainer,
 
   ContractDetailPageContainer,
-  ContractsPageContainer,
+  ContractListPageContainer,
 
-  BlocksPageContainer,
+  BlockListPageContainer,
   BlockDetailPageContainer,
-  TransactionsPageContainer,
+  TransactionListPageContainer,
   TransactionDetailPageContainer,
   NotFoundPageContainer,
 
-  TokensPageContainer,
+  TokenListPageContainer,
   TokenDetailPageContainer,
 
   TxPageContainer,

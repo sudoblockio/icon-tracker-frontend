@@ -3,16 +3,16 @@ import { Switch, Route } from 'react-router-dom';
 import { Footer, Popup } from './components/';
 import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
-import AddressesPage from './pages/AddressesPage';
+import AddressListPage from './pages/AddressListPage';
 import AddressDetailPage from './pages/AddressDetailPage';
 import ContractDetailPage from './pages/ContractDetailPage'
-import ContractsPage from './pages/ContractsPage'
-import BlocksPage from './pages/BlocksPage';
+import ContractListPage from './pages/ContractListPage'
+import BlockListPage from './pages/BlockListPage';
 import BlockDetailPage from './pages/BlockDetailPage';
-import TransactionsPage from './pages/TransactionsPage';
+import TransactionListPage from './pages/TransactionListPage';
 import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
-import TokensPage from './pages/TokensPage'
+import TokenListPage from './pages/TokenListPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import TxPage from './pages/TxPage'
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
@@ -28,23 +28,23 @@ class Routes extends Component {
             <Switch>
               <Route onEnter={window.scroll(0, 0)} path='/' component={MainPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}`} component={AddressesPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}/:pageId`} component={AddressesPage} />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}`} component={AddressListPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESSES}/:pageId`} component={AddressListPage} />
               <Route onEnter={window.scroll(0, 0)} path='/address/:addressId' component={AddressDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}`} component={BlocksPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}/:pageId`} component={BlocksPage} />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}`} component={BlockListPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.BLOCKS}/:pageId`} component={BlockListPage} />
               <Route onEnter={window.scroll(0, 0)} path='/block/:blockId' component={BlockDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}`} component={TransactionsPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TransactionsPage} />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}`} component={TransactionListPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TransactionListPage} />
               <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}`} component={ContractsPage} exact />
-              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractsPage} />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}`} component={ContractListPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractListPage} />
               <Route onEnter={window.scroll(0, 0)} path='/contract/:contractId' component={ContractDetailPage} exact />
 
-              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.TOKENS}`} component={TokensPage} exact />
+              <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.TOKENS}`} component={TokenListPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/token/:tokenId' component={TokenDetailPage} exact />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact />

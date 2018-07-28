@@ -20,6 +20,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TokensPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TokenListPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TokenListPage));
 
-export default TokensPageContainer;

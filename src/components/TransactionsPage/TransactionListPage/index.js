@@ -3,9 +3,9 @@ import {
 	TxPage
 } from 'components'
 
-class TransactionsPage extends Component {
+class TransactionListPage extends Component {
 	render() {
 		return <TxPage {...this.props}/>
 	}
 }
-export default TransactionsPage
+export default TransactionListPage

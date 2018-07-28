@@ -20,5 +20,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const ContractsPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ContractListPage));
-export default ContractsPageContainer;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContractListPage));

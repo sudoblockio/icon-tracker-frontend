@@ -3,9 +3,9 @@ import {
 	SearchPage
 } from 'components'
 
-class TokensPage extends Component {
+class TokenListPage extends Component {
 	render() {
 		return <SearchPage {...this.props}/>
 	}
 }
-export default TokensPage
+export default TokenListPage
