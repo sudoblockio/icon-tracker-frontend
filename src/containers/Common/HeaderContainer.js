@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Header } from '../../components/';
+import { Header } from 'components';
 import { search } from '../../redux/actions/searchActions';
 
 function mapStateToProps(state) {

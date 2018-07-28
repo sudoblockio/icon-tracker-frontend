@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TokensPage } from '../../components/';
+import { TokenListPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   tokenList,
@@ -20,6 +20,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TokensPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TokensPage));
+const TokensPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TokenListPage));
 
 export default TokensPageContainer;

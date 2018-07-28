@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numberWithCommas } from '../../utils/utils'
+import { numberWithCommas } from 'utils/utils'
 
 class InfoSummary extends Component {
   render() {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TxPage } from '../../components/';
+import { TxPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   contractTxList,

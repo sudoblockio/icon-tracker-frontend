@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
     TransactionLink
-} from '../../components'
+} from 'components'
 import {
     CONTRACT_STATUS
-} from '../../utils/const'
+} from 'utils/const'
 
 class ContractDetail extends Component {
 

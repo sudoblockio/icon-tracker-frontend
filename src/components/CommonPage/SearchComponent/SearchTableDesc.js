@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
     SEARCH_TYPE
-} from '../../../utils/const'
+} from 'utils/const'
 import {
     numberWithCommas
-} from '../../../utils/utils'
+} from 'utils/utils'
 
 class SearchTableDesc extends Component {
 

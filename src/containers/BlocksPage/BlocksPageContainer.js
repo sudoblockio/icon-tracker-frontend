@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { BlocksPage } from '../../components/';
+import { BlockListPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { blockList } from '../../redux/actions/blocksActions';
 
@@ -16,6 +16,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const BlocksPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(BlocksPage));
+const BlocksPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(BlockListPage));
 
 export default BlocksPageContainer;

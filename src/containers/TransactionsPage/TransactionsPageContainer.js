@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TransactionsPage } from '../../components/';
+import { TransactionListPage } from 'components';
 import {
   transactionRecentTx
 } from '../../redux/actions/transactionsActions'
@@ -17,5 +17,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TransactionsPageContainer = connect(mapStateToProps, mapDispatchToProps)(TransactionsPage);
+const TransactionsPageContainer = connect(mapStateToProps, mapDispatchToProps)(TransactionListPage);
 export default TransactionsPageContainer;

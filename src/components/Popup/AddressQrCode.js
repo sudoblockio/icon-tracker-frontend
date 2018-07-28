@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     QrCodeComponent
-} from '../../components/'
+} from 'components'
 
 class AddressQrCode extends Component {
 

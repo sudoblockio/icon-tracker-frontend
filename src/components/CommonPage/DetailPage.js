@@ -3,10 +3,10 @@ import {
     startsWith,
     findTabIndex,
     noSpaceLowerCase
-} from '../../utils/utils'
+} from 'utils/utils'
 import {
     NotFound,
-} from '../../components/';
+} from 'components';
 
 class DetailPage extends Component {
 

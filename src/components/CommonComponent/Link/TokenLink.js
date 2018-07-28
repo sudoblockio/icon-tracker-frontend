@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import LinkToPage from './LinkToPage'
 
-const TokenLink = ({ label, to }) => {
-    return (
-        <Link className="on" to={'/token/' + to}>{label || to}</Link>
-    )
+const TokenLink = ({ to, label }) => {
+  return (
+    <LinkToPage
+      noSpan
+      aClassName="on"
+      to={to}
+      label={label}
+      pageType="token"
+    />
+  )
 }
 
 export default TokenLink;

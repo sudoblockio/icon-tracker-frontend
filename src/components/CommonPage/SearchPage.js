@@ -3,11 +3,11 @@ import queryString from 'query-string'
 import {
   startsWith,
   calcMaxPageNum,
-} from '../../utils/utils';
+} from 'utils/utils';
 import {
   SEARCH_TYPE,
   SEARCH_TYPE_DATA,
-} from '../../utils/const'
+} from 'utils/const'
 import {
   LoadingComponent,
   Pagination,
@@ -17,7 +17,7 @@ import {
   SearchTableHead,
   SearchTableBody,
   SearchTableDesc
-} from '../../components/';
+} from 'components';
 
 class ContractsPage extends Component {
 

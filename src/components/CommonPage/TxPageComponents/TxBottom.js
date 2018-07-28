@@ -6,7 +6,7 @@ import {
     TxTableBody,
     NoBox,
     TxBottomTitle
-} from '../../../components'
+} from 'components'
 
 class TxBottom extends Component {
 

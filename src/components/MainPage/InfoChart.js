@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js'
 import moment from 'moment'
-import { LoadingComponent } from '../../components'
+import { LoadingComponent } from 'components'
 
 class InfoChart extends Component {
 

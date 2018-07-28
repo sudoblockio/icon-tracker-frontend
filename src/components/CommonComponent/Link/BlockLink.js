@@ -1,9 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import LinkToPage from './LinkToPage'
 
-const BlockLink = ({to, label = '', isEllipsis}) => {
+const BlockLink = ({ to, label, isEllipsis }) => {
   return (
-    <Link className={`on ${isEllipsis ? 'ellipsis' : ''}`} to={'/block/' + to}>{ label || to }</Link>
+    <LinkToPage
+      noSpan
+      aClassName={`on ${isEllipsis ? 'ellipsis' : ''}`}
+      to={to}
+      label={label}
+      pageType="block"
+    />
   )
 }
 

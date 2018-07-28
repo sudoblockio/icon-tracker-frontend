@@ -4,14 +4,14 @@ import {
 	numberWithCommas,
 	tokenText,
 	onlyDate
-} from '../../../utils/utils'
+} from 'utils/utils'
 import {
-	WalletLink,
-} from '../../../components'
+	AddressLink,
+} from 'components'
 import {
 	CONTRACT_STATUS,
 	SEARCH_TYPE
-} from '../../../utils/const'
+} from 'utils/const'
 
 const AmountCell = ({ type, amount, decimal, symbol }) => {
 	return <td><span>{convertNumberToText(amount, type, decimal)}</span><em>{symbol}</em></td>
@@ -25,7 +25,7 @@ class SearchTableBody extends Component {
 				case SEARCH_TYPE.CONTRACTS:
 					return (
 						<tr>
-							<td className="on"><span className="ellipsis"><WalletLink to={data.address} /></span></td>
+							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
 							<td>{data.contractName}</td>
 							<td>{data.compiler}</td>
 							<AmountCell type="icx" amount={data.balance} decimal={4} symbol="ICX" />

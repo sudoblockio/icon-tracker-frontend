@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InfoSummary, InfoChart, RecentBlocks, RecentTransactions } from '../../components'
+import { InfoSummary, InfoChart, RecentBlocks, RecentTransactions } from 'components'
 
 class MainPage extends Component {
 

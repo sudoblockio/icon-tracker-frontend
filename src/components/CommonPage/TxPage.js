@@ -8,14 +8,14 @@ import {
 	TxTableBody,
 	TxPageTitle,
 	NoBox
-} from '../../components/';
+} from 'components';
 import {
 	TX_TYPE,
 	TX_TYPE_DATA
-} from '../../utils/const'
+} from 'utils/const'
 import {
 	calcMaxPageNum,
-} from '../../utils/utils';
+} from 'utils/utils';
 
 class TxPage extends Component {
 

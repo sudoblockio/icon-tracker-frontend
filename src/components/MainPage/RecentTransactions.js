@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { convertNumberToText } from '../../utils/utils'
-import { LoadingComponent, TransactionLink } from '../../components'
+import { convertNumberToText } from 'utils/utils'
+import { LoadingComponent, TransactionLink } from 'components'
 import icon_01 from '../../style/image/icon_01.png'
 import icon_03 from '../../style/image/icon_03.png'
 

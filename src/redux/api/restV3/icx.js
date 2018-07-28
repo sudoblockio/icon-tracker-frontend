@@ -1,4 +1,4 @@
-import { randomUint32 } from '../../../utils/utils'
+import { randomUint32 } from 'utils/utils'
 import { walletApi } from './config'
 
 export function icxGetScore(params) {

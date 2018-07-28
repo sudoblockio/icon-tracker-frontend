@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { NotFound } from '../../components/';
+import { NotFound } from 'components';
 import { searchErrorReset } from '../../redux/actions/searchActions'
 
 function mapStateToProps(state) {

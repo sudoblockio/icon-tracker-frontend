@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { AddressesPage } from '../../components/';
+import { AddressListPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { addressList } from '../../redux/actions/addressesActions';
 
@@ -16,6 +16,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const AddressDetailPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressesPage));
+const AddressDetailPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressListPage));
 
 export default AddressDetailPageContainer;

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { localDevUrl } from '../redux/api/restV3/config'
 import {
   TokenLink,
-} from '../components'
+} from 'components'
 import {
   REDUX_STEP
 } from './const'

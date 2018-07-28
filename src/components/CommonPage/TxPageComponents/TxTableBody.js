@@ -7,15 +7,15 @@ import {
 	dateToUTC,
 	isValidData,
 	tokenText
-} from '../../../utils/utils'
+} from 'utils/utils'
 import {
 	TransactionLink,
-	WalletLink,
+	AddressLink,
 	BlockLink,
-} from '../../../components'
+} from 'components'
 import {
 	TX_TYPE
-} from '../../../utils/const'
+} from 'utils/const'
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -51,7 +51,7 @@ const AddressCell = ({ targetAddr, address, noEllipsis }) => {
 		className = isContract ? 'icon' : ''
 	}
 	else {
-		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis'}><WalletLink to={targetAddr} /></span>
+		_targetAddr = <span className={noEllipsis ? '' : 'ellipsis'}><AddressLink to={targetAddr} /></span>
 		className = `on ${isContract ? 'icon' : ''}`
 	}
 	return (

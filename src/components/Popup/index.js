@@ -5,7 +5,7 @@ import ContractDetail from './ContractDetail'
 import { initPopup } from '../../redux/actions/popupActions'
 import { 
     POPUP_TYPE
-} from '../../utils/const'
+} from 'utils/const'
 
 class Popup extends Component {
 

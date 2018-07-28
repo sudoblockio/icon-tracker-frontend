@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     LoadingComponent,
-} from '../../components'
+} from 'components'
 
 class TabTable extends Component {
 

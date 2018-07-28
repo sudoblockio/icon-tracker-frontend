@@ -1,4 +1,4 @@
-import { makeUrl } from '../../../utils/utils'
+import { makeUrl } from 'utils/utils'
 import { trackerApi } from './config'
 
 export function contractList(payload) {

@@ -5,7 +5,7 @@ import {
   isHxAddress,
   isCxAddress,
   is0xAddress,
-} from '../../utils/utils'
+} from 'utils/utils'
 import {
   searchData as SEARCH_DATA_API,
   blockInfo as BLOCK_INFO_API

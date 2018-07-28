@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TokenDetailPage } from '../../components/';
+import { TokenDetailPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   tokenSummary,

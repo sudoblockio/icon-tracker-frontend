@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { AddressDetailPage } from '../../components/';
+import { AddressDetailPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   addressInfo,

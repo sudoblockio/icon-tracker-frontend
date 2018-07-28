@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoadingComponent } from '../../components/';
+import { LoadingComponent } from 'components';
 
 class SearchBox extends Component {
 

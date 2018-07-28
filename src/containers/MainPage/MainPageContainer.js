@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { MainPage } from '../../components/';
+import { MainPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { getMainInfo, getMainChart } from '../../redux/actions/mainPageActions'
 

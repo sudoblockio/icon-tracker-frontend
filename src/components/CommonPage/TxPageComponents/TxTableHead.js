@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getUTCString } from '../../../utils/utils'
-import { TX_TYPE } from '../../../utils/const'
+import { getUTCString } from 'utils/utils'
+import { TX_TYPE } from 'utils/const'
 
 class TxTableHead extends Component {
     render() {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { ContractsPage } from '../../components/';
+import { ContractListPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   contractList,
@@ -20,5 +20,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const ContractsPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ContractsPage));
+const ContractsPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ContractListPage));
 export default ContractsPageContainer;
