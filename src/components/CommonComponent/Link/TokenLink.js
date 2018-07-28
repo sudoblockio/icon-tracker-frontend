@@ -1,14 +1,13 @@
 import React from 'react';
-import LinkToPage from './LinkToPage'
+import LinkCell from './LinkCell'
 
-const TokenLink = ({ to, label, noSpan, spanClassName }) => {
+const TokenLink = ({ to, label, spanClassName }) => {
   return (
-    <LinkToPage
+    <LinkCell
       pageType="token"
       aClassName="on"
       to={to}
       label={label}
-      noSpan={noSpan}
       spanClassName={spanClassName}
     />
   )

@@ -19,11 +19,12 @@ import {
 
 class ContractInfo extends Component {
 
-    componentDidMount() {
-        setTimeout(() => {
-            const event = new CustomEvent('CUSTOM_FX', { detail: "CONTRACT" })
-            window.dispatchEvent(event)    
-        }, 500)
+    onMouseOver = () => {
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "LINK_OVER" }))
+    }
+
+    onMouseOut = () => {
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "LINK_OUT" }))
     }
 
     render() {
@@ -50,16 +51,27 @@ class ContractInfo extends Component {
                                             <td>Balance</td>
                                             <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                             <td>Token Contract</td>
-                                            <TokenContractCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion} />
+                                            <TokenContractCell
+                                                tokenName={tokenName}
+                                                symbol={symbol}
+                                                address={address}
+                                                ircVersion={ircVersion}
+                                                onMouseOver={this.onMouseOver}
+                                                onMouseOut={this.onMouseOut}
+                                            />
                                         </tr>
                                         <tr>
                                             <td>ICX Value</td>
                                             <td>{convertNumberToText(usdBalance, 'usd')} USD</td>
                                             <td>Contract Creator</td>
                                             <td>
-                                                <span className="link address ellipsis"><AddressLink to={creator} /></span><em>at Txn</em><TransactionLink to={createTx} spanClassName="link hash ellipsis" />
                                                 <span className="help address">Creator Address</span>
                                                 <span className="help hash">Creator Transaction Hash</span>
+                                                <span className="link address ellipsis" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                                                    <AddressLink to={creator} />
+                                                </span>
+                                                <em>at Txn</em>
+                                                <TransactionLink to={createTx} spanClassName="link hash ellipsis" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -96,17 +108,25 @@ class DetailButton extends Component {
     }
 }
 
-const TokenContractCell = ({ tokenName, symbol, address, ircVersion }) => {
-    if (ircVersion === IRC_VERSION[1]) {
-        return (
-            <td>
-                {tokenText(tokenName, symbol, address, false, "link token")}
-                <span className="help token">{ircVersion} - {address}</span>
-            </td>
-        )
-    }
-    else {
-        return <td>-</td>
+class TokenContractCell extends Component {
+    render() {
+        const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut } = this.props
+        const Content = () => {
+            if (ircVersion === IRC_VERSION[1]) {
+                return (
+                    <td>
+                        <span className="help token">{ircVersion} Token</span>
+                        <span className="link token" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+                            {tokenText(tokenName, symbol, address)}
+                        </span>
+                    </td>
+                )
+            }
+            else {
+                return <td>-</td>
+            }
+        }
+        return Content()
     }
 }
 

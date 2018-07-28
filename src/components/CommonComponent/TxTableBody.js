@@ -78,7 +78,7 @@ const SignCell = ({ address, fromAddr, toAddr }) => {
 }
 
 const TokenCell = ({ name, address }) => {
-	return <td>{tokenText(name, undefined, address)}</td>
+	return <td>{tokenText(name, undefined, address, 'ellipsis')}</td>
 }
 
 const DateCell = ({ date, isAge }) => {

@@ -12,7 +12,31 @@ $(window).on('CUSTOM_FX', function (e) {
 		case 'CLOSE_DETAIL':
 			$(".popup-wrap.detail").css({ "display": "none" });
 			break
-			
+
+		case 'LINK_OVER':
+			var _class;
+			if ($(".table-typeB .link").hasClass("address")) {
+				_class = "address";
+			} else if ($(".table-typeB .link").hasClass("hash")) {
+				_class = "hash";
+			} else {
+				_class = "token";
+			}
+			$(".table-typeB .help." + _class).addClass("animate");
+			break
+
+		case 'LINK_OUT':
+			var _class;
+			if ($(".table-typeB .link").hasClass("address")) {
+				_class = "address";
+			} else if ($(".table-typeB .link").hasClass("hash")) {
+				_class = "hash";
+			} else {
+				_class = "token";
+			}
+			$(".table-typeB .help." + _class).removeClass("animate");
+			break
+		
 		case 'SORT_HOLDER':
 			$('.sort-holder ').mouseenter(function () {
 				$(".sort-holder ul").stop().slideDown(300, 'swing');

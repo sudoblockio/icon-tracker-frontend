@@ -44,7 +44,7 @@ class SearchTableBody extends Component {
 					return (
 						<tr>
 							<td>{index + 1}</td>
-							<td>{tokenText(name, symbol, contractAddr, true)}</td>
+							<td>{tokenText(name, symbol, contractAddr)}</td>
 							<td>
 								<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
 								<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>
