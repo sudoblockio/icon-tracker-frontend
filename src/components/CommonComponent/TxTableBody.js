@@ -116,7 +116,6 @@ class TxTableBody extends Component {
 				address
 			} = this.props
 
-
 			const addressInData = data.address
 			const isError = data.state === 0
 
@@ -148,9 +147,9 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash}/>
 							<DateCell isAge date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={data.address}/>
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={data.address}/>
-							<AddressCell targetAddr={data.toAddr} address={data.address}/>
+							<AddressCell targetAddr={data.fromAddr} address={address}/>
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address}/>
+							<AddressCell targetAddr={data.toAddr} address={address}/>
 							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol="ICX"/>
 						</tr>
 					)
@@ -159,9 +158,9 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<DateCell isAge date={data.age} />
-							<AddressCell targetAddr={data.fromAddr} address={data.address}/>
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={data.address}/>
-							<AddressCell targetAddr={data.toAddr} address={data.address}/>
+							<AddressCell targetAddr={data.fromAddr} address={address}/>
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address}/>
+							<AddressCell targetAddr={data.toAddr} address={address}/>
 							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol}/>
 							<TokenCell name={data.name} address={data.tradeTokenAddr} />
 						</tr>
@@ -184,9 +183,9 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height}/>
 							<DateCell date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={data.address} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={data.address} />
-							<AddressCell targetAddr={data.toAddr} address={data.address} />
+							<AddressCell targetAddr={data.fromAddr} address={address} />
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
+							<AddressCell targetAddr={data.toAddr} address={address} />
 							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX"/>
 							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX"/>
 						</tr>
@@ -196,9 +195,9 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<DateCell date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={data.address} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={data.address} />
-							<AddressCell targetAddr={data.toAddr} address={data.address} />
+							<AddressCell targetAddr={data.fromAddr} address={address} />
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
+							<AddressCell targetAddr={data.toAddr} address={address} />
 							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol}/>
 							<TokenCell name={data.contractName} address={data.contractAddr} />
 						</tr>
