@@ -116,37 +116,9 @@ class TxTableBody extends Component {
 				address
 			} = this.props
 
-			const {
-				name,
-				txHash,
-				age,
-				fromAddr,
-				toAddr,
-				quantity,
-				state,
-				height,
-				amount,
-				createDate,
-				fee,
-				contractSymbol,
-				contractName,
-				contractAddr,
-				tokenName,
-				symbol,
-				rank,
-				percentage,
-				tradeTokenAddr,
-				method,
-				eventLog,
-				balance,
-				icxUsd,
-				txCount,
-				nodeType,
-				hash,
-			} = data
 
 			const addressInData = data.address
-			const isError = state === 0
+			const isError = data.state === 0
 
 			switch (txType) {
 				case TX_TYPE.BLOCKS:
@@ -281,7 +253,7 @@ class TxTableBody extends Component {
 				case TX_TYPE.TOKEN_HOLDERS:
 					return (
 						<tr>
-							<td>{rank}</td>
+							<td>{data.rank}</td>
 							<AddressCell targetAddr={addressInData} noEllipsis/>
 							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol}/>
 							<td><span>{data.percentage}</span><em>%</em></td>
