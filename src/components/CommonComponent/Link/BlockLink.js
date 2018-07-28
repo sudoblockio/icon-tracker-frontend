@@ -1,11 +1,11 @@
 import React from 'react';
 import LinkToPage from './LinkToPage'
 
-const BlockLink = ({ to, label, isEllipsis }) => {
+const BlockLink = ({ to, label, ellipsis }) => {
   return (
     <LinkToPage
       pageType="block"
-      aClassName={`on ${isEllipsis ? 'ellipsis' : ''}`}
+      aClassName={`on ${ellipsis ? 'ellipsis' : ''}`}
       to={to}
       label={label}
       noSpan
