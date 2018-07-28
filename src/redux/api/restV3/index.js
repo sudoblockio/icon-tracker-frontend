@@ -23,9 +23,10 @@ import {
 import {
     contractList,
     contractInfo,
+    contractDetail,
     contractTxList,
     contractTokenTxList,
-    contractEventLogList
+    contractEventLogList,
 } from './contract'
 
 import {
@@ -64,6 +65,7 @@ export {
 
     contractList,
     contractInfo,
+    contractDetail,
     contractTxList,
     contractTokenTxList,
     contractEventLogList,

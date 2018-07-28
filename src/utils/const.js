@@ -40,8 +40,8 @@ export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
 export const TRANSACTION_TABS = ['Events']
 
 export const POPUP_TYPE = {
-    AddressQrCode: 'AddressQrCode',
-    ContractDetail: 'ContractDetail'
+    QR: 'qr',
+    DETAIL: 'detail'
 }
 
 export const SEARCH_TYPE = {

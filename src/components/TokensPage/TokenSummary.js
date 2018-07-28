@@ -6,7 +6,7 @@ import {
 } from '../../utils/utils'
 import { 
     LoadingComponent,
-    ContractLink 
+    WalletLink 
 } from '../../components'
 
 class TokenSummary extends Component {
@@ -32,7 +32,7 @@ class TokenSummary extends Component {
                                             <td>Total Supply</td>
                                             <td>{numberWithCommas(totalSupply)} {symbol}{!!_totalSupplyUsd && <em>({_totalSupplyUsd} USD)</em>}</td>
                                             <td>Contract </td>
-                                            <td><span>{contract ? <ContractLink to={contract}/> : '-'}</span></td>
+                                            <td><span>{contract ? <WalletLink to={contract}/> : '-'}</span></td>
                                         </tr>
                                         <tr>
                                             <td>Price</td>

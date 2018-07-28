@@ -11,6 +11,7 @@ const initialState = {
   contracts: INITIAL_STATE['ARR'],
   contractsSearch: INITIAL_STATE['ARR'],
   contract: INITIAL_STATE['OBJ'],
+  contractDetail: INITIAL_STATE['OBJ'],
   contractTx: INITIAL_STATE['ARR'],
   contractTokenTx: INITIAL_STATE['ARR'],
   contractEvents: INITIAL_STATE['ARR'],
@@ -37,6 +38,10 @@ export function contractsReducer(state = initialState, action) {
     case actionTypes.contractInfo: return getState('OBJ', REDUX_STEP.READY, state, action, 'contract')
     case actionTypes.contractInfoFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'contract')
     case actionTypes.contractInfoRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'contract')
+
+    case actionTypes.contractDetail: return getState('OBJ', REDUX_STEP.READY, state, action, 'contractDetail')
+    case actionTypes.contractDetailFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'contractDetail')
+    case actionTypes.contractDetailRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'contractDetail')
 
     case actionTypes.contractTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'contractTx')
     case actionTypes.contractTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'contractTx')

@@ -79,6 +79,12 @@ const actionTypes = {
   contractInfoFulfilled: 'CONTRACT_INFO_FULFILLED',
   contractInfoRejected: 'CONTRACT_INFO_REJECTED',
 
+  contractDetail: 'CONTRACT_DETAIL',
+  contractDetailFulfilled: 'CONTRACT_DETAIL_FULFILLED',
+  contractDetailRejected: 'CONTRACT_DETAIL_REJECTED',
+
+  contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
+
   contractTxList: 'CONTRACT_TX_LIST',
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
   contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',

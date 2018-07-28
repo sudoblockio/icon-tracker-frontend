@@ -32,10 +32,6 @@ import LoadingComponent from './CommonComponent/LoadingComponent'
 import Pagination from './CommonComponent/Pagination'
 import NotFound from './CommonComponent/NotFound'
 
-import WalletLink from './CommonComponent/WalletLink'
-import BlockLink from './CommonComponent/BlockLink'
-import TransactionLink from './CommonComponent/TransactionLink'
-
 import SortHolder from './CommonComponent/SortHolder'
 import CopyButton from './CommonComponent/CopyButton'
 
@@ -47,8 +43,6 @@ import TokenTransfers from './TokensPage/TokenTabs/TokenTransfers'
 import TokenHolders from './TokensPage/TokenTabs/TokenHolders'
 import TokenContractRead from './TokensPage/TokenTabs/TokenContractRead'
 
-import TokenLink from './CommonComponent/TokenLink'
-import ContractLink from './CommonComponent/ContractLink'
 import NoBox from './CommonComponent/NoBox'
 import SearchInput from './CommonComponent/SearchInput'
 
@@ -80,6 +74,11 @@ import QrCodeComponent from './CommonComponent/QrCode/QrCodeComponent'
 
 import DetailPage from './CommonPage/DetailPage'
 import TabTable from './CommonPage/TabTable'
+
+import WalletLink from './CommonComponent/Link/WalletLink'
+import BlockLink from './CommonComponent/Link/BlockLink'
+import TransactionLink from './CommonComponent/Link/TransactionLink'
+import TokenLink from './CommonComponent/Link/TokenLink'
 
 export {
   Header,
@@ -115,10 +114,7 @@ export {
   LoadingComponent,
   Pagination,
   NotFound,
-  
-  WalletLink,
-  BlockLink,
-  TransactionLink,
+
 
   SortHolder,
   CopyButton,
@@ -131,8 +127,6 @@ export {
   TokenHolders,
   TokenContractRead,
 
-  TokenLink,
-  ContractLink,
   NoBox,
   SearchInput,
 
@@ -163,5 +157,10 @@ export {
   QrCodeComponent,
 
   DetailPage,
-  TabTable
+  TabTable,
+  
+  WalletLink,
+  BlockLink,
+  TransactionLink,
+  TokenLink,
 }

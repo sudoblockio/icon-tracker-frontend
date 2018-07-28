@@ -3,6 +3,7 @@ import { ContractDetailPage } from '../../components/';
 import { withRouter } from 'react-router-dom';
 import {
     contractInfo,
+    contractDetailPopup,
     contractTxList,
     contractTokenTxList,
     contractEventLogList,
@@ -21,6 +22,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         contractInfo: payload => dispatch(contractInfo(payload)),
+        contractDetailPopup: payload => dispatch(contractDetailPopup(payload)),
         contractTxList: payload => dispatch(contractTxList(payload)),
         contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
         contractEventLogList: payload => dispatch(contractEventLogList(payload)),

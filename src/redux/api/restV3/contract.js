@@ -28,6 +28,19 @@ export function contractInfo(payload) {
   })
 }
 
+export function contractDetail(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/contract/detail', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 export function contractTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/txList', payload))

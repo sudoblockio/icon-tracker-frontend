@@ -4,19 +4,14 @@ import { POPUP_TYPE } from '../../../utils/const'
 import { setPopup } from '../../../redux/actions/popupActions'
 
 class QrCodeButton extends Component {
-    componentDidMount() {
-        const event = new CustomEvent('CUSTOM_FX', { detail: "QR_CODE" })
-        window.dispatchEvent(event)
-    }
-
+    
     handleClick = () => {
         const { address } = this.props
         this.props.setPopup({
-            type: POPUP_TYPE.AddressQrCode,
+            type: POPUP_TYPE.QR,
             data: { address }
         })
     }
-
 
     render() {
         return (

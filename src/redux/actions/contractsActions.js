@@ -21,6 +21,20 @@ export function contractInfo(payload) {
   }
 }
 
+export function contractDetail(payload) {
+  return {
+    type: actionTypes.contractDetail,
+    payload
+  }
+}
+
+export function contractDetailPopup(payload) {
+  return {
+    type: actionTypes.contractDetailPopup,
+    payload
+  }
+}
+
 export function contractTxList(payload) {
   return {
     type: actionTypes.contractTxList,

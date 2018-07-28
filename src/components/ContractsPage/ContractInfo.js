@@ -19,20 +19,12 @@ import {
 
 class ContractInfo extends Component {
 
-    componentDidMount() {
-        const event = new CustomEvent('CUSTOM_FX', { detail: "CONTRACT" })
-        // TODO timeout 제거
-        setTimeout(() => {
-            window.dispatchEvent(event)
-        }, 100)
-    }
-
     render() {
         const { contract } = this.props
         const { loading, data } = contract
         const Contents = () => {
             if (loading) {
-                return <LoadingComponent height='206px'/>
+                return <LoadingComponent height='206px' />
             }
             else {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
@@ -58,7 +50,7 @@ class ContractInfo extends Component {
                                             <td>{convertNumberToText(usdBalance, 'usd')} USD</td>
                                             <td>Contract Creator</td>
                                             <td>
-                                                <span className="link address ellipsis"><WalletLink to={creator} /></span><em>at Txn</em><TransactionLink to={createTx} spanClass="link hash ellipsis" />
+                                                <span className="link address ellipsis"><WalletLink to={creator} /></span><em>at Txn</em><TransactionLink to={createTx} spanClassName="link hash ellipsis" />
                                                 <span className="help address">Creator Address</span>
                                                 <span className="help hash">Creator Transaction Hash</span>
                                             </td>
@@ -67,7 +59,9 @@ class ContractInfo extends Component {
                                             <td>Transactions</td>
                                             <td>{numberWithCommas(txCount)} Txns</td>
                                             <td>Status</td>
-                                            <td>{CONTRACT_STATUS[status]}<button className="btn-type-normal status">Detail</button></td>
+                                            <td>{CONTRACT_STATUS[status]}
+                                                <DetailButton contractAddr={address} contractDetailPopup={this.props.contractDetailPopup} />
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -78,6 +72,20 @@ class ContractInfo extends Component {
             }
         }
         return Contents()
+    }
+}
+
+class DetailButton extends Component {
+
+    handleClick = () => {
+        const { contractAddr } = this.props
+        this.props.contractDetailPopup({ contractAddr })
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick} className="btn-type-normal status">Detail</button>
+        )
     }
 }
 

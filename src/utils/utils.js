@@ -187,6 +187,8 @@ export function getArrayState(step, state, action, dataType) {
           data: [],
           page: Number(action.payload.page) || 1,
           count: Number(action.payload.count) || state[dataType].count,
+          listSize: 0,
+          totalSize: 0,
           error: ''
         }
       }

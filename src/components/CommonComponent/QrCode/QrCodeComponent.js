@@ -7,15 +7,6 @@ class QrCodeComponent extends Component {
         this.drawQrCode()
     }
 
-    componentWillReceiveProps(nextProps) {
-        const { text, scale } = this.props.text
-        const nextText = nextProps.text
-        const nextScale = this.props.scale
-        if (text !== nextText || scale !== nextScale) {
-            this.drawQrCode()
-        }    
-    }
-
     drawQrCode () {
         const { text, scale } = this.props
         if (!text || !scale) return

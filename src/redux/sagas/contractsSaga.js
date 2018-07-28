@@ -1,10 +1,13 @@
 import { fork, put, takeLatest, call, all, select } from 'redux-saga/effects'
 // import { delay } from 'redux-saga'
 import AT from '../actionTypes/actionTypes';
-
+import {
+  POPUP_TYPE
+} from '../../utils/const'
 import {
   contractList as CONTRACT_LIST_API,
   contractInfo as CONTRACT_INFO_API,
+  contractDetail as CONTRACT_DETAIL_API,
   contractTxList as CONTRACT_TX_LIST_API,
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
@@ -16,6 +19,8 @@ export default function* contractsSaga() {
   yield fork(watchContractList);
   yield fork(watchContractListSearch);
   yield fork(watchContractInfo);
+  yield fork(watchContractDetail);
+  yield fork(watchContractDetailPopup);
   yield fork(watchContractTxList);
   yield fork(watchContractTokenTxList);
   yield fork(watchContractEventLogList);
@@ -27,6 +32,8 @@ export default function* contractsSaga() {
 function* watchContractList() { yield takeLatest(AT.contractList, contractListFunc) }
 function* watchContractListSearch() { yield takeLatest(AT.contractListSearch, contractListSearchFunc) }
 function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFunc) }
+function* watchContractDetail() { yield takeLatest(AT.contractDetail, contractDetailFunc) }
+function* watchContractDetailPopup() { yield takeLatest(AT.contractDetailPopup, contractDetailPopupFunc) }
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
 function* watchContractEventLogList() { yield takeLatest(AT.contractEventLogList, contractEventLogListFunc) }
@@ -38,7 +45,7 @@ export function* contractListFunc(action) {
   try {
     const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({ type: AT.contractListFulfilled, payload: payload });
+      yield put({ type: AT.contractListFulfilled, payload });
     }
     else {
       throw new Error();
@@ -53,7 +60,7 @@ export function* contractListSearchFunc(action) {
   try {
     const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({ type: AT.contractListSearchFulfilled, payload: payload });
+      yield put({ type: AT.contractListSearchFulfilled, payload });
     }
     else {
       throw new Error();
@@ -68,7 +75,7 @@ export function* contractInfoFunc(action) {
   try {
     const payload = yield call(CONTRACT_INFO_API, action.payload);
     if (payload.result === '200' && payload.data !== "NO_DATA") {
-      yield put({ type: AT.contractInfoFulfilled, payload: payload });
+      yield put({ type: AT.contractInfoFulfilled, payload });
     }
     else {
       throw new Error();
@@ -79,11 +86,42 @@ export function* contractInfoFunc(action) {
   }
 }
 
+export function* contractDetailFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_DETAIL_API, action.payload);
+    if (payload.result === '200' && payload.data !== "NO_DATA") {
+      yield put({ type: AT.contractDetailFulfilled, payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    yield put({ type: AT.contractDetailRejected });
+  }
+}
+
+export function* contractDetailPopupFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_DETAIL_API, action.payload);
+    if (payload.result === '200' && payload.data !== "NO_DATA") {
+      payload.type = POPUP_TYPE.DETAIL
+      yield put({ type: AT.setPopup, payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
 export function* contractTxListFunc(action) {
   try {
     const payload = yield call(CONTRACT_TX_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({ type: AT.contractTxListFulfilled, payload: payload });
+      yield put({ type: AT.contractTxListFulfilled, payload });
     }
     else {
       throw new Error();
@@ -98,7 +136,7 @@ export function* contractTokenTxListFunc(action) {
   try {
     const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({ type: AT.contractTokenTxListFulfilled, payload: payload });
+      yield put({ type: AT.contractTokenTxListFulfilled, payload });
     }
     else {
       throw new Error();
@@ -113,7 +151,7 @@ export function* contractEventLogListFunc(action) {
   try {
     const payload = yield call(CONTRACT_EVENT_LOG_LIST_API, action.payload);
     if (payload.result === '200') {
-      yield put({ type: AT.contractEventLogListFulfilled, payload: payload });
+      yield put({ type: AT.contractEventLogListFulfilled, payload });
     }
     else {
       throw new Error();
