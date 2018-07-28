@@ -3,11 +3,11 @@ import {
   TxBottomWrapper
 } from 'components'
 
-class WalletTokenTransfers extends Component {
+class AddressTokenTransfers extends Component {
   render() {
     return <TxBottomWrapper {...this.props}/>
   }
 }
 
-export default WalletTokenTransfers;
+export default AddressTokenTransfers;
 

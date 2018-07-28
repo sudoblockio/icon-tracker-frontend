@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import WalletTransactions from './WalletTransactions'
-import WalletTokenTransfers from './WalletTokenTransfers'
+import AddressTransactions from './AddressTransactions'
+import AddressTokenTransfers from './AddressTokenTransfers'
 import {
     TX_TYPE,
     WALLET_TABS,
@@ -27,7 +27,7 @@ class WalletTabs extends Component {
                     switch (on) {
                         case 0:
                             return (
-                                <WalletTransactions 
+                                <AddressTransactions 
                                     txData={walletTx} 
                                     goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`)}} 
                                     txType={TX_TYPE.ADDRESS_TX} 
@@ -36,7 +36,7 @@ class WalletTabs extends Component {
                             )
                         case 1:
                             return (
-                                <WalletTokenTransfers 
+                                <AddressTokenTransfers 
                                     txData={walletTokenTx} 
                                     goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`)}} 
                                     txType={TX_TYPE.ADDRESS_TOKEN_TX} 

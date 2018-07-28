@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  TxBottom
-} from 'components'
+import TxBottom from './TxBottom'
 import {
   TX_TYPE_DATA
 } from 'utils/const'

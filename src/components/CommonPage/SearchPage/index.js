@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import queryString from 'query-string'
+import SearchTableHead from './SearchTableHead'
+import SearchTableBody from './SearchTableBody'
+import SearchTableDesc from './SearchTableDesc'
+import {
+  LoadingComponent,
+  Pagination,
+  SortHolder,
+  NoBox,
+  SearchInput,
+} from 'components';
 import {
   startsWith,
   calcMaxPageNum,
@@ -8,16 +18,6 @@ import {
   SEARCH_TYPE,
   SEARCH_TYPE_DATA,
 } from 'utils/const'
-import {
-  LoadingComponent,
-  Pagination,
-  SortHolder,
-  NoBox,
-  SearchInput,
-  SearchTableHead,
-  SearchTableBody,
-  SearchTableDesc
-} from 'components';
 
 class SearchPage extends Component {
 

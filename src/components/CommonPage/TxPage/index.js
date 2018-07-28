@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import TxTableHead from './TxBottomTitle'
+import TxTableBody from './TxTableBody'
+import TxPageTitle from './TxPageTitle'
 import {
 	LoadingComponent,
 	Pagination,
 	SortHolder,
-	TxTableHead,
-	TxTableBody,
-	TxPageTitle,
 	NoBox
 } from 'components';
 import {

@@ -14,7 +14,7 @@ import {
   QrCodeButton
 } from 'components';
 
-class WalletInfo extends Component {
+class AddressInfo extends Component {
   
   render() {
     const { wallet } = this.props    
@@ -159,4 +159,4 @@ class TokenBalance extends Component {
   }
 }
 
-export default withRouter(WalletInfo);
+export default withRouter(AddressInfo);

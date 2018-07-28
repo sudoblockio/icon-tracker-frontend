@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import TxTableHead from './TxTableHead'
+import TxTableBody from './TxTableBody'
+import TxBottomTitle from './TxBottomTitle'
 import {
     LoadingComponent,
-    TxTableHead,
-    TxTableBody,
     NoBox,
-    TxBottomTitle
 } from 'components'
 
 class TxBottom extends Component {

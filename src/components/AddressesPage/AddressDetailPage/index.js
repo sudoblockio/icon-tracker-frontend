@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import WalletInfo from './WalletInfo'
-import WalletTabs from './WalletTabs'
+import AddressInfo from './AddressInfo'
+import AddressTabs from './AddressTabs'
 import {
     DetailPage
 } from 'components';
@@ -30,8 +30,8 @@ class AddressesDetailPage extends Component {
                         this.props.addressTokenTxList({ address, page: 1, count: 10 })
                     },
                 ]}
-                InfoComponent={WalletInfo}
-                TabsComponent={WalletTabs}
+                InfoComponent={AddressInfo}
+                TabsComponent={AddressTabs}
             />
         )
     }
