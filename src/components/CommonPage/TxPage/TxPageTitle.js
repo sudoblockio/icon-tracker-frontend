@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    TX_TYPE
+    TX_TYPE,
+    IRC_VERSION
 } from 'utils/const'
 import {
     numberWithCommas
@@ -84,7 +85,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="title token">
                             Token Transfers
-                            <span>(IRC1)</span>
+                            <span>({IRC_VERSION[1]})</span>
                             <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
                         </p>
                     )

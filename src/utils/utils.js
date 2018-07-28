@@ -145,9 +145,11 @@ export function makeDownloadLink(address) {
   return `${localDevUrl}/score/${address}_1.zip`
 }
 
-export function tokenText(name, symbol, address, noSpan) {
+export function tokenText(name, symbol, address, noSpan, spanClassName) {
+  console.log(name, symbol, address, noSpan)
   const isName = isValidData(name)
   const isSymbol = isValidData(symbol)
+  
   let text = ""
   if (isName) {
     text += name
@@ -155,7 +157,7 @@ export function tokenText(name, symbol, address, noSpan) {
       text += ` (${symbol})`
     }
   }
-  else {    
+  else {
     if (isSymbol) {
       text += symbol
     }
@@ -163,16 +165,12 @@ export function tokenText(name, symbol, address, noSpan) {
       text += "-"
     }
   }
+
   if (!address) {
     return text
   }
   else {
-    if (noSpan) {
-      return <TokenLink label={text} to={address}/>
-    }
-    else {
-      return <span className="ellipsis"><TokenLink label={text} to={address}/></span>
-    }
+    return <TokenLink label={text} to={address} noSpan={noSpan} spanClassName={spanClassName} />
   }
 }
 
@@ -276,7 +274,7 @@ export function isValidData(data) {
 
 export function searchLowerCase(searchValue, searchItems) {
   if (!searchValue) return true
-  
+
   const lowerSearch = searchValue.toLowerCase()
   let result = false
   for (let i = 0; i < searchItems.length; i++) {

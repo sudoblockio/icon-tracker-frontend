@@ -1,14 +1,15 @@
 import React from 'react';
 import LinkToPage from './LinkToPage'
 
-const TokenLink = ({ to, label }) => {
+const TokenLink = ({ to, label, noSpan, spanClassName }) => {
   return (
     <LinkToPage
-      noSpan
+      pageType="token"
       aClassName="on"
       to={to}
       label={label}
-      pageType="token"
+      noSpan={noSpan}
+      spanClassName={spanClassName}
     />
   )
 }

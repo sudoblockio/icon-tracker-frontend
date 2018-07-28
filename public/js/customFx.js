@@ -12,6 +12,7 @@ $(window).on('CUSTOM_FX', function (e) {
 		case 'CLOSE_DETAIL':
 			$(".popup-wrap.detail").css({ "display": "none" });
 			break
+			
 		case 'SORT_HOLDER':
 			$('.sort-holder ').mouseenter(function () {
 				$(".sort-holder ul").stop().slideDown(300, 'swing');

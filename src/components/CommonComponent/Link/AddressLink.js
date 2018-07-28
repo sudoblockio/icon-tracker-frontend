@@ -7,10 +7,10 @@ import {
 const AddressLink = ({to}) => {
   return (
     <LinkToPage
-      noSpan 
+      pageType={isContractAddress(to) ? 'contract' : 'address'}
       aClassName="on"
       to={to}
-      pageType={isContractAddress(to) ? 'contract' : 'address'}
+      noSpan 
     />
   )
 }

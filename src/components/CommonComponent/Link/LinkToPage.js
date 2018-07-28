@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LinkToPage = ({ aClassName, to, label = '', noSpan, spanClassName, onClick, pageType }) => {
+const LinkToPage = ({ aClassName, to, label, noSpan, spanClassName, onClick, pageType }) => {
     if (noSpan) {
         return (
             <Link

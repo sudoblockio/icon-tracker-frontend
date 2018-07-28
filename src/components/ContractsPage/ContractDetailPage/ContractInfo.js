@@ -11,13 +11,20 @@ import {
     convertNumberToText,
     numberWithCommas,
     tokenText,
-    isValidData
 } from 'utils/utils'
 import {
-    CONTRACT_STATUS
+    CONTRACT_STATUS,
+    IRC_VERSION
 } from 'utils/const'
 
 class ContractInfo extends Component {
+
+    componentDidMount() {
+        setTimeout(() => {
+            const event = new CustomEvent('CUSTOM_FX', { detail: "CONTRACT" })
+            window.dispatchEvent(event)    
+        }, 500)
+    }
 
     render() {
         const { contract } = this.props
@@ -43,7 +50,7 @@ class ContractInfo extends Component {
                                             <td>Balance</td>
                                             <td>{convertNumberToText(balance, 'icx')} ICX{/*<span className="gray">({convertNumberToText(usdBalance, 'usd')} USD)</span>*/}</td>
                                             <td>Token Contract</td>
-                                            <TokenCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion} />
+                                            <TokenContractCell tokenName={tokenName} symbol={symbol} address={address} ircVersion={ircVersion} />
                                         </tr>
                                         <tr>
                                             <td>ICX Value</td>
@@ -89,14 +96,12 @@ class DetailButton extends Component {
     }
 }
 
-const TokenCell = ({ tokenName, symbol, address, ircVersion }) => {
-    const isSymbol = isValidData(symbol)
-    if (isSymbol) {
-        const isIrcVersion = isValidData(ircVersion)
+const TokenContractCell = ({ tokenName, symbol, address, ircVersion }) => {
+    if (ircVersion === IRC_VERSION[1]) {
         return (
             <td>
-                {tokenText(tokenName, symbol, address)}
-                <span className="help token">{isIrcVersion ? `${ircVersion} - ${address}` : address}</span>
+                {tokenText(tokenName, symbol, address, false, "link token")}
+                <span className="help token">{ircVersion} - {address}</span>
             </td>
         )
     }

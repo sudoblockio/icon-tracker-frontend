@@ -7,6 +7,9 @@ import {
   is0xAddress,
 } from 'utils/utils'
 import {
+  IRC_VERSION
+} from 'utils/const'
+import {
   searchData as SEARCH_DATA_API,
   blockInfo as BLOCK_INFO_API
 } from '../api/restV3'
@@ -24,7 +27,7 @@ function* searchFunc(action) {
       const result = yield call(SEARCH_DATA_API, { data: action.payload });
       if (result.result === "200") {
         switch (result.data) {
-          case 'IRC1':
+          case IRC_VERSION[1]:
             yield put(routerActions.push(`/token/${payload}`));
             break
           default:

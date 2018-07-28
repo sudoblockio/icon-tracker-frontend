@@ -4,11 +4,11 @@ import LinkToPage from './LinkToPage'
 const TransactionLink = ({  to, label, noSpan, spanClassName, onClick }) => {
   return (
     <LinkToPage
-      noSpan={noSpan}
-      spanClassName={spanClassName}
+      pageType="transaction"
       to={to}
       label={label}
-      pageType="transaction"
+      noSpan={noSpan}
+      spanClassName={spanClassName}
       onClick={onClick}
     />
   )
