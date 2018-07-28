@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TxBottom from './TxBottom'
+import TxBottomComponent from './TxBottomComponent'
 import {
   TX_TYPE_DATA
 } from 'utils/const'
 
-class TxBottomWrapper extends Component {
+class TxBottom extends Component {
   render() {
     const {
       txData,
@@ -22,7 +22,7 @@ class TxBottomWrapper extends Component {
       TX_TYPE_DATA[txType]['noBoxText'] : ''
 
     return (
-      <TxBottom
+      <TxBottomComponent
         txData={txData}
         goAllTx={goAllTx}
         txType={txType}
@@ -34,4 +34,4 @@ class TxBottomWrapper extends Component {
   }
 }
 
-export default TxBottomWrapper;
+export default TxBottom;

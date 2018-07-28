@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-  TxBottomWrapper
+  TxBottom
 } from 'components'
 
 class AddressTransactions extends Component {
   render() {
-    return <TxBottomWrapper {...this.props}/>
+    return <TxBottom {...this.props}/>
   }
 }
 

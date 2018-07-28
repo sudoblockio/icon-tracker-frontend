@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import img_sorry from '../../style/image/img-sorry.png'
 
-class NotFound extends Component {
+class NotFoundPage extends Component {
 
   constructor(props) {
     super(props);
@@ -59,4 +59,4 @@ class NotFound extends Component {
   }
 }
 
-export default withRouter(NotFound);
+export default withRouter(NotFoundPage);

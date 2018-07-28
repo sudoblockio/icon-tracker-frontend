@@ -5,7 +5,7 @@ import {
     noSpaceLowerCase
 } from 'utils/utils'
 import {
-    NotFound,
+    NotFoundPage,
 } from 'components';
 
 class DetailPage extends Component {
@@ -74,7 +74,7 @@ class DetailPage extends Component {
         const { loading, error } = this.props
         const Content = () => {
             if (error !== "" && !loading) {
-                return <NotFound error={error}/>
+                return <NotFoundPage error={error}/>
             }
             else {
                 const { InfoComponent, TabsComponent } = this.props

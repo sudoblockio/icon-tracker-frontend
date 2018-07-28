@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import TxTableHead from './TxTableHead'
-import TxTableBody from './TxTableBody'
 import TxBottomTitle from './TxBottomTitle'
 import {
+    TxTableHead,
+    TxTableBody,
     LoadingComponent,
     NoBox,
 } from 'components'
 
-class TxBottom extends Component {
+class TxBottomComponent extends Component {
 
     render() {
         const { 
@@ -63,4 +63,4 @@ class TxBottom extends Component {
     }
 }
 
-export default withRouter(TxBottom);
+export default withRouter(TxBottomComponent);

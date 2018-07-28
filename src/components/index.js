@@ -26,9 +26,13 @@ import Footer from './Footer/Footer'
 import SearchBox from './Header/SearchBox'
 import Popup from './Popup'
 
+import AddressLink from './CommonComponent/Link/AddressLink'
+import BlockLink from './CommonComponent/Link/BlockLink'
+import TransactionLink from './CommonComponent/Link/TransactionLink'
+import TokenLink from './CommonComponent/Link/TokenLink'
+
 import LoadingComponent from './CommonComponent/LoadingComponent'
 import Pagination from './CommonComponent/Pagination'
-import NotFound from './CommonComponent/NotFound'
 import SortHolder from './CommonComponent/SortHolder'
 import CopyButton from './CommonComponent/CopyButton'
 import NoBox from './CommonComponent/NoBox'
@@ -36,17 +40,15 @@ import SearchInput from './CommonComponent/SearchInput'
 import QrCodeButton from './CommonComponent/QrCode/QrCodeButton'
 import QrCodeComponent from './CommonComponent/QrCode/QrCodeComponent'
 
-import AddressLink from './CommonComponent/Link/AddressLink'
-import BlockLink from './CommonComponent/Link/BlockLink'
-import TransactionLink from './CommonComponent/Link/TransactionLink'
-import TokenLink from './CommonComponent/Link/TokenLink'
+import TxBottom from './CommonComponent/TxBottom'
+import TxTableHead from './CommonComponent/TxTableHead'
+import TxTableBody from './CommonComponent/TxTableBody'
+import TabTable from './CommonComponent/TabTable'
 
 import TxPage from './CommonPage/TxPage'
-import TxBottomWrapper from './CommonPage/TxPage/TxBottomWrapper'
-
 import SearchPage from './CommonPage/SearchPage'
 import DetailPage from './CommonPage/DetailPage'
-import TabTable from './CommonPage/TabTable'
+import NotFoundPage from './CommonPage/NotFoundPage'
 
 export {
   MainPage,
@@ -76,9 +78,13 @@ export {
   SearchBox,
   Popup,
 
+  AddressLink,
+  BlockLink,
+  TransactionLink,
+  TokenLink,
+
   LoadingComponent,
   Pagination,
-  NotFound,
   SortHolder,
   CopyButton,
   NoBox,
@@ -86,15 +92,13 @@ export {
   QrCodeButton,
   QrCodeComponent,
 
-  AddressLink,
-  BlockLink,
-  TransactionLink,
-  TokenLink,
+  TxBottom,
+  TxTableHead,
+  TxTableBody,
+  TabTable,
 
   TxPage,
-  TxBottomWrapper,
-
   SearchPage,
   DetailPage,
-  TabTable,
+  NotFoundPage,
 }

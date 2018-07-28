@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { NotFound } from 'components';
+import { NotFoundPage } from 'components';
 import { searchErrorReset } from '../../redux/actions/searchActions'
 
 function mapStateToProps(state) {
@@ -14,6 +14,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const NotFoundPageContainer = connect(mapStateToProps, mapDispatchToProps)(NotFound);
+const NotFoundPageContainer = connect(mapStateToProps, mapDispatchToProps)(NotFoundPage);
 
 export default NotFoundPageContainer;
