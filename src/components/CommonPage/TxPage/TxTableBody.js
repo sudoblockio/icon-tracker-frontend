@@ -24,11 +24,11 @@ const TxHashCell = ({ isError, txHash }) => {
 		className = 'no'
 	}
 	else if (isError) {
-		_txHash = <TransactionLink to={txHash}/>
+		_txHash = <TransactionLink to={txHash} spanClassName="ellipsis" />
 		className = 'icon error on'
 	}
 	else {
-		_txHash = <TransactionLink to={txHash}/>
+		_txHash = <TransactionLink to={txHash} spanClassName="ellipsis" />
 		className = 'on'
 	}
 	return (
@@ -104,7 +104,7 @@ const AmountCell = ({ type, amount, decimal, symbol }) => {
 }
 
 const BlockCell = ({ height }) => {
-	return <td className="on break"><BlockLink to={height} label={numberWithCommas(height)}/></td>
+	return <td className="on break"><BlockLink to={height} label={numberWithCommas(height)} /></td>
 }
 
 class TxTableBody extends Component {
@@ -123,34 +123,34 @@ class TxTableBody extends Component {
 				case TX_TYPE.BLOCKS:
 					return (
 						<tr>
-							<BlockCell height={data.height}/>
+							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
 							<td>{numberWithCommas(data.txCount)}</td>
-							<td><BlockLink label={data.hash} to={data.height} ellipsis/></td>
-							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX"/>
-							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX"/>
+							<td><BlockLink label={data.hash} to={data.height} ellipsis /></td>
+							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX" />
+							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
 					return (
 						<tr>
 							<AddressCell targetAddr={addressInData} />
-							<AmountCell type="icx" amount={data.balance} decimal={4} symbol="ICX"/>
-							<AmountCell type="usd" amount={data.icxUsd} symbol="USD"/>
+							<AmountCell type="icx" amount={data.balance} decimal={4} symbol="ICX" />
+							<AmountCell type="usd" amount={data.icxUsd} symbol="USD" />
 							<td><span>{data.percentage}</span><em>%</em></td>
 							<td>{numberWithCommas(data.txCount)}</td>
 							<td>{data.nodeType}</td>
 						</tr>
 					)
-				case TX_TYPE.CONTRACT_TX:						
+				case TX_TYPE.CONTRACT_TX:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash}/>
+							<TxHashCell isError={isError} txHash={data.txHash} />
 							<DateCell isAge date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={address}/>
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address}/>
-							<AddressCell targetAddr={data.toAddr} address={address}/>
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol="ICX"/>
+							<AddressCell targetAddr={data.fromAddr} address={address} />
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
+							<AddressCell targetAddr={data.toAddr} address={address} />
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
@@ -158,10 +158,10 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<DateCell isAge date={data.age} />
-							<AddressCell targetAddr={data.fromAddr} address={address}/>
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address}/>
-							<AddressCell targetAddr={data.toAddr} address={address}/>
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol}/>
+							<AddressCell targetAddr={data.fromAddr} address={address} />
+							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
+							<AddressCell targetAddr={data.toAddr} address={address} />
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol} />
 							<TokenCell name={data.name} address={data.tradeTokenAddr} />
 						</tr>
 					)
@@ -169,8 +169,8 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on">
-								<TransactionLink to={data.txHash}/><br/>
-								<span><BlockLink label={`# ${data.height}`} to={data.height}/></span>
+								<TransactionLink to={data.txHash} /><br />
+								<span><BlockLink label={`# ${data.height}`} to={data.height} /></span>
 								<p>{calcFromNow(data.age)}</p>
 							</td>
 							<td>{data.method}</td>
@@ -181,13 +181,13 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height}/>
+							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
 							<AddressCell targetAddr={data.fromAddr} address={address} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
 							<AddressCell targetAddr={data.toAddr} address={address} />
-							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX"/>
-							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX"/>
+							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX" />
+							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:
@@ -198,7 +198,7 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.fromAddr} address={address} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
 							<AddressCell targetAddr={data.toAddr} address={address} />
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol}/>
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.contractSymbol} />
 							<TokenCell name={data.contractName} address={data.contractAddr} />
 						</tr>
 					)
@@ -206,13 +206,13 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height}/>
+							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
 							<AddressCell targetAddr={data.fromAddr} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
 							<AddressCell targetAddr={data.toAddr} />
-							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX"/>
-							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX"/>
+							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX" />
+							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
@@ -223,8 +223,8 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.fromAddr} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
 							<AddressCell targetAddr={data.toAddr} />
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol}/>
-							<TokenCell name={data.tokenName} address={data.contractAddr}/>
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol} />
+							<TokenCell name={data.tokenName} address={data.contractAddr} />
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
@@ -234,8 +234,8 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.fromAddr} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
 							<AddressCell targetAddr={data.toAddr} />
-							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX"/>
-							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX"/>
+							<AmountCell type="icx" amount={data.amount} decimal={4} symbol="ICX" />
+							<AmountCell type="icx" amount={data.fee} decimal={4} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
@@ -246,15 +246,15 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.fromAddr} />
 							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
 							<AddressCell targetAddr={data.toAddr} />
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol}/>
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol} />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
 					return (
 						<tr>
 							<td>{data.rank}</td>
-							<AddressCell targetAddr={addressInData} noEllipsis/>
-							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol}/>
+							<AddressCell targetAddr={addressInData} noEllipsis />
+							<AmountCell type="icx" amount={data.quantity} decimal={4} symbol={data.symbol} />
 							<td><span>{data.percentage}</span><em>%</em></td>
 						</tr>
 					)

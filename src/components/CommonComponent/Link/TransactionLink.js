@@ -1,13 +1,12 @@
 import React from 'react';
-import LinkToPage from './LinkToPage'
+import LinkCell from './LinkCell'
 
-const TransactionLink = ({  to, label, noSpan, spanClassName, onClick }) => {
+const TransactionLink = ({  to, label, spanClassName, onClick }) => {
   return (
-    <LinkToPage
+    <LinkCell
       pageType="transaction"
       to={to}
       label={label}
-      noSpan={noSpan}
       spanClassName={spanClassName}
       onClick={onClick}
     />

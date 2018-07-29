@@ -71,7 +71,9 @@ class ContractInfo extends Component {
                                                     <AddressLink to={creator} />
                                                 </span>
                                                 <em>at Txn</em>
-                                                <TransactionLink to={createTx} spanClassName="link hash ellipsis" />
+                                                <span className="link hash ellipsis" onMouseOver={() => { this.onMouseOver("hash") }} onMouseOut={() => { this.onMouseOut("hash") }}>
+                                                    <TransactionLink to={createTx} />
+                                                </span>
                                             </td>
                                         </tr>
                                         <tr>

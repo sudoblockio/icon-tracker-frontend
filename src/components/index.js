@@ -41,9 +41,10 @@ import QrCodeButton from './CommonComponent/QrCode/QrCodeButton'
 import QrCodeComponent from './CommonComponent/QrCode/QrCodeComponent'
 
 import TxBottom from './CommonComponent/TxBottom'
-import TxTableHead from './CommonComponent/TxTableHead'
-import TxTableBody from './CommonComponent/TxTableBody'
 import TabTable from './CommonComponent/TabTable'
+
+import TxTableHead from './CommonPage/TxPage/TxTableHead'
+import TxTableBody from './CommonPage/TxPage/TxTableBody'
 
 import TxPage from './CommonPage/TxPage'
 import SearchPage from './CommonPage/SearchPage'
