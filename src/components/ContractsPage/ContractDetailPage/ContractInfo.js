@@ -19,12 +19,12 @@ import {
 
 class ContractInfo extends Component {
 
-    onMouseOver = () => {
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "LINK_OVER" }))
+    onMouseOver = (param) => {
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "CONTRACT_OVER", param } }))
     }
 
-    onMouseOut = () => {
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "LINK_OUT" }))
+    onMouseOut = (param) => {
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "CONTRACT_OUT", param } }))
     }
 
     render() {
@@ -67,7 +67,7 @@ class ContractInfo extends Component {
                                             <td>
                                                 <span className="help address">Creator Address</span>
                                                 <span className="help hash">Creator Transaction Hash</span>
-                                                <span className="link address ellipsis" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                                                <span className="link address ellipsis" onMouseOver={() => { this.onMouseOver("address") }} onMouseOut={() => { this.onMouseOut("address") }}>
                                                     <AddressLink to={creator} />
                                                 </span>
                                                 <em>at Txn</em>
@@ -116,7 +116,7 @@ class TokenContractCell extends Component {
                 return (
                     <td>
                         <span className="help token">{ircVersion} Token</span>
-                        <span className="link token" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+                        <span className="link token" onMouseOver={()=>{onMouseOver("token")}}  onMouseOut={()=>{onMouseOut("token")}}>
                             {tokenText(tokenName, symbol, address)}
                         </span>
                     </td>

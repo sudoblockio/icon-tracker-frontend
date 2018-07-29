@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AddressQrCode from './AddressQrCode'
 import ContractDetail from './ContractDetail'
 import { initPopup } from '../../redux/actions/popupActions'
-import { 
+import {
     POPUP_TYPE
 } from 'utils/const'
 
@@ -21,10 +21,10 @@ class Popup extends Component {
     openPopup = (type) => {
         switch (type) {
             case POPUP_TYPE.QR:
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "OPEN_QR" }))    
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'qr' } }))
                 break
             case POPUP_TYPE.DETAIL:
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "OPEN_DETAIL" }))    
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'detail' } }))
                 break
             default:
         }
@@ -32,16 +32,16 @@ class Popup extends Component {
 
     closePopup = () => {
         this.props.initPopup()
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "CLOSE_POPUP" }))    
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: '' } }))
     }
 
     closeDetail = () => {
         this.props.initPopup()
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: "CLOSE_DETAIL" }))    
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: 'detail' } }))
     }
-    
+
     render() {
-        const { type, data } = this.props        
+        const { type, data } = this.props
         const isQr = type === POPUP_TYPE.QR
         const qrData = isQr ? data : {}
         const isDetail = type === POPUP_TYPE.DETAIL

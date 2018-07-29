@@ -47,20 +47,20 @@ var createMenu = function(){
 		$(this).addClass("on");
 	});
 
-	// qrcode popup
-	$(".qrcode").click(function(){
-		$(".popup-wrap.qr").fadeIn(350);
-	});
+	// // qrcode popup
+	// $(".qrcode").click(function(){
+	// 	$(".popup-wrap.qr").fadeIn(350);
+	// });
 
-	// detail popup
-	$(".status").click(function(){
-		$(".popup-wrap.detail").css({"display":"block"});
-	});
+	// // detail popup
+	// $(".status").click(function(){
+	// 	$(".popup-wrap.detail").css({"display":"block"});
+	// });
 
-	// close popup
-	$(".close").click(function(){
-		$(".popup-wrap").fadeOut(350);
-	});
+	// // close popup
+	// $(".close").click(function(){
+	// 	$(".popup-wrap").fadeOut(350);
+	// });
 }
 
 $(document).ready(function(){

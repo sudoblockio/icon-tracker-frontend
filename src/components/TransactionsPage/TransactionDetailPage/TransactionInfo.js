@@ -29,7 +29,6 @@ class TransactionInfo extends Component {
 				const { errorMsg, tokenTxList, internalTxList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
 				const stepPriceIcx = web3Utils.fromWei(stepPrice || "0", "ether")
 				const isTokenTx = txType === "1"
-				
 
 				return (
 					<div className="screen0">
@@ -75,7 +74,14 @@ class TransactionInfo extends Component {
 														{
 															(tokenTxList || []).map((tokenTx, index) => {
 																const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
-																return <p key={index}>{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;<AddressLink to={fromAddr} />&emsp;to&emsp;<AddressLink to={toAddr} /></p>
+																return (
+																	<p key={index}>
+																		{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;
+																		<AddressLink to={fromAddr} />
+																		&emsp;to&emsp;
+																		<AddressLink to={toAddr} />
+																	</p>
+																)
 															})
 														}
 													</td>
@@ -125,13 +131,23 @@ const AddressCell = ({ address, internalTxList }) => {
 		const isContract = isContractAddress(address)
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<td className="trans">{isContract && <i className="img"></i>}<span><AddressLink to={address} /></span><CopyButton data={address} title={'Copy Address'} isSpan />
+			<td className="trans">
+				{isContract && <i className="img"></i>}
+				<span><AddressLink to={address} /></span>
+				<CopyButton data={address} title={'Copy Address'} isSpan />
 				{
 					isInternalTxList &&
 					<div>
 						{internalTxList.map((tx, index) => {
 							const { amount, fromAddr, toAddr } = tx
-							return <p key={index}>┗&emsp;TRANSFER {convertNumberToText(amount, 'icx')} ICX&emsp; from &emsp;<span><AddressLink to={fromAddr} /></span>&emsp;to&emsp;<span><AddressLink to={toAddr} /></span></p>
+							return (
+								<p key={index}>
+									┗&emsp;TRANSFER {convertNumberToText(amount, 'icx')} ICX&emsp; from &emsp;
+									<span><AddressLink to={fromAddr} /></span>
+									&emsp;to&emsp;
+									<span><AddressLink to={toAddr} /></span>
+								</p>
+							)
 						})}
 					</div>
 				}

@@ -1,42 +1,25 @@
 $(window).on('CUSTOM_FX', function (e) {
-	switch (e.originalEvent.detail) {
-		case 'OPEN_QR':
-			$(".popup-wrap.qr").fadeIn(350);
+	var type = e.originalEvent.detail.type
+	var param = e.originalEvent.detail.param
+	switch (type) {
+		case 'POPUP_OPEN':
+			$(".popup-wrap." + param).fadeIn(350);
 			break
-		case 'OPEN_DETAIL':
-			$(".popup-wrap.detail").fadeIn(350);
+		case 'POPUP_CLOSE':
+			if (param == 'detail') {
+				$(".popup-wrap.detail").css({ "display": "none" });
+			}
+			else {
+				$(".popup-wrap").fadeOut(350);
+			}
 			break
-		case 'CLOSE_POPUP':
-			$(".popup-wrap").fadeOut(350);
+		case 'CONTRACT_OVER':
+			$(".table-typeB .help." + param).addClass("animate");
 			break
-		case 'CLOSE_DETAIL':
-			$(".popup-wrap.detail").css({ "display": "none" });
+		case 'CONTRACT_OUT':
+			$(".table-typeB .help." + param).removeClass("animate");
 			break
 
-		case 'LINK_OVER':
-			var _class;
-			if ($(".table-typeB .link").hasClass("address")) {
-				_class = "address";
-			} else if ($(".table-typeB .link").hasClass("hash")) {
-				_class = "hash";
-			} else {
-				_class = "token";
-			}
-			$(".table-typeB .help." + _class).addClass("animate");
-			break
-
-		case 'LINK_OUT':
-			var _class;
-			if ($(".table-typeB .link").hasClass("address")) {
-				_class = "address";
-			} else if ($(".table-typeB .link").hasClass("hash")) {
-				_class = "hash";
-			} else {
-				_class = "token";
-			}
-			$(".table-typeB .help." + _class).removeClass("animate");
-			break
-		
 		case 'SORT_HOLDER':
 			$('.sort-holder ').mouseenter(function () {
 				$(".sort-holder ul").stop().slideDown(300, 'swing');
