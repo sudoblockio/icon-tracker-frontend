@@ -5,11 +5,39 @@ import {
 
 class TabTable extends Component {
 
+    componentDidMount() {
+        window.addEventListener("keydown", this.handleKeyDown)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.handleKeyDown)
+    }
+
+    handleKeyDown = (e) => {
+        const { TABS, on } = this.props
+        const { code } = e
+        switch (code) {
+            case "ArrowLeft":
+                const prev = on - 1
+                if (prev >= 0) {
+                    this.props.changeTab(prev)
+                }
+                break
+            case "ArrowRight":
+                const next = on + 1
+                if (next < TABS.length) {
+                    this.props.changeTab(next)
+                }
+                break
+            default:
+        }
+    }
+
     render() {
-        const { on, loading, TableContents } = this.props      
+        const { on, loading, TableContents } = this.props
         const Contents = () => {
             if (loading) {
-                return <LoadingComponent height='513px'/>
+                return <LoadingComponent height='513px' />
             }
             else {
                 const { TABS } = this.props

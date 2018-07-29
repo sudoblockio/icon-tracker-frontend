@@ -169,7 +169,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on">
-								<TransactionLink to={data.txHash} /><br />
+								<span className="ellipsis"><TransactionLink to={data.txHash} /></span><br />
 								<span><BlockLink label={`# ${data.height}`} to={data.height} /></span>
 								<p>{calcFromNow(data.age)}</p>
 							</td>
