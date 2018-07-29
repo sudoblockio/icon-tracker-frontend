@@ -77,9 +77,8 @@ class TokenBalance extends Component {
     }
   }
 
-  componentDidMount() {
-    const event = new CustomEvent('CUSTOM_FX', { detail: "TOKEN_BALANCE" })
-    window.dispatchEvent(event)
+  handleClick = () => {
+    window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "TOKEN_BALANCE" } }))
   }
 
   handleChange = (e) => {
@@ -103,7 +102,7 @@ class TokenBalance extends Component {
       const next = prev.plus(_totalTokenPrice)      
       result = next.toString(10)
     })
-    return result.toString(10)
+    return result
 	}
 
   render() {
@@ -120,7 +119,7 @@ class TokenBalance extends Component {
         const totalBalance = this.calcTotalTokenBalance(_tokenList)
         return (
           <td>
-            <p className="balance">{totalBalance} USD<span className="gray">(Total)</span><em className="img"></em></p>
+            <p className="balance" onClick={this.handleClick}>{totalBalance} USD<span className="gray">(Total)</span><em className="img"></em></p>
             <div className="combo-group">
               <div className="combo-layer">
                 <div className="search-group">

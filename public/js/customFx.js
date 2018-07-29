@@ -1,3 +1,21 @@
+$(document).ready(function(){
+	$(document).mouseup(function(e){
+		var container = $(".combo-group");
+		if(container.has(e.target).length===0){
+			container.css("display","none");
+			$(".table-typeB td .balance").removeClass("on");
+		}
+	});
+	
+	$('.header-wrap ul li').mouseenter(function(){
+		$(this).find(".sub-menu").stop().slideDown(300, 'swing');
+		$(this).find("span").addClass("on");
+	}).mouseleave(function(){
+		$(this).find(".sub-menu").stop().slideUp(300, 'swing');
+		$(this).find("span").removeClass("on");
+	});
+});
+
 $(window).on('CUSTOM_FX', function (e) {
 	var type = e.originalEvent.detail.type
 	var param = e.originalEvent.detail.param
@@ -19,21 +37,17 @@ $(window).on('CUSTOM_FX', function (e) {
 		case 'CONTRACT_OUT':
 			$(".table-typeB .help." + param).removeClass("animate");
 			break
-
 		case 'SORT_ENTER':
 			$(".sort-holder ul").stop().slideDown(300, 'swing');
 			break
 		case 'SORT_LEAVE':
 			$(".sort-holder ul").stop().slideUp(300, 'swing');
 			break
-
 		case 'TOKEN_BALANCE':
-			$(".table-typeB td .balance").click(function () {
-				$(".combo-group").css({ "display": "block" });
-				$(this).addClass("on");
-			});
+			$(".combo-group").css({ "display": "block" });
+			$(".table-typeB td .balance").addClass("on");
 			break;
-					
+
 		default:
 	}
 });

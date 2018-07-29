@@ -169,7 +169,7 @@ export function* icxGetSroreFunc(action) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload.data.result } });
     }
     else {
-      const { message } = payload.data.error
+      const { message } = payload.error
       throw new Error(message)
     }
   }
@@ -196,9 +196,12 @@ export function* icxCallFunc(action) {
         params
       }
     })
+
     if (outputs.status === 200) {
       const { result } = outputs.data
-      const valueArray = Array.isArray(result) ? result : [result]
+      // TODO 아웃풋 배열로 오는지 확인
+      // const valueArray = Array.isArray(result) ? result : [result]
+      const valueArray = [result]
       funcOutputs[index] = {
         valueArray,
         error: ''
@@ -223,7 +226,7 @@ export function* readContractInformationFunc(action) {
   try {
     const score = yield call(ICX_GET_SCORE_API, action.payload);
     if (score.status !== 200) {
-      const { message } = score.data.error
+      const { message } = score.error
       throw new Error(message)
     }
 

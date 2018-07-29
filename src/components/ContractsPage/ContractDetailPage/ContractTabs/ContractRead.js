@@ -22,14 +22,27 @@ class ContractRead extends Component {
         })
     }
 
-    handleClick = (address, params, index, method) => {
-        const payload = {
+    handleClick = (address, method, inputs, index) => {
+        const params = this.makeParams(method, inputs)
+        this.props.icxCall({
             address,
             params,
-            index,
             method,
-        }
-        this.props.icxCall(payload)
+            index,
+        })
+    }
+
+    makeParams = (funcName, inputs) => {
+        const { params } = this.state
+        const result = {}
+        inputs.forEach(item => {
+            const name = item["name"]
+            const type = item["type"]
+            const inputName = `${funcName}_${name}_${type}`
+            const value = params[inputName] || ''
+            result[name] = value
+        })
+        return result
     }
 
     render() {
@@ -47,34 +60,35 @@ class ContractRead extends Component {
                     </div>
                     {
                         loading ?
-                            <LoadingComponent height="322px"/>
+                            <LoadingComponent height="322px" />
                             :
                             <div className="scroll">
                                 <ul className="list">
                                     {
                                         !!error ?
-                                        <li>{error}</li>
-                                        :
-                                        funcList.map((func, index) => {
-                                            const outputs = funcOutputs[index]
-                                            const inputs = func["inputs"]
-                                            const isQuery = inputs.length > 0
-                                            if (isQuery) {
-                                                return [
-                                                    <li key="li0">{index + 1}. {func["name"]} > {
-                                                        <Inputs inputs={inputs} params={params} handleChange={this.handleChange} />}
-                                                        <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, params, index, func["name"]) }}>Query</button>
-                                                    </li>,
-                                                    <li key="li1" className="result">
-                                                        <OutputTypes func={func} />
-                                                        {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs} />}
-                                                    </li>
-                                                ]
-                                            }
-                                            else {
-                                                return <Outputs key={index} func={func} outputs={outputs} index={index} />
-                                            }
-                                        })
+                                            <li>{error}</li>
+                                            :
+                                            funcList.map((func, index) => {
+                                                const outputs = funcOutputs[index]
+                                                const inputs = func["inputs"]
+                                                const isQuery = inputs.length > 0
+                                                if (isQuery) {
+                                                    const funcName = func["name"]
+                                                    return [
+                                                        <li key="li0">{index + 1}. {funcName} > {
+                                                            <Inputs inputs={inputs} params={params} handleChange={this.handleChange} funcName={funcName} />}
+                                                            <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, funcName, inputs, index) }}>Query</button>
+                                                        </li>,
+                                                        <li key="li1" className="result">
+                                                            <OutputTypes func={func} />
+                                                            {!isEmptyOutput(outputs) && <OutputResults func={func} outputs={outputs} />}
+                                                        </li>
+                                                    ]
+                                                }
+                                                else {
+                                                    return <Outputs key={index} func={func} outputs={outputs} index={index} />
+                                                }
+                                            })
                                     }
                                 </ul>
                             </div>
@@ -97,17 +111,25 @@ function isEmptyOutput(outputs) {
 }
 
 function getOutValue(type, value) {
-    return type === 'int' ? new BigNumber(value).toString(10) : value
+    switch (type) {
+        case 'int':
+            return new BigNumber(value).toString(10)
+        case 'str':
+            return value
+        default:
+            return JSON.stringify(value)
+    }       
 }
 
-const Inputs = ({ inputs, params, handleChange }) => {
+const Inputs = ({ funcName, inputs, params, handleChange }) => {
     return (
         inputs.map((item, i) => {
             const name = item["name"]
             const type = item["type"]
+            const inputName = `${funcName}_${name}_${type}`
             const placeholder = `${name} (${type})`
-            const value = params[name] || ''
-            return <input type="text" className="over" key={i} name={name} placeholder={placeholder} value={value} onChange={handleChange} />
+            const value = params[inputName] || ''
+            return <input type="text" className="over" key={i} name={inputName} placeholder={placeholder} value={value} onChange={handleChange} />
         })
     )
 }
@@ -130,7 +152,7 @@ const OutputResults = ({ func, outputs }) => {
             <p>[ {name} method response ]</p>
             {
                 error ?
-                    <p>>> {error}</p>
+                    <p className="red">>> {error}</p>
                     :
                     valueArray.map((value, i) => {
                         const outType = func["outputs"][i]["type"]

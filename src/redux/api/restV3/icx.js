@@ -15,7 +15,16 @@ export function icxGetScore(params) {
         resolve(response);                  
       })
       .catch(error => {
-        resolve(error.response);
+        if (!!error.response) {
+          resolve(error.response.data);
+        }
+        else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          })
+        }
       })
   });
 }
@@ -34,7 +43,16 @@ export function icxCall(params) {
         resolve(response);
       })
       .catch(error => {
-        resolve(error.response);
+        if (!!error.response) {
+          resolve(error.response.data);
+        }
+        else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          })
+        }
       })
   });
 }
