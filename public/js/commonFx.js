@@ -1,26 +1,26 @@
 // contract over
 var ctreteContract = function(){
-	$(".table-typeB .link").mouseover(function(){
-		var _class;
-		if($(this).hasClass("address")){
-			_class = "address";
-		} else if($(this).hasClass("hash")){
-			_class = "hash";
-		} else {
-			_class = "token";
-		}
-		$(".table-typeB .help."+_class).addClass("animate");
-	}).mouseout(function(){
-		var _class;
-		if($(this).hasClass("address")){
-			_class = "address";
-		} else if($(this).hasClass("hash")){
-			_class = "hash";
-		} else {
-			_class = "token";
-		}
-		$(".table-typeB .help."+_class).removeClass("animate");
-	});
+	// $(".table-typeB .link").mouseover(function(){
+	// 	var _class;
+	// 	if($(this).hasClass("address")){
+	// 		_class = "address";
+	// 	} else if($(this).hasClass("hash")){
+	// 		_class = "hash";
+	// 	} else {
+	// 		_class = "token";
+	// 	}
+	// 	$(".table-typeB .help."+_class).addClass("animate");
+	// }).mouseout(function(){
+	// 	var _class;
+	// 	if($(this).hasClass("address")){
+	// 		_class = "address";
+	// 	} else if($(this).hasClass("hash")){
+	// 		_class = "hash";
+	// 	} else {
+	// 		_class = "token";
+	// 	}
+	// 	$(".table-typeB .help."+_class).removeClass("animate");
+	// });
 
 }
 
@@ -34,12 +34,12 @@ var createMenu = function(){
 		$(this).find("span").removeClass("on");
 	});
 
-	// sort
-	$('.sort-holder ').mouseenter(function(){
-		$(".sort-holder ul").stop().slideDown(300, 'swing');
-	}).mouseleave(function(){
-		$(".sort-holder ul").stop().slideUp(300, 'swing');
-	});
+	// // sort
+	// $('.sort-holder ').mouseenter(function(){
+	// 	$(".sort-holder ul").stop().slideDown(300, 'swing');
+	// }).mouseleave(function(){
+	// 	$(".sort-holder ul").stop().slideUp(300, 'swing');
+	// });
 
 	// address token balance
 	$(".table-typeB td .balance").click(function(){
