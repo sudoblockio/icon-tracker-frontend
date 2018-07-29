@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LinkCell = ({ to, label, aClassName, spanClassName, onClick, pageType }) => {
+const LinkCell = ({ pageType, to, label, aClassName, spanClassName, onClick }) => {
     if (!!spanClassName) {
         return (
             <Link

@@ -1,14 +1,13 @@
 import React from 'react';
-import LinkToPage from './LinkToPage'
+import LinkCell from './LinkCell'
 
 const BlockLink = ({ to, label, ellipsis }) => {
   return (
-    <LinkToPage
+    <LinkCell
       pageType="block"
       aClassName={`on ${ellipsis ? 'ellipsis' : ''}`}
       to={to}
       label={label}
-      noSpan
     />
   )
 }
