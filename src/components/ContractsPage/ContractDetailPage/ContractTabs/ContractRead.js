@@ -26,9 +26,9 @@ class ContractRead extends Component {
         const params = this.makeParams(method, inputs)
         this.props.icxCall({
             address,
-            params,
             method,
-            index,
+            params,
+            index
         })
     }
 

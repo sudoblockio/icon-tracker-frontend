@@ -101,11 +101,11 @@ class BlockInfo extends Component {
                     </tr>
                     <tr>
                       <td>Amount</td>
-                      <td>{convertNumberToText(amount, 'icx')} ICX</td>
+                      <td>{convertNumberToText(amount)} ICX</td>
                     </tr>
                     <tr>
                       <td>TxFee</td>
-                      <td>{convertNumberToText(fee, 'icx')} ICX</td>
+                      <td>{convertNumberToText(fee)} ICX</td>
                     </tr>
                     {
                       height === 0 &&

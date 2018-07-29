@@ -65,7 +65,7 @@ class TransactionInfo extends Component {
 											!isTokenTx ?
 												<tr>
 													<td>Amount</td>
-													<td>{`${convertNumberToText(amount, 'icx')} ICX`}</td>
+													<td>{`${convertNumberToText(amount)} ICX`}</td>
 												</tr>
 												:
 												<tr>
@@ -90,19 +90,19 @@ class TransactionInfo extends Component {
 
 										<tr>
 											<td>STEP limit</td>
-											<td>{convertNumberToText(stepLimit, 'icx')}</td>
+											<td>{convertNumberToText(stepLimit)}</td>
 										</tr>
 										<tr>
 											<td>STEP used by Txn</td>
-											<td>{convertNumberToText(stepUsedByTxn, 'icx')}</td>
+											<td>{convertNumberToText(stepUsedByTxn)}</td>
 										</tr>
 										<tr>
 											<td>STEP price</td>
-											<td>{`${convertNumberToText(stepPrice, 'icx')} Loop`}<em>{`(${convertNumberToText(stepPriceIcx, 'icx')} ICX)`}</em></td>
+											<td>{`${convertNumberToText(stepPrice)} Loop`}<em>{`(${convertNumberToText(stepPriceIcx)} ICX)`}</em></td>
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
-											<td>{`${convertNumberToText(fee, 'icx')} ICX`}<em>{`(${convertNumberToText(feeUsd, 'usd', 2)} USD)`}</em></td>
+											<td>{`${convertNumberToText(fee)} ICX`}<em>{`(${convertNumberToText(feeUsd, 2)} USD)`}</em></td>
 										</tr>
 										<tr>
 											<td>Data</td>
@@ -142,7 +142,7 @@ const AddressCell = ({ address, internalTxList }) => {
 							const { amount, fromAddr, toAddr } = tx
 							return (
 								<p key={index}>
-									┗&emsp;TRANSFER {convertNumberToText(amount, 'icx')} ICX&emsp; from &emsp;
+									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX&emsp; from &emsp;
 									<span><AddressLink to={fromAddr} /></span>
 									&emsp;to&emsp;
 									<span><AddressLink to={toAddr} /></span>

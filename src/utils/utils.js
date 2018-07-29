@@ -1,18 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 import { localDevUrl } from '../redux/api/restV3/config'
+import BigNumber from 'bignumber.js'
 import {
   TokenLink,
 } from 'components'
 import {
   REDUX_STEP
 } from './const'
-
-// const CURRENCY_ROUND = {
-//   'krw': 0,
-//   'usd': 2,
-//   'icx': 4
-// };
 
 export function numberWithCommas(x) {
   if (!x) { return 0 }
@@ -21,19 +16,24 @@ export function numberWithCommas(x) {
   return parts.join('.');
 }
 
-export function convertNumberToText(num, unit, round) {
-  // let roundNum = CURRENCY_ROUND[unit];
-  // if (num === "-" || Number(num) === 0) {
-  //   return '0'
-  // }
-  // return numberWithCommas(Number(num).toFixed(roundNum).toString())
-  if (!num || num === "-") return 0
+export function convertNumberToText(num, round) {
+  if (!isValidData(num)) {
+    return 0
+  }
+  
+  if (typeof num === 'string') {
+    num = num.replace(/,/g, ""); 
+  }
+  
+  let numStr
   if (round) {
-    return numberWithCommas(Number(num).toFixed(round))
+    numStr = (new BigNumber(num)).toFixed(round)
   }
   else {
-    return numberWithCommas(num)
+    numStr = (new BigNumber(num)).toString(10)
   }
+
+  return numberWithCommas(numStr)
 }
 
 // export function isInt(value) {

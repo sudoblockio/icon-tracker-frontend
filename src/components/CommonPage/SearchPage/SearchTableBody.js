@@ -13,8 +13,8 @@ import {
 	SEARCH_TYPE
 } from 'utils/const'
 
-const AmountCell = ({ type, amount, decimal, symbol }) => {
-	return <td><span>{convertNumberToText(amount, type, decimal)}</span><em>{symbol}</em></td>
+const AmountCell = ({ amount, decimal, symbol }) => {
+	return <td><span>{convertNumberToText(amount, decimal)}</span><em>{symbol}</em></td>
 }
 
 class SearchTableBody extends Component {
@@ -46,14 +46,14 @@ class SearchTableBody extends Component {
 							<td>{index + 1}</td>
 							<td>{tokenText(name, symbol, contractAddr)}</td>
 							<td>
-								<p>{convertNumberToText(usd, 'usd') || '-'}<em>USD</em></p>
-								<p>{convertNumberToText(icx, 'icx') || '-'}<em>ICX</em></p>
-								<p>{convertNumberToText(btc, 'icx') || '-'}<em>BTC</em></p>
-								<p>{convertNumberToText(eth, 'icx') || '-'}<em>ETH</em></p>
+								<p>{convertNumberToText(usd) || '-'}<em>USD</em></p>
+								<p>{convertNumberToText(icx) || '-'}<em>ICX</em></p>
+								<p>{convertNumberToText(btc) || '-'}<em>BTC</em></p>
+								<p>{convertNumberToText(eth) || '-'}<em>ETH</em></p>
 							</td>
 							<td className={className}><span>{sign}{_changeVal || '-'}</span> %</td>
-							<td>{convertNumberToText(volume, 'usd') || '-'}<em>USD</em></td>
-							<td>{convertNumberToText(marketCap, 'usd') || '-'}<em>USD</em></td>
+							<td>{convertNumberToText(volume) || '-'}<em>USD</em></td>
+							<td>{convertNumberToText(marketCap) || '-'}<em>USD</em></td>
 						</tr>
 					)
 				default:

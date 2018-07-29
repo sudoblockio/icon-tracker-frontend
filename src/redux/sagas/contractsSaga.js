@@ -174,18 +174,13 @@ export function* icxGetSroreFunc(action) {
     }
   }
   catch (e) {
-    yield put({ type: AT.icxGetScoreRejected, error: e.message});
+    yield put({ type: AT.icxGetScoreRejected, error: e.message });
   }
 }
 
 export function* icxCallFunc(action) {
   try {
-    const {
-      address,
-      params,
-      index,
-      method
-    } = action.payload
+    const { address, method, params } = action.payload
     const funcOutputs = yield select(state => state.contracts.contractReadInfo.funcOutputs);
     const outputs = yield call(ICX_CALL_API, {
       from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
@@ -197,6 +192,7 @@ export function* icxCallFunc(action) {
       }
     })
 
+    const { index } = action.payload
     if (outputs.status === 200) {
       const { result } = outputs.data
       // TODO 아웃풋 배열로 오는지 확인
@@ -231,26 +227,28 @@ export function* readContractInformationFunc(action) {
     }
 
     const abiData = score.data.result
-    const { address } = action.payload
     const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
+    const { address } = action.payload
     const funcList = [...readOnlyFunc]
-    const _funcOutputs = yield all(readOnlyFunc.map(
-      func => {
-        if (func["inputs"].length === 0) {
-          return call(ICX_CALL_API, {
-            from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
-            to: address,
-            dataType: "call",
-            data: {
-              method: func["name"]
-            }
-          })
+    const _funcOutputs = yield all(
+      readOnlyFunc.map(
+        func => {
+          if (func["inputs"].length === 0) {
+            return call(ICX_CALL_API, {
+              from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
+              to: address,
+              dataType: "call",
+              data: {
+                method: func["name"]
+              }
+            })
+          }
+          else {
+            return ''
+          }
         }
-        else {
-          return ''
-        }
-      }
-    ))
+      )
+    )
     const funcOutputs = []
     _funcOutputs.forEach(output => {
       if (output === '') {
@@ -261,7 +259,9 @@ export function* readContractInformationFunc(action) {
       }
       else if (output.status === 200) {
         const { result } = output.data
-        const valueArray = Array.isArray(result) ? result : [result]
+        // TODO
+        // const valueArray = Array.isArray(result) ? result : [result]
+        const valueArray = [result]
         funcOutputs.push({
           valueArray,
           error: ''

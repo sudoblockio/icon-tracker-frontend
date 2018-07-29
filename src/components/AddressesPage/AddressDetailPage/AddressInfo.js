@@ -47,7 +47,7 @@ class AddressInfo extends Component {
                     </tr>
                     <tr>
                       <td>Balance</td>
-                      <td>{`${convertNumberToText(balance, 'icx')} ICX`}<span className="gray">{`(${convertNumberToText(icxUsd, 'usd')} USD)`}</span></td>
+                      <td>{`${convertNumberToText(balance)} ICX`}<span className="gray">{`(${convertNumberToText(icxUsd)} USD)`}</span></td>
                     </tr>
                     <tr>
                       <td>No of Txns</td>
