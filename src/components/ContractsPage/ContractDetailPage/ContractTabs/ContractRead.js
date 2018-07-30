@@ -75,7 +75,7 @@ class ContractRead extends Component {
                                                 if (isQuery) {
                                                     const funcName = func["name"]
                                                     return [
-                                                        <li key="li0">{index + 1}. {funcName} > {
+                                                        <li key="li0" className="input"><span className="label">{index + 1}. {funcName} > </span>{
                                                             <Inputs inputs={inputs} params={params} handleChange={this.handleChange} funcName={funcName} />}
                                                             <button key='button' className="btn-type-query" onClick={() => { this.handleClick(address, funcName, inputs, index) }}>Query</button>
                                                         </li>,

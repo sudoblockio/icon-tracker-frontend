@@ -71,7 +71,7 @@ input::-moz-placeholder { color: #a7d7de; }
 .btn-type-fill{ background: #262626; color: #fff;}
 .btn-type-fill:hover{ background: #000;}
 
-.btn-type-query{ border-radius: 0 2px 2px 0; background: #fff; margin-left: -2px;}
+.btn-type-query{ border-radius: 0 2px 2px 0; background: #fff; margin-left: -4px;}
 
  [class ^="btn-type"].on{   background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
  [class ^="btn-type"].on:hover{   background: #1aaaba !important; color: #fff !important;border: 1px solid #1aaaba !important;}
@@ -325,7 +325,7 @@ html, body{height: 100%;}
 
 
 .table-typeB .link:hover{text-decoration: underline; cursor: pointer;}
-.table-typeB .help{position: absolute; height: 26px; border-radius: 26px; background:  rgba(38, 38, 38, 0.9);; color: #fff; font-size: 12px;line-height: 28px; padding: 0 16px; font-weight: 500; }
+.table-typeB .help{position: absolute; height: 26px; border-radius: 26px; background:  rgba(38, 38, 38, 0.9);; color: #fff; font-size: 12px;line-height: 28px; padding: 0 16px; font-weight: 500; pointer-events: none;}
 .table-typeB .help.token{top: -14px; left: 10px; }
 .table-typeB .help.address{top: -14px; left: 10px; }
 .table-typeB .help.hash{top: -14px; left: 240px; }
@@ -650,14 +650,18 @@ td.table-sign i.img{background-position: -150px 0; width: 10px; height: 8px; lef
 .code-box.read .list li.result div{padding-bottom: 8px;}
 .code-box.read .list li.result div p{padding: 6px 0;}
 .code-box.read .list li.result p{padding: 14px 0; font-size: 10px;}
+/*.code-box.read .list li.input{position: relative; padding:13px 20px 10px 102px;}*/
+.code-box.read .list li.input .label{display: inline-block; margin: 6px 6px 0 0 ;}
 .code-box.read .list li span{font-weight: 500;}
 .code-box.read .list li em{font-size: 10px; color: #b3b3b3; margin:0 10px;}
-.code-box.read input{height: 26px; font-size: 12px; color: #262626; border: 1px solid #262626; padding: 0 9px; vertical-align: top; width: 400px; border-radius: 2px;}
-.code-box.read input:nth-child(2){margin-left: 4px;}
+.code-box.read input{height: 26px; font-size: 12px; color: #262626; border: 1px solid #262626; padding: 0 9px; vertical-align: top; width: 400px; border-radius: 2px; margin: 0 1px 5px;}
+/*.code-box.read input:nth-child(2){margin-left: 4px;}*/
 .code-box.read input:-ms-input-placeholder { color: #b3b3b3; }
 .code-box.read input::-webkit-input-placeholder { color: #b3b3b3; }
 .code-box.read input::-moz-placeholder { color: #b3b3b3; }
 .code-box.read input::-moz-placeholder { color: #b3b3b3; }
+
+
 .txt-type-search:-ms-input-placeholder { color: #b3b3b3; }
 .txt-type-search::-webkit-input-placeholder { color: #b3b3b3; }
 .txt-type-search::-moz-placeholder { color: #b3b3b3; }
@@ -788,11 +792,12 @@ input[type="text"]:focus.over {border: 1px solid #262626;}
 .popup-wrap .close { position: absolute; top: 32px; right: 32px; cursor: pointer; }
 .popup-wrap .close .img {width: 20px; height: 20px; background-position: -300px 0; }
 .popup-wrap .popup.contract{height: 600px;}
-.popup-wrap .scroll{overflow-y:auto;  height: 437px; padding: 0px 20px; margin-top: 20px;}
+.popup-wrap .scroll{overflow-y:auto;  height: 437px; padding:0 10px 0 20px; margin-top: 20px;}
 .popup-wrap .scroll p {text-align: left;font-size: 12px; color: #262626;}
 .popup-wrap .scroll p.hash{font-weight: 800; color: #1aaaba;}
 .popup-wrap .scroll .label{margin-top: 24px; font-weight: 600;}
 .popup-wrap .scroll .txt{margin-top: 8px;}
+.popup-wrap .scroll a:hover{text-decoration: underline;}
 
 .list-group::-webkit-scrollbar {width: 4px; height: 4px; /*border: 3px solid #fff;*/ }
 .list-group::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 5px; background: #fff}

@@ -24,12 +24,13 @@ class ContractDetail extends Component {
         } = data
 
         const _state = state ? CONTRACT_STATUS[state] : "-"
-        const _txHash = txHash ? <TransactionLink to={txHash} onClick={closeDetail} /> : "-"
-        const _verifiedTx = verifiedTx ? <TransactionLink to={verifiedTx} onClick={closeDetail} /> : "-"
         const _vefification = vefification || "-"
         const _submission = submission || "-"
         const _checksum = checksum || "-"
         const _comment= comment || "-"
+
+        const TxHash = txHash ? <TransactionLink to={txHash} label={<p className="txt hash">{txHash}</p>} onClick={closeDetail} /> : "-"
+        const VerifiedTx = verifiedTx ? <TransactionLink to={verifiedTx} label={<p className="txt hash">{verifiedTx}</p>} onClick={closeDetail} /> : "-"
 
         return ([
             <h1 key="h1" className="title">Contract detail</h1>,
@@ -37,9 +38,9 @@ class ContractDetail extends Component {
                 <p className="label">Stauts</p>
                 <p className="txt">{_state}</p>
                 <p className="label">TxHash</p>
-                <p className="txt hash">{_txHash}</p>
+                {TxHash}
                 <p className="label">검증 Tx hash</p>
-                <p className="txt hash">{_verifiedTx}</p>
+                {VerifiedTx}                
                 <p className="label">검증인</p>
                 <p className="txt">{_vefification}</p>
                 <p className="label">제출인</p>

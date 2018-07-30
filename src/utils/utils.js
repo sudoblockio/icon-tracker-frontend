@@ -169,7 +169,7 @@ export function tokenText(name, symbol, address, spanClassName) {
     return text
   }
   else {
-    return <TokenLink label={text} to={address} spanClassName={spanClassName} />
+    return <TokenLink to={address} label={!spanClassName ? text : <span className={spanClassName}>{text}</span> } />
   }
 }
 

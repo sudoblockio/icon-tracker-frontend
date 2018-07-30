@@ -24,11 +24,11 @@ const TxHashCell = ({ isError, txHash }) => {
 		className = 'no'
 	}
 	else if (isError) {
-		_txHash = <TransactionLink to={txHash} spanClassName="ellipsis" />
+		_txHash = <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} />
 		className = 'icon error on'
 	}
 	else {
-		_txHash = <TransactionLink to={txHash} spanClassName="ellipsis" />
+		_txHash = <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} />
 		className = 'on'
 	}
 	return (
