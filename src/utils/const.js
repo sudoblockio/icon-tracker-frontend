@@ -35,7 +35,7 @@ export const SERVER_TX_TYPE = {
     "0": "Icx Transfer",
     "1": "Token Transfer",
     "2": "Contract Call",
-    "3": "Contract Install",
+    "3": "Contract Create",
     "4": "Contract Update",
 }
 
@@ -44,7 +44,7 @@ export const IRC_VERSION = {
     "3": "IRC3"
 }
 
-export const SORT_TYPE = [2, 10, 20, 40, 80, 160]
+export const SORT_TYPE = [10, 20, 40, 80, 160]
 
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
@@ -69,7 +69,7 @@ export const SEARCH_TYPE_DATA = {
         tableClassName: 'table-typeA contract',
         contentsClassName: 'contents',
         noBoxText: 'No Contract',
-        placeholder: "Search for contract name / address / symbol",
+        placeholder: "Search for contract name / address",
         title: 'Contracts',
     },
     [SEARCH_TYPE.TOKENS]: {

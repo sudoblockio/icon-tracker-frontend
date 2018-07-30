@@ -6,7 +6,8 @@ const LinkCell = ({ pageType, to, label, aClassName, onClick }) => {
         <Link
             className={aClassName}
             to={`/${pageType}/${to}`}
-            onClick={() => { if (typeof onClick === 'function') { onClick() } }}
+            onClick={() => { if (typeof onClick === 'function') { onClick() } }}            
+            title={to}
         >
             {label || to}
         </Link>
