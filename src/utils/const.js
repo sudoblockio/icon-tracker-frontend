@@ -31,8 +31,17 @@ export const CONTRACT_STATUS = {
     "2": 'Reject',
 }
 
+export const SERVER_TX_TYPE = {
+    "0": "Icx Transfer",
+    "1": "Token Transfer",
+    "2": "Contract Call",
+    "3": "Contract Install",
+    "4": "Contract Update",
+}
+
 export const IRC_VERSION = {
-    "1": "IRC1"
+    "1": "IRC1",
+    "3": "IRC3"
 }
 
 export const SORT_TYPE = [2, 10, 20, 40, 80, 160]

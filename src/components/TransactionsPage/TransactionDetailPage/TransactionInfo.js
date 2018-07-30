@@ -7,8 +7,12 @@ import {
 	isValidData,
 	dateToUTC,
 	utcDateInfo,
-	isContractAddress
+	isContractAddress,
+	isScoreTx
 } from 'utils/utils'
+import {
+	SERVER_TX_TYPE
+} from 'utils/const'
 import {
 	CopyButton,
 	LoadingComponent,
@@ -55,11 +59,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressCell address={fromAddr} />
+											<AddressCell address={fromAddr} txType={txType} />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressCell address={toAddr} internalTxList={internalTxList} />
+											<AddressCell address={toAddr} internalTxList={internalTxList} txType={txType} />
 										</tr>
 										{
 											!isTokenTx ?
@@ -125,16 +129,17 @@ class TransactionInfo extends Component {
 	}
 }
 
-const AddressCell = ({ address, internalTxList }) => {
+const AddressCell = ({ address, txType, internalTxList }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
-		const isContract = isContractAddress(address)
+		const _isScoreTx = isScoreTx(address, txType)
+		const _isContractAddress = isContractAddress(address)
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<td className="trans">
-				{isContract && <i className="img"></i>}
-				<span><AddressLink to={address} /></span>
-				<CopyButton data={address} title={'Copy Address'} isSpan />
+			<td className={`trans ${_isScoreTx ? 'calen' : ''}`}>
+				{(_isScoreTx || _isContractAddress) && <i className="img"></i>}
+				<span>{_isScoreTx ? SERVER_TX_TYPE[txType] : <AddressLink to={address} />}</span>
+				{!_isScoreTx && <CopyButton data={address} title={'Copy Address'} isSpan />}
 				{
 					isInternalTxList &&
 					<div>

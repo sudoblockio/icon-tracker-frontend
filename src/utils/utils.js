@@ -322,3 +322,7 @@ export function is0xAddress(str) {
   if (!str) return false
   return startsWith(str, '0x') && str.length === 66
 }
+
+export function isScoreTx(targetAddr, txType) {
+	return (txType === "2" || txType === "3" || txType === "4") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+}
