@@ -9,6 +9,25 @@ import {
   REDUX_STEP
 } from './const'
 
+moment.updateLocale('en', {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: '%d seconds',
+    ss: '%d seconds',
+    m: "%d minute",
+    mm: "%d minutes",
+    h: "%d hour",
+    hh: "%d hours",
+    d: "%d day",
+    dd: "%d days",
+    M: "%d month",
+    MM: "%d months",
+    y: "%d year",
+    yy: "%d years"
+  }
+});
+
 export function numberWithCommas(x) {
   if (!x) { return 0 }
   let parts = x.toString().split('.');
@@ -20,11 +39,11 @@ export function convertNumberToText(num, round) {
   if (!isValidData(num)) {
     return 0
   }
-  
+
   if (typeof num === 'string') {
-    num = num.replace(/,/g, ""); 
+    num = num.replace(/,/g, "");
   }
-  
+
   let numStr
   if (round) {
     numStr = (new BigNumber(num)).toFixed(round)
@@ -35,17 +54,6 @@ export function convertNumberToText(num, round) {
 
   return numberWithCommas(numStr)
 }
-
-// export function isInt(value) {
-//   return !isNaN(value) &&
-//          parseInt(Number(value), 10) === value &&
-//          !isNaN(parseInt(value, 10));
-// }
-
-// export function dateToUTC(date, showUTC) {
-//   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-//   return moment(date).utcOffset(timezoneOffset).format(`YYYY-MM-DD HH:mm:ss${!!showUTC ? ` [(UTC+${timezoneOffset})]` : ''}`)
-// }
 
 export function onlyDate(date) {
   if (!isValidData(date)) return "-"
@@ -82,17 +90,6 @@ export function calcMaxPageNum(total, rowNum) {
 }
 
 export function calcFromNow(createDate) {
-  // const createMoment = moment(createDate)
-  // const todayMoment = moment()
-  // const diffDay = todayMoment.diff(createMoment, 'day')
-  // const diffHour = todayMoment.diff(createMoment, 'hour')
-
-  // if (diffDay === 0) {
-  //   return diffHour > 1 ? `${diffHour} Hours ago` : `${diffHour} Hour ago`
-  // }
-  // else {
-  //   return diffDay > 1 ? `${diffDay} Days ago` : `${diffDay} Day ago`
-  // }
   return moment(createDate).fromNow()
 }
 
@@ -148,7 +145,7 @@ export function makeDownloadLink(address) {
 export function tokenText(name, symbol, address, spanClassName) {
   const isName = isValidData(name)
   const isSymbol = isValidData(symbol)
-  
+
   let text = ""
   if (isName) {
     text += name
@@ -169,7 +166,7 @@ export function tokenText(name, symbol, address, spanClassName) {
     return text
   }
   else {
-    return <TokenLink to={address} label={!spanClassName ? text : <span className={spanClassName}>{text}</span> } />
+    return <TokenLink to={address} label={!spanClassName ? text : <span className={spanClassName}>{text}</span>} />
   }
 }
 
@@ -324,5 +321,5 @@ export function is0xAddress(str) {
 }
 
 export function isScoreTx(targetAddr, txType) {
-	return (txType === "2" || txType === "3" || txType === "4") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+  return (txType === "2" || txType === "3" || txType === "4") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
 }
