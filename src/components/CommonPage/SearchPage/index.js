@@ -77,20 +77,23 @@ class SearchPage extends Component {
   }
 
   getListByCount = (count) => {
-    switch (this.searchType) {
-      case SEARCH_TYPE.CONTRACTS:
-        this.getList({ page: this.pageId, count })
-        break
-      case SEARCH_TYPE.TOKENS:
-        this.getList({})
-        break
-
-      default:
-    }
+    this.setState({ status: '' }, () => {
+      switch (this.searchType) {
+        case SEARCH_TYPE.CONTRACTS:
+          this.getList({ page: this.pageId, count })
+          break
+        case SEARCH_TYPE.TOKENS:
+          this.getList({})
+          break
+        default:
+      }
+    })
   }
 
   getListByPage = (page) => {
-    this.props.history.push(`/${this.searchType}/${page}`);
+    this.setState({ status: '' }, () => {
+      this.props.history.push(`/${this.searchType}/${page}`);
+    })
   }
 
   getListByStatus = (status) => {
@@ -124,7 +127,7 @@ class SearchPage extends Component {
     }
   }
 
-  getFilteredByStatus= (data, status) => {
+  getFilteredByStatus = (data, status) => {
     if (!status) {
       return data
     }

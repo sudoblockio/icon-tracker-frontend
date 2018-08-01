@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { numberWithCommas } from 'utils/utils'
+import { numberWithCommas, convertNumberToText } from 'utils/utils'
 
 class InfoSummary extends Component {
   render() {
@@ -13,7 +13,7 @@ class InfoSummary extends Component {
         <p className="subTitle">ICX Supply</p>
         <p className="num b">{numberWithCommas(icxSupply)}</p>
         <p className="subTitle">ICX Circulationy</p>
-        <p className="num c">{numberWithCommas(icxCirculationy)}</p>
+        <p className="num c">{convertNumberToText(icxCirculationy, 0)}</p>
         <hr className="hr"/>
         <p className="subTitle c">All Transactions<em>{numberWithCommas(transactionCount)}</em></p>
         <p className="subTitle c">C-reps<em>{numberWithCommas(crepCount)}</em></p>

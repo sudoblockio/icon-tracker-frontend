@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import web3Utils from 'web3-utils'
 import {
+	CopyButton,
+	LoadingComponent,
+	AddressLink,
+	BlockLink,
+	AddressCell
+} from 'components'
+import {
 	convertNumberToText,
 	numberWithCommas,
 	isValidData,
@@ -15,12 +22,6 @@ import {
 import {
 	SERVER_TX_TYPE
 } from 'utils/const'
-import {
-	CopyButton,
-	LoadingComponent,
-	AddressLink,
-	BlockLink
-} from 'components'
 
 class TransactionInfo extends Component {
 
@@ -51,7 +52,8 @@ class TransactionInfo extends Component {
 					dataString,
 					fee,
 					feeUsd,
-					dataType
+					dataType,
+					targetContractAddr
 				} = data
 				const stepPriceIcx = web3Utils.fromWei(stepPrice || "0", "ether")
 				const isTokenTx = txType === "1"
@@ -83,11 +85,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressCell address={fromAddr} txType={txType} />
+											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr}/>
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressCell address={toAddr} internalTxList={internalTxList} txType={txType} />
+											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr}/>
 										</tr>
 										<tr>
 											<AmountCell isTokenTx={isTokenTx} amount={amount} tokenTxList={tokenTxList} />
@@ -213,18 +215,13 @@ const AmountCell = ({ isTokenTx, amount, tokenTxList }) => {
 
 }
 
-const AddressCell = ({ address, txType, internalTxList }) => {
+const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
-		const _isScoreTx = isScoreTx(address, txType)
-		const _isContractAddress = isContractAddress(address)
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<td className={`trans ${_isScoreTx ? 'calen' : ''}`}>
-				{(_isScoreTx || _isContractAddress) && <i className="img"></i>}
-				<span>{_isScoreTx ? SERVER_TX_TYPE[txType] : <AddressLink to={address} />}</span>
-				{!_isScoreTx && <CopyButton data={address} title={'Copy Address'} isSpan />}
-				{
+			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} tdClassName="trans" 
+				InternalDiv={
 					isInternalTxList &&
 					<div>
 						{internalTxList.map((tx, index) => {
@@ -239,7 +236,7 @@ const AddressCell = ({ address, txType, internalTxList }) => {
 						})}
 					</div>
 				}
-			</td>
+			/>
 		)
 	}
 	else {

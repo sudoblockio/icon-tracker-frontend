@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 import {
 	calcFromNow,
 	convertNumberToText,
-	isContractAddress,
 	numberWithCommas,
 	dateToUTC,
 	isValidData,
 	tokenText,
-	isScoreTx
 } from 'utils/utils'
 import {
 	TransactionLink,
-	AddressLink,
 	BlockLink,
+	AddressCell,
+	AddressSet
 } from 'components'
 import {
 	TX_TYPE,
-	SERVER_TX_TYPE,
 } from 'utils/const'
 
 const TxHashCell = ({ isError, txHash }) => {
@@ -39,89 +37,6 @@ const TxHashCell = ({ isError, txHash }) => {
 			{_txHash}
 		</td>
 	)
-}
-
-function getClassName(targetAddr, address, txType, targetContractAddr) {
-	const _isScoreTx = isScoreTx(targetAddr, txType)
-	const _isContractAddress = isContractAddress(targetAddr)
-
-	console.log()
-
-	let className = ""
-	if (_isScoreTx) {
-		className += "icon calen"
-	}
-	else if (_isContractAddress) {
-		className += "icon"
-	}
-
-	if (_isScoreTx) {
-		if (!!targetContractAddr) {
-			className += " on"
-		}
-	}
-	else {
-		if (targetAddr !== address) {
-			className += " on"
-		}
-	}
-
-	return className
-}
-
-function getInnerElements(targetAddr, address, noEllipsis, txType, targetContractAddr) {
-	const _isScoreTx = isScoreTx(targetAddr, txType)
-	const _isContractAddress = isContractAddress(targetAddr)
-
-	let elements = []
-	if (_isScoreTx) {
-		elements.push(<i key="i" className="img"></i>)
-	}
-	else if (_isContractAddress) {
-		elements.push(<i key="i" className="img"></i>)
-	}
-
-	if (_isScoreTx) {
-		const scoreTxTypeText = SERVER_TX_TYPE[txType]
-		elements.push(<span key="span">{!!targetContractAddr ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}</span>)
-	}
-	else {
-		elements.push(<span key="span" className={noEllipsis ? '' : 'ellipsis'}>{targetAddr !== address ? <AddressLink to={targetAddr} /> : address}</span>)
-	}
-
-	return elements
-}
-
-const AddressCell = ({ targetAddr, address, noEllipsis, txType, targetContractAddr }) => {
-	if (!isValidData(targetAddr)) {
-		return <td className="no">-</td>
-	}
-	const className = getClassName(targetAddr, address, txType, targetContractAddr)
-	const innerElements = getInnerElements(targetAddr, address, noEllipsis, txType, targetContractAddr)
-	return <td className={className}>{innerElements}</td>
-}
-
-const AddressSet = ({ fromAddr, toAddr, address, txType, targetContractAddr }) => {
-	return [
-		<AddressCell key="from" targetAddr={fromAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />,
-		<SignCell key="sign" fromAddr={fromAddr} toAddr={toAddr} address={address} />,
-		<AddressCell key="to" targetAddr={toAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />
-	]
-}
-
-const SignCell = ({ address, fromAddr, toAddr }) => {
-	let signItem, className = 'table-sign'
-	if (fromAddr === address) {
-		signItem = <span>OUT</span>
-		className += ' out'
-	}
-	else if (toAddr === address) {
-		signItem = <span>IN</span>
-	}
-	else {
-		signItem = <i className="img"></i>
-	}
-	return <td className={className}>{signItem}</td>
 }
 
 const TokenCell = ({ name, address }) => {
@@ -290,7 +205,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td>{data.rank}</td>
-							<AddressCell targetAddr={addressInData} txType={data.txType} noEllipsis />
+							<AddressCell targetAddr={addressInData} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<td><span>{data.percentage}</span><em>%</em></td>
 						</tr>

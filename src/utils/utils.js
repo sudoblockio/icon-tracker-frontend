@@ -45,7 +45,7 @@ export function convertNumberToText(num, round) {
   }
 
   let numStr
-  if (round) {
+  if (round >= 0) {
     numStr = (new BigNumber(num)).toFixed(round)
   }
   else {

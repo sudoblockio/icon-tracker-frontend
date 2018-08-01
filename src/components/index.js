@@ -40,6 +40,8 @@ import NoBox from './CommonComponent/NoBox'
 import SearchInput from './CommonComponent/SearchInput'
 import QrCodeButton from './CommonComponent/QrCode/QrCodeButton'
 import QrCodeComponent from './CommonComponent/QrCode/QrCodeComponent'
+import AddressCell from './CommonComponent/AddressCell'
+import AddressSet from './CommonComponent/AddressSet'
 
 import TxBottom from './CommonComponent/TxBottom'
 import TabTable from './CommonComponent/TabTable'
@@ -94,6 +96,8 @@ export {
   SearchInput,
   QrCodeButton,
   QrCodeComponent,
+  AddressCell,
+  AddressSet,
 
   TxBottom,
   TxTableHead,
