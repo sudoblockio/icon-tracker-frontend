@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {
+    StatusHolder
+} from 'components'
+import {
     SEARCH_TYPE
 } from 'utils/const'
 
@@ -16,7 +19,7 @@ class SearchTableHead extends Component {
                             <th>Compiler</th>
                             <th>Balance</th>
                             <th>TxCount</th>
-                            <th>Status</th>
+                            <StatusHolder getData={this.props.getListByStatus}/>
                             <th>Confirmed date</th>
                         </tr>
                     )

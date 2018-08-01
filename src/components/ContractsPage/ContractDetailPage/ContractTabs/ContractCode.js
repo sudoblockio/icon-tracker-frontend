@@ -13,7 +13,7 @@ class ContractCode extends Component {
     render() {
         const { contract, contractAbi } = this.props
         const { data } = contract
-        const { address, tokenName, symbol, compiler } = data
+        const { address, tokenName, symbol, compiler, contractVersion } = data
         const { loading, data: abiData, error } = contractAbi
         return (
             <div className="contents">
@@ -29,22 +29,27 @@ class ContractCode extends Component {
                         <tr className="">
                             <td>{tokenText(tokenName, symbol)}</td>
                             <td>{compiler || "-"}</td>
-                            <td><span><i className="img"></i><a href={makeDownloadLink(address)} download={`${address}.zip`}>Download</a></span></td>
+                            <td>
+                                <span>
+                                    <i className="img"></i>
+                                    <a href={makeDownloadLink(address, contractVersion)} download={`${address}_${contractVersion}.zip`}>Download</a>
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
-                        <CopyButton data={abiData} title={'Copy ABI'} />
+                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} />
                     </div>
                     {
                         loading ?
-                            <LoadingComponent height="230px"/>
+                            <LoadingComponent height="230px" />
                             :
                             <div className="scroll">
-                                <p className="txt">
-                                    {!!error ? error : JSON.stringify(abiData)}
+                                <p className="txt" style={{ whiteSpace: 'pre' }}>
+                                    {!!error ? error : JSON.stringify(abiData, null, '\t')}
                                 </p>
                             </div>
                     }

@@ -8,7 +8,9 @@ import {
 	dateToUTC,
 	utcDateInfo,
 	isContractAddress,
-	isScoreTx
+	isScoreTx,
+	beautifyJson,
+	removeQuotes,
 } from 'utils/utils'
 import {
 	SERVER_TX_TYPE
@@ -20,7 +22,7 @@ import {
 	BlockLink
 } from 'components'
 
-class TransactionInfo extends Component {	
+class TransactionInfo extends Component {
 
 	render() {
 		const { transaction } = this.props
@@ -30,9 +32,31 @@ class TransactionInfo extends Component {
 				return <LoadingComponent height='206px' />
 			}
 			else {
-				const { errorMsg, tokenTxList, internalTxList, txType, txHash, status, createDate, height, confirmation, fromAddr, toAddr, amount, stepLimit, stepUsedByTxn, stepPrice, dataString, fee, feeUsd } = data
+				const {
+					errorMsg,
+					tokenTxList,
+					internalTxList,
+					txType,
+					txHash,
+					status,
+					createDate,
+					height,
+					confirmation,
+					fromAddr,
+					toAddr,
+					amount,
+					stepLimit,
+					stepUsedByTxn,
+					stepPrice,
+					dataString,
+					fee,
+					feeUsd,
+					dataType
+				} = data
 				const stepPriceIcx = web3Utils.fromWei(stepPrice || "0", "ether")
 				const isTokenTx = txType === "1"
+				const isFail = status === 'Fail'
+				const isErrorMsg = isValidData(errorMsg)
 
 				return (
 					<div className="screen0">
@@ -47,7 +71,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td>{status}{isValidData(errorMsg) && <em>({errorMsg})</em>}</td>
+											<td className={isFail ? 'fail' : ''}>{status} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
@@ -65,33 +89,9 @@ class TransactionInfo extends Component {
 											<td>To</td>
 											<AddressCell address={toAddr} internalTxList={internalTxList} txType={txType} />
 										</tr>
-										{
-											!isTokenTx ?
-												<tr>
-													<td>Amount</td>
-													<td>{`${convertNumberToText(amount)} ICX`}</td>
-												</tr>
-												:
-												<tr>
-													<td>Token transfer</td>
-													<td>
-														{
-															(tokenTxList || []).map((tokenTx, index) => {
-																const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
-																return (
-																	<p key={index}>
-																		{quantity} {symbol}<em>({tokenName})</em>&emsp; from &emsp;
-																		<AddressLink to={fromAddr} />
-																		&emsp;to&emsp;
-																		<AddressLink to={toAddr} />
-																	</p>
-																)
-															})
-														}
-													</td>
-												</tr>
-										}
-
+										<tr>
+											<AmountCell isTokenTx={isTokenTx} amount={amount} tokenTxList={tokenTxList} />
+										</tr>
 										<tr>
 											<td>STEP limit</td>
 											<td>{convertNumberToText(stepLimit)}</td>
@@ -109,13 +109,7 @@ class TransactionInfo extends Component {
 											<td>{`${convertNumberToText(fee)} ICX`}<em>{`(${convertNumberToText(feeUsd, 2)} USD)`}</em></td>
 										</tr>
 										<tr>
-											<td>Data</td>
-											<td className="convert">
-												<div className="scroll">
-													<p>{dataString}</p>
-												</div>
-												<button className="btn-type-normal">Convert to UTF-8</button>
-											</td>
+											<DataCell dataType={dataType} dataString={dataString} />
 										</tr>
 									</tbody>
 								</table>
@@ -127,6 +121,96 @@ class TransactionInfo extends Component {
 		}
 		return Contents()
 	}
+}
+class DataCell extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			viewUtf8: false
+		}
+	}
+
+	handleClick = () => {
+		const { dataType } = this.props
+		if (dataType === 'message') {
+			this.setState({ viewUtf8: !this.state.viewUtf8 })
+		}
+	}
+
+	getButtonTitle = () => {
+		const { viewUtf8 } = this.state
+		if (viewUtf8) {
+			return 'Convert to HEX'
+		}
+
+		return 'Convert to UTF-8'
+	}
+
+	getDataString = () => {
+		const { viewUtf8 } = this.state
+		const { dataType, dataString } = this.props
+		try {
+			if (dataType !== 'message') {
+				return beautifyJson(dataString, '\t')
+			}
+
+			const _removed = removeQuotes(dataString)
+			if (viewUtf8) {
+				return web3Utils.hexToUtf8(_removed)
+			}
+			else {
+				return _removed
+			}
+		}
+		catch (e) {
+			console.log(e)
+			return dataString			
+		}
+	}
+
+	render() {
+		const { dataType } = this.props
+		const buttonTitle = this.getButtonTitle()
+		const dataString = this.getDataString()
+		return [
+			<td key="titie">Data</td>,
+			<td key="content" className="convert">
+				<div className="scroll">
+					<p style={{ whiteSpace: 'pre' }}>{dataString}</p>
+				</div>
+				{(dataType === 'message') && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
+			</td>
+		]
+	}
+}
+
+const AmountCell = ({ isTokenTx, amount, tokenTxList }) => {
+	if (!isTokenTx) {
+		return [
+			<td key="title">Amount</td>,
+			<td key="content">{`${convertNumberToText(amount)} ICX`}</td>
+		]
+	}
+	else {
+		return [
+			<td key="title">Token transfer</td>,
+			<td key="content">
+				{
+					(tokenTxList || []).map((tokenTx, index) => {
+						const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+						return (
+							<p key={index}>
+								{quantity} {symbol}<em>({tokenName})</em>
+								&emsp; from &emsp;<AddressLink to={fromAddr} />
+								&emsp;to&emsp;<AddressLink to={toAddr} />
+							</p>
+						)
+					})
+				}
+			</td>
+		]
+	}
+
 }
 
 const AddressCell = ({ address, txType, internalTxList }) => {
@@ -147,10 +231,9 @@ const AddressCell = ({ address, txType, internalTxList }) => {
 							const { amount, fromAddr, toAddr } = tx
 							return (
 								<p key={index}>
-									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX&emsp; from &emsp;
-									<span><AddressLink to={fromAddr} /></span>
-									&emsp;to&emsp;
-									<span><AddressLink to={toAddr} /></span>
+									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
+									&emsp; from &emsp;<span><AddressLink to={fromAddr} /></span>
+									&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
 								</p>
 							)
 						})}

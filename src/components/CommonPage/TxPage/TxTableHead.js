@@ -8,59 +8,6 @@ class TxTableHead extends Component {
             const { txType } = _props
             const utcLabel = `(${getUTCString()})`
             switch (txType) {
-                case TX_TYPE.BLOCKS:
-                    return (
-                        <tr>
-                            <th>Block</th>
-                            <th>Time Stamp<em>{utcLabel}</em></th>
-                            <th>No of Txns</th>
-                            <th>Block Hash</th>
-                            <th>Amount</th>
-                            <th>TxFee</th>
-                        </tr>
-                    )
-                case TX_TYPE.ADDRESSES:
-                    return (
-                        <tr>
-                            <th>Address</th>
-                            <th>ICX Balance</th>
-                            <th>ICX USD Value</th>
-                            <th>Percentage<em>%</em></th>
-                            <th>No of Txns</th>
-                            <th>Node type</th>
-                        </tr>
-                    )
-                case TX_TYPE.CONTRACT_TX:
-                    return (
-                        <tr>
-                            <th>TxHash</th>
-                            <th>Age</th>
-                            <th>From</th>
-                            <th className="table-sign"></th>
-                            <th>To</th>
-                            <th>Quantity</th>
-                        </tr>
-                    )
-                case TX_TYPE.CONTRACT_TOKEN_TX:
-                    return (
-                        <tr>
-                            <th>TxHash</th>
-                            <th>Age</th>
-                            <th>From</th>
-                            <th className="table-sign"></th>
-                            <th>To</th>
-                            <th>Quantity</th>
-                            <th>Token</th>
-                        </tr>
-                    )
-                case TX_TYPE.CONTRACT_EVENTS:
-                    return (
-                        <tr>
-                            <th>TxHash / Block / Age</th>
-                            <th>Method</th>
-                            <th>Event Logs</th>
-                        </tr>
-                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>
@@ -84,6 +31,40 @@ class TxTableHead extends Component {
                             <th>To</th>
                             <th>Quantity</th>
                             <th>Token</th>
+                        </tr>
+                    )
+                case TX_TYPE.CONTRACT_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Amount</th>
+                        </tr>
+                    )
+                case TX_TYPE.CONTRACT_TOKEN_TX:
+                    return (
+                        <tr>
+                            <th>TxHash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Quantity</th>
+                            <th>Token</th>
+                        </tr>
+                    )
+                case TX_TYPE.BLOCK_TX:
+                    return (
+                        <tr>
+                            <th>Tx Hash</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
                         </tr>
                     )
                 case TX_TYPE.TRANSACTIONS:
@@ -111,17 +92,6 @@ class TxTableHead extends Component {
                             <th>Token</th>
                         </tr>
                     )
-                case TX_TYPE.BLOCK_TX:
-                    return (
-                        <tr>
-                            <th>Tx Hash</th>
-                            <th>From</th>
-                            <th className="table-sign"></th>
-                            <th>To</th>
-                            <th>Amount</th>
-                            <th>TxFee</th>
-                        </tr>
-                    )
                 case TX_TYPE.TOKEN_TX:
                     return (
                         <tr>
@@ -133,6 +103,42 @@ class TxTableHead extends Component {
                             <th>Quantity</th>
                         </tr>
                     )
+                case TX_TYPE.ADDRESSES:
+                    return (
+                        <tr>
+                            <th>Address</th>
+                            <th>ICX Balance</th>
+                            <th>ICX USD Value</th>
+                            <th>Percentage<em>%</em></th>
+                            <th>No of Txns</th>
+                            <th>Node type</th>
+                        </tr>
+                    )
+                case TX_TYPE.BLOCKS:
+                    return (
+                        <tr>
+                            <th>Block</th>
+                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>No of Txns</th>
+                            <th>Block Hash</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
+                case TX_TYPE.CONTRACT_EVENTS:
+                    return (
+                        <tr>
+                            <th>TxHash / Block / Age</th>
+                            <th>Method</th>
+                            <th>Event Logs</th>
+                        </tr>
+                    )
+                case TX_TYPE.TRANSACTION_EVENTS:
+                    return (
+                        <tr>
+                            <th>Event Logs</th>
+                        </tr>
+                    )
                 case TX_TYPE.TOKEN_HOLDERS:
                     return (
                         <tr>
@@ -142,12 +148,6 @@ class TxTableHead extends Component {
                             <th>Percentage<em>%</em></th>
                         </tr>
                     )
-                case TX_TYPE.TRANSACTION_EVENTS:
-                    return (
-                        <tr>
-                            <th>Event Logs</th>
-                        </tr>
-                    )                    
                 default:
                     return (
                         <tr></tr>

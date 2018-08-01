@@ -41,6 +41,12 @@ var createMenu = function(){
 		$(".sort-holder ul").stop().slideUp(300, 'swing');
 	});
 
+	// contract status
+	$(".status-holder > span").click(function(){
+		$(".status-holder ul").stop().slideDown(300, 'swing');
+		$(this).addClass("on");
+	});
+
 	// address token balance
 	$(".table-typeB td .balance").click(function(){
 		$(".combo-group").css({"display":"block"});
@@ -69,6 +75,11 @@ $(document).ready(function(){
 		if(container.has(e.target).length===0){
 			container.css("display","none");
 			$(".table-typeB td .balance").removeClass("on");
+		}
+		var status = $(".header-wrap .logo");
+		if(status.has(e.target).length===0){
+			$(".status-holder ul").css("display","none");
+			$(".status-holder > span").removeClass("on");
 		}
 	});
 

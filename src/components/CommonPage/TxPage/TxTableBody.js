@@ -41,56 +41,72 @@ const TxHashCell = ({ isError, txHash }) => {
 	)
 }
 
-function getClassName (targetAddr, address, txType) {
+function getClassName(targetAddr, address, txType, targetContractAddr) {
 	const _isScoreTx = isScoreTx(targetAddr, txType)
 	const _isContractAddress = isContractAddress(targetAddr)
 
-	if (_isScoreTx) {
-		return "icon calen"
-	}
+	console.log()
 
 	let className = ""
-	if (_isContractAddress) {
+	if (_isScoreTx) {
+		className += "icon calen"
+	}
+	else if (_isContractAddress) {
 		className += "icon"
 	}
-	
-	if (targetAddr !== address) {
-		className += " on"
+
+	if (_isScoreTx) {
+		if (!!targetContractAddr) {
+			className += " on"
+		}
 	}
-	
+	else {
+		if (targetAddr !== address) {
+			className += " on"
+		}
+	}
+
 	return className
 }
 
-function getInnerElements (targetAddr, address, noEllipsis, txType) {
+function getInnerElements(targetAddr, address, noEllipsis, txType, targetContractAddr) {
 	const _isScoreTx = isScoreTx(targetAddr, txType)
 	const _isContractAddress = isContractAddress(targetAddr)
 
-	if (_isScoreTx) {
-		return [<i key="i" className="img"></i>,<span key="span">{SERVER_TX_TYPE[txType]}</span>]
-	}
-
 	let elements = []
-	if (_isContractAddress) {
+	if (_isScoreTx) {
 		elements.push(<i key="i" className="img"></i>)
 	}
-	
-	if (targetAddr !== address) {
-		elements.push(<span key="span" className={noEllipsis ? '' : 'ellipsis'}><AddressLink to={targetAddr} /></span>)
+	else if (_isContractAddress) {
+		elements.push(<i key="i" className="img"></i>)
+	}
+
+	if (_isScoreTx) {
+		const scoreTxTypeText = SERVER_TX_TYPE[txType]
+		elements.push(<span key="span">{!!targetContractAddr ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}</span>)
 	}
 	else {
-		elements.push(<span key="span" className={noEllipsis ? '' : 'ellipsis'}>{address}</span>)
+		elements.push(<span key="span" className={noEllipsis ? '' : 'ellipsis'}>{targetAddr !== address ? <AddressLink to={targetAddr} /> : address}</span>)
 	}
 
 	return elements
 }
 
-const AddressCell = ({ targetAddr, address, noEllipsis, txType }) => {
+const AddressCell = ({ targetAddr, address, noEllipsis, txType, targetContractAddr }) => {
 	if (!isValidData(targetAddr)) {
 		return <td className="no">-</td>
 	}
-	const className = getClassName(targetAddr, address, txType)
-	const innerElements = getInnerElements(targetAddr, address, noEllipsis, txType)
+	const className = getClassName(targetAddr, address, txType, targetContractAddr)
+	const innerElements = getInnerElements(targetAddr, address, noEllipsis, txType, targetContractAddr)
 	return <td className={className}>{innerElements}</td>
+}
+
+const AddressSet = ({ fromAddr, toAddr, address, txType, targetContractAddr }) => {
+	return [
+		<AddressCell key="from" targetAddr={fromAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />,
+		<SignCell key="sign" fromAddr={fromAddr} toAddr={toAddr} address={address} />,
+		<AddressCell key="to" targetAddr={toAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />
+	]
 }
 
 const SignCell = ({ address, fromAddr, toAddr }) => {
@@ -151,15 +167,83 @@ class TxTableBody extends Component {
 			const isError = data.state === 0
 
 			switch (txType) {
-				case TX_TYPE.BLOCKS:
+				case TX_TYPE.ADDRESS_TX:
 					return (
 						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
-							<td>{numberWithCommas(data.txCount)}</td>
-							<td><BlockLink label={data.hash} to={data.height} ellipsis /></td>
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={data.amount} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
+						</tr>
+					)
+				case TX_TYPE.ADDRESS_TOKEN_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<DateCell date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={data.contractAddr} />
+							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
+							<TokenCell name={data.contractName} address={data.contractAddr} />
+						</tr>
+					)
+				case TX_TYPE.CONTRACT_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<DateCell isAge date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
+							<AmountCell amount={data.quantity} symbol="ICX" />
+						</tr>
+					)
+				case TX_TYPE.CONTRACT_TOKEN_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<DateCell isAge date={data.age} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
+							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
+							<TokenCell name={data.name} address={data.tradeTokenAddr} />
+						</tr>
+					)
+				case TX_TYPE.BLOCK_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.amount} symbol="ICX" />
+							<AmountCell amount={data.fee} symbol="ICX" />
+						</tr>
+					)
+				case TX_TYPE.TRANSACTIONS:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<BlockCell height={data.height} />
+							<DateCell date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.amount} symbol="ICX" />
+							<AmountCell amount={data.fee} symbol="ICX" />
+						</tr>
+					)
+				case TX_TYPE.TOKEN_TRANSFERS:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<DateCell isAge date={data.age} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
+							<AmountCell amount={data.quantity} symbol={data.symbol} />
+							<TokenCell name={data.tokenName} address={data.contractAddr} />
+						</tr>
+					)
+				case TX_TYPE.TOKEN_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<DateCell isAge date={data.age} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
+							<AmountCell amount={data.quantity} symbol={data.symbol} />
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
@@ -173,27 +257,15 @@ class TxTableBody extends Component {
 							<td>{data.nodeType}</td>
 						</tr>
 					)
-				case TX_TYPE.CONTRACT_TX:
+				case TX_TYPE.BLOCKS:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={address} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
-							<AddressCell targetAddr={data.toAddr} address={address} txType={data.txType} />
-							<AmountCell amount={data.quantity} symbol="ICX" />
-						</tr>
-					)
-				case TX_TYPE.CONTRACT_TOKEN_TX:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.age} />
-							<AddressCell targetAddr={data.fromAddr} address={address} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
-							<AddressCell targetAddr={data.toAddr} address={address} txType={data.txType} />
-							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
-							<TokenCell name={data.name} address={data.tradeTokenAddr} />
+							<BlockCell height={data.height} />
+							<DateCell date={data.createDate} />
+							<td>{numberWithCommas(data.txCount)}</td>
+							<td><BlockLink label={data.hash} to={data.height} ellipsis /></td>
+							<AmountCell amount={data.amount} symbol="ICX" />
+							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:
@@ -208,76 +280,10 @@ class TxTableBody extends Component {
 							<td>{data.eventLog}</td>
 						</tr>
 					)
-				case TX_TYPE.ADDRESS_TX:
+				case TX_TYPE.TRANSACTION_EVENTS:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={address} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
-							<AddressCell targetAddr={data.toAddr} address={address} txType={data.txType} />
-							<AmountCell amount={data.amount} symbol="ICX" />
-							<AmountCell amount={data.fee} symbol="ICX" />
-						</tr>
-					)
-				case TX_TYPE.ADDRESS_TOKEN_TX:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} address={address} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} />
-							<AddressCell targetAddr={data.toAddr} address={address} txType={data.txType} />
-							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
-							<TokenCell name={data.contractName} address={data.contractAddr} />
-						</tr>
-					)
-				case TX_TYPE.TRANSACTIONS:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
-							<AddressCell targetAddr={data.toAddr} txType={data.txType} />
-							<AmountCell amount={data.amount} symbol="ICX" />
-							<AmountCell amount={data.fee} symbol="ICX" />
-						</tr>
-					)
-				case TX_TYPE.TOKEN_TRANSFERS:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.age} />
-							<AddressCell targetAddr={data.fromAddr} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
-							<AddressCell targetAddr={data.toAddr} txType={data.txType} />
-							<AmountCell amount={data.quantity} symbol={data.symbol} />
-							<TokenCell name={data.tokenName} address={data.contractAddr} />
-						</tr>
-					)
-				case TX_TYPE.BLOCK_TX:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<AddressCell targetAddr={data.fromAddr} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
-							<AddressCell targetAddr={data.toAddr} txType={data.txType} />
-							<AmountCell amount={data.amount} symbol="ICX" />
-							<AmountCell amount={data.fee} symbol="ICX" />
-						</tr>
-					)
-				case TX_TYPE.TOKEN_TX:
-					return (
-						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.createDate} />
-							<AddressCell targetAddr={data.fromAddr} txType={data.txType} />
-							<SignCell fromAddr={data.fromAddr} toAddr={data.toAddr} />
-							<AddressCell targetAddr={data.toAddr} txType={data.txType} />
-							<AmountCell amount={data.quantity} symbol={data.symbol} />
+							<td>{data.eventLog}</td>
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
@@ -287,12 +293,6 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={addressInData} txType={data.txType} noEllipsis />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<td><span>{data.percentage}</span><em>%</em></td>
-						</tr>
-					)
-				case TX_TYPE.TRANSACTION_EVENTS:
-					return (
-						<tr>
-							<td>{data.eventLog}</td>
 						</tr>
 					)
 				default:

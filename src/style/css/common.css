@@ -286,7 +286,7 @@ html, body{height: 100%;}
 [class *="table-type"] tr i.img{width: 10px; height: 12px; background-position: -50px 0; position: absolute; top: 10px; }
 [class *="table-type"] td.icon.error i.img{width: 10px; height: 10px; background-position: -100px 0; position: absolute; top: 12px; }
 [class *="table-type"] td.icon.calen i.img{width: 12px; height: 12px; background-position: 0px -250px; position: absolute; top: 12px;}
-[class *="table-type"] td.icon.calen span{font-size: 10px;}
+[class *="table-type"] td.icon.calen span{font-size: 11px;}
 [class *="table-type"] td.icon.calen{padding: 8px 20px 5px;}
 
 
@@ -336,11 +336,13 @@ html, body{height: 100%;}
 .table-typeB .qr .img{vertical-align: top;}
 
 .table-typeB .scroll{height: 100px; overflow-y: auto; }
-.table-typeB .scroll span{color: #e6001b;}
+.table-typeB .scroll span{color: #4CAF50;     pointer-events: none;}
 .table-typeB .scroll p{line-height: 24px; word-break: break-all;}
 .table-typeB .convert{padding: 14px 30px;}
 .table-typeB .convert button{margin-top: 10px;}
-.table-typeB .fail{color:#e6001b; }
+.table-typeB .fail{color:#e6001b;     pointer-events: none;}
+.table-typeB .fail em{color:#e6001b; }
+.table-typeB .fail span{color:#e6001b; }
 
 .table-typeB .combo-group{position: relative; display: none;}
 .table-typeB .combo-layer{width: 464px;box-shadow: 0 4px 15px 0 rgba(38, 38, 38, 0.2); background: #ffffff; border: solid 2px #262626; position: absolute; z-index: 1; top: -6px; margin-left: -20px; border-radius: 6px; box-shadow: 0 20px 30px 0 rgba(0, 25, 77, 0.07);}
@@ -410,6 +412,7 @@ html, body{height: 100%;}
 .table-typeB.transaction tr .trans p{font-size: 10px; font-weight: 400;}
 .table-typeB.transaction tr .trans div{margin-top: 10px;}
 .table-typeB.transaction tr .trans p{margin-top: 2px;}
+.table-typeB.transaction tr .trans.calen .img{    background-position: 0px -250px; width: 12px;}
 
 .table-typeC td:nth-child(2){text-align: center;}
 .table-typeC td:nth-child(7){text-align: right;}
@@ -543,7 +546,7 @@ html, body{height: 100%;}
 .table-typeH td:nth-child(1) p:last-child{color: #262626;    margin-top: 2px;}
 .table-typeH td:nth-child(2){text-align: center;}
 .table-typeH td:nth-child(3) {line-height: 20px;}
-.table-typeH td:nth-child(3) span{color:#e6001b; }
+.table-typeH td:nth-child(3) span{color:#4CAF50; }
 .table-typeH th:nth-child(1){width:234px; }
 .table-typeH th:nth-child(2){width:234px; }
 .table-typeH .ellipsis{width: 184px;}

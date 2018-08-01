@@ -27,8 +27,8 @@ export const INITIAL_STATE = {
 
 export const CONTRACT_STATUS = {
     "0": 'Pending', 
-    "1": 'Success', 
-    "2": 'Reject',
+    "1": 'Active', 
+    "2": 'Rejected',
 }
 
 export const SERVER_TX_TYPE = {
@@ -37,6 +37,8 @@ export const SERVER_TX_TYPE = {
     "2": "Contract Call",
     "3": "Contract Create",
     "4": "Contract Update",
+    "5": "Contract Accept",
+    "6": "Contract Reject"
 }
 
 export const IRC_VERSION = {
@@ -45,6 +47,7 @@ export const IRC_VERSION = {
 }
 
 export const SORT_TYPE = [10, 20, 40, 80, 160]
+export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
 export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
@@ -84,33 +87,33 @@ export const SEARCH_TYPE_DATA = {
 }
 
 export const TX_TYPE = {
-    BLOCKS: 'blocks',
-    ADDRESSES: 'addresses',
-    CONTRACT_TX: 'contracttx',
-    CONTRACT_TOKEN_TX: 'contracttokentx',
-    CONTRACT_EVENTS: 'contractevents',
     ADDRESS_TX: 'addresstx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
+    CONTRACT_TX: 'contracttx',
+    CONTRACT_TOKEN_TX: 'contracttokentx',
+    BLOCK_TX: 'blocktx',
     TRANSACTIONS: 'transactions',
     TOKEN_TRANSFERS: 'tokentransfers',
-    BLOCK_TX: 'blocktx',
     TOKEN_TX: 'tokentx',
-    TOKEN_HOLDERS: 'tokenholders',
+    ADDRESSES: 'addresses',
+    BLOCKS: 'blocks',
+    CONTRACT_EVENTS: 'contractevents',
     TRANSACTION_EVENTS: 'transactionevents',
+    TOKEN_HOLDERS: 'tokenholders',
 }
 
 export const TX_TYPE_DATA = {
-    [TX_TYPE.BLOCKS]: {
-		tx: 'blocks',
-		getTxList: 'blockList',
-        className: 'table-typeE',
-        noBoxText: 'No Block',
+    [TX_TYPE.ADDRESS_TX]: {
+		tx: 'walletTx',
+		getTxList: 'addressTxList',
+        className: 'table-typeC',
+        noBoxText: 'No Transaction',
     },
-	[TX_TYPE.ADDRESSES]: {
-		tx: 'addresses',
-		getTxList: 'addressList',
-        className: 'table-typeA',
-        noBoxText: 'No Address',
+	[TX_TYPE.ADDRESS_TOKEN_TX]: {
+		tx: 'walletTokenTx',
+		getTxList: 'addressTokenTxList',
+        className: 'table-typeC token',
+        noBoxText: 'No Transaction',
     },
     [TX_TYPE.CONTRACT_TX]: {
 		tx: 'contractTx',
@@ -124,24 +127,12 @@ export const TX_TYPE_DATA = {
         className: 'table-typeC token tap2',
         noBoxText: 'No Transaction'
     },
-    [TX_TYPE.CONTRACT_EVENTS]: {
-		tx: 'contractEvents',
-		getTxList: 'contractEventLogList',
-        className: 'table-typeH',
-        noBoxText: 'No Event'
-    },
-	[TX_TYPE.ADDRESS_TX]: {
-		tx: 'walletTx',
-		getTxList: 'addressTxList',
-        className: 'table-typeC',
+    [TX_TYPE.BLOCK_TX]: {
+		tx: 'blockTx',
+		getTxList: 'blockTxList',
+		className: 'table-typeD',
         noBoxText: 'No Transaction',
-    },
-	[TX_TYPE.ADDRESS_TOKEN_TX]: {
-		tx: 'walletTokenTx',
-		getTxList: 'addressTokenTxList',
-        className: 'table-typeC token',
-        noBoxText: 'No Transaction',
-    },
+	},
     [TX_TYPE.TRANSACTIONS]: {
 		tx: 'recentTx',
 		getTxList: 'transactionRecentTx',
@@ -154,28 +145,40 @@ export const TX_TYPE_DATA = {
 		className: 'table-typeN',
         noBoxText: 'No Transaction',
 	},
-    [TX_TYPE.BLOCK_TX]: {
-		tx: 'blockTx',
-		getTxList: 'blockTxList',
-		className: 'table-typeD',
-        noBoxText: 'No Transaction',
-	},
     [TX_TYPE.TOKEN_TX]: {
 		tx: 'tokenTransfers',
 		getTxList: 'tokenTransfersList',
 		className: 'table-typeF',
         noBoxText: 'No Transaction',
 	},
-    [TX_TYPE.TOKEN_HOLDERS]: {
-		tx: 'tokenHolders',
-		getTxList: 'tokenHoldersList',
-		className: 'table-typeM',
-        noBoxText: 'No Holders',
+	[TX_TYPE.ADDRESSES]: {
+		tx: 'addresses',
+		getTxList: 'addressList',
+        className: 'table-typeA',
+        noBoxText: 'No Address',
+    },
+    [TX_TYPE.BLOCKS]: {
+		tx: 'blocks',
+		getTxList: 'blockList',
+        className: 'table-typeE',
+        noBoxText: 'No Block',
+    },
+    [TX_TYPE.CONTRACT_EVENTS]: {
+		tx: 'contractEvents',
+		getTxList: 'contractEventLogList',
+        className: 'table-typeH',
+        noBoxText: 'No Event'
     },
     [TX_TYPE.TRANSACTION_EVENTS]: {
 		tx: 'transactionEvents',
 		getTxList: 'transactionEventLogList',
 		className: 'table-typeH log',
         noBoxText: 'No Event',
-    }
+    },
+    [TX_TYPE.TOKEN_HOLDERS]: {
+		tx: 'tokenHolders',
+		getTxList: 'tokenHoldersList',
+		className: 'table-typeM',
+        noBoxText: 'No Holders',
+    },
 }

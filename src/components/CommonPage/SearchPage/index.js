@@ -17,6 +17,7 @@ import {
 import {
   SEARCH_TYPE,
   SEARCH_TYPE_DATA,
+  CONTRACT_STATUS
 } from 'utils/const'
 
 class SearchPage extends Component {
@@ -28,7 +29,8 @@ class SearchPage extends Component {
     this.getList = () => { }
     this.getListSearch = () => { }
     this.state = {
-      searchKeyword: ''
+      searchKeyword: '',
+      status: '',
     }
   }
 
@@ -91,6 +93,16 @@ class SearchPage extends Component {
     this.props.history.push(`/${this.searchType}/${page}`);
   }
 
+  getListByStatus = (status) => {
+    switch (this.searchType) {
+      case SEARCH_TYPE.CONTRACTS:
+        this.setState({ status })
+        break
+      case SEARCH_TYPE.TOKENS:
+      default:
+    }
+  }
+
   setSearch = (_search) => {
     const parsed = queryString.parse(_search)
     const { search } = parsed
@@ -112,8 +124,20 @@ class SearchPage extends Component {
     }
   }
 
+  getFilteredByStatus= (data, status) => {
+    if (!status) {
+      return data
+    }
+    switch (this.searchType) {
+      case SEARCH_TYPE.CONTRACTS:
+        return data.filter(item => CONTRACT_STATUS[item.status] === status)
+      case SEARCH_TYPE.TOKENS:
+      default:
+        return data
+    }
+  }
+
   render() {
-    const { searchKeyword } = this.state
     const list = this.props[this.getSearchTypeData()['list']] || {}
     const listSearch = this.props[`${this.getSearchTypeData()['list']}Search`]
     const tableClassName = this.getSearchTypeData()['tableClassName'] || ''
@@ -122,40 +146,38 @@ class SearchPage extends Component {
     const placeholder = this.getSearchTypeData()['placeholder'] || ''
     const title = this.getSearchTypeData()['title'] || ''
 
-    const ListData = !searchKeyword ? list : listSearch //
+    const { searchKeyword, status } = this.state
+    const ListData = !searchKeyword ? list : listSearch
     const { loading, data, page, listSize, count } = ListData;
     const noData = data.length === 0
-
-    const needOption = !searchKeyword && this.searchType === SEARCH_TYPE.CONTRACTS
+    const filtered = this.getFilteredByStatus(data, status)
+    const needPageOption = !searchKeyword && this.searchType === SEARCH_TYPE.CONTRACTS
 
     const TableContent = () => {
       if (noData) {
-        return <NoBox text={searchKeyword ? 'No Data' : noBoxText} /> //
+        return <NoBox text={searchKeyword ? 'No Data' : noBoxText} />
       }
       else {
         return ([
-          <table
-            key='table'
-            className={tableClassName} //
-          >
+          <table key='table' className={tableClassName}>
             <thead>
-              <SearchTableHead searchType={this.searchType} />
+              <SearchTableHead searchType={this.searchType} getListByStatus={this.getListByStatus} />
             </thead>
             <tbody>
               {
-                data.map((item, index) => (
+                filtered.map((item, index) => (
                   <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} />
                 ))
               }
             </tbody>
           </table>,
-          (needOption &&
+          (needPageOption &&
             <SortHolder //
               key='SortHolder'
               count={count}
               getData={this.getListByCount}
             />),
-          (needOption &&
+          (needPageOption &&
             <Pagination //
               key='Pagination'
               pageNum={page}
@@ -174,7 +196,7 @@ class SearchPage extends Component {
         return (
           <div className="screen0">
             <div className="wrap-holder">
-              <p className="title">{title}</p> {/**/}
+              <p className="title">{title}</p>
               <SearchInput
                 id="sub-search-input"
                 placeholder={placeholder}

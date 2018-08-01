@@ -34,6 +34,7 @@ import TokenLink from './CommonComponent/Link/TokenLink'
 import LoadingComponent from './CommonComponent/LoadingComponent'
 import Pagination from './CommonComponent/Pagination'
 import SortHolder from './CommonComponent/SortHolder'
+import StatusHolder from './CommonComponent/StatusHolder'
 import CopyButton from './CommonComponent/CopyButton'
 import NoBox from './CommonComponent/NoBox'
 import SearchInput from './CommonComponent/SearchInput'
@@ -87,6 +88,7 @@ export {
   LoadingComponent,
   Pagination,
   SortHolder,
+  StatusHolder,
   CopyButton,
   NoBox,
   SearchInput,

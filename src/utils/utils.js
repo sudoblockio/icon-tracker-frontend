@@ -138,8 +138,8 @@ export function randomUint32() {
   }
 }
 
-export function makeDownloadLink(address) {
-  return `${localDevUrl}/score/${address}_1.zip`
+export function makeDownloadLink(address, version) {
+  return `${localDevUrl}/score/${address}_${version}.zip`
 }
 
 export function tokenText(name, symbol, address, spanClassName) {
@@ -321,5 +321,29 @@ export function is0xAddress(str) {
 }
 
 export function isScoreTx(targetAddr, txType) {
-  return (txType === "2" || txType === "3" || txType === "4") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+  return (txType === "2" || txType === "3" || txType === "4" || txType === "5") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+}
+
+export function beautifyJson(data, tab) {
+  if (!data) {
+    return ''
+  }
+  try {
+    let _data = {}
+    if (typeof data === 'object') {
+      _data = data
+    }
+    else if (typeof data === 'string') {
+      _data = JSON.parse(data)
+    }
+    return JSON.stringify(_data, null, tab)
+  }
+  catch (e) {
+    console.log(e)
+    return ''
+  }
+}
+
+export function removeQuotes(str) {
+  return str.replace(/"/gi, "")
 }
