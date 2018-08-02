@@ -11,23 +11,23 @@ import {
 	isValidData
 } from 'utils/utils'
 
-function getClassName(targetAddr, address, txType, targetContractAddr, tdClassName) {
-	const _isScoreTx = isScoreTx(targetAddr, txType)
-	const _isContractAddress = isContractAddress(targetAddr)
-	const isOtherAddress = targetAddr !== address
-	const isOtherContract = targetContractAddr !== address
+function addIconClassName(tdClassName, isScoreTx, isContractAddress) {
 	const _tdClassName = !!tdClassName ? tdClassName : 'icon'
 	
 	let className = ""
-	if (_isScoreTx) {
+	if (isScoreTx) {
 		className += `${_tdClassName} calen`
 	}
-	else if (_isContractAddress) {
+	else if (isContractAddress) {
 		className += `${_tdClassName}`
 	}
+	return className
+}
 
-	if (_isScoreTx) {
-		if (!!targetContractAddr && isOtherContract) {
+function addLinkClassName(isTargetContractAddr, isScoreTx, isOtherContract, isOtherAddress) {
+	let className = ""
+	if (isScoreTx) {
+		if (isTargetContractAddr && isOtherContract) {
 			className += " on"
 		}
 	}
@@ -36,17 +36,50 @@ function getClassName(targetAddr, address, txType, targetContractAddr, tdClassNa
 			className += " on"
 		}
 	}
-
 	return className
 }
 
-function getInnerElements(targetAddr, address, spanNoEllipsis, txType, targetContractAddr) {
+function getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName) {
 	const _isScoreTx = isScoreTx(targetAddr, txType)
 	const _isContractAddress = isContractAddress(targetAddr)
-	const isOtherAddress = targetAddr !== address
-	const isOtherContract = targetContractAddr !== address
+	const _isOtherAddress = targetAddr !== address
+	const _isOtherContract = targetContractAddr !== address
+	const _isListCell = tdClassName !== 'trans'
+	return {
+		_isScoreTx,
+		_isContractAddress,
+		_isOtherAddress,
+		_isOtherContract,
+		_isListCell
+	}
+}
 
-	console.log(targetContractAddr, isOtherContract)
+function getClassName(targetAddr, address, txType, targetContractAddr, tdClassName) {
+	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName)
+	const {
+		_isScoreTx,
+		_isContractAddress,
+		_isOtherAddress,
+		_isOtherContract,
+		_isListCell
+	} = _getBoolean
+	
+	let className = addIconClassName(tdClassName, _isScoreTx, _isContractAddress)
+	if (_isListCell) {
+		className += addLinkClassName(!!targetContractAddr, _isScoreTx, _isOtherContract, _isOtherAddress)
+	}
+	return className
+}
+
+function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis) {
+	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr)
+	const {
+		_isScoreTx,
+		_isContractAddress,
+		_isOtherAddress,
+		_isOtherContract,
+	} = _getBoolean
+
 	let elements = []
 	if (_isScoreTx) {
 		elements.push(<i key="i" className="img"></i>)
@@ -59,14 +92,14 @@ function getInnerElements(targetAddr, address, spanNoEllipsis, txType, targetCon
 		const scoreTxTypeText = SERVER_TX_TYPE[txType]
 		elements.push(
 			<span key="span">
-				{(!!targetContractAddr && isOtherContract) ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}
+				{(!!targetContractAddr && _isOtherContract) ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}
 			</span>
 		)
 	}
 	else {
 		elements.push(
 			<span key="span" className={spanNoEllipsis ? '' : 'ellipsis'}>
-				{isOtherAddress ? <AddressLink to={targetAddr} /> : address}
+				{_isOtherAddress ? <AddressLink to={targetAddr} /> : address}
 			</span>
 		)
 	}
@@ -74,12 +107,12 @@ function getInnerElements(targetAddr, address, spanNoEllipsis, txType, targetCon
 	return elements
 }
 
-const AddressCell = ({ targetAddr, address, tdClassName, spanNoEllipsis, txType, targetContractAddr, InternalDiv }) => {
+const AddressCell = ({ targetAddr, address, txType, targetContractAddr, tdClassName, spanNoEllipsis, InternalDiv }) => {
 	if (!isValidData(targetAddr)) {
 		return <td className="no">-</td>
 	}
 	const className = getClassName(targetAddr, address, txType, targetContractAddr, tdClassName)
-	const innerElements = getInnerElements(targetAddr, address, spanNoEllipsis, txType, targetContractAddr)
+	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis)
 	return <td className={className}>{innerElements}{InternalDiv}</td>
 }
 
