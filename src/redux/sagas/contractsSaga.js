@@ -43,6 +43,11 @@ function* watchReadContractInformation() { yield takeLatest(AT.readContractInfor
 
 export function* contractListFunc(action) {
   try {
+    if (!action.payload.count) {
+      const contracts = yield select(state => state.contracts.contracts);
+      const { count } = contracts
+      action.payload.count = count
+    }
     const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractListFulfilled, payload });

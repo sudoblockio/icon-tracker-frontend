@@ -98,7 +98,7 @@ class SearchPage extends Component {
   }
 
   getListByStatus = (status) => {
-    const query = { page: 1, count: 20 }
+    const query = { page: 1 }
     if (!!status) {
       query.status = CONTRACT_STATUS_NUM[status]
     }
