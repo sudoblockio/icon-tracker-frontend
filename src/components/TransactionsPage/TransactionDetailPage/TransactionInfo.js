@@ -188,7 +188,7 @@ class DataCell extends Component {
 				<div className="scroll">
 					<p style={{ whiteSpace: 'pre' }}>{dataString}</p>
 				</div>
-				{(dataType === 'message') && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
+				<button className="btn-type-normal" onClick={this.handleClick} disabled={dataType !== 'message'}>{buttonTitle}</button>
 			</td>
 		)
 	}

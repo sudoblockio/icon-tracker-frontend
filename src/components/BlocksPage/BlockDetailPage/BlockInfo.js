@@ -57,7 +57,9 @@ class BlockInfo extends Component {
         return <LoadingComponent height='206px' />
       }
       else {
-        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message } = data
+        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock } = data
+        const isFirst = height === 0
+        const isLast = lastBlock !== "-"
         return (
           <div className="screen0">
             <div className="wrap-holder">
@@ -68,9 +70,9 @@ class BlockInfo extends Component {
                     <tr>
                       <td>Block Height</td>
                       <td>
-                        <p onClick={this.handlePrevBlock} className="prev"><em className="img"></em></p>
+                        <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled': ''}`}><em className="img"></em></p>
                         <em className="value">{numberWithCommas(height)}</em>
-                        <p onClick={this.handleNextBlock} className="next"><em className="img"></em></p>
+                        <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled': ''}`}><em className="img"></em></p>
                       </td>
                     </tr>
                     <tr>

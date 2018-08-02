@@ -30,6 +30,11 @@ export const CONTRACT_STATUS = {
     "1": 'Active', 
     "2": 'Rejected',
 }
+export const CONTRACT_STATUS_NUM = {
+    "Pending": '0', 
+    "Active": '1', 
+    "Rejected": '2',
+}
 
 export const SERVER_TX_TYPE = {
     "0": "Icx Transfer",

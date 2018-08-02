@@ -17,7 +17,8 @@ import {
 import {
   SEARCH_TYPE,
   SEARCH_TYPE_DATA,
-  CONTRACT_STATUS
+  CONTRACT_STATUS,
+  CONTRACT_STATUS_NUM
 } from 'utils/const'
 
 class SearchPage extends Component {
@@ -97,9 +98,13 @@ class SearchPage extends Component {
   }
 
   getListByStatus = (status) => {
+    const query = { page: 1, count: 20 }
+    if (!!status) {
+      query.status = CONTRACT_STATUS_NUM[status]
+    }
     switch (this.searchType) {
       case SEARCH_TYPE.CONTRACTS:
-        this.setState({ status })
+        this.getList(query)
         break
       case SEARCH_TYPE.TOKENS:
       default:
