@@ -157,8 +157,7 @@ class SearchPage extends Component {
     const { searchKeyword, status } = this.state
     const ListData = !searchKeyword ? list : listSearch
     const { loading, data, page, listSize, count } = ListData;
-    const noData = data.length === 0
-    const filtered = this.getFilteredByStatus(data, status)
+    const noData = data.length === 0 && !status
     const needPageOption = !searchKeyword && this.searchType === SEARCH_TYPE.CONTRACTS
 
     const TableContent = () => {
@@ -173,7 +172,7 @@ class SearchPage extends Component {
             </thead>
             <tbody>
               {
-                filtered.map((item, index) => (
+                data.map((item, index) => (
                   <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} />
                 ))
               }
