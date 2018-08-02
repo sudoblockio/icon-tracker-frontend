@@ -6,7 +6,8 @@ import {
   TokenLink,
 } from 'components'
 import {
-  REDUX_STEP
+  REDUX_STEP, 
+  SERVER_TX_TYPE
 } from './const'
 
 moment.updateLocale('en', {
@@ -321,7 +322,9 @@ export function is0xAddress(str) {
 }
 
 export function isScoreTx(targetAddr, txType) {
-  return (txType === "2" || txType === "3" || txType === "4" || txType === "5") && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+  const _txType = SERVER_TX_TYPE[txType]
+  return (_txType === SERVER_TX_TYPE[2] || _txType === SERVER_TX_TYPE[3] || _txType === SERVER_TX_TYPE[4] || _txType === SERVER_TX_TYPE[5] || _txType === SERVER_TX_TYPE[6]) 
+  && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
 }
 
 export function beautifyJson(data, tab) {

@@ -54,9 +54,7 @@ class BlockInfo extends Component {
 
     const Content = () => {
       if (loading) {
-        return (
-          <LoadingComponent height='206px' />
-        )
+        return <LoadingComponent height='206px' />
       }
       else {
         const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message } = data

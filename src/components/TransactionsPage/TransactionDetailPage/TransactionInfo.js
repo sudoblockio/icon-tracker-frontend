@@ -14,8 +14,6 @@ import {
 	isValidData,
 	dateToUTC,
 	utcDateInfo,
-	isContractAddress,
-	isScoreTx,
 	beautifyJson,
 	removeQuotes,
 } from 'utils/utils'
@@ -55,9 +53,11 @@ class TransactionInfo extends Component {
 					dataType,
 					targetContractAddr
 				} = data
-				const stepPriceIcx = web3Utils.fromWei(stepPrice || "0", "ether")
-				const isTokenTx = txType === "1"
+				const _stepPrice = stepPrice || "0"
+				const stepPriceGloop = web3Utils.fromWei(_stepPrice, "Gwei")
+				const stepPriceIcx = web3Utils.fromWei(_stepPrice, "ether")
 				const isFail = status === 'Fail'
+				const isIcxTx = SERVER_TX_TYPE[txType] === SERVER_TX_TYPE[0]
 				const isErrorMsg = isValidData(errorMsg)
 
 				return (
@@ -85,15 +85,23 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr}/>
+											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr}/>
+											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} />
 										</tr>
 										<tr>
-											<AmountCell isTokenTx={isTokenTx} amount={amount} tokenTxList={tokenTxList} />
+											<td>Amount</td>
+											<td>{`${convertNumberToText(amount)} ICX`}</td>
 										</tr>
+										{
+											!isIcxTx &&
+											<tr>
+												<td>Token transfer</td>
+												<TokenTransferCell tokenTxList={tokenTxList} />
+											</tr>
+										}
 										<tr>
 											<td>STEP limit</td>
 											<td>{convertNumberToText(stepLimit)}</td>
@@ -104,13 +112,14 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>STEP price</td>
-											<td>{`${convertNumberToText(stepPrice)} Loop`}<em>{`(${convertNumberToText(stepPriceIcx)} ICX)`}</em></td>
+											<td>{`${convertNumberToText(stepPriceGloop)} Gloop`}<em>{`(${convertNumberToText(stepPriceIcx)} ICX)`}</em></td>
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
 											<td>{`${convertNumberToText(fee)} ICX`}<em>{`(${convertNumberToText(feeUsd, 2)} USD)`}</em></td>
 										</tr>
 										<tr>
+											<td>Data</td>
 											<DataCell dataType={dataType} dataString={dataString} />
 										</tr>
 									</tbody>
@@ -166,7 +175,7 @@ class DataCell extends Component {
 		}
 		catch (e) {
 			console.log(e)
-			return dataString			
+			return dataString
 		}
 	}
 
@@ -174,45 +183,37 @@ class DataCell extends Component {
 		const { dataType } = this.props
 		const buttonTitle = this.getButtonTitle()
 		const dataString = this.getDataString()
-		return [
-			<td key="titie">Data</td>,
-			<td key="content" className="convert">
+		return (
+			<td className="convert">
 				<div className="scroll">
 					<p style={{ whiteSpace: 'pre' }}>{dataString}</p>
 				</div>
 				{(dataType === 'message') && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
 			</td>
-		]
+		)
 	}
 }
 
-const AmountCell = ({ isTokenTx, amount, tokenTxList }) => {
-	if (!isTokenTx) {
-		return [
-			<td key="title">Amount</td>,
-			<td key="content">{`${convertNumberToText(amount)} ICX`}</td>
-		]
+const TokenTransferCell = ({ tokenTxList }) => {
+	if (!tokenTxList || tokenTxList.length === 0) {
+		return <td>-</td>
 	}
-	else {
-		return [
-			<td key="title">Token transfer</td>,
-			<td key="content">
-				{
-					(tokenTxList || []).map((tokenTx, index) => {
-						const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
-						return (
-							<p key={index}>
-								{quantity} {symbol}<em>({tokenName})</em>
-								&emsp; from &emsp;<AddressLink to={fromAddr} />
-								&emsp;to&emsp;<AddressLink to={toAddr} />
-							</p>
-						)
-					})
-				}
-			</td>
-		]
-	}
-
+	return (
+		<td>
+			{
+				tokenTxList.map((tokenTx, index) => {
+					const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+					return (
+						<p key={index}>
+							{quantity} {symbol}<em>({tokenName})</em>
+							&emsp; from &emsp;<AddressLink to={fromAddr} />
+							&emsp;to&emsp;<AddressLink to={toAddr} />
+						</p>
+					)
+				})
+			}
+		</td>
+	)
 }
 
 const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => {
@@ -220,7 +221,7 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => 
 	if (isAddress) {
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} tdClassName="trans" 
+			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} tdClassName="trans"
 				InternalDiv={
 					isInternalTxList &&
 					<div>

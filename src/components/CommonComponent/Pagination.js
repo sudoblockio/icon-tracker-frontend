@@ -63,13 +63,16 @@ class Pagination extends Component {
   render() {
     const { maxPageNum } = this.props;
     const { pageNum } = this.state;
+    const isFirst = pageNum === 1
+    const isLast = pageNum === maxPageNum
+
     return (
       <ul className="page">
         <li onClick={() => this.getData('start')}>
-          <span className="start"><em className="img"></em></span>
+          <span className={`start ${isFirst ? 'disabled' : ''}`}><em className="img"></em></span>
         </li>
         <li onClick={() => this.getData('prev')}>
-          <span className="prev"><em className="img"></em></span>
+          <span className={`prev ${isFirst ? 'disabled' : ''}`}><em className="img"></em></span>
         </li>
         <li className="pageNum">
           <p>Page</p>
@@ -77,10 +80,10 @@ class Pagination extends Component {
           <p> / {maxPageNum}</p>
         </li>
         <li onClick={() => this.getData('next')}>
-          <span name="next" className="next"><em className="img"></em></span>
+          <span name="next" className={`next ${isLast ? 'disabled' : ''}`}><em className="img"></em></span>
         </li>
         <li onClick={() => this.getData('end')}>
-          <span name="end" className="end"><em className="img"></em></span>
+          <span name="end" className={`end ${isLast ? 'disabled' : ''}`}><em className="img"></em></span>
         </li>
       </ul>
     );
