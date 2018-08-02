@@ -17,7 +17,12 @@ class CopyButton extends Component {
   }
 
   handleClick = () => {
-    if (this.state.style !== 'on') {
+    const { disabled } = this.props
+    if (disabled) {
+      return
+    }
+    const { style } = this.state
+    if (style !== 'on') {
       this.setState({ style: 'on' }, this.startTimeout)
     }
   }
@@ -29,15 +34,14 @@ class CopyButton extends Component {
   }
 
   render() {
-    const { data, title, isSpan } = this.props
+    const { data, title, isSpan, disabled } = this.props
     const { style } = this.state
     const text = style === 'on' ? 'Copy Complete' : title
-
     const Content = () => {
       if (isSpan) {
         return (
           <span
-            className={`copy clipboard-btn ${style}`}
+            className={`copy clipboard-btn ${style} ${disabled ? 'disabled' : ''}`}
             data-clipboard-text={data}
             onClick={this.handleClick}
           >
@@ -48,9 +52,10 @@ class CopyButton extends Component {
       else {
         return (
           <button
-            className={`btn-type clipboard-btn  ${style}`}
+            className={`btn-type clipboard-btn ${style}`}
             data-clipboard-text={data}
             onClick={this.handleClick}
+            disabled={disabled}
           >
             {text}
           </button>

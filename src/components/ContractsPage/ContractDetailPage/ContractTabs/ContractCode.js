@@ -41,7 +41,7 @@ class ContractCode extends Component {
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
-                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} />
+                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} disabled={!!error}/>
                     </div>
                     {
                         loading ?

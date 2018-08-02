@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-	AddressLink
+	AddressLink,
+	CopyButton
 } from 'components'
 import {
 	SERVER_TX_TYPE
@@ -71,13 +72,14 @@ function getClassName(targetAddr, address, txType, targetContractAddr, tdClassNa
 	return className
 }
 
-function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis) {
-	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr)
+function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName) {
+	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName)
 	const {
 		_isScoreTx,
 		_isContractAddress,
 		_isOtherAddress,
 		_isOtherContract,
+		_isListCell
 	} = _getBoolean
 
 	let elements = []
@@ -94,13 +96,19 @@ function getInnerElements(targetAddr, address, txType, targetContractAddr, spanN
 			<span key="span">
 				{(!!targetContractAddr && _isOtherContract) ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}
 			</span>
-		)
+		)	
 	}
 	else {
 		elements.push(
 			<span key="span" className={spanNoEllipsis ? '' : 'ellipsis'}>
 				{_isOtherAddress ? <AddressLink to={targetAddr} /> : address}
-			</span>
+			</span>			
+		)
+	}
+
+	if (!_isListCell) {
+		elements.push(
+			<CopyButton key="copy" data={targetAddr} title={'Copy Address'} isSpan disabled={_isScoreTx} />
 		)
 	}
 
@@ -112,7 +120,7 @@ const AddressCell = ({ targetAddr, address, txType, targetContractAddr, tdClassN
 		return <td className="no">-</td>
 	}
 	const className = getClassName(targetAddr, address, txType, targetContractAddr, tdClassName)
-	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis)
+	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName)
 	return <td className={className}>{innerElements}{InternalDiv}</td>
 }
 

@@ -68,7 +68,7 @@
 								<tbody>
 									<tr class="qr">
 										<td>Address</td>
-										<td colspan="3">0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="copy on">Copy Complete</span></td>
+										<td colspan="3">0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="copy on">Copy Complete</span><span class="copy disabled">Copy Address</span></td>
 									</tr>
 									<tr class="">
 										<td>Balance</td>
@@ -133,7 +133,7 @@
 											</div>
 										</li>
 										<li>3. Decimals > <span>XXXXXXXXXXXXXXX</span><em>Unit256</em></li>
-										<li class="input"><span class="label">3. Allowance > </span><input type="text" class="txt-type over" placeholder="_owner (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><button class="btn-type-query">Query</button></li>
+										<li class="input"><span class="label">3. Allowance > </span><input type="text" class="txt-type over" placeholder="_owner (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><button class="btn-type-query" disabled>Query</button></li>
 										<li class="result"><p>┗<em>Unit256</em></p></li>
 
 										<li class="input"><span class="label">3. Allowance Allowance Allowance > </span><input type="text" class="txt-type over" placeholder="_owner (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><input type="text" class="txt-type over" placeholder="_spender (address)" value=""><button class="btn-type-query">Query</button></li>
@@ -144,6 +144,15 @@
 							</div>
 
 						</div>
+						<!-- nodata -->
+						<table class="table-type">
+							<tbody>
+								<tr>
+									<td class="notrans">The contract has been Pending / The contract has rejected</td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- nodata -->
 					</div>
 				</div>
 			</div>

@@ -221,7 +221,7 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => 
 	if (isAddress) {
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} tdClassName="trans"
+			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} spanNoEllipsis tdClassName="trans"
 				InternalDiv={
 					isInternalTxList &&
 					<div>
