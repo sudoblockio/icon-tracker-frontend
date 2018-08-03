@@ -20,7 +20,7 @@ const SignCell = ({ address, fromAddr, toAddr }) => {
 
 const AddressSet = ({ fromAddr, toAddr, address, txType, targetContractAddr }) => {
 	return [
-		<AddressCell key="from" targetAddr={fromAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />,
+		<AddressCell key="from" targetAddr={fromAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} isFrom/>,
 		<SignCell key="sign" fromAddr={fromAddr} toAddr={toAddr} address={address} />,
 		<AddressCell key="to" targetAddr={toAddr} address={address} txType={txType} targetContractAddr={targetContractAddr} />
 	]

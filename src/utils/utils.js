@@ -321,10 +321,22 @@ export function is0xAddress(str) {
   return startsWith(str, '0x') && str.length === 66
 }
 
-export function isScoreTx(targetAddr, txType) {
+export function isScoreTx(targetAddr, txType, isFrom) {
+  if (isFrom) {
+    return false
+  }
   const _txType = SERVER_TX_TYPE[txType]
-  return (_txType === SERVER_TX_TYPE[2] || _txType === SERVER_TX_TYPE[3] || _txType === SERVER_TX_TYPE[4] || _txType === SERVER_TX_TYPE[5] || _txType === SERVER_TX_TYPE[6]) 
-  && (targetAddr === "cx0000000000000000000000000000000000000000" || targetAddr === "cx0000000000000000000000000000000000000001")
+  switch(_txType) {
+    case SERVER_TX_TYPE[3]:
+      return targetAddr === "cx0000000000000000000000000000000000000000"
+    case SERVER_TX_TYPE[4]:
+      return true
+    case SERVER_TX_TYPE[5]:  
+    case SERVER_TX_TYPE[6]:
+      return targetAddr === "cx0000000000000000000000000000000000000001"
+    default:
+      return false      
+  }
 }
 
 export function beautifyJson(data, tab) {

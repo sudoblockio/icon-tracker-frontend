@@ -40,8 +40,8 @@ function addLinkClassName(isTargetContractAddr, isScoreTx, isOtherContract, isOt
 	return className
 }
 
-function getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName) {
-	const _isScoreTx = isScoreTx(targetAddr, txType)
+function getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom) {
+	const _isScoreTx = isScoreTx(targetAddr, txType, isFrom)
 	const _isContractAddress = isContractAddress(targetAddr)
 	const _isOtherAddress = targetAddr !== address
 	const _isOtherContract = targetContractAddr !== address
@@ -55,14 +55,14 @@ function getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName
 	}
 }
 
-function getClassName(targetAddr, address, txType, targetContractAddr, tdClassName) {
-	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName)
+function getClassName(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom) {
+	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
 	const {
 		_isScoreTx,
 		_isContractAddress,
 		_isOtherAddress,
 		_isOtherContract,
-		_isListCell
+		_isListCell,
 	} = _getBoolean
 	
 	let className = addIconClassName(tdClassName, _isScoreTx, _isContractAddress)
@@ -72,8 +72,8 @@ function getClassName(targetAddr, address, txType, targetContractAddr, tdClassNa
 	return className
 }
 
-function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName) {
-	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName)
+function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName, isFrom) {
+	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
 	const {
 		_isScoreTx,
 		_isContractAddress,
@@ -115,12 +115,12 @@ function getInnerElements(targetAddr, address, txType, targetContractAddr, spanN
 	return elements
 }
 
-const AddressCell = ({ targetAddr, address, txType, targetContractAddr, tdClassName, spanNoEllipsis, InternalDiv }) => {
+const AddressCell = ({ targetAddr, address, txType, targetContractAddr, tdClassName, spanNoEllipsis, InternalDiv, isFrom }) => {
 	if (!isValidData(targetAddr)) {
 		return <td className="no">-</td>
 	}
-	const className = getClassName(targetAddr, address, txType, targetContractAddr, tdClassName)
-	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName)
+	const className = getClassName(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
+	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName, isFrom)
 	return <td className={className}>{innerElements}{InternalDiv}</td>
 }
 
