@@ -206,8 +206,8 @@ const TokenTransferCell = ({ tokenTxList }) => {
 					return (
 						<p key={index}>
 							{quantity} {symbol}<em>({tokenName})</em>
-							&emsp; from &emsp;<AddressLink to={fromAddr} />
-							&emsp;to&emsp;<AddressLink to={toAddr} />
+							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
+							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{fromAddr}</span>} />
 						</p>
 					)
 				})
@@ -230,8 +230,8 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => 
 							return (
 								<p key={index}>
 									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-									&emsp; from &emsp;<span><AddressLink to={fromAddr} /></span>
-									&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
+									&emsp; from &emsp;<span className="ellipsis"><AddressLink to={fromAddr} /></span>
+									&emsp;to&emsp;<span className="ellipsis"><AddressLink to={toAddr} /></span>
 								</p>
 							)
 						})}

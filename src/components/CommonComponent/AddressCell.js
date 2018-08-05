@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	AddressLink,
 	CopyButton
@@ -11,6 +11,21 @@ import {
 	isContractAddress,
 	isValidData
 } from 'utils/utils'
+
+function getBooleans(props) {
+	const _isScoreTx = isScoreTx(props.targetAddr, props.txType, props.isFrom)
+	const _isContractAddress = isContractAddress(props.targetAddr)
+	const _isOtherAddress = props.targetAddr !== props.address
+	const _isOtherContract = props.targetContractAddr !== props.address
+	const _isListCell = props.tdClassName !== 'trans'
+	return {
+		_isScoreTx,
+		_isContractAddress,
+		_isOtherAddress,
+		_isOtherContract,
+		_isListCell
+	}
+}
 
 function addIconClassName(tdClassName, isScoreTx, isContractAddress) {
 	const _tdClassName = !!tdClassName ? tdClassName : 'icon'
@@ -40,47 +55,18 @@ function addLinkClassName(isTargetContractAddr, isScoreTx, isOtherContract, isOt
 	return className
 }
 
-function getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom) {
-	const _isScoreTx = isScoreTx(targetAddr, txType, isFrom)
-	const _isContractAddress = isContractAddress(targetAddr)
-	const _isOtherAddress = targetAddr !== address
-	const _isOtherContract = targetContractAddr !== address
-	const _isListCell = tdClassName !== 'trans'
-	return {
-		_isScoreTx,
-		_isContractAddress,
-		_isOtherAddress,
-		_isOtherContract,
-		_isListCell
-	}
-}
-
-function getClassName(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom) {
-	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
-	const {
-		_isScoreTx,
-		_isContractAddress,
-		_isOtherAddress,
-		_isOtherContract,
-		_isListCell,
-	} = _getBoolean
+function getClassName(props, booleans) {
+	const { _isScoreTx, _isContractAddress, _isOtherAddress, _isOtherContract, _isListCell } = booleans
 	
-	let className = addIconClassName(tdClassName, _isScoreTx, _isContractAddress)
+	let className = addIconClassName(props.tdClassName, _isScoreTx, _isContractAddress)
 	if (_isListCell) {
-		className += addLinkClassName(!!targetContractAddr, _isScoreTx, _isOtherContract, _isOtherAddress)
+		className += addLinkClassName(!!props.targetContractAddr, _isScoreTx, _isOtherContract, _isOtherAddress)
 	}
 	return className
 }
 
-function getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName, isFrom) {
-	const _getBoolean = getBoolean(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
-	const {
-		_isScoreTx,
-		_isContractAddress,
-		_isOtherAddress,
-		_isOtherContract,
-		_isListCell
-	} = _getBoolean
+function getInnerElements(props, booleans) {
+	const { _isScoreTx, _isContractAddress, _isOtherAddress, _isOtherContract, _isListCell } = booleans
 
 	let elements = []
 	if (_isScoreTx) {
@@ -91,37 +77,49 @@ function getInnerElements(targetAddr, address, txType, targetContractAddr, spanN
 	}
 
 	if (_isScoreTx) {
-		const scoreTxTypeText = SERVER_TX_TYPE[txType]
+		const scoreTxTypeText = SERVER_TX_TYPE[props.txType]
 		elements.push(
 			<span key="span">
-				{(!!targetContractAddr && _isOtherContract) ? <AddressLink label={scoreTxTypeText} to={targetContractAddr} /> : scoreTxTypeText}
+				{(!!props.targetContractAddr && _isOtherContract) ? <AddressLink label={scoreTxTypeText} to={props.targetContractAddr} /> : scoreTxTypeText}
 			</span>
 		)	
 	}
 	else {
 		elements.push(
-			<span key="span" className={spanNoEllipsis ? '' : 'ellipsis'}>
-				{_isOtherAddress ? <AddressLink to={targetAddr} /> : address}
+			<span key="span" className={props.spanNoEllipsis ? '' : 'ellipsis'}>
+				{_isOtherAddress ? <AddressLink to={props.targetAddr} /> : props.address}
 			</span>			
 		)
 	}
 
 	if (!_isListCell) {
 		elements.push(
-			<CopyButton key="copy" data={targetAddr} title={'Copy Address'} isSpan disabled={_isScoreTx} />
+			<CopyButton key="copy" data={props.targetAddr} title={'Copy Address'} isSpan disabled={_isScoreTx} />
 		)
 	}
 
 	return elements
 }
 
-const AddressCell = ({ targetAddr, address, txType, targetContractAddr, tdClassName, spanNoEllipsis, InternalDiv, isFrom }) => {
-	if (!isValidData(targetAddr)) {
-		return <td className="no">-</td>
+class AddressCell extends Component {
+	render() {
+		const Content = () => {
+			if (!isValidData(this.props.targetAddr)) {
+				return <td className="no">-</td>
+			}
+			const booleans = getBooleans(this.props)
+			const className = getClassName(this.props, booleans)
+			const innerElements = getInnerElements(this.props, booleans)
+			return (
+				<td className={className}>
+					{innerElements}
+					{this.props.InternalDiv}
+				</td>		
+			)
+		}
+
+		return Content()
 	}
-	const className = getClassName(targetAddr, address, txType, targetContractAddr, tdClassName, isFrom)
-	const innerElements = getInnerElements(targetAddr, address, txType, targetContractAddr, spanNoEllipsis, tdClassName, isFrom)
-	return <td className={className}>{innerElements}{InternalDiv}</td>
 }
 
 export default AddressCell
