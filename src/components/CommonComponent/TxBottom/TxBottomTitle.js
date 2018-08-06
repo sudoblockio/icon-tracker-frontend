@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {
+    AddressLink
+} from 'components'
+import {
     TX_TYPE
 } from 'utils/const'
 import {
@@ -14,6 +17,8 @@ class TxPageTitle extends Component {
             listSize,
             totalSize,
             goAllTx,
+            fromAddr,
+            toAddr
         } = this.props
 
         const Content = () => {
@@ -120,10 +125,13 @@ class TxPageTitle extends Component {
                 case TX_TYPE.TRANSACTION_INTERNAL_TX:
                     return (
                         <p className="txt">
-                            <span>
-                                Latest<em>{listSizeUnder10}</em> txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} internal transactions</em>
-                            </span>
+                            {
+                                <span>
+                                The Contract Call From
+                                <AddressLink to={fromAddr} label={<em className="mint ellipsis">{fromAddr}</em>} /> To
+                                <AddressLink to={toAddr} label={<em className="mint ellipsis">{toAddr}</em>}/>
+                                </span>
+                            } produced {_listSize} Contract Internal Transactions
                         </p>
                     )
                 default:

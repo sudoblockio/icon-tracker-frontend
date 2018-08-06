@@ -31,25 +31,21 @@ class TxBottomComponent extends Component {
             if (loading) {
                 return <LoadingComponent height='349px'/>
             }
-            else if (data.length === 0) {
+            else if (!data || data.length === 0) {
                 return <NoBox text={noBoxText}/>
             }
             else {
+                const { fromAddr, toAddr } = data[0]
                 return (
                     <div className="contents">
-                        <TxBottomTitle 
-                            txType={txType}
-                            listSize={listSize}
-                            totalSize={totalSize}
-                            goAllTx={goAllTx}
-                        />
+                        <TxBottomTitle txType={txType} listSize={listSize} totalSize={totalSize} goAllTx={goAllTx} fromAddr={fromAddr} toAddr={toAddr}/>
                         <table className={tableClassName}>
                             <thead>
                                 <TxTableHead txType={txType}/>
                             </thead>
                             <tbody>
                                 {
-                                    data.map((item, index) => (
+                                    (data || []).map((item, index) => (
                                         <TxTableBody key={index} data={item} txType={txType} address={address}/>
                                     ))
                                 }
