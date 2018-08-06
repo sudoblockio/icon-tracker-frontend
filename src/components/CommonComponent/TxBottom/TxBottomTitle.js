@@ -131,7 +131,7 @@ class TxPageTitle extends Component {
                                 <AddressLink to={fromAddr} label={<em className="mint ellipsis">{fromAddr}</em>} /> To
                                 <AddressLink to={toAddr} label={<em className="mint ellipsis">{toAddr}</em>}/>
                                 </span>
-                            } produced {_listSize} Contract Internal Transactions
+                            } produced {_listSize} contract internal transactions
                         </p>
                     )
                 default:
