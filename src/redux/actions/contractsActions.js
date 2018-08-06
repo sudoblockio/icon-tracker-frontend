@@ -42,6 +42,13 @@ export function contractTxList(payload) {
   }
 }
 
+export function contractInternalTxList(payload) {
+  return {
+    type: actionTypes.contractInternalTxList,
+    payload
+  }
+}
+
 export function contractTokenTxList(payload) {
   return {
     type: actionTypes.contractTokenTxList,

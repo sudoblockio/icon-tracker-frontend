@@ -44,6 +44,18 @@ class TxTableHead extends Component {
                             <th>Amount</th>
                         </tr>
                     )
+                case TX_TYPE.CONTRACT_INTERNAL_TX:
+                    return (
+                        <tr>
+                            <th>Parent TxHash</th>
+                            <th>Block</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Value</th>
+                        </tr>
+                    )
                 case TX_TYPE.CONTRACT_TOKEN_TX:
                     return (
                         <tr>
@@ -137,6 +149,17 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>Event Logs</th>
+                        </tr>
+                    )
+                case TX_TYPE.TRANSACTION_INTERNAL_TX:
+                    return (
+                        <tr>
+                            <th>Type trace address</th>
+                            <th>From</th>
+                            <th className="table-sign"></th>
+                            <th>To</th>
+                            <th>Value</th>
+                            <th>Step limit</th>
                         </tr>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:

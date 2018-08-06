@@ -39,3 +39,16 @@ export function transactionEventLogList(payload) {
       })
   })
 }
+
+export function transactionInternalTxList(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/transaction/internalTxList', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}

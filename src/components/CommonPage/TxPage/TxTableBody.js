@@ -112,6 +112,16 @@ class TxTableBody extends Component {
 							<AmountCell amount={data.quantity} symbol="ICX" />
 						</tr>
 					)
+				case TX_TYPE.CONTRACT_INTERNAL_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<BlockCell height={data.height} />
+							<DateCell isAge date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
+							<AmountCell amount={data.amount} symbol="ICX" />
+						</tr>
+					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
 					return (
 						<tr>
@@ -199,6 +209,13 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td>{data.eventLog}</td>
+						</tr>
+					)
+				case TX_TYPE.TRANSACTION_INTERNAL_TX:
+					return (
+						<tr>
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.amount} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:

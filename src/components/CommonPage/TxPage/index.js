@@ -55,6 +55,7 @@ class TxPage extends Component {
 		this.txType = pathname.split("/")[1] || ''
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
+			case TX_TYPE.CONTRACT_INTERNAL_TX:
 			case TX_TYPE.CONTRACT_TOKEN_TX:
 			case TX_TYPE.CONTRACT_EVENTS:
 			case TX_TYPE.ADDRESS_TX:
@@ -63,6 +64,7 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_TX:
 			case TX_TYPE.TOKEN_HOLDERS:
 			case TX_TYPE.TRANSACTION_EVENTS:
+			case TX_TYPE.TRANSACTION_INTERNAL_TX:
 				this.urlIndex = pathname.split("/")[2] || ''
 				this.pageId = pathname.split("/")[3] || 1
 				break
@@ -80,6 +82,7 @@ class TxPage extends Component {
 	getTxListByCount = (count) => {
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
+			case TX_TYPE.CONTRACT_INTERNAL_TX:
 			case TX_TYPE.CONTRACT_TOKEN_TX:
 			case TX_TYPE.CONTRACT_EVENTS:
 				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
@@ -102,6 +105,7 @@ class TxPage extends Component {
 				this.getTxList({ page: this.pageId, count })
 				break
 			case TX_TYPE.TRANSACTION_EVENTS:
+			case TX_TYPE.TRANSACTION_INTERNAL_TX:
 				this.getTxList({ txHash: this.urlIndex, page: this.pageId, count })
 				break
 
@@ -112,6 +116,7 @@ class TxPage extends Component {
 	getTxListByPage = (page) => {
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
+			case TX_TYPE.CONTRACT_INTERNAL_TX:
 			case TX_TYPE.CONTRACT_TOKEN_TX:
 			case TX_TYPE.CONTRACT_EVENTS:
 			case TX_TYPE.ADDRESS_TX:
@@ -120,6 +125,7 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_TX:
 			case TX_TYPE.TOKEN_HOLDERS:
 			case TX_TYPE.TRANSACTION_EVENTS:
+			case TX_TYPE.TRANSACTION_INTERNAL_TX:
 				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
 				break
 			case TX_TYPE.BLOCKS:

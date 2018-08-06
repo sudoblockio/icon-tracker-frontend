@@ -11,6 +11,7 @@ const initialState = {
   transaction: INITIAL_STATE['OBJ'],
   recentTx: INITIAL_STATE['ARR'],
   transactionEvents: INITIAL_STATE['ARR'],
+  transactionInternalTx: INITIAL_STATE['ARR'],
 }
 
 export function transactionsReducer(state = initialState, action) {
@@ -26,6 +27,10 @@ export function transactionsReducer(state = initialState, action) {
     case actionTypes.transactionEventLogList: return getState('ARR', REDUX_STEP.READY, state, action, 'transactionEvents') 
     case actionTypes.transactionEventLogListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'transactionEvents') 
     case actionTypes.transactionEventLogListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'transactionEvents') 
+
+    case actionTypes.transactionInternalTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'transactionInternalTx') 
+    case actionTypes.transactionInternalTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'transactionInternalTx') 
+    case actionTypes.transactionInternalTxListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'transactionInternalTx') 
 
     default: {
       return state

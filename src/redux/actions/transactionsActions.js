@@ -20,3 +20,10 @@ export function transactionEventLogList(payload){
     payload
   };
 }
+
+export function transactionInternalTxList(payload){
+  return {
+    type: actionTypes.transactionInternalTxList,
+    payload
+  };
+}

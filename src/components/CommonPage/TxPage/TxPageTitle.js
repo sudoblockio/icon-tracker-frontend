@@ -42,6 +42,14 @@ class TxPageTitle extends Component {
                             <span className="right">A total of<em>{_listSize}</em> transactions found</span>
                         </p>
                     )
+                case TX_TYPE.CONTRACT_INTERNAL_TX:
+                    return (
+                        <p className="title">
+                            Internal Transactions
+                            <span>for Contract {urlIndex}</span>
+                            <span className="right">A total of<em>{_listSize}</em> internal transactions found</span>
+                        </p>
+                    )
                 case TX_TYPE.CONTRACT_TOKEN_TX:
                     return (
                         <p className="title">
@@ -119,6 +127,14 @@ class TxPageTitle extends Component {
                             Events
                             <span>for Transactions {urlIndex}</span>
                             <span className="right">A total of<em>{_totalSize}</em> events found</span>
+                        </p>
+                    )
+                case TX_TYPE.TRANSACTION_INTERNAL_TX:
+                    return (
+                        <p className="title">
+                            Internal Transactions
+                            <span>for Transactions {urlIndex}</span>
+                            <span className="right">A total of<em>{_totalSize}</em> internal transactions found</span>
                         </p>
                     )
                 default:

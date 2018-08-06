@@ -54,11 +54,11 @@ export const IRC_VERSION = {
 export const SORT_TYPE = [10, 20, 40, 80, 160]
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
-export const CONTRACT_TABS = ['Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
+export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const WALLET_TABS = ['Transactions', 'Token Transfers']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
-export const TRANSACTION_TABS = ['Events']
+export const TRANSACTION_TABS = ['Internal Transactions', 'Events']
 
 export const POPUP_TYPE = {
     QR: 'qr',
@@ -95,6 +95,7 @@ export const TX_TYPE = {
     ADDRESS_TX: 'addresstx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
     CONTRACT_TX: 'contracttx',
+    CONTRACT_INTERNAL_TX: 'contractinternaltx',
     CONTRACT_TOKEN_TX: 'contracttokentx',
     BLOCK_TX: 'blocktx',
     TRANSACTIONS: 'transactions',
@@ -104,6 +105,7 @@ export const TX_TYPE = {
     BLOCKS: 'blocks',
     CONTRACT_EVENTS: 'contractevents',
     TRANSACTION_EVENTS: 'transactionevents',
+    TRANSACTION_INTERNAL_TX: 'transactioninternaltx',
     TOKEN_HOLDERS: 'tokenholders',
 }
 
@@ -124,6 +126,12 @@ export const TX_TYPE_DATA = {
 		tx: 'contractTx',
 		getTxList: 'contractTxList',
         className: 'table-typeF',
+        noBoxText: 'No Transaction',
+    },
+    [TX_TYPE.CONTRACT_INTERNAL_TX]: {
+		tx: 'contractInternalTx',
+		getTxList: 'contractInternalTxList',
+        className: 'table-typeC internal',
         noBoxText: 'No Transaction',
     },
     [TX_TYPE.CONTRACT_TOKEN_TX]: {
@@ -179,6 +187,12 @@ export const TX_TYPE_DATA = {
 		getTxList: 'transactionEventLogList',
 		className: 'table-typeH log',
         noBoxText: 'No Event',
+    },
+    [TX_TYPE.TRANSACTION_INTERNAL_TX]: {
+		tx: 'transactionInternalTx',
+		getTxList: 'transactionInternalTxList',
+		className: 'table-typeC it',
+        noBoxText: 'No Transaction',
     },
     [TX_TYPE.TOKEN_HOLDERS]: {
 		tx: 'tokenHolders',

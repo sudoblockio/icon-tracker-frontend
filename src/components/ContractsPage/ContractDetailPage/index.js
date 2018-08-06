@@ -27,6 +27,9 @@ class ContractDetailPage extends Component {
                         this.props.contractTxList({ addr, page: 1, count: 10 })
                     },
                     addr => {
+                        this.props.contractInternalTxList({ addr, page: 1, count: 10 })
+                    },
+                    addr => {
                         this.props.contractTokenTxList({ addr, page: 1, count: 10 })
                     },
                     address => {

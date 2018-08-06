@@ -24,6 +24,9 @@ class TransactionDetailPage extends Component {
                 getInfo={txHash => { this.props.transactionTxDetail({ txHash }) }}
                 getList={[
                     txHash => {
+                        this.props.transactionInternalTxList({ txHash, page: 1, count: 10 })
+                    },                    
+                    txHash => {
                         this.props.transactionEventLogList({ txHash, page: 1, count: 10 })
                     }
                 ]}

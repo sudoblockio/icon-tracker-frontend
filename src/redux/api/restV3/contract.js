@@ -79,3 +79,17 @@ export function contractEventLogList(payload) {
       })
   })
 }
+
+export function contractInternalTxList(payload) {
+  return new Promise((resolve, reject) => {
+    trackerApi.get(makeUrl('/v3/contract/internalTxList', payload))
+      .then(result => {
+        console.log(result)
+        resolve(result.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+

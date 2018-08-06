@@ -3,6 +3,7 @@ import { TxPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
   contractTxList,
+  contractInternalTxList,
   contractTokenTxList,
   contractEventLogList
 } from '../../redux/actions/contractsActions';
@@ -13,7 +14,8 @@ import {
 } from '../../redux/actions/addressesActions';
 import { 
   transactionRecentTx,
-  transactionEventLogList
+  transactionEventLogList,
+  transactionInternalTxList
 } from '../../redux/actions/transactionsActions';
 import { 
   tokenTxList,
@@ -29,6 +31,7 @@ function mapStateToProps(state) {
   return {
     url: state.router.location,
     contractTx: state.contracts.contractTx,
+    contractInternalTx: state.contracts.contractInternalTx,
     contractTokenTx: state.contracts.contractTokenTx,
     contractEvents: state.contracts.contractEvents,
     addresses: state.addresses.addresses,
@@ -40,13 +43,15 @@ function mapStateToProps(state) {
     blockTx: state.blocks.blockTx,
     tokenTransfers: state.tokens.tokenTransfers,
     tokenHolders: state.tokens.tokenHolders,
-    transactionEvents: state.transactions.transactionEvents
+    transactionEvents: state.transactions.transactionEvents,
+    transactionInternalTx: state.transactions.transactionInternalTx
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     contractTxList: payload => dispatch(contractTxList(payload)),
+    contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),
     contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
     contractEventLogList: payload => dispatch(contractEventLogList(payload)),
     addressList: payload => dispatch(addressList(payload)),
@@ -59,6 +64,7 @@ function mapDispatchToProps(dispatch) {
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
     transactionEventLogList: payload => dispatch(transactionEventLogList(payload)),
+    transactionInternalTxList: payload => dispatch(transactionInternalTxList(payload)),
   };
 }
 

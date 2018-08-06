@@ -9,6 +9,7 @@ import {
   contractInfo as CONTRACT_INFO_API,
   contractDetail as CONTRACT_DETAIL_API,
   contractTxList as CONTRACT_TX_LIST_API,
+  contractInternalTxList as CONTRACT_INTERNAL_TX_LIST_API,
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
   icxGetScore as ICX_GET_SCORE_API,
@@ -22,6 +23,7 @@ export default function* contractsSaga() {
   yield fork(watchContractDetail);
   yield fork(watchContractDetailPopup);
   yield fork(watchContractTxList);
+  yield fork(watchContractInternalTxList);
   yield fork(watchContractTokenTxList);
   yield fork(watchContractEventLogList);
   yield fork(watchIcxGetSrore);
@@ -35,6 +37,7 @@ function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFu
 function* watchContractDetail() { yield takeLatest(AT.contractDetail, contractDetailFunc) }
 function* watchContractDetailPopup() { yield takeLatest(AT.contractDetailPopup, contractDetailPopupFunc) }
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
+function* watchContractInternalTxList() { yield takeLatest(AT.contractInternalTxList, contractInternalTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
 function* watchContractEventLogList() { yield takeLatest(AT.contractEventLogList, contractEventLogListFunc) }
 function* watchIcxGetSrore() { yield takeLatest(AT.icxGetScore, icxGetSroreFunc) }
@@ -134,6 +137,21 @@ export function* contractTxListFunc(action) {
   }
   catch (e) {
     yield put({ type: AT.contractTxListRejected });
+  }
+}
+
+export function* contractInternalTxListFunc(action) {
+  try {
+    const payload = yield call(CONTRACT_INTERNAL_TX_LIST_API, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.contractInternalTxListFulfilled, payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    yield put({ type: AT.contractInternalTxListRejected });
   }
 }
 

@@ -32,6 +32,15 @@ class TxPageTitle extends Component {
                             </span>
                         </p>
                     )
+                case TX_TYPE.CONTRACT_INTERNAL_TX:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} internal transactions</em>
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.CONTRACT_TOKEN_TX:
                     return (
                         <p className="txt">
@@ -105,6 +114,15 @@ class TxPageTitle extends Component {
                             <span>
                                 Latest<em>{listSizeUnder10}</em> events from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} events</em>
+                            </span>
+                        </p>
+                    )
+                case TX_TYPE.TRANSACTION_INTERNAL_TX:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} internal transactions</em>
                             </span>
                         </p>
                     )

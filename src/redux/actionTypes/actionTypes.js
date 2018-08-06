@@ -47,6 +47,10 @@ const actionTypes = {
   transactionEventLogList: 'TRANSACTION_EVENT_LOG_LIST',
   transactionEventLogListFulfilled: 'TRANSACTION_EVENT_LOG_LIST_FULFILLED',
   transactionEventLogListRejected: 'TRANSACTION_EVENT_LOG_LIST_REJECTED',
+  
+  transactionInternalTxList: 'TRANSACTION_INTERNAL_TX_LIST',
+  transactionInternalTxListFulfilled: 'TRANSACTION_INTERNAL_TX_LIST_FULFILLED',
+  transactionInternalTxListRejected: 'TRANSACTION_INTERNAL_TX_LIST_REJECTED',
 
   contractList: 'SELECT_CONTRACT_LIST',
   contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
@@ -88,6 +92,10 @@ const actionTypes = {
   contractTxList: 'CONTRACT_TX_LIST',
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
   contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
+
+  contractInternalTxList: 'CONTRACT_INTERNAL_TX_LIST',
+  contractInternalTxListFulfilled: 'CONTRACT_INTERNAL_TX_LIST_FULFILLED',
+  contractInternalTxListRejected: 'CONTRACT_INTERNAL_TX_LIST_REJECTED',
 
   contractEventLogList: 'CONTRACT_EVENT_LOG_LIST',
   contractEventLogListFulfilled: 'CONTRACT_EVENT_LOG_LIST_FULFILLED',
