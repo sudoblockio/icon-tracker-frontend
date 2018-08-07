@@ -23,13 +23,9 @@ const TxHashCell = ({ isError, txHash }) => {
 		_txHash = '-'
 		className = 'no'
 	}
-	else if (isError) {
-		_txHash = <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} />
-		className = 'icon error on'
-	}
 	else {
 		_txHash = <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} />
-		className = 'on'
+		className = `${isError ? 'icon error' : ''} on`
 	}
 	return (
 		<td className={className}>

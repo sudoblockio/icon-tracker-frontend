@@ -57,7 +57,6 @@ class TransactionInfo extends Component {
 				const stepPriceGloop = web3Utils.fromWei(_stepPrice, "Gwei")
 				const stepPriceIcx = web3Utils.fromWei(_stepPrice, "ether")
 				const isFail = status === 'Fail'
-				const isIcxTx = SERVER_TX_TYPE[txType] === SERVER_TX_TYPE[0]
 				const isErrorMsg = isValidData(errorMsg)
 
 				return (
@@ -95,13 +94,10 @@ class TransactionInfo extends Component {
 											<td>Amount</td>
 											<td>{`${convertNumberToText(amount)} ICX`}</td>
 										</tr>
-										{
-											!isIcxTx &&
-											<tr>
-												<td>Token transfer</td>
-												<TokenTransferCell tokenTxList={tokenTxList} />
-											</tr>
-										}
+										<tr>
+											<td>Token transfer</td>
+											<TokenTransferCell tokenTxList={tokenTxList} />
+										</tr>
 										<tr>
 											<td>STEP limit</td>
 											<td>{convertNumberToText(stepLimit)}</td>
@@ -230,8 +226,8 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => 
 							return (
 								<p key={index}>
 									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-									&emsp; from &emsp;<span className="ellipsis"><AddressLink to={fromAddr} /></span>
-									&emsp;to&emsp;<span className="ellipsis"><AddressLink to={toAddr} /></span>
+									&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
+									&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
 								</p>
 							)
 						})}

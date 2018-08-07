@@ -320,7 +320,7 @@ html, body{height: 100%;}
 
 .table-typeB td p{margin: 5px 0;}
 .table-typeB td span{color: #1aaaba; font-weight: 800;     word-break: break-all; cursor: pointer;}
-.table-typeB td span.ellipsis{width: 300px; vertical-align: top;}
+.table-typeB td span.ellipsis{width: 200px; vertical-align: top;}
 
 .table-typeB td span:hover{text-decoration: underline;}
 .table-typeB a{ font-weight: 800;}
