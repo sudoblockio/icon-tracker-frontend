@@ -1,20 +1,30 @@
 import axios from 'axios'
 
-// const productionURL = 'https://tracker.icon.foundation'
-// const developmentURL = 'https://trackerdev.icon.foundation'
-export const localDevUrl = 'http://trackerlocaldev.icon.foundation'
-export const loopChainDevUrl = 'https://testwallet.icon.foundation'
-
+export const apiUrl = getUrl()
 export const trackerApi = axios.create({
-  baseURL: localDevUrl,
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   }
 })
-
-export const walletApi  = axios.create({
-  baseURL: localDevUrl,
+export const walletApi = axios.create({
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
 })
+
+function getUrl() {
+  if (!!process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL
+  }  
+  if (!!process.env.REACT_APP_ENV) {
+    switch(process.env.REACT_APP_ENV) {
+      case 'production':
+        return 'http://tracker.icon.foundation'
+      case 'development':
+      default:
+        return 'http://trackerlocaldev.icon.foundation'
+    }
+  } 
+}
