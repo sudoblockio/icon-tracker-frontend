@@ -111,7 +111,7 @@ class BlockInfo extends Component {
                       height === 0 &&
                       <tr>
                         <td>Message</td>
-                        <td>{message}</td>
+                        <td className="message">{message}</td>
                       </tr>
                     }
                   </tbody>

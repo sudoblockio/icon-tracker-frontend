@@ -417,6 +417,9 @@ html, body{height: 100%;}
 
 .table-typeB.detail .value{display: inline-block;width: 200px; text-align: center;font-weight: 800; color: #262626;}
 .table-typeB.detail p:hover{border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
+.table-typeB.detail .message {    padding: 14px 30px;}
+.table-typeB.detail .message p{      word-break: break-all; line-height: 18px;}
+.table-typeB.detail .message p:hover{border: none;box-shadow: none;}
 
 .table-typeB.contract td:first-child,
 .table-typeB.contract td:nth-child(3){width: 210px; background: #f0f2f5; }
