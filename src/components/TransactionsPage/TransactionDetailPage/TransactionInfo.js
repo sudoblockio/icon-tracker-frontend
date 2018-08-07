@@ -17,9 +17,6 @@ import {
 	beautifyJson,
 	removeQuotes,
 } from 'utils/utils'
-import {
-	SERVER_TX_TYPE
-} from 'utils/const'
 
 class TransactionInfo extends Component {
 

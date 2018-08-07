@@ -39,13 +39,13 @@ class ContractDetail extends Component {
                 <p className="txt">{_state}</p>
                 <p className="label">TxHash</p>
                 {TxHash}
-                <p className="label">검증 Tx hash</p>
+                <p className="label">Verified TxHash</p>
                 {VerifiedTx}                
-                <p className="label">검증인</p>
+                <p className="label">Verifier</p>
                 <p className="txt">{_vefification}</p>
-                <p className="label">제출인</p>
+                <p className="label">Submitter</p>
                 <p className="txt">{_submission}</p>
-                <p className="label">패키지 Checksum</p>
+                <p className="label">Package Checksum</p>
                 <p className="txt">{_checksum}</p>
                 <p className="label">Comment</p>
                 <p className="txt">{_comment}</p>
