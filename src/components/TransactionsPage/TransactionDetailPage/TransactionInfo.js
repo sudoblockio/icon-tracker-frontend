@@ -91,10 +91,13 @@ class TransactionInfo extends Component {
 											<td>Amount</td>
 											<td>{`${convertNumberToText(amount)} ICX`}</td>
 										</tr>
-										<tr>
-											<td>Token transfer</td>
-											<TokenTransferCell tokenTxList={tokenTxList} />
-										</tr>
+										{
+											(!!tokenTxList && tokenTxList.length !== 0) &&
+											<tr>
+												<td>Token transfer</td>
+												<TokenTransferCell tokenTxList={tokenTxList} />
+											</tr>
+										}
 										<tr>
 											<td>STEP limit</td>
 											<td>{convertNumberToText(stepLimit)}</td>
@@ -188,9 +191,6 @@ class DataCell extends Component {
 }
 
 const TokenTransferCell = ({ tokenTxList }) => {
-	if (!tokenTxList || tokenTxList.length === 0) {
-		return <td>-</td>
-	}
 	return (
 		<td>
 			{
