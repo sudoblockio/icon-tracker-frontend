@@ -21,11 +21,11 @@ class LoadingComponent extends Component {
 
   render() {
     const { display } = this.state
-    const { height } = this.props
+    const { height, width } = this.props
     const Content = () => {
-      if (height) {
+      if (height || width) {
         return (
-          <div style={{ height }}>
+          <div style={{ height, width }}>
             <LoadingDiv display={display} />
           </div>
         )

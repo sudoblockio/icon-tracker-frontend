@@ -43,7 +43,7 @@ class TxPage extends Component {
 		this.getParams(pathname)
 		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
-		const { count } = tx	
+		const { count } = tx
 		this.getTxListByCount(sort || count)
 	}
 

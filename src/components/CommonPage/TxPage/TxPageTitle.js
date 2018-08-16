@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {
+	LoadingComponent,
+} from 'components';
+import {
     TX_TYPE,
     IRC_VERSION
 } from 'utils/const'
@@ -14,10 +17,16 @@ class TxPageTitle extends Component {
             txType, 
             urlIndex, 
             listSize,
-            totalSize
+            totalSize,
+            loading
         } = this.props
 
         const Content = () => {
+            if (loading) {
+                return (
+                    <LoadingComponent height="24px" width="24px" />
+                )
+            }
             const _listSize = numberWithCommas(listSize || 0)
             const _totalSize = numberWithCommas(totalSize || 0)
             switch (txType) {

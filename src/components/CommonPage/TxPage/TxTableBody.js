@@ -62,7 +62,7 @@ const AmountCell = ({ amount, decimal, symbol }) => {
 }
 
 const BlockCell = ({ height }) => {
-	return <td className="on break"><BlockLink to={height} label={numberWithCommas(height)} /></td>
+	return <td className="on"><BlockLink to={height} label={numberWithCommas(height)} /></td>
 }
 
 class TxTableBody extends Component {
