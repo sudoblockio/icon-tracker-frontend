@@ -19,7 +19,6 @@ $(document).ready(function () {
 		$(this).find(".sub-menu").stop().slideUp(300, 'swing');
 		$(this).find("span").removeClass("on");
 	});
-
 });
 
 $(window).on('CUSTOM_FX', function (e) {

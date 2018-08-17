@@ -31,6 +31,10 @@ class TxPage extends Component {
 		this.setInitialData(this.props.url.pathname, 20)
 	}
 
+	componentWillUnmount() {
+		this.getTxListByCount(0)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const current = this.props.url.pathname
 		const next = nextProps.url.pathname
@@ -43,7 +47,7 @@ class TxPage extends Component {
 		this.getParams(pathname)
 		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		const tx = this.props[this.getTxTypeData()['tx']] || {}
-		const { count } = tx	
+		const { count } = tx
 		this.getTxListByCount(sort || count)
 	}
 
@@ -175,6 +179,11 @@ class TxPage extends Component {
 						count={count}
 						getData={this.getTxListByCount}
 					/>,
+					(loading && 
+					<LoadingComponent
+						key='LoadingComponent'
+						style={{position: 'absolute', width: '0', left: '185px', bottom: '10px'}}
+					/>),
 					<Pagination
 						key='Pagination'
 						pageNum={page}
@@ -186,7 +195,7 @@ class TxPage extends Component {
 		}
 
 		const Content = () => {
-			if (loading) {
+			if (loading && noData) {
 				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
 			}
 			else {

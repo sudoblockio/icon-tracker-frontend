@@ -39,7 +39,7 @@ const TokenCell = ({ name, address }) => {
 	return <td>{tokenText(name, undefined, address, 'ellipsis')}</td>
 }
 
-const DateCell = ({ date, isAge }) => {
+const DateCell = ({ date, isDate }) => {
 	let className, dateText
 	if (!isValidData(date)) {
 		className = "no"
@@ -47,11 +47,11 @@ const DateCell = ({ date, isAge }) => {
 	}
 	else {
 		className = "break"
-		if (isAge) {
-			dateText = calcFromNow(date)
+		if (isDate) {
+			dateText = dateToUTC(date)
 		}
 		else {
-			dateText = dateToUTC(date)
+			dateText = calcFromNow(date)
 		}
 	}
 	return <td className={className}>{dateText}</td>
@@ -62,7 +62,7 @@ const AmountCell = ({ amount, decimal, symbol }) => {
 }
 
 const BlockCell = ({ height }) => {
-	return <td className="on break"><BlockLink to={height} label={numberWithCommas(height)} /></td>
+	return <td className="on"><BlockLink to={height} label={numberWithCommas(height)} /></td>
 }
 
 class TxTableBody extends Component {
@@ -103,7 +103,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.createDate} />
+							<DateCell date={data.createDate} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol="ICX" />
 						</tr>
@@ -113,7 +113,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height} />
-							<DateCell isAge date={data.createDate} />
+							<DateCell date={data.createDate} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.amount} symbol="ICX" />
 						</tr>
@@ -122,7 +122,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.age} />
+							<DateCell date={data.age} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
 							<TokenCell name={data.name} address={data.tradeTokenAddr} />
@@ -152,7 +152,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.age} />
+							<DateCell date={data.age} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<TokenCell name={data.tokenName} address={data.contractAddr} />
@@ -162,7 +162,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell isAge date={data.age} />
+							<DateCell date={data.age} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 						</tr>

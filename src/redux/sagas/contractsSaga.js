@@ -46,11 +46,16 @@ function* watchReadContractInformation() { yield takeLatest(AT.readContractInfor
 
 export function* contractListFunc(action) {
   try {
-    if (!action.payload.count) {
-      const contracts = yield select(state => state.contracts.contracts);
-      const { count } = contracts
-      action.payload.count = count
+    // if (!action.payload.count) {
+    //   const contracts = yield select(state => state.contracts.contracts);
+    //   const { count } = contracts
+    //   action.payload.count = count
+    // }
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractListFulfilled, payload: { data: [] } });
+      return
     }
+
     const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractListFulfilled, payload });
@@ -66,6 +71,11 @@ export function* contractListFunc(action) {
 
 export function* contractListSearchFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractListSearchFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(CONTRACT_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractListSearchFulfilled, payload });
@@ -127,6 +137,11 @@ export function* contractDetailPopupFunc(action) {
 
 export function* contractTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(CONTRACT_TX_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractTxListFulfilled, payload });
@@ -142,6 +157,11 @@ export function* contractTxListFunc(action) {
 
 export function* contractInternalTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractInternalTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(CONTRACT_INTERNAL_TX_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractInternalTxListFulfilled, payload });
@@ -157,6 +177,11 @@ export function* contractInternalTxListFunc(action) {
 
 export function* contractTokenTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractTokenTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractTokenTxListFulfilled, payload });
@@ -172,6 +197,11 @@ export function* contractTokenTxListFunc(action) {
 
 export function* contractEventLogListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.contractEventLogListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(CONTRACT_EVENT_LOG_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.contractEventLogListFulfilled, payload });

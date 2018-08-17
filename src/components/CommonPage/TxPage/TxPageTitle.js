@@ -14,7 +14,7 @@ class TxPageTitle extends Component {
             txType, 
             urlIndex, 
             listSize,
-            totalSize
+            totalSize,
         } = this.props
 
         const Content = () => {

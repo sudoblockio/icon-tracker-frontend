@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { getUTCString } from 'utils/utils'
 import { TX_TYPE } from 'utils/const'
 
 class TxTableHead extends Component {
     render() {
         const TableHead = (_props) => {
             const { txType } = _props
-            const utcLabel = `(${getUTCString()})`
             switch (txType) {
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>
                             <th>TxHash</th>
                             <th>Block</th>
-                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>Age</th>
                             <th>From</th>
                             <th className="table-sign"></th>
                             <th>To</th>
@@ -25,7 +23,7 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>TxHash</th>
-                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>Age</th>
                             <th>From</th>
                             <th className="table-sign"></th>
                             <th>To</th>
@@ -84,7 +82,7 @@ class TxTableHead extends Component {
                         <tr>
                             <th>TxHash</th>
                             <th>Block</th>
-                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>Age</th>
                             <th>From</th>
                             <th className="table-sign"></th>
                             <th>To</th>
@@ -130,7 +128,7 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>Block</th>
-                            <th>Time Stamp<em>{utcLabel}</em></th>
+                            <th>Age</th>
                             <th>No of Txns</th>
                             <th>Block Hash</th>
                             <th>Amount</th>

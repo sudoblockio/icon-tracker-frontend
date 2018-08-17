@@ -39,6 +39,10 @@ class SearchPage extends Component {
     this.setInitialData(this.props.url)
   }
 
+  componentWillUnmount() {
+    this.getListByCount(0)
+  }
+
   componentWillReceiveProps(nextProps) {
     const { pathname: currentPath } = this.props.url
     const { pathname: nextPath } = nextProps.url
@@ -184,6 +188,11 @@ class SearchPage extends Component {
               count={count}
               getData={this.getListByCount}
             />),
+          (loading &&
+            <LoadingComponent
+              key='LoadingComponent'
+              style={{ position: 'absolute', width: '0', left: '185px', bottom: '10px' }}
+            />),
           (needPageOption &&
             <Pagination //
               key='Pagination'
@@ -196,7 +205,7 @@ class SearchPage extends Component {
     }
 
     const Content = () => {
-      if (loading) {
+      if (loading && noData) {
         return <LoadingComponent height='calc(100vh - 120px - 144px)' />
       }
       else {

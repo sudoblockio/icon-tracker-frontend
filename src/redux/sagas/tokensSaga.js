@@ -26,6 +26,11 @@ export default function* tokensSaga() {
 
 function* tokenListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.tokenListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(TOKEN_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.tokenListFulfilled, payload: payload });
@@ -39,6 +44,11 @@ function* tokenListFunc(action) {
 
 function* tokenListSearchFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.tokenListSearchFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(TOKEN_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.tokenListSearchFulfilled, payload: payload });
@@ -52,6 +62,11 @@ function* tokenListSearchFunc(action) {
 
 function* tokenTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.tokenTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(TOKEN_TX_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.tokenTxListFulfilled, payload: payload });
@@ -78,6 +93,11 @@ function* tokenSummaryFunc(action) {
 
 function* tokenTransfersListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.tokenTransfersListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(TOKEN_TRANSFERS_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.tokenTransfersListFulfilled, payload: payload });
@@ -91,6 +111,11 @@ function* tokenTransfersListFunc(action) {
 
 function* tokenHoldersListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.tokenHoldersListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(TPKEN_HOLDERS_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({ type: AT.tokenHoldersListFulfilled, payload: payload });
