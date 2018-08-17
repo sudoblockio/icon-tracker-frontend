@@ -1,4 +1,5 @@
 export const REDUX_STEP = {
+    INIT: 'init',
     READY: 'ready',
     FULFILLED: 'fulfilled',
     REJECTED: 'rejected',
@@ -198,6 +199,6 @@ export const TX_TYPE_DATA = {
 		tx: 'tokenHolders',
 		getTxList: 'tokenHoldersList',
 		className: 'table-typeM',
-        noBoxText: 'No Holders',
+        noBoxText: 'No Holder',
     },
 }

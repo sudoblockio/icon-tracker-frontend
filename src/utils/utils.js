@@ -179,11 +179,8 @@ export function getArrayState(step, state, action, dataType) {
         [dataType]: {
           ...state[dataType],
           loading: true,
-          data: [],
-          page: Number(action.payload.page) || 1,
+          page: Number(action.payload.page) || state[dataType].page,
           count: Number(action.payload.count) || state[dataType].count,
-          listSize: 0,
-          totalSize: 0,
           error: ''
         }
       }

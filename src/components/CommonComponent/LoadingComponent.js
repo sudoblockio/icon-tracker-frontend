@@ -4,35 +4,24 @@ class LoadingComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      display: 'none'
+      display: 'block'
     }
-    this.timeout = 0
-  }
-
-  componentDidMount() {
-    this.timeout = setTimeout(() => {
-      this.setState({ display: 'block' })
-    }, 500)
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout)
   }
 
   render() {
     const { display } = this.state
-    const { height, width } = this.props
+    const { height, width, style } = this.props
     const Content = () => {
       if (height || width) {
         return (
           <div style={{ height, width }}>
-            <LoadingDiv display={display} />
+            <LoadingDiv display={display} style={style} />
           </div>
         )
       }
       else {
         return (
-          <LoadingDiv display={display} />
+          <LoadingDiv display={display} style={style} />
         )
       }
     }
@@ -41,8 +30,8 @@ class LoadingComponent extends Component {
   }
 }
 
-const LoadingDiv = ({ display }) => (
-  <div className='loadingDiv' style={{ display }}>
+const LoadingDiv = ({ style, display }) => (
+  <div className='loadingDiv' style={{ ...style, display }}>
     <div className="loading">
       <svg className="lds-spinner" width="49px" height="49px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style={{ background: 'none' }}>
         <g transform="rotate(0 50 50)">

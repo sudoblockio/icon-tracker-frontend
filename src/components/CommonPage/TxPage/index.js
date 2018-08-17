@@ -175,6 +175,11 @@ class TxPage extends Component {
 						count={count}
 						getData={this.getTxListByCount}
 					/>,
+					(loading && 
+					<LoadingComponent
+						key='LoadingComponent'
+						style={{position: 'absolute', width: '0', left: '185px', bottom: '10px'}}
+					/>),
 					<Pagination
 						key='Pagination'
 						pageNum={page}
@@ -186,7 +191,7 @@ class TxPage extends Component {
 		}
 
 		const Content = () => {
-			if (loading) {
+			if (loading && noData) {
 				return <LoadingComponent height='calc(100vh - 120px - 144px)' />
 			}
 			else {
