@@ -6,7 +6,7 @@ import {
   TokenLink,
 } from 'components'
 import {
-  REDUX_STEP, 
+  REDUX_STEP,
   SERVER_TX_TYPE
 } from './const'
 
@@ -172,39 +172,54 @@ export function tokenText(name, symbol, address, spanClassName) {
 }
 
 export function getArrayState(step, state, action, dataType) {
+  const { payload } = action
   switch (step) {
     case REDUX_STEP.READY:
+      const { page, count } = payload
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: true,
-          page: Number(action.payload.page) || state[dataType].page,
-          count: Number(action.payload.count) || state[dataType].count,
+          page: Number(page) || state[dataType].page,
+          count: Number(count) || state[dataType].count,
           error: ''
         }
       }
     case REDUX_STEP.FULFILLED:
-      const { payload } = action
-      const { data } = payload
+      const { data, listSize, totalSize } = payload
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
           data: data || [],
-          listSize: action.payload.listSize || 0,
-          totalSize: action.payload.totalSize || 0,
+          listSize: listSize || 0,
+          totalSize: totalSize || 0,
           error: ''
         }
       }
     case REDUX_STEP.REJECTED:
+      const { error } = action
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
-          error: action.error
+          error: error
+        }
+      }
+    case REDUX_STEP.INIT:
+      return {
+        ...state,
+        [dataType]: {
+          loading: false,
+          page: 1,
+          count: 20,
+          data: [],
+          listSize: 0,
+          totalSize: 0,
+          error: '',
         }
       }
     default:
@@ -237,12 +252,22 @@ export function getObjectState(step, state, action, dataType) {
         }
       }
     case REDUX_STEP.REJECTED:
+      const { error } = action
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
-          error: action.error
+          error: error
+        }
+      }
+    case REDUX_STEP.INIT:
+      return {
+        ...state,
+        [dataType]: {
+          loading: false,
+          data: {},
+          error: '',
         }
       }
     default:
@@ -323,16 +348,16 @@ export function isScoreTx(targetAddr, txType, isFrom) {
     return false
   }
   const _txType = SERVER_TX_TYPE[txType]
-  switch(_txType) {
+  switch (_txType) {
     case SERVER_TX_TYPE[3]:
       return targetAddr === "cx0000000000000000000000000000000000000000"
     case SERVER_TX_TYPE[4]:
       return true
-    case SERVER_TX_TYPE[5]:  
+    case SERVER_TX_TYPE[5]:
     case SERVER_TX_TYPE[6]:
       return targetAddr === "cx0000000000000000000000000000000000000001"
     default:
-      return false      
+      return false
   }
 }
 

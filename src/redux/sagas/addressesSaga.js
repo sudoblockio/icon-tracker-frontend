@@ -21,6 +21,11 @@ function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, ad
 
 export function* addressListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(ADDRESS_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.addressListFulfilled, payload: payload});
@@ -51,6 +56,11 @@ export function* addressInfoFunc(action) {
 
 export function* addressTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(ADDRESS_TX_LIST, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.addressTxListFulfilled, payload: payload});
@@ -66,6 +76,11 @@ export function* addressTxListFunc(action) {
 
 export function* addressTokenTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressTokenTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(ADDRESS_TOKEN_TX_LIST, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.addressTokenTxListFulfilled, payload: payload});

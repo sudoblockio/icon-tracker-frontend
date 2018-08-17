@@ -31,6 +31,10 @@ class TxPage extends Component {
 		this.setInitialData(this.props.url.pathname, 20)
 	}
 
+	componentWillUnmount() {
+		this.getTxListByCount(0)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const current = this.props.url.pathname
 		const next = nextProps.url.pathname

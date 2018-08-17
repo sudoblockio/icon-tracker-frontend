@@ -18,6 +18,11 @@ function* watchBlockTxList() { yield takeLatest(AT.blockTxList, blockTxListFunc)
 
 function* blockListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.blockListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(BLOCK_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.blockListFulfilled, payload: payload});
@@ -44,6 +49,11 @@ function* blockInfoFunc(action) {
 
 function* blockTxListFunc(action) {
   try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.blockTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
     const payload = yield call(BLOCK_TX_LIST_API, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.blockTxListFulfilled, payload: payload});
