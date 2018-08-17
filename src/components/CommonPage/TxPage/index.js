@@ -43,7 +43,7 @@ class TxPage extends Component {
 		const { pathname: currentPath } = this.props.url
 		const { pathname: nextPath } = nextProps.url
 		if (currentPath !== nextPath) {
-			const tx = this.getTx()
+			const tx = this.props[this.getTxTypeData()['tx']] || {}
 			const { count } = tx
 			this.setInitialData(nextProps.url, count)
 		}
@@ -56,10 +56,6 @@ class TxPage extends Component {
 
 	getTxTypeData = () => {
 		return TX_TYPE_DATA[this.txType] || {}
-	}
-
-	getTx = () => {
-		return this.props[this.getTxTypeData()['tx']] || {}
 	}
 
 	getParams = (url) => {

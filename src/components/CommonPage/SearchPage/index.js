@@ -51,7 +51,7 @@ class SearchPage extends Component {
     const { pathname: currentPath } = this.props.url
     const { pathname: nextPath } = nextProps.url
     if (currentPath !== nextPath && startsWith(nextPath, `/${this.searchType}`)) {
-			const list = this.getTx()
+			const list = this.props[this.getSearchTypeData()['list']] || {}
 			const { count } = list
       this.setInitialData(nextProps.url, count)
     }
@@ -75,10 +75,6 @@ class SearchPage extends Component {
 
   getSearchTypeData = () => {
     return SEARCH_TYPE_DATA[this.searchType] || {}
-  }
-
-  getList = () => {
-    return this.props[this.getSearchTypeData()['list']] || {}
   }
 
   getParams = (url) => {
