@@ -36,8 +36,12 @@ class SearchPage extends Component {
   }
 
   componentWillMount() {
-    this.setInitialData(this.props.url)
+    this.setInitialData(this.props.url, 0)
   }
+
+  componentDidMount() {
+		this.getListByCount(20)
+	}
 
   componentWillUnmount() {
     this.getListByCount(0)
@@ -47,7 +51,9 @@ class SearchPage extends Component {
     const { pathname: currentPath } = this.props.url
     const { pathname: nextPath } = nextProps.url
     if (currentPath !== nextPath && startsWith(nextPath, `/${this.searchType}`)) {
-      this.setInitialData(nextProps.url)
+			const list = this.getTx()
+			const { count } = list
+      this.setInitialData(nextProps.url, count)
     }
     else {
       const { search: currentSearch } = this.props.url
@@ -60,11 +66,7 @@ class SearchPage extends Component {
 
   setInitialData = (url, sort) => {
     this.getParams(url)
-    this.getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
-    this.getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
-    const list = this.props[this.getSearchTypeData()['list']] || {}
-    const { count } = list
-    this.getListByCount(sort || count)
+    this.getListByCount(sort)
     const { search } = url
     if (search) {
       this.setSearch(search)
@@ -75,9 +77,15 @@ class SearchPage extends Component {
     return SEARCH_TYPE_DATA[this.searchType] || {}
   }
 
+  getList = () => {
+    return this.props[this.getSearchTypeData()['list']] || {}
+  }
+
   getParams = (url) => {
     const { pathname } = url
     this.searchType = pathname.split("/")[1] || ''
+    this.getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
+    this.getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
     this.pageId = pathname.split("/")[2] || 1
   }
 

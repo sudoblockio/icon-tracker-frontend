@@ -28,7 +28,11 @@ class TxPage extends Component {
 	}
 
 	componentWillMount() {
-		this.setInitialData(this.props.url.pathname, 20)
+		this.setInitialData(this.props.url, 0)
+	}
+
+	componentDidMount() {
+		this.getTxListByCount(20)
 	}
 
 	componentWillUnmount() {
@@ -36,27 +40,32 @@ class TxPage extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const current = this.props.url.pathname
-		const next = nextProps.url.pathname
-		if (current !== next) {
-			this.setInitialData(next)
+		const { pathname: currentPath } = this.props.url
+		const { pathname: nextPath } = nextProps.url
+		if (currentPath !== nextPath) {
+			const tx = this.getTx()
+			const { count } = tx
+			this.setInitialData(nextProps.url, count)
 		}
 	}
 
-	setInitialData = (pathname, sort) => {
-		this.getParams(pathname)
-		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
-		const tx = this.props[this.getTxTypeData()['tx']] || {}
-		const { count } = tx
-		this.getTxListByCount(sort || count)
-	}
+	setInitialData = (url, sort) => {
+		this.getParams(url)
+		this.getTxListByCount(sort)
+	}	
 
 	getTxTypeData = () => {
 		return TX_TYPE_DATA[this.txType] || {}
 	}
 
-	getParams = (pathname) => {
+	getTx = () => {
+		return this.props[this.getTxTypeData()['tx']] || {}
+	}
+
+	getParams = (url) => {
+		const { pathname } = url
 		this.txType = pathname.split("/")[1] || ''
+		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
 			case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -88,7 +97,6 @@ class TxPage extends Component {
 			case TX_TYPE.CONTRACT_TX:
 			case TX_TYPE.CONTRACT_INTERNAL_TX:
 			case TX_TYPE.CONTRACT_TOKEN_TX:
-			case TX_TYPE.CONTRACT_EVENTS:
 				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
 				break
 			case TX_TYPE.ADDRESS_TX:
@@ -100,6 +108,7 @@ class TxPage extends Component {
 				break
 			case TX_TYPE.TOKEN_TX:
 			case TX_TYPE.TOKEN_HOLDERS:
+			case TX_TYPE.CONTRACT_EVENTS:
 				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
 				break
 			case TX_TYPE.BLOCKS:
