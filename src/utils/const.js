@@ -87,7 +87,7 @@ export const SEARCH_TYPE_DATA = {
         tableClassName: 'table-typeI',
         contentsClassName: 'contents tokens',
         noBoxText: 'No Token',      
-        placeholder: "Search for any ICX token name / address / symbol",
+        placeholder: "Search for any token name / address / symbol",
         title: 'Tokens',
     },
 }
