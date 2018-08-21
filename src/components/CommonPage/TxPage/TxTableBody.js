@@ -106,6 +106,7 @@ class TxTableBody extends Component {
 							<DateCell date={data.createDate} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol="ICX" />
+							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -126,6 +127,7 @@ class TxTableBody extends Component {
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol={data.contractSymbol} />
 							<TokenCell name={data.name} address={data.tradeTokenAddr} />
+							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
@@ -156,6 +158,7 @@ class TxTableBody extends Component {
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<TokenCell name={data.tokenName} address={data.contractAddr} />
+							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
@@ -165,6 +168,7 @@ class TxTableBody extends Component {
 							<DateCell date={data.age} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
+							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:

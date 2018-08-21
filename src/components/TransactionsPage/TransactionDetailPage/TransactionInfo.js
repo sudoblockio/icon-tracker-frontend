@@ -99,7 +99,7 @@ class TransactionInfo extends Component {
 											</tr>
 										}
 										<tr>
-											<td>STEP limit</td>
+											<td>Step Liimit</td>
 											<td>{convertNumberToText(stepLimit)}</td>
 										</tr>
 										<tr>
@@ -107,12 +107,12 @@ class TransactionInfo extends Component {
 											<td>{convertNumberToText(stepUsedByTxn)}</td>
 										</tr>
 										<tr>
-											<td>STEP price</td>
-											<td>{`${convertNumberToText(stepPriceGloop)} Gloop`}<em>{`(${convertNumberToText(stepPriceIcx)} ICX)`}</em></td>
+											<td>Step Price</td>
+											<td>{convertNumberToText(stepPriceIcx)} ICX<em>({convertNumberToText(stepPriceGloop)} Gloop)</em></td>
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
-											<td>{`${convertNumberToText(fee)} ICX`}<em>{`(${convertNumberToText(feeUsd, 2)} USD)`}</em></td>
+											<td>{convertNumberToText(fee)} ICX<em>({convertNumberToText(feeUsd, 2)} USD</em></td>
 										</tr>
 										<tr>
 											<td>Data</td>

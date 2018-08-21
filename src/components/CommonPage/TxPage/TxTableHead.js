@@ -40,6 +40,7 @@ class TxTableHead extends Component {
                             <th className="table-sign"></th>
                             <th>To</th>
                             <th>Amount</th>
+                            <th>TxFee</th>
                         </tr>
                     )
                 case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -64,6 +65,7 @@ class TxTableHead extends Component {
                             <th>To</th>
                             <th>Quantity</th>
                             <th>Token</th>
+                            <th>TxFee</th>
                         </tr>
                     )
                 case TX_TYPE.BLOCK_TX:
@@ -100,6 +102,7 @@ class TxTableHead extends Component {
                             <th>To</th>
                             <th>Value</th>
                             <th>Token</th>
+                            <th>TxFee</th>
                         </tr>
                     )
                 case TX_TYPE.TOKEN_TX:
@@ -111,6 +114,7 @@ class TxTableHead extends Component {
                             <th className="table-sign"></th>
                             <th>To</th>
                             <th>Quantity</th>
+                            <th>TxFee</th>
                         </tr>
                     )
                 case TX_TYPE.ADDRESSES:
@@ -157,7 +161,7 @@ class TxTableHead extends Component {
                             <th className="table-sign"></th>
                             <th>To</th>
                             <th>Value</th>
-                            <th>Step limit</th>
+                            <th>Step Liimit</th>
                         </tr>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:

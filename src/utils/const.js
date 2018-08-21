@@ -41,10 +41,10 @@ export const SERVER_TX_TYPE = {
     "0": "Icx Transfer",
     "1": "Token Transfer",
     "2": "Contract Call",
-    "3": "Contract Create",
-    "4": "Contract Update",
-    "5": "Contract Accept",
-    "6": "Contract Reject"
+    "3": "Contract Created",
+    "4": "Contract Updated",
+    "5": "Contract Accepted",
+    "6": "Contract Rejected"
 }
 
 export const IRC_VERSION = {

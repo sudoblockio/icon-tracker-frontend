@@ -11,6 +11,7 @@ import {
     convertNumberToText,
     numberWithCommas,
     tokenText,
+    isValidData
 } from 'utils/utils'
 import {
     CONTRACT_STATUS,
@@ -36,6 +37,8 @@ class ContractInfo extends Component {
             }
             else {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
+                const isCreator = isValidData(creator)
+                const isCreateTx = isValidData(createTx)
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -64,17 +67,22 @@ class ContractInfo extends Component {
                                             <td>ICX Value</td>
                                             <td>{convertNumberToText(usdBalance)} USD</td>
                                             <td>Contract Creator</td>
-                                            <td>
-                                                <span className="help address">Creator Address</span>
-                                                <span className="help hash">Creator Transaction Hash</span>
-                                                <span className="link address ellipsis" onMouseOver={() => { this.onMouseOver("address") }} onMouseOut={() => { this.onMouseOut("address") }}>
-                                                    <AddressLink to={creator} />
-                                                </span>
-                                                <em>at Txn</em>
-                                                <span className="link hash ellipsis" onMouseOver={() => { this.onMouseOver("hash") }} onMouseOut={() => { this.onMouseOut("hash") }}>
-                                                    <TransactionLink to={createTx} />
-                                                </span>
-                                            </td>
+                                            {
+                                                (isCreator && isCreateTx) ?
+                                                    <td>
+                                                        <span className="help address">Creator Address</span>
+                                                        <span className="help hash">Creator Transaction Hash</span>
+                                                        <span className="link address ellipsis" onMouseOver={() => { this.onMouseOver("address") }} onMouseOut={() => { this.onMouseOut("address") }}>
+                                                            <AddressLink to={creator} />
+                                                        </span>
+                                                        <em>at Txn</em>
+                                                        <span className="link hash ellipsis" onMouseOver={() => { this.onMouseOver("hash") }} onMouseOut={() => { this.onMouseOut("hash") }}>
+                                                            <TransactionLink to={createTx} />
+                                                        </span>
+                                                    </td>
+                                                    :
+                                                    <td>-</td>
+                                            }
                                         </tr>
                                         <tr>
                                             <td>Transactions</td>
@@ -118,7 +126,7 @@ class TokenContractCell extends Component {
                 return (
                     <td>
                         <span className="help token">{ircVersion} Token</span>
-                        <span className="link token" onMouseOver={()=>{onMouseOver("token")}}  onMouseOut={()=>{onMouseOut("token")}}>
+                        <span className="link token" onMouseOver={() => { onMouseOver("token") }} onMouseOut={() => { onMouseOut("token") }}>
                             {tokenText(tokenName, symbol, address)}
                         </span>
                     </td>

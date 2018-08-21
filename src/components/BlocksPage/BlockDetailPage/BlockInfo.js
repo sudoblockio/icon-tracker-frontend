@@ -76,7 +76,7 @@ class BlockInfo extends Component {
                       </td>
                     </tr>
                     <tr>
-                      <td>Time</td>
+                      <td>Time Stamp</td>
                       <td>{height === 0 ? '-' : dateToUTC(createDate, true)}</td>
                     </tr>
                     {/*<tr>

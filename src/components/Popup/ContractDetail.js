@@ -35,7 +35,7 @@ class ContractDetail extends Component {
         return ([
             <h1 key="h1" className="title">Contract detail</h1>,
             <div key="div" className="scroll">
-                <p className="label">Stauts</p>
+                <p className="label">Status</p>
                 <p className="txt">{_state}</p>
                 <p className="label">TxHash</p>
                 {TxHash}

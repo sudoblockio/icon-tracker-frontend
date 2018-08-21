@@ -12,7 +12,7 @@ class InfoSummary extends Component {
         <p className={`num a ${marketCapStr.length >= 17 && 'small'}`}>{marketCapStr}</p>
         <p className="subTitle">ICX Supply</p>
         <p className="num b">{numberWithCommas(icxSupply)}</p>
-        <p className="subTitle">ICX Circulationy</p>
+        <p className="subTitle">ICX Circulation</p>
         <p className="num c">{convertNumberToText(icxCirculationy, 0)}</p>
         <hr className="hr"/>
         <p className="subTitle c">All Transactions<em>{numberWithCommas(transactionCount)}</em></p>
