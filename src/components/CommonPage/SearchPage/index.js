@@ -27,11 +27,12 @@ class SearchPage extends Component {
     super(props)
     this.searchType = ''
     this.pageId = 1
-    this.getList = () => { }
-    this.getListSearch = () => { }
+    this._getList = () => { }
+    this._getListSearch = () => { }
     this.state = {
       searchKeyword: '',
       status: '',
+      count: 20,      
     }
   }
 
@@ -40,12 +41,8 @@ class SearchPage extends Component {
   }
 
   componentDidMount() {
-		this.getListByCount(20)
+		this.getList(this.pageId, 20)
 	}
-
-  componentWillUnmount() {
-    this.getListByCount(0)
-  }
 
   componentWillReceiveProps(nextProps) {
     const { pathname: currentPath } = this.props.url
@@ -66,7 +63,7 @@ class SearchPage extends Component {
 
   setInitialData = (url, sort) => {
     this.getParams(url)
-    this.getListByCount(sort)
+    this.getList(this.pageId, sort)
     const { search } = url
     if (search) {
       this.setSearch(search)
@@ -77,46 +74,49 @@ class SearchPage extends Component {
     return SEARCH_TYPE_DATA[this.searchType] || {}
   }
 
+  getCount = () => {
+    const list = this.props[this.getSearchTypeData()['list']] || {}
+    const { count } = list
+    return count
+}
+
   getParams = (url) => {
     const { pathname } = url
     this.searchType = pathname.split("/")[1] || ''
-    this.getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
-    this.getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
+    this._getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
+    this._getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
     this.pageId = pathname.split("/")[2] || 1
   }
 
-  getListByCount = (count) => {
-    this.setState({ status: '' }, () => {
-      switch (this.searchType) {
-        case SEARCH_TYPE.CONTRACTS:
-          this.getList({ page: this.pageId, count })
-          break
-        case SEARCH_TYPE.TOKENS:
-          this.getList({})
-          break
-        default:
-      }
-    })
-  }
-
-  getListByPage = (page) => {
-    this.setState({ status: '' }, () => {
-      this.props.history.push(`/${this.searchType}/${page}`);
-    })
-  }
-
-  getListByStatus = (status) => {
-    const query = { page: 1 }
+  getList = (page, count) => {
+    const { status } = this.state
+    const query = { page, count }
     if (!!status) {
       query.status = CONTRACT_STATUS_NUM[status]
     }
     switch (this.searchType) {
       case SEARCH_TYPE.CONTRACTS:
-        this.getList(query)
+        this._getList(query)
         break
       case SEARCH_TYPE.TOKENS:
+        this._getList({})
+        break
       default:
     }
+  }
+
+  getListByPage = (page) => {
+    this.props.history.push(`/${this.searchType}/${page}`);
+  }
+
+  getListByCount = (count) => {
+    this.getList(1, count)
+  }
+
+  getListByStatus = (status) => {
+    this.setState({ status }, () => {
+      this.getListByPage(1)
+    })
   }
 
   setSearch = (_search) => {
@@ -124,14 +124,14 @@ class SearchPage extends Component {
     const { search } = parsed
     this.setState({ searchKeyword: search || '' }, () => {
       if (search) {
-        this.getListSearch({ keyword: search, page: 1, count: 100 })
+        this._getListSearch({ keyword: search, page: 1, count: 100 })
       }
     })
   }
 
   changeSearch = (nextSearch) => {
-    const { search } = this.state
-    if (search === '' && nextSearch === '') return
+    const { searchKeyword } = this.state
+    if (searchKeyword === '' && nextSearch === '') return
     if (nextSearch) {
       this.props.history.push(`/${this.searchType}?search=${nextSearch}`);
     }

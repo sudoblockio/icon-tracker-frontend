@@ -35,10 +35,6 @@ class TxPage extends Component {
 		this.getTxListByCount(20)
 	}
 
-	componentWillUnmount() {
-		this.getTxListByCount(0)
-	}
-
 	componentWillReceiveProps(nextProps) {
 		const { pathname: currentPath } = this.props.url
 		const { pathname: nextPath } = nextProps.url

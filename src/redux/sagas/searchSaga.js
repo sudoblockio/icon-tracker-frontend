@@ -4,7 +4,8 @@ import AT from '../actionTypes/actionTypes';
 import {
   isHxAddress,
   isCxAddress,
-  is0xAddress,
+  is0xHash,
+  isNumeric
 } from 'utils/utils'
 import {
   IRC_VERSION
@@ -38,7 +39,7 @@ function* searchFunc(action) {
         throw new Error();
       }
     }
-    else if (is0xAddress(payload)) {
+    else if (is0xHash(payload)) {
       const result = yield call(SEARCH_DATA_API, { data: action.payload });
       if (result.result === "200") {
         const type = result.data.split(" ")[0]
@@ -58,7 +59,7 @@ function* searchFunc(action) {
         throw new Error();
       }
     }
-    else if (!isNaN(payload)) {
+    else if (isNumeric(payload)) {
       yield put(routerActions.push(`/block/${payload}`));
     }
     else {
