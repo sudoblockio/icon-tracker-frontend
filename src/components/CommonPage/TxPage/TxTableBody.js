@@ -176,7 +176,7 @@ class TxTableBody extends Component {
 						<tr>
 							<AddressCell targetAddr={addressInData} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
-							<AmountCell amount={data.icxUsd} decimal={2} symbol="USD" />
+							<AmountCell amount={data.icxUsd} decimal={3} symbol="USD" />
 							<td><span>{data.percentage}</span><em>%</em></td>
 							<td>{numberWithCommas(data.txCount)}</td>
 							<td>{data.nodeType}</td>

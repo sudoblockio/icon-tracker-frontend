@@ -38,7 +38,7 @@ class TokenSummary extends Component {
                                             <td>Price</td>
                                             {
                                                 !!price ?
-                                                    <td>{convertNumberToText(price)} ICX<em>({convertNumberToText(priceUsd)} USD)</em></td>
+                                                    <td>{convertNumberToText(price)} ICX<em>({convertNumberToText(priceUsd, 3)} USD)</em></td>
                                                     :
                                                     <td>-</td>
                                             }

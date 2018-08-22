@@ -52,7 +52,7 @@ class ContractInfo extends Component {
                                         </tr>
                                         <tr>
                                             <td>Balance</td>
-                                            <td>{convertNumberToText(balance)} ICX{/*<span className="gray">({convertNumberToText(usdBalance)} USD)</span>*/}</td>
+                                            <td>{convertNumberToText(balance)} ICX</td>
                                             <td>Token Contract</td>
                                             <TokenContractCell
                                                 tokenName={tokenName}
@@ -65,7 +65,7 @@ class ContractInfo extends Component {
                                         </tr>
                                         <tr>
                                             <td>ICX Value</td>
-                                            <td>{convertNumberToText(usdBalance)} USD</td>
+                                            <td>{convertNumberToText(usdBalance, 3)} USD</td>
                                             <td>Contract Creator</td>
                                             {
                                                 (isCreator && isCreateTx) ?
