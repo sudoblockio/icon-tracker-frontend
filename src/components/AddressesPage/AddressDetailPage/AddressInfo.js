@@ -18,7 +18,7 @@ class AddressInfo extends Component {
   
   render() {
     const { wallet } = this.props    
-    const { loading, data } = wallet
+    const { loading, data, error } = wallet
     
     const Content = () => {
       if (loading) {
@@ -28,6 +28,7 @@ class AddressInfo extends Component {
       }
       else {
         const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
+        const _address = !!address ? address : error
         return (
           <div className="screen0">
             <div className="wrap-holder">
@@ -43,7 +44,7 @@ class AddressInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{address} <QrCodeButton address={address}/><CopyButton data={address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td>{_address} <QrCodeButton address={_address}/><CopyButton data={_address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
                     </tr>
                     <tr>
                       <td>Balance</td>

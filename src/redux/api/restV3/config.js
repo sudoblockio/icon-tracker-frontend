@@ -45,7 +45,7 @@ export async function getApiUrl() {
 
 async function getConfigFile() {
   try {
-    const response = await fetch('./config.json')
+    const response = await fetch('/config.json')
     const responseJson = await response.json();
     return responseJson
   }

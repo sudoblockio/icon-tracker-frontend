@@ -330,18 +330,15 @@ export function noHashLowerCase(str) {
 }
 
 export function isHxAddress(str) {
-  if (!str) return false
-  return startsWith(str, 'hx') && str.length === 42
+  return !!/^(hx)[0-9a-f]{40}$/i.test(str)
 }
 
 export function isCxAddress(str) {
-  if (!str) return false
-  return startsWith(str, 'cx') && str.length === 42
+  return !!/^(cx)[0-9a-f]{40}$/i.test(str)
 }
 
 export function is0xAddress(str) {
-  if (!str) return false
-  return startsWith(str, '0x') && str.length === 66
+  return !!/^(0x)[0-9a-f]{40}$/i.test(str)
 }
 
 export function isScoreTx(targetAddr, txType, isFrom) {

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     startsWith,
     findTabIndex,
-    noSpaceLowerCase
+    noSpaceLowerCase,
+    isHxAddress
 } from 'utils/utils'
 import {
     NotFoundPage,
@@ -72,8 +73,10 @@ class DetailPage extends Component {
 
     render() {
         const { loading, error } = this.props
+        const isNotFoundPage = !loading && error !== "" && !isHxAddress(error)
+        
         const Content = () => {
-            if (error !== "" && !loading) {
+            if (isNotFoundPage) {
                 return <NotFoundPage error={error}/>
             }
             else {
