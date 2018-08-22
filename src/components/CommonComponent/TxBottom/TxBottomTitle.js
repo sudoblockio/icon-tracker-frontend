@@ -32,7 +32,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> ICX txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
                             </span>
                         </p>
@@ -41,7 +41,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} internal transactions</em>
                             </span>
                         </p>
@@ -50,7 +50,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} token transfers</em>
                             </span>
                         </p>
@@ -68,7 +68,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> ICX txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
                             </span>
                         </p>
@@ -77,7 +77,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} token transfers</em>
                             </span>
                         </p>
@@ -94,7 +94,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> ICX txns from a total of
+                                Latest<em>{listSizeUnder10}</em> Txns from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
                             </span>
                         </p>

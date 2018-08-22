@@ -103,7 +103,7 @@ class TransactionInfo extends Component {
 											<td>{convertNumberToText(stepLimit)}</td>
 										</tr>
 										<tr>
-											<td>STEP used by Txn</td>
+											<td>Step used by Txn</td>
 											<td>{convertNumberToText(stepUsedByTxn)}</td>
 										</tr>
 										<tr>
