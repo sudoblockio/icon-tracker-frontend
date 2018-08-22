@@ -19,14 +19,12 @@ class ContractDetail extends Component {
             verifiedTx,
             vefification,
             submission,
-            checksum,
             comment
         } = data
 
         const _state = state ? CONTRACT_STATUS[state] : "-"
         const _vefification = vefification || "-"
         const _submission = submission || "-"
-        const _checksum = checksum || "-"
         const _comment= comment || "-"
 
         const TxHash = txHash ? <TransactionLink to={txHash} label={<p className="txt hash">{txHash}</p>} onClick={closeDetail} /> : "-"
@@ -45,8 +43,6 @@ class ContractDetail extends Component {
                 <p className="txt">{_vefification}</p>
                 <p className="label">Submitter</p>
                 <p className="txt">{_submission}</p>
-                <p className="label">Package Checksum</p>
-                <p className="txt">{_checksum}</p>
                 <p className="label">Comment</p>
                 <p className="txt">{_comment}</p>
             </div>
