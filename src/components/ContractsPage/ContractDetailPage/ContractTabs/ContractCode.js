@@ -10,7 +10,29 @@ import {
 } from 'components';
 
 class ContractCode extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            downloadLink: ''
+        }        
+    }
+
+    componentDidMount () {
+        this.getDownloadLink()
+    }
+
+    getDownloadLink = async () => {
+        const { contract } = this.props
+        const { data } = contract
+        const { address, contractVersion } = data
+        if (!!address) {
+            const downloadLink = await makeDownloadLink(address, contractVersion)
+            this.setState({ downloadLink })    
+        }
+    }
+
     render() {
+        const { downloadLink } = this.state
         const { contract, contractAbi } = this.props
         const { data } = contract
         const { address, tokenName, symbol, compiler, contractVersion } = data
@@ -32,7 +54,7 @@ class ContractCode extends Component {
                             <td>
                                 <span>
                                     <i className="img"></i>
-                                    <a href={makeDownloadLink(address, contractVersion)} download={`${address}_${contractVersion}.zip`}>Download</a>
+                                    <a href={downloadLink} download={`${address}_${contractVersion}.zip`}>Download</a>
                                 </span>
                             </td>
                         </tr>

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { apiUrl } from '../redux/api/restV3/config'
+import { getApiUrl } from '../redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
 import {
   TokenLink,
@@ -139,7 +139,8 @@ export function randomUint32() {
   }
 }
 
-export function makeDownloadLink(address, version) {
+export async function makeDownloadLink(address, version) {
+  const apiUrl = await getApiUrl()
   return `${apiUrl}/score/${address}_${version}.zip`
 }
 

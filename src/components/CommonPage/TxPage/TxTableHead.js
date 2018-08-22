@@ -161,7 +161,7 @@ class TxTableHead extends Component {
                             <th className="table-sign"></th>
                             <th>To</th>
                             <th>Value</th>
-                            <th>Step Liimit</th>
+                            <th>Step Limit</th>
                         </tr>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:

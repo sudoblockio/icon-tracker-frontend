@@ -1,7 +1,8 @@
 import { makeUrl } from 'utils/utils'
-import { trackerApi } from './config'
+import { trackerApiInstance } from './config'
 
-export function addressList(payload) {
+export async function addressList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/list`, payload))
             .then(result => {
@@ -14,7 +15,8 @@ export function addressList(payload) {
     })
 }
 
-export function addressInfo(payload) {
+export async function addressInfo(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/info`, payload))
             .then(result => {
@@ -27,7 +29,8 @@ export function addressInfo(payload) {
     })
 }
 
-export function addressTxList(payload) {
+export async function addressTxList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/txList`, payload))
             .then(result => {
@@ -39,7 +42,8 @@ export function addressTxList(payload) {
     })
 }
 
-export function addressTokenTxList(payload) {
+export async function addressTokenTxList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/tokenTxList`, payload))
             .then(result => {

@@ -1,7 +1,8 @@
 import { makeUrl } from 'utils/utils'
-import { trackerApi } from './config'
+import { trackerApiInstance } from './config'
 
-export function transactionRecentTx(payload) {
+export async function transactionRecentTx(payload) {
+  const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/transaction/recentTx', payload))
       .then(result => {
@@ -14,7 +15,8 @@ export function transactionRecentTx(payload) {
   })
 }
 
-export function transactionTxDetail(payload) {
+export async function transactionTxDetail(payload) {
+  const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/transaction/txDetail', payload))
       .then(result => {
@@ -27,7 +29,8 @@ export function transactionTxDetail(payload) {
   })
 }
 
-export function transactionEventLogList(payload) {
+export async function transactionEventLogList(payload) {
+  const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/transaction/eventLogList', payload))
       .then(result => {
@@ -40,7 +43,8 @@ export function transactionEventLogList(payload) {
   })
 }
 
-export function transactionInternalTxList(payload) {
+export async function transactionInternalTxList(payload) {
+  const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/transaction/internalTxList', payload))
       .then(result => {

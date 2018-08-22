@@ -1,7 +1,8 @@
 import { randomUint32 } from 'utils/utils'
-import { walletApi } from './config'
+import { walletApiInstance } from './config'
 
-export function icxGetScore(params) {
+export async function icxGetScore(params) {
+  const walletApi = await walletApiInstance()
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
@@ -30,7 +31,8 @@ export function icxGetScore(params) {
   });
 }
 
-export function icxCall(params) {
+export async function icxCall(params) {
+  const walletApi = await walletApiInstance()
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
