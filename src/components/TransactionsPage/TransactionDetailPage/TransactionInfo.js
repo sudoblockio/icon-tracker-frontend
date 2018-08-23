@@ -200,7 +200,7 @@ const TokenTransferCell = ({ tokenTxList }) => {
 						<p key={index}>
 							{quantity} {symbol}<em>({tokenName})</em>
 							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
-							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{fromAddr}</span>} />
+							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{toAddr}</span>} />
 						</p>
 					)
 				})

@@ -6,6 +6,7 @@ import {
 	dateToUTC,
 	isValidData,
 	tokenText,
+	is0xHash
 } from 'utils/utils'
 import {
 	TransactionLink,
@@ -24,8 +25,9 @@ const TxHashCell = ({ isError, txHash }) => {
 		className = 'no'
 	}
 	else {
-		_txHash = <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} />
-		className = `${isError ? 'icon error' : ''} on`
+		const _is0xHash = is0xHash(txHash)
+		_txHash = _is0xHash ? <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} /> : txHash
+		className = `${isError ? 'icon error' : ''} ${_is0xHash ? 'on' : ''}`	
 	}
 	return (
 		<td className={className}>
@@ -42,7 +44,7 @@ const TokenCell = ({ name, address }) => {
 const DateCell = ({ date, isDate }) => {
 	let className, dateText
 	if (!isValidData(date)) {
-		className = "no"
+		className = ""
 		dateText = "-"
 	}
 	else {
