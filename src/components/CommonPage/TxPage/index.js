@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string'
 import TxPageTitle from './TxPageTitle'
 import {
 	TxTableBody,
@@ -15,6 +16,7 @@ import {
 } from 'utils/const'
 import {
 	calcMaxPageNum,
+	isNumeric
 } from 'utils/utils';
 
 class TxPage extends Component {
@@ -24,40 +26,96 @@ class TxPage extends Component {
 		this.txType = ''
 		this.urlIndex = ''
 		this.pageId = 1
-		this.getTxList = () => {}
+		this._getTxList = () => { }
 	}
 
 	componentWillMount() {
-		this.setInitialData(this.props.url, 0)
+		this.initPage(this.props.url)
 	}
 
 	componentDidMount() {
-		this.getTxListByCount(20)
+		this.setInitialData(this.props.url)
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const { pathname: currentPath } = this.props.url
 		const { pathname: nextPath } = nextProps.url
-		if (currentPath !== nextPath) {
-			const tx = this.props[this.getTxTypeData()['tx']] || {}
-			const { count } = tx
-			this.setInitialData(nextProps.url, count)
+		const { search: currentSearch } = this.props.url
+		const { search: nextSearch } = nextProps.url
+		if (currentPath !== nextPath || currentSearch !== nextSearch) {
+			this.setInitialData(nextProps.url)
 		}
 	}
 
-	setInitialData = (url, sort) => {
+	initPage = (url) => {
 		this.getParams(url)
-		this.getTxListByCount(sort)
-	}	
+		this.getTxList(1, 0, this.urlIndex)
+	}
+
+	setInitialData = (url) => {
+		this.getParams(url)
+		this.setQueryToList(url.search)
+	}
+
+	setQueryToList = (search) => {
+		const parsed = queryString.parse(search)
+		const { urlIndex, pageId } = this
+		const { count } = parsed
+		this.getTxList(pageId, count, urlIndex)
+	}
+
+	getTxList = (page, count, urlIndex) => {
+		const query = {
+			page: isNumeric(page) ? page : 1,
+			count: isNumeric(count) ? count : 20
+		}
+		switch (this.txType) {
+			case TX_TYPE.CONTRACT_TX:
+			case TX_TYPE.CONTRACT_INTERNAL_TX:
+			case TX_TYPE.CONTRACT_TOKEN_TX:
+				query.addr = urlIndex
+				break
+			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_TOKEN_TX:
+				query.address = urlIndex
+				break
+			case TX_TYPE.BLOCK_TX:
+				query.height = urlIndex
+				break
+			case TX_TYPE.TOKEN_TX:
+			case TX_TYPE.TOKEN_HOLDERS:
+			case TX_TYPE.CONTRACT_EVENTS:
+				query.contractAddr = urlIndex
+				break
+			case TX_TYPE.BLOCKS:
+			case TX_TYPE.ADDRESSES:
+			case TX_TYPE.TRANSACTIONS:
+			case TX_TYPE.TOKEN_TRANSFERS:
+				break
+			case TX_TYPE.TRANSACTION_EVENTS:
+			case TX_TYPE.TRANSACTION_INTERNAL_TX:
+				query.txHash = urlIndex
+				break
+
+			default:
+		}
+		this._getTxList(query)
+	}
 
 	getTxTypeData = () => {
 		return TX_TYPE_DATA[this.txType] || {}
 	}
 
+	getCount = () => {
+		const tx = this.props[this.getTxTypeData()['tx']] || {}
+		const { count } = tx
+		return count
+	}
+
 	getParams = (url) => {
 		const { pathname } = url
 		this.txType = pathname.split("/")[1] || ''
-		this.getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
+		this._getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
 			case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -85,40 +143,16 @@ class TxPage extends Component {
 	}
 
 	getTxListByCount = (count) => {
-		switch (this.txType) {
-			case TX_TYPE.CONTRACT_TX:
-			case TX_TYPE.CONTRACT_INTERNAL_TX:
-			case TX_TYPE.CONTRACT_TOKEN_TX:
-				this.getTxList({ addr: this.urlIndex, page: this.pageId, count })
-				break
-			case TX_TYPE.ADDRESS_TX:
-			case TX_TYPE.ADDRESS_TOKEN_TX:
-				this.getTxList({ address: this.urlIndex, page: this.pageId, count })
-				break
-			case TX_TYPE.BLOCK_TX:
-				this.getTxList({ height: this.urlIndex, page: this.pageId, count })
-				break
-			case TX_TYPE.TOKEN_TX:
-			case TX_TYPE.TOKEN_HOLDERS:
-			case TX_TYPE.CONTRACT_EVENTS:
-				this.getTxList({ contractAddr: this.urlIndex, page: this.pageId, count })
-				break
-			case TX_TYPE.BLOCKS:
-			case TX_TYPE.ADDRESSES:
-			case TX_TYPE.TRANSACTIONS:
-			case TX_TYPE.TOKEN_TRANSFERS:
-				this.getTxList({ page: this.pageId, count })
-				break
-			case TX_TYPE.TRANSACTION_EVENTS:
-			case TX_TYPE.TRANSACTION_INTERNAL_TX:
-				this.getTxList({ txHash: this.urlIndex, page: this.pageId, count })
-				break
-
-			default:
-		}
+		this.historyPush(1, count)
 	}
 
 	getTxListByPage = (page) => {
+		const count = this.getCount()
+		this.historyPush(page, count)
+	}
+
+	historyPush = (page, count) => {
+		let url = ''
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:
 			case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -131,17 +165,36 @@ class TxPage extends Component {
 			case TX_TYPE.TOKEN_HOLDERS:
 			case TX_TYPE.TRANSACTION_EVENTS:
 			case TX_TYPE.TRANSACTION_INTERNAL_TX:
-				this.props.history.push(`/${this.txType}/${this.urlIndex}/${page}`);
+				url = this.makeUrl(page, count, this.urlIndex)
 				break
 			case TX_TYPE.BLOCKS:
 			case TX_TYPE.ADDRESSES:
 			case TX_TYPE.TRANSACTIONS:
 			case TX_TYPE.TOKEN_TRANSFERS:
-				this.props.history.push(`/${this.txType}/${page}`);
+				url = this.makeUrl(page, count)
 				break
 
 			default:
+				return
 		}
+		this.props.history.push(url);
+	}
+
+	makeUrl = (page, count, urlIndex) => {
+		let url = `/${this.txType}`
+		if (urlIndex) {
+			url += `/${urlIndex}`
+		}
+
+		if (page) {
+			url += `/${page}`
+		}
+
+		if (count) {
+			url += `?count=${count}`
+		}
+
+		return url
 	}
 
 	render() {
@@ -165,12 +218,12 @@ class TxPage extends Component {
 				return ([
 					<table key='table' className={className}>
 						<thead>
-							<TxTableHead txType={this.txType}/>
+							<TxTableHead txType={this.txType} />
 						</thead>
 						<tbody>
 							{
 								data.map((item, index) => (
-									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex}/>
+									<TxTableBody key={index} data={item} txType={this.txType} address={this.urlIndex} />
 								))
 							}
 						</tbody>
@@ -180,11 +233,11 @@ class TxPage extends Component {
 						count={count}
 						getData={this.getTxListByCount}
 					/>,
-					(loading && 
-					<LoadingComponent
-						key='LoadingComponent'
-						style={{position: 'absolute', width: '0', left: '185px', bottom: '10px'}}
-					/>),
+					(loading &&
+						<LoadingComponent
+							key='LoadingComponent'
+							style={{ position: 'absolute', width: '0', left: '185px', bottom: '10px' }}
+						/>),
 					<Pagination
 						key='Pagination'
 						pageNum={page}

@@ -11,7 +11,6 @@ import {
   SearchInput,
 } from 'components';
 import {
-  startsWith,
   calcMaxPageNum,
   isNumeric
 } from 'utils/utils';
@@ -101,6 +100,12 @@ class SearchPage extends Component {
   getSearchTypeData = () => {
     return SEARCH_TYPE_DATA[this.searchType] || {}
   }
+  
+  getCount = () => {
+    const list = this.props[this.getSearchTypeData()['list']] || {}
+    const { count } = list
+    return count
+  }
 
   getParams = (url) => {
     const { pathname } = url
@@ -108,12 +113,6 @@ class SearchPage extends Component {
     this._getList = this.props[this.getSearchTypeData()['getList']] || (() => { })
     this._getListSearch = this.props[`${this.getSearchTypeData()['getList']}Search`] || (() => { })
     this.pageId = pathname.split("/")[2] || 1
-  }
-
-  getCount = () => {
-    const list = this.props[this.getSearchTypeData()['list']] || {}
-    const { count } = list
-    return count
   }
 
   getListByPage = (page) => {
