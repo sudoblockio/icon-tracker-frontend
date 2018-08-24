@@ -9,10 +9,10 @@ import {
 
 class TxPageTitle extends Component {
 
-	render() {
-        const { 
-            txType, 
-            urlIndex, 
+    render() {
+        const {
+            txType,
+            urlIndex,
             listSize,
             totalSize,
         } = this.props
@@ -21,19 +21,6 @@ class TxPageTitle extends Component {
             const _listSize = numberWithCommas(listSize || 0)
             const _totalSize = numberWithCommas(totalSize || 0)
             switch (txType) {
-                case TX_TYPE.BLOCKS:
-                    return (
-                        <p className="title">
-                            Blocks       
-                            <span className="right"><em>{_listSize}</em> total blocks</span>
-                        </p>
-                    )
-                case TX_TYPE.ADDRESSES:
-                    return (
-                        <p className="title">
-                            Addresses                        
-                        </p>
-                    )
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <p className="title">
@@ -82,21 +69,6 @@ class TxPageTitle extends Component {
                             <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
                         </p>
                     )
-                case TX_TYPE.TRANSACTIONS:
-                    return (
-                        <p className="title">
-                            Transactions
-                            <span className="right"><em>{_listSize}</em> total transactions</span>
-                        </p>
-                    )
-                case TX_TYPE.TOKEN_TRANSFERS:
-                    return (
-                        <p className="title token">
-                            Token Transfers
-                            <span>({IRC_VERSION[1]})</span>
-                            <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
-                        </p>
-                    )
                 case TX_TYPE.BLOCK_TX:
                     return (
                         <p className="title">
@@ -134,15 +106,45 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Internal Transactions
                             <span>for Transactions {urlIndex}</span>
-                            <span className="right">A total of<em>{_totalSize}</em> internal transactions found</span>
+                            <span className="right">A total of<em>{_listSize}</em> internal transactions found</span>
+                        </p>
+                    )
+                case TX_TYPE.BLOCKS:
+                    return (
+                        <p className="title token">
+                            Blocks
+                            <span></span>
+                            <span className="right">A total of<em>{_totalSize}</em> total blocks found<em className="gray">(Showing the last {_listSize} records only)</em></span>
+                        </p>
+                    )
+                case TX_TYPE.ADDRESSES:
+                    return (
+                        <p className="title">
+                            Addresses
+                        </p>
+                    )
+                case TX_TYPE.TRANSACTIONS:
+                    return (
+                        <p className="title token">
+                            Transactions
+                            <span></span>
+                            <span className="right">A total of<em>{_totalSize}</em> total transactions found<em className="gray">(Showing the last {_listSize} records only)</em></span>
+                        </p>
+                    )
+                case TX_TYPE.TOKEN_TRANSFERS:
+                    return (
+                        <p className="title token">
+                            Token Transfers
+                            <span>({IRC_VERSION[1]})</span>
+                            <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
                         </p>
                     )
                 default:
                     return <p></p>
             }
         }
-		return Content()
-	}
+        return Content()
+    }
 }
 
 export default TxPageTitle;
