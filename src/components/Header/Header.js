@@ -25,7 +25,7 @@ class Header extends Component {
                   <span>Token<em className="img"></em></span>
 									<ol className="sub-menu">                    
                     <li onClick={() => {this.props.history.push('/tokens')}}><span>Tokens</span></li>                    
-										<li onClick={() => {this.props.history.push('/tokentransfers')}}><span>Token Transfer</span></li>
+										<li onClick={() => {this.props.history.push('/tokentransfers')}}><span>Token Transfers</span></li>
 									</ol>
                 </li>
               </ul>
