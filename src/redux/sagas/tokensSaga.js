@@ -50,7 +50,7 @@ function* tokenListSearchFunc(action) {
     }
 
     const payload = yield call(TOKEN_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.result === '200' || 'NO Data') {
       yield put({ type: AT.tokenListSearchFulfilled, payload: payload });
     } else {
       throw new Error();

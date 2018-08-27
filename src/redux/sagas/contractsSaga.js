@@ -72,7 +72,7 @@ export function* contractListSearchFunc(action) {
     }
 
     const payload = yield call(CONTRACT_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.result === '200' || 'NO Data') {
       yield put({ type: AT.contractListSearchFulfilled, payload });
     }
     else {

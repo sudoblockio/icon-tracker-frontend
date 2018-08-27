@@ -184,7 +184,7 @@ class SearchPage extends Component {
     const { keyword, status } = this.state
     const ListData = !keyword ? list : listSearch
     const { loading, data, page, listSize, count } = ListData;
-    const noData = (!data || data.length === 0) && !status
+    const noData = (data.length === 0) && !status
     const needPageOption = !keyword && this.searchType === SEARCH_TYPE.CONTRACTS
 
     const TableContent = () => {
