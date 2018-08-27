@@ -15,11 +15,11 @@ import {
 } from 'components';
 
 class AddressInfo extends Component {
-  
+
   render() {
-    const { wallet } = this.props    
+    const { wallet } = this.props
     const { loading, data, error } = wallet
-    
+
     const Content = () => {
       if (loading) {
         return (
@@ -44,7 +44,7 @@ class AddressInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{_address} <QrCodeButton address={_address}/><CopyButton data={_address} title={'Copy Address'} isSpan/>{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td>{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
                     </tr>
                     <tr>
                       <td>Balance</td>
@@ -96,15 +96,15 @@ class TokenBalance extends Component {
 
   calcTotalTokenBalance = (tokenList) => {
     let result = "0"
-		tokenList.forEach(token => {
+    tokenList.forEach(token => {
       const prev = new BigNumber(result)
       const { totalTokenPrice } = token
       const _totalTokenPrice = isValidData(totalTokenPrice) ? totalTokenPrice : "0"
-      const next = prev.plus(_totalTokenPrice)      
+      const next = prev.plus(_totalTokenPrice)
       result = next.toString(10)
     })
     return result
-	}
+  }
 
   render() {
     const TableData = (_tokenList) => {
@@ -112,7 +112,7 @@ class TokenBalance extends Component {
         return <td>None</td>
       }
       else {
-        const { search } = this.state        
+        const { search } = this.state
         const list = _tokenList.filter(token => {
           const { contractName, contractSymbol } = token
           return searchLowerCase(search, [contractName, contractSymbol])
@@ -135,19 +135,21 @@ class TokenBalance extends Component {
                   list.length === 0 ?
                     <p className="nodata">No result found</p>
                     :
-                    <ul className="list-group">
-                      {
-                        list.map((token, index) => {
-                          const { contractName, contractSymbol, quantity, unit, totalTokenPrice } = token
-                          return (
-                            <li key={index}>
-                              <p><em>{contractName}</em><em>{totalTokenPrice ? totalTokenPrice : "-"}</em><em>USD</em></p>
-                              <p><em>{quantity} {contractSymbol}</em><em>{unit ? unit : "-"}</em><em>@</em></p>
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
+                    <div className="scroll">
+                      <ul className="list-group">
+                        {
+                          list.map((token, index) => {
+                            const { contractName, contractSymbol, quantity, unit, totalTokenPrice } = token
+                            return (
+                              <li key={index}>
+                                <p><em>{contractName}</em><em>{totalTokenPrice ? totalTokenPrice : "-"}</em><em>USD</em></p>
+                                <p><em>{quantity} {contractSymbol}</em><em>{unit ? unit : "-"}</em><em>@</em></p>
+                              </li>
+                            )
+                          })
+                        }
+                      </ul>
+                    </div>
                 }
               </div>
             </div>

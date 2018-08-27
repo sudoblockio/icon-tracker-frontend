@@ -49,6 +49,7 @@ export const SERVER_TX_TYPE = {
 
 export const IRC_VERSION = {
     "1": "IRC1",
+    "2": "IRC2",
     "3": "IRC3"
 }
 

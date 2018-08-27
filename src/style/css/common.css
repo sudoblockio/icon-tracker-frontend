@@ -344,14 +344,16 @@ html, body{height: 100%;}
 .table-typeB .qr{padding: 10px 40px;}
 .table-typeB .qr .img{vertical-align: top;}
 
-.table-typeB .scroll{height: 100px; overflow-y: auto; }
+.table-typeB .scroll{height: 100px; overflow-y: auto; overflow-x: hidden}
 .table-typeB .scroll span{color: #4CAF50;     pointer-events: none;}
-.table-typeB .scroll p{line-height: 24px; word-break: break-all;     white-space: pre;}
+.table-typeB .scroll p{line-height: 24px; word-break: break-all;     white-space: pre; width: 850px;}
 .table-typeB .convert{padding: 14px 30px;}
 .table-typeB .convert button{margin-top: 10px;}
 .table-typeB .fail{color:#e6001b;     pointer-events: none;}
 .table-typeB .fail em{color:#e6001b; }
 .table-typeB .fail span{color:#e6001b; }
+
+.table-typeB .combo-layer .scroll {max-height:340px;height: auto; }
 
 .table-typeB .combo-group{position: relative; display: none;}
 .table-typeB .combo-layer{width: 464px;box-shadow: 0 4px 15px 0 rgba(38, 38, 38, 0.2); background: #ffffff; border: solid 2px #262626; position: absolute; z-index: 1; top: -6px; margin-left: -20px; border-radius: 6px; box-shadow: 0 20px 30px 0 rgba(0, 25, 77, 0.07);}
