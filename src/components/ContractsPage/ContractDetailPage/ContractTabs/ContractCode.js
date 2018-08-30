@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
     makeDownloadLink,
-    tokenText
+    tokenText,
+    isValidData
 } from 'utils/utils'
 import {
     CopyButton,
@@ -13,57 +14,56 @@ class ContractCode extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            downloadLink: ''
-        }        
+            activeLink: '',
+            updatedLink: '',
+        }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.getDownloadLink()
     }
 
     getDownloadLink = async () => {
         const { contract } = this.props
         const { data } = contract
-        const { address, contractVersion } = data
+        const { address, contractVersion, newVersion } = data
         if (!!address) {
-            const downloadLink = await makeDownloadLink(address, contractVersion)
-            this.setState({ downloadLink })    
+            const activeLink = isValidData(contractVersion) ? await makeDownloadLink(address, contractVersion) : ''
+            const updatedLink = isValidData(newVersion) ? await makeDownloadLink(address, newVersion) : ''
+            console.log(contractVersion, newVersion, activeLink, updatedLink)
+            this.setState({ activeLink, updatedLink })
         }
     }
 
     render() {
-        const { downloadLink } = this.state
+        const { activeLink, updatedLink } = this.state
         const { contract, contractAbi } = this.props
         const { data } = contract
-        const { address, tokenName, symbol, compiler, contractVersion } = data
+        const { address, tokenName, symbol, contractVersion, newVersion } = data
         const { loading, data: abiData, error } = contractAbi
+        console.log(activeLink)
         return (
             <div className="contents">
                 <table className="table-typeL">
                     <thead>
                         <tr>
                             <th>Contract Name</th>
-                            <th>Compiler Version</th>
-                            <th>Contract Source Code</th>
+                            <th>Active Contract Source Code</th>
+                            <th>Updated Contract Source Code</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className="">
                             <td>{tokenText(tokenName, symbol)}</td>
-                            <td>{compiler || "-"}</td>
-                            <td>
-                                <span>
-                                    <i className="img"></i>
-                                    <a href={downloadLink} download={`${address}_${contractVersion}.zip`}>Download</a>
-                                </span>
-                            </td>
+                            <DownloadLink link={activeLink} name={`${address}_${contractVersion}.zip`} />
+                            <DownloadLink link={updatedLink} name={`${address}_${newVersion}.zip`} />
                         </tr>
                     </tbody>
                 </table>
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
-                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} disabled={!!error}/>
+                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} disabled={!!error} />
                     </div>
                     {
                         loading ?
@@ -79,6 +79,27 @@ class ContractCode extends Component {
             </div>
         )
     }
+}
+
+const DownloadLink = ({ link, name }) => {
+    const Content = () => {
+        if (link) {
+            return (
+                <td>
+                    <span>
+                        <i className="img"></i>
+                        <a href={link} download={name}>Download</a>
+                    </span>
+                </td>
+            )
+        }
+        else {
+            return (
+                <td>-</td>
+            )
+        }
+    }
+    return Content()
 }
 
 export default withRouter(ContractCode);
