@@ -207,6 +207,7 @@ export function getArrayState(step, state, action, dataType) {
         [dataType]: {
           ...state[dataType],
           loading: false,
+          data: [],
           error: error
         }
       }
@@ -259,6 +260,7 @@ export function getObjectState(step, state, action, dataType) {
         [dataType]: {
           ...state[dataType],
           loading: false,
+          data: {},
           error: error
         }
       }

@@ -81,7 +81,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} />
+											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom/>
 										</tr>
 										<tr>
 											<td>To</td>
@@ -209,12 +209,12 @@ const TokenTransferCell = ({ tokenTxList }) => {
 	)
 }
 
-const AddressRow = ({ address, txType, internalTxList, targetContractAddr }) => {
+const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} spanNoEllipsis tdClassName="trans"
+			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} spanNoEllipsis tdClassName="trans" isFrom={isFrom}
 				InternalDiv={
 					isInternalTxList &&
 					<div>
