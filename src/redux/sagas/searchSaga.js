@@ -18,6 +18,7 @@ import {
 function* searchFunc(action) {
   try {
     const { payload } = action
+    const commaRemoved = payload.replace(/,/g, "")
     if (!payload) {
       throw new Error();
     }
@@ -59,8 +60,8 @@ function* searchFunc(action) {
         throw new Error();
       }
     }
-    else if (isNumeric(payload)) {
-      yield put(routerActions.push(`/block/${payload}`));
+    else if (isNumeric(commaRemoved)) {    
+      yield put(routerActions.push(`/block/${commaRemoved}`));
     }
     else {
       throw new Error();
