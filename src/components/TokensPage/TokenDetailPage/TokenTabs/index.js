@@ -38,7 +38,7 @@ class TokenTabs extends Component {
                             return (
                                 <TokenHolders
                                     txData={tokenHolders}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${contract}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`) }}
                                     txType={TX_TYPE.TOKEN_HOLDERS}
                                 />
                             )
