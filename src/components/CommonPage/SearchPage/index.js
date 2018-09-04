@@ -31,7 +31,7 @@ class SearchPage extends Component {
     this.state = {
       keyword: '',
       status: '',
-      count: 20,
+      count: 25,
     }
   }
 
@@ -81,7 +81,7 @@ class SearchPage extends Component {
   getList = (page, count, status) => {
     const query = {
       page: isNumeric(page) ? page : 1,
-      count: isNumeric(count) ? count : 20
+      count: isNumeric(count) ? count : 25
     }
     if (!!status && !!CONTRACT_STATUS_NUM[status]) {
       query.status = CONTRACT_STATUS_NUM[status]

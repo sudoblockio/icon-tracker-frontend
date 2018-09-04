@@ -67,7 +67,7 @@ class TxPage extends Component {
 	getTxList = (page, count, urlIndex) => {
 		const query = {
 			page: isNumeric(page) ? page : 1,
-			count: isNumeric(count) ? count : 20
+			count: isNumeric(count) ? count : 25
 		}
 		switch (this.txType) {
 			case TX_TYPE.CONTRACT_TX:

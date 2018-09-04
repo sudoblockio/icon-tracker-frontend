@@ -27,7 +27,7 @@ class SearchTableDesc extends Component {
                 case SEARCH_TYPE.TOKENS:
                     return (
                         <p className="txt cont">
-                            <span>iCON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
+                            <span>ICON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
                             <span>A total of<em>{listSize} ICX Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
                         </p>
                     )

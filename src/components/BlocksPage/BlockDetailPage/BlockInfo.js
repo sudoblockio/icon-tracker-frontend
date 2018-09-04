@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 import {
   numberWithCommas,
   convertNumberToText,
-  dateToUTC
+  dateToUTC,
+  utcDateInfo,
 } from 'utils/utils'
 import {
   TX_TYPE
@@ -77,7 +78,12 @@ class BlockInfo extends Component {
                     </tr>
                     <tr>
                       <td>Time Stamp</td>
-                      <td>{height === 0 ? '-' : dateToUTC(createDate, true)}</td>
+                      {
+                        isFirst ?
+                        <td>-</td>
+                        :
+                        <td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
+                      }
                     </tr>
                     {/*<tr>
                       <td>C-rep</td>

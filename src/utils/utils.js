@@ -217,7 +217,7 @@ export function getArrayState(step, state, action, dataType) {
         [dataType]: {
           loading: false,
           page: 1,
-          count: 20,
+          count: 25,
           data: [],
           listSize: 0,
           totalSize: 0,

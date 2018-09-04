@@ -8,7 +8,7 @@ export const REDUX_STEP = {
 export const INITIAL_ARRAY_STATE = {
     loading: false,
     page: 1,
-    count: 20,
+    count: 25,
     data: [],
     listSize: 0,
     totalSize: 0,
@@ -53,7 +53,7 @@ export const IRC_VERSION = {
     "3": "IRC3"
 }
 
-export const SORT_TYPE = [10, 20, 40, 80, 160]
+export const SORT_TYPE = [10, 25, 50, 100]
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
 export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
