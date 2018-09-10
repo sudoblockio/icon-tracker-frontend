@@ -1,3 +1,4 @@
 {
-    "REACT_APP_API_URL":"http://trackerlocaldev.icon.foundation"
+    "TRACKER_API_URL":"http://trackerlocaldev.icon.foundation",
+    "WALLET_API_URL":"http://http://13.209.103.183:9000"
 }
