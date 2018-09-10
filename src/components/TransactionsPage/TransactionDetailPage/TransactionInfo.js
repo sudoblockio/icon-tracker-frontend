@@ -9,6 +9,7 @@ import {
 	AddressCell
 } from 'components'
 import {
+	makeDownloadLink,
 	convertNumberToText,
 	numberWithCommas,
 	isValidData,
@@ -19,8 +20,38 @@ import {
 } from 'utils/utils'
 
 class TransactionInfo extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+			download: undefined,
+        }
+	}
+	
+	componentWillReceiveProps(nextProps) {
+		const { download } = this.state
+		if (download) {
+			return
+		}
+
+		this.getDownloadLink(nextProps)
+	}
+
+    getDownloadLink = async (props) => {
+		const { transaction } = props
+        const { data } = transaction
+        const { targetContractAddr, contractVersion } = data
+
+		if (isValidData(targetContractAddr) && isValidData(contractVersion)) {
+            const link = await makeDownloadLink(targetContractAddr, contractVersion)
+			const name = `${targetContractAddr}_${contractVersion}.zip`
+			this.setState({ download: {
+				link, name
+			}})
+        }
+    }
 
 	render() {
+		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
 		const Contents = () => {
@@ -85,7 +116,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} />
+											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
@@ -133,7 +164,7 @@ class DataCell extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			viewUtf8: false
+			viewUtf8: true
 		}
 	}
 
@@ -209,12 +240,19 @@ const TokenTransferCell = ({ tokenTxList }) => {
 	)
 }
 
-const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom }) => {
+const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom, download }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<AddressCell targetAddr={address} txType={txType} targetContractAddr={targetContractAddr} spanNoEllipsis tdClassName="trans" isFrom={isFrom}
+			<AddressCell 
+				targetAddr={address} 
+				txType={txType} 
+				targetContractAddr={targetContractAddr} 
+				spanNoEllipsis 
+				tdClassName="trans" 
+				isFrom={isFrom} 
+				download={download}
 				InternalDiv={
 					isInternalTxList &&
 					<div>

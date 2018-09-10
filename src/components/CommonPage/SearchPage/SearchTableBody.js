@@ -14,7 +14,7 @@ import {
 } from 'utils/const'
 
 const AmountCell = ({ amount, decimal, symbol }) => {
-	return <td><span>{convertNumberToText(amount, decimal)}</span><em>{symbol}</em></td>
+	return <td><span>{convertNumberToText(amount || "0", decimal || 4)}</span><em>{symbol}</em></td>
 }
 
 class SearchTableBody extends Component {
@@ -28,7 +28,7 @@ class SearchTableBody extends Component {
 							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
 							<td>{data.contractName || '-'}</td>
 							<td>{data.compiler || '-'}</td>
-							<AmountCell type="icx" amount={data.balance} decimal={4} symbol="ICX" />
+							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
 							<td>{numberWithCommas(data.txCount)}</td>
 							<td>{CONTRACT_STATUS[data.status]}</td>
 							<td>{onlyDate(data.verifiedDate)}</td>

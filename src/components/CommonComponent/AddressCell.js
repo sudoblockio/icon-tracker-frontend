@@ -23,7 +23,7 @@ function getBooleans(props) {
 		_isContractAddress,
 		_isOtherAddress,
 		_isOtherContract,
-		_isListCell
+		_isListCell,
 	}
 }
 
@@ -94,7 +94,7 @@ function getInnerElements(props, booleans) {
 
 	if (!_isListCell) {
 		elements.push(
-			<CopyButton key="copy" data={props.targetAddr} title={'Copy Address'} isSpan disabled={_isScoreTx} />
+			<CopyButton key="copy" data={props.targetAddr} title={'Copy Address'} isSpan disabled={_isScoreTx} download={props.download} />
 		)
 	}
 
