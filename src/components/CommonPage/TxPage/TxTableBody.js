@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {
 	calcFromNow,
-	convertNumberToText,
 	numberWithCommas,
 	dateToUTC,
 	isValidData,
 	tokenText,
-	is0xHash
+	is0xHash,
 } from 'utils/utils'
 import {
 	TransactionLink,
 	BlockLink,
 	AddressCell,
-	AddressSet
+	AddressSet,
+	AmountCell
 } from 'components'
 import {
 	TX_TYPE,
@@ -57,10 +57,6 @@ const DateCell = ({ date, isDate }) => {
 		}
 	}
 	return <td className={className}>{dateText}</td>
-}
-
-const AmountCell = ({ amount, decimal, symbol }) => {
-	return <td><span>{convertNumberToText(amount || "0", decimal || 4)}</span><em>{symbol}</em></td>
 }
 
 const BlockCell = ({ height }) => {

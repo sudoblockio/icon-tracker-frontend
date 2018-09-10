@@ -56,6 +56,24 @@ export function convertNumberToText(num, round) {
   return numberWithCommas(numStr)
 }
 
+export function convertToExponentialText(num, round) {
+  if (!isValidData(num)) {
+    return 0
+  }
+
+  if (typeof num === 'string') {
+    num = num.replace(/,/g, "");
+  }
+
+  num = Number(num)
+  num = String(num.toExponential(round));
+  const mantissa = num.substr(0, num.lastIndexOf('e'))
+  const exponent = num.substr(num.lastIndexOf('e') + 2)
+
+  return `${mantissa} * 10 ^ ${exponent}`
+}
+
+
 export function onlyDate(date) {
   if (!isValidData(date)) return "-"
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1

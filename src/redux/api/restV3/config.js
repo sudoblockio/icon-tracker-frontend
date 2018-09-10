@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { convertToExponentialText } from 'utils/utils'
+
+convertToExponentialText(1230103123.12314145, 4)
 
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl()

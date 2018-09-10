@@ -3,19 +3,16 @@ import {
 	convertNumberToText,
 	numberWithCommas,
 	tokenText,
-	onlyDate
+	onlyDate,
 } from 'utils/utils'
 import {
 	AddressLink,
+	AmountCell
 } from 'components'
 import {
 	CONTRACT_STATUS,
 	SEARCH_TYPE
 } from 'utils/const'
-
-const AmountCell = ({ amount, decimal, symbol }) => {
-	return <td><span>{convertNumberToText(amount || "0", decimal || 4)}</span><em>{symbol}</em></td>
-}
 
 class SearchTableBody extends Component {
 	render() {
