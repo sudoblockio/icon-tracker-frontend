@@ -63,10 +63,16 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "REACT_APP_ENV=development node scripts/start.js",
-    "build": "REACT_APP_ENV=production node scripts/build.js",
-    "start:production": "REACT_APP_ENV=production node scripts/start.js",
-    "build:development": "REACT_APP_ENV=development node scripts/build.js",
+    "start": "node scripts/start.js",
+    "start:mainnet": "REACT_APP_ENV=mainnet node scripts/start.js",
+    "start:testnet": "REACT_APP_ENV=testnet node scripts/start.js",
+    "start:testnet1": "REACT_APP_ENV=testnet1 node scripts/start.js",
+    "start:custom": "REACT_APP_ENV=custom node scripts/start.js",
+    "build": "node scripts/build.js",
+    "build:mainnet": "REACT_APP_ENV=mainnet node scripts/build.js",
+    "build:testnet": "REACT_APP_ENV=testnet node scripts/build.js",
+    "build:testnet1": "REACT_APP_ENV=testnet1 node scripts/build.js",
+    "build:custom": "REACT_APP_ENV=custom node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {

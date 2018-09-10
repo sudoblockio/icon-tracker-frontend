@@ -330,7 +330,6 @@ html, body{height: 100%;}
 /*.table-typeB .copy.disabled:hover{background:#fff ; }*/
 
 .table-typeB .copy.on{background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
-
 [class *="table-type"] a.download:hover{ text-decoration:default; opacity: 1; }
 .table-typeB .copy.download:active{background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
 
