@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import {
-    TransactionLink
+    TransactionLink,
+    AddressLink
 } from 'components'
+import {
+    isValidData
+} from 'utils/utils'
 import {
     CONTRACT_STATUS
 } from 'utils/const'
@@ -17,18 +21,17 @@ class ContractDetail extends Component {
             state,
             txHash,
             verifiedTx,
-            vefification,
-            submission,
+            verifier,
+            submitter,
             comment
         } = data
 
         const _state = state ? CONTRACT_STATUS[state] : "-"
-        const _vefification = vefification || "-"
-        const _submission = submission || "-"
+        const _txHash = isValidData(txHash) ? <TransactionLink to={txHash} label={<p className="txt hash">{txHash}</p>} onClick={closeDetail} /> : "-"
+        const _verifiedTx = isValidData(verifiedTx) ? <TransactionLink to={verifiedTx} label={<p className="txt hash">{verifiedTx}</p>} onClick={closeDetail} /> : "-"
+        const _verifier = isValidData(verifier) ? <AddressLink to={verifier} label={<p className="txt hash">{verifier}</p>} onClick={closeDetail} /> : "-"
+        const _submitter = isValidData(submitter) ? <AddressLink to={submitter} label={<p className="txt hash">{submitter}</p>} onClick={closeDetail} /> : "-"
         const _comment= comment || "-"
-
-        const TxHash = txHash ? <TransactionLink to={txHash} label={<p className="txt hash">{txHash}</p>} onClick={closeDetail} /> : "-"
-        const VerifiedTx = verifiedTx ? <TransactionLink to={verifiedTx} label={<p className="txt hash">{verifiedTx}</p>} onClick={closeDetail} /> : "-"
 
         return ([
             <h1 key="h1" className="title">Contract detail</h1>,
@@ -36,13 +39,13 @@ class ContractDetail extends Component {
                 <p className="label">Status</p>
                 <p className="txt">{_state}</p>
                 <p className="label">TxHash</p>
-                {TxHash}
+                {_txHash}
                 <p className="label">Verified TxHash</p>
-                {VerifiedTx}                
+                {_verifiedTx}                
                 <p className="label">Verifier</p>
-                <p className="txt">{_vefification}</p>
+                {_verifier}
                 <p className="label">Submitter</p>
-                <p className="txt">{_submission}</p>
+                {_submitter}
                 <p className="label">Comment</p>
                 <p className="txt">{_comment}</p>
             </div>

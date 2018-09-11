@@ -1,7 +1,4 @@
 import axios from 'axios'
-import { convertToExponentialText } from 'utils/utils'
-
-convertToExponentialText(1230103123.12314145, 4)
 
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl()
@@ -33,7 +30,7 @@ export async function getTrackerApiUrl() {
       case 'mainnet':
         return 'https://tracker.icon.foundation'
       case 'testnet':
-        return 'http://trackerdev.icon.foundation'
+        return 'https://trackerdev.icon.foundation'
       case 'testnet1':
         return 'https://bicon.tracker.solidwallet.io'
       case 'custom':
