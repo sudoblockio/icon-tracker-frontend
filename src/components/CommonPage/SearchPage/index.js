@@ -15,7 +15,6 @@ import {
   isNumeric
 } from 'utils/utils';
 import {
-  SEARCH_TYPE,
   SEARCH_TYPE_DATA,
   CONTRACT_STATUS_NUM
 } from 'utils/const'
@@ -86,15 +85,8 @@ class SearchPage extends Component {
     if (!!status && !!CONTRACT_STATUS_NUM[status]) {
       query.status = CONTRACT_STATUS_NUM[status]
     }
-    switch (this.searchType) {
-      case SEARCH_TYPE.CONTRACTS:
-        this._getList(query)
-        break
-      case SEARCH_TYPE.TOKENS:
-        this._getList({})
-        break
-      default:
-    }
+
+    this._getList(query)
   }
 
   getSearchTypeData = () => {
@@ -185,7 +177,7 @@ class SearchPage extends Component {
     const ListData = !keyword ? list : listSearch
     const { loading, data, page, listSize, count } = ListData;
     const noData = (data.length === 0) && !status
-    const needPageOption = !keyword && this.searchType === SEARCH_TYPE.CONTRACTS
+    const needPageOption = !keyword
 
     const TableContent = () => {
       if (noData) {

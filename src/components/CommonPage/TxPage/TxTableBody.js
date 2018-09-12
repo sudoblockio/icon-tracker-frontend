@@ -38,7 +38,7 @@ const TxHashCell = ({ isError, txHash }) => {
 }
 
 const TokenCell = ({ name, address }) => {
-	return <td>{tokenText(name, undefined, address, 'ellipsis')}</td>
+	return <td><span className="ellipsis">{tokenText(name, undefined, address, 'ellipsis')}</span></td>
 }
 
 const DateCell = ({ date, isDate }) => {

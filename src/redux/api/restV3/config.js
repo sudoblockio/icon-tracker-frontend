@@ -4,19 +4,13 @@ export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl()
   return axios.create({
     baseURL: apiUrl,
-    headers: {
-      'Content-Type': 'application/json',
-    }
   })
 }
 
 export async function walletApiInstance() {
   const apiUrl = await getWalletApiUrl()
   return axios.create({
-    baseURL: apiUrl,
-    headers: {
-      'Content-Type': 'application/json',
-    }
+    baseURL: apiUrl
   })
 }
 

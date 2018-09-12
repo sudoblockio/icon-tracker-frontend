@@ -7,7 +7,7 @@ import {
 const AmountCell = ({ amount, decimal, symbol }) => {
 	amount = convertNumberToText(amount || "0", decimal || 4)
 	amount = amount.length < 20 ? amount : convertToExponentialText(amount, decimal || 4)
-	return <td><span>{amount}</span><em>{symbol}</em></td>
+	return <td><span>{amount}</span><em className={symbol !== "ICX" ? "ellipsis" : ""}>{symbol}</em></td>
 }
 
 export default AmountCell

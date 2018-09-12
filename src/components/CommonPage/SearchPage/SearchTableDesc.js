@@ -28,7 +28,7 @@ class SearchTableDesc extends Component {
                     return (
                         <p className="txt cont">
                             <span>ICON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
-                            <span>A total of<em>{listSize} ICX Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
+                            <span>A total of<em>{listSize} IRC2 Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
                         </p>
                     )
                 default:

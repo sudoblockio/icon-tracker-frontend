@@ -100,7 +100,7 @@ class TxTableHead extends Component {
                             <th>From</th>
                             <th className="table-sign"></th>
                             <th>To</th>
-                            <th>Value</th>
+                            <th>Quantity</th>
                             <th>Token</th>
                             <th>TxFee</th>
                         </tr>
