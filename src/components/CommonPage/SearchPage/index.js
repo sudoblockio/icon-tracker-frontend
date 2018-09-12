@@ -192,7 +192,7 @@ class SearchPage extends Component {
             <tbody>
               {
                 data.map((item, index) => (
-                  <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} />
+                  <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} count={count} page={page}/>
                 ))
               }
             </tbody>

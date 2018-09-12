@@ -32,16 +32,16 @@ class SearchTableBody extends Component {
 						</tr>
 					)
 				case SEARCH_TYPE.TOKENS:
-					const { index } = this.props
-					const { name, symbol, price, changeVal, volume, marketCap, contractAddr } = data
-					const { usd, icx, btc, eth } = price || {}
-					const _changeVal = changeVal || 0
+					const { index, count, page } = this.props
+					const { usd, icx, btc, eth } = data.price || {}
+					const _changeVal = data.changeVal || 0
 					const className = _changeVal > 0 ? 'red' : _changeVal < 0 ? 'blue' : ''
 					const sign = _changeVal > 0 ? '+' : _changeVal < 0 ? '-' : ''
+					const ranking = count * (page - 1) + index + 1
 					return (
 						<tr>
-							<td>{index + 1}</td>
-							<td>{tokenText(name, symbol, contractAddr)}</td>
+							<td>{ranking}</td>
+							<td>{tokenText(data.name, data.symbol, data.contractAddr)}</td>
 							<td>
 								<p>{convertNumberToText(usd) || '-'}<em>USD</em></p>
 								<p>{convertNumberToText(icx) || '-'}<em>ICX</em></p>
@@ -49,8 +49,8 @@ class SearchTableBody extends Component {
 								<p>{convertNumberToText(eth) || '-'}<em>ETH</em></p>
 							</td>
 							<td className={className}><span>{sign}{_changeVal || '-'}</span> %</td>
-							<td>{convertNumberToText(volume) || '-'}<em>USD</em></td>
-							<td>{convertNumberToText(marketCap) || '-'}<em>USD</em></td>
+							<td>{convertNumberToText(data.volume) || '-'}<em>USD</em></td>
+							<td>{convertNumberToText(data.marketCap) || '-'}<em>USD</em></td>
 						</tr>
 					)
 				default:
