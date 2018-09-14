@@ -163,7 +163,7 @@ export const TX_TYPE_DATA = {
     [TX_TYPE.TOKEN_TX]: {
 		tx: 'tokenTransfers',
 		getTxList: 'tokenTransfersList',
-		className: 'table-typeF',
+		className: 'table-typeF token',
         noBoxText: 'No Transaction',
 	},
 	[TX_TYPE.ADDRESSES]: {
