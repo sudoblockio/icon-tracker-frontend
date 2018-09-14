@@ -26,7 +26,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Transactions
                             <span>for Contract {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> transactions found</span>
+                            <span className="right">A total of<em>{_listSize}</em> transaction(s) found</span>
                         </p>
                     )
                 case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -34,7 +34,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Internal Transactions
                             <span>for Contract {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> internal transactions found</span>
+                            <span className="right">A total of<em>{_listSize}</em> internal transaction(s) found</span>
                         </p>
                     )
                 case TX_TYPE.CONTRACT_TOKEN_TX:
@@ -42,7 +42,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Token Transfers
                             <span>for Contract {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
+                            <span className="right">A total of<em>{_listSize}</em> token transfer(s) found</span>
                         </p>
                     )
                 case TX_TYPE.CONTRACT_EVENTS:
@@ -50,7 +50,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Events
                             <span>for Contract {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> events found</span>
+                            <span className="right">A total of<em>{_listSize}</em> event(s) found</span>
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TX:
@@ -58,7 +58,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Transactions
                             <span>for Address {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> transactions found</span>
+                            <span className="right">A total of<em>{_listSize}</em> transaction(s) found</span>
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TOKEN_TX:
@@ -66,7 +66,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Token Transfers
                             <span>for Address {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
+                            <span className="right">A total of<em>{_listSize}</em> token transfer(s) found</span>
                         </p>
                     )
                 case TX_TYPE.BLOCK_TX:
@@ -74,7 +74,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Transactions
                             <span>for Block Height {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> transactions found</span>
+                            <span className="right">A total of<em>{_listSize}</em> transaction(s) found</span>
                         </p>
                     )
                 case TX_TYPE.TOKEN_TX:
@@ -82,7 +82,7 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Token Transfers
                             <span>for Token {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> token transfers found</span>
+                            <span className="right">A total of<em>{_listSize}</em> token transfer(s) found</span>
                         </p>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:
@@ -90,23 +90,23 @@ class TxPageTitle extends Component {
                         <p className="title">
                             Token Holders
                             <span>for Token {urlIndex}</span>
-                            <span className="right">A total of<em>{_totalSize}</em> holders found<em className="gray">(Showing the top {_listSize} holders only)</em></span>
+                            <span className="right">A total of<em>{_totalSize}</em> holder(s) found<em className="gray">(Showing the top {_listSize} holder(s) only)</em></span>
                         </p>
                     )
                 case TX_TYPE.TRANSACTION_EVENTS:
                     return (
                         <p className="title">
                             Events
-                            <span>for Transactions {urlIndex}</span>
-                            <span className="right">A total of<em>{_totalSize}</em> events found</span>
+                            <span>for Transaction {urlIndex}</span>
+                            <span className="right">A total of<em>{_totalSize}</em> event(s) found</span>
                         </p>
                     )
                 case TX_TYPE.TRANSACTION_INTERNAL_TX:
                     return (
                         <p className="title">
                             Internal Transactions
-                            <span>for Transactions {urlIndex}</span>
-                            <span className="right">A total of<em>{_listSize}</em> internal transactions found</span>
+                            <span>for Transaction {urlIndex}</span>
+                            <span className="right">A total of<em>{_listSize}</em> internal transaction(s) found</span>
                         </p>
                     )
                 case TX_TYPE.BLOCKS:
@@ -114,7 +114,7 @@ class TxPageTitle extends Component {
                         <p className="title token">
                             Blocks
                             <span></span>
-                            <span className="right">A total of<em>{_totalSize}</em> total blocks found<em className="gray">(Showing the last {_listSize} records only)</em></span>
+                            <span className="right">A total of<em>{_totalSize}</em> total block(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em></span>
                         </p>
                     )
                 case TX_TYPE.ADDRESSES:
@@ -128,7 +128,7 @@ class TxPageTitle extends Component {
                         <p className="title token">
                             Transactions
                             <span></span>
-                            <span className="right">A total of<em>{_totalSize}</em> total transactions found<em className="gray">(Showing the last {_listSize} records only)</em></span>
+                            <span className="right">A total of<em>{_totalSize}</em> total transaction(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em></span>
                         </p>
                     )
                 case TX_TYPE.TOKEN_TRANSFERS:
@@ -136,7 +136,7 @@ class TxPageTitle extends Component {
                         <p className="title token">
                             Token Transfers
                             <span>({IRC_VERSION[1]})</span>
-                            <span className="right">A total of<em>{_totalSize}</em> token transfers found<em className="gray">(Showing the last {_listSize} records only)</em></span>
+                            <span className="right">A total of<em>{_totalSize}</em> token transfer(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em></span>
                         </p>
                     )
                 default:

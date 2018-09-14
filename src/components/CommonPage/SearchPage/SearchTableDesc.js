@@ -21,14 +21,14 @@ class SearchTableDesc extends Component {
                     return (
                         <p className="txt cont">
                             <span>With verified source codes only</span>
-                            <span>A total of<em>{_listSize}</em> verified contract source codes found</span>
+                            <span>A total of<em>{_listSize}</em> verified contract source code(s) found</span>
                         </p>
                     )
                 case SEARCH_TYPE.TOKENS:
                     return (
                         <p className="txt cont">
                             <span>ICON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
-                            <span>A total of<em>{listSize} IRC2 Token</em> Contracts found<em>(Sorted by MarketCap value in DESC Order)</em></span>
+                            <span>A total of<em>{listSize} IRC2 Token</em> Contract(s) found<em>(Sorted by MarketCap value in DESC Order)</em></span>
                         </p>
                     )
                 default:

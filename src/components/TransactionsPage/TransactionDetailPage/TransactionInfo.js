@@ -104,7 +104,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Block Height</td>
-											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${numberWithCommas(confirmation)} Confirmations)`}</em></td>
+											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${numberWithCommas(confirmation)} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>

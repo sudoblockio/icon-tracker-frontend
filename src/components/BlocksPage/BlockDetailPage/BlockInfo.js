@@ -91,7 +91,7 @@ class BlockInfo extends Component {
                     </tr>*/}
                     <tr>
                       <td>Transactions</td>
-                      <td><span onClick={this.goAllTx}>{numberWithCommas(txCount)} Transactions</span> in this block</td>
+                      <td><span onClick={this.goAllTx}>{numberWithCommas(txCount)} Transaction(s)</span> in this block</td>
                     </tr>
                     <tr>
                       <td>Hash</td>

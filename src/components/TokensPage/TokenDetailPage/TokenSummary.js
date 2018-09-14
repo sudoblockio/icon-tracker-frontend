@@ -47,7 +47,7 @@ class TokenSummary extends Component {
                                         </tr>
                                         <tr>
                                             <td>Holders</td>
-                                            <td>{numberWithCommas(holders)} addresses</td>
+                                            <td>{numberWithCommas(holders)} Address(es)</td>
                                             <td>Transfers</td>
                                             <td>{numberWithCommas(transfers)}</td>
                                         </tr>

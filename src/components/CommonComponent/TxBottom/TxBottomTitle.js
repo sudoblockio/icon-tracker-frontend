@@ -32,8 +32,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -41,8 +41,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} internal transactions</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} internal transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -50,8 +50,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} token transfers</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} token transfer(s)</em>
                             </span>
                         </p>
                     )
@@ -59,8 +59,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> events from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} events</em>
+                                Latest<em>{listSizeUnder10}</em> event(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} event(s)</em>
                             </span>
                         </p>
                     )
@@ -68,8 +68,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -77,8 +77,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} token transfers</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} token transfer(s)</em>
                             </span>
                         </p>
                     )
@@ -94,8 +94,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} transactions</em>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -103,22 +103,22 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                A Total of<em className="mint" onClick={goAllTx}>{_listSize} token transfers</em> found
+                                A Total of<em className="mint" onClick={goAllTx}>{_listSize} token transfer(s)</em> found
                             </span>
                         </p>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:
                     return (
                         <p className="txt">
-                            <span>Top<em className="mint" onClick={goAllTx}>{_listSize} Holders</em><em className="gray">(from a total of {_totalSize} holders)</em></span>
+                            <span>Top<em className="mint" onClick={goAllTx}>{_listSize} Holder(s)</em><em className="gray">(from a total of {_totalSize} holder(s))</em></span>
                         </p>
                     )
                 case TX_TYPE.TRANSACTION_EVENTS:
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> events from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} events</em>
+                                Latest<em>{listSizeUnder10}</em> event(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} event(s)</em>
                             </span>
                         </p>
                     )
@@ -131,7 +131,7 @@ class TxPageTitle extends Component {
                                 <AddressLink to={fromAddr} label={<em className="mint ellipsis">{fromAddr}</em>} /> To
                                 <AddressLink to={toAddr} label={<em className="mint ellipsis">{toAddr}</em>}/>
                                 </span>
-                            } produced {_listSize} contract internal transactions
+                            } produced {_listSize} contract internal transaction(s)
                         </p>
                     )
                 default:
