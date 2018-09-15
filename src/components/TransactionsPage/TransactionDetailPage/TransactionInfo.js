@@ -164,40 +164,42 @@ class DataCell extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			viewUtf8: true
+			viewHex: false
 		}
 	}
 
 	handleClick = () => {
 		const { dataType } = this.props
 		if (dataType === 'message') {
-			this.setState({ viewUtf8: !this.state.viewUtf8 })
+			this.setState({ viewHex: !this.state.viewHex })
 		}
 	}
 
 	getButtonTitle = () => {
-		const { viewUtf8 } = this.state
-		if (viewUtf8) {
+		const { viewHex } = this.state
+		if (viewHex) {
+			return 'Convert to UTF-8'
+		}
+		else {
 			return 'Convert to HEX'
 		}
 
-		return 'Convert to UTF-8'
 	}
 
 	getDataString = () => {
-		const { viewUtf8 } = this.state
+		const { viewHex } = this.state
 		const { dataType, dataString } = this.props
 		try {
 			if (dataType !== 'message') {
 				return beautifyJson(dataString, '\t')
 			}
 
-			const _removed = removeQuotes(dataString)
-			if (viewUtf8) {
-				return web3Utils.hexToUtf8(_removed)
+			const removed = removeQuotes(dataString)
+			if (viewHex) {				
+				return web3Utils.isHex(removed) ? removed : web3Utils.utf8ToHex(removed)
 			}
 			else {
-				return _removed
+				return web3Utils.isHex(removed) ? web3Utils.hexToUtf8(removed) : removed
 			}
 		}
 		catch (e) {
