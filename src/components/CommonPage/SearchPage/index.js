@@ -64,26 +64,43 @@ class SearchPage extends Component {
 
   setQueryToList = (search) => {
     const parsed = queryString.parse(search)
-    const { keyword } = parsed
-    if (keyword) {
-      this.setState({ keyword }, () => {
-        this._getListSearch({ keyword, page: 1, count: 100 })
-      })
+    // const { keyword } = parsed
+    // if (keyword) {
+    //   this.setState({ keyword }, () => {
+    //     this._getListSearch({ keyword, page: 1, count: 100 })
+    //   })
+    // }
+    // else {
+    //   const { pageId } = this
+    //   const { count, status } = parsed
+    //   this.getList(pageId, count, status)
+    // }
+
+    const { pageId } = this
+    const { keyword, count, status } = parsed
+    this.getList(pageId, count, status, keyword)
+
+    if (status) {
+      this.setState({ status })
     }
-    else {
-      const { pageId } = this
-      const { count, status } = parsed
-      this.getList(pageId, count, status)
+
+    if (keyword) {
+      this.setState({ keyword })
     }
   }
 
-  getList = (page, count, status) => {
+  getList = (page, count, status, keyword) => {
     const query = {
       page: isNumeric(page) ? page : 1,
       count: isNumeric(count) ? count : 25
     }
+
     if (!!status && !!CONTRACT_STATUS_NUM[status]) {
       query.status = CONTRACT_STATUS_NUM[status]
+    }
+
+    if (!!keyword) {
+      query.keyword = keyword
     }
 
     this._getList(query)
@@ -92,7 +109,7 @@ class SearchPage extends Component {
   getSearchTypeData = () => {
     return SEARCH_TYPE_DATA[this.searchType] || {}
   }
-  
+
   getCount = () => {
     const list = this.props[this.getSearchTypeData()['list']] || {}
     const { count } = list
@@ -109,64 +126,63 @@ class SearchPage extends Component {
 
   getListByPage = (page) => {
     const count = this.getCount()
-    const { status } = this.state
-    const url = this.makeUrl(page, count, status)
+    const { status, keyword } = this.state
+    const url = this.makeUrl(page, count, status, keyword)
     this.props.history.push(url);
   }
 
   getListByCount = (count) => {
-    const { status } = this.state
-    const url = this.makeUrl(1, count, status)
+    const { status, keyword } = this.state
+    const url = this.makeUrl(1, count, status, keyword)
     this.props.history.push(url);
   }
 
   getListByStatus = (status) => {
     this.setState({ status }, () => {
+      const { keyword } = this.state
       const count = this.getCount()
-      const url = this.makeUrl(1, count, status)
+      const url = this.makeUrl(1, count, status, keyword)
       this.props.history.push(url);
     })
   }
 
-  makeUrl = (page, count, status) => {
-    let url = `/${this.searchType}`
-    if (page) {
-      url += `/${page}`
-    }
-
-    if (count || status) {
-      url += '?'
-    }
-
-    if (count) {
-      url += `count=${count}${status ? '&' : ''}`
-    }
-
-    if (status) {
-      url += `status=${status}`
-    }
-
-    return url
-  }
-
-  changeSearch = (nextSearch) => {
+  getListBySearch = (nextSearch) => {
     const { keyword } = this.state
     if (keyword === '' && nextSearch === '') {
       return
     }
     this.setState({ keyword: nextSearch }, () => {
-      if (nextSearch) {
-        this.props.history.push(`/${this.searchType}?keyword=${nextSearch}`);
-      }
-      else {
-        this.props.history.push(`/${this.searchType}`);
-      }
+      const { status } = this.state
+      const count = this.getCount()
+      const url = this.makeUrl(1, count, status, nextSearch)
+      this.props.history.push(url);
     })
+  }
+
+  makeUrl = (page, count, status, keyword) => {
+    let url = `/${this.searchType}`
+
+    if (page) {
+      url += `/${page}`
+    }
+
+    const query = { count, status, keyword }
+    const isQuery = Object.keys(query).some(key => query[key])
+    if (isQuery) {
+      let firstQuery = true
+      Object.keys(query).forEach(key => {
+        if (query[key]) {
+          url += `${firstQuery ? '?' : '&'}${key}=${query[key]}`
+          firstQuery = false
+        }
+      })
+    }
+
+    return url
   }
 
   render() {
     const list = this.props[this.getSearchTypeData()['list']] || {}
-    const listSearch = this.props[`${this.getSearchTypeData()['list']}Search`]
     const tableClassName = this.getSearchTypeData()['tableClassName'] || ''
     const contentsClassName = this.getSearchTypeData()['contentsClassName'] || ''
     const noBoxText = this.getSearchTypeData()['noBoxText'] || ''
@@ -174,10 +190,8 @@ class SearchPage extends Component {
     const title = this.getSearchTypeData()['title'] || ''
 
     const { keyword, status } = this.state
-    const ListData = !keyword ? list : listSearch
-    const { loading, data, page, listSize, count } = ListData;
+    const { loading, data, page, listSize, count } = list;
     const noData = (data.length === 0) && !status
-    const needPageOption = !keyword
 
     const TableContent = () => {
       if (noData) {
@@ -192,29 +206,27 @@ class SearchPage extends Component {
             <tbody>
               {
                 data.map((item, index) => (
-                  <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} count={count} page={page}/>
+                  <SearchTableBody key={index} data={item} searchType={this.searchType} index={index} count={count} page={page} />
                 ))
               }
             </tbody>
           </table>,
-          (needPageOption &&
-            <SortHolder //
-              key='SortHolder'
-              count={count}
-              getData={this.getListByCount}
-            />),
+          <SortHolder
+            key='SortHolder'
+            count={count}
+            getData={this.getListByCount}
+          />,
           (loading &&
             <LoadingComponent
               key='LoadingComponent'
               style={{ position: 'absolute', width: '0', left: '185px', bottom: '10px' }}
             />),
-          (needPageOption &&
-            <Pagination //
-              key='Pagination'
-              pageNum={page}
-              maxPageNum={calcMaxPageNum(listSize, count)}
-              getData={this.getListByPage}
-            />)
+          <Pagination
+            key='Pagination'
+            pageNum={page}
+            maxPageNum={calcMaxPageNum(listSize, count)}
+            getData={this.getListByPage}
+          />
         ])
       }
     }
@@ -232,7 +244,7 @@ class SearchPage extends Component {
                 id="sub-search-input"
                 placeholder={placeholder}
                 searchKeyword={keyword}
-                changeSearch={this.changeSearch}
+                changeSearch={this.getListBySearch}
               />
               <div className={contentsClassName}>
                 <SearchTableDesc searchType={this.searchType} listSize={listSize} />
