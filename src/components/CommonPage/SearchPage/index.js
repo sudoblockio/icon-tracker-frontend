@@ -64,18 +64,6 @@ class SearchPage extends Component {
 
   setQueryToList = (search) => {
     const parsed = queryString.parse(search)
-    // const { keyword } = parsed
-    // if (keyword) {
-    //   this.setState({ keyword }, () => {
-    //     this._getListSearch({ keyword, page: 1, count: 100 })
-    //   })
-    // }
-    // else {
-    //   const { pageId } = this
-    //   const { count, status } = parsed
-    //   this.getList(pageId, count, status)
-    // }
-
     const { pageId } = this
     const { keyword, count, status } = parsed
     this.getList(pageId, count, status, keyword)
@@ -127,13 +115,13 @@ class SearchPage extends Component {
   getListByPage = (page) => {
     const count = this.getCount()
     const { status, keyword } = this.state
-    const url = this.makeUrl(page, count, status, keyword)
+    const url = this.makeUrl(page, { count, status, keyword })
     this.props.history.push(url);
   }
 
   getListByCount = (count) => {
     const { status, keyword } = this.state
-    const url = this.makeUrl(1, count, status, keyword)
+    const url = this.makeUrl(1, { count, status, keyword })
     this.props.history.push(url);
   }
 
@@ -141,7 +129,7 @@ class SearchPage extends Component {
     this.setState({ status }, () => {
       const { keyword } = this.state
       const count = this.getCount()
-      const url = this.makeUrl(1, count, status, keyword)
+      const url = this.makeUrl(1, { count, status, keyword })
       this.props.history.push(url);
     })
   }
@@ -154,19 +142,18 @@ class SearchPage extends Component {
     this.setState({ keyword: nextSearch }, () => {
       const { status } = this.state
       const count = this.getCount()
-      const url = this.makeUrl(1, count, status, nextSearch)
+      const url = this.makeUrl(1, { count, status, keyword: nextSearch })
       this.props.history.push(url);
     })
   }
 
-  makeUrl = (page, count, status, keyword) => {
+  makeUrl = (page, query) => {
     let url = `/${this.searchType}`
 
     if (page) {
       url += `/${page}`
     }
 
-    const query = { count, status, keyword }
     const isQuery = Object.keys(query).some(key => query[key])
     if (isQuery) {
       let firstQuery = true

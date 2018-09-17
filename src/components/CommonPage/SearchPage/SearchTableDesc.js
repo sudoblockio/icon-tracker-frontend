@@ -5,6 +5,7 @@ import {
 import {
     numberWithCommas
 } from 'utils/utils'
+import { IRC_VERSION } from '../../../utils/const';
 
 class SearchTableDesc extends Component {
 
@@ -28,7 +29,7 @@ class SearchTableDesc extends Component {
                     return (
                         <p className="txt cont">
                             <span>ICON Tokens Market Capitalization Sorted by MarketCap value in DESC Order</span>
-                            <span>A total of<em>{listSize} IRC2 Token</em> Contract(s) found<em>(Sorted by MarketCap value in DESC Order)</em></span>
+                            <span>A total of<em>{listSize} {IRC_VERSION[2]} Token</em> Contract(s) found<em>(Sorted by MarketCap value in DESC Order)</em></span>
                         </p>
                     )
                 default:
