@@ -56,7 +56,7 @@ export async function getWalletApiUrl() {
         return 'https://bicon.net.solidwallet.io'
       case 'custom':
       default:
-        return 'http://http://13.209.103.183:9000'
+        return 'http://13.209.103.183:9000'
     }
   }
 
@@ -65,7 +65,7 @@ export async function getWalletApiUrl() {
     return configFile.WALLET_API_URL
   }
 
-  return 'http://http://13.209.103.183:9000'
+  return 'http://13.209.103.183:9000'
 }
 
 async function getConfigFile() {

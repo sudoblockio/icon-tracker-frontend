@@ -44,7 +44,10 @@ export const SERVER_TX_TYPE = {
     "3": "Contract Created",
     "4": "Contract Updated",
     "5": "Contract Accepted",
-    "6": "Contract Rejected"
+    "6": "Contract Rejected",
+    "7": "Update Accepted",
+    "8": "Update Rejected",
+    "9": "Update cancelled"
 }
 
 export const IRC_VERSION = {

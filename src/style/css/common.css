@@ -470,7 +470,7 @@ html, body{height: 100%;}
 .table-typeC.token td:nth-child(1).icon .ellipsis{width:150px; }
 .table-typeC.token td:not(:nth-child(1)).icon .ellipsis{width:100px; }
 .table-typeC.token td:nth-child(6) .ellipsis{width:51px; vertical-align: top; }
-.table-typeC.token td:nth-child(7) span.ellipsis{vertical-align: top; width: 150px;}
+.table-typeC.token td:nth-child(7) span.ellipsis{vertical-align: top; width: 80px;}
 .table-typeC.token.tap2 td:nth-child(2) {text-align: right;}
 
 

@@ -212,8 +212,10 @@ class TxTableBody extends Component {
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
 					return (
 						<tr>
+							<td>-</td>
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={data.amount} symbol="ICX" />
+							<td>-</td>
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
