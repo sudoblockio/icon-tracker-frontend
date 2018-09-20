@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import web3Utils from 'web3-utils'
+import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import {
 	CopyButton,
 	LoadingComponent,
@@ -16,17 +17,16 @@ import {
 	dateToUTC,
 	utcDateInfo,
 	beautifyJson,
-	removeQuotes,
 } from 'utils/utils'
 
 class TransactionInfo extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+	constructor(props) {
+		super(props)
+		this.state = {
 			download: undefined,
-        }
+		}
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 		const { download } = this.state
 		if (download) {
@@ -36,19 +36,21 @@ class TransactionInfo extends Component {
 		this.getDownloadLink(nextProps)
 	}
 
-    getDownloadLink = async (props) => {
+	getDownloadLink = async (props) => {
 		const { transaction } = props
-        const { data } = transaction
-        const { targetContractAddr, contractVersion } = data
+		const { data } = transaction
+		const { targetContractAddr, contractVersion } = data
 
 		if (isValidData(targetContractAddr) && isValidData(contractVersion)) {
-            const link = await makeDownloadLink(targetContractAddr, contractVersion)
+			const link = await makeDownloadLink(targetContractAddr, contractVersion)
 			const name = `${targetContractAddr}_${contractVersion}.zip`
-			this.setState({ download: {
-				link, name
-			}})
-        }
-    }
+			this.setState({
+				download: {
+					link, name
+				}
+			})
+		}
+	}
 
 	render() {
 		const { download } = this.state
@@ -112,7 +114,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom/>
+											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
@@ -160,64 +162,96 @@ class TransactionInfo extends Component {
 		return Contents()
 	}
 }
+
 class DataCell extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			viewHex: false
+			removed: '',
+			converted: '',
+			loading: false,
+			viewHex: false,
+		}
+
+		this.workers = []
+	}
+
+	async componentWillMount() {
+		this.getDataString()
+	}
+
+	componentWillUnmount() {
+		this.workers.forEach(worker => {
+			worker.terminate()
+		})
+	}
+
+	promiseWorker = (type, payload) => {
+		let worker = new Worker()
+		this.workers.push(worker)
+		this.setState({ loading: true }, () => {
+			worker.postMessage({ type, payload })
+		})
+		return new Promise(resolve => {
+			worker.onmessage = message => {
+				this.setState({ loading: false }, () => {
+					const { payload } = message.data
+					resolve(payload)
+					worker.terminate()
+				})
+			}
+		})
+	}
+
+	getDataString = async () => {
+		const { dataType, dataString } = this.props
+		try {
+			if (dataType === 'message') {
+				const { viewHex } = this.state
+				const removed = await this.promiseWorker('removeQuotes', dataString)
+				const isHex = web3Utils.isHex(removed)
+				if (viewHex && !isHex) {
+					const toHex = await this.promiseWorker('utf8ToHex', removed)
+					this.setState({ converted: toHex })
+				}
+				else if (!viewHex && isHex) {
+					let toUtf8 = await this.promiseWorker('hexToUtf8', removed)
+					// alert(toUtf8)
+					this.setState({ converted: toUtf8 })
+				}
+				else {
+					this.setState({ converted: removed })
+				}
+			}
+			else {
+				this.setState({ converted: beautifyJson(dataString, '\t') })
+			}
+		}
+		catch (e) {
+			console.error(e)
+			this.setState({ converted: dataString })
 		}
 	}
 
 	handleClick = () => {
 		const { dataType } = this.props
 		if (dataType === 'message') {
-			this.setState({ viewHex: !this.state.viewHex })
-		}
-	}
-
-	getButtonTitle = () => {
-		const { viewHex } = this.state
-		if (viewHex) {
-			return 'Convert to UTF-8'
-		}
-		else {
-			return 'Convert to HEX'
-		}
-
-	}
-
-	getDataString = () => {
-		const { viewHex } = this.state
-		const { dataType, dataString } = this.props
-		try {
-			if (dataType !== 'message') {
-				return beautifyJson(dataString, '\t')
-			}
-
-			const removed = removeQuotes(dataString)
-			if (viewHex) {				
-				return web3Utils.isHex(removed) ? removed : web3Utils.utf8ToHex(removed)
-			}
-			else {
-				return web3Utils.isHex(removed) ? web3Utils.hexToUtf8(removed) : removed
-			}
-		}
-		catch (e) {
-			console.log(e)
-			return dataString
+			this.setState({ viewHex: !this.state.viewHex }, () => {
+				this.getDataString()
+			})
 		}
 	}
 
 	render() {
 		const { dataType } = this.props
-		const buttonTitle = this.getButtonTitle()
-		const dataString = this.getDataString()
+		const { converted, loading, viewHex } = this.state
+		const buttonTitle = viewHex ? 'Convert to UTF-8' : 'Convert to HEX'
 		return (
 			<td className="convert">
 				<div className="scroll">
-					<p style={{ whiteSpace: 'pre' }}>{dataString}</p>
+					<p>{converted}</p>
 				</div>
-				<button className="btn-type-normal" onClick={this.handleClick} disabled={dataType !== 'message'}>{buttonTitle}</button>
+				<button className="btn-type-normal" onClick={this.handleClick} disabled={!(dataType === 'message' && !loading)}>{buttonTitle}</button>
 			</td>
 		)
 	}
@@ -247,13 +281,13 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFro
 	if (isAddress) {
 		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
-			<AddressCell 
-				targetAddr={address} 
-				txType={txType} 
-				targetContractAddr={targetContractAddr} 
-				spanNoEllipsis 
-				tdClassName="trans" 
-				isFrom={isFrom} 
+			<AddressCell
+				targetAddr={address}
+				txType={txType}
+				targetContractAddr={targetContractAddr}
+				spanNoEllipsis
+				tdClassName="trans"
+				isFrom={isFrom}
 				download={download}
 				InternalDiv={
 					isInternalTxList &&

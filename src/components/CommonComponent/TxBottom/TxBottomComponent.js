@@ -26,8 +26,6 @@ class TxBottomComponent extends Component {
             totalSize,
             loading
         } = txData
-
-        console.log(data)
         
         const Content = () => {
             if (loading) {
