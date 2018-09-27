@@ -103,7 +103,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<DateCell date={data.createDate} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
-							<AmountCell amount={data.quantity} symbol="ICX" />
+							<AmountCell amount={data.amount} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
