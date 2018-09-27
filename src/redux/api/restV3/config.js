@@ -38,7 +38,7 @@ export async function getTrackerApiUrl() {
     return configFile.TRACKER_API_URL
   }
 
-  return 'http://trackerlocaldev.icon.foundation'
+  return '/'
 }
 
 export async function getWalletApiUrl() {
@@ -65,7 +65,7 @@ export async function getWalletApiUrl() {
     return configFile.WALLET_API_URL
   }
 
-  return 'http://13.209.103.183:9000'
+  return '/'
 }
 
 async function getConfigFile() {
