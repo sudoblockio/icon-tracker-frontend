@@ -5,6 +5,7 @@ import {
   isHxAddress,
   isCxAddress,
   is0xHash,
+  isHash,
   isNumeric
 } from 'utils/utils'
 import {
@@ -59,6 +60,9 @@ function* searchFunc(action) {
       else {
         throw new Error();
       }
+    }
+    else if (isHash(payload)) {
+      yield put(routerActions.push(`/transaction/${payload}`));
     }
     else if (isNumeric(commaRemoved)) {    
       yield put(routerActions.push(`/block/${commaRemoved}`));

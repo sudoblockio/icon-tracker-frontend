@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { getTrackerApiUrl } from '../redux/api/restV3/config'
+import { getTrackerApiUrl } from 'redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
 import {
   TokenLink,
@@ -9,6 +9,9 @@ import {
   REDUX_STEP,
   SERVER_TX_TYPE
 } from './const'
+import {
+  getIsSoloVersion
+} from 'redux/api/restV3/config'
 
 moment.updateLocale('en', {
   relativeTime: {
@@ -361,6 +364,10 @@ export function is0xHash(str) {
   return /^(0x)[0-9a-f]{64}$/i.test(str)
 }
 
+export function isHash(str) {
+  return /^[0-9a-f]{64}$/i.test(str)
+}
+
 export function isNumeric(str) {
   return /^\d+$/.test(str)
 }
@@ -408,4 +415,9 @@ export function beautifyJson(data, tab) {
 
 export function removeQuotes(str) {
   return str.replace(/"/gi, "")
+}
+
+export async function getIsSolo() {
+  const result = await getIsSoloVersion()
+  return result
 }

@@ -1,4 +1,5 @@
 {
-    "TRACKER_API_URL":"http://trackerlocaldev.icon.foundation",
-    "WALLET_API_URL":"http://http://13.209.103.183:9000"
+    "TRACKER_API_URL": "http://trackerlocaldev.icon.foundation",
+    "WALLET_API_URL": "http://13.209.103.183:9000",
+    "IS_SOLO_VERSION": false
 }

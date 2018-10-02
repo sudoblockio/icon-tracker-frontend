@@ -28,8 +28,8 @@ export async function getTrackerApiUrl() {
       case 'testnet1':
         return 'https://bicon.tracker.solidwallet.io'
       case 'custom':
-      default:
         return 'http://trackerlocaldev.icon.foundation'
+      default:
     }
   }
 
@@ -55,8 +55,8 @@ export async function getWalletApiUrl() {
       case 'testnet1':
         return 'https://bicon.net.solidwallet.io'
       case 'custom':
-      default:
         return 'http://13.209.103.183:9000'
+      default:
     }
   }
 
@@ -66,6 +66,31 @@ export async function getWalletApiUrl() {
   }
 
   return '/'
+}
+
+export async function getIsSoloVersion() {
+  if (process.env.IS_SOLO_VERSION) {
+    return process.env.IS_SOLO_VERSION
+  }
+
+  if (process.env.REACT_APP_ENV) {
+    switch (process.env.REACT_APP_ENV) {
+      case 'mainnet':
+      case 'testnet':
+      case 'testnet1':
+      case 'custom':
+        return false
+      default:
+    }
+  }
+
+  const configFile = await getConfigFile()
+  if (configFile && configFile.IS_SOLO_VERSION) {
+    return !!configFile.IS_SOLO_VERSION
+  }
+  else {
+    return false
+  }
 }
 
 async function getConfigFile() {

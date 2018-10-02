@@ -16,7 +16,7 @@ class SearchTableHead extends Component {
                         <tr>
                             <th>Address</th>
                             <th>Contract Name</th>
-                            <th>Compiler</th>
+                            {/* <th>Compiler</th> */}
                             <th>Balance</th>
                             <th>TxCount</th>
                             <StatusHolder getData={this.props.getListByStatus}/>

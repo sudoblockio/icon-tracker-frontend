@@ -24,7 +24,7 @@ class SearchTableBody extends Component {
 						<tr>
 							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
 							<td>{data.contractName || '-'}</td>
-							<td>{data.compiler || '-'}</td>
+							{/* <td>{data.compiler || '-'}</td> */}
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
 							<td>{numberWithCommas(data.txCount)}</td>
 							<td>{CONTRACT_STATUS[data.status]}</td>

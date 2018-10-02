@@ -273,18 +273,16 @@ html, body{height: 100%;}
 
 
 .table-typeA.contract td:nth-child(2){text-align: left;}
-.table-typeA.contract td:nth-child(4),
-.table-typeA.contract td:nth-child(5){text-align: right;}
 .table-typeA.contract td:nth-child(3),
+.table-typeA.contract td:nth-child(4){text-align: right;}
+.table-typeA.contract td:nth-child(4),
 .table-typeA.contract td:nth-child(5),
-.table-typeA.contract td:nth-child(6),
-.table-typeA.contract td:nth-child(7){text-align: center;}
-.table-typeA.contract th:nth-child(2){width:250px; }
-.table-typeA.contract th:nth-child(3){width:150px; }
-.table-typeA.contract th:nth-child(4){width:150px; }
-.table-typeA.contract th:nth-child(5){width:84px; }
-.table-typeA.contract th:nth-child(6){width:120px; }
-.table-typeA.contract th:nth-child(7){width:147px; }
+.table-typeA.contract td:nth-child(6){text-align: center;}
+.table-typeA.contract th:nth-child(2){width:310px; }
+.table-typeA.contract th:nth-child(3){width:220px; }
+.table-typeA.contract th:nth-child(4){width:84px; }
+.table-typeA.contract th:nth-child(5){width:120px; }
+.table-typeA.contract th:nth-child(6){width:147px; }
 .table-typeA.contract td:nth-child(1) span{width: 240px;}
 .table-typeA  td{position: relative;}
 [class *="table-type"] td.icon span{margin-left: 16px; width: 282px;}
