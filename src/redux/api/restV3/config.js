@@ -15,8 +15,13 @@ export async function walletApiInstance() {
 }
 
 export async function getTrackerApiUrl() {
-  if (process.env.TRACKER_API_URL) {
-    return process.env.TRACKER_API_URL
+  // if (process.env.TRACKER_API_URL) {
+  //   return process.env.TRACKER_API_URL
+  // }
+
+  const configFile = await getConfigFile()
+  if (configFile && configFile.TRACKER_API_URL) {
+    return configFile.TRACKER_API_URL
   }
 
   if (process.env.REACT_APP_ENV) {
@@ -33,17 +38,17 @@ export async function getTrackerApiUrl() {
     }
   }
 
-  const configFile = await getConfigFile()
-  if (configFile && configFile.TRACKER_API_URL) {
-    return configFile.TRACKER_API_URL
-  }
-
   return '/'
 }
 
 export async function getWalletApiUrl() {
-  if (process.env.WALLET_API_URL) {
-    return process.env.WALLET_API_URL
+  // if (process.env.WALLET_API_URL) {
+  //   return process.env.WALLET_API_URL
+  // }
+
+  const configFile = await getConfigFile()
+  if (configFile && configFile.WALLET_API_URL) {
+    return configFile.WALLET_API_URL
   }
 
   if (process.env.REACT_APP_ENV) {
@@ -60,17 +65,17 @@ export async function getWalletApiUrl() {
     }
   }
 
-  const configFile = await getConfigFile()
-  if (configFile && configFile.WALLET_API_URL) {
-    return configFile.WALLET_API_URL
-  }
-
   return '/'
 }
 
 export async function getIsSoloVersion() {
-  if (process.env.IS_SOLO_VERSION) {
-    return process.env.IS_SOLO_VERSION
+  // if (process.env.IS_SOLO_VERSION) {
+  //   return process.env.IS_SOLO_VERSION
+  // }
+
+  const configFile = await getConfigFile()
+  if (configFile && configFile.IS_SOLO_VERSION) {
+    return !!configFile.IS_SOLO_VERSION
   }
 
   if (process.env.REACT_APP_ENV) {
@@ -84,13 +89,7 @@ export async function getIsSoloVersion() {
     }
   }
 
-  const configFile = await getConfigFile()
-  if (configFile && configFile.IS_SOLO_VERSION) {
-    return !!configFile.IS_SOLO_VERSION
-  }
-  else {
-    return false
-  }
+  return false
 }
 
 async function getConfigFile() {
