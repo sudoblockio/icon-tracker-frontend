@@ -122,7 +122,7 @@ class TokenContractCell extends Component {
     render() {
         const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut } = this.props
         const Content = () => {
-            if (ircVersion === IRC_VERSION[1]) {
+            if (ircVersion === IRC_VERSION[2]) {
                 return (
                     <td>
                         <span className="help token">{ircVersion} Token</span>
