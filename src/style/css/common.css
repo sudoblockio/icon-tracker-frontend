@@ -50,6 +50,23 @@ a:hover {  color:#1aaaba;}
 table{ border-collapse: inherit; }
 }
 
+.table-typeN td:nth-child(7) .ellipsis,
+.table-typeI td:nth-child(2),
+.table-typeB .scroll p,
+.table-typeL td:first-child,
+.table-typeB .help,
+.multi-lang,
+.table-typeB .link.token,
+[class ^="txt-type"],
+.table-typeA.contract td:nth-child(2),
+.table-typeC.token td:nth-child(7),
+.table-typeC.token td:nth-child(7) span,
+.table-typeB .combo-layer .list-group li p:first-child em{font-family:Arial,Microsoft YaHei,sans-serif!important }
+
+.table-typeI td:nth-child(2),
+.table-typeB .scroll p,
+.table-typeB .link.token{font-weight: 600!important;}
+
 
 /*txt*/
 [class ^="txt-type"] {color: #fff; background-color: transparent; ; font-size: 12px; border: none; border-bottom: 2px solid rgba(255, 255, 255, 0.4); padding: 12px 40px 12px 10px; font-family: "NanumSquare"; font-weight: 500;}

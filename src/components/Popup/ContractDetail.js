@@ -29,8 +29,8 @@ class ContractDetail extends Component {
         const _state = state ? CONTRACT_STATUS[state] : "-"
         const _txHash = isValidData(txHash) ? <TransactionLink to={txHash} label={<p className="txt hash">{txHash}</p>} onClick={closeDetail} /> : "-"
         const _verifiedTx = isValidData(verifiedTx) ? <TransactionLink to={verifiedTx} label={<p className="txt hash">{verifiedTx}</p>} onClick={closeDetail} /> : "-"
-        const _verifier = isValidData(verifier) ? <AddressLink to={verifier} label={<p className="txt hash">{verifier}</p>} onClick={closeDetail} /> : "-"
-        const _submitter = isValidData(submitter) ? <AddressLink to={submitter} label={<p className="txt hash">{submitter}</p>} onClick={closeDetail} /> : "-"
+        const _verifier = isValidData(verifier) ? <AddressLink to={verifier} label={<p className="txt multi-lang">{verifier}</p>} onClick={closeDetail} /> : "-"
+        const _submitter = isValidData(submitter) ? <AddressLink to={submitter} label={<p className="txt multi-lang">{submitter}</p>} onClick={closeDetail} /> : "-"
         const _comment= comment || "-"
 
         return ([
