@@ -1,5 +1,5 @@
 {   
-    "VERSION": "1.0.1_20181030_0",
+    "VERSION": "1.0.2_20181106_0",
     "To use below variables,": "remove two underbars at the front, and then set as you want.",
     "__TRACKER_API_URL": "http://trackerlocaldev.icon.foundation",
     "__WALLET_API_URL": "http://13.209.103.183:9000",
