@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import AddressTransactions from './AddressTransactions'
+import AddressInternalTransactions from './AddressInternalTransactions'
 import AddressTokenTransfers from './AddressTokenTransfers'
 import {
     TX_TYPE,
-    WALLET_TABS,
+    ADDRESS_TABS,
 } from 'utils/const'
 import {
     NoBox,
@@ -12,15 +13,15 @@ import {
 } from 'components'
 
 class WalletTabs extends Component {
-
     render() {
-        const { on, wallet, walletTx, walletTokenTx } = this.props
+        const { on, wallet, walletTx, addressInternalTx, walletTokenTx } = this.props
         const { loading, data } = wallet
-        const { address } = data
+        const { address, tokenList } = data
+        const TABS = tokenList && tokenList.length === 0 ? [ADDRESS_TABS[0]] : ADDRESS_TABS
         return (
             <TabTable
                 {...this.props}
-                TABS={WALLET_TABS}
+                TABS={TABS}
                 on={on}
                 loading={loading}
                 TableContents={on => {
@@ -35,6 +36,15 @@ class WalletTabs extends Component {
                                 />
                             )
                         case 1:
+                            return (
+                                <AddressInternalTransactions 
+                                    txData={addressInternalTx} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`)}} 
+                                    txType={TX_TYPE.ADDRESS_INTERNAL_TX} 
+                                    address={address} 
+                                />
+                            )
+                        case 2:
                             return (
                                 <AddressTokenTransfers 
                                     txData={walletTokenTx} 

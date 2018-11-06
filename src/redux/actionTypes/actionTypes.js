@@ -27,6 +27,10 @@ const actionTypes = {
   addressInfo: 'ADDRESS_INFO',
   addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
   addressInfoRejected: 'ADDRESS_INFO_REJECTED',
+
+  addressInternalTxList: 'ADDRESS_INTERNAL_TX_LIST',
+  addressInternalTxListFulfilled: 'ADDRESS_INTERNAL_TX_LIST_FULFILLED',
+  addressInternalTxListRejected: 'ADDRESS_INTERNAL_TX_LIST_REJECTED',
   
   addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
   addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',

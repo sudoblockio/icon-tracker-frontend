@@ -4,6 +4,7 @@ import {
   addressList as ADDRESS_LIST_API,
   addressInfo as ADDRESS_INFO_API,
   addressTxList as ADDRESS_TX_LIST,
+  addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
 } from '../api/restV3';
 
@@ -11,12 +12,14 @@ export default function* addressesSaga() {
   yield fork(watchAddressList);
   yield fork(watchAddressInfo);
   yield fork(watchAddressTxList);
+  yield fork(watchAddressInternalTxList);
   yield fork(watchAddressTokenTxList);
 }
 
 function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
 function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc) }
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
+function* watchAddressInternalTxList() { yield takeLatest(AT.addressInternalTxList, addressInternalTxListFunc) }
 function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
 
 export function* addressListFunc(action) {
@@ -71,6 +74,26 @@ export function* addressTxListFunc(action) {
   }
   catch(e) {
     yield put({type: AT.addressTxListRejected});
+  }
+}
+
+export function* addressInternalTxListFunc(action) {
+  try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressInternalTxListFulfilled, payload: { data: [] } });
+      return
+    }
+
+    const payload = yield call(ADDRESS_INTERNAL_TX_LIST, action.payload);
+    if (payload.result === '200') {
+      yield put({type: AT.addressInternalTxListFulfilled, payload: payload});
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch(e) {
+    yield put({type: AT.addressInternalTxListRejected});
   }
 }
 

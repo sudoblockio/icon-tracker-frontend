@@ -61,6 +61,14 @@ class TxPageTitle extends Component {
                             <span className="right">A total of<em>{_listSize}</em> transaction(s) found</span>
                         </p>
                     )
+                case TX_TYPE.ADDRESS_INTERNAL_TX:
+                    return (
+                        <p className="title">
+                            Internal Transactions
+                            <span>for Address {urlIndex}</span>
+                            <span className="right">A total of<em>{_listSize}</em> internal transaction(s) found</span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_TOKEN_TX:
                     return (
                         <p className="title">

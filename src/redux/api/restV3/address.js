@@ -54,3 +54,17 @@ export async function addressTokenTxList(payload) {
             })
     })
 }
+
+export async function addressInternalTxList(payload) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject) => {
+      trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
+        .then(result => {
+          console.log(result)
+          resolve(result.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  }

@@ -11,6 +11,7 @@ import {
     addressList,
     addressInfo,
     addressTxList,
+    addressInternalTxList,
     addressTokenTxList
 } from './address'
 
@@ -59,6 +60,7 @@ export {
     addressList,
     addressInfo,
     addressTxList,
+    addressInternalTxList,
     addressTokenTxList,
 
     blockList,

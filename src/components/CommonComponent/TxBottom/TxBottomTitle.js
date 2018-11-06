@@ -73,6 +73,15 @@ class TxPageTitle extends Component {
                             </span>
                         </p>
                     )
+                case TX_TYPE.ADDRESS_INTERNAL_TX:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} internal transaction(s)</em>
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_TOKEN_TX:
                     return (
                         <p className="txt">

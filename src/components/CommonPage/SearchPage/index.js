@@ -167,6 +167,18 @@ class SearchPage extends Component {
 
     return url
   }
+  
+  getNoData = (data, status) => {
+    if (data && data.length !== 0) {
+      return false
+    }
+    else if (status) {
+      return false
+    }
+    else {
+      return true
+    }
+  }
 
   render() {
     const list = this.props[this.getSearchTypeData()['list']] || {}
@@ -178,7 +190,7 @@ class SearchPage extends Component {
 
     const { keyword, status } = this.state
     const { loading, data, page, listSize, count } = list;
-    const noData = (data.length === 0) && !status
+    const noData = this.getNoData(data, status)
 
     const TableContent = () => {
       if (noData) {

@@ -21,6 +21,13 @@ export function addressTxList(payload) {
   }
 }
 
+export function addressInternalTxList(payload) {
+  return {
+    type: actionTypes.addressInternalTxList,
+    payload
+  }
+}
+
 export function addressTokenTxList(payload) {
   return {
     type: actionTypes.addressTokenTxList,

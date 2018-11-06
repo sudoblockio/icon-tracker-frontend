@@ -5,7 +5,7 @@ import {
     DetailPage
 } from 'components';
 import {
-    WALLET_TABS
+    ADDRESS_TABS
 } from 'utils/const'
 
 class AddressesDetailPage extends Component {
@@ -19,12 +19,15 @@ class AddressesDetailPage extends Component {
                 {...this.props}
                 loading={loading}
                 error={error}
-                TABS={WALLET_TABS}
+                TABS={ADDRESS_TABS}
                 ROUTE="/address"
                 getInfo={address => { this.props.addressInfo({ address }) }}
                 getList={[
                     address => {
                         this.props.addressTxList({ address, page: 1, count: 10 })
+                    },
+                    address => {
+                        this.props.addressInternalTxList({ address, page: 1, count: 10 })
                     },
                     address => {
                         this.props.addressTokenTxList({ address, page: 1, count: 10 })

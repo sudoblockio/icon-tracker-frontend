@@ -10,6 +10,7 @@ import {
 import { 
   addressList,
   addressTxList,
+  addressInternalTxList,
   addressTokenTxList
 } from '../../redux/actions/addressesActions';
 import { 
@@ -36,6 +37,7 @@ function mapStateToProps(state) {
     contractEvents: state.contracts.contractEvents,
     addresses: state.addresses.addresses,
     walletTx: state.addresses.walletTx,
+    addressInternalTx: state.addresses.addressInternalTx,
     walletTokenTx: state.addresses.walletTokenTx,
     recentTx: state.transactions.recentTx,
     recentTokenTx: state.tokens.recentTokenTx,
@@ -55,6 +57,7 @@ function mapDispatchToProps(dispatch) {
     contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
     contractEventLogList: payload => dispatch(contractEventLogList(payload)),
     addressList: payload => dispatch(addressList(payload)),
+    addressInternalTxList: payload => dispatch(addressInternalTxList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),

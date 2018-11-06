@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { 
   addressInfo,
   addressTxList,
+  addressInternalTxList,
   addressTokenTxList
 } from '../../redux/actions/addressesActions';
 
@@ -18,6 +19,7 @@ function mapDispatchToProps(dispatch) {
   return {
     addressInfo: (payload) => dispatch(addressInfo(payload)),
     addressTxList: (payload) => dispatch(addressTxList(payload)),
+    addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
   };
 }

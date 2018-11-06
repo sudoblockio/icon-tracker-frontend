@@ -87,6 +87,16 @@ class TxTableBody extends Component {
 							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
+				case TX_TYPE.ADDRESS_INTERNAL_TX:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<BlockCell height={data.height} />
+							<DateCell date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
+							<AmountCell amount={data.amount} symbol="ICX" />
+						</tr>
+					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:
 					return (
 						<tr>

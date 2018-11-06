@@ -76,6 +76,7 @@ class TxPage extends Component {
 				query.addr = urlIndex
 				break
 			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_INTERNAL_TX:
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 				query.address = urlIndex
 				break
@@ -122,6 +123,7 @@ class TxPage extends Component {
 			case TX_TYPE.CONTRACT_TOKEN_TX:
 			case TX_TYPE.CONTRACT_EVENTS:
 			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_INTERNAL_TX:
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 			case TX_TYPE.BLOCK_TX:
 			case TX_TYPE.TOKEN_TX:
@@ -159,6 +161,7 @@ class TxPage extends Component {
 			case TX_TYPE.CONTRACT_TOKEN_TX:
 			case TX_TYPE.CONTRACT_EVENTS:
 			case TX_TYPE.ADDRESS_TX:
+			case TX_TYPE.ADDRESS_INTERNAL_TX:
 			case TX_TYPE.ADDRESS_TOKEN_TX:
 			case TX_TYPE.BLOCK_TX:
 			case TX_TYPE.TOKEN_TX:
@@ -209,7 +212,7 @@ class TxPage extends Component {
 			listSize,
 			totalSize
 		} = tx;
-		const noData = !data || data.length === 0
+		const noData = !(data && data.length !== 0)
 		const TableContent = () => {
 			if (noData) {
 				return <NoBox text={noBoxText} />
