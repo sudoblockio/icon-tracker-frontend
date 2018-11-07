@@ -17,7 +17,6 @@ onmessage = message => {
         case 'hexToUtf8':
             postMessage({
                 type,
-                // payload: payload.length,
                 payload: web3Utils.hexToUtf8(payload),
             })
             break;

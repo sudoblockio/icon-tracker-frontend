@@ -414,7 +414,19 @@ export function beautifyJson(data, tab) {
 }
 
 export function removeQuotes(str) {
-  return str.replace(/"/gi, "")
+  if (!str) {
+    return ""
+  }
+
+  if (str[0] === '"') {
+    str = str.substr(1)
+  }
+  
+  if (str[str.length - 1] === '"') {
+    str = str.substr(0, str.length - 1)
+  }
+
+  return str
 }
 
 export async function getIsSolo() {

@@ -17,6 +17,7 @@ import {
 	dateToUTC,
 	utcDateInfo,
 	beautifyJson,
+	removeQuotes
 } from 'utils/utils'
 
 class TransactionInfo extends Component {
@@ -167,7 +168,6 @@ class DataCell extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			removed: '',
 			converted: '',
 			loading: false,
 			viewHex: false,
@@ -192,7 +192,7 @@ class DataCell extends Component {
 		this.setState({ loading: true }, () => {
 			worker.postMessage({ type, payload })
 		})
-		return new Promise(resolve => {
+		return new Promise((resolve, reject) => {
 			worker.onmessage = message => {
 				this.setState({ loading: false }, () => {
 					const { payload } = message.data
@@ -203,20 +203,19 @@ class DataCell extends Component {
 		})
 	}
 
-	getDataString = async () => {
+	getDataString = () => {
 		const { dataType, dataString } = this.props
+		const removed = removeQuotes(dataString)
+		const isHex = web3Utils.isHex(removed)
 		try {
 			if (dataType === 'message') {
 				const { viewHex } = this.state
-				const removed = await this.promiseWorker('removeQuotes', dataString)
-				const isHex = web3Utils.isHex(removed)
 				if (viewHex && !isHex) {
-					const toHex = await this.promiseWorker('utf8ToHex', removed)
+					const toHex =  web3Utils.utf8ToHex(removed)
 					this.setState({ converted: toHex })
 				}
 				else if (!viewHex && isHex) {
-					let toUtf8 = await this.promiseWorker('hexToUtf8', removed)
-					// alert(toUtf8)
+					const toUtf8 =  web3Utils.hexToUtf8(removed)
 					this.setState({ converted: toUtf8 })
 				}
 				else {
@@ -227,9 +226,9 @@ class DataCell extends Component {
 				this.setState({ converted: beautifyJson(dataString, '\t') })
 			}
 		}
-		catch (e) {
-			console.error(e)
-			this.setState({ converted: dataString })
+		catch (error) {
+			console.error(error)
+			this.setState({ viewHex: isHex, converted: removed })
 		}
 	}
 
