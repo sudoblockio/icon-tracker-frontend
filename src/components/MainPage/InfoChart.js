@@ -99,8 +99,8 @@ class InfoChart extends Component {
               fontColor: '#9deaf2',
               fontFamily: 'NanumSquare',
               beginAtZero: true,
-              suggestedMax: chartData.max,
-              suggestedMin: chartData.min,
+              max: chartData.max,
+              min: chartData.min,
               stepSize: chartData.step
             }
           }]
@@ -125,7 +125,8 @@ class InfoChart extends Component {
     let division = Math.pow(10, step.toString().length - 1)
 
     step = Math.ceil(step / division) * division
-    min = min < step ? min : min - step
+    min = Math.floor(min / division) * division
+    max = min + step * 4
 
     return { labels, data, max, min, step }
   }

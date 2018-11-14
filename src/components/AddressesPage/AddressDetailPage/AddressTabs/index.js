@@ -16,8 +16,15 @@ class WalletTabs extends Component {
     render() {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx } = this.props
         const { loading, data } = wallet
-        const { address, tokenList } = data
-        const TABS = tokenList && tokenList.length === 0 ? [ADDRESS_TABS[0]] : ADDRESS_TABS
+        const { address, tokenList, internalTxCount } = data
+        const TABS = []
+        TABS.push(ADDRESS_TABS[0])
+        if (internalTxCount && Number(internalTxCount) !== 0) {
+            TABS.push(ADDRESS_TABS[1])
+        }
+        if (tokenList && tokenList.length !== 0) {
+            TABS.push(ADDRESS_TABS[2])
+        }
         return (
             <TabTable
                 {...this.props}
@@ -25,8 +32,8 @@ class WalletTabs extends Component {
                 on={on}
                 loading={loading}
                 TableContents={on => {
-                    switch (on) {
-                        case 0:
+                    switch (ADDRESS_TABS[on]) {
+                        case ADDRESS_TABS[0]:
                             return (
                                 <AddressTransactions 
                                     txData={walletTx} 
@@ -35,7 +42,7 @@ class WalletTabs extends Component {
                                     address={address} 
                                 />
                             )
-                        case 1:
+                        case ADDRESS_TABS[1]:
                             return (
                                 <AddressInternalTransactions 
                                     txData={addressInternalTx} 
@@ -44,7 +51,7 @@ class WalletTabs extends Component {
                                     address={address} 
                                 />
                             )
-                        case 2:
+                        case ADDRESS_TABS[2]:
                             return (
                                 <AddressTokenTransfers 
                                     txData={walletTokenTx} 
