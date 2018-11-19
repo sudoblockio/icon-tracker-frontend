@@ -20,6 +20,8 @@ import {
 	removeQuotes
 } from 'utils/utils'
 
+const COUNT = 10
+
 class TransactionInfo extends Component {
 	constructor(props) {
 		super(props)
@@ -211,11 +213,11 @@ class DataCell extends Component {
 			if (dataType === 'message') {
 				const { viewHex } = this.state
 				if (viewHex && !isHex) {
-					const toHex =  web3Utils.utf8ToHex(removed)
+					const toHex = web3Utils.utf8ToHex(removed)
 					this.setState({ converted: toHex })
 				}
 				else if (!viewHex && isHex) {
-					const toUtf8 =  web3Utils.hexToUtf8(removed)
+					const toUtf8 = web3Utils.hexToUtf8(removed)
 					this.setState({ converted: toUtf8 })
 				}
 				else {
@@ -256,11 +258,27 @@ class DataCell extends Component {
 	}
 }
 
-const TokenTransferCell = ({ tokenTxList }) => {
-	return (
-		<td>
-			{
-				tokenTxList.map((tokenTx, index) => {
+class TokenTransferCell extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			more: false,
+		}
+	}
+
+	toggleMore = () => {
+		this.setState({ more: !this.state.more })
+	}
+
+	render() {
+		const { more } = this.state
+		const { tokenTxList } = this.props
+		const isMoreTen = tokenTxList && tokenTxList.length > COUNT
+		const tokenTxListSliced = (isMoreTen && !more) ? tokenTxList.slice(0, COUNT) : tokenTxList
+		const length = tokenTxList ? tokenTxList.length : 0
+		return (
+			<td className="transfer">
+				{tokenTxListSliced.map((tokenTx, index) => {
 					const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
 					return (
 						<p key={index}>
@@ -269,16 +287,62 @@ const TokenTransferCell = ({ tokenTxList }) => {
 							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{toAddr}</span>} />
 						</p>
 					)
-				})
-			}
-		</td>
-	)
+				})}
+				{isMoreTen && 
+					<span className={`more`} onClick={this.toggleMore}>
+						More ({more ? length : length - COUNT} / {length})
+						<i className={`img${more ? ' on' : ''}`}></i>
+					</span>
+				}
+			</td>
+		)
+	}
+}
+
+class InternalTx extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			more: false,
+		}
+	}
+
+	toggleMore = () => {
+		this.setState({ more: !this.state.more })
+	}
+
+	render() {
+		const { more } = this.state
+		const { internalTxList } = this.props
+		const isMoreTen = internalTxList && internalTxList.length > COUNT
+		const internalTxListSliced = (isMoreTen && !more) ? internalTxList.slice(0, COUNT) : internalTxList
+		const length = internalTxList ? internalTxList.length : 0
+		return (
+			<div>
+				{internalTxListSliced.map((tx, index) => {
+					const { amount, fromAddr, toAddr } = tx
+					return (
+						<p key={index}>
+							┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
+							&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
+							&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
+						</p>
+					)
+				})}
+				{isMoreTen && 
+					<span className={`more`} onClick={this.toggleMore}>
+						More ({more ? length : length - COUNT}/{length})
+						<i className={`img${more ? ' on' : ''}`}></i>
+					</span>
+				}
+			</div>
+		)
+	}
 }
 
 const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom, download }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
-		const isInternalTxList = !!internalTxList && internalTxList.length !== 0
 		return (
 			<AddressCell
 				targetAddr={address}
@@ -288,21 +352,7 @@ const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFro
 				tdClassName="trans"
 				isFrom={isFrom}
 				download={download}
-				InternalDiv={
-					isInternalTxList &&
-					<div>
-						{internalTxList.map((tx, index) => {
-							const { amount, fromAddr, toAddr } = tx
-							return (
-								<p key={index}>
-									┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-									&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
-									&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
-								</p>
-							)
-						})}
-					</div>
-				}
+				InternalDiv={(internalTxList && internalTxList.length !== 0) && <InternalTx internalTxList={internalTxList}/>}
 			/>
 		)
 	}

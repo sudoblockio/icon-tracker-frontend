@@ -332,7 +332,18 @@ html, body{height: 100%;}
 .table-typeB tr .qrcode:hover {border: 1px solid #1aaaba; box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);}
 .table-typeB tr .qrcode:hover em.img{background-position:-250px 0; }
 
-.table-typeB td p{margin: 5px 0;}
+.table-typeB td p{margin: 5px 0;  }
+.table-typeB td.transfer{padding: 2px 30px; text-align: center;}
+.table-typeB td.transfer p{margin: 0px 0; padding: 9px 0; text-align: left;}
+.table-typeB td.transfer p:not(:last-child){  border-bottom: 1px dotted  #e6e6e6;}
+.table-typeB td.transfer .more{color:#262626;display: block; padding: 10px 0;}
+.table-typeB td.transfer .more .img{width: 16px; height: 16px; background-position:-250px -300px; top: 4px; margin: 0 0 0 14px; }
+.table-typeB td.transfer .more .img.on{background-position:-275px -300px; }
+.table-typeB td.transfer .more:hover{color: #1aaaba; text-decoration: none;}
+.table-typeB td.transfer .more:hover .img{background-position:-250px -325px;}
+.table-typeB td.transfer .more:hover .img.on{background-position:-275px -325px;}
+
+
 .table-typeB td span{color: #1aaaba; font-weight: 800;     word-break: break-all; cursor: pointer;}
 .table-typeB td span.ellipsis{width: 200px; vertical-align: top;}
 
@@ -447,10 +458,17 @@ html, body{height: 100%;}
 .table-typeB.transaction span.copy{margin-left: 20px;}
 .table-typeB.transaction tr i.img{width: 10px; height: 12px; position: relative;     background-position: -50px 0; margin-right: 4px; top: -1px;}
 .table-typeB.transaction tr .trans{padding: 8px 30px 6px;}
-.table-typeB.transaction tr .trans p{font-size: 10px; font-weight: 400;}
-.table-typeB.transaction tr .trans div{margin-top: 10px;}
-.table-typeB.transaction tr .trans p{margin-top: 2px;}
+.table-typeB.transaction tr .trans p{font-size: 10px; font-weight: 400;margin-top: 2px; text-align: left;}
+.table-typeB.transaction tr .trans div{margin-top: 10px; text-align: center;}
 .table-typeB.transaction tr .trans.calen .img{    background-position: 0px -250px; width: 12px;}
+
+.table-typeB.transaction tr .trans .more{color:#262626;display: block; padding: 10px 0;}
+.table-typeB.transaction tr .trans .more .img{width: 16px; height: 16px; background-position:-250px -300px; top: 4px; margin: 0 0 0 14px; }
+.table-typeB.transaction tr .trans .more .img.on{background-position:-275px -300px; }
+.table-typeB.transaction tr .trans .more:hover{color: #1aaaba; text-decoration: none;}
+.table-typeB.transaction tr .trans .more:hover .img{background-position:-250px -325px;}
+.table-typeB.transaction tr .trans .more:hover .img.on{background-position:-275px -325px;}
+
 
 .table-typeC td:nth-child(2){text-align: center;}
 .table-typeC td:nth-child(3){text-align: right;}
