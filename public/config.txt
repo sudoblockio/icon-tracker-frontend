@@ -1,1 +1,1 @@
-1.0.6_20181128_4|http://trackerlocaldev.icon.foundation|http://13.209.103.183:9000|false
+1.0.7_20181129_0|http://trackerlocaldev.icon.foundation|http://13.209.103.183:9000|false
