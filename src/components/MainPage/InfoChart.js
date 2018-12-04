@@ -110,7 +110,7 @@ class InfoChart extends Component {
   }
 
   makeChartData(tmainChart) {
-    if (tmainChart && tmainChart.length !== 0) {
+    if (!tmainChart && tmainChart.length !== 0) {
       const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
       const labels = []
       const data = []
@@ -129,15 +129,21 @@ class InfoChart extends Component {
       min = Math.floor(min / division) * division
       max = min + step * 4
   
-      return { labels, data, max, min, step }
+      return { 
+        labels, 
+        data, 
+        max, 
+        min, 
+        step 
+      }
     }
     else {
       return {
         labels: [],
         data: [],
-        max: 1000,
+        max: 100000,
         min: 0,
-        step: 250,
+        step: 25000,
       }
     }
   }

@@ -15,19 +15,10 @@ export async function walletApiInstance() {
 }
 
 export async function getTrackerApiUrl() {
-  // if (process.env.TRACKER_API_URL) {
-  //   return process.env.TRACKER_API_URL
-  // }
-
   const configFile = await getConfigJsonFile()
   if (configFile && configFile.TRACKER_API_URL) {
     return configFile.TRACKER_API_URL
   }
-
-  // const configTxt = await getConfigTxtFile()
-  // if (configTxt[1]) {
-  //   return configTxt[1]
-  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -47,19 +38,12 @@ export async function getTrackerApiUrl() {
 }
 
 export async function getWalletApiUrl() {
-  // if (process.env.WALLET_API_URL) {
-  //   return process.env.WALLET_API_URL
-  // }
-
+  console.log('getWalletApiUrl')
   const configFile = await getConfigJsonFile()
+  console.log('configFile', configFile)
   if (configFile && configFile.WALLET_API_URL) {
     return configFile.WALLET_API_URL
   }
-
-  // const configTxt = await getConfigTxtFile()
-  // if (configTxt[2]) {
-  //   return configTxt[2]
-  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -79,19 +63,10 @@ export async function getWalletApiUrl() {
 }
 
 export async function getIsSoloVersion() {
-  // if (process.env.IS_SOLO_VERSION) {
-  //   return process.env.IS_SOLO_VERSION
-  // }
-
   const configFile = await getConfigJsonFile()
   if (configFile && configFile.IS_SOLO_VERSION) {
     return !!configFile.IS_SOLO_VERSION
   }
-
-  // const configTxt = await getConfigTxtFile()
-  // if (configTxt[3]) {
-  //   return JSON.parse(configTxt[3])
-  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -119,18 +94,3 @@ async function getConfigJsonFile() {
     return {}
   }
 }
-
-// async function getConfigTxtFile() {
-//   try {
-//     const response = await fetch('/config.txt')
-//     console.log('getConfigTxtFile()', response)
-//     const responseText = await response.text();
-//     const responseSplit = responseText.split("|")
-//     console.log('responseSplit', responseSplit)
-//     return responseSplit
-//   }
-//   catch (e) {
-//     console.error(e)
-//     return {}
-//   }
-// }

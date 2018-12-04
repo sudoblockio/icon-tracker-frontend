@@ -1,7 +1,7 @@
 {   
-    "VERSION": "1.0.8_20181204_1",
+    "VERSION": "1.0.8_20181204_3",
     "To use below variables,": "remove two underbars at the front, and then set as you want.",
-    "__TRACKER_API_URL": "http://trackerlocaldev.icon.foundation",
-    "__WALLET_API_URL": "http://13.209.103.183:9000",
+    "__TRACKER_API_URL": "https://bicon.tracker.solidwallet.io",
+    "__WALLET_API_URL": "https://bicon.net.solidwallet.io",
     "__IS_SOLO_VERSION": false
 }
