@@ -19,15 +19,15 @@ export async function getTrackerApiUrl() {
   //   return process.env.TRACKER_API_URL
   // }
 
-  // const configFile = await getConfigJsonFile()
-  // if (configFile && configFile.TRACKER_API_URL) {
-  //   return configFile.TRACKER_API_URL
-  // }
+  const configFile = await getConfigJsonFile()
+  if (configFile && configFile.TRACKER_API_URL) {
+    return configFile.TRACKER_API_URL
+  }
 
-  const configTxt = await getConfigTxtFile()
-  if (configTxt[1]) {
-    return configTxt[1]
-  } 
+  // const configTxt = await getConfigTxtFile()
+  // if (configTxt[1]) {
+  //   return configTxt[1]
+  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -51,15 +51,15 @@ export async function getWalletApiUrl() {
   //   return process.env.WALLET_API_URL
   // }
 
-  // const configFile = await getConfigJsonFile()
-  // if (configFile && configFile.WALLET_API_URL) {
-  //   return configFile.WALLET_API_URL
-  // }
+  const configFile = await getConfigJsonFile()
+  if (configFile && configFile.WALLET_API_URL) {
+    return configFile.WALLET_API_URL
+  }
 
-  const configTxt = await getConfigTxtFile()
-  if (configTxt[2]) {
-    return configTxt[2]
-  } 
+  // const configTxt = await getConfigTxtFile()
+  // if (configTxt[2]) {
+  //   return configTxt[2]
+  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -83,15 +83,15 @@ export async function getIsSoloVersion() {
   //   return process.env.IS_SOLO_VERSION
   // }
 
-  // const configFile = await getConfigJsonFile()
-  // if (configFile && configFile.IS_SOLO_VERSION) {
-  //   return !!configFile.IS_SOLO_VERSION
-  // }
+  const configFile = await getConfigJsonFile()
+  if (configFile && configFile.IS_SOLO_VERSION) {
+    return !!configFile.IS_SOLO_VERSION
+  }
 
-  const configTxt = await getConfigTxtFile()
-  if (configTxt[3]) {
-    return JSON.parse(configTxt[3])
-  } 
+  // const configTxt = await getConfigTxtFile()
+  // if (configTxt[3]) {
+  //   return JSON.parse(configTxt[3])
+  // } 
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
@@ -107,30 +107,30 @@ export async function getIsSoloVersion() {
   return false
 }
 
-// async function getConfigJsonFile() {
-//   try {
-//     const response = await fetch('/config.json')
-//     console.log('getConfigJsonFile()', response)
-//     const responseJson = await response.json();
-//     return responseJson
-//   }
-//   catch (e) {
-//     console.error(e)
-//     return {}
-//   }
-// }
-
-async function getConfigTxtFile() {
+async function getConfigJsonFile() {
   try {
-    const response = await fetch('/config.txt')
-    console.log('getConfigTxtFile()', response)
-    const responseText = await response.text();
-    const responseSplit = responseText.split("|")
-    console.log('responseSplit', responseSplit)
-    return responseSplit
+    const response = await fetch('/config.json')
+    console.log('getConfigJsonFile()', response)
+    const responseJson = await response.json();
+    return responseJson
   }
   catch (e) {
     console.error(e)
     return {}
   }
 }
+
+// async function getConfigTxtFile() {
+//   try {
+//     const response = await fetch('/config.txt')
+//     console.log('getConfigTxtFile()', response)
+//     const responseText = await response.text();
+//     const responseSplit = responseText.split("|")
+//     console.log('responseSplit', responseSplit)
+//     return responseSplit
+//   }
+//   catch (e) {
+//     console.error(e)
+//     return {}
+//   }
+// }

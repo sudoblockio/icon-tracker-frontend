@@ -110,25 +110,36 @@ class InfoChart extends Component {
   }
 
   makeChartData(tmainChart) {
-    const labels = []
-    const data = []
-    const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
-
-    chartData.forEach((c, i) => {
-      labels.push(moment(c.targetDate).format('MMM D'))
-      data.push(c.txCount)
-    })
-
-    let max = Math.max.apply(null, data)
-    let min = Math.min.apply(null, data)
-    let step = Math.round((max - min) / 4)
-    let division = Math.pow(10, step.toString().length - 1)
-
-    step = Math.ceil(step / division) * division
-    min = Math.floor(min / division) * division
-    max = min + step * 4
-
-    return { labels, data, max, min, step }
+    if (tmainChart && tmainChart.length !== 0) {
+      const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
+      const labels = []
+      const data = []
+  
+      chartData.forEach((c, i) => {
+        labels.push(moment(c.targetDate).format('MMM D'))
+        data.push(c.txCount)
+      })
+  
+      let max = Math.max.apply(null, data)
+      let min = Math.min.apply(null, data)
+      let step = Math.round((max - min) / 4)
+      let division = Math.pow(10, step.toString().length - 1)
+  
+      step = Math.ceil(step / division) * division
+      min = Math.floor(min / division) * division
+      max = min + step * 4
+  
+      return { labels, data, max, min, step }
+    }
+    else {
+      return {
+        labels: [],
+        data: [],
+        max: 1000,
+        min: 0,
+        step: 250,
+      }
+    }
   }
 
   render() {

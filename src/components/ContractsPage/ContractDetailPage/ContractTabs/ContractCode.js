@@ -27,9 +27,11 @@ class ContractCode extends Component {
         const { contract } = this.props
         const { data } = contract
         const { address, contractVersion, newVersion } = data
+        console.log(data)
         if (isValidData(address)) {
             const activeLink = isValidData(contractVersion) ? await makeDownloadLink(address, contractVersion) : ''
             const updatedLink = isValidData(newVersion) ? await makeDownloadLink(address, newVersion) : ''
+            console.log(activeLink, updatedLink)
             this.setState({ activeLink, updatedLink })
         }
     }
