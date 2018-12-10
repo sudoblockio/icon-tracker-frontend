@@ -47,7 +47,7 @@ export const SERVER_TX_TYPE = {
     "6": "Contract Rejected",
     "7": "Update Accepted",
     "8": "Update Rejected",
-    "9": "Update cancelled"
+    "9": "Update Cancelled"
 }
 
 export const IRC_VERSION = {
@@ -137,7 +137,7 @@ export const TX_TYPE_DATA = {
     [TX_TYPE.CONTRACT_TX]: {
 		tx: 'contractTx',
 		getTxList: 'contractTxList',
-        className: 'table-typeF',
+        className: 'table-typeC',
         noBoxText: 'No Transaction',
     },
     [TX_TYPE.CONTRACT_INTERNAL_TX]: {

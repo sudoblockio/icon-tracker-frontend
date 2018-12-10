@@ -111,6 +111,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
+							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.amount} symbol="ICX" />

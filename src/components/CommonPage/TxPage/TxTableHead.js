@@ -47,6 +47,7 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>TxHash</th>
+                            <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
                             <th className="table-sign"></th>

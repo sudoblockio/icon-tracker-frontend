@@ -377,17 +377,30 @@ export function isScoreTx(targetAddr, txType, isFrom) {
     return false
   }
   const _txType = SERVER_TX_TYPE[txType]
+  // switch (_txType) {
+  //   case SERVER_TX_TYPE[3]:
+  //   case SERVER_TX_TYPE[4]:
+  //     return targetAddr === "cx0000000000000000000000000000000000000000"
+  //   case SERVER_TX_TYPE[5]:
+  //   case SERVER_TX_TYPE[6]:
+  //   case SERVER_TX_TYPE[7]:
+  //   case SERVER_TX_TYPE[8]:
+  //     return targetAddr === "cx0000000000000000000000000000000000000001"
+  //   case SERVER_TX_TYPE[9]:
+  //     return targetAddr === "cx0000000000000000000000000000000000000000"
+  //   default:
+  //     return false
+  // }
   switch (_txType) {
     case SERVER_TX_TYPE[3]:
     case SERVER_TX_TYPE[4]:
-      return targetAddr === "cx0000000000000000000000000000000000000000"
     case SERVER_TX_TYPE[5]:
     case SERVER_TX_TYPE[6]:
     case SERVER_TX_TYPE[7]:
     case SERVER_TX_TYPE[8]:
-      return targetAddr === "cx0000000000000000000000000000000000000001"
+      return true
     case SERVER_TX_TYPE[9]:
-      return targetAddr === "cx0000000000000000000000000000000000000000"
+      return targetAddr !== "cx0000000000000000000000000000000000000001"
     default:
       return false
   }
