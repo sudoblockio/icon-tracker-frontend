@@ -110,7 +110,7 @@ class InfoChart extends Component {
   }
 
   makeChartData(tmainChart) {
-    if (!tmainChart && tmainChart.length !== 0) {
+    if (tmainChart && tmainChart.length !== 0) {
       const chartData = tmainChart.sort((a, b) => moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))
       const labels = []
       const data = []
