@@ -233,7 +233,7 @@ class TxPage extends Component {
 					</table >,
 					<SortHolder
 						key='SortHolder'
-						count={count}
+						count={count >= 100 ? 100 : count}
 						getData={this.getTxListByCount}
 					/>,
 					(loading &&
