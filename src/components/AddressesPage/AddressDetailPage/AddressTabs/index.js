@@ -17,6 +17,7 @@ class WalletTabs extends Component {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx } = this.props
         const { loading, data } = wallet
         const { address, tokenList, internalTxCount } = data
+        
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
         if (internalTxCount && Number(internalTxCount) !== 0) {
@@ -25,6 +26,7 @@ class WalletTabs extends Component {
         if (tokenList && tokenList.length !== 0) {
             TABS.push(ADDRESS_TABS[2])
         }
+
         return (
             <TabTable
                 {...this.props}
@@ -32,7 +34,7 @@ class WalletTabs extends Component {
                 on={on}
                 loading={loading}
                 TableContents={on => {
-                    switch (ADDRESS_TABS[on]) {
+                    switch (TABS[on]) {
                         case ADDRESS_TABS[0]:
                             return (
                                 <AddressTransactions 

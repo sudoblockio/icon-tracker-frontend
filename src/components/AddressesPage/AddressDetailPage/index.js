@@ -12,27 +12,36 @@ class AddressesDetailPage extends Component {
 
     render() {
         const { wallet } = this.props;
-        const { loading, error } = wallet
+        const { loading, error, data } = wallet
+        const { tokenList, internalTxCount } = data
+
+        const TABS = [], getList = []
+        TABS.push(ADDRESS_TABS[0])
+        getList.push(address => {
+            this.props.addressTxList({ address, page: 1, count: 10 })
+        })
+        if (internalTxCount && Number(internalTxCount) !== 0) {
+            TABS.push(ADDRESS_TABS[1])
+            getList.push(address => {
+                this.props.addressInternalTxList({ address, page: 1, count: 10 })
+            })
+        }
+        if (tokenList && tokenList.length !== 0) {
+            TABS.push(ADDRESS_TABS[2])
+            getList.push(address => {
+                this.props.addressTokenTxList({ address, page: 1, count: 10 })
+            })
+        }
 
         return (
             <DetailPage
                 {...this.props}
                 loading={loading}
                 error={error}
-                TABS={ADDRESS_TABS}
+                TABS={TABS}
                 ROUTE="/address"
                 getInfo={address => { this.props.addressInfo({ address }) }}
-                getList={[
-                    address => {
-                        this.props.addressTxList({ address, page: 1, count: 10 })
-                    },
-                    address => {
-                        this.props.addressInternalTxList({ address, page: 1, count: 10 })
-                    },
-                    address => {
-                        this.props.addressTokenTxList({ address, page: 1, count: 10 })
-                    },
-                ]}
+                getList={getList}
                 InfoComponent={AddressInfo}
                 TabsComponent={AddressTabs}
             />
