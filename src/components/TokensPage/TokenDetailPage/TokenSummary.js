@@ -43,7 +43,7 @@ class TokenSummary extends Component {
                                                     <td>-</td>
                                             }
                                             <td>Decimals</td>
-                                            <td>{decimals || '-'}</td>
+                                            <td>{decimals}</td>
                                         </tr>
                                         <tr>
                                             <td>Holders</td>
