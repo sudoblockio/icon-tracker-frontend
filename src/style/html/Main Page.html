@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/font.css">
 	<link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
-<body>
+<body class="isBanner">
 	<div class="root">
 		<div class="wrap home">
 			<!-- header -->
@@ -38,7 +38,14 @@
 										<li><span>Token List</span></li>
 										<li><span>Token Transfer List</span></li>
 									</ol>
-								</li>
+								</li> 
+								<!-- <li>
+									<span>Rep<em class="img"></em></span>
+									<ol class="sub-menu">
+										<li><span>Representative</span></li>
+									</ol>
+								</li>  -->
+								<li><span>ID</span></li>
 							</ul>
 							<div class="search-group">
 								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, BLOCK height" value="">
@@ -70,7 +77,7 @@
 							<li class="right">
 								<p class="subTitle">Daily Transactions</p>
 								<div class="graph">
-									<img src="../image/chart.png">
+									<img src="../image/chart.png" style="width: 728px;height: 282px;">
 								</div>
 							</li>
 						</ul>
@@ -257,6 +264,23 @@
 		</div>
 	</div>
 	<!-- //footer -->
+
+	<!-- banner -->
+	<div class="banner-wrap">
+		<div class="banner">
+			<img src="../image/banner_t.png">
+			<i class="bubble"></i>
+			<i class="bubble"></i>
+			<i class="bubble"></i>
+			<div class="view">
+				<input id="cbox-01" class="cbox-type" type="checkbox" name="">
+				<label for="cbox-01" class="label _img">Do not show 7 days</label>
+				<i class="img close"></i>
+			</div>
+			<a class="link" href="https://icon.community/iconsensus/" target="_blank"></a>
+		</div>
+	</div>
+	<!-- //banner -->
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Footer, Popup } from './components/';
+import { Footer, Popup, Banner } from './components/';
 import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
 import AddressListPage from './pages/AddressListPage';
@@ -94,6 +94,7 @@ class Routes extends Component {
           <div className="blank"></div>
         </div>
         <Footer />
+        {window.location.pathname === '/' && <Banner />}
         <Popup />
       </div>
     );

@@ -155,7 +155,9 @@ const actionTypes = {
 
   icxCall: 'ICX_CALL',
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
-  icxCallRejected: 'ICX_CALL_REJECTED'
+  icxCallRejected: 'ICX_CALL_REJECTED',
+
+  setBannerOption: 'SET_BANNER_OPTION'
 }
 
 export default actionTypes

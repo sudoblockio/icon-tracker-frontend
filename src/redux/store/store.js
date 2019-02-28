@@ -5,15 +5,19 @@ import createHistory from 'history/createBrowserHistory'
 import rootReducer from '../reducers/rootReducer';
 import rootSaga from '../sagas/rootSaga';
 import { routerMiddleware } from 'react-router-redux'
+import persistState from 'redux-localstorage'
 
 const history = createHistory()
 const routeMiddleware = routerMiddleware(history)
-
 const sagaMiddleware = createSagaMiddleware();
-
 const store = createStore(rootReducer, {}, composeWithDevTools(
   applyMiddleware(sagaMiddleware),
-  applyMiddleware(routeMiddleware)
+  applyMiddleware(routeMiddleware),
+  persistState(null, {
+    slicer: () => state => {
+      return { storage: state.storage }
+    }
+  })
 ));
 
 sagaMiddleware.run(rootSaga);

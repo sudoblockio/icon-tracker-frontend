@@ -5,11 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
-	<title>ICON:Tracker</title>
+	<title>ICON</title>
 	<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="../js/commonFx.js"></script>
-	<script type="text/javascript" src="../js/commonFx.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/font.css">
 	<link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
@@ -39,12 +37,7 @@
 										<li><span>Token Transfer List</span></li>
 									</ol>
 								</li> 
-								<li>
-									<span>Rep<em class="img"></em></span>
-									<ol class="sub-menu">
-										<li><span>Representative</span></li>
-									</ol>
-								</li> 
+								<li><span>ID</span></li>
 							</ul>
 							<div class="search-group">
 								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, Block height" value="">
@@ -61,14 +54,59 @@
 			<div class="content-wrap">
 				<div class="screen0">
 					<div class="wrap-holder">
-						<p class="title">Transactions
-							<span class="right"><em>999</em> Total Transactions</span>
-						</p>
+						<p class="title">Transaction</p>
 						<div class="contents">
-							<table class="table-typeJ">
+							<table class="table-typeB transaction">
+								<thead>
+									<tr>
+										<th>Address</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="">
+										<td>ID</td>
+										<td>did:icon:AbdWbNvG2BEuAGfCHMr84iNg4F3iWpRGRx <span class="copy">Copy ID</span><span class="copy on">Copy ID</span></td>
+									</tr>
+									
+									<tr>
+										<td>Public Key ID<em>(Hex)</em></td>
+										<td class="id">
+											<div>
+												<p>keys-1<em>(039548b1aedbb7b812ef2412c7922cde2f9b358939877410cce4a6777ec1b651f1)</em></p>
+												<p>keys-2<em>(039548b1aedbb7b812ef2412c7922cde2f9b358939877410cce4a6777ec1b651f1)</em></p>
+												<p>keys-3<em>(039548b1aedbb7b812ef2412c7922cde2f9b358939877410cce4a6777ec1b651f1)</em></p>
+												
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>Type</td>
+										<td>ES256K</td>
+									</tr>
+									
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+				<div class="screen1">
+					<div class="wrap-holder">
+						<div class="tab-holder">
+							<ul>
+								<li class="on">Events on this ID</li>
+							</ul>
+						</div>
+						<div class="contents">
+							<p class="txt"><span>Latest<em>2</em> ICX Txn(s) from a total of<em >2 Transaction(s)</em></span></p>
+							<table class="table-typeO">
 								<thead>
 									<tr>
 										<th>TxHash</th>
+										<th>Action</th>
 										<th>Block</th>
 										<th>Age</th>
 										<th>From</th>
@@ -81,93 +119,53 @@
 								<tbody>
 									<tr>
 										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td>Revoke ID</td>
 										<td>999,999</td>
 										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><i class="img"><i/></td>
+										<td class="on"><span class=" ellipsis">did:icon:Abcf0a4548548bb787</span></td>
+										<td class="table-sign out"><span>OUT</span></td>
 										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td>100.00001<em>ICX</em></td>
 										<td>0.01<em>ICX</em></td>
 									</tr>
 									<tr>
 										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td>Create ID</td>
 										<td>999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
+										<td>2020-12-24 01:53:49<em>(UTC+09)</em></td>
 										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><i class="img"><i/></td>
+										<td class="table-sign"><span>IN</span></td>
 										<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td>100.00001<em>ICX</em></td>
 										<td>0.01<em>ICX</em></td>
 									</tr>
 									<tr>
 										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td>Create ID</td>
 										<td>999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
+										<td>2020-12-24 01:53:49<em>(UTC+09)</em></td>
 										<td class="no">-</td>
-										<td class="table-sign"><i class="img"><i/></td>
+										<td class="table-sign"><span>IN</span></td>
 										<td class="no">-</td>
-										<td>100.00001<em>ICX</em></td>
+										<td>100,000.0000<em>ICX</em></td>
 										<td>0.01<em>ICX</em></td>
 									</tr>
 									<tr>
 										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td>Create ID</td>
 										<td>999</td>
-										<td>23 hrs ago</td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><i class="img"><i/></td>
-										<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
-										<td>100.00001<em>ICX</em></td>
-										<td>0.01<em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
+										<td>2020-12-24 01:53:49<em>(UTC+09)</em></td>
 										<td class="no">-</td>
-										<td class="table-sign"><i class="img"><i/></td>
+										<td class="table-sign"><span>IN</span></td>
 										<td class="no">-</td>
 										<td>100.00001<em>ICX</em></td>
-										<td>0.01<em>ICX</em></td>
+										<td>0.0001<em>ICX</em></td>
 									</tr>
-
-
 								</tbody>
 							</table>
-							<!-- sort -->
-							<div class="sort-holder">
-								<p>160<span>(Show)</span><em class="img"></em></p>
-								<ul>
-									<li><span>20</span></li>
-									<li><span>40</span></li>
-									<li><span>80</span></li>
-									<li><span>160</span></li>
-								</ul>
-							</div>
-							<!-- //sort -->
 
-							<!-- pageing -->
-							<ul class="page">
-								<li>
-									<span class="start"><em class="img"></em></span>
-								</li>
-								<li>
-									<span class="prev"><em class="img"></em></span>
-								</li>
-								<li class="pageNum">
-									<p>Page</p>
-									<input type="text" class="txt-type-page over" placeholder="" value="">
-									<p> / 10000</p>
-								</li>
-								<li>
-									<span class="next"><em class="img"></em></span>
-								</li>
-								<li>
-									<span class="end"><em class="img"></em></span>
-								</li>
-							</ul>
-							<!-- //pageing -->
+
 						</div>
-
 					</div>
 				</div>
 

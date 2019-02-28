@@ -55,6 +55,8 @@ import SearchPage from './CommonPage/SearchPage'
 import DetailPage from './CommonPage/DetailPage'
 import NotFoundPage from './CommonPage/NotFoundPage'
 
+import Banner from './Banner/Banner'
+
 export {
   MainPage,
   InfoSummary,
@@ -110,4 +112,6 @@ export {
   SearchPage,
   DetailPage,
   NotFoundPage,
+
+  Banner
 }
