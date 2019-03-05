@@ -16,8 +16,20 @@ import TokenListPage from './pages/TokenListPage'
 import TokenDetailPage from './pages/TokenDetailPage'
 import TxPage from './pages/TxPage'
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
+import { getIsSolo } from './utils/utils'
 
 class Routes extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isSolo: true
+    }
+  }
+
+  async componentDidMount() {
+    const isSolo = await getIsSolo()
+    this.setState({ isSolo })
+  }
 
   render() {
     return (
@@ -94,7 +106,7 @@ class Routes extends Component {
           <div className="blank"></div>
         </div>
         <Footer />
-        {window.location.pathname === '/' && <Banner />}
+        {window.location.pathname === '/' && !this.state.isSolo && <Banner />}
         <Popup />
       </div>
     );
