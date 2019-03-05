@@ -1,4 +1,5 @@
-import web3Utils from 'web3-utils'
+import { IconConverter } from 'icon-sdk-js'
+
 onmessage = message => {
     const { type, payload } = message.data
     switch (type) {
@@ -11,13 +12,15 @@ onmessage = message => {
         case 'utf8ToHex':
             postMessage({
                 type,
-                payload: web3Utils.utf8ToHex(payload),
+                payload: IconConverter.toHex(payload),
+
+                
             })
             break;
         case 'hexToUtf8':
             postMessage({
                 type,
-                payload: web3Utils.hexToUtf8(payload),
+                payload: IconConverter.toUtf8(payload),
             })
             break;
         default:

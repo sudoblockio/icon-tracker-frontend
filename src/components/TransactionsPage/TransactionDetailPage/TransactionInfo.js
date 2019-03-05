@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import web3Utils from 'web3-utils'
+import { IconAmount, IconConverter } from 'icon-sdk-js'
 import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import {
 	CopyButton,
@@ -17,7 +17,8 @@ import {
 	dateToUTC,
 	utcDateInfo,
 	beautifyJson,
-	removeQuotes
+	removeQuotes,
+	isHex
 } from 'utils/utils'
 
 const COUNT = 10
@@ -87,8 +88,9 @@ class TransactionInfo extends Component {
 					targetContractAddr
 				} = data
 				const _stepPrice = stepPrice || "0"
-				const stepPriceGloop = web3Utils.fromWei(_stepPrice, "Gwei")
-				const stepPriceIcx = web3Utils.fromWei(_stepPrice, "ether")
+				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
+				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
+				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
 
@@ -208,16 +210,16 @@ class DataCell extends Component {
 	getDataString = () => {
 		const { dataType, dataString } = this.props
 		const removed = removeQuotes(dataString)
-		const isHex = web3Utils.isHex(removed)
+		const _isHex = isHex(removed)
 		try {
 			if (dataType === 'message') {
 				const { viewHex } = this.state
-				if (viewHex && !isHex) {
-					const toHex = web3Utils.utf8ToHex(removed)
+				if (viewHex && !_isHex) {
+					const toHex = IconConverter.toHex(removed)
 					this.setState({ converted: toHex })
 				}
-				else if (!viewHex && isHex) {
-					const toUtf8 = web3Utils.hexToUtf8(removed)
+				else if (!viewHex && _isHex) {
+					const toUtf8 = IconConverter.toUtf8(removed)
 					this.setState({ converted: toUtf8 })
 				}
 				else {
@@ -230,7 +232,7 @@ class DataCell extends Component {
 		}
 		catch (error) {
 			console.error(error)
-			this.setState({ viewHex: isHex, converted: removed })
+			this.setState({ viewHex: _isHex, converted: removed })
 		}
 	}
 

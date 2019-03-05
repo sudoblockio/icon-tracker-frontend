@@ -447,3 +447,7 @@ export async function getIsSolo() {
   console.log('getIsSolo()', result)
   return result
 }
+
+export function isHex(value) {
+  return /^(0x)[0-9a-fA-F]+$/i.test(value);
+}
