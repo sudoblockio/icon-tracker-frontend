@@ -5,12 +5,6 @@
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.17.1",
-    "babel-core": "6.26.0",
-    "babel-eslint": "7.2.3",
-    "babel-jest": "20.0.3",
-    "babel-loader": "7.1.2",
-    "babel-preset-react-app": "^3.1.1",
-    "babel-runtime": "6.26.0",
     "bignumber.js": "^7.2.1",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
@@ -19,13 +13,6 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "4.10.0",
-    "eslint-config-react-app": "^2.1.0",
-    "eslint-loader": "1.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
@@ -33,7 +20,6 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
     "icon-sdk-js": "0.0.11",
-    "jest": "20.0.4",
     "js-beautify": "^1.7.5",
     "moment": "^2.24.0",
     "object-assign": "4.1.1",
@@ -51,6 +37,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "^2.1.8",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-localstorage": "^0.4.1",
@@ -60,27 +47,22 @@
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "web3-utils": "^1.0.0-beta.34",
-    "webpack": "3.8.1",
-    "webpack-dev-server": "2.9.4",
-    "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "start:mainnet": "REACT_APP_ENV=mainnet node scripts/start.js",
-    "start:testnet": "REACT_APP_ENV=testnet node scripts/start.js",
-    "start:testnet1": "REACT_APP_ENV=testnet1 node scripts/start.js",
-    "start:custom": "REACT_APP_ENV=custom node scripts/start.js",
-    "build": "node scripts/build.js",
-    "build:mainnet": "REACT_APP_ENV=mainnet node scripts/build.js && zip -r build.zip build",
-    "build:testnet": "REACT_APP_ENV=testnet node scripts/build.js && zip -r build.zip build",
-    "build:testnet1": "REACT_APP_ENV=testnet1 node scripts/build.js && zip -r build.zip build",
-    "build:custom": "REACT_APP_ENV=custom node scripts/build.js && zip -r build.zip build",
-    "test": "node scripts/test.js --env=jsdom"
+    "start": "react-scripts start",
+    "start:mainnet": "REACT_APP_ENV=mainnet react-scripts start",
+    "start:testnet": "REACT_APP_ENV=testnet react-scripts start",
+    "start:testnet1": "REACT_APP_ENV=testnet1 react-scripts start",
+    "start:custom": "REACT_APP_ENV=custom react-scripts start",
+    "build": "react-scripts build",
+    "build:mainnet": "REACT_APP_ENV=mainnet react-scripts build && zip -r build.zip build",
+    "build:testnet": "REACT_APP_ENV=testnet react-scripts build && zip -r build.zip build",
+    "build:testnet1": "REACT_APP_ENV=testnet1 react-scripts build && zip -r build.zip build",
+    "build:custom": "REACT_APP_ENV=custom react-scripts build && zip -r build.zip build",
+    "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {
-    "eslint": "^4.15.0",
-    "eslint-plugin-react": "^7.5.1",
     "worker-loader": "^2.0.0"
   },
   "jest": {
@@ -124,5 +106,11 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
