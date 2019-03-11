@@ -1011,7 +1011,7 @@ input[type=checkbox]:checked + label {background-position-y: -200px; color: #fff
 .banner-wrap{height: 80px; width: 100%; bottom: 0; background-image: linear-gradient(to bottom, #1a1a1a, #212121); position: fixed; text-align: center; z-index: 1; color: #fff; }
 .banner-wrap .banner{width: 900px; display: inline-block; text-align: left; position: relative; background: url(../image/banner.png) 380px bottom no-repeat; background-size: auto 80px; height: 100%;  }
 .banner-wrap .banner .link{ display: inline-block; height: 80px; width: 660px; position: absolute; top: 0; left: 0; cursor: pointer;}
-.banner-wrap .banner img{width: 276px; height: 44px;  margin-top: 18px;}
+.banner-wrap .banner img{width: 314px; height: 44px;  margin-top: 18px;}
 .banner-wrap .banner .close{width:16px; height: 16px; background-position:-200px -250px; cursor: pointer; vertical-align: top; margin-top: 2px;  }
 .banner-wrap .banner .view{position: absolute; display: inline-block; right: 0; top: 30px;}
 .banner-wrap .banner >i {position: absolute; background: url(../image/banner_b.png) left top no-repeat; background-size: auto 50px; opacity: 0; }
@@ -1025,13 +1025,19 @@ input[type=checkbox]:checked + label {background-position-y: -200px; color: #fff
 }
 
 @-webkit-keyframes bubble {
-    0% { -webkit-transform: translateY(10px); opacity: 0; }
-    100% { -webkit-transform: translateY(0); opacity: 1; }
+    0% { -webkit-transform: translateY(5px); opacity: 0; }
+    10% { -webkit-transform: translateY(0px); opacity: 1; }
+    70% { -webkit-transform: translateY(0px); opacity: 1; }
+    80% { -webkit-transform: translateY(5px); opacity: 0; }
+    100% { -webkit-transform: translateY(5px); opacity: 0; }    
 }
 
 @-moz-keyframes bubble {
-    0% { -moz-transform: translateY(10px); opacity: 0; }
-    100% { -moz-transform: translateY(0); opacity: 1; }
+    0% { -moz-transform: translateY(5px); opacity: 0; }
+    10% { -moz-transform: translateY(0px); opacity: 1; }
+    70% { -moz-transform: translateY(0px); opacity: 1; }
+    80% { -moz-transform: translateY(5px); opacity: 0; }
+    100% { -moz-transform: translateY(5px); opacity: 0; }
 }
 
 @keyframes bubble {
