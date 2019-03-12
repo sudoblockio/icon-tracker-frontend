@@ -30,7 +30,7 @@ class TokenSummary extends Component {
                                     <tbody>
                                         <tr>
                                             <td>Total Supply</td>
-                                            <td>{numberWithCommas(totalSupply)} {symbol}{!!_totalSupplyUsd && <em>({_totalSupplyUsd} USD)</em>}</td>
+                                            <td>{numberWithCommas(totalSupply)} {symbol}{!!_totalSupplyUsd && <em>({convertNumberToText(_totalSupplyUsd, 0)} USD)</em>}</td>
                                             <td>Contract </td>
                                             <td><span>{contract ? <AddressLink to={contract}/> : '-'}</span></td>
                                         </tr>
@@ -38,7 +38,7 @@ class TokenSummary extends Component {
                                             <td>Price</td>
                                             {
                                                 !!price ?
-                                                    <td>{convertNumberToText(price)} ICX<em>({convertNumberToText(priceUsd, 3)} USD)</em></td>
+                                                    <td>{convertNumberToText(price, 8)} ICX<em>({convertNumberToText(priceUsd, 8)} USD)</em></td>
                                                     :
                                                     <td>-</td>
                                             }
