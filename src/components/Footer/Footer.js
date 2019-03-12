@@ -13,7 +13,7 @@ class Footer extends Component {
       <div className="footer-wrap">
     		<div className="screen0">
     			<div className="wrap-holder">
-    				<p>©2018 ICON Foundation</p>
+    				<p>©2019 ICON Foundation</p>
     				<div className="sns">
     					<ul>
     						<li className="icon"><a target='_black' href="https://www.icon.foundation"><span className="img"></span></a></li>
