@@ -1,4 +1,4 @@
-image: node:latest
+image: nikolaik/python-nodejs:latest
 
 stages:
   - install
@@ -13,6 +13,8 @@ install:
     policy: push
     paths:
       - node_modules/
+  only:
+    - pipeline_test
 
 build:
   stage: build
@@ -33,6 +35,9 @@ build:
     paths:
       - build/
     expire_in: 5 mins
+  only:
+    - pipeline_test
+
 
 deploy:
   stage: deploy
@@ -45,7 +50,11 @@ deploy:
     - cat ~/.ssh/config
     - cat ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - scp -r ./build ubuntu@$PRODUCTION_SERVER_URL:/home/ubuntu
-    - ssh ubuntu@$PRODUCTION_SERVER_URL "echo \"$now\" >> test2.txt"
+    - scp -r ./build ubuntu@$PROD_SERVER_INSTANCE:/home/ubuntu
+    - ssh ubuntu@$PROD_SERVER_INSTANCE "echo \"$now\" >> test2.txt"
   dependencies:
     - build
+  only:
+    - pipeline_test
+  when: manual
+
