@@ -1,0 +1,51 @@
+image: node:latest
+
+stages:
+  - install
+  - build
+  - deploy
+
+install:
+  stage: install
+  script:
+    - npm install
+  cache:
+    policy: push
+    paths:
+      - node_modules/
+
+build:
+  stage: build
+  before_script:
+    - "if [ ! -d ./node_modules ];
+      then echo \"Cache not found. Installing npm modules\" && npm install;
+      else echo \"Cache was found. Reusing npm modules\";
+      fi"
+  script:
+    - ls
+    - npm run build
+    - ls
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - build/
+    expire_in: 5 mins
+
+deploy:
+  stage: deploy
+  script:
+    - ls
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - cat ~/.ssh/config
+    - cat ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - scp -r ./build ubuntu@$PRODUCTION_SERVER_URL:/home/ubuntu
+    - ssh ubuntu@$PRODUCTION_SERVER_URL "echo \"$now\" >> test2.txt"
+  dependencies:
+    - build
