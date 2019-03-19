@@ -22,7 +22,6 @@ test:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-        # scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
 
     - mkdir -p ~/.ssh
@@ -39,7 +38,6 @@ test:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-        # scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
 
 build:
@@ -78,7 +76,6 @@ deploy testnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh ubuntu@${ec2_instance} "cp -r build build_${current_datetime}";
-        # scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
@@ -104,7 +101,6 @@ deploy mainnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh ubuntu@${ec2_instance} "echo \"proof of ssh\"" >> test.txt";
-        # scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
