@@ -40,7 +40,7 @@ deploy testnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
@@ -66,7 +66,7 @@ deploy mainnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
