@@ -5,7 +5,7 @@ stages:
   - build
   - deploy
 
-test:
+test dev:
   stage: test
   script:
     - mkdir -p ~/.ssh
@@ -15,7 +15,7 @@ test:
     - chmod 600 ~/.ssh/id_rsa
     
     - current_datetime=$(date +%Y_%m_%d)
-    - backup_file_name="build$current_datetime"
+    - backup_file_name="build_$current_datetime"
     - SERVERS=$DEV_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
@@ -31,7 +31,26 @@ test:
     - chmod 600 ~/.ssh/id_rsa
     
     - current_datetime=$(date +%Y_%m_%d)
-    - backup_file_name="build$current_datetime"
+    - backup_file_name="build_$current_datetime"
+    - SERVERS=$PROD_SERVER_URL_LIST
+    - SERVER_LIST=(${SERVERS//,/ })
+    - for ec2_instance in "${SERVER_LIST[@]}";
+      do 
+        echo "deploying to ${ec2_instance}";
+        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+      done
+
+test prod:
+  stage: test
+  script:
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - chmod 600 ~/.ssh/id_rsa
+    
+    - current_datetime=$(date +%Y_%m_%d)
+    - backup_file_name="build_$current_datetime"
     - SERVERS=$PROD_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
