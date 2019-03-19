@@ -38,7 +38,7 @@ deploy testnet:
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh\"" >> test.txt";
+        ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh\" >> test.txt";
         scp -r ./build -v ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
