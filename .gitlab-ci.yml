@@ -4,7 +4,6 @@ stages:
   - build
   - deploy
 
-
 build:
   stage: build
   script:
@@ -39,7 +38,7 @@ deploy testnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh\" >> test.txt";
-        scp -r ./build -v ubuntu@${ec2_instance}:/home/ubuntu;
+        scp -v -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
@@ -64,7 +63,7 @@ deploy mainnet:
       do 
         echo "deploying to ${ec2_instance}";
         ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh\"" >> test.txt";
-        scp -r ./build -v ubuntu@${ec2_instance}:/home/ubuntu;
+        scp -v -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
