@@ -1,20 +1,19 @@
 image: nikolaik/python-nodejs:latest
 
 stages:
-  - test
+  # - test
   - build
   - deploy
 
-test:
-  stage: test
-  script:
-    - SERVERS=$DEV_SERVER_URL_LIST
-    - SERVER_LIST=(${SERVERS//,/ })
-    - for ec2_instance in "${SERVER_LIST[@]}";
-      do 
-        echo "deploying to ${ec2_instance}";
-        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
-      done
+# test:
+#   stage: test
+#   script:
+#     - SERVERS=$DEV_SERVER_URL_LIST
+#     - SERVER_LIST=(${SERVERS//,/ })
+#     - for ec2_instance in "${SERVER_LIST[@]}";
+#       do 
+#         echo "deploying to ${ec2_instance}";
+#       done
 
 build:
   stage: build
