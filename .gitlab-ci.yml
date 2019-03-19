@@ -1,47 +1,8 @@
 image: nikolaik/python-nodejs:latest
 
 stages:
-  - test
   - build
   - deploy
-
-test dev:
-  stage: test
-  script:
-    - mkdir -p ~/.ssh
-    - touch ~/.ssh/config
-    - echo -e "$SSH_PRIVATE_KEY_DEV" > ~/.ssh/id_rsa
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - chmod 600 ~/.ssh/id_rsa
-    
-    - current_datetime=$(date +%Y_%m_%d)
-    - backup_file_name="build_$current_datetime"
-    - SERVERS=$DEV_SERVER_URL_LIST
-    - SERVER_LIST=(${SERVERS//,/ })
-    - for ec2_instance in "${SERVER_LIST[@]}";
-      do 
-        echo "deploying to ${ec2_instance}";
-        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-      done
-
-test prod:
-  stage: test
-  script:
-    - mkdir -p ~/.ssh
-    - touch ~/.ssh/config
-    - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - chmod 600 ~/.ssh/id_rsa
-    
-    - current_datetime=$(date +%Y_%m_%d)
-    - backup_file_name="build_$current_datetime"
-    - SERVERS=$PROD_SERVER_URL_LIST
-    - SERVER_LIST=(${SERVERS//,/ })
-    - for ec2_instance in "${SERVER_LIST[@]}";
-      do 
-        echo "deploying to ${ec2_instance}";
-        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
-      done
 
 build:
   stage: build
@@ -71,14 +32,15 @@ deploy testnet:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - chmod 600 ~/.ssh/id_rsa
     
-    - current_datetime=$(date +%Y_%m_%d)
+    - current_datetime=$(date +%Y%m%d)
     - backup_file_name="build_$current_datetime"
     - SERVERS=$DEV_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        ssh ubuntu@${ec2_instance} "cp -r build build_${current_datetime}";
+        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
       done
   dependencies:
     - build
@@ -90,20 +52,21 @@ deploy testnet:
 deploy mainnet:
   stage: deploy
   script:
-    - ls
     - mkdir -p ~/.ssh
     - touch ~/.ssh/config
     - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - chmod 600 ~/.ssh/id_rsa
     
-    - datetime="date +%Y_%m_d"
+    - current_datetime=$(date +%Y%m%d)
+    - backup_file_name="build_$current_datetime"
     - SERVERS=$PROD_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        ssh ubuntu@${ec2_instance} "echo \"proof of ssh\"" >> test.txt";
+        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
       done
   dependencies:
     - build
