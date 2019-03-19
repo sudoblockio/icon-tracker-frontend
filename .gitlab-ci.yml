@@ -13,7 +13,7 @@ build:
   artifacts:
     paths:
       - build/
-    expire_in: 20 mins
+    expire_in: 30 mins
   only:
     - master
     - development 
@@ -38,7 +38,8 @@ deploy testnet:
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
+        ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh" >> test.txt"
+        scp -r ./build -v ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
@@ -62,7 +63,8 @@ deploy mainnet:
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
+        ssh -v ubuntu@${ec2_instance} "echo \"proof of ssh" >> test.txt"
+        scp -r ./build -v ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
     - build
