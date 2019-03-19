@@ -1,0 +1,71 @@
+image: nikolaik/python-nodejs:latest
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 20 mins
+  only:
+    - master
+    - development 
+
+deploy testnet:
+  stage: deploy
+  before_script:
+    - apt-get update -qq && apt-get install -y jq
+  script:
+    - cat ./build/config.json
+    - jq '.["TRACKER_API_URL"] = "https://trackerdev.icon.foundation/" | .["WALLET_API_URL"] = "https://testwallet.icon.foundation" | .["IS_SOLO_VERSION"] = .__IS_SOLO_VERSION  | del(.__TRACKER_API_URL, .__WALLET_API_URL, .__IS_SOLO_VERSION)' ./build/config.json > temp.tmp && mv temp.tmp ./build/config.json
+    - cat ./build/config.json
+
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - echo -e "$SSH_PRIVATE_KEY_DEV" > ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - chmod 600 ~/.ssh/id_rsa
+    
+    - SERVERS=$DEV_SERVER_URL_LIST
+    - SERVER_LIST=(${SERVERS//,/ })
+    - for ec2_instance in "${SERVER_LIST[@]}";
+      do 
+        echo "deploying to ${ec2_instance}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
+      done
+  dependencies:
+    - build
+  only:
+    - master
+    - development 
+  when: manual
+
+deploy mainnet:
+  stage: deploy
+  script:
+    - ls
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - chmod 600 ~/.ssh/id_rsa
+    
+    - SERVERS=$PROD_SERVER_URL_LIST
+    - SERVER_LIST=(${SERVERS//,/ })
+    - for ec2_instance in "${SERVER_LIST[@]}";
+      do 
+        echo "deploying to ${ec2_instance}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu
+      done
+  dependencies:
+    - build
+  only:
+    - master
+    - development 
+  when: manual
