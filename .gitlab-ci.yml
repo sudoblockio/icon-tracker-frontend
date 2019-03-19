@@ -1,60 +1,76 @@
 image: nikolaik/python-nodejs:latest
 
 stages:
-  - install
   - build
   - deploy
 
-install:
-  stage: install
-  script:
-    - npm install
-  cache:
-    policy: push
-    paths:
-      - node_modules/
-  only:
-    - pipeline_test
-
 build:
   stage: build
-  before_script:
-    - "if [ ! -d ./node_modules ];
-      then echo \"Cache not found. Installing npm modules\" && npm install;
-      else echo \"Cache was found. Reusing npm modules\";
-      fi"
   script:
-    - ls
+    - npm install
     - npm run build
-    - ls
-  cache:
-    policy: pull
-    paths:
-      - node_modules/
   artifacts:
     paths:
       - build/
-    expire_in: 5 mins
+    expire_in: 30 mins
   only:
-    - pipeline_test
+    - master
+    - development 
 
-
-deploy:
+deploy testnet:
   stage: deploy
+  before_script:
+    - apt-get update -qq && apt-get install -y jq
   script:
-    - ls
+    - cat ./build/config.json
+    - jq '.["TRACKER_API_URL"] = "https://trackerdev.icon.foundation" | .["WALLET_API_URL"] = "https://testwallet.icon.foundation" | .["IS_SOLO_VERSION"] = .__IS_SOLO_VERSION  | del(.__TRACKER_API_URL, .__WALLET_API_URL, .__IS_SOLO_VERSION)' ./build/config.json > temp.tmp && mv temp.tmp ./build/config.json
+    - cat ./build/config.json
+
     - mkdir -p ~/.ssh
     - touch ~/.ssh/config
-    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - echo -e "$SSH_PRIVATE_KEY_DEV" > ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - cat ~/.ssh/config
-    - cat ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - scp -r ./build ubuntu@$PROD_SERVER_INSTANCE:/home/ubuntu
-    - ssh ubuntu@$PROD_SERVER_INSTANCE "echo \"$now\" >> test2.txt"
+    
+    - current_datetime=$(date +%Y%m%d)
+    - backup_file_name="build_$current_datetime"
+    - SERVERS=$DEV_SERVER_URL_LIST
+    - SERVER_LIST=(${SERVERS//,/ })
+    - for ec2_instance in "${SERVER_LIST[@]}";
+      do 
+        echo "deploying to ${ec2_instance}";
+        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
+      done
   dependencies:
     - build
   only:
-    - pipeline_test
+    - master
+    - development 
   when: manual
 
+deploy mainnet:
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/config
+    - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - chmod 600 ~/.ssh/id_rsa
+    
+    - current_datetime=$(date +%Y%m%d)
+    - backup_file_name="build_$current_datetime"
+    - SERVERS=$PROD_SERVER_URL_LIST
+    - SERVER_LIST=(${SERVERS//,/ })
+    - for ec2_instance in "${SERVER_LIST[@]}";
+      do 
+        echo "deploying to ${ec2_instance}";
+        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
+      done
+  dependencies:
+    - build
+  only:
+    - master
+    - development 
+  when: manual
