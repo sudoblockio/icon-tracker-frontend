@@ -12,6 +12,7 @@ import {
 import {
   getIsSoloVersion
 } from 'redux/api/restV3/config'
+import { IconConverter } from 'icon-sdk-js'
 
 moment.updateLocale('en', {
   relativeTime: {
@@ -450,4 +451,14 @@ export async function getIsSolo() {
 
 export function isHex(value) {
   return /^(0x)[0-9a-fA-F]+$/i.test(value);
+}
+
+export function isImageData(dataString) {
+  if (typeof dataString === 'string') {
+		const removed = removeQuotes(dataString)		
+		const data = isHex(removed) ? IconConverter.toUtf8(removed) : removed
+    return data.indexOf('data:image') === 0
+  }
+  
+  return false
 }

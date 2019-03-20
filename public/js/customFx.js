@@ -32,6 +32,9 @@ $(window).on('CUSTOM_FX', function (e) {
 			if (param == 'detail') {
 				$(".popup-wrap.detail").css({ "display": "none" });
 			}
+			if (param == 'image') {
+				$(".popup-wrap.image").css({ "display": "none" });
+			}
 			else {
 				$(".popup-wrap").fadeOut(350);
 			}

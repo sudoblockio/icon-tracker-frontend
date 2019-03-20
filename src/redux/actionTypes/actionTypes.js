@@ -92,6 +92,7 @@ const actionTypes = {
   contractDetailRejected: 'CONTRACT_DETAIL_REJECTED',
 
   contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
+  imageConverterPopup: 'IMAGE_CONVERTER_POPUP',
 
   contractTxList: 'CONTRACT_TX_LIST',
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',

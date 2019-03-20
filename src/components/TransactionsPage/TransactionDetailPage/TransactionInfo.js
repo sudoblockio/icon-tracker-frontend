@@ -18,7 +18,8 @@ import {
 	utcDateInfo,
 	beautifyJson,
 	removeQuotes,
-	isHex
+	isHex,
+	isImageData
 } from 'utils/utils'
 
 const COUNT = 10
@@ -154,7 +155,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Data</td>
-											<DataCell dataType={dataType} dataString={dataString} />
+											<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 										</tr>
 									</tbody>
 								</table>
@@ -245,16 +246,25 @@ class DataCell extends Component {
 		}
 	}
 
+	handleImageClick = () => {
+		const { dataString } = this.props
+		const removed = removeQuotes(dataString)		
+		const data = isHex(removed) ? IconConverter.toUtf8(removed) : removed
+		this.props.imageConverterPopup({ data })
+	}
+
 	render() {
-		const { dataType } = this.props
+		const { dataType, dataString } = this.props
 		const { converted, loading, viewHex } = this.state
 		const buttonTitle = viewHex ? 'Convert to UTF-8' : 'Convert to HEX'
+		const _isImageData = isImageData(dataString)
 		return (
 			<td className="convert">
 				<div className="scroll">
 					<p>{converted}</p>
 				</div>
 				<button className="btn-type-normal" onClick={this.handleClick} disabled={!(dataType === 'message' && !loading)}>{buttonTitle}</button>
+				<button className="btn-type-normal" onClick={this.handleImageClick} disabled={!(dataType === 'message' && !loading && _isImageData)}>Convert to Image</button>
 			</td>
 		)
 	}
