@@ -12,7 +12,6 @@ import {
 import {
   getIsSoloVersion
 } from 'redux/api/restV3/config'
-import { IconConverter } from 'icon-sdk-js'
 
 moment.updateLocale('en', {
   relativeTime: {
