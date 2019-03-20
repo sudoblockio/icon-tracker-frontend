@@ -3,4 +3,10 @@
 /* Set margin-left of address link with icon to 0px in trasaction list */
 [class *="table-type"] td.icon a{margin-left: 0px;}
 /* Set height and max-height of data to auto and 300px each other in transaction detail page */
-.table-typeB .scroll{ height: auto !important; max-height: 300px; }
+.table-typeB .scroll{ height: auto !important; }
+
+.convert .btn-type-normal {margin-right: 13px;}
+
+.popup-wrap.image .popup { overflow: hidden; }
+.popup-wrap.image .popup .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%);}
+.popup-wrap.image .popup .centered img {position: absolute; top: 0; left: 0; max-width: 100%; height: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%);}

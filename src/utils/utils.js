@@ -451,3 +451,11 @@ export async function getIsSolo() {
 export function isHex(value) {
   return /^(0x)[0-9a-fA-F]+$/i.test(value);
 }
+
+export function isImageData(data) {
+  if (typeof data === 'string') {
+    return data.indexOf('data:image') === 0
+  }
+  
+  return false
+}

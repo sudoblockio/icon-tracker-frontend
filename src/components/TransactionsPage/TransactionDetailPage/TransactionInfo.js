@@ -18,7 +18,8 @@ import {
 	utcDateInfo,
 	beautifyJson,
 	removeQuotes,
-	isHex
+	isHex,
+	isImageData
 } from 'utils/utils'
 
 const COUNT = 10
@@ -152,10 +153,12 @@ class TransactionInfo extends Component {
 											<td>Actual TxFee</td>
 											<td>{convertNumberToText(fee)} ICX<em>({convertNumberToText(feeUsd, 3)} USD)</em></td>
 										</tr>
+										{dataType && dataString &&
 										<tr>
 											<td>Data</td>
-											<DataCell dataType={dataType} dataString={dataString} />
+											<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 										</tr>
+										}
 									</tbody>
 								</table>
 							</div>
@@ -172,9 +175,11 @@ class DataCell extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			converted: '',
 			loading: false,
 			viewHex: false,
+			converted: '',
+			toHex: '',
+			toUtf8: ''
 		}
 
 		this.workers = []
@@ -211,16 +216,16 @@ class DataCell extends Component {
 		const { dataType, dataString } = this.props
 		const removed = removeQuotes(dataString)
 		const _isHex = isHex(removed)
+		const toHex = _isHex ? removed : IconConverter.toHex(removed)
+		const toUtf8 = _isHex ? IconConverter.toUtf8(removed) : removed
 		try {
 			if (dataType === 'message') {
 				const { viewHex } = this.state
 				if (viewHex && !_isHex) {
-					const toHex = IconConverter.toHex(removed)
-					this.setState({ converted: toHex })
+					this.setState({ converted: toHex, toHex })
 				}
 				else if (!viewHex && _isHex) {
-					const toUtf8 = IconConverter.toUtf8(removed)
-					this.setState({ converted: toUtf8 })
+					this.setState({ converted: toUtf8, toUtf8 })
 				}
 				else {
 					this.setState({ converted: removed })
@@ -245,16 +250,30 @@ class DataCell extends Component {
 		}
 	}
 
+	handleImageClick = () => {
+		const { dataString } = this.props
+		const removed = removeQuotes(dataString)		
+		const data = isHex(removed) ? IconConverter.toUtf8(removed) : removed
+		this.props.imageConverterPopup({ data })
+	}
+
 	render() {
 		const { dataType } = this.props
-		const { converted, loading, viewHex } = this.state
-		const buttonTitle = viewHex ? 'Convert to UTF-8' : 'Convert to HEX'
+		const { converted, loading, viewHex, toUtf8 } = this.state
+		const isMessage = dataType === 'message'
+		const isButton = isMessage && !loading
+		const _isImageData = isMessage && isImageData(toUtf8)		
+		const buttonTitle = viewHex ? `Convert to ${_isImageData ? 'Image' : 'UTF-8'}` : 'Convert to HEX'
 		return (
 			<td className="convert">
 				<div className="scroll">
-					<p>{converted}</p>
+					{!viewHex && _isImageData ?
+						<img src={converted} alt='converted'/>    
+						:
+						<p>{converted}</p>
+					}
 				</div>
-				<button className="btn-type-normal" onClick={this.handleClick} disabled={!(dataType === 'message' && !loading)}>{buttonTitle}</button>
+				{isButton && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
 			</td>
 		)
 	}
