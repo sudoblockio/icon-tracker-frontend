@@ -179,7 +179,8 @@ class DataCell extends Component {
 			viewHex: false,
 			converted: '',
 			toHex: '',
-			toUtf8: ''
+			toUtf8: '',
+			imgError: false
 		}
 
 		this.workers = []
@@ -257,18 +258,22 @@ class DataCell extends Component {
 		this.props.imageConverterPopup({ data })
 	}
 
+	onError = () => {
+		this.setState({ imgError: true })
+	}
+
 	render() {
 		const { dataType } = this.props
-		const { converted, loading, viewHex, toUtf8 } = this.state
+		const { converted, loading, viewHex, toUtf8, imgError } = this.state
 		const isMessage = dataType === 'message'
 		const isButton = isMessage && !loading
-		const _isImageData = isMessage && isImageData(toUtf8)		
+		const _isImageData = isMessage && isImageData(toUtf8) && !imgError
 		const buttonTitle = viewHex ? `Convert to ${_isImageData ? 'Image' : 'UTF-8'}` : 'Convert to HEX'
 		return (
 			<td className="convert">
 				<div className="scroll">
 					{!viewHex && _isImageData ?
-						<img src={converted} alt='converted'/>    
+						<img src={converted} onError={this.onError} alt='error'/>    
 						:
 						<p>{converted}</p>
 					}
