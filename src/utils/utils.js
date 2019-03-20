@@ -453,10 +453,8 @@ export function isHex(value) {
   return /^(0x)[0-9a-fA-F]+$/i.test(value);
 }
 
-export function isImageData(dataString) {
-  if (typeof dataString === 'string') {
-		const removed = removeQuotes(dataString)		
-		const data = isHex(removed) ? IconConverter.toUtf8(removed) : removed
+export function isImageData(data) {
+  if (typeof data === 'string') {
     return data.indexOf('data:image') === 0
   }
   
