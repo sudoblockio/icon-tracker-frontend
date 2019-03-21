@@ -12,7 +12,7 @@ build:
   artifacts:
     paths:
       - build/
-    expire_in: 30 mins
+    expire_in: 24 hrs
   only:
     - master
     - development 
@@ -32,14 +32,12 @@ deploy testnet:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - chmod 600 ~/.ssh/id_rsa
     
-    - current_datetime=$(date +%Y%m%d)
-    - backup_file_name="build_$current_datetime"
     - SERVERS=$DEV_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        cat build_backup_creation.sh | ssh -v ubuntu@${ec2_instance};
         scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
@@ -51,21 +49,25 @@ deploy testnet:
 
 deploy mainnet:
   stage: deploy
+  before_script:
+    - apt-get update -qq && apt-get install -y jq
   script:
+    - cat ./build/config.json
+    - jq '.["TRACKER_API_URL"] = "https://tracker.icon.foundation" | .["WALLET_API_URL"] = "https://wallet.icon.foundation" | .["IS_SOLO_VERSION"] = .__IS_SOLO_VERSION  | del(.__TRACKER_API_URL, .__WALLET_API_URL, .__IS_SOLO_VERSION)' ./build/config.json > temp.tmp && mv temp.tmp ./build/config.json
+    - cat ./build/config.json
+
     - mkdir -p ~/.ssh
     - touch ~/.ssh/config
     - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - chmod 600 ~/.ssh/id_rsa
     
-    - current_datetime=$(date +%Y%m%d)
-    - backup_file_name="build_$current_datetime"
     - SERVERS=$PROD_SERVER_URL_LIST
     - SERVER_LIST=(${SERVERS//,/ })
     - for ec2_instance in "${SERVER_LIST[@]}";
       do 
         echo "deploying to ${ec2_instance}";
-        ssh -v ubuntu@${ec2_instance} "cp -r build ${backup_file_name}";
+        cat build_backup_creation.sh | ssh -v ubuntu@${ec2_instance};
         scp -r ./build ubuntu@${ec2_instance}:/home/ubuntu;
       done
   dependencies:
