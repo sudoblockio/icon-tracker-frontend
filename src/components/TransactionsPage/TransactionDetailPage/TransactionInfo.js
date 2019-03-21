@@ -262,6 +262,13 @@ class DataCell extends Component {
 		this.setState({ imgError: true })
 	}
 
+	openImage = () => {
+		// const img = new Image()
+		// img.src = this.state.toUtf8
+		// const newTab = window.open('', '_blank')
+		// newTab.document.write(img.outerHTML)
+	}
+
 	render() {
 		const { dataType } = this.props
 		const { converted, loading, viewHex, toUtf8, imgError } = this.state
@@ -273,7 +280,7 @@ class DataCell extends Component {
 			<td className="convert">
 				<div className="scroll">
 					{!viewHex && _isImageData ?
-						<img src={converted} onError={this.onError} alt='error'/>    
+						<img src={converted} onClick={this.openImage} onError={this.onError} alt='error'/> 
 						:
 						<p>{converted}</p>
 					}
