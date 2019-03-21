@@ -5,4 +5,4 @@
 /* Set height and max-height of data to auto and 300px each other in transaction detail page */
 .table-typeB .scroll{ height: auto !important; }
 
-.table-typeB .scroll img{max-width: 850px;}
+.table-typeB .scroll img{max-width: 850px; /* cursor: pointer; */}
