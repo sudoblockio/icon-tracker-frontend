@@ -6,7 +6,8 @@ function* setWalletAddress(action) {
     try {
       const { payload } = action;
       if (payload) {
-        yield put({ type: AT.setWalletAddress, payload: payload });
+        console.log(payload)
+        yield put({ type: AT.setWalletAddressSuccess, payload: payload });
       } else {
         throw new Error();
       }
@@ -14,11 +15,19 @@ function* setWalletAddress(action) {
         console.log(e)
     }
   }
-
-function* watchWalletAddress() {
-    yield takeLatest(AT.setWalletAddress, setWalletAddress)
+function* clearWalletAddress(){
+    try{
+        yield put({ type: AT.clearWalletAddressSuccess });
+    }catch(e){
+        console.log(e)
+    }
 }
 
-export default function* walletAddress() {
-    yield fork(watchWalletAddress)
+function* watchSetWalletAddress() {
+    yield takeLatest(AT.setWalletAddress, setWalletAddress)
+    yield takeLatest(AT.clearWalletAddress, clearWalletAddress)
+}
+
+export default function* walletAddressSaga() {
+    yield fork(watchSetWalletAddress)
 }

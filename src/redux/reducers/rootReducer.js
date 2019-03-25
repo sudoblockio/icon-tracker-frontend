@@ -9,7 +9,6 @@ import { tokensReducer } from './tokensReducer'
 import { contractsReducer } from './contractsReducer'
 import { popupReducer } from './popupReducer'
 import { storageReducer } from './storageReducer'
-import { walletAddressReducer } from "./walletAddressReducer"
 
 const rootReducer = combineReducers({
   mainPage: mainPageReducer,
@@ -21,8 +20,7 @@ const rootReducer = combineReducers({
   tokens: tokensReducer,
   contracts: contractsReducer,
   popup: popupReducer,
-  storage: storageReducer,
-  walletAddress :  walletAddressReducer
+  storage: storageReducer
 });
 
 export default rootReducer;

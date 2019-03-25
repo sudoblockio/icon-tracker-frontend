@@ -57,44 +57,42 @@ $(document).ready(function() {
 	var type = e.originalEvent.detail.type;
 	var param = e.originalEvent.detail.param;
 	switch (type) {
-	  case "POPUP_OPEN":
-		$(".popup-wrap." + param).fadeIn(350);
-		break;
-	  case "POPUP_CLOSE":
-		if (param == "detail") {
-		  $(".popup-wrap.detail").css({ display: "none" });
-		} else {
-		  $(".popup-wrap").fadeOut(350);
-		}
-		break;
-	  case "CONTRACT_OVER":
-		$(".table-typeB .help." + param).addClass("animate");
-		break;
-	  case "CONTRACT_OUT":
-		$(".table-typeB .help." + param).removeClass("animate");
-		break;
-	  case "SORT_ENTER":
-		$(".sort-holder ul")
-		  .stop()
-		  .slideDown(300, "swing");
-		break;
-	  case "SORT_LEAVE":
-		$(".sort-holder ul")
-		  .stop()
-		  .slideUp(300, "swing");
-		break;
-	  case "TOKEN_BALANCE":
-		$(".combo-group").css({ display: "block" });
-		$(".table-typeB td .balance").addClass("on");
-		break;
-	  case "CONTRACT_STATUS":
-		$(".status-holder ul")
-		  .stop()
-		  .slideDown(300, "swing");
-		$(".status-holder > span").addClass("on");
-		break;
-  
-	  default:
+		case 'POPUP_OPEN':
+			$(".popup-wrap." + param).fadeIn(350);
+			break
+		case 'POPUP_CLOSE':
+			if (param == 'detail') {
+				$(".popup-wrap.detail").css({ "display": "none" });
+			}
+			if (param == 'image') {
+				$(".popup-wrap.image").css({ "display": "none" });
+			}
+			else {
+				$(".popup-wrap").fadeOut(350);
+			}
+			break
+		case 'CONTRACT_OVER':
+			$(".table-typeB .help." + param).addClass("animate");
+			break
+		case 'CONTRACT_OUT':
+			$(".table-typeB .help." + param).removeClass("animate");
+			break
+		case 'SORT_ENTER':
+			$(".sort-holder ul").stop().slideDown(300, 'swing');
+			break
+		case 'SORT_LEAVE':
+			$(".sort-holder ul").stop().slideUp(300, 'swing');
+			break
+		case 'TOKEN_BALANCE':
+			$(".combo-group").css({ "display": "block" });
+			$(".table-typeB td .balance").addClass("on");
+			break;
+		case 'CONTRACT_STATUS':
+			$(".status-holder ul").stop().slideDown(300, 'swing');
+			$(".status-holder > span").addClass("on");
+			break;
+
+		default:
 	}
   });
   

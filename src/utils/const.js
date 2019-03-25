@@ -67,7 +67,8 @@ export const TRANSACTION_TABS = ['Internal Transactions', 'Events']
 
 export const POPUP_TYPE = {
     QR: 'qr',
-    DETAIL: 'detail'
+    DETAIL: 'detail',
+    IMAGE: 'image'
 }
 
 export const SEARCH_TYPE = {

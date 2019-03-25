@@ -92,6 +92,7 @@ const actionTypes = {
   contractDetailRejected: 'CONTRACT_DETAIL_REJECTED',
 
   contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
+  imageConverterPopup: 'IMAGE_CONVERTER_POPUP',
 
   contractTxList: 'CONTRACT_TX_LIST',
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
@@ -158,7 +159,12 @@ const actionTypes = {
   icxCallRejected: 'ICX_CALL_REJECTED',
 
   setBannerOption: 'SET_BANNER_OPTION',
-  setWalletAddress: 'SET_WALLET_ADDRESS'
+  
+  setWalletAddress: 'SET_WALLET_ADDRESS',
+  setWalletAddressSuccess :'SET_WALLET_ADDRESS_SUCCESS',
+  clearWalletAddress: 'CLEAR_WALLET_ADDRESS',
+  clearWalletAddressSuccess: 'CLEAR_WALLET_ADDRESS_SUCCESS'
+
 }
 
 export default actionTypes

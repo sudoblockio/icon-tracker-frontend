@@ -27,3 +27,10 @@ export function transactionInternalTxList(payload){
     payload
   };
 }
+
+export function imageConverterPopup(payload) {
+  return {
+    type: actionTypes.imageConverterPopup,
+    payload
+  }
+}

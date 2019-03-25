@@ -5,7 +5,7 @@ class Connect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      walletAddress: localStorage.getItem("walletAddress")
+      walletAddress:this.props.walletAddress
     };
   }
   getWalletAddress = async () => {
@@ -17,18 +17,16 @@ class Connect extends Component {
       {
         walletAddress
       },
-      localStorage.setItem("walletAddress", walletAddress)
+      ()=>{this.props.setWalletAddress(walletAddress)}
     );
   };
   disconnect = () => {
-    this.setState(
-      {
-        walletAddress: false
-      },
-      localStorage.removeItem("walletAddress")
-    );
+    this.setState({
+        walletAddress:undefined
+    },()=>{this.props.clearWalletAddress()})    
   };
   render() {
+      
     const { walletAddress } = this.state;
     return (
       <div className={`connect ${walletAddress ? "join" : ""}`}>

@@ -6,3 +6,16 @@ export function setBannerOption(payload) {
     payload
   }
 }
+
+export function setWalletAddress(payload) {
+  return {
+    type: actionTypes.setWalletAddress,
+    payload
+  }
+}
+
+export function clearWalletAddress(){
+  return{
+    type:actionTypes.clearWalletAddress
+  }
+}

@@ -139,11 +139,11 @@ class TokenBalance extends Component {
                       <ul className="list-group">
                         {
                           list.map((token, index) => {
-                            const { contractName, contractSymbol, quantity, unit, totalTokenPrice } = token
+                            const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
                             return (
                               <li key={index}>
                                 <p><em>{contractName}</em><em>{totalTokenPrice ? totalTokenPrice : "-"}</em><em>USD</em></p>
-                                <p><em>{quantity} {contractSymbol}</em><em>{unit ? unit : "-"}</em><em>@</em></p>
+                                <p><em>{quantity} {contractSymbol}</em><em>{tokenPrice ? tokenPrice : "-"}</em><em>@</em></p>
                               </li>
                             )
                           })
