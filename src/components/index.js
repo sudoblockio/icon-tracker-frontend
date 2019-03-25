@@ -56,6 +56,7 @@ import DetailPage from './CommonPage/DetailPage'
 import NotFoundPage from './CommonPage/NotFoundPage'
 
 import Banner from './Banner/Banner'
+import Connect from './Header/Connect';
 
 export {
   MainPage,
@@ -113,5 +114,6 @@ export {
   DetailPage,
   NotFoundPage,
 
-  Banner
+  Banner,
+  Connect
 }

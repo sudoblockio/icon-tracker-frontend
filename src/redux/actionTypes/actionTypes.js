@@ -157,7 +157,8 @@ const actionTypes = {
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
 
-  setBannerOption: 'SET_BANNER_OPTION'
+  setBannerOption: 'SET_BANNER_OPTION',
+  setWalletAddress: 'SET_WALLET_ADDRESS'
 }
 
 export default actionTypes

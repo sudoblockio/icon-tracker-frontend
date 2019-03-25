@@ -1,8 +1,8 @@
 import actionTypes from '../actionTypes/actionTypes';
 
-export function setBannerOption(payload) {
+export function setWalletAddress(payload) {
   return {
-    type: actionTypes.setBannerOption,
+    type: actionTypes.setWalletAddress,
     payload
   }
 }

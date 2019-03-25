@@ -15,7 +15,7 @@ const store = createStore(rootReducer, {}, composeWithDevTools(
   applyMiddleware(routeMiddleware),
   persistState(null, {
     slicer: () => state => {
-      return { storage: state.storage }
+      return { storage: state.storage,...state.walletAddress.payload }
     }
   })
 ));

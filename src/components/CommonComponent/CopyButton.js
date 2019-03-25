@@ -1,70 +1,79 @@
-import React, { Component } from 'react';
-import clipboard from 'clipboard'
+import React, { Component } from "react";
+import clipboard from "clipboard";
 
 class CopyButton extends Component {
   constructor(props) {
-    super(props)
-    this.clipboard = new clipboard('.clipboard-btn');
-    this.timeout = 0
+    super(props);
+    this.clipboard = new clipboard(".clipboard-btn");
+    this.timeout = 0;
     this.state = {
-      style: ''
-    }
+      style: ""
+    };
   }
 
   componentWillUnmount() {
     this.clipboard.destroy();
-    clearTimeout(this.timeout)
+    clearTimeout(this.timeout);
   }
 
   handleClick = () => {
-    const { disabled, download } = this.props
+    const { disabled, download } = this.props;
     if (disabled || download) {
-      return
+      return;
     }
-    const { style } = this.state
-    if (style !== 'on') {
-      this.setState({ style: 'on' }, this.startTimeout)
+    const { style } = this.state;
+    if (style !== "on") {
+      this.setState({ style: "on" }, this.startTimeout);
     }
-  }
+  };
 
   startTimeout = () => {
     this.timeout = setTimeout(() => {
-      this.setState({ style: '' })
-    }, 1000)
-  }
+      this.setState({ style: "" });
+    }, 1000);
+  };
 
   render() {
-    const { data, title, isSpan, disabled, download } = this.props
-    const { style } = this.state
-    const text = style === 'on' ? 'Copy Complete' : title
+    const { data, title, isSpan, disabled, download, wallet } = this.props;
+    const { style } = this.state;
+    const text = style === "on" ? "Copy Complete" : title;
     const Content = () => {
       if (isSpan) {
         if (!download) {
           return (
             <span
-              className={`copy clipboard-btn ${style} ${disabled ? 'disabled' : ''}`}
+              className={`copy clipboard-btn ${style} ${disabled ? "disabled" : ""}`}
               data-clipboard-text={data}
               onClick={this.handleClick}
             >
               {text}
             </span>
-          )
-        }
-        else {
+          );
+        } else {
           return (
-            <a href={download.link} download={download.name} className='download'>
+            <a href={download.link} download={download.name} className="download">
               <span
                 className={`copy clipboard-btn download ${style}`}
                 data-clipboard-text={data}
                 onClick={this.handleClick}
               >
                 Download
-            </span>
+              </span>
             </a>
-          )
+          );
         }
-      }
-      else {
+      } else if (wallet) {
+        return (
+          <span
+            className={style === "on" ? "complete" : ""}
+            data-clipboard-text={data}
+            onClick={this.handleClick}
+          >
+            <em>{data}</em>
+            <em>{text}</em>
+          </span>
+        );
+      } else {
         return (
           <button
             className={`btn-type clipboard-btn ${style}`}
@@ -74,9 +83,9 @@ class CopyButton extends Component {
           >
             {text}
           </button>
-        )
+        );
       }
-    }
+    };
 
     return Content();
   }

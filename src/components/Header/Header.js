@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { SearchBox } from 'components';
+import { Connect}from "components"
 import { withRouter } from "react-router-dom";
 
 class Header extends Component {
@@ -30,6 +31,7 @@ class Header extends Component {
                 </li>
               </ul>
 							<SearchBox {...this.props} />
+              <Connect {...this.props}/>
 						</div>
 					</div>
 				</div>
