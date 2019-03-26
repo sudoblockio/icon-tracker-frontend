@@ -12,50 +12,18 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".header-wrap ul li")
-		.mouseenter(function () {
-			$(this)
-				.find(".sub-menu")
-				.stop()
-				.slideDown(300, "swing");
-			$(this)
-				.find("span")
-				.addClass("on");
-		})
-		.mouseleave(function () {
-			$(this)
-				.find(".sub-menu")
-				.stop()
-				.slideUp(300, "swing");
-			$(this)
-				.find("span")
-				.removeClass("on");
-		});
-
-	$(".header-wrap ul li, .header-wrap .connect.join")
-		.mouseenter(function () {
-			$(this)
-				.find(".sub-menu")
-				.stop()
-				.slideDown(300, "swing");
-			$(this)
-				.find("span")
-				.addClass("on");
-		})
-		.mouseleave(function () {
-			$(this)
-				.find(".sub-menu")
-				.stop()
-				.slideUp(300, "swing");
-			$(this)
-				.find("span")
-				.removeClass("on");
-		});
+	$('.header-wrap ul li, .header-wrap .connect.join').mouseenter(function () {
+		$(this).find(".sub-menu").stop().slideDown(300, 'swing');
+		$(this).find("span").addClass("on");
+	}).mouseleave(function () {
+		$(this).find(".sub-menu").stop().slideUp(300, 'swing');
+		$(this).find("span").removeClass("on");
+	});
 });
 
-$(window).on("CUSTOM_FX", function (e) {
-	var type = e.originalEvent.detail.type;
-	var param = e.originalEvent.detail.param;
+$(window).on('CUSTOM_FX', function (e) {
+	var type = e.originalEvent.detail.type
+	var param = e.originalEvent.detail.param
 	switch (type) {
 		case 'POPUP_OPEN':
 			$(".popup-wrap." + param).fadeIn(350);

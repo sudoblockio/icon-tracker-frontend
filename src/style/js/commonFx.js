@@ -26,7 +26,7 @@ var ctreteContract = function(){
 
 var createMenu = function(){
 	// header
-	$('.header-wrap ul li').mouseenter(function(){
+	$('.header-wrap ul li, .header-wrap .connect.join').mouseenter(function(){
 		$(this).find(".sub-menu").stop().slideDown(300, 'swing');
 		$(this).find("span").addClass("on");
 	}).mouseleave(function(){
