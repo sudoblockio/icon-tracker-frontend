@@ -49,9 +49,6 @@ deploy testnet:
 
 deploy mainnet:
   stage: deploy
-<<<<<<< HEAD
-  script:
-=======
   before_script:
     - apt-get update -qq && apt-get install -y jq
   script:
@@ -59,7 +56,6 @@ deploy mainnet:
     - jq '.["TRACKER_API_URL"] = "https://tracker.icon.foundation" | .["WALLET_API_URL"] = "https://wallet.icon.foundation" | .["IS_SOLO_VERSION"] = .__IS_SOLO_VERSION  | del(.__TRACKER_API_URL, .__WALLET_API_URL, .__IS_SOLO_VERSION)' ./build/config.json > temp.tmp && mv temp.tmp ./build/config.json
     - cat ./build/config.json
 
->>>>>>> 0acfb3b2a4c52dcabfe1681504480263230324d2
     - mkdir -p ~/.ssh
     - touch ~/.ssh/config
     - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
