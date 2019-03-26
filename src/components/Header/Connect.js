@@ -14,7 +14,10 @@ class Connect extends Component {
       return;
     }
     const walletAddress = await requestAddress();
-    this.setState({ walletAddress }, () => { this.props.setWalletAddress(walletAddress) });
+    this.setState({ walletAddress }, () => { 
+      window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "SET_WALLET" } }))
+      this.props.setWalletAddress(walletAddress) 
+    });
   }
 
   disconnect = () => {
