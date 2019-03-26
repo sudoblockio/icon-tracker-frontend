@@ -7,15 +7,15 @@ export function setBannerOption(payload) {
   }
 }
 
-export function setWalletAddress(payload) {
+export function setAddress(payload) {
   return {
-    type: actionTypes.setWalletAddress,
+    type: actionTypes.setAddress,
     payload
   }
 }
 
-export function clearWalletAddress(){
+export function clearWallet(){
   return{
-    type:actionTypes.clearWalletAddress
+    type:actionTypes.clearWallet
   }
 }

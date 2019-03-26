@@ -6,3 +6,5 @@
 .table-typeB .scroll{ height: auto !important; /* max-height: 300px */ }
 
 .table-typeB .scroll img{ max-width: 850px; /* cursor: pointer; */}
+
+.header-wrap .link li:nth-child(4) .sub-menu{ min-width: 140px; }

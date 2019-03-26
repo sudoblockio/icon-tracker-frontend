@@ -160,11 +160,10 @@ const actionTypes = {
 
   setBannerOption: 'SET_BANNER_OPTION',
   
-  setWalletAddress: 'SET_WALLET_ADDRESS',
-  setWalletAddressSuccess :'SET_WALLET_ADDRESS_SUCCESS',
-  clearWalletAddress: 'CLEAR_WALLET_ADDRESS',
-  clearWalletAddressSuccess: 'CLEAR_WALLET_ADDRESS_SUCCESS'
-
+  setAddress: 'SET_ADDRESS',
+  setAddressSuccess :'SET_ADDRESS_SUCCESS',
+  clearWallet: 'CLEAR_WALLET',
+  clearWalletSuccess: 'CLEAR_WALLET_SUCCESS'
 }
 
 export default actionTypes

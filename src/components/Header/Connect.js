@@ -16,12 +16,12 @@ class Connect extends Component {
     const walletAddress = await requestAddress();
     this.setState({ walletAddress }, () => { 
       window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "SET_WALLET" } }))
-      this.props.setWalletAddress(walletAddress) 
+      this.props.setAddress(walletAddress) 
     });
   }
 
   disconnect = () => {
-    this.setState({ walletAddress: undefined }, () => { this.props.clearWalletAddress() })
+    this.setState({ walletAddress: undefined }, () => { this.props.clearWallet() })
   }
   
   render() {

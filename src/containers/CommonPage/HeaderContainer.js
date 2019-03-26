@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Header } from 'components';
 import { search } from '../../redux/actions/searchActions';
-import { setWalletAddress, clearWalletAddress } from "../../redux/actions/storageActions"
+import { setAddress, clearWallet } from "../../redux/actions/storageActions"
 
 function mapStateToProps(state) {
   return {
@@ -13,8 +13,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     search: param => dispatch(search(param)),
-    setWalletAddress: payload => dispatch(setWalletAddress(payload)),
-    clearWalletAddress: () => dispatch(clearWalletAddress())
+    setAddress: payload => dispatch(setAddress(payload)),
+    clearWallet: () => dispatch(clearWallet())
   };
 }
 

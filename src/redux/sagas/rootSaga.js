@@ -6,7 +6,7 @@ import transactionsSaga from './transactionsSaga';
 import searchSaga from './searchSaga';
 import tokensSaga from './tokensSaga'
 import contractsSaga from './contractsSaga'
-import walletAddressSaga from "./walletAddressSaga"
+import walletSaga from "./walletSaga"
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +17,6 @@ export default function* rootSaga() {
     fork(searchSaga),
     fork(tokensSaga),
     fork(contractsSaga),
-    fork(walletAddressSaga)
+    fork(walletSaga)
   ]);
 }
