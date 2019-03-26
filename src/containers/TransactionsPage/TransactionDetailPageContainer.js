@@ -5,7 +5,6 @@ import {
   transactionTxDetail,
   transactionEventLogList,
   transactionInternalTxList,
-  imageConverterPopup
 } from '../../redux/actions/transactionsActions';
 
 function mapStateToProps(state) {
@@ -20,7 +19,6 @@ function mapDispatchToProps(dispatch) {
     transactionTxDetail: (payload) => dispatch(transactionTxDetail(payload)),
     transactionEventLogList: (payload) => dispatch(transactionEventLogList(payload)),
     transactionInternalTxList: (payload) => dispatch(transactionInternalTxList(payload)),
-    imageConverterPopup: (payload) => dispatch(imageConverterPopup(payload)),
   };
 }
 

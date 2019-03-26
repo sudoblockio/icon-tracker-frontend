@@ -2,7 +2,7 @@ import actionTypes from '../actionTypes/actionTypes'
 
 const initialState = {
   bannerExpireDate: undefined,
-  walletAddress:undefined
+  walletAddress: undefined
 }
 
 export function storageReducer(state = initialState, action) {
@@ -11,13 +11,13 @@ export function storageReducer(state = initialState, action) {
       return Object.assign({}, state, {
         bannerExpireDate: action.payload.bannerExpireDate,
       })
-      case actionTypes.setWalletAddressSuccess:
+    case actionTypes.setWalletAddressSuccess:
       return Object.assign({}, state, {
-        walletAddress:action.payload
+        walletAddress: action.payload
       })
-      case actionTypes.clearWalletAddressSuccess:
+    case actionTypes.clearWalletAddressSuccess:
       return Object.assign({}, state, {
-        walletAddress:undefined
+        walletAddress: undefined
       })
     default: {
       return state

@@ -7,37 +7,17 @@ import {
   transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
   transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
 } from '../api/restV3';
-import {
-  POPUP_TYPE
-} from 'utils/const'
 
 function* watchTransactionRecentTx() { yield takeLatest(AT.transactionRecentTx, transactionRecentTxFunc) }
 function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
 function* watchTransactionEventLogList() { yield takeLatest(AT.transactionEventLogList, transactionEventLogListFunc) }
 function* watchTransactionInternalTxList() { yield takeLatest(AT.transactionInternalTxList, transactionInternalTxListFunc) }
-function* watchImageConverterPopup() { yield takeLatest(AT.imageConverterPopup, imageConverterPopupFunc) }
 
 export default function* transactionsSaga() {
   yield fork(watchTransactionRecentTx);
   yield fork(watchTransactionTxDetail);
   yield fork(watchTransactionEventLogList);
   yield fork(watchTransactionInternalTxList);
-  yield fork(watchImageConverterPopup);
-}
-
-function* imageConverterPopupFunc(action) {
-  console.log('imageConverterPopupFunc', action)
-  try {
-    const payload = {
-      data: action.payload.data,
-      type: POPUP_TYPE.IMAGE
-    }
-
-    yield put({ type: AT.setPopup, payload });
-  }
-  catch (e) {
-    console.log(e)
-  }
 }
 
 function* transactionRecentTxFunc(action) {

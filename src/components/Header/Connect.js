@@ -5,28 +5,23 @@ class Connect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      walletAddress:this.props.walletAddress
+      walletAddress: this.props.walletAddress
     };
   }
+  
   getWalletAddress = async () => {
     if (this.state.walletAddress) {
       return;
     }
     const walletAddress = await requestAddress();
-    this.setState(
-      {
-        walletAddress
-      },
-      ()=>{this.props.setWalletAddress(walletAddress)}
-    );
-  };
+    this.setState({ walletAddress }, () => { this.props.setWalletAddress(walletAddress) });
+  }
+
   disconnect = () => {
-    this.setState({
-        walletAddress:undefined
-    },()=>{this.props.clearWalletAddress()})    
-  };
+    this.setState({ walletAddress: undefined }, () => { this.props.clearWalletAddress() })
+  }
+  
   render() {
-      
     const { walletAddress } = this.state;
     return (
       <div className={`connect ${walletAddress ? "join" : ""}`}>
@@ -52,8 +47,8 @@ class Connect extends Component {
             </span>
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </div>
     );
   }

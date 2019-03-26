@@ -3,6 +3,6 @@
 /* Set margin-left of address link with icon to 0px in trasaction list */
 [class *="table-type"] td.icon a{margin-left: 0px;}
 /* Set height and max-height of data to auto and 300px each other in transaction detail page */
-.table-typeB .scroll{ height: auto !important; }
+.table-typeB .scroll{ height: auto !important; /* max-height: 300px */ }
 
-.table-typeB .scroll img{max-width: 850px; /* cursor: pointer; */}
+.table-typeB .scroll img{ max-width: 850px; /* cursor: pointer; */}

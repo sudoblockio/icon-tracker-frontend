@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { Header } from 'components';
 import { search } from '../../redux/actions/searchActions';
-import { setWalletAddress,clearWalletAddress } from "../../redux/actions/storageActions"
+import { setWalletAddress, clearWalletAddress } from "../../redux/actions/storageActions"
 
 function mapStateToProps(state) {
   return {
     loading: state.search.loading,
-    walletAddress : state.storage.walletAddress
+    walletAddress: state.storage.walletAddress
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    search: (param) => dispatch(search(param)),
-    setWalletAddress: (payload) => dispatch(setWalletAddress(payload)),
-    clearWalletAddress:()=>dispatch(clearWalletAddress())
+    search: param => dispatch(search(param)),
+    setWalletAddress: payload => dispatch(setWalletAddress(payload)),
+    clearWalletAddress: () => dispatch(clearWalletAddress())
   };
 }
 
