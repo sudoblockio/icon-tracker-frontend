@@ -120,7 +120,7 @@ class TokenBalance extends Component {
         const totalBalance = this.calcTotalTokenBalance(_tokenList)
         return (
           <td>
-            <p className="balance" onClick={this.handleClick}>{totalBalance} USD<span className="gray">(Total)</span><em className="img"></em></p>
+            <p className="balance" onClick={this.handleClick}>{convertNumberToText(totalBalance, 3)} USD<span className="gray">(Total)</span><em className="img"></em></p>
             <div className="combo-group">
               <div className="combo-layer">
                 <div className="search-group">
@@ -142,8 +142,8 @@ class TokenBalance extends Component {
                             const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
                             return (
                               <li key={index}>
-                                <p><em>{contractName}</em><em>{totalTokenPrice ? totalTokenPrice : "-"}</em><em>USD</em></p>
-                                <p><em>{quantity} {contractSymbol}</em><em>{tokenPrice ? tokenPrice : "-"}</em><em>@</em></p>
+                                <p><em>{contractName}</em><em>{totalTokenPrice ? convertNumberToText(totalTokenPrice, 3) : "-"}</em><em>USD</em></p>
+                                <p><em>{quantity} {contractSymbol}</em><em>{tokenPrice ? convertNumberToText(tokenPrice, 3) : "-"}</em><em>@</em></p>
                               </li>
                             )
                           })
