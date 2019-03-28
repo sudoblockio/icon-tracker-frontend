@@ -407,7 +407,7 @@ html, body{height: 100%;}
 .table-typeB .qr{padding: 10px 40px;}
 .table-typeB .qr .img{vertical-align: top;}
 
-.table-typeB .scroll{height: auto !important; max-height: 300px; overflow-y: auto; }
+.table-typeB .scroll{height: auto !important; overflow-y: auto; }
 .table-typeB .scroll span{color: #4CAF50;     pointer-events: none;}
 .table-typeB .scroll p{line-height: 24px; word-break: break-all;     white-space: pre; width: 850px;}
 .table-typeB .convert{padding: 14px 30px;}
