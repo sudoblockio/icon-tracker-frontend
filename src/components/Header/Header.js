@@ -16,8 +16,8 @@ class Header extends Component {
                 <li>
                   <span>Address<em className="img"></em></span>
 									<ol className="sub-menu">                    
-                    <li onClick={() => {this.props.history.push('/addresses')}}><span>Addresses</span></li>                    
-										<li onClick={() => {this.props.history.push('/contracts')}}><span>Contracts</span></li>
+                    <li onClick={() => {this.props.history.push('/addresses')}}><span>Addresses List</span></li>                    
+										<li onClick={() => {this.props.history.push('/contracts')}}><span>Contracts List</span></li>
 									</ol>
                 </li>
                 <li onClick={() => {this.props.history.push('/blocks')}}><span>Block</span></li>
@@ -25,8 +25,8 @@ class Header extends Component {
                 <li>
                   <span>Token<em className="img"></em></span>
 									<ol className="sub-menu">                    
-                    <li onClick={() => {this.props.history.push('/tokens')}}><span>Tokens</span></li>                    
-										<li onClick={() => {this.props.history.push('/tokentransfers')}}><span>Token Transfers</span></li>
+                    <li onClick={() => {this.props.history.push('/tokens')}}><span>Tokens List</span></li>                    
+										<li onClick={() => {this.props.history.push('/tokentransfers')}}><span>Token Transfers List</span></li>
 									</ol>
                 </li>
               </ul>

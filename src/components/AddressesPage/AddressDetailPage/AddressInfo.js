@@ -17,7 +17,7 @@ import {
 class AddressInfo extends Component {
 
   render() {
-    const { wallet } = this.props
+    const { wallet, walletAddress } = this.props
     const { loading, data, error } = wallet
 
     const Content = () => {
@@ -29,10 +29,15 @@ class AddressInfo extends Component {
       else {
         const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
         const _address = !!address ? address : error
+        const isConnected = walletAddress === _address
         return (
           <div className="screen0">
             <div className="wrap-holder">
-              <p className="title">Address</p>
+              {isConnected ?
+                <p className="title">My Address<span className="connected"><i className="img"></i>Connected to ICONex</span></p>
+              :
+                <p className="title">Address</p> 
+              }          
               <div className="contents">
                 <table className="table-typeB address">
                   <thead>

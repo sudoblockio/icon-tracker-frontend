@@ -17,6 +17,7 @@ class Connect extends Component {
     this.setState({ walletAddress }, () => { 
       window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "SET_WALLET" } }))
       this.props.setAddress(walletAddress) 
+      this.props.history.push(`/address/${walletAddress}`);
     });
   }
 
