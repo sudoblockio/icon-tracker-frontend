@@ -49,7 +49,8 @@ class CopyButton extends Component {
               {text}
             </span>
           );
-        } else {
+        } 
+        else {
           return (
             <a href={download.link} download={download.name} className="download">
               <span
@@ -62,10 +63,11 @@ class CopyButton extends Component {
             </a>
           );
         }
-      } else if (wallet) {
+      } 
+      else if (wallet) {
         return (
           <span
-            className={`${style === "on" ? "complete" : ""} ${className}`}
+            className={`clipboard-btn ${style === "on" ? "complete" : ""} ${className}`}
             data-clipboard-text={data}
             onClick={this.handleClick}
           >
@@ -73,7 +75,8 @@ class CopyButton extends Component {
             <em>{text}</em>
           </span>
         );
-      } else {
+      } 
+      else {
         return (
           <button
             className={`btn-type clipboard-btn ${style} ${className}`}
