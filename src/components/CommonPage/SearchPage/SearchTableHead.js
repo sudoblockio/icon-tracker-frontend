@@ -31,7 +31,7 @@ class SearchTableHead extends Component {
                             <th>Price</th>
                             <th>% Change (24h)</th>
                             <th>Volume (24h)</th>
-                            <th className="marketcap"><span>MarketCap<em className="img"></em></span></th>
+                            <th className="marketcap"><span>MarketCap{/* <em className="img"></em> */}</span></th>
                         </tr>
                     )
                 default:

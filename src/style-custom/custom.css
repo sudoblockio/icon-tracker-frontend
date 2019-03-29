@@ -14,3 +14,6 @@
 .table-typeB .copy.twit{ margin-right: -16px; }
 .table-typeB tr .qrcode{ margin-right: -16px; }
 
+.table-typeI th:nth-child(6){ color: #b3b3b3; }
+.table-typeI thead  th.marketcap{ cursor: default !important; }
+.table-typeI thead  th.marketcap:hover{ color: #b3b3b3 !important; }
