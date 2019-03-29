@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
 import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
+import { getTrackerApiUrl } from 'redux/api/restV3/config'
 import {
 	CopyButton,
 	LoadingComponent,
@@ -19,7 +20,7 @@ import {
 	beautifyJson,
 	removeQuotes,
 	isHex,
-	isImageData
+	isImageData,
 } from 'utils/utils'
 
 const COUNT = 10
@@ -55,6 +56,13 @@ class TransactionInfo extends Component {
 				}
 			})
 		}
+	}
+
+	onTwitterClick = async () => {
+		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
+		const url = await getTrackerApiUrl()
+		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
+		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
 	render() {
@@ -104,7 +112,7 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<CopyButton data={txHash} title={'Copy TxHash'} isSpan /></td>
+											<td>{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img"></i></span><CopyButton className={'twit-right'} data={txHash} title={'Copy TxHash'} isSpan /></td>
 										</tr>
 										<tr>
 											<td>Status</td>
