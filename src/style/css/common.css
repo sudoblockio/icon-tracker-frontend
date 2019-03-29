@@ -188,7 +188,7 @@ html, body{height: 100%;}
 .wrap{position: relative; }
 .content-wrap .bar{background: #1aaaba; position: absolute;}
 
-.content-wrap .wrap-holder > .title{ font-family: 'Montserrat';     letter-spacing: -0.5px;}
+.content-wrap .wrap-holder > .title{ font-family: 'Montserrat'; position: relative;    letter-spacing: -0.5px;}
 .content-wrap .wrap-holder > .title i {width: 30px; height: 30px; display: inline-block; margin-right: 6px; position: absolute; top: -3px; left: 46px;}
 .content-wrap .wrap-holder > .title i img{width: 100%;}
 .content-wrap .title{font-size: 20px; font-weight: 800; font-family: 'Montserrat';}
@@ -198,6 +198,12 @@ html, body{height: 100%;}
 .content-wrap .title .right em:nth-child(2){color: #b3b3b3; font-weight: 400; cursor: default; text-decoration: none;}
 .content-wrap .title .left{color: #262626;}
 .content-wrap .title span .mint{color:#1aaaba; font-weight: 600; }
+
+.content-wrap .title .connected{height: 26px; font-weight: 600; border-radius: 13px; background: #e6f8fa; padding: 7px 15px; color: #1aaaba; position: relative; top: -4px;}
+.content-wrap .title .connected .img{background-position: -100px -250px; width: 14px; height: 9px; position: relative; top: 2px; left: auto;}
+.content-wrap .title .toggle{position: absolute; right: 0; color: #262626;font-weight: 600; top: 10px;}
+.content-wrap .title .toggle em:first-child{margin-right: 30px;}
+
 
 .content-wrap .wrap-holder > .title.token  .right .gray{color: #b3b3b3;font-weight: 400;}
 .content-wrap .wrap-holder > .title.token  span:first-child{font-size:20px; color: #262626; }
@@ -392,6 +398,9 @@ html, body{height: 100%;}
 .table-typeB .copy{font-size: 12px; color: #262626; border: 1px solid #262626; height: 26px ;border-radius: 2px; margin-left: 4px; display: inline-block;      line-height: 18px;  padding: 4px 14px; cursor: pointer; font-weight: 600; min-width: 106px; text-align: center; }
 .table-typeB .copy:hover{color: #1aaaba;border: 1px solid #1aaaba;box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05); text-decoration: none;}
 .table-typeB .copy.disabled{cursor:default;  color: #ccc; border-color:#ccc; box-shadow: none; }
+.table-typeB .copy.twit{width: 26px; min-width: auto;padding: 4px 5px;}
+.table-typeB .copy.twit .img{background-position:-150px -250px; width: 16px; height: 15px; }
+.table-typeB .copy.twit:hover .img{background-position-y:-275px;}
 
 .table-typeB .copy.on{background: #1aaaba; color: #fff;border: 1px solid #1aaaba;}
 [class *="table-type"] a.download:hover{ text-decoration:default; opacity: 1; }
@@ -407,7 +416,7 @@ html, body{height: 100%;}
 .table-typeB .qr{padding: 10px 40px;}
 .table-typeB .qr .img{vertical-align: top;}
 
-.table-typeB .scroll{height: auto !important; overflow-y: auto; }
+.table-typeB .scroll{height: auto !important; /*max-height: 300px;*/ overflow-y: auto; }
 .table-typeB .scroll span{color: #4CAF50;     pointer-events: none;}
 .table-typeB .scroll p{line-height: 24px; word-break: break-all;     white-space: pre; width: 850px;}
 .table-typeB .convert{padding: 14px 30px;}
@@ -492,7 +501,7 @@ html, body{height: 100%;}
 .table-typeB.contract .status{position: absolute; right: 30px; top: 8px; font-weight: 600;}
 
 .table-typeB  tr i.img{width: 18px; height: 22px; background-position: 0 -254px; vertical-align: middle; margin-right: 10px;}
-.table-typeB.transaction span.copy{margin-left: 20px;}
+.table-typeB.transaction span.copy:nth-of-type(1){margin-left: 20px;}
 .table-typeB.transaction tr i.img{width: 10px; height: 12px; position: relative;     background-position: -50px 0; margin-right: 4px; top: -1px;}
 .table-typeB.transaction tr .trans{padding: 8px 30px 2px;}
 .table-typeB.transaction tr .trans p{font-size: 10px; font-weight: 400;margin: 0px 0; padding: 9px 0; text-align: left;}
@@ -523,7 +532,7 @@ html, body{height: 100%;}
 .table-typeC td:nth-child(1) .ellipsis{width:143px; }
 .table-typeC td:nth-child(1).icon .ellipsis{width:128px; }
 .table-typeC td:not(:nth-child(1)).icon .ellipsis{width:100px; }
-
+.table-typeC td{padding: 11px 19px 5px;}
 .table-typeC .ellipsis{width:110px; }
 .table-typeC td:nth-child(1) {}
 
@@ -778,8 +787,8 @@ html, body{height: 100%;}
 
 td.table-sign i.img{background-position: -150px 0; width: 10px; height: 8px; left: 12px; top: 14px; }
 
-.table-sign span{width: 33px; height: 16px; display: inline-block; border-radius: 10px; background: #1aaaba; font-size: 9px; color: #fff; text-align: center; line-height: 18px;}
-.table-sign.out span{background: #ff4063;}
+.table-sign span{width: 33px; height: 16px; display: inline-block; border-radius: 10px; background: #e6f8fa; font-size: 9px; color: #00a1b3; text-align: center; line-height: 18px; font-weight: 600 !important;}
+.table-sign.out span{background: #ffefed; color:#f24130; }
 .ellipsis{ text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: inline-block;}
 
 .code-box{ margin-top: 24px; border: 2px solid #262626; font-size: 12px; height: 284px; color: #262626;}
@@ -1023,6 +1032,11 @@ input[type="text"]:focus.over {border: 1px solid #262626;}
 [class ^="cbox-type"]{display: none; }
 [class ^="cbox-type"] + label {height: 18px; line-height: 18px; padding: 0 20px 0 27px; background-color: transparent;  background-position: -300px -150px; font-size: 12px; display: inline-block; cursor: pointer; color: #666;}
 input[type=checkbox]:checked + label {background-position-y: -200px; color: #fff; }
+
+.toggle [class ^="cbox-type"] + label {height: 20px; line-height: 18px; padding: 0 20px 0 27px; background-position: -300px -300px;     vertical-align: top;
+    margin-top: -4px;}
+.toggle input[type=checkbox]:checked + label {background-position-y: -325px; }
+
 /*banner*/
 .isBanner{}
 .isBanner .root{margin: 0 auto -132px;}
