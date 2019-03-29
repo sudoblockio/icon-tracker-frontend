@@ -11,4 +11,6 @@
 .header-wrap .link li:nth-child(4) .sub-menu{ width: 155px; }
 
 .table-typeB .copy{ margin-left: 20px; }
-.table-typeB .copy.twit-right{ margin-left: 4px !important; }
+.table-typeB .copy.twit{ margin-right: -16px; }
+.table-typeB tr .qrcode{ margin-right: -16px; }
+

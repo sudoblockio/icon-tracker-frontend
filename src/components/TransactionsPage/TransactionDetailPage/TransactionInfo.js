@@ -112,7 +112,7 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img"></i></span><CopyButton className={'twit-right'} data={txHash} title={'Copy TxHash'} isSpan /></td>
+											<td>{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /></td>
 										</tr>
 										<tr>
 											<td>Status</td>
