@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import { requestAddress } from "../../utils/connect";
 import { CopyButton } from "components";
+import checkIconex from 'check-iconex'
+
 class Connect extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      disabled: false,
       walletAddress: this.props.walletAddress
     };
   }
-  
+
+  async componentDidMount() {
+    const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
+    this.setState({ disabled: !(isChrome && iconexInstalled && hasIconWallet)})
+  }
+
   getWalletAddress = async () => {
     if (this.state.walletAddress) {
       return;
     }
     const walletAddress = await requestAddress();
-    this.setState({ walletAddress }, () => { 
+    this.setState({ walletAddress }, () => {
       window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "SET_WALLET" } }))
-      this.props.setAddress(walletAddress) 
+      this.props.setAddress(walletAddress)
       this.props.history.push(`/address/${walletAddress}`);
     });
   }
@@ -24,12 +32,12 @@ class Connect extends Component {
   disconnect = () => {
     this.setState({ walletAddress: undefined }, () => { this.props.clearWallet() })
   }
-  
+
   render() {
-    const { walletAddress } = this.state;
+    const { walletAddress, disabled } = this.state;
     return (
       <div className={`connect ${walletAddress ? "join" : ""}`}>
-        <span onClick={this.getWalletAddress}>
+        <span onClick={this.getWalletAddress} className={disabled ? 'disabled' : ''}>
           <em className="img" />
         </span>
         {walletAddress ? (

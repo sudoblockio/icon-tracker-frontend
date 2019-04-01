@@ -9,6 +9,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "chart.js": "^2.7.2",
+    "check-iconex": "0.0.7",
     "clipboard": "^1.7.1",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
