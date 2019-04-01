@@ -12,7 +12,10 @@ import {
 import {
   getIsSoloVersion
 } from 'redux/api/restV3/config'
-
+import IconService, {
+  HttpProvider
+} from "icon-sdk-js"
+import { getWalletApiUrl } from "../redux/api/restV3/config"
 moment.updateLocale('en', {
   relativeTime: {
     future: "in %s",
@@ -222,7 +225,7 @@ export function getArrayState(step, state, action, dataType) {
         }
       }
     case REDUX_STEP.REJECTED:
-      const { error } = action
+      const { error,pending } = action
       return {
         ...state,
         [dataType]: {
@@ -275,14 +278,15 @@ export function getObjectState(step, state, action, dataType) {
         }
       }
     case REDUX_STEP.REJECTED:
-      const { error } = action
+      const { error,pending } = action
       return {
         ...state,
         [dataType]: {
           ...state[dataType],
           loading: false,
           data: {},
-          error: error
+          error: error,
+          pending:pending
         }
       }
     case REDUX_STEP.INIT:
@@ -458,4 +462,22 @@ export function isImageData(data) {
   }
   
   return false
+}
+
+export async function getTransactionResult(txHash) {
+  const url = `${await getWalletApiUrl()}/api/v3`;
+  const provider = new HttpProvider(url)
+  const iconService = new IconService(provider);
+  try {
+    const response = await iconService.getTransactionResult(txHash).execute();
+    return response;
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+
+export function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

@@ -54,6 +54,7 @@ import TxPage from './CommonPage/TxPage'
 import SearchPage from './CommonPage/SearchPage'
 import DetailPage from './CommonPage/DetailPage'
 import NotFoundPage from './CommonPage/NotFoundPage'
+import PendingPage from "./CommonPage/PendingPage"
 
 import Banner from './Banner/Banner'
 import Connect from './Header/Connect';
@@ -113,6 +114,7 @@ export {
   SearchPage,
   DetailPage,
   NotFoundPage,
+  PendingPage,
 
   Banner,
   Connect

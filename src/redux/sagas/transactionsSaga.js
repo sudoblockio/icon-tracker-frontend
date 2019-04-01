@@ -1,6 +1,6 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
-
+import {getTransactionResult, delay} from "../../utils/utils";
 import {
   transactionRecentTx as TRANSACTION_RECENT_TX_API,
   transactionTxDetail as TRANSACTION_TX_DETAIL_API,
@@ -39,10 +39,23 @@ function* transactionRecentTxFunc(action) {
 }
 
 function* transactionTxDetailFunc(action) {
+  const res = yield call (getTransactionResult,action.payload.txHash);
+  const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
   try {
-    const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (payload.result === '200') {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
+    if(res.status === 1){
+      if(payload.result === "200"){
+        yield put({ type: AT.transactionTxDetailFulfilled,payload:payload});
+      }else if(payload.result === "No Data"){
+        yield call(delay, 5000);
+        const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+        if(payload.result ==='200'){
+          yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
+        }else{
+          throw new Error();
+        }
+      }
+    } else if (res.status === 0){
+      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash, pending:true });
     } else {
       throw new Error();
     }
