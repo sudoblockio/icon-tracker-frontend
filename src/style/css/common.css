@@ -163,6 +163,8 @@ html, body{height: 100%;}
 .header-wrap .connect > span { cursor: pointer;background: rgba(255,255,255,0.2); border-radius: 50%; width: 40px; height: 40px;display: inline-block; }
 .header-wrap .connect > span:hover{background: rgba(255,255,255,0.5);}
 .header-wrap .connect > span em{width: 26px; height: 26px; display: inline-block; background-position:-250px -250px; position: absolute; top: 7px; left: 7px; }
+.header-wrap .connect > span.disabled{opacity: 0.5; pointer-events: none;}
+.header-wrap .connect > span.disabled+.sub-menu{opacity: 0;pointer-events: none; }
 
 .header-wrap .connect.join em{background-position-x:-300px; }
 .header-wrap .connect .sub-menu{width: 361px; height: 108px; background: #fff;border-radius: 4px; box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15); position: absolute; right: 2px; top: 44px;  font-size: 0; overflow: hidden; padding: 0; }
@@ -690,8 +692,8 @@ html, body{height: 100%;}
 .table-typeI th:nth-child(3){width:170px; color: #b3b3b3;}
 .table-typeI th:nth-child(4){width:124px; color: #b3b3b3; }
 .table-typeI th:nth-child(5){width:200px; color: #b3b3b3; }
-.table-typeI th:nth-child(6){width:200px; }
-.table-typeI thead  th .img{width: 6px; height: 8px; background-position:-100px -250px; }
+.table-typeI th:nth-child(6){width:200px; color: #b3b3b3; }
+.table-typeI thead  th .img{width: 6px; height: 8px; background-position:-100px -325px; }
 .table-typeI thead  th.marketcap{cursor: pointer;}
 .table-typeI thead  th.marketcap:hover{color: #1aaaba;}
 .table-typeI thead  th em{margin-right: 6px;}
