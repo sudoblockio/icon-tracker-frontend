@@ -120,7 +120,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Block Height</td>
-											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${numberWithCommas(confirmation)} Confirmation(s))`}</em></td>
+											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
@@ -159,13 +159,16 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Actual TxFee</td>
-											<td>{convertNumberToText(fee)} ICX<em>({convertNumberToText(feeUsd, 3)} USD)</em></td>
+											<td>{convertNumberToText(fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
-										{dataType && dataString &&
-										<tr>
-											<td>Data</td>
-											<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
-										</tr>
+										{(dataType && dataString) ?
+											<tr>
+												<td>Data</td>
+												<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+											</tr>
+											:
+											null
+
 										}
 									</tbody>
 								</table>

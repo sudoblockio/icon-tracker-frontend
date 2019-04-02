@@ -48,7 +48,9 @@ import {
 
 import {
     icxGetScore,
-    icxCall
+    icxCall,
+    getTransactionResult,
+    getTransaction
 } from './icx'
 
 export {
@@ -87,5 +89,7 @@ export {
     tokenHoldersList,
 
     icxGetScore,
-    icxCall
+    icxCall,
+    getTransactionResult,
+    getTransaction
 }

@@ -12,12 +12,13 @@ class TransactionDetailPage extends Component {
 
     render() {
         const { transaction } = this.props;
-        const { loading, error } = transaction
+        const { loading, error,pending } = transaction
 
         return (
             <DetailPage
                 {...this.props}
                 loading={loading}
+                pending={pending}
                 error={error}
                 TABS={TRANSACTION_TABS}
                 ROUTE="/transaction"

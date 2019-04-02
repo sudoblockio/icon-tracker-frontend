@@ -7,6 +7,7 @@ import {
 } from 'utils/utils'
 import {
     NotFoundPage,
+    PendingPage
 } from 'components';
 
 class DetailPage extends Component {
@@ -73,11 +74,13 @@ class DetailPage extends Component {
     }
 
     render() {
-        const { loading, error } = this.props
-        const isNotFoundPage = !loading && error !== "" && !isHxAddress(error)
+        const { loading, error, pending } = this.props;
+        const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending
         
         const Content = () => {
-            if (isNotFoundPage) {
+            if(pending){
+                return <PendingPage error={error}/>
+            } else if (isNotFoundPage) {
                 return <NotFoundPage error={error}/>
             }
             else {

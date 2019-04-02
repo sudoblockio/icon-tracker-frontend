@@ -38,9 +38,7 @@ export async function getTrackerApiUrl() {
 }
 
 export async function getWalletApiUrl() {
-  console.log('getWalletApiUrl')
   const configFile = await getConfigJsonFile()
-  console.log('configFile', configFile)
   if (configFile && configFile.WALLET_API_URL) {
     return configFile.WALLET_API_URL
   }
@@ -85,7 +83,6 @@ export async function getIsSoloVersion() {
 async function getConfigJsonFile() {
   try {
     const response = await fetch('/config.json')
-    console.log('getConfigJsonFile()', response)
     const responseJson = await response.json();
     return responseJson
   }

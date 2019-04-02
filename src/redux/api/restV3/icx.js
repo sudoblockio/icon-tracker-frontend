@@ -1,5 +1,7 @@
 import { randomUint32 } from 'utils/utils'
 import { walletApiInstance } from './config'
+import IconService, { HttpProvider } from "icon-sdk-js"
+import { getWalletApiUrl } from "./config"
 
 export async function icxGetScore(params) {
   const walletApi = await walletApiInstance()
@@ -59,4 +61,32 @@ export async function icxCall(params) {
         }
       })
   });
+}
+
+export async function getTransaction(txHash) {
+  const walletApiUrl = await getWalletApiUrl()
+  const url = `${walletApiUrl}/api/v3`;
+  const provider = new HttpProvider(url)
+  const iconService = new IconService(provider);
+  try {
+    const response = await iconService.getTransaction(txHash).execute();
+    return response;
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
+}
+
+export async function getTransactionResult(txHash) {
+  const walletApiUrl = await getWalletApiUrl()
+  const url = `${walletApiUrl}/api/v3`;
+  const provider = new HttpProvider(url)
+  const iconService = new IconService(provider);
+  try {
+    const response = await iconService.getTransactionResult(txHash).execute();
+    return response;
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
 }
