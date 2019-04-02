@@ -12,7 +12,7 @@ class PendingPage extends Component {
         <div className="screen0">
           <div className="wrap-holder">
             <div className="contents">
-              <span><img src={img_pending} /></span>
+              <span><img src={img_pending} alt='pending' /></span>
               <p className="title">Pending…</p>
               <p className="txt">The string below is invalid.<br />
                 Please double check your key.<br />

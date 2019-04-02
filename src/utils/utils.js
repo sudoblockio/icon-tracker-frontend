@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { getTrackerApiUrl } from 'redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
+import { IconConverter, IconAmount } from 'icon-sdk-js'
 import {
   TokenLink,
 } from 'components'
@@ -12,10 +13,7 @@ import {
 import {
   getIsSoloVersion
 } from 'redux/api/restV3/config'
-import IconService, {
-  HttpProvider
-} from "icon-sdk-js"
-import { getWalletApiUrl } from "../redux/api/restV3/config"
+
 moment.updateLocale('en', {
   relativeTime: {
     future: "in %s",
@@ -225,7 +223,7 @@ export function getArrayState(step, state, action, dataType) {
         }
       }
     case REDUX_STEP.REJECTED:
-      const { error,pending } = action
+      const { error } = action
       return {
         ...state,
         [dataType]: {
@@ -278,7 +276,7 @@ export function getObjectState(step, state, action, dataType) {
         }
       }
     case REDUX_STEP.REJECTED:
-      const { error,pending } = action
+      const { error, pending } = action
       return {
         ...state,
         [dataType]: {
@@ -286,7 +284,7 @@ export function getObjectState(step, state, action, dataType) {
           loading: false,
           data: {},
           error: error,
-          pending:pending
+          pending: pending
         }
       }
     case REDUX_STEP.INIT:
@@ -438,7 +436,7 @@ export function removeQuotes(str) {
   if (str[0] === '"') {
     str = str.substr(1)
   }
-  
+
   if (str[str.length - 1] === '"') {
     str = str.substr(0, str.length - 1)
   }
@@ -460,24 +458,70 @@ export function isImageData(data) {
   if (typeof data === 'string') {
     return data.indexOf('data:image') === 0
   }
-  
+
   return false
 }
 
-export async function getTransactionResult(txHash) {
-  const url = `${await getWalletApiUrl()}/api/v3`;
-  const provider = new HttpProvider(url)
-  const iconService = new IconService(provider);
-  try {
-    const response = await iconService.getTransactionResult(txHash).execute();
-    return response;
-  } catch (e) {
-    console.error(e);
-    return 0;
-  }
-}
 
 
 export function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function convertEngineToTracker(resultData, byHashData) {
+  const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString()
+  const stepUsed = IconAmount.of(resultData.stepUsed)
+  const stepPrice = IconAmount.of(resultData.stepPrice).toString()
+  const { eventLogs } = resultData
+  const { txHash, from, blockHeight: height } = byHashData
+  const result = {
+    txHash,
+    status: resultData.status === 1 ? 'Success' : 'Fail',
+    height,
+    confirmation: '',
+    createDate: moment(byHashData.timestamp / 1000).format(),
+    fromAddr: from,
+    toAddr: byHashData.to,
+    amount: valueIcx === 'NaN' ? 0 : valueIcx,
+    stepLimit: IconAmount.of(byHashData.stepLimit).toString(),
+    stepUsedByTxn: stepUsed.toString(),
+    stepPrice,
+    fee: IconAmount.of(IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice), IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+    dataType: byHashData.dataType,
+    dataString: byHashData.data,
+    tokenTxList: [],
+    internalTxList: []
+  }
+
+  if (eventLogs.length === 0) {
+    return result
+  }
+  
+  eventLogs.forEach((eventLog, index) => {
+    const { indexed, scoreAddress } = eventLog
+    if (indexed[0] === 'Transfer(Address,Address,int,bytes)') {
+      result.tokenTxList.push({
+        fromAddr: indexed[1],
+        toAddr: indexed[2],
+        quantity: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+        targetContractAddr: scoreAddress,
+        symbol: 'TOKENS',
+        tokenName: ' - '
+      })
+    } 
+
+    if (indexed[0] === 'ICXTransfer(Address,Address,int)') {
+      result.internalTxList.push({
+        amount: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+        contractAddr: scoreAddress,        
+        fromAddr: indexed[1],
+        height: height,
+        toAddr: indexed[2],
+        txHash,
+        txIndex: index
+      })
+    } 
+  })
+
+  return result
 }
