@@ -43,14 +43,12 @@ function* transactionRecentTxFunc(action) {
 function* transactionTxDetailFunc(action) {
   try {
     let trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    console.log('trackerData', trackerData)
     if (trackerData.result === "200") {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return
     }
 
     const resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
-    console.log('resultData', resultData)
     if (resultData.status === undefined) {
       yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
       return
@@ -63,7 +61,6 @@ function* transactionTxDetailFunc(action) {
     yield call(delay, 3000)
 
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    console.log('trackerData', trackerData)
     if (trackerData.result === "200") {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
     }
