@@ -41,6 +41,13 @@ var createMenu = function(){
 		$(".sort-holder ul").stop().slideUp(300, 'swing');
 	});
 
+	// sort
+	$('.footer-wrap .mainnet').mouseenter(function(){
+		$(".footer-wrap .mainnet ul").stop().slideDown(300, 'swing');
+	}).mouseleave(function(){
+		$(".footer-wrap .mainnet ul").stop().slideUp(300, 'swing');
+	});
+
 	// contract status
 	$(".status-holder > span").click(function(){
 		$(".status-holder ul").stop().slideDown(300, 'swing');

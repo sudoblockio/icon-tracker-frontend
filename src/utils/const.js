@@ -65,6 +65,18 @@ export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
 export const TRANSACTION_TABS = ['Internal Transactions', 'Events']
 
+export const NETWORK_URL = {
+    Mainnet: 'https://tracker.icon.foundation/',
+    Euljiro: 'https://trackerdev.icon.foundation/',
+    Yeouido: 'https://bicon.tracker.solidwallet.io/'
+}
+
+export const NETWORK_NAME = {
+    [NETWORK_URL['Mainnet']]: 'Mainnet',
+    [NETWORK_URL['Euljiro']]: 'Euljiro',
+    [NETWORK_URL['Euljiro']]: 'Euljiro'
+}
+
 export const POPUP_TYPE = {
     QR: 'qr',
     DETAIL: 'detail',

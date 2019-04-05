@@ -12,6 +12,12 @@ $(document).ready(function () {
 		}
 	});
 
+	$('.footer-wrap .mainnet').mouseenter(function(){
+		$(".footer-wrap .mainnet ul").stop().slideDown(300, 'swing');
+	}).mouseleave(function(){
+		$(".footer-wrap .mainnet ul").stop().slideUp(300, 'swing');
+	});
+
 	addMouseInOutListener('.header-wrap ul li, .header-wrap .connect.join');
 });
 
