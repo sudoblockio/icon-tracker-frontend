@@ -162,6 +162,8 @@ const actionTypes = {
   
   setAddress: 'SET_ADDRESS',
   setAddressSuccess :'SET_ADDRESS_SUCCESS',
+  setNotification: 'SET_NOTIFICATION',
+  setNotificationSuccess :'SET_NOTIFICATION_SUCCESS',
   clearWallet: 'CLEAR_WALLET',
   clearWalletSuccess: 'CLEAR_WALLET_SUCCESS'
 }

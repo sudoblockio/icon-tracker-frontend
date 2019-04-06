@@ -13,8 +13,33 @@ import {
   LoadingComponent,
   QrCodeButton
 } from 'components';
+import { isNotificationAvailable, registerServiceWorker } from 'notification';
+
+const _isNotificationAvailable = isNotificationAvailable()
 
 class AddressInfo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      notification: _isNotificationAvailable && this.props.walletNotification
+    }
+  }
+
+  onNotificationChange = () => {
+    if (!_isNotificationAvailable) {
+      return
+    }
+    const notification = !this.state.notification
+    this.setState({ notification }, () => {
+      this.props.setNotification(notification)
+      if (notification) {
+        const { wallet } = this.props
+        const { data } = wallet
+        const { address } = data
+        registerServiceWorker(address)
+      }
+    })
+  }
 
   render() {
     const { wallet, walletAddress } = this.props
@@ -30,14 +55,31 @@ class AddressInfo extends Component {
         const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
         const _address = !!address ? address : error
         const isConnected = walletAddress === _address
+        const disabled = !_isNotificationAvailable
         return (
           <div className="screen0">
             <div className="wrap-holder">
               {isConnected ?
-                <p className="title">My Address<span className="connected"><i className="img"></i>Connected to ICONex</span></p>
+                <p className="title">
+                  My Address<span className="connected"><i className="img"></i>Connected to ICONex</span>
+                  <span className={`toggle${disabled ? ' disabled' : ''}`}>
+                    <em>
+                      <input 
+                        id="cbox-02" 
+                        className="cbox-type" 
+                        type="checkbox" 
+                        name="notification" 
+                        onChange={this.onNotificationChange} 
+                        checked={!this.state.notification} 
+                        disabled={disabled}
+                      />
+                      <label htmlFor="cbox-02" className="label _img"></label>Notifications
+                    </em>
+                  </span>
+                </p>
               :
                 <p className="title">Address</p> 
-              }          
+              }
               <div className="contents">
                 <table className="table-typeB address">
                   <thead>
