@@ -1,3 +1,5 @@
+console.log('sw.js')
+
 self.addEventListener('install', event => {
     console.log('install', event)
 });
@@ -21,6 +23,10 @@ self.addEventListener('push', async event => {
     // const { address, txHash } = data
     // const { currentTarget } = event
     // const { origin } = currentTarget
+    const { currentTarget } = event
+    const { navigator } = currentTarget
+    const { platform } = navigator
+    const isWindow = platform === 'Win32'
 
     const origin = 'https://trackerdev.icon.foundation'
     const address = 'hx04d669879227bb24fc32312c408b0d5503362ef0'
@@ -28,14 +34,28 @@ self.addEventListener('push', async event => {
     // const txHash = '0xbeee59c0a21446f09581205f4dad86b056fbf64df341e0d8a796a4c49aa4d1b3' // message
     // const txHash = '0x39e75c17eecce36ae967e66760738ecbfb57de60c8dc3b8c297f50c5841379dc' // image
     // const txHash = '0xa8f85977ac22bdb57d8eb3325e28abfe979ab2f21c02a46391c9177dce31d4c7' // token
-    const txHash = '0xc30e543e6eecf9bdca2834c9b4665d3b592ccac65beea9558e35b02168128e1a' // call
-
-    const { title, icon } = await makeData(origin, address, txHash)
-    const options = { data: txHash, icon };
+    const txHash = '0xcd956c00792d4a97f0d88ba9e4565a43a2590f57d7a9b12c65e80b6e9f2504d9' // call
+    // const txHash = '0xce17860989cb8c0c3d96ac70c7894aba9a153c7f0ec9697163e391b4b330854e' // deploy
+    
+    const { title, image } = await makeData(origin, address, txHash)
+    const options = { 
+        data: txHash, 
+        icon: isWindow ? './logo.png' : image
+    };
     setTimeout(() => {
         self.registration.showNotification(title, options)
     }, 100);
 });
+
+const DEPLOY_TX_TYPE = {
+    "3": "Contract created",
+    "4": "Contract updated",
+    "5": "Contract accepted",
+    "6": "Contract rejected",
+    "7": "Update accepted",
+    "8": "Update rejected",
+    "9": "Update cancelled"
+}
 
 async function makeData(origin, address, txHash) {
     const txDetail = await getTxDetail(origin, txHash)
@@ -54,7 +74,7 @@ async function makeData(origin, address, txHash) {
             const isImage = isSafe && decoded.indexOf('data:image') === 0
             return {
                 title: isImage ? 'Image' : decoded,
-                icon: isImage ? decoded : undefined
+                image: isImage ? decoded : undefined
             }
         }
         case 'call': {
@@ -70,8 +90,12 @@ async function makeData(origin, address, txHash) {
                 const { dataString, targetContractAddr } = txDetail
                 const parsed = JSON.parse(dataString)
                 const { method } = parsed
-                return { title: `<${method}> is called on ${targetContractAddr}.` }
+                return { title: `${method} called on ${targetContractAddr}` }
             }
+        }
+        case 'deploy': {
+            const { txType } = txDetail
+            return { title: DEPLOY_TX_TYPE[txType] }
         }
         default: {
             return 'title'
