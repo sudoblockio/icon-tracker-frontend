@@ -7,9 +7,8 @@ class Footer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			current: NETWORK_NAME[window.location.href] || 'Mainnet'
+			current: NETWORK_NAME[window.location.host] || 'Mainnet'
 		};
-		console.log(window.location)
 	}
 
 	onNetworkClick = key => {
