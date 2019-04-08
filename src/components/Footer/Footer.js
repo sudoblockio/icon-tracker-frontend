@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { NETWORK_NAME, NETWORK_URL } from 'utils/const';
+import { NETWORK_NAME, NETWORK_HOST } from 'utils/const';
 
 class Footer extends Component {
 
@@ -9,10 +9,11 @@ class Footer extends Component {
 		this.state = {
 			current: NETWORK_NAME[window.location.href] || 'Mainnet'
 		};
+		console.log(window.location)
 	}
 
 	onNetworkClick = key => {
-		window.open(NETWORK_URL[key], '_blank')
+		window.open(`https://${NETWORK_HOST[key]}/`, '_blank')
 	}
 
 	render() {
@@ -32,7 +33,7 @@ class Footer extends Component {
 							</ul>
 							<div className="mainnet"><p>{this.state.current}<i className="img"></i></p>
 								<ul>
-									{Object.keys(NETWORK_URL).map(key => <li key={key}><span onClick={() => { this.onNetworkClick(key) }}>{key}</span></li>)}
+									{Object.keys(NETWORK_HOST).map(key => <li key={key}><span onClick={() => { this.onNetworkClick(key) }}>{key}</span></li>)}
 								</ul>
 							</div>
 						</div>
