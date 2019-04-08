@@ -7,7 +7,7 @@ self.addEventListener('activate', event => {
     console.log('activate', event)
 });
 self.addEventListener('notificationclick', async event => {
-    console.log('notificationclick', event, clients)
+    // console.log('notificationclick', event, clients)
     event.notification.close()
     const { currentTarget, notification } = event
     const { data } = notification
@@ -18,29 +18,36 @@ self.addEventListener('notificationclick', async event => {
     }
 });
 self.addEventListener('push', async event => {
-    console.log('push', event)
-    // const data = event.data.json()
-    // const { address, txHash } = data
-    // const { currentTarget } = event
-    // const { origin } = currentTarget
-    const { currentTarget } = event
-    const { navigator } = currentTarget
-    const { platform } = navigator
-    const isWindow = platform === 'Win32'
-
-    const origin = 'https://trackerdev.icon.foundation'
-    const address = 'hx04d669879227bb24fc32312c408b0d5503362ef0'
-    // const txHash = '0xcea5597417d9fb3b5f5e4496422e6a37c0ed1478685c71cf0d0a04f96c7b8331' // icx
+    // console.log('push', event, event.data.text())
+    const data = JSON.parse(event.data.text())
+    const { address, txHash, timestamp } = data
+    // const address = 'hx04d669879227bb24fc32312c408b0d5503362ef0'
+    // const txHash = '0xcea5597417d9fb3b5f5e4496422e6a37c0ed1478685c71cf0d0a04f96c7b8331' // withdraw
+    // const txHash = '0x34ed73b83c45452dbbc345c265d2b38026ea5a7537cb16da92ce07a996660580' // deposit
     // const txHash = '0xbeee59c0a21446f09581205f4dad86b056fbf64df341e0d8a796a4c49aa4d1b3' // message
     // const txHash = '0x39e75c17eecce36ae967e66760738ecbfb57de60c8dc3b8c297f50c5841379dc' // image
     // const txHash = '0xa8f85977ac22bdb57d8eb3325e28abfe979ab2f21c02a46391c9177dce31d4c7' // token
-    const txHash = '0xcd956c00792d4a97f0d88ba9e4565a43a2590f57d7a9b12c65e80b6e9f2504d9' // call
+    // const txHash = '0xcd956c00792d4a97f0d88ba9e4565a43a2590f57d7a9b12c65e80b6e9f2504d9' // call
     // const txHash = '0xce17860989cb8c0c3d96ac70c7894aba9a153c7f0ec9697163e391b4b330854e' // deploy
+
+    // TODO
+    // 최근 10분 전 내역만 노티 표시
+    // const pushTime = new Date(timestamp).getTime()
+    // const currentTime = new Date().getTime()
+    // if ((currentTime - pushTime) / (1000 * 60) > 10) {
+    //     return
+    // }
+
+    const { currentTarget } = event
+    // const { navigator, origin } = currentTarget
+    const { navigator } = currentTarget
+    const { platform } = navigator
+    const origin = 'https://trackerdev.icon.foundation'
     
     const { title, image } = await makeData(origin, address, txHash)
     const options = { 
         data: txHash, 
-        icon: isWindow ? './logo.png' : image
+        icon: platform === 'Win32' ? './logo.png' : image
     };
     setTimeout(() => {
         self.registration.showNotification(title, options)
@@ -59,12 +66,13 @@ const DEPLOY_TX_TYPE = {
 
 async function makeData(origin, address, txHash) {
     const txDetail = await getTxDetail(origin, txHash)
-    console.log(txDetail)
+    // console.log(txDetail)
     const { fromAddr, dataType } = txDetail
+    const isWithdraw = fromAddr === address
     switch (dataType) {
         case 'icx': {
             const { amount } = txDetail
-            const operation = (fromAddr === address) ? 'Withdraw' : 'Deposit'
+            const operation = isWithdraw ? 'Withdraw' : 'Deposit'
             return { title: `${operation} ${amount} ICX` }
         }
         case 'message': {
@@ -72,7 +80,9 @@ async function makeData(origin, address, txHash) {
             const removed = dataString.replace(/\"/gi, "");
             const decoded = toUtf8(removed)
             const isImage = isSafe && decoded.indexOf('data:image') === 0
-            return {
+            return isWithdraw ? {
+                title: 'Message transaction sent'
+            } : {
                 title: isImage ? 'Image' : decoded,
                 image: isImage ? decoded : undefined
             }
@@ -98,7 +108,7 @@ async function makeData(origin, address, txHash) {
             return { title: DEPLOY_TX_TYPE[txType] }
         }
         default: {
-            return 'title'
+            return 'Notification'
         }
     }
 }
