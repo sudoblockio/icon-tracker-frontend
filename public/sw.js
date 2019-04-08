@@ -7,7 +7,7 @@ self.addEventListener('activate', event => {
     console.log('activate', event)
 });
 self.addEventListener('notificationclick', async event => {
-    // console.log('notificationclick', event, clients)
+    console.log('notificationclick', event, clients)
     event.notification.close()
     const { currentTarget, notification } = event
     const { data } = notification
@@ -18,7 +18,7 @@ self.addEventListener('notificationclick', async event => {
     }
 });
 self.addEventListener('push', async event => {
-    // console.log('push', event, event.data.text())
+    console.log('push', event)
     const data = JSON.parse(event.data.text())
     const { address, txHash, timestamp } = data
     // const address = 'hx04d669879227bb24fc32312c408b0d5503362ef0'
@@ -39,10 +39,10 @@ self.addEventListener('push', async event => {
     // }
 
     const { currentTarget } = event
-    // const { navigator, origin } = currentTarget
-    const { navigator } = currentTarget
+    const { navigator, origin } = currentTarget
+    // const { navigator } = currentTarget
+    // const origin = 'https://trackerdev.icon.foundation'
     const { platform } = navigator
-    const origin = 'https://trackerdev.icon.foundation'
     
     const { title, image } = await makeData(origin, address, txHash)
     const options = { 
