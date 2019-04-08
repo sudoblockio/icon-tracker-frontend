@@ -13,7 +13,11 @@ import {
   LoadingComponent,
   QrCodeButton
 } from 'components';
-import { isNotificationAvailable, registerServiceWorker } from 'notification';
+import { 
+  isNotificationAvailable, 
+  registerServiceWorker, 
+  deregisterServiceWorker 
+} from 'notification';
 
 const _isNotificationAvailable = isNotificationAvailable()
 
@@ -37,6 +41,9 @@ class AddressInfo extends Component {
         const { data } = wallet
         const { address } = data
         registerServiceWorker(address)
+      }
+      else {
+        deregisterServiceWorker()
       }
     })
   }

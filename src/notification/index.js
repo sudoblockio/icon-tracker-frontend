@@ -1,6 +1,10 @@
 import { pushRegister } from '../redux/api/restV3/notification'
 
+const path = '/sw.js'
 const PublicKey = 'BHu9mU0UUq95nIOkY2EGxHq4l2ibzVzVbcD0uZHAaibpLTQEBl9kL8sSUlXMMc_StUdlwIXa32gJFZKcOw6pw5A'
+
+// TODO
+// export class
 
 export function isNotificationAvailable() {
     if (!('serviceWorker' in navigator)) return false    
@@ -10,7 +14,7 @@ export function isNotificationAvailable() {
 
 export async function registerServiceWorker(address) {
     try {
-        const registration = await navigator.serviceWorker.register('/sw.js')
+        const registration = await navigator.serviceWorker.register(path)
         const permission = await requestPermission();
         const pushSubscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
@@ -25,6 +29,15 @@ export async function registerServiceWorker(address) {
     catch(e) {
         console.error(e)        
     }
+}
+
+export async function deregisterServiceWorker() {
+    const registrations = await navigator.serviceWorker.getRegistrations()
+    registrations.forEach(registration => {
+        if (registration.active.scriptURL.indexOf(path) !== 0) {
+            registration.unregister()
+        }
+    })
 }
 
 export async function requestPermission() {
