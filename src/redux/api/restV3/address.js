@@ -6,7 +6,6 @@ export async function addressList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/list`, payload))
             .then(result => {
-                console.log(result.data)
                 resolve(result.data)
             })
             .catch(error => {
@@ -20,7 +19,6 @@ export async function addressInfo(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/info`, payload))
             .then(result => {
-                console.log(result.data)
                 resolve(result.data)
             })
             .catch(error => {

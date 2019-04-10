@@ -446,7 +446,6 @@ export function removeQuotes(str) {
 
 export async function getIsSolo() {
   const result = await getIsSoloVersion()
-  console.log('getIsSolo()', result)
   return result
 }
 
