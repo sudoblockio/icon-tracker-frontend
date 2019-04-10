@@ -3,9 +3,11 @@ console.log('sw.js')
 self.addEventListener('install', event => {
     console.log('install', event)
 });
+
 self.addEventListener('activate', event => {
     console.log('activate', event)
 });
+
 self.addEventListener('notificationclick', async event => {
     console.log('notificationclick', event, clients)
     event.notification.close()
@@ -17,33 +19,28 @@ self.addEventListener('notificationclick', async event => {
         clients.openWindow(`${origin}/transaction/${data}`)
     }
 });
-self.addEventListener('push', async event => {
-    console.log('push', event)
-    const data = JSON.parse(event.data.text())
-    const { address, txHash, timestamp } = data
-    // const address = 'hx04d669879227bb24fc32312c408b0d5503362ef0'
-    // const txHash = '0xcea5597417d9fb3b5f5e4496422e6a37c0ed1478685c71cf0d0a04f96c7b8331' // withdraw
-    // const txHash = '0x34ed73b83c45452dbbc345c265d2b38026ea5a7537cb16da92ce07a996660580' // deposit
-    // const txHash = '0xbeee59c0a21446f09581205f4dad86b056fbf64df341e0d8a796a4c49aa4d1b3' // message
-    // const txHash = '0x39e75c17eecce36ae967e66760738ecbfb57de60c8dc3b8c297f50c5841379dc' // image
-    // const txHash = '0xa8f85977ac22bdb57d8eb3325e28abfe979ab2f21c02a46391c9177dce31d4c7' // token
-    // const txHash = '0xcd956c00792d4a97f0d88ba9e4565a43a2590f57d7a9b12c65e80b6e9f2504d9' // call
-    // const txHash = '0xce17860989cb8c0c3d96ac70c7894aba9a153c7f0ec9697163e391b4b330854e' // deploy
 
-    // TODO
-    // 최근 10분 전 내역만 노티 표시
-    // const pushTime = new Date(timestamp).getTime()
-    // const currentTime = new Date().getTime()
-    // if ((currentTime - pushTime) / (1000 * 60) > 10) {
-    //     return
-    // }
+self.addEventListener('push', async event => {
+    const data = JSON.parse(event.data.text())
+    console.log('push', data)
+    const { timestamp } = data
+    const eventTime = new Date(timestamp).getTime()
+    const currentTime = new Date().getTime()
+    const diffMinute = (currentTime - eventTime) / (1000 * 60)
+    console.log(eventTime, currentTime, (currentTime - eventTime), diffMinute)
+    if (diffMinute > 10) {
+        return
+    }
 
     const { currentTarget } = event
-    const { navigator, origin } = currentTarget
-    // const { navigator } = currentTarget
-    // const origin = 'https://trackerdev.icon.foundation'
-    const { platform } = navigator
+    let { origin } = currentTarget
+    if (origin.indexOf('localhost') !== 0 ) {
+        origin = 'https://trackerdev.icon.foundation'
+    }
     
+    const { navigator } = currentTarget
+    const { platform } = navigator
+    const { address, txHash } = data
     const { title, image } = await makeData(origin, address, txHash)
     const options = { 
         data: txHash, 
@@ -66,7 +63,7 @@ const DEPLOY_TX_TYPE = {
 
 async function makeData(origin, address, txHash) {
     const txDetail = await getTxDetail(origin, txHash)
-    // console.log(txDetail)
+    console.log(txDetail)
     const { fromAddr, dataType } = txDetail
     const isWithdraw = fromAddr === address
     switch (dataType) {
@@ -90,18 +87,19 @@ async function makeData(origin, address, txHash) {
         case 'call': {
             const { tokenTxList } = txDetail
             const { length } = tokenTxList
-            if (length !== 0) {
-                const tokenTx = tokenTxList[0]
-                const { quantity, fromAddr: tokenFromAddr, symbol } = tokenTx
-                const operation = (tokenFromAddr === address) ? 'Withdraw' : 'Deposit'
-                return { title: `${operation} ${quantity} ${symbol}${length > 1 ? ` (${length})` : ''}` }
-            }
-            else {
+            if (length === 0) {
                 const { dataString, targetContractAddr } = txDetail
                 const parsed = JSON.parse(dataString)
                 const { method } = parsed
                 return { title: `${method} called on ${targetContractAddr}` }
             }
+            else {
+                const filtered = tokenTxList.filter(tx => tx.fromAddr === address || tx.toAddr === address)
+                const tokenTx = filtered[0]
+                const { quantity, fromAddr: tokenFromAddr, symbol } = tokenTx
+                const operation = (tokenFromAddr === address) ? 'Withdraw' : 'Deposit'
+                return { title: `${operation} ${quantity} ${symbol}${length > 1 ? ` (${length})` : ''}` }    
+            }           
         }
         case 'deploy': {
             const { txType } = txDetail
