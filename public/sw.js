@@ -1,5 +1,21 @@
 console.log('sw.js')
 
+const NETWORK_HOST = {
+    Mainnet: 'tracker.icon.foundation',
+    Euljiro: 'trackerdev.icon.foundation',
+    Yeouido: 'bicon.tracker.solidwallet.io'
+}
+
+const DEPLOY_TX_TYPE = {
+    "3": "Contract created",
+    "4": "Contract updated",
+    "5": "Contract accepted",
+    "6": "Contract rejected",
+    "7": "Update accepted",
+    "8": "Update rejected",
+    "9": "Update cancelled"
+}
+
 self.addEventListener('install', event => {
     console.log('install', event)
 });
@@ -34,7 +50,8 @@ self.addEventListener('push', async event => {
 
     const { currentTarget } = event
     let { origin } = currentTarget
-    if (origin.indexOf('localhost') !== 0 ) {
+    const host = origin.replace('https://','')
+    if (!NETWORK_HOST[host]) {
         origin = 'https://trackerdev.icon.foundation'
     }
     
@@ -42,24 +59,12 @@ self.addEventListener('push', async event => {
     const { platform } = navigator
     const { address, txHash } = data
     const { title, image } = await makeData(origin, address, txHash)
-    const options = { 
-        data: txHash, 
-        icon: platform === 'Win32' ? './logo.png' : image
-    };
+    const icon = image ? image : platform === 'Win32' ? './logo.png' : undefined
+    const options = { data: txHash, icon };
     setTimeout(() => {
         self.registration.showNotification(title, options)
     }, 100);
 });
-
-const DEPLOY_TX_TYPE = {
-    "3": "Contract created",
-    "4": "Contract updated",
-    "5": "Contract accepted",
-    "6": "Contract rejected",
-    "7": "Update accepted",
-    "8": "Update rejected",
-    "9": "Update cancelled"
-}
 
 async function makeData(origin, address, txHash) {
     const txDetail = await getTxDetail(origin, txHash)
