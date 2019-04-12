@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { requestAddress } from "../../utils/connect";
 import { CopyButton } from "components";
 import checkIconex from 'check-iconex'
-import { deregisterServiceWorker } from "../../notification";
+import NotificationManager from 'utils/NotificationManager'
 
 class Connect extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Connect extends Component {
   disconnect = () => {
     this.setState({ walletAddress: undefined }, () => {
       this.props.clearWallet()
-      deregisterServiceWorker()
+      NotificationManager.deregisterServiceWorker()
     })
   }
 

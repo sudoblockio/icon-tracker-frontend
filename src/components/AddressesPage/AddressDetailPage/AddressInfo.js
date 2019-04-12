@@ -13,13 +13,9 @@ import {
   LoadingComponent,
   QrCodeButton
 } from 'components';
-import { 
-  isNotificationAvailable, 
-  registerServiceWorker, 
-  deregisterServiceWorker 
-} from 'notification';
+import NotificationManager from 'utils/NotificationManager'
 
-const _isNotificationAvailable = isNotificationAvailable()
+const _isNotificationAvailable = NotificationManager.available()
 
 class AddressInfo extends Component {
   constructor(props) {
@@ -40,10 +36,10 @@ class AddressInfo extends Component {
         const { wallet } = this.props
         const { data } = wallet
         const { address } = data
-        registerServiceWorker(address)
+        NotificationManager.registerServiceWorker(address)
       }
       else {
-        deregisterServiceWorker()
+        NotificationManager.deregisterServiceWorker()
       }
     })
   }
