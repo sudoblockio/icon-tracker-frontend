@@ -17,7 +17,7 @@ export async function pushRegister(payload) {
 export async function pushWithdraw(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.post('/v3/push/withdraw', makeUrl(payload))
+    trackerApi.delete(makeUrl('/v3/push/withdraw', payload))
       .then(result => {
         resolve(result)
       })

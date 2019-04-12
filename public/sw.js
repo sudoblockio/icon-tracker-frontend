@@ -111,7 +111,7 @@ async function makeData(origin, address, txHash) {
             return { title: DEPLOY_TX_TYPE[txType] }
         }
         default: {
-            return 'Notification'
+            return { title: 'Notification' }
         }
     }
 }

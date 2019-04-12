@@ -34,8 +34,8 @@ class AddressInfo extends Component {
       this.props.setNotification(notification)
       if (notification) {
         const { wallet } = this.props
-        const { data } = wallet
-        const { address } = data
+        const { data, error } = wallet
+        const address = data.address || error
         NotificationManager.registerServiceWorker(address)
       }
       else {
