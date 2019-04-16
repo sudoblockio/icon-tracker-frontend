@@ -58,7 +58,7 @@ function* transactionTxDetailFunc(action) {
     const data = convertEngineToTracker(resultData, byHashData)
     yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
 
-    yield call(delay, 3000)
+    yield call(delay, 5000)
 
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     if (trackerData.result === "200") {

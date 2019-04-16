@@ -50,11 +50,11 @@ self.addEventListener('push', async event => {
 
     const { currentTarget } = event
     let { origin } = currentTarget
-    const host = origin.replace('https://','')
+    const host = origin.replace('https://', '')
     if (!NETWORK_HOST[host]) {
-        origin = 'https://trackerdev.icon.foundation'
+        origin = 'https://tracker.icon.foundation'
     }
-    
+
     const { navigator } = currentTarget
     const { platform } = navigator
     const { address, txHash } = data
@@ -85,9 +85,9 @@ async function makeData(origin, address, txHash) {
             return isWithdraw ? {
                 title: 'Message transaction sent'
             } : {
-                title: isImage ? 'Image' : decoded,
-                image: isImage ? decoded : undefined
-            }
+                    title: isImage ? 'Image' : decoded,
+                    image: isImage ? decoded : undefined
+                }
         }
         case 'call': {
             const { tokenTxList } = txDetail
@@ -103,8 +103,8 @@ async function makeData(origin, address, txHash) {
                 const tokenTx = filtered[0]
                 const { quantity, fromAddr: tokenFromAddr, symbol } = tokenTx
                 const operation = (tokenFromAddr === address) ? 'Withdraw' : 'Deposit'
-                return { title: `${operation} ${quantity} ${symbol}${length > 1 ? ` (${length})` : ''}` }    
-            }           
+                return { title: `${operation} ${quantity} ${symbol}${length > 1 ? ` (${length})` : ''}` }
+            }
         }
         case 'deploy': {
             const { txType } = txDetail
@@ -132,23 +132,6 @@ async function getTxDetail(host, txHash) {
         console.error(e)
         return {}
     }
-}
-
-function toUtf8(value) {
-    let str = '';
-    let i = 0; const
-        l = value.length;
-    if (value.substring(0, 2) === '0x') {
-        i = 2;
-    }
-    for (; i < l; i += 2) {
-        const code = parseInt(value.substr(i, 2), 16);
-        if (code === 0) break;
-        str += String.fromCharCode(code);
-    }
-
-    // return utf8.decode(str);
-    return utf8decode(str);
 }
 
 // utf8 module
