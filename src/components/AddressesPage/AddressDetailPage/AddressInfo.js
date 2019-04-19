@@ -76,7 +76,7 @@ class AddressInfo extends Component {
                         checked={!this.state.notification} 
                         disabled={disabled}
                       />
-                      <label htmlFor="cbox-02" className="label _img"></label>Notifications
+                      <label htmlFor="cbox-02" className="label _img"></label>Notifications<span>(Beta)</span>
                     </em>
                   </span>
                 </p>

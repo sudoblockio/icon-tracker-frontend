@@ -65,6 +65,11 @@ var createMenu = function(){
 		$(".popup-wrap.qr").fadeIn(350);
 	});
 
+	// qrcode popup
+	$(".btn-scam").click(function(){
+		$(".popup-wrap.scam").fadeIn(350);
+	});
+
 	// detail popup
 	$(".status").click(function(){
 		$(".popup-wrap.detail").css({"display":"block"});
