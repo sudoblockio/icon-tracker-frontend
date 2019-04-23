@@ -1,4 +1,4 @@
-export const NETWORK_NAME = {
+const NETWORK_NAME = {
     'tracker.icon.foundation': 'Mainnet',
     'trackerdev.icon.foundation': 'Euljiro',
     'bicon.tracker.solidwallet.io': 'Yeouido'
