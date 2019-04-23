@@ -5,7 +5,8 @@ import {
     TransactionLink,
     LoadingComponent,
     QrCodeButton,
-    AddressLink
+    AddressLink,
+    ReportButton
 } from 'components'
 import {
     convertNumberToText,
@@ -36,9 +37,11 @@ class ContractInfo extends Component {
                 return <LoadingComponent height='206px' />
             }
             else {
-                const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName } = data
+                console.log(this.props)
+                const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName, reportedCount } = data
                 const isCreator = isValidData(creator)
                 const isCreateTx = isValidData(createTx)
+                const scam = reportedCount >= 10 ? true : false
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -48,7 +51,7 @@ class ContractInfo extends Component {
                                     <tbody>
                                         <tr className="qr">
                                             <td>Address</td>
-                                            <td colSpan="3">{address} <QrCodeButton address={address} /><CopyButton data={address} title={'Copy Address'} isSpan /></td>
+                <td colSpan="3"  className={scam ? "scam":""}>{scam &&<span className="scam-tag">Scam</span>}{address} <QrCodeButton address={address} /><CopyButton data={address} title={'Copy Address'} isSpan /><ReportButton address={address}/></td>
                                         </tr>
                                         <tr>
                                             <td>Balance</td>

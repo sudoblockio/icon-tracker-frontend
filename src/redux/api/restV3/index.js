@@ -12,7 +12,8 @@ import {
     addressInfo,
     addressTxList,
     addressInternalTxList,
-    addressTokenTxList
+    addressTokenTxList,
+    reportAddress
 } from './address'
 
 import {
@@ -64,7 +65,8 @@ export {
     addressTxList,
     addressInternalTxList,
     addressTokenTxList,
-
+    reportAddress,
+    
     blockList,
     blockInfo,
     blockTxList,

@@ -8,7 +8,8 @@ import {
 	LoadingComponent,
 	AddressLink,
 	BlockLink,
-	AddressCell
+	AddressCell,
+	ReportButton
 } from 'components'
 import {
 	makeDownloadLink,
@@ -94,7 +95,8 @@ class TransactionInfo extends Component {
 					fee,
 					feeUsd,
 					dataType,
-					targetContractAddr
+					targetContractAddr,
+					reportedCount
 				} = data
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -102,7 +104,7 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
-
+				const scam = reportedCount >= 10 ?  true: false;
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -112,7 +114,7 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /></td>
+											<td className={scam ? "scam":""}>{scam?<span className="scam-tag">Scam</span>:""}{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img twit-icon"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /><ReportButton address={txHash}/></td>
 										</tr>
 										<tr>
 											<td>Status</td>

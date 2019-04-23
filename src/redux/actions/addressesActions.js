@@ -34,3 +34,11 @@ export function addressTokenTxList(payload) {
     payload
   }
 }
+
+export function reportAddress(payload){
+  console.log(payload,"?")
+  return {
+    type: actionTypes.reportAddress,
+    payload
+  }
+}

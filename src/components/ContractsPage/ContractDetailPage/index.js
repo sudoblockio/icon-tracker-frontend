@@ -13,7 +13,6 @@ class ContractDetailPage extends Component {
     render() {
         const { contract } = this.props;
         const { loading, error } = contract
-
         return (
             <DetailPage
                 {...this.props}

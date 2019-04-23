@@ -80,6 +80,7 @@ export const NETWORK_NAME = {
 export const POPUP_TYPE = {
     QR: 'qr',
     DETAIL: 'detail',
+    SCAM: 'scam'
 }
 
 export const SEARCH_TYPE = {

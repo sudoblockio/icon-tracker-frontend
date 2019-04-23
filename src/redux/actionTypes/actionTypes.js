@@ -109,6 +109,7 @@ const actionTypes = {
   addressTxList: 'ADDRESS_TX_LIST',
   addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
   addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
+
   
   icxGetScore: 'ICX_GET_SCORE',
   icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
@@ -157,6 +158,10 @@ const actionTypes = {
   icxCall: 'ICX_CALL',
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
+
+  reportAddress: 'REPORT_ADDRESS',
+  reportAddressFulfilled: 'REPORT_ADDRESS_FULFILLED',
+  reportAddressRejected: 'REPORT_ADDRESS_REJECTED',
 
   setBannerOption: 'SET_BANNER_OPTION',
   
