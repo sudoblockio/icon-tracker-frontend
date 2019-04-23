@@ -35,10 +35,10 @@ export function addressTokenTxList(payload) {
   }
 }
 
-export function reportAddress(payload){
+export function reportScam(payload){
   console.log(payload,"?")
   return {
-    type: actionTypes.reportAddress,
+    type: actionTypes.reportScam,
     payload
   }
 }

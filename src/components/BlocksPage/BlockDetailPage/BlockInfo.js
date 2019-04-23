@@ -52,7 +52,6 @@ class BlockInfo extends Component {
       loading,
       data
     } = block
-    console.log(data,"blockdata")
 
     const Content = () => {
       if (loading) {

@@ -64,7 +64,7 @@ class AddressInfo extends Component {
         const _address = !!address ? address : error
         const isConnected = walletAddress === _address
         const disabled = !_isNotificationAvailable
-        
+
         const scam = reportedCount >= 10 ? true : false
 
         return (
@@ -102,7 +102,7 @@ class AddressInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td className={scam ? "scam":""}>{scam?<span className="scam-tag">Scam</span>:""}{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}<ReportButton address={address} /></td>
+                      <td className={scam ? "scam":""}>{scam &&<span className="scam-tag">Scam</span>}{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}<ReportButton address={address} /></td>
                     </tr>
                     <tr>
                       <td>Balance</td>
@@ -165,7 +165,6 @@ class TokenBalance extends Component {
   }
 
   render() {
-    console.log(this.props,"this.props")
     const TableData = (_tokenList) => {
       if (_tokenList.length === 0) {
         return <td>None</td>

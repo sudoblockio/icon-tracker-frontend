@@ -6,7 +6,7 @@ import {
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
-  reportAddress as REPORT_ADDRESS_API
+  reportScam as REPORT_ADDRESS_API
 } from '../api/restV3';
 
 export default function* addressesSaga() {
@@ -15,7 +15,7 @@ export default function* addressesSaga() {
   yield fork(watchAddressTxList);
   yield fork(watchAddressInternalTxList);
   yield fork(watchAddressTokenTxList);
-  yield fork(watchReportAddress);
+  yield fork(watchreportScam);
 
 }
 
@@ -24,7 +24,7 @@ function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc)
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
 function* watchAddressInternalTxList() { yield takeLatest(AT.addressInternalTxList, addressInternalTxListFunc) }
 function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
-function* watchReportAddress() { yield takeLatest(AT.reportAddress,reportAddressFunc) }
+function* watchreportScam() { yield takeLatest(AT.reportScam,reportScamFunc) }
 
 export function* addressListFunc(action) {
   try {
@@ -51,7 +51,6 @@ export function* addressInfoFunc(action) {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
     if (payload.result === '200') {
       yield put({type: AT.addressInfoFulfilled, payload: payload});
-      console.log(payload,"infoPayload")
     }
     else {
       throw new Error();
@@ -123,11 +122,11 @@ export function* addressTokenTxListFunc(action) {
 }
 
 
-export function* reportAddressFunc(action) {
+export function* reportScamFunc(action) {
   try {
     const payload = yield call(REPORT_ADDRESS_API, action.payload);
     if (payload.result === "200") {
-      yield put({ type: AT.reportAddressFulfilled});
+      yield put({ type: AT.reportScamFulfilled});
       return
     }
     else {
@@ -135,6 +134,6 @@ export function* reportAddressFunc(action) {
     }
   }
   catch(e) {
-    yield put({type: AT.reportAddressRejected});
+    yield put({type: AT.reportScamRejected});
   }
 }

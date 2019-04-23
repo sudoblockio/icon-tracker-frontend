@@ -6,7 +6,7 @@ import {
   addressTxList,
   addressInternalTxList,
   addressTokenTxList,
-  reportAddress
+  reportScam
 } from '../../redux/actions/addressesActions';
 import { 
   setPopup 

@@ -37,7 +37,6 @@ class ContractInfo extends Component {
                 return <LoadingComponent height='206px' />
             }
             else {
-                console.log(this.props)
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName, reportedCount } = data
                 const isCreator = isValidData(creator)
                 const isCreateTx = isValidData(createTx)

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { POPUP_TYPE } from 'utils/const'
 import { setPopup } from '../../redux/actions/popupActions'
-import { reportAddress } from "../../redux/actions/addressesActions"
+import { reportScam } from "../../redux/actions/addressesActions"
 class ReportButton extends Component {
 
     handleClick = () => {
-        const { walletAddress, reportAddress, address } = this.props
+        const { walletAddress, reportScam, address } = this.props
         this.props.setPopup({
             type: POPUP_TYPE.SCAM,
-            data:{ walletAddress, address, reportAddress}
+            data:{ walletAddress, address, reportScam}
         })
     }
 
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         setPopup: payload => dispatch(setPopup(payload)),
-        reportAddress: payload => dispatch(reportAddress(payload))
+        reportScam: payload => dispatch(reportScam(payload))
     };
 }
 

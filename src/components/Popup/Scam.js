@@ -26,7 +26,6 @@ class Scam extends Component {
     readFile = (file) => {
         if(file && file[0]){
             const fileName = file[0].name;
-            console.log(file[0].size/1024/1024)
             if(!file[0].type.includes('image')){
                 this.setState({
                     fileName,
@@ -36,7 +35,6 @@ class Scam extends Component {
                 return;
             }
             if(file[0].size/1024/1024 > 1){
-                console.log("in?")
                 this.setState({
                     fileName,
                     dropBoxClass:"error",
@@ -60,9 +58,9 @@ class Scam extends Component {
         })
     }
     handleSubmit = async () => {
-        const { reportAddress, address, walletAddress } = this.props.data;
+        const { reportScam, address, walletAddress } = this.props.data;
         const { refUrl } = this.state;
-        await reportAddress(
+        await reportScam(
             {
                 reported:address,
                 reporter:walletAddress,
@@ -75,7 +73,6 @@ class Scam extends Component {
     renderContents = () => {
         const { connectStatus, dropBoxClass, url, fileName, msg } = this.state;
         const { walletAddress } = this.props.data;
-        console.log(this.props.data,"data")
         
         if(connectStatus === 2){
             return (
@@ -123,7 +120,6 @@ class Scam extends Component {
         }
     }
     render() {
-        console.log(this.props.data)
         return (
             <Fragment>
             <h1 key="h1" className="title">Report scam</h1>

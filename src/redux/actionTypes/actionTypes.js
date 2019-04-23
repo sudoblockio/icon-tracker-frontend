@@ -159,9 +159,9 @@ const actionTypes = {
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
 
-  reportAddress: 'REPORT_ADDRESS',
-  reportAddressFulfilled: 'REPORT_ADDRESS_FULFILLED',
-  reportAddressRejected: 'REPORT_ADDRESS_REJECTED',
+  reportScam: 'REPORT_ADDRESS',
+  reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
+  reportScamRejected: 'REPORT_ADDRESS_REJECTED',
 
   setBannerOption: 'SET_BANNER_OPTION',
   
