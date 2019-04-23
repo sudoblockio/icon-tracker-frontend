@@ -1,7 +1,7 @@
-const NETWORK_HOST = {
-    Mainnet: 'tracker.icon.foundation',
-    Euljiro: 'trackerdev.icon.foundation',
-    Yeouido: 'bicon.tracker.solidwallet.io'
+export const NETWORK_NAME = {
+    ['tracker.icon.foundation']: 'Mainnet',
+    [ 'trackerdev.icon.foundation']: 'Euljiro',
+    ['bicon.tracker.solidwallet.io']: 'Yeouido'
 }
 
 const DEPLOY_TX_TYPE = {
@@ -48,8 +48,7 @@ self.addEventListener('push', async event => {
     const { currentTarget } = event
     let { origin } = currentTarget
     const host = origin.replace('https://', '')
-    console.log(host, NETWORK_HOST[host])
-    if (!NETWORK_HOST[host]) {
+    if (!NETWORK_NAME[host]) {
         origin = 'https://tracker.icon.foundation'
     }
 
