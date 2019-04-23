@@ -130,6 +130,22 @@ async function getTxDetail(host, txHash) {
     }
 }
 
+function toUtf8(value) {
+    let str = '';
+    let i = 0; const
+        l = value.length;
+    if (value.substring(0, 2) === '0x') {
+        i = 2;
+    }
+    for (; i < l; i += 2) {
+        const code = parseInt(value.substr(i, 2), 16);
+        if (code === 0) break;
+        str += String.fromCharCode(code);
+    }
+
+    return utf8decode(str);
+}
+
 // utf8 module
 
 var stringFromCharCode = String.fromCharCode;
