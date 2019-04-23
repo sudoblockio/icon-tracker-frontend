@@ -72,9 +72,9 @@ export const NETWORK_HOST = {
 }
 
 export const NETWORK_NAME = {
-    ['tracker.icon.foundation']: 'Mainnet',
-    [ 'trackerdev.icon.foundation']: 'Euljiro',
-    ['bicon.tracker.solidwallet.io']: 'Yeouido'
+    'tracker.icon.foundation': 'Mainnet',
+    'trackerdev.icon.foundation': 'Euljiro',
+    'bicon.tracker.solidwallet.io': 'Yeouido'
 }
 
 export const POPUP_TYPE = {
