@@ -1,5 +1,3 @@
-console.log('sw.js')
-
 const NETWORK_HOST = {
     Mainnet: 'tracker.icon.foundation',
     Euljiro: 'trackerdev.icon.foundation',
@@ -16,16 +14,17 @@ const DEPLOY_TX_TYPE = {
     "9": "Update cancelled"
 }
 
-self.addEventListener('install', event => {
-    console.log('install', event)
-});
+// console.log('sw.js')
 
-self.addEventListener('activate', event => {
-    console.log('activate', event)
-});
+// self.addEventListener('install', event => {
+//     console.log('install', event)
+// });
+
+// self.addEventListener('activate', event => {
+//     console.log('activate', event)
+// });
 
 self.addEventListener('notificationclick', async event => {
-    console.log('notificationclick', event, clients)
     event.notification.close()
     const { currentTarget, notification } = event
     const { data } = notification
@@ -38,12 +37,10 @@ self.addEventListener('notificationclick', async event => {
 
 self.addEventListener('push', async event => {
     const data = JSON.parse(event.data.text())
-    console.log('push', data)
     const { timestamp } = data
     const eventTime = new Date(timestamp).getTime()
     const currentTime = new Date().getTime()
     const diffMinute = (currentTime - eventTime) / (1000 * 60)
-    console.log(eventTime, currentTime, (currentTime - eventTime), diffMinute)
     if (diffMinute > 10) {
         return
     }
@@ -51,6 +48,7 @@ self.addEventListener('push', async event => {
     const { currentTarget } = event
     let { origin } = currentTarget
     const host = origin.replace('https://', '')
+    console.log(host, NETWORK_HOST[host])
     if (!NETWORK_HOST[host]) {
         origin = 'https://tracker.icon.foundation'
     }
@@ -68,7 +66,6 @@ self.addEventListener('push', async event => {
 
 async function makeData(origin, address, txHash) {
     const txDetail = await getTxDetail(origin, txHash)
-    console.log(txDetail)
     const { fromAddr, dataType } = txDetail
     const isWithdraw = fromAddr === address
     switch (dataType) {

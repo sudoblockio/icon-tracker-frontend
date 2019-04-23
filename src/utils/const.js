@@ -74,7 +74,7 @@ export const NETWORK_HOST = {
 export const NETWORK_NAME = {
     [NETWORK_HOST['Mainnet']]: 'Mainnet',
     [NETWORK_HOST['Euljiro']]: 'Euljiro',
-    [NETWORK_HOST['Euljiro']]: 'Euljiro'
+    [NETWORK_HOST['Yeouido']]: 'Yeouido'
 }
 
 export const POPUP_TYPE = {
