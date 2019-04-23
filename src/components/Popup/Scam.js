@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone'
 import icon from "../../style/image/img-icon.png"
 import complete from "../../style/image/img-complete.png"
+import { requestAddress } from "../../utils/connect";
+import { reportScam } from "../../redux/actions/addressesActions"
+import { setAddress } from "../../redux/actions/storageActions"
 
 class Scam extends Component {
     state = {
-        connectStatus:this.props.data.walletAddress !== "" ? 1 : 0,
+        connectStatus:this.props.walletAddress !== "" ? 2 : 0,
         refUrl:'',
         fileName:'',
         dropBoxClass:"",
         msg:''
     }
     componentWillReceiveProps(nextProps){
+        console.log(nextProps,"next")
         if(nextProps.data.walletAddress !== ""){
             this.setState({
                 connectStatus:1
@@ -58,7 +63,8 @@ class Scam extends Component {
         })
     }
     handleSubmit = async () => {
-        const { reportScam, address, walletAddress } = this.props.data;
+        const { reportScam, data, walletAddress } = this.props;
+        const { address } = data;
         const { refUrl } = this.state;
         await reportScam(
             {
@@ -69,11 +75,21 @@ class Scam extends Component {
         )
         this.props.closeScam()
     }
-    
+    onClickNext = async () => {
+        const {connectStatus} = this.state;
+        if(connectStatus === 1){
+            this.setState({
+                connectStatus:2
+            })
+        }else if(connectStatus === 0){
+            const walletAddress = await requestAddress();
+            await this.props.setAddress(walletAddress);
+        }
+    }  
     renderContents = () => {
         const { connectStatus, dropBoxClass, url, fileName, msg } = this.state;
-        const { walletAddress } = this.props.data;
-        
+        const { walletAddress } = this.props;
+
         if(connectStatus === 2){
             return (
                 <Fragment><h3>Select a file or drag & drop to the area below.</h3>
@@ -114,7 +130,7 @@ class Scam extends Component {
 				{connectStatus === 1 && <p className="address">{walletAddress}</p>}
 				<div className="btn-holder">
 					<button className="btn-type-normal size-half" onClick={this.props.closeScam}><span>Cancel</span></button>
-					<button className="btn-type-normal size-half" onClick={()=>{this.setState({connectStatus:2})}}disabled = {connectStatus === 0 ? true : false}><span>Add</span></button>
+					<button className="btn-type-normal size-half" onClick={this.onClickNext}><span>{connectStatus === 0 ? "Connect":"Next"}</span></button>
 				</div>
             </Fragment> )
         }
@@ -131,4 +147,17 @@ class Scam extends Component {
     }
 }
 
-export default Scam
+function mapStateToProps(state) {
+    return {
+        walletAddress:state.storage.walletAddress
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        reportScam: payload => dispatch(reportScam(payload)),
+        setAddress: payload => dispatch(setAddress(payload))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Scam)
