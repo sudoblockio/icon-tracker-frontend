@@ -11,6 +11,7 @@ import {
 } from 'utils/const'
 import {
   BlockLink,
+  AddressLink,
   LoadingComponent
 } from 'components';
 
@@ -58,7 +59,7 @@ class BlockInfo extends Component {
         return <LoadingComponent height='206px' />
       }
       else {
-        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock } = data
+        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId } = data
         const isFirst = height === 0
         const isLast = lastBlock !== "-"
         return (
@@ -75,6 +76,10 @@ class BlockInfo extends Component {
                         <em className="value">{numberWithCommas(height)}</em>
                         <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled': ''}`}><em className="img"></em></p>
                       </td>
+                    </tr>
+                    <tr>
+                      <td>Peer ID</td>
+                      <td><AddressLink to={peerId} /></td>                 
                     </tr>
                     <tr>
                       <td>Time Stamp</td>
@@ -102,7 +107,7 @@ class BlockInfo extends Component {
                       <td>{prevHash ? (<BlockLink to={height - 1} label={prevHash} />) : "-"}</td>
                     </tr>
                     <tr>
-                      <td>Block size</td>
+                      <td>Block Size</td>
                       <td>{numberWithCommas(blockSize)} bytes</td>
                     </tr>
                     <tr>
