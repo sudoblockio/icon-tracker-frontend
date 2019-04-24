@@ -13,7 +13,8 @@ class Scam extends Component {
         refUrl:'',
         fileName:'',
         dropBoxClass:"",
-        msg:''
+        msg:'',
+        imgFile:null
     }
     componentWillReceiveProps(nextProps){
         console.log(nextProps,"next")
@@ -50,7 +51,7 @@ class Scam extends Component {
                 this.setState({
                     fileName,
                     dropBoxClass:"normal",
-                    file
+                    imgFile:file
                 })
         }
         
@@ -58,19 +59,20 @@ class Scam extends Component {
     handleClickDelete = () => {
         this.setState({
             dropBoxClass:'',
-            file:null,
+            imgFile:null,
             msg:''
         })
     }
     handleSubmit = async () => {
         const { reportScam, data, walletAddress } = this.props;
         const { address } = data;
-        const { refUrl } = this.state;
+        const { refUrl, imgFile } = this.state;
         await reportScam(
             {
                 reported:address,
                 reporter:walletAddress,
-                refUrl
+                refUrl,
+                imgFile
             }
         )
         this.props.closeScam()
