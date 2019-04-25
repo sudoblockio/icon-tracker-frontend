@@ -20,7 +20,7 @@ class ReportButton extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps() {
     return {}
 }
 

@@ -49,7 +49,7 @@ class Popup extends Component {
     }
 
     render() {
-        const { type, data, walletAddress } = this.props
+        const { type, data } = this.props
         const isQr = type === POPUP_TYPE.QR
         const qrData = isQr ? data : {}
         const isDetail = type === POPUP_TYPE.DETAIL

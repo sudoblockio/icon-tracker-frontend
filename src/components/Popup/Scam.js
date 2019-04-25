@@ -125,7 +125,7 @@ class Scam extends Component {
             return(
             <Fragment>
                 <div className="icon">
-				    { connectStatus === 0 ? <img src={icon} />: <img src={complete} />}
+				    { connectStatus === 0 ? <img src={icon} alt="icon" />: <img src={complete} alt="complete"/>}
 				</div>
 				<p className="sub-title">Connect to ICONex</p>
 				<p className="txt">{connectStatus === 0 ? "ICONex지갑을 연동 해야 신고가 가능합니다.": "ICONex지갑이 연동 되었습니다."}</p>
