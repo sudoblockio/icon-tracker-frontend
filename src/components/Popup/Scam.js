@@ -17,7 +17,7 @@ class Scam extends Component {
         imgFile:null
     }
     componentWillReceiveProps(nextProps){
-        if(nextProps.data.walletAddress !== ""){
+        if(nextProps.walletAddress !== ""){
             this.setState({
                 connectStatus:1
             })
