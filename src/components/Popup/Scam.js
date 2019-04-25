@@ -84,7 +84,7 @@ class Scam extends Component {
             })
         }else if(connectStatus === 0){
             const walletAddress = await requestAddress();
-            await this.props.setAddress(walletAddress);
+            this.props.setAddress(walletAddress);
         }
     }  
     renderContents = () => {
