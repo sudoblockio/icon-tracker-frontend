@@ -25,7 +25,7 @@ class Scam extends Component {
     }
     handleChange = (e) => {
         this.setState({
-            url:e.target.value
+            refUrl:e.target.value
         })
     }
     readFile = (file) => {
@@ -87,13 +87,15 @@ class Scam extends Component {
             this.props.setAddress(walletAddress);
         }
     }  
-    renderContents = () => {
-        const { connectStatus, dropBoxClass, url, fileName, msg } = this.state;
-        const { walletAddress } = this.props;
 
-        if(connectStatus === 2){
-            return (
-                <Fragment><h3>Select a file or drag & drop to the area below.</h3>
+    render() {
+        const { connectStatus, dropBoxClass, refUrl, fileName, msg } = this.state;
+        const { walletAddress } = this.props;
+        return (
+            <Fragment>
+            <h1 key="h1" className="title">Report scam</h1>
+            <div key="div" className="box">
+                {connectStatus === 2 ? <Fragment><h3>Select a file or drag & drop to the area below.</h3>
                 <Dropzone onDrop={file => this.readFile(file)}>
                     {({getRootProps, getInputProps}) => (
                         <Fragment>
@@ -114,14 +116,12 @@ class Scam extends Component {
                     )}
                 </Dropzone>
 				<h2>The scam site URL (Optional)</h2>
-                <input type="text" className="txt-type over" placeholder="Enter scam site URL" onChange={this.handleChange} value={url} />
+                <input type="text" className="txt-type over" placeholder="Enter scam site URL" onChange={this.handleChange} value={refUrl} />
 				<div className="btn-holder">
 					<button className="btn-type-normal" disabled={dropBoxClass === "error" ? true : false} onClick={this.handleSubmit}><span>Summit</span></button>
 				</div>
             </Fragment>
-            )
-        }else if(connectStatus === 0 || connectStatus === 1){
-            return(
+            :
             <Fragment>
                 <div className="icon">
 				    { connectStatus === 0 ? <img src={icon} alt="icon" />: <img src={complete} alt="complete"/>}
@@ -133,15 +133,7 @@ class Scam extends Component {
 					<button className="btn-type-normal size-half" onClick={this.props.closeScam}><span>Cancel</span></button>
 					<button className="btn-type-normal size-half" onClick={this.onClickNext}><span>{connectStatus === 0 ? "Connect":"Next"}</span></button>
 				</div>
-            </Fragment> )
-        }
-    }
-    render() {
-        return (
-            <Fragment>
-            <h1 key="h1" className="title">Report scam</h1>
-            <div key="div" className="box">
-                {this.renderContents()}
+            </Fragment>}
             </div>
             </Fragment>
             )
