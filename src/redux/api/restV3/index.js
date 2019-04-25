@@ -13,7 +13,6 @@ import {
     addressTxList,
     addressInternalTxList,
     addressTokenTxList,
-    reportScam
 } from './address'
 
 import {
@@ -54,6 +53,10 @@ import {
     getTransaction
 } from './icx'
 
+import{
+    reportScam
+} from './report';
+
 export {
     getMainInfo,
     getMainChart,
@@ -65,7 +68,6 @@ export {
     addressTxList,
     addressInternalTxList,
     addressTokenTxList,
-    reportScam,
 
     blockList,
     blockInfo,
@@ -93,5 +95,7 @@ export {
     icxGetScore,
     icxCall,
     getTransactionResult,
-    getTransaction
+    getTransaction,
+
+    reportScam
 }

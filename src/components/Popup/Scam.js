@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 import icon from "../../style/image/img-icon.png"
 import complete from "../../style/image/img-complete.png"
 import { requestAddress } from "../../utils/connect";
-import { reportScam } from "../../redux/actions/addressesActions"
+import { reportScam } from "../../redux/actions/reportAction"
 import { setAddress } from "../../redux/actions/storageActions"
 
 class Scam extends Component {
@@ -17,7 +17,6 @@ class Scam extends Component {
         imgFile:null
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps,"next")
         if(nextProps.data.walletAddress !== ""){
             this.setState({
                 connectStatus:1

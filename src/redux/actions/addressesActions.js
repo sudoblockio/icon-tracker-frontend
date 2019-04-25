@@ -35,9 +35,3 @@ export function addressTokenTxList(payload) {
   }
 }
 
-export function reportScam(payload){
-  return {
-    type: actionTypes.reportScam,
-    payload
-  }
-}

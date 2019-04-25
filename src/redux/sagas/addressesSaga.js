@@ -6,7 +6,6 @@ import {
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
-  reportScam as REPORT_ADDRESS_API
 } from '../api/restV3';
 
 export default function* addressesSaga() {
@@ -15,8 +14,6 @@ export default function* addressesSaga() {
   yield fork(watchAddressTxList);
   yield fork(watchAddressInternalTxList);
   yield fork(watchAddressTokenTxList);
-  yield fork(watchreportScam);
-
 }
 
 function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
@@ -24,7 +21,6 @@ function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc)
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
 function* watchAddressInternalTxList() { yield takeLatest(AT.addressInternalTxList, addressInternalTxListFunc) }
 function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
-function* watchreportScam() { yield takeLatest(AT.reportScam,reportScamFunc) }
 
 export function* addressListFunc(action) {
   try {
@@ -121,19 +117,3 @@ export function* addressTokenTxListFunc(action) {
   }
 }
 
-
-export function* reportScamFunc(action) {
-  try {
-    const payload = yield call(REPORT_ADDRESS_API, action.payload);
-    if (payload.result === "200") {
-      yield put({ type: AT.reportScamFulfilled});
-      return
-    }
-    else {
-      throw new Error();
-    }
-  }
-  catch(e) {
-    yield put({type: AT.reportScamRejected});
-  }
-}
