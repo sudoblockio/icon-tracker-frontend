@@ -63,39 +63,20 @@ function* transactionTxDetailFunc(action) {
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     if (trackerData.result === "200") {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
+      return
     }
-    else {
-      throw new Error();
+
+    yield call(delay, 10000)
+
+    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+    if (trackerData.result === "200") {
+      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
     }
   }
   catch (e) {
     console.log(e)
     yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
   }
-
-  // const res = yield call(getTransactionResult, action.payload.txHash);
-  // const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-  // try {
-  //   if (res.status === 1) {
-  //     if (payload.result === "200") {
-  //       yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
-  //     } else if (payload.result === "No Data") {
-  //       yield call(delay, 5000);
-  //       const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-  //       if (payload.result === '200') {
-  //         yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
-  //       } else {
-  //         throw new Error();
-  //       }
-  //     }
-  //   } else if (res.status === 0) {
-  //     yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash, pending: true });
-  //   } else {
-  //     throw new Error();
-  //   }
-  // } catch (e) {
-  //   yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
-  // }
 }
 
 function* transactionEventLogListFunc(action) {
