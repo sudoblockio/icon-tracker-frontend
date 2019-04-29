@@ -17,7 +17,7 @@ export async function walletApiInstance() {
 export async function getTrackerApiUrl() {
   const configFile = await getConfigJsonFile()
   if (configFile && configFile.TRACKER_API_URL) {
-    return configFile.TRACKER_API_URL
+    // return configFile.TRACKER_API_URL
   }
 
   if (process.env.REACT_APP_ENV) {
