@@ -15,7 +15,7 @@ class ReportButton extends Component {
 
     render() {
         return (
-            <span className="btn-scam" onClick={this.handleClick}>Report scam</span>
+            <span className="btn-scam" onClick={this.handleClick}>Report</span>
         )
     }
 }

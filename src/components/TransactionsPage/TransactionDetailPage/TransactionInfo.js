@@ -114,7 +114,7 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td className={scam ? "scam":""}>{scam?<span className="scam-tag">Scam</span>:""}{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img twit-icon"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /><ReportButton address={txHash}/></td>
+											<td className={scam ? "scam":""}>{scam?<span className="scam-tag">Reported</span>:""}{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img twit-icon"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /><ReportButton address={txHash}/></td>
 										</tr>
 										<tr>
 											<td>Status</td>
