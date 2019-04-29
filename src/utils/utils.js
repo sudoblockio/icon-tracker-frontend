@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { getTrackerApiUrl } from 'redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
-import { IconConverter, IconAmount } from 'icon-sdk-js'
+import IconService, { HttpProvider, IconConverter, IconAmount, IconBuilder } from 'icon-sdk-js'
 import {
   TokenLink,
 } from 'components'
@@ -523,4 +523,24 @@ export function convertEngineToTracker(resultData, byHashData) {
   })
 
   return result
+}
+
+export  async function getUrl(params){
+  const provider = new HttpProvider('https://bicon.net.solidwallet.io/api/v3');
+  const iconService = new IconService(provider);
+  const scoreAddress = "cx2f9ed6ce329af3f97a1a0e745852efe4e7a46263";
+  const { CallBuilder } = IconBuilder; 
+  const call = new CallBuilder()
+      .to(scoreAddress)
+      .method('get_url')
+      .params(params)
+      .build();
+  
+  const url = await iconService.call(call).execute();
+  if(!!url){
+    return url;
+  }else{
+    return false
+  }
+  
 }

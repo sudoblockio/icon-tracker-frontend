@@ -7,7 +7,8 @@ import {
 } from 'utils/utils'
 import {
 	AddressLink,
-	AmountCell
+	AmountCell,
+	LinkButton
 } from 'components'
 import {
 	CONTRACT_STATUS,
@@ -41,7 +42,7 @@ class SearchTableBody extends Component {
 					return (
 						<tr>
 							<td>{ranking}</td>
-							<td>{tokenText(data.name, data.symbol, data.contractAddr)}</td>
+							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.contractAddr)}</span><LinkButton address={data.contractAddr}/></td>
 							<td>
 								<p>{convertNumberToText(usd, 8) || '-'}<em>USD</em></p>
 								<p>{convertNumberToText(icx, 8) || '-'}<em>ICX</em></p>
