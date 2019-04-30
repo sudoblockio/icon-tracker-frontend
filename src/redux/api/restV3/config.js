@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axios from "axios"
 
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl()
   return axios.create({
-    baseURL: apiUrl,
+    baseURL: apiUrl
   })
 }
 
@@ -17,24 +17,24 @@ export async function walletApiInstance() {
 export async function getTrackerApiUrl() {
   const configFile = await getConfigJsonFile()
   if (configFile && configFile.TRACKER_API_URL) {
-    return configFile.TRACKER_API_URL
+    // return configFile.TRACKER_API_URL
   }
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
-      case 'mainnet':
-        return 'https://tracker.icon.foundation'
-      case 'testnet':
-        return 'https://trackerdev.icon.foundation'
-      case 'testnet1':
-        return 'https://bicon.tracker.solidwallet.io'
-      case 'custom':
-        return 'http://trackerlocaldev.icon.foundation'
+      case "mainnet":
+        return "https://tracker.icon.foundation"
+      case "testnet":
+        return "https://trackerdev.icon.foundation"
+      case "testnet1":
+        return "https://bicon.tracker.solidwallet.io"
+      case "custom":
+        return "http://trackerlocaldev.icon.foundation"
       default:
     }
   }
 
-  return '/'
+  return "/"
 }
 
 export async function getWalletApiUrl() {
@@ -45,19 +45,19 @@ export async function getWalletApiUrl() {
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
-      case 'mainnet':
-        return 'https://ctz.solidwallet.io'
-      case 'testnet':
-        return 'https://test-ctz.solidwallet.io'
-      case 'testnet1':
-        return 'https://bicon.net.solidwallet.io'
-      case 'custom':
-        return 'http://13.209.103.183:9000'
+      case "mainnet":
+        return "https://wallet.icon.foundation"
+      case "testnet":
+        return "https://testwallet.icon.foundation"
+      case "testnet1":
+        return "https://bicon.net.solidwallet.io"
+      case "custom":
+        return "http://13.209.103.183:9000"
       default:
     }
   }
 
-  return '/'
+  return "/"
 }
 
 export async function getIsSoloVersion() {
@@ -68,10 +68,10 @@ export async function getIsSoloVersion() {
 
   if (process.env.REACT_APP_ENV) {
     switch (process.env.REACT_APP_ENV) {
-      case 'mainnet':
-      case 'testnet':
-      case 'testnet1':
-      case 'custom':
+      case "mainnet":
+      case "testnet":
+      case "testnet1":
+      case "custom":
         return false
       default:
     }
@@ -82,11 +82,10 @@ export async function getIsSoloVersion() {
 
 async function getConfigJsonFile() {
   try {
-    const response = await fetch('/config.json')
-    const responseJson = await response.json();
+    const response = await fetch("/config.json")
+    const responseJson = await response.json()
     return responseJson
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e)
     return {}
   }
