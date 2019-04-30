@@ -1,25 +1,18 @@
-import React from 'react';
-import moment from 'moment';
-import { getTrackerApiUrl } from 'redux/api/restV3/config'
-import BigNumber from 'bignumber.js'
-import IconService, { HttpProvider, IconConverter, IconAmount, IconBuilder } from 'icon-sdk-js'
-import {
-  TokenLink,
-} from 'components'
-import {
-  REDUX_STEP,
-  SERVER_TX_TYPE
-} from './const'
-import {
-  getIsSoloVersion
-} from 'redux/api/restV3/config'
+import React from "react"
+import moment from "moment"
+import { getTrackerApiUrl } from "redux/api/restV3/config"
+import BigNumber from "bignumber.js"
+import { IconConverter, IconAmount } from "icon-sdk-js"
+import { TokenLink } from "components"
+import { REDUX_STEP, SERVER_TX_TYPE } from "./const"
+import { getIsSoloVersion } from "redux/api/restV3/config"
 
-moment.updateLocale('en', {
+moment.updateLocale("en", {
   relativeTime: {
     future: "in %s",
     past: "%s ago",
-    s: '%d seconds',
-    ss: '%d seconds',
+    s: "%d seconds",
+    ss: "%d seconds",
     m: "%d minute",
     mm: "%d minutes",
     h: "%d hour",
@@ -31,13 +24,15 @@ moment.updateLocale('en', {
     y: "%d year",
     yy: "%d years"
   }
-});
+})
 
 export function numberWithCommas(x) {
-  if (!x) { return 0 }
-  let parts = x.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return parts.join('.');
+  if (!x) {
+    return 0
+  }
+  let parts = x.toString().split(".")
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return parts.join(".")
 }
 
 export function convertNumberToText(num, round) {
@@ -45,16 +40,15 @@ export function convertNumberToText(num, round) {
     return 0
   }
 
-  if (typeof num === 'string') {
-    num = num.replace(/,/g, "");
+  if (typeof num === "string") {
+    num = num.replace(/,/g, "")
   }
 
   let numStr
   if (round >= 0) {
-    numStr = (new BigNumber(num)).toFixed(round)
-  }
-  else {
-    numStr = (new BigNumber(num)).toString(10)
+    numStr = new BigNumber(num).toFixed(round)
+  } else {
+    numStr = new BigNumber(num).toString(10)
   }
 
   return numberWithCommas(numStr)
@@ -65,34 +59,39 @@ export function convertToExponentialText(num, round) {
     return 0
   }
 
-  if (typeof num === 'string') {
-    num = num.replace(/,/g, "");
+  if (typeof num === "string") {
+    num = num.replace(/,/g, "")
   }
 
   num = Number(num)
-  num = String(num.toExponential(round));
-  const mantissa = num.substr(0, num.lastIndexOf('e'))
-  const exponent = num.substr(num.lastIndexOf('e') + 2)
+  num = String(num.toExponential(round))
+  const mantissa = num.substr(0, num.lastIndexOf("e"))
+  const exponent = num.substr(num.lastIndexOf("e") + 2)
 
   return `${mantissa} * 10 ^ ${exponent}`
 }
 
-
 export function onlyDate(date) {
   if (!isValidData(date)) return "-"
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD')
+  return moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD")
 }
 
 export function getTimezoneMomentTime(date) {
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  return moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+  return moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD HH:mm:ss")
 }
 
 export function dateToUTC(date, showUTC, showAgo) {
-  if (!date) return '-'
+  if (!date) return "-"
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  let result = moment(date).utcOffset(timezoneOffset).format('YYYY-MM-DD HH:mm:ss')
+  let result = moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD HH:mm:ss")
   if (showUTC) {
     result += ` (${getUTCString()})`
   }
@@ -106,10 +105,9 @@ export function utcDateInfo(date) {
   return `(${getUTCString()}, ${calcFromNow(date)})`
 }
 
-
 export function calcMaxPageNum(total, rowNum) {
-  if (!Number(total)) return 1;
-  return Math.ceil(total / rowNum);
+  if (!Number(total)) return 1
+  return Math.ceil(total / rowNum)
 }
 
 export function calcFromNow(createDate) {
@@ -118,24 +116,26 @@ export function calcFromNow(createDate) {
 
 export function getUTCString() {
   let timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
-  if (timezoneOffset > 0) { timezoneOffset = `+${timezoneOffset}` }
-  return `UTC${timezoneOffset === 0 ? '' : `${timezoneOffset}`}`
+  if (timezoneOffset > 0) {
+    timezoneOffset = `+${timezoneOffset}`
+  }
+  return `UTC${timezoneOffset === 0 ? "" : `${timezoneOffset}`}`
 }
 
 export function isValidNodeType(nodeType) {
   if (!nodeType) return false
-  if (nodeType === '') return false
-  if (nodeType === '-') return false
+  if (nodeType === "") return false
+  if (nodeType === "-") return false
   return true
 }
 
 export function startsWith(text, search) {
-  if (typeof text !== 'string') return false
+  if (typeof text !== "string") return false
   return text.indexOf(search) === 0
 }
 
 export function isContractAddress(address) {
-  return startsWith(address, 'cx')
+  return startsWith(address, "cx")
 }
 
 export function makeUrl(url, payload) {
@@ -145,19 +145,19 @@ export function makeUrl(url, payload) {
 
   let result = url
   Object.keys(payload).forEach((key, index) => {
-    result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+    result += `${index === 0 ? "?" : "&"}${key}=${payload[key]}`
   })
   return result
 }
 
 export function randomUint32() {
   if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {
-    var o = new Uint32Array(1);
-    window.crypto.getRandomValues(o);
-    return o[0];
+    var o = new Uint32Array(1)
+    window.crypto.getRandomValues(o)
+    return o[0]
   } else {
-    console.warn('Falling back to pseudo-random client seed');
-    return Math.floor(Math.random() * Math.pow(2, 32));
+    console.warn("Falling back to pseudo-random client seed")
+    return Math.floor(Math.random() * Math.pow(2, 32))
   }
 }
 
@@ -176,21 +176,25 @@ export function tokenText(name, symbol, address, spanClassName) {
     if (isSymbol) {
       text += ` (${symbol})`
     }
-  }
-  else {
+  } else {
     if (isSymbol) {
       text += symbol
-    }
-    else {
+    } else {
       text += "-"
     }
   }
 
   if (!address) {
     return text
-  }
-  else {
-    return <TokenLink to={address} label={!spanClassName ? text : <span className={spanClassName}>{text}</span>} />
+  } else {
+    return (
+      <TokenLink
+        to={address}
+        label={
+          !spanClassName ? text : <span className={spanClassName}>{text}</span>
+        }
+      />
+    )
   }
 }
 
@@ -206,7 +210,7 @@ export function getArrayState(step, state, action, dataType) {
           loading: true,
           page: Number(page) || state[dataType].page,
           count: Number(count) || state[dataType].count,
-          error: ''
+          error: ""
         }
       }
     case REDUX_STEP.FULFILLED:
@@ -219,7 +223,7 @@ export function getArrayState(step, state, action, dataType) {
           data: data || [],
           listSize: listSize || 0,
           totalSize: totalSize || 0,
-          error: ''
+          error: ""
         }
       }
     case REDUX_STEP.REJECTED:
@@ -243,7 +247,7 @@ export function getArrayState(step, state, action, dataType) {
           data: [],
           listSize: 0,
           totalSize: 0,
-          error: '',
+          error: ""
         }
       }
     default:
@@ -260,7 +264,7 @@ export function getObjectState(step, state, action, dataType) {
           ...state[dataType],
           loading: true,
           data: {},
-          error: ''
+          error: ""
         }
       }
     case REDUX_STEP.FULFILLED:
@@ -272,7 +276,7 @@ export function getObjectState(step, state, action, dataType) {
           ...state[dataType],
           loading: false,
           data: data || {},
-          error: ''
+          error: ""
         }
       }
     case REDUX_STEP.REJECTED:
@@ -293,7 +297,7 @@ export function getObjectState(step, state, action, dataType) {
         [dataType]: {
           loading: false,
           data: {},
-          error: '',
+          error: ""
         }
       }
     default:
@@ -303,9 +307,9 @@ export function getObjectState(step, state, action, dataType) {
 
 export function getState(type, step, state, action, dataType) {
   switch (type) {
-    case 'ARR':
+    case "ARR":
       return getArrayState(step, state, action, dataType)
-    case 'OBJ':
+    case "OBJ":
       return getObjectState(step, state, action, dataType)
     default:
       return state
@@ -313,7 +317,7 @@ export function getState(type, step, state, action, dataType) {
 }
 
 export function isValidData(data) {
-  if (!!data && data !== '-') return true
+  if (!!data && data !== "-") return true
   else return false
 }
 
@@ -336,8 +340,7 @@ export function findTabIndex(Tabs, hash) {
     const _hash = noHashLowerCase(hash)
     if (_tab === _hash) {
       return i
-    }
-    else {
+    } else {
       continue
     }
   }
@@ -345,12 +348,12 @@ export function findTabIndex(Tabs, hash) {
 }
 
 export function noSpaceLowerCase(str) {
-  if (!str) return ''
+  if (!str) return ""
   return str.replace(/\s/gi, "").toLowerCase()
 }
 
 export function noHashLowerCase(str) {
-  if (!str) return ''
+  if (!str) return ""
   return str.replace("#", "").toLowerCase()
 }
 
@@ -410,21 +413,19 @@ export function isScoreTx(targetAddr, txType, isFrom) {
 
 export function beautifyJson(data, tab) {
   if (!data) {
-    return ''
+    return ""
   }
   try {
     let _data = {}
-    if (typeof data === 'object') {
+    if (typeof data === "object") {
       _data = data
-    }
-    else if (typeof data === 'string') {
+    } else if (typeof data === "string") {
       _data = JSON.parse(data)
     }
     return JSON.stringify(_data, null, tab)
-  }
-  catch (e) {
+  } catch (e) {
     console.log(e)
-    return ''
+    return ""
   }
 }
 
@@ -450,42 +451,47 @@ export async function getIsSolo() {
 }
 
 export function isHex(value) {
-  return /^(0x)[0-9a-fA-F]+$/i.test(value);
+  return /^(0x)[0-9a-fA-F]+$/i.test(value)
 }
 
 export function isImageData(data) {
-  if (typeof data === 'string') {
-    return data.indexOf('data:image') === 0
+  if (typeof data === "string") {
+    return data.indexOf("data:image") === 0
   }
 
   return false
 }
 
-
-
 export function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export function convertEngineToTracker(resultData, byHashData) {
-  const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString()
+  const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP)
+    .convertUnit(IconAmount.Unit.ICX)
+    .toString()
   const stepUsed = IconAmount.of(resultData.stepUsed)
   const stepPrice = IconAmount.of(resultData.stepPrice).toString()
   const { eventLogs } = resultData
   const { txHash, from, blockHeight: height } = byHashData
   const result = {
     txHash,
-    status: resultData.status === 1 ? 'Success' : 'Fail',
+    status: resultData.status === 1 ? "Success" : "Fail",
     height,
-    confirmation: '',
+    confirmation: "",
     createDate: moment(byHashData.timestamp / 1000).format(),
     fromAddr: from,
     toAddr: byHashData.to,
-    amount: valueIcx === 'NaN' ? 0 : valueIcx,
+    amount: valueIcx === "NaN" ? 0 : valueIcx,
     stepLimit: IconAmount.of(byHashData.stepLimit).toString(),
     stepUsedByTxn: stepUsed.toString(),
     stepPrice,
-    fee: IconAmount.of(IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice), IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+    fee: IconAmount.of(
+      IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice),
+      IconAmount.Unit.LOOP
+    )
+      .convertUnit(IconAmount.Unit.ICX)
+      .toString(),
     dataType: byHashData.dataType,
     dataString: byHashData.data,
     tokenTxList: [],
@@ -495,52 +501,36 @@ export function convertEngineToTracker(resultData, byHashData) {
   if (eventLogs.length === 0) {
     return result
   }
-  
+
   eventLogs.forEach((eventLog, index) => {
     const { indexed, scoreAddress } = eventLog
-    if (indexed[0] === 'Transfer(Address,Address,int,bytes)') {
+    if (indexed[0] === "Transfer(Address,Address,int,bytes)") {
       result.tokenTxList.push({
         fromAddr: indexed[1],
         toAddr: indexed[2],
-        quantity: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+        quantity: IconAmount.of(indexed[3], IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .toString(),
         targetContractAddr: scoreAddress,
-        symbol: 'TOKENS',
-        tokenName: ' - '
+        symbol: "TOKENS",
+        tokenName: " - "
       })
-    } 
+    }
 
-    if (indexed[0] === 'ICXTransfer(Address,Address,int)') {
+    if (indexed[0] === "ICXTransfer(Address,Address,int)") {
       result.internalTxList.push({
-        amount: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
-        contractAddr: scoreAddress,        
+        amount: IconAmount.of(indexed[3], IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .toString(),
+        contractAddr: scoreAddress,
         fromAddr: indexed[1],
         height: height,
         toAddr: indexed[2],
         txHash,
         txIndex: index
       })
-    } 
+    }
   })
 
   return result
-}
-
-export  async function getUrl(params){
-  const provider = new HttpProvider('https://bicon.net.solidwallet.io/api/v3');
-  const iconService = new IconService(provider);
-  const scoreAddress = "cx2f9ed6ce329af3f97a1a0e745852efe4e7a46263";
-  const { CallBuilder } = IconBuilder; 
-  const call = new CallBuilder()
-      .to(scoreAddress)
-      .method('get_url')
-      .params(params)
-      .build();
-  
-  const url = await iconService.call(call).execute();
-  if(!!url){
-    return url;
-  }else{
-    return false
-  }
-  
 }
