@@ -61,7 +61,7 @@ class AddressInfo extends Component {
         const isConnected = walletAddress === _address
         const disabled = !_isNotificationAvailable
 
-        const scam = reportedCount >= 10 ? true : false
+        const scam = reportedCount >= 100 ? true : false
 
         return (
           <div className="screen0">

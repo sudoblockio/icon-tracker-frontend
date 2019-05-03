@@ -104,7 +104,7 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
-				const scam = reportedCount >= 100 ?  true: false;
+				const scam = reportedCount >= 10 ?  true: false;
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
