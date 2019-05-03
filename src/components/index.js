@@ -60,6 +60,8 @@ import PendingPage from "./CommonPage/PendingPage"
 import Banner from './Banner/Banner'
 import Connect from './Header/Connect';
 
+import ReportButton from './CommonComponent/ReportButton'
+
 export {
   MainPage,
   InfoSummary,
@@ -119,5 +121,7 @@ export {
   PendingPage,
 
   Banner,
-  Connect
+  Connect,
+  
+  ReportButton
 }

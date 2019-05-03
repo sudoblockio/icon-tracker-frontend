@@ -269,7 +269,8 @@ export function getObjectState(step, state, action, dataType) {
       }
     case REDUX_STEP.FULFILLED:
       const { payload } = action
-      const { data } = payload
+      const { data } = payload;
+      console.log(data)
       return {
         ...state,
         [dataType]: {

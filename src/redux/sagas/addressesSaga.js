@@ -116,3 +116,4 @@ export function* addressTokenTxListFunc(action) {
     yield put({type: AT.addressTokenTxListRejected});
   }
 }
+

@@ -11,7 +11,8 @@ import {
 import {
   CopyButton,
   LoadingComponent,
-  QrCodeButton
+  QrCodeButton,
+  ReportButton
 } from 'components';
 import NotificationManager from 'utils/NotificationManager'
 
@@ -46,8 +47,8 @@ class AddressInfo extends Component {
 
   render() {
     const { wallet, walletAddress } = this.props
-    const { loading, data, error } = wallet
-
+    const { loading, data, error } = wallet;
+    
     const Content = () => {
       if (loading) {
         return (
@@ -55,10 +56,13 @@ class AddressInfo extends Component {
         )
       }
       else {
-        const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
+        const { address, nodeType, balance, icxUsd, txCount, tokenList, reportedCount } = data
         const _address = !!address ? address : error
         const isConnected = walletAddress === _address
         const disabled = !_isNotificationAvailable
+
+        const scam = reportedCount >= 10 ? true : false
+
         return (
           <div className="screen0">
             <div className="wrap-holder">
@@ -94,7 +98,7 @@ class AddressInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td className={scam ? "scam":""}>{scam &&<span className="scam-tag">Scam</span>}{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}<ReportButton address={address} /></td>
                     </tr>
                     <tr>
                       <td>Balance</td>

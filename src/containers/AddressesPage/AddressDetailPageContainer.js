@@ -7,7 +7,9 @@ import {
   addressInternalTxList,
   addressTokenTxList,
 } from '../../redux/actions/addressesActions';
-
+import { 
+  setPopup 
+} from '../../redux/actions/popupActions'
 import { 
   setNotification,
 } from '../../redux/actions/storageActions';
@@ -28,6 +30,7 @@ function mapDispatchToProps(dispatch) {
     addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
     setNotification: (payload) => dispatch(setNotification(payload)),
+    setPopup: (payload) => dispatch(setPopup(payload))
   };
 }
 

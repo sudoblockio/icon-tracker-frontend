@@ -12,10 +12,20 @@ class Connect extends Component {
       walletAddress: this.props.walletAddress
     };
   }
-
+  
   async componentDidMount() {
     const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
     this.setState({ disabled: !(isChrome && iconexInstalled && hasIconWallet)})
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.walletAddress !== this.props.walletAddress){
+      this.setState({
+        walletAddress:nextProps.walletAddress
+      },()=>{
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "SET_WALLET" } }))
+      })
+    }
   }
 
   getWalletAddress = async () => {
