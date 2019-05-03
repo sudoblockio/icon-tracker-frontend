@@ -97,8 +97,8 @@ class Scam extends Component {
             <div key="div" className="box">
                 {connectStatus === 2 ? 
                 <Fragment>
-                <h2>The scam site URL(Optional)</h2>
-                <input type="text" className="txt-type over" placeholder="Enter scam site URL" onChange={this.handleChange} value={refUrl} />
+                <h2>The scam site URL or description (Optional)</h2>
+                <input type="text" className="txt-type over" placeholder="Enter scam site URL or description" onChange={this.handleChange} value={refUrl} />
 				<h3>Select a file or drag & drop to the area below (Optional)</h3>    
                 <Dropzone onDrop={file => this.readFile(file)}>
                     {({getRootProps, getInputProps}) => (

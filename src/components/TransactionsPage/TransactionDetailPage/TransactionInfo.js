@@ -104,7 +104,7 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
-				const scam = reportedCount >= 10 ?  true: false;
+				const scam = reportedCount >= 100 ?  true: false;
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -166,7 +166,7 @@ class TransactionInfo extends Component {
 										{(dataType && dataString) ?
 											<tr>
 												<td>Data</td>
-												<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+												<DataCell scam={scam} dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 											</tr>
 											:
 											null
@@ -189,7 +189,7 @@ class DataCell extends Component {
 		super(props)
 		this.state = {
 			loading: false,
-			viewHex: false,
+			viewHex: this.props.scam ? true : false,
 			converted: '',
 			toHex: '',
 			toUtf8: '',
@@ -283,7 +283,7 @@ class DataCell extends Component {
 	}
 
 	render() {
-		const { dataType } = this.props
+		const { dataType, scam } = this.props
 		const { converted, loading, viewHex, toUtf8, imgError } = this.state
 		const isMessage = dataType === 'message'
 		const isButton = isMessage && !loading
@@ -298,7 +298,7 @@ class DataCell extends Component {
 						<p>{converted}</p>
 					}
 				</div>
-				{isButton && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
+				{isButton && <button className="btn-type-normal" onClick={this.handleClick} disabled={scam}>{buttonTitle}</button>}
 			</td>
 		)
 	}

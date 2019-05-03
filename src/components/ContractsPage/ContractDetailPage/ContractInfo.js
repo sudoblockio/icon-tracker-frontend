@@ -40,7 +40,7 @@ class ContractInfo extends Component {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName, reportedCount } = data
                 const isCreator = isValidData(creator)
                 const isCreateTx = isValidData(createTx)
-                const scam = reportedCount >= 10 ? true : false
+                const scam = reportedCount >= 100 ? true : false
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
