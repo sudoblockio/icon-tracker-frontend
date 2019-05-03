@@ -95,7 +95,11 @@ class Scam extends Component {
             <Fragment>
             <h1 key="h1" className="title">Report scam</h1>
             <div key="div" className="box">
-                {connectStatus === 2 ? <Fragment><h3>Select a file or drag & drop to the area below.</h3>
+                {connectStatus === 2 ? 
+                <Fragment>
+                <h2>The scam site URL(Optional)</h2>
+                <input type="text" className="txt-type over" placeholder="Enter scam site URL" onChange={this.handleChange} value={refUrl} />
+				<h3>Select a file or drag & drop to the area below (Optional)</h3>    
                 <Dropzone onDrop={file => this.readFile(file)}>
                     {({getRootProps, getInputProps}) => (
                         <Fragment>
@@ -115,8 +119,6 @@ class Scam extends Component {
                         </Fragment>
                     )}
                 </Dropzone>
-				<h2>The scam site URL (Optional)</h2>
-                <input type="text" className="txt-type over" placeholder="Enter scam site URL" onChange={this.handleChange} value={refUrl} />
 				<div className="btn-holder">
 					<button className="btn-type-normal" disabled={dropBoxClass === "error" ? true : false} onClick={this.handleSubmit}><span>Summit</span></button>
 				</div>

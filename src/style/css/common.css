@@ -205,7 +205,7 @@ html, body{height: 100%;}
 .content-wrap .title .connected .img{background-position: -100px -250px; width: 14px; height: 9px; position: relative; top: 2px; left: auto;}
 .content-wrap .title .toggle{position: absolute; right: 0; color: #262626;font-weight: 600; top: 10px;}
 .content-wrap .title .toggle em:first-child{margin-right: 30px;}
-
+.content-wrap .title .toggle em span{margin-left: 4px;}
 
 .content-wrap .wrap-holder > .title.token  .right .gray{color: #b3b3b3;font-weight: 400;}
 .content-wrap .wrap-holder > .title.token  span:first-child{font-size:20px; color: #262626; }
@@ -726,6 +726,8 @@ html, body{height: 100%;}
 .table-typeI td:nth-child(6) em{color: #b3b3b3;}
 .table-typeI i{width: 30px; height: 30px; margin-right: 4px; display: inline-block;     vertical-align: middle;}
 .table-typeI i img{width: 100%;}
+.table-typeI tr i.img{width: 16px; height: 16px; background-position: -200px -350px; cursor: pointer; position: absolute; right: 20px; top: 24px; }
+.table-typeI td:nth-child(2) .ellipsis{width:300px; font-weight: 600; }
 
 .table-typeJ td:nth-child(2),
 .table-typeJ td:nth-child(3){text-align: right;}
@@ -1030,8 +1032,8 @@ input[type="text"]:focus.over {border: 1px solid #262626;}
 .popup-wrap.scam .popup .txt{font-size: 14px; letter-spacing: -0.5px; margin-bottom: 33px;}
 .popup-wrap.scam .popup .address{font-size: 12px; font-weight: 800; height: 36px; border-radius: 25px; background-color: #f5f5f5; padding: 11px 0;}
 
-.popup-wrap.scam h2{font-size: 14px; color: #333; text-align: left; margin-bottom: 21px;}
-.popup-wrap.scam h3{font-size: 12px; color: #262626; font-weight: 700; text-align: left; margin-top: 50px;}
+.popup-wrap.scam h2{font-size: 12px; color: #262626; font-weight: 700; text-align: left; margin-bottom: 21px; margin-top: 50px;}
+.popup-wrap.scam h3{font-size: 12px; color: #262626; font-weight: 700; text-align: left; margin-top: 40px;}
 .popup-wrap.scam .drop-box{height: 70px; margin: 20px 0 30px; border: 1px dotted #d9d9d9; background: #fbfcfc; font-size: 14px; position: relative; }
 .popup-wrap.scam .drop-box span{ margin-top: 27px; display: inline-block;width: 100%;}
 .popup-wrap.scam .drop-box i:nth-of-type(1){width:32px; height: 34px; background-position: -100px -350px; position: absolute; left: 24px; top: 17px;   }
