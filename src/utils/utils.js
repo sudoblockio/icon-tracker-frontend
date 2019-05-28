@@ -468,6 +468,10 @@ export function delay(ms) {
 }
 
 export function convertEngineToTracker(resultData, byHashData) {
+  if (!resultData || !byHashData) {
+    return undefined
+  }
+
   const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP)
     .convertUnit(IconAmount.Unit.ICX)
     .toString()

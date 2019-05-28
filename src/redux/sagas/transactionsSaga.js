@@ -41,40 +41,56 @@ function* transactionRecentTxFunc(action) {
 }
 
 function* transactionTxDetailFunc(action) {
+  let trackerData, resultData, byHashData, data
+
   try {
-    let trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-      return
-    }
-
-    const resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
-    if (resultData.status === undefined) {
-      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
-      return
-    }
-
-    const byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
-    const data = convertEngineToTracker(resultData, byHashData)
-    yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
-
-    yield call(delay, 5000)
-
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     if (trackerData.result === "200") {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return
-    }
-
-    yield call(delay, 10000)
-
-    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
     }
   }
   catch (e) {
-    console.log(e)
+    console.error(e)
+  }
+
+  try {
+    resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
+    if (resultData && resultData.status === undefined) {
+      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+      return
+    }
+    byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
+    data = convertEngineToTracker(resultData, byHashData)
+    if (data) {
+      yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
+    }
+
+    yield call(delay, 1000)
+
+    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+    if (trackerData.result === "200") {
+      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
+      return
+    }
+
+    yield call(delay, 1000)
+
+    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+    if (trackerData.result === "200") {
+      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
+    }
+    else {
+      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+    }
+  }
+  catch (e) {
+    console.error(e)
+
+    if (data) {
+      return
+    }
+
     yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
   }
 }
