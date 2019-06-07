@@ -36,3 +36,43 @@
  .scam .img.twit-icon{
    background-position: -150px -250px !important;
  }
+
+ .footer-wrap{color: #fff; font-size: 14px; font-weight: 600; position: relative; background: #262626;   margin: 0 auto; }
+ .footer-wrap .screen0{height: 52px;min-width: 1210px;}
+ .footer-wrap .screen0 p{font-size: 12px; padding:20px 0; display: inline-block;     opacity: 0.7;   font-weight: 300;font-family: 'Montserrat'; letter-spacing: -0.3px; height: 52px;}
+ .footer-wrap li{display: inline-block; vertical-align: top; }
+ .footer-wrap .wrap-holder{width: 100%; min-width: 1260px; background: #262626; height: 100%;}
+ .footer-wrap .wrap-holder .sns {position: absolute; float: right; right: 50px; bottom: 0px; height: 52px;}
+ .footer-wrap .wrap-holder .sns ul{display: inline-block; vertical-align: top; margin-top: 13px;}
+ .footer-wrap .wrap-holder .sns li:not(:first-child){margin-left: 10px;}
+ .footer-wrap .wrap-holder .sns li span{width: 26px; height: 26px;display: inline-block;}
+ .footer-wrap .wrap-holder .sns .icon .img{background-position: 0px -150px; }
+ .footer-wrap .wrap-holder .sns .medium .img{background-position: -50px -150px; }
+ .footer-wrap .wrap-holder .sns .brunch .img{background-position: -100px -150px; }
+ .footer-wrap .wrap-holder .sns .twitter .img{background-position: -150px -150px; }
+ .footer-wrap .wrap-holder .sns .facebook .img{background-position: -200px -150px; }
+ .footer-wrap .wrap-holder .sns .github .img{background-position: -250px -150px; }
+ 
+ .footer-wrap .wrap-holder .sns .icon .img:hover{background-position: 0px -200px; }
+ .footer-wrap .wrap-holder .sns .medium .img:hover{background-position: -50px -200px; }
+ .footer-wrap .wrap-holder .sns .brunch .img:hover{background-position: -100px -200px; }
+ .footer-wrap .wrap-holder .sns .twitter .img:hover{background-position: -150px -200px; }
+ .footer-wrap .wrap-holder .sns .facebook .img:hover{background-position: -200px -200px; }
+ .footer-wrap .wrap-holder .sns .github .img:hover{background-position: -250px -200px; }
+ 
+ .footer-wrap .wrap-holder .sns .mainnet{display: inline-block; font-size: 12px; color:rgba(255,255,255,0.7); position: relative;margin-left: 60px;}
+ .footer-wrap .wrap-holder .sns .mainnet:before{content: ""; width: 1px; height: 14px; background: rgba(255,255,255,0.2); position: absolute; left: -30px; top: 20px;}
+ .footer-wrap .wrap-holder .sns .mainnet p{cursor: pointer;}
+ .footer-wrap .wrap-holder .sns .mainnet p:hover{color:#fff; }
+ .footer-wrap .wrap-holder .sns .mainnet p:hover .img{background-position:-250px -100px; }
+ .footer-wrap .wrap-holder .sns .mainnet .img{background-position:-250px -50px; width: 7px; height: 5px; margin-left: 6px; }
+ .footer-wrap .wrap-holder .sns .mainnet ul{font-size: 12px; font-weight: 100; background:  #262626; border-radius: 4px;box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15); color: #ccc; bottom: 46px; left: -30px; position: absolute;border: 1px solid #404040; display: none; }
+ .footer-wrap .wrap-holder .sns .mainnet ul li{display: block;padding: 7px 24px; margin-left: 0; text-align: center; cursor: pointer;}
+ .footer-wrap .wrap-holder .sns .mainnet ul li:hover{color:#1aaaba; }
+ .footer-wrap .wrap-holder .sns .mainnet ul li:not(:last-child){border-bottom: 1px solid #404040;  }
+ .footer-wrap .wrap-holder .sns .mainnet ul li span{width: auto; height: auto;}
+ .footer-wrap .wrap-holder .mail {position: relative; margin-right: 60px; letter-spacing: 0; padding: 18px 0 0; vertical-align: top;}
+ .footer-wrap .wrap-holder .mail span{color:rgb(255,255,255,0.4); margin-right: 10px; }
+ .footer-wrap .wrap-holder .mail a{color: rgb(255,255,255,0.7);}
+ .footer-wrap .wrap-holder .mail a:hover{color: #fff;}
+ .footer-wrap .wrap-holder .mail:before{content: ""; width: 1px; height: 14px; background: rgba(255,255,255,0.2); position: absolute; right: -30px; top: 20px;}
