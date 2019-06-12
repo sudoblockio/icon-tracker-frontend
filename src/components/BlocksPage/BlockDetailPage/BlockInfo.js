@@ -11,6 +11,7 @@ import {
 } from 'utils/const'
 import {
   BlockLink,
+  AddressLink,
   LoadingComponent
 } from 'components';
 
@@ -58,9 +59,10 @@ class BlockInfo extends Component {
         return <LoadingComponent height='206px' />
       }
       else {
-        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock } = data
+        const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
         const isFirst = height === 0
         const isLast = lastBlock !== "-"
+        const prep = peerId || crep
         return (
           <div className="screen0">
             <div className="wrap-holder">
@@ -71,18 +73,22 @@ class BlockInfo extends Component {
                     <tr>
                       <td>Block Height</td>
                       <td>
-                        <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled': ''}`}><em className="img"></em></p>
+                        <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}><em className="img"></em></p>
                         <em className="value">{numberWithCommas(height)}</em>
-                        <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled': ''}`}><em className="img"></em></p>
+                        <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled' : ''}`}><em className="img"></em></p>
                       </td>
+                    </tr>
+                    <tr>
+                      <td>Peer ID</td>
+                      <td>{prep ? <AddressLink to={prep} /> : '-'}</td>
                     </tr>
                     <tr>
                       <td>Time Stamp</td>
                       {
                         isFirst ?
-                        <td>-</td>
-                        :
-                        <td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
+                          <td>-</td>
+                          :
+                          <td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
                       }
                     </tr>
                     {/*<tr>
@@ -102,7 +108,7 @@ class BlockInfo extends Component {
                       <td>{prevHash ? (<BlockLink to={height - 1} label={prevHash} />) : "-"}</td>
                     </tr>
                     <tr>
-                      <td>Block size</td>
+                      <td>Block Size</td>
                       <td>{numberWithCommas(blockSize)} bytes</td>
                     </tr>
                     <tr>

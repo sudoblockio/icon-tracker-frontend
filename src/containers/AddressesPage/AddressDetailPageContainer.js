@@ -5,14 +5,21 @@ import {
   addressInfo,
   addressTxList,
   addressInternalTxList,
-  addressTokenTxList
+  addressTokenTxList,
 } from '../../redux/actions/addressesActions';
+import { 
+  setPopup 
+} from '../../redux/actions/popupActions'
+import { 
+  setNotification,
+} from '../../redux/actions/storageActions';
 
 function mapStateToProps(state) {
   return {
     url: state.router.location,
     ...state.addresses,
-    walletAddress: state.storage.walletAddress
+    walletAddress: state.storage.walletAddress,
+    walletNotification: state.storage.walletNotification
   };
 }
 
@@ -22,6 +29,8 @@ function mapDispatchToProps(dispatch) {
     addressTxList: (payload) => dispatch(addressTxList(payload)),
     addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),
     addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
+    setNotification: (payload) => dispatch(setNotification(payload)),
+    setPopup: (payload) => dispatch(setPopup(payload))
   };
 }
 

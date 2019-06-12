@@ -43,6 +43,7 @@ import QrCodeComponent from './CommonComponent/QrCode/QrCodeComponent'
 import AddressCell from './CommonComponent/AddressCell'
 import AddressSet from './CommonComponent/AddressSet'
 import AmountCell from './CommonComponent/AmountCell'
+import LinkButton from "./CommonComponent/LinkButton"
 
 import TxBottom from './CommonComponent/TxBottom'
 import TabTable from './CommonComponent/TabTable'
@@ -58,6 +59,8 @@ import PendingPage from "./CommonPage/PendingPage"
 
 import Banner from './Banner/Banner'
 import Connect from './Header/Connect';
+
+import ReportButton from './CommonComponent/ReportButton'
 
 export {
   MainPage,
@@ -104,6 +107,7 @@ export {
   AddressCell,
   AddressSet,
   AmountCell,
+  LinkButton,
 
   TxBottom,
   TxTableHead,
@@ -117,5 +121,7 @@ export {
   PendingPage,
 
   Banner,
-  Connect
+  Connect,
+  
+  ReportButton
 }

@@ -41,61 +41,54 @@ function* transactionRecentTxFunc(action) {
 }
 
 function* transactionTxDetailFunc(action) {
+  let trackerData, resultData, byHashData, data
+
   try {
-    let trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-      return
-    }
-
-    const resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
-    if (resultData.status === undefined) {
-      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
-      return
-    }
-
-    const byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
-    const data = convertEngineToTracker(resultData, byHashData)
-    yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
-
-    yield call(delay, 3000)
-
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     if (trackerData.result === "200") {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-    }
-    else {
-      throw new Error();
+      return
     }
   }
   catch (e) {
-    console.log(e)
-    yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+    console.error(e)
   }
 
-  // const res = yield call(getTransactionResult, action.payload.txHash);
-  // const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-  // try {
-  //   if (res.status === 1) {
-  //     if (payload.result === "200") {
-  //       yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
-  //     } else if (payload.result === "No Data") {
-  //       yield call(delay, 5000);
-  //       const payload = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-  //       if (payload.result === '200') {
-  //         yield put({ type: AT.transactionTxDetailFulfilled, payload: payload });
-  //       } else {
-  //         throw new Error();
-  //       }
-  //     }
-  //   } else if (res.status === 0) {
-  //     yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash, pending: true });
-  //   } else {
-  //     throw new Error();
-  //   }
-  // } catch (e) {
-  //   yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
-  // }
+  try {
+    resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
+    if (resultData && resultData.status === undefined) {
+      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+      return
+    }
+    
+    byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
+    data = convertEngineToTracker(resultData, byHashData)
+    if (data) {
+      yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
+    }
+
+    const count = 2, timeout = 2000
+    for (let i = 0; i < count; i++ ) {
+      yield call(delay, timeout * (i + 1))
+      trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+      if (trackerData.result === "200") {
+        yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
+        return
+      }
+      else if (i === count - 1) {
+        throw Error(trackerData.result)
+      }
+    }
+  }
+  catch (e) {
+    console.error(e)
+
+    if (data) {
+      return
+    }
+
+    yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+  }
 }
 
 function* transactionEventLogListFunc(action) {

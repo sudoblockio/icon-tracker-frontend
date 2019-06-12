@@ -12,7 +12,6 @@ class InfoSummary extends Component {
 
   async componentDidMount() {
     const isSolo = await getIsSolo()
-    console.log(isSolo)
     this.setState({ isSolo })
   }
 

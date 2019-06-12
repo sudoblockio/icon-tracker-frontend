@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
 	<title>ICON</title>
-	<script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="../js/commonFx.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/font.css">
@@ -74,7 +74,7 @@
 									<input id="cbox-01" class="cbox-type" type="checkbox" name="">
 									<label for="cbox-01" class="label _img"></label>Start page</em>
 								<em><input id="cbox-02" class="cbox-type" type="checkbox" name="">
-									<label for="cbox-02" class="label _img"></label>Notifications</em>
+									<label for="cbox-02" class="label _img"></label>Notifications<span>(Beta)</span></em>
 							</span>
 						</p>
 						<div class="contents">
@@ -88,7 +88,7 @@
 								<tbody>
 									<tr class="">
 										<td>Address</td>
-										<td>0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="copy disabled">Copy Address</span><span class="copy on">Copy Complete</span><span class="crep">C-rep Node</span></td>
+										<td class="scam"><span class="scam-tag">Scam</span> 0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="btn-scam complete">Report scam</span><!-- <span class="copy disabled">Copy Address</span><span class="copy on">Copy Complete</span> --><span class="crep">C-rep Node</span></td>
 									</tr>
 									<tr>
 										<td>Balance</td>
@@ -105,9 +105,7 @@
 
 								</tbody>
 							</table>
-
 						</div>
-
 					</div>
 				</div>
 				<div class="screen1">
@@ -140,12 +138,12 @@
 										<td>23 hrs ago</td>
 										<td class="break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td class="table-sign"><span>IN</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td><span>2000.000001</span><em>ICX</em></td>
 										<td><span>20.1</span><em>ICX</em></td>
 									</tr>
 									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td class="on icon scam"><i class="img"></i><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
 										<td>999999</td>
 										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
 										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
@@ -168,7 +166,7 @@
 										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td>9,999,999</td>
 										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+										<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
 										<td class="table-sign out"><span>OUT</span></td>
 										<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
 										<td><span>12,201</span><em>ICX</em></td>
@@ -274,5 +272,66 @@
 		</div>
 	</div>
 	<!-- //popup -->
+
+	<!-- popup -->
+	<div class="popup-wrap scam">
+		<div class="dimmed"></div>
+		<div class="popup">
+			<span class="close"><em class="img"></em></span>
+			<h1 class="title">Report scam</h1>
+			<div class="box">
+				<div class="icon">
+					<!-- <img src="../image/img-icon.png"> -->
+					<img src="../image/img-complete.png">
+				</div>
+				<p class="sub-title">Connect to ICONex</p>
+				<p class="txt">ICONex지갑이 연동 되었습니다.</p>
+				<p class="address">hx1729b35b690d51e9944b2e94075acff986ea0675</p>
+				<div class="btn-holder">
+					<button class="btn-type-normal size-half"><span>Cancel</span></button>
+					<button class="btn-type-normal size-half" disabled><span>Add</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //popup -->
+
+	<!-- popup -->
+	<div class="popup-wrap scam" style="display: block;">
+		<div class="dimmed"></div>
+		<div class="popup">
+			<span class="close"><em class="img"></em></span>
+			<h1 class="title">Report scam</h1>
+			<div class="box">
+				<h3>Select a file or drag & drop to the area below.</h3>
+				<div class="drop-box">
+					<span>Please drag your file here</span>
+				</div>
+ 
+<!-- 				<div class="drop-box error">
+					<i class="img"></i>
+					<span class="ellipsis">2019-02-11T08_45_13.jpg</span>
+					<i class="img"></i>
+					<span class="msg">Incorrect file form.</span>
+				</div>  -->
+
+<!-- 				<div class="drop-box normal">
+					<i class="img"></i>
+					<span class="ellipsis">2019-02-11T08_45_13.jpg</span>
+					<i class="img"></i>
+				</div> -->
+
+				<button class="btn-type-normal select"  disabled><span>Select file</span></button>
+				<h2>The scam site URL (Optional)</h2>
+				<input type="text" class="txt-type over" placeholder="Enter scam site URL" value="">
+				<div class="btn-holder">
+					<button class="btn-type-normal"><span>Summit</span></button>
+				</div>				
+			</div>
+
+		</div>
+	</div>
+	<!-- //popup -->	
+
 </body>
 </html>

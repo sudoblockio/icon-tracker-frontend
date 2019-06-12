@@ -73,7 +73,7 @@ export async function getTransaction(txHash) {
     return response;
   } catch (e) {
     console.error(e);
-    return {};
+    return undefined;
   }
 }
 
@@ -87,6 +87,6 @@ export async function getTransactionResult(txHash) {
     return response;
   } catch (e) {
     console.error(e);
-    return {};
+    return undefined;
   }
 }

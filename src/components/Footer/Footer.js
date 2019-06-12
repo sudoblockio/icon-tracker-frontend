@@ -7,9 +7,8 @@ class Footer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			current: NETWORK_NAME[window.location.href] || 'Mainnet'
+			current: NETWORK_NAME[window.location.host] || 'Mainnet'
 		};
-		console.log(window.location)
 	}
 
 	onNetworkClick = key => {
@@ -23,6 +22,7 @@ class Footer extends Component {
 					<div className="wrap-holder">
 						<p>©2019 ICON Foundation</p>
 						<div className="sns">
+							<p className="mail"><span>Support & request to add the token homepage URL</span><a href="mailto:tracker@icon.foundation">tracker@icon.foundation</a></p>
 							<ul>
 								<li className="icon"><a target='_black' href="https://www.icon.foundation"><span className="img"></span></a></li>
 								<li className="medium"><a target='_black' href="https://medium.com/@helloiconworld"><span className="img"></span></a></li>

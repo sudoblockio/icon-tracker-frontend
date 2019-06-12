@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddressQrCode from './AddressQrCode'
 import ContractDetail from './ContractDetail'
+import Scam from './Scam'
 import { initPopup } from '../../redux/actions/popupActions'
 import {
     POPUP_TYPE
@@ -26,6 +27,9 @@ class Popup extends Component {
             case POPUP_TYPE.DETAIL:
                 window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'detail' } }))
                 break
+            case POPUP_TYPE.SCAM:
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'scam' } }))
+            break
             default:
         }
     }
@@ -39,6 +43,10 @@ class Popup extends Component {
         this.props.initPopup()
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: 'detail' } }))
     }
+    closeScam = () => {
+        this.props.initPopup()
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: 'scam' } }))
+    }
 
     render() {
         const { type, data } = this.props
@@ -46,6 +54,8 @@ class Popup extends Component {
         const qrData = isQr ? data : {}
         const isDetail = type === POPUP_TYPE.DETAIL
         const detailData = isDetail ? data : {}
+        const isScam = type === POPUP_TYPE.SCAM;
+        const scamData = isScam ? data : {}
 
         return ([
             <div key="qr" className="popup-wrap qr">
@@ -65,7 +75,17 @@ class Popup extends Component {
                     </span>
                     {isDetail && <ContractDetail data={detailData} closeDetail={this.closeDetail} />}
                 </div>
+            </div>,
+            <div key="scam" className="popup-wrap scam">
+                <div className="dimmed"></div>
+                <div className="popup scam">
+                    <span className="close" onClick={this.closePopup}>
+                        <em className="img"></em>
+                    </span>
+                    {isScam && <Scam data={scamData} closeScam={this.closeScam} />}
+                </div>
             </div>
+            
         ])
     }
 }

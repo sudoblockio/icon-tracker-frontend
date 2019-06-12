@@ -16,3 +16,4 @@ production_folder="build"
 current_datetime=$(date +%Y%m%d)
 primary_backup_folder="build_backup_1_$current_datetime"
 cp -r $production_folder $primary_backup_folder
+rm -rf $production_folder/*

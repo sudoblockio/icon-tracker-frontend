@@ -14,6 +14,13 @@ export function setAddress(payload) {
   }
 }
 
+export function setNotification(payload) {
+  return {
+    type: actionTypes.setNotification,
+    payload
+  }
+}
+
 export function clearWallet(){
   return{
     type:actionTypes.clearWallet

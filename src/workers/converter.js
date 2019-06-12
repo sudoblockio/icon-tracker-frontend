@@ -13,8 +13,6 @@ onmessage = message => {
             postMessage({
                 type,
                 payload: IconConverter.toHex(payload),
-
-                
             })
             break;
         case 'hexToUtf8':

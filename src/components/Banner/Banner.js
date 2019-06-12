@@ -33,7 +33,6 @@ class Banner extends Component {
         if (this.props.bannerExpireDate) {
             const bannerExpireDate = moment(this.props.bannerExpireDate)
             const now = moment()
-            console.log(bannerExpireDate.format('YYYY-MM-DD'), now.format('YYYY-MM-DD'))
             if (now.isAfter(bannerExpireDate, 'day')) {
                 return true
             }

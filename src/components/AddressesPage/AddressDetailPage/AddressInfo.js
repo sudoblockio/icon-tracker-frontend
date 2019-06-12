@@ -11,15 +11,44 @@ import {
 import {
   CopyButton,
   LoadingComponent,
-  QrCodeButton
+  QrCodeButton,
+  ReportButton
 } from 'components';
+import NotificationManager from 'utils/NotificationManager'
+
+const _isNotificationAvailable = NotificationManager.available()
 
 class AddressInfo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      notification: _isNotificationAvailable && this.props.walletNotification
+    }
+  }
+
+  onNotificationChange = () => {
+    if (!_isNotificationAvailable) {
+      return
+    }
+    const notification = !this.state.notification
+    this.setState({ notification }, () => {
+      this.props.setNotification(notification)
+      if (notification) {
+        const { wallet } = this.props
+        const { data, error } = wallet
+        const address = data.address || error
+        NotificationManager.registerServiceWorker(address)
+      }
+      else {
+        NotificationManager.deregisterServiceWorker()
+      }
+    })
+  }
 
   render() {
     const { wallet, walletAddress } = this.props
-    const { loading, data, error } = wallet
-
+    const { loading, data, error } = wallet;
+    
     const Content = () => {
       if (loading) {
         return (
@@ -27,17 +56,37 @@ class AddressInfo extends Component {
         )
       }
       else {
-        const { address, nodeType, balance, icxUsd, txCount, tokenList } = data
+        const { address, nodeType, balance, icxUsd, txCount, tokenList, reportedCount } = data
         const _address = !!address ? address : error
         const isConnected = walletAddress === _address
+        const disabled = !_isNotificationAvailable
+
+        const scam = reportedCount >= 100 ? true : false
+
         return (
           <div className="screen0">
             <div className="wrap-holder">
               {isConnected ?
-                <p className="title">My Address<span className="connected"><i className="img"></i>Connected to ICONex</span></p>
+                <p className="title">
+                  My Address<span className="connected"><i className="img"></i>Connected to ICONex</span>
+                  <span className={`toggle${disabled ? ' disabled' : ''}`}>
+                    <em>
+                      <input 
+                        id="cbox-02" 
+                        className="cbox-type" 
+                        type="checkbox" 
+                        name="notification" 
+                        onChange={this.onNotificationChange} 
+                        checked={!this.state.notification} 
+                        disabled={disabled}
+                      />
+                      <label htmlFor="cbox-02" className="label _img"></label>Notifications<span>(Beta)</span>
+                    </em>
+                  </span>
+                </p>
               :
                 <p className="title">Address</p> 
-              }          
+              }
               <div className="contents">
                 <table className="table-typeB address">
                   <thead>
@@ -49,7 +98,7 @@ class AddressInfo extends Component {
                   <tbody>
                     <tr className="">
                       <td>Address</td>
-                      <td>{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}</td>
+                      <td className={scam ? "scam":""}>{scam &&<span className="scam-tag">Scam</span>}{_address} <QrCodeButton address={_address} /><CopyButton data={_address} title={'Copy Address'} isSpan />{isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}<ReportButton address={address} /></td>
                     </tr>
                     <tr>
                       <td>Balance</td>

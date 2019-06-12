@@ -8,7 +8,8 @@ import {
 	LoadingComponent,
 	AddressLink,
 	BlockLink,
-	AddressCell
+	AddressCell,
+	ReportButton
 } from 'components'
 import {
 	makeDownloadLink,
@@ -94,7 +95,8 @@ class TransactionInfo extends Component {
 					fee,
 					feeUsd,
 					dataType,
-					targetContractAddr
+					targetContractAddr,
+					reportedCount
 				} = data
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -102,7 +104,7 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
-
+				const scam = reportedCount >= 10 ?  true: false;
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -112,7 +114,7 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td>{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /></td>
+											<td className={scam ? "scam":""}>{scam?<span className="scam-tag">Reported</span>:""}{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img twit-icon"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /><ReportButton address={txHash}/></td>
 										</tr>
 										<tr>
 											<td>Status</td>
@@ -164,7 +166,7 @@ class TransactionInfo extends Component {
 										{(dataType && dataString) ?
 											<tr>
 												<td>Data</td>
-												<DataCell dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+												<DataCell scam={scam} dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 											</tr>
 											:
 											null
@@ -187,7 +189,7 @@ class DataCell extends Component {
 		super(props)
 		this.state = {
 			loading: false,
-			viewHex: false,
+			viewHex: this.props.scam ? true : false,
 			converted: '',
 			toHex: '',
 			toUtf8: '',
@@ -281,7 +283,7 @@ class DataCell extends Component {
 	}
 
 	render() {
-		const { dataType } = this.props
+		const { dataType, scam } = this.props
 		const { converted, loading, viewHex, toUtf8, imgError } = this.state
 		const isMessage = dataType === 'message'
 		const isButton = isMessage && !loading
@@ -296,7 +298,7 @@ class DataCell extends Component {
 						<p>{converted}</p>
 					}
 				</div>
-				{isButton && <button className="btn-type-normal" onClick={this.handleClick}>{buttonTitle}</button>}
+				{isButton && <button className="btn-type-normal" onClick={this.handleClick} disabled={scam}>{buttonTitle}</button>}
 			</td>
 		)
 	}

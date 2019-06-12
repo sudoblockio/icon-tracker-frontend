@@ -109,6 +109,7 @@ const actionTypes = {
   addressTxList: 'ADDRESS_TX_LIST',
   addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
   addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
+
   
   icxGetScore: 'ICX_GET_SCORE',
   icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
@@ -158,10 +159,16 @@ const actionTypes = {
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
 
+  reportScam: 'REPORT_ADDRESS',
+  reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
+  reportScamRejected: 'REPORT_ADDRESS_REJECTED',
+
   setBannerOption: 'SET_BANNER_OPTION',
   
   setAddress: 'SET_ADDRESS',
   setAddressSuccess :'SET_ADDRESS_SUCCESS',
+  setNotification: 'SET_NOTIFICATION',
+  setNotificationSuccess :'SET_NOTIFICATION_SUCCESS',
   clearWallet: 'CLEAR_WALLET',
   clearWalletSuccess: 'CLEAR_WALLET_SUCCESS'
 }
