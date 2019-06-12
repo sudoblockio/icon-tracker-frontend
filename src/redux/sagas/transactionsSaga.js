@@ -67,7 +67,7 @@ function* transactionTxDetailFunc(action) {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
     }
 
-    const count = 2, timeout = 2000
+    const count = 2, timeout = 1500
     for (let i = 0; i < count; i++ ) {
       yield call(delay, timeout * (i + 1))
       trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
