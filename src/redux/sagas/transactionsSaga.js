@@ -60,28 +60,24 @@ function* transactionTxDetailFunc(action) {
       yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
       return
     }
+    
     byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
     data = convertEngineToTracker(resultData, byHashData)
     if (data) {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
     }
 
-    yield call(delay, 1000)
-
-    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-      return
-    }
-
-    yield call(delay, 1000)
-
-    trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
-      yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-    }
-    else {
-      yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
+    const count = 2, timeout = 2000
+    for (let i = 0; i < count; i++ ) {
+      yield call(delay, timeout * (i + 1))
+      trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
+      if (trackerData.result === "200") {
+        yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
+        return
+      }
+      else if (i === count - 1) {
+        throw Error(trackerData.result)
+      }
     }
   }
   catch (e) {

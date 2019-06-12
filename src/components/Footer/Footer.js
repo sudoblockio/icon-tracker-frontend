@@ -22,7 +22,7 @@ class Footer extends Component {
 					<div className="wrap-holder">
 						<p>©2019 ICON Foundation</p>
 						<div className="sns">
-							<p class="mail"><span>Support & request to add the token homepage URL</span><a href="mailto:tracker@icon.foundation">tracker@icon.foundation</a></p>
+							<p className="mail"><span>Support & request to add the token homepage URL</span><a href="mailto:tracker@icon.foundation">tracker@icon.foundation</a></p>
 							<ul>
 								<li className="icon"><a target='_black' href="https://www.icon.foundation"><span className="img"></span></a></li>
 								<li className="medium"><a target='_black' href="https://medium.com/@helloiconworld"><span className="img"></span></a></li>
