@@ -127,7 +127,7 @@ class InfoChart extends Component {
   
       step = Math.ceil(step / division) * division
       min = Math.floor(min / division) * division
-      max = min + step * 4
+      max = min + step * 5
   
       return { 
         labels, 
