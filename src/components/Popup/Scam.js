@@ -129,7 +129,7 @@ class Scam extends Component {
 				    { connectStatus === 0 ? <img src={icon} alt="icon" />: <img src={complete} alt="complete"/>}
 				</div>
 				<p className="sub-title">Connect to ICONex</p>
-				<p className="txt">{connectStatus === 0 ? "ICONex지갑을 연동 해야 신고가 가능합니다.": "ICONex지갑이 연동 되었습니다."}</p>
+				<p className="txt">{connectStatus === 0 ? "Reporting is only available after you connect the ICONex wallet.": "ICONex wallet is connected."}</p>
 				{connectStatus === 1 && <p className="address">{walletAddress}</p>}
 				<div className="btn-holder">
 					<button className="btn-type-normal size-half" onClick={this.props.closeScam}><span>Cancel</span></button>
