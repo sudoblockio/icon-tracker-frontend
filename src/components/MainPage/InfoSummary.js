@@ -18,7 +18,7 @@ class InfoSummary extends Component {
   render() {
     const { isSolo } = this.state
     const { tmainInfo } = this.props.info || {}
-    const { crepCount, icxSupply, marketCap, transactionCount, icxCirculationy } = tmainInfo || {}
+    const { crepCount, icxSupply, marketCap, transactionCount, icxCirculationy, blockHeight } = tmainInfo || {}
     const marketCapStr = numberWithCommas(Math.floor(marketCap))
     return (
       <li className="left">
@@ -30,7 +30,8 @@ class InfoSummary extends Component {
         <p className="num c">{convertNumberToText(icxCirculationy, 0)}</p>
         <hr className="hr" />
         <p className="subTitle c">All Transactions<em>{numberWithCommas(transactionCount)}</em></p>
-        {!isSolo && <p className="subTitle c">C-reps<em>{numberWithCommas(crepCount)}</em></p>}
+        {blockHeight && <p className="subTitle c">Block Height<em>{numberWithCommas(blockHeight)}</em></p>}
+        {!blockHeight && !isSolo && <p className="subTitle c">C-reps<em>{numberWithCommas(crepCount)}</em></p>}
         {/*<p className="subTitle c">Public Treasury<em>{numberWithCommas(publicTreasury)}</em></p>*/}
       </li>
     );
