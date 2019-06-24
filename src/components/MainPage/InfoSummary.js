@@ -17,8 +17,10 @@ class InfoSummary extends Component {
 
   render() {
     const { isSolo } = this.state
-    const { tmainInfo } = this.props.info || {}
-    const { crepCount, icxSupply, marketCap, transactionCount, icxCirculationy, blockHeight } = tmainInfo || {}
+    const { tmainInfo, tmainBlock } = this.props.info || {}
+    const { crepCount, icxSupply, marketCap, transactionCount, icxCirculationy } = tmainInfo || {}
+    const lastBlock = (tmainBlock || [])[0]
+    const { blockHeight } = lastBlock || {}
     const marketCapStr = numberWithCommas(Math.floor(marketCap))
     return (
       <li className="left">
