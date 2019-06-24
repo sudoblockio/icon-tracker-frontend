@@ -29,8 +29,8 @@ class InfoSummary extends Component {
         <p className="subTitle">ICX Circulation</p>
         <p className="num c">{convertNumberToText(icxCirculationy, 0)}</p>
         <hr className="hr" />
-        <p className="subTitle c">All Transactions<em>{numberWithCommas(transactionCount)}</em></p>
         {blockHeight && <p className="subTitle c">Block Height<em>{numberWithCommas(blockHeight)}</em></p>}
+        <p className="subTitle c">All Transactions<em>{numberWithCommas(transactionCount)}</em></p>
         {!blockHeight && !isSolo && <p className="subTitle c">C-reps<em>{numberWithCommas(crepCount)}</em></p>}
         {/*<p className="subTitle c">Public Treasury<em>{numberWithCommas(publicTreasury)}</em></p>*/}
       </li>
