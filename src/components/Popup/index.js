@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import AddressQrCode from './AddressQrCode'
 import ContractDetail from './ContractDetail'
 import Scam from './Scam'
+import Search from './Search'
 import { initPopup } from '../../redux/actions/popupActions'
-import {
-    POPUP_TYPE
-} from 'utils/const'
+import { POPUP_TYPE } from 'utils/const'
 
 class Popup extends Component {
     componentWillReceiveProps(nextProps) {
@@ -19,33 +18,40 @@ class Popup extends Component {
         }
     }
 
-    openPopup = (type) => {
+    openPopup = type => {
         switch (type) {
             case POPUP_TYPE.QR:
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'qr' } }))
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'qr' } }))
                 break
             case POPUP_TYPE.DETAIL:
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'detail' } }))
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'detail' } }))
                 break
             case POPUP_TYPE.SCAM:
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_OPEN", param: 'scam' } }))
-            break
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'scam' } }))
+                break
+            case POPUP_TYPE.SEARCH:
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'search' } }))
+                break
             default:
         }
     }
 
     closePopup = () => {
         this.props.initPopup()
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: '' } }))
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: '' } }))
     }
 
     closeDetail = () => {
         this.props.initPopup()
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: 'detail' } }))
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'detail' } }))
     }
     closeScam = () => {
         this.props.initPopup()
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: "POPUP_CLOSE", param: 'scam' } }))
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'scam' } }))
+    }
+    closeSearch = () => {
+        this.props.initPopup()
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'search' } }))
     }
 
     render() {
@@ -54,53 +60,57 @@ class Popup extends Component {
         const qrData = isQr ? data : {}
         const isDetail = type === POPUP_TYPE.DETAIL
         const detailData = isDetail ? data : {}
-        const isScam = type === POPUP_TYPE.SCAM;
+        const isScam = type === POPUP_TYPE.SCAM
         const scamData = isScam ? data : {}
-
-        return ([
+        const isSearch = type === POPUP_TYPE.SEARCH
+        const searchData = isSearch ? data : {}
+        return [
             <div key="qr" className="popup-wrap qr">
-                <div className="dimmed"></div>
+                <div className="dimmed" />
                 <div className="popup">
                     <span className="close" onClick={this.closePopup}>
-                        <em className="img"></em>
+                        <em className="img" />
                     </span>
                     {isQr && <AddressQrCode data={qrData} />}
                 </div>
             </div>,
             <div key="detail" className="popup-wrap detail">
-                <div className="dimmed"></div>
+                <div className="dimmed" />
                 <div className="popup contract">
                     <span className="close" onClick={this.closePopup}>
-                        <em className="img"></em>
+                        <em className="img" />
                     </span>
                     {isDetail && <ContractDetail data={detailData} closeDetail={this.closeDetail} />}
                 </div>
             </div>,
             <div key="scam" className="popup-wrap scam">
-                <div className="dimmed"></div>
+                <div className="dimmed" />
                 <div className="popup scam">
                     <span className="close" onClick={this.closePopup}>
-                        <em className="img"></em>
+                        <em className="img" />
                     </span>
                     {isScam && <Scam data={scamData} closeScam={this.closeScam} />}
                 </div>
-            </div>
-            
-        ])
+            </div>,
+            isSearch && <Search data={searchData} closeSearch={this.closeSearch} />,
+        ]
     }
 }
 
 function mapStateToProps(state) {
     return {
         type: state.popup.type,
-        data: state.popup.data
-    };
+        data: state.popup.data,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        initPopup: () => dispatch(initPopup())
-    };
+        initPopup: () => dispatch(initPopup()),
+    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Popup)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Popup)

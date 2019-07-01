@@ -34,6 +34,7 @@ class Routes extends Component {
   render() {
     return (
       <div id="app-root">
+        {window.location.pathname === '/' && !this.state.isSolo && <Banner />}
         <div className="root">
           <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
             <HeaderContainer />
@@ -106,7 +107,6 @@ class Routes extends Component {
           <div className="blank"></div>
         </div>
         <Footer />
-        {window.location.pathname === '/' && !this.state.isSolo && <Banner />}
         <Popup />
       </div>
     );

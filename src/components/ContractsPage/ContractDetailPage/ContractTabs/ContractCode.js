@@ -1,14 +1,7 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import {
-    makeDownloadLink,
-    tokenText,
-    isValidData
-} from 'utils/utils'
-import {
-    CopyButton,
-    LoadingComponent
-} from 'components';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import { makeDownloadLink, tokenText, isValidData } from 'utils/utils'
+import { CopyButton, LoadingComponent } from 'components'
 
 class ContractCode extends Component {
     constructor(props) {
@@ -44,37 +37,38 @@ class ContractCode extends Component {
         const { loading, data: abiData, error } = contractAbi
         return (
             <div className="contents">
-                <table className="table-typeL">
-                    <thead>
-                        <tr>
-                            <th>Contract Name</th>
-                            <th>Active Contract Source Code</th>
-                            <th>Updated Contract Source Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="">
-                            <td>{tokenText(tokenName, symbol)}</td>
-                            <DownloadLink link={activeLink} name={`${address}_${contractVersion}.zip`} />
-                            <DownloadLink link={updatedLink} name={`${address}_${newVersion}.zip`} />
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="table-box">
+                    <table className="table-typeL">
+                        <thead>
+                            <tr>
+                                <th>Contract Name</th>
+                                <th>Active Contract Source Code</th>
+                                <th>Updated Contract Source Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="">
+                                <td>{tokenText(tokenName, symbol)}</td>
+                                <DownloadLink link={activeLink} name={`${address}_${contractVersion}.zip`} />
+                                <DownloadLink link={updatedLink} name={`${address}_${newVersion}.zip`} />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
                         <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} disabled={!!error} />
                     </div>
-                    {
-                        loading ?
-                            <LoadingComponent height="230px" />
-                            :
-                            <div className="scroll">
-                                <p className="txt" style={{ whiteSpace: 'pre' }}>
-                                    {!!error ? error : JSON.stringify(abiData, null, '\t')}
-                                </p>
-                            </div>
-                    }
+                    {loading ? (
+                        <LoadingComponent height="230px" />
+                    ) : (
+                        <div className="scroll">
+                            <p className="txt" style={{ whiteSpace: 'pre' }}>
+                                {!!error ? error : JSON.stringify(abiData, null, '\t')}
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         )
@@ -87,19 +81,18 @@ const DownloadLink = ({ link, name }) => {
             return (
                 <td>
                     <span>
-                        <i className="img"></i>
-                        <a href={link} download={name}>Download</a>
+                        <i className="img" />
+                        <a href={link} download={name}>
+                            Download
+                        </a>
                     </span>
                 </td>
             )
-        }
-        else {
-            return (
-                <td>-</td>
-            )
+        } else {
+            return <td>-</td>
         }
     }
     return Content()
 }
 
-export default withRouter(ContractCode);
+export default withRouter(ContractCode)
