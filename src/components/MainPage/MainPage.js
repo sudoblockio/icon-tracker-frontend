@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import {
-    InfoSummary,
-    InfoChart,
-    RecentBlocks,
-    RecentTransactions,
-} from 'components'
+import { InfoSummary, RecentBlocks, RecentTransactions } from 'components'
 
 class MainPage extends Component {
     constructor(props) {
@@ -23,7 +18,6 @@ class MainPage extends Component {
                     <div className="wrap-holder">
                         <ul className="content">
                             <InfoSummary {...this.props} />
-                            {/* <InfoChart {...this.props} /> */}
                         </ul>
                     </div>
                 </div>

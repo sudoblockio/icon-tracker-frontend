@@ -12,18 +12,7 @@ class TokenSummary extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const {
-                    tokenName,
-                    totalSupply,
-                    contract,
-                    price,
-                    decimals,
-                    holders,
-                    transfers,
-                    totalSupplyUsd,
-                    priceUsd,
-                    symbol,
-                } = data
+                const { tokenName, totalSupply, contract, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
                 return (
                     <div className="screen0">
@@ -38,51 +27,21 @@ class TokenSummary extends Component {
                                             <tr>
                                                 <td>Total Supply</td>
                                                 <td>
-                                                    {numberWithCommas(
-                                                        totalSupply,
-                                                    )}{' '}
-                                                    {symbol}
-                                                    {!!_totalSupplyUsd && (
-                                                        <em>
-                                                            (
-                                                            {convertNumberToText(
-                                                                _totalSupplyUsd,
-                                                                0,
-                                                            )}{' '}
-                                                            USD)
-                                                        </em>
-                                                    )}
+                                                    {numberWithCommas(totalSupply)} {symbol}
+                                                    {!!_totalSupplyUsd && <em>({convertNumberToText(_totalSupplyUsd, 0)} USD)</em>}
                                                 </td>
                                                 <td>Contract </td>
                                                 <td>
-                                                    <span>
-                                                        {contract ? (
-                                                            <AddressLink
-                                                                to={contract}
-                                                            />
-                                                        ) : (
-                                                            '-'
-                                                        )}
-                                                    </span>
+                                                    {/* <i className="img" /> */}
+                                                    <span>{contract ? <AddressLink to={contract} /> : '-'}</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Price</td>
                                                 {!!price ? (
                                                     <td>
-                                                        {convertNumberToText(
-                                                            price,
-                                                            8,
-                                                        )}{' '}
-                                                        ICX
-                                                        <em>
-                                                            (
-                                                            {convertNumberToText(
-                                                                priceUsd,
-                                                                8,
-                                                            )}{' '}
-                                                            USD)
-                                                        </em>
+                                                        {convertNumberToText(price, 8)} ICX
+                                                        <em>({convertNumberToText(priceUsd, 8)} USD)</em>
                                                     </td>
                                                 ) : (
                                                     <td>-</td>
@@ -92,16 +51,9 @@ class TokenSummary extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Holders</td>
-                                                <td>
-                                                    {numberWithCommas(holders)}{' '}
-                                                    Address(es)
-                                                </td>
+                                                <td>{numberWithCommas(holders)} Address(es)</td>
                                                 <td>Transfers</td>
-                                                <td>
-                                                    {numberWithCommas(
-                                                        transfers,
-                                                    )}
-                                                </td>
+                                                <td>{numberWithCommas(transfers)}</td>
                                             </tr>
                                         </tbody>
                                     </table>

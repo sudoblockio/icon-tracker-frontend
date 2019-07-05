@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { TX_TYPE } from 'utils/const'
 
 class TxTableHead extends Component {
     render() {
-        const TableHead = (_props) => {
+        const TableHead = _props => {
             const { txType } = _props
             switch (txType) {
                 case TX_TYPE.ADDRESS_TX:
@@ -13,7 +13,7 @@ class TxTableHead extends Component {
                             <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Amount</th>
                             <th>TxFee</th>
@@ -26,18 +26,18 @@ class TxTableHead extends Component {
                             <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Value</th>
                         </tr>
-                    )                    
+                    )
                 case TX_TYPE.ADDRESS_TOKEN_TX:
                     return (
                         <tr>
                             <th>TxHash</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Quantity</th>
                             <th>Token</th>
@@ -50,7 +50,7 @@ class TxTableHead extends Component {
                             <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Amount</th>
                             <th>TxFee</th>
@@ -63,7 +63,7 @@ class TxTableHead extends Component {
                             <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Value</th>
                         </tr>
@@ -74,7 +74,7 @@ class TxTableHead extends Component {
                             <th>TxHash</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Quantity</th>
                             <th>Token</th>
@@ -86,7 +86,7 @@ class TxTableHead extends Component {
                         <tr>
                             <th>Tx Hash</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Amount</th>
                             <th>TxFee</th>
@@ -99,7 +99,7 @@ class TxTableHead extends Component {
                             <th>Block</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Amount</th>
                             <th>TxFee</th>
@@ -111,7 +111,7 @@ class TxTableHead extends Component {
                             <th>Tx Hash</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Quantity</th>
                             <th>Token</th>
@@ -124,7 +124,7 @@ class TxTableHead extends Component {
                             <th>TxHash</th>
                             <th>Age</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Quantity</th>
                             <th>TxFee</th>
@@ -134,9 +134,11 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>Address</th>
-                            <th>ICX Balance</th>
-                            <th>ICX USD Value</th>
-                            <th>Percentage<em>%</em></th>
+                            <th>Balance</th>
+                            <th>USD Value</th>
+                            <th>
+                                Percentage<em>%</em>
+                            </th>
                             <th>No of Txns</th>
                             <th>Node type</th>
                         </tr>
@@ -171,7 +173,7 @@ class TxTableHead extends Component {
                         <tr>
                             <th>Type trace address</th>
                             <th>From</th>
-                            <th className="table-sign"></th>
+                            <th className="table-sign" />
                             <th>To</th>
                             <th>Value</th>
                             <th>Step Limit</th>
@@ -183,13 +185,13 @@ class TxTableHead extends Component {
                             <th>Rank</th>
                             <th>Addresses</th>
                             <th>Quantity</th>
-                            <th>Percentage<em>%</em></th>
+                            <th>
+                                Percentage<em>%</em>
+                            </th>
                         </tr>
                     )
                 default:
-                    return (
-                        <tr></tr>
-                    )
+                    return <tr />
             }
         }
 

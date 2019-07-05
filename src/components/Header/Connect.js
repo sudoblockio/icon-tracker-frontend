@@ -14,10 +14,7 @@ class Connect extends Component {
     }
 
     async componentDidMount() {
-        const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(
-            1000,
-            2000,
-        )
+        const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
         this.setState({
             disabled: !(isChrome && iconexInstalled && hasIconWallet),
         })
@@ -67,22 +64,14 @@ class Connect extends Component {
         const { walletAddress, disabled } = this.state
         return (
             <div className={`connect ${walletAddress ? 'join' : ''}`}>
-                <span
-                    onClick={this.getWalletAddress}
-                    className={disabled ? 'disabled' : ''}
-                >
-                    Connect to ICONex
+                <span onClick={this.getWalletAddress} className={disabled ? 'disabled' : ''}>
                     <em className="img" />
                 </span>
                 {walletAddress ? (
                     <div className="sub-menu">
                         <p>
                             <span>Wallet Address</span>
-                            <CopyButton
-                                data={walletAddress}
-                                title={'Copy Address'}
-                                wallet={true}
-                            />
+                            <CopyButton data={walletAddress} title={'Copy Address'} wallet={true} />
                         </p>
                         <span className="btn" onClick={this.disconnect}>
                             Disconnect
@@ -90,9 +79,7 @@ class Connect extends Component {
                         <span
                             className="btn"
                             onClick={() => {
-                                this.props.history.push(
-                                    `/address/${walletAddress}`,
-                                )
+                                this.props.history.push(`/address/${walletAddress}`)
                             }}
                         >
                             View Details
@@ -102,33 +89,6 @@ class Connect extends Component {
                     ''
                 )}
             </div>
-            // <div className={`connect ${walletAddress ? "join" : ""}`}>
-            //   <span onClick={this.getWalletAddress} className={disabled ? 'disabled' : ''}>
-            //   Connect to ICONex
-            //         <em className="img" />
-            //   </span>
-            //   {walletAddress ? (
-            //     <div className="sub-menu">
-            //       <p>
-            //         <span>Wallet Address</span>
-            //         <CopyButton data={walletAddress} title={"Copy Address"} wallet={true} />
-            //       </p>
-            //       <span className="btn" onClick={this.disconnect}>
-            //         Disconnect
-            //       </span>
-            //       <span
-            //         className="btn"
-            //         onClick={() => {
-            //           this.props.history.push(`/address/${walletAddress}`);
-            //         }}
-            //       >
-            //         View Details
-            //       </span>
-            //     </div>
-            //   ) : (
-            //       ""
-            //     )}
-            // </div>
         )
     }
 }

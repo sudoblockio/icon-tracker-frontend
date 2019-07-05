@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { numberWithCommas, dateToUTC } from 'utils/utils'
+import { numberWithCommas, getTimezoneMomentTime } from 'utils/utils'
 import { LoadingComponent, BlockLink } from 'components'
 
 class RecentBlocks extends Component {
     render() {
         const { loading, tmainBlock } = this.props.info
         const list = tmainBlock.slice(9) || []
-        console.log(tmainBlock)
         return (
             <li className="left">
                 <p className="title">Blocks</p>
@@ -19,34 +18,14 @@ class RecentBlocks extends Component {
                     ) : (
                         <ul className="list">
                             {list.map((block, index) => {
-                                const {
-                                    blockHeight,
-                                    createDate,
-                                    hash,
-                                    txCount,
-                                } = block
+                                const { blockHeight, createDate, hash, txCount } = block
                                 return (
                                     <li key={index}>
-                                        <p className="icon">
-                                            B
-                                            {/* <span>
-                                                <BlockLink
-                                                    to={blockHeight}
-                                                    label={numberWithCommas(
-                                                        blockHeight,
-                                                    )}
-                                                />
-                                            </span> */}
-                                        </p>
+                                        <p className="icon">B</p>
                                         <p className="a">
                                             Block
                                             <em>
-                                                <BlockLink
-                                                    to={blockHeight}
-                                                    label={numberWithCommas(
-                                                        blockHeight,
-                                                    )}
-                                                />
+                                                <BlockLink to={blockHeight} label={numberWithCommas(blockHeight)} />
                                             </em>
                                         </p>
                                         <p className="b">
@@ -56,17 +35,12 @@ class RecentBlocks extends Component {
                                         <p className="c">
                                             Hash
                                             <em>
-                                                <BlockLink
-                                                    to={blockHeight}
-                                                    label={hash}
-                                                />
+                                                <BlockLink to={blockHeight} label={hash} />
                                             </em>
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            <em>
-                                                {dateToUTC(createDate, true)}
-                                            </em>
+                                            <em>{getTimezoneMomentTime(createDate)}</em>
                                         </p>
                                     </li>
                                 )

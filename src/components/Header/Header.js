@@ -81,8 +81,8 @@ class Header extends Component {
                                 </li> */}
                             </ul>
                             <div className="link-right">
-                                <Connect {...this.props} />
                                 <SearchBox {...this.props} />
+                                <Connect {...this.props} />
                             </div>
                         </div>
                     </div>

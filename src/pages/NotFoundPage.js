@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { NotFoundPageContainer } from '../containers'
 
 class NotFoundPage extends Component {
-  render() {
-    return (
-      <NotFoundPageContainer />
-    );
-  }
+    render() {
+        return <NotFoundPageContainer />
+    }
 }
 
-export default NotFoundPage;
+export default NotFoundPage

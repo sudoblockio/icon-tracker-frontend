@@ -52,9 +52,7 @@ class CopyButton extends Component {
                 } else {
                     return (
                         <a href={download.link} download={download.name} className="download">
-                            <span className={`copy clipboard-btn download ${style} ${className}`} data-clipboard-text={data} onClick={this.handleClick}>
-                                Download
-                            </span>
+                            <span className={`copy clipboard-btn download ${style} ${className}`} data-clipboard-text={data} onClick={this.handleClick} />
                         </a>
                     )
                 }

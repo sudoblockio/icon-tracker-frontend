@@ -28,6 +28,7 @@
 .table-typeB .copy {
     margin-left: 20px;
 }
+
 .table-typeB .copy.twit {
     margin-right: -16px;
 }
@@ -278,9 +279,169 @@
 }
 
 .table-typeB.transaction span.copy:nth-of-type(1) {
-    margin-left: 4px;
+    margin-left: 10px;
 }
 
 .table-typeB .copy.twit {
     margin-right: 0;
+}
+.header-wrap .link-right {
+    top: 10px;
+}
+.header-wrap .connect {
+    display: inline-block;
+    margin-left: 20px;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 0;
+}
+.header-wrap .connect > span {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+.header-wrap .connect > span:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+.header-wrap .connect > span em {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background-position: -250px -250px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+.header-wrap .connect > span.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.header-wrap .connect > span.disabled + .sub-menu {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.header-wrap .connect.join em {
+    background-position: -300px -250px;
+}
+.header-wrap .connect.join > span:hover em {
+    background-position: -300px -250px;
+}
+
+.header-wrap .connect .sub-menu {
+    width: 361px;
+    height: 108px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+    position: absolute;
+    right: 2px;
+    top: 44px;
+    font-size: 0;
+    overflow: hidden;
+    padding: 0;
+}
+.header-wrap .connect .sub-menu p {
+    margin: 14px 20px;
+    height: 50px;
+    padding-top: 9px;
+}
+.header-wrap .connect .sub-menu p span {
+    display: block;
+}
+.header-wrap .connect .sub-menu p span:nth-child(1) {
+    font-size: 12px;
+    color: #262626;
+    font-family: 'Montserrat';
+    margin: 0 0 5px;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 12px;
+}
+.header-wrap .connect .sub-menu p span:nth-child(2) {
+    font-size: 10px;
+    color: #b3b3b3;
+    cursor: pointer;
+}
+.header-wrap .connect .sub-menu p span:nth-child(2) em:nth-child(2) {
+    margin-left: 4px;
+    visibility: hidden;
+}
+.header-wrap .connect .sub-menu p span:nth-child(2):hover {
+    color: #262626;
+}
+.header-wrap .connect .sub-menu p span:nth-child(2):hover em {
+    visibility: visible;
+}
+.header-wrap .connect .sub-menu p span:nth-child(2):hover em:nth-child(1) {
+    text-decoration: underline;
+}
+.header-wrap .connect .sub-menu .complete em {
+    color: #1daab9;
+    visibility: visible !important;
+}
+
+.table-typeB tr .copy.clipboard-btn i.img {
+    background-image: url('../style/image/ic-copy-address-pressed.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center !important;
+}
+
+.table-typeB .btn-scam {
+    font-size: 12px;
+    color: #808080;
+    height: 26px;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px #d9d9d9;
+    padding: 6px 18px;
+    font-weight: 400;
+    background-color: #ffffff;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    line-height: initial;
+}
+
+.table-box {
+    overflow: visible;
+}
+
+.contents .txt {
+    text-align: left;
+}
+
+.table-typeB tr i.img {
+    background-position: -50px 0;
+    width: 16px;
+    height: 16px;
+    margin-right: 0;
+}
+
+.table-typeB.transaction tr .trans {
+    padding: 10px 20px 10px;
+}
+
+.table-typeB td span {
+    margin-right: 6px;
+}
+
+.table-typeB.transaction span.copy.download:nth-of-type(1) {
+    margin-left: 4px;
+    padding: 4px;
+    background-image: url('../style/image/ic-download.png');
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+.table-typeB.transaction tr .trans.calen .img {
+    margin-right: 4px;
+}
+
+.table-typeN td:nth-child(7) {
+    text-align: center;
 }
