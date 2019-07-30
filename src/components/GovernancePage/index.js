@@ -5,6 +5,9 @@ import { numberWithCommas } from 'utils/utils'
 import { getPRepList, getIISSInfo } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepMain, prepSub, prepList, getPRep } from '../../redux/api/restV3/iiss';
+import {
+    LoadingComponent,
+} from 'components'
 
 class GovernancePage extends Component {
 
@@ -17,12 +20,15 @@ class GovernancePage extends Component {
 		rRep: 0,
 		height: 0,
 		stepPrice: 0,
-		checked: 'all',
+		mainChecked: false,
+		subChecked: false,
+		restChecked: true,
 		mainPrep: [],
 		subPrep: [],
 		allPrep: [],
 		lastBlockPrepName: "",
-		search: ''
+		search: '',
+		loading: true
 	}
 
 	async componentDidMount() {
@@ -51,6 +57,7 @@ class GovernancePage extends Component {
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		
 		this.setState({ 
+			loading: false,
 			totalCirculation, 
 			publicTreasury,
 			totalStaked,
@@ -70,7 +77,15 @@ class GovernancePage extends Component {
 		const { type, value } = e.target
 		switch(type) {
 			case 'checkbox':
-				this.setState({ checked: value })
+				if (value === 'main') {
+					this.setState({ mainChecked: !this.state.mainChecked })
+				}
+				else if (value === 'sub') {
+					this.setState({ subChecked: !this.state.subChecked })
+				}
+				else if (value === 'rest') {
+					this.setState({ restChecked: !this.state.restChecked })
+				}
 				return
 			case 'text':
 				this.setState({ search: value })
@@ -108,24 +123,31 @@ class GovernancePage extends Component {
 			rRep,
 			height,
 			stepPrice,
-			checked,
 			mainPrep,
 			subPrep,
 			allPrep,
 			lastBlockPrepName,
 			search,
+			loading,
+			mainChecked,
+			subChecked,
+			restChecked,
 		} = this.state
 
 		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation
 		const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation
 
-		const list = checked === 'main' ? mainPrep : checked === 'sub' ? subPrep : allPrep
-		const filtered = !search ? list : list.filter(prep => prep.name.includes(search) || prep.address.includes(search))
+		const list = allPrep.filter(p => {
+			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
+		})
+
+		const searched = !search ? list : list.filter(prep => prep.name.includes(search) || prep.address.includes(search))
 
 		return (
 			<div className="content-wrap governance">
 				<div className="screen0">
-					<div className="wrap-holder">
+					{loading && <LoadingComponent height='100%'/>}
+					{!loading && <div className="wrap-holder">
 						<p className="title">Governance<span><i className="img"></i>About Governance</span></p>
 						<div className="contents">
 							<div className="graph">
@@ -163,23 +185,24 @@ class GovernancePage extends Component {
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div>}
 				</div>
 				<div className="screen2">
-					<div className="wrap-holder">
+					{loading && <LoadingComponent height='500px'/>}
+					{!loading && <div className="wrap-holder">
 						<div className="contents">
 							<div className="search-group">
 								<span>
-									<input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={checked === 'main'} onChange={this.handleChange}/>
+									<input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({mainPrep.length})</label>
 								</span>						
 								<span>
-									<input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={checked === 'sub'} onChange={this.handleChange}/>
+									<input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({subPrep.length})</label>
 								</span>						
 								<span>
-									<input id="cbox-03" className="cbox-type" type="checkbox" name="all" value='all' checked={checked === 'all'} onChange={this.handleChange}/>
-									<label htmlFor="cbox-03" className="label _img">P-Rep ({allPrep.length})</label>
+									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
+									<label htmlFor="cbox-03" className="label _img">P-Rep ({allPrep.filter(p => p.grade === 2).length})</label>
 								</span>
 								{/* <span className="blacklist">
 									<input id="cbox-04" className="cbox-type" type="checkbox" name=""/>
@@ -215,7 +238,7 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
-										{filtered.map((prep, index) => {
+										{searched.map((prep, index) => {
 											const { 
 												name,
 												address,
@@ -227,7 +250,7 @@ class GovernancePage extends Component {
 												irep,
 												irepUpdateBlockHeight,
 												active,
-												logo
+												logo,
 											} = prep
 
 											const produced = totalBlocks
@@ -267,14 +290,8 @@ class GovernancePage extends Component {
 								</table>
 							</div>
 						</div>
-
-					</div>
+					</div>}
 				</div>
-
-
-
-
-
 			</div>
 		)
 	}
