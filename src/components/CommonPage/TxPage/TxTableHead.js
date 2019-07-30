@@ -6,6 +6,13 @@ class TxTableHead extends Component {
         const TableHead = _props => {
             const { txType } = _props
             switch (txType) {
+                case TX_TYPE.ADDRESS_DELEGATION:
+                    return (
+                        <tr>
+                            <th>P-Rep</th>
+                            <th>Voted</th>
+                        </tr>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>

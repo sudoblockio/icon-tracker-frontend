@@ -30,6 +30,8 @@ export async function getTrackerApiUrl() {
         return "https://bicon.tracker.solidwallet.io"
       case "custom":
         return "http://trackerlocaldev.icon.foundation"
+      case "prep":
+        return "http://54.180.29.194"
       default:
     }
   }
@@ -53,6 +55,8 @@ export async function getWalletApiUrl() {
         return "https://bicon.net.solidwallet.io"
       case "custom":
         return "http://13.209.103.183:9000"
+      case "prep":
+          return "http://20.20.7.156:9000"  
       default:
     }
   }
@@ -72,6 +76,7 @@ export async function getIsSoloVersion() {
       case "testnet":
       case "testnet1":
       case "custom":
+      case "prep":
         return false
       default:
     }

@@ -209,11 +209,12 @@ html, body{height: 100%;}
 .content-wrap .title .right.cont{margin:8px 375px 0 0;}
 .content-wrap .title span .mint{color:#1aaaba; font-weight: 600; }
 
-.content-wrap .title .connected{height: 26px; font-weight: 600; border-radius: 13px; background: #e6f8fa; padding: 7px 15px; color: #1aaaba; position: relative; top: -4px; margin-left: 20px;}
+.content-wrap .title .connected{height: 26px; font-weight: 600; border-radius: 13px; background: #e6f8fa; padding: 7px 15px; color: #1aaaba; position: relative; top: -4px; margin-left: 20px; top: 0;}
 .content-wrap .title .connected .img{background-position: -100px -250px; width: 14px; height: 9px; position: relative; top: 2px; left: auto;}
 .content-wrap .title .toggle{position: absolute; right: 0; color: #4d4d4d;font-weight: 600; top: 10px;}
-.content-wrap .title .toggle em:first-child{margin-right: 30px;}
+.content-wrap .title .toggle em:first-child{margin-right: 20px;}
 .content-wrap .title .toggle em span{margin-left: 4px;}
+.content-wrap .title .title-tag{height: 26px; font-weight: 600; border-radius: 13px; background: #e6f8fa; padding: 7px 15px; color: #1aaaba; position: relative; top: -4px; margin-left: 20px; top: -4px;}
 
 .content-wrap .wrap-holder > .title.token  .right .gray{color: #b3b3b3;font-weight: 400;}
 .content-wrap .wrap-holder > .title.token  span:first-child{font-size:24px; color: #4d4d4d; }
@@ -407,9 +408,10 @@ html, body{height: 100%;}
 .table-typeB tr.governance em{font-size: 10px; margin-right: 6px;color: #4d4d4d;}
 .table-typeB tr.governance span i{font-style: italic;}
 .table-typeB td sub{font-size: 8px; color: #4d4d4d; margin:0 6px 0 1px;font-weight: 400;}
+.table-typeB tr.governance sub{vertical-align: sub;}
 
 .table-typeB tr.p-rep{}
-.table-typeB tr.p-rep span:first-child{font-weight: 700;}
+.table-typeB tr.p-rep span:first-child *{font-weight: 700;}
 .table-typeB tr.p-rep span:first-child em{font-size: 18px; color: #4d4d4d;}
 .table-typeB tr.p-rep span:first-child em sub{font-size: 12px; margin-right: 10px;}
 .table-typeB tr.p-rep .active{position: absolute; right: 150px; top: 20px; color: #b3b3b3; font-weight: 700;}
@@ -674,6 +676,18 @@ html, body{height: 100%;}
 .table-typeC.it td:not(:nth-child(1)).icon .ellipsis{width:100px; }
 .table-typeC.it .parent{border-bottom: none;}
 
+.table-typeC.voter{}
+.table-typeC.voter th:nth-child(1){width:220px; }
+.table-typeC.voter th:nth-child(2){width:auto; }
+.table-typeC.voter th:nth-child(3){width: 220px;}
+.table-typeC.voter td:nth-child(1){text-align: center;}
+.table-typeC.voter td:nth-child(2){color: #4d4d4d; text-align: left; font-weight: 700; }
+.table-typeC.voter td:nth-child(3){color: #4d4d4d; text-align: right;}
+.table-typeC.voter td:nth-child(3).plus *{color: #1aaaba;}
+.table-typeC.voter td.on{color: #1aaaba !important;}
+.table-typeC.voter td .ellipsis{width:660px; color: #1aaaba; }
+.table-typeC.voter td .prep-tag{padding: 4px 15px;     vertical-align: top;}
+
 
 .table-typeD{}
 .notrans{text-align: center; vertical-align: middle; height: 78px; font-size: 12px; background: #f5f5f5;}
@@ -852,13 +866,11 @@ table.table-typeP th sub{font-size: 8px;margin:5px 0 0 2px;    display: inline-b
 
 .table-typeP col.add{width:60px;}
 .table-typeP col.rank{width:68px;}
-.table-typeP col.rank+col{width:270px; }
+.table-typeP col.rank+col{width:504px; }
 .table-typeP col.rank+col+col{width:138px; }
 .table-typeP col.rank+col+col+col{width:96px; }
-.table-typeP col.rank+col+col+col+col{width:94px; }
-.table-typeP col.rank+col+col+col+col+col{width:138px; }
-.table-typeP col.rank+col+col+col+col+col+col{width:108px; }
-.table-typeP col.rank+col+col+col+col+col+col+col{width:119px; }
+.table-typeP col.rank+col+col+col+col{width:108px; }
+.table-typeP col.rank+col+col+col+col+col{width:119px; }
 .table-typeP td{padding: 12px 14px 10px;}
 
 .table-typeP td.rank{font-size: 16px; font-weight: 700; text-align: center;}
@@ -869,17 +881,17 @@ table.table-typeP th sub{font-size: 8px;margin:5px 0 0 2px;    display: inline-b
 .table-typeP td.rank+td+td+td+td{text-align: right;}
 .table-typeP td.rank+td+td+td+td+td{text-align: right;}
 .table-typeP td.rank+td+td+td+td+td+td{text-align: right;}
-.table-typeP td.rank+td+td+td+td+td+td+td{text-align: right;}
-.table-typeP td.rank+td+td+td+td+td+td+td+td{text-align: right;}
-.table-typeP td.rank+td+td+td+td+td+td+td em{font-size: 11px; margin: 0; display: block; text-align: right;}
-.table-typeP td.rank+td+td+td+td+td+td+td+td em{font-size: 11px; margin: 0; display: block; text-align: right;}
+
+.table-typeP td.rank+td+td+td+td+td em{font-size: 11px; margin: 0; display: block; text-align: right;}
+.table-typeP td.rank+td+td+td+td+td+td em{font-size: 11px; margin: 0; display: block; text-align: right;}
+
 .table-typeP li {vertical-align: middle;}
 .table-typeP li em{display: block; margin: 0; font-size: 10px;color: #1aaaba; }
 .table-typeP .prep-tag{height: 18px;border-radius: 10px;background: #e6f8fa; font-size: 9px; color: #00a1b3; padding: 4px 10px 4px 6px; display: inline-block;}
 .table-typeP .prep-tag i{width: 6px; height: 6px; background: #1aaaba; border-radius: 50%; display: inline-block; margin-right: 6px;}
 .table-typeP .prep-tag.off{border: 1px solid  #d8edf0; background: #fff;}
 .table-typeP .prep-tag.off i{background: #fff; border: 1px solid #1aaaba;}
-.table-typeP .ellipsis{width: 134px;}
+.table-typeP .ellipsis{width: 390px;}
 .table-typeP .black .prep-tag{background: #ffedeb; color: #f24130; padding-left: 10px;}
 .table-typeP .black em{color: #f24130;}
 .table-typeP .add{display: none;}
@@ -1101,31 +1113,35 @@ input[type="text"]:focus.over {border: 1px solid #4d4d4d;}
 .content-wrap.governance .screen0 .contents .graph .txt{    margin: 0px 0 0 10px; text-align: left; padding: 0;}
 .content-wrap.governance .screen0 .contents .graph .txt span{float: none; margin-right: 20px;}
 .content-wrap.governance .screen0 .contents .graph .txt span i{width: 4px; height: 12px; background:red; margin-right: 8px; vertical-align: top;}
-.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(1) {color:#006199; }
+.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(3) {color:#006199; }
 .content-wrap.governance .screen0 .contents .graph .txt span:nth-child(2) {color:#00a1b3; }
-.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(3) {color:#4d4d4d; }
-.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(1) i{background:#006199; }
+.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(1) {color:#4d4d4d; }
+.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(3) i{background:#006199; }
 .content-wrap.governance .screen0 .contents .graph .txt span:nth-child(2) i{background:#00dbf2; }
-.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(3) i{background:#fff; }
+.content-wrap.governance .screen0 .contents .graph .txt span:nth-child(1) i{background:#fff; }
 
 
-.content-wrap.governance .screen0 .contents .graph .total{display: inline-block; position: absolute; right: 51px; top: 70px;  font-size: 12px; width: 168px;}
+.content-wrap.governance .screen0 .contents .graph .total{display: inline-block; position: absolute; right: 51px; top: 70px;  font-size: 12px; width: 223px;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(1){ font-weight: 600;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(2){font-weight: 300; margin-top: 18px;text-align: right;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(2) em{    position: absolute; bottom: 4px; left: 0;}
-.content-wrap.governance .screen0 .contents .graph .total p:nth-child(2) span{font-size: 18px; letter-spacing: -0.6px; font-weight: 400; height: 24px; display: inline-block;}
+.content-wrap.governance .screen0 .contents .graph .total p:nth-child(2) span{font-size: 24px; letter-spacing: -0.6px; font-weight: 400; height: 24px; display: inline-block;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(2) span.m{font-size: 27px;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(2) span.l{font-size: 25px;}
 .content-wrap.governance .screen0 .contents ul{font-size: 0;    padding: 0 23px;}
-.content-wrap.governance .screen0 .contents ul li{width: 20%; padding: 0 27px; position: relative;    vertical-align: top;}
+.content-wrap.governance .screen0 .contents ul li{width: 25%; padding: 0 27px; position: relative;    vertical-align: top;}
 .content-wrap.governance .screen0 .contents ul li p:first-child{font-size: 12px; font-weight: 600;}
 .content-wrap.governance .screen0 .contents ul li p:first-child span{height: 18px; border-radius: 10px; background-color: #0071b3; font-size: 9px; color: #fff; display: inline-block; padding: 5px 15px; float: right; }
 .content-wrap.governance .screen0 .contents ul li p:last-child{font-size: 12px; font-weight: 300; position: relative; text-align: right; margin-top: 16px;}
-.content-wrap.governance .screen0 .contents ul li p:last-child span{font-size: 18px; letter-spacing: -0.6px; font-weight: 400;    height: 24px; display: inline-block; }
+.content-wrap.governance .screen0 .contents ul li p:last-child span{font-size: 24px; letter-spacing: -0.6px; font-weight: 400;    height: 24px; display: inline-block; }
 .content-wrap.governance .screen0 .contents ul li p:last-child span.m{font-size: 27px;}
 .content-wrap.governance .screen0 .contents ul li p:last-child span.l{font-size: 25px;}
 .content-wrap.governance .screen0 .contents ul li p:last-child em{position: absolute; bottom: 4px; left: 0; }
 .content-wrap.governance .screen0 .contents ul li:not(:last-child):after{content: ""; position: absolute;  height: 50px; right: 0; top: 4px; border-right: 1px dotted #a1cce6;}
+.content-wrap.governance .screen0 .contents ul li:nth-child(1) p:first-child,
+.content-wrap.governance .screen0 .contents ul li:nth-child(2) p:first-child{    font-style: italic;}
+.content-wrap.governance .screen0 .contents ul li sub{vertical-align: sub;}
+
 .content-wrap.governance .screen1 {margin-top: 56px;}
 .content-wrap.governance .screen1 .wrap-holder,
 .content-wrap.governance.on .screen2 .wrap-holder{padding: 0 20px;}
@@ -1394,6 +1410,9 @@ input[type=checkbox]:checked + label {background-position-y: -200px; color: #fff
 .toggle [class ^="cbox-type"] + label {height: 20px; line-height: 18px; padding: 0 20px 0 27px; background-position: -300px -300px;     vertical-align: top;
     margin-top: -4px;}
 .toggle input[type=checkbox]:checked + label {background-position-y: -325px; }
+.toggle em.noti {margin-left: 20px;}
+.toggle em.noti i._img{width: 17px; height: 21px; background-position: -50px  -500px; position: relative; left: 0; vertical-align: top; margin-left: 5px;}
+.toggle em.noti input[type=checkbox]:checked + label + i._img{background-position-x:0; }
 
 /*banner*/
 .isBanner{}

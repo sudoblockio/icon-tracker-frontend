@@ -68,6 +68,10 @@ const actionTypes = {
   contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',
   contractTokenTxListRejected: 'CONTRACT_TOKEN_TX_LIST_REJECTED',
 
+  addressDelegationList: 'ADDRESS_DELEGATION_LIST',
+  addressDelegationListFulfilled: 'ADDRESS_DELEGATION_LIST_FULFILLED',
+  addressDelegationListRejected: 'ADDRESS_DELEGATION_LIST_REJECTED',
+
 
 
 

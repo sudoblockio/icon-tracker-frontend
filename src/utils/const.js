@@ -59,7 +59,7 @@ export const IRC_VERSION = {
 export const SORT_TYPE = [10, 25, 50, 100]
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
-export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers']
+export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Delegations']
 export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
@@ -111,6 +111,7 @@ export const SEARCH_TYPE_DATA = {
 }
 
 export const TX_TYPE = {
+    ADDRESS_DELEGATION: 'addressdelegation',
     ADDRESS_TX: 'addresstx',
     ADDRESS_INTERNAL_TX: 'addressinternaltx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
@@ -130,6 +131,12 @@ export const TX_TYPE = {
 }
 
 export const TX_TYPE_DATA = {
+    [TX_TYPE.ADDRESS_DELEGATION]: {
+        tx: 'addressDelegation',
+        getTxList: 'addressDelegationList',
+        className: 'table-typeC voter',
+        noBoxText: 'No Delegation',
+    },
     [TX_TYPE.ADDRESS_TX]: {
         tx: 'walletTx',
         getTxList: 'addressTxList',

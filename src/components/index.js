@@ -62,6 +62,8 @@ import Connect from './Header/Connect';
 
 import ReportButton from './CommonComponent/ReportButton'
 
+import GovernancePage from './GovernancePage'
+
 export {
   MainPage,
   InfoSummary,
@@ -123,5 +125,7 @@ export {
   Banner,
   Connect,
   
-  ReportButton
+  ReportButton,
+
+  GovernancePage
 }

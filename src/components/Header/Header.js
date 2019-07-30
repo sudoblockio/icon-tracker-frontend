@@ -73,12 +73,13 @@ class Header extends Component {
                                         </li>
                                     </ol>
                                 </li>
-                                {/* <li>
-                                    <span>ID</span>
-                                </li> */}
-                                {/* <li>
+                                <li
+                                    onClick={() => {
+                                        this.props.history.push('/governance')
+                                    }}
+                                >
                                     <span>Governance</span>
-                                </li> */}
+                                </li>
                             </ul>
                             <div className="link-right">
                                 <SearchBox {...this.props} />

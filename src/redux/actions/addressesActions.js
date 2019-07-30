@@ -35,3 +35,10 @@ export function addressTokenTxList(payload) {
   }
 }
 
+export function addressDelegationList(payload) {
+  return {
+    type: actionTypes.addressDelegationList,
+    payload
+  }
+}
+

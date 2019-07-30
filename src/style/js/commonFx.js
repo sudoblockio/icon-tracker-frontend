@@ -60,6 +60,12 @@ var createMenu = function(){
 		$(this).addClass("on");
 	});
 
+	// drop
+	$(".drop-btn").click(function(){
+		var _parent = $(this).parent().parent();
+		_parent.toggleClass("on");
+	});
+
 	// qrcode popup
 	$(".qrcode").click(function(){
 		$(".popup-wrap.qr").fadeIn(350);

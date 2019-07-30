@@ -68,7 +68,6 @@ class DetailPage extends Component {
 
     changeTab = (index) => {
         const { TABS, url } = this.props
-        console.log(TABS)
         const { pathname } = url
         this.props.history.push(`${pathname}#${noSpaceLowerCase(TABS[index])}`);
     }
@@ -80,7 +79,8 @@ class DetailPage extends Component {
         const Content = () => {
             if(pending){
                 return <PendingPage error={error}/>
-            } else if (isNotFoundPage) {
+            } 
+            else if (isNotFoundPage) {
                 return <NotFoundPage error={error}/>
             }
             else {

@@ -12,7 +12,6 @@ class Popup extends Component {
         const { type: current } = this.props
         const { type: next } = nextProps
 
-        console.log(nextProps)
         if (current === '' && next !== '') {
             this.openPopup(next)
         }
@@ -40,7 +39,6 @@ class Popup extends Component {
         this.props.initPopup()
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: '' } }))
     }
-
     closeDetail = () => {
         this.props.initPopup()
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'detail' } }))

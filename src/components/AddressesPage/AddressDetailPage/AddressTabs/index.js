@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AddressTransactions from './AddressTransactions'
 import AddressInternalTransactions from './AddressInternalTransactions'
 import AddressTokenTransfers from './AddressTokenTransfers'
+import AddressDelegation from './AddressDelegation'
 import {
     TX_TYPE,
     ADDRESS_TABS,
@@ -14,10 +15,10 @@ import {
 
 class WalletTabs extends Component {
     render() {
-        const { on, wallet, walletTx, addressInternalTx, walletTokenTx } = this.props
+        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation } = this.props
         const { loading, data } = wallet
         const { address, tokenList, internalTxCount } = data
-        
+
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
         if (internalTxCount && Number(internalTxCount) !== 0) {
@@ -26,6 +27,7 @@ class WalletTabs extends Component {
         if (tokenList && tokenList.length !== 0) {
             TABS.push(ADDRESS_TABS[2])
         }
+        TABS.push(ADDRESS_TABS[3])
 
         return (
             <TabTable
@@ -37,33 +39,41 @@ class WalletTabs extends Component {
                     switch (TABS[on]) {
                         case ADDRESS_TABS[0]:
                             return (
-                                <AddressTransactions 
-                                    txData={walletTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`)}} 
-                                    txType={TX_TYPE.ADDRESS_TX} 
-                                    address={address} 
+                                <AddressTransactions
+                                    txData={walletTx}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`) }}
+                                    txType={TX_TYPE.ADDRESS_TX}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[1]:
                             return (
-                                <AddressInternalTransactions 
-                                    txData={addressInternalTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`)}} 
-                                    txType={TX_TYPE.ADDRESS_INTERNAL_TX} 
-                                    address={address} 
+                                <AddressInternalTransactions
+                                    txData={addressInternalTx}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`) }}
+                                    txType={TX_TYPE.ADDRESS_INTERNAL_TX}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[2]:
                             return (
-                                <AddressTokenTransfers 
-                                    txData={walletTokenTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`)}} 
-                                    txType={TX_TYPE.ADDRESS_TOKEN_TX} 
-                                    address={address} 
+                                <AddressTokenTransfers
+                                    txData={walletTokenTx}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`) }}
+                                    txType={TX_TYPE.ADDRESS_TOKEN_TX}
+                                    address={address}
+                                />
+                            )
+                        case ADDRESS_TABS[3]:
+                            return (
+                                <AddressDelegation
+                                    txData={addressDelegation}
+                                    txType={TX_TYPE.ADDRESS_DELEGATION}
+                                    address={address}
                                 />
                             )
                         default:
-                            return <NoBox text="No Data"/>
+                            return <NoBox text="No Data" />
                     }
                 }}
             />

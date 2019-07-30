@@ -13,7 +13,7 @@ class AddressesDetailPage extends Component {
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount} = data
+        const { tokenList, internalTxCount } = data
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
@@ -31,6 +31,10 @@ class AddressesDetailPage extends Component {
                 this.props.addressTokenTxList({ address, page: 1, count: 10 })
             })
         }
+        TABS.push(ADDRESS_TABS[3])
+        getList.push(address => {
+            this.props.addressDelegationList({ address })
+        })
         return (
             <DetailPage
                 {...this.props}

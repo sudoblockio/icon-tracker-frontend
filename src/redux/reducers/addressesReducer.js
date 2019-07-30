@@ -13,6 +13,7 @@ const initialState = {
   walletTx: INITIAL_STATE['ARR'],
   addressInternalTx: INITIAL_STATE['ARR'],
   walletTokenTx: INITIAL_STATE['ARR'],
+  addressDelegation: INITIAL_STATE['ARR'],
 }
 
 export function addressesReducer(state = initialState, action) {
@@ -36,6 +37,10 @@ export function addressesReducer(state = initialState, action) {
     case actionTypes.addressTokenTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'walletTokenTx') 
     case actionTypes.addressTokenTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'walletTokenTx') 
     case actionTypes.addressTokenTxListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'walletTokenTx')
+
+    case actionTypes.addressDelegationList: return getState('ARR', REDUX_STEP.READY, state, action, 'addressDelegation') 
+    case actionTypes.addressDelegationListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'addressDelegation') 
+    case actionTypes.addressDelegationListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'addressDelegation')
 
     default: {
       return state

@@ -267,7 +267,6 @@ export function getObjectState(step, state, action, dataType) {
         case REDUX_STEP.FULFILLED:
             const { payload } = action
             const { data } = payload
-            console.log(data)
             return {
                 ...state,
                 [dataType]: {
@@ -532,4 +531,20 @@ export function convertEngineToTracker(resultData, byHashData) {
     })
 
     return result
+}
+
+export function convertLoopToIcxDecimal(loop) {
+    return IconAmount.of(loop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString()
+}
+
+export function getBadgeTitle(grade) {
+    switch (grade) {
+        case '0x0':
+            return 'Main P-Rep'
+        case '0x1':
+            return 'Sub P-Rep'
+        case '0x2':
+        default:
+            return 'P-Rep'
+    }
 }

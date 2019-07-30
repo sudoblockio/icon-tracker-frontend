@@ -4,6 +4,9 @@ import BigNumber from 'bignumber.js'
 import { numberWithCommas, convertNumberToText, isValidNodeType, searchLowerCase, isValidData } from 'utils/utils'
 import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'components'
 import NotificationManager from 'utils/NotificationManager'
+import { getStake, queryIScore, getBalance, getPRep, prepList } from '../../../redux/api/restV3/iiss';
+import { IconConverter, IconAmount } from 'icon-sdk-js'
+import { convertLoopToIcxDecimal, getBadgeTitle } from '../../../utils/utils';
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -12,6 +15,49 @@ class AddressInfo extends Component {
         super(props)
         this.state = {
             notification: _isNotificationAvailable && this.props.walletNotification,
+            available: 0,
+            staked: 0,
+            unstaked: 0,
+            iscore: 0,
+            delegated: 0,
+            icxMore: false,
+            tokenMore: false,
+            prep: {},
+            active: true
+        }
+    }
+
+    async componentWillReceiveProps(nextProps) {
+        const { address: prev } = this.props.wallet.data
+        const { address: next } = nextProps.wallet.data
+        
+        if (!prev && next) {
+            const address = next
+            const balance = await getBalance(address)
+            const { stake, unstake } = await getStake(address)
+            const { iscore } = await queryIScore(address)
+            const { totalDelegated } = await queryIScore(address)
+            const prep = await getPRep(address)
+            const _prepList = await prepList()
+            const _prep = (_prepList || []).filter(p => p.address === address)[0]
+            const { active } = _prep || {}
+            
+            const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
+            const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
+            const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
+            const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
+            const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
+            
+            this.setState({
+                available: _balance,
+                staked: _stake,
+                unstaked: _unstake,
+                iscore: _iscore,
+                delegated: _totalDelegated,
+                prep,
+                active
+            })
+
         }
     }
 
@@ -33,14 +79,54 @@ class AddressInfo extends Component {
         })
     }
 
+    toggleIcxMore = () => {
+        this.setState({ icxMore: !this.state.icxMore })
+    }
+
+    toggleTokenMore = () => {
+        this.setState({ tokenMore: !this.state.tokenMore })
+    }
+
+    goBlock = height => {
+        window.open('/block/' + height, '_blank')
+    }
+
     render() {
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
+        const isPrep = Object.keys(this.state.prep).length !== 0
+
+        const { 
+            name,
+            totalBlocks,
+            validatedBlocks,
+            stake,
+            delegated,
+            irep,
+            irepUpdateBlockHeight,
+            lastGenerateBlockHeight,
+            website,
+            grade
+        } = this.state.prep
+
+        const produced = IconConverter.toNumber(totalBlocks)
+        const validated = IconConverter.toNumber(validatedBlocks)
+        const missed = produced - validated
+        const productivity = !produced ? '-' : `${(validated / produced * 100).toFixed(2)}%`
+
+        const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
+        const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
+        const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
+
+        const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
+
+        const badge = getBadgeTitle(grade)
 
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
-            } else {
+            }
+            else {
                 const { address, nodeType, balance, icxUsd, txCount, tokenList, reportedCount } = data
                 const _address = !!address ? address : error
                 const isConnected = walletAddress === _address
@@ -53,7 +139,7 @@ class AddressInfo extends Component {
                         <div className="wrap-holder">
                             {isConnected ? (
                                 <p className="title">
-                                    My Address
+                                    My Address{isPrep && <span className="title-tag">{badge}</span>}
                                     <span className="connected">
                                         <i className="img" />Connected to ICONex
                                     </span>
@@ -73,8 +159,8 @@ class AddressInfo extends Component {
                                     </span>
                                 </p>
                             ) : (
-                                <p className="title">Address</p>
-                            )}
+                                    <p className="title">Address{isPrep && <span className="title-tag">{badge}</span>}</p>
+                                )}
                             <div className="contents">
                                 <div className="table-box">
                                     <table className="table-typeB address">
@@ -85,9 +171,44 @@ class AddressInfo extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {isPrep && <tr className="p-rep">
+                                                <td>Name</td>
+                                                <td colSpan="3">
+                                                    <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
+                                                    <span className="home" onClick={() => {
+                                                        window.open(website, '_blank')
+                                                    }}><i className="img"></i></span>
+                                                    {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
+                                                    <span className={`active ${this.state.active ? 'on' : 'off'}`}><i></i>{this.state.active ? 'Active' : 'Inactive'}</span>
+                                                    {/* <span className="btn-scam">Go to Voting</span> */}
+                                                </td>
+                                            </tr>}
+                                            {isPrep && <tr className="">
+                                                <td>Total Votes</td>
+                                                <td colSpan="3"><span>{numberWithCommas(totalVotes)}{/* <em>( 90.02 % )</em> */}</span></td>
+                                                {/* <td>24h Change Amount</td>
+                                                <td><span>▲  900,000,000.0004</span></td> */}
+                                            </tr>}
+                                            {isPrep && <tr className="last">
+                                                <td>Productivity (Produced / Missed)</td>
+                                                <td><span>{productivity}<em>( {numberWithCommas(produced)} / {numberWithCommas(missed)} )</em></span></td>
+                                                <td>Last Producted</td>
+                                                {_lastGenerateBlockHeight === '-' ?
+                                                    <td><span>-</span></td>
+                                                :
+                                                    <td><span className="mint" onClick={()=>{this.goBlock(_lastGenerateBlockHeight)}}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
+                                                }
+                                            </tr>}
+                                            {isPrep && <tr className="governance">
+                                                <td>Governance variables</td>
+                                                <td colSpan="3">
+                                                    <span><i>i<sub>- rep</sub></i>{numberWithCommas(_irep)}</span>
+                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdateBlockHeight)}}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
+                                                </td>
+                                            </tr>}
                                             <tr className="">
                                                 <td>Address</td>
-                                                <td className={scam ? 'scam' : ''}>
+                                                <td colSpan={isPrep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {_address} <QrCodeButton address={_address} />
                                                     <CopyButton data={_address} title={'Copy Address'} isSpan />
@@ -97,19 +218,37 @@ class AddressInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Balance</td>
-                                                <td>
+                                                {/* <td>
                                                     {`${convertNumberToText(balance)} ICX`}
                                                     <span className="gray">{`(${convertNumberToText(icxUsd, 3)} USD)`}</span>
+                                                </td> */}
+                                                <td colSpan="3" className="balance">
+                                                    <div className={this.state.icxMore ? 'on' : ''}>
+                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
+                                                        <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
+                                                        <p><span>Staked</span><span><em>{(this.state.staked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Unstaked</span><span><em>{(this.state.unstaked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Delegated</span><span><em>{(this.state.delegated / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
+                                                        <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I_SCORE</em></span></p>
+
+                                                    </div>
+                                                    <div className={this.state.tokenMore ? 'on' : ''}>
+                                                        <p><span><i className="coin"></i>Token</span><span>{(tokenList || []).length}<em>Tokens</em></span><em className="drop-btn" onClick={this.toggleTokenMore}><i className="img"></i></em></p>
+                                                        {(tokenList || []).map((token, index) => {
+                                                            const { contractName, contractSymbol, quantity } = token
+                                                            return <p key={index}><span>{contractName}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span></p>
+                                                        })}
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {/* <tr>
                                                 <td>No of Txns</td>
                                                 <td>{`${numberWithCommas(txCount)}`}</td>
-                                            </tr>
-                                            <tr>
+                                            </tr> */}
+                                            {/* <tr>
                                                 <td>Token Balance</td>
                                                 <TokenBalance tokenList={tokenList} />
-                                            </tr>
+                                            </tr> */}
                                         </tbody>
                                     </table>
                                 </div>
@@ -163,7 +302,8 @@ class TokenBalance extends Component {
         const TableData = _tokenList => {
             if (_tokenList.length === 0) {
                 return <td>None</td>
-            } else {
+            } 
+            else {
                 const { search } = this.state
                 const list = _tokenList.filter(token => {
                     const { contractName, contractSymbol } = token
@@ -192,30 +332,30 @@ class TokenBalance extends Component {
                                 {list.length === 0 ? (
                                     <p className="nodata">No result found</p>
                                 ) : (
-                                    <div className="scroll">
-                                        <ul className="list-group">
-                                            {list.map((token, index) => {
-                                                const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
-                                                return (
-                                                    <li key={index}>
-                                                        <p>
-                                                            <em>{contractName}</em>
-                                                            <em>{totalTokenPrice ? convertNumberToText(totalTokenPrice, 3) : '-'}</em>
-                                                            <em>USD</em>
-                                                        </p>
-                                                        <p>
-                                                            <em>
-                                                                {quantity} {contractSymbol}
-                                                            </em>
-                                                            <em>{tokenPrice ? convertNumberToText(tokenPrice, 3) : '-'}</em>
-                                                            <em>@</em>
-                                                        </p>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                )}
+                                        <div className="scroll">
+                                            <ul className="list-group">
+                                                {list.map((token, index) => {
+                                                    const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
+                                                    return (
+                                                        <li key={index}>
+                                                            <p>
+                                                                <em>{contractName}</em>
+                                                                <em>{totalTokenPrice ? convertNumberToText(totalTokenPrice, 3) : '-'}</em>
+                                                                <em>USD</em>
+                                                            </p>
+                                                            <p>
+                                                                <em>
+                                                                    {quantity} {contractSymbol}
+                                                                </em>
+                                                                <em>{tokenPrice ? convertNumberToText(tokenPrice, 3) : '-'}</em>
+                                                                <em>@</em>
+                                                            </p>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </div>
+                                    )}
                             </div>
                         </div>
                     </td>

@@ -445,3 +445,38 @@
 .table-typeN td:nth-child(7) {
     text-align: center;
 }
+
+.content-wrap.governance .screen0 .contents ul li{width: 25%;}
+
+.content-wrap.governance .search-group input[type=checkbox] + label{ margin-right: 5px; }
+
+.table-typeP td.rank+td+td em{text-align: center}
+
+.table-typeB td.balance{padding: 0 20px;}
+
+.table-typeP .pointer{cursor: pointer;}
+
+.table-typeB .governance .mint,
+.table-typeB .last .mint { cursor: pointer; }
+
+.table-typeC.voter{}
+/* .table-typeC.voter th:nth-child(1){width:220px; } */
+.table-typeC.voter th:nth-child(1){width: auto; }
+.table-typeC.voter th:nth-child(2){width: 220px;}
+/* .table-typeC.voter td:nth-child(1){text-align: center;} */
+.table-typeC.voter td:nth-child(1){color: #4d4d4d; text-align: left; font-weight: 700; }
+.table-typeC.voter td:nth-child(2){color: #4d4d4d; text-align: right;}
+.table-typeC.voter td:nth-child(2).plus *{color: #1aaaba;}
+.table-typeC.voter td.on{color: #1aaaba !important;  cursor: pointer;}
+.table-typeC.voter td .ellipsis{width:660px; color: #1aaaba;}
+.table-typeC.voter td .prep-tag{padding: 4px 15px;     vertical-align: top;}
+
+.table-typeP .ellipsis{width: 355px;}
+.table-typeP td.on img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.table-typeB tr.p-rep .active{ right: 20px; }
+.table-typeB tr.p-rep .active i{ right: 20px; }

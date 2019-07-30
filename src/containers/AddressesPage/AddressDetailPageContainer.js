@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { AddressDetailPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
+  addressDelegationList,
   addressInfo,
   addressTxList,
   addressInternalTxList,
@@ -25,6 +26,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    addressDelegationList: (payload) => dispatch(addressDelegationList(payload)),
     addressInfo: (payload) => dispatch(addressInfo(payload)),
     addressTxList: (payload) => dispatch(addressTxList(payload)),
     addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),
