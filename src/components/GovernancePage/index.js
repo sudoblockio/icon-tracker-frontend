@@ -187,11 +187,11 @@ class GovernancePage extends Component {
 							</div>
 							<ul>
 								<li>
-									<p>i<sub>-rep</sub></p>
+									<p>i<sub>rep</sub></p>
 									<p><em>ICX</em><span>{numberWithCommas(irep)}</span></p>
 								</li>
 								<li>
-									<p>r<sub>-rep</sub></p>
+									<p>r<sub>rep</sub></p>
 									<p><em>ICX</em><span>{numberWithCommas(rrep)}</span></p>
 								</li>
 								{/* <li>
@@ -250,13 +250,13 @@ class GovernancePage extends Component {
 											<th rowSpan="2" className="add">Add</th>
 											<th rowSpan="2" className="rank"><span className="sort">Rank ↓</span></th>
 											<th rowSpan="2">Name</th>
-											<th rowSpan="2">Productivity<em>Produced / Missed</em></th>
+											<th rowSpan="2">Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
 											<th colSpan="2">Governance Variables</th>
 											<th rowSpan="2">Staked</th>
 											<th rowSpan="2">Total Votes</th>
 										</tr>
 										<tr>
-											<th className="italic"><em>i<sub>-rep</sub></em></th>
+											<th className="italic"><em>i<sub>rep</sub></em></th>
 											<th><em>Last updated</em></th>
 										</tr>
 									</thead>
@@ -277,10 +277,6 @@ class GovernancePage extends Component {
 												rank
 											} = prep
 
-											console.log(rank)
-
-											const produced = totalBlocks
-											const missed = totalBlocks - validatedBlocks
 											const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 											const prepStaked = IconConverter.toNumber(stake || 0)
@@ -304,7 +300,7 @@ class GovernancePage extends Component {
 															</li>
 														</ul>
 													</td>
-													<td><span>{productivity}</span><em>{numberWithCommas(produced)} / {numberWithCommas(missed)}</em></td>
+													<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
 													<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
 													<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdateBlockHeight))}</span></td>
 													<td><span>{stakedRate.toFixed(1)}%</span><em>{numberWithCommas(prepStaked)}</em></td>

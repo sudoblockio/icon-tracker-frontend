@@ -23,7 +23,7 @@ class AddressInfo extends Component {
             icxMore: false,
             tokenMore: false,
             prep: {},
-            active: false,
+            active: 'N/A',
             media: {},
             prepLoading: true,
         }
@@ -59,9 +59,6 @@ class AddressInfo extends Component {
                 prepLoading: false
             })
         }
-        else {
-            this.setState({ prepLoading: false })
-        }
     }
 
     checkRepJson = async details => {
@@ -88,12 +85,16 @@ class AddressInfo extends Component {
 
         if (server) {
             const { api_endpoint } = server
+            if (!api_endpoint) {
+                return
+            }
+
             try {
                 const response = await fetch(api_endpoint)
                 const { status } = response
                 console.log(status)
                 if (status === 200) {
-                    this.setState({ active: true })
+                    this.setState({ active: 'Active' })
                 }
                 else {
                     throw new Error(status)
@@ -101,7 +102,7 @@ class AddressInfo extends Component {
             }
             catch(e) {
                 console.log(e)
-                this.setState({ active: false })
+                this.setState({ active: 'Inactive' })
             }
         }
     }
@@ -168,7 +169,6 @@ class AddressInfo extends Component {
 
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
-        const missed = produced - validated
         const productivity = !produced ? '-' : `${(validated / produced * 100).toFixed(2)}%`
 
         const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
@@ -243,7 +243,7 @@ class AddressInfo extends Component {
                                                     {wechat && <span className="wechat" onClick={() => { window.open(wechat, 'wechat') }}><i className="img"></i></span>}
                                                     {youtube && <span className="youtube" onClick={() => { window.open(youtube, '_blank') }}><i className="img"></i></span>}
                                                     {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
-                                                    <span className={`active ${this.state.active ? 'on' : 'off'}`}><i></i>{this.state.active ? 'Active' : 'Inactive'}</span>
+                                                    <span className={`active ${this.state.active === 'Active' ? 'on' : 'off'}`}><i></i>{this.state.active}</span>
                                                     {/* <span className="btn-scam">Go to Voting</span> */}
                                                 </td>
                                             </tr>}
@@ -254,9 +254,9 @@ class AddressInfo extends Component {
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                             </tr>}
                                             {isPrep && <tr className="last">
-                                                <td>Productivity (Produced / Missed)</td>
-                                                <td><span>{productivity}<em>( {numberWithCommas(produced)} / {numberWithCommas(missed)} )</em></span></td>
-                                                <td>Last Producted</td>
+                                                <td>Productivity<br/>(Produced / (Produced + Missed))</td>
+                                                <td><span>{productivity}<em>( {numberWithCommas(validated)} / {numberWithCommas(produced)} )</em></span></td>
+                                                <td>Last Blockheight</td>
                                                 {_lastGenerateBlockHeight === '-' ?
                                                     <td><span>-</span></td>
                                                 :
@@ -266,7 +266,7 @@ class AddressInfo extends Component {
                                             {isPrep && <tr className="governance">
                                                 <td>Governance variables</td>
                                                 <td colSpan="3">
-                                                    <span><i>i<sub>- rep</sub></i>{numberWithCommas(_irep)}</span>
+                                                    <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
                                                     <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdateBlockHeight)}}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
                                                 </td>
                                             </tr>}
