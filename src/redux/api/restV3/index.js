@@ -58,7 +58,7 @@ import{
 } from './report';
 
 import{
-    getPRepList,
+    getPReps,
     getIISSInfo,
     getDelegation
 } from './iiss';
@@ -105,7 +105,7 @@ export {
 
     reportScam,
 
-    getPRepList,
+    getPReps,
     getIISSInfo,
     getDelegation
 }

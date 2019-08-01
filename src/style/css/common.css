@@ -419,10 +419,18 @@ html, body{height: 100%;}
 .table-typeB tr.p-rep .active.on{color:#09a4b5; }
 .table-typeB tr.p-rep .active.on i{background:#09a4b5; }
 .table-typeB tr.p-rep i.img{width: 26px; height: 26px; top: 0; margin-right: 6px; cursor: pointer;}
-.table-typeB tr.p-rep .home i{background-position: 0 -400px; margin-left: 11px;}
-.table-typeB tr.p-rep .email i{background-position: -50px -400px;}
-.table-typeB tr.p-rep .twitter i{background-position: -100px -400px;}
-.table-typeB tr.p-rep i:hover{background-position-y:-450px;}
+.table-typeB tr.p-rep .home i{background-position: 0 -550px; margin-left: 11px;}
+.table-typeB tr.p-rep .email i{background-position: -25px -550px;}
+.table-typeB tr.p-rep .twitter i{background-position: -50px -550px;}
+.table-typeB tr.p-rep .facebook i{background-position: -75px -550px;}
+.table-typeB tr.p-rep .github i{background-position: -100px -550px;}
+.table-typeB tr.p-rep .telegram i{background-position: -125px -550px;}
+.table-typeB tr.p-rep .reddit i{background-position: -150px -550px;}
+.table-typeB tr.p-rep .steemit i{background-position: -175px -550px;}
+.table-typeB tr.p-rep .youtube i{background-position: -200px -550px;}
+.table-typeB tr.p-rep .keybase i{background-position: -225px -550px;}
+.table-typeB tr.p-rep .wechat i{background-position: -250px -550px;}
+.table-typeB tr.p-rep i:hover{background-position-y:-575px;}
 .table-typeB tr .small{font-size: 10px;} 
 
 
@@ -677,13 +685,12 @@ html, body{height: 100%;}
 .table-typeC.it .parent{border-bottom: none;}
 
 .table-typeC.voter{}
-.table-typeC.voter th:nth-child(1){width:220px; }
-.table-typeC.voter th:nth-child(2){width:auto; }
-.table-typeC.voter th:nth-child(3){width: 220px;}
-.table-typeC.voter td:nth-child(1){text-align: center;}
-.table-typeC.voter td:nth-child(2){color: #4d4d4d; text-align: left; font-weight: 700; }
-.table-typeC.voter td:nth-child(3){color: #4d4d4d; text-align: right;}
-.table-typeC.voter td:nth-child(3).plus *{color: #1aaaba;}
+/*.table-typeC.voter th:nth-child(1){width:220px; }*/
+.table-typeC.voter th:nth-child(1){width:auto; }
+.table-typeC.voter th:nth-child(2){width: 300px;}
+.table-typeC.voter td:nth-child(1){color: #4d4d4d; text-align: left; font-weight: 700; }
+.table-typeC.voter td:nth-child(2){color: #4d4d4d; text-align: right;}
+.table-typeC.voter td:nth-child(2).plus *{color: #1aaaba;}
 .table-typeC.voter td.on{color: #1aaaba !important;}
 .table-typeC.voter td .ellipsis{width:660px; color: #1aaaba; }
 .table-typeC.voter td .prep-tag{padding: 4px 15px;     vertical-align: top;}

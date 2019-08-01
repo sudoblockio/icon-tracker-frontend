@@ -26,7 +26,7 @@ class InfoSummary extends Component {
                 </li>
                 <li>
                     <p className="subTitle">ICX Supply</p>
-                    <p className="num b">{numberWithCommas(icxSupply)}</p>
+                    <p className="num b">{convertNumberToText(icxSupply, 0)}</p>
                 </li>
                 <li>
                     <p className="subTitle">ICX Circulation</p>

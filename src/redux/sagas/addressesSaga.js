@@ -7,7 +7,7 @@ import {
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
-  getPRepList,
+  getPReps,
 } from '../api/restV3';
 
 export default function* addressesSaga() {
@@ -32,7 +32,7 @@ export function* addressDelegationListFunc(action) {
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
     const { delegations } = payload
     if (delegations) {
-      const { preps } = yield call(getPRepList)
+      const { preps } = yield call(getPReps)
       const data = delegations.map(prep => {
         const { address, value } = prep
         const searched = { ...preps.filter(p => p.address === address)[0] }

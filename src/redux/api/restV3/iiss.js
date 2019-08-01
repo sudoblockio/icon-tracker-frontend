@@ -1,7 +1,7 @@
 import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from 'utils/utils'
 
-export async function getPRepList() {
+export async function getPReps() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -13,7 +13,7 @@ export async function getPRepList() {
                 "to": "cx0000000000000000000000000000000000000000",
                 "dataType": "call",
                 "data": {
-                    "method": 'getPRepList',
+                    "method": 'getPReps',
                 }
             }
         }
@@ -177,7 +177,14 @@ export async function prepMain() {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/prep/main`, { count: 100 }))
             .then(result => {
-                resolve(result.data.data)
+                const { data } = result.data
+                const _data = data.map((item, index) => {
+                    if (!item.rank) {
+                        item.rank = index + 1
+                    }
+                    return item
+                })
+                resolve(_data)
             })
             .catch(error => {
                 reject(error)
@@ -190,7 +197,14 @@ export async function prepSub() {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/prep/sub`, { count: 100 }))
             .then(result => {
-                resolve(result.data.data)
+                const { data } = result.data
+                const _data = data.map((item, index) => {
+                    if (!item.rank) {
+                        item.rank = index + 1
+                    }
+                    return item
+                })
+                resolve(_data)
             })
             .catch(error => {
                 reject(error)
@@ -198,12 +212,23 @@ export async function prepSub() {
     })
 }
 
-export async function prepList(payload) {
+export async function prepList(grade) {
     const trackerApi = await trackerApiInstance()
+    const payload = { count: 500 }
+    if (grade) {
+        payload.grade = grade
+    }
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/prep/list`, { count: 200 }))
+        trackerApi.get(makeUrl(`/v3/iiss/prep/list`, payload))
             .then(result => {
-                resolve(result.data.data)
+                const { data } = result.data
+                const _data = (data || []).map((item, index) => {
+                    if (!item.rank) {
+                        item.rank = index + 1
+                    }
+                    return item
+                })
+                resolve(_data)
             })
             .catch(error => {
                 reject(error)

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { getMainInfo } from '../../redux/api/restV3/main';
-import { numberWithCommas } from 'utils/utils'
-import { getPRepList, getIISSInfo } from '../../redux/api/restV3';
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from 'utils/utils'
+import { getPReps, getIISSInfo } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepMain, prepSub, prepList, getPRep } from '../../redux/api/restV3/iiss';
 import {
@@ -16,16 +16,16 @@ class GovernancePage extends Component {
 		publicTreasury: 0,
 		totalStaked: 0,
 		totalVoted: 0,
-		iRep: 0,
-		rRep: 0,
+		irep: 0,
+		rrep: 0,
 		height: 0,
 		stepPrice: 0,
-		mainChecked: false,
+		mainChecked: true,
 		subChecked: false,
-		restChecked: true,
-		mainPrep: [],
-		subPrep: [],
+		restChecked: false,
+		blackChecked: false,
 		allPrep: [],
+		blackPrep: [],
 		lastBlockPrepName: "",
 		search: '',
 		loading: true
@@ -33,27 +33,24 @@ class GovernancePage extends Component {
 
 	async componentDidMount() {
 		const { tmainInfo } = await getMainInfo()
-		const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepList()		
+		const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
-		const _mainPrep = await prepMain()
-		const _subPrep = await prepSub()
 		const _allPrep = await prepList()
+		const _blackPrep = await prepList(3)
 		const { name: lastBlockPrepName } = await getPRep(peer_id)
 
 		const { icxCirculationy, publicTreasury } = tmainInfo || {}
-		const { irep, rrep } = variable || {}
 		const { height, peer_id } = lastBlock || {}
-		const mainPrep = _mainPrep || []
-		const subPrep = _subPrep || []
 		const allPrep = _allPrep || []
+		const blackPrep = _blackPrep || []
 		
 		const totalCirculation = Number(icxCirculationy || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-		const iRep = IconConverter.toNumber(irep || 0)
-		const rRep = IconConverter.toNumber(rrep || 0)
+		const irep = convertLoopToIcxDecimal((variable || {}).irep || 0)
+		const rrep = IconConverter.toNumber((variable || {}).rrep || 0)
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		
 		this.setState({ 
@@ -62,13 +59,12 @@ class GovernancePage extends Component {
 			publicTreasury,
 			totalStaked,
 			totalVoted,
-			iRep,
-			rRep,
+			irep,
+			rrep,
 			height,
 			stepPrice,
-			mainPrep,
-			subPrep,
 			allPrep,
+			blackPrep,
 			lastBlockPrepName
 		})
 	}
@@ -78,13 +74,40 @@ class GovernancePage extends Component {
 		switch(type) {
 			case 'checkbox':
 				if (value === 'main') {
-					this.setState({ mainChecked: !this.state.mainChecked })
+					this.setState({ 
+						mainChecked: !this.state.mainChecked,
+						blackChecked: false,
+					})
 				}
 				else if (value === 'sub') {
-					this.setState({ subChecked: !this.state.subChecked })
+					this.setState({ 
+						subChecked: !this.state.subChecked,
+						blackChecked: false,
+					})
 				}
 				else if (value === 'rest') {
-					this.setState({ restChecked: !this.state.restChecked })
+					this.setState({ 
+						restChecked: !this.state.restChecked,
+						blackChecked: false,
+					})
+				}
+				else if (value === 'black') {
+					if (this.state.blackChecked) {
+						this.setState({ 
+							blackChecked: false,
+							mainChecked: true,
+							subChecked: false,
+							restChecked: false
+						})	
+					}
+					else {
+						this.setState({ 
+							blackChecked: true,
+							mainChecked: false,
+							subChecked: false,
+							restChecked: false
+						})	
+					}
 				}
 				return
 			case 'text':
@@ -119,19 +142,19 @@ class GovernancePage extends Component {
 			publicTreasury,
 			totalStaked,
 			totalVoted,
-			iRep,
-			rRep,
+			irep,
+			rrep,
 			height,
 			stepPrice,
-			mainPrep,
-			subPrep,
 			allPrep,
+			blackPrep,
 			lastBlockPrepName,
 			search,
 			loading,
 			mainChecked,
 			subChecked,
 			restChecked,
+			blackChecked
 		} = this.state
 
 		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation
@@ -151,7 +174,7 @@ class GovernancePage extends Component {
 						<p className="title">Governance<span><i className="img"></i>About Governance</span></p>
 						<div className="contents">
 							<div className="graph">
-								<div className="txt"><span><i className="img"></i>Total Circulation : {numberWithCommas(totalCirculation)}</span><span><i className="img"></i>Staked : {numberWithCommas(totalStaked)}</span><span><i className="img"></i>Voted : {numberWithCommas(totalVoted)}</span></div>
+								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
 								<div className="bar-group">
 									<div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
 									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
@@ -159,17 +182,17 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury</p>
-									<p><em>ICX</em><span>{numberWithCommas(publicTreasury)}</span></p>
+									<p><em>ICX</em><span>{convertNumberToText(publicTreasury, 0)}</span></p>
 								</div>
 							</div>
 							<ul>
 								<li>
 									<p>i<sub>-rep</sub></p>
-									<p><em>ICX</em><span>{numberWithCommas(iRep)}</span></p>
+									<p><em>ICX</em><span>{numberWithCommas(irep)}</span></p>
 								</li>
 								<li>
 									<p>r<sub>-rep</sub></p>
-									<p><em>ICX</em><span>{numberWithCommas(rRep)}</span></p>
+									<p><em>ICX</em><span>{numberWithCommas(rrep)}</span></p>
 								</li>
 								{/* <li>
 									<p>Voter reward</p>
@@ -194,20 +217,20 @@ class GovernancePage extends Component {
 							<div className="search-group">
 								<span>
 									<input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({mainPrep.length})</label>
+									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0).length})</label>
 								</span>						
 								<span>
 									<input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({subPrep.length})</label>
+									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1).length})</label>
 								</span>						
 								<span>
 									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-03" className="label _img">P-Rep ({allPrep.filter(p => p.grade === 2).length})</label>
 								</span>
-								{/* <span className="blacklist">
-									<input id="cbox-04" className="cbox-type" type="checkbox" name=""/>
-									<label htmlFor="cbox-04" className="label _img">Blacklist (22)</label>									
-								</span> */}
+								<span className="blacklist">
+									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
+									<label htmlFor="cbox-04" className="label _img">Blacklist ({blackPrep.length})</label>									
+								</span>
 								<span className="search on"><input type="text" className="txt-type-search" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
 							<div className="table-box">
@@ -251,7 +274,10 @@ class GovernancePage extends Component {
 												irepUpdateBlockHeight,
 												active,
 												logo,
+												rank
 											} = prep
+
+											console.log(rank)
 
 											const produced = totalBlocks
 											const missed = totalBlocks - validatedBlocks
@@ -267,7 +293,7 @@ class GovernancePage extends Component {
 									
 											return(
 												<tr key={index}>
-													<td className="rank"><span>{index + 1}</span></td>
+													<td className="rank"><span>{rank}</span></td>
 													<td className="on">
 														<ul>
 															<li>{badge}</li>

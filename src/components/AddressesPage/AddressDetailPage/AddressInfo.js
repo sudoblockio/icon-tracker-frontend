@@ -23,7 +23,9 @@ class AddressInfo extends Component {
             icxMore: false,
             tokenMore: false,
             prep: {},
-            active: true
+            active: false,
+            media: {},
+            prepLoading: true,
         }
     }
 
@@ -33,14 +35,13 @@ class AddressInfo extends Component {
         
         if (!prev && next) {
             const address = next
+            const prep = await getPRep(address)
             const balance = await getBalance(address)
             const { stake, unstake } = await getStake(address)
             const { iscore } = await queryIScore(address)
             const { totalDelegated } = await queryIScore(address)
-            const prep = await getPRep(address)
-            const _prepList = await prepList()
-            const _prep = (_prepList || []).filter(p => p.address === address)[0]
-            const { active } = _prep || {}
+            const { details } = prep
+            await this.checkRepJson(details)
             
             const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
             const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
@@ -55,9 +56,53 @@ class AddressInfo extends Component {
                 iscore: _iscore,
                 delegated: _totalDelegated,
                 prep,
-                active
+                prepLoading: false
             })
+        }
+        else {
+            this.setState({ prepLoading: false })
+        }
+    }
 
+    checkRepJson = async details => {
+        let repJson = {}
+
+        try {
+            if (details) {
+                const response = await fetch(details)
+                repJson = await response.json()
+                console.log(repJson)
+            }
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+        const { representative, server } = repJson
+        if (representative) {
+            const { media } = representative
+            if (media) {
+                this.setState({ media })
+            }
+        }
+
+        if (server) {
+            const { api_endpoint } = server
+            try {
+                const response = await fetch(api_endpoint)
+                const { status } = response
+                console.log(status)
+                if (status === 200) {
+                    this.setState({ active: true })
+                }
+                else {
+                    throw new Error(status)
+                }
+            }
+            catch(e) {
+                console.log(e)
+                this.setState({ active: false })
+            }
         }
     }
 
@@ -109,6 +154,18 @@ class AddressInfo extends Component {
             grade
         } = this.state.prep
 
+        const {
+            facebook,
+            github,
+            keybase,
+            reddit,
+            steemit,
+            telegram,
+            twitter,
+            wechat,
+            youtube,
+        } = this.state.media
+
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
         const missed = produced - validated
@@ -123,7 +180,7 @@ class AddressInfo extends Component {
         const badge = getBadgeTitle(grade)
 
         const Content = () => {
-            if (loading) {
+            if (loading || this.state.prepLoading) {
                 return <LoadingComponent height="206px" />
             }
             else {
@@ -175,9 +232,16 @@ class AddressInfo extends Component {
                                                 <td>Name</td>
                                                 <td colSpan="3">
                                                     <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
-                                                    <span className="home" onClick={() => {
-                                                        window.open(website, '_blank')
-                                                    }}><i className="img"></i></span>
+                                                    {website && <span className="home" onClick={() => { window.open(website, '_blank') }}><i className="img"></i></span>}
+                                                    {facebook && <span className="facebook" onClick={() => { window.open(facebook, '_blank') }}><i className="img"></i></span>}
+                                                    {github && <span className="github" onClick={() => { window.open(github, '_blank') }}><i className="img"></i></span>}
+                                                    {keybase && <span className="keybase" onClick={() => { window.open(keybase, '_blank') }}><i className="img"></i></span>}
+                                                    {reddit && <span className="reddit" onClick={() => { window.open(reddit, '_blank') }}><i className="img"></i></span>}
+                                                    {steemit && <span className="steemit" onClick={() => { window.open(steemit, '_blank') }}><i className="img"></i></span>}
+                                                    {telegram && <span className="telegram" onClick={() => { window.open(telegram, '_blank') }}><i className="img"></i></span>}
+                                                    {twitter && <span className="twitter" onClick={() => { window.open(twitter, '_blank') }}><i className="img"></i></span>}
+                                                    {wechat && <span className="wechat" onClick={() => { window.open(wechat, 'wechat') }}><i className="img"></i></span>}
+                                                    {youtube && <span className="youtube" onClick={() => { window.open(youtube, '_blank') }}><i className="img"></i></span>}
                                                     {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
                                                     <span className={`active ${this.state.active ? 'on' : 'off'}`}><i></i>{this.state.active ? 'Active' : 'Inactive'}</span>
                                                     {/* <span className="btn-scam">Go to Voting</span> */}
