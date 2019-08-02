@@ -29,36 +29,45 @@ class AddressInfo extends Component {
         }
     }
 
+    async componentDidMount() {
+        const splitted = window.location.pathname.split('/')
+        const address = splitted[splitted.length - 1]
+        await this.setPrepData(address)
+    }
+
     async componentWillReceiveProps(nextProps) {
         const { address: prev } = this.props.wallet.data
         const { address: next } = nextProps.wallet.data
-        
+
         if (!prev && next) {
-            const address = next
-            const prep = await getPRep(address)
-            const balance = await getBalance(address)
-            const { stake, unstake } = await getStake(address)
-            const { iscore } = await queryIScore(address)
-            const { totalDelegated } = await queryIScore(address)
-            const { details } = prep
-            await this.checkRepJson(details)
-            
-            const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
-            const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
-            const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
-            const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
-            const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
-            
-            this.setState({
-                available: _balance,
-                staked: _stake,
-                unstaked: _unstake,
-                iscore: _iscore,
-                delegated: _totalDelegated,
-                prep,
-                prepLoading: false
-            })
+            // await this.setPrepData(next)            
         }
+    }
+
+    setPrepData = async address => {
+        const prep = await getPRep(address)
+        const balance = await getBalance(address)
+        const { stake, unstake } = await getStake(address)
+        const { iscore } = await queryIScore(address)
+        const { totalDelegated } = await queryIScore(address)
+        const { details } = prep
+        await this.checkRepJson(details)
+        
+        const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
+        const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
+        const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
+        const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
+        const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
+        
+        this.setState({
+            available: _balance,
+            staked: _stake,
+            unstaked: _unstake,
+            iscore: _iscore,
+            delegated: _totalDelegated,
+            prep,
+            prepLoading: false
+        })
     }
 
     checkRepJson = async details => {

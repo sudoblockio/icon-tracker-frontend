@@ -203,8 +203,8 @@ class GovernancePage extends Component {
 									<p><em>ICX</em><span>{numberWithCommas(stepPrice)}</span></p>
 								</li>
 								<li>
-									<p>Last block{lastBlockPrepName && <span>{lastBlockPrepName}</span>}</p>
-									<p><span>{numberWithCommas(height)}</span></p>
+									<p>Last Block{lastBlockPrepName && <span>{lastBlockPrepName}</span>}</p>
+									<p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
 								</li>
 							</ul>
 						</div>

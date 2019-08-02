@@ -205,8 +205,8 @@ class TxPage extends Component {
                 return <NoBox text={noBoxText} />
             } else {
                 return [
-                    <div className="table-box">
-                        <table key="table" className={className}>
+                    <div className="table-box" key="table">
+                        <table className={className}>
                             <thead>
                                 <TxTableHead txType={this.txType} />
                             </thead>

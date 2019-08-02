@@ -32,6 +32,8 @@ export async function getTrackerApiUrl() {
         return "http://trackerlocaldev.icon.foundation"
       case "prep":
         return "http://54.180.29.194"
+      case "qa":
+        return "http://13.125.236.68"
       default:
     }
   }
@@ -56,7 +58,9 @@ export async function getWalletApiUrl() {
       case "custom":
         return "http://13.209.103.183:9000"
       case "prep":
-          return "http://20.20.7.156:9000"  
+        return "http://20.20.7.156:9000"  
+      case "qa":
+        return "https://devorg.icon.foundation"  
       default:
     }
   }
@@ -77,6 +81,7 @@ export async function getIsSoloVersion() {
       case "testnet1":
       case "custom":
       case "prep":
+      case "qa":
         return false
       default:
     }
