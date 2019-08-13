@@ -133,7 +133,7 @@ class GovernancePage extends Component {
 	}
 
 	goAddress = address => {
-		window.open('/address/' + address, '_blank')
+		this.props.history.push('/address/' + address)
 	}
 
 	render() {
@@ -157,16 +157,12 @@ class GovernancePage extends Component {
 			blackChecked
 		} = this.state
 
-		// const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation
-		// const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation
-		const totalStakedRate = 20
-		const totalVotedRate = 2
+		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation * 100
+		const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation * 100
 		
 		const list = allPrep.filter(p => {
 			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
 		})
-
-		console.log(totalCirculation, totalStaked, totalVoted, totalStakedRate, totalVotedRate)
 
 		const searched = !search ? list : list.filter(prep => prep.name.includes(search) || prep.address.includes(search))
 
@@ -181,8 +177,8 @@ class GovernancePage extends Component {
 								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
 								<div className="bar-group">
 									<div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
-									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{<span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
-									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{<span>{totalVotedRate.toFixed(1)}<em>%</em></span>}</div>
+									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
+									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(1)}<em>%</em></span>}</div>
 								</div>
 								<div className="total">
 									<p>Public Treasury</p>
