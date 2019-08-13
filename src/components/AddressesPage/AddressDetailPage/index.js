@@ -7,10 +7,26 @@ import {
 import {
     ADDRESS_TABS
 } from 'utils/const'
+import { getDelegation } from '../../../redux/api/restV3/iiss';
 
 class AddressesDetailPage extends Component {
+    state = {
+        hasDelegations: false
+    }
 
+    async componentWillReceiveProps(nextProps) {
+        const { address: prev } = this.props.wallet.data
+        const { address: next } = nextProps.wallet.data
+        if (!prev && prev !== next) {
+            const { delegations } = await getDelegation(next)
+            if (delegations.length > 0) {
+                this.setState({ hasDelegations: true })
+            }
+        }
+    }
+    
     render() {
+        const { hasDelegations } = this.state
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, internalTxCount } = data
@@ -20,7 +36,7 @@ class AddressesDetailPage extends Component {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
         if (internalTxCount && Number(internalTxCount) !== 0) {
-            TABS.push(ADDRESS_TABS[1])
+            TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })
             })
@@ -31,10 +47,13 @@ class AddressesDetailPage extends Component {
                 this.props.addressTokenTxList({ address, page: 1, count: 10 })
             })
         }
-        TABS.push(ADDRESS_TABS[3])
-        getList.push(address => {
-            this.props.addressDelegationList({ address })
-        })
+        if (hasDelegations) {
+            TABS.push(ADDRESS_TABS[3])
+            getList.push(address => {
+                this.props.addressDelegationList({ address })
+            })
+        }
+
         return (
             <DetailPage
                 {...this.props}
@@ -46,6 +65,7 @@ class AddressesDetailPage extends Component {
                 getList={getList}
                 InfoComponent={AddressInfo}
                 TabsComponent={AddressTabs}
+                hasDelegations={hasDelegations}
             />
         )
     }

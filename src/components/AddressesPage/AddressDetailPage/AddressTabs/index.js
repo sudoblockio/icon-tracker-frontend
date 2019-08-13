@@ -15,7 +15,7 @@ import {
 
 class WalletTabs extends Component {
     render() {
-        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation } = this.props
+        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, hasDelegations } = this.props
         const { loading, data } = wallet
         const { address, tokenList, internalTxCount } = data
 
@@ -27,7 +27,9 @@ class WalletTabs extends Component {
         if (tokenList && tokenList.length !== 0) {
             TABS.push(ADDRESS_TABS[2])
         }
-        TABS.push(ADDRESS_TABS[3])
+        if (hasDelegations) {
+            TABS.push(ADDRESS_TABS[3])
+        }
 
         return (
             <TabTable

@@ -34,9 +34,10 @@ class DetailPage extends Component {
         else {
             const { hash: currentHash } = this.props.url
             const { hash: nextHash } = nextProps.url
-            if (currentHash !== nextHash) {
-                const { TABS } = this.props
-                this.setTab(findTabIndex(TABS, nextHash))
+            const { TABS: currentTabs } = this.props
+            const { TABS: nextTabs } = nextProps
+            if (currentHash !== nextHash || currentTabs.length !== nextTabs.length) {
+                this.setTab(findTabIndex(nextTabs, nextHash))
             }    
         }
     }

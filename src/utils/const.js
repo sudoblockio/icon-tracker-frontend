@@ -111,7 +111,7 @@ export const SEARCH_TYPE_DATA = {
 }
 
 export const TX_TYPE = {
-    ADDRESS_DELEGATION: 'addressdelegation',
+    ADDRESS_DELEGATION: 'addressdelegations',
     ADDRESS_TX: 'addresstx',
     ADDRESS_INTERNAL_TX: 'addressinternaltx',
     ADDRESS_TOKEN_TX: 'addresstokentx',

@@ -71,6 +71,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_TX:
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
+            case TX_TYPE.ADDRESS_DELEGATION:
                 query.address = urlIndex
                 break
             case TX_TYPE.BLOCK_TX:
@@ -109,8 +110,7 @@ class TxPage extends Component {
     getParams = url => {
         const { pathname } = url
         this.txType = pathname.split('/')[1] || ''
-        this._getTxList =
-            this.props[this.getTxTypeData()['getTxList']] || (() => {})
+        this._getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => {})
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
             case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -119,6 +119,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_TX:
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
+            case TX_TYPE.ADDRESS_DELEGATION:
             case TX_TYPE.BLOCK_TX:
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:
@@ -157,6 +158,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_TX:
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
+            case TX_TYPE.ADDRESS_DELEGATION:
             case TX_TYPE.BLOCK_TX:
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:

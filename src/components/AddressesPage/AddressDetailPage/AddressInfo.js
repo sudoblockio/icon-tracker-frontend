@@ -158,7 +158,7 @@ class AddressInfo extends Component {
             stake,
             delegated,
             irep,
-            irepUpdateBlockHeight,
+            irepUpdatedBlockHeight,
             lastGenerateBlockHeight,
             website,
             grade
@@ -181,7 +181,7 @@ class AddressInfo extends Component {
         const productivity = !produced ? '-' : `${(validated / produced * 100).toFixed(2)}%`
 
         const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
+        const _irepUpdatedBlockHeight = !irepUpdatedBlockHeight ? 0 : IconConverter.toNumber(irepUpdatedBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
 
         const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
@@ -276,7 +276,7 @@ class AddressInfo extends Component {
                                                 <td>Governance variables</td>
                                                 <td colSpan="3">
                                                     <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
-                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdateBlockHeight)}}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
+                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdatedBlockHeight)}}>{numberWithCommas(_irepUpdatedBlockHeight)}</span></span>
                                                 </td>
                                             </tr>}
                                             <tr className="">

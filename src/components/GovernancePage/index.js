@@ -21,8 +21,8 @@ class GovernancePage extends Component {
 		height: 0,
 		stepPrice: 0,
 		mainChecked: true,
-		subChecked: false,
-		restChecked: false,
+		subChecked: true,
+		restChecked: true,
 		blackChecked: false,
 		allPrep: [],
 		blackPrep: [],
@@ -39,10 +39,10 @@ class GovernancePage extends Component {
 		const stepPriceLoop = await getStepPrice()
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
-		const { name: lastBlockPrepName } = await getPRep(peer_id)
 
 		const { icxCirculationy, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
+		const { name: lastBlockPrepName } = await getPRep(peer_id)
 		const allPrep = _allPrep || []
 		const blackPrep = _blackPrep || []
 		
@@ -157,12 +157,16 @@ class GovernancePage extends Component {
 			blackChecked
 		} = this.state
 
-		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation
-		const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation
-
+		// const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation
+		// const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation
+		const totalStakedRate = 20
+		const totalVotedRate = 2
+		
 		const list = allPrep.filter(p => {
 			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
 		})
+
+		console.log(totalCirculation, totalStaked, totalVoted, totalStakedRate, totalVotedRate)
 
 		const searched = !search ? list : list.filter(prep => prep.name.includes(search) || prep.address.includes(search))
 
@@ -177,8 +181,8 @@ class GovernancePage extends Component {
 								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
 								<div className="bar-group">
 									<div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
-									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
-									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(1)}<em>%</em></span>}</div>
+									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{<span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
+									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{<span>{totalVotedRate.toFixed(1)}<em>%</em></span>}</div>
 								</div>
 								<div className="total">
 									<p>Public Treasury</p>
@@ -188,11 +192,11 @@ class GovernancePage extends Component {
 							<ul>
 								<li>
 									<p>i<sub>rep</sub></p>
-									<p><em>ICX</em><span>{numberWithCommas(irep)}</span></p>
+									<p><em>ICX</em><span>{convertNumberToText(irep, 4)}</span></p>
 								</li>
 								<li>
 									<p>r<sub>rep</sub></p>
-									<p><em>ICX</em><span>{numberWithCommas(rrep)}</span></p>
+									<p><em>ICX</em><span>{convertNumberToText(rrep, 4)}</span></p>
 								</li>
 								{/* <li>
 									<p>Voter reward</p>
@@ -271,7 +275,7 @@ class GovernancePage extends Component {
 												stake,
 												delegated,
 												irep,
-												irepUpdateBlockHeight,
+												irepUpdatedBlockHeight,
 												active,
 												logo,
 												rank
@@ -302,9 +306,9 @@ class GovernancePage extends Component {
 													</td>
 													<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
 													<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
-													<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdateBlockHeight))}</span></td>
-													<td><span>{stakedRate.toFixed(1)}%</span><em>{numberWithCommas(prepStaked)}</em></td>
-													<td><span>{votedRate.toFixed(1)}%</span><em>{numberWithCommas(prepVoted)}</em></td>
+													<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdatedBlockHeight))}</span></td>
+													<td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td>
+													<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
 												</tr>
 											)
 										})}
