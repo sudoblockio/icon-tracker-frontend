@@ -7,6 +7,7 @@ import {
   addressTxList,
   addressInternalTxList,
   addressTokenTxList,
+  addressVotedList,
 } from '../../redux/actions/addressesActions';
 import { 
   setPopup 
@@ -27,6 +28,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addressDelegationList: (payload) => dispatch(addressDelegationList(payload)),
+    addressVotedList: (payload) => dispatch(addressVotedList(payload)),
     addressInfo: (payload) => dispatch(addressInfo(payload)),
     addressTxList: (payload) => dispatch(addressTxList(payload)),
     addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),

@@ -9,9 +9,11 @@ import {
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
   getPReps,
 } from '../api/restV3';
+import { iissDelegateList } from '../api/restV3/iiss';
 
 export default function* addressesSaga() {
   yield fork(watchAddressDelegationList);
+  yield fork(watchAddressVotedList);
   yield fork(watchAddressList);
   yield fork(watchAddressInfo);
   yield fork(watchAddressTxList);
@@ -20,6 +22,7 @@ export default function* addressesSaga() {
 }
 
 function* watchAddressDelegationList() { yield takeLatest(AT.addressDelegationList, addressDelegationListFunc) }
+function* watchAddressVotedList() { yield takeLatest(AT.addressVotedList, addressVotedListFunc) }
 function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
 function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc) }
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
@@ -52,6 +55,28 @@ export function* addressDelegationListFunc(action) {
   }
   catch (e) {
     yield put({ type: AT.addressDelegationListRejected });
+  }
+}
+
+export function* addressVotedListFunc(action) {
+  try {
+    const { address } = action.payload
+    const data = yield call(iissDelegateList, { prep: address })
+    console.log(data)
+    if (data && data.length > 0) {
+      yield put({ type: AT.addressVotedListFulfilled, payload: { 
+        data,
+        listSize: data.length,
+        totalSize: data.length
+      }});
+    }
+    else {
+      throw new Error()
+    }  
+  }
+  catch (e) {
+    yield put({ type: AT.addressVotedListRejected });
+
   }
 }
 

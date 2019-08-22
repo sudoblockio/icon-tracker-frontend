@@ -15,7 +15,7 @@ import {
 
 class WalletTabs extends Component {
     render() {
-        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, hasDelegations } = this.props
+        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep } = this.props
         const { loading, data } = wallet
         const { address, tokenList, internalTxCount } = data
 
@@ -29,6 +29,9 @@ class WalletTabs extends Component {
         }
         if (hasDelegations) {
             TABS.push(ADDRESS_TABS[3])
+        }
+        if (isPrep) {
+            TABS.push(ADDRESS_TABS[4])
         }
 
         return (
@@ -71,6 +74,14 @@ class WalletTabs extends Component {
                                 <AddressDelegation
                                     txData={addressDelegation}
                                     txType={TX_TYPE.ADDRESS_DELEGATION}
+                                    address={address}
+                                />
+                            )
+                        case ADDRESS_TABS[4]:
+                            return (
+                                <AddressDelegation
+                                    txData={addressVoted}
+                                    txType={TX_TYPE.ADDRESS_VOTED}
                                     address={address}
                                 />
                             )

@@ -72,6 +72,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
             case TX_TYPE.ADDRESS_DELEGATION:
+            case TX_TYPE.ADDRESS_VOTED:
                 query.address = urlIndex
                 break
             case TX_TYPE.BLOCK_TX:
@@ -120,6 +121,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
             case TX_TYPE.ADDRESS_DELEGATION:
+            case TX_TYPE.ADDRESS_VOTED:
             case TX_TYPE.BLOCK_TX:
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:
@@ -159,6 +161,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_INTERNAL_TX:
             case TX_TYPE.ADDRESS_TOKEN_TX:
             case TX_TYPE.ADDRESS_DELEGATION:
+            case TX_TYPE.ADDRESS_VOTED:
             case TX_TYPE.BLOCK_TX:
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:

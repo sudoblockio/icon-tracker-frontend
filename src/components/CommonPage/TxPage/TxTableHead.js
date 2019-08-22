@@ -13,6 +13,13 @@ class TxTableHead extends Component {
                             <th>Voted</th>
                         </tr>
                     )
+                case TX_TYPE.ADDRESS_VOTED:
+                    return (
+                        <tr>
+                            <th>Address</th>
+                            <th>Delegation</th>
+                        </tr>
+                    )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>

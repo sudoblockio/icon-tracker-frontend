@@ -42,3 +42,10 @@ export function addressDelegationList(payload) {
   }
 }
 
+export function addressVotedList(payload) {
+  return {
+    type: actionTypes.addressVotedList,
+    payload
+  }
+}
+

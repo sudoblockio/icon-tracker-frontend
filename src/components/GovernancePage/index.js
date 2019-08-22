@@ -8,6 +8,7 @@ import { getLastBlock, getStepPrice, prepMain, prepSub, prepList, getPRep } from
 import {
     LoadingComponent,
 } from 'components'
+import { POPUP_TYPE } from 'utils/const'
 
 class GovernancePage extends Component {
 
@@ -160,18 +161,18 @@ class GovernancePage extends Component {
 		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation * 100
 		const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation * 100
 		
-		const list = allPrep.filter(p => {
+		const list = blackChecked ? blackPrep : allPrep.filter(p => {
 			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
 		})
 
-		const searched = !search ? list : list.filter(prep => prep.name.includes(search) || prep.address.includes(search))
+		const searched = !search ? list : list.filter(prep => prep.name.includes(search.trim()) || prep.address.includes(search.trim()))
 
 		return (
 			<div className="content-wrap governance">
 				<div className="screen0">
 					{loading && <LoadingComponent height='100%'/>}
 					{!loading && <div className="wrap-holder">
-						<p className="title">Governance<span><i className="img"></i>About Governance</span></p>
+						<p className="title">Governance<span onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}><i className="img"></i>About Governance</span></p>
 						<div className="contents">
 							<div className="graph">
 								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
@@ -182,7 +183,7 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury</p>
-									<p><em>ICX</em><span>{convertNumberToText(publicTreasury, 0)}</span></p>
+									<p><em>ICX</em><span>{convertNumberToText(publicTreasury, 4)}</span></p>
 								</div>
 							</div>
 							<ul>

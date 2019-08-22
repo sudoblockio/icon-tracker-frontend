@@ -480,3 +480,7 @@
 
 .table-typeB tr.p-rep .active{ right: 20px; }
 .table-typeB tr.p-rep .active i{ right: 20px; }
+
+input.txt-type-search {
+    padding: 12px 32px 12px 10px !important;
+}

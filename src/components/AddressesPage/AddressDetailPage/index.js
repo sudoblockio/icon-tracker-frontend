@@ -7,11 +7,12 @@ import {
 import {
     ADDRESS_TABS
 } from 'utils/const'
-import { getDelegation } from '../../../redux/api/restV3/iiss';
+import { getDelegation, getPRep } from '../../../redux/api/restV3/iiss';
 
 class AddressesDetailPage extends Component {
     state = {
-        hasDelegations: false
+        hasDelegations: false,
+        isPrep: false,
     }
 
     async componentWillReceiveProps(nextProps) {
@@ -19,14 +20,15 @@ class AddressesDetailPage extends Component {
         const { address: next } = nextProps.wallet.data
         if (!prev && prev !== next) {
             const { delegations } = await getDelegation(next)
-            if (delegations.length > 0) {
-                this.setState({ hasDelegations: true })
-            }
+            const { name } = await getPRep(next)
+            const hasDelegations = delegations.length > 0
+            const isPrep = !!name
+            this.setState({ hasDelegations, isPrep })
         }
     }
     
     render() {
-        const { hasDelegations } = this.state
+        const { hasDelegations, isPrep } = this.state
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, internalTxCount } = data
@@ -35,6 +37,7 @@ class AddressesDetailPage extends Component {
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
+        
         if (internalTxCount && Number(internalTxCount) !== 0) {
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
@@ -53,6 +56,12 @@ class AddressesDetailPage extends Component {
                 this.props.addressDelegationList({ address })
             })
         }
+        if (isPrep) {
+            TABS.push(ADDRESS_TABS[4])
+            getList.push(address => {
+                this.props.addressVotedList({ address })
+            })
+        }
 
         return (
             <DetailPage
@@ -66,6 +75,7 @@ class AddressesDetailPage extends Component {
                 InfoComponent={AddressInfo}
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
+                isPrep={isPrep}
             />
         )
     }

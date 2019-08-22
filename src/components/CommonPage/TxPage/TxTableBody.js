@@ -86,7 +86,17 @@ class TxTableBody extends Component {
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
-							<td className="plus"><span>{numberWithCommas(value)}</span><em>VP</em></td>
+							<td className="plus"><span>{numberWithCommas(value)}</span><em>ICX</em></td>
+						</tr>
+					)
+				case TX_TYPE.ADDRESS_VOTED:
+					console.log('ADDRESS_VOTED')
+					return (
+						<tr>
+							<td className="on" onClick={() => {
+								window.open('/address/' + data.address)
+							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
+							<td className="plus"><span>{numberWithCommas(data.amount)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:

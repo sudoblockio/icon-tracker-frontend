@@ -36,6 +36,9 @@ $(window).on('CUSTOM_FX', function(e) {
             break
         case 'POPUP_OPEN':
             $('.popup-wrap.' + param).fadeIn(350)
+            if (param == 'about') {
+                $('.popup-wrap.about').css({ display: 'flex' })
+            }
             break
         case 'POPUP_CLOSE':
             if (param == 'detail') {

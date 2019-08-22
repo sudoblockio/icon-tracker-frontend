@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import { GovernancePage } from 'components';
 import { withRouter } from 'react-router-dom';
+import { 
+  setPopup 
+} from '../../redux/actions/popupActions'
 
 function mapStateToProps(state) {
   return {
@@ -10,6 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setPopup: (payload) => dispatch(setPopup(payload))
   };
 }
 

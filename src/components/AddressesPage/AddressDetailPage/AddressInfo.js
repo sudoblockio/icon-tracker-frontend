@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { numberWithCommas, convertNumberToText, isValidNodeType, searchLowerCase, isValidData } from 'utils/utils'
 import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'components'
 import NotificationManager from 'utils/NotificationManager'
-import { getStake, queryIScore, getBalance, getPRep, prepList } from '../../../redux/api/restV3/iiss';
+import { getStake, queryIScore, getBalance, getPRep, prepList, getDelegation } from '../../../redux/api/restV3/iiss';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle } from '../../../utils/utils';
 
@@ -36,12 +36,12 @@ class AddressInfo extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        const { address: prev } = this.props.wallet.data
-        const { address: next } = nextProps.wallet.data
+        // const { address: prev } = this.props.wallet.data
+        // const { address: next } = nextProps.wallet.data
 
-        if (!prev && next) {
-            // await this.setPrepData(next)            
-        }
+        // if (!prev && next) {
+        //     await this.setPrepData(next)            
+        // }
     }
 
     setPrepData = async address => {
@@ -49,10 +49,12 @@ class AddressInfo extends Component {
         const balance = await getBalance(address)
         const { stake, unstake } = await getStake(address)
         const { iscore } = await queryIScore(address)
-        const { totalDelegated } = await queryIScore(address)
+        const { totalDelegated } = await getDelegation(address)
         const { details } = prep
         await this.checkRepJson(details)
         
+        console.log(prep)
+
         const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
         const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
         const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
@@ -158,7 +160,7 @@ class AddressInfo extends Component {
             stake,
             delegated,
             irep,
-            irepUpdatedBlockHeight,
+            irepUpdateBlockHeight,
             lastGenerateBlockHeight,
             website,
             grade
@@ -181,7 +183,7 @@ class AddressInfo extends Component {
         const productivity = !produced ? '-' : `${(validated / produced * 100).toFixed(2)}%`
 
         const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        const _irepUpdatedBlockHeight = !irepUpdatedBlockHeight ? 0 : IconConverter.toNumber(irepUpdatedBlockHeight)
+        const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
 
         const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
@@ -276,7 +278,7 @@ class AddressInfo extends Component {
                                                 <td>Governance variables</td>
                                                 <td colSpan="3">
                                                     <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
-                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdatedBlockHeight)}}>{numberWithCommas(_irepUpdatedBlockHeight)}</span></span>
+                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdateBlockHeight)}}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
                                                 </td>
                                             </tr>}
                                             <tr className="">
@@ -302,7 +304,7 @@ class AddressInfo extends Component {
                                                         <p><span>Staked</span><span><em>{(this.state.staked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
                                                         <p><span>Unstaked</span><span><em>{(this.state.unstaked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
                                                         <p><span>Delegated</span><span><em>{(this.state.delegated / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
-                                                        <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I_SCORE</em></span></p>
+                                                        <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I-Score</em></span></p>
 
                                                     </div>
                                                     <div className={this.state.tokenMore ? 'on' : ''}>
