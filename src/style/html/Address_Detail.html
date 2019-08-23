@@ -22,14 +22,14 @@
 						<span class="logo"></span>
 						<div class="link">
 							<ul>
-								<li>
+								<li class="on">
 									<span>Address<em class="img"></em></span>
 									<ol class="sub-menu">
 										<li><span>Addresses</span></li>
 										<li><span>Contracts</span></li>
 									</ol>
 								</li>
-								<li><span>BLOCK</span></li>
+								<li><span>Block</span></li>
 								<li><span>Transaction</span></li>
 								<li>
 									<span>Token<em class="img"></em></span>
@@ -39,12 +39,11 @@
 									</ol>
 								</li> 
 								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
-							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, BLOCK height" value="">
-								<span><em class="img"></em></span>
-							</div>
-							<div class="connect join"><span><em class="img"></em></span>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
 								<div class="sub-menu">
 									<p><span>Wallet Address</span>
 										<span class="complete">
@@ -52,10 +51,12 @@
 											<em>Copy Address</em>
 										</span>
 									</p>
-									
 									<span class="btn">Disconnect</span>
 									<span class="btn">View Details</span>
 								</div>
+							</div>
+							<div class="search-group">
+								<span><em class="img"></em></span>
 							</div>
 						</div>
 					</div>
@@ -68,43 +69,59 @@
 			<div class="content-wrap">
 				<div class="screen0">
 					<div class="wrap-holder">
-						<p class="title">Address<span class="connected"><i class="img"></i>Connected to ICONex</span>
+						<p class="title">Address<span class="title-tag">P-Rep</span>
 							<span class="toggle">
+								<em class="connected">Connected to ICONex</em>
 								<em>
 									<input id="cbox-01" class="cbox-type" type="checkbox" name="">
 									<label for="cbox-01" class="label _img"></label>Start page</em>
-								<em><input id="cbox-02" class="cbox-type" type="checkbox" name="">
-									<label for="cbox-02" class="label _img"></label>Notifications<span>(Beta)</span></em>
+								<em class="noti"><input id="cbox-02" class="cbox-type" type="checkbox" name="">
+									<label for="cbox-02" class="label _img"></label><i class="_img"></i>
+								</em>
+
 							</span>
 						</p>
 						<div class="contents">
-							<table class="table-typeB address">
-								<thead>
-									<tr>
-										<th>Address</th>
-										<th>value</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="">
-										<td>Address</td>
-										<td class="scam"><span class="scam-tag">Scam</span> 0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="btn-scam complete">Report scam</span><!-- <span class="copy disabled">Copy Address</span><span class="copy on">Copy Complete</span> --><span class="crep">C-rep Node</span></td>
-									</tr>
-									<tr>
-										<td>Balance</td>
-										<td>0.1234 ICX<span class="gray">(11 USD)</span></td>
-									</tr>
-									<tr>
-										<td>No of Txns</td>
-										<td>999,999,999,999</td>
-									</tr>
-									<tr>
-										<td>Token Balance</td>
-										<td>None</td>
-									</tr>
+							<div class="table-box">
+								<table class="table-typeB address">
+									<thead>
+										<tr>
+											<th>Address</th>
+											<th>value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td>Address</td>
+											<td colspan="3" class="scam">
+												<span><em class="scam-tag">Scam</em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E </span>
+												<span class="qrcode"><i class="img"></i></span><span class="copy"><i class="img"></i></span><span class="btn-scam">Report scam</span></td>
+										</tr>
+										<tr>
+											<td>Balance</td>
+											<td colspan="3" class="balance">
+												<div>
+													<p><span><i class="coin icon"></i>ICX</span><span>900,000,000.0000000000000016<em>ICX</em></span><em class="drop-btn"><i class="img"></i></em></p>
+													<p><span>Available</span><span>900,000,000.0000000000000016<em>ICX</em></span></p>
+													<p><span>Staked</span><span><em>22.32%</em>900,000,000<em>ICX</em></span></p>
+													<p><span>Delegated</span><span><em>22.32%</em>900,000,000<em>Voting power</em></span></p>
+													<p><span>I_SCORE</span><span>900,000,000<em>I_SCORE</em></span></p>
 
-								</tbody>
-							</table>
+												</div>
+												<div>
+													<p><span><i class="coin"></i>ICX</span><span>9<em>Tokens</em></span><em class="drop-btn"><i class="img"></i></em></p>
+													<p><span>AC3</span><span>900,000,000<em>AC3</em></span></p>
+													<p><span>Andrew Token</span><span>900,000<em>ATK</em></span></p>
+													<p><span>Somesing Exchange</span><span>900,000<em>SSX</em></span></p>
+													<p><span>SportToken</span><span>900,000,000.0000016<em>SPORT</em></span></p>
+												</div>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>								
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -118,113 +135,115 @@
 						</div>
 						<div class="contents">
 							<p class="txt"><span>Latest<em>10</em>ICX Txns from a total of <em>999,999 Transactions</em></span></p>
-							<table class="table-typeC">
-								<thead>
-									<tr>
-										<th>TxHash</th>
-										<th>Block</th>
-										<th>Age</th>
-										<th>From</th>
-										<th class="table-sign"></th>
-										<th>To</th>
-										<th>Amount</th>
-										<th>TxFee</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="on icon error"><i class="img"></i><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
-										<td>999999</td>
-										<td>23 hrs ago</td>
-										<td class="break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on icon scam"><i class="img"></i><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
-										<td>999999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign out"><span>OUT</span></td>
-										<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.01</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>1</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="no">-</td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="no">-</td>
-										<td><span>200001</span><em>ICX</em></td>
-										<td class="no"><span>-</span></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>9,999,999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign out"><span>OUT</span></td>
-										<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
-										<td><span>12,201</span><em>ICX</em></td>
-										<td><span>0.0001</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
-										<td>9,999,999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign out"><span>OUT</span></td>
-										<td class="on icon calen"><i class="img"></i><span>Contract Accepted</span></td>
-										<td><span>12,201</span><em>ICX</em></td>
-										<td><span>0.0092</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>999999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>999999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.01</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>1</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="no">-</td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="no">-</td>
-										<td><span>200001</span><em>ICX</em></td>
-										<td class="no"><span>-</span></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>9,999,999</td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>12,201</span><em>ICX</em></td>
-										<td><span>0.01</span><em>ICX</em></td>
-									</tr>
+							<div class="table-box">
+								<table class="table-typeC">
+									<thead>
+										<tr>
+											<th>TxHash</th>
+											<th>Block</th>
+											<th>Time (UTC+09)</th>
+											<th>From</th>
+											<th class="table-sign"></th>
+											<th>To</th>
+											<th>Amount</th>
+											<th>TxFee</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="on icon error"><i class="img"></i><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
+											<td>999999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on icon scam"><i class="img"></i><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
+											<td>999999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign out"><span>OUT</span></td>
+											<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.01</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>1</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="no">-</td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="no">-</td>
+											<td><span>200001</span><em>ICX</em></td>
+											<td class="no"><span>-</span></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>9,999,999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="on icon scam"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign out"><span>OUT</span></td>
+											<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
+											<td><span>12,201</span><em>ICX</em></td>
+											<td><span>0.0001</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on"><a href=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></a></td>
+											<td>9,999,999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign out"><span>OUT</span></td>
+											<td class="on icon calen"><i class="img"></i><span>Contract Accepted</span></td>
+											<td><span>12,201</span><em>ICX</em></td>
+											<td><span>0.0092</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>999999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>999999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.01</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>1</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="no">-</td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="no">-</td>
+											<td><span>200001</span><em>ICX</em></td>
+											<td class="no"><span>-</span></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td>9,999,999</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>12,201</span><em>ICX</em></td>
+											<td><span>0.01</span><em>ICX</em></td>
+										</tr>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</div>
 						</div>
 
 					</div>
@@ -252,23 +271,41 @@
 						<li class="facebook"><a href=""><span class="img"></span></a></li>
 						<li class="github"><a href=""><span class="img"></span></a></li>
 					</ul>
+					<div class="mainnet"><p>Mainnet<i class="img"></i></p>
+						<ul>
+							<li><span>Mainnet</span></li>
+							<li><span>Euljiro</span></li>
+							<li><span>Yeouido</span></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- //footer -->
 
+	<!-- popup-search -->
+	<div class="pop-search">
+		<div class="dimmed">
+		</div>
+		<div class="search-group">
+			<span><i class="img"></i></span><input type="text" class="txt-type-search" placeholder="Name, Address, TxHash, Block, SCORE" value=""><em><i class="img"></i></em>
+		</div>
+	</div>
+	<!-- //popup-search -->	
+
 	<!-- popup -->
 	<div class="popup-wrap qr">
 		<div class="dimmed"></div>
 		<div class="popup">
-			<span class="close"><em class="img"></em></span>
 			<h1 class="title">Address</h1>
 			<div class="qr">
 				<img src="../image/qr.png">
 			</div>
 			<p>3H3svYGqXxAAHSAJy2Eu1TGagC3H3svYGqXxAAHSbU2kz5KR</p>
-
+			<div class="btn-holder full">
+				<button class="btn-type-normal size-full"><span>Confirm</span></button>
+			</div>
 		</div>
 	</div>
 	<!-- //popup -->
@@ -277,7 +314,6 @@
 	<div class="popup-wrap scam">
 		<div class="dimmed"></div>
 		<div class="popup">
-			<span class="close"><em class="img"></em></span>
 			<h1 class="title">Report scam</h1>
 			<div class="box">
 				<div class="icon">
@@ -287,23 +323,25 @@
 				<p class="sub-title">Connect to ICONex</p>
 				<p class="txt">ICONex지갑이 연동 되었습니다.</p>
 				<p class="address">hx1729b35b690d51e9944b2e94075acff986ea0675</p>
-				<div class="btn-holder">
-					<button class="btn-type-normal size-half"><span>Cancel</span></button>
-					<button class="btn-type-normal size-half" disabled><span>Add</span></button>
-				</div>
+
 			</div>
+			<div class="btn-holder full">
+				<button class="btn-type-normal size-half"><span>Cancel</span></button>
+				<button class="btn-type-normal size-half" disabled><span>Add</span></button>
+			</div>			
 		</div>
 	</div>
 	<!-- //popup -->
 
 	<!-- popup -->
-	<div class="popup-wrap scam" style="display: block;">
+	<div class="popup-wrap scam">
 		<div class="dimmed"></div>
 		<div class="popup">
-			<span class="close"><em class="img"></em></span>
 			<h1 class="title">Report scam</h1>
 			<div class="box">
-				<h3>Select a file or drag & drop to the area below.</h3>
+				<h2>The scam site URL</h2>
+				<input type="text" class="txt-type over" placeholder="Enter scam site URL" value="">				
+				<h3>Select a file or drag & drop to the area below (Optional)</h3>
 				<div class="drop-box">
 					<span>Please drag your file here</span>
 				</div>
@@ -322,13 +360,14 @@
 				</div> -->
 
 				<button class="btn-type-normal select"  disabled><span>Select file</span></button>
-				<h2>The scam site URL (Optional)</h2>
-				<input type="text" class="txt-type over" placeholder="Enter scam site URL" value="">
-				<div class="btn-holder">
-					<button class="btn-type-normal"><span>Summit</span></button>
-				</div>				
-			</div>
 
+			
+			</div>
+			<div class="btn-holder full">
+				<button class="btn-type-fill size-half"><span>Cancel</span></button>
+				<button class="btn-type-normal size-half"><span>Summit</span></button>
+
+			</div>	
 		</div>
 	</div>
 	<!-- //popup -->	

@@ -34,9 +34,10 @@ class DetailPage extends Component {
         else {
             const { hash: currentHash } = this.props.url
             const { hash: nextHash } = nextProps.url
-            if (currentHash !== nextHash) {
-                const { TABS } = this.props
-                this.setTab(findTabIndex(TABS, nextHash))
+            const { TABS: currentTabs } = this.props
+            const { TABS: nextTabs } = nextProps
+            if (currentHash !== nextHash || currentTabs.length !== nextTabs.length) {
+                this.setTab(findTabIndex(nextTabs, nextHash))
             }    
         }
     }
@@ -68,7 +69,6 @@ class DetailPage extends Component {
 
     changeTab = (index) => {
         const { TABS, url } = this.props
-        console.log(TABS)
         const { pathname } = url
         this.props.history.push(`${pathname}#${noSpaceLowerCase(TABS[index])}`);
     }
@@ -80,7 +80,8 @@ class DetailPage extends Component {
         const Content = () => {
             if(pending){
                 return <PendingPage error={error}/>
-            } else if (isNotFoundPage) {
+            } 
+            else if (isNotFoundPage) {
                 return <NotFoundPage error={error}/>
             }
             else {

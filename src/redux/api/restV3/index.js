@@ -57,6 +57,12 @@ import{
     reportScam
 } from './report';
 
+import{
+    getPReps,
+    getIISSInfo,
+    getDelegation
+} from './iiss';
+
 export {
     getMainInfo,
     getMainChart,
@@ -97,5 +103,9 @@ export {
     getTransactionResult,
     getTransaction,
 
-    reportScam
+    reportScam,
+
+    getPReps,
+    getIISSInfo,
+    getDelegation
 }

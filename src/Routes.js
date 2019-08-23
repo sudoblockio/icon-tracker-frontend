@@ -14,6 +14,7 @@ import TransactionDetailPage from './pages/TransactionDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import TokenListPage from './pages/TokenListPage'
 import TokenDetailPage from './pages/TokenDetailPage'
+import GovernancePage from './pages/GovernancePage'
 import TxPage from './pages/TxPage'
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
 import { getIsSolo } from './utils/utils'
@@ -34,6 +35,7 @@ class Routes extends Component {
   render() {
     return (
       <div id="app-root">
+        {window.location.pathname === '/' && !this.state.isSolo && <Banner />}
         <div className="root">
           <div className={`wrap ${window.location.pathname === '/' ? 'home' : 'sub'}`}>
             <HeaderContainer />
@@ -59,6 +61,8 @@ class Routes extends Component {
               <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.TOKENS}`} component={TokenListPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.TOKENS}/:pageId`} component={TokenListPage} exact />
               <Route onEnter={window.scroll(0, 0)} path='/token/:tokenId' component={TokenDetailPage} exact />
+
+              <Route onEnter={window.scroll(0, 0)} path={`/governance`} component={GovernancePage} exact />
 
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}`} component={TxPage} exact />
               <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TOKEN_TRANSFERS}/:pageId`} component={TxPage} />
@@ -106,7 +110,6 @@ class Routes extends Component {
           <div className="blank"></div>
         </div>
         <Footer />
-        {window.location.pathname === '/' && !this.state.isSolo && <Banner />}
         <Popup />
       </div>
     );

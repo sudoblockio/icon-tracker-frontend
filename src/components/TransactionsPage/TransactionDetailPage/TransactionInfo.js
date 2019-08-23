@@ -110,6 +110,7 @@ class TransactionInfo extends Component {
 						<div className="wrap-holder">
 							<p className="title">Transaction</p>
 							<div className="contents">
+								<div className='table-box'>
 								<table className="table-typeB transaction">
 									<tbody>
 										<tr>
@@ -174,6 +175,7 @@ class TransactionInfo extends Component {
 										}
 									</tbody>
 								</table>
+								</div>
 							</div>
 						</div>
 					</div>

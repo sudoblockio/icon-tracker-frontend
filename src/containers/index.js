@@ -15,6 +15,8 @@ import TransactionDetailPageContainer from './TransactionsPage/TransactionDetail
 import TokenListPageContainer from './TokensPage/TokenListPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
+import GovernancePageContainer from './GovernancePage/GovernancePageContainer'
+
 import HeaderContainer from './CommonPage/HeaderContainer'
 import NotFoundPageContainer from './CommonPage/NotFoundPageContainer'
 import TxPageContainer from './CommonPage/TxPageContainer'
@@ -40,4 +42,6 @@ export {
   HeaderContainer,
   NotFoundPageContainer,
   TxPageContainer,
+
+  GovernancePageContainer 
 }

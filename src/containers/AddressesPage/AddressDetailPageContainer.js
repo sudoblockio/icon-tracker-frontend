@@ -2,10 +2,12 @@ import { connect } from 'react-redux';
 import { AddressDetailPage } from 'components';
 import { withRouter } from 'react-router-dom';
 import { 
+  addressDelegationList,
   addressInfo,
   addressTxList,
   addressInternalTxList,
   addressTokenTxList,
+  addressVotedList,
 } from '../../redux/actions/addressesActions';
 import { 
   setPopup 
@@ -25,6 +27,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    addressDelegationList: (payload) => dispatch(addressDelegationList(payload)),
+    addressVotedList: (payload) => dispatch(addressVotedList(payload)),
     addressInfo: (payload) => dispatch(addressInfo(payload)),
     addressTxList: (payload) => dispatch(addressTxList(payload)),
     addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),

@@ -35,3 +35,17 @@ export function addressTokenTxList(payload) {
   }
 }
 
+export function addressDelegationList(payload) {
+  return {
+    type: actionTypes.addressDelegationList,
+    payload
+  }
+}
+
+export function addressVotedList(payload) {
+  return {
+    type: actionTypes.addressVotedList,
+    payload
+  }
+}
+

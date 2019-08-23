@@ -6,6 +6,7 @@ import {
 	isValidData,
 	tokenText,
 	is0xHash,
+	convertLoopToIcxDecimal
 } from 'utils/utils'
 import {
 	TransactionLink,
@@ -17,6 +18,7 @@ import {
 import {
 	TX_TYPE,
 } from 'utils/const'
+import { getBadgeTitle } from '../../../utils/utils';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -71,11 +73,31 @@ class TxTableBody extends Component {
 				data,
 				address
 			} = this.props
-
+			
 			const addressInData = data.address
 			const isError = data.state === 0
 
 			switch (txType) {
+				case TX_TYPE.ADDRESS_DELEGATION:
+					const value = convertLoopToIcxDecimal(data.value)
+					const badgeTitle = getBadgeTitle(data.grade)
+					return (
+						<tr>
+							<td className="on" onClick={() => {
+								window.open('/address/' + data.address)
+							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
+							<td className="plus"><span>{numberWithCommas(value)}</span><em>ICX</em></td>
+						</tr>
+					)
+				case TX_TYPE.ADDRESS_VOTED:
+					return (
+						<tr>
+							<td className="on" onClick={() => {
+								window.open('/address/' + data.address)
+							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
+							<td className="plus"><span>{numberWithCommas(data.amount)}</span><em>ICX</em></td>
+						</tr>
+					)
 				case TX_TYPE.ADDRESS_TX:
 					return (
 						<tr>
