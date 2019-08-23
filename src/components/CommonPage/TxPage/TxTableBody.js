@@ -90,7 +90,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_VOTED:
-					console.log('ADDRESS_VOTED')
 					return (
 						<tr>
 							<td className="on" onClick={() => {

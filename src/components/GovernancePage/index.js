@@ -34,7 +34,7 @@ class GovernancePage extends Component {
 
 	async componentDidMount() {
 		const { tmainInfo } = await getMainInfo()
-		const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
+		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
@@ -43,10 +43,12 @@ class GovernancePage extends Component {
 
 		const { icxCirculationy, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
-		const { name: lastBlockPrepName } = await getPRep(peer_id)
 		const allPrep = _allPrep || []
 		const blackPrep = _blackPrep || []
-		
+
+		const lastPrepIndex = preps.findIndex(prep => prep.address === peer_id)
+		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${preps[lastPrepIndex].name}`
+	
 		const totalCirculation = Number(icxCirculationy || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
@@ -165,7 +167,7 @@ class GovernancePage extends Component {
 			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
 		})
 
-		const searched = !search ? list : list.filter(prep => prep.name.includes(search.trim()) || prep.address.includes(search.trim()))
+		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
 		return (
 			<div className="content-wrap governance">
@@ -178,8 +180,8 @@ class GovernancePage extends Component {
 								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
 								<div className="bar-group">
 									<div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
-									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(1)}<em>%</em></span>}</div>
-									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(1)}<em>%</em></span>}</div>
+									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(2)}<em>%</em></span>}</div>
+									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(2)}<em>%</em></span>}</div>
 								</div>
 								<div className="total">
 									<p>Public Treasury</p>

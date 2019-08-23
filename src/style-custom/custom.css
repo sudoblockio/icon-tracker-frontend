@@ -484,3 +484,6 @@
 input.txt-type-search {
     padding: 12px 32px 12px 10px !important;
 }
+
+.table-typeB td.balance p span:first-child{width: 180px;}
+.table-typeB td.balance p span:nth-of-type(2){width: 300px;}
