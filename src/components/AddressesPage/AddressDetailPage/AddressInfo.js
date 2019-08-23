@@ -303,7 +303,7 @@ class AddressInfo extends Component {
                                                         <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
                                                         <p><span>Staked</span><span><em>{(this.state.staked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
                                                         <p><span>Unstaking</span><span><em>{(this.state.unstaked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Delegated</span><span><em>{(this.state.delegated / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
+                                                        <p><span>Voted</span><span><em>{(this.state.delegated / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I-Score</em></span></p>
 
                                                     </div>
