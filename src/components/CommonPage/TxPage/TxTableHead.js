@@ -154,7 +154,7 @@ class TxTableHead extends Component {
                                 Percentage<em>%</em>
                             </th>
                             <th>No of Txns</th>
-                            <th>Node type</th>
+                            <th>Address type</th>
                         </tr>
                     )
                 case TX_TYPE.BLOCKS:

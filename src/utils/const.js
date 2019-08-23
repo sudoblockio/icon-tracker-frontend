@@ -30,11 +30,13 @@ export const CONTRACT_STATUS = {
     '0': 'Pending',
     '1': 'Active',
     '2': 'Rejected',
+    '3': 'Error',
 }
 export const CONTRACT_STATUS_NUM = {
     Pending: '0',
     Active: '1',
     Rejected: '2',
+    Error: '3'
 }
 
 export const SERVER_TX_TYPE = {

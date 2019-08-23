@@ -53,8 +53,6 @@ class AddressInfo extends Component {
         const { details } = prep
         await this.checkRepJson(details)
         
-        console.log(prep)
-
         const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
         const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
         const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
@@ -62,7 +60,7 @@ class AddressInfo extends Component {
         const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
         
         this.setState({
-            available: _balance,
+            available: _balance - _stake - _unstake,
             staked: _stake,
             unstaked: _unstake,
             iscore: _iscore,
