@@ -76,7 +76,7 @@ class AddressInfo extends Component {
         const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
         
         this.setState({
-            balance: Number(_balance) + Number(_stake) + Number(_unstake),
+            balance: convertLoopToIcxDecimal(Number(balance || 0) + Number(stake || 0) + Number(unstake || 0)),
             available: _balance,
             staked: _stake,
             unstaked: _unstake,
@@ -204,8 +204,6 @@ class AddressInfo extends Component {
         const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
 
         const badge = getBadgeTitle(grade)
-
-        console.log(this.state.balance)
 
         const Content = () => {
             if (loading || this.state.prepLoading) {
