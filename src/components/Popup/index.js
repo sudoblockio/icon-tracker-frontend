@@ -117,7 +117,7 @@ class Popup extends Component {
                     </div>
                 </div>
             </div>,
-            isSearch && <Search data={searchData} closeSearch={this.closeSearch} />,
+            isSearch && <Search key='search' data={searchData} closeSearch={this.closeSearch} />,
         ]
     }
 }

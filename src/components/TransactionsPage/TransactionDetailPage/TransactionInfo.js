@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
 import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from 'redux/api/restV3/config'
+import twitterLogo from 'style-custom/twitter-logo.png'
 import {
 	CopyButton,
 	LoadingComponent,
@@ -115,7 +116,15 @@ class TransactionInfo extends Component {
 									<tbody>
 										<tr>
 											<td>TxHash</td>
-											<td className={scam ? "scam":""}>{scam?<span className="scam-tag">Reported</span>:""}{txHash}<span className="copy twit" onClick={this.onTwitterClick}><i className="img twit-icon"></i></span><CopyButton data={txHash} title={'Copy TxHash'} isSpan /><ReportButton address={txHash}/></td>
+											<td className={scam ? "scam":""}>
+												{scam?<span className="scam-tag">Reported</span>:""}
+												{txHash}
+												<span className="copy twit" onClick={this.onTwitterClick}>
+													{/* <i className="img twit-icon"></i> */}
+													<img className='custom-twitter' src={twitterLogo} />
+												</span><CopyButton data={txHash} title={'Copy TxHash'} isSpan />
+												<ReportButton address={txHash}/>
+											</td>
 										</tr>
 										<tr>
 											<td>Status</td>

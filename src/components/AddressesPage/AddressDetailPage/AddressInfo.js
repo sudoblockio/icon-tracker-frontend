@@ -36,12 +36,28 @@ class AddressInfo extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        // const { address: prev } = this.props.wallet.data
-        // const { address: next } = nextProps.wallet.data
+        const { address: prev } = this.props.wallet.data
+        const { address: next } = nextProps.wallet.data
 
-        // if (!prev && next) {
-        //     await this.setPrepData(next)            
-        // }
+        if (prev && !next) {
+            this.setState({
+                notification: _isNotificationAvailable && this.props.walletNotification,
+                available: 0,
+                staked: 0,
+                unstaked: 0,
+                iscore: 0,
+                delegated: 0,
+                icxMore: false,
+                tokenMore: false,
+                prep: {},
+                active: 'N/A',
+                media: {},
+                prepLoading: true,
+            })
+        }
+        else if (!prev && next) {
+            this.setPrepData(next)
+        }
     }
 
     setPrepData = async address => {
@@ -60,7 +76,8 @@ class AddressInfo extends Component {
         const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
         
         this.setState({
-            available: _balance - _stake - _unstake,
+            balance: Number(_balance) + Number(_stake) + Number(_unstake),
+            available: _balance,
             staked: _stake,
             unstaked: _unstake,
             iscore: _iscore,
@@ -188,12 +205,14 @@ class AddressInfo extends Component {
 
         const badge = getBadgeTitle(grade)
 
+        console.log(this.state.balance)
+
         const Content = () => {
             if (loading || this.state.prepLoading) {
                 return <LoadingComponent height="206px" />
             }
             else {
-                const { address, nodeType, balance, icxUsd, txCount, tokenList, reportedCount } = data
+                const { address, nodeType, icxUsd, txCount, tokenList, reportedCount } = data
                 const _address = !!address ? address : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -297,11 +316,11 @@ class AddressInfo extends Component {
                                                 </td> */}
                                                 <td colSpan="3" className="balance">
                                                     <div className={this.state.icxMore ? 'on' : ''}>
-                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
+                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
-                                                        <p><span>Staked</span><span><em>{(this.state.staked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Unstaking</span><span><em>{(this.state.unstaked / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Voted</span><span><em>{(this.state.delegated / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
+                                                        <p><span>Staked</span><span><em>{(this.state.staked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Unstaking</span><span><em>{(this.state.unstaked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Voted</span><span><em>{(this.state.delegated / this.state.staked * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I-Score</em></span></p>
 
                                                     </div>

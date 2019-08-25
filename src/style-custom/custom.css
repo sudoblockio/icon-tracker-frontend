@@ -481,9 +481,11 @@
 .table-typeB tr.p-rep .active{ right: 20px; }
 .table-typeB tr.p-rep .active i{ right: 20px; }
 
-input.txt-type-search {
+input.txt-type-search.modified {
     padding: 12px 32px 12px 10px !important;
 }
 
 .table-typeB td.balance p span:first-child{width: 180px;}
 .table-typeB td.balance p span:nth-of-type(2){width: 300px;}
+
+.copy.twit .custom-twitter { margin: 4.5px; width: 15px; opacity: 0.9; }

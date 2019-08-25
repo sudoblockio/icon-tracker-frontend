@@ -43,7 +43,13 @@ class GovernancePage extends Component {
 
 		const { icxCirculationy, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
-		const allPrep = _allPrep || []
+		const allPrep = (_allPrep || []).map(prep => {
+			const index = preps.findIndex(p => prep.address === p.address)
+			if (index !== -1) {
+				prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+			}
+			return prep
+		})
 		const blackPrep = _blackPrep || []
 
 		const lastPrepIndex = preps.findIndex(prep => prep.address === peer_id)
@@ -234,7 +240,7 @@ class GovernancePage extends Component {
 									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-04" className="label _img">Blacklist ({blackPrep.length})</label>									
 								</span>
-								<span className="search on"><input type="text" className="txt-type-search" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
+								<span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
 							<div className="table-box">
 								<table className="table-typeP">
