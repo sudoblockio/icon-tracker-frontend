@@ -32,6 +32,8 @@ class GovernancePage extends Component {
 		loading: true
 	}
 
+	checkedState = {}
+
 	async componentDidMount() {
 		const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
@@ -104,12 +106,22 @@ class GovernancePage extends Component {
 					if (this.state.blackChecked) {
 						this.setState({ 
 							blackChecked: false,
-							mainChecked: true,
-							subChecked: false,
-							restChecked: false
+							...this.checkedState,
 						})	
 					}
 					else {
+						const { 
+							mainChecked,
+							subChecked,
+							restChecked
+						} = this.state
+
+						this.checkedState = {
+							mainChecked,
+							subChecked,
+							restChecked
+						}
+
 						this.setState({ 
 							blackChecked: true,
 							mainChecked: false,
