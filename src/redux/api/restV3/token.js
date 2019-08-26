@@ -6,7 +6,6 @@ export async function tokenList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/list', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -50,7 +49,6 @@ export async function tokenHoldersList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/token/holders', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {

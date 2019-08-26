@@ -192,8 +192,8 @@ class SearchPage extends Component {
                 return <NoBox text={keyword ? 'No Data' : noBoxText} />
             } else {
                 return [
-                    <div className="table-box">
-                        <table key="table" className={tableClassName}>
+                    <div key="table-box" className="table-box">
+                        <table className={tableClassName}>
                             <thead>
                                 <SearchTableHead
                                     searchType={this.searchType}
