@@ -314,13 +314,12 @@ class AddressInfo extends Component {
                                                 </td> */}
                                                 <td colSpan="3" className="balance">
                                                     <div className={this.state.icxMore ? 'on' : ''}>
-                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
+                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance, 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
-                                                        <p><span>Staked</span><span><em>{(this.state.staked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Unstaking</span><span><em>{(this.state.unstaked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Voted</span><span><em>{(this.state.delegated / this.state.staked * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
+                                                        <p><span>Staked</span><span><em>{(!this.state.balance ? 0 : this.state.staked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Unstaking</span><span><em>{(!this.state.balance ? 0 :this.state.unstaked / this.state.balance * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Voted</span><span><em>{(!this.state.staked ? 0 : this.state.delegated / this.state.staked * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>Voting power</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I-Score</em></span></p>
-
                                                     </div>
                                                     <div className={this.state.tokenMore ? 'on' : ''}>
                                                         <p><span><i className="coin"></i>Token</span><span>{(tokenList || []).length}<em>Tokens</em></span><em className="drop-btn" onClick={this.toggleTokenMore}><i className="img"></i></em></p>
