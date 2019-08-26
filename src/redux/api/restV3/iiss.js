@@ -22,16 +22,18 @@ export async function getPReps() {
                 resolve(response.data.result);
             })
             .catch(error => {
-                if (!!error.response) {
-                    resolve(error.response.data);
-                }
-                else {
-                    resolve({
-                        error: {
-                            message: error.message
-                        }
-                    })
-                }
+                console.error(error)
+                resolve({ preps: [] });
+                // if (!!error.response) {
+                //     resolve(error.response.data);
+                // }
+                // else {
+                //     resolve({
+                //         error: {
+                //             message: error.message
+                //         }
+                //     })
+                // }
             })
     });
 }
@@ -358,16 +360,18 @@ export async function getDelegation(address) {
                 resolve(response.data.result);
             })
             .catch(error => {
-                if (!!error.response) {
-                    resolve(error.response.data);
-                }
-                else {
-                    resolve({
-                        error: {
-                            message: error.message
-                        }
-                    })
-                }
+                console.error(error)
+                resolve({ delegations: [] });
+                // if (!!error.response) {
+                //     resolve(error.response.data);
+                // }
+                // else {
+                //     resolve({
+                //         error: {
+                //             message: error.message
+                //         }
+                //     })
+                // }
             })
     });
 }
