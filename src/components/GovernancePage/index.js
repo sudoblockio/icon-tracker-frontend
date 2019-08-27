@@ -332,6 +332,9 @@ class GovernancePage extends Component {
 									</tbody>
 								</table>
 							</div>
+							<p className='prep-causion'>
+								The detailed informations of P-Rep will be updated every UTC 00:00, UTC 06:00, UTC 12:00, and UTC 18:00. Please check the URL of the submitted JSON file for each P-Rep.
+							</p>
 						</div>
 					</div>}
 				</div>
