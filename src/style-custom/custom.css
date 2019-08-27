@@ -489,3 +489,12 @@ input.txt-type-search.modified {
 .table-typeB td.balance p span:nth-of-type(2){width: 300px;}
 
 .copy.twit .custom-twitter { margin: 4.5px; width: 15px; opacity: 0.9; }
+
+p.prep-causion {
+    font-size: 12px;
+    color: #4d4d4d;
+    text-align: right;
+    line-height: 1.5;
+    margin-top: 10px;
+    font-weight: bold;
+}
