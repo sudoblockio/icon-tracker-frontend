@@ -212,8 +212,8 @@ class GovernancePage extends Component {
 									<p><em>ICX</em><span>{convertNumberToText(irep, 4)}</span></p>
 								</li>
 								<li>
-									<p>r<sub>rep</sub></p>
-									<p><em>%</em><span>{convertNumberToText(rrep / 100, 4)}</span></p>
+									<p>r<sub>rep</sub> * 3</p>
+									<p><em>%</em><span>{convertNumberToText(rrep / 100 * 3, 4)}</span></p>
 								</li>
 								{/* <li>
 									<p>Voter reward</p>
