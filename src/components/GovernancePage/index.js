@@ -138,25 +138,6 @@ class GovernancePage extends Component {
 		}
 	}
 
-	getBadge = (grade, active) => {
-		const className = active ? 'prep-tag' : 'prep-tag off'
-
-		switch(grade) {
-			case 0:
-				return <span className={className}><i></i>Main P-Rep</span>			
-			case 1:
-				return <span className={className}><i></i>Sub P-Rep</span>
-			case 2:
-				return <span className={className}><i></i>P-Rep</span>
-			default:
-				return null		
-		}
-	}
-
-	goAddress = address => {
-		this.props.history.push('/address/' + address)
-	}
-
 	render() {
 		const {
 			totalCirculation,
@@ -190,7 +171,7 @@ class GovernancePage extends Component {
 		return (
 			<div className="content-wrap governance">
 				<div className="screen0">
-					{loading && <LoadingComponent height='100%'/>}
+					{loading && <LoadingComponent height='400px'/>}
 					{!loading && <div className="wrap-holder">
 						<p className="title">Governance<span onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}><i className="img"></i>About Governance</span></p>
 						<div className="contents">
@@ -282,53 +263,7 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
-										{searched.map((prep, index) => {
-											const { 
-												name,
-												address,
-												grade,
-												totalBlocks,
-												validatedBlocks,
-												stake,
-												delegated,
-												irep,
-												irepUpdatedBlockHeight,
-												active,
-												logo,
-												rank
-											} = prep
-
-											const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
-
-											const prepStaked = IconConverter.toNumber(stake || 0)
-											const prepVoted = IconConverter.toNumber(delegated || 0)
-
-											const stakedRate = !totalStaked ? 0 : prepStaked / totalStaked * 100
-											const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
-
-											const badge = this.getBadge(grade, active)
-									
-											return(
-												<tr key={index}>
-													<td className="rank"><span>{rank}</span></td>
-													<td className="on">
-														<ul>
-															<li>{badge}</li>
-															{logo && <li><img src={logo || 'https://www.freelogodesign.org/Content/img/logo-samples/bakary.png'} /></li>}
-															<li>
-																<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
-																<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
-															</li>
-														</ul>
-													</td>
-													<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
-													<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
-													<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdatedBlockHeight))}</span></td>
-													<td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td>
-													<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
-												</tr>
-											)
-										})}
+										{searched.map((prep, index) => <TableRow key={index} prep={prep} totalStaked={totalStaked} totalVoted={totalVoted} />)}
 									</tbody>
 								</table>
 							</div>
@@ -336,6 +271,94 @@ class GovernancePage extends Component {
 					</div>}
 				</div>
 			</div>
+		)
+	}
+}
+
+class TableRow extends Component {
+
+	state = {
+		logoError: false,
+	}
+
+	getBadge = (grade, active) => {
+		const className = active ? 'prep-tag' : 'prep-tag off'
+
+		switch(grade) {
+			case 0:
+				return <span className={className}><i></i>Main P-Rep</span>			
+			case 1:
+				return <span className={className}><i></i>Sub P-Rep</span>
+			case 2:
+				return <span className={className}><i></i>P-Rep</span>
+			default:
+				return null		
+		}
+	}
+
+	goAddress = address => {
+		this.props.history.push('/address/' + address)
+	}
+
+	onError = () => {
+		this.setState({ logoError: true })
+	}
+
+	render() {
+		const {
+			logoError
+		} = this.state
+
+		const {
+			totalStaked,
+			totalVoted,
+			prep
+		} = this.props
+
+		const { 
+			name,
+			address,
+			grade,
+			totalBlocks,
+			validatedBlocks,
+			stake,
+			delegated,
+			irep,
+			irepUpdatedBlockHeight,
+			active,
+			logo,
+			rank
+		} = prep
+
+		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
+
+		const prepStaked = IconConverter.toNumber(stake || 0)
+		const prepVoted = IconConverter.toNumber(delegated || 0)
+
+		const stakedRate = !totalStaked ? 0 : prepStaked / totalStaked * 100
+		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
+
+		const badge = this.getBadge(grade, active)
+
+		return(
+			<tr>
+				<td className="rank"><span>{rank}</span></td>
+				<td className="on">
+					<ul>
+						<li>{badge}</li>
+						{logo && !logoError && <li><img src={logo} onError={this.onError} /></li>}
+						<li>
+							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
+							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
+						</li>
+					</ul>
+				</td>
+				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
+				<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
+				<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdatedBlockHeight))}</span></td>
+				<td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td>
+				<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
+			</tr>
 		)
 	}
 }
