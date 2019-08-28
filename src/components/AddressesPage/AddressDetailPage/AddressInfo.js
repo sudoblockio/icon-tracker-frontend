@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { numberWithCommas, convertNumberToText, isValidNodeType, searchLowerCase, isValidData } from 'utils/utils'
 import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'components'
 import NotificationManager from 'utils/NotificationManager'
-import { getStake, queryIScore, getBalance, getPRep, prepList, getDelegation } from '../../../redux/api/restV3/iiss';
+import { getStake, queryIScore, getBalance, getPRep, prepList, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle } from '../../../utils/utils';
 
@@ -66,15 +66,14 @@ class AddressInfo extends Component {
         const { stake, unstake } = await getStake(address)
         const { iscore } = await queryIScore(address)
         const { totalDelegated } = await getDelegation(address)
-        const { details } = prep
-        await this.checkRepJson(details)
-        
+        await this.checkRepJson(address)
+
         const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
         const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
         const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
         const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
         const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
-        
+
         this.setState({
             balance: convertLoopToIcxDecimal(Number(balance || 0) + Number(stake || 0) + Number(unstake || 0)),
             available: _balance,
@@ -87,50 +86,16 @@ class AddressInfo extends Component {
         })
     }
 
-    checkRepJson = async details => {
-        let repJson = {}
-
-        try {
-            if (details) {
-                const response = await fetch(details)
-                repJson = await response.json()
-                console.log(repJson)
-            }
-        }
-        catch (e) {
-            console.log(e)
+    checkRepJson = async address => {
+        const { repJson, isActive } = await iissPrepRepJsonActive({ address })
+        let media = {}
+        if (repJson &&
+            repJson.representative &&
+            repJson.representative.media instanceof Object) {
+            media = repJson.representative.media
         }
 
-        const { representative, server } = repJson
-        if (representative) {
-            const { media } = representative
-            if (media) {
-                this.setState({ media })
-            }
-        }
-
-        if (server) {
-            const { api_endpoint } = server
-            if (!api_endpoint) {
-                return
-            }
-
-            try {
-                const response = await fetch(api_endpoint)
-                const { status } = response
-                console.log(status)
-                if (status === 200) {
-                    this.setState({ active: 'Active' })
-                }
-                else {
-                    throw new Error(status)
-                }
-            }
-            catch(e) {
-                console.log(e)
-                this.setState({ active: 'Inactive' })
-            }
-        }
+        this.setState({ media, active: isActive ? 'Active' : 'Inactive' })
     }
 
     onNotificationChange = () => {
@@ -168,7 +133,7 @@ class AddressInfo extends Component {
         const { loading, data, error } = wallet
         const isPrep = Object.keys(this.state.prep).length !== 0
 
-        const { 
+        const {
             name,
             totalBlocks,
             validatedBlocks,
@@ -280,20 +245,20 @@ class AddressInfo extends Component {
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                             </tr>}
                                             {isPrep && <tr className="last">
-                                                <td>Productivity<br/>(Produced / (Produced + Missed))</td>
+                                                <td>Productivity<br />(Produced / (Produced + Missed))</td>
                                                 <td><span>{productivity}<em>( {numberWithCommas(validated)} / {numberWithCommas(produced)} )</em></span></td>
                                                 <td>Last Blockheight</td>
                                                 {(_lastGenerateBlockHeight === '-' || _lastGenerateBlockHeight < 0) ?
                                                     <td><span>{_lastGenerateBlockHeight}</span></td>
-                                                :
-                                                    <td><span className="mint" onClick={()=>{this.goBlock(_lastGenerateBlockHeight)}}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
+                                                    :
+                                                    <td><span className="mint" onClick={() => { this.goBlock(_lastGenerateBlockHeight) }}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
                                                 }
                                             </tr>}
                                             {isPrep && <tr className="governance">
                                                 <td>Governance variables</td>
                                                 <td colSpan="3">
                                                     <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
-                                                    <span><em>Last updated</em><span className="mint" onClick={()=>{this.goBlock(_irepUpdateBlockHeight)}}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
+                                                    <span><em>Last updated</em><span className="mint" onClick={() => { this.goBlock(_irepUpdateBlockHeight) }}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
                                                 </td>
                                             </tr>}
                                             <tr className="">
@@ -391,7 +356,7 @@ class TokenBalance extends Component {
         const TableData = _tokenList => {
             if (_tokenList.length === 0) {
                 return <td>None</td>
-            } 
+            }
             else {
                 const { search } = this.state
                 const list = _tokenList.filter(token => {

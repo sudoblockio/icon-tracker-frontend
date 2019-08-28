@@ -31,7 +31,7 @@ export async function getTrackerApiUrl() {
       case "custom":
         return "http://trackerlocaldev.icon.foundation"
       case "prep":
-        return "http://54.180.29.194"
+        return "http://54.180.16.76"
       case "qa":
         return "http://13.125.236.68"
       default:
