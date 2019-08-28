@@ -283,8 +283,8 @@ class AddressInfo extends Component {
                                                 <td>Productivity<br/>(Produced / (Produced + Missed))</td>
                                                 <td><span>{productivity}<em>( {numberWithCommas(validated)} / {numberWithCommas(produced)} )</em></span></td>
                                                 <td>Last Blockheight</td>
-                                                {_lastGenerateBlockHeight === '-' ?
-                                                    <td><span>-</span></td>
+                                                {(_lastGenerateBlockHeight === '-' || _lastGenerateBlockHeight < 0) ?
+                                                    <td><span>{_lastGenerateBlockHeight}</span></td>
                                                 :
                                                     <td><span className="mint" onClick={()=>{this.goBlock(_lastGenerateBlockHeight)}}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
                                                 }

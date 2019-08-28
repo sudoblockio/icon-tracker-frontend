@@ -13,7 +13,7 @@ import { POPUP_TYPE } from 'utils/const'
 class GovernancePage extends Component {
 
 	state = {
-		totalCirculation: 0,
+		totalSupply: 0,
 		publicTreasury: 0,
 		totalStaked: 0,
 		totalVoted: 0,
@@ -43,7 +43,7 @@ class GovernancePage extends Component {
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
-		const { icxCirculationy, publicTreasury } = tmainInfo || {}
+		const { icxSupply, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
@@ -57,7 +57,7 @@ class GovernancePage extends Component {
 		const lastPrepIndex = preps.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${preps[lastPrepIndex].name}`
 	
-		const totalCirculation = Number(icxCirculationy || 0)
+		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const irep = convertLoopToIcxDecimal((variable || {}).irep || 0)
@@ -66,7 +66,7 @@ class GovernancePage extends Component {
 		
 		this.setState({ 
 			loading: false,
-			totalCirculation, 
+			totalSupply, 
 			publicTreasury,
 			totalStaked,
 			totalVoted,
@@ -140,7 +140,7 @@ class GovernancePage extends Component {
 
 	render() {
 		const {
-			totalCirculation,
+			totalSupply,
 			publicTreasury,
 			totalStaked,
 			totalVoted,
@@ -159,8 +159,8 @@ class GovernancePage extends Component {
 			blackChecked
 		} = this.state
 
-		const totalStakedRate = !totalCirculation ? '-' : totalStaked / totalCirculation * 100
-		const totalVotedRate = !totalCirculation ? '-' : totalVoted / totalCirculation * 100
+		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
+		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 		
 		const list = blackChecked ? blackPrep : allPrep.filter(p => {
 			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
@@ -176,7 +176,7 @@ class GovernancePage extends Component {
 						<p className="title">Governance<span onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}><i className="img"></i>About Governance</span></p>
 						<div className="contents">
 							<div className="graph">
-								<div className="txt"><span><i className="img"></i>Total Circulation : {convertNumberToText(totalCirculation, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
+								<div className="txt"><span><i className="img"></i>Total Supply : {convertNumberToText(totalSupply, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
 								<div className="bar-group">
 									<div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
 									<div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(2)}<em>%</em></span>}</div>
@@ -263,7 +263,15 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
-										{searched.map((prep, index) => <TableRow key={index} prep={prep} totalStaked={totalStaked} totalVoted={totalVoted} />)}
+										{searched.map((prep, index) => (
+											<TableRow 
+												key={index} 
+												prep={prep} 
+												totalStaked={totalStaked} 
+												totalVoted={totalVoted} 
+												history={this.props.history}
+											/>
+										))}
 									</tbody>
 								</table>
 							</div>

@@ -62,7 +62,6 @@ export function* addressVotedListFunc(action) {
   try {
     const { address } = action.payload
     const data = yield call(iissDelegateList, { prep: address })
-    console.log(data)
     if (data && data.length > 0) {
       yield put({ type: AT.addressVotedListFulfilled, payload: { 
         data,
