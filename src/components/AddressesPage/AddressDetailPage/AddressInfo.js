@@ -66,8 +66,11 @@ class AddressInfo extends Component {
         const { stake, unstake } = await getStake(address)
         const { iscore } = await queryIScore(address)
         const { totalDelegated } = await getDelegation(address)
-        await this.checkRepJson(address)
-
+        
+        if (prep && Object.keys(prep).length > 0) {
+            await this.checkRepJson(address)
+        }
+        
         const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
         const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
         const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
