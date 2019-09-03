@@ -474,7 +474,7 @@
 .table-typeP .ellipsis{width: 325px;}
 .table-typeP td.on img {
     width: 30px;
-    height: 30px;
+    /* height: 30px; */
     margin-right: 5px;
 }
 
