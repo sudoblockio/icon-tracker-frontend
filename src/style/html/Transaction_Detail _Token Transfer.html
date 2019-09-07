@@ -28,7 +28,7 @@
 										<li><span>Contracts</span></li>
 									</ol>
 								</li>
-								<li><span>BLOCK</span></li>
+								<li><span>Block</span></li>
 								<li><span>Transaction</span></li>
 								<li>
 									<span>Token<em class="img"></em></span>
@@ -38,12 +38,11 @@
 									</ol>
 								</li> 
 								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
-							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, BLOCK height" value="">
-								<span><em class="img"></em></span>
-							</div>
-							<div class="connect join"><span><em class="img"></em></span>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
 								<div class="sub-menu">
 									<p><span>Wallet Address</span>
 										<span class="complete">
@@ -51,10 +50,12 @@
 											<em>Copy Address</em>
 										</span>
 									</p>
-									
 									<span class="btn">Disconnect</span>
 									<span class="btn">View Details</span>
 								</div>
+							</div>
+							<div class="search-group">
+								<span><em class="img"></em></span>
 							</div>
 						</div>
 					</div>
@@ -68,105 +69,102 @@
 					<div class="wrap-holder">
 						<p class="title">Transaction</p>
 						<div class="contents">
-							<table class="table-typeB transaction">
-								<thead>
-									<tr>
-										<th>Address</th>
-										<th>value</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="">
-										<td>TxHash</td>
-										<td>0xB704eC3E412910C97d120424f5De0e7b63b2c04E<span class="copy twit"><i class="img"></i></span><span class="copy">Copy Address</span><span class="copy on">Copy Address</span></td>
-									</tr>
-									<tr>
-										<td>Status</td>
-										<td>Successfully Confirmed</td>
-									</tr>
-									<tr>
-										<td>Block height</td>
-										<td><span>106</span><em>(1,000 Confirmations)</em> Pending</td>
-									</tr>
-									<tr>
-										<td>Time stamp</td>
-										<td>2018-03-08 22:14:27<em>(UTC+9)</em></td>
-									</tr>
-									<tr>
-										<td>From</td>
-										<td><span>E412910C97d120424f5De0e7b63b2c04E </span><span class="copy">Copy Address</span></td>
-									</tr>
-									<tr>
-										<td>To</td>
-										<td class="trans"><i class="img"></i><span>E412910C97d120424f5De0e7b63b2c04E </span><span class="copy">Copy Address</span>
-											<!-- <div>
-												<p>┗&emsp;TRANSFER XXXX ICX&emsp; from &emsp;<span>0x31nsadnk…</span>&emsp;to&emsp;<span>0x31nsadnk…</p>
-												<p>┗&emsp;TRANSFER XXXX ICX&emsp; from &emsp;<span>0x31nsadnk…</span>&emsp;to&emsp;<span>0x31nsadnk…</p>
-											</div> -->
-										</td>
-									</tr>
-									<tr>
-										<td>To</td>
-										<td class="trans calen"><i class="img"></i><span>Contract creation </span>
-										</td>
-									</tr>
-									<tr>
-										<td>Token transfer</td>
-										<td class="transfer">
-											<p>5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis scam"><i class="img"></i>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
-											<p class="fail">5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis scam"><i class="img"></i>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
-											<p>5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
-											<span class="more">More (5/15)<i class="img"></i></span>
-											<!-- <span class="more">More(15)<i class="img on"></i></span> -->
-										</td>
-									</tr>
-									<tr>
-										<td>Amount</td>
-										<td>100,000,000.09 ICX</td>
-									</tr>
-								<!-- 	<tr>
-										<td>Internal transaction</td>
-										<td>X</td>
-									</tr> -->
-									<tr>
-										<td>STEP limit</td>
-										<td>XX</td>
-									</tr>
-									<tr>
-										<td>STEP used by Txn</td>
-										<td>XXX</td>
-									</tr>
-									<tr>
-										<td>STEP price</td>
-										<td>0 ICX<em>(0 Gloop)</em></td>
-									</tr>
-									<tr>
-										<td>Actual TxFee</td>
-										<td>0 ICX<em>(0.00 USD)</em></td>
-									</tr>
-									<tr>
-										<td>Data</td>
-										<td class="convert">
-											<div class="scroll">
-												<p>Function: transfer(address _<span>to</span>, uint256 _<span>value</span>) ***
-	MethodID: 0xa0000cbb
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
-	[1]:  00000000000000000000000000000000000000000000000000000002540b</p>
-											</div>
-											<button class="btn-type-normal">Convert to UTF-8</button>
-											<!-- <span class="">Convert to UTF-8</span> -->
+							<div class="table-box">
+								<table class="table-typeB transaction">
+									<thead>
+										<tr>
+											<th>Address</th>
+											<th>value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td>TxHash</td>
+											<td><span>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</span><span class="copy twit"><i class="img"></i></span><span class="copy"><i class="img"></i></span><span class="btn-scam">Report scam</span></td>
+										</tr>
+										<tr>
+											<td>Status</td>
+											<td><span>Successfully Confirmed</span></td>
+										</tr>
+										<tr>
+											<td>Block height</td>
+											<td><span>106</span><em>(1,000 Confirmations)</em> <span>Pending</span></td>
+										</tr>
+										<tr>
+											<td>Time (UTC+9)</td>
+											<td><span>2018-03-08 22:14:27</span></td>
+										</tr>
+										<tr>
+											<td>From</td>
+											<td><span>E412910C97d120424f5De0e7b63b2c04E </span><span class="copy"><i class="img"></i></span></td>
+										</tr>
+										<tr>
+											<td>To</td>
+											<td class="trans"><i class="img"></i><span>E412910C97d120424f5De0e7b63b2c04E </span><span class="copy"><i class="img"></i></span>
+												<!-- <div>
+													<p>┗&emsp;TRANSFER XXXX ICX&emsp; from &emsp;<span>0x31nsadnk…</span>&emsp;to&emsp;<span>0x31nsadnk…</p>
+													<p>┗&emsp;TRANSFER XXXX ICX&emsp; from &emsp;<span>0x31nsadnk…</span>&emsp;to&emsp;<span>0x31nsadnk…</p>
+												</div> -->
+											</td>
+										</tr>
+										<tr>
+											<td>To</td>
+											<td class="trans calen"><i class="img"></i><span>Contract creation </span>
+											</td>
+										</tr>
+										<tr>
+											<td>Token transfer</td>
+											<td class="transfer">
+												<p>5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis scam"><i class="img"></i>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
+												<p class="fail">5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis scam"><i class="img"></i>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
+												<p>5 IRC 01<em>(XXXX Token)</em>&emsp; from &emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>&emsp;to&emsp;<span class="ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></p>
+												<span class="more">More (5/15)<i class="img"></i></span>
+												<!-- <span class="more">More(15)<i class="img on"></i></span> -->
+											</td>
+										</tr>
+										<tr>
+											<td>Amount</td>
+											<td><span>100,000,000.09 ICX</span></td>
+										</tr>
+										<tr>
+											<td>STEP limit</td>
+											<td><span>XX</span></td>
+										</tr>
+										<tr>
+											<td>STEP used by Txn</td>
+											<td><span>XXX</span></td>
+										</tr>
+										<tr>
+											<td>STEP price</td>
+											<td><span>0 ICX</span><em>(XX Gloop)</em></td>
+										</tr>
+										<tr>
+											<td>Actual TxFee</td>
+											<td><span>0 ICX</span><em>(0.00 USD)</em></td>
+										</tr>
+										<tr>
+											<td>Data</td>
+											<td class="convert">
+												<div class="scroll">
+													<p>Function: transfer(address _<span>to</span>, uint256 _<span>value</span>) ***
+		MethodID: 0xa0000cbb
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[0]:  0000000000000000000000007df6e1c7ec3d93c7b9d6df2cc1b6b1e02219397b
+		[1]:  00000000000000000000000000000000000000000000000000000002540b</p>
+												</div>
+												<button class="btn-type-normal">Convert to UTF-8</button>
+												<!-- <span class="">Convert to UTF-8</span> -->
 
-										</td>
-									</tr>
+											</td>
+										</tr>
 
-								</tbody>
-							</table>
-
+									</tbody>
+								</table>
+							</div>
 						</div>
 
 					</div>
@@ -179,25 +177,32 @@
 
 	</div>
 
-			<!-- footer -->
-			<div class="footer-wrap">
-				<div class="screen0">
-					<div class="wrap-holder">
-						<p>©2018 ICON Foundation</p>
-						<div class="sns">
-							<ul>
-								<li class="icon"><a href=""><span class="img"></span></a></li>
-								<li class="medium"><a href=""><span class="img"></span></a></li>
-								<li class="brunch"><a href=""><span class="img"></span></a></li>
-								<li class="twitter"><a href=""><span class="img"></span></a></li>
-								<li class="facebook"><a href=""><span class="img"></span></a></li>
-								<li class="github"><a href=""><span class="img"></span></a></li>
-							</ul>
-						</div>
+	<!-- footer -->
+	<div class="footer-wrap">
+		<div class="screen0">
+			<div class="wrap-holder">
+				<p>©2018 ICON Foundation</p>
+				<div class="sns">
+					<ul>
+						<li class="icon"><a href=""><span class="img"></span></a></li>
+						<li class="medium"><a href=""><span class="img"></span></a></li>
+						<li class="brunch"><a href=""><span class="img"></span></a></li>
+						<li class="twitter"><a href=""><span class="img"></span></a></li>
+						<li class="facebook"><a href=""><span class="img"></span></a></li>
+						<li class="github"><a href=""><span class="img"></span></a></li>
+					</ul>
+					<div class="mainnet"><p>Mainnet<i class="img"></i></p>
+						<ul>
+							<li><span>Mainnet</span></li>
+							<li><span>Euljiro</span></li>
+							<li><span>Yeouido</span></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<!-- //footer -->
+		</div>
+	</div>
+	<!-- //footer -->
 
 </body>
 </html>

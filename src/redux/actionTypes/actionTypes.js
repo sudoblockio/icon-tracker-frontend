@@ -76,6 +76,10 @@ const actionTypes = {
   addressVotedListFulfilled: 'ADDRESS_VOTED_LIST_FULFILLED',
   addressVotedListRejected: 'ADDRESS_VOTED_LIST_REJECTED',
 
+  addressRewardList: 'ADDRESS_REWARD_LIST',
+  addressRewardListFulfilled: 'ADDRESS_REWARD_LIST_FULFILLED',
+  addressRewardListRejected: 'ADDRESS_REWARD_LIST_REJECTED',
+
 
 
 
@@ -178,7 +182,19 @@ const actionTypes = {
   setNotification: 'SET_NOTIFICATION',
   setNotificationSuccess :'SET_NOTIFICATION_SUCCESS',
   clearWallet: 'CLEAR_WALLET',
-  clearWalletSuccess: 'CLEAR_WALLET_SUCCESS'
+  clearWalletSuccess: 'CLEAR_WALLET_SUCCESS',
+
+  proposalInfo: 'PROPOSAL_INFO',
+  proposalInfoFulfilled: 'PROPOSAL_INFO_FULFILLED',
+  proposalInfoRejected: 'PROPOSAL_INFO_REJECTED',
+
+  totalQuorum: 'TOTAL_QUORUM',
+  totalQuorumFulfilled: 'TOTAL_QUORUM_FULFILLED',
+  totalQuorumRejected: 'TOTAL_QUORUM_REJECTED',
+
+  totalTokenVotes: 'TOTAL_TOKEN_VOTES',
+  totalTokenVotesFulfilled: 'TOTAL_TOKEN_VOTES_FULFILLED',
+  totalTokenVotesRejected: 'TOTAL_TOKEN_VOTES_REJECTED',
 }
 
 export default actionTypes

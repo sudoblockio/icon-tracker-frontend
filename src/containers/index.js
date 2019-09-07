@@ -16,6 +16,8 @@ import TokenListPageContainer from './TokensPage/TokenListPageContainer'
 import TokenDetailPageContainer from './TokensPage/TokenDetailPageContainer'
 
 import GovernancePageContainer from './GovernancePage/GovernancePageContainer'
+import ProposalListPageContainer from './ProposalListPage/ProposalListPageContainer'
+import ProposalDetailPageContainer from './ProposalDetailPage/ProposalDetailPageContainer'
 
 import HeaderContainer from './CommonPage/HeaderContainer'
 import NotFoundPageContainer from './CommonPage/NotFoundPageContainer'
@@ -43,5 +45,7 @@ export {
   NotFoundPageContainer,
   TxPageContainer,
 
-  GovernancePageContainer 
+  GovernancePageContainer,
+  ProposalListPageContainer,
+  ProposalDetailPageContainer
 }

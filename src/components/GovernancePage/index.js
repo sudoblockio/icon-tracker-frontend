@@ -4,7 +4,8 @@ import { getMainInfo } from '../../redux/api/restV3/main';
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from 'utils/utils'
 import { getPReps, getIISSInfo } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepMain, prepSub, prepList, getPRep } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList } from '../../redux/api/restV3/iiss';
+// import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
     LoadingComponent,
 } from 'components'
@@ -357,7 +358,7 @@ class TableRow extends Component {
 				<td className="on">
 					<ul>
 						<li>{badge}</li>
-						{logo && !logoError && <li><img src={logo} onError={this.onError} /></li>}
+						{logo && !logoError && <li><img src={logo} onError={this.onError} alt='logo'/></li>}
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>

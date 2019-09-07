@@ -121,7 +121,7 @@ class TransactionInfo extends Component {
 												{txHash}
 												<span className="copy twit" onClick={this.onTwitterClick}>
 													{/* <i className="img twit-icon"></i> */}
-													<img className='custom-twitter' src={twitterLogo} />
+													<img className='custom-twitter' src={twitterLogo} alt='twitter'/>
 												</span><CopyButton data={txHash} title={'Copy TxHash'} isSpan />
 												<ReportButton address={txHash}/>
 											</td>

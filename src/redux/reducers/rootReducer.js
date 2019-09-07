@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   tokens: tokensReducer,
   contracts: contractsReducer,
   popup: popupReducer,
-  storage: storageReducer
+  storage: storageReducer,
 });
 
 export default rootReducer;

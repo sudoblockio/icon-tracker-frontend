@@ -6,6 +6,13 @@ export default class Search extends Component {
         this.state = {
             value: '',
         }
+        this.input = null
+    }
+
+    componentDidMount() {
+        if (this.input) {
+            this.input.focus()
+        }
     }
 
     handleInputChange = e => {
@@ -14,33 +21,17 @@ export default class Search extends Component {
         })
     }
 
-    handleKeyPress = e => {
-        if (!this.state.value) return
-        if (e.key === 'Enter') {
-            this.props.data.search(this.state.value.replace(/\s/gi, ''))
-            this.setState(
-                {
-                    value: '',
-                },
-                () => {
-                    this.props.closeSearch()
-                },
-            )
+    handleKeyDown = e => {
+        if (e.key === 'Enter' && this.state.value) {
+            this.props.data.search(this.state.value)
+            this.setState({ value: '' }, this.props.closeSearch)
+        }
+
+        if (e.key === 'Escape') {
+            this.props.closeSearch()
         }
     }
-
-    handleSubmit = () => {
-        if (!this.state.value) return
-        this.props.data.search(this.state.value.replace(/\s/gi, ''))
-        this.setState(
-            {
-                value: '',
-            },
-            () => {
-                this.props.closeSearch()
-            },
-        )
-    }
+ 
     render() {
         return (
             <div key="search" className="pop-search">
@@ -50,12 +41,14 @@ export default class Search extends Component {
                         <i className="img" />
                     </span>
                     <input
+                        ref={ref => { this.input = ref }} 
                         type="text"
                         className="txt-type-search"
                         onChange={this.handleInputChange}
-                        onKeyPress={this.handleKeyPress}
+                        onKeyDown={this.handleKeyDown}
                         placeholder="Address, TxHash, Block, SCORE"
                         value={this.state.value}
+                        onBlur={this.props.closeSearch}
                     />
                     <em>
                         <i className="img" onClick={this.props.closeSearch} />

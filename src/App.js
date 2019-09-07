@@ -6,7 +6,6 @@ import { ConnectedRouter } from 'react-router-redux'
 
 class App extends Component {
     render() {
-        console.error('error')
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>

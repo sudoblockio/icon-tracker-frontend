@@ -10,6 +10,16 @@ class TxPageTitle extends Component {
             const _listSize = numberWithCommas(listSize || 0)
             const _totalSize = numberWithCommas(totalSize || 0)
             switch (txType) {
+                case TX_TYPE.ADDRESS_REWARD:
+                    return (
+                        <p className="title">
+                            Reward
+                            <span>for address {urlIndex}</span>
+                            <span className="right">
+                                A total of<em>{_listSize}</em> reward(s) found
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <p className="title">

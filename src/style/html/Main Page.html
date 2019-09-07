@@ -13,7 +13,24 @@
 	<link rel="stylesheet" type="text/css" href="../css/font.css">
 	<link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
-<body class="isBanner">
+<body class="isBanner"> <!-- isBanner -->
+	<!-- banner -->
+	<div class="banner-wrap">
+		<div class="banner">
+			<img src="../image/banner_t.png">
+			<i class="bubble"></i>
+			<i class="bubble"></i>
+			<i class="bubble"></i>
+			<div class="view">
+				<input id="cbox-01" class="cbox-type" type="checkbox" name="">
+				<label for="cbox-01" class="label _img">Do not show 7 days</label>
+				<i class="img close"></i>
+			</div>
+			<a class="link" href="https://icon.community/iconsensus/" target="_blank"></a>
+		</div>
+	</div>
+	<!-- //banner -->
+
 	<div class="root">
 		<div class="wrap home">
 			<!-- header -->
@@ -30,7 +47,7 @@
 										<li><span>Contracts</span></li>
 									</ol>
 								</li>
-								<li><span>BLOCK</span></li>
+								<li><span>Block</span></li>
 								<li><span>Transaction</span></li>
 								<li>
 									<span>Token<em class="img"></em></span>
@@ -40,12 +57,11 @@
 									</ol>
 								</li> 
 								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
-							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, BLOCK height" value="">
-								<span><em class="img"></em></span>
-							</div>
-							<div class="connect join"><span class="disabled"><em class="img"></em></span>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
 								<div class="sub-menu">
 									<p><span>Wallet Address</span>
 										<span class="complete">
@@ -53,10 +69,12 @@
 											<em>Copy Address</em>
 										</span>
 									</p>
-									
 									<span class="btn">Disconnect</span>
 									<span class="btn">View Details</span>
 								</div>
+							</div>
+							<div class="search-group">
+								<span><em class="img"></em></span>
 							</div>
 						</div>
 					</div>
@@ -66,24 +84,45 @@
 
 			<!-- content -->
 			<div class="content-wrap">
+				<div class="screen2">
+					<div class="wrap-holder">
+						<div class="content">
+							<p>ICON Blockchain Explorer</p>		
+							<div class="search-group txt fixing">
+								<input type="text" class="txt-type-search" placeholder="Name, Address, TxHash, Block, SCORE" value=""><span><i class="img"></i></span><em><i class="img"></i></em>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="screen0">
 					<div class="wrap-holder">
-						<ul class="content ">
-							<li class="left">
-								<p class="subTitle a">Market Cap<em class="subTitle">USD</em></p>
-								<p class="num a">90,000,000,000</p>
-								<p class="subTitle">ICX Supply</p>
-								<p class="num b">800,000,000</p>
-								<p class="subTitle">ICX Circulationy</p>
-								<p class="num c">790,000,000</p>
-								<hr class="hr">
-								<p class="subTitle c">All Transactions<em>999,999,999</em></p>
-								<p class="subTitle c">C-reps<em>50</em></p>
+						<ul class="content">
+							<li>
+								<div>
+									<span class="usd"><i class="img"></i></span>
+									<p>Market Cap <em>(USD)</em></p>
+									<p>148,604,730</p>									
+								</div>
 							</li>
-							<li class="right">
-								<p class="subTitle">Daily Transactions</p>
-								<div class="graph">
-									<img src="../image/chart.png" style="width: 728px;height: 282px;">
+							<li>
+								<div>
+									<span class="icx"><i class="img"></i></span>
+									<p>ICX Supply</p>
+									<p>800,460,000</p>									
+								</div>
+							</li>
+							<li>
+								<div>
+									<span class="icx"><i class="img"></i></span>
+									<p>ICX Circulation</p>
+									<p>473,406,688</p>									
+								</div>
+							</li>
+							<li>
+								<div>
+									<span><i class="img">T</i></span>
+									<p>All Transactions</p>
+									<p>8,000,005</p>									
 								</div>
 							</li>
 						</ul>
@@ -92,154 +131,165 @@
 				<div class="screen1">
 					<div class="bg">
 						<div class="wrap-holder">
-							<ul class="content half">
+							<ul class="content">
 								<li class="left">
-									<p class="title">Blocks<span>View all<em class="img"></em></span></p>
+									<p class="title">Blocks</p>
 									<div class="list-group">
 										<ul class="list">
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span>99</span>
-												</p>
-												<p class="a">Hash<em class="scam"><i class="img"></i><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:1<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span>99,999</span>
-												</p>
-												<p class="a">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em class="scam"><i class="img"></i><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
 											<li>
-												<p class="icon">
-													<img src="../image/icon_02.png">
-													<span>BLOCK</span>
-													<span class="s">999,999</span>
-												</p>
-												<p class="a">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
 												<p class="b">Transactions<em>100</em></p>
-												<p class="c">Time Stamp<em>2017-12-14 13:11:11<span>(UTC+9)</span></em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
 											</li>
-
-
+											<li>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
+												<p class="b">Transactions<em>100</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
+											</li>
+											<li>
+												<p class="icon">B</p>
+												<p class="a">Block<em>999,999</em></p>
+												<p class="b">Transactions<em>100</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">Time (UTC+9)<em>2018-06-08 14:32:29</em></p>
+											</li>
 										</ul>
 									</div>
-
+									<p class="all">View all (9,999,999)</p>
 								</li>
 								<li class="right">
-									<p class="title">Transactions <span>View all<em class="img"></em></span></p>
+									<p class="title">Transactions</p>
 									<div class="list-group">
 										<ul class="list">
 											<li>
-												<p class="icon"><img src="../image/icon_01.png">
-													<span>SUCCESS</span></p>
-												<p class="a">TxHash<em><a href="">0xB704eC3E412910C97d120424f5dfdfdfdfererererereredfdDe0e7b63b2c04E</a></em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em class="scam"><i class="img"></i>0xB704eC3E412910C97d120424f5De0e7b63b2c24f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li class="fail">
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
+											</li>
+											<li>
+												<p class="icon">T</p>
+												<p class="a">Status<em>Success</em></p>
+												<p class="b">Amount<em>90,000.000006 ICX</em></p>
+												<p class="c">Hash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
+												<p class="d">TxFee<em>0.000006 ICX</em></p>
 											</li>
 
-											<li>
-												<p class="icon"><img src="../image/icon_01.png"><span>SUCCESS</span></p>
-												<p class="a">TxHash<em class="scam"><i class="img"></i>0xB704eC3E412910C97d120424f5De0e7b63b2c24f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
 
-											<li>
-												<p class="icon"><img src="../image/icon_01.png"><span>SUCCESS</span></p>
-												<p class="a">TxHash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
-
-											<li>
-												<p class="icon fail"><img src="../image/icon_03.png"><span>FAIL</span></p>
-												<p class="a">TxHash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
-
-											<li>
-												<p class="icon"><img src="../image/icon_01.png"><span>SUCCESS</span></p>
-												<p class="a">TxHash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
-
-											<li>
-												<p class="icon"><img src="../image/icon_01.png"><span>SUCCESS</span></p>
-												<p class="a">TxHash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
-
-											<li>
-												<p class="icon"><img src="../image/icon_01.png"><span>SUCCESS</span></p>
-												<p class="a">TxHash<em>0xB704eC3E412910C97d120424f5De0e7b63b2c04E</em></p>
-												<p class="b">Amount<em>100.0000001<span>ICX</span></em></p>
-												<p class="c">TxFee<em>0.1<span>ICX</span></em></p>
-											</li>
+											
 										</ul>
 									</div>
-
-
+									<p class="all">View all (9,999,999)</p>
 								</li>
 							</ul>
 						</div>
@@ -251,12 +301,25 @@
 		</div>
 		<div class="blank"></div>
 	</div>
+
+
+	<!-- popup-search -->
+	<div class="pop-search">
+		<div class="dimmed">
+		</div>
+		<div class="search-group txt">
+			<span><i class="img"></i></span><input type="text" class="txt-type-search" placeholder="Name, Address, TxHash, Block, SCORE" value=""><em><i class="img"></i></em>
+		</div>
+	</div>
+	<!-- //popup-search -->
+
 	<!-- footer -->
 	<div class="footer-wrap">
 		<div class="screen0">
 			<div class="wrap-holder">
 				<p>©2018 ICON Foundation</p>
 				<div class="sns">
+					<p class="mail"><span>Request to add token homepage link & support</span><a href="mailto:hello@icon.foundation">hello@icon.foundation</a></p>
 					<ul>
 						<li class="icon"><a href=""><span class="img"></span></a></li>
 						<li class="medium"><a href=""><span class="img"></span></a></li>
@@ -279,22 +342,7 @@
 	</div>
 	<!-- //footer -->
 
-	<!-- banner -->
-	<div class="banner-wrap">
-		<div class="banner">
-			<img src="../image/banner_t.png">
-			<i class="bubble"></i>
-			<i class="bubble"></i>
-			<i class="bubble"></i>
-			<div class="view">
-				<input id="cbox-01" class="cbox-type" type="checkbox" name="">
-				<label for="cbox-01" class="label _img">Do not show 7 days</label>
-				<i class="img close"></i>
-			</div>
-			<a class="link" href="https://icon.community/iconsensus/" target="_blank"></a>
-		</div>
-	</div>
-	<!-- //banner -->
+
 
 </body>
 </html>

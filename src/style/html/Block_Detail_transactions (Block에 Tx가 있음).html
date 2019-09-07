@@ -25,8 +25,8 @@
 								<li>
 									<span>Address<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Addresses List</span></li>
-										<li><span>Contracts List</span></li>
+										<li><span>Addresses</span></li>
+										<li><span>Contracts</span></li>
 									</ol>
 								</li>
 								<li><span>Block</span></li>
@@ -34,21 +34,29 @@
 								<li>
 									<span>Token<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Token List</span></li>
-										<li><span>Token Transfer List</span></li>
+										<li><span>Token</span></li>
+										<li><span>Token Transfer</span></li>
 									</ol>
 								</li> 
-								<li>
-									<span>Rep<em class="img"></em></span>
-									<ol class="sub-menu">
-										<li><span>Representative</span></li>
-									</ol>
-								</li> 
+								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
+								<div class="sub-menu">
+									<p><span>Wallet Address</span>
+										<span class="complete">
+											<em>hx2fd0acc3c266dfc0c0085f50420e2beed76cd6f0</em>
+											<em>Copy Address</em>
+										</span>
+									</p>
+									<span class="btn">Disconnect</span>
+									<span class="btn">View Details</span>
+								</div>
+							</div>
 							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, Block height" value="">
 								<span><em class="img"></em></span>
-
 							</div>
 						</div>
 					</div>
@@ -62,57 +70,52 @@
 					<div class="wrap-holder">
 						<p class="title">Block</p>
 						<div class="contents">
-							<table class="table-typeB detail">
-								<thead>
-									<tr>
-										<th>Block Height</th>
-										<th>value</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Block Height</td>
-										<td><p class="prev disabled"><em class="img"></em></p><em class="value">99999</em><p class="next disabled"><em class="img"></em></p></td>
-									</tr>
+							<div class="table-box">
+								<table class="table-typeB detail">
+									<thead>
+										<tr>
+											<th>Block Height</th>
+											<th>value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Block Height</td>
+											<td><p class="prev disabled"><em class="img"></em></p><em class="value">99999</em><p class="next"><em class="img"></em></p></td>
+										</tr>
 
-									<tr>
-										<td>Time</td>
-										<td>2017-12-14 01:53:49<em>(UTC+9)</em></td>
-									</tr>
-									<tr>
-										<td>C-rep</td>
-										<td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
-									</tr>
-									<tr>
-										<td>Transactions</td>
-										<td><span>XX Transactions</span> in this block</td>
-									</tr>
-									<tr>
-										<td>Hash</td>
-										<td>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</td>
-									</tr>
-									<tr>
-										<td>Prev Hash</td>
-										<td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
-									</tr>
-									<tr>
-										<td>Block Size</td>
-										<td>37,975 bytes</td>
-									</tr>
-									<tr>
-										<td>Amount</td>
-										<td>100.000005 ICX</td>
-									</tr>
-									<tr>
-										<td>TxFee</td>
-										<td>0.1 ICX</td>
-									</tr>
-									<tr>
-										<td>Representative</td>
-										<td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
-									</tr>
-								</tbody>
-							</table>
+										<tr>
+											<td>Time (UTC+9)</td>
+											<td><span>2017-12-14 01:53:49</span></td>
+										</tr>
+										<tr>
+											<td>No of Txns</td>
+											<td><span>XX</span></td>
+										</tr>
+										<tr>
+											<td>Hash</td>
+											<td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
+										</tr>
+										<tr>
+											<td>Prev Hash</td>
+											<td><span>0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span></td>
+										</tr>
+										<tr>
+											<td>Block Size</td>
+											<td><span>37,975 bytes</span></td>
+										</tr>
+										<tr>
+											<td>TxFee</td>
+											<td><span>0.1 ICX</span></td>
+										</tr>
+										<tr>
+											<td>Produced by</td>
+											<td><span><em class="prep-tag">P-Rep</em>ICONIST</span></td>
+										</tr>
+									</tbody>
+								</table>								
+							</div>
+
 
 						</div>
 
@@ -126,62 +129,65 @@
 							</ul>
 						</div>
 						<div class="contents">
-							<p class="txt"><span>Latest<em>10</em> ICX txns from a total of<em>999,999 transaction</em></span></p>
-							<table class="table-typeD">
-								<thead>
-									<tr>
-										<th>TxHash</th>
-										<th>From</th>
-										<th class="table-sign"></th>
-										<th>To</th>
-										<th>Amount</th>
-										<th>TxFee</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="no">-</td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="no">-</td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
-									<tr>
-										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign out"><span>OUT</span></td>
-										<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
-										<td><span>2000.000001</span><em>ICX</em></td>
-										<td><span>20.1</span><em>ICX</em></td>
-									</tr>
+							<p class="txt"><span>Latest<em>10</em> ICX txns(s) from a total of<em>999,999 transaction(s)</em></span></p>
+							<div class="table-box">
+								<table class="table-typeD">
+									<thead>
+										<tr>
+											<th>TxHash</th>
+											<th>From</th>
+											<th class="table-sign"></th>
+											<th>To</th>
+											<th>Amount</th>
+											<th>TxFee</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="no">-</td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="no">-</td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
+										<tr>
+											<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign out"><span>OUT</span></td>
+											<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
+											<td><span>2000.000001</span><em>ICX</em></td>
+											<td><span>20.1</span><em>ICX</em></td>
+										</tr>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>
 
-							<table class="table-type">
-								<tbody>
-									<tr>
-										<td colspan="7" class="notrans">No Transaction</td>
-									</tr>
-								</tbody>
-							</table>
+								<table class="table-type">
+									<tbody>
+										<tr>
+											<td colspan="7" class="notrans">No Transaction</td>
+										</tr>
+									</tbody>
+								</table>								
+							</div>
+
 
 						</div>
 
@@ -210,6 +216,13 @@
 						<li class="facebook"><a href=""><span class="img"></span></a></li>
 						<li class="github"><a href=""><span class="img"></span></a></li>
 					</ul>
+					<div class="mainnet"><p>Mainnet<i class="img"></i></p>
+						<ul>
+							<li><span>Mainnet</span></li>
+							<li><span>Euljiro</span></li>
+							<li><span>Yeouido</span></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

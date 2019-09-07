@@ -92,6 +92,7 @@
         "start:custom": "REACT_APP_ENV=custom node scripts/start.js",
         "start:prep": "REACT_APP_ENV=prep node scripts/start.js",
         "start:qa": "REACT_APP_ENV=qa node scripts/start.js",
+        "start:np": "REACT_APP_ENV=np node scripts/start.js",
         "build": "node scripts/build.js",
         "build:mainnet": "REACT_APP_ENV=mainnet node scripts/build.js && zip -r build-mainnet.zip build",
         "build:testnet": "REACT_APP_ENV=testnet node scripts/build.js && zip -r build-testnet.zip build",
@@ -99,6 +100,7 @@
         "build:custom": "REACT_APP_ENV=custom node scripts/build.js && zip -r build-custom.zip build",
         "build:prep": "REACT_APP_ENV=prep node scripts/build.js && zip -r build-prep.zip build",
         "build:qa": "REACT_APP_ENV=qa node scripts/build.js && zip -r build-qa.zip build",
+        "build:np": "REACT_APP_ENV=np node scripts/build.js && zip -r build-np.zip build",
         "test": "node scripts/test.js --env=jsdom"
     },
     "devDependencies": {

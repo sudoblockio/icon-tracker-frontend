@@ -548,3 +548,21 @@ export function getBadgeTitle(grade) {
             return 'P-Rep'
     }
 }
+
+
+export function valueToString(value){
+    if (!value) return ''
+
+    if (typeof value === 'string') {
+        return value
+    }
+
+    let result = ''
+    if (typeof value === 'object') {
+        Object.keys(value).forEach(key => {
+            result += (result !== '' ? ', ' : '') + value[key]
+        })
+    }
+
+    return result
+}

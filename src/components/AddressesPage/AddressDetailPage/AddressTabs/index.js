@@ -15,9 +15,9 @@ import {
 
 class WalletTabs extends Component {
     render() {
-        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep } = this.props
+        const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
-        const { address, tokenList, internalTxCount } = data
+        const { address, tokenList, internalTxCount, claimIScore } = data
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
@@ -33,7 +33,10 @@ class WalletTabs extends Component {
         if (isPrep) {
             TABS.push(ADDRESS_TABS[4])
         }
-
+        if (claimIScore) {
+            TABS.push(ADDRESS_TABS[5])
+        }
+        
         return (
             <TabTable
                 {...this.props}
@@ -82,6 +85,15 @@ class WalletTabs extends Component {
                                 <AddressDelegation
                                     txData={addressVoted}
                                     txType={TX_TYPE.ADDRESS_VOTED}
+                                    address={address}
+                                />
+                            )
+                        case ADDRESS_TABS[5]:
+                            return (
+                                <AddressDelegation
+                                    txData={addressReward}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${address}`) }}
+                                    txType={TX_TYPE.ADDRESS_REWARD}
                                     address={address}
                                 />
                             )

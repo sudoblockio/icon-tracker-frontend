@@ -25,8 +25,8 @@
 								<li>
 									<span>Address<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Addresses List</span></li>
-										<li><span>Contracts List</span></li>
+										<li><span>Addresses</span></li>
+										<li><span>Contracts</span></li>
 									</ol>
 								</li>
 								<li><span>Block</span></li>
@@ -34,21 +34,29 @@
 								<li>
 									<span>Token<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Token List</span></li>
-										<li><span>Token Transfer List</span></li>
+										<li><span>Token</span></li>
+										<li><span>Token Transfer</span></li>
 									</ol>
 								</li> 
-								<li>
-									<span>Rep<em class="img"></em></span>
-									<ol class="sub-menu">
-										<li><span>Representative</span></li>
-									</ol>
-								</li> 
+								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
+								<div class="sub-menu">
+									<p><span>Wallet Address</span>
+										<span class="complete">
+											<em>hx2fd0acc3c266dfc0c0085f50420e2beed76cd6f0</em>
+											<em>Copy Address</em>
+										</span>
+									</p>
+									<span class="btn">Disconnect</span>
+									<span class="btn">View Details</span>
+								</div>
+							</div>
 							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, Block height" value="">
 								<span><em class="img"></em></span>
-
 							</div>
 						</div>
 					</div>
@@ -62,70 +70,72 @@
 				<div class="screen0">
 					<div class="wrap-holder">
 						<p class="title">Token transfers<span>for Address  0xB704eC3E412910C97d120424f5De0e7b63b2cd</span>
-							<span class="right">A total of<em>999</em> Token transfers found </span>
+							<span class="right">A total of<em>999</em> Token transfers found<em>(Showing the last 999 record(s) only)</em></span>
 						</p>
 						<div class="contents">
-							<table class="table-typeC token tap2">
-								<thead>
-									<tr>
-										<th>TxHash</th>
-										<th>Age</th>
-										<th>From</th>
-										<th class="table-sign"></th>
-										<th>To</th>
-										<th>Quantity</th>
-										<th>Token</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>3 hrs ago</td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>1,234,567,812,345,678.1234</span><em class="ellipsis">AAAAAA</em></td>
-										<td><span class="ellipsis">BBBBBBBBBBBBBBBBBBBBB</span></td>
-									</tr>
-									<tr>
-										<td class="on "><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td><span>2000.01</span><em class="ellipsis">ABCDEFGH</em></td>
-										<td>IRC01(TKN)</td>
-									</tr>
-									<tr>
-										<td class="on break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="no">-</td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="no">-</td>
-										<td><span>200001</span><em class="ellipsis">ICX</em></td>
-										<td>IRC01(TKN)</td>
-									</tr>
-									<tr>
-										<td class="on "><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td class="table-sign out"><span>OUT</span></td>
-										<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
-										<td><span>2000.01</span><em class="ellipsis">ICX</em></td>
-										<td>IRC01(TKN)</td>
-									</tr>
-									<tr>
-										<td class="on break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
-										<td>2017-12-14 01:53:49<em>(UTC+09)</em></td>
-										<td class="no">-</td>
-										<td class="table-sign"><span>IN</span></td>
-										<td class="no">-</td>
-										<td><span>200001</span><em class="ellipsis">ICX</em></td>
-										<td>IRC01(TKN)</td>
-									</tr>
+							<div class="table-box">
+								<table class="table-typeC token tap2">
+									<thead>
+										<tr>
+											<th>TxHash</th>
+											<th>Time (UTC+09)</th>
+											<th>From</th>
+											<th class="table-sign"></th>
+											<th>To</th>
+											<th>Quantity</th>
+											<th>Token</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="on icon error"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>1,234,567,812,345,678.1234</span><em class="ellipsis">AAAAAA</em></td>
+											<td><span class="ellipsis">BBBBBBBBBBBBBBBBBBBBB</span></td>
+										</tr>
+										<tr>
+											<td class="on "><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="on icon"><i class="img"></i><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2000.01</span><em class="ellipsis">ABCDEFGH</em></td>
+											<td>IRC01(TKN)</td>
+										</tr>
+										<tr>
+											<td class="on break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="no">-</td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="no">-</td>
+											<td><span>200001</span><em class="ellipsis">ICX</em></td>
+											<td>IRC01(TKN)</td>
+										</tr>
+										<tr>
+											<td class="on "><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class=""><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td class="table-sign out"><span>OUT</span></td>
+											<td class="on icon calen"><i class="img"></i><span>Contract creation</span></td>
+											<td><span>2000.01x10<sup>13</sup></span><em class="ellipsis">ICX</em></td>
+											<td>IRC01(TKN)</td>
+										</tr>
+										<tr>
+											<td class="on break"><span class=" ellipsis">0x45ab5ce7aa9idae22384938c3bcf0a4548548bb787</span></td>
+											<td><span>2017-12-14 01:53:49</span></td>
+											<td class="no">-</td>
+											<td class="table-sign"><span>IN</span></td>
+											<td class="no">-</td>
+											<td><span>200001</span><em class="ellipsis">ICX</em></td>
+											<td>IRC01(TKN)</td>
+										</tr>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>								
+							</div>
 
 							<!-- sort -->
 							<div class="sort-holder">
@@ -187,6 +197,13 @@
 						<li class="facebook"><a href=""><span class="img"></span></a></li>
 						<li class="github"><a href=""><span class="img"></span></a></li>
 					</ul>
+					<div class="mainnet"><p>Mainnet<i class="img"></i></p>
+						<ul>
+							<li><span>Mainnet</span></li>
+							<li><span>Euljiro</span></li>
+							<li><span>Yeouido</span></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

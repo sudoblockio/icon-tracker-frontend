@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import BigNumber from 'bignumber.js'
-import { numberWithCommas, convertNumberToText, isValidNodeType, searchLowerCase, isValidData } from 'utils/utils'
+// import BigNumber from 'bignumber.js'
+import { numberWithCommas, convertNumberToText, isValidNodeType } from 'utils/utils'
+// import { searchLowerCase, isValidData } from 'utils/utils'
 import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'components'
 import NotificationManager from 'utils/NotificationManager'
-import { getStake, queryIScore, getBalance, getPRep, prepList, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
-import { IconConverter, IconAmount } from 'icon-sdk-js'
+import { getStake, queryIScore, getBalance, getPRep, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
+import { IconConverter } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle } from '../../../utils/utils';
 
 const _isNotificationAvailable = NotificationManager.available()
@@ -140,8 +141,6 @@ class AddressInfo extends Component {
             name,
             totalBlocks,
             validatedBlocks,
-            stake,
-            delegated,
             irep,
             irepUpdateBlockHeight,
             lastGenerateBlockHeight,
@@ -178,7 +177,7 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px" />
             }
             else {
-                const { address, nodeType, icxUsd, txCount, tokenList, reportedCount } = data
+                const { address, nodeType, tokenList, reportedCount } = data
                 const _address = !!address ? address : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -319,108 +318,108 @@ class AddressInfo extends Component {
     }
 }
 
-class TokenBalance extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            search: '',
-        }
-    }
+// class TokenBalance extends Component {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             search: '',
+//         }
+//     }
 
-    handleClick = () => {
-        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'TOKEN_BALANCE' } }))
-    }
+//     handleClick = () => {
+//         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'TOKEN_BALANCE' } }))
+//     }
 
-    handleChange = e => {
-        const { name, value } = e.target
-        this.setState({ [name]: value })
-    }
+//     handleChange = e => {
+//         const { name, value } = e.target
+//         this.setState({ [name]: value })
+//     }
 
-    handleKeyDown = e => {
-        if (e.keyCode === 27) {
-            const { name } = e.target
-            this.setState({ [name]: '' })
-        }
-    }
+//     handleKeyDown = e => {
+//         if (e.keyCode === 27) {
+//             const { name } = e.target
+//             this.setState({ [name]: '' })
+//         }
+//     }
 
-    calcTotalTokenBalance = tokenList => {
-        let result = '0'
-        tokenList.forEach(token => {
-            const prev = new BigNumber(result)
-            const { totalTokenPrice } = token
-            const _totalTokenPrice = isValidData(totalTokenPrice) ? totalTokenPrice : '0'
-            const next = prev.plus(_totalTokenPrice)
-            result = next.toString(10)
-        })
-        return result
-    }
+//     calcTotalTokenBalance = tokenList => {
+//         let result = '0'
+//         tokenList.forEach(token => {
+//             const prev = new BigNumber(result)
+//             const { totalTokenPrice } = token
+//             const _totalTokenPrice = isValidData(totalTokenPrice) ? totalTokenPrice : '0'
+//             const next = prev.plus(_totalTokenPrice)
+//             result = next.toString(10)
+//         })
+//         return result
+//     }
 
-    render() {
-        const TableData = _tokenList => {
-            if (_tokenList.length === 0) {
-                return <td>None</td>
-            }
-            else {
-                const { search } = this.state
-                const list = _tokenList.filter(token => {
-                    const { contractName, contractSymbol } = token
-                    return searchLowerCase(search, [contractName, contractSymbol])
-                })
-                const totalBalance = this.calcTotalTokenBalance(_tokenList)
-                return (
-                    <td>
-                        <p className="balance" onClick={this.handleClick}>
-                            {convertNumberToText(totalBalance, 3)} USD<span className="gray">(Total)</span>
-                            <em className="img" />
-                        </p>
-                        <div className="combo-group">
-                            <div className="combo-layer">
-                                <div className="search-group">
-                                    <input
-                                        type="text"
-                                        className="txt-type-page over"
-                                        placeholder="Search for token name"
-                                        name={'search'}
-                                        value={this.state.search}
-                                        onChange={this.handleChange}
-                                        onKeyDown={this.handleKeyDown}
-                                    />
-                                </div>
-                                {list.length === 0 ? (
-                                    <p className="nodata">No result found</p>
-                                ) : (
-                                        <div className="scroll">
-                                            <ul className="list-group">
-                                                {list.map((token, index) => {
-                                                    const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
-                                                    return (
-                                                        <li key={index}>
-                                                            <p>
-                                                                <em>{contractName}</em>
-                                                                <em>{totalTokenPrice ? convertNumberToText(totalTokenPrice, 3) : '-'}</em>
-                                                                <em>USD</em>
-                                                            </p>
-                                                            <p>
-                                                                <em>
-                                                                    {quantity} {contractSymbol}
-                                                                </em>
-                                                                <em>{tokenPrice ? convertNumberToText(tokenPrice, 3) : '-'}</em>
-                                                                <em>@</em>
-                                                            </p>
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
-                                        </div>
-                                    )}
-                            </div>
-                        </div>
-                    </td>
-                )
-            }
-        }
-        return TableData(this.props.tokenList || [])
-    }
-}
+//     render() {
+//         const TableData = _tokenList => {
+//             if (_tokenList.length === 0) {
+//                 return <td>None</td>
+//             }
+//             else {
+//                 const { search } = this.state
+//                 const list = _tokenList.filter(token => {
+//                     const { contractName, contractSymbol } = token
+//                     return searchLowerCase(search, [contractName, contractSymbol])
+//                 })
+//                 const totalBalance = this.calcTotalTokenBalance(_tokenList)
+//                 return (
+//                     <td>
+//                         <p className="balance" onClick={this.handleClick}>
+//                             {convertNumberToText(totalBalance, 3)} USD<span className="gray">(Total)</span>
+//                             <em className="img" />
+//                         </p>
+//                         <div className="combo-group">
+//                             <div className="combo-layer">
+//                                 <div className="search-group">
+//                                     <input
+//                                         type="text"
+//                                         className="txt-type-page over"
+//                                         placeholder="Search for token name"
+//                                         name={'search'}
+//                                         value={this.state.search}
+//                                         onChange={this.handleChange}
+//                                         onKeyDown={this.handleKeyDown}
+//                                     />
+//                                 </div>
+//                                 {list.length === 0 ? (
+//                                     <p className="nodata">No result found</p>
+//                                 ) : (
+//                                         <div className="scroll">
+//                                             <ul className="list-group">
+//                                                 {list.map((token, index) => {
+//                                                     const { contractName, contractSymbol, quantity, totalTokenPrice, tokenPrice } = token
+//                                                     return (
+//                                                         <li key={index}>
+//                                                             <p>
+//                                                                 <em>{contractName}</em>
+//                                                                 <em>{totalTokenPrice ? convertNumberToText(totalTokenPrice, 3) : '-'}</em>
+//                                                                 <em>USD</em>
+//                                                             </p>
+//                                                             <p>
+//                                                                 <em>
+//                                                                     {quantity} {contractSymbol}
+//                                                                 </em>
+//                                                                 <em>{tokenPrice ? convertNumberToText(tokenPrice, 3) : '-'}</em>
+//                                                                 <em>@</em>
+//                                                             </p>
+//                                                         </li>
+//                                                     )
+//                                                 })}
+//                                             </ul>
+//                                         </div>
+//                                     )}
+//                             </div>
+//                         </div>
+//                     </td>
+//                 )
+//             }
+//         }
+//         return TableData(this.props.tokenList || [])
+//     }
+// }
 
 export default withRouter(AddressInfo)

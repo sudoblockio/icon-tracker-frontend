@@ -49,3 +49,10 @@ export function addressVotedList(payload) {
   }
 }
 
+export function addressRewardList(payload) {
+  return {
+    type: actionTypes.addressRewardList,
+    payload
+  }
+}
+

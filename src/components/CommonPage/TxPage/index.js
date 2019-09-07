@@ -73,6 +73,7 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_TOKEN_TX:
             case TX_TYPE.ADDRESS_DELEGATION:
             case TX_TYPE.ADDRESS_VOTED:
+            case TX_TYPE.ADDRESS_REWARD:                
                 query.address = urlIndex
                 break
             case TX_TYPE.BLOCK_TX:
@@ -127,6 +128,7 @@ class TxPage extends Component {
             case TX_TYPE.TOKEN_HOLDERS:
             case TX_TYPE.TRANSACTION_EVENTS:
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
+            case TX_TYPE.ADDRESS_REWARD:         
                 this.urlIndex = pathname.split('/')[2] || ''
                 this.pageId = pathname.split('/')[3] || 1
                 break
@@ -167,6 +169,7 @@ class TxPage extends Component {
             case TX_TYPE.TOKEN_HOLDERS:
             case TX_TYPE.TRANSACTION_EVENTS:
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
+            case TX_TYPE.ADDRESS_REWARD:         
                 url = this.makeUrl(page, count, this.urlIndex)
                 break
             case TX_TYPE.BLOCKS:

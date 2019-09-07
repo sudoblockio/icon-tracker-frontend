@@ -24,21 +24,27 @@ class RecentTransactions extends Component {
                                     <li key={index}>
                                         <p className={`icon ${!isSuccess ? 'fail' : ''}`}>T</p>
                                         <p className="a">
-                                            Hash
+                                            Status
                                             <em>
-                                                <TransactionLink to={txHash} label={txHash} />
+                                                {isSuccess ? 'Success' : 'Fail'}
                                             </em>
                                         </p>
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertNumberToText(amount)} <span>ICX</span>
+                                                {convertNumberToText(amount)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
+                                            Hash
+                                            <em>
+                                                <TransactionLink to={txHash} label={txHash} />
+                                            </em>
+                                        </p>
+                                        <p className="d">
                                             Fee
                                             <em>
-                                                {convertNumberToText(fee)} <span>ICX</span>
+                                                {convertNumberToText(fee)} ICX
                                             </em>
                                         </p>
                                     </li>

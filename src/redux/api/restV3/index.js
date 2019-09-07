@@ -60,7 +60,8 @@ import{
 import{
     getPReps,
     getIISSInfo,
-    getDelegation
+    getDelegation,
+    addressReward
 } from './iiss';
 
 export {
@@ -107,5 +108,6 @@ export {
 
     getPReps,
     getIISSInfo,
-    getDelegation
+    getDelegation,
+    addressReward
 }

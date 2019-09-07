@@ -43,7 +43,8 @@ $(window).on('CUSTOM_FX', function(e) {
         case 'POPUP_CLOSE':
             if (param == 'detail') {
                 $('.popup-wrap.detail').css({ display: 'none' })
-            } else {
+            }
+            else {
                 $('.popup-wrap').fadeOut(350)
             }
             break

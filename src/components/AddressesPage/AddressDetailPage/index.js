@@ -31,7 +31,7 @@ class AddressesDetailPage extends Component {
         const { hasDelegations, isPrep } = this.state
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount } = data
+        const { tokenList, internalTxCount, claimIScore } = data
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
@@ -61,6 +61,12 @@ class AddressesDetailPage extends Component {
             getList.push(address => {
                 this.props.addressVotedList({ address })
             })
+        }
+        if (claimIScore) {
+            TABS.push(ADDRESS_TABS[5])
+            getList.push(address => {
+                this.props.addressRewardList({ address })
+            })    
         }
 
         return (

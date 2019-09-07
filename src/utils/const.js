@@ -61,11 +61,12 @@ export const IRC_VERSION = {
 export const SORT_TYPE = [10, 25, 50, 100]
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
-export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Delegations', 'Voted']
+export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Delegations', 'Voted', 'Reward']
 export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
 export const TRANSACTION_TABS = ['Internal Transactions', 'Events']
+export const PROPOSAL_TABS = ['Total Quorum', 'Total Token Votes']
 
 export const NETWORK_HOST = {
     Mainnet: 'tracker.icon.foundation',
@@ -114,6 +115,7 @@ export const SEARCH_TYPE_DATA = {
 }
 
 export const TX_TYPE = {
+    ADDRESS_REWARD: 'addressreward',
     ADDRESS_DELEGATION: 'addressdelegations',
     ADDRESS_VOTED: 'addressvoted',
     ADDRESS_TX: 'addresstx',
@@ -135,6 +137,12 @@ export const TX_TYPE = {
 }
 
 export const TX_TYPE_DATA = {
+    [TX_TYPE.ADDRESS_REWARD]: {
+        tx: 'addressReward',
+        getTxList: 'addressRewardList',
+        className: 'table-typeC reward',
+        noBoxText: 'No Reward',
+    },
     [TX_TYPE.ADDRESS_DELEGATION]: {
         tx: 'addressDelegation',
         getTxList: 'addressDelegationList',
@@ -244,3 +252,27 @@ export const TX_TYPE_DATA = {
         noBoxText: 'No Holder',
     },
 }
+
+export const ProposalType = {
+    "0x0": 'Text',
+    "0x1": "Revision Update",
+    "0x2": "Malicious SCORE",
+    "0x3": "P-Rep Disqualification",
+    "0x4": "Step Price"
+}
+
+export const ProposalStatus = {
+    "0x0": 'Voting Period',
+    "0x1": "Approved",
+    "0x2": "Disapproved",
+    "0x3": "Canceled",
+}
+
+export const ProposalStatusClass = {
+    "0x0": 'period',
+    "0x1": "approved",
+    "0x2": "disapproved",
+    "0x3": "canceled",
+}
+
+export const VIEW_NUMBER = true

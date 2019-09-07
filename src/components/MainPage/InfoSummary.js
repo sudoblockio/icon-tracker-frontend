@@ -21,20 +21,32 @@ class InfoSummary extends Component {
         return (
             <Fragment>
                 <li>
-                    <p className="subTitle">Market Cap(USD)</p>
-                    <p className={`num a ${marketCapStr.length >= 17 && 'small'}`}>{marketCapStr}</p>
+                    <div>
+                        <span className="usd"><i className="img"></i></span>
+                        <p>Market Cap <em>(USD)</em></p>
+                        <p>{marketCapStr}</p>									
+                    </div>
                 </li>
                 <li>
-                    <p className="subTitle">ICX Supply</p>
-                    <p className="num b">{convertNumberToText(icxSupply, 0)}</p>
+                    <div>
+                        <span className="icx"><i className="img"></i></span>
+                        <p>ICX Supply</p>
+                        <p>{convertNumberToText(icxSupply, 0)}</p>									
+                    </div>
                 </li>
                 <li>
-                    <p className="subTitle">ICX Circulation</p>
-                    <p className="num c">{convertNumberToText(icxCirculationy, 0)}</p>
+                    <div>
+                        <span className="icx"><i className="img"></i></span>
+                        <p>ICX Circulation</p>
+                        <p>{convertNumberToText(icxCirculationy, 0)}</p>									
+                    </div>
                 </li>
                 <li>
-                    <p className="subTitle">All Transactions</p>
-                    <p>{numberWithCommas(transactionCount)}</p>
+                    <div>
+                        <span><i className="img">T</i></span>
+                        <p>All Transactions</p>
+                        <p>{numberWithCommas(transactionCount)}</p>									
+                    </div>
                 </li>
             </Fragment>
         )

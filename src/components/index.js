@@ -63,6 +63,8 @@ import Connect from './Header/Connect';
 import ReportButton from './CommonComponent/ReportButton'
 
 import GovernancePage from './GovernancePage'
+import ProposalListPage from './ProposalListPage'
+import ProposalDetailPage from './ProposalDetailPage'
 
 export {
   MainPage,
@@ -127,5 +129,7 @@ export {
   
   ReportButton,
 
-  GovernancePage
+  GovernancePage,
+  ProposalListPage,
+  ProposalDetailPage
 }

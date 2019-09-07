@@ -24,6 +24,9 @@
 .header-wrap .link li:nth-child(4) .sub-menu {
     width: 155px;
 }
+.header-wrap .link li:nth-child(5) .sub-menu {
+    width: 150px;
+}
 
 .table-typeB .copy {
     margin-left: 20px;
@@ -312,7 +315,7 @@
     display: inline-block;
     background-position: -250px -250px;
     position: absolute;
-    top: 7px;
+    top: 5px;
     left: 7px;
 }
 .header-wrap .connect > span.disabled {
@@ -498,3 +501,19 @@ p.prep-causion {
     margin-top: 10px;
     font-weight: bold;
 }
+
+.proposal-pointer {
+    cursor: pointer;
+}
+
+.bar-graph-group .disagreed .bar-foreground span {
+    display: inline-block;
+}
+
+.tab-color {
+    color: #1aaaba;
+}
+
+.table-typeE th:nth-child(3){width: 80px;}
+
+.home .content-wrap .screen0 .content li div {width: 279px !important;}

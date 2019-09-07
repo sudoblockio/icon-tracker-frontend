@@ -7,11 +7,13 @@ import {
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
+  addressReward as ADDRESS_REWARDT,
   getPReps,
 } from '../api/restV3';
 import { iissDelegateList } from '../api/restV3/iiss';
 
 export default function* addressesSaga() {
+  yield fork(watchAddressRewardList);
   yield fork(watchAddressDelegationList);
   yield fork(watchAddressVotedList);
   yield fork(watchAddressList);
@@ -21,6 +23,7 @@ export default function* addressesSaga() {
   yield fork(watchAddressTokenTxList);
 }
 
+function* watchAddressRewardList() { yield takeLatest(AT.addressRewardList, addressRewardListFunc) }
 function* watchAddressDelegationList() { yield takeLatest(AT.addressDelegationList, addressDelegationListFunc) }
 function* watchAddressVotedList() { yield takeLatest(AT.addressVotedList, addressVotedListFunc) }
 function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
@@ -28,6 +31,26 @@ function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc)
 function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
 function* watchAddressInternalTxList() { yield takeLatest(AT.addressInternalTxList, addressInternalTxListFunc) }
 function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
+
+export function* addressRewardListFunc(action) {
+  try {
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressRewardListFulfilled, payload: { data: [] } });
+      return
+    }
+
+    const payload = yield call(ADDRESS_REWARDT, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.addressRewardListFulfilled, payload: payload });
+    }
+    else {
+      throw new Error();
+    }
+  }
+  catch (e) {
+    yield put({ type: AT.addressRewardListRejected });
+  }
+}
 
 export function* addressDelegationListFunc(action) {
   try {
@@ -43,11 +66,13 @@ export function* addressDelegationListFunc(action) {
         return searched
       })
 
-      yield put({ type: AT.addressDelegationListFulfilled, payload: { 
-        data,
-        listSize: data.length,
-        totalSize: data.length
-      }});
+      yield put({
+        type: AT.addressDelegationListFulfilled, payload: {
+          data,
+          listSize: data.length,
+          totalSize: data.length
+        }
+      });
     }
     else {
       throw new Error()
@@ -63,15 +88,17 @@ export function* addressVotedListFunc(action) {
     const { address } = action.payload
     const data = yield call(iissDelegateList, { prep: address })
     if (data && data.length > 0) {
-      yield put({ type: AT.addressVotedListFulfilled, payload: { 
-        data,
-        listSize: data.length,
-        totalSize: data.length
-      }});
+      yield put({
+        type: AT.addressVotedListFulfilled, payload: {
+          data,
+          listSize: data.length,
+          totalSize: data.length
+        }
+      });
     }
     else {
       throw new Error()
-    }  
+    }
   }
   catch (e) {
     yield put({ type: AT.addressVotedListRejected });

@@ -73,12 +73,27 @@ class Header extends Component {
                                         </li>
                                     </ol>
                                 </li>
-                                <li
-                                    onClick={() => {
-                                        this.props.history.push('/governance')
-                                    }}
-                                >
-                                    <span>Governance</span>
+                                <li>
+                                    <span>
+                                        Governance
+                                        <em className="img" />
+                                    </span>
+                                    <ol className="sub-menu">
+                                        <li
+                                            onClick={() => {
+                                                this.props.history.push('/governance')
+                                            }}
+                                        >
+                                            <span>P-Rep List</span>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                this.props.history.push('/proposal-list')
+                                            }}
+                                        >
+                                            <span>Network Proposal</span>
+                                        </li>
+                                    </ol>
                                 </li>
                             </ul>
                             <div className="link-right">

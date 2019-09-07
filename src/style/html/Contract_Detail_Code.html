@@ -25,8 +25,8 @@
 								<li>
 									<span>Address<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Addresses List</span></li>
-										<li><span>Contracts List</span></li>
+										<li><span>Addresses</span></li>
+										<li><span>Contracts</span></li>
 									</ol>
 								</li>
 								<li><span>Block</span></li>
@@ -34,21 +34,29 @@
 								<li>
 									<span>Token<em class="img"></em></span>
 									<ol class="sub-menu">
-										<li><span>Token List</span></li>
-										<li><span>Token Transfer List</span></li>
+										<li><span>Token</span></li>
+										<li><span>Token Transfer</span></li>
 									</ol>
 								</li> 
-								<li>
-									<span>Rep<em class="img"></em></span>
-									<ol class="sub-menu">
-										<li><span>Representative</span></li>
-									</ol>
-								</li> 
+								<li><span>ID</span></li>
+								<li><span>Governance</span></li>
 							</ul>
+						</div>
+						<div class="link-right">
+							<div class="connect join"><span>Connect to ICONex<em class="img"></em></span>
+								<div class="sub-menu">
+									<p><span>Wallet Address</span>
+										<span class="complete">
+											<em>hx2fd0acc3c266dfc0c0085f50420e2beed76cd6f0</em>
+											<em>Copy Address</em>
+										</span>
+									</p>
+									<span class="btn">Disconnect</span>
+									<span class="btn">View Details</span>
+								</div>
+							</div>
 							<div class="search-group">
-								<input type="text" class="txt-type-normal" placeholder="Address, TxHash, Block height" value="">
 								<span><em class="img"></em></span>
-
 							</div>
 						</div>
 					</div>
@@ -62,48 +70,46 @@
 					<div class="wrap-holder">
 						<p class="title">Contract</p>
 						<div class="contents">
-							<table class="table-typeB contract">
-								<thead>
-									<tr>
-										<th>Balance</th>
-										<th>value</th>
-										<th>Balance</th>
-										<th>value</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="qr">
-										<td>Address</td>
-										<td colspan="3">0xB704eC3E412910C97d120424f5De0e7b63b2c04E <span class="qrcode"><em class="img"></em></span><span class="copy">Copy Address</span><span class="copy disabled">Copy Address</span><span class="copy on">Copy Complete</span></td>
-									</tr>
-									<tr class="">
-										<td>Balance</td>
-										<td>0.1234 ICX<span class="gray">(11 USD)</span></td>
-										<td>Token Contract</td>
-										<td>
-											<span class="link token">TOKEN(TKN)</span>
-											<span class="help token">IRC01 - 0xB704eC3E412910C97d120424f5De0e7b63b2c04E</span>
-										</td>
-									</tr>
-									<tr>
-										<td>ICX Value</td>
-										<td>900,000,000.01</td>
-										<td>Contract Creator</td>
-										<td>
-											<span class="link address ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span><em>at Txn</em><span class="link hash ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>
-											<span class="help address">Creator Address</span>
-											<span class="help hash">Creator Transaction Hash</span>
-										</td>
-									</tr>
-									<tr>
-										<td>Transactions</td>
-										<td>100 Txns</td>
-										<td>Status</td>
-										<td>In progress<button class="btn-type-normal status" disabled>Detail</button></td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="table-box">
+								<table class="table-typeB contract">
+									<thead>
+										<tr>
+											<th>Balance</th>
+											<th>value</th>
+											<th>Balance</th>
+											<th>value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="qr">
+											<td>Address</td>
+											<td colspan="3">
+												<span>0xB704eC3E412910C97d120424f5De0e7b63b2c04E </span>
+												<span class="qrcode"><em class="img"></em></span><span class="copy"></span></td>
+										</tr>
+										<tr class="">
 
+											<td>Token Contract</td>
+											<td>
+												<span class="link token">TOKEN(TKN)</span>
+												<span class="help token">IRC01 - 0xB704eC3E412910C97d120424f5De0e7b63b2c04E</span>
+											</td>
+											<td>Balance</td>
+											<td><span>0.1234 ICX</span><span class="gray">(11 USD)</span></td>											
+										</tr>
+										<tr>
+											<td>Contract Creator</td>
+											<td>
+												<span class="link address ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span><em>at Txn</em><span class="link hash ellipsis">0x45ab5ce7aa91dae22384938c3bcf0a4548548bb78717c34fa04ce339c5b43460</span>
+												<span class="help address">Creator Address</span>
+												<span class="help hash">Creator Transaction Hash</span>
+											</td>
+											<td>Status</td>
+											<td><span>In progress</span><button class="btn-type-normal status">Detail</button></td>
+										</tr>
+									</tbody>
+								</table>								
+							</div>
 						</div>
 
 					</div>
@@ -113,6 +119,7 @@
 						<div class="tab-holder">
 							<ul>
 								<li>Transactions</li>
+								<li>Internal Transactions</li>
 								<li>Token Transfers</li>
 								<li class="on">Code</li>
 								<li>Read Contract</li>
@@ -121,25 +128,24 @@
 						</div>
 						<div class="contents">
 							<!-- <p class="txt"><span>Latest 10 txns from a total of XXXX events</span><span>Compiler Version: v0.4.xx+xxxxx</span></p> -->
-							<table class="table-typeL">
-								<thead>
-									<tr>
-										<th>Contract Name</th>
-										<th>Compiler Version</th>
-										<th>Contract Source Code</th>
-									</tr>
-								</thead>
-								<tbody>
-
-									<tr class="">
-										<td>name</td>
-										<td>v0.4.xx+xxxxx</td>
-										<td><span><i class="img"></i>Download</span></td>
-
-									</tr>
-
-								</tbody>
-							</table>
+							<div class="table-box">
+								<table class="table-typeL">
+									<thead>
+										<tr>
+											<th>Contract Name</th>
+											<th>Compiler Version</th>
+											<th>Contract Source Code</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td><span>name</span></td>
+											<td><span>v0.4.xx+xxxxx</span></td>
+											<td><span class="link"><i class="img"></i>Download</span></td>
+										</tr>
+									</tbody>
+								</table>								
+							</div>
 
 							<div class="code-box api">
 								<div class="title-group">
@@ -147,8 +153,7 @@
 									<button class="btn-type" disabled>Copy</button> <button class="btn-type on">Complete</button>
 								</div>
 								<div class="scroll">
-									<p class="txt">
-[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"}
+									<p class="txt">[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"}
 [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"}
 [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"}
 [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"}
@@ -159,13 +164,15 @@
 							</div>
 
 							<!-- nodata -->
-							<table class="table-type">
-								<tbody>
-									<tr>
-										<td class="notrans">The contract has been pending / The contract has rejected</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="table-box">
+								<table class="table-type">
+									<tbody>
+										<tr>
+											<td class="notrans">The contract has been pending / The contract has rejected</td>
+										</tr>
+									</tbody>
+								</table>								
+							</div>
 							<!-- nodata -->
 						</div>
 					</div>
@@ -192,6 +199,13 @@
 						<li class="facebook"><a href=""><span class="img"></span></a></li>
 						<li class="github"><a href=""><span class="img"></span></a></li>
 					</ul>
+					<div class="mainnet"><p>Mainnet<i class="img"></i></p>
+						<ul>
+							<li><span>Mainnet</span></li>
+							<li><span>Euljiro</span></li>
+							<li><span>Yeouido</span></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -201,21 +215,21 @@
 	<div class="popup-wrap qr">
 		<div class="dimmed"></div>
 		<div class="popup">
-			<span class="close"><em class="img"></em></span>
 			<h1 class="title">Address</h1>
 			<div class="qr">
 				<img src="../image/qr.png">
 			</div>
 			<p>3H3svYGqXxAAHSAJy2Eu1TGagC3H3svYGqXxAAHSbU2kz5KR</p>
-
+			<div class="btn-holder full">
+				<button class="btn-type-normal size-full"><span>Confirm</span></button>
+			</div>
 		</div>
 	</div>
 	<!-- //popup -->
 	<!-- popup -->
-	<div class="popup-wrap detail">
+	<div class="popup-wrap detail" style="display: block;">
 		<div class="dimmed"></div>
 		<div class="popup contract">
-			<span class="close"><em class="img"></em></span>
 			<h1 class="title">Contract detail</h1>
 			<div class="scroll">
 				<p class="label">Stauts</p>
@@ -235,7 +249,9 @@
 
 				</p>
 			</div>
-
+			<div class="btn-holder full">
+				<button class="btn-type-normal size-full"><span>Confirm</span></button>
+			</div>
 		</div>
 	</div>
 	<!-- //popup -->

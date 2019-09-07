@@ -78,6 +78,17 @@ class TxTableBody extends Component {
 			const isError = data.state === 0
 
 			switch (txType) {
+				case TX_TYPE.ADDRESS_REWARD:
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.txHash} />
+							<BlockCell height={data.height} />
+							<DateCell date={data.createDate} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.amount} symbol="I-Score" />
+							<AmountCell amount={data.fee} symbol="ICX" />
+						</tr>
+					)
 				case TX_TYPE.ADDRESS_DELEGATION:
 					const value = convertLoopToIcxDecimal(data.value)
 					const badgeTitle = getBadgeTitle(data.grade)
