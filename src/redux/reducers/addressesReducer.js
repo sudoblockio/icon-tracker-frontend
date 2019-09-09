@@ -48,9 +48,9 @@ export function addressesReducer(state = initialState, action) {
     case actionTypes.addressVotedListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'addressVoted') 
     case actionTypes.addressVotedListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'addressVoted')
 
-    case actionTypes.addressRewardList: return getState('ARR', REDUX_STEP.READY, state, action, 'addressVoted') 
-    case actionTypes.addressRewardListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'addressVoted') 
-    case actionTypes.addressRewardListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'addressVoted')
+    case actionTypes.addressRewardList: return getState('ARR', REDUX_STEP.READY, state, action, 'addressReward') 
+    case actionTypes.addressRewardListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'addressReward') 
+    case actionTypes.addressRewardListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'addressReward')
 
     default: {
       return state

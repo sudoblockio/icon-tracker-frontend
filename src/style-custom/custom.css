@@ -517,3 +517,16 @@ p.prep-causion {
 .table-typeE th:nth-child(3){width: 80px;}
 
 .home .content-wrap .screen0 .content li div {width: 279px !important;}
+
+.proposer-name { width: 353px; position: relative; top: 5px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+.table-typeC.reward th:nth-child(1){width: 500px; }
+.table-typeC.reward th:nth-child(2){width: 120px; }
+.table-typeC.reward th:nth-child(3){width: 200px;}
+.table-typeC.reward th:nth-child(4){width: 220px;}
+.table-typeC.reward th:nth-child(5){width: 150px;}
+.table-typeC.reward td:nth-child(1) a span { width: auto !important; }
+.table-typeC.reward td:nth-child(4){text-align: right;}
+.table-typeC.reward td:nth-child(5){text-align: right;}
+.table-typeC.reward td:nth-child(1) .ellipsis{width:112px; }
+.table-typeC.reward td:nth-child(1).icon .ellipsis{width:98px; }

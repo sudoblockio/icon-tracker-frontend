@@ -17,7 +17,7 @@ class WalletTabs extends Component {
     render() {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
-        const { address, tokenList, internalTxCount, claimIScore } = data
+        const { address, tokenList, internalTxCount, claimIScoreCount } = data
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
@@ -33,7 +33,7 @@ class WalletTabs extends Component {
         if (isPrep) {
             TABS.push(ADDRESS_TABS[4])
         }
-        if (claimIScore) {
+        if (claimIScoreCount && Number(claimIScoreCount) !== 0) {
             TABS.push(ADDRESS_TABS[5])
         }
         

@@ -7,7 +7,7 @@ import {
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
-  addressReward as ADDRESS_REWARDT,
+  addressReward as ADDRESS_REWARD,
   getPReps,
 } from '../api/restV3';
 import { iissDelegateList } from '../api/restV3/iiss';
@@ -34,12 +34,8 @@ function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, ad
 
 export function* addressRewardListFunc(action) {
   try {
-    if (action.payload.count === 0) {
-      yield put({ type: AT.addressRewardListFulfilled, payload: { data: [] } });
-      return
-    }
-
-    const payload = yield call(ADDRESS_REWARDT, action.payload);
+    const payload = yield call(ADDRESS_REWARD, action.payload);
+    console.log(payload)
     if (payload.result === '200') {
       yield put({ type: AT.addressRewardListFulfilled, payload: payload });
     }
@@ -61,7 +57,11 @@ export function* addressDelegationListFunc(action) {
       const { preps } = yield call(getPReps)
       const data = delegations.map(prep => {
         const { address, value } = prep
-        const searched = { ...preps.filter(p => p.address === address)[0] }
+        const index = preps.findIndex(p => p.address === address)
+        let searched = { address }
+        if (index !== -1) {
+          searched = preps[index]
+        }
         searched.value = value
         return searched
       })

@@ -12,11 +12,8 @@ class TxTableHead extends Component {
                             <th>TxHash</th>
                             <th>Block</th>
                             <th>Age</th>
-                            <th>From</th>
-                            <th className="table-sign" />
-                            <th>To</th>
                             <th>I-Score</th>
-                            <th>TxFee</th>
+                            <th>ICX</th>
                         </tr>
                     )
                 case TX_TYPE.ADDRESS_DELEGATION:

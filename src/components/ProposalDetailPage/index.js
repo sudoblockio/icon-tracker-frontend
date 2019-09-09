@@ -8,6 +8,7 @@ import { getProposal } from '../../redux/api/restV3/iiss';
 import { ProposalStatus, ProposalStatusClass, ProposalType, VIEW_NUMBER } from '../../utils/const';
 import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString } from '../../utils/utils';
 import {
+	NoBox,
 	NotFoundPage,
 	LoadingComponent
 } from 'components';
@@ -127,15 +128,16 @@ class ProposalDetailPage extends Component {
 
 		const _agreeLength = ((agreeLength / prepsLength) * 100).toFixed()
 		const _disagreeLength = ((disagreeLength / prepsLength) * 100).toFixed()
-		const _noVoteLength = ((noVoteLength / prepsLength) * 100).toFixed()
 		const _voteLength = ((voteLength / prepsLength) * 100).toFixed()
+		const topLength = ((noVoteLength / prepsLength) * 100).toFixed()
 
 		const agreeAmount = agree ? IconConverter.toNumber(agree.amount) : 0
 		const disagreeAmount = disagree ? IconConverter.toNumber(disagree.amount) : 0
 		const voteAmount = agreeAmount + disagreeAmount
 
-		const _agreeAmount = ((agreeAmount / voteAmount) * 100).toFixed()
-		const _disagreeAmount = ((disagreeAmount / voteAmount) * 100).toFixed()
+		const _agreeAmount = !voteAmount ? 0 : ((agreeAmount / voteAmount) * 100).toFixed()
+		const _disagreeAmount = !voteAmount ? 0 : ((disagreeAmount / voteAmount) * 100).toFixed()
+		const topAmount = !voteAmount ? 100 : 0
 
 		const tabVotes = this.state.tab === PROPOSAL_TABS[1]
 
@@ -214,10 +216,10 @@ class ProposalDetailPage extends Component {
 																<p>Quorum</p>
 																<div className="bar-wrap">
 																	<div className="bar-container">
-																		<div className="bar-foreground" style={{ height: `${_agreeLength}%`, top: `${_noVoteLength}%` }}>
+																		<div className="bar-foreground" style={{ height: `${_agreeLength}%`, top: `${topLength}%` }}>
 																			{(VIEW_NUMBER || _agreeLength >= 25) && <span><em>{_agreeLength}</em>%</span>}
 																		</div>
-																		<div className="bar-background" style={{ height: `${_disagreeLength}%`, top: `${_noVoteLength}%` }}>
+																		<div className="bar-background" style={{ height: `${_disagreeLength}%`, top: `${topLength}%` }}>
 																			{(VIEW_NUMBER || _disagreeLength >= 25) && <span><em>{_disagreeLength}</em>%</span>}
 																		</div>
 																	</div>
@@ -233,10 +235,10 @@ class ProposalDetailPage extends Component {
 																<p>Token Votes </p>
 																<div className="bar-wrap">
 																	<div className="bar-container">
-																		<div className="bar-foreground" style={{ height: `${_agreeAmount}%` }}>
+																		<div className="bar-foreground" style={{ height: `${_agreeAmount}%`, top: `${topAmount}%` }}>
 																			{(VIEW_NUMBER || _agreeAmount >= 25) && <span><em>{_agreeAmount}</em>%</span>}
 																		</div>
-																		<div className="bar-background" style={{ height: `${_disagreeAmount}%` }}>
+																		<div className="bar-background" style={{ height: `${_disagreeAmount}%`, top: `${topAmount}%` }}>
 																			{(VIEW_NUMBER || _disagreeAmount >= 25) && <span><em>{_disagreeAmount}</em>%</span>}
 																		</div>
 																	</div>
@@ -272,32 +274,36 @@ class ProposalDetailPage extends Component {
 									</ul>
 								</div>
 								<div className="contents">
-									<div className="table-box">
-										<table className={`table-typeC proposal${tabVotes ? ' votes' : ''}`}>
-											<thead>
-												<tr>
-													<th>Voter</th>
-													<th>{tabVotes ? 'Votes' : 'Answer'}</th>
-													<th>Tx hash</th>
-													<th>Time ({getUTCString()})</th>
-												</tr>
-											</thead>
-											<tbody>
-												{tabList.map((item, index) => {
-													const { id, address, name, timestamp, amount, answer } = item
-													const _amount = IconConverter.toNumber(amount)
-													return (
-														<tr key={index}>
-															<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-															{tabVotes ? <td><span>{convertNumberToText(_amount)}</span><em>ICX</em></td> : <td><span>{answer}</span></td>}
-															<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
-															<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
-														</tr>
-													)
-												})}
-											</tbody>
-										</table>
-									</div>
+									{tabList.length === 0 ?
+										<NoBox text={`No ${this.state.tab === PROPOSAL_TABS[0] ? 'Quorum' : 'Token Vote'}`}/>
+										:
+										<div className="table-box">
+											<table className={`table-typeC proposal${tabVotes ? ' votes' : ''}`}>
+												<thead>
+													<tr>
+														<th>Voter</th>
+														<th>{tabVotes ? 'Votes' : 'Answer'}</th>
+														<th>Tx hash</th>
+														<th>Time ({getUTCString()})</th>
+													</tr>
+												</thead>
+												<tbody>
+													{tabList.map((item, index) => {
+														const { id, address, name, timestamp, amount, answer } = item
+														const _amount = IconConverter.toNumber(amount)
+														return (
+															<tr key={index}>
+																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
+																{tabVotes ? <td><span>{convertNumberToText(_amount)}</span><em>ICX</em></td> : <td><span>{answer}</span></td>}
+																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
+																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
+															</tr>
+														)
+													})}
+												</tbody>
+											</table>
+										</div>
+									}									
 								</div>
 							</div>
 						</div>}

@@ -546,7 +546,7 @@ export function getBadgeTitle(grade) {
         case '0x2':
         default:
             return 'P-Rep'
-    }
+        }
 }
 
 

@@ -14,23 +14,23 @@ class TabTable extends Component {
     }
 
     handleKeyDown = (e) => {
-        const { TABS, on } = this.props
-        const { code } = e
-        switch (code) {
-            case "ArrowLeft":
-                const prev = on - 1
-                if (prev >= 0) {
-                    this.props.changeTab(prev)
-                }
-                break
-            case "ArrowRight":
-                const next = on + 1
-                if (next < TABS.length) {
-                    this.props.changeTab(next)
-                }
-                break
-            default:
-        }
+        // const { TABS, on } = this.props
+        // const { code } = e
+        // switch (code) {
+        //     case "ArrowLeft":
+        //         const prev = on - 1
+        //         if (prev >= 0) {
+        //             this.props.changeTab(prev)
+        //         }
+        //         break
+        //     case "ArrowRight":
+        //         const next = on + 1
+        //         if (next < TABS.length) {
+        //             this.props.changeTab(next)
+        //         }
+        //         break
+        //     default:
+        // }
     }
 
     render() {

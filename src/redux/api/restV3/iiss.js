@@ -422,183 +422,183 @@ export async function getBalance(address) {
 }
 
 export async function getProposals() {
-    return new Promise(resolve => {
-        const mock = {
-            "proposals": [
-                {
-                    "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                    "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
-                    "proposerName": "Icon Foundation",
-                    "status": "0x0",
-                    "startBlockHeight": "0x1",
-                    "endBlockHeight": "0x65",
-                    "vote": {
-                        "agree": {
-                            "count": "0x8",
-                            "amount": "0x12312341234a"
-                        },
-                        "disagree": {
-                            "count": "0x6",
-                            "amount": "0x12312341234a"
-                        },
-                        "noVote": {
-                            "count": "0x8",
-                            "amount": "0x12312341234a"
-                        },
-                    },
-                    "contents": {
-                        "title": "Disqualify P-Rep A",
-                        "description": "P-Rep A does not maintain node",
-                        "type": "0x1",
-                        "value": {
-                            "address": "hxbe258ceb872e08851f1f59694dac2558708ece11"
-                        }
-                    }
-                }
-            ]
-        }
-        resolve(mock)
-        // const walletApi = await walletApiInstance()
-        // walletApi.post(`/api/v3`, JSON.stringify({
-        //     jsonrpc: "2.0",
-        //     id: randomUint32(),
-        //     method: "icx_call",
-        //     params: {
-        //         "from": "hx0000000000000000000000000000000000000000",
-        //         "to": "cx0000000000000000000000000000000000000000",
-        //         "dataType": "call",
-        //         "data": {
-        //             "method": "getProposals",
+    return new Promise(async resolve => {
+        // const mock = {
+        //     "proposals": [
+        //         {
+        //             "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //             "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
+        //             "proposerName": "Icon Foundation",
+        //             "status": "0x0",
+        //             "startBlockHeight": "0x1",
+        //             "endBlockHeight": "0x65",
+        //             "vote": {
+        //                 "agree": {
+        //                     "count": "0x8",
+        //                     "amount": "0x12312341234a"
+        //                 },
+        //                 "disagree": {
+        //                     "count": "0x6",
+        //                     "amount": "0x12312341234a"
+        //                 },
+        //                 "noVote": {
+        //                     "count": "0x8",
+        //                     "amount": "0x12312341234a"
+        //                 },
+        //             },
+        //             "contents": {
+        //                 "title": "Disqualify P-Rep A",
+        //                 "description": "P-Rep A does not maintain node",
+        //                 "type": "0x1",
+        //                 "value": {
+        //                     "address": "hxbe258ceb872e08851f1f59694dac2558708ece11"
+        //                 }
+        //             }
         //         }
-        //     }
-        // }))
-        //     .then(response => {
-        //         resolve(response.data.result);
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //         resolve({ proposals: [] });
-        //     })
+        //     ]
+        // }
+        // resolve(mock)
+        const walletApi = await walletApiInstance()
+        walletApi.post(`/api/v3`, JSON.stringify({
+            jsonrpc: "2.0",
+            id: randomUint32(),
+            method: "icx_call",
+            params: {
+                "from": "hx0000000000000000000000000000000000000000",
+                "to": "cx0000000000000000000000000000000000000001",
+                "dataType": "call",
+                "data": {
+                    "method": "getProposals",
+                }
+            }
+        }))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                console.error(error)
+                resolve({ proposals: [] });
+            })
     });
 }
 
 export async function getProposal(id) {
-    return new Promise(resolve => {
-        const mock = {
-            "id": id,
-            "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
-            "proposerName": "Icon Foundation",
-            "status": "0x0",
-            "startBlockHeight": "0x1",
-            "endBlockHeight": "0x65",
-            "vote": {
-                "agree": {
-                    "list": [{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330133",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330135",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563adcf330134",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330133",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330132",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330131",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    }],
-                    "amount": "0x12345"
-                },
-                "disagree": {
-                    "list": [{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330136",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330136",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330136",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    },{
-                        "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
-                        "timestamp": "0x563a6cf330136",
-                        "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
-                        "name": "Icon Foundation",
-                        "amount": "0x1"
-                    }],
-                    "amount": "0x22346"
-                },
-                "noVote": {
-                    "list": ["hx31258ceb872e08851f1f59694dac2558708ece11", "hx31258ceb872e08851f1f59694dac2558708eceff"],
-                    "amount": "0x12312341234a"
-                },
-            },
-            "contents": {
-                "title": "Disqualify P-Rep A",
-                "description": "P-Rep A does not maintain node",
-                "type": "0x1",
-                "value": {
-                    "address": "hxbe258ceb872e08851f1f59694dac2558708ece11"
-                }
-            }
-        }
-        resolve(mock)
-        // const walletApi = await walletApiInstance()
-        // walletApi.post(`/api/v3`, JSON.stringify({
-        //     jsonrpc: "2.0",
-        //     id: randomUint32(),
-        //     method: "icx_call",
-        //     params: {
-        //         "from": "hx0000000000000000000000000000000000000000",
-        //         "to": "cx0000000000000000000000000000000000000000",
-        //         "dataType": "call",
-        //         "data": {
-        //             "method": "getProposal",
-        //             "params": {
-        //                 "id": id
-        //             }
+    return new Promise(async resolve => {
+        // const mock = {
+        //     "id": id,
+        //     "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
+        //     "proposerName": "Icon Foundation",
+        //     "status": "0x0",
+        //     "startBlockHeight": "0x1",
+        //     "endBlockHeight": "0x65",
+        //     "vote": {
+        //         "agree": {
+        //             "list": [{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330133",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330135",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563adcf330134",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330133",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330132",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330131",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             }],
+        //             "amount": "0x12345"
+        //         },
+        //         "disagree": {
+        //             "list": [{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330136",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330136",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330136",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             },{
+        //                 "id": "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238",
+        //                 "timestamp": "0x563a6cf330136",
+        //                 "address": "hxe7af5fcfd8dfc67530a01a0e403882687528dfcb",
+        //                 "name": "Icon Foundation",
+        //                 "amount": "0x1"
+        //             }],
+        //             "amount": "0x22346"
+        //         },
+        //         "noVote": {
+        //             "list": ["hx31258ceb872e08851f1f59694dac2558708ece11", "hx31258ceb872e08851f1f59694dac2558708eceff"],
+        //             "amount": "0x12312341234a"
+        //         },
+        //     },
+        //     "contents": {
+        //         "title": "Disqualify P-Rep A",
+        //         "description": "P-Rep A does not maintain node",
+        //         "type": "0x1",
+        //         "value": {
+        //             "address": "hxbe258ceb872e08851f1f59694dac2558708ece11"
         //         }
         //     }
-        // }))
-        //     .then(response => {
-        //         resolve(response.data.result);
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //         resolve({});
-        //     })
+        // }
+        // resolve(mock)
+        const walletApi = await walletApiInstance()
+        walletApi.post(`/api/v3`, JSON.stringify({
+            jsonrpc: "2.0",
+            id: randomUint32(),
+            method: "icx_call",
+            params: {
+                "from": "hx0000000000000000000000000000000000000000",
+                "to": "cx0000000000000000000000000000000000000001",
+                "dataType": "call",
+                "data": {
+                    "method": "getProposal",
+                    "params": {
+                        "id": id
+                    }
+                }
+            }
+        }))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                console.error(error)
+                resolve({});
+            })
     });
 }
 

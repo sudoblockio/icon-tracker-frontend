@@ -84,9 +84,8 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height} />
 							<DateCell date={data.createDate} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.amount} symbol="I-Score" />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis/>
+							<AmountCell amount={data.icx} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_DELEGATION:
@@ -96,7 +95,7 @@ class TxTableBody extends Component {
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
-							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
+							}}><span className="prep-tag">{badgeTitle}</span>{data.name || data.address}</td>
 							<td className="plus"><span>{numberWithCommas(value)}</span><em>ICX</em></td>
 						</tr>
 					)
@@ -105,7 +104,7 @@ class TxTableBody extends Component {
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
-							}}>{data.grade && <span className="prep-tag">{badgeTitle}</span>}{data.name || data.address}</td>
+							}}>{data.address}</td>
 							<td className="plus"><span>{numberWithCommas(data.amount)}</span><em>ICX</em></td>
 						</tr>
 					)
