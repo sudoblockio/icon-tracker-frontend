@@ -11,7 +11,8 @@ import {
   addressList,
   addressTxList,
   addressInternalTxList,
-  addressTokenTxList
+  addressTokenTxList,
+  addressRewardList
 } from '../../redux/actions/addressesActions';
 import { 
   transactionRecentTx,
@@ -46,7 +47,8 @@ function mapStateToProps(state) {
     tokenTransfers: state.tokens.tokenTransfers,
     tokenHolders: state.tokens.tokenHolders,
     transactionEvents: state.transactions.transactionEvents,
-    transactionInternalTx: state.transactions.transactionInternalTx
+    transactionInternalTx: state.transactions.transactionInternalTx,
+    addressReward: state.addresses.addressReward
   };
 }
 
@@ -68,6 +70,7 @@ function mapDispatchToProps(dispatch) {
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
     transactionEventLogList: payload => dispatch(transactionEventLogList(payload)),
     transactionInternalTxList: payload => dispatch(transactionInternalTxList(payload)),
+    addressRewardList: payload => dispatch(addressRewardList(payload)),
   };
 }
 

@@ -13,7 +13,7 @@ class TxPageTitle extends Component {
                 case TX_TYPE.ADDRESS_REWARD:
                     return (
                         <p className="title">
-                            Reward
+                            Rewards
                             <span>for address {urlIndex}</span>
                             <span className="right">
                                 A total of<em>{_listSize}</em> reward(s) found

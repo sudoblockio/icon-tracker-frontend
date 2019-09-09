@@ -4,6 +4,8 @@ import AddressTransactions from './AddressTransactions'
 import AddressInternalTransactions from './AddressInternalTransactions'
 import AddressTokenTransfers from './AddressTokenTransfers'
 import AddressDelegation from './AddressDelegation'
+import AddressVoted from './AddressVoted'
+import AddressReward from './AddressReward'
 import {
     TX_TYPE,
     ADDRESS_TABS,
@@ -82,7 +84,7 @@ class WalletTabs extends Component {
                             )
                         case ADDRESS_TABS[4]:
                             return (
-                                <AddressDelegation
+                                <AddressVoted
                                     txData={addressVoted}
                                     txType={TX_TYPE.ADDRESS_VOTED}
                                     address={address}
@@ -90,7 +92,7 @@ class WalletTabs extends Component {
                             )
                         case ADDRESS_TABS[5]:
                             return (
-                                <AddressDelegation
+                                <AddressReward
                                     txData={addressReward}
                                     goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_REWARD}

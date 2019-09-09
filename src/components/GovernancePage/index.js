@@ -184,30 +184,34 @@ class GovernancePage extends Component {
 									<div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(2)}<em>%</em></span>}</div>
 								</div>
 								<div className="total">
-									<p>Public Treasury</p>
-									<p><em>ICX</em><span>{convertNumberToText(publicTreasury, 4)}</span></p>
+									<p>Public Treasury <em>(ICX)</em></p>
+									<p><span>{convertNumberToText(publicTreasury, 4)}</span></p>
 								</div>
 							</div>
 							<ul>
 								<li>
-									<p>i<sub>rep</sub></p>
-									<p><em>ICX</em><span>{convertNumberToText(irep, 4)}</span></p>
+									<div>
+										<p>i<sub>rep</sub> <em>(ICX)</em></p>
+										<p><span>{convertNumberToText(irep, 4)}</span></p>
+									</div>
 								</li>
 								<li>
-									<p>r<sub>rep</sub> * 3</p>
-									<p><em>%</em><span>{convertNumberToText(rrep / 100 * 3, 4)}</span></p>
-								</li>
-								{/* <li>
-									<p>Voter reward</p>
-									<p><em>ICX</em><span>900,000,000.0004</span></p>
-								</li> */}
-								<li>
-									<p>Step Price</p>
-									<p><em>ICX</em><span>{numberWithCommas(stepPrice)}</span></p>
+									<div>
+										<p>r<sub>rep</sub> * 3 <em>(%)</em></p>
+										<p><span>{convertNumberToText(rrep / 100 * 3, 4)}</span></p>
+									</div>
 								</li>
 								<li>
-									<p>Last Block{lastBlockPrepName && <span>{lastBlockPrepName}</span>}</p>
-									<p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
+									<div>
+										<p>Step Price <em>(ICX)</em></p>
+										<p><span>{numberWithCommas(stepPrice)}</span></p>
+									</div>
+								</li>
+								<li>
+									<div>
+										<p>Last Block{lastBlockPrepName && <span>{lastBlockPrepName}</span>}</p>
+										<p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
+									</div>
 								</li>
 							</ul>
 						</div>

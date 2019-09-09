@@ -449,8 +449,6 @@
     text-align: center;
 }
 
-.content-wrap.governance .screen0 .contents ul li{width: 25%;}
-
 .content-wrap.governance .search-group input[type=checkbox] + label{ margin-right: 5px; }
 
 .table-typeP td.rank+td+td em{text-align: center}

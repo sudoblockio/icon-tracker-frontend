@@ -178,24 +178,24 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Proposer</td>
-													<td><span className="on proposal-pointer" onClick={() => { this.props.history.push('/address/' + proposer) }}>{proposerName}</span></td>
+													<td><span className="on proposal-pointer" onClick={() => { window.open('/address/' + proposer, '_blank') }}>{proposerName}</span></td>
 												</tr>
 												<tr>
 													<td>Tx Hash</td>
-													<td><span className="link proposal-pointer" onClick={() => { this.props.history.push('/transaction/' + id) }}>{id}</span></td>
+													<td><span className="link proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 												</tr>
 												<tr>
 													<td>Start Blockheight</td>
-													{isNaN(start) ?
-														<td><span className="on proposal-pointer" onClick={() => { this.props.history.push('/block/' + start) }}>{start}</span> </td>
+													{!isNaN(start) ?
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}</span> </td>
 														:
 														<td><span>-</span></td>
 													}
 												</tr>
 												<tr>
 													<td>End Blockheight</td>
-													{isNaN(end) ?
-														<td><span className="on proposal-pointer" onClick={() => { this.props.history.push('/block/' + end) }}>{end}</span> </td>
+													{!isNaN(end) ?
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end}</span> </td>
 														:
 														<td><span>-</span></td>
 													}

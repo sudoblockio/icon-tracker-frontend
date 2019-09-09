@@ -61,7 +61,7 @@ export const IRC_VERSION = {
 export const SORT_TYPE = [10, 25, 50, 100]
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected']
 
-export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Delegations', 'Voted', 'Reward']
+export const ADDRESS_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Delegations', 'Voted', 'Rewards']
 export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Transfers', 'Code', 'Read Contract', 'Events']
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
