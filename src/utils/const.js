@@ -1,3 +1,4 @@
+export const SUPPORT_URL = "https://icon-project.atlassian.net/servicedesk/customer/portal/4"
 export const REDUX_STEP = {
     INIT: 'init',
     READY: 'ready',
