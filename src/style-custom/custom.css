@@ -528,3 +528,13 @@ p.prep-causion {
 .table-typeC.reward td:nth-child(5){text-align: right;}
 .table-typeC.reward td:nth-child(1) .ellipsis{width:112px; }
 .table-typeC.reward td:nth-child(1).icon .ellipsis{width:98px; }
+
+.table-typeC.proposal.votes th:nth-child(1){width:auto; }
+.table-typeC.proposal.votes th:nth-child(2){width: 170px !important;}
+.table-typeC.proposal.votes th:nth-child(3){width: 140px !important;}
+.table-typeC.proposal.votes th:nth-child(4){width: 200px !important;}
+.table-typeC.proposal.votes th:nth-child(5){width: 200px !important;}
+.table-typeC.proposal.votes td:nth-child(2){text-align: right; }
+.table-typeC.proposal.votes td .ellipsis{width:430px; color: #1aaaba; }
+.table-typeC.proposal.votes td:nth-child(4) span {width: 291px !important;}
+.table-typeC.proposal.votes td:nth-child(5){ text-align: center; }

@@ -282,7 +282,8 @@ class ProposalDetailPage extends Component {
 												<thead>
 													<tr>
 														<th>Voter</th>
-														<th>{tabVotes ? 'Votes' : 'Answer'}</th>
+														{tabVotes && <th>Votes</th>}
+														<th>Answer</th>
 														<th>Tx hash</th>
 														<th>Time ({getUTCString()})</th>
 													</tr>
@@ -294,7 +295,8 @@ class ProposalDetailPage extends Component {
 														return (
 															<tr key={index}>
 																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-																{tabVotes ? <td><span>{convertNumberToText(_amount)}</span><em>ICX</em></td> : <td><span>{answer}</span></td>}
+																{tabVotes && <td><span>{convertNumberToText(_amount)}</span><em>ICX</em></td>}
+																<td><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
 															</tr>
