@@ -39,7 +39,7 @@ class MainPage extends Component {
                         <div className="content">
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
-                                <input ref={ref => { this.input = ref }} type="text" className="txt-type-search" placeholder="Name, Address, TxHash, Block, SCORE" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} /><span><i className="img"></i></span><em><i className="img"></i></em>
+                                <input ref={ref => { this.input = ref }} type="text" className="txt-type-search" placeholder="Address, TxHash, Block, SCORE" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} /><span><i className="img"></i></span><em><i className="img"></i></em>
                             </div>
                         </div>
                     </div>
