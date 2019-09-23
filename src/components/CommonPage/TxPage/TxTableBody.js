@@ -18,7 +18,7 @@ import {
 import {
 	TX_TYPE,
 } from 'utils/const'
-import { getBadgeTitle } from '../../../utils/utils';
+import { getBadgeTitle, convertNumberToText } from '../../../utils/utils';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -96,7 +96,7 @@ class TxTableBody extends Component {
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}><span className="prep-tag">{badgeTitle}</span>{data.name || data.address}</td>
-							<td className="plus"><span>{numberWithCommas(value)}</span><em>ICX</em></td>
+							<td className="plus"><span>{convertNumberToText(value)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_VOTED:
@@ -105,7 +105,7 @@ class TxTableBody extends Component {
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}>{data.address}</td>
-							<td className="plus"><span>{numberWithCommas(data.amount)}</span><em>ICX</em></td>
+							<td className="plus"><span>{convertNumberToText(data.amount)}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
