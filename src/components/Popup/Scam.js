@@ -130,8 +130,11 @@ class Scam extends Component {
                                     </Fragment>
                                 )}
                             </Dropzone>
-                            <div className="btn-holder">
-                                <button className="btn-type-normal" disabled={dropBoxClass === 'error' ? true : false} onClick={this.handleSubmit}>
+                            <div className="btn-holder full">
+                                <button className="btn-type-fill size-half" onClick={this.props.closeScam}>
+                                    <span>{'Cancel'}</span>
+                                </button>                                
+                                <button className="btn-type-normal size-half" disabled={dropBoxClass === 'error' ? true : false} onClick={this.handleSubmit}>
                                     <span>Summit</span>
                                 </button>
                             </div>
@@ -144,7 +147,10 @@ class Scam extends Component {
                                 {connectStatus === 0 ? 'Reporting is only available after you connect the ICONex wallet.' : 'ICONex wallet is connected.'}
                             </p>
                             {connectStatus === 1 && <p className="address">{walletAddress}</p>}
-                            <div className="btn-holder">
+                            <div className="btn-holder full">
+                                <button className="btn-type-fill size-half" onClick={this.props.closeScam}>
+                                    <span>{'Cancel'}</span>
+                                </button>
                                 <button className="btn-type-normal size-half" onClick={this.onClickNext}>
                                     <span>{connectStatus === 0 ? 'Connect' : 'Next'}</span>
                                 </button>

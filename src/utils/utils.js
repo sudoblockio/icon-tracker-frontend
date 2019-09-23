@@ -594,6 +594,8 @@ export function getBadgeTitle(grade) {
             return 'Sub P-Rep'
         case '0x2':
             return 'Candidate'
+        case '0x3':
+            return 'Blacklist'
         default:
             return 'Unregistered'
     }

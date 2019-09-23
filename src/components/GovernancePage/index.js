@@ -55,7 +55,10 @@ class GovernancePage extends Component {
 			prep.balance = Number(prep.balance)
 			return prep
 		})
-		const blackPrep = _blackPrep || []
+		const blackPrep = (_blackPrep || []).map(bp => {
+			bp.grade = 3
+			return bp
+		})
 
 		const lastPrepIndex = preps.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${preps[lastPrepIndex].name}`
@@ -309,6 +312,8 @@ class TableRow extends Component {
 				return <span className={className}><i></i>Sub P-Rep</span>
 			case 2:
 				return <span className={className}><i></i>Candidate</span>
+			case 3:
+				return <span className={'prep-tag'}>Blacklist</span>
 			default:
 				return null		
 		}
@@ -346,7 +351,7 @@ class TableRow extends Component {
 			logo,
 			rank,
 			balance,
-			unstake
+			unstake,
 		} = prep
 
 		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
@@ -365,7 +370,7 @@ class TableRow extends Component {
 		return(
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
-				<td className="on">
+				<td className={grade === 3 ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
 						{logo && !logoError && <li><img src={logo} onError={this.onError} alt='logo'/></li>}
