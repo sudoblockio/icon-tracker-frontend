@@ -6,6 +6,7 @@ import { valueToString } from '../../utils/utils';
 import {
 	LoadingComponent
 } from 'components';
+import imgNoProposal from '../../style/image/img-no-proposal.png'
 
 class ProposalListPage extends Component {
 
@@ -32,6 +33,9 @@ class ProposalListPage extends Component {
 					<div className="wrap-holder">
 						<p className="title">Network Proposal</p>
 						<div className="content">
+							{proposals.length === 0 ?
+							<div className="no-proposal"><img src={imgNoProposal} alt='no-proposal' /></div>						
+							:	
 							<div className="proposal-list">
 								{proposals.map(proposal => {
 									const { id, contents, vote, status, proposerName } = proposal
@@ -104,6 +108,7 @@ class ProposalListPage extends Component {
 									)
 								})}
 							</div>
+							}
 						</div>
 					</div>
 				</div>}

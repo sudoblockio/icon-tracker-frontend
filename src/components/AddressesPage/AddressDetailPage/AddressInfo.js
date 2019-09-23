@@ -270,7 +270,7 @@ class AddressInfo extends Component {
                                                     {_address} <QrCodeButton address={_address} />
                                                     <CopyButton data={_address} title={'Copy Address'} isSpan />
                                                     {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
-                                                    <ReportButton address={address} />
+                                                    {!isConnected && <ReportButton address={address} />}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -281,7 +281,7 @@ class AddressInfo extends Component {
                                                 </td> */}
                                                 <td colSpan="3" className="balance">
                                                     <div className={this.state.icxMore ? 'on' : ''}>
-                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance, 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
+                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance, this.state.icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
                                                         <p><span>Staked</span><span><em>{(!Number(this.state.balance) ? 0 : Number(this.state.staked) / Number(this.state.balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
                                                         <p><span>Unstaking</span><span><em>{(!Number(this.state.balance) ? 0 : Number(this.state.unstaked) / Number(this.state.balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>

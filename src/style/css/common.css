@@ -1337,6 +1337,9 @@ input[type="text"]:focus.over {border: 1px solid #4d4d4d;}
 .proposal-list .bar-background:before { top: -2px; right: -4px; width: 4px; height: }
 .proposal-list .bar-background:after { top: -4px; left: 2px; height: 4px;}
 
+.no-proposal { text-align: center; margin-top: 15%;}
+.no-proposal img{width:440px; height: 260px; }
+
 .toast{position: fixed; bottom: 110px; left: calc(50% - 140px); height: 42px; padding: 0 30px; color: #fff; font-size: 16px; border-radius: 25px; box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3); background-color: #333333; line-height: 42px;}
 .toast span:first-child{font-weight: 700; margin-right: 20px;}
 .toast span:first-child em{color: rgba(255,255,255,0.5);}

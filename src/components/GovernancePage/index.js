@@ -50,7 +50,9 @@ class GovernancePage extends Component {
 			const index = preps.findIndex(p => prep.address === p.address)
 			if (index !== -1) {
 				prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+				prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 			}
+			prep.balance = Number(prep.balance)
 			return prep
 		})
 		const blackPrep = _blackPrep || []
@@ -326,7 +328,6 @@ class TableRow extends Component {
 		} = this.state
 
 		const {
-			totalStaked,
 			totalVoted,
 			prep
 		} = this.props
@@ -343,15 +344,20 @@ class TableRow extends Component {
 			irepUpdatedBlockHeight,
 			active,
 			logo,
-			rank
+			rank,
+			balance,
+			unstake
 		} = prep
 
 		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 		const prepStaked = IconConverter.toNumber(stake || 0)
+		const prepUnstaked = IconConverter.toNumber(unstake || 0)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 
-		const stakedRate = !totalStaked ? 0 : prepStaked / totalStaked * 100
+		const totalBalcne = balance + prepStaked + prepUnstaked
+
+		const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
 
 		const badge = this.getBadge(grade, active)

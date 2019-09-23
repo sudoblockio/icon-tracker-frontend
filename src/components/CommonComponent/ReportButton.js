@@ -13,8 +13,10 @@ class ReportButton extends Component {
     }
 
     render() {
+        const { disabled } = this.props
+
         return (
-            <span className="btn-scam" onClick={this.handleClick}>
+            <span className={["btn-scam", disabled && "disabled"].join(" ") } onClick={this.handleClick}>
                 Report scam
             </span>
         )
