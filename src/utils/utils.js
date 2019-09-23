@@ -114,8 +114,57 @@ export function calcMaxPageNum(total, rowNum) {
     return Math.ceil(total / rowNum)
 }
 
+export function makeFromNowText(fistTime, firstText, secondTime, secondText, later) {
+    const _secondTime = secondTime === 0 ? undefined : secondTime
+    const result = [
+        fistTime && `${fistTime} ${firstText}${fistTime === 1 ? "" : "s"}`,
+        _secondTime && `${_secondTime} ${secondText}${_secondTime === 1 ? "" : "s"}`,
+    ]
+
+    if (later) {
+        result.unshift('in')
+    }
+    else {
+        result.push('ago')
+    }
+
+    return result.join(" ")
+}
+
 export function calcFromNow(createDate) {
-    return moment(createDate).fromNow()
+    const M = 60
+    const H = 60 * 60
+    const D = 60 * 60 * 24
+    
+    const createMoment = moment(createDate)
+    const currentMoment = moment()
+    const createTime = createMoment.format('X')
+    const currentTime = currentMoment.format('X')
+    const diffValue = currentTime - createTime
+    const diff = Math.abs(diffValue)
+    const later = diffValue < 0
+
+    if (diff === 0) {
+        return 'right now'
+    }
+    else if (diff > 0 && diff < M) {
+        return  makeFromNowText(diff, 'second', undefined, '', later)        
+    }
+    else if (diff >= M && diff < H) {
+        const minute = Math.floor(diff / M)
+        const second = diff % M
+        return makeFromNowText(minute, 'minute', second, 'second', later)
+    }
+    else if (diff >= H && diff < D) {
+        const hour = Math.floor(diff / H)
+        const minute = Math.floor((diff % H) / M)
+        return makeFromNowText(hour, 'hour', minute, 'minute', later)
+    }
+    else {
+        const day = Math.floor(diff / D)
+        const hour = Math.floor((diff % D) / H)
+        return makeFromNowText(day, 'day', hour, 'hour', later)
+    }
 }
 
 export function getUTCString() {
@@ -544,9 +593,10 @@ export function getBadgeTitle(grade) {
         case '0x1':
             return 'Sub P-Rep'
         case '0x2':
+            return 'Candidate'
         default:
-            return 'P-Rep'
-        }
+            return 'Unregistered'
+    }
 }
 
 

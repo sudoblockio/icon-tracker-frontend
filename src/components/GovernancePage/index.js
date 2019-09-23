@@ -232,7 +232,7 @@ class GovernancePage extends Component {
 								</span>						
 								<span>
 									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-03" className="label _img">P-Rep ({allPrep.filter(p => p.grade === 2).length})</label>
+									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2).length})</label>
 								</span>
 								<span className="blacklist">
 									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
@@ -306,7 +306,7 @@ class TableRow extends Component {
 			case 1:
 				return <span className={className}><i></i>Sub P-Rep</span>
 			case 2:
-				return <span className={className}><i></i>P-Rep</span>
+				return <span className={className}><i></i>Candidate</span>
 			default:
 				return null		
 		}
@@ -358,7 +358,7 @@ class TableRow extends Component {
 
 		return(
 			<tr>
-				<td className="rank"><span>{rank}</span></td>
+				<td className="rank"><span>{rank || '-'}</span></td>
 				<td className="on">
 					<ul>
 						<li>{badge}</li>

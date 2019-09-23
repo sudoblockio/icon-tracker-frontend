@@ -261,13 +261,10 @@ export async function prepList(grade) {
         trackerApi.get(makeUrl(`/v3/iiss/prep/list`, payload))
             .then(result => {
                 const { data } = result.data
-                const _data = (data || []).map((item, index) => {
-                    if (!item.rank) {
-                        item.rank = index + 1
-                    }
-                    return item
-                })
-                resolve(_data)
+                const _data = data || []
+                const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
+                const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)
+                resolve([...delegated, ...undelegated])
             })
             .catch(error => {
                 reject(error)
