@@ -86,6 +86,7 @@ class WalletTabs extends Component {
                             return (
                                 <AddressVoted
                                     txData={addressVoted}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_VOTED}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_VOTED}
                                     address={address}
                                 />

@@ -214,7 +214,7 @@ class GovernancePage extends Component {
 								</li>
 								<li>
 									<div>
-										<p>Last Block{lastBlockPrepName && <span>{lastBlockPrepName}</span>}</p>
+										<p>Last Block{lastBlockPrepName && <span className='last-block-name-tag'>{lastBlockPrepName}</span>}</p>
 										<p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
 									</div>
 								</li>

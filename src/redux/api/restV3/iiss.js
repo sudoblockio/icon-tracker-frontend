@@ -191,26 +191,6 @@ export async function iissPrepRepJsonActive(payload) {
     })
 }
 
-export async function iissDelegateList(payload) {
-    const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/delegate/list`, payload))
-            .then(result => {
-                const { data } = result.data
-                const _data = data.map((item, index) => {
-                    if (!item.rank) {
-                        item.rank = index + 1
-                    }
-                    return item
-                })
-                resolve(_data)
-            })
-            .catch(error => {
-                reject(error)
-            })
-    })
-}
-
 export async function prepMain() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {

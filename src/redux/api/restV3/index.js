@@ -13,6 +13,7 @@ import {
     addressTxList,
     addressInternalTxList,
     addressTokenTxList,
+    addressVotedList
 } from './address'
 
 import {
@@ -75,7 +76,8 @@ export {
     addressTxList,
     addressInternalTxList,
     addressTokenTxList,
-
+    addressVotedList,
+    
     blockList,
     blockInfo,
     blockTxList,

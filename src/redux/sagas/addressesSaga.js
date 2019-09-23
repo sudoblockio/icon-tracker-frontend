@@ -8,9 +8,9 @@ import {
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
   addressReward as ADDRESS_REWARD,
+  addressVotedList as ADDRESS_VOTED_LIST,
   getPReps,
 } from '../api/restV3';
-import { iissDelegateList } from '../api/restV3/iiss';
 
 export default function* addressesSaga() {
   yield fork(watchAddressRewardList);
@@ -84,25 +84,23 @@ export function* addressDelegationListFunc(action) {
 
 export function* addressVotedListFunc(action) {
   try {
-    const { address } = action.payload
-    const data = yield call(iissDelegateList, { prep: address })
-    if (data && data.length > 0) {
-      yield put({
-        type: AT.addressVotedListFulfilled, payload: {
-          data,
-          listSize: data.length,
-          totalSize: data.length
-        }
-      });
+    if (action.payload.count === 0) {
+      yield put({ type: AT.addressVotedListFulfilled, payload: { data: [] } });
+      return
+    }
+
+    const payload = yield call(ADDRESS_VOTED_LIST, action.payload);
+    if (payload.result === '200') {
+      yield put({ type: AT.addressVotedListFulfilled, payload: payload });
     }
     else {
-      throw new Error()
+      throw new Error();
     }
   }
   catch (e) {
     yield put({ type: AT.addressVotedListRejected });
-
   }
+
 }
 
 export function* addressListFunc(action) {

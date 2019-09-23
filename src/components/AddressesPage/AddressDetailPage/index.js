@@ -59,7 +59,7 @@ class AddressesDetailPage extends Component {
         if (isPrep) {
             TABS.push(ADDRESS_TABS[4])
             getList.push(address => {
-                this.props.addressVotedList({ address })
+                this.props.addressVotedList({ address, page: 1, count: 10 })
             })
         }
         if (claimIScoreCount && Number(claimIScoreCount) !== 0) {

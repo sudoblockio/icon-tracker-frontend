@@ -63,6 +63,9 @@ class TxPage extends Component {
             count: isNumeric(count) ? count : 25,
         }
         switch (this.txType) {
+            case TX_TYPE.ADDRESS_VOTED:
+                query.prep = urlIndex
+                break
             case TX_TYPE.CONTRACT_TX:
             case TX_TYPE.CONTRACT_INTERNAL_TX:
             case TX_TYPE.CONTRACT_TOKEN_TX:

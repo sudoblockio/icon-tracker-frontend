@@ -542,3 +542,11 @@ p.prep-causion {
 .table-typeN td:nth-child(2), .table-typeE td:nth-child(2) { text-align: right }
 
 .table-typeC.voter th:nth-child(2) { width: 350px; }
+
+.last-block-name-tag {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+}

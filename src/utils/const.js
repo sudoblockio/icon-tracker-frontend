@@ -118,7 +118,7 @@ export const SEARCH_TYPE_DATA = {
 export const TX_TYPE = {
     ADDRESS_REWARD: 'addressreward',
     ADDRESS_DELEGATION: 'addressdelegations',
-    ADDRESS_VOTED: 'addressvoted',
+    ADDRESS_VOTED: 'addressvoters',
     ADDRESS_TX: 'addresstx',
     ADDRESS_INTERNAL_TX: 'addressinternaltx',
     ADDRESS_TOKEN_TX: 'addresstokentx',
@@ -154,7 +154,7 @@ export const TX_TYPE_DATA = {
         tx: 'addressVoted',
         getTxList: 'addressVotedList',
         className: 'table-typeC voter',
-        noBoxText: 'No Voted',
+        noBoxText: 'No Voters',
     },
     [TX_TYPE.ADDRESS_TX]: {
         tx: 'walletTx',

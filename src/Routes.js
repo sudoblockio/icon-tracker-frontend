@@ -81,6 +81,9 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/`} component={TxPage} exact />
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_TX}/:addressId/:pageId`} component={TxPage} />
 
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_VOTED}/:addressId/`} component={TxPage} exact />
+                <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_VOTED}/:addressId/:pageId`} component={TxPage} />
+
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_INTERNAL_TX}/:addressId/`} component={TxPage} exact />
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.ADDRESS_INTERNAL_TX}/:addressId/:pageId`} component={TxPage} />
 

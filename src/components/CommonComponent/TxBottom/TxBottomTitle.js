@@ -28,6 +28,15 @@ class TxPageTitle extends Component {
             const _listSize = numberWithCommas(listSizeNum)
             const _totalSize = numberWithCommas(totalSizeNum)
             switch (txType) {
+                case TX_TYPE.ADDRESS_VOTED:                
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{listSizeUnder10}</em> Voter(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} Voter(s)</em>
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.ADDRESS_REWARD:                
                     return (
                         <p className="txt">

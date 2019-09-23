@@ -56,13 +56,33 @@ export async function addressTokenTxList(payload) {
 export async function addressInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
-        .then(result => {
-          console.log(result)
-          resolve(result.data)
-        })
-        .catch(error => {
-          reject(error)
-        })
+        trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
+            .then(result => {
+                console.log(result)
+                resolve(result.data)
+            })
+            .catch(error => {
+                reject(error)
+            })
     })
-  }
+}
+
+export async function addressVotedList(payload) {
+    const trackerApi = await trackerApiInstance()
+
+    if (payload.address) {
+        payload.prep = payload.address
+        delete payload.address
+    }
+
+    return new Promise((resolve, reject) => {
+        trackerApi.get(makeUrl(`/v3/iiss/delegate/list`, payload))
+            .then(result => {
+                console.log(result)
+                resolve(result.data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
