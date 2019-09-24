@@ -32,6 +32,12 @@ export function numberWithCommas(x) {
     }
     let parts = x.toString().split('.')
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    if (parts[1]) {
+        parts[1] = parts[1].replace(/0+$/, "")        
+    }
+    if (parts[1] === "") {
+        parts.pop()
+    }
     return parts.join('.')
 }
 
@@ -522,7 +528,7 @@ export function convertEngineToTracker(resultData, byHashData) {
         .toString()
     const stepUsed = IconAmount.of(resultData.stepUsed)
     const stepPrice = IconAmount.of(resultData.stepPrice).toString()
-    const { eventLogs } = resultData
+    const { eventLogs, stepUsedDetails } = resultData
     const { txHash, from, blockHeight: height } = byHashData
     const result = {
         txHash,
@@ -535,6 +541,7 @@ export function convertEngineToTracker(resultData, byHashData) {
         amount: valueIcx === 'NaN' ? 0 : valueIcx,
         stepLimit: IconAmount.of(byHashData.stepLimit).toString(),
         stepUsedByTxn: stepUsed.toString(),
+        stepUsedDetails,
         stepPrice,
         fee: IconAmount.of(IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice), IconAmount.Unit.LOOP)
             .convertUnit(IconAmount.Unit.ICX)

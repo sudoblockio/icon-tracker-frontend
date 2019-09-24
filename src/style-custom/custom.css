@@ -550,3 +550,24 @@ p.prep-causion {
     word-break: keep-all;
     white-space: nowrap;
 }
+
+.table-typeB td.transfer {
+    padding: 2px 20px;   
+}
+
+
+.step-used-details-p {
+    font-size: 10px;
+    font-weight: 400;
+    margin: 0px 0;
+    padding: 3px 0;
+    text-align: left;
+}
+
+.step-used-details-p:first-child {
+    padding-top: 8px;
+}
+
+/* .step-used-details-p:not(:last-child) {
+    border-bottom: 1px dotted #e6e6e6;
+} */

@@ -97,7 +97,8 @@ class TransactionInfo extends Component {
 					feeUsd,
 					dataType,
 					targetContractAddr,
-					reportedCount
+					reportedCount,
+					stepUsedDetails
 				} = data
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -163,7 +164,18 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Step used by Txn</td>
-											<td>{convertNumberToText(stepUsedByTxn)}</td>
+											<td style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
+												{convertNumberToText(stepUsedByTxn)}
+												{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
+													const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
+													return (
+														<p key={index} className='step-used-details-p'>
+															┗&emsp;<span><AddressLink to={stepAddr} /></span>
+															&emsp;{convertNumberToText(_stepUsed)}
+														</p>
+													)
+												})}
+											</td>
 										</tr>
 										<tr>
 											<td>Step Price</td>

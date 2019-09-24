@@ -81,9 +81,9 @@ class BlockInfo extends Component {
                                                 )}
                                             </tr>
                                             {/*<tr>
-                      <td>C-rep</td>
-                      <td><span>{crep}</span></td>
-                    </tr>*/}
+                                                <td>C-rep</td>
+                                                <td><span>{crep}</span></td>
+                                            </tr>*/}
                                             <tr>
                                                 <td>Transactions</td>
                                                 <td>

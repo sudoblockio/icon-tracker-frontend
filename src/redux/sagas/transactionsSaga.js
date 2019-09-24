@@ -1,6 +1,6 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
-import { delay, convertEngineToTracker } from "../../utils/utils";
+import { convertEngineToTracker } from "../../utils/utils";
 import {
   transactionRecentTx as TRANSACTION_RECENT_TX_API,
   transactionTxDetail as TRANSACTION_TX_DETAIL_API,
@@ -45,7 +45,17 @@ function* transactionTxDetailFunc(action) {
 
   try {
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-    if (trackerData.result === "200") {
+    
+    if (trackerData.result === "200") {      
+      // if (trackerData.data && !trackerData.data.stepUsedDetails) {
+      //   const { stepUsedDetails } = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
+      //   trackerData.data.stepUsedDetails = stepUsedDetails
+      //   // trackerData.data.stepUsedDetails = {
+      //   //   "cx4d6f646441a3f9c9b91019c9b98e3c342cceb114" : "0x1230",
+      //   //   "hx4873b94352c8c1f3b2f09aaeccea31ce9e90bd31" : "0x4"
+      //   // }  
+      // }
+
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return
     }
@@ -65,20 +75,10 @@ function* transactionTxDetailFunc(action) {
     data = convertEngineToTracker(resultData, byHashData)
     if (data) {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
+      return
     }
-
-    const count = 0, timeout = 1500
-    for (let i = 0; i < count; i++ ) {
-      yield call(delay, timeout * (i + 1))
-      trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
-      if (trackerData.result === "200") {
-        yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
-        return
-      }
-      else if (i === count - 1) {
-        throw Error(trackerData.result)
-      }
-    }
+    
+    throw Error()
   }
   catch (e) {
     console.error(e)
