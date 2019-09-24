@@ -67,7 +67,7 @@ export const CONTRACT_TABS = ['Transactions', 'Internal Transactions', 'Token Tr
 export const BLOCK_TABS = ['Transactions']
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract']
 export const TRANSACTION_TABS = ['Internal Transactions', 'Events']
-export const PROPOSAL_TABS = ['Total Quorum', 'Total Token Votes']
+export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes']
 
 export const NETWORK_HOST = {
     Mainnet: 'tracker.icon.foundation',

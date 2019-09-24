@@ -38,9 +38,15 @@ class Connect extends Component {
     }
 
     getWalletAddress = async () => {
+        if (this.state.disabled) {
+            window.open('https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel', '_blank')
+            return
+        }
+
         if (this.state.walletAddress) {
             return
         }
+        
         const walletAddress = await requestAddress()
         this.setState({ walletAddress }, () => {
             window.dispatchEvent(
@@ -61,10 +67,10 @@ class Connect extends Component {
     }
 
     render() {
-        const { walletAddress, disabled } = this.state
+        const { walletAddress } = this.state
         return (
             <div className={`connect ${walletAddress ? 'join' : ''}`}>
-                <span onClick={this.getWalletAddress} className={disabled ? 'disabled' : ''}>
+                <span onClick={this.getWalletAddress}>
                     <em className="img" />
                 </span>
                 {walletAddress ? (

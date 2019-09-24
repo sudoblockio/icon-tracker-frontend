@@ -10,6 +10,7 @@ import {
     LoadingComponent,
 } from 'components'
 import { POPUP_TYPE } from 'utils/const'
+import { calcFromLastBlock } from '../../utils/utils';
 
 class GovernancePage extends Component {
 
@@ -275,6 +276,7 @@ class GovernancePage extends Component {
 									<tbody>
 										{searched.map((prep, index) => (
 											<TableRow 
+												lastBlockHeight={height}
 												key={index} 
 												prep={prep} 
 												totalStaked={totalStaked} 
@@ -334,7 +336,8 @@ class TableRow extends Component {
 
 		const {
 			totalVoted,
-			prep
+			prep,
+			lastBlockHeight
 		} = this.props
 
 		const { 
@@ -382,7 +385,7 @@ class TableRow extends Component {
 				</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
 				<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
-				<td><span>{numberWithCommas(IconConverter.toNumber(irepUpdatedBlockHeight))}</span></td>
+				<td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td>
 				<td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td>
 				<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
 			</tr>

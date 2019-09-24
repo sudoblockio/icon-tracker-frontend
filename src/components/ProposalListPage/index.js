@@ -64,7 +64,7 @@ class ProposalListPage extends Component {
 												<h2>{valueToString(value)}</h2>
 												<div>
 													<div className="percent-group">
-														<h3 className="label">Quorum</h3>
+														<h3 className="label">Voters</h3>
 														<div><h4>Agreen</h4><span>{agreeCount}</span>%</div>
 														<div><h4>Disagreed</h4><span>{disagreeCount}</span>%</div>
 													</div>
@@ -77,7 +77,7 @@ class ProposalListPage extends Component {
 
 											</li>
 											<li>
-												<h4>Quorum</h4>
+												<h4>Voters</h4>
 												<div className="bar-wrap">
 													<div className="bar-container">
 														<div className="bar-foreground" style={{ height: `${agreeCount}%`, top: `${topCount}%` }}>

@@ -6,7 +6,7 @@ import {
 } from 'utils/const'
 import { getProposal } from '../../redux/api/restV3/iiss';
 import { ProposalStatus, ProposalStatusClass, ProposalType, VIEW_NUMBER } from '../../utils/const';
-import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString } from '../../utils/utils';
+import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString, convertLoopToIcxDecimal } from '../../utils/utils';
 import {
 	NoBox,
 	NotFoundPage,
@@ -213,7 +213,7 @@ class ProposalDetailPage extends Component {
 													<td>
 														<ul className="bar-graph-group">
 															<li>
-																<p>Quorum</p>
+																<p>Voters</p>
 																<div className="bar-wrap">
 																	<div className="bar-container">
 																		<div className="bar-foreground" style={{ height: `${_agreeLength}%`, top: `${topLength}%` }}>
@@ -225,7 +225,7 @@ class ProposalDetailPage extends Component {
 																	</div>
 																</div>
 																<div className="info">
-																	<p>Total Quorum </p>
+																	<p>Total Voters </p>
 																	<p><span><em>{voteLength}</em>/{prepsLength}</span> P-Reps ({_voteLength}%)</p>
 																	<p className="on">Agreed<span><em>{agreeLength}</em> P-Reps ({_agreeLength}%)</span></p>
 																	<p>Disagreed<span><em>{disagreeLength}</em> P-Reps ({_disagreeLength}%)</span></p>
@@ -245,9 +245,9 @@ class ProposalDetailPage extends Component {
 																</div>
 																<div className="info">
 																	<p>Total Token Votes</p>
-																	<p><span><em>{convertNumberToText(voteAmount)} ICX</em></span> ICX</p>
-																	<p className="on">Agreed<span><em>{convertNumberToText(agreeAmount)}</em> ICX ({_agreeAmount}%)</span></p>
-																	<p>Disagreed<span><em>{convertNumberToText(disagreeAmount)}</em> ICX ({_disagreeAmount}%)</span></p>
+																	<p><span><em>{convertNumberToText(convertLoopToIcxDecimal(voteAmount))} ICX</em></span> ICX</p>
+																	<p className="on">Agreed<span><em>{convertNumberToText(convertLoopToIcxDecimal(agreeAmount))}</em> ICX ({_agreeAmount}%)</span></p>
+																	<p>Disagreed<span><em>{convertNumberToText(convertLoopToIcxDecimal(disagreeAmount))}</em> ICX ({_disagreeAmount}%)</span></p>
 																</div>
 															</li>
 														</ul>
@@ -275,7 +275,7 @@ class ProposalDetailPage extends Component {
 								</div>
 								<div className="contents">
 									{tabList.length === 0 ?
-										<NoBox text={`No ${this.state.tab === PROPOSAL_TABS[0] ? 'Quorum' : 'Token Vote'}`}/>
+										<NoBox text={`No ${this.state.tab === PROPOSAL_TABS[0] ? 'Voters' : 'Token Vote'}`}/>
 										:
 										<div className="table-box">
 											<table className={`table-typeC proposal${tabVotes ? ' votes' : ''}`}>

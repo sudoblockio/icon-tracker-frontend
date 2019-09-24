@@ -290,7 +290,7 @@ class AddressInfo extends Component {
                                                     </div>
                                                     <div className={this.state.tokenMore ? 'on' : ''}>
                                                         <p><span><i className="coin"></i>Token</span><span>{(tokenList || []).length}<em>Tokens</em></span><em className="drop-btn" onClick={this.toggleTokenMore}><i className="img"></i></em></p>
-                                                        {(tokenList || []).map((token, index) => {
+                                                        {(tokenList || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((token, index) => {
                                                             const { contractName, contractSymbol, quantity } = token
                                                             return <p key={index}><span>{contractName}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span></p>
                                                         })}

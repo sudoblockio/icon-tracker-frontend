@@ -5,10 +5,16 @@ import { setPopup } from '../../redux/actions/popupActions'
 
 class SearchBox extends Component {
     handleClick = () => {
-        this.props.setPopup({
-            type: POPUP_TYPE.SEARCH,
-            data: { search: this.props.search },
-        })
+        const mainTopSearchBar = document.getElementById('main-top-search-bar')
+        if (mainTopSearchBar) {
+            mainTopSearchBar.focus()
+        }
+        else {
+            this.props.setPopup({
+                type: POPUP_TYPE.SEARCH,
+                data: { search: this.props.search },
+            })
+        }
     }
     render() {
         return (

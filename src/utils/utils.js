@@ -139,8 +139,9 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 
 export function calcFromNow(createDate) {
     const M = 60
-    const H = 60 * 60
-    const D = 60 * 60 * 24
+    const H = M * 60
+    const D = H * 24
+    const W = D * 7
     
     const createMoment = moment(createDate)
     const currentMoment = moment()
@@ -166,11 +167,44 @@ export function calcFromNow(createDate) {
         const minute = Math.floor((diff % H) / M)
         return makeFromNowText(hour, 'hour', minute, 'minute', later)
     }
-    else {
+    else if(diff >= D && diff < W) {
         const day = Math.floor(diff / D)
         const hour = Math.floor((diff % D) / H)
         return makeFromNowText(day, 'day', hour, 'hour', later)
     }
+    else {
+        const week = Math.floor(diff / W)
+        const day = Math.floor((diff % W) / D)
+        return makeFromNowText(week, 'week', day, 'day', later)
+    }
+}
+
+export function calcFromLastBlock(blockDiff) {
+    const M = 60
+    const H = M * 60
+    const D = H * 24
+    const W = D * 7
+
+    const diff = blockDiff * 2
+    if (diff === 0) {
+        return 'right now'
+    }
+    else if (diff > 0 && diff < H) {
+        const minute = Math.floor(diff / M)
+        return makeFromNowText(minute, 'minute')
+    }
+    else if (diff >= H && diff < D) {
+        const hour = Math.floor(diff / H)
+        return makeFromNowText(hour, 'hour')
+    }
+    else if(diff >= D && diff < W) {
+        const day = Math.floor(diff / D)
+        return makeFromNowText(day, 'day')
+    }
+    else {
+        const week = Math.floor(diff / W)
+        return makeFromNowText(week, 'week')
+    }    
 }
 
 export function getUTCString() {
