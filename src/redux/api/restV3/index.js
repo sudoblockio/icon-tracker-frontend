@@ -51,7 +51,8 @@ import {
     icxGetScore,
     icxCall,
     getTransactionResult,
-    getTransaction
+    getTransaction,
+    getTransactionResultNotSdk
 } from './icx'
 
 import{
@@ -111,5 +112,7 @@ export {
     getPReps,
     getIISSInfo,
     getDelegation,
-    addressReward
+    addressReward,
+
+    getTransactionResultNotSdk
 }

@@ -7,6 +7,7 @@ import {
   transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
   transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
   getTransactionResult as GET_TRANSACTION_RESULT_API,
+  getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
   getTransaction as GET_TRANSACTION_API,
 } from '../api/restV3';
 
@@ -47,14 +48,14 @@ function* transactionTxDetailFunc(action) {
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     
     if (trackerData.result === "200") {      
-      // if (trackerData.data && !trackerData.data.stepUsedDetails) {
-      //   const { stepUsedDetails } = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
-      //   trackerData.data.stepUsedDetails = stepUsedDetails
-      //   // trackerData.data.stepUsedDetails = {
-      //   //   "cx4d6f646441a3f9c9b91019c9b98e3c342cceb114" : "0x1230",
-      //   //   "hx4873b94352c8c1f3b2f09aaeccea31ce9e90bd31" : "0x4"
-      //   // }  
-      // }
+      if (trackerData.data && !trackerData.data.stepUsedDetails) {
+        const { stepUsedDetails } = yield call(GET_TRANSACTION_RESULT_NOT_SDK_API, action.payload.txHash);
+        trackerData.data.stepUsedDetails = stepUsedDetails
+        // trackerData.data.stepUsedDetails = {
+        //   "cx4d6f646441a3f9c9b91019c9b98e3c342cceb114" : "0x1230",
+        //   "hx4873b94352c8c1f3b2f09aaeccea31ce9e90bd31" : "0x4"
+        // }  
+      }
 
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return

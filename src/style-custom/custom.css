@@ -539,7 +539,11 @@ p.prep-causion {
 .table-typeC.proposal.votes td:nth-child(4) span {width: 291px !important;}
 .table-typeC.proposal.votes td:nth-child(5){ text-align: center; }
 
-.table-typeN td:nth-child(2), .table-typeE td:nth-child(2) { text-align: right }
+.table-typeC td:nth-child(3), 
+.table-typeN td:nth-child(2), 
+.table-typeE td:nth-child(2) { 
+    text-align: right 
+}
 
 .table-typeC.voter th:nth-child(2) { width: 350px; }
 

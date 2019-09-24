@@ -2,6 +2,7 @@ import { randomUint32 } from 'utils/utils'
 import { walletApiInstance } from './config'
 import IconService, { HttpProvider } from "icon-sdk-js"
 import { getWalletApiUrl } from "./config"
+import axios from 'axios'
 
 export async function icxGetScore(params) {
   const walletApi = await walletApiInstance()
@@ -85,6 +86,29 @@ export async function getTransactionResult(txHash) {
   try {
     const response = await iconService.getTransactionResult(txHash).execute();
     return response;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export async function getTransactionResultNotSdk(txHash) {
+  const walletApiUrl = await getWalletApiUrl()  
+  try {
+    const response = await axios({
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      method: 'post',
+      url: `${walletApiUrl}/api/v3`,
+      data: {
+        id: new Date().getTime() * 1000,
+        jsonrpc: "2.0",
+        method: "icx_getTransactionResult",
+        params: { txHash }
+      }
+    })      
+    return response.data.result;
   } catch (e) {
     console.error(e);
     return undefined;
