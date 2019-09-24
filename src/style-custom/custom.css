@@ -573,6 +573,8 @@ p.prep-causion {
     padding-top: 8px;
 }
 
+.table-typeP col.rank+col+col+col+col{width:125px; }
+
 /* .step-used-details-p:not(:last-child) {
     border-bottom: 1px dotted #e6e6e6;
 } */

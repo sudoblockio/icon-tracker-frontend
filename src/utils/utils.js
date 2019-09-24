@@ -189,7 +189,10 @@ export function calcFromLastBlock(blockDiff) {
     if (diff === 0) {
         return 'right now'
     }
-    else if (diff > 0 && diff < H) {
+    else if (diff > 0 && diff < M) {
+        return  makeFromNowText(diff, 'second')        
+    }
+    else if (diff > M && diff < H) {
         const minute = Math.floor(diff / M)
         return makeFromNowText(minute, 'minute')
     }
