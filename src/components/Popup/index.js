@@ -101,16 +101,16 @@ class Popup extends Component {
                 <div className="dimmed"></div>
                 <div className="popup">
                     <h1 className="title">About Governance</h1>
-                    <p className="txt">ICON Network의 독자적인 기여도 평가 시스템 ‘위임 기여도 증명 DPoc; Delegated Proof of Contribution’를 기반으로 생태계 기여자 모두를 공정하게 평가하고, 그에 따른 합당한 보상을 분배합니다.</p>
+                    <p className="txt">ICON Network is a blockchain network operated by Public Representative (P-Rep). Therefore, Users (ICONist) must vote for high qualified P-Reps so that ICON Network to be more stable. Each P-Reps can submit the Monthly Reward Variable for Representative  (i_rep) that affects the total reward amount for the ICON Network. Therefore, users should compare each i_reps submitted by each P-Reps and make right decision. In addition, users who have participated in the vote will receive reward with Annual Delegation Reward Rate for Representative (r_rep).</p>
                     <div className="box">
                         <p className="sub-title">· Public Treasury</p>
-                        <p className="txt">인센티브를 저장해놓는 보관소로 Transaction fee와 보상을 위한 I_SCORE 발행량(ICX로 환산)의 누적량 입니다.</p>
+                        <p className="txt">Public Treasury, a fully automated reward fund that stores all ICX rewards until ICONists claim their rewards using I-Score. It is funded by ICX issuance and network fees (Step).</p>
                         <p className="sub-title">· i_rep</p>
-                        <p className="txt">대표자당 예상 월간 보상량.</p>
+                        <p className="txt">Monthly Reward Variable for Representative is a variable that determines the reward amount for contribution by Representatives.</p>
                         <p className="sub-title">· r_rep</p>
-                        <p className="txt">대표자 위임 연간 보상률.</p>
+                        <p className="txt">Annual Delegation Reward Rate for Representative is the rate received by an ICONist who delegates their ICX to a Representative. At the moment, considering the r_eep and r_dapp, the r_rep is tripled.</p>
                         <p className="sub-title">· Step Price</p>
-                        <p className="txt">ICON Network에서 실행되는 Smart contract 수수료 입니다.</p>
+                        <p className="txt">Step Price is a variable that determines the price of Step.</p>
                     </div>
                     <div className="btn-holder full">
                         <button className="btn-type-normal size-full" onClick={this.closeAbout}><span>Confirm</span></button>

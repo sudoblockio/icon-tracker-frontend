@@ -276,4 +276,4 @@ export const ProposalStatusClass = {
     "0x3": "canceled",
 }
 
-export const VIEW_NUMBER = true
+export const VIEW_NUMBER = false

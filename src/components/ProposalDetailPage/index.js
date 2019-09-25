@@ -213,7 +213,7 @@ class ProposalDetailPage extends Component {
 													<td>
 														<ul className="bar-graph-group">
 															<li>
-																<p>Voters</p>
+																<p>Voter</p>
 																<div className="bar-wrap">
 																	<div className="bar-container">
 																		<div className="bar-foreground" style={{ height: `${_agreeLength}%`, top: `${topLength}%` }}>
@@ -225,14 +225,14 @@ class ProposalDetailPage extends Component {
 																	</div>
 																</div>
 																<div className="info">
-																	<p>Total Voters </p>
+																	<p>Total Voters</p>
 																	<p><span><em>{voteLength}</em>/{prepsLength}</span> P-Reps ({_voteLength}%)</p>
 																	<p className="on">Agreed<span><em>{agreeLength}</em> P-Reps ({_agreeLength}%)</span></p>
 																	<p>Disagreed<span><em>{disagreeLength}</em> P-Reps ({_disagreeLength}%)</span></p>
 																</div>
 															</li>
 															<li className="disagreed">
-																<p>Token Votes </p>
+																<p>Token Vote</p>
 																<div className="bar-wrap">
 																	<div className="bar-container">
 																		<div className="bar-foreground" style={{ height: `${_agreeAmount}%`, top: `${topAmount}%` }}>
@@ -295,8 +295,8 @@ class ProposalDetailPage extends Component {
 														return (
 															<tr key={index}>
 																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-																{tabVotes && <td><span>{convertNumberToText(_amount)}</span><em>ICX</em></td>}
-																<td><span>{answer}</span></td>
+																{tabVotes && <td><span>{convertNumberToText(convertLoopToIcxDecimal(_amount))}</span><em>ICX</em></td>}
+																<td className='center-align'><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
 															</tr>

@@ -578,3 +578,19 @@ p.prep-causion {
 /* .step-used-details-p:not(:last-child) {
     border-bottom: 1px dotted #e6e6e6;
 } */
+
+.table-typeC.proposal td .ellipsis {
+    width: 420px;
+}
+
+.table-typeC.proposal th:nth-child(3) {
+    width: 460px;
+}
+
+.table-typeE th:nth-child(5) {
+    width: 165px;
+}
+
+.table-typeC .center-align {
+    text-align: center !important;
+}

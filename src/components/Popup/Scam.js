@@ -39,7 +39,7 @@ class Scam extends Component {
                 })
                 return
             }
-            if (file[0].size / 1024 / 1024 > 1) {
+            if (file[0].size / 1024 / 1024 > 5) {
                 this.setState({
                     fileName,
                     dropBoxClass: 'error',
