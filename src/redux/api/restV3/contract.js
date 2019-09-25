@@ -6,11 +6,9 @@ export async function contractList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/list', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
-        console.log(error)
         reject(error)
       })
   })
@@ -21,7 +19,6 @@ export async function contractInfo(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/info', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -35,7 +32,6 @@ export async function contractDetail(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/detail', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -49,7 +45,6 @@ export async function contractTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/txList', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -63,7 +58,6 @@ export async function contractTokenTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/tokenTxList', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -77,7 +71,6 @@ export async function contractEventLogList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/eventLogList', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {
@@ -91,7 +84,6 @@ export async function contractInternalTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/internalTxList', payload))
       .then(result => {
-        console.log(result)
         resolve(result.data)
       })
       .catch(error => {

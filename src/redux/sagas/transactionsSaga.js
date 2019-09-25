@@ -48,14 +48,14 @@ function* transactionTxDetailFunc(action) {
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);
     
     if (trackerData.result === "200") {      
-      if (trackerData.data && !trackerData.data.stepUsedDetails) {
-        const { stepUsedDetails } = yield call(GET_TRANSACTION_RESULT_NOT_SDK_API, action.payload.txHash);
-        trackerData.data.stepUsedDetails = stepUsedDetails
-        // trackerData.data.stepUsedDetails = {
-        //   "cx4d6f646441a3f9c9b91019c9b98e3c342cceb114" : "0x1230",
-        //   "hx4873b94352c8c1f3b2f09aaeccea31ce9e90bd31" : "0x4"
-        // }  
-      }
+      // let { stepUsedDetails } = trackerData.data
+      // if (stepUsedDetails) {
+      //   trackerData.data.stepUsedDetails = JSON.parse(stepUsedDetails)
+      // }
+      // else {
+      //   const response = yield call(GET_TRANSACTION_RESULT_NOT_SDK_API, action.payload.txHash);
+      //   trackerData.data.stepUsedDetails = response.stepUsedDetails
+      // }
 
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return
