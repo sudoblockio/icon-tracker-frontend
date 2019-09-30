@@ -201,7 +201,7 @@ class AddressInfo extends Component {
                                                 type="checkbox"
                                                 name="notification"
                                                 onChange={this.onNotificationChange}
-                                                checked={!this.state.notification}
+                                                checked={this.state.notification}
                                                 disabled={disabled}
                                             />
                                             <label htmlFor="cbox-02" className="label _img" />Notifications<span>(Beta)</span>

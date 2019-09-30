@@ -6,7 +6,7 @@ import { LoadingComponent, BlockLink } from 'components'
 class RecentBlocks extends Component {
     render() {
         const { loading, tmainBlock } = this.props.info
-        const list = tmainBlock ? tmainBlock.slice(9) : []
+        const list = tmainBlock ? tmainBlock.slice(0, 10) : []
         return (
             <li className="left">
                 <p className="title">Blocks</p>

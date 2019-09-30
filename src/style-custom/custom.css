@@ -594,3 +594,7 @@ p.prep-causion {
 .table-typeC .center-align {
     text-align: center !important;
 }
+
+.table-typeE td:nth-child(6) {
+    text-align: right;
+}
