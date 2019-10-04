@@ -1,5 +1,6 @@
 import { makeUrl } from 'utils/utils'
-import { trackerApiInstance } from './config'
+import { trackerApiInstance, walletApiInstance } from './config'
+import { randomUint32 } from '../../../utils/utils'
 
 export async function contractList(payload) {
   const trackerApi = await trackerApiInstance()
@@ -92,3 +93,39 @@ export async function contractInternalTxList(payload) {
   })
 }
 
+export async function getScoreStatus(address) {
+  const walletApi = await walletApiInstance()
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      id: randomUint32(),
+      "method": "icx_call",
+      "params": {
+        "to": "cx0000000000000000000000000000000000000001",
+        "dataType": "call",
+        "data": {
+          "method": "getScoreStatus",
+          "params": {
+            address
+          }
+        }
+      }
+    }
+    walletApi.post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        }
+        else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          })
+        }
+      })
+  });
+}

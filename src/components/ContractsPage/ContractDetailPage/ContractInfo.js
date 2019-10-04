@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from 'components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData } from 'utils/utils'
 import { CONTRACT_STATUS, IRC_VERSION } from 'utils/const'
+import { convertLoopToIcxDecimal } from '../../../utils/utils'
 
 class ContractInfo extends Component {
     onMouseOver = param => {
@@ -20,10 +21,11 @@ class ContractInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, usdBalance, tokenName, reportedCount } = data
+                const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount } = data
                 const isCreator = isValidData(creator)
                 const isCreateTx = isValidData(createTx)
                 const scam = reportedCount >= 100 ? true : false
+                const { availableDeposit, availableVirtualStep } = depositInfo || {}
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -42,8 +44,6 @@ class ContractInfo extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Balance</td>
-                                                <td>{convertNumberToText(balance)} ICX</td>
                                                 <td>Token Contract</td>
                                                 <TokenContractCell
                                                     tokenName={tokenName}
@@ -53,10 +53,6 @@ class ContractInfo extends Component {
                                                     onMouseOver={this.onMouseOver}
                                                     onMouseOut={this.onMouseOut}
                                                 />
-                                            </tr>
-                                            <tr>
-                                                <td>ICX Value</td>
-                                                <td>{convertNumberToText(usdBalance, 3)} USD</td>
                                                 <td>Contract Creator</td>
                                                 {isCreator && isCreateTx ? (
                                                     <td>
@@ -98,6 +94,16 @@ class ContractInfo extends Component {
                                                     {CONTRACT_STATUS[status]}
                                                     <DetailButton contractAddr={address} contractDetailPopup={this.props.contractDetailPopup} />
                                                 </td>
+                                            </tr>                                            
+                                            <tr>
+                                                <td>Balance</td>
+                                                <td>{convertNumberToText(balance)} ICX</td>
+                                                <td>Deposit</td>
+                                                {availableDeposit ? <td>{convertNumberToText(convertLoopToIcxDecimal(availableDeposit))} ICX</td> : <td>-</td>}
+                                            </tr>
+                                            <tr>
+                                                <td>Virtual Step</td>
+                                                {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
                                             </tr>
                                         </tbody>
                                     </table>

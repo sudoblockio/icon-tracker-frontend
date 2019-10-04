@@ -242,7 +242,7 @@ class GovernancePage extends Component {
 								</span>
 								<span className="blacklist">
 									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-04" className="label _img">Blacklist ({blackPrep.length})</label>									
+									<label htmlFor="cbox-04" className="label _img">Unregistered ({blackPrep.length})</label>									
 								</span>
 								<span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
@@ -353,19 +353,19 @@ class TableRow extends Component {
 			active,
 			logo,
 			rank,
-			balance,
-			unstake,
+			// balance,
+			// unstake,
 		} = prep
 
 		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 		const prepStaked = IconConverter.toNumber(stake || 0)
-		const prepUnstaked = IconConverter.toNumber(unstake || 0)
+		// const prepUnstaked = IconConverter.toNumber(unstake || 0)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 
-		const totalBalcne = balance + prepStaked + prepUnstaked
+		// const totalBalcne = balance + prepStaked + prepUnstaked
 
-		const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
+		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
 
 		const badge = this.getBadge(grade, active)
@@ -386,7 +386,8 @@ class TableRow extends Component {
 				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
 				<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
 				<td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td>
-				<td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td>
+				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
+				<td><span>{convertNumberToText(prepStaked, 4)}</span></td>
 				<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
 			</tr>
 		)

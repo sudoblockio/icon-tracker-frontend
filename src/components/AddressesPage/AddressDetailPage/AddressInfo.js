@@ -7,7 +7,7 @@ import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'compon
 import NotificationManager from 'utils/NotificationManager'
 import { getStake, queryIScore, getBalance, getPRep, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
 import { IconConverter } from 'icon-sdk-js'
-import { convertLoopToIcxDecimal, getBadgeTitle } from '../../../utils/utils';
+import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt } from '../../../utils/utils';
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -27,6 +27,7 @@ class AddressInfo extends Component {
             active: 'N/A',
             media: {},
             prepLoading: true,
+            on: {}
         }
     }
 
@@ -132,6 +133,38 @@ class AddressInfo extends Component {
         window.open('/block/' + height, '_blank')
     }
 
+    onSocialClick = async (link, type) => {
+        this.setState({ on: {}}, () => {
+            window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_OFF' } }))
+        })
+
+        if (!type || isUrl(link)) {
+            window.open(link, '_blank')
+        }
+        else {
+            this.setMedia(type)
+        }
+    }
+
+    setMedia = type => {
+        if (this.state.on[type]) {
+            this.setState({ on: {
+                ...this.state.on,
+                [type]: false
+            }}, () => {
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_OFF' } }))
+            })
+        }
+        else {
+            this.setState({ on: {
+                ...this.state.on,
+                [type]: true
+            }}, () => {
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_ON', param: type } }))
+            })
+        }
+    }
+
     render() {
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
@@ -148,7 +181,7 @@ class AddressInfo extends Component {
             grade
         } = this.state.prep
 
-        const {
+        let {
             facebook,
             github,
             keybase,
@@ -223,18 +256,18 @@ class AddressInfo extends Component {
                                         <tbody>
                                             {isPrep && <tr className="p-rep">
                                                 <td>Name</td>
-                                                <td colSpan="3">
+                                                <td colSpan="3">                                                
                                                     <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
-                                                    {website && <span className="home" onClick={() => { window.open(website, '_blank') }}><i className="img"></i></span>}
-                                                    {facebook && <span className="facebook" onClick={() => { window.open(facebook, '_blank') }}><i className="img"></i></span>}
-                                                    {github && <span className="github" onClick={() => { window.open(github, '_blank') }}><i className="img"></i></span>}
-                                                    {keybase && <span className="keybase" onClick={() => { window.open(keybase, '_blank') }}><i className="img"></i></span>}
-                                                    {reddit && <span className="reddit" onClick={() => { window.open(reddit, '_blank') }}><i className="img"></i></span>}
-                                                    {steemit && <span className="steemit" onClick={() => { window.open(steemit, '_blank') }}><i className="img"></i></span>}
-                                                    {telegram && <span className="telegram" onClick={() => { window.open(telegram, '_blank') }}><i className="img"></i></span>}
-                                                    {twitter && <span className="twitter" onClick={() => { window.open(twitter, '_blank') }}><i className="img"></i></span>}
-                                                    {wechat && <span className="wechat" onClick={() => { window.open(wechat, 'wechat') }}><i className="img"></i></span>}
-                                                    {youtube && <span className="youtube" onClick={() => { window.open(youtube, '_blank') }}><i className="img"></i></span>}
+                                                    {website && <span className="home" onClick={() => { this.onSocialClick(website) }}><i className="img"></i></span>}
+                                                    {facebook && <span className="facebook" onClick={() => { this.onSocialClick(facebook) }}><i className="img"></i></span>}
+                                                    {github && <span className="github" onClick={() => { this.onSocialClick(github) }}><i className="img"></i></span>}
+                                                    {keybase && <span className={"keybase" + (this.state.on.keybase ? " media-on" : "")} onClick={() => { this.onSocialClick(keybase, 'keybase') }}><span style={{ width: facebook.length * 6.5 + 50 }} className="help social keybase">{addAt(keybase)}</span><i className="img"></i></span>}
+                                                    {reddit && <span className="reddit" onClick={() => { this.onSocialClick(reddit) }}><i className="img"></i></span>}
+                                                    {steemit && <span className="steemit" onClick={() => { this.onSocialClick(steemit) }}><i className="img"></i></span>}
+                                                    {telegram && <span className={"telegram" + (this.state.on.telegram ? " media-on" : "")} onClick={() => { this.onSocialClick(telegram, 'telegram') }}><span style={{ width: telegram.length * 6.5 + 50 }} className="help social telegram">{addAt(telegram)}</span><i className="img"></i></span>}
+                                                    {twitter && <span className="twitter" onClick={() => { this.onSocialClick(twitter) }}><i className="img"></i></span>}
+                                                    {wechat && <span className={"wechat" + (this.state.on.wechat ? " media-on" : "")} onClick={() => { this.onSocialClick(wechat, 'wechat') }}><span style={{ width: wechat.length * 6.5 + 50 }} className="help social wechat">{addAt(wechat)}</span><i className="img"></i></span>}
+                                                    {youtube && <span className="youtube" onClick={() => {this.onSocialClick(youtube) }}><i className="img"></i></span>}
                                                     {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
                                                     <span className={`active ${this.state.active === 'Active' ? 'on' : 'off'}`}><i></i>{this.state.active}</span>
                                                     {/* <span className="btn-scam">Go to Voting</span> */}

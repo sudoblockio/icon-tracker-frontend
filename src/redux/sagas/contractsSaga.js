@@ -15,6 +15,7 @@ import {
   icxGetScore as ICX_GET_SCORE_API,
   icxCall as ICX_CALL_API
 } from '../api/restV3';
+import { getScoreStatus } from '../api/restV3/contract';
 
 export default function* contractsSaga() {
   yield fork(watchContractList);
@@ -88,7 +89,9 @@ export function* contractInfoFunc(action) {
   try {
     const payload = yield call(CONTRACT_INFO_API, action.payload);
     if (payload.result === '200' && payload.data !== "NO_DATA") {
-      yield put({ type: AT.contractInfoFulfilled, payload });
+      const { depositInfo } = yield call(getScoreStatus, action.payload.addr)
+      payload.data.depositInfo = depositInfo
+        yield put({ type: AT.contractInfoFulfilled, payload });
     }
     else {
       throw new Error();

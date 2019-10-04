@@ -569,8 +569,8 @@ p.prep-causion {
     text-align: left;
 }
 
-.step-used-details-p:first-child {
-    padding-top: 8px;
+.step-used-details-p:first-of-type {
+    padding-top: 6px;
 }
 
 .table-typeP col.rank+col+col+col+col{width:120px; }
@@ -597,4 +597,18 @@ p.prep-causion {
 
 .table-typeE td:nth-child(6) {
     text-align: right;
+}
+
+.help.social {
+    top: -32px;
+    left: 0;
+    word-break: keep-all;
+}
+
+.wechat, .telegram, .keybase, .facebook {
+    position: relative;
+}
+
+.media-on i {
+    background-position-y: -575px !important;
 }

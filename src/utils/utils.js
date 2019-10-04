@@ -662,3 +662,17 @@ export function valueToString(value){
 
     return result
 }
+
+export function isUrl(text) {
+    const regexp = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+    return regexp.test(text)
+}
+
+export function addAt(text) {
+    if (startsWith(text, '@') || isUrl(text)) {
+        return text
+    }
+    else {
+        return '@' + text
+    }
+}

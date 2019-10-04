@@ -21,7 +21,6 @@ var ctreteContract = function(){
 		}
 		$(".table-typeB .help."+_class).removeClass("animate");
 	});
-
 }
 
 var createMenu = function(){

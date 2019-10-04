@@ -159,13 +159,17 @@ class TransactionInfo extends Component {
 											</tr>
 										}
 										<tr>
-											<td>Step Limit</td>
-											<td>{convertNumberToText(stepLimit)}</td>
+											<td>Step Price</td>
+											<td>{convertNumberToText(stepPriceIcx)} ICX<em>({convertNumberToText(stepPriceGloop)} Gloop)</em></td>
 										</tr>
 										<tr>
-											<td>Step used by Txn</td>
+											<td>Step Limit</td>
+											<td>{convertNumberToText(stepLimit)} Steps</td>
+										</tr>
+										<tr>
+											<td>Fee in Step</td>
 											<td style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
-												{convertNumberToText(stepUsedByTxn)}
+												{convertNumberToText(stepUsedByTxn)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
 												{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
 													const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
 													return (
@@ -178,11 +182,7 @@ class TransactionInfo extends Component {
 											</td>
 										</tr>
 										<tr>
-											<td>Step Price</td>
-											<td>{convertNumberToText(stepPriceIcx)} ICX<em>({convertNumberToText(stepPriceGloop)} Gloop)</em></td>
-										</tr>
-										<tr>
-											<td>Actual TxFee</td>
+											<td>Fee in ICX</td>
 											<td>{convertNumberToText(fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
 										{(dataType && dataString) ?

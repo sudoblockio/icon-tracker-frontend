@@ -104,7 +104,7 @@ class Scam extends Component {
                                 onChange={this.handleChange}
                                 value={refUrl}
                             />
-                            <h3>Select a file or drag & drop to the area below (Optional)</h3>
+                            <h3>Select a file or drag & drop to the area. Maximum upload file is 5MB. (Optional)</h3>
                             <Dropzone onDrop={file => this.readFile(file)}>
                                 {({ getRootProps, getInputProps }) => (
                                     <Fragment>
@@ -135,7 +135,7 @@ class Scam extends Component {
                                     <span>{'Cancel'}</span>
                                 </button>                                
                                 <button className="btn-type-normal size-half" disabled={dropBoxClass === 'error' ? true : false} onClick={this.handleSubmit}>
-                                    <span>Summit</span>
+                                    <span>Submit</span>
                                 </button>
                             </div>
                         </Fragment>
