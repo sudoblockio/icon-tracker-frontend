@@ -146,7 +146,6 @@ export function* addressInfoFunc(action) {
       const isPrep = prep && Object.keys(prep).length > 0
       let active = 'N/A', media = {}
 
-
       if (isPrep) {
         const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
 

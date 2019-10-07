@@ -133,8 +133,6 @@ class AddressInfo extends Component {
         const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
 
-        const totalVotes = convertLoopToIcxDecimal(delegated)
-
         const badge = getBadgeTitle(grade, status)
         const Content = () => {
             if (loading) {
@@ -206,7 +204,7 @@ class AddressInfo extends Component {
                                             </tr>}
                                             {isPrep && <tr className="">
                                                 <td>Total Votes</td>
-                                                <td colSpan="3"><span>{numberWithCommas(totalVotes)}{/* <em>( 90.02 % )</em> */}</span></td>
+                                                <td colSpan="3"><span>{convertNumberToText(delegated)}{/* <em>( 90.02 % )</em> */}</span></td>
                                                 {/* <td>24h Change Amount</td>
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                             </tr>}

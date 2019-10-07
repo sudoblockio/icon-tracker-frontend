@@ -653,7 +653,13 @@ export function getBadgeTitle(grade, status) {
 }
 
 export function addUnregisteredStyle(status) {
-    return status !== '0x0' ? " prep-unregistered" : ""
+    const _status = Number(status)
+    if (!isNaN(_status) && _status > 0 && _status < 3) {
+        return " prep-unregistered"
+    }
+    else {
+        return ""
+    }
 }
 
 export function valueToString(value){
