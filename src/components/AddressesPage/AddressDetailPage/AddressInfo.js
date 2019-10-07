@@ -5,7 +5,6 @@ import { numberWithCommas, convertNumberToText, isValidNodeType } from 'utils/ut
 // import { searchLowerCase, isValidData } from 'utils/utils'
 import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'components'
 import NotificationManager from 'utils/NotificationManager'
-import { getStake, queryIScore, getBalance, getPRep, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
 import { IconConverter } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt, addUnregisteredStyle } from '../../../utils/utils';
 
@@ -16,91 +15,10 @@ class AddressInfo extends Component {
         super(props)
         this.state = {
             notification: _isNotificationAvailable && this.props.walletNotification,
-            available: 0,
-            staked: 0,
-            unstaked: 0,
-            iscore: 0,
-            delegated: 0,
             icxMore: false,
             tokenMore: false,
-            prep: {},
-            active: 'N/A',
-            media: {},
-            prepLoading: true,
-            on: {}
+            on: {},
         }
-    }
-
-    async componentDidMount() {
-        const splitted = window.location.pathname.split('/')
-        const address = splitted[splitted.length - 1]
-        await this.setPrepData(address)
-    }
-
-    async componentWillReceiveProps(nextProps) {
-        const { address: prev } = this.props.wallet.data
-        const { address: next } = nextProps.wallet.data
-
-        if (prev && !next) {
-            this.setState({
-                notification: _isNotificationAvailable && this.props.walletNotification,
-                available: 0,
-                staked: 0,
-                unstaked: 0,
-                iscore: 0,
-                delegated: 0,
-                icxMore: false,
-                tokenMore: false,
-                prep: {},
-                active: 'N/A',
-                media: {},
-                prepLoading: true,
-            })
-        }
-        else if (!prev && next) {
-            this.setPrepData(next)
-        }
-    }
-
-    setPrepData = async address => {
-        const prep = await getPRep(address)
-        const balance = await getBalance(address)
-        const { stake, unstake } = await getStake(address)
-        const { iscore } = await queryIScore(address)
-        const { totalDelegated } = await getDelegation(address)
-        
-        if (prep && Object.keys(prep).length > 0) {
-            await this.checkRepJson(address)
-        }
-        
-        const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
-        const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
-        const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
-        const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
-        const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
-
-        this.setState({
-            balance: convertLoopToIcxDecimal(Number(balance || 0) + Number(stake || 0) + Number(unstake || 0)),
-            available: _balance,
-            staked: _stake,
-            unstaked: _unstake,
-            iscore: _iscore,
-            delegated: _totalDelegated,
-            prep,
-            prepLoading: false
-        })
-    }
-
-    checkRepJson = async address => {
-        const { repJson, isActive } = await iissPrepRepJsonActive({ address })
-        let media = {}
-        if (repJson &&
-            repJson.representative &&
-            repJson.representative.media instanceof Object) {
-            media = repJson.representative.media
-        }
-
-        this.setState({ media, active: isActive ? 'Active' : 'Inactive' })
     }
 
     onNotificationChange = () => {
@@ -166,9 +84,22 @@ class AddressInfo extends Component {
     }
 
     render() {
+        const { notification, on, icxMore, tokenMore } = this.state
+
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
-        const isPrep = Object.keys(this.state.prep).length !== 0
+        const { 
+            isPrep, 
+            prep, 
+            media, 
+            active, 
+            balance, 
+            available, 
+            staked,
+            unstaked,
+            delegated,
+            iscore
+        } = data
 
         const {
             name,
@@ -180,7 +111,7 @@ class AddressInfo extends Component {
             website,
             grade,
             status
-        } = this.state.prep
+        } = prep || {}
 
         let {
             facebook,
@@ -192,7 +123,7 @@ class AddressInfo extends Component {
             twitter,
             wechat,
             youtube,
-        } = this.state.media
+        } = media || {}
 
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
@@ -202,11 +133,11 @@ class AddressInfo extends Component {
         const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
 
-        const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
+        const totalVotes = convertLoopToIcxDecimal(delegated)
 
         const badge = getBadgeTitle(grade, status)
         const Content = () => {
-            if (loading || this.state.prepLoading) {
+            if (loading) {
                 return <LoadingComponent height="206px" />
             }
             else {
@@ -234,7 +165,7 @@ class AddressInfo extends Component {
                                                 type="checkbox"
                                                 name="notification"
                                                 onChange={this.onNotificationChange}
-                                                checked={this.state.notification}
+                                                checked={notification}
                                                 disabled={disabled}
                                             />
                                             <label htmlFor="cbox-02" className="label _img" />Notifications<span>(Beta)</span>
@@ -261,15 +192,15 @@ class AddressInfo extends Component {
                                                     {website && <span className="home" onClick={() => { this.onSocialClick(website) }}><i className="img"></i></span>}
                                                     {facebook && <span className="facebook" onClick={() => { this.onSocialClick(facebook) }}><i className="img"></i></span>}
                                                     {github && <span className="github" onClick={() => { this.onSocialClick(github) }}><i className="img"></i></span>}
-                                                    {keybase && <span className={"keybase" + (this.state.on.keybase ? " media-on" : "")} onClick={() => { this.onSocialClick(keybase, 'keybase') }}><span style={{ width: facebook.length * 6.5 + 50 }} className="help social keybase">{addAt(keybase)}</span><i className="img"></i></span>}
+                                                    {keybase && <span className={"keybase" + (on.keybase ? " media-on" : "")} onClick={() => { this.onSocialClick(keybase, 'keybase') }}><span style={{ width: facebook.length * 6.5 + 50 }} className="help social keybase">{addAt(keybase)}</span><i className="img"></i></span>}
                                                     {reddit && <span className="reddit" onClick={() => { this.onSocialClick(reddit) }}><i className="img"></i></span>}
                                                     {steemit && <span className="steemit" onClick={() => { this.onSocialClick(steemit) }}><i className="img"></i></span>}
-                                                    {telegram && <span className={"telegram" + (this.state.on.telegram ? " media-on" : "")} onClick={() => { this.onSocialClick(telegram, 'telegram') }}><span style={{ width: telegram.length * 6.5 + 50 }} className="help social telegram">{addAt(telegram)}</span><i className="img"></i></span>}
+                                                    {telegram && <span className={"telegram" + (on.telegram ? " media-on" : "")} onClick={() => { this.onSocialClick(telegram, 'telegram') }}><span style={{ width: telegram.length * 6.5 + 50 }} className="help social telegram">{addAt(telegram)}</span><i className="img"></i></span>}
                                                     {twitter && <span className="twitter" onClick={() => { this.onSocialClick(twitter) }}><i className="img"></i></span>}
-                                                    {wechat && <span className={"wechat" + (this.state.on.wechat ? " media-on" : "")} onClick={() => { this.onSocialClick(wechat, 'wechat') }}><span style={{ width: wechat.length * 6.5 + 50 }} className="help social wechat">{addAt(wechat)}</span><i className="img"></i></span>}
+                                                    {wechat && <span className={"wechat" + (on.wechat ? " media-on" : "")} onClick={() => { this.onSocialClick(wechat, 'wechat') }}><span style={{ width: wechat.length * 6.5 + 50 }} className="help social wechat">{addAt(wechat)}</span><i className="img"></i></span>}
                                                     {youtube && <span className="youtube" onClick={() => {this.onSocialClick(youtube) }}><i className="img"></i></span>}
                                                     {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
-                                                    <span className={`active ${this.state.active === 'Active' ? 'on' : 'off'}`}><i></i>{this.state.active}</span>
+                                                    <span className={`active ${active === 'Active' ? 'on' : 'off'}`}><i></i>{active}</span>
                                                     {/* <span className="btn-scam">Go to Voting</span> */}
                                                 </td>
                                             </tr>}
@@ -313,15 +244,15 @@ class AddressInfo extends Component {
                                                     <span className="gray">{`(${convertNumberToText(icxUsd, 3)} USD)`}</span>
                                                 </td> */}
                                                 <td colSpan="3" className="balance">
-                                                    <div className={this.state.icxMore ? 'on' : ''}>
-                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(this.state.balance, this.state.icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
-                                                        <p><span>Available</span><span>{`${convertNumberToText(this.state.available)}`}<em>ICX</em></span></p>
-                                                        <p><span>Staked</span><span><em>{(!Number(this.state.balance) ? 0 : Number(this.state.staked) / Number(this.state.balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.staked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Unstaking</span><span><em>{(!Number(this.state.balance) ? 0 : Number(this.state.unstaked) / Number(this.state.balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.unstaked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Voted</span><span><em>{(!Number(this.state.staked) ? 0 : Number(this.state.delegated) / Number(this.state.staked) * 100).toFixed(2)}%</em>{`${convertNumberToText(this.state.delegated)}`}<em>ICX</em></span></p>
-                                                        <p><span>I_SCORE</span><span>{`${convertNumberToText(this.state.iscore)}`}<em>I-Score</em></span></p>
+                                                    <div className={icxMore ? 'on' : ''}>
+                                                        <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance, icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
+                                                        <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span></p>
+                                                        <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Unstaking</span><span><em>{(!Number(balance) ? 0 : Number(unstaked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstaked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Voted</span><span><em>{(!Number(staked) ? 0 : Number(delegated) / Number(staked) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated)}`}<em>ICX</em></span></p>
+                                                        <p><span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span></p>
                                                     </div>
-                                                    <div className={this.state.tokenMore ? 'on' : ''}>
+                                                    <div className={tokenMore ? 'on' : ''}>
                                                         <p><span><i className="coin"></i>Token</span><span>{(tokenList || []).length}<em>Tokens</em></span><em className="drop-btn" onClick={this.toggleTokenMore}><i className="img"></i></em></p>
                                                         {(tokenList || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((token, index) => {
                                                             const { contractName, contractSymbol, quantity } = token

@@ -12,7 +12,8 @@ import {
   getPReps,
   getDelegation,
 } from '../api/restV3';
-import { getPRep } from '../api/restV3/iiss';
+import { getPRep, getStake, queryIScore, getBalance, iissPrepRepJsonActive } from '../api/restV3/iiss';
+import { convertLoopToIcxDecimal } from '../../utils/utils';
 
 export default function* addressesSaga() {
   yield fork(watchAddressRewardList);
@@ -130,13 +131,51 @@ export function* addressInfoFunc(action) {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
     if (payload.result === '200') {
       const { address } = action.payload
-      const { delegations } = yield call(getDelegation, address)
-      const { name } = yield call(getPRep, address)
-      payload.data.hasDelegations = delegations.length > 0
-      payload.data.isPrep = !!name
+      const { delegations, totalDelegated } = yield call(getDelegation, address)
+      const prep = yield call(getPRep, address)
+      const balance = yield call(getBalance, address)
+      const { stake, unstake } = yield call(getStake, address)
+      const { iscore } = yield call(queryIScore, address)
+
+      const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
+      const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
+      const _unstake = !unstake ? 0 : convertLoopToIcxDecimal(unstake)
+      const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
+      const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
+
+      const isPrep = prep && Object.keys(prep).length > 0
+      let active = 'N/A', media = {}
+
+
+      if (isPrep) {
+        const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
+
+        active = isActive ? 'Active' : 'Inactive'
+        if (repJson &&
+          repJson.representative &&
+          repJson.representative.media instanceof Object) {
+            media = repJson.representative.media
+        }
+      }
+
+      payload.data = {
+        ...payload.data,
+        hasDelegations: delegations.length > 0,
+        isPrep,
+        balance: convertLoopToIcxDecimal(Number(balance || 0) + Number(stake || 0) + Number(unstake || 0)),
+        available: _balance,
+        staked: _stake,
+        unstaked: _unstake,
+        iscore: _iscore,
+        delegated: _totalDelegated,
+        prep,
+        active,
+        media,
+      }
+      
       yield put({ type: AT.addressInfoFulfilled, payload: payload });
     }
-    else {
+    else {      
       throw new Error();
     }
   }
