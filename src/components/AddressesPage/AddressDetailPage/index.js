@@ -7,31 +7,13 @@ import {
 import {
     ADDRESS_TABS
 } from 'utils/const'
-import { getDelegation, getPRep } from '../../../redux/api/restV3/iiss';
 
 class AddressesDetailPage extends Component {
-    state = {
-        hasDelegations: false,
-        isPrep: false,
-    }
-
-    async componentWillReceiveProps(nextProps) {
-        const { address: prev } = this.props.wallet.data
-        const { address: next } = nextProps.wallet.data
-        if (!prev && prev !== next) {
-            const { delegations } = await getDelegation(next)
-            const { name } = await getPRep(next)
-            const hasDelegations = delegations.length > 0
-            const isPrep = !!name
-            this.setState({ hasDelegations, isPrep })
-        }
-    }
     
     render() {
-        const { hasDelegations, isPrep } = this.state
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount, claimIScoreCount } = data
+        const { tokenList, internalTxCount, claimIScoreCount, hasDelegations, isPrep } = data
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {

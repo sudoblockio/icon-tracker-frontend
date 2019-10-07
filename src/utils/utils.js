@@ -630,7 +630,16 @@ export function convertLoopToIcxDecimal(loop) {
     return IconAmount.of(loop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString()
 }
 
-export function getBadgeTitle(grade) {
+export function getBadgeTitle(grade, status) {
+    switch (status) {
+        case '0x1':
+            return 'Unregistered'
+        case '0x2':
+            return 'Disqualified'
+        case '0x0':
+        default:
+    }
+
     switch (grade) {
         case '0x0':
             return 'Main P-Rep'
@@ -638,13 +647,14 @@ export function getBadgeTitle(grade) {
             return 'Sub P-Rep'
         case '0x2':
             return 'Candidate'
-        case '0x3':
-            return 'Blacklist'
         default:
             return 'Unregistered'
     }
 }
 
+export function addUnregisteredStyle(status) {
+    return status !== '0x0' ? " prep-unregistered" : ""
+}
 
 export function valueToString(value){
     if (!value) return ''

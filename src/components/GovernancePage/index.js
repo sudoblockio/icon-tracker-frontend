@@ -58,6 +58,7 @@ class GovernancePage extends Component {
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
+			bp.status = bp.penaltyStatus
 			return bp
 		})
 
@@ -304,8 +305,8 @@ class TableRow extends Component {
 		logoError: false,
 	}
 
-	getBadge = (grade, active) => {
-		const className = active ? 'prep-tag' : 'prep-tag off'
+	getBadge = (grade, active, status) => {
+		const className = (active ? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
 			case 0:
@@ -315,7 +316,7 @@ class TableRow extends Component {
 			case 2:
 				return <span className={className}><i></i>Candidate</span>
 			case 3:
-				return <span className={'prep-tag'}>Blacklist</span>
+				return <span className={'prep-tag'}>{status === 1 ? 'Unregistered' : 'Disqualified'}</span>
 			default:
 				return null		
 		}
@@ -355,8 +356,9 @@ class TableRow extends Component {
 			rank,
 			// balance,
 			// unstake,
+			status
 		} = prep
-
+		
 		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 		const prepStaked = IconConverter.toNumber(stake || 0)
@@ -368,12 +370,12 @@ class TableRow extends Component {
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
 
-		const badge = this.getBadge(grade, active)
+		const badge = this.getBadge(grade, active, status)
 
 		return(
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
-				<td className={grade === 3 ? 'black' : 'on'}>
+				<td className={grade > 2 ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
 						{logo && !logoError && <li><img src={logo} onError={this.onError} alt='logo'/></li>}

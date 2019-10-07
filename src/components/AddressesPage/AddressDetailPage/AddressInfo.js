@@ -7,7 +7,7 @@ import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'compon
 import NotificationManager from 'utils/NotificationManager'
 import { getStake, queryIScore, getBalance, getPRep, getDelegation, iissPrepRepJsonActive } from '../../../redux/api/restV3/iiss';
 import { IconConverter } from 'icon-sdk-js'
-import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt } from '../../../utils/utils';
+import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt, addUnregisteredStyle } from '../../../utils/utils';
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -178,7 +178,8 @@ class AddressInfo extends Component {
             irepUpdateBlockHeight,
             lastGenerateBlockHeight,
             website,
-            grade
+            grade,
+            status
         } = this.state.prep
 
         let {
@@ -203,8 +204,7 @@ class AddressInfo extends Component {
 
         const totalVotes = convertLoopToIcxDecimal(this.state.prep.delegated)
 
-        const badge = getBadgeTitle(grade)
-
+        const badge = getBadgeTitle(grade, status)
         const Content = () => {
             if (loading || this.state.prepLoading) {
                 return <LoadingComponent height="206px" />
@@ -222,7 +222,7 @@ class AddressInfo extends Component {
                         <div className="wrap-holder">
                             {isConnected ? (
                                 <p className="title">
-                                    My Address{isPrep && <span className="title-tag">{badge}</span>}
+                                    My Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status)}>{badge}</span>}
                                     <span className="connected">
                                         <i className="img" />Connected to ICONex
                                     </span>
@@ -242,7 +242,7 @@ class AddressInfo extends Component {
                                     </span>
                                 </p>
                             ) : (
-                                    <p className="title">Address{isPrep && <span className="title-tag">{badge}</span>}</p>
+                                    <p className="title">Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status)}>{badge}</span>}</p>
                                 )}
                             <div className="contents">
                                 <div className="table-box">

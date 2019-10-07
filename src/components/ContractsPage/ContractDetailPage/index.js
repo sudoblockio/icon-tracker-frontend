@@ -32,7 +32,7 @@ class ContractDetailPage extends Component {
                         this.props.contractTokenTxList({ addr, page: 1, count: 10 })
                     },
                     address => {
-                        this.props.icxGetScore({ address  })
+                        this.props.icxGetScore({ address })
                     },
                     address => {
                         this.props.readContractInformation({ address  })

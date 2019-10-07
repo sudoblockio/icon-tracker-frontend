@@ -10,7 +10,9 @@ import {
   addressReward as ADDRESS_REWARD,
   addressVotedList as ADDRESS_VOTED_LIST,
   getPReps,
+  getDelegation,
 } from '../api/restV3';
+import { getPRep } from '../api/restV3/iiss';
 
 export default function* addressesSaga() {
   yield fork(watchAddressRewardList);
@@ -127,6 +129,11 @@ export function* addressInfoFunc(action) {
   try {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
     if (payload.result === '200') {
+      const { address } = action.payload
+      const { delegations } = yield call(getDelegation, address)
+      const { name } = yield call(getPRep, address)
+      payload.data.hasDelegations = delegations.length > 0
+      payload.data.isPrep = !!name
       yield put({ type: AT.addressInfoFulfilled, payload: payload });
     }
     else {

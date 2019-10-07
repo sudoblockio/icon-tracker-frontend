@@ -612,3 +612,7 @@ p.prep-causion {
 .media-on i {
     background-position-y: -575px !important;
 }
+
+.prep-unregistered {
+    color: #f24130 !important; background: #ffedeb !important;
+}

@@ -18,7 +18,7 @@ import {
 import {
 	TX_TYPE,
 } from 'utils/const'
-import { getBadgeTitle, convertNumberToText } from '../../../utils/utils';
+import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -90,12 +90,12 @@ class TxTableBody extends Component {
 					)
 				case TX_TYPE.ADDRESS_DELEGATION:
 					const value = convertLoopToIcxDecimal(data.value)
-					const badgeTitle = getBadgeTitle(data.grade)
+					const badgeTitle = getBadgeTitle(data.grade, data.status)
 					return (
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
-							}}><span className="prep-tag">{badgeTitle}</span>{data.name || data.address}</td>
+							}}><span className={"prep-tag" + addUnregisteredStyle(data.status)}>{badgeTitle}</span>{data.name || data.address}</td>
 							<td className="plus"><span>{convertNumberToText(value)}</span><em>ICX</em></td>
 						</tr>
 					)
