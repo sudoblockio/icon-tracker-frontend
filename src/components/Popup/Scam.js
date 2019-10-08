@@ -96,7 +96,7 @@ class Scam extends Component {
                 <div key="div" className="box">
                     {connectStatus === 2 ? (
                         <Fragment>
-                            <h2>The scam site URL or description (Optional)</h2>
+                            <h2>The scam site URL or description. <span>(Optional)</span></h2>
                             <input
                                 type="text"
                                 className="txt-type over"
@@ -104,7 +104,7 @@ class Scam extends Component {
                                 onChange={this.handleChange}
                                 value={refUrl}
                             />
-                            <h3>Select a file or drag & drop to the area. Maximum upload file is 5MB. (Optional)</h3>
+                            <h3>Select a file or drag & drop to the area below. <span>(Optional)</span></h3>
                             <Dropzone onDrop={file => this.readFile(file)}>
                                 {({ getRootProps, getInputProps }) => (
                                     <Fragment>
@@ -123,7 +123,7 @@ class Scam extends Component {
                                                     <i className="img" onClick={this.handleClickDelete} />
                                                 </Fragment>
                                             )}
-                                            {dropBoxClass === '' && <span>Please drag your file here</span>}
+                                            {dropBoxClass === '' && <span>Please drag your file here.<br/>(Maximum upload file is 5MB.)</span>}
                                         </div>
                                         <label htmlFor="file">Select file</label>
                                         <input id="file" className="btn-type-normal select" {...getInputProps()} />

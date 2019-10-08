@@ -7,6 +7,7 @@ import { CopyButton, LoadingComponent, QrCodeButton, ReportButton } from 'compon
 import NotificationManager from 'utils/NotificationManager'
 import { IconConverter } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt, addUnregisteredStyle } from '../../../utils/utils';
+import { SocialMediaType } from '../../../utils/const'
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -17,7 +18,6 @@ class AddressInfo extends Component {
             notification: _isNotificationAvailable && this.props.walletNotification,
             icxMore: false,
             tokenMore: false,
-            on: {},
         }
     }
 
@@ -51,40 +51,14 @@ class AddressInfo extends Component {
         window.open('/block/' + height, '_blank')
     }
 
-    onSocialClick = async (link, type) => {
-        this.setState({ on: {}}, () => {
-            window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_OFF' } }))
-        })
-
-        if (!type || isUrl(link)) {
+    onSocialClick = async link => {
+        if (isUrl(link)) {
             window.open(link, '_blank')
-        }
-        else {
-            this.setMedia(type)
-        }
-    }
-
-    setMedia = type => {
-        if (this.state.on[type]) {
-            this.setState({ on: {
-                ...this.state.on,
-                [type]: false
-            }}, () => {
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_OFF' } }))
-            })
-        }
-        else {
-            this.setState({ on: {
-                ...this.state.on,
-                [type]: true
-            }}, () => {
-                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'SOCIAL_ON', param: type } }))
-            })
         }
     }
 
     render() {
-        const { notification, on, icxMore, tokenMore } = this.state
+        const { notification, icxMore, tokenMore } = this.state
 
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
@@ -112,18 +86,6 @@ class AddressInfo extends Component {
             grade,
             status
         } = prep || {}
-
-        let {
-            facebook,
-            github,
-            keybase,
-            reddit,
-            steemit,
-            telegram,
-            twitter,
-            wechat,
-            youtube,
-        } = media || {}
 
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
@@ -188,15 +150,30 @@ class AddressInfo extends Component {
                                                 <td colSpan="3">                                                
                                                     <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
                                                     {website && <span className="home" onClick={() => { this.onSocialClick(website) }}><i className="img"></i></span>}
-                                                    {facebook && <span className="facebook" onClick={() => { this.onSocialClick(facebook) }}><i className="img"></i></span>}
-                                                    {github && <span className="github" onClick={() => { this.onSocialClick(github) }}><i className="img"></i></span>}
-                                                    {keybase && <span className={"keybase" + (on.keybase ? " media-on" : "")} onClick={() => { this.onSocialClick(keybase, 'keybase') }}><span style={{ width: facebook.length * 6.5 + 50 }} className="help social keybase">{addAt(keybase)}</span><i className="img"></i></span>}
-                                                    {reddit && <span className="reddit" onClick={() => { this.onSocialClick(reddit) }}><i className="img"></i></span>}
-                                                    {steemit && <span className="steemit" onClick={() => { this.onSocialClick(steemit) }}><i className="img"></i></span>}
-                                                    {telegram && <span className={"telegram" + (on.telegram ? " media-on" : "")} onClick={() => { this.onSocialClick(telegram, 'telegram') }}><span style={{ width: telegram.length * 6.5 + 50 }} className="help social telegram">{addAt(telegram)}</span><i className="img"></i></span>}
-                                                    {twitter && <span className="twitter" onClick={() => { this.onSocialClick(twitter) }}><i className="img"></i></span>}
-                                                    {wechat && <span className={"wechat" + (on.wechat ? " media-on" : "")} onClick={() => { this.onSocialClick(wechat, 'wechat') }}><span style={{ width: wechat.length * 6.5 + 50 }} className="help social wechat">{addAt(wechat)}</span><i className="img"></i></span>}
-                                                    {youtube && <span className="youtube" onClick={() => {this.onSocialClick(youtube) }}><i className="img"></i></span>}
+                                                    {SocialMediaType.map(type => {
+                                                        const mediaValue = media[type]
+                                                        
+                                                        if (!mediaValue) {
+                                                            return null
+                                                        }
+
+                                                        return (
+                                                            <span className={type} onClick={() => {this.onSocialClick(mediaValue) }}>
+                                                                {isUrl(mediaValue) ? 
+                                                                    <i className="img"></i>
+                                                                :
+                                                                    [
+                                                                        <i key="i" className="img tooltip"></i>
+                                                                        ,
+                                                                        <div key="div" className="help-layer">
+                                                                            <p className='txt'>{addAt(mediaValue)}</p>
+                                                                            <div className='tri'></div>
+                                                                        </div>
+                                                                    ]
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}                                                 
                                                     {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
                                                     <span className={`active ${active === 'Active' ? 'on' : 'off'}`}><i></i>{active}</span>
                                                     {/* <span className="btn-scam">Go to Voting</span> */}

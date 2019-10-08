@@ -48,12 +48,6 @@ $(window).on('CUSTOM_FX', function(e) {
                 $('.popup-wrap').fadeOut(350)
             }
             break
-        case 'SOCIAL_ON':
-            $('.table-typeB .help.' + param).addClass('animate')
-            break
-        case 'SOCIAL_OFF':
-            $('.table-typeB .help').removeClass('animate')
-            break
         case 'CONTRACT_OVER':
             $('.table-typeB .help.' + param).addClass('animate')
             break

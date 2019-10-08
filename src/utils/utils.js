@@ -632,19 +632,23 @@ export function convertLoopToIcxDecimal(loop) {
 
 export function getBadgeTitle(grade, status) {
     switch (status) {
+        case 1:
         case '0x1':
             return 'Unregistered'
+        case 2:
         case '0x2':
             return 'Disqualified'
-        case '0x0':
         default:
     }
 
     switch (grade) {
+        case 0:
         case '0x0':
             return 'Main P-Rep'
+        case 1:
         case '0x1':
             return 'Sub P-Rep'
+        case 2:
         case '0x2':
             return 'Candidate'
         default:

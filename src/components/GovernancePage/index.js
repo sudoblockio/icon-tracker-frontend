@@ -316,7 +316,7 @@ class TableRow extends Component {
 			case 2:
 				return <span className={className}><i></i>Candidate</span>
 			case 3:
-				return <span className={'prep-tag'}>{status === 1 ? 'Unregistered' : 'Disqualified'}</span>
+				return <span className={'prep-tag'}>{status === 2 ? 'Disqualified' : 'Unregistered'}</span>
 			default:
 				return null		
 		}

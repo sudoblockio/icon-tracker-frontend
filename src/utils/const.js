@@ -277,3 +277,5 @@ export const ProposalStatusClass = {
 }
 
 export const VIEW_NUMBER = false
+
+export const SocialMediaType = ['facebook', 'github', 'reddit', 'steemit', 'twitter', 'youtube', 'wechat', 'telegram', 'keybase']

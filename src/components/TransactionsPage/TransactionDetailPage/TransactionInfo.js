@@ -168,17 +168,19 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in Step</td>
-											<td style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
+											<td className='trans' style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
 												{convertNumberToText(stepUsedByTxn)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
-												{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
-													const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
-													return (
-														<p key={index} className='step-used-details-p'>
-															┗&emsp;<span><AddressLink to={stepAddr} /></span>
-															&emsp;{convertNumberToText(_stepUsed)}
-														</p>
-													)
-												})}
+												<div>
+													{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
+														const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
+														return (
+															<p key={index}>
+																┗&emsp;<span className='mint'><AddressLink to={stepAddr} /></span>
+																&emsp;{convertNumberToText(_stepUsed)}
+															</p>
+														)
+													})}
+												</div>
 											</td>
 										</tr>
 										<tr>
