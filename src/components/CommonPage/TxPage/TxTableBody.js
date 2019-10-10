@@ -95,7 +95,7 @@ class TxTableBody extends Component {
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
-							}}><span className={"prep-tag" + addUnregisteredStyle(data.status)}>{badgeTitle}</span>{data.name || data.address}</td>
+							}}><span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}>{badgeTitle}</span>{data.name || data.address}</td>
 							<td className="plus"><span>{convertNumberToText(value)}</span><em>ICX</em></td>
 						</tr>
 					)

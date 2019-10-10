@@ -113,7 +113,7 @@ class AddressInfo extends Component {
                         <div className="wrap-holder">
                             {isConnected ? (
                                 <p className="title">
-                                    My Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status)}>{badge}</span>}
+                                    My Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}
                                     <span className="connected">
                                         <i className="img" />Connected to ICONex
                                     </span>
@@ -133,7 +133,7 @@ class AddressInfo extends Component {
                                     </span>
                                 </p>
                             ) : (
-                                    <p className="title">Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status)}>{badge}</span>}</p>
+                                    <p className="title">Address{isPrep && <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}</p>
                                 )}
                             <div className="contents">
                                 <div className="table-box">
