@@ -62,8 +62,8 @@ class GovernancePage extends Component {
 			return bp
 		})
 
-		const lastPrepIndex = preps.findIndex(prep => prep.address === peer_id)
-		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${preps[lastPrepIndex].name}`
+		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
+		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${allPrep[lastPrepIndex].rank} ${allPrep[lastPrepIndex].name}`
 	
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
@@ -243,7 +243,8 @@ class GovernancePage extends Component {
 								</span>
 								<span className="blacklist">
 									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-04" className="label _img">Unregistered ({blackPrep.length})</label>									
+									{/* <label htmlFor="cbox-04" className="label _img">Unregistered ({blackPrep.length})</label>									 */}
+									<label htmlFor="cbox-04" className="label _img">Unregistered</label>									
 								</span>
 								<span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
