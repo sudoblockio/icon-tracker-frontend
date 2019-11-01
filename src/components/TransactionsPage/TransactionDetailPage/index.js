@@ -12,7 +12,7 @@ class TransactionDetailPage extends Component {
 
     render() {
         const { transaction } = this.props;
-        const { loading, error,pending } = transaction
+        const { loading, error, pending } = transaction
 
         return (
             <DetailPage

@@ -50,9 +50,10 @@ export default class Search extends Component {
                         value={this.state.value}
                         onBlur={this.props.closeSearch}
                     />
+                    {this.state.value && 
                     <em>
                         <i className="img" onClick={this.props.closeSearch} />
-                    </em>
+                    </em>}
                 </div>
             </div>
         )

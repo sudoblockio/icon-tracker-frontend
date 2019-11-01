@@ -71,11 +71,11 @@ class AddressInfo extends Component {
             available, 
             staked,
             unstaked,
-            delegated,
             iscore
         } = data
 
         const {
+            delegated,
             name,
             totalBlocks,
             validatedBlocks,
@@ -150,7 +150,7 @@ class AddressInfo extends Component {
                                                 <td colSpan="3">                                                
                                                     <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
                                                     {website && <span className="home" onClick={() => { this.onSocialClick(website) }}><i className="img"></i></span>}
-                                                    {SocialMediaType.map(type => {
+                                                    {SocialMediaType.map((type, index) => {
                                                         const mediaValue = media[type]
                                                         
                                                         if (!mediaValue) {
@@ -158,7 +158,7 @@ class AddressInfo extends Component {
                                                         }
 
                                                         return (
-                                                            <span className={type} onClick={() => {this.onSocialClick(mediaValue) }}>
+                                                            <span key={index} className={type} onClick={() => {this.onSocialClick(mediaValue) }}>
                                                                 {isUrl(mediaValue) ? 
                                                                     <i className="img"></i>
                                                                 :
@@ -181,7 +181,7 @@ class AddressInfo extends Component {
                                             </tr>}
                                             {isPrep && <tr className="">
                                                 <td>Total Votes</td>
-                                                <td colSpan="3"><span>{convertNumberToText(delegated)}{/* <em>( 90.02 % )</em> */}</span></td>
+                                                <td colSpan="3"><span>{convertNumberToText(convertLoopToIcxDecimal(delegated))}{/* <em>( 90.02 % )</em> */}</span></td>
                                                 {/* <td>24h Change Amount</td>
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                             </tr>}

@@ -31,14 +31,14 @@ class Scam extends Component {
     readFile = file => {
         if (file && file[0]) {
             const fileName = file[0].name
-            if (!file[0].type.includes('image')) {
-                this.setState({
-                    fileName,
-                    dropBoxClass: 'error',
-                    msg: 'Incorrect file form.',
-                })
-                return
-            }
+            // if (!file[0].type.includes('image')) {
+            //     this.setState({
+            //         fileName,
+            //         dropBoxClass: 'error',
+            //         msg: 'Incorrect file form.',
+            //     })
+            //     return
+            // }
             if (file[0].size / 1024 / 1024 > 5) {
                 this.setState({
                     fileName,

@@ -19,6 +19,7 @@ import {
 	TX_TYPE,
 } from 'utils/const'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
+import moment from 'moment';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -83,7 +84,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
+							<DateCell date={moment.utc(data.createDate).local()} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis/>
 							<AmountCell amount={data.icx} symbol="ICX" />
 						</tr>
