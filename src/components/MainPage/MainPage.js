@@ -61,7 +61,7 @@ class MainPage extends Component {
                                     onKeyDown={this.handleKeyDown}
                                     onChange={this.handleChange}
                                 />
-                                {!this.state.value && 
+                                {/* {!this.state.value && 
                                 <span onMouseDown={() => {
                                         this.notFocus = this.focused
                                     }} 
@@ -72,7 +72,7 @@ class MainPage extends Component {
                                     }
                                 }}>
                                     <i className="img"></i>
-                                </span>}
+                                </span>} */}
                                 {this.state.value &&
                                 <em onMouseDown={() => {
                                     this.setState({ value: '' })

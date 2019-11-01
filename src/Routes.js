@@ -43,7 +43,7 @@ class Routes extends Component {
     return (
       <BodyClassName className={bodyClassName}>
         <div id="app-root">
-          {isMain && !this.state.isSolo && <Banner />}
+          {/* {isMain && !this.state.isSolo && <Banner />} */}
           <div className="root">
             <div className={`wrap ${isMain ? 'home' : 'sub'}`}>
               <HeaderContainer />

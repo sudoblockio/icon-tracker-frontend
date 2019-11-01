@@ -94,7 +94,6 @@ function* transactionTxDetailFunc(action) {
 }
 
 function* transactionEventLogListFunc(action) {
-  console.log('transactionEventLogListFunc')
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.transactionEventLogListFulfilled, payload: { data: [] } });
@@ -102,7 +101,6 @@ function* transactionEventLogListFunc(action) {
     }
 
     const payload = yield call(TRANSACTION_EVENT_LOG_LIST_API, action.payload);
-    console.log(payload)
     if (payload.result === '200') {
       yield put({ type: AT.transactionEventLogListFulfilled, payload: payload });
     } else {
