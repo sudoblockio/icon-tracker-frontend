@@ -16,8 +16,8 @@ class TransactionTabs extends Component {
     render() {
         const { on, transaction, transactionEvents, transactionInternalTx } = this.props
         const { loading, data } = transaction
-        const { loadingE, dataE } = transactionEvents
-        const { loadingI, dataI } = transactionInternalTx
+        const { loading: loadingE, data: dataE } = transactionEvents
+        const { loading: loadingI, data: dataI } = transactionInternalTx
         const { txHash } = data
 
         const TABS = []
