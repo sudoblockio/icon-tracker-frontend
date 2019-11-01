@@ -605,3 +605,9 @@ p.prep-causion {
     display: inline-block;
     cursor: pointer;
 }
+
+.table-typeC.it th:nth-child(1){width: 400px; }
+.table-typeC.it td:nth-child(1) .ellipsis,
+.table-typeC.it td:nth-child(3) .ellipsis{width:350px; }
+.table-typeC.it td:nth-child(4){text-align: right;}
+

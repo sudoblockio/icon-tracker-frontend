@@ -195,12 +195,12 @@ class TxTableHead extends Component {
                 case TX_TYPE.TRANSACTION_INTERNAL_TX:
                     return (
                         <tr>
-                            <th>Type trace address</th>
+                            {/* <th>Type trace address</th> */}
                             <th>From</th>
                             <th className="table-sign" />
                             <th>To</th>
                             <th>Value</th>
-                            <th>Step Limit</th>
+                            {/* <th>Step Limit</th> */}
                         </tr>
                     )
                 case TX_TYPE.TOKEN_HOLDERS:
