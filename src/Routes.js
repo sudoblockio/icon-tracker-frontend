@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Footer, Popup, Banner } from './components/';
+import { Footer, Popup } from './components/';
+// import { Banner } from './components/';
 import { HeaderContainer } from './containers/'
 import MainPage from './pages/MainPage';
 import AddressListPage from './pages/AddressListPage';
