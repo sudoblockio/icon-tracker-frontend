@@ -10,11 +10,20 @@ import { trackerApiInstance } from './config'
           resolve(result.data)
           if (result.data.result === "208") {
             setTimeout(() => {
-              if (startsWith(reported, 'hx')) {
-                alert('You have already reported this address as a scam address. You can only report the same address once.')
+              let item = ''
+              
+              if (startsWith(reported, '0x')) {
+                item = 'transaction'
               }
-              else {
-                alert('You have already reported this transaction as a scam transaction. You can only report the same transaction once.')
+              else if (startsWith(reported, 'cx')) {
+                item = 'contract'
+              }
+              else  if (startsWith(reported, 'hx')) {
+                item = 'address'
+              }
+
+              if (item) {
+                alert(`You have already reported this ${item} as a scam ${item}. You can only report the same ${item} once.`)
               }
             }, 500)          
           }
