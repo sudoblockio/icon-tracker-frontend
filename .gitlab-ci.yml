@@ -13,9 +13,6 @@ build:
     paths:
       - build/
     expire_in: 24 hrs
-  only:
-    - master
-    - development 
 
 deploy testnet:
   stage: deploy
@@ -42,9 +39,6 @@ deploy testnet:
       done
   dependencies:
     - build
-  only:
-    - master
-    - development 
   when: manual
 
 deploy mainnet:
@@ -72,7 +66,4 @@ deploy mainnet:
       done
   dependencies:
     - build
-  only:
-    - master
-    - development 
   when: manual
