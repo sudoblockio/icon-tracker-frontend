@@ -267,8 +267,8 @@ class GovernancePage extends Component {
 											<th rowSpan="2">Name</th>
 											<th rowSpan="2">Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
 											<th colSpan="2">Governance Variables</th>
-											<th rowSpan="2">Staked</th>
-											<th rowSpan="2">Total Votes</th>
+											{!blackChecked && <th rowSpan="2">Staked</th>}
+											{!blackChecked && <th rowSpan="2">Total Votes</th>}
 										</tr>
 										<tr>
 											<th className="italic"><em>i<sub>rep</sub></em></th>
@@ -284,6 +284,7 @@ class GovernancePage extends Component {
 												totalStaked={totalStaked} 
 												totalVoted={totalVoted} 
 												history={this.props.history}
+												blackChecked={blackChecked}
 											/>
 										))}
 									</tbody>
@@ -339,7 +340,8 @@ class TableRow extends Component {
 		const {
 			totalVoted,
 			prep,
-			lastBlockHeight
+			lastBlockHeight,
+			blackChecked
 		} = this.props
 
 		const { 
@@ -390,8 +392,8 @@ class TableRow extends Component {
 				<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
 				<td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td>
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
-				<td><span>{convertNumberToText(prepStaked, 4)}</span></td>
-				<td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>
+				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
+				{!blackChecked && <td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>}
 			</tr>
 		)
 	}
