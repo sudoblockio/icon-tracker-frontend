@@ -473,7 +473,7 @@
 .table-typeC.voter td .prep-tag{padding: 4px 15px;     vertical-align: top;}
 
 .table-typeP .ellipsis{ width: 280px; }
-.table-typeP td.on img {
+.table-typeP td img {
     width: 30px;
     max-height: 30px;
     margin-right: 5px;
