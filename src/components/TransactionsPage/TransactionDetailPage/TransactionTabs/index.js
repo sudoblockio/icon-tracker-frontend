@@ -16,13 +16,29 @@ class TransactionTabs extends Component {
     render() {
         const { on, transaction, transactionEvents, transactionInternalTx } = this.props
         const { loading, data } = transaction
+        const { loading: loadingE, data: dataE } = transactionEvents
+        const { loading: loadingI, data: dataI } = transactionInternalTx
         const { txHash } = data
+
+        const TABS = []
+        if (dataE && dataE.length > 0) {
+            TABS.push(TRANSACTION_TABS[0])
+        }
+        
+        if (dataI && dataI.length > 0) {
+            TABS.push(TRANSACTION_TABS[1])
+        }
+
+        if (TABS.length < 1) {
+            return null
+        }
+
         return (
             <TabTable
                 {...this.props}
-                TABS={TRANSACTION_TABS}
+                TABS={TABS}
                 on={on}
-                loading={loading}
+                loading={loading && loadingE && loadingI}
                 TableContents={on => {
                     switch (on) {
                         case 0:

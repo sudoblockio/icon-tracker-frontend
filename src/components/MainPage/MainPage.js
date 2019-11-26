@@ -6,10 +6,13 @@ import { connect } from 'react-redux'
 class MainPage extends Component {
 
     state = {
-        value: ''
+        value: '',
+        focused: false
     }
 
     input = null
+    notFocus = true
+    focused = false
 
     handleChange = e => {
         const { value } = e.target
@@ -39,7 +42,43 @@ class MainPage extends Component {
                         <div className="content">
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
-                                <input id='main-top-search-bar' ref={ref => { this.input = ref }} type="text" className="txt-type-search" placeholder="Address, TxHash, Block, SCORE" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} /><span><i className="img"></i></span><em><i className="img"></i></em>
+                                <input id='main-top-search-bar'
+                                    ref={ref => { 
+                                        this.input = ref 
+                                        if (this.input) {
+                                            this.input.onfocus = () => {
+                                                this.focused = true;
+                                            };
+                                            this.input.onblur = () => {
+                                                this.focused = false;
+                                            };
+                                        }
+                                    }}
+                                    type="text"
+                                    className="txt-type-search"
+                                    placeholder="Address, TxHash, Block, SCORE"
+                                    value={this.state.value}
+                                    onKeyDown={this.handleKeyDown}
+                                    onChange={this.handleChange}
+                                />
+                                {/* {!this.state.value && 
+                                <span onMouseDown={() => {
+                                        this.notFocus = this.focused
+                                    }} 
+                                    onMouseUp={e => {
+                                    if (!this.notFocus) {
+                                        this.notFocus = true
+                                        this.input.focus()
+                                    }
+                                }}>
+                                    <i className="img"></i>
+                                </span>} */}
+                                {this.state.value &&
+                                <em onMouseDown={() => {
+                                    this.setState({ value: '' })
+                                }}>
+                                    <i className="img"></i>
+                                </em>}
                             </div>
                         </div>
                     </div>

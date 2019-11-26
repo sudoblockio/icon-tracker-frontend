@@ -19,6 +19,7 @@ import {
 	TX_TYPE,
 } from 'utils/const'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
+import moment from 'moment';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -83,7 +84,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
 							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
+							<DateCell date={moment.utc(data.createDate).local()} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis/>
 							<AmountCell amount={data.icx} symbol="ICX" />
 						</tr>
@@ -95,7 +96,7 @@ class TxTableBody extends Component {
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
-							}}><span className={"prep-tag" + addUnregisteredStyle(data.status)}>{badgeTitle}</span>{data.name || data.address}</td>
+							}}><span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}>{badgeTitle}</span>{data.name || data.address}</td>
 							<td className="plus"><span>{convertNumberToText(value)}</span><em>ICX</em></td>
 						</tr>
 					)
@@ -255,10 +256,10 @@ class TxTableBody extends Component {
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
 					return (
 						<tr>
-							<td>-</td>
+							{/* <td>-</td> */}
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={data.amount} symbol="ICX" />
-							<td>-</td>
+							{/* <td>-</td> */}
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:

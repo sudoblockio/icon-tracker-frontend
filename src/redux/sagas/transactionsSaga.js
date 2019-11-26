@@ -10,6 +10,7 @@ import {
   getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
   getTransaction as GET_TRANSACTION_API,
 } from '../api/restV3';
+import { transactionEventLogList } from '../actions/transactionsActions';
 
 function* watchTransactionRecentTx() { yield takeLatest(AT.transactionRecentTx, transactionRecentTxFunc) }
 function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
@@ -45,6 +46,7 @@ function* transactionTxDetailFunc(action) {
   let trackerData, resultData, byHashData, data
 
   try {
+    yield put(transactionEventLogList({ txHash: action.payload.txHash, count: 10 }))
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload);    
     if (trackerData.result === "200") {      
       let { stepUsedDetails } = trackerData.data
