@@ -29,9 +29,9 @@ class ProposalDetailPage extends Component {
 		const id = this.getId(this.props.url.pathname)
 		try {
 			const proposal = await getProposal(id)
-			this.setState({ loading:false, proposal })	
+			this.setState({ loading: false, proposal })
 		}
-		catch(e) {
+		catch (e) {
 			console.error(e)
 			this.setState({ error: id })
 		}
@@ -145,12 +145,12 @@ class ProposalDetailPage extends Component {
 
 		const Content = () => {
 			if (error) {
-				return <NotFoundPage error={error}/>
+				return <NotFoundPage error={error} />
 			}
 			else {
 				return (
 					<div className="content-wrap">
-						{loading && <LoadingComponent height='600px'/> }
+						{loading && <LoadingComponent height='600px' />}
 						{!loading && <div className="screen0">
 							<div className="wrap-holder">
 								<p className="title">Network Proposal Details</p>
@@ -202,7 +202,7 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Description</td>
-													<td><span className="comment">{description}</span></td>
+													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = description }}></span></td>
 												</tr>
 												<tr>
 													<td>Value</td>
@@ -275,7 +275,7 @@ class ProposalDetailPage extends Component {
 								</div>
 								<div className="contents">
 									{tabList.length === 0 ?
-										<NoBox text={`No ${this.state.tab === PROPOSAL_TABS[0] ? 'Voters' : 'Token Vote'}`}/>
+										<NoBox text={`No ${this.state.tab === PROPOSAL_TABS[0] ? 'Voters' : 'Token Vote'}`} />
 										:
 										<div className="table-box">
 											<table className={`table-typeC proposal${tabVotes ? ' votes' : ''}`}>
@@ -305,7 +305,7 @@ class ProposalDetailPage extends Component {
 												</tbody>
 											</table>
 										</div>
-									}									
+									}
 								</div>
 							</div>
 						</div>}
