@@ -6,7 +6,7 @@ import {
 } from 'utils/const'
 import { getProposal } from '../../redux/api/restV3/iiss';
 import { ProposalStatus, ProposalStatusClass, ProposalType, VIEW_NUMBER } from '../../utils/const';
-import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString, convertLoopToIcxDecimal } from '../../utils/utils';
+import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString, convertLoopToIcxDecimal, closeEm } from '../../utils/utils';
 import {
 	NoBox,
 	NotFoundPage,
@@ -202,7 +202,7 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Description</td>
-													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = description }}></span></td>
+													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = closeEm(description) }}></span></td>
 												</tr>
 												<tr>
 													<td>Value</td>

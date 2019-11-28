@@ -700,3 +700,8 @@ export function addAt(text) {
         return '@' + text
     }
 }
+
+export function closeEm(text) {
+    if (!text) return ''
+    return text.replace(/<\/em>/gi, "</em").replace(/<\/em/gi, "</em>")
+}
