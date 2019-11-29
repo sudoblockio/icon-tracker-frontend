@@ -37,7 +37,7 @@ class ProposalListPage extends Component {
 							<div className="no-proposal"><img src={imgNoProposal} alt='no-proposal' /></div>						
 							:	
 							<div className="proposal-list">
-								{proposals.map(proposal => {
+								{(proposals || []).reverse().map(proposal => {
 									const { id, contents, vote, status, proposerName } = proposal
 									const { type, description, title, value } = contents
 									const { agree, disagree, noVote } = vote
