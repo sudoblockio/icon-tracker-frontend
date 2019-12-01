@@ -39,7 +39,8 @@ class ProposalListPage extends Component {
 							<div className="proposal-list">
 								{(proposals || []).reverse().map(proposal => {
 									const { id, contents, vote, status, proposerName } = proposal
-									const { type, description, title, value } = contents
+									const { type, title, value } = contents
+									// const { description } = contents
 									const { agree, disagree, noVote } = vote
 									const allCount = Number(agree.count) + Number(disagree.count) + Number(noVote.count)
 									const allAmount = Number(agree.amount) + Number(disagree.amount)
