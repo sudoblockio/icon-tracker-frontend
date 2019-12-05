@@ -206,7 +206,7 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Value</td>
-													<td><span className="comment">{valueToString(value)}</span></td>
+													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = closeEm(valueToString(value)) }}></span></td>
 												</tr>
 												<tr>
 													<td>Votes</td>
