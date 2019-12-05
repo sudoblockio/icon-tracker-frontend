@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { getProposals } from '../../redux/api/restV3/iiss';
 import { ProposalType, ProposalStatus, ProposalStatusClass, VIEW_NUMBER } from '../../utils/const';
-import { valueToString } from '../../utils/utils';
+import { valueToString, getTextFromHtml } from '../../utils/utils';
 import {
 	LoadingComponent
 } from 'components';
@@ -55,7 +55,7 @@ class ProposalListPage extends Component {
 										<ul key={id} className='proposal-pointer' onClick={() => { this.props.history.push('/proposal/' + id) }}>
 											<li>
 												<h3 className="label">{ProposalType[type]} Proposal</h3>
-												{/* <h1>{title}<br />{description}</h1> */}
+												{/* <h1>{title}<br />{getTextFromHtml(description)}</h1> */}
 												<h1>{title}</h1>
 												<div>
 													<span className={`proposal-status ${ProposalStatusClass[status]}`}>{ProposalStatus[status]}</span><h3 className='proposer-name'>Proposed by <span>{proposerName}</span></h3>
@@ -63,7 +63,7 @@ class ProposalListPage extends Component {
 											</li>
 											<li>
 												<h3 className="label">Value</h3>
-												<h2>{valueToString(value)}</h2>
+												<h2>{getTextFromHtml(valueToString(value))}</h2>
 												<div>
 													<div className="percent-group">
 														<h3 className="label">Voter</h3>

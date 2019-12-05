@@ -29,9 +29,7 @@ moment.updateLocale('en', {
 export function getTextFromHtml(data) {
     if (!data || typeof data !== 'string') return ''
 
-    for (let i = 0; i < data.length; i++) {
-        console.log(data)
-    }
+    return data.replace(/(<([^>]+)>)/ig,"");
 }
 
 export function numberWithCommas(x) {
