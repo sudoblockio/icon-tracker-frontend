@@ -20,11 +20,19 @@ moment.updateLocale('en', {
         d: '%d day',
         dd: '%d days',
         M: '%d month',
-        MM: '%d months',
+        MM: '%d months', 
         y: '%d year',
         yy: '%d years',
     },
 })
+
+export function getTextFromHtml(data) {
+    if (!data || typeof data !== 'string') return ''
+
+    for (let i = 0; i < data.length; i++) {
+        console.log(data)
+    }
+}
 
 export function numberWithCommas(x) {
     if (!x) {
@@ -33,7 +41,7 @@ export function numberWithCommas(x) {
     let parts = x.toString().split('.')
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     if (parts[1]) {
-        parts[1] = parts[1].replace(/0+$/, "")        
+        parts[1] = parts[1].replace(/0+$/, "")
     }
     if (parts[1] === "") {
         parts.pop()
@@ -142,7 +150,7 @@ export function calcFromNow(createDate) {
     const H = M * 60
     const D = H * 24
     const W = D * 7
-    
+
     const createMoment = moment(createDate)
     const currentMoment = moment()
     const createTime = createMoment.format('X')
@@ -155,7 +163,7 @@ export function calcFromNow(createDate) {
         return 'right now'
     }
     else if (diff > 0 && diff < M) {
-        return  makeFromNowText(diff, 'second', undefined, '', later)        
+        return makeFromNowText(diff, 'second', undefined, '', later)
     }
     else if (diff >= M && diff < H) {
         const minute = Math.floor(diff / M)
@@ -167,7 +175,7 @@ export function calcFromNow(createDate) {
         const minute = Math.floor((diff % H) / M)
         return makeFromNowText(hour, 'hour', minute, 'minute', later)
     }
-    else if(diff >= D && diff < W) {
+    else if (diff >= D && diff < W) {
         const day = Math.floor(diff / D)
         const hour = Math.floor((diff % D) / H)
         return makeFromNowText(day, 'day', hour, 'hour', later)
@@ -190,7 +198,7 @@ export function calcFromLastBlock(blockDiff) {
         return 'right now'
     }
     else if (diff > 0 && diff < M) {
-        return  makeFromNowText(diff, 'second')        
+        return makeFromNowText(diff, 'second')
     }
     else if (diff > M && diff < H) {
         const minute = Math.floor(diff / M)
@@ -200,14 +208,14 @@ export function calcFromLastBlock(blockDiff) {
         const hour = Math.floor(diff / H)
         return makeFromNowText(hour, 'hour')
     }
-    else if(diff >= D && diff < W) {
+    else if (diff >= D && diff < W) {
         const day = Math.floor(diff / D)
         return makeFromNowText(day, 'day')
     }
     else {
         const week = Math.floor(diff / W)
         return makeFromNowText(week, 'week')
-    }    
+    }
 }
 
 export function getUTCString() {
@@ -662,7 +670,7 @@ export function addUnregisteredStyle(status, grade) {
     if (!isNaN(_status) && (_status > 0 && _status < 3)) {
         return " prep-unregistered"
     }
-    else if (isNaN(_grade) || (_grade > 2) ) {
+    else if (isNaN(_grade) || (_grade > 2)) {
         return " prep-unregistered"
     }
     else {
@@ -670,7 +678,7 @@ export function addUnregisteredStyle(status, grade) {
     }
 }
 
-export function valueToString(value){
+export function valueToString(value) {
     if (!value) return ''
 
     if (typeof value === 'string') {
