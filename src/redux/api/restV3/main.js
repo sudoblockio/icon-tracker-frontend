@@ -3,7 +3,7 @@ import { trackerApiInstance } from './config'
 export async function getMainInfo() {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get('/v0/main/mainInfo')
+    trackerApi.get('/v3/main/mainInfo')
       .then(result => {
         resolve(result.data)
       })
@@ -16,7 +16,7 @@ export async function getMainInfo() {
 export async function getMainChart() {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get('/v0/main/mainChart')
+    trackerApi.get('/v3/main/mainChart')
       .then(result => {
         resolve(result.data.data)
       })
