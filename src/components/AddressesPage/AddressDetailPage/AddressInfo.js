@@ -8,6 +8,7 @@ import NotificationManager from 'utils/NotificationManager'
 import { IconConverter } from 'icon-sdk-js'
 import { convertLoopToIcxDecimal, getBadgeTitle, isUrl, addAt, addUnregisteredStyle } from '../../../utils/utils';
 import { SocialMediaType } from '../../../utils/const'
+import { getPReps } from '../../../redux/api/restV3';
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -19,6 +20,11 @@ class AddressInfo extends Component {
             icxMore: false,
             tokenMore: false,
         }
+    }
+
+    async componentDidMount() {
+        const { totalDelegated } = await getPReps()
+        this.setState({totalDelegated})
     }
 
     onNotificationChange = () => {
@@ -89,11 +95,11 @@ class AddressInfo extends Component {
 
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
-        const productivity = !produced ? '-' : `${(validated / produced * 100).toFixed(2)}%`
+        const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
 
         const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
         const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
-        const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? '-' : IconConverter.toNumber(lastGenerateBlockHeight)
+        const _lastGenerateBlockHeight = !lastGenerateBlockHeight? 'None' : IconConverter.toNumber(lastGenerateBlockHeight)
 
         const badge = getBadgeTitle(grade, status)
         const Content = () => {
@@ -181,7 +187,7 @@ class AddressInfo extends Component {
                                             </tr>}
                                             {isPrep && <tr className="">
                                                 <td>Total Votes</td>
-                                                <td colSpan="3"><span>{convertNumberToText(convertLoopToIcxDecimal(delegated))}{/* <em>( 90.02 % )</em> */}</span></td>
+                                                <td colSpan="3"><span>{convertNumberToText(convertLoopToIcxDecimal(delegated))}<em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}% )</em>{/* <em>( 90.02 % )</em> */}</span></td>
                                                 {/* <td>24h Change Amount</td>
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                             </tr>}
@@ -189,8 +195,8 @@ class AddressInfo extends Component {
                                                 <td>Productivity<br />(Produced / (Produced + Missed))</td>
                                                 <td><span>{productivity}<em>( {numberWithCommas(validated)} / {numberWithCommas(produced)} )</em></span></td>
                                                 <td>Last Blockheight</td>
-                                                {(_lastGenerateBlockHeight === '-' || _lastGenerateBlockHeight < 0) ?
-                                                    <td><span>{_lastGenerateBlockHeight}</span></td>
+                                                {(_lastGenerateBlockHeight === 'None' || _lastGenerateBlockHeight < 0) ?
+                                                    <td><span>None</span></td>
                                                     :
                                                     <td><span className="mint" onClick={() => { this.goBlock(_lastGenerateBlockHeight) }}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
                                                 }
@@ -224,7 +230,8 @@ class AddressInfo extends Component {
                                                         <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span></p>
                                                         <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
                                                         <p><span>Unstaking</span><span><em>{(!Number(balance) ? 0 : Number(unstaked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstaked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Voted</span><span><em>{(!Number(staked) ? 0 : Number(delegated) / Number(staked) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated)}`}<em>ICX</em></span></p>
+                                                        {/* <p><span>Voted</span><span><em>{(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
+                                                        <p><span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span></p>
                                                     </div>
                                                     <div className={tokenMore ? 'on' : ''}>

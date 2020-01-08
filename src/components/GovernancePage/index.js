@@ -362,7 +362,7 @@ class TableRow extends Component {
 			status
 		} = prep
 		
-		const productivity = !totalBlocks ? '-' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
+		const productivity = !totalBlocks ? 'None' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 		const prepStaked = IconConverter.toNumber(stake || 0)
 		// const prepUnstaked = IconConverter.toNumber(unstake || 0)
@@ -372,6 +372,7 @@ class TableRow extends Component {
 
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
+		console.log(votedRate, totalVoted, prepVoted)
 
 		const badge = this.getBadge(grade, active, status)
 
