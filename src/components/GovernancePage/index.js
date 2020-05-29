@@ -21,6 +21,7 @@ class GovernancePage extends Component {
 		totalVoted: 0,
 		irep: 0,
 		rrep: 0,
+		glbComRate: 0,
 		height: 0,
 		stepPrice: 0,
 		mainChecked: true,
@@ -68,8 +69,10 @@ class GovernancePage extends Component {
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-		const irep = convertLoopToIcxDecimal((variable || {}).irep || 0)
-		const rrep = IconConverter.toNumber((variable || {}).rrep || 0)
+		const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
+		const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
+		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
+		// console.log("Global Rate = ", glbComRate);
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		
 		this.setState({ 
@@ -80,6 +83,7 @@ class GovernancePage extends Component {
 			totalVoted,
 			irep,
 			rrep,
+			glbComRate,
 			height,
 			stepPrice,
 			allPrep,
@@ -152,8 +156,9 @@ class GovernancePage extends Component {
 			publicTreasury,
 			totalStaked,
 			totalVoted,
-			irep,
+			// irep,
 			rrep,
+			glbComRate,
 			height,
 			stepPrice,
 			allPrep,
@@ -198,14 +203,14 @@ class GovernancePage extends Component {
 							<ul>
 								<li>
 									<div>
-										<p>i<sub>rep</sub> <em>(ICX)</em></p>
-										<p><span>{convertNumberToText(irep, 4)}</span></p>
+										<p>Global Commission Rate <em>(%)</em></p>
+										<p><span>{convertNumberToText(glbComRate, 4)}</span></p>
 									</div>
 								</li>
 								<li>
 									<div>
-										<p>r<sub>rep</sub> * 3 <em>(%)</em></p>
-										<p><span>{convertNumberToText(rrep / 100 * 3, 4)}</span></p>
+										<p>Reward Rate <em>(%)</em></p>
+										<p><span>{convertNumberToText((rrep / 100) * 3, 4)}</span></p>
 									</div>
 								</li>
 								<li>
@@ -266,12 +271,12 @@ class GovernancePage extends Component {
 											<th rowSpan="2" className="rank"><span className="sort">Rank ↓</span></th>
 											<th rowSpan="2">Name</th>
 											<th rowSpan="2">Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
-											<th colSpan="2">Governance Variables</th>
+											<th colSpan="2">Suggested Commission Rate</th>
 											{!blackChecked && <th rowSpan="2">Staked</th>}
 											{!blackChecked && <th rowSpan="2">Total Votes</th>}
 										</tr>
 										<tr>
-											<th className="italic"><em>i<sub>rep</sub></em></th>
+											<th><em>Rate (%)</em></th>
 											<th><em>Last updated</em></th>
 										</tr>
 									</thead>
@@ -282,7 +287,8 @@ class GovernancePage extends Component {
 												key={index} 
 												prep={prep} 
 												totalStaked={totalStaked} 
-												totalVoted={totalVoted} 
+												totalVoted={totalVoted}
+												rrep={rrep}
 												history={this.props.history}
 												blackChecked={blackChecked}
 											/>
@@ -339,6 +345,7 @@ class TableRow extends Component {
 
 		const {
 			totalVoted,
+			rrep,
 			prep,
 			lastBlockHeight,
 			blackChecked
@@ -361,7 +368,11 @@ class TableRow extends Component {
 			// unstake,
 			status
 		} = prep
-		
+
+		const sugComRate = 
+		( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100
+		// console.log("sugComRate = ", sugComRate, "\nirep = ", irep, "\nrrep = ", rrep, "\ntotalVoted" ,totalVoted);
+
 		const productivity = !totalBlocks ? 'None' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
 		const prepStaked = IconConverter.toNumber(stake || 0)
@@ -390,7 +401,7 @@ class TableRow extends Component {
 					</ul>
 				</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
-				<td><span>{numberWithCommas(IconConverter.toNumber(irep || 0))}</span></td>
+				<td><span>{convertNumberToText(sugComRate, 2)}</span></td>
 				<td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td>
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
