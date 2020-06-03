@@ -86,7 +86,9 @@ export const POPUP_TYPE = {
     DETAIL: 'detail',
     SCAM: 'scam',
     SEARCH: 'search',
-    ABOUT: 'about'
+    ABOUT: 'about',
+    SUGGEST: 'suggest',
+    COMMISSION: 'commission'
 }
 
 export const SEARCH_TYPE = {
