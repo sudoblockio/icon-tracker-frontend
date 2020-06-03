@@ -921,6 +921,8 @@ html, body{height: 100%;}
 
 table.table-typeP th em{font-size: 10px; display: block; color: #808080; margin: 0;}
 table.table-typeP th sub{font-size: 8px;margin:5px 0 0 2px;    display: inline-block; vertical-align: top;}
+/* table.table-typeP th .itag em{font-size: 10px; display: contents; color: #808080; margin: 0;}
+table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150px -250px; margin-left: 3px; cursor: pointer;     vertical-align: top; position: relative; left: 0; top: 0;} */
 
 .table-typeP col.add{width:60px;}
 .table-typeP col.rank{width:68px;}
@@ -1230,7 +1232,6 @@ input[type="text"]:focus.over {border: 1px solid #4d4d4d;}
 .content-wrap.governance .screen0 .contents .graph .txt span:nth-child(2) i{background:#00dbf2; }
 .content-wrap.governance .screen0 .contents .graph .txt span:nth-child(1) i{background:#545454; }
 
-
 .content-wrap.governance .screen0 .contents .graph .total{display: inline-block; position: absolute; right: 51px; top: 70px;  font-size: 12px; width: 230px; text-align: center;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(1){ color: #b3b3b3;}
 .content-wrap.governance .screen0 .contents .graph .total p:nth-child(1) em{ font-weight: 100;}
@@ -1240,10 +1241,12 @@ input[type="text"]:focus.over {border: 1px solid #4d4d4d;}
 .content-wrap.governance .screen0 .contents ul{font-size: 0; margin-top: 12px; }
 .content-wrap.governance .screen0 .contents ul li{ position: relative;    vertical-align: top; margin-right: 12px;}
 .content-wrap.governance .screen0 .contents ul li:last-child{margin-right: 0;}
-
 .content-wrap.governance .screen0 .contents ul li div{width: 281px; height: 100px;border-radius: 3px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);border: solid 1px #d9d9d9;background-color: #ffffff; padding: 25px 20px 24px 30px;}
+.content-wrap.governance .screen0 .contents ul li div .itag .img{width:14px; height: 14px; background-position: -150px -250px; margin-left: 6px; margin-right: 8px; cursor: pointer;     vertical-align: top; position: relative; left: 0; top: 0;}
 .content-wrap.governance .screen0 .contents ul li p:first-child{font-size: 12px; color: #b3b3b3;}
 .content-wrap.governance .screen0 .contents ul li p:first-child span{height: 18px; border-radius: 10px; background-color: #545454; font-size: 9px; color: #fff; display: inline-block; padding: 5px 15px; float: right;     margin-top: -4px;}
+/* .content-wrap.governance .screen0 .contents ul li div .itag .none{height: 14px; border-radius: 14px; background-color: #fff; font-size: 9px; color: #000; display: inline-block; padding: 5px; float: left;     margin-top: 0px;} */
+
 .content-wrap.governance .screen0 .contents ul li p:last-child{font-size: 12px; font-weight: 300; position: relative; text-align: right; margin-top: 10px;}
 .content-wrap.governance .screen0 .contents ul li p:last-child span{font-size: 24px; letter-spacing: -0.6px; font-weight: 700;    height: 24px; display: inline-block; }
 .content-wrap.governance .screen0 .contents ul li p:last-child em{position: absolute; bottom: 4px; left: 0; }
@@ -1480,6 +1483,18 @@ input[type="text"]:focus.over {border: 1px solid #4d4d4d;}
 .popup-wrap.about .box{margin-top: 50px;}
 .popup-wrap.about .box .txt:not(:last-child){margin-bottom: 26px;}
 .popup-wrap.about .box .txt{padding-left: 10px;}
+
+.popup-wrap.suggest {padding: 40px 40px 110px;}
+.popup-wrap.suggest .txt{text-align: left; font-size: 14px; color: #808080; letter-spacing: -0.5px; line-height: 1.67;}
+/* .popup-wrap.suggest .sub-title{font-size: 14px; font-weight: 600; font-family: 'Montserrat'; margin-bottom: 6px;} */
+/* .popup-wrap.suggest .popup{text-align: left; width: 580px;  height: auto;  padding: 40px 40px 110px;  font-size: 20px;  min-height: 246px;  position: relative;  border: none;  overflow: hidden;} */
+.popup-wrap.suggest .popup{height: 200px;}
+.popup-wrap.suggest .title{padding-bottom: 12px;}
+
+.popup-wrap.commission {padding: 40px 40px 110px;}
+.popup-wrap.commission .txt{text-align: left; font-size: 14px; color: #808080; letter-spacing: -0.5px; line-height: 1.67;}
+.popup-wrap.commission .popup{height: 230px;}
+.popup-wrap.commission .title{padding-bottom: 12px;}
 
 .size-half{width: 50% !important;}
 .size-full {width: 100% !important;}

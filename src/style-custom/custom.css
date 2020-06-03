@@ -612,3 +612,15 @@ p.prep-causion {
 .table-typeC.it td:nth-child(4){text-align: right;}
 
 .proposal-pointer li h1 { padding-top: 5px; }
+
+
+i.img.screamer{
+    width:14px !important;
+    height: 14px !important; 
+    background-position: -150px -250px !important; 
+    cursor: pointer; 
+    vertical-align: top !important; 
+    position: relative !important; 
+    left: 0 !important; 
+    top: 0 !important;
+}

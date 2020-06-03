@@ -34,6 +34,12 @@ class Popup extends Component {
             case POPUP_TYPE.ABOUT:
                 window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'about' } }))
                 break
+            case POPUP_TYPE.SUGGEST:
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'suggest' } }))
+                break
+            case POPUP_TYPE.COMMISSION:
+                window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_OPEN', param: 'commission' } }))
+                break
             default:
         }
     }
@@ -57,6 +63,14 @@ class Popup extends Component {
     closeAbout = () => {
         this.props.initPopup()
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'about' } }))
+    }
+    closeAbout = () => {
+        this.props.initPopup()
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'suggest' } }))
+    }
+    closeAbout = () => {
+        this.props.initPopup()
+        window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'POPUP_CLOSE', param: 'commission' } }))
     }
 
     render() {
@@ -117,6 +131,26 @@ class Popup extends Component {
                     </div>
                 </div>
             </div>,
+            <div key='suggest' className="popup-wrap suggest" style={{ display: 'none' }}>
+                <div className="dimmed"></div>
+                <div className="popup">
+                    <h1 className="title">Suggested Commission Rate</h1>
+                    <p className="txt">Each Main P-Rep suggests a commission rate, then the ICON Network takes an average to form the Global Commission Rate</p>
+                    <div className="btn-holder full">
+                        <button className="btn-type-normal size-full" onClick={this.closeAbout}><span>Confirm</span></button>
+                    </div>
+                </div>
+            </div>,
+        <div key='commission' className="popup-wrap commission" style={{ display: 'none' }}>
+        <div className="dimmed"></div>
+        <div className="popup">
+            <h1 className="title">Global Commission Rate</h1>
+            <p className="txt">The percentage of block rewards that go to P-Reps. For example, with a 20% commission rate, if 100 ICX inflation is created then 20 goes to P-Reps and 80 goes to voters.</p>
+            <div className="btn-holder full">
+                <button className="btn-type-normal size-full" onClick={this.closeAbout}><span>Confirm</span></button>
+            </div>
+        </div>
+    </div>,
             isSearch && <Search key='search' data={searchData} closeSearch={this.closeSearch} />,
         ]
     }

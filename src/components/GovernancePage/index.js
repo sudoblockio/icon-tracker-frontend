@@ -203,7 +203,7 @@ class GovernancePage extends Component {
 							<ul>
 								<li>
 									<div>
-										<p>Global Commission Rate <em>(%)</em></p>
+										<p>Global Commission Rate <em>(%)</em> <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}} style={{marginLeft:'3px'}}></i></p>
 										<p><span>{convertNumberToText(glbComRate, 4)}</span></p>
 									</div>
 								</li>
@@ -276,7 +276,7 @@ class GovernancePage extends Component {
 											{!blackChecked && <th rowSpan="2">Total Votes</th>}
 										</tr>
 										<tr>
-											<th><em>Rate (%)</em></th>
+											<th><span><em>Rate (%) <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.SUGGEST })}} style={{marginLeft:'3px'}}></i></em></span></th>
 											<th><em>Last updated</em></th>
 										</tr>
 									</thead>
