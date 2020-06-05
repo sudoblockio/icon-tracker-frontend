@@ -4,8 +4,8 @@ import IconService, { HttpProvider } from "icon-sdk-js"
 import { getWalletApiUrl } from "./config"
 import axios from 'axios'
 
-export async function icxGetScore(params) {
-  const walletApi = await walletApiInstance()
+export function icxGetScore(params) {
+  const walletApi = walletApiInstance()
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
@@ -34,8 +34,8 @@ export async function icxGetScore(params) {
   });
 }
 
-export async function icxCall(params) {
-  const walletApi = await walletApiInstance()
+export function icxCall(params) {
+  const walletApi = walletApiInstance()
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
@@ -65,7 +65,7 @@ export async function icxCall(params) {
 }
 
 export async function getTransaction(txHash) {
-  const walletApiUrl = await getWalletApiUrl()
+  const walletApiUrl = getWalletApiUrl()
   const url = `${walletApiUrl}/api/v3`;
   const provider = new HttpProvider(url)
   const iconService = new IconService(provider);
@@ -79,7 +79,7 @@ export async function getTransaction(txHash) {
 }
 
 export async function getTransactionResult(txHash) {
-  const walletApiUrl = await getWalletApiUrl()
+  const walletApiUrl = getWalletApiUrl()
   const url = `${walletApiUrl}/api/v3`;
   const provider = new HttpProvider(url)
   const iconService = new IconService(provider);
@@ -93,7 +93,7 @@ export async function getTransactionResult(txHash) {
 }
 
 export async function getTransactionResultNotSdk(txHash) {
-  const walletApiUrl = await getWalletApiUrl()  
+  const walletApiUrl = getWalletApiUrl()  
   try {
     const response = await axios({
       headers: {

@@ -1,7 +1,7 @@
 import { trackerApiInstance } from './config'
 
-export async function getMainInfo() {
-  const trackerApi = await trackerApiInstance()
+export function getMainInfo() {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get('/v3/main/mainInfo')
       .then(result => {
@@ -13,8 +13,8 @@ export async function getMainInfo() {
   })
 }
 
-export async function getMainChart() {
-  const trackerApi = await trackerApiInstance()
+export function getMainChart() {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get('/v3/main/mainChart')
       .then(result => {

@@ -2,8 +2,8 @@ import { makeUrl } from 'utils/utils'
 import { trackerApiInstance, walletApiInstance } from './config'
 import { randomUint32 } from '../../../utils/utils'
 
-export async function contractList(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractList(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/list', payload))
       .then(result => {
@@ -15,8 +15,8 @@ export async function contractList(payload) {
   })
 }
 
-export async function contractInfo(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractInfo(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/info', payload))
       .then(result => {
@@ -28,8 +28,8 @@ export async function contractInfo(payload) {
   })
 }
 
-export async function contractDetail(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractDetail(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/detail', payload))
       .then(result => {
@@ -41,8 +41,8 @@ export async function contractDetail(payload) {
   })
 }
 
-export async function contractTxList(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractTxList(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/txList', payload))
       .then(result => {
@@ -54,8 +54,8 @@ export async function contractTxList(payload) {
   })
 }
 
-export async function contractTokenTxList(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractTokenTxList(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/tokenTxList', payload))
       .then(result => {
@@ -67,8 +67,8 @@ export async function contractTokenTxList(payload) {
   })
 }
 
-export async function contractEventLogList(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractEventLogList(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/eventLogList', payload))
       .then(result => {
@@ -80,8 +80,8 @@ export async function contractEventLogList(payload) {
   })
 }
 
-export async function contractInternalTxList(payload) {
-  const trackerApi = await trackerApiInstance()
+export function contractInternalTxList(payload) {
+  const trackerApi = trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/internalTxList', payload))
       .then(result => {
@@ -93,8 +93,8 @@ export async function contractInternalTxList(payload) {
   })
 }
 
-export async function getScoreStatus(address) {
-  const walletApi = await walletApiInstance()
+export function getScoreStatus(address) {
+  const walletApi = walletApiInstance()
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",

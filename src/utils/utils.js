@@ -263,8 +263,8 @@ export function randomUint32() {
     }
 }
 
-export async function makeDownloadLink(address, version) {
-    const apiUrl = await getTrackerApiUrl()
+export function makeDownloadLink(address, version) {
+    const apiUrl = getTrackerApiUrl()
     return `${apiUrl}/score/${address}_${version}.zip`
 }
 
@@ -540,8 +540,8 @@ export function removeQuotes(str) {
     return str
 }
 
-export async function getIsSolo() {
-    const result = await getIsSoloVersion()
+export function getIsSolo() {
+    const result = getIsSoloVersion()
     return result
 }
 

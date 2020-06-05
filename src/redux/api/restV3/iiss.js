@@ -1,8 +1,8 @@
 import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from 'utils/utils'
 
-export async function getPReps() {
-    const walletApi = await walletApiInstance()
+export function getPReps() {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -38,8 +38,8 @@ export async function getPReps() {
     });
 }
 
-export async function getIISSInfo() {
-    const walletApi = await walletApiInstance()
+export function getIISSInfo() {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -73,10 +73,10 @@ export async function getIISSInfo() {
     });
 }
 
-export async function getPRep(address) {
+export function getPRep(address) {
     if (!address) return {}
 
-    const walletApi = await walletApiInstance()
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -114,8 +114,8 @@ export async function getPRep(address) {
     });
 }
 
-export async function getLastBlock() {
-    const walletApi = await walletApiInstance()
+export function getLastBlock() {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -141,8 +141,8 @@ export async function getLastBlock() {
     });
 }
 
-export async function getStepPrice() {
-    const walletApi = await walletApiInstance()
+export function getStepPrice() {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -176,8 +176,8 @@ export async function getStepPrice() {
     });
 }
 
-export async function iissPrepRepJsonActive(payload) {
-    const trackerApi = await trackerApiInstance()
+export function iissPrepRepJsonActive(payload) {
+    const trackerApi = trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/prep/repJson`, payload))
             .then(result => {
@@ -191,8 +191,8 @@ export async function iissPrepRepJsonActive(payload) {
     })
 }
 
-export async function prepMain() {
-    const trackerApi = await trackerApiInstance()
+export function prepMain() {
+    const trackerApi = trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/prep/main`, { count: 22 }))
             .then(result => {
@@ -211,8 +211,8 @@ export async function prepMain() {
     })
 }
 
-export async function prepSub() {
-    const trackerApi = await trackerApiInstance()
+export function prepSub() {
+    const trackerApi = trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/prep/sub`, { count: 100 }))
             .then(result => {
@@ -231,8 +231,8 @@ export async function prepSub() {
     })
 }
 
-export async function prepList(grade) {
-    const trackerApi = await trackerApiInstance()
+export function prepList(grade) {
+    const trackerApi = trackerApiInstance()
     const payload = { count: 500 }
     if (grade) {
         payload.grade = grade
@@ -255,8 +255,8 @@ export async function prepList(grade) {
     })
 }
 
-export async function getStake(address) {
-    const walletApi = await walletApiInstance()
+export function getStake(address) {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -293,8 +293,8 @@ export async function getStake(address) {
     });
 }
 
-export async function queryIScore(address) {
-    const walletApi = await walletApiInstance()
+export function queryIScore(address) {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -331,8 +331,8 @@ export async function queryIScore(address) {
     });
 }
 
-export async function getDelegation(address) {
-    const walletApi = await walletApiInstance()
+export function getDelegation(address) {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -371,8 +371,8 @@ export async function getDelegation(address) {
     });
 }
 
-export async function getBalance(address) {
-    const walletApi = await walletApiInstance()
+export function getBalance(address) {
+    const walletApi = walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
@@ -401,8 +401,8 @@ export async function getBalance(address) {
     });
 }
 
-export async function getProposals() {
-    return new Promise(async resolve => {
+export function getProposals() {
+    return new Promise(resolve => {
         // const mock = {
         //     "proposals": [
         //         {
@@ -438,7 +438,7 @@ export async function getProposals() {
         //     ]
         // }
         // resolve(mock)
-        const walletApi = await walletApiInstance()
+        const walletApi = walletApiInstance()
         walletApi.post(`/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
@@ -462,8 +462,8 @@ export async function getProposals() {
     });
 }
 
-export async function getProposal(id) {
-    return new Promise(async resolve => {
+export function getProposal(id) {
+    return new Promise(resolve => {
         // const mock = {
         //     "id": id,
         //     "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
@@ -555,7 +555,7 @@ export async function getProposal(id) {
         //     }
         // }
         // resolve(mock)
-        const walletApi = await walletApiInstance()
+        const walletApi = walletApiInstance()
         walletApi.post(`/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
@@ -582,8 +582,8 @@ export async function getProposal(id) {
     });
 }
 
-export async function addressReward(payload) {
-    const trackerApi = await trackerApiInstance()
+export function addressReward(payload) {
+    const trackerApi = trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/claimIScoreList`, payload))
             .then(result => {
