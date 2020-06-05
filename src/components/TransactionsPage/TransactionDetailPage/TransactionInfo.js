@@ -60,9 +60,9 @@ class TransactionInfo extends Component {
 		}
 	}
 
-	onTwitterClick = async () => {
+	onTwitterClick = () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
-		const url = await getTrackerApiUrl()
+		const url = getTrackerApiUrl()
 		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}

@@ -31,8 +31,8 @@ class Routes extends Component {
     }
   }
 
-  async componentDidMount() {
-    const isSolo = await getIsSolo()
+  componentDidMount() {
+    const isSolo = getIsSolo()
     this.setState({ isSolo })
   }
 
