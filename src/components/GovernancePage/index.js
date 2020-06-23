@@ -393,7 +393,7 @@ class TableRow extends Component {
 				<td className={grade > 2 ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
-						{logo && !logoError && <li><img src={logo} onError={this.onError} alt='logo'/></li>}
+						{logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>}
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
