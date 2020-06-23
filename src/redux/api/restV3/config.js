@@ -21,7 +21,8 @@ export function getTrackerApiUrl() {
 		case "testnet":
 			return "https://trackerdev.icon.foundation"
 		case "testnet1":
-			return "https://bicon.tracker.solidwallet.io"
+			// return "https://bicon.tracker.solidwallet.io"
+			return "https://tracker.icon.foundation"
     case 'testnet2':
 			return "http://10.201.11.74:8080"
 		case "custom":
@@ -32,7 +33,8 @@ export function getTrackerApiUrl() {
 		case "qa":
 			return "http://13.125.236.68"
 		default:
-			return "/"
+			return 	"https://tracker.icon.foundation"
+
 	}
 }
 
@@ -43,8 +45,9 @@ export function getWalletApiUrl() {
 		case "testnet":
 			return "https://testwallet.icon.foundation"
 		case "testnet1":
-    case 'testnet2':
-			return "https://bicon.net.solidwallet.io"
+    	case 'testnet2':
+		// return "https://bicon.net.solidwallet.io"
+			return "http://13.125.65.157:9000"
 		case "custom":
 			return "http://13.209.103.183:9000"
 		case "prep":
@@ -53,7 +56,7 @@ export function getWalletApiUrl() {
 		case "qa":
 			return "https://devorg.icon.foundation"
 		default:
-			return "/"
+			return "https://wallet.icon.foundation"
 	}
 }
 
