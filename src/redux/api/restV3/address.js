@@ -1,8 +1,8 @@
 import { makeUrl } from 'utils/utils'
 import { trackerApiInstance } from './config'
 
-export function addressList(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/list`, payload))
             .then(result => {
@@ -14,8 +14,8 @@ export function addressList(payload) {
     })
 }
 
-export function addressInfo(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressInfo(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/info`, payload))
             .then(result => {
@@ -27,8 +27,8 @@ export function addressInfo(payload) {
     })
 }
 
-export function addressTxList(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressTxList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/txList`, payload))
             .then(result => {
@@ -40,8 +40,8 @@ export function addressTxList(payload) {
     })
 }
 
-export function addressTokenTxList(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressTokenTxList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/address/tokenTxList`, payload))
             .then(result => {
@@ -53,8 +53,8 @@ export function addressTokenTxList(payload) {
     })
 }
 
-export function addressInternalTxList(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressInternalTxList(payload) {
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
             .then(result => {
@@ -67,8 +67,8 @@ export function addressInternalTxList(payload) {
     })
 }
 
-export function addressVotedList(payload) {
-    const trackerApi = trackerApiInstance()
+export async function addressVotedList(payload) {
+    const trackerApi = await trackerApiInstance()
 
     if (payload.address) {
         payload.prep = payload.address
