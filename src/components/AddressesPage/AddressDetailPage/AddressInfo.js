@@ -76,7 +76,7 @@ class AddressInfo extends Component {
             balance, 
             available, 
             staked,
-            unstaked,
+            unstakeList,
             iscore
         } = data
 
@@ -93,6 +93,13 @@ class AddressInfo extends Component {
             status
         } = prep || {}
 
+        let unstakeSum = 0;
+        if (unstakeList && unstakeList.length !== 0) {
+            unstakeList.map((list, idx) => {
+                unstakeSum = Number(list.unstake) + unstakeSum;
+            })
+        }
+        const unStakeSum = convertLoopToIcxDecimal(unstakeSum);
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
@@ -229,7 +236,24 @@ class AddressInfo extends Component {
                                                         <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance, icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span></p>
                                                         <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Unstaking</span><span><em>{(!Number(balance) ? 0 : Number(unstaked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstaked)}`}<em>ICX</em></span></p>
+                                                        <p>
+                                                            <span>Unstaking</span>
+                                                            <span><em>{(!Number(balance) ? 0 : Number(unStakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unStakeSum)}`}<em>ICX</em></span>                                                      
+                                                            <div className="unstaking-list">
+                                                            {unstakeList && unstakeList.length !== 0 ?
+                                                             unstakeList.map((dataList) => {
+
+                                                                return (
+                                                                    <p>
+                                                                        <span className="unstaking-item">
+                                                                            <em>Target Block Height {convertNumberToText(IconConverter.toNumber(dataList.unstakeBlockHeight))}</em>
+                                                                            <span className="balance">{convertNumberToText(convertLoopToIcxDecimal(dataList.unstake))}</span><em>ICX</em>
+                                                                        </span>
+                                                                    </p> 
+                                                                )
+                                                             }) : ''}
+                                                            </div>
+                                                        </p>
                                                         {/* <p><span>Voted</span><span><em>{(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
                                                         <p><span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span></p>

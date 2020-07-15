@@ -624,3 +624,29 @@ i.img.screamer{
     left: 0 !important; 
     top: 0 !important;
 }
+
+.unstaking-list {
+    width:517px !important;
+    overflow:visible !important;
+    height:auto !important;
+    text-align: right;
+}
+
+.unstaking-list > p {
+    height:auto !important;
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+}
+
+.unstaking-list .unstaking-item {
+    width:400px !important;
+    padding-top:8px !important;
+}
+
+.unstaking-list .unstaking-item em:first-child {
+    margin-right: 10px !important;
+    font-size:10px !important;
+}
+.unstaking-list .unstaking-item span.balance{
+    margin-right: 2px !important;
+}
