@@ -2,7 +2,7 @@ import IconService, { HttpProvider, IconBuilder } from "icon-sdk-js"
 import { getWalletApiUrl } from "../redux/api/restV3/config"
 
 export async function getUrl(params) {
-  const walletApiUrl = getWalletApiUrl()
+  const walletApiUrl = await getWalletApiUrl()
   const provider = new HttpProvider(`${walletApiUrl}/api/v3`)
   const iconService = new IconService(provider)
   const scoreAddress =
