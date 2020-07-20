@@ -25,7 +25,8 @@ export async function getTrackerApiUrl() {
       case "mainnet":
         return "https://tracker.icon.foundation"
       case "testnet":
-        return "https://trackerdev.icon.foundation"
+        // return "https://trackerdev.icon.foundation"
+        return "http://10.201.11.74:8081"
       case "testnet1":
 		    // return "https://bicon.tracker.solidwallet.io"
 		    return "http://10.201.11.74:8081"
@@ -54,7 +55,8 @@ export async function getWalletApiUrl() {
       case "mainnet":
         return "https://wallet.icon.foundation"
       case "testnet":
-        return "https://testwallet.icon.foundation"
+        // return "https://testwallet.icon.foundation"
+        return "http://13.125.65.157:9000"
       case "testnet1":
 		    // return "https://bicon.net.solidwallet.io"
 		    return "http://13.125.65.157:9000"
