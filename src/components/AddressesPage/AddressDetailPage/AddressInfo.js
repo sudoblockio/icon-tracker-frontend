@@ -19,6 +19,7 @@ class AddressInfo extends Component {
             notification: _isNotificationAvailable && this.props.walletNotification,
             icxMore: false,
             tokenMore: false,
+            showNode: "none",
         }
     }
 
@@ -63,8 +64,12 @@ class AddressInfo extends Component {
         }
     }
 
+    clickShowBtn = () => {
+        this.setState({ showNode: "table-row" })
+    }
+
     render() {
-        const { notification, icxMore, tokenMore } = this.state
+        const { notification, icxMore, tokenMore, showNode } = this.state
 
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
@@ -81,6 +86,7 @@ class AddressInfo extends Component {
         } = data
 
         const {
+            nodeAddress,
             delegated,
             name,
             totalBlocks,
@@ -221,8 +227,16 @@ class AddressInfo extends Component {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {_address} <QrCodeButton address={_address} />
                                                     <CopyButton data={_address} title={'Copy Address'} isSpan />
+                                                    <span className="show-node-addr" style={isPrep ? {display: ""} : {display: "none"}} onClick={this.clickShowBtn}>Show node Address</span>
                                                     {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
                                                     {!isConnected && <ReportButton address={address} />}
+                                                </td>
+                                            </tr>
+                                            <tr className="node-addr" style={{display:showNode}}>
+                                                <td></td>
+                                                <td colSpan="3">
+                                                    <i className="img node-addr"></i>
+                                                    {nodeAddress}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -238,7 +252,7 @@ class AddressInfo extends Component {
                                                         <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
                                                         <p>
                                                             <span>Unstaking</span>
-                                                            <span><em>{(!Number(balance) ? 0 : Number(unStakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unStakeSum)}`}<em>ICX</em></span>                                                      
+                                                            <span><em>{(!Number(balance) ? 0 : Number(unStakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unStakeSum)}`}<em>ICX</em></span>
                                                             <div className="unstaking-list">
                                                             {unstakeList && unstakeList.length !== 0 ?
                                                              unstakeList.map((dataList) => {

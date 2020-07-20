@@ -647,6 +647,44 @@ i.img.screamer{
     margin-right: 10px !important;
     font-size:10px !important;
 }
+
 .unstaking-list .unstaking-item span.balance{
     margin-right: 2px !important;
+}
+
+.show-node-addr{
+    width: 150px; 
+    height: 26px; 
+    border-radius: 3px; 
+    text-align:center; 
+    font-weight: 400 !important; 
+    padding: 6px; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1); 
+    border: solid 1px #d9d9d9; 
+    background-color: #ffffff; 
+    vertical-align: top; 
+    cursor: pointer; display: inline-block; 
+    vertical-align: middle; 
+    margin-left: 4px;
+}
+
+.show-node-addr:hover {
+    border: 1px solid #1aaaba; 
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.show-node-addr:active{
+    background: #1aaaba; 
+    color: #fff; 
+    border: 1px solid #1aaaba;
+}
+
+i.img.node-addr{
+    width:14px !important;
+    height: 14px !important; 
+    background-position: 0px 0px !important;
+    vertical-align: top !important; 
+    position: relative !important; 
+    left: 0 !important; 
+    top: 0 !important;
 }
