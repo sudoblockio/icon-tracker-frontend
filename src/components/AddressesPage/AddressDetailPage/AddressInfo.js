@@ -102,10 +102,10 @@ class AddressInfo extends Component {
         let unstakeSum = 0;
         if (unstakeList && unstakeList.length !== 0) {
             unstakeList.map((list, idx) => {
-                unstakeSum = Number(list.unstake) + unstakeSum;
+                unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
             })
         }
-        const unStakeSum = convertLoopToIcxDecimal(unstakeSum);
+
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
@@ -227,13 +227,13 @@ class AddressInfo extends Component {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {_address} <QrCodeButton address={_address} />
                                                     <CopyButton data={_address} title={'Copy Address'} isSpan />
-                                                    <span className="show-node-addr" style={isPrep ? {display: ""} : {display: "none"}} onClick={this.clickShowBtn}>Show node Address</span>
+                                                    <span className="show-node-addr" style={isPrep ? {display: ""} : {display: "none"}} onClick={this.clickShowBtn}>Show node address</span>
                                                     {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
                                                     {!isConnected && <ReportButton address={address} />}
                                                 </td>
                                             </tr>
                                             <tr className="node-addr" style={{display:showNode}}>
-                                                <td></td>
+                                                <td>Node Address</td>
                                                 <td colSpan="3">
                                                     <i className="img node-addr"></i>
                                                     {nodeAddress}
@@ -252,7 +252,7 @@ class AddressInfo extends Component {
                                                         <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
                                                         <p>
                                                             <span>Unstaking</span>
-                                                            <span><em>{(!Number(balance) ? 0 : Number(unStakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unStakeSum)}`}<em>ICX</em></span>
+                                                            <span><em>{(!Number(balance) ? 0 : Number(unstakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
                                                             <div className="unstaking-list">
                                                             {unstakeList && unstakeList.length !== 0 ?
                                                              unstakeList.map((dataList) => {
