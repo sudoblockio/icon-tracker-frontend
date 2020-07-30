@@ -74,12 +74,11 @@ class AddressInfo extends Component {
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
         const { 
-            isPrep, 
-            prep, 
-            media, 
-            active, 
-            balance, 
-            available, 
+            isPrep,
+            prep,
+            media,
+            active,
+            available,
             staked,
             unstakeList,
             iscore
@@ -106,6 +105,7 @@ class AddressInfo extends Component {
             })
         }
 
+        const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
@@ -249,10 +249,12 @@ class AddressInfo extends Component {
                                                     <div className={icxMore ? 'on' : ''}>
                                                         <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance, icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span></p>
-                                                        <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
+                                                        {/* <p><span>Staked</span><span><em>{(!balance ? 0 : Number(staked) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p> */}
                                                         <p>
                                                             <span>Unstaking</span>
-                                                            <span><em>{(!Number(balance) ? 0 : Number(unstakeSum) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
+                                                            <span>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
+                                                            {/* <span><em>{(!balance ? 0 : Number(unstakeSum) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span> */}
                                                             <div className="unstaking-list">
                                                             {unstakeList && unstakeList.length !== 0 ?
                                                              unstakeList.map((dataList) => {
