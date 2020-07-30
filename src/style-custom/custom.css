@@ -688,3 +688,5 @@ i.img.node-addr{
     left: 0 !important; 
     top: 0 !important;
 }
+
+div.table-box table.table-typeP thead tr{height: 80px;}

@@ -10,7 +10,7 @@ import {
     LoadingComponent,
 } from 'components'
 import { POPUP_TYPE } from 'utils/const'
-import { calcFromLastBlock } from '../../utils/utils';
+// import { calcFromLastBlock } from '../../utils/utils';
 
 class GovernancePage extends Component {
 
@@ -267,17 +267,12 @@ class GovernancePage extends Component {
 									</colgroup>
 									<thead>
 										<tr>
-											<th rowSpan="2" className="add">Add</th>
-											<th rowSpan="2" className="rank"><span className="sort">Rank ↓</span></th>
-											<th rowSpan="2">Name</th>
-											<th rowSpan="2">Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
-											<th colSpan="2">Suggested Commission Rate</th>
-											{!blackChecked && <th rowSpan="2">Staked</th>}
-											{!blackChecked && <th rowSpan="2">Total Votes</th>}
-										</tr>
-										<tr>
-											<th><span><em>Rate (%) <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.SUGGEST })}} style={{marginLeft:'3px'}}></i></em></span></th>
-											<th><em>Last updated</em></th>
+											<th className="add">Add</th>
+											<th className="rank"><span className="sort">Rank ↓</span></th>
+											<th>Name</th>
+											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
+											{!blackChecked && <th>Staked</th>}
+											{!blackChecked && <th>Total Votes</th>}
 										</tr>
 									</thead>
 									<tbody>
@@ -345,9 +340,9 @@ class TableRow extends Component {
 
 		const {
 			totalVoted,
-			rrep,
+			// rrep,
 			prep,
-			lastBlockHeight,
+			// lastBlockHeight,
 			blackChecked
 		} = this.props
 
@@ -359,8 +354,8 @@ class TableRow extends Component {
 			validatedBlocks,
 			stake,
 			delegated,
-			irep,
-			irepUpdatedBlockHeight,
+			// irep,
+			// irepUpdatedBlockHeight,
 			active,
 			logo,
 			rank,
@@ -369,9 +364,7 @@ class TableRow extends Component {
 			status
 		} = prep
 
-		const sugComRate = 
-		( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100
-		// console.log("sugComRate = ", sugComRate, "\nirep = ", irep, "\nrrep = ", rrep, "\ntotalVoted" ,totalVoted);
+		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 
 		const productivity = !totalBlocks ? 'None' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
 
@@ -401,8 +394,8 @@ class TableRow extends Component {
 					</ul>
 				</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
-				<td><span>{convertNumberToText(sugComRate, 2)}</span></td>
-				<td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td>
+				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
+				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
 				{!blackChecked && <td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>}
