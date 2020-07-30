@@ -90,8 +90,8 @@ class AddressInfo extends Component {
             name,
             totalBlocks,
             validatedBlocks,
-            irep,
-            irepUpdateBlockHeight,
+            // irep,
+            // irepUpdateBlockHeight,
             lastGenerateBlockHeight,
             website,
             grade,
@@ -110,8 +110,8 @@ class AddressInfo extends Component {
         const validated = IconConverter.toNumber(validatedBlocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
 
-        const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
+        // const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
+        // const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight? 'None' : IconConverter.toNumber(lastGenerateBlockHeight)
 
         const badge = getBadgeTitle(grade, status)
@@ -213,13 +213,6 @@ class AddressInfo extends Component {
                                                     :
                                                     <td><span className="mint" onClick={() => { this.goBlock(_lastGenerateBlockHeight) }}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
                                                 }
-                                            </tr>}
-                                            {isPrep && <tr className="governance">
-                                                <td>Governance variables</td>
-                                                <td colSpan="3">
-                                                    <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
-                                                    <span><em>Last updated</em><span className="mint" onClick={() => { this.goBlock(_irepUpdateBlockHeight) }}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
-                                                </td>
                                             </tr>}
                                             <tr className="">
                                                 <td>Address</td>
