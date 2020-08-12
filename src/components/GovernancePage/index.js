@@ -43,19 +43,15 @@ class GovernancePage extends Component {
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
-		const _allPrep = await prepList()
+		// const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
 		const { icxSupply, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
-		const allPrep = (_allPrep || []).map(prep => {
-			const index = preps.findIndex(p => prep.address === p.address)
+		const allPrep = (preps || []).map((prep, index) => {
 			if (index !== -1) {
-				prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-				prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+				return prep
 			}
-			prep.balance = Number(prep.balance)
-			return prep
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
@@ -64,7 +60,7 @@ class GovernancePage extends Component {
 		})
 
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
-		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${allPrep[lastPrepIndex].rank} ${allPrep[lastPrepIndex].name}`
+		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
 	
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
@@ -175,7 +171,7 @@ class GovernancePage extends Component {
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 		
 		const list = blackChecked ? blackPrep : allPrep.filter(p => {
-			return (mainChecked && p.grade === 0) || (subChecked && p.grade === 1) || (restChecked && p.grade === 2)
+			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		})
 
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
@@ -241,15 +237,15 @@ class GovernancePage extends Component {
 							<div className="search-group">
 								<span>
 									<input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0).length})</label>
+									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0 || p.grade === '0x0').length})</label>
 								</span>						
 								<span>
 									<input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1).length})</label>
+									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1 || p.grade === '0x1').length})</label>
 								</span>						
 								<span>
 									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2).length})</label>
+									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
 								</span>
 								<span className="blacklist">
 									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
@@ -284,7 +280,8 @@ class GovernancePage extends Component {
 										{searched.map((prep, index) => (
 											<TableRow 
 												lastBlockHeight={height}
-												key={index} 
+												key={index}
+												index={index}
 												prep={prep} 
 												totalStaked={totalStaked} 
 												totalVoted={totalVoted}
@@ -318,12 +315,16 @@ class TableRow extends Component {
 
 		switch(grade) {
 			case 0:
+			case '0x0':
 				return <span className={className}><i></i>Main P-Rep</span>			
 			case 1:
+			case '0x1':
 				return <span className={className}><i></i>Sub P-Rep</span>
 			case 2:
+			case '0x2':
 				return <span className={className}><i></i>Candidate</span>
 			case 3:
+			case '0x3':
 				return <span className={'prep-tag'}>{status === 2 ? 'Disqualified' : 'Unregistered'}</span>
 			default:
 				return null		
@@ -348,7 +349,8 @@ class TableRow extends Component {
 			// rrep,
 			prep,
 			// lastBlockHeight,
-			blackChecked
+			blackChecked,
+			index,
 		} = this.props
 
 		const { 
@@ -363,32 +365,25 @@ class TableRow extends Component {
 			// irepUpdatedBlockHeight,
 			active,
 			logo,
-			rank,
 			// balance,
 			// unstake,
 			status
 		} = prep
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-
-		const productivity = !totalBlocks ? 'None' : `${(validatedBlocks / totalBlocks * 100).toFixed(2)}%`
-
-		const prepStaked = IconConverter.toNumber(stake || 0)
-		// const prepUnstaked = IconConverter.toNumber(unstake || 0)
-		const prepVoted = IconConverter.toNumber(delegated || 0)
-
+		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(totalBlocks) / Number(validatedBlocks) * 100).toFixed(2)}%`)
+		const prepStaked = Number(convertLoopToIcxDecimal(stake || 0))
+		const prepVoted = Number(convertLoopToIcxDecimal(delegated || 0))
 		// const totalBalcne = balance + prepStaked + prepUnstaked
-
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
-		// console.log(votedRate, totalVoted, prepVoted)
-
 		const badge = this.getBadge(grade, active, status)
+		const rank = index + 1
 
 		return(
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
-				<td className={grade > 2 ? 'black' : 'on'}>
+				<td className={(grade > 2 || grade === '0x3') ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
 						{logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>}
@@ -398,7 +393,7 @@ class TableRow extends Component {
 						</li>
 					</ul>
 				</td>
-				<td><span>{productivity}</span><em>{numberWithCommas(validatedBlocks)} / {numberWithCommas(totalBlocks)}</em></td>
+				<td><span>{productivity}</span><em>{numberWithCommas(Number(validatedBlocks))} / {numberWithCommas(Number(totalBlocks))}</em></td>
 				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
