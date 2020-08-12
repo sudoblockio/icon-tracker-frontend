@@ -72,7 +72,6 @@ class GovernancePage extends Component {
 		const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
 		const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
 		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
-		// console.log("Global Rate = ", glbComRate);
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		
 		this.setState({ 
@@ -156,7 +155,7 @@ class GovernancePage extends Component {
 			publicTreasury,
 			totalStaked,
 			totalVoted,
-			// irep,
+			irep,
 			rrep,
 			glbComRate,
 			height,
@@ -203,8 +202,14 @@ class GovernancePage extends Component {
 							<ul>
 								<li>
 									<div>
-										<p>Global Commission Rate <em>(%)</em> <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}} style={{marginLeft:'3px'}}></i></p>
+										<p>Global Commission Rate <em>(%)</em> <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}}></i></p>
 										<p><span>{convertNumberToText(glbComRate, 4)}</span></p>
+									</div>
+								</li>
+								<li>
+									<div>
+										<p>Global i_rep <em>(ICX)</em></p>
+										<p><span>{convertNumberToText(irep, 4)}</span></p>
 									</div>
 								</li>
 								<li>
