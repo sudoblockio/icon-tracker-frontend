@@ -43,15 +43,19 @@ class GovernancePage extends Component {
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
-		// const _allPrep = await prepList()
+		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
 		const { icxSupply, publicTreasury } = tmainInfo || {}
 		const { height, peer_id } = lastBlock || {}
-		const allPrep = (preps || []).map((prep, index) => {
+		const allPrep = (_allPrep || []).map(prep => {
+			const index = preps.findIndex(p => prep.address === p.address)
 			if (index !== -1) {
-				return prep
+				prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+				prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 			}
+			prep.balance = Number(prep.balance)
+			return prep
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
