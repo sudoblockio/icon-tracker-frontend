@@ -371,7 +371,7 @@ class TableRow extends Component {
 		} = prep
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(totalBlocks) / Number(validatedBlocks) * 100).toFixed(2)}%`)
+		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(validatedBlocks) / Number(totalBlocks) * 100).toFixed(2)}%`)
 		const prepStaked = Number(convertLoopToIcxDecimal(stake || 0))
 		const prepVoted = Number(convertLoopToIcxDecimal(delegated || 0))
 		// const totalBalcne = balance + prepStaked + prepUnstaked
