@@ -19,6 +19,7 @@ class AddressInfo extends Component {
             notification: _isNotificationAvailable && this.props.walletNotification,
             icxMore: false,
             tokenMore: false,
+            showNode: "none",
         }
     }
 
@@ -63,42 +64,54 @@ class AddressInfo extends Component {
         }
     }
 
+    clickShowBtn = () => {
+        this.setState({ showNode: "table-row" })
+    }
+
     render() {
-        const { notification, icxMore, tokenMore } = this.state
+        const { notification, icxMore, tokenMore, showNode } = this.state
 
         const { wallet, walletAddress } = this.props
         const { loading, data, error } = wallet
         const { 
-            isPrep, 
-            prep, 
-            media, 
-            active, 
-            balance, 
-            available, 
+            isPrep,
+            prep,
+            media,
+            active,
+            available,
             staked,
-            unstaked,
+            unstakeList,
             iscore
         } = data
 
         const {
+            nodeAddress,
             delegated,
             name,
             totalBlocks,
             validatedBlocks,
-            irep,
-            irepUpdateBlockHeight,
+            // irep,
+            // irepUpdateBlockHeight,
             lastGenerateBlockHeight,
             website,
             grade,
             status
         } = prep || {}
 
+        let unstakeSum = 0;
+        if (unstakeList && unstakeList.length !== 0) {
+            unstakeList.map((list, idx) => {
+                unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
+            })
+        }
+
+        const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
 
-        const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
+        // const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
+        // const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !lastGenerateBlockHeight? 'None' : IconConverter.toNumber(lastGenerateBlockHeight)
 
         const badge = getBadgeTitle(grade, status)
@@ -201,21 +214,22 @@ class AddressInfo extends Component {
                                                     <td><span className="mint" onClick={() => { this.goBlock(_lastGenerateBlockHeight) }}>{numberWithCommas(_lastGenerateBlockHeight)}{/* <em className="small">( 2019-01-01 17:03:35 )</em> */}</span></td>
                                                 }
                                             </tr>}
-                                            {isPrep && <tr className="governance">
-                                                <td>Governance variables</td>
-                                                <td colSpan="3">
-                                                    <span><i>i<sub>rep</sub></i>{numberWithCommas(_irep)}</span>
-                                                    <span><em>Last updated</em><span className="mint" onClick={() => { this.goBlock(_irepUpdateBlockHeight) }}>{numberWithCommas(_irepUpdateBlockHeight)}</span></span>
-                                                </td>
-                                            </tr>}
                                             <tr className="">
                                                 <td>Address</td>
                                                 <td colSpan={isPrep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {_address} <QrCodeButton address={_address} />
                                                     <CopyButton data={_address} title={'Copy Address'} isSpan />
+                                                    <span className="show-node-addr" style={isPrep ? {display: ""} : {display: "none"}} onClick={this.clickShowBtn}>Show node address</span>
                                                     {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
                                                     {!isConnected && <ReportButton address={address} />}
+                                                </td>
+                                            </tr>
+                                            <tr className="node-addr" style={{display:showNode}}>
+                                                <td>Node Address</td>
+                                                <td colSpan="3">
+                                                    <i className="img node-addr"></i>
+                                                    {nodeAddress}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -228,8 +242,27 @@ class AddressInfo extends Component {
                                                     <div className={icxMore ? 'on' : ''}>
                                                         <p><span><i className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance, icxMore ? undefined : 4)}`}<em>ICX</em></span><em className="drop-btn" onClick={this.toggleIcxMore}><i className="img"></i></em></p>
                                                         <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span></p>
-                                                        <p><span>Staked</span><span><em>{(!Number(balance) ? 0 : Number(staked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
-                                                        <p><span>Unstaking</span><span><em>{(!Number(balance) ? 0 : Number(unstaked) / Number(balance) * 100).toFixed(2)}%</em>{`${convertNumberToText(unstaked)}`}<em>ICX</em></span></p>
+                                                        <p><span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p>
+                                                        {/* <p><span>Staked</span><span><em>{(!balance ? 0 : Number(staked) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p> */}
+                                                        <p>
+                                                            <span>Unstaking</span>
+                                                            <span>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
+                                                            {/* <span><em>{(!balance ? 0 : Number(unstakeSum) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span> */}
+                                                            <div className="unstaking-list">
+                                                            {unstakeList && unstakeList.length !== 0 ?
+                                                             unstakeList.map((dataList) => {
+
+                                                                return (
+                                                                    <p>
+                                                                        <span className="unstaking-item">
+                                                                            <em>Target Block Height {convertNumberToText(IconConverter.toNumber(dataList.unstakeBlockHeight))}</em>
+                                                                            <span className="balance">{convertNumberToText(convertLoopToIcxDecimal(dataList.unstake))}</span><em>ICX</em>
+                                                                        </span>
+                                                                    </p> 
+                                                                )
+                                                             }) : ''}
+                                                            </div>
+                                                        </p>
                                                         {/* <p><span>Voted</span><span><em>{(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
                                                         <p><span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p>
                                                         <p><span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span></p>

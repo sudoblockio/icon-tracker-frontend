@@ -261,7 +261,8 @@ export const ProposalType = {
     "0x1": "Revision Update",
     "0x2": "Malicious SCORE",
     "0x3": "P-Rep Disqualification",
-    "0x4": "Step Price"
+    "0x4": "Step Price",
+    "0x5": "i_rep",
 }
 
 export const ProposalStatus = {
