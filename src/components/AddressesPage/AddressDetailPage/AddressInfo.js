@@ -80,7 +80,7 @@ class AddressInfo extends Component {
             active,
             available,
             staked,
-            unstakeList,
+            unstakes,
             iscore
         } = data
 
@@ -99,8 +99,8 @@ class AddressInfo extends Component {
         } = prep || {}
 
         let unstakeSum = 0;
-        if (unstakeList && unstakeList.length !== 0) {
-            unstakeList.map((list, idx) => {
+        if (unstakes && unstakes.length !== 0) {
+            unstakes.map((list, idx) => {
                 unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
             })
         }
@@ -249,8 +249,8 @@ class AddressInfo extends Component {
                                                             <span>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
                                                             {/* <span><em>{(!balance ? 0 : Number(unstakeSum) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span> */}
                                                             <div className="unstaking-list">
-                                                            {unstakeList && unstakeList.length !== 0 ?
-                                                             unstakeList.map((dataList) => {
+                                                            {unstakes && unstakes.length !== 0 ?
+                                                             unstakes.map((dataList) => {
 
                                                                 return (
                                                                     <p>

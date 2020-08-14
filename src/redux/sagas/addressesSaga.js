@@ -134,7 +134,7 @@ export function* addressInfoFunc(action) {
       const { delegations, totalDelegated } = yield call(getDelegation, address)
       const prep = yield call(getPRep, address)
       const balance = yield call(getBalance, address)
-      const { stake, unstakeList } = yield call(getStake, address)
+      const { stake, unstakes } = yield call(getStake, address)
       const { iscore } = yield call(queryIScore, address)
 
       const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
@@ -162,7 +162,7 @@ export function* addressInfoFunc(action) {
         isPrep,
         available: _balance,
         staked: _stake,
-        unstakeList,
+        unstakes,
         iscore: _iscore,
         delegated: _totalDelegated,
         prep,
