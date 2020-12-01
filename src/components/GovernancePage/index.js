@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { getMainInfo } from '../../redux/api/restV3/main';
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from 'utils/utils'
-import { getPReps, getIISSInfo } from '../../redux/api/restV3';
+import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList } from '../../redux/api/restV3/iiss';
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
@@ -36,8 +36,23 @@ class GovernancePage extends Component {
 	}
 
 	checkedState = {}
-
+	getAdditionalData=async method=>{
+		const params={
+			from:'hxec79e9c1c882632688f8c8f9a07832bcabe8be8f',
+			to:'cx39a17d13e01538756e9649f80f0b6604a9e7bd39',
+			dataType:'call',
+			data:{
+				method:method
+			}
+		}
+		const response = await icxCall(params);
+		return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
+	}
+	governanceData=[];
+	sponsorData={}
 	async componentDidMount() {
+		this.governanceData = await this.getAdditionalData('get_PReps');
+		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
 		const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
@@ -148,7 +163,18 @@ class GovernancePage extends Component {
 			default:							
 		}
 	}
-
+	getGovernanceStatus = address=>{
+		let result =false;
+		this.governanceData.forEach(item=>{
+			if(item.address===address){
+				result = true;
+			}
+		})
+		return result
+	}
+	getSponsorCount=address=>{
+		return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
+	}
 	render() {
 		const {
 			totalSupply,
@@ -269,12 +295,16 @@ class GovernancePage extends Component {
 										<col />
 										<col />
 										<col />
+										<col />
+										<col />
 									</colgroup>
 									<thead>
 										<tr>
 											<th className="add">Add</th>
 											<th className="rank"><span className="sort">Rank ↓</span></th>
 											<th>Name</th>
+											<th>Governance</th>
+											<th>Sponsored<br/>Projects</th>
 											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
 											{!blackChecked && <th>Staked</th>}
 											{!blackChecked && <th>Total Votes</th>}
@@ -283,7 +313,9 @@ class GovernancePage extends Component {
 									<tbody>
 										{searched.map((prep, index) => (
 											<TableRow 
-												lastBlockHeight={height}
+											governanceStatus={this.getGovernanceStatus(prep.address)}
+											sponsorCount={this.getSponsorCount(prep.address)} 
+											lastBlockHeight={height}
 												key={index}
 												index={index}
 												prep={prep} 
@@ -355,6 +387,8 @@ class TableRow extends Component {
 			// lastBlockHeight,
 			blackChecked,
 			index,
+			governanceStatus,
+			sponsorCount
 		} = this.props
 
 		const { 
@@ -397,6 +431,8 @@ class TableRow extends Component {
 						</li>
 					</ul>
 				</td>
+				<td>{governanceStatus===true?'YES':'NO'}</td>
+				<td>{sponsorCount}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validatedBlocks))} / {numberWithCommas(Number(totalBlocks))}</em></td>
 				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
