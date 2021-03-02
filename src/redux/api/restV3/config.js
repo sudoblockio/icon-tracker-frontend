@@ -26,11 +26,11 @@ export async function getTrackerApiUrl() {
         return 'https://tracker.icon.foundation';
       // return 'https://bicon.tracker.solidwallet.io';
       case 'testnet':
-        // return "https://trackerdev.icon.foundation"
-        return 'http://10.201.11.74:8081';
+        return 'https://trackerdev.icon.foundation';
+      // return 'http://10.201.11.74:8081';
       case 'testnet1':
-        // return "https://bicon.tracker.solidwallet.io"
-        return 'http://10.201.11.74:8081';
+        return 'https://bicon.tracker.solidwallet.io';
+      // return 'http://10.201.11.74:8081';
       case 'custom':
         return 'http://trackerlocaldev.icon.foundation';
       case 'prep':
@@ -57,11 +57,11 @@ export async function getWalletApiUrl() {
         return 'https://wallet.icon.foundation';
       // return 'https://bicon.net.solidwallet.io';
       case 'testnet':
-        // return "https://testwallet.icon.foundation"
-        return 'http://13.125.65.157:9000';
+        return 'https://testwallet.icon.foundation';
+      // return 'http://13.125.65.157:9000';
       case 'testnet1':
-        // return "https://bicon.net.solidwallet.io"
-        return 'http://13.125.65.157:9000';
+        return 'https://bicon.net.solidwallet.io';
+      // return 'http://13.125.65.157:9000';
       case 'custom':
         return 'http://13.209.103.183:9000';
       case 'prep':

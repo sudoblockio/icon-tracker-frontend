@@ -10,6 +10,8 @@ import {
     LoadingComponent,
 } from 'components'
 import { POPUP_TYPE } from 'utils/const'
+import { getTrackerApiUrl } from '../../redux/api/restV3/config';
+import { GetAddressForPrepList } from '../../utils/const';
 // import { calcFromLastBlock } from '../../utils/utils';
 
 class GovernancePage extends Component {
@@ -37,9 +39,10 @@ class GovernancePage extends Component {
 
 	checkedState = {}
 	getAdditionalData=async method=>{
+		const network=await getTrackerApiUrl()
+		const address=GetAddressForPrepList[network]
 		const params={
-			from:'hxec79e9c1c882632688f8c8f9a07832bcabe8be8f',
-			to:'cx39a17d13e01538756e9649f80f0b6604a9e7bd39',
+			to:address,
 			dataType:'call',
 			data:{
 				method:method
@@ -303,8 +306,14 @@ class GovernancePage extends Component {
 											<th className="add">Add</th>
 											<th className="rank"><span className="sort">Rank ↓</span></th>
 											<th>Name</th>
-											<th>Governance</th>
-											<th>Sponsored<br/>Projects</th>
+											<th>Governance<i style={{marginLeft:'5px'}} className='img screamer' onClick={()=>{
+												this.props.setPopup({
+													type:POPUP_TYPE.GOVERNANCE
+												})
+											}}></i></th>
+											<th><span>Sponsored<br/>Projects</span><i style={{marginLeft:'5px'}} className="img screamer" onClick={()=>{
+												this.props.setPopup({type:POPUP_TYPE.SPONSOR})
+											}}></i></th>
 											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
 											{!blackChecked && <th>Staked</th>}
 											{!blackChecked && <th>Total Votes</th>}

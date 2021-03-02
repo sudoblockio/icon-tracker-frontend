@@ -4981,7 +4981,6 @@ input[type='text']:focus.over {
   top: -2px;
   right: -4px;
   width: 4px;
-  height: ;
 }
 .proposal-list .bar-background:after {
   top: -4px;
@@ -5611,7 +5610,32 @@ input[type='text']:focus.over {
 .popup-wrap.commission .title {
   padding-bottom: 12px;
 }
-
+.popup-wrap.governance .title{
+  padding-bottom: 12px;
+}
+.popup-wrap.governance .popup{
+  height:180px
+}
+.popup-wrap.governance .txt {
+  text-align: left;
+  font-size: 14px;
+  color: #808080;
+  letter-spacing: -0.5px;
+  line-height: 1.67;
+}
+.popup-wrap.sponsor .title{
+  padding-bottom: 12px;
+}
+.popup-wrap.sponsor .popup{
+  height:200px
+}
+.popup-wrap.sponsor .txt {
+  text-align: left;
+  font-size: 14px;
+  color: #808080;
+  letter-spacing: -0.5px;
+  line-height: 1.67;
+}
 .size-half {
   width: 50% !important;
 }
