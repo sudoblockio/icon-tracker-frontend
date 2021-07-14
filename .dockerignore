@@ -1,0 +1,9 @@
+Dockerfile
+docker-compose.yml
+README.md
+*/node_modules
+build
+
+yarn.lock
+.env*
+.gitlab-ci.yml

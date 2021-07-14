@@ -31,6 +31,8 @@ export async function getTrackerApiUrl() {
       case 'testnet1':
         return 'https://bicon.tracker.solidwallet.io';
       // return 'http://10.201.11.74:8081';
+      case 'sejong':
+        return 'https://sejong.tracker.solidwallet.io';
       case 'custom':
         return 'http://trackerlocaldev.icon.foundation';
       case 'prep':
@@ -55,13 +57,14 @@ export async function getWalletApiUrl() {
     switch (process.env.REACT_APP_ENV) {
       case 'mainnet':
         return 'https://wallet.icon.foundation';
-      // return 'https://bicon.net.solidwallet.io';
       case 'testnet':
         return 'https://testwallet.icon.foundation';
       // return 'http://13.125.65.157:9000';
       case 'testnet1':
         return 'https://bicon.net.solidwallet.io';
       // return 'http://13.125.65.157:9000';
+      case 'sejong':
+        return 'https://sejong.net.solidwallet.io';
       case 'custom':
         return 'http://13.209.103.183:9000';
       case 'prep':
@@ -87,6 +90,7 @@ export async function getIsSoloVersion() {
       case 'mainnet':
       case 'testnet':
       case 'testnet1':
+      case 'sejong':
       case 'custom':
       case 'prep':
       case 'np':
