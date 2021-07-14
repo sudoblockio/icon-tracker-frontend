@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { store, history } from './redux/store/store'
 import Routes from './Routes.js'
 import { ConnectedRouter } from 'react-router-redux'
-
+debugger
 class App extends Component {
     render() {
         return (
@@ -17,3 +17,4 @@ class App extends Component {
 }
 
 export default App
+debugger
