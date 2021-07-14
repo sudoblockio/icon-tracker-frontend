@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: ${FRONTEND_CONTEXT:-.}
+#      target: test
+    ports:
+      - "8080:8080"
+    environment:
+      REACT_APP_ENV: sejong
+
+#    volumes:
+#      - ${FRONTEND_CONTEXT:-.}/:/app/
+#      - ${FRONTEND_CONTEXT:-.}/tests:/app/tests
+#      - ${FRONTEND_CONTEXT:-.}/code-coverage.xml:/code-coverage.xml
