@@ -152,10 +152,6 @@
             "web.jsx",
             "jsx",
             "node"
-        ],
-        "watchPlugins": [
-            "/Users/ab12b1125-1/Desktop/icon-tracker/node_modules/jest-watch-typeahead/filename.js",
-            "/Users/ab12b1125-1/Desktop/icon-tracker/node_modules/jest-watch-typeahead/testname.js"
         ]
     },
     "babel": {
