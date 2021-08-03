@@ -1,0 +1,42 @@
+name: pr-test
+
+# 1. Runs tests
+# 2. Upload coverage
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build the container
+        run: docker build . -t www
+
+#      - name: Run unit tests
+#        run: docker run www yarn run test
+#
+#      - uses: codecov/codecov-action@v2
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          files: ./coverage.out
+#          flags: unit
+#          fail_ci_if_error: true
+#
+#      - name: Bring up stack
+#        run: make up
+#
+#      - name: Run integration tests
+#        run: docker run www yarn run test
+#
+#      - uses: codecov/codecov-action@v2
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          files: ./coverage.out
+#          flags: integration
+#          fail_ci_if_error: true

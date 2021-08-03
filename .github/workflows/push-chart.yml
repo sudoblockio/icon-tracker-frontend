@@ -1,0 +1,49 @@
+name: push-chart
+
+# 1. Run unit and integration tests on chart
+# 2. Release the chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'chart/**'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Minikube
+        uses: manusa/actions-setup-minikube@v2.3.1
+        with:
+          minikube version: 'v1.16.0'
+          kubernetes version: 'v1.19.2'
+
+      - name: Test
+        run: |
+          sudo apt-get -y install socat
+          export KUBE_CONFIG_PATH=$HOME/.kube/config
+          cd chart/test
+          go test .
+          cd ../..
+
+      - name: Configure Git
+        run: |
+          git config user.name "geometrybot"
+          git config user.email "geometrybot@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.1
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

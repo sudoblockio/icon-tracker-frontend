@@ -1,0 +1,94 @@
+name: release
+
+# 1. Run unit and integration tests
+# 2. Push containers to AWS ECR and dockerhub tagged with release
+# 3. Recommit an update to the chart's deployments with the updated build number in the `deployment` branch
+
+on:
+  release:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Tag name
+        id: source
+        run: |
+          echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
+
+      - name: Build the container
+        run: docker build . -t www
+
+#      - name: Run unit tests
+#        run: docker run www yarn run test
+#
+#      - name: Run integration tests
+#        run: docker run www yarn run test
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr-worker
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr-worker.outputs.registry }}
+          ECR_REPOSITORY: icon-explorer-frontend
+          IMAGE_TAG: ${{ steps.source.outputs.TAG }}
+        run: |
+          docker build --build-arg SERVICE_NAME=worker -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args:
+            - SERVICE_NAME=api
+          file: ./Dockerfile
+          target: prod
+          push: true
+          tags: |
+            geometrylabs/icon-explorer-frontend:latest
+            geometrylabs/icon-explorer-frontend:${{ steps.source.outputs.TAG }}
+
+      - name: Update prod-mainnet deployment values file and re-commit
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'chart/deployments/prod-mainnet/values.test.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: ${{ github.run_number }}
+          branch: deployment
+          targetBranch: main
+          createPR: 'false'
+          message: 'Update prod deployment image version to ${{ github.run_number }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update prod-sejong deployment values file and re-commit
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'chart/deployments/prod-sejong/values.test.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: ${{ github.run_number }}
+          branch: deployment
+          targetBranch: main
+          createPR: 'false'
+          message: 'Update prod deployment image version to ${{ github.run_number }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
