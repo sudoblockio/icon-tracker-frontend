@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import { store, history } from './redux/store/store'
+import { Provider as ReduxProvider } from 'react-redux';
+import configureStore from './redux/store';
+import { history } from './redux/store/store'
 import Routes from './Routes.js'
-import { ConnectedRouter } from 'react-router-redux'
-debugger
+import { ConnectedRouter } from 'connected-react-router'
+
+const store = configureStore();
+
 class App extends Component {
     render() {
         return (
-            <Provider store={store}>
+            <ReduxProvider store={store}>
                 <ConnectedRouter history={history}>
                     <Routes />
                 </ConnectedRouter>
-            </Provider>
+            </ReduxProvider>
         )
     }
 }
 
 export default App
-debugger
