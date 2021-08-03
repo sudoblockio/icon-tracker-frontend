@@ -1,0 +1,36 @@
+deployment:
+  image:
+    repository: 868027517775.dkr.ecr.us-west-2.amazonaws.com/icon-explorer-frontend-sejong
+    tag: '45'
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  annotations: |
+    "consul.hashicorp.com/connect-inject": "true"
+    "consul.hashicorp.com/connect-service-upstreams": "icon-blocks:80"
+    "consul.hashicorp.com/connect-service-upstreams": "icon-transactions:80"
+    "consul.hashicorp.com/connect-service-upstreams": "icon-logs:80"
+    "consul.hashicorp.com/connect-service-upstreams": "icon-contracts:80"
+    "consul.hashicorp.com/connect-service-upstreams": "icon-accounts:80"
+  resources:
+    requests:
+      cpu: '0.25'
+      memory: 256Mi
+    limits:
+      cpu: '1'
+      memory: 1024Mi
+  backendAPIRoot: icon.geometry-dev.net
+autoscaler:
+  enabled: true
+  maxReplicas: 25
+  averageCPU: 50
+service:
+  name: icon-explorer-frontend-sejong
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 8080
+ingress:
+  enabled: true
+  regionalHost: icon.us-west-2.aws.geometry-dev.net
+  apexHost: icon.geometry-dev.net
+  annotations: |
+    "cert-manager.io/cluster-issuer": "letsencrypt"

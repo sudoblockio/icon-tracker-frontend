@@ -1,0 +1,55 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "labels" . | indent 4 }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+{{ tpl .Values.ingress.annotations . | indent 4 }}
+  {{- end }}
+spec:
+  tls:
+    - secretName: {{ .Release.Name }}-apex
+      hosts:
+      - {{ .Values.ingress.apexHost }}
+    - secretName: {{ .Release.Name }}-regional-tls
+      hosts:
+      - {{ .Values.ingress.regionalHost }}
+  rules:
+    - host: {{ .Values.ingress.regionalHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Release.Name }}
+                port:
+                  number: {{ $.Values.service.externalPort }}
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: ingress-default-backend
+                port:
+                  number: 80
+    - host: {{ .Values.ingress.apexHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $.Release.Name }}
+                port:
+                  number: {{ $.Values.service.externalPort }}
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: ingress-default-backend
+                port:
+                  number: 80
+  {{- end }}

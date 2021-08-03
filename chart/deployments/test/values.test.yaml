@@ -1,0 +1,3 @@
+deployment:
+  image:
+    repository: icon-blocks

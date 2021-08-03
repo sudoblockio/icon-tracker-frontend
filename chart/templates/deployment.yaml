@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "labels" . | indent 6 }}
+
+spec:
+  selector:
+    matchLabels:
+{{ include "selectorLabels" . | indent 6 }}
+  replicas: {{ .Values.api.replicaCount }}
+  template:
+    metadata:
+      {{- if .Values.deployment.annotations }}
+      annotations:
+{{ tpl .Values.deployment.annotations . | indent 8 }}
+      {{- end }}
+      labels:
+{{ include "labels" . | indent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-api
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+          imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.api.internalPort }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.api.healthPrefix }}
+              port: {{ .Values.api.healthPort }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.api.healthPrefix }}
+              port: {{ .Values.api.healthPort }}
+          env:
+            - name: NAME
+              value: {{ .Values.networkName }}
+            - name: NETWORK_NAME
+              value: {{ .Values.networkName }}
+            - name: PORT
+              value: {{ .Values.api.internalPort }}
+            - name: HEALTH_PORT
+              value: {{ .Values.api.healthPort }}
+            - name: REST_PREFIX
+              value: {{ .Values.api.restPrefix }}
+            - name: METRICS_PORT
+              value: {{ .Values.api.metricsPort }}
+            - name: HEALTH_PREFIX
+              value: {{ .Values.api.healthPrefix }}
+            - name: METRICS_PREFIX
+              value: {{ .Values.api.metricsPrefix }}
+            - name: LOG_LEVEL
+              value: {{ .Values.api.logLevel }}
+            - name: LOG_TO_FILE
+              value: {{ .Values.api.logToFile }}
+          resources:
+            requests:
+              cpu: {{ .Values.deployment.resources.requests.cpu }}
+              memory: {{ .Values.deployment.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.deployment.resources.limits.cpu }}
+              memory: {{ .Values.deployment.resources.limits.memory }}
