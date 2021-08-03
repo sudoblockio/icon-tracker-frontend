@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { POPUP_TYPE } from 'utils/const'
+import { POPUP_TYPE } from '../../utils/const'
 import { setPopup } from '../../redux/actions/popupActions'
 
 class ReportButton extends Component {

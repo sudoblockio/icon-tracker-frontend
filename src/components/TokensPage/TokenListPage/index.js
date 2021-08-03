@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SearchPage } from 'components'
+import { SearchPage } from '../../../components'
 
 class TokenListPage extends Component {
     render() {

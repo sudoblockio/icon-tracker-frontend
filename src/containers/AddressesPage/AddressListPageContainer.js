@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { AddressListPage } from 'components';
+import { AddressListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { addressList } from '../../redux/actions/addressesActions';
 

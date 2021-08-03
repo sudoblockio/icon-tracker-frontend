@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { NETWORK_NAME, NETWORK_HOST } from 'utils/const';
+import { NETWORK_NAME, NETWORK_HOST } from '../../utils/const';
 import { SUPPORT_URL } from '../../utils/const';
 
 class Footer extends Component {

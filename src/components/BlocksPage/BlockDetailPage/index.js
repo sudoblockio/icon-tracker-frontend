@@ -3,10 +3,10 @@ import BlockInfo from './BlockInfo'
 import BlockTabs from './BlockTabs'
 import {
   BLOCK_TABS
-} from 'utils/const'
+} from '../../../utils/const'
 import {
   DetailPage
-} from 'components';
+} from '../../../components';
 
 class BlockDetailPage extends Component {
 

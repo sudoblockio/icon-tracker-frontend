@@ -2,7 +2,7 @@ import React from 'react';
 import {
     convertNumberToText,
     convertToExponentialText
-} from 'utils/utils'
+} from '../../utils/utils'
 
 const AmountCell = ({ amount, decimal, symbol, noEllipsis }) => {
 	amount = convertNumberToText(amount || "0", decimal || 4)

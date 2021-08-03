@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
 	SearchPage
-} from 'components'
+} from '../../../components'
 
 class ContractListPage extends Component {
 	render() {

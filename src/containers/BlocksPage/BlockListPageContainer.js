@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { BlockListPage } from 'components';
+import { BlockListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { blockList } from '../../redux/actions/blocksActions';
 

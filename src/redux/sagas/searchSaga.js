@@ -7,10 +7,10 @@ import {
   is0xHash,
   isHash,
   isNumeric
-} from 'utils/utils'
+} from '../../utils/utils'
 import {
   IRC_VERSION
-} from 'utils/const'
+} from '../../utils/const'
 import {
   searchData as SEARCH_DATA_API,
   blockInfo as BLOCK_INFO_API

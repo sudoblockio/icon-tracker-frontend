@@ -1,4 +1,4 @@
-import { makeUrl } from 'utils/utils'
+import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 
 export async function blockList(payload) {

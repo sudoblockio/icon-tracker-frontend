@@ -1,4 +1,4 @@
-import { makeUrl, startsWith } from 'utils/utils'
+import { makeUrl, startsWith } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 
   export async function reportScam(payload){

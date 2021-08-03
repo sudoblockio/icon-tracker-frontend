@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
     StatusHolder
-} from 'components'
+} from '../../../components'
 import {
     SEARCH_TYPE
-} from 'utils/const'
+} from '../../../utils/const'
 
 class SearchTableHead extends Component {
     render() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getUrl } from "utils/score"
+import { getUrl } from "../../utils/score"
 
 const LinkButton = ({ address }) => {
   const [url, setUrl] = useState(false)

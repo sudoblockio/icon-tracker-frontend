@@ -4,16 +4,16 @@ import {
 	numberWithCommas,
 	tokenText,
 	onlyDate,
-} from 'utils/utils'
+} from '../../../utils/utils'
 import {
 	AddressLink,
 	AmountCell,
 	LinkButton
-} from 'components'
+} from '../../../components'
 import {
 	CONTRACT_STATUS,
 	SEARCH_TYPE
-} from 'utils/const'
+} from '../../../utils/const'
 
 class SearchTableBody extends Component {
 	render() {

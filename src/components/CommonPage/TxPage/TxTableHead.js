@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TX_TYPE } from 'utils/const'
+import { TX_TYPE } from '../../../utils/const'
 
 class TxTableHead extends Component {
     render() {

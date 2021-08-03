@@ -6,11 +6,11 @@ import TokenContractRead from './TokenContractRead'
 import {
     NoBox,
     TabTable
-} from 'components'
+} from '../../../../components'
 import {
     TX_TYPE,
     TOKEN_TABS,
-} from 'utils/const'
+} from '../../../../utils/const'
 
 class TokenTabs extends Component {
 

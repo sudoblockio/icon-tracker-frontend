@@ -1,4 +1,4 @@
-import { randomUint32 } from 'utils/utils'
+import { randomUint32 } from '../../../utils/utils'
 import { walletApiInstance } from './config'
 import IconService, { HttpProvider } from "icon-sdk-js"
 import { getWalletApiUrl } from "./config"

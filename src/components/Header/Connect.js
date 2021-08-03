@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { requestAddress } from '../../utils/connect'
-import { CopyButton } from 'components'
+import { CopyButton } from '../../components'
 import checkIconex from 'check-iconex'
-import NotificationManager from 'utils/NotificationManager'
+import NotificationManager from '../../utils/NotificationManager'
 
 class Connect extends Component {
     constructor(props) {

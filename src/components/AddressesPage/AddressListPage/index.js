@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
 	TxPage
-} from 'components'
+} from '../../../components'
 
 class AddressListPage extends Component {
 	render() {

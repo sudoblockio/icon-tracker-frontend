@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TransactionDetailPage } from 'components';
+import { TransactionDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   transactionTxDetail,

@@ -3,10 +3,10 @@ import TokenSummary from './TokenSummary'
 import TokenTabs from './TokenTabs'
 import {
     DetailPage
-} from 'components';
+} from '../../../components';
 import {
     TOKEN_TABS
-} from 'utils/const'
+} from '../../../utils/const'
 
 class TokenDetailPage extends Component {
 

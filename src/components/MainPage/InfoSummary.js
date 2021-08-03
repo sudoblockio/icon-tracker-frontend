@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { numberWithCommas, convertNumberToText, getIsSolo } from 'utils/utils'
+import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
 
 class InfoSummary extends Component {
     constructor(props) {

@@ -9,9 +9,9 @@ import {
     SortHolder,
     NoBox,
     SearchInput,
-} from 'components'
-import { calcMaxPageNum, isNumeric } from 'utils/utils'
-import { SEARCH_TYPE_DATA, CONTRACT_STATUS_NUM } from 'utils/const'
+} from '../../../components'
+import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
+import { SEARCH_TYPE_DATA, CONTRACT_STATUS_NUM } from '../../../utils/const'
 
 class SearchPage extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import { ProposalDetailPage } from 'components';
+import { ProposalDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   setPopup 

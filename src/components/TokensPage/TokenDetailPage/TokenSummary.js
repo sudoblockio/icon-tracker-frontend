@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText } from 'utils/utils'
-import { LoadingComponent, AddressLink } from 'components'
+import { numberWithCommas, convertNumberToText } from '../../../utils/utils'
+import { LoadingComponent, AddressLink } from '../../../components'
 
 class TokenSummary extends Component {
     render() {

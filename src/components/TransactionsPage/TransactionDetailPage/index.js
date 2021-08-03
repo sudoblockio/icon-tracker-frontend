@@ -3,10 +3,10 @@ import TransactionInfo from './TransactionInfo'
 import TransactionTabs from './TransactionTabs'
 import {
     DetailPage
-} from 'components';
+} from '../../../components';
 import {
     TRANSACTION_TABS
-} from 'utils/const'
+} from '../../../utils/const'
 
 class TransactionDetailPage extends Component {
 

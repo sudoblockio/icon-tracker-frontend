@@ -1,4 +1,4 @@
-import { makeUrl } from 'utils/utils'
+import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance, walletApiInstance } from './config'
 import { randomUint32 } from '../../../utils/utils'
 

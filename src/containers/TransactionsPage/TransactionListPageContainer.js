@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TransactionListPage } from 'components';
+import { TransactionListPage } from '../../components';
 import {
   transactionRecentTx
 } from '../../redux/actions/transactionsActions'

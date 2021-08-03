@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   ContractRead
-} from 'components'
+} from '../../../../components'
 
 class TokenContractRead extends Component {
   render() {

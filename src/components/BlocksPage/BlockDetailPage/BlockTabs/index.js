@@ -4,11 +4,11 @@ import BlockTransactions from './BlockTransactions'
 import {
     TX_TYPE,
     BLOCK_TABS,
-} from 'utils/const'
+} from '../../../../utils/const'
 import {
     NoBox,
     TabTable
-} from 'components'
+} from '../../../../components'
 
 class BlockTabs extends Component {
 

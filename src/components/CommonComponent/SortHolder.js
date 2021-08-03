@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   SORT_TYPE
-} from 'utils/const'
+} from '../../utils/const'
 
 class SortHolder extends Component {
 

@@ -7,17 +7,17 @@ import {
 	tokenText,
 	is0xHash,
 	convertLoopToIcxDecimal
-} from 'utils/utils'
+} from '../../../utils/utils'
 import {
 	TransactionLink,
 	BlockLink,
 	AddressCell,
 	AddressSet,
 	AmountCell
-} from 'components'
+} from '../../../components'
 import {
 	TX_TYPE,
-} from 'utils/const'
+} from '../../../utils/const'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
 import moment from 'moment';
 

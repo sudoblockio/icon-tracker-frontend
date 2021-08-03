@@ -1,11 +1,11 @@
 import actionTypes from '../actionTypes/actionTypes'
 import {
   getState
-} from 'utils/utils'
+} from '../../utils/utils'
 import {
   REDUX_STEP,
   INITIAL_STATE
-} from 'utils/const'
+} from '../../utils/const'
 
 const initialState = {
   addresses: INITIAL_STATE['ARR'],

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { GovernancePage } from 'components';
+import { GovernancePage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   setPopup 

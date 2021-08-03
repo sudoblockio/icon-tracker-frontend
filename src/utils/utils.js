@@ -1,11 +1,11 @@
 import React from 'react'
 import moment from 'moment'
-import { getTrackerApiUrl } from 'redux/api/restV3/config'
+import { getTrackerApiUrl } from '../redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { TokenLink } from 'components'
+import { TokenLink } from '../components'
 import { REDUX_STEP, SERVER_TX_TYPE } from './const'
-import { getIsSoloVersion } from 'redux/api/restV3/config'
+import { getIsSoloVersion } from '../redux/api/restV3/config'
 
 moment.updateLocale('en', {
     relativeTime: {

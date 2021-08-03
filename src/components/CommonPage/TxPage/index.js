@@ -9,9 +9,9 @@ import {
     Pagination,
     SortHolder,
     NoBox,
-} from 'components'
-import { TX_TYPE, TX_TYPE_DATA } from 'utils/const'
-import { calcMaxPageNum, isNumeric } from 'utils/utils'
+} from '../../../components'
+import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
+import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
 
 class TxPage extends Component {
     constructor(props) {
