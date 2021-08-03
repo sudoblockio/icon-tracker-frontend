@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TxBottomComponent from './TxBottomComponent'
 import {
   TX_TYPE_DATA
-} from 'utils/const'
+} from '../../../utils/const'
 
 class TxBottom extends Component {
   render() {

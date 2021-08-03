@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from 'components'
-import { convertNumberToText, numberWithCommas, tokenText, isValidData } from 'utils/utils'
-import { CONTRACT_STATUS, IRC_VERSION } from 'utils/const'
+import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
+import { convertNumberToText, numberWithCommas, tokenText, isValidData } from '../../../utils/utils'
+import { CONTRACT_STATUS, IRC_VERSION } from '../../../utils/const'
 import { convertLoopToIcxDecimal } from '../../../utils/utils'
 
 class ContractInfo extends Component {

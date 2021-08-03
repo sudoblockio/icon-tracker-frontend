@@ -4,11 +4,11 @@ import {
     findTabIndex,
     noSpaceLowerCase,
     isHxAddress
-} from 'utils/utils'
+} from '../../utils/utils'
 import {
     NotFoundPage,
     PendingPage
-} from 'components';
+} from '../../components';
 
 class DetailPage extends Component {
 

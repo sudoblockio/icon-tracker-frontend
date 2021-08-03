@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {
   TxBottom
-} from 'components'
+} from '../../../../components'
 
 class AddressInternalTransactions extends Component {
   render() {

@@ -5,7 +5,7 @@ import { ProposalType, ProposalStatus, ProposalStatusClass, VIEW_NUMBER } from '
 import { valueToString, getTextFromHtml } from '../../utils/utils';
 import {
 	LoadingComponent
-} from 'components';
+} from '../../components';
 import imgNoProposal from '../../style/image/img-no-proposal.png'
 
 class ProposalListPage extends Component {

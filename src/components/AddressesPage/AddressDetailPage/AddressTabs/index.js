@@ -9,11 +9,11 @@ import AddressReward from './AddressReward'
 import {
     TX_TYPE,
     ADDRESS_TABS,
-} from 'utils/const'
+} from '../../../../utils/const'
 import {
     NoBox,
     TabTable
-} from 'components'
+} from '../../../../components'
 
 class WalletTabs extends Component {
     render() {

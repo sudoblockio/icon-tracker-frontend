@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo } from 'utils/utils'
-import { TX_TYPE } from 'utils/const'
-import { BlockLink, AddressLink, LoadingComponent } from 'components'
+import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo } from '../../../utils/utils'
+import { TX_TYPE } from '../../../utils/const'
+import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
 class BlockInfo extends Component {
     handlePrevBlock = () => {

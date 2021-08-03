@@ -5,7 +5,7 @@ import ContractDetail from './ContractDetail';
 import Scam from './Scam';
 import Search from './Search';
 import { initPopup } from '../../redux/actions/popupActions';
-import { POPUP_TYPE } from 'utils/const';
+import { POPUP_TYPE } from '../../utils/const';
 
 class Popup extends Component {
   componentWillReceiveProps(nextProps) {

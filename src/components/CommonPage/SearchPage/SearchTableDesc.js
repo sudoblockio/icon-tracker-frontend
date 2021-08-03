@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { SEARCH_TYPE } from 'utils/const'
-import { numberWithCommas } from 'utils/utils'
-import { IRC_VERSION } from '../../../utils/const'
+import { SEARCH_TYPE, IRC_VERSION } from '../../../utils/const'
+import { numberWithCommas } from '../../../utils/utils'
+// import {  } from '../../../utils/const'
 
 class SearchTableDesc extends Component {
     render() {

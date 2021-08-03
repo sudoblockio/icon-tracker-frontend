@@ -3,10 +3,10 @@ import AddressInfo from './AddressInfo'
 import AddressTabs from './AddressTabs'
 import {
     DetailPage
-} from 'components';
+} from '../../../components';
 import {
     ADDRESS_TABS
-} from 'utils/const'
+} from '../../../utils/const'
 
 class AddressesDetailPage extends Component {
     

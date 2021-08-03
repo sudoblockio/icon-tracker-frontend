@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {
     TransactionLink,
     AddressLink
-} from 'components'
+} from '../../components'
 import {
     isValidData
-} from 'utils/utils'
+} from '../../utils/utils'
 import {
     CONTRACT_STATUS
-} from 'utils/const'
+} from '../../utils/const'
 
 class ContractDetail extends Component {
 

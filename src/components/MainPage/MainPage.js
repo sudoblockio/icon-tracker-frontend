@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { InfoSummary, RecentBlocks, RecentTransactions } from 'components'
-import { search } from 'redux/actions/searchActions';
+import { InfoSummary, RecentBlocks, RecentTransactions } from '../../components'
+import { search } from '../../redux/actions/searchActions';
 import { connect } from 'react-redux'
 
 class MainPage extends Component {

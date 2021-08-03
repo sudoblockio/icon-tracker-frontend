@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   TxBottom
-} from 'components'
+} from '../../../../components'
 
 class ContractEvents extends Component {
   render() {

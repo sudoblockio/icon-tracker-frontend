@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { convertNumberToText } from 'utils/utils'
-import { LoadingComponent, TransactionLink } from 'components'
+import { convertNumberToText } from '../../utils/utils'
+import { LoadingComponent, TransactionLink } from '../../components'
 
 class RecentTransactions extends Component {
     render() {

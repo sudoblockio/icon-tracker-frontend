@@ -3,10 +3,10 @@ import ContractInfo from './ContractInfo'
 import ContractTabs from './ContractTabs'
 import {
     DetailPage
-} from 'components';
+} from '../../../components';
 import {
     CONTRACT_TABS
-} from 'utils/const'
+} from '../../../utils/const'
 
 class ContractDetailPage extends Component {
 

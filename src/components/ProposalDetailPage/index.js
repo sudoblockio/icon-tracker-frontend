@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { IconConverter } from 'icon-sdk-js'
 import {
 	PROPOSAL_TABS
-} from 'utils/const'
+} from '../../utils/const'
 import { getProposal } from '../../redux/api/restV3/iiss';
 import { ProposalStatus, ProposalStatusClass, ProposalType, VIEW_NUMBER } from '../../utils/const';
 import { valueToString, convertNumberToText, findTabIndex, dateToUTC, getUTCString, convertLoopToIcxDecimal, closeEm } from '../../utils/utils';
@@ -11,7 +11,7 @@ import {
 	NoBox,
 	NotFoundPage,
 	LoadingComponent
-} from 'components';
+} from '../../components';
 
 class ProposalDetailPage extends Component {
 

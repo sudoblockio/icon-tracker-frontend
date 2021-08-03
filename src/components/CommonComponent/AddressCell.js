@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import {
 	AddressLink,
 	CopyButton
-} from 'components'
+} from '../../components'
 import {
 	SERVER_TX_TYPE
-} from 'utils/const'
+} from '../../utils/const'
 import {
 	isScoreTx,
 	isContractAddress,
 	isValidData
-} from 'utils/utils'
+} from '../../utils/utils'
 
 function getBooleans(props) {
 	const _isScoreTx = isScoreTx(props.targetAddr, props.txType, props.isFrom)

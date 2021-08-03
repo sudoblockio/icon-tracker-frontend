@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import TransactionEvents from './TransactionEvents';
 import TransactionInternalTransactions from './TransactionInternalTransactions';
-import { NoBox, TabTable } from 'components';
-import { TX_TYPE, TRANSACTION_TABS } from 'utils/const';
+import { NoBox, TabTable } from '../../../../components';
+import { TX_TYPE, TRANSACTION_TABS } from '../../../../utils/const';
 
 class TransactionTabs extends Component {
   render() {

@@ -3,7 +3,7 @@ import { fork, put, takeLatest, call, all, select } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 import {
   POPUP_TYPE
-} from 'utils/const'
+} from '../../utils/const'
 import {
   contractList as CONTRACT_LIST_API,
   contractInfo as CONTRACT_INFO_API,

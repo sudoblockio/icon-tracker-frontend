@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import withClickOut from 'HOC/withClickOut'
+import withClickOut from '../../HOC/withClickOut'
 
 class SearchGroup extends Component {
     constructor(props) {

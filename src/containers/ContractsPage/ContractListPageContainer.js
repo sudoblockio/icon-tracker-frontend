@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { ContractListPage } from 'components';
+import { ContractListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   contractList,

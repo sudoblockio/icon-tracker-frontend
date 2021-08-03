@@ -1,5 +1,5 @@
 import { trackerApiInstance } from './config'
-import { makeUrl } from 'utils/utils'
+import { makeUrl } from '../../../utils/utils'
 
 export async function pushRegister(payload) {
   const trackerApi = await trackerApiInstance()

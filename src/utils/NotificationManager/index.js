@@ -1,5 +1,5 @@
 import { pushRegister, pushWithdraw } from '../../redux/api/restV3/notification'
-import { delay } from 'utils/utils';
+import { delay } from '../utils';
 
 const path = '/sw.js'
 const PublicKey = 'BHu9mU0UUq95nIOkY2EGxHq4l2ibzVzVbcD0uZHAaibpLTQEBl9kL8sSUlXMMc_StUdlwIXa32gJFZKcOw6pw5A'

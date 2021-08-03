@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { TX_TYPE, IRC_VERSION } from 'utils/const'
-import { numberWithCommas } from 'utils/utils'
+import { TX_TYPE, IRC_VERSION } from '../../../utils/const'
+import { numberWithCommas } from '../../../utils/utils'
 
 class TxPageTitle extends Component {
     render() {

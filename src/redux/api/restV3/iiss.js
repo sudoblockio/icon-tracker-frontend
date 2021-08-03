@@ -1,5 +1,5 @@
 import { walletApiInstance, trackerApiInstance } from './config'
-import { randomUint32, makeUrl } from 'utils/utils'
+import { randomUint32, makeUrl } from '../../../utils/utils'
 
 export async function getPReps() {
     const walletApi = await walletApiInstance()

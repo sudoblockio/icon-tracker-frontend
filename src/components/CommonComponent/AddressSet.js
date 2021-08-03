@@ -1,7 +1,7 @@
 import React from 'react';
 import {
 	AddressCell
-} from 'components'
+} from '../../components'
 
 const SignCell = ({ address, fromAddr, toAddr, targetContractAddr }) => {
 	let signItem, className = 'table-sign'

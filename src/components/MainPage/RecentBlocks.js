@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { numberWithCommas, getTimezoneMomentTime } from 'utils/utils'
-import { LoadingComponent, BlockLink } from 'components'
+import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
+import { LoadingComponent, BlockLink } from '../../components'
 
 class RecentBlocks extends Component {
     render() {

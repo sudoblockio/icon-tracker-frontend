@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { makeDownloadLink, tokenText, isValidData } from 'utils/utils'
-import { CopyButton, LoadingComponent } from 'components'
+import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
+import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
     constructor(props) {

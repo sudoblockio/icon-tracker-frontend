@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { getMainInfo } from '../../redux/api/restV3/main';
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from 'utils/utils'
+// import { getMainInfo } from '../../redux/api/restV3/main';
+import { getMainInfo } from '../../redux/api/restV3';
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList } from '../../redux/api/restV3/iiss';
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
     LoadingComponent,
-} from 'components'
-import { POPUP_TYPE } from 'utils/const'
+} from '../../components'
+import { POPUP_TYPE } from '../../utils/const'
 import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
 // import { calcFromLastBlock } from '../../utils/utils';

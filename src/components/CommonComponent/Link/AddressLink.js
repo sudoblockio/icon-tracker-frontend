@@ -2,7 +2,7 @@ import React from 'react';
 import LinkCell from './LinkCell'
 import {
   isContractAddress
-} from 'utils/utils'
+} from '../../../utils/utils'
 
 const AddressLink = ({to, label, onClick}) => {
   return (
