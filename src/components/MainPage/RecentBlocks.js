@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
 import { LoadingComponent, BlockLink } from '../../components'
-
 class RecentBlocks extends Component {
     render() {
+        console.log("THIS ====> " , this.props)
         const { loading, tmainBlock } = this.props.info
         const list = tmainBlock ? tmainBlock.slice(0, 10) : []
         return (

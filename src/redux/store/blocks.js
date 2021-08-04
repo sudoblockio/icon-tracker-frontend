@@ -9,10 +9,10 @@ const GET_BLOCKLIST='blocks/GET_BLOCKLIST';
 
 const getBlockList = (blocks) => ({
     type: GET_BLOCKLIST,
-    blocks,
+    blocks
 });
 
-export const getBlocks = (payload) => async (dispatch) => {
+export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     const response = trackerApi.get(makeUrl('/v3/block/list', payload));
     if (response.ok) {
