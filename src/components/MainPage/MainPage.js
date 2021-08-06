@@ -95,6 +95,7 @@ class MainPage extends Component {
                         <div className="wrap-holder">
                             <ul className="content">
                                 <RecentBlocks {...this.props} />
+                                {console.log(this.props)}
                                 <RecentTransactions {...this.props} />
                             </ul>
                         </div>
@@ -106,7 +107,7 @@ class MainPage extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return { };
 }
 
 function mapDispatchToProps(dispatch) {

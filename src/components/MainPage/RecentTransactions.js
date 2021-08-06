@@ -5,7 +5,8 @@ import { LoadingComponent, TransactionLink } from '../../components'
 
 class RecentTransactions extends Component {
     render() {
-        const { loading, tmainTx } = this.props.info
+        // TODO: figure out why this was this.props.info when there was no info prop. 
+        const { loading, tmainTx } = this.props
         const list = tmainTx ? tmainTx.slice(0, 10) : []
         return (
             <li className="right">

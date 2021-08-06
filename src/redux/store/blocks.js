@@ -1,71 +1,58 @@
 import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config' 
-// action types
-const GET_BLOCKLIST='blocks/GET_BLOCKLIST';
-// const GET_BLOCKINFO='blocks/GET_BLOCKINFO'
-// const GET_BLOCKTXLIST='blocks/GET_BLOCKTXLIST'
-// thunk actions
 
-const getBlockList = (blocks) => ({
+const GET_BLOCKLIST='blocks/GET_BLOCKLIST';
+const GET_BLOCKINFO='blocks/GET_BLOCKINFO'
+const GET_BLOCKTXLIST='blocks/GET_BLOCKTXLIST'
+
+const getblockList = (payload) => ({
     type: GET_BLOCKLIST,
-    blocks
+    payload
 });
 
+const getblockInfo = (payload) => ({
+    type: GET_BLOCKINFO,
+    payload
+});
+
+const getblockTxList = (payload) => ({
+    type: GET_BLOCKTXLIST,
+    payload
+});
 export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     const response = trackerApi.get(makeUrl('/v3/block/list', payload));
     if (response.ok) {
-        const blockInfo = await response.data;
-        dispatch(getBlockList(blockInfo))
+        const data = await response.data;
+        dispatch(getblockList(data))
     }
-}
+};
 
-// export async function blockList(payload) {
-//     const trackerApi = await trackerApiInstance()
-//     return new Promise((resolve, reject) => {
-//       trackerApi.get(makeUrl('/v3/block/list', payload))
-//         .then(result => {
-//           resolve(result.data)
-//         })
-//         .catch(error => {
-//           reject(error)
-//         })
-//     })
-//   }
-  
-//   export async function blockInfo(payload) {
-//     const trackerApi = await trackerApiInstance()
-//     return new Promise((resolve, reject) => {
-//       trackerApi.get(makeUrl('/v3/block/info', payload))
-//         .then(result => {
-//           resolve(result.data)
-//         })
-//         .catch(error => {
-//           reject(error)
-//         })
-//     })
-//   }
-  
-//   export async function blockTxList(payload) {
-//     const trackerApi = await trackerApiInstance()
-//     return new Promise((resolve, reject) => {
-//       trackerApi.get(makeUrl('/v3/block/txList', payload))
-//         .then(result => {
-//           resolve(result.data)
-//         })
-//         .catch(error => {
-//           reject(error)
-//         })
-//     })
-//   }
+export const blockInfo = (payload) => async (dispatch) => {
+    const trackerApi = await trackerApiInstance();
+    const response = trackerApi.get(makeUrl('/v3/block/info', payload));
+    if (response.ok) {
+        const data = await response.data;
+        dispatch(getblockInfo(data))
+    }
+};
 
-// state reducer
+export const blockTxList = (payload) => async (dispatch) => {
+    const trackerApi = await trackerApiInstance();
+    const response = trackerApi.get(makeUrl('/v3/block/txList', payload));
+    if (response.ok) {
+        const data = await response.data;
+        dispatch(getblockTxList(data))
+    }
+};
+
 const initialState = {
     blocks: ['ARR'],
     block: ['OBJ'],
     blockTx: ['ARR'],
   }
+
 let newState;
 const blocksReducer = (state = initialState, action) => {
     switch (action.type){
@@ -76,8 +63,6 @@ const blocksReducer = (state = initialState, action) => {
         default:
       return state;
     }
-}
-
-// default export
+};
 
 export default blocksReducer;
