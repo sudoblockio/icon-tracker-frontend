@@ -58,7 +58,6 @@ export async function addressInternalTxList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
             .then(result => {
-                console.log(result)
                 resolve(result.data)
             })
             .catch(error => {

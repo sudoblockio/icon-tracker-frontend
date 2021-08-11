@@ -6,10 +6,9 @@ import { connect } from 'react-redux'
 class MainPage extends Component {
 
     state = {
-        value: '',
-        focused: false
+        'value': '',
+        'focused': 'false'
     }
-
     input = null
     notFocus = true
     focused = false
@@ -17,6 +16,8 @@ class MainPage extends Component {
     handleChange = e => {
         const { value } = e.target
         this.setState({ value })
+        console.log(value)
+        console.log(this.state.value)
     }
 
     handleKeyDown = e => {
@@ -61,18 +62,6 @@ class MainPage extends Component {
                                     onKeyDown={this.handleKeyDown}
                                     onChange={this.handleChange}
                                 />
-                                {/* {!this.state.value && 
-                                <span onMouseDown={() => {
-                                        this.notFocus = this.focused
-                                    }} 
-                                    onMouseUp={e => {
-                                    if (!this.notFocus) {
-                                        this.notFocus = true
-                                        this.input.focus()
-                                    }
-                                }}>
-                                    <i className="img"></i>
-                                </span>} */}
                                 {this.state.value &&
                                 <em onMouseDown={() => {
                                     this.setState({ value: '' })
@@ -95,7 +84,6 @@ class MainPage extends Component {
                         <div className="wrap-holder">
                             <ul className="content">
                                 <RecentBlocks {...this.props} />
-                                {console.log(this.props)}
                                 <RecentTransactions {...this.props} />
                             </ul>
                         </div>
@@ -106,8 +94,10 @@ class MainPage extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { };
+function mapStateToProps() {
+    return {
+        searchTerm: this.state,
+    };
 }
 
 function mapDispatchToProps(dispatch) {

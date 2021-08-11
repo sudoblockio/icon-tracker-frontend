@@ -3,13 +3,14 @@ import { createBrowserHistory as createHistory } from 'history'
 const history = createHistory()
 const config = {
   // API Endpoints
-  'blockList': 'endpoint',
+  'BLOCKS_PREFIX': 'endpoint',
+  // or:
   'singleBlock': 'endpoint',
   'blockTxList': 'endpoint',
   // Non-sensitive env variables? 
   // mainnet:
   // testnet:
-  
+
 }
 
 export {

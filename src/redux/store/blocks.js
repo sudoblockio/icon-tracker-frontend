@@ -23,7 +23,7 @@ const getblockTxList = (payload) => ({
 // BLOCKS_PREFIX=/v1/blocks
 export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
-    const response = trackerApi.get(makeUrl('/v1/blocks', payload));
+    const response = trackerApi.get(makeUrl('/v3/block/list', payload));
     if (response.ok) {
         const data = await response.data;
         dispatch(getblockList(data))
