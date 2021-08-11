@@ -58,7 +58,7 @@ class SearchInput extends Component {
           <input name="search" type="text" className="txt-type-search"
             id={id}
             placeholder={placeholder}
-            value={search}
+            value={search || ''}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}

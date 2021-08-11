@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InfoSummary, RecentBlocks, RecentTransactions } from '../../components'
+import { InfoSummary, RecentBlocks, RecentTransactions, SearchInput } from '../../components'
 import { search } from '../../redux/actions/searchActions';
 import { connect } from 'react-redux'
 
@@ -16,8 +16,6 @@ class MainPage extends Component {
     handleChange = e => {
         const { value } = e.target
         this.setState({ value })
-        console.log(value)
-        console.log(this.state.value)
     }
 
     handleKeyDown = e => {
@@ -43,6 +41,7 @@ class MainPage extends Component {
                         <div className="content">
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
+                                < SearchInput />
                                 <input id='main-top-search-bar'
                                     ref={ref => { 
                                         this.input = ref 
