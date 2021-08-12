@@ -42,31 +42,6 @@ class MainPage extends Component {
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
                                 < SearchInput />
-                                <input id='main-top-search-bar'
-                                    ref={ref => { 
-                                        this.input = ref 
-                                        if (this.input) {
-                                            this.input.onfocus = () => {
-                                                this.focused = true;
-                                            };
-                                            this.input.onblur = () => {
-                                                this.focused = false;
-                                            };
-                                        }
-                                    }}
-                                    type="text"
-                                    className="txt-type-search"
-                                    placeholder="Address, TxHash, Block, SCORE"
-                                    value={this.state.value}
-                                    onKeyDown={this.handleKeyDown}
-                                    onChange={this.handleChange}
-                                />
-                                {this.state.value &&
-                                <em onMouseDown={() => {
-                                    this.setState({ value: '' })
-                                }}>
-                                    <i className="img"></i>
-                                </em>}
                             </div>
                         </div>
                     </div>
