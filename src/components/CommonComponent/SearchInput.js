@@ -25,10 +25,11 @@ function SearchInput(props) {
   }
   
   
-  // this actually is the "dispatch search" function 
+  // this is the "dispatch search" function 
   const handleClick = async (e) => {
     let searchResults = await dispatch(findData(search))
-    searchResults? console.log(searchResults) : console.log("nope")
+    console.log("search:", searchResults)
+    searchResults? console.log(searchResults) : /*error handler*/ console.log("nope")
   }
 
     return (
