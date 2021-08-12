@@ -94,9 +94,7 @@ class MainPage extends Component {
 }
 
 function mapStateToProps() {
-    return {
-        searchTerm: this.state,
-    };
+    return {}
 }
 
 function mapDispatchToProps(dispatch) {
