@@ -5,8 +5,9 @@ const config = {
   // API Endpoints
   'BLOCKS_PREFIX': 'endpoint',
   // or:
-  'singleBlock': 'endpoint',
-  'blockTxList': 'endpoint',
+  'SINGLE_BLOCK_PREFIX': 'endpoint',
+  'BLOCK_TX_PREFIX': 'endpoint',
+  'SEARCH_ADD_PREFIX': 'endpoint'
   // Non-sensitive env variables? 
   // mainnet:
   // testnet:

@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { findData } from '../../redux/store/search'
 
-function SearchInput(props) {
+function SearchInput() {
   const dispatch = useDispatch();
   const [ search, setSearch] = useState("")
-
+  const [ errors ] = useState("")
 
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -25,11 +25,11 @@ function SearchInput(props) {
   }
   
   
+
   // this is the "dispatch search" function 
   const handleClick = async (e) => {
     let searchResults = await dispatch(findData(search))
-    console.log("search:", searchResults)
-    searchResults? console.log(searchResults) : /*error handler*/ console.log("nope")
+    searchResults? console.log(searchResults) : /*error*/ console.log("nope")
   }
 
     return (
@@ -41,6 +41,9 @@ function SearchInput(props) {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />
+          <div className="error-holder">
+            <div><p id="error-message">{errors}</p></div>
+          </div>
           <span onClick={handleClick}><em className="img"></em></span>
         </div>
       </div>

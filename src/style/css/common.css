@@ -4251,6 +4251,7 @@ input[type='text']:focus.over {
   margin: 10px 2px;
 }
 
+
 .content-wrap .search-holder {
   float: right;
   margin-top: -28px;
@@ -5947,6 +5948,23 @@ input[type='checkbox']:checked + label {
 }
 .toggle em.noti input[type='checkbox']:checked + label + i._img {
   background-position-x: 0;
+}
+
+/* error messages*/
+.error-holder {
+  position: relative;
+  text-align: left;
+  
+
+}
+
+#error-message {
+  font-size: 10px;
+  padding-top: 5px;
+  padding-left: 2px;
+  color: rgba(196, 39, 57, 1);
+  text-shadow: none;
+  
 }
 
 /*banner*/
