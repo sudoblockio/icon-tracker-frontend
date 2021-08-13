@@ -1,11 +1,16 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
-import { LoadingComponent, BlockLink } from '../../components'
-class RecentBlocks extends Component {
-    render() {
-        const { loading, tmainBlock } = this.props
-        const list = tmainBlock ? tmainBlock.slice(0, 10) : []
+import React, { Component } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
+import { LoadingComponent, BlockLink } from '../../components';
+
+function RecentBlocks (props) {
+    const { loading, tmainBlock } = props
+    console.log("props", props)
+    console.log("loading", loading)
+    const list = tmainBlock ? tmainBlock.slice(0, 10) : []
+    {console.log(list)}
+    
         return (
             <li className="left">
                 <p className="title">Blocks</p>
@@ -55,7 +60,7 @@ class RecentBlocks extends Component {
                 </Link>
             </li>
         )
-    }
+    
 }
 
 export default RecentBlocks
