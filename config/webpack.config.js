@@ -278,12 +278,7 @@ module.exports = function(webpackEnv) {
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-        // gives node_config webpack support as node_config runs at build at therefore, 
-        // needs explicit configuruation to run in runtime on browser in 'production' vs localhost
-        // *** !IMPORTANT! This configuation also prevents sensitive env variables from being 
-        // written directly to the frontend. !IMPORTANT! *** 
- 
-        new ConfigWebpackPlugin()
+
       ]
     },
     resolveLoader: {
@@ -475,6 +470,12 @@ module.exports = function(webpackEnv) {
       ]
     },
     plugins: [
+      // Gives node_config webpack support as node_config runs at build at therefore, 
+      // needs explicit configuruation to run in runtime, on browser, in 'production', vs localhost
+      // *** !IMPORTANT! This configuation also prevents sensitive env variables from being 
+      // written to the frontend. Without this configuration, env variables directly overwrite
+      // config variables.  !IMPORTANT! *** 
+      new ConfigWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
