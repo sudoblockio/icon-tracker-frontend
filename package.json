@@ -21,6 +21,8 @@
         "chart.js": "^2.7.2",
         "check-iconex": "0.0.7",
         "clipboard": "^1.7.1",
+        "config": "^3.3.6",
+        "config-webpack": "^1.0.5",
         "connected-react-router": "^6.9.1",
         "css-loader": "1.0.0",
         "deepcopy": "^2.1.0",

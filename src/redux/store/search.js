@@ -39,6 +39,7 @@ const searchData = (payload) => ({
 export const findData = (payload) => async (dispatch) => {
     console.log("store ==>", payload)
     const trackerApi = await trackerApiInstance()
+    // 
     const response = trackerApi.get(makeUrl('/v0/search/Search', payload));
     console.log(response)
     if (response.ok) {
@@ -47,10 +48,10 @@ export const findData = (payload) => async (dispatch) => {
     }
 }
 
-
-export const findAddress = (payload) => async (dispatch) => {
+// the right way: 
+export const findAddress = (address) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
-    const response = trackerApi.get(makeUrl('ADDRESSES_PREFIX', payload));
+    const response = trackerApi.get(makeUrl(`/accounts/${address}`, address));
 
     if (response.ok) {
         const resultData = await response.data.data;

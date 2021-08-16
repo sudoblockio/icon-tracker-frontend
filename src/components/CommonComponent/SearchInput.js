@@ -5,7 +5,8 @@ import { findData } from '../../redux/store/search'
 function SearchInput() {
   const dispatch = useDispatch();
   const [ search, setSearch] = useState("")
-  const [ errors ] = useState("")
+  const [ errors, setError ] = useState("")
+
 
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -24,12 +25,19 @@ function SearchInput() {
     }
   }
   
-  
-
   // this is the "dispatch search" function 
+  // STUB: search query sort
   const handleClick = async (e) => {
-    let searchResults = await dispatch(findData(search))
-    searchResults? console.log(searchResults) : /*error*/ console.log("nope")
+    const block_re = () => {
+    new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
+    if (block_re.test(e)) {
+      console.log("WE're here")
+    }
+    console.log("not here")
+  }
+    
+    // let searchResults = await dispatch(findData(search))
+    // searchResults? console.log(searchResults) : /*error*/ console.log("nope")
   }
 
     return (
