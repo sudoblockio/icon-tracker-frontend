@@ -475,7 +475,7 @@ module.exports = function(webpackEnv) {
       // *** !IMPORTANT! This configuation also prevents sensitive env variables from being 
       // written to the frontend. Without this configuration, env variables directly overwrite
       // config variables.  !IMPORTANT! *** 
-      
+      // see more: https://github.com/lorenwest/node-config/wiki/Webpack-Usage
       // Create a custom config object: 
       // new ConfigWebpackPlugin("myConfig", { numberOfTusks: 3, colorOfTusks: "yellow" })
       new ConfigWebpackPlugin(),
