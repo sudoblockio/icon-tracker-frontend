@@ -1,4 +1,6 @@
 const env = process.env.NODE_ENV;
+// !Important! All variables on this file are written directly to the frontend. Sensitive 
+// data must be abstracted through dotenv.
 
 const dev = {
     app = {
@@ -10,7 +12,7 @@ const dev = {
         // test values
         host: process.env.DEV_DB_HOST || 'localhost',
         port: parseInt(process.env.DEV_DB_PORT) || 27017,
-        name: name: process.env.DEV_DB_NAME || 'db'
+        name: process.env.DEV_DB_NAME || 'db'
     }
 }
 
