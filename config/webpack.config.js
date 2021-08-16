@@ -280,6 +280,9 @@ module.exports = function(webpackEnv) {
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
         // gives node_config webpack support as node_config runs at build at therefore, 
         // needs explicit configuruation to run in runtime on browser in 'production' vs localhost
+        // *** !IMPORTANT! This configuation also prevents sensitive env variables from being 
+        // written directly to the frontend. !IMPORTANT! *** 
+ 
         new ConfigWebpackPlugin()
       ]
     },
