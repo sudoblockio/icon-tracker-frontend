@@ -6,11 +6,8 @@ import { LoadingComponent, BlockLink } from '../../components';
 
 function RecentBlocks (props) {
     const { loading, tmainBlock } = props
-    console.log("props", props)
-    console.log("loading", loading)
     const list = tmainBlock ? tmainBlock.slice(0, 10) : []
-    {console.log(list)}
-    
+
         return (
             <li className="left">
                 <p className="title">Blocks</p>

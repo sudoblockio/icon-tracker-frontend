@@ -14,7 +14,7 @@ function SearchInput() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleClick()
+      handleClick(e.target.value)
     }
     // keycode 27 = `esc`
     if (e.keyCode === 27) {
@@ -30,14 +30,10 @@ function SearchInput() {
   const handleClick = async (e) => {
     const block_re = () => {
     new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
-    if (block_re.test(e)) {
-      console.log("WE're here")
-    }
-    console.log("not here")
   }
+  console.log(e)
     
-    // let searchResults = await dispatch(findData(search))
-    // searchResults? console.log(searchResults) : /*error*/ console.log("nope")
+
   }
 
     return (

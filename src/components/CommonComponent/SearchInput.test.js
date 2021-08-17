@@ -26,11 +26,8 @@ describe("block_re", () => {
     })
 })
 
-
-
-it("correctly verifies block regex", () => {
-   const block_Regex = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
-   blockTests.forEach(block => {
-       expect(block.toString()).toMatch(block_Regex)
-   })
+describe("transaction_re", () => {
+    test("it correctly verifies tx regex", () => {
+        const tx_Regex = new RegExp()
+    })
 })
