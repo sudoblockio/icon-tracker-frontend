@@ -11,7 +11,7 @@ const dev = {
     db = {
         // test values
         host: process.env.DEV_DB_HOST || 'localhost',
-        port: parseInt(process.env.DEV_DB_PORT) || 27017,
+        port: parseInt(process.env.DEV_DB_PORT) || 3000,
         name: process.env.DEV_DB_NAME || 'db'
     }
 }
