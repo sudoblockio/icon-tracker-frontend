@@ -18,6 +18,7 @@ const mainnet = {
 
 const sejong = {
     // values are inject by node
+    // NODE_ENV=sejong:
     secretPort: "SECRET_VALUE",
     secretServer: 'SECRET_SERVER',
     backendAPIRoot: 'API_ROOT',

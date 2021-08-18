@@ -14,7 +14,7 @@ const app = {
 
             }
         },
-        backendAPIRoot: '",
+        backendAPIRoot: '',
         autoscaler: {
             enabled: true,
             maxReplicas: 25,
