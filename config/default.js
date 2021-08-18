@@ -1,47 +1,45 @@
-// const env = process.env.NODE_ENV;
-// // !Important! All variables on this file are written directly to the frontend. Sensitive 
-// // data must be abstracted through dotenv.
+// !Important! All variables on this file are written directly to the frontend. 
+// For more information on environment variables here: https://github.com/lorenwest/node-config/wiki/Environment-Variables
+const env = process.env.NODE_ENV;
 
-// const dev = {
-//     app = {
-//         // all process.env variables are Strings, 
-//         // if a number is needed, use parseInt
-//         port: parseInt(process.env.DEV_APP_PORT) || 3000
-//     },
-//     db = {
-//         // test values
-//         host: process.env.DEV_DB_HOST || 'localhost',
-//         port: parseInt(process.env.DEV_DB_PORT) || 3000,
-//         name: process.env.DEV_DB_NAME || 'db'
-//     }
-// }
+const app = {
+    defaults: {
+        secretPort: '',
+        network: {
+            mainnet: {
+                URLPrefix: ''
+            },
+            sejong: {
+                URLPrefix: ''
 
-// const test = {
-//     app = {
-//         port: 3000
-//     },
-//     db = {
-//         // test values
-//         host: localhost,
-//         port: 3000
-//     }
-// }
+            }
+        },
+        backendAPIRoot: '",
+        autoscaler: {
+            enabled: true,
+            maxReplicas: 25,
+            averageCPU: 50,
+        },
 
-// const mainnet = {
-//     app = {
-//         port: 3000
-//     },
-//     db = {
-//         // test values
-//         host: localhost,
-//         port: 3000
-//     }
-// }
+        service: {
+            name: "icon-explorer-frontend-mainnet",
+            type: "ClusterIP",
+            // overrided by custom-environment-variables.js or local.js:
+            externalPort: '',
+            internalPort: ''
+        },
 
-// const config = {
-//     dev,
-//     test,
-//     mainnet
-// }
+        ingress: {
+            enabled: true,
+            regionalHost: '',
+            apexHost: ''
+        }
 
-// module.exports = config[env]
+        }
+
+    }
+}
+
+
+const config = app;
+module.exports = config[env]

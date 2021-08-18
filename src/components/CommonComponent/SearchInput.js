@@ -34,7 +34,7 @@ function SearchInput() {
     const tx_re = new RegExp()
     const searchTerm = e.target.value
 
-    const searchByType = (searchTerm) =>{
+    const searchByType = (searchTerm) => {
       return block_re.test(searchTerm) === true ? dispatch(/*searchBlocks(searchTerm)*/)
             : add_re.test(searchTerm) === true ? dispatch(/*searchAdd(searchTerm)*/)
             : tx_re.test(searchTerm) === true ? dispatch(/*searchTx(searchTerm)*/)
