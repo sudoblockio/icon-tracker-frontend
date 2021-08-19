@@ -37,11 +37,9 @@ const searchData = (payload) => ({
 
 // to generic endpoint
 export const findData = (payload) => async (dispatch) => {
-    console.log("store ==>", payload)
     const trackerApi = await trackerApiInstance()
     // 
     const response = trackerApi.get(makeUrl('/v0/search/Search', payload));
-    console.log(response)
     if (response.ok) {
         const resultData = await response.data.data;
         dispatch(searchData(resultData))

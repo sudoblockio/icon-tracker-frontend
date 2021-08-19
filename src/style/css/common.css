@@ -852,6 +852,7 @@ body {
 .home .content-wrap .screen1 .bg {
   width: 100%;
   position: relative;
+  height: 100%;
 }
 .home .content-wrap .screen0 .content {
   font-size: 0;

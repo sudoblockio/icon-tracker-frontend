@@ -698,9 +698,6 @@ export function isUrl(text) {
     return regexp.test(text)
 }
 
-// TODO: regex for block, transaction
-// &test
-
 export function addAt(text) {
     if (startsWith(text, '@') || isUrl(text)) {
         return text

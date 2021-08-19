@@ -77,7 +77,6 @@ export async function addressVotedList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/delegate/list`, payload))
             .then(result => {
-                console.log(result)
                 resolve(result.data)
             })
             .catch(error => {
