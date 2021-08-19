@@ -4,9 +4,9 @@ import { trackerApiInstance } from './config'
 export async function blockList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    // STUB: to update with config obj prefix paths
-    trackerApi.get(makeUrl('${config.blocks_prefix}/blocks', payload))
+    trackerApi.get(makeUrl('/v1/blocks', payload))
       .then(result => {
+        console.log(result, "from rest")
         resolve(result.data)
       })
       .catch(error => {

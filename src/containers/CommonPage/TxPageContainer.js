@@ -28,7 +28,7 @@ import {
 import { 
   blockList,
   blockTxList,
-} from '../../redux/actions/blocksActions';
+} from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
   return {

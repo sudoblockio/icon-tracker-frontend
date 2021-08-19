@@ -24,6 +24,7 @@ const getblockTxList = (payload) => ({
 export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     const response = trackerApi.get(makeUrl('/v1/blocks', payload));
+    console.log(response,"FROM THE STORE")
     if (response.ok) {
         const data = await response.data;
         dispatch(getblockList(data))
@@ -59,6 +60,7 @@ const blocksReducer = (state = initialState, action) => {
     switch (action.type){
         case GET_BLOCKLIST: {
             newState = deepcopy(state)
+            console.log(newState)
             return newState;
         }
         default:
