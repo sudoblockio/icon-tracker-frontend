@@ -16,18 +16,18 @@ describe("check search types", () => {
     test("correctly ids transactions", () => {
         const tx_Regex = tx_re;
         const input = ["0xa2968b7d3bde8818f9e4c53b9b41f5a05b457c4da163ebbc0485eea6983f960e","0xbff754969d2edb69d2a4ec5eae9db82d51ee979625fb0b4975827868e043b0","0xbff754969d2edb69d2a4ec5eae9db82d51ee979625fb0b4975827868e043b07a"]
-        const expect = [true, false, true]
+        const expected = [true, false, true]
         const isTx = (hash) => {
             return tx_Regex.test(hash) ? true : false
         }
-        const areTx = input.map(hash => isTx(hash))
+        const areTx = input.map(hash => isTx(hash.toString()))
         expect(areTx).toEqual(expected)
     }); 
 
     test("it correctly verifies address regex", () => {
         const add_Regex = add_re;
         const input = ["hx8913f49afe7f01ff0d7318b98f7b4ae9d3cd0d61","0xbf0","hxc4193cda4a75526bf50896ec242d6713bb6b02a3"]
-        const expect = [true, false, true]
+        const expected = [true, false, true]
         const isAdd = (hash) => {
             return add_Regex.test(hash) ? true : false
         }
@@ -36,10 +36,10 @@ describe("check search types", () => {
     }); 
 });
 
-// once store is complete:
-describe("it correctly dispatches search functions", () => {
-    test("", () => {
-        searchByType()
-    });
-});
+// once store is complete:w
+// describe("it correctly dispatches search functions", () => {
+//     test("", () => {
+//         searchByType()
+//     });
+// });
 

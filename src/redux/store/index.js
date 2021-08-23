@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk'
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import blocksReducer from './blocks'
 import popupReducer from './popup';
 import searchReducer from './search'
 import { storageReducer } from '../reducers/storageReducer';
-import thunk from 'redux-thunk';
 
 const createRootReducer = (history) => combineReducers ({
     router: connectRouter(history),
@@ -19,12 +19,12 @@ let enhancer;
 
 // TODO: add all the env vars
 if (process.env.NODE_ENV === "production") {
-    enhancer = applyMiddleware(thunk);
+    enhancer = applyMiddleware(thunkMiddleware);
   } else {
     const logger = require("redux-logger").default;
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+    enhancer = composeEnhancers(applyMiddleware(thunkMiddleware, logger));
   }
 
   // if (process.env.REACT_APP_ENV) {
@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === "production") {
 
 export const history = createBrowserHistory()
 const configureStore = (preloadedState) => {
-    return createStore(createRootReducer(history), preloadedState, enhancer);
+    return createStore(createRootReducer(history), applyMiddleware(thunkMiddleware), preloadedState, enhancer);
   };
 
 const store = configureStore();

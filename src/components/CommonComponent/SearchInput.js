@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { isAddress } from 'web3-utils';
-import { findData } from '../../redux/store/search'
 
 export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
-export const add_re = new RegExp('/^hx[a-fA-F0-9]{40}$/')
-export const tx_re = new RegExp('/^0x([A-Fa-f0-9]{64})$/')
+export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
+export const tx_re = new RegExp('^0x([A-Fa-f0-9]{64})$')
 let searchByType; 
 
 function SearchInput() {

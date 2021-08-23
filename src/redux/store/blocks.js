@@ -20,16 +20,34 @@ const getblockTxList = (payload) => ({
     type: GET_BLOCKTXLIST,
     payload
 });
-// BLOCKS_PREFIX=/v1/blocks
-export const blockList = (payload) => async (dispatch) => {
+
+export const blockList = () => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
-    const response = trackerApi.get(makeUrl('/v1/blocks', payload));
+    try {const response = await trackerApi.get('/v1/blocks');
     console.log(response,"FROM THE STORE")
     if (response.ok) {
-        const data = await response.data;
-        dispatch(getblockList(data))
+        const data = await response.json();
+         dispatch(getblockList(data))
+    }}
+    catch (e) {
+        console.log(e, "e from the store")
     }
-};
+}
+
+
+// export async function blockList(payload) {
+//     const trackerApi = await trackerApiInstance()
+//     return new Promise((resolve, reject) => {
+//       trackerApi.get(makeUrl('/v1/blocks', payload))
+//         .then(result => {
+//           console.log(result, "from rest")
+//           resolve(result.data)
+//         })
+//         .catch(error => {
+//           reject(error)
+//         })
+//     })
+//   }
 
 export const blockInfo = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
