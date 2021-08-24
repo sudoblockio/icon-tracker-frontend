@@ -1,69 +1,85 @@
 import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config' 
+import { types } from 'babel-core';
 
-const GET_BLOCKLIST='blocks/GET_BLOCKLIST';
-const GET_BLOCKINFO='blocks/GET_BLOCKINFO'
-const GET_BLOCKTXLIST='blocks/GET_BLOCKTXLIST'
+const BLOCK_LIST = 'BLOCK_LIST'
+const BLOCKLISTFULFILLED = 'BLOCK_LIST_FULFILLED'
+const BLOCKLISTREJECTED = 'BLOCK_LIST_REJECTED'
 
 const getblockList = (payload) => ({
-    type: GET_BLOCKLIST,
+    type: BLOCK_LIST,
+    options: {
+        method: 'GET',
+        actionTypes: {
+            success: BLOCKLISTFULFILLED,
+            error: BLOCKLISTREJECTED
+        },
+        headers: {
+            "Content-Type": "application/json"
+          }
+    },
     payload
 });
 
-const getblockInfo = (payload) => ({
-    type: GET_BLOCKINFO,
-    payload
-});
+// const getblockInfo = (payload) => ({
+//     type: GET_BLOCKINFO,
+//     payload
+// });
 
-const getblockTxList = (payload) => ({
-    type: GET_BLOCKTXLIST,
-    payload
-});
+// const getblockTxList = (payload) => ({
+//     type: GET_BLOCKTXLIST,
+//     payload
+// });
 
-export const blockList = () => async (dispatch) => {
+export const blockList =  (payload) => async dispatch => {
     const trackerApi = await trackerApiInstance()
-    try {const response = await trackerApi.get('/v1/blocks');
-    console.log(response,"FROM THE STORE")
-    if (response.ok) {
-        const data = await response.json();
-         dispatch(getblockList(data))
-    }}
+    try {
+        return async function (dispatch) {
+           const response = await trackerApi.get(makeUrl('/v1/blocks', payload))
+            console.log(response, "response")
+            dispatch ({
+                type: 'BLOCK_LIST',
+                payload: response
+            }    )
+
+        }  
+    }
     catch (e) {
         console.log(e, "e from the store")
     }
 }
 
-
-// export async function blockList(payload) {
+// export const blockList = async (payload) => async (dispatch) => {
 //     const trackerApi = await trackerApiInstance()
-//     return new Promise((resolve, reject) => {
-//       trackerApi.get(makeUrl('/v1/blocks', payload))
-//         .then(result => {
-//           console.log(result, "from rest")
-//           resolve(result.data)
-//         })
-//         .catch(error => {
-//           reject(error)
-//         })
-//     })
-//   }
+//     try {
+//         const response = await trackerApi.get(makeUrl('/v1/blocks', payload));
+//         console.log(response, "response")
+//         if (response.ok) {
+//             const data = response.data;
+//              dispatch(getblockList(data))
+//         }}
+//     catch (e) {
+//         console.log(e, "e from the store")
+//     }
+// }
 
-export const blockInfo = (payload) => async (dispatch) => {
-    const trackerApi = await trackerApiInstance();
-    const response = trackerApi.get(makeUrl('/v3/block/info', payload));
-    if (response.ok) {
-        const data = await response.data;
-        dispatch(getblockInfo(data))
-    }
-};
+
+// export const blockInfo = (payload) => async (dispatch) => {
+//     const trackerApi = await trackerApiInstance();
+//     const response = trackerApi.get(makeUrl('/v3/block/info', payload));
+//     if (response.ok) {
+//         const data = await response.data;
+//         dispatch(getblockInfo(data))
+//     }
+// };
 
 export const blockTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
     const response = trackerApi.get(makeUrl('/v3/block/txList', payload));
     if (response.ok) {
         const data = await response.data;
-        dispatch(getblockTxList(data))
+        // dispatch(getblockTxList(data))
     }
 };
 
@@ -76,7 +92,7 @@ const initialState = {
 let newState;
 const blocksReducer = (state = initialState, action) => {
     switch (action.type){
-        case GET_BLOCKLIST: {
+        case BLOCK_LIST: {
             newState = deepcopy(state)
             console.log(newState)
             return newState;

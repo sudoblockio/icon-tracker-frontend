@@ -43,14 +43,13 @@ export async function getTrackerApiUrl() {
       default:
     }
   }
-
   return '/';
 }
 
 export async function getWalletApiUrl() {
   const configFile = await getConfigJsonFile();
   if (configFile && configFile.WALLET_API_URL) {
-    return configFile.WALLET_API_URL;
+    return configFile.WALLET_API_URL  ;
   }
 
   if (process.env.REACT_APP_ENV) {

@@ -54,8 +54,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
+function mapDispatchToProps(dispatch)  {
+  return  {
     addressVotedList: payload => dispatch(addressVotedList(payload)),
     contractTxList: payload => dispatch(contractTxList(payload)),
     contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),

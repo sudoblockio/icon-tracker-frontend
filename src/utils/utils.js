@@ -241,10 +241,13 @@ export function isContractAddress(address) {
 }
 
 export function makeUrl(url, payload) {
+    // GETs:
     if (!payload) {
+        console.log(url, "url")
         return url
     }
-
+    console.log(payload, "payload from makeUrl")
+    console.log(url, "url from makeUrl")
     let result = url
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`

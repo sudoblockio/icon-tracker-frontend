@@ -16,11 +16,11 @@ import {
     addressVotedList
 } from './address'
 
-import {
-    blockList,
-    blockInfo,
-    blockTxList,
-} from './block'
+// import {
+//     blockList,
+//     blockInfo,
+//     blockTxList,
+// } from './block'
 
 import {
     contractList,
@@ -79,9 +79,9 @@ export {
     addressTokenTxList,
     addressVotedList,
     
-    blockList,
-    blockInfo,
-    blockTxList,
+    // blockList,
+    // blockInfo,
+    // blockTxList,
 
     contractList,
     contractInfo,

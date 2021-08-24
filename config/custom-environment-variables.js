@@ -17,7 +17,7 @@ const mainnet = {
 }
 
 const sejong = {
-    // values are inject by node
+    // values are injected by node
     // NODE_ENV=sejong:
     secretPort: "SECRET_VALUE",
     secretServer: 'SECRET_SERVER',
@@ -31,5 +31,19 @@ const sejong = {
     
 }
 
-const config = {mainnet, sejong}
+const testnet1 = {
+    secretPort: "SECRET_VALUE",
+    secretServer: 'SECRET_SERVER',
+    backendAPIRoot: 'API_ROOT',
+    blocksPrefix: 'BLOCKS_PREFIX',
+    settings: {
+        testnet1: {
+            __name: "TESTNET1",
+            __format: "js"
+        }
+    }
+    
+}
+
+const config = {mainnet, sejong, testnet1}
 module.exports = config[env]
