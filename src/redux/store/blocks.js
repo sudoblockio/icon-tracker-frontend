@@ -9,16 +9,6 @@ const BLOCKLISTREJECTED = 'BLOCK_LIST_REJECTED'
 
 const getblockList = (payload) => ({
     type: BLOCK_LIST,
-    options: {
-        method: 'GET',
-        actionTypes: {
-            success: BLOCKLISTFULFILLED,
-            error: BLOCKLISTREJECTED
-        },
-        headers: {
-            "Content-Type": "application/json"
-          }
-    },
     payload
 });
 console.log(getblockList, "blocklist")
@@ -42,6 +32,10 @@ console.log(getblockList, "blocklist")
 
 
 export const blockList = (payload) => async (dispatch) => {
+    const search = payload
+    search.limit = search.count
+    delete search.count;
+    delete search.page;
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl('/v1/blocks', payload));
