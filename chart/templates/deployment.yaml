@@ -4,12 +4,11 @@ metadata:
   name: {{ .Release.Name }}
   labels:
 {{ include "labels" . | indent 6 }}
-
 spec:
   selector:
     matchLabels:
 {{ include "selectorLabels" . | indent 6 }}
-  replicas: {{ .Values.api.replicaCount }}
+  replicas: {{ .Values.deployment.replicas }}
   template:
     metadata:
       {{- if .Values.deployment.annotations }}
@@ -19,41 +18,23 @@ spec:
       labels:
 {{ include "labels" . | indent 8 }}
     spec:
+    {{- if .Values.deployment.affinity }}
+      affinity:
+        {{ tpl .Values.deployment.affinity . | nindent 8 | trim }}
+    {{- end }}
+    {{- if .Values.deployment.tolerations }}
+      tolerations:
+        {{ tpl .Values.deployment.tolerations . | nindent 8 | trim }}
+    {{- end }}
+      {{- if .Values.deployment.priorityClassName }}
+      priorityClassName: {{ .Values.deployment.priorityClassName | quote }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-api
           image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
           imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.api.internalPort }}
-          livenessProbe:
-            httpGet:
-              path: {{ .Values.api.healthPrefix }}
-              port: {{ .Values.api.healthPort }}
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.api.healthPrefix }}
-              port: {{ .Values.api.healthPort }}
-          env:
-            - name: NAME
-              value: {{ .Values.networkName }}
-            - name: NETWORK_NAME
-              value: {{ .Values.networkName }}
-            - name: PORT
-              value: {{ .Values.api.internalPort }}
-            - name: HEALTH_PORT
-              value: {{ .Values.api.healthPort }}
-            - name: REST_PREFIX
-              value: {{ .Values.api.restPrefix }}
-            - name: METRICS_PORT
-              value: {{ .Values.api.metricsPort }}
-            - name: HEALTH_PREFIX
-              value: {{ .Values.api.healthPrefix }}
-            - name: METRICS_PREFIX
-              value: {{ .Values.api.metricsPrefix }}
-            - name: LOG_LEVEL
-              value: {{ .Values.api.logLevel }}
-            - name: LOG_TO_FILE
-              value: {{ .Values.api.logToFile }}
+            - containerPort: {{ .Values.deployment.port }}
           resources:
             requests:
               cpu: {{ .Values.deployment.resources.requests.cpu }}
@@ -61,3 +42,7 @@ spec:
             limits:
               cpu: {{ .Values.deployment.resources.limits.cpu }}
               memory: {{ .Values.deployment.resources.limits.memory }}
+      {{- if .Values.deployment.nodeSelector }}
+      nodeSelector:
+      {{ tpl .Values.deployment.nodeSelector . | indent 8 | trim }}
+      {{- end }}
