@@ -1,7 +1,7 @@
 import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config' 
-import { types } from 'babel-core';
+
 
 const BLOCK_LIST = 'BLOCK_LIST'
 const BLOCKLISTFULFILLED = 'BLOCK_LIST_FULFILLED'
@@ -21,6 +21,7 @@ const getblockList = (payload) => ({
     },
     payload
 });
+console.log(getblockList, "blocklist")
 
 // const getblockInfo = (payload) => ({
 //     type: GET_BLOCKINFO,
@@ -32,37 +33,27 @@ const getblockList = (payload) => ({
 //     payload
 // });
 
-export const blockList =  (payload) => async dispatch => {
+// export const blockList = (payload) => async (dispatch) => {
+//     const trackerApi = await trackerApiInstance()
+//         return trackerApi.get(makeUrl('/v1/blocks', payload))
+//         .then(result => dispatch(getblockList(result)))
+//         .catch(error => console.log(error))  
+//     }
+
+
+export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
-        return async function (dispatch) {
-           const response = await trackerApi.get(makeUrl('/v1/blocks', payload))
-            console.log(response, "response")
-            dispatch ({
-                type: 'BLOCK_LIST',
-                payload: response
-            }    )
-
-        }  
-    }
+        const response = await trackerApi.get(makeUrl('/v1/blocks', payload));
+        console.log(response, "response")
+        if (response.ok) {
+            const data = response.data;
+             dispatch(getblockList(data))
+        }}
     catch (e) {
         console.log(e, "e from the store")
     }
 }
-
-// export const blockList = async (payload) => async (dispatch) => {
-//     const trackerApi = await trackerApiInstance()
-//     try {
-//         const response = await trackerApi.get(makeUrl('/v1/blocks', payload));
-//         console.log(response, "response")
-//         if (response.ok) {
-//             const data = response.data;
-//              dispatch(getblockList(data))
-//         }}
-//     catch (e) {
-//         console.log(e, "e from the store")
-//     }
-// }
 
 
 // export const blockInfo = (payload) => async (dispatch) => {

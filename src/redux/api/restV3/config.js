@@ -30,7 +30,7 @@ export async function getTrackerApiUrl() {
       // return 'http://10.201.11.74:8081';
       case 'testnet1':
         // return 'https://bicon.tracker.solidwallet.io';
-      return 'https://localhost:8000';
+      return 'https://explorer.icon.geometry-dev.net';
       case 'sejong':
         return 'https://sejong.tracker.solidwallet.io';
       case 'custom':

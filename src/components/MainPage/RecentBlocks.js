@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
 import { LoadingComponent, BlockLink } from '../../components';

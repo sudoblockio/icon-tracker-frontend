@@ -252,7 +252,8 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
-    return result
+    console.log("/api" + result)
+    return "/api" + result
 }
 
 export function randomUint32() {
