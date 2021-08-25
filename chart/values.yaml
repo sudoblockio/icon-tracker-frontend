@@ -4,16 +4,9 @@ networkName: mainnet
 deployment:
   image:
     repository: 868027517775.dkr.ecr.us-west-2.amazonaws.com/icon-explorer-frontend
-    tag: latest
+    tag: 29
     pullPolicy: IfNotPresent
-  replicaCount: 1
-  # Defines additional annotations for app pods. This should be formatted as a multi-line string.
-  #
-  # ```yaml
-  # annotations: |
-  #   "sample/annotation1": "foo"
-  #   "sample/annotation2": "bar"
-  # ```
+  replicas: 1
   annotations: null
   resources:
     requests:
@@ -22,7 +15,11 @@ deployment:
     limits:
       cpu: "1"
       memory: "1024Mi"
-  backendAPIRoot: https://users.example.com
+  tolerations: ""
+  nodeSelector: null
+  affinity: null
+  priorityClassName: ""
+  port: 8080
 
 autoscaler:
   enabled: true
@@ -39,27 +36,3 @@ ingress:
   regionalHost: "app.region.example.com"
   apexHost: "app.example.com"
   annotations: null
-
-api:
-  replicaCount: 1
-
-  # Ports
-  internalPort: 80
-  healthPort: 9300
-  metricsPort: 9400
-
-  # Prefixes
-  restPrefix: api/v1
-  websocketPrefix: /ws
-  healthPrefix: /healthcheck
-  metricsPrefix: metrics
-
-  # Monitoring
-  healthPollingInterval: 1
-  logLevel: debug
-  logToFile: true
-  logFileName: "./api.log"
-
-  # DB
-  dbUser: postgres
-  dbPassword: changeme
