@@ -4,7 +4,7 @@ networkName: mainnet
 deployment:
   image:
     repository: 868027517775.dkr.ecr.us-west-2.amazonaws.com/icon-explorer-frontend
-    tag: 29
+    tag: latest
     pullPolicy: IfNotPresent
   replicas: 1
   annotations: null
