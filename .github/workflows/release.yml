@@ -38,16 +38,16 @@ jobs:
           aws-region: us-west-2
 
       - name: Login to Amazon ECR
-        id: login-ecr-worker
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr-worker.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: icon-explorer-frontend
           IMAGE_TAG: ${{ steps.source.outputs.TAG }}
         run: |
-          docker build --build-arg SERVICE_NAME=worker -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --target prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Login to DockerHub
@@ -60,8 +60,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-args:
-            - SERVICE_NAME=api
           file: ./Dockerfile
           target: prod
           push: true
