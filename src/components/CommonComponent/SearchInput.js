@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { isAddress } from 'web3-utils';
+import searchBlocks from '../../redux/store/search'
 
 export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
 export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
@@ -34,7 +34,7 @@ function SearchInput() {
     const searchTerm = e.target.value
 
     let searchByType = (searchTerm) => {
-      return block_re.test(searchTerm) === true ? dispatch(/*searchBlocks(searchTerm)*/)
+      return block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm))
             : add_re.test(searchTerm) === true ? dispatch(/*searchAdd(searchTerm)*/)
             : tx_re.test(searchTerm) === true ? dispatch(/*searchTx(searchTerm)*/)
             : setError("Not found")

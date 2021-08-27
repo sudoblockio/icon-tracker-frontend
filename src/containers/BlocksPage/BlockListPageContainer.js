@@ -4,21 +4,16 @@ import { withRouter } from 'react-router-dom';
 import { blockList } from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
+  console.log("state", state)
   return {
     url: state.router.location,
     ...state.blocks
   };
 }
 
-// const mapDispatchToProps = () => async (dispatch) =>  {
-//   return {
-//     blockList: payload =>  dispatch(blockList(payload)),
-//   };
-// }
-
 function mapDispatchToProps(dispatch) {
   return {
-    blockList: payload =>  dispatch(blockList(payload)),
+    blockList: payload => dispatch(blockList(payload)),
   };
 }
 

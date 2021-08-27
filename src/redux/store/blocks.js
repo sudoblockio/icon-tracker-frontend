@@ -10,8 +10,8 @@ const BLOCK_INFO = 'BLOCK_INFO'
 const BLOCK_TX_LIST = 'BLOCK_TX_LIST'
 
 const getblockList = (payload) => ({
-    type: BLOCK_LIST,
-    payload
+        type: BLOCK_LIST,
+        payload
 });
 
 const getblockInfo = (payload) => ({
@@ -32,9 +32,12 @@ export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        if (response.ok) {
+        console.log(response, "response")
+        if (response.data) {
             const data = response.data;
+            console.log(data, "data")
              dispatch(getblockList(data))
+             return data
         }}
     catch (e) {
         console.log(e, "e from the store")
@@ -47,6 +50,7 @@ export const blockInfo = (payload) => async (dispatch) => {
     if (response.ok) {
         const data = await response.data;
         dispatch(getblockInfo(data))
+        return data
     }
 };
 
@@ -69,7 +73,9 @@ let newState;
 const blocksReducer = (state = initialState, action) => {
     switch (action.type){
         case BLOCK_LIST: {
+
             newState = deepcopy(state)
+            newState.blocks.data = action.payload
             return newState;
         }
         default:

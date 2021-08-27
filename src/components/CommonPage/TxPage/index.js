@@ -15,6 +15,7 @@ import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
 
 class TxPage extends Component {
     constructor(props) {
+        console.log(props, "TXPAGGGEEE")
         super(props)
         this.txType = ''
         this.urlIndex = ''
