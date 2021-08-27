@@ -5,7 +5,6 @@ import {
 
 class BlockListPage extends Component {
 	render() {
-		{console.log({...this.props}, "props from component")}
 		return <TxPage {...this.props}/>
 	}
 }

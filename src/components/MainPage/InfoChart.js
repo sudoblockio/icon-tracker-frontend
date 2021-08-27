@@ -131,7 +131,6 @@ class InfoChart extends Component {
       min = Math.floor(min / division) * division
       max = min + step * 5
 
-      console.log(min, max, step)
 
       return { 
         labels, 

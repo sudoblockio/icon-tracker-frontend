@@ -32,10 +32,8 @@ export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        console.log(response, "response")
         if (response.data) {
             const data = response.data;
-            console.log(data, "data")
              dispatch(getblockList(data))
              return data
         }}
@@ -73,7 +71,6 @@ let newState;
 const blocksReducer = (state = initialState, action) => {
     switch (action.type){
         case BLOCK_LIST: {
-
             newState = deepcopy(state)
             newState.blocks.data = action.payload
             return newState;
