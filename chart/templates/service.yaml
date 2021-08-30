@@ -8,7 +8,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.externalPort }}
-      targetPort: {{ .Values.service.internalPort }}
+      targetPort: {{ .Values.deployment.port }}
       protocol: TCP
       name: {{ .Values.service.name }}
   selector:
