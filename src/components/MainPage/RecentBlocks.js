@@ -4,8 +4,9 @@ import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
 import { LoadingComponent, BlockLink } from '../../components';
 
 function RecentBlocks (props) {
-    const { loading, tmainBlock } = props
-    const list = tmainBlock ? tmainBlock.slice(0, 10) : []
+    console.log(props, "recentBlocks props")
+    const { loading, blocks } = props
+    const list = blocks ? blocks.slice(0, 10) : []
 
         return (
             <li className="left">

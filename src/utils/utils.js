@@ -241,7 +241,6 @@ export function isContractAddress(address) {
 }
 
 export function makeUrl(url, payload) {
-    // GETs:
     if (!payload) {
         return url
     }

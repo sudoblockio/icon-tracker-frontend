@@ -29,6 +29,7 @@ export const blockList = (payload) => async (dispatch) => {
     search.limit = search.count
     delete search.count;
     delete search.page;
+    console.log(payload, "payload")
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
