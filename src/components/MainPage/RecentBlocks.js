@@ -19,7 +19,7 @@ function RecentBlocks (props) {
                     ) : (
                         <ul className={"list"} style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((block, index) => {
-                                const { number, createDate, hash, transaction_count } = block
+                                const { number, createDate, timestamp, hash, transaction_count } = block
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
@@ -41,7 +41,7 @@ function RecentBlocks (props) {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            <em>{getTimezoneMomentTime(createDate)}</em>
+                                            <em>{getTimezoneMomentTime(timestamp)}</em>
                                         </p>
                                     </li>
                                 )
