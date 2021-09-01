@@ -17,7 +17,6 @@ const createRootReducer = (history) => combineReducers ({
 
 let enhancer;
 
-// TODO: add all the env vars
 if (process.env.NODE_ENV === "production") {
     enhancer = applyMiddleware(thunk);
   } else {

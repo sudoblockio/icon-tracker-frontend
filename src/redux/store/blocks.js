@@ -29,10 +29,12 @@ export const blockList = (payload) => async (dispatch) => {
     search.limit = search.count
     delete search.count;
     delete search.page;
-    console.log(payload, "payload")
+
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
+        console.log(response, "respomse from RHEANNONE")
+
         if (response.data) {
             const data = response.data;
              dispatch(getblockList(data))
@@ -54,6 +56,7 @@ export const blockInfo = (payload) => async (dispatch) => {
 };
 
 export const blockTxList = (payload) => async (dispatch) => {
+    console.log(payload, "payload from blockinfo")
     const trackerApi = await trackerApiInstance();
     const response = trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
     if (response.ok) {

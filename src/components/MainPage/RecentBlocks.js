@@ -19,24 +19,24 @@ function RecentBlocks (props) {
                     ) : (
                         <ul className={"list"} style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((block, index) => {
-                                const { blockHeight, createDate, hash, txCount } = block
+                                const { number, createDate, hash, transaction_count } = block
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
                                         <p className="a">
                                             Block
                                             <em>
-                                                <BlockLink to={blockHeight} label={numberWithCommas(blockHeight)} />
+                                                <BlockLink to={number} label={numberWithCommas(number)} />
                                             </em>
                                         </p>
                                         <p className="b">
                                             Transactions
-                                            <em>{numberWithCommas(txCount)}</em>
+                                            <em>{numberWithCommas(transaction_count)}</em>
                                         </p>
                                         <p className="c">
                                             Hash
                                             <em>
-                                                <BlockLink to={blockHeight} label={hash} />
+                                                <BlockLink to={number} label={hash} />
                                             </em>
                                         </p>
                                         <p className="d">
