@@ -69,7 +69,6 @@ const BlockCell = ({ height }) => {
 class TxTableBody extends Component {
 	render() {
 		const TableRow = (_props) => {
-			{console.log(this.props, "props from tablebody ")}
 			const {
 				txType,
 				data,
@@ -226,14 +225,16 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.BLOCKS:
+					const amtToNum = parseInt(data.transaction_amount, 16)
+					const blockAmount = amtToNum / Math.pow(10, 18)
 					return (
 						<tr>
 							<BlockCell height={data.number} />
 							<DateCell date={data.timestamp} />
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td><BlockLink label={data.hash} to={data.number} ellipsis /></td>
-							<AmountCell amount={data.amount} symbol="ICX" />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<AmountCell amount={data.transaction_amount} symbol="ICX" />
+							<AmountCell amount={data.transaction_fees} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:

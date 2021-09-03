@@ -12,12 +12,13 @@ const getsearchBlocks = (payload) => ({
 
 export const searchBlocks = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
-    try 
-   { const response = trackerApi.get(makeUrl('/v0/search/Search', payload));
-    if (response.ok) {
-        const resultData = await response.data.data;
-        dispatch(getsearchBlocks(resultData))
-        return resultData
+    try { 
+        console.log(payload, "payload from search")
+        const response = trackerApi.get(makeUrl('/v1/blocks/', payload));
+        if (response.data) {
+            const resultData = await response.data.data;
+            dispatch(getsearchBlocks(resultData))
+            return resultData
     }}
     catch (e) {
         console.log(e, "e from search")
@@ -43,16 +44,15 @@ const initialState = {
   };
   
 let newState;
-
 const searchReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);
-            newState = action.data
+            newState = action.payload
             return newState;
         }
         default: 
-        return state;
+            return state;
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
+import { numberWithCommas, getTimezoneMomentTime, getTimezoneMomentKSTTime } from '../../utils/utils';
 import { LoadingComponent, BlockLink } from '../../components';
 
 function RecentBlocks (props) {
@@ -41,6 +41,7 @@ function RecentBlocks (props) {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
+                                            {console.log(timestamp)}
                                             <em>{getTimezoneMomentTime(timestamp)}</em>
                                         </p>
                                     </li>

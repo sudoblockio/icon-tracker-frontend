@@ -2,7 +2,6 @@ import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config' 
 
-// refactor to use global config w env vars
 const BLOCK_PREFIX = '/v1/blocks'
 
 const BLOCK_LIST = 'BLOCK_LIST'
@@ -33,8 +32,6 @@ export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        console.log(response, "respomse from RHEANNONE")
-
         if (response.data) {
             const data = response.data;
              dispatch(getblockList(data))
@@ -46,12 +43,18 @@ export const blockList = (payload) => async (dispatch) => {
 }
 
 export const blockInfo = (payload) => async (dispatch) => {
+    console.log(payload, "payload from info")
     const trackerApi = await trackerApiInstance();
-    const response = trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-    if (response.ok) {
+    try {
+        const response = trackerApi.get(makeUrl(`${BLOCK_PREFIX}/${payload.height}`, payload));
+        console.log("response from blockinfo")
+    if (response.data) {
         const data = await response.data;
         dispatch(getblockInfo(data))
         return data
+    }}
+    catch (e) {
+        console.log(e, "error from RHEANNONE")
     }
 };
 
@@ -78,6 +81,11 @@ const blocksReducer = (state = initialState, action) => {
             newState = deepcopy(state)
             newState.blocks.data = action.payload
             return newState;
+        }
+        case BLOCK_INFO: {
+            newState = deepcopy(state)
+            newState.block = action.payload
+            return newState
         }
         default:
       return state;
