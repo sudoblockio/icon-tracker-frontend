@@ -76,7 +76,7 @@ class MainPage extends Component {
 function mapStateToProps(state) {
         return {
             blocks: state.blocks.blocks.data,
-            transactions: state.transactions.recentTx
+            transactions: state.transactions.data
         }
 }
 

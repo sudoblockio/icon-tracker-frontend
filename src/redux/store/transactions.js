@@ -37,7 +37,7 @@ const transactionsReducer = (state = initialState, action) => {
     switch(action.type) {
         case TX_LIST: {
             newState = deepcopy(state)
-            newState.recentTx = action.payload
+            newState.recentTx.data = action.payload
             return newState
         }
         default:

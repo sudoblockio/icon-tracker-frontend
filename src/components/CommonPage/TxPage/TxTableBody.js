@@ -184,11 +184,11 @@ class TxTableBody extends Component {
 				case TX_TYPE.TRANSACTIONS:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.amount} symbol="ICX" />
+							<TxHashCell isError={isError} txHash={data.hash} />
+							<BlockCell height={data.block_number} />
+							<DateCell date={data.timestamp} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.value} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
