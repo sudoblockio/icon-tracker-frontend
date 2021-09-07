@@ -92,8 +92,6 @@ export function onlyDate(date) {
 }
 
 export function getTimezoneMomentTime(date) {
-    const somedate = new Date(date)
-    console.log(somedate)
     const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1
     return moment(date)
         .utcOffset(timezoneOffset)

@@ -82,14 +82,14 @@ class DetailPage extends Component {
                 return <PendingPage error={error}/>
             } 
             else if (isNotFoundPage) {
-                console.log(error, "error")
+
                 return <NotFoundPage error={error}/>
             }
             else {
                 const { InfoComponent, TabsComponent } = this.props
                 return (
                     <div className="content-wrap">
-                        {console.log(this.props)}
+
                         <InfoComponent {...this.props}/>
                         <TabsComponent {...this.props} {...this.state} changeTab={this.changeTab}/>
                     </div>

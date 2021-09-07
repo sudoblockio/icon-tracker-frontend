@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { convertNumberToText } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 
+
 class RecentTransactions extends Component {
     render() {
-        // TODO: figure out why this was this.props.info when there was no info prop. 
-        const { loading, tmainTx } = this.props
-        const list = tmainTx ? tmainTx.slice(0, 10) : []
+        console.log(this.props, "transaction props")
+        const { loading, transactions } = this.props
+        const list = transactions ? transactions.slice(0, 10) : []
         return (
             <li className="right">
                 <p className="title">Transactions</p>
@@ -19,7 +20,7 @@ class RecentTransactions extends Component {
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((tx, index) => {
-                                const { txHash, amount, fee, state } = tx
+                                const { hash, value, fee, state } = tx
                                 const isSuccess = Number(state) === 1
                                 return (
                                     <li key={index}>
@@ -33,13 +34,13 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertNumberToText(amount)} ICX
+                                                {convertNumberToText(value)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
                                             Hash
                                             <em>
-                                                <TransactionLink to={txHash} label={txHash} />
+                                                <TransactionLink to={hash} label={hash} />
                                             </em>
                                         </p>
                                         <p className="d">

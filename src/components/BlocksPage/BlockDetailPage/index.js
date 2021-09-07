@@ -11,7 +11,6 @@ import {
 class BlockDetailPage extends Component {
 
   render() {
-    {console.log(this.props, "props from blockdeatil")}
     const { block } = this.props;
     const { loading, error } = block
 

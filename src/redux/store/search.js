@@ -13,7 +13,6 @@ const getsearchBlocks = (payload) => ({
 export const searchBlocks = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try { 
-        console.log(payload, "payload from search")
         const response = trackerApi.get(makeUrl('/v1/blocks/', payload));
         if (response.data) {
             const resultData = await response.data.data;

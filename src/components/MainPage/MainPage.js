@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { InfoSummary, RecentBlocks, RecentTransactions, SearchInput } from '../../components'
 import { search } from '../../redux/actions/searchActions';
 import { blockList } from '../../redux/store/blocks'
+import { txList } from '../../redux/store/transactions'
 import { connect } from 'react-redux'
+
 
 class MainPage extends Component {
 
@@ -33,6 +35,7 @@ class MainPage extends Component {
     componentWillMount() {
         const payload = {count: 10, page: 1}
         this.props.blockList(payload)
+        this.props.txList(payload)
     }
 
     render() {
@@ -72,14 +75,16 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
         return {
-            blocks: state.blocks.blocks.data
+            blocks: state.blocks.blocks.data,
+            transactions: state.transactions.recentTx
         }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         search: param => dispatch(search(param)),
-        blockList: payload => dispatch(blockList(payload))
+        blockList: payload => dispatch(blockList(payload)),
+        txList: payload => dispatch(txList(payload))
     };
 }
 

@@ -43,25 +43,19 @@ export const blockList = (payload) => async (dispatch) => {
 }
 
 export const blockInfo = (payload) => async (dispatch) => {
-    console.log(payload, "payload from info")
     const trackerApi = await trackerApiInstance();
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        console.log(response, "response from blockinfo")
         if (response.ok) {
-            console.log(response, "response from blockinfo")
             const data = response.data;
-            console.log(data, "more data")
             dispatch(getblockInfo(data))
             return data
     }}
     catch (e) {
-        console.log(e, "error from RHEANNONE")
     }
 };
 
 export const blockTxList = (payload) => async (dispatch) => {
-    console.log(payload, "payload from blockinfo")
     const trackerApi = await trackerApiInstance();
     const response = trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
     if (response.ok) {

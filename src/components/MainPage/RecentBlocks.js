@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { numberWithCommas, getTimezoneMomentTime, getTimezoneMomentKSTTime } from '../../utils/utils';
+import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
 import { LoadingComponent, BlockLink } from '../../components';
 
 function RecentBlocks (props) {
-    console.log(props, "recentBlocks props")
     const { loading, blocks } = props
     const list = blocks ? blocks.slice(0, 10) : []
 
@@ -41,7 +40,7 @@ function RecentBlocks (props) {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            {console.log(timestamp)}
+                                            
                                             <em>{getTimezoneMomentTime(timestamp)}</em>
                                         </p>
                                     </li>
