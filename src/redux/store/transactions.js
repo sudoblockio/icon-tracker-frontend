@@ -11,9 +11,11 @@ const getTxList = (payload) => ({
 });
 
 export const txList = (payload) => async (dispatch) => {
+    console.log(payload, "tx list payload")
     const trackerApi = await trackerApiInstance()
     try {
         const res = await trackerApi.get(makeUrl(`/v1/transactions`, payload))
+        console.log(payload, "payload from txlist")
         if (res.data) {
             const data = res.data
             dispatch(getTxList(data))

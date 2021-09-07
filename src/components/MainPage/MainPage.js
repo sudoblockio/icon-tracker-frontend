@@ -33,7 +33,7 @@ class MainPage extends Component {
     }
 
     componentWillMount() {
-        const payload = {count: 10, page: 1}
+        const payload = {limit: 10}
         this.props.blockList(payload)
         this.props.txList(payload)
     }

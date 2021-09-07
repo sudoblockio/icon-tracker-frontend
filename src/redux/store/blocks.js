@@ -24,10 +24,7 @@ const getblockTxList = (payload) => ({
   });
 
 export const blockList = (payload) => async (dispatch) => {
-    const search = payload
-    search.limit = search.count
-    delete search.count;
-    delete search.page;
+    console.log(payload, "blocklist payload")
 
     const trackerApi = await trackerApiInstance()
     try {
@@ -38,7 +35,7 @@ export const blockList = (payload) => async (dispatch) => {
              return data
         }}
     catch (e) {
-        console.log(e, "e from the store")
+        console.log(e, "e from the store 1")
     }
 }
 

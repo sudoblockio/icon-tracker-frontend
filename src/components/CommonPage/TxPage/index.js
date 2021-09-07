@@ -57,10 +57,13 @@ class TxPage extends Component {
         this.getTxList(pageId, count, urlIndex)
     }
 
-    getTxList = (page, count, urlIndex) => {
+    getTxList = (page, count, urlIndex, limit) => {
         const query = {
             page: isNumeric(page) ? page : 1,
+            // todo: refactor to remove "count"
             count: isNumeric(count) ? count : 25,
+            // 
+            limit: 25
         }
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
