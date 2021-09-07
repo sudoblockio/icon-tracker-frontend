@@ -63,6 +63,7 @@ class MainPage extends Component {
                         <div className="wrap-holder">
                             <ul className="content">
                                 <RecentBlocks {...this.props} />
+                                {console.log(this.props, "component props")}
                                 <RecentTransactions {...this.props} />
                             </ul>
                         </div>
@@ -76,7 +77,7 @@ class MainPage extends Component {
 function mapStateToProps(state) {
         return {
             blocks: state.blocks.blocks.data,
-            transactions: state.transactions.data
+            transactions: state.transactions.recentTx.data
         }
 }
 
