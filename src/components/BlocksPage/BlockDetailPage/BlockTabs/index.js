@@ -13,7 +13,7 @@ import {
 class BlockTabs extends Component {
 
     render() {
-        {console.log(this.props)}
+        {console.log(this.props, "BlockTabs")}
         const { on, block, blockTx } = this.props
         const { loading, data } = block
         const { height } = data

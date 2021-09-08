@@ -13,8 +13,9 @@ class BlockDetailPage extends Component {
   render() {
     console.log(this.props, "index.js")
     const { block } = this.props;
-    const { loading, error } = block
-
+    const { loading, error, data } = block
+    console.log(data, "datat over here")
+    
     return (
       
       <DetailPage

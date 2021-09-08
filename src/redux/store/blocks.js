@@ -1,5 +1,6 @@
 import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
+import { INITIAL_STATE} from '../../../src/utils/const'
 import { trackerApiInstance } from '../api/restV3/config' 
 
 const BLOCK_PREFIX = '/v1/blocks'
@@ -69,9 +70,9 @@ export const blockInfo = (payload) => async (dispatch) => {
 
 
 const initialState = {
-    blocks: ['ARR'],
-    block: ['OBJ'],
-    blockTx: ['ARR'],
+    blocks: INITIAL_STATE['ARR'],
+    block: INITIAL_STATE['OBJ'],
+    blockTx: INITIAL_STATE['ARR'],
   }
 
 let newState;

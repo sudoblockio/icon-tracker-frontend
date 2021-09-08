@@ -20,6 +20,7 @@ class DetailPage extends Component {
     }
     
     componentWillMount() {
+        console.log(this.props.url, "url props")
         this.setInitialData(this.props.url)
     }
 
@@ -48,7 +49,9 @@ class DetailPage extends Component {
             console.log(query, "query from detail page")
             console.log(this.props, "setInitialData")
             const { TABS } = this.props
+            console.log(this.props.getInfo, "getinfo???")
             this.props.getInfo(query)
+            console.log(this.props, "experiment")
             this.setTab(findTabIndex(TABS, url.hash), query)
         }
     }
