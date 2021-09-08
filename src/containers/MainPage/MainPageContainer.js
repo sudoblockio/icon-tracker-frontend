@@ -6,7 +6,6 @@ import { blockList} from '../../redux/store/blocks'
 import { txList } from '../../redux/store/transactions'
 
 function mapStateToProps(state) {
-  console.log(state, "andheretwo")
   return {
       blocks: state.blocks.blocks,
       transactions: state.transactions

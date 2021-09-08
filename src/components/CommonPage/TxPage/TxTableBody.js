@@ -175,10 +175,10 @@ class TxTableBody extends Component {
 				case TX_TYPE.BLOCK_TX:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.amount} symbol="ICX" />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<TxHashCell isError={isError} txHash={data.hash} />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.type} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.transaction_amount} symbol="ICX" />
+							<AmountCell amount={data.transaction_fees} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TRANSACTIONS:

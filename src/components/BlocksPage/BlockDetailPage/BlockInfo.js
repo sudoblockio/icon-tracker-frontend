@@ -34,11 +34,8 @@ class BlockInfo extends Component {
     }
 
     render() {
-        console.log(this.props.block, "line 37 BlockInfo.js")
 
         const { block } = this.props
-        console.log(this.props, "nextline")
-        console.log(block, "line40 BlockInfo.js")
 
         const { loading, data } = block
 
@@ -46,7 +43,8 @@ class BlockInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const { number, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
+                console.log(data[0], "the next data jedi returns")
+                const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peerId || crep
@@ -81,8 +79,8 @@ class BlockInfo extends Component {
                                                     <td>-</td>
                                                 ) : (
                                                     <td>
-                                                        {dateToUTC(createDate)}
-                                                        <em>{utcDateInfo(createDate)}</em>
+                                                        {dateToUTC(timestamp)}
+                                                        <em>{utcDateInfo(timestamp)}</em>
                                                     </td>
                                                 )}
                                             </tr>
@@ -93,7 +91,7 @@ class BlockInfo extends Component {
                                             <tr>
                                                 <td>Transactions</td>
                                                 <td>
-                                                    <span onClick={this.goAllTx}>{numberWithCommas(txCount)} Transaction(s)</span> in this block
+                                                    <span onClick={this.goAllTx}>{numberWithCommas(transaction_count)} Transaction(s)</span> in this block
                                                 </td>
                                             </tr>
                                             <tr>

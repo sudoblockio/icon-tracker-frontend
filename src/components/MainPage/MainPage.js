@@ -63,7 +63,6 @@ class MainPage extends Component {
                         <div className="wrap-holder">
                             <ul className="content">
                                 <RecentBlocks {...this.props} />
-                                {console.log(this.props, "component props")}
                                 <RecentTransactions {...this.props} />
                             </ul>
                         </div>
