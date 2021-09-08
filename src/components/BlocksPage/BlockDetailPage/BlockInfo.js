@@ -5,6 +5,7 @@ import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
 class BlockInfo extends Component {
+    
     handlePrevBlock = () => {
         const { block } = this.props
         const { data } = block
@@ -33,7 +34,10 @@ class BlockInfo extends Component {
     }
 
     render() {
+        console.log(this.props, "line 37 BlockInfo.js")
+
         const { block } = this.props
+        console.log(block, "line40 BlockInfo.js")
 
         const { loading, data } = block
 
@@ -41,8 +45,8 @@ class BlockInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const { height, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
-                const isFirst = height === 0
+                const { number, createDate, txCount, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
+                const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peerId || crep
                 return (
@@ -60,7 +64,7 @@ class BlockInfo extends Component {
                                                     <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>
-                                                    <em className="value">{numberWithCommas(height)}</em>
+                                                    <em className="value">{numberWithCommas(number)}</em>
                                                     <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>
@@ -97,7 +101,7 @@ class BlockInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Prev Hash</td>
-                                                <td>{prevHash ? <BlockLink to={height - 1} label={prevHash} /> : '-'}</td>
+                                                <td>{prevHash ? <BlockLink to={number - 1} label={prevHash} /> : '-'}</td>
                                             </tr>
                                             <tr>
                                                 <td>Block Size</td>
@@ -111,7 +115,7 @@ class BlockInfo extends Component {
                                                 <td>TxFee</td>
                                                 <td>{convertNumberToText(fee)} ICX</td>
                                             </tr>
-                                            {height === 0 && (
+                                            {number === 0 && (
                                                 <tr>
                                                     <td>Message</td>
                                                     <td className="message">{message}</td>

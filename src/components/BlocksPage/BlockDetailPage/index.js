@@ -11,6 +11,7 @@ import {
 class BlockDetailPage extends Component {
 
   render() {
+    console.log(this.props, "index.js")
     const { block } = this.props;
     const { loading, error } = block
 
@@ -21,10 +22,10 @@ class BlockDetailPage extends Component {
         error={error}
         TABS={BLOCK_TABS}
         ROUTE="/block"
-        getInfo={height => {this.props.blockInfo({ height })}}
+        getInfo={number => {this.props.blockInfo({ number })}}
         getList={[
-          height => {
-            this.props.blockTxList({height})
+          number => {
+            this.props.blockTxList({number})
           }
         ]}
         InfoComponent={BlockInfo}

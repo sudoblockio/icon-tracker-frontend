@@ -29,7 +29,6 @@ export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        console.log(response, "res from blockList")
         if (response.data) {
             const data = response.data;
              dispatch(getblockList(data))
@@ -42,12 +41,10 @@ export const blockList = (payload) => async (dispatch) => {
 
 export const blockTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
-    console.log(payload.height, "height? ")
     try {
-    const response = trackerApi.get(`/api${BLOCK_PREFIX}/${payload.height}`);
-    console.log(response, "res from blockTxList")
-    if (response.ok) {
-        const data = await response.data;
+    const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`);
+    if (response.data) {
+        const data = response.data;
         dispatch(getblockTxList(data))
     }}
     catch (e) {
@@ -59,12 +56,14 @@ export const blockInfo = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        if (response.ok) {
+        console.log(response, "res from blockinfo")
+        if (response.data) {
             const data = response.data;
             dispatch(getblockInfo(data))
             return data
     }}
     catch (e) {
+        console.log(e, "error from blockInfo")
     }
 };
 
@@ -85,14 +84,14 @@ const blocksReducer = (state = initialState, action) => {
         }
         case BLOCK_INFO: {
             newState = deepcopy(state)
-            newState.blocks.block = action.payload
-            console.log(newState, "state from reducer")
+            console.log(newState, "state from reducer BLOCKINFO")
+            newState.block = action.payload
             return newState
         }
         case BLOCK_TX_LIST: {
             newState = deepcopy(state)
-            newState.blocks.blockTx = action.payload
-            console.log(newState, "state from reducer")
+            newState.blockTx = action.payload
+            console.log(newState, "state from reducer BLOCKTXLIST")
             return newState
         }
         default:
