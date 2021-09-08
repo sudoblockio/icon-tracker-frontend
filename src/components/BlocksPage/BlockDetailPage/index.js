@@ -16,6 +16,7 @@ class BlockDetailPage extends Component {
     const { loading, error } = block
 
     return (
+      
       <DetailPage
         {...this.props}
         loading={loading}
@@ -25,7 +26,7 @@ class BlockDetailPage extends Component {
         getInfo={number => {this.props.blockInfo({ number })}}
         getList={[
           number => {
-            this.props.blockTxList({number})
+            this.props.blockTxList({ number, page: 1, count: 10})
           }
         ]}
         InfoComponent={BlockInfo}

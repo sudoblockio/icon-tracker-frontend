@@ -34,7 +34,7 @@ class BlockInfo extends Component {
     }
 
     render() {
-        console.log(this.props, "line 37 BlockInfo.js")
+        console.log(this.props.data, "line 37 BlockInfo.js")
 
         const { block } = this.props
         console.log(block, "line40 BlockInfo.js")

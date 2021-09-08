@@ -18,6 +18,7 @@ class DetailPage extends Component {
             on: 0
         }
     }
+    
     componentWillMount() {
         this.setInitialData(this.props.url)
     }
@@ -44,6 +45,8 @@ class DetailPage extends Component {
     setInitialData = (url) => {
         const query = url.pathname.split("/")[2]
         if (query) {
+            console.log(query, "query from detail page")
+            console.log(this.props, "setInitialData")
             const { TABS } = this.props
             this.props.getInfo(query)
             this.setTab(findTabIndex(TABS, url.hash), query)
@@ -73,6 +76,7 @@ class DetailPage extends Component {
     }
 
     render() {
+        
         {console.log(this.props, "detail page")}
         const { loading, error, pending } = this.props;
         const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending

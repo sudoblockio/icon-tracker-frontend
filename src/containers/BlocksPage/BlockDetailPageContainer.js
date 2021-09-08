@@ -3,19 +3,23 @@ import { BlockDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { blockInfo, blockTxList } from '../../redux/store/blocks';
 
-function mapStateToProps(state) {
+
+const mapStateToProps = (state) => {
+  console.log(state, "lookiehere")
   return {
     url: state.router.location,
     ...state.blocks,
-    // block: state.blocks.block
-
-  };
+    block: state.blocks.block,
+    blockTx: state.blocks.blockTx
+    
+  }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return {
-    blockInfo: (payload) => dispatch(blockInfo(payload)),
     blockTxList: (payload) => dispatch(blockTxList(payload)),
+    blockInfo: (payload) => dispatch(blockInfo(payload)),
   };
 }
 
