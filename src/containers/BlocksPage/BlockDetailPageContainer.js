@@ -1,11 +1,7 @@
 import { connect } from 'react-redux';
 import { BlockDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-// import { blockInfo } from '../../redux/store/blocks';
-import {
-  blockInfo,
-  blockTxList,
-} from '../../redux/actions/blocksActions';
+import { blockInfo, blockTxList } from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
   return {

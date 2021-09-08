@@ -29,15 +29,31 @@ export const blockList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
+        console.log(response, "res from blockList")
         if (response.data) {
             const data = response.data;
              dispatch(getblockList(data))
              return data
         }}
     catch (e) {
-        console.log(e, "e from the store 1")
+        console.log(e, "e from the blockList")
     }
-}
+};
+
+export const blockTxList = (payload) => async (dispatch) => {
+    const trackerApi = await trackerApiInstance();
+    console.log(payload.height, "height? ")
+    try {
+    const response = trackerApi.get(`/api${BLOCK_PREFIX}/${payload.height}`);
+    console.log(response, "res from blockTxList")
+    if (response.ok) {
+        const data = await response.data;
+        dispatch(getblockTxList(data))
+    }}
+    catch (e) {
+        console.log(e, "error from blockTxList")
+    }
+};
 
 export const blockInfo = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
@@ -52,14 +68,6 @@ export const blockInfo = (payload) => async (dispatch) => {
     }
 };
 
-export const blockTxList = (payload) => async (dispatch) => {
-    const trackerApi = await trackerApiInstance();
-    const response = trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-    if (response.ok) {
-        const data = await response.data;
-        dispatch(getblockTxList(data))
-    }
-};
 
 const initialState = {
     blocks: ['ARR'],
@@ -77,7 +85,14 @@ const blocksReducer = (state = initialState, action) => {
         }
         case BLOCK_INFO: {
             newState = deepcopy(state)
-            newState.block = action.payload
+            newState.blocks.block = action.payload
+            console.log(newState, "state from reducer")
+            return newState
+        }
+        case BLOCK_TX_LIST: {
+            newState = deepcopy(state)
+            newState.blocks.blockTx = action.payload
+            console.log(newState, "state from reducer")
             return newState
         }
         default:

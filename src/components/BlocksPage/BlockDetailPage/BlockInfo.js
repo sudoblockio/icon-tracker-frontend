@@ -56,6 +56,7 @@ class BlockInfo extends Component {
                                             <tr>
                                                 <td>Block Height</td>
                                                 <td>
+                                                    {console.log(this.props, "props from blockdetailpage")}
                                                     <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>

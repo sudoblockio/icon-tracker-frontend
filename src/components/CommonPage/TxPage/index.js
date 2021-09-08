@@ -57,7 +57,7 @@ class TxPage extends Component {
         this.getTxList(pageId, count, urlIndex)
     }
 
-    getTxList = (page, count, urlIndex, limit) => {
+    getTxList = (page, count, urlIndex) => {
         const query = {
             page: isNumeric(page) ? page : 1,
             // todo: refactor to remove "count"
