@@ -80,19 +80,21 @@ const blocksReducer = (state = initialState, action) => {
     switch (action.type){
         case BLOCK_LIST: {
             newState = deepcopy(state)
+            console.log(newState, "before the change")
             newState.blocks.data = action.payload
             return newState;
         }
         case BLOCK_INFO: {
             newState = deepcopy(state)
+            console.log(action.payload[0], "payload from blockinfo reducer")
+            newState.block.data = action.payload[0]
             console.log(newState, "state from reducer BLOCKINFO")
-            newState.block.data = action.payload
             return newState
         }
         case BLOCK_TX_LIST: {
             newState = deepcopy(state)
             newState.blockTx.data = action.payload
-            console.log(newState, "state from reducer BLOCKTXLIST")
+            console.log("BLOCKTXLIST")
             return newState
         }
         default:

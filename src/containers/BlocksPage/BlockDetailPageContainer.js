@@ -5,11 +5,13 @@ import { blockInfo, blockTxList } from '../../redux/store/blocks';
 
 
 const mapStateToProps = (state) => {
+  console.log(state, "state from BlockDetailPageContainer")
   return {
     url: state.router.location,
     ...state.blocks,
-    block: state.blocks.block,
-    blockTx: state.blocks.blockTx
+    // blocks: state.blocks,
+    // block: state.blocks.block,
+    // blockTx: state.blocks.blockTx
     
   }
 }

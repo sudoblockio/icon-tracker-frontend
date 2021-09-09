@@ -17,6 +17,7 @@ class BlockTabs extends Component {
         const { on, block, blockTx } = this.props
         const { loading, data } = block
         const { height } = data
+        console.log(height, "height from blocktabs")
         return (
             <TabTable
                 {...this.props}

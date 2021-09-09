@@ -18,7 +18,7 @@ function RecentBlocks (props) {
                     ) : (
                         <ul className={"list"} style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((block, index) => {
-                                const { number, createDate, timestamp, hash, transaction_count } = block
+                                const { number, timestamp, hash, transaction_count } = block
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>

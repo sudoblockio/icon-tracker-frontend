@@ -9,41 +9,42 @@ class BlockInfo extends Component {
     handlePrevBlock = () => {
         const { block } = this.props
         const { data } = block
-        const { height } = data
-        if (height === 0) return
+        const { number } = data
+        if (number === 0) return
 
-        const prevHeight = height - 1
+        const prevHeight = number - 1
         this.props.history.push('/block/' + prevHeight)
     }
 
     handleNextBlock = () => {
         const { block } = this.props
         const { data } = block
-        const { lastBlock, height } = data
+        const { lastBlock, number } = data
         if (lastBlock !== '-') return
 
-        const nextHeight = height + 1
+        const nextHeight = number + 1
         this.props.history.push('/block/' + nextHeight)
     }
 
     goAllTx = () => {
         const { block } = this.props
         const { data } = block
-        const { height } = data
-        this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${height}`)
+        const { number } = data
+        this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)
     }
 
     render() {
 
         const { block } = this.props
-
         const { loading, data } = block
+        console.log(data, "darta")
 
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                console.log(data[0], "the next data jedi returns")
+                console.log(data[0], "this is the object")
+                
                 const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
@@ -59,7 +60,6 @@ class BlockInfo extends Component {
                                             <tr>
                                                 <td>Block Height</td>
                                                 <td>
-                                                    {console.log(this.props, "props from blockdetailpage")}
                                                     <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>
@@ -79,7 +79,7 @@ class BlockInfo extends Component {
                                                     <td>-</td>
                                                 ) : (
                                                     <td>
-                                                        {dateToUTC(timestamp)}
+                                                        {timestamp}
                                                         <em>{utcDateInfo(timestamp)}</em>
                                                     </td>
                                                 )}
