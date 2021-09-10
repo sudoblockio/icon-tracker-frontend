@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
-// import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
 import {
@@ -63,25 +62,27 @@ class TransactionInfo extends Component {
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
-		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
+		const link = `${url}/transaction/${this.props.transaction.data.hash}`
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
 	render() {
 		const { download } = this.state
 		const { transaction } = this.props
+		console.log(this.props, "transactionInfo comp props")
 		const { loading, data } = transaction
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent height='206px' />
 			}
 			else {
+				const txData = data
 				const {
 					errorMsg,
 					tokenTxList,
 					internalTxList,
-					txType,
-					txHash,
+					type,
+					hash,
 					status,
 					createDate,
 					height,
@@ -92,10 +93,11 @@ class TransactionInfo extends Component {
 					stepLimit,
 					stepUsedByTxn,
 					stepPrice,
-					dataString,
+					// 💪
+					data: dataString,
 					fee,
 					feeUsd,
-					dataType,
+					data_type,
 					targetContractAddr,
 					reportedCount,
 					stepUsedDetails
@@ -116,15 +118,15 @@ class TransactionInfo extends Component {
 								<table className="table-typeB transaction">
 									<tbody>
 										<tr>
-											<td>TxHash</td>
+											<td>hash</td>
 											<td className={scam ? "scam":""}>
 												{scam?<span className="scam-tag">Reported</span>:""}
-												{txHash}
+												{hash}
 												<span className="copy twit" onClick={this.onTwitterClick}>
 													{/* <i className="img twit-icon"></i> */}
 													<img className='custom-twitter' src={twitterLogo} alt='twitter'/>
-												</span><CopyButton data={txHash} title={'Copy TxHash'} isSpan />
-												<ReportButton address={txHash}/>
+												</span><CopyButton data={hash} title={'Copy hash'} isSpan />
+												<ReportButton address={hash}/>
 											</td>
 										</tr>
 										<tr>
@@ -141,11 +143,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom />
+											<AddressRow address={fromAddr} type={type} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={toAddr} internalTxList={internalTxList} type={type} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
@@ -187,10 +189,10 @@ class TransactionInfo extends Component {
 											<td>Fee in ICX</td>
 											<td>{convertNumberToText(fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
-										{(dataType && dataString) ?
+										{(data_type && dataString) ?
 											<tr>
 												<td>Data</td>
-												<DataCell scam={scam} dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+												<DataCell scam={scam} data_type={data_type} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 											</tr>
 											:
 											null
@@ -252,13 +254,13 @@ class DataCell extends Component {
 	}
 
 	getDataString = () => {
-		const { dataType, dataString } = this.props
+		const { data_type, dataString } = this.props
 		const removed = removeQuotes(dataString)
 		const _isHex = isHex(removed)
 		const toHex = _isHex ? removed : IconConverter.toHex(removed)
 		const toUtf8 = _isHex ? IconConverter.toUtf8(removed) : removed
 		try {
-			if (dataType === 'message') {
+			if (data_type === 'message') {
 				const { viewHex } = this.state
 				if (viewHex && !_isHex) {
 					this.setState({ converted: toHex, toHex })
@@ -281,8 +283,8 @@ class DataCell extends Component {
 	}
 
 	handleClick = () => {
-		const { dataType } = this.props
-		if (dataType === 'message') {
+		const { data_type } = this.props
+		if (data_type === 'message') {
 			this.setState({ viewHex: !this.state.viewHex }, () => {
 				this.getDataString()
 			})
@@ -308,9 +310,9 @@ class DataCell extends Component {
 	}
 
 	render() {
-		const { dataType, scam } = this.props
+		const { data_type, scam } = this.props
 		const { converted, loading, viewHex, toUtf8, imgError } = this.state
-		const isMessage = dataType === 'message'
+		const isMessage = data_type === 'message'
 		const isButton = isMessage && !loading
 		const _isImageData = isMessage && isImageData(toUtf8) && !imgError
 		const buttonTitle = viewHex ? `Convert to ${_isImageData ? 'Image' : 'UTF-8'}` : 'Convert to HEX'
@@ -411,13 +413,13 @@ class InternalTx extends Component {
 	}
 }
 
-const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom, download }) => {
+const AddressRow = ({ address, type, internalTxList, targetContractAddr, isFrom, download }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
 		return (
 			<AddressCell
 				targetAddr={address}
-				txType={txType}
+				type={type}
 				targetContractAddr={targetContractAddr}
 				spanNoEllipsis
 				tdClassName="trans"
