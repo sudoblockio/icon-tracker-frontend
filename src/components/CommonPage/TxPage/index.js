@@ -222,6 +222,7 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
+                                {console.log(data, "right before the map")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}

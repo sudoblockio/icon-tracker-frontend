@@ -87,7 +87,7 @@ const blocksReducer = (state = initialState, action) => {
         case BLOCK_INFO: {
             newState = deepcopy(state)
             console.log(action.payload[0], "payload from blockinfo reducer")
-            newState.block.data = action.payload[0]
+            newState.block.data = action.payload
             console.log(newState, "state from reducer BLOCKINFO")
             return newState
         }
