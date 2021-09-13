@@ -63,7 +63,7 @@ class TransactionInfo extends Component {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
 		const link = `${url}/transaction/${this.props.transaction.data.hash}`
-		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
+		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,block_number=470")
 	}
 
 	render() {
@@ -73,7 +73,7 @@ class TransactionInfo extends Component {
 		const { loading, data } = transaction
 		const Contents = () => {
 			if (loading) {
-				return <LoadingComponent height='206px' />
+				return <LoadingComponent block_number='206px' />
 			}
 			else {
 				const txData = data
@@ -85,15 +85,14 @@ class TransactionInfo extends Component {
 					hash,
 					status,
 					createDate,
-					height,
+					block_number,
 					confirmation,
 					fromAddr,
-					toAddr,
+					to_address,
 					amount,
-					stepLimit,
+					step_limit,
 					stepUsedByTxn,
 					stepPrice,
-					// 💪
 					data: dataString,
 					fee,
 					feeUsd,
@@ -134,8 +133,8 @@ class TransactionInfo extends Component {
 											<td className={isFail ? 'fail' : ''}>{status} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
 										</tr>
 										<tr>
-											<td>Block Height</td>
-											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
+											<td>Block</td>
+											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
@@ -147,7 +146,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={toAddr} internalTxList={internalTxList} type={type} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={to_address} internalTxList={internalTxList} type={type} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
@@ -166,7 +165,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Step Limit</td>
-											<td>{convertNumberToText(stepLimit)} Steps</td>
+											<td>{convertNumberToText(step_limit)} Steps</td>
 										</tr>
 										<tr>
 											<td>Fee in Step</td>
@@ -352,12 +351,12 @@ class TokenTransferCell extends Component {
 		return (
 			<td className="transfer">
 				{tokenTxListSliced.map((tokenTx, index) => {
-					const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+					const { fromAddr, quantity, symbol, to_address, tokenName } = tokenTx
 					return (
 						<p key={index}>
 							{quantity} {symbol}<em>({tokenName})</em>
 							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
-							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{toAddr}</span>} />
+							&emsp;to&emsp;<AddressLink to={to_address} label={<span className="ellipsis">{to_address}</span>} />
 						</p>
 					)
 				})}
@@ -393,12 +392,12 @@ class InternalTx extends Component {
 		return (
 			<div>
 				{internalTxListSliced.map((tx, index) => {
-					const { amount, fromAddr, toAddr } = tx
+					const { amount, fromAddr, to_address } = tx
 					return (
 						<p key={index}>
 							┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
 							&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
-							&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
+							&emsp;to&emsp;<span><AddressLink to={to_address} /></span>
 						</p>
 					)
 				})}
