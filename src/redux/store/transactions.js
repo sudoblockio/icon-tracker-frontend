@@ -46,6 +46,8 @@ export const transactionTxDetail = (payload) => async (dispatch)=> {
     }
 }
 
+
+
 const initialState = {
     transaction: INITIAL_STATE['OBJ'],
     recentTx: INITIAL_STATE['ARR'],
