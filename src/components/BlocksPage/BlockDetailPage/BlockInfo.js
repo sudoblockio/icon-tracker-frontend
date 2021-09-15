@@ -5,8 +5,9 @@ import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
 class BlockInfo extends Component {
-    
+
     handlePrevBlock = () => {
+        
         const { block } = this.props
         const { data } = block
         const { number } = data
@@ -34,21 +35,23 @@ class BlockInfo extends Component {
     }
 
     render() {
-
         const { block } = this.props
         const { loading, data } = block
-        console.log(data, "darta")
 
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                console.log(data[0], "this is the object")
                 
+                console.log(data[0], "this is the object")
+                console.log(typeof data, "what is this")
+                console.log(typeof data[0], "what is THIS")
+               
                 const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peerId || crep
+                
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">

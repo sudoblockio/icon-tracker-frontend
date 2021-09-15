@@ -11,10 +11,10 @@ import {
 class BlockDetailPage extends Component {
 
   render() {
-    console.log(this.props, "index.js")
     const { block } = this.props;
-    const { loading, error, data } = block
-    
+    const { loading, error } = block
+
+
     return (
       
       <DetailPage

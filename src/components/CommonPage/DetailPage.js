@@ -24,6 +24,11 @@ class DetailPage extends Component {
         this.setInitialData(this.props.url)
     }
 
+    componentDidMount() {
+        console.log(this.props.url, "url props")
+        this.setInitialData(this.props.url)
+    }
+
     componentWillReceiveProps(nextProps) {
         const { pathname: currentPath } = this.props.url
         const { pathname: nextPath } = nextProps.url
@@ -46,12 +51,8 @@ class DetailPage extends Component {
     setInitialData = (url) => {
         const query = url.pathname.split("/")[2]
         if (query) {
-            console.log(query, "query from detail page")
-            console.log(this.props, "setInitialData")
             const { TABS } = this.props
-            console.log(this.props.getInfo, "getinfo???")
             this.props.getInfo(query)
-            console.log(this.props, "experiment")
             this.setTab(findTabIndex(TABS, url.hash), query)
         }
     }
@@ -80,7 +81,6 @@ class DetailPage extends Component {
 
     render() {
         
-        {console.log(this.props, "detail page")}
         const { loading, error, pending } = this.props;
         const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending
         
@@ -95,7 +95,6 @@ class DetailPage extends Component {
                 const { InfoComponent, TabsComponent } = this.props
                 return (
                     <div className="content-wrap">
-
                         <InfoComponent {...this.props}/>
                         <TabsComponent {...this.props} {...this.state} changeTab={this.changeTab}/>
                     </div>

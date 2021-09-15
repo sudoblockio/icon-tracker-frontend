@@ -39,6 +39,7 @@ class MainPage extends Component {
     }
 
     render() {
+
         return (
             <div className="content-wrap">
                 <div className="screen2">

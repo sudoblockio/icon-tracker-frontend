@@ -1,6 +1,7 @@
 import { makeUrl } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
-import { INITIAL_STATE} from '../../../src/utils/const'
+import { INITIAL_STATE, REDUX_STEP} from '../../../src/utils/const'
+import { getState } from '../../utils/utils'
 import { trackerApiInstance } from '../api/restV3/config' 
 
 const BLOCK_PREFIX = '/v1/blocks'
@@ -8,6 +9,8 @@ const BLOCK_PREFIX = '/v1/blocks'
 const BLOCK_LIST = 'BLOCK_LIST'
 const BLOCK_INFO = 'BLOCK_INFO'
 const BLOCK_TX_LIST = 'BLOCK_TX_LIST'
+const BLOCK_TX_LIST_FULFILLED = 'BLOCL_TX_LIST_FULFILLED'
+const BLOCK_TX_LIST_REJECTED = 'BLOCK_TX_LIST_REJECTED'
 
 const getblockList = (payload) => ({
         type: BLOCK_LIST,
@@ -91,15 +94,16 @@ const blocksReducer = (state = initialState, action) => {
             newState = deepcopy(state)
             console.log(action.payload[0], "payload from blockinfo reducer")
             newState.block.data = action.payload
-            console.log(newState, "state from reducer BLOCKINFO")
             return newState
         }
         case BLOCK_TX_LIST: {
-            newState = deepcopy(state)
-            console.log(action.payload, "action.payload from reducer")
-            newState.blocks.blockTx.data = action.payload
-            console.log("BLOCKTXLIST")
-            return newState
+            return getState('ARR', REDUX_STEP.READY, state, action, 'blockTx')
+        }
+        case BLOCK_TX_LIST_FULFILLED :{
+            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blockTx')
+        }
+        case BLOCK_TX_LIST_REJECTED :{
+            return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blockTx')
         }
         default:
       return state;
