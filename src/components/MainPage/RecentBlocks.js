@@ -1,47 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils';
-import { LoadingComponent, BlockLink } from '../../components';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
+import { LoadingComponent, BlockLink } from '../../components'
 
-function RecentBlocks (props) {
-    const { loading, blocks } = props
-    const list = blocks ? blocks.slice(0, 10) : []
-
+class RecentBlocks extends Component {
+    render() {
+        const { blocks } = this.props
+        const list = blocks ? blocks.slice(0, 10) : []
         return (
             <li className="left">
                 <p className="title">Blocks</p>
                 <div className="list-group">
-                    {loading ? (
+                    {!list ? (
                         <div style={{ height: '511px' }}>
                             <LoadingComponent />
                         </div>
                     ) : (
                         <ul className={"list"} style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((block, index) => {
-                                const { number, timestamp, hash, transaction_count } = block
+                                const { blockHeight, createDate, hash, txCount } = block
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
                                         <p className="a">
                                             Block
                                             <em>
-                                                <BlockLink to={number} label={numberWithCommas(number)} />
+                                                <BlockLink to={blockHeight} label={numberWithCommas(blockHeight)} />
                                             </em>
                                         </p>
                                         <p className="b">
                                             Transactions
-                                            <em>{numberWithCommas(transaction_count)}</em>
+                                            <em>{numberWithCommas(txCount)}</em>
                                         </p>
                                         <p className="c">
                                             Hash
                                             <em>
-                                                <BlockLink to={number} label={hash} />
+                                                <BlockLink to={blockHeight} label={hash} />
                                             </em>
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            
-                                            <em>{getTimezoneMomentTime(timestamp)}</em>
+                                            <em>{getTimezoneMomentTime(createDate)}</em>
                                         </p>
                                     </li>
                                 )
@@ -57,7 +56,7 @@ function RecentBlocks (props) {
                 </Link>
             </li>
         )
-    
+    }
 }
 
 export default RecentBlocks
