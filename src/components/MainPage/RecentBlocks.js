@@ -5,13 +5,13 @@ import { LoadingComponent, BlockLink } from '../../components'
 
 class RecentBlocks extends Component {
     render() {
-        const { blocks } = this.props
+        const { loading, blocks } = this.props
         const list = blocks ? blocks.slice(0, 10) : []
         return (
             <li className="left">
                 <p className="title">Blocks</p>
                 <div className="list-group">
-                    {!list ? (
+                    {loading ? (
                         <div style={{ height: '511px' }}>
                             <LoadingComponent />
                         </div>
