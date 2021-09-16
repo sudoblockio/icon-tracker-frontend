@@ -42,10 +42,6 @@ class BlockInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                
-                console.log(data[0], "this is the object")
-                console.log(typeof data, "what is this")
-                console.log(typeof data[0], "what is THIS")
                
                 const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
                 const isFirst = number === 0
