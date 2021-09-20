@@ -1,10 +1,8 @@
 import { connect } from 'react-redux';
 import { TransactionDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { 
-  transactionEventLogList,
-  transactionInternalTxList,
-} from '../../redux/actions/transactionsActions';
+import { transactionEventLogList, transactionInternalTxList } from '../../redux/actions/transactionsActions';
+
 import { transactionTxDetail } from '../../redux/store/transactions'
 function mapStateToProps(state) {
   return {

@@ -21,15 +21,20 @@ const getTxDetail = (payload) => ({
 })
 
 // previously src/redux/api/restV3/transaction.js
+// maybe go by HTTP status code instead of res.data
+// "when there is an error and nothign loads res.data will still have stuff"
+// try a refactor with status code instead of "if data exists"
 export const txList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
+        // if 200
         if (res.data) {
             const data = res.data
             dispatch(getTxList(data))
             return data
         }
+        // error
     }
     catch (e) {
         console.log(e)

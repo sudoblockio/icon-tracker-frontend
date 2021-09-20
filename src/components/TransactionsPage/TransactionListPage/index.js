@@ -5,7 +5,6 @@ import {
 
 class TransactionListPage extends Component {
 	render() {
-		console.log(this.props, "tx list oage props")
 		return <TxPage {...this.props}/>
 	}
 }

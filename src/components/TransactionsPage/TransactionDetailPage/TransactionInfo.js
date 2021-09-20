@@ -17,6 +17,7 @@ import {
 	numberWithCommas,
 	isValidData,
 	dateToUTC,
+	getTimezoneMomentKSTTime,
 	utcDateInfo,
 	beautifyJson,
 	removeQuotes,
@@ -69,14 +70,12 @@ class TransactionInfo extends Component {
 	render() {
 		const { download } = this.state
 		const { transaction } = this.props
-		console.log(this.props, "transactionInfo comp props")
 		const { loading, data } = transaction
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent block_number='206px' />
 			}
 			else {
-				const txData = data
 				const {
 					errorMsg,
 					tokenTxList,
@@ -85,14 +84,17 @@ class TransactionInfo extends Component {
 					hash,
 					status,
 					createDate,
+					timestamp,
 					block_number,
 					confirmation,
-					fromAddr,
+					from_address,
 					to_address,
-					amount,
+					value,
 					step_limit,
 					stepUsedByTxn,
 					stepPrice,
+					// aliasing the DB column name 'data' to 'dataString' 
+					// because 'data' is already used as a global state variable. 
 					data: dataString,
 					fee,
 					feeUsd,
@@ -138,11 +140,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
-											<td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
+											<td>{(timestamp)}<em>{utcDateInfo(createDate)}</em></td>
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} type={type} targetContractAddr={targetContractAddr} isFrom />
+											<AddressRow address={from_address} type={type} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
@@ -150,7 +152,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Amount</td>
-											<td>{`${convertNumberToText(amount)} ICX`}</td>
+											<td>{`${convertNumberToText(value)} ICX`}</td>
 										</tr>
 										{
 											(!!tokenTxList && tokenTxList.length !== 0) &&
@@ -351,11 +353,11 @@ class TokenTransferCell extends Component {
 		return (
 			<td className="transfer">
 				{tokenTxListSliced.map((tokenTx, index) => {
-					const { fromAddr, quantity, symbol, to_address, tokenName } = tokenTx
+					const { from_address, quantity, symbol, to_address, tokenName } = tokenTx
 					return (
 						<p key={index}>
 							{quantity} {symbol}<em>({tokenName})</em>
-							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
+							&emsp;from &emsp;<AddressLink to={from_address} label={<span className="ellipsis">{from_address}</span>} />
 							&emsp;to&emsp;<AddressLink to={to_address} label={<span className="ellipsis">{to_address}</span>} />
 						</p>
 					)
@@ -392,11 +394,11 @@ class InternalTx extends Component {
 		return (
 			<div>
 				{internalTxListSliced.map((tx, index) => {
-					const { amount, fromAddr, to_address } = tx
+					const { amount, from_address, to_address } = tx
 					return (
 						<p key={index}>
 							┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-							&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
+							&emsp;from &emsp;<span><AddressLink to={from_address} /></span>
 							&emsp;to&emsp;<span><AddressLink to={to_address} /></span>
 						</p>
 					)
