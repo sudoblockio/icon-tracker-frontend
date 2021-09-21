@@ -24,17 +24,6 @@ export const searchBlocks = (payload) => async (dispatch) => {
     }
 }
 
-// the right way: 
-// export const findAddress = (address) => async (dispatch) => {
-//     const trackerApi = await trackerApiInstance()
-//     const response = trackerApi.get(makeUrl(`/accounts/${address}`, address));
-
-//     if (response.ok) {
-//         const resultData = await response.data.data;
-//         dispatch(searchData(resultData))
-//     }
-// }
-
 
 
 const initialState = {

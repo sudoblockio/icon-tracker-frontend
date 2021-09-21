@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import searchBlocks from '../../redux/store/search'
-
 export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
 export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
 export const tx_re = new RegExp('^0x([A-Fa-f0-9]{64})$')
@@ -29,11 +28,13 @@ function SearchInput() {
       })
     }
   }
-  
+  const anum = 60006
+  console.log(block_re.test(anum.toString()), "block number test ")
   const handleClick = (e) => {
     const searchTerm = e.target.value
-
     let searchByType = (searchTerm) => {
+      console.log(searchTerm, "this is the search term")
+      console.log(searchTerm.toString(), "search string")
       return block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm))
             : add_re.test(searchTerm) === true ? dispatch(/*searchAdd(searchTerm)*/)
             : tx_re.test(searchTerm) === true ? dispatch(/*searchTx(searchTerm)*/)
