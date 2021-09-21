@@ -28,11 +28,14 @@ export const txList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
+        console.log(res, "res from txlist")
         // if 200
-        if (res.data) {
+        if (res.status === 200) {
             const data = res.data
             dispatch(getTxList(data))
             return data
+        } else {
+            //setError(e)
         }
         // error
     }
@@ -45,10 +48,12 @@ export const transactionTxDetail = (payload) => async (dispatch)=> {
     const trackerApi = await trackerApiInstance()
     try {
         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}/${payload.txHash}`, payload))
-        if (res.data) {
+        if (res.status === 200) {
             const data = res.data
             dispatch(getTxDetail(data))
             return data
+        } else {
+            //setError(e)
         }
     }
     catch (e) {
