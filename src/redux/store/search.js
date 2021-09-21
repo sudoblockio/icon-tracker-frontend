@@ -11,6 +11,7 @@ const getsearchBlocks = (payload) => ({
 
 
 export const searchBlocks = (payload) => async (dispatch) => {
+    console.log(payload, "search payload here ")
     const trackerApi = await trackerApiInstance()
     try { 
         const response = trackerApi.get(makeUrl('/v1/blocks/', payload));
@@ -36,7 +37,7 @@ const searchReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);
-            newState = action.payload
+            newState.search = action.payload
             return newState;
         }
         default: 
