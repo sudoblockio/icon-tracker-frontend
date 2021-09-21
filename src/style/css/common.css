@@ -5963,7 +5963,7 @@ input[type='checkbox']:checked + label {
   font-size: 10px;
   padding-top: 5px;
   padding-left: 2px;
-  color: rgba(196, 39, 57, 1);
+  color: #fff;
   text-shadow: none;
   
 }

@@ -34,11 +34,15 @@ export const blockList = (payload) => async (dispatch) => {
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
         console.log(response, "response from blocks")
-        if (response.data) {
+        if (response.status === 200) {
             const data = response.data;
              dispatch(getblockList(data))
              return data
-        }}
+        } else {
+            // handle error
+        }
+    
+    }
     catch (e) {
         console.log(e, "e from the blockList")
     }
@@ -48,7 +52,7 @@ export const blockTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
     try {
     const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`);
-    if (response.data) {
+    if (response.status === 200) {
         const data = response.data;
         dispatch(getblockTxList(data))
     }}
@@ -62,11 +66,14 @@ export const blockInfo = (payload) => async (dispatch) => {
     try {
         const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
         console.log(response, "res from blockinfo")
-        if (response.data) {
+        if (response.status === 200) {
             const data = response.data;
             dispatch(getblockInfo(data))
             return data
-    }}
+    } else {
+        // setError(error)
+    }
+}
     catch (e) {
         console.log(e, "error from blockInfo")
     }
