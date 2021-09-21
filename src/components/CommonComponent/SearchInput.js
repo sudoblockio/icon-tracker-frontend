@@ -32,10 +32,10 @@ function SearchInput() {
   console.log(block_re.test(anum.toString()), "block number test ")
   const handleClick = (e) => {
     const searchTerm = e.target.value
-    let searchByType = (searchTerm) => {
+    let searchByType = async (searchTerm) => {
       console.log(searchTerm, "this is the search term")
       console.log(searchTerm.toString(), "search string")
-      return block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm))
+      return block_re.test(searchTerm) === true ? await dispatch(searchBlocks(searchTerm))
             : add_re.test(searchTerm) === true ? dispatch(/*searchAdd(searchTerm)*/)
             : tx_re.test(searchTerm) === true ? dispatch(/*searchTx(searchTerm)*/)
             : setError("Not found")
