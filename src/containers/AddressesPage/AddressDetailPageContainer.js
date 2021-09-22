@@ -12,7 +12,7 @@ import {
 } from '../../redux/actions/addressesActions';
 import { 
   setPopup 
-} from '../../redux/actions/popupActions'
+} from '../../redux/store/popup'
 import { 
   setNotification,
 } from '../../redux/actions/storageActions';
