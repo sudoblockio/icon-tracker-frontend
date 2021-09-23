@@ -713,6 +713,12 @@ export function closeEm(text) {
 }
 
 export const convertHexToInt = (hex) => {
+    if (hex === "0x0") {
+        return 0
+    } else {
     const int = parseInt(hex, 16)
-    return int
+    const value = int / 10^18
+    return value;
+    }
 }
+
