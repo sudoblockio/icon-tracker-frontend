@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { convertNumberToText } from '../../utils/utils'
+import { convertNumberToText, convertHexToInt } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 
 
@@ -19,6 +19,7 @@ class RecentTransactions extends Component {
                         </div>
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
+                            {console.log(list, "tx list props")}
                             {list.map((tx, index) => {
                                 const { hash, value, fee, state } = tx
                                 const isSuccess = Number(state) === 1
@@ -34,7 +35,7 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertNumberToText(value)} ICX
+                                                {convertHexToInt(value)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
