@@ -727,7 +727,7 @@ export const convertHexToValue = (hex) => {
     const test = new BigNumber(hex, 16)
     console.log(test, "this is the test")
     var thex = 'ABCDEF1234567890',
-    bignumber = new BigNumber(thex, 16);
+    bignumber = new BigNumber(hex, 16);
 
     console.log(bignumber.toString(10), "this is the big number")
     return value;

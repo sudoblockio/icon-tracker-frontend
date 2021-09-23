@@ -83,6 +83,7 @@ class TransactionInfo extends Component {
 					type,
 					hash,
 					status,
+					receipt_status,
 					createDate,
 					timestamp,
 					block_number,
@@ -103,11 +104,13 @@ class TransactionInfo extends Component {
 					reportedCount,
 					stepUsedDetails
 				} = data
+				console.log(data, "tx detail data")
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
-				const isFail = status === 'Fail'
+				const isFail = receipt_status === 'Fail'
+				const isSuccess = Number(receipt_status) === 1
 				const isErrorMsg = isValidData(errorMsg)
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
@@ -132,7 +135,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}>{status} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
+											<td className={isFail ? 'fail' : ''}>{isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
 										</tr>
 										<tr>
 											<td>Block</td>
