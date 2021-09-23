@@ -6,7 +6,8 @@ import {
 	isValidData,
 	tokenText,
 	is0xHash,
-	convertLoopToIcxDecimal
+	convertLoopToIcxDecimal,
+	convertHexToValue
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -178,7 +179,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.type} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={data.transaction_amount} symbol="ICX" />
-							<AmountCell amount={data.transaction_fees} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TRANSACTIONS:
@@ -188,7 +189,7 @@ class TxTableBody extends Component {
 							<BlockCell height={data.block_number} />
 							<DateCell date={data.timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.value} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)

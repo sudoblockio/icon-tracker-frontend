@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { convertNumberToText, convertHexToInt } from '../../utils/utils'
+import { convertNumberToText, convertHexToValue } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 
 
@@ -35,7 +35,7 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertHexToInt(value)} ICX
+                                                {convertHexToValue(value)} ICX
                                             </em>
                                         </p>
                                         <p className="c">

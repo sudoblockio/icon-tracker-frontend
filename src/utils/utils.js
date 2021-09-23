@@ -712,13 +712,24 @@ export function closeEm(text) {
     return text.replace(/<\/em>/gi, "</em").replace(/<\/em/gi, "</em>")
 }
 
-export const convertHexToInt = (hex) => {
+export const convertHexToValue = (hex) => {
     if (hex === "0x0") {
         return 0
     } else {
-    const int = parseInt(hex, 16)
+    console.log(hex, "this is the hex")
+    const int = parseInt(Number(hex), 16)
+    // 5125000000000000 
+    console.log(int, "this is int")
     const value = int / 10^18
+    // -1267562478
+    console.log(value, "this is value")
+
+    const test = new BigNumber(hex, 16)
+    console.log(test, "this is the test")
+    var thex = 'ABCDEF1234567890',
+    bignumber = new BigNumber(thex, 16);
+
+    console.log(bignumber.toString(10), "this is the big number")
     return value;
     }
 }
-
