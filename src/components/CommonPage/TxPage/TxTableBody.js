@@ -7,7 +7,8 @@ import {
 	tokenText,
 	is0xHash,
 	convertLoopToIcxDecimal,
-	convertHexToValue
+	convertHexToValue,
+	epochToFromNow 
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -59,7 +60,7 @@ const DateCell = ({ date, isDate }) => {
 		}
 		else {
 			console.log("is not a date")
-			dateText = calcFromNow(date)
+			dateText = epochToFromNow (date)
 		}
 	}
 	return <td className={className}>{dateText}</td>

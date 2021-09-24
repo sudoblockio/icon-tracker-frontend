@@ -144,9 +144,13 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
     return result.join(" ")
 }
 
+
+// 🔥🔥🔥
+export const epochToFromNow = (miliseconds) => {
+    return moment(new Date(miliseconds / 1000)).fromNow()
+}
+
 export function calcFromNow(createDate) {
-    console.log(new Date(createDate), "does this work?")
-    const testMoment = moment(new Date(createDate)).fromNow()
     const M = 60
     const H = M * 60
     const D = H * 24
