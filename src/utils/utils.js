@@ -162,24 +162,29 @@ export function calcFromNow(createDate) {
         return 'right now'
     }
     else if (diff > 0 && diff < M) {
+        console.log("1")
         return makeFromNowText(diff, 'second', undefined, '', later)
     }
     else if (diff >= M && diff < H) {
+        console.log("2")
         const minute = Math.floor(diff / M)
         const second = diff % M
         return makeFromNowText(minute, 'minute', second, 'second', later)
     }
     else if (diff >= H && diff < D) {
+        console.log("3")
         const hour = Math.floor(diff / H)
         const minute = Math.floor((diff % H) / M)
         return makeFromNowText(hour, 'hour', minute, 'minute', later)
     }
     else if (diff >= D && diff < W) {
+        console.log("4")
         const day = Math.floor(diff / D)
         const hour = Math.floor((diff % D) / H)
         return makeFromNowText(day, 'day', hour, 'hour', later)
     }
     else {
+        console.log("5")
         const week = Math.floor(diff / W)
         const day = Math.floor((diff % W) / D)
         return makeFromNowText(week, 'week', day, 'day', later)

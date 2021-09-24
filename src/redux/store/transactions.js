@@ -30,7 +30,6 @@ export const txList = (payload) => async (dispatch) => {
         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
         // if 200
         if (res.status === 200) {
-            console.log(res, "repsonse from TXList")
             const data = res.data
             dispatch(getTxList(data))
             return data

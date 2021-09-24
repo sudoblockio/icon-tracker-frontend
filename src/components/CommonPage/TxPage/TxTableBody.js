@@ -54,9 +54,11 @@ const DateCell = ({ date, isDate }) => {
 	else {
 		className = "break"
 		if (isDate) {
+			console.log("is a date")
 			dateText = dateToUTC(date)
 		}
 		else {
+			console.log("is not a date")
 			dateText = calcFromNow(date)
 		}
 	}

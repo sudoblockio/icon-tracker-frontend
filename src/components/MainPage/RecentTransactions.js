@@ -6,7 +6,6 @@ import { LoadingComponent, TransactionLink } from '../../components'
 
 class RecentTransactions extends Component {
     render() {
-        console.log(this.props, "transaction props")
         const { loading, transactions } = this.props
         const list = transactions ? transactions.slice(0, 10) : []
         return (
@@ -19,7 +18,6 @@ class RecentTransactions extends Component {
                         </div>
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
-                            {console.log(list, "tx list props")}
                             {list.map((tx, index) => {
                                 const { hash, value, fee, state } = tx
                                 const isSuccess = Number(state) === 1
