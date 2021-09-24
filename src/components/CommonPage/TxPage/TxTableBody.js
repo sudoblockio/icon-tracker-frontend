@@ -56,7 +56,7 @@ const DateCell = ({ date, isDate }) => {
 		className = "break"
 		if (isDate) {
 			console.log("is a date")
-			dateText = dateToUTC(date)
+			dateText = epochToFromNow(date)
 		}
 		else {
 			console.log("is not a date")
