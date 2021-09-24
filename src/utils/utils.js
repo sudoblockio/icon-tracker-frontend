@@ -145,6 +145,7 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 }
 
 export function calcFromNow(createDate) {
+    console.log(new Date(createDate), "does this work? ")
     const M = 60
     const H = M * 60
     const D = H * 24
