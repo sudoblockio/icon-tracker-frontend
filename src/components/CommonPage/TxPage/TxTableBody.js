@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
-	calcFromNow,
 	numberWithCommas,
-	dateToUTC,
 	isValidData,
 	tokenText,
 	is0xHash,
@@ -247,7 +245,7 @@ class TxTableBody extends Component {
 							<td className="on">
 								<span className="ellipsis"><TransactionLink to={data.txHash} /></span><br />
 								<span><BlockLink label={`# ${data.height}`} to={data.height} /></span>
-								<p>{calcFromNow(data.age)}</p>
+								<p>{epochToFromNow(data.age)}</p>
 							</td>
 							<td>{data.method}</td>
 							<td>{data.eventLog}</td>

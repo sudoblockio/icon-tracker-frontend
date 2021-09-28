@@ -5,6 +5,7 @@ import checkIconex from 'check-iconex'
 import NotificationManager from '../../utils/NotificationManager'
 
 class Connect extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props)
         this.state = {
@@ -14,10 +15,16 @@ class Connect extends Component {
     }
 
     async componentDidMount() {
+        this._isMounted = true;
         const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
+        if (this._isMounted) {
         this.setState({
             disabled: !(isChrome && iconexInstalled && hasIconWallet),
-        })
+        })}
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     componentWillReceiveProps(nextProps) {

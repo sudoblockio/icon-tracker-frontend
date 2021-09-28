@@ -60,9 +60,7 @@ class TxPage extends Component {
     getTxList = (page, count, urlIndex) => {
         const query = {
             page: isNumeric(page) ? page : 1,
-            // todo: refactor to remove "count"
             count: isNumeric(count) ? count : 25,
-            // 
             limit: 25
         }
         switch (this.txType) {
@@ -209,7 +207,9 @@ class TxPage extends Component {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
+        console.log(tx, "all  the props on tx")
         const { loading, page, count, data, listSize, totalSize } = tx
+
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {
@@ -222,7 +222,6 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
-                                {console.log(data, "right before the map")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}

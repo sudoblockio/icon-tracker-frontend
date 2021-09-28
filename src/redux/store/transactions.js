@@ -5,6 +5,7 @@ import { trackerApiInstance } from '../api/restV3/config'
 
 const TX_PREFIX = `/v1/transactions`
 
+
 // previously src/redux/actionTypes/actionTypes.js
 const TX_LIST = 'TX_LIST'
 const TX_DETAIL = 'TX_DETAIL'
@@ -24,13 +25,45 @@ const getTxDetail = (payload) => ({
 // maybe go by HTTP status code instead of res.data
 // "when there is an error and nothign loads res.data will still have stuff"
 // try a refactor with status code instead of "if data exists"
+// export const txList = (payload) => async (dispatch) => {
+//     const trackerApi = await trackerApiInstance()
+//     try {
+//         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
+//         // if 200
+//         if (res.status === 200) {
+//             const data = res.data
+//             dispatch(getTxList(data))
+//             return data
+//         } else {
+//             //setError(e)
+//         }
+//         // error
+//     }
+//     catch (e) {
+//         console.log(e)
+//     }
+// }
+// get old api data
+const OLD_PREFIX = `https://trackerdev.icon.foundation/v3/transaction/recentTx`
+export function makeOldUrl(url, payload) {
+    if (!payload) {
+        return url
+    }
+    let result = url
+    Object.keys(payload).forEach((key, index) => {
+        result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+    })
+    return result
+}
 export const txList = (payload) => async (dispatch) => {
-    const trackerApi = await trackerApiInstance()
+    const trackerApi = 'https://trackerdev.icon.foundation/'
     try {
-        const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
+        const res = await fetch(makeOldUrl(`${OLD_PREFIX}`, payload))
+        console.log(res, "old res")
         // if 200
         if (res.status === 200) {
-            const data = res.data
+            const data = await res.json().data
+            console.log(data, "this is data")
             dispatch(getTxList(data))
             return data
         } else {

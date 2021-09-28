@@ -54,6 +54,7 @@ class Pagination extends Component {
 
   handleKeyPress = (e) => {
     const { getData } = this.props;
+    console.log(getData, "this is getData")
     if (!Number(this.state.pageNum)) return;
     if (e.key === 'Enter') {
       getData(this.state.pageNum)
@@ -61,6 +62,8 @@ class Pagination extends Component {
   }
 
   render() {
+    console.log(this.props, "props from pagination")
+    console.log(this.state, "state from pagination")
     const { maxPageNum } = this.props;
     const { pageNum } = this.state;
     const isFirst = pageNum === 1

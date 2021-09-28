@@ -145,8 +145,9 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 }
 
 
-// 🔥🔥🔥
+
 export const epochToFromNow = (miliseconds) => {
+    // could upgrade to https://moment.github.io/luxon/#/?id=luxon
     return moment(new Date(miliseconds / 1000)).fromNow()
 }
 
@@ -727,20 +728,13 @@ export const convertHexToValue = (hex) => {
     if (hex === "0x0") {
         return 0
     } else {
-    console.log(hex, "this is the hex")
-    const int = parseInt(Number(hex), 16)
-    // 5125000000000000 
-    console.log(int, "this is int")
-    const value = int / 10^18
-    // -1267562478
-    console.log(value, "this is value")
 
+    const int = parseInt(Number(hex), 16)
+    const value = int / 10^18
     const test = new BigNumber(hex, 16)
     console.log(test, "this is the test")
-    var thex = 'ABCDEF1234567890',
-    bignumber = new BigNumber(hex, 16);
-
-    console.log(bignumber.toString(10), "this is the big number")
+    // bignumber = new BigNumber(hex, 16);
+    // console.log(bignumber.toString(10), "this is the big number")
     return value;
     }
 }
