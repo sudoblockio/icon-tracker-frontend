@@ -7,18 +7,23 @@ class InfoSummary extends Component {
         super(props)
         this.state = {
             isSolo: false,
+            totalSupply: 0,
         }
     }
+
+    
 
     async componentDidMount() {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         console.log(totalSupply, "total supply")
         console.log(parseInt(totalSupply, 16) , "did it work")
-        this.setState({ isSolo })
+        this.setState({ isSolo, totalSupply })
     }
-
+    
     render() {
+        {console.log(this.state, "the state")}
+        const test = getTotalSupply()
         const { tmainInfo } = this.props.info || {}
         const { icxSupply, marketCap, transactionCount, icxCirculationy } = tmainInfo || {}
         const marketCapStr = numberWithCommas(Math.floor(marketCap))
@@ -35,7 +40,7 @@ class InfoSummary extends Component {
                     <div>
                         <span className="icx"><i className="img"></i></span>
                         <p>ICX Supply</p>
-                        <p>{convertNumberToText(icxSupply, 0)}</p>									
+                        <p>{convertNumberToText(this.state.totalSupply, 0)}</p>									
                     </div>
                 </li>
                 <li>
