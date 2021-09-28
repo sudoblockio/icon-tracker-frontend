@@ -2,6 +2,12 @@ import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
 
 
+export async function getAllTransactions () {
+    const prepnode = await fetch('http://210.180.69.101:9000/api/v1/status/peer')
+    const data = await prepnode.json()
+    return data.total_tx;
+}
+
 export async function coinGeckoMarketCap () {
     const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
     const data = await mktcap.json()

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap } from '../../redux/api/restV3/iiss'
+import { getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss'
 
 class InfoSummary extends Component {
     constructor(props) {
@@ -8,7 +8,8 @@ class InfoSummary extends Component {
         this.state = {
             isSolo: false,
             totalSupply: 0, 
-            marketCap: 0
+            marketCap: 0,
+            allTransactions: 0,
         }
     }
 
@@ -18,14 +19,16 @@ class InfoSummary extends Component {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
-        this.setState({ isSolo, totalSupply, marketCap })
+        const allTransactions = await getAllTransactions()
+        this.setState({ isSolo, totalSupply, marketCap, allTransactions })
     }
     
     render() {
-
         const { tmainInfo } = this.props.info || {}
         const { transactionCount, icxCirculationy } = tmainInfo || {}
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
+        const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
+        console.log(totalSupplyStr, "did it work? ")
         return (
             <Fragment>
                 <li>
@@ -53,7 +56,7 @@ class InfoSummary extends Component {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>{numberWithCommas(transactionCount)}</p>									
+                        <p>{numberWithCommas(this.state.allTransactions)}</p>									
                     </div>
                 </li>
             </Fragment>
