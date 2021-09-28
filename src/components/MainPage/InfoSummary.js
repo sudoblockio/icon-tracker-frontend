@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply } from '../../redux/api/restV3/iiss'
+import { getTotalSupply, coinGeckoMarketCap } from '../../redux/api/restV3/iiss'
 
 class InfoSummary extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isSolo: false,
-            totalSupply: 0,
+            totalSupply: 0, 
+            marketCap: 0
         }
     }
 
@@ -16,17 +17,15 @@ class InfoSummary extends Component {
     async componentDidMount() {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
-        console.log(totalSupply, "total supply")
-        console.log(parseInt(totalSupply, 16) , "did it work")
-        this.setState({ isSolo, totalSupply })
+        const marketCap = await coinGeckoMarketCap()
+        this.setState({ isSolo, totalSupply, marketCap })
     }
     
     render() {
-        {console.log(this.state, "the state")}
-        const test = getTotalSupply()
+
         const { tmainInfo } = this.props.info || {}
-        const { icxSupply, marketCap, transactionCount, icxCirculationy } = tmainInfo || {}
-        const marketCapStr = numberWithCommas(Math.floor(marketCap))
+        const { transactionCount, icxCirculationy } = tmainInfo || {}
+        const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
         return (
             <Fragment>
                 <li>

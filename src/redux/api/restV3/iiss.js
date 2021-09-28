@@ -1,6 +1,43 @@
 import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
 
+
+export async function coinGeckoMarketCap () {
+    const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+    const data = await mktcap.json()
+    return data[0].market_cap
+}
+
+export async function getTotalSupply () {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_getTotalSupply",
+            id: randomUint32(),
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                console.log(response, "the whole response")
+                console.log(parseInt(response.data.result, 16), "response data result ")
+                resolve(parseInt(response.data.result, 16));
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error.response.data);
+                }
+                else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    })
+}
+
+
 export async function getPReps() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -114,32 +151,6 @@ export async function getPRep(address) {
     });
 }
 
-export async function getTotalSupply () {
-    const walletApi = await walletApiInstance()
-    return new Promise(resolve => {
-        const param = {
-            jsonrpc: "2.0",
-            method: "icx_getTotalSupply",
-            id: randomUint32(),
-        }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
-            .then(response => {
-                resolve(response.data.result);
-            })
-            .catch(error => {
-                if (!!error.response) {
-                    resolve(error.response.data);
-                }
-                else {
-                    resolve({
-                        error: {
-                            message: error.message
-                        }
-                    })
-                }
-            })
-    })
-}
 
 export async function getLastBlock() {
     const walletApi = await walletApiInstance()
