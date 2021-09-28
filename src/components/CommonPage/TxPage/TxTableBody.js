@@ -76,7 +76,7 @@ class TxTableBody extends Component {
 				data,
 				address
 			} = this.props
-			
+			console.log(data, "tx table body all data")
 			const addressInData = data.address
 			const isError = data.state === 0
 
@@ -186,11 +186,11 @@ class TxTableBody extends Component {
 				case TX_TYPE.TRANSACTIONS:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.hash} />
-							<BlockCell height={data.block_number} />
-							<DateCell date={data.timestamp} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+							<TxHashCell isError={isError} txHash={data.hash || data.txHash} />
+							<BlockCell height={data.block_number || data.height} />
+							<DateCell date={data.timestamp || data.createDate} />
+							<AddressSet fromAddr={data.from_address || data.fromAddr} toAddr={data.to_address || data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
 						</tr>
 					)
