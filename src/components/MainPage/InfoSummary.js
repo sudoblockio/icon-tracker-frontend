@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
+import { getTotalSupply } from '../../redux/api/restV3/iiss'
 
 class InfoSummary extends Component {
     constructor(props) {
@@ -11,6 +12,9 @@ class InfoSummary extends Component {
 
     async componentDidMount() {
         const isSolo = await getIsSolo()
+        const totalSupply = await getTotalSupply()
+        console.log(totalSupply, "total supply")
+        console.log(parseInt(totalSupply, 16) , "did it work")
         this.setState({ isSolo })
     }
 
