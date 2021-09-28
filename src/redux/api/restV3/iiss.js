@@ -2,11 +2,11 @@ import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
 
 
-export async function getAllTransactions () {
-    const prepnode = await fetch('http://210.180.69.101:9000/api/v1/status/peer')
-    const data = await prepnode.json()
-    return data.total_tx;
-}
+// export async function getAllTransactions () {
+//     const prepnode = await fetch('https://210.180.69.101:9000/api/v1/status/peer')
+//     const data = await prepnode.json()
+//     return data.total_tx;
+// }
 
 export async function coinGeckoMarketCap () {
     const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
@@ -24,8 +24,6 @@ export async function getTotalSupply () {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                console.log(response, "the whole response")
-                console.log(parseInt(response.data.result, 16), "response data result ")
                 resolve(parseInt(response.data.result, 16));
             })
             .catch(error => {

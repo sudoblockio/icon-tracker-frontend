@@ -147,26 +147,10 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 
 
 export const epochToFromNow = (date) => {
-// check if input is epoch time or hex
-let x;
 let parsed = parseInt(date, 16)
 let prettyDate;
 typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
-console.log(prettyDate, "how did it come out? ")
 return prettyDate
-// parse accordingly 
-// return the fromNow() of that date
-
-
-
-
-    // could upgrade to https://moment.github.io/luxon/#/?id=luxon
-    // console.log(date, "the input to this function")
-    // console.log(new Date(date / 1000), "date")
-    // console.log(moment(new Date(date / 1000)).fromNow(), "from now text")
-    // const aHex = parseInt(date, 16)
-    // console.log(moment(new Date(aHex / 1000)), "the date???")
-    // return moment(new Date(date / 1000)).fromNow()
 }
 
 export function calcFromNow(createDate) {
