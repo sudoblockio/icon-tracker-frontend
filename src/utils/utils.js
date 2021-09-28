@@ -148,6 +148,8 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 
 export const epochToFromNow = (miliseconds) => {
     // could upgrade to https://moment.github.io/luxon/#/?id=luxon
+    console.log(new Date(miliseconds / 1000), "the miliseconds")
+    console.log(moment(new Date(miliseconds / 1000)).fromNow())
     return moment(new Date(miliseconds / 1000)).fromNow()
 }
 

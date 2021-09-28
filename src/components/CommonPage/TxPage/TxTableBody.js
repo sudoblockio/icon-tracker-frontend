@@ -6,7 +6,8 @@ import {
 	is0xHash,
 	convertLoopToIcxDecimal,
 	convertHexToValue,
-	epochToFromNow 
+	epochToFromNow,
+	dateToUTC 
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -53,12 +54,13 @@ const DateCell = ({ date, isDate }) => {
 	else {
 		className = "break"
 		if (isDate) {
-			console.log("is a date")
-			dateText = epochToFromNow(date)
+			console.log(date, "is a date")
+			dateText = dateToUTC(date)
 		}
 		else {
-			console.log("is not a date")
-			dateText = epochToFromNow (date)
+			console.log(date, "is not a date")
+			dateText = epochToFromNow(date)
+			console.log(dateText, "this is datetext")
 		}
 	}
 	return <td className={className}>{dateText}</td>
@@ -184,6 +186,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTIONS:
+					// or statements to handle old endpoint column names:
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash || data.txHash} />
