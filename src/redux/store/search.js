@@ -34,7 +34,6 @@ const initialState = {
   
 let newState;
 const searchReducer = (state = initialState, action) => {
-    console.log(action, "this is the search action")
     switch (action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);

@@ -91,10 +91,7 @@ const blocksReducer = (state = initialState, action) => {
     switch (action.type){
         case BLOCK_LIST: {
             newState = deepcopy(state)
-            console.log(newState, "before the change")
             newState.blocks.data = action.payload
-            console.log(action.payload, "after")
-
             return newState;
         }
         case BLOCK_INFO: {

@@ -29,12 +29,11 @@ function SearchInput() {
       })
     }
   }
-  const anum = 60006
-  console.log(block_re.test(anum.toString()), "block number test ")
+
   const handleClick = (e) => {
     const searchTerm = e.target.value
     let searchByType = (searchTerm) => {
-      return block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm)) : setError("Not found")
+      block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm)) : setError("Not found")
     } 
 
     searchByType(searchTerm)

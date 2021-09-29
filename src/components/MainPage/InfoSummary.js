@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/api/restV3/iiss'
+import { getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss'
 
 class InfoSummary extends Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class InfoSummary extends Component {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
-        // const allTransactions = await getAllTransactions()
-        this.setState({ isSolo, totalSupply, marketCap, /*allTransactions*/ })
+        const allTransactions = await getAllTransactions()
+        this.setState({ isSolo, totalSupply, marketCap, allTransactions })
     }
     
     render() {

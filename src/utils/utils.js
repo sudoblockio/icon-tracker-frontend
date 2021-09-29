@@ -147,10 +147,10 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 
 
 export const epochToFromNow = (date) => {
-let parsed = parseInt(date, 16)
-let prettyDate;
-typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
-return prettyDate
+    let parsed = parseInt(date, 16)
+    let prettyDate;
+    typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
+    return prettyDate
 }
 
 export function calcFromNow(createDate) {
@@ -734,7 +734,6 @@ export const convertHexToValue = (hex) => {
     const int = parseInt(Number(hex), 16)
     const value = int / 10^18
     const test = new BigNumber(hex, 16)
-    console.log(test, "this is the test")
     // bignumber = new BigNumber(hex, 16);
     // console.log(bignumber.toString(10), "this is the big number")
     return value;
