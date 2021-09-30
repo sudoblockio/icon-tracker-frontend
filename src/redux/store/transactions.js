@@ -44,7 +44,7 @@ export const txList = (payload) => async (dispatch) => {
 
 
 // ::
-// :: backup demo
+// :: ripcord demo
 // ::
 // const V3_ENDPOINT = `https://trackerdev.icon.foundation/v3/transaction/recentTx`
 // const makeV3Url  = (url, payload) => {
@@ -55,7 +55,6 @@ export const txList = (payload) => async (dispatch) => {
 //     Object.keys(payload).forEach((key, index) => {
 //         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
 //     })
-//     console.log(result)
 //     return result
 // }
 // export const txList = (payload) => async (dispatch) => {

@@ -1,12 +1,9 @@
 import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
+import { BigNumber } from "bignumber.js";
 
 
 export async function getAllTransactions () {
-    // instead of 
-    // base endpoint
-    // https://explorer.icon.geometry-dev.net / api / v1 / status  / peer 
-    // const prepnode = await fetch('http://210.180.69.101:9000/api/v1/status/peer')
     const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
     const data = await prepnode.json()
     return data.total_tx;
@@ -32,6 +29,11 @@ export async function getTotalSupply () {
                 console.log(parseInt(response.data.result, 16), "parsed")
                 
                 console.log(parseInt(Number(response.data.result), 16) / 10^18, "divided by 10^18")
+                const biggin = BigNumber(response.data.result)
+                console.log(biggin.toFixed(), "to fixed")
+                console.log(biggin.toString(),"to string")
+                console.log(biggin.toPrecision(),"to precision")
+                console.log(biggin.toNumber(),"to number")
                 resolve(parseInt(response.data.result, 16) / 10^18);
             })
             .catch(error => {

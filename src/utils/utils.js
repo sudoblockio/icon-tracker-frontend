@@ -739,18 +739,15 @@ export const convertHexToValue = (hex) => {
     return value;
     }
 }
-// Function for Richard :D 
-// Example Test Data:
+
 const testData = ["some", "hashed", "data", "and", "addresses", "or", "something"]
 const getRandomIndexInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min)) + min;
 }
-// Function to take in test data and generate a random number found in the range of indices.
-// Js Arrays start at zero so the index of the last element in array is found an data.length-1
 const randomDataPicker = (testData) => {
     const randomIdx = testData[getRandomIndexInRange(0, testData.length-1)]
     return randomIdx;
 }
 
-// call the function however is useful:
+
 console.log(randomDataPicker(testData))
