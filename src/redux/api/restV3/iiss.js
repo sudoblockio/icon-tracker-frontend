@@ -34,6 +34,10 @@ export async function getTotalSupply () {
                 console.log(biggin.toString(),"to string")
                 console.log(biggin.toPrecision(),"to precision")
                 console.log(biggin.toNumber(),"to number")
+                const bigNum = BigNumber(response.data.result, 16)
+                const divisor = Math.pow(10, 18)
+                console.log(BigNumber(bigNum / divisor).toPrecision(), "give bignumb the power")
+                console.log(BigNumber(response.data.result, 16).toFixed(), "given hex and base 16")
                 resolve(parseInt(response.data.result, 16) / 10^18);
             })
             .catch(error => {
