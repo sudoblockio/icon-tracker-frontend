@@ -33,7 +33,7 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertNumberToText(value)} ICX
+                                                {convertHexToValue(value)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
@@ -45,7 +45,7 @@ class RecentTransactions extends Component {
                                         <p className="d">
                                             Fee
                                             <em>
-                                                {convertNumberToText(fee)} ICX
+                                                {convertHexToValue(fee)} ICX
                                             </em>
                                         </p>
                                     </li>

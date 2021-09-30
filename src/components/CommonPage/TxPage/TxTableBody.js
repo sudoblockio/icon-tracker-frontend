@@ -181,7 +181,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.type} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.transaction_amount} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
 						</tr>
 					)
@@ -230,16 +230,14 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.BLOCKS:
-					const amtToNum = parseInt(data.transaction_amount, 16)
-					const blockAmount = amtToNum / Math.pow(10, 18)
 					return (
 						<tr>
 							<BlockCell height={data.number} />
 							<DateCell date={data.timestamp} />
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td><BlockLink label={data.hash} to={data.number} ellipsis /></td>
-							<AmountCell amount={data.transaction_amount} symbol="ICX" />
-							<AmountCell amount={data.transaction_fees} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:
