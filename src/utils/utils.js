@@ -727,17 +727,16 @@ export function closeEm(text) {
 }
 
 export const convertHexToValue = (hex) => {
+    let value;
     if (hex === "0x0") {
-        return 0
+        value = 0
     } else {
-
-    const int = parseInt(Number(hex), 16)
-    const value = int / 10^18
-    const test = new BigNumber(hex, 16)
-    // bignumber = new BigNumber(hex, 16);
-    // console.log(bignumber.toString(10), "this is the big number")
-    return value;
+        const bigNum = BigNumber(hex, 16)
+        const divisor = Math.pow(10, 18)
+        value = BigNumber(bigNum / divisor).toPrecision();
     }
+
+    return Number(value);
 }
 
 const testData = ["some", "hashed", "data", "and", "addresses", "or", "something"]

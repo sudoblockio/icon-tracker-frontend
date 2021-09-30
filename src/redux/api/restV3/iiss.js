@@ -25,19 +25,8 @@ export async function getTotalSupply () {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                console.log(response.data.result, "response data")
-                console.log(parseInt(response.data.result, 16), "parsed")
-                
-                console.log(parseInt(Number(response.data.result), 16) / 10^18, "divided by 10^18")
-                const biggin = BigNumber(response.data.result)
-                console.log(biggin.toFixed(), "to fixed")
-                console.log(biggin.toString(),"to string")
-                console.log(biggin.toPrecision(),"to precision")
-                console.log(biggin.toNumber(),"to number")
                 const bigNum = BigNumber(response.data.result, 16)
                 const divisor = Math.pow(10, 18)
-                console.log(BigNumber(bigNum / divisor).toFixed(), "give bignumb the power")
-                console.log(BigNumber(response.data.result, 16).toFixed(), "given hex and base 16")
                 resolve(BigNumber(bigNum / divisor).toFixed());
             })
             .catch(error => {
