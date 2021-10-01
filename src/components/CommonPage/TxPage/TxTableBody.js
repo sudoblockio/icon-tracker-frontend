@@ -263,7 +263,7 @@ class TxTableBody extends Component {
 						<tr>
 							{/* <td>-</td> */}
 							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.amount} symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.amount)} symbol="ICX" />
 							{/* <td>-</td> */}
 						</tr>
 					)

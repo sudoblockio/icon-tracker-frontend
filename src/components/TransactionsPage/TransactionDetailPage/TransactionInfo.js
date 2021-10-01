@@ -23,7 +23,10 @@ import {
 	removeQuotes,
 	isHex,
 	isImageData,
+	epochToFromNow,
+	convertHexToValue,
 } from '../../../utils/utils'
+
 
 const COUNT = 10
 
@@ -69,6 +72,8 @@ class TransactionInfo extends Component {
 
 	render() {
 		const { download } = this.state
+		console.log(this.state, "transaction info state")
+		console.log(this.props, "transaction info props")
 		const { transaction } = this.props
 		const { loading, data } = transaction
 		const Contents = () => {
@@ -94,8 +99,6 @@ class TransactionInfo extends Component {
 					step_limit,
 					stepUsedByTxn,
 					stepPrice,
-					// aliasing the DB column name 'data' to 'dataString' 
-					// because 'data' is already used as a global state variable. 
 					data: dataString,
 					fee,
 					feeUsd,
@@ -104,7 +107,6 @@ class TransactionInfo extends Component {
 					reportedCount,
 					stepUsedDetails
 				} = data
-				console.log(data, "tx detail data")
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
@@ -143,7 +145,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
-											<td>{(timestamp)}<em>{utcDateInfo(createDate)}</em></td>
+											<td>{new Date(parseInt(timestamp, 16) / 1000).toString()}<em>{epochToFromNow(parseInt(timestamp, 16))}</em></td>
 										</tr>
 										<tr>
 											<td>From</td>
