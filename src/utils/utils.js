@@ -146,13 +146,6 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
 
 
 
-export const epochToFromNow = (date) => {
-    let parsed = parseInt(date, 16)
-    let prettyDate;
-    typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
-    return prettyDate
-}
-
 export function calcFromNow(createDate) {
     const M = 60
     const H = M * 60
@@ -737,6 +730,13 @@ export const convertHexToValue = (hex) => {
     }
 
     return Number(value);
+}
+
+export const epochToFromNow = (date) => {
+    let parsed = parseInt(date, 16)
+    let prettyDate;
+    typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
+    return prettyDate
 }
 
 const testData = ["some", "hashed", "data", "and", "addresses", "or", "something"]

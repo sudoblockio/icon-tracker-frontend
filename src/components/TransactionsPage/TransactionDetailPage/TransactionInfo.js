@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
+import { BigNumber} from 'bignumber.js'
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
 import {
@@ -105,7 +106,8 @@ class TransactionInfo extends Component {
 					data_type,
 					targetContractAddr,
 					reportedCount,
-					stepUsedDetails
+					stepUsedDetails,
+					receipt_step_price
 				} = data
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -157,7 +159,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Amount</td>
-											<td>{`${convertNumberToText(value)} ICX`}</td>
+											<td>{`${convertHexToValue(value)} ICX`}</td>
 										</tr>
 										{
 											(!!tokenTxList && tokenTxList.length !== 0) &&
@@ -168,7 +170,7 @@ class TransactionInfo extends Component {
 										}
 										<tr>
 											<td>Step Price</td>
-											<td>{convertNumberToText(stepPriceIcx)} ICX<em>({convertNumberToText(stepPriceGloop)} Gloop)</em></td>
+											<td>{BigNumber(convertHexToValue(receipt_step_price)/100).toFixed()} ICX<em>({receipt_step_price/1000000000} Gloop)</em></td>
 										</tr>
 										<tr>
 											<td>Step Limit</td>
