@@ -52,6 +52,7 @@ export const blockTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
     try {
     const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`);
+    console.log(response, "res from blockTxList")
     if (response.status === 200) {
         const data = response.data;
         dispatch(getblockTxList(data))
@@ -62,13 +63,16 @@ export const blockTxList = (payload) => async (dispatch) => {
 };
 
 export const blockInfo = (payload) => async (dispatch) => {
+    console.log(payload, "paylod")
     const trackerApi = await trackerApiInstance();
     try {
-        const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
+        // const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
+        const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`)
         console.log(response, "res from blockinfo")
         if (response.status === 200) {
             const data = response.data;
             dispatch(getblockInfo(data))
+            console.log(data, "data from blockINfo")
             return data
     } else {
         // setError(error)
@@ -100,7 +104,7 @@ const blocksReducer = (state = initialState, action) => {
             console.log(action.payload, "payload from blockinfo reducer")
 
             console.log(action.payload[0], "payload AT ZERO from blockinfo reducer")
-            newState.block.data = action.payload[0]
+            newState.block.data = action.payload
             return newState
         }
         case BLOCK_TX_LIST: {

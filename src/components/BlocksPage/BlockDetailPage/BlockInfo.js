@@ -41,11 +41,12 @@ class BlockInfo extends Component {
                 return <LoadingComponent height="206px" />
             } else {
                
-                const { number, timestamp, transaction_count, transaction_amount, transaction_fees, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
+                const { number, timestamp, transaction_count, transaction_amount, transaction_fees, hash, parent_hash, blockSize, amount, fee, message, lastBlock, peer_id, crep } = data
                 {console.log(data, "data from component")}
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
-                const prep = peerId || crep
+                const prep = peer_id || crep
+                console.log(peer_id, "this blocks peer id, prep? ")
                 
                 return (
                     <div className="screen0">
@@ -77,7 +78,7 @@ class BlockInfo extends Component {
                                                     <td>-</td>
                                                 ) : (
                                                     <td>
-                                                        {new Date(timestamp).toString()}
+                                                        {new Date(timestamp / 1000).toString()}
                                                         <em>{epochToFromNow(timestamp)}</em>
                                                     </td>
                                                 )}
@@ -98,7 +99,7 @@ class BlockInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Prev Hash</td>
-                                                <td>{prevHash ? <BlockLink to={number - 1} label={prevHash} /> : '-'}</td>
+                                                <td>{parent_hash ? <BlockLink to={number - 1} label={parent_hash} /> : '-'}</td>
                                             </tr>
                                             <tr>
                                                 <td>Block Size</td>
