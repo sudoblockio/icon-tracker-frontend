@@ -169,6 +169,7 @@ export async function getLastBlock() {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.log(response.data.result, "is this teh last block???????????")
                 resolve(response.data.result);
             })
             .catch(error => {

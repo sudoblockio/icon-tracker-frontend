@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
 import { BigNumber} from 'bignumber.js'
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
+import { getConfirmations } from '../../../utils/utils'
+import { getLastBlock } from '../../../redux/api/restV3/iiss';
 import twitterLogo from '../../../style-custom/twitter-logo.png'
 import {
 	CopyButton,
@@ -46,6 +48,10 @@ class TransactionInfo extends Component {
 		}
 
 		this.getDownloadLink(nextProps)
+	}
+
+	componentDidMount = async () => {
+
 	}
 
 	getDownloadLink = async (props) => {
@@ -93,7 +99,6 @@ class TransactionInfo extends Component {
 					createDate,
 					timestamp,
 					block_number,
-					confirmation,
 					from_address,
 					to_address,
 					value,
@@ -110,6 +115,9 @@ class TransactionInfo extends Component {
 					receipt_step_price,
 					receipt_step_used, 
 				} = data
+				
+				const confirmation = async (block_number) => await getConfirmations(block_number)
+				console.log(confirmation, "confirmation")
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
@@ -144,7 +152,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Block</td>
-											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
+											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation()) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>

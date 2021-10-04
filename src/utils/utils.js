@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { getTrackerApiUrl } from '../redux/api/restV3/config'
+import { getLastBlock } from '../../src/redux/api/restV3/iiss'
 import BigNumber from 'bignumber.js'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { TokenLink } from '../components'
@@ -739,14 +740,7 @@ export const epochToFromNow = (date) => {
     return prettyDate
 }
 
-const testData = ["some", "hashed", "data", "and", "addresses", "or", "something"]
-const getRandomIndexInRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min)) + min;
+export const getConfirmations = async (block_number) => {
+    const lastBlock = await getLastBlock()
+    return Number(lastBlock - block_number)
 }
-const randomDataPicker = (testData) => {
-    const randomIdx = testData[getRandomIndexInRange(0, testData.length-1)]
-    return randomIdx;
-}
-
-
-console.log(randomDataPicker(testData))
