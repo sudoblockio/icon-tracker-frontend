@@ -20,9 +20,7 @@ class BlockInfo extends Component {
     handleNextBlock = () => {
         const { block } = this.props
         const { data } = block
-        const { lastBlock, number } = data
-        if (lastBlock !== '-') return
-
+        const { number } = data
         const nextHeight = number + 1
         this.props.history.push('/block/' + nextHeight)
     }
@@ -60,11 +58,11 @@ class BlockInfo extends Component {
                                             <tr>
                                                 <td>Block Height</td>
                                                 <td>
-                                                    <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}>
+                                                    <p onClick={this.handlePrevBlock} className={`prev`}>
                                                         <em className="img" />
                                                     </p>
                                                     <em className="value">{numberWithCommas(number)}</em>
-                                                    <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled' : ''}`}>
+                                                    <p onClick={this.handleNextBlock} className={`next`}>
                                                         <em className="img" />
                                                     </p>
                                                 </td>

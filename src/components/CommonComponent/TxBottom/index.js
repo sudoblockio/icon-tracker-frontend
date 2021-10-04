@@ -12,6 +12,8 @@ class TxBottom extends Component {
       txType,
       address
     } = this.props
+    // this throws contract state error... 
+    // console.log(goAllTx(40477089), "tx table bottom block transaction props")
 
     const tableClassName =
       TX_TYPE_DATA[txType] ?
