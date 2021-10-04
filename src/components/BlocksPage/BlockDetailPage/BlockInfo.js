@@ -43,8 +43,8 @@ class BlockInfo extends Component {
                 return <LoadingComponent height="206px" />
             } else {
                
-                const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
-                {console.log(new Date(timestamp), "data from component")}
+                const { number, timestamp, transaction_count, transaction_amount, transaction_fees, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
+                {console.log(data, "data from component")}
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peerId || crep
@@ -79,7 +79,7 @@ class BlockInfo extends Component {
                                                     <td>-</td>
                                                 ) : (
                                                     <td>
-                                                        {timestamp}
+                                                        {new Date(timestamp).toString()}
                                                         <em>{epochToFromNow(timestamp)}</em>
                                                     </td>
                                                 )}
@@ -108,11 +108,11 @@ class BlockInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Amount</td>
-                                                <td>{convertNumberToText(amount)} ICX</td>
+                                                <td>{numberWithCommas(convertHexToValue(transaction_amount)) } ICX</td>
                                             </tr>
                                             <tr>
                                                 <td>TxFee</td>
-                                                <td>{convertNumberToText(fee)} ICX</td>
+                                                <td>{convertHexToValue(transaction_fees)} ICX</td>
                                             </tr>
                                             {number === 0 && (
                                                 <tr>
