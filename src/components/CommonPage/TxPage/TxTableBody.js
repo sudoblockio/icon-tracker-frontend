@@ -54,13 +54,11 @@ const DateCell = ({ date, isDate }) => {
 	else {
 		className = "break"
 		if (isDate) {
-			console.log(date, "is a date")
 			dateText = dateToUTC(date)
 		}
 		else {
-			console.log(date, "is not a date")
 			dateText = epochToFromNow(date)
-			console.log(dateText, "this is datetext")
+
 		}
 	}
 	return <td className={className}>{dateText}</td>

@@ -13,7 +13,7 @@ class BlockDetailPage extends Component {
   render() {
     const { block } = this.props;
     const { loading, error } = block
-
+    {console.log(this.props, "what is this? ")}
 
     return (
       

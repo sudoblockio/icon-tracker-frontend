@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo } from '../../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue, epochToFromNow, } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
@@ -44,6 +44,7 @@ class BlockInfo extends Component {
             } else {
                
                 const { number, timestamp, transaction_count, hash, prevHash, blockSize, amount, fee, message, lastBlock, peerId, crep } = data
+                {console.log(new Date(timestamp), "data from component")}
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peerId || crep
@@ -79,7 +80,7 @@ class BlockInfo extends Component {
                                                 ) : (
                                                     <td>
                                                         {timestamp}
-                                                        <em>{utcDateInfo(timestamp)}</em>
+                                                        <em>{epochToFromNow(timestamp)}</em>
                                                     </td>
                                                 )}
                                             </tr>
