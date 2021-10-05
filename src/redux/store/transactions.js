@@ -147,7 +147,6 @@ const transactionsReducer = (state = initialState, action) => {
         case TX_INT_LIST: {
             newState = deepcopy(state)
             newState.transactionInternalTx.data = action.payload
-            console.log(newState, "tx int new state")
             return newState 
         }
         default:

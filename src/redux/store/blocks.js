@@ -9,7 +9,7 @@ const BLOCK_PREFIX = '/v1/blocks'
 const BLOCK_LIST = 'BLOCK_LIST'
 const BLOCK_INFO = 'BLOCK_INFO'
 const BLOCK_TX_LIST = 'BLOCK_TX_LIST'
-const BLOCK_TX_LIST_FULFILLED = 'BLOCL_TX_LIST_FULFILLED'
+const BLOCK_TX_LIST_FULFILLED = 'BLOCK_TX_LIST_FULFILLED'
 const BLOCK_TX_LIST_REJECTED = 'BLOCK_TX_LIST_REJECTED'
 
 const getblockList = (payload) => ({
@@ -48,10 +48,11 @@ export const blockList = (payload) => async (dispatch) => {
 export const blockTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance();
     try {
-    const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`);
+    const response = await trackerApi.get(`/api/v1/transactions?block_number=${payload.number}`);
     console.log(response, "res from blockTxList")
     if (response.status === 200) {
         const data = response.data;
+        console.log(data, "data from block tx list")
         dispatch(getblockTxList(data))
     }}
     catch (e) {
@@ -97,21 +98,14 @@ const blocksReducer = (state = initialState, action) => {
         }
         case BLOCK_INFO: {
             newState = deepcopy(state)
-            console.log(newState, "blockinfo newState")
-            console.log(action.payload, "payload from blockinfo reducer")
-
-            console.log(action.payload[0], "payload AT ZERO from blockinfo reducer")
             newState.block.data = action.payload
             return newState
         }
         case BLOCK_TX_LIST: {
-            return getState('ARR', REDUX_STEP.READY, state, action, 'blockTx')
-        }
-        case BLOCK_TX_LIST_FULFILLED :{
-            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blockTx')
-        }
-        case BLOCK_TX_LIST_REJECTED :{
-            return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blockTx')
+            newState = deepcopy(state)
+            newState.blockTx.data = action.payload
+            console.log(newState, "newstate block tx")
+            return newState
         }
         default:
       return state;
