@@ -40,15 +40,15 @@ export async function transactionEventLogList(payload) {
   })
 }
 
-export async function transactionInternalTxList(payload) {
-  const trackerApi = await trackerApiInstance()
-  return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/transaction/internalTxList', payload))
-      .then(result => {
-        resolve(result.data)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
+// export async function transactionInternalTxList(payload) {
+//   const trackerApi = await trackerApiInstance()
+//   return new Promise((resolve, reject) => {
+//     trackerApi.get(makeUrl('/v3/transaction/internalTxList', payload))
+//       .then(result => {
+//         resolve(result.data)
+//       })
+//       .catch(error => {
+//         reject(error)
+//       })
+//   })
+// }

@@ -1,6 +1,6 @@
-import { makeUrl } from '../../utils/utils';
+import { makeUrl, getState } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
-import { INITIAL_STATE} from '../../../src/utils/const'
+import { INITIAL_STATE, REDUX_STEP} from '../../../src/utils/const'
 import { trackerApiInstance } from '../api/restV3/config'
 
 const TX_PREFIX = `/v1/transactions`
@@ -9,6 +9,7 @@ const TX_PREFIX = `/v1/transactions`
 // previously src/redux/actionTypes/actionTypes.js
 const TX_LIST = 'TX_LIST'
 const TX_DETAIL = 'TX_DETAIL'
+const TX_INT_LIST = 'TX_INT_LIST'
 
 // previously src/redux/actions/transactionsActions.js
 const getTxList = (payload) => ({
@@ -16,10 +17,34 @@ const getTxList = (payload) => ({
     payload
 });
 
+const getTxIntList = (payload) => ({
+    type: TX_INT_LIST, 
+    payload
+})
+
 const getTxDetail = (payload) => ({
     type: TX_DETAIL,
     payload
 })
+
+
+export const transactionInternalTxList = (payload) => async (dispatch) => {
+    const trackerApi = await trackerApiInstance()
+    console.log(payload, "int tx list payload")
+    try {
+        const res = await trackerApi.get(`/api/v1/transactions/internal/${payload.txHash}`)
+        console.log(res, "int tx list res")
+        if (res.status === 200) {
+            const data = res.data
+            dispatch(getTxIntList(data))
+            return data
+        } else {
+            // handle error
+        }
+    } catch (e){
+        console.log(e, "error from tx int list")
+    }
+}
 
 export const txList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
@@ -119,9 +144,17 @@ const transactionsReducer = (state = initialState, action) => {
             newState.transaction.data = action.payload
             return newState
         }
+        case TX_INT_LIST: {
+            newState = deepcopy(state)
+            newState.transactionInternalTx.data = action.payload
+            console.log(newState, "tx int new state")
+            return newState 
+        }
         default:
             return state;
     }
 };
 
 export default transactionsReducer;
+
+

@@ -1,4 +1,4 @@
-import { makeUrl } from '../../utils/utils';
+import { makeUrl, getState } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config'
 
