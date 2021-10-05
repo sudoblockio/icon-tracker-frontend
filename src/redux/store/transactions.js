@@ -28,6 +28,7 @@ const getTxDetail = (payload) => ({
 })
 
 
+
 export const transactionInternalTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     console.log(payload, "int tx list payload")

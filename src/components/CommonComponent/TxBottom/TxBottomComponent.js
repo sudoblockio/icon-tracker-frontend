@@ -9,6 +9,7 @@ class TxBottomComponent extends Component {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
         console.log(this.props, "tx bottom props")
         const { data, listSize, totalSize, loading } = txData
+        console.log(txData, "this is txData listSize")
 
         const Content = () => {
             if (loading) {
@@ -34,8 +35,8 @@ class TxBottomComponent extends Component {
                                     {data.map((item, index) => (
                                         console.log(item, "item/index")
                                     ))}
-
-                                    {data.map((item, index) => (
+                                    {console.log(typeof(data), "what type is data here? ")}
+                                    {[data].map((item, index) => (
                                         
                                         <TxTableBody key={index} data={item} txType={txType} address={address} />
                                     ))}

@@ -175,15 +175,20 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
-					return (
-						<tr>
-							{console.log(data, "block tx data")}
-							<TxHashCell isError={isError} txHash={data.hash} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
-							<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
-						</tr>
-					)
+					data.map((item, index) => {
+						console.log(item, "each item")
+						return (
+							<tr>
+								{console.log(data, "block tx data")}
+								{console.log(item, item.from_address, "some items")}
+								<TxHashCell isError={isError} txHash={data.hash} />
+								<AddressSet fromAddr={item.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.targetContractAddr} />
+								<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
+								<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
+							</tr>
+						)
+
+					})
 				case TX_TYPE.TRANSACTIONS:
 					// or statements to handle old endpoint column names:
 					return (
