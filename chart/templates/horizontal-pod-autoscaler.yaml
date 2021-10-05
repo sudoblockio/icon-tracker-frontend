@@ -20,4 +20,14 @@ spec:
         target:
           type: Utilization
           averageUtilization: {{ .Values.autoscaler.averageCPU }}
+    - type: Object
+      object:
+        describedObject:
+          kind: Service
+          name: {{ .Release.Name }}
+        metric:
+          name: envoy_upstream_active_requests
+        target:
+          type: AverageValue
+          averageValue: "100"
 {{- end }}
