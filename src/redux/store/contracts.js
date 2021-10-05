@@ -3,7 +3,9 @@ import * as deepcopy from 'deepcopy'
 import { INITIAL_STATE} from '../../../src/utils/const'
 import { trackerApiInstance } from '../api/restV3/config'
 
-const CONTRACT_LISTS = 'CONTRACT_LIST'
+const CX_PREFIX = `/api/v1/etc`
+
+const CONTRACTS_LIST = 'CONTRACT_LIST'
 
 const getContractsList = (payload) => ({
     type: CONTRACTS_LIST,
@@ -52,5 +54,7 @@ const initialState = {
           case CONTRACTS_LIST: {
             return getState('ARR', REDUX_STEP.READY, state, action, 'contracts')
           }
+          default: 
+            return state;
       }
   }

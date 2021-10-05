@@ -19,8 +19,8 @@ class RecentTransactions extends Component {
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((tx, index) => {
-                                const { hash, value, fee, state } = tx
-                                const isSuccess = Number(state) === 1
+                                const { hash, value, fee, receipt_status } = tx
+                                const isSuccess = Number(receipt_status) === 1
                                 return (
                                     <li key={index}>
                                         <p className={`icon ${!isSuccess ? 'fail' : ''}`}>T</p>
