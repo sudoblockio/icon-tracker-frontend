@@ -35,7 +35,7 @@ class TxBottomComponent extends Component {
                                         console.log(item, "item/index")
                                     ))}
 
-                                    {[data].map((item, index) => (
+                                    {data.map((item, index) => (
                                         
                                         <TxTableBody key={index} data={item} txType={txType} address={address} />
                                     ))}
