@@ -28,12 +28,9 @@ const getblockTxList = (payload) => ({
   });
 
 export const blockList = (payload) => async (dispatch) => {
-    console.log(payload, "blocklist payload")
-
     const trackerApi = await trackerApiInstance()
     try {
-        const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
-        console.log(response, "response from blocks")
+        const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload.limit));
         if (response.status === 200) {
             const data = response.data;
              dispatch(getblockList(data))

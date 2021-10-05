@@ -35,9 +35,8 @@ export const txList = (payload) => async (dispatch) => {
             // handle error from get
         }
         // error
-    }
-    catch (e) {
-        // if no tracker api instance 
+    } catch (e) {
+        // if no tracker api url
         console.log(e)
     }
 }

@@ -4,6 +4,7 @@ import { trackerApiInstance } from '../api/restV3/config'
 
 const SEARCH_BLOCKS = 'SEARCH_BLOCKS'
 
+
 const getsearchBlocks = (payload) => ({
     type: SEARCH_BLOCKS,
     payload
@@ -14,9 +15,11 @@ export const searchBlocks = (payload) => async (dispatch) => {
     console.log(payload, "search payload here ")
     const trackerApi = await trackerApiInstance()
     try { 
+        console.log("from the try block")
         const response = trackerApi.get(makeUrl('/v1/blocks/', payload));
+        console.log(response, "searchBlocks respose")
         if (response.data) {
-            const resultData = await response.data.data;
+            const resultData = response.data;
             dispatch(getsearchBlocks(resultData))
             return resultData
     }}
@@ -34,6 +37,7 @@ const initialState = {
   
 let newState;
 const searchReducer = (state = initialState, action) => {
+    console.log(action, "this is action")
     switch (action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);

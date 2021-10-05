@@ -50,7 +50,7 @@ class TransactionInfo extends Component {
 		this.getDownloadLink(nextProps)
 	}
 
-	componentDidMount = async () => {
+	async componentDidMount()  {
 
 	}
 
@@ -79,8 +79,6 @@ class TransactionInfo extends Component {
 
 	render() {
 		const { download } = this.state
-		console.log(this.state, "transaction info state")
-		console.log(this.props, "transaction info props")
 		const { transaction } = this.props
 		const { loading, data } = transaction
 		const Contents = () => {
@@ -117,7 +115,6 @@ class TransactionInfo extends Component {
 				} = data
 				
 				const confirmation = async (block_number) => await getConfirmations(block_number)
-				console.log(confirmation, "confirmation")
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
