@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { InfoSummary, RecentBlocks, RecentTransactions, SearchInput } from '../../components'
 import { search } from '../../redux/actions/searchActions';
 import { blockList } from '../../redux/store/blocks'
+import { searchBlocks } from '../../redux/store/search'
 import { txList } from '../../redux/store/transactions'
 import { connect } from 'react-redux'
 
@@ -83,7 +84,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        search: param => dispatch(search(param)),
+        search: param => dispatch(searchBlocks(param)),
         blockList: payload => dispatch(blockList(payload)),
         txList: payload => dispatch(txList(payload))
     };

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { searchBlocks } from '../../redux/store/search'
+import { searchBlocks } from '../../redux/store/search';
+import { connect } from 'react-redux'
+
 
 class SearchInput extends Component {
   constructor(props) {
     super(props)
     const { searchKeyword } = this.props
+    console.log(this.props, "whay's happening")
     this.state = {
       search: searchKeyword
     }
@@ -45,9 +48,10 @@ class SearchInput extends Component {
     e.target.value = value
   }
 
-  handleClick = (dispatch) => {
+  handleClick = () => {
     const { search } = this.state
-    dispatch(searchBlocks(search))
+    console.log(this.props.search, "plz be a function")
+    this.props.search(search)
   }
 
   render() {
@@ -71,4 +75,10 @@ class SearchInput extends Component {
   }
 }
 
-export {SearchInput}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    search: () => dispatch(searchBlocks())
+  }
+}
+
+export default connect(null,mapDispatchToProps) (SearchInput)
