@@ -2,6 +2,7 @@ import { makeUrl, getState } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config'
 
+const BLOCK_PREFIX = '/v1/blocks'
 const SEARCH_BLOCKS = 'SEARCH_BLOCKS'
 
 
@@ -12,21 +13,24 @@ const getsearchBlocks = (payload) => ({
 
 
 export const searchBlocks = (payload) => async (dispatch) => {
-    console.log(payload, "search payload here ")
-    const trackerApi = await trackerApiInstance()
-    try { 
-        console.log("from the try block")
-        const response = trackerApi.get(makeUrl('/v1/blocks/', payload));
-        console.log(response, "searchBlocks respose")
-        if (response.data) {
-            const resultData = response.data;
-            dispatch(getsearchBlocks(resultData))
-            return resultData
-    }}
-    catch (e) {
-        console.log(e, "e from search")
+    console.log(payload, "payload search input")
+    const trackerApi = await trackerApiInstance();
+    try {
+        const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`)
+        console.log(response, "res from searchInput")
+        if (response.status === 200) {
+            const data = response.data.data;
+            dispatch(getsearchBlocks(data))
+            console.log(data, "data from searchInput")
+            return data
+    } else {
+        // setError(error)
     }
 }
+    catch (e) {
+        console.log(e, "error from searchInput")
+    }
+};
 
 
 
@@ -38,12 +42,14 @@ const initialState = {
 let newState;
 const searchReducer = (state = initialState, action) => {
     console.log(action, "this is action")
-    switch (action.type) {
+    switch (action && action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);
             console.log(newState, "this is the new state from search")
             newState.search = action.payload
-            return newState;
+            return Object.assign({}, state, {
+                loading: true
+              })
         }
         default: 
             return state;

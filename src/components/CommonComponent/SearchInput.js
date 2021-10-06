@@ -30,15 +30,16 @@ function SearchInput() {
     }
   }
 
-  const handleClick = (e) => {
+  const handleClick =  (e) => {
     const searchTerm = e.target.value
     console.log(searchTerm, "search term")
     
-    let searchByType = (searchTerm) => {
-      block_re.test(searchTerm) === true ? dispatch(searchBlocks(searchTerm)) : setError("Not found")
-    } 
-
-    searchByType(searchTerm)
+    if (block_re.test(searchTerm)) {
+      console.log("it is a block")
+      dispatch(searchBlocks(searchTerm))
+    } else {
+      setError("Not Found")
+    }
 
   }
 
