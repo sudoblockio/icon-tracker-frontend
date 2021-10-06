@@ -53,7 +53,8 @@ export const searchBlocks = (payload) => async (dispatch) => {
 
 const initialState = {
     loading: false,
-    error: ''
+    error: '',
+    redirect: false
   };
   
 let newState;

@@ -6,8 +6,7 @@ import { connect } from 'react-redux'
 class SearchInput extends Component {
   constructor(props) {
     super(props)
-    const { searchKeyword } = this.props
-    console.log(this.props, "whay's happening")
+    const { searchKeyword, redirect } = this.props
     this.state = {
       search: searchKeyword
     }
@@ -21,12 +20,13 @@ class SearchInput extends Component {
   }
 
   handleChange = (e) => {
+    // console.log(e, "e")
     const { name, value } = e.target
     const prevSearch = this.state[name]
     this.setState({ [name]: value }, () => {
-      if (prevSearch !== '' && value === '') {
-        this.handleClick()
-      }
+      // if (prevSearch !== '' && value === '') {
+      //   this.handleClick()
+      // }
     })
   }
 
@@ -49,10 +49,11 @@ class SearchInput extends Component {
   }
 
   handleClick = () => {
+    console.log(this.props, "search input props")
     const { search } = this.state
+    console.log(this.props, "all")
     console.log(this.props.search(search), "plz be a function")
     console.log(search, "is this a numver?")
-    this.props.search(search)
   }
 
   render() {
@@ -76,10 +77,16 @@ class SearchInput extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    redirect: state.search.redirect
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     search: payload => dispatch(searchBlocks(payload))
   }
 }
 
-export default connect(null,mapDispatchToProps) (SearchInput)
+export default connect(mapStateToProps,mapDispatchToProps) (SearchInput)
