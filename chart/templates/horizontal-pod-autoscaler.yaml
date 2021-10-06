@@ -14,12 +14,6 @@ spec:
     kind: Deployment
     name: {{ .Release.Name }}
   metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: {{ .Values.autoscaler.averageCPU }}
     - type: Object
       object:
         describedObject:
@@ -28,6 +22,12 @@ spec:
         metric:
           name: envoy_upstream_active_requests
         target:
-          type: AverageValue
-          averageValue: "100"
+          type: Value
+          value: "100"
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaler.averageCPU }}
 {{- end }}
