@@ -11,16 +11,16 @@ class SearchInput extends Component {
       search: searchKeyword
     }
   }
-
+  
   componentDidMount = () => {
     const { searchKeyword, id } = this.props
     if (searchKeyword && id) {
       document.getElementById(id).focus()
     }
+
   }
 
   handleChange = (e) => {
-    // console.log(e, "e")
     const { name, value } = e.target
     const prevSearch = this.state[name]
     this.setState({ [name]: value }, () => {
@@ -49,14 +49,15 @@ class SearchInput extends Component {
   }
 
   handleClick = () => {
-    console.log(this.props, "search input props")
     const { search } = this.state
-    console.log(this.props, "all")
-    console.log(this.props.search(search), "plz be a function")
-    console.log(search, "is this a numver?")
+    this.props.search(search)
+    console.log(this.props, "this props")
   }
-
+  
   render() {
+    if (this.props.redirect === true) {
+      console.log("redirect is true")
+    }
     const { search } = this.state
     const { placeholder, id } = this.props
     return (
@@ -78,8 +79,11 @@ class SearchInput extends Component {
 }
 
 const mapStateToProps = (state) => {
+  {console.log(state, "this is state")}
   return {
-    redirect: state.search.redirect
+    url: state.router.location, 
+    redirect: state.search.redirect,
+    ...state.search,
   }
 }
 

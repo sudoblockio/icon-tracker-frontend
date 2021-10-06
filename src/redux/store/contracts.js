@@ -1,25 +1,29 @@
 import { makeUrl, getState } from '../../utils/utils';
 import * as deepcopy from 'deepcopy'
-import { INITIAL_STATE} from '../../../src/utils/const'
+import { INITIAL_STATE, REDUX_STEP} from '../../../src/utils/const'
 import { trackerApiInstance } from '../api/restV3/config'
 
-const CX_PREFIX = `/api/v1/etc`
+const CX_PREFIX = `/v1/contracts`;
 
-const CONTRACTS_LIST = 'CONTRACT_LIST'
+const SELECT_CONTRACT_LIST = 'SELECT_CONTRACT_LIST';
+const SELECT_CONTRACT_LIST_FULFILLED = 'SELECT_CONTRACT_LIST_FULFILLED';
+const SELECT_CONTRACT_LIST_REJECTED = 'SELECT_CONTRACT_LIST_REJECTED';
 
-const getContractsList = (payload) => ({
-    type: CONTRACTS_LIST,
+const getContractList = (payload) => ({
+    type: SELECT_CONTRACT_LIST,
     payload
 });
 
 
 export const contractList = (payload) => async (dispatch) => {
+    console.log(payload, "contracts payload")
     const trackerApi = await trackerApiInstance();
     try {
         const res = await trackerApi.get(makeUrl(`${CX_PREFIX}`, payload))
+        console.log(res, "res from contracts")
         if (res.status === 200) {
             const data = res.data
-            dispatch(getContractsList(data))
+            dispatch(getContractList(data))
             return data
         } else {
             // handle error
@@ -49,10 +53,19 @@ const initialState = {
     }
   }
 
+  let newState;
   export const contractsReducer = (state = initialState, action) => {
       switch(action.type){
-          case CONTRACTS_LIST: {
-            return getState('ARR', REDUX_STEP.READY, state, action, 'contracts')
+          case SELECT_CONTRACT_LIST: {
+            newState = deepcopy(state)
+            newState.contracts.data = action.payload
+            return getState('ARR', REDUX_STEP.READY, newState, action, 'contracts')
+          }
+          case SELECT_CONTRACT_LIST_FULFILLED: {
+            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'contracts')  
+          }
+          case SELECT_CONTRACT_LIST_REJECTED: {
+            return getState('ARR', REDUX_STEP.REJECTED, state, action, 'contracts')
           }
           default: 
             return state;

@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { ContractListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
-  contractList,
   contractListSearch
 } from '../../redux/actions/contractsActions';
+import { contractList } from '../../redux/store/contracts'
 
 function mapStateToProps(state) {
   return {

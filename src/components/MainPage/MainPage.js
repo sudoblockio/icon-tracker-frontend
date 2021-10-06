@@ -40,7 +40,7 @@ class MainPage extends Component {
     }
 
     render() {
-
+        {console.log(this.props, "main props")}
         return (
             <div className="content-wrap">
                 <div className="screen2">
@@ -78,7 +78,8 @@ class MainPage extends Component {
 function mapStateToProps(state) {
         return {
             blocks: state.blocks.blocks.data,
-            transactions: state.transactions.recentTx.data
+            transactions: state.transactions.recentTx.data,
+            redirect: state.search.redirect
         }
 }
 

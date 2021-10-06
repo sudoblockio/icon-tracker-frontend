@@ -5,13 +5,15 @@ import { createBrowserHistory } from 'history'
 import blocksReducer from './blocks'
 import transactionsReducer from './transactions'
 import popupReducer from './popup';
-import searchReducer from './search'
+import searchReducer from './search';
+import { contractsReducer } from './contracts';
 import { storageReducer } from '../reducers/storageReducer';
 
 const createRootReducer = (history) => combineReducers ({
     router: connectRouter(history),
     blocks: blocksReducer,
     transactions: transactionsReducer,
+    contracts: contractsReducer,
     search: searchReducer,
     popup: popupReducer,
     storage: storageReducer
