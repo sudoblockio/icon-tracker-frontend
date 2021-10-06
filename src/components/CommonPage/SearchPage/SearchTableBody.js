@@ -19,16 +19,17 @@ class SearchTableBody extends Component {
 	render() {
 		const TableRow = () => {
 			const { searchType, data } = this.props
+			console.log(data, "search table data")
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
 					return (
 						<tr>
 							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
-							<td>{data.contractName || '-'}</td>
+							<td>{data.name || '-'}</td>
 							{/* <td>{data.compiler || '-'}</td> */}
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
 							<td>{numberWithCommas(data.txCount)}</td>
-							<td>{CONTRACT_STATUS[data.status]}</td>
+							<td>{data.status}</td>
 							<td>{onlyDate(data.verifiedDate)}</td>
 						</tr>
 					)
