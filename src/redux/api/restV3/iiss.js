@@ -3,11 +3,6 @@ import { randomUint32, makeUrl } from '../../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
 
-export async function getAllTransactions () {
-    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
-    const data = await prepnode.json()
-    return data.total_tx;
-}
 
 export async function coinGeckoMarketCap () {
     const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
@@ -24,26 +19,31 @@ export async function getTotalSupply () {
             id: randomUint32(),
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
-            .then(response => {
-                const bigNum = BigNumber(response.data.result, 16)
-                const divisor = Math.pow(10, 18)
-                resolve(BigNumber(bigNum / divisor).toFixed());
-            })
-            .catch(error => {
-                if (!!error.response) {
-                    resolve(error.response.data);
-                }
-                else {
-                    resolve({
-                        error: {
-                            message: error.message
-                        }
-                    })
-                }
-            })
+        .then(response => {
+            const bigNum = BigNumber(response.data.result, 16)
+            const divisor = Math.pow(10, 18)
+            resolve(BigNumber(bigNum / divisor).toFixed());
+        })
+        .catch(error => {
+            if (!!error.response) {
+                resolve(error.response.data);
+            }
+            else {
+                resolve({
+                    error: {
+                        message: error.message
+                    }
+                })
+            }
+        })
     })
 }
 
+export async function getAllTransactions () {
+    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
+    const data = await prepnode.json()
+    return data.total_tx;
+}
 
 export async function getPReps() {
     const walletApi = await walletApiInstance()
@@ -284,10 +284,11 @@ export async function prepList(grade) {
         payload.grade = grade
     }
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/prep/list`, payload))
+        trackerApi.get(makeUrl(`/v1/preps`, payload))
             .then(result => {
                 const { data } = result.data
-                const nameSorted = (data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+                console.log(result.data, "p rep data")
+                const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
                 const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
                 resolve(_data)

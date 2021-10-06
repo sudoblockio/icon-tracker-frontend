@@ -5,7 +5,7 @@ import { getMainInfo } from '../../redux/api/restV3';
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss';
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
     LoadingComponent,
@@ -57,7 +57,7 @@ class GovernancePage extends Component {
 	async componentDidMount() {
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
-		const { tmainInfo } = await getMainInfo()
+		// const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
@@ -65,7 +65,8 @@ class GovernancePage extends Component {
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
-		const { icxSupply, publicTreasury } = tmainInfo || {}
+		const  publicTreasury  = 4930167.9322
+		const icxSupply = await getTotalSupply()
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
@@ -180,6 +181,7 @@ class GovernancePage extends Component {
 		return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
 	}
 	render() {
+		console.log(this.state, "lower chart state governance")
 		const {
 			totalSupply,
 			publicTreasury,
@@ -207,7 +209,7 @@ class GovernancePage extends Component {
 		const list = blackChecked ? blackPrep : allPrep.filter(p => {
 			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		})
-
+		console.log(list, "this is list")
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
 		return (
@@ -321,6 +323,7 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
+										{console.log(searched, "what is searched")}
 										{searched.map((prep, index) => (
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
