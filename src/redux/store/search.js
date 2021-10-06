@@ -3,25 +3,42 @@ import * as deepcopy from 'deepcopy'
 import { trackerApiInstance } from '../api/restV3/config'
 
 const BLOCK_PREFIX = '/v1/blocks'
+
 const SEARCH_BLOCKS = 'SEARCH_BLOCKS'
 
 
-const getsearchBlocks = (payload) => ({
-    type: SEARCH_BLOCKS,
-    payload
-})
+// const getSearchBlocks = (payload) => ({
+//     type: SEARCH_BLOCKS,
+//     payload
+// })
+
+// function getSearchBlocks(payload) {
+//     return function (dispatch) {
+//         dispatch({
+//             type: SEARCH_BLOCKS,
+//             payload
+//         });
+
+//     }
+// }
+
+export function getSearchBlocks(payload) {
+    return {
+        type: SEARCH_BLOCKS, 
+        payload
+    }
+}
+
 
 
 export const searchBlocks = (payload) => async (dispatch) => {
-    console.log(payload, "payload search input")
+    console.log(payload, "we can finally see it")
     const trackerApi = await trackerApiInstance();
     try {
-        const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`)
-        console.log(response, "res from searchInput")
+        const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload}`)
         if (response.status === 200) {
-            const data = response.data.data;
-            dispatch(getsearchBlocks(data))
-            console.log(data, "data from searchInput")
+            const data = response.data;
+            dispatch(getSearchBlocks(data))
             return data
     } else {
         // setError(error)

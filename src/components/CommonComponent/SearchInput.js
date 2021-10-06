@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import searchBlocks from '../../redux/store/search'
+import { Redirect } from 'react-router';
+import {searchBlocks} from '../../redux/store/search'
+
 
 export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
 export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
@@ -30,13 +32,14 @@ function SearchInput() {
     }
   }
 
-  const handleClick =  (e) => {
+  const handleClick = (e) => {
     const searchTerm = e.target.value
     console.log(searchTerm, "search term")
     
     if (block_re.test(searchTerm)) {
       console.log("it is a block")
       dispatch(searchBlocks(searchTerm))
+      this.props.history.push(`/blocks/${searchTerm}`)
     } else {
       setError("Not Found")
     }
