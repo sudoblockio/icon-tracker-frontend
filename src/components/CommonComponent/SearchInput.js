@@ -50,7 +50,8 @@ class SearchInput extends Component {
 
   handleClick = () => {
     const { search } = this.state
-    console.log(this.props.search, "plz be a function")
+    console.log(this.props.search(search), "plz be a function")
+    console.log(search, "is this a numver?")
     this.props.search(search)
   }
 
@@ -68,7 +69,7 @@ class SearchInput extends Component {
             onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}
           />
-          <span onClick={this.handleClick}><em className="img"></em></span>
+          <span onClick={this.handleClick()}><em className="img"></em></span>
         </div>
       </div>
     )
@@ -77,7 +78,7 @@ class SearchInput extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: () => dispatch(searchBlocks())
+    search: payload => dispatch(searchBlocks(payload))
   }
 }
 
