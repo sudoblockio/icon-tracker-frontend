@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import searchReducer, { searchBlocks } from '../../redux/store/search';
+import { TX_TYPE } from '../../utils/const'
 import { connect } from 'react-redux'
 
 
@@ -52,7 +53,9 @@ class SearchInput extends Component {
   handleClick = () => {
     const { search } = this.state
     this.props.search(search)
-    console.log(this.props, "this props")
+    console.log(TX_TYPE, "what is this?")
+    // refactor to be dynamic
+    this.props.history.push(`/transactions`)
   }
   
   render() {
@@ -71,7 +74,7 @@ class SearchInput extends Component {
             onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}
           />
-          <span onClick={this.handleClick()}><em className="img"></em></span>
+          <span><em className="img"></em></span>
         </div>
       </div>
     )
