@@ -39,7 +39,7 @@
         "extract-text-webpack-plugin": "3.0.2",
         "file-loader": "2.0.0",
         "fs-extra": "7.0.1",
-        "history": "^4.7.2",
+        "history": "^4.10.1",
         "html-webpack-plugin": "^4.0.0-alpha.2",
         "icon-sdk-js": "0.0.15",
         "identity-obj-proxy": "3.0.0",

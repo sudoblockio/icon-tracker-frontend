@@ -6,6 +6,7 @@ import blocksReducer from './blocks'
 import transactionsReducer from './transactions'
 import popupReducer from './popup';
 import searchReducer from './search';
+import { routerReducer } from 'react-router-redux'
 import { contractsReducer } from './contracts';
 import { storageReducer } from '../reducers/storageReducer';
 
@@ -16,7 +17,8 @@ const createRootReducer = (history) => combineReducers ({
     contracts: contractsReducer,
     search: searchReducer,
     popup: popupReducer,
-    storage: storageReducer
+    storage: storageReducer,
+    
 });
 
 let enhancer;
