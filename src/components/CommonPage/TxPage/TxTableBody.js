@@ -76,7 +76,6 @@ class TxTableBody extends Component {
 				data,
 				address
 			} = this.props
-			console.log(data, "tx table body all data")
 			const addressInData = data.address
 			const isError = data.state === 0
 

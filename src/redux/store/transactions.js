@@ -5,6 +5,9 @@ import { trackerApiInstance } from '../api/restV3/config'
 
 const TX_PREFIX = `/v1/transactions`
 
+const TRANSACTION_RECENT_TX = 'TRANSACTION_RECENT_TX'
+const TRANSACTION_RECENT_TX_FULFILLED = 'TRANSACTION_RECENT_TX_FULFILLED'
+const TRANSACTION_RECENT_TX_REJECTED = 'TRANSACTION_RECENT_TX_REJECTED'
 
 // previously src/redux/actionTypes/actionTypes.js
 const TX_LIST = 'TX_LIST'
@@ -12,8 +15,8 @@ const TX_DETAIL = 'TX_DETAIL'
 const TX_INT_LIST = 'TX_INT_LIST'
 
 // previously src/redux/actions/transactionsActions.js
-const getTxList = (payload) => ({
-    type: TX_LIST, 
+const transactionRecentTx = (payload) => ({
+    type: TRANSACTION_RECENT_TX, 
     payload
 });
 
@@ -54,7 +57,7 @@ export const txList = (payload) => async (dispatch) => {
         // if 200
         if (res.status === 200) {
             const data = res.data
-            dispatch(getTxList(data))
+            dispatch(transactionRecentTx(data))
             return data
         } else {
             //setError(e)
@@ -135,10 +138,14 @@ let newState;
 // previously src/redux/reducers/transactionsReducer.js
 const transactionsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case TX_LIST: {
+        case TRANSACTION_RECENT_TX: {
             newState = deepcopy(state)
             newState.recentTx.data = action.payload
-            return newState
+            return getState('ARR', REDUX_STEP.READY, newState, action, 'recentTx')
+        }
+
+        case TRANSACTION_RECENT_TX_FULFILLED: {
+            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'recentTx')
         }
         case TX_DETAIL: {
             newState = deepcopy(state)

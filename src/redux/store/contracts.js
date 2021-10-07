@@ -10,7 +10,7 @@ const SELECT_CONTRACT_LIST_FULFILLED = 'SELECT_CONTRACT_LIST_FULFILLED';
 const SELECT_CONTRACT_LIST_REJECTED = 'SELECT_CONTRACT_LIST_REJECTED';
 
 const getContractList = (payload) => ({
-    type: SELECT_CONTRACT_LIST,
+    type: SELECT_CONTRACT_LIST_FULFILLED,
     payload
 });
 
@@ -62,7 +62,7 @@ const initialState = {
             return getState('ARR', REDUX_STEP.READY, newState, action, 'contracts')
           }
           case SELECT_CONTRACT_LIST_FULFILLED: {
-            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'contracts')  
+            return getState('ARR', REDUX_STEP.FULFILLED, newState, action, 'contracts')  
           }
           case SELECT_CONTRACT_LIST_REJECTED: {
             return getState('ARR', REDUX_STEP.REJECTED, state, action, 'contracts')

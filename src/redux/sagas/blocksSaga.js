@@ -4,7 +4,7 @@ import {
   blockList as BLOCK_LIST_API,
   blockInfo as BLOCK_INFO_API,
   blockTxList as BLOCK_TX_LIST_API
-} from '../api/restV3';
+} from '../store/blocks';
 
 export default function* blocksSaga() {
   yield fork(watchBlockList)

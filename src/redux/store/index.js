@@ -1,5 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas/rootSaga';
+import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
+import persistState from 'redux-localstorage'
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import blocksReducer from './blocks'
@@ -21,17 +25,26 @@ const createRootReducer = (history) => combineReducers ({
 });
 
 let enhancer;
+export const history = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware();
+const routeMiddleware = routerMiddleware(history)
 
 if (process.env.NODE_ENV === "production") {
-    enhancer = applyMiddleware(thunk);
+    enhancer = applyMiddleware(thunk, sagaMiddleware);
   } else {
     const logger = require("redux-logger").default;
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+    enhancer = composeEnhancers(applyMiddleware(thunk, logger, sagaMiddleware, routeMiddleware),
+    persistState(null, {
+      slicer: () => state => {
+        return { storage: state.storage }
+      }
+    }));
   }
 
-export const history = createBrowserHistory()
+
+
 const configureStore = (preloadedState) => {
     return createStore(createRootReducer(history), preloadedState, enhancer);
   };
@@ -41,4 +54,6 @@ if (process.env.NODE_ENV !== "production") {
     window.store = store;
   }
 
+
+  sagaMiddleware.run(rootSaga);
 export default configureStore;
