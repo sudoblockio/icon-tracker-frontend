@@ -14,7 +14,8 @@ class SearchInput extends Component {
     super(props)
     const { searchKeyword, redirect } = this.props
     this.state = {
-      search: searchKeyword
+      search: searchKeyword,
+      errorMessage: ""
     }
   }
   

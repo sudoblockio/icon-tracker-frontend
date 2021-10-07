@@ -206,9 +206,12 @@ class GovernancePage extends Component {
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 		
-		const list = blackChecked ? blackPrep : allPrep.filter(p => {
-			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
-		})
+		console.log(blackChecked, "blackchecked")
+		console.log(allPrep, "allprep")
+		const list = blackChecked ? blackPrep : allPrep
+		// const list = blackChecked ? blackPrep : allPrep.filter(p => {
+		// 	return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+		// })
 		console.log(list, "this is list")
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
@@ -357,6 +360,10 @@ class TableRow extends Component {
 
 	state = {
 		logoError: false,
+		loaded: false
+	}
+	loadImage = () => {
+		this.setState({loaded: true})
 	}
 
 	getBadge = (grade, active, status) => {
@@ -388,10 +395,12 @@ class TableRow extends Component {
 		this.setState({ logoError: true })
 	}
 
+	loadImage = () => {
+		this.setState({loaded: true})
+	}
+
 	render() {
-		const {
-			logoError
-		} = this.state
+		const { logoError } = this.state
 
 		const {
 			totalVoted,
@@ -403,7 +412,7 @@ class TableRow extends Component {
 			governanceStatus,
 			sponsorCount
 		} = this.props
-
+		console.log(this.props, "tablerow props")
 		const { 
 			name,
 			address,
@@ -415,11 +424,12 @@ class TableRow extends Component {
 			// irep,
 			// irepUpdatedBlockHeight,
 			active,
-			logo,
+			logo_256,
 			// balance,
 			// unstake,
 			status
 		} = prep
+		console.log(prep, "a single prep")
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(validatedBlocks) / Number(totalBlocks) * 100).toFixed(2)}%`)
@@ -436,8 +446,10 @@ class TableRow extends Component {
 				<td className="rank"><span>{rank || '-'}</span></td>
 				<td className={(grade > 2 || grade === '0x3') ? 'black' : 'on'}>
 					<ul>
-						<li>{badge}</li>
-						{logo && !logoError && <li><img src={ logo } onError={this.onError} loading="lazy" alt='logo'/></li>}
+						<li>{badge}</li>{console.log(logo_256 ? true : false)}
+						<li><img src="/default.jpg" onError={this.onError} style={ this.state.loaded ? {display: "none"} : {}} loading="lazy" alt='logo'/></li>
+						<li><img src={logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} loading="lazy" alt='logo'/></li>
+						{/* {logo_256 ?  <li><img src={ logo_256 } onLoad={console.log("load lifecycle")} onError={this.onError} loading="lazy" alt='logo'/></li> : <li></li>} */}
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
