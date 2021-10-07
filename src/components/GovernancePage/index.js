@@ -426,10 +426,13 @@ class TableRow extends Component {
 			// irepUpdatedBlockHeight,
 			active,
 			logo_256,
+			logo_svg,
 			// balance,
 			// unstake,
-			status
+			status,
+			rank
 		} = prep
+		console.log(prep, "one pRep")
 
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
@@ -440,7 +443,7 @@ class TableRow extends Component {
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
 		const badge = this.getBadge(grade, active, status)
-		const rank = index + 1
+		// const rank = index + 1
 
 		return(
 			<tr>
@@ -449,7 +452,7 @@ class TableRow extends Component {
 					<ul>
 						<li>{badge}</li>
 						{/* <li><img src="/default.jpg" onError={this.onError} style={ this.state.loaded ? {display: "none"} : {}} loading="lazy" alt='logo'/></li> */}
-						<li><img src={logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} loading="lazy" alt='logo'/></li>
+						<li><img src={logo_svg ? logo_svg : logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} loading="lazy" alt='logo'/></li>
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
