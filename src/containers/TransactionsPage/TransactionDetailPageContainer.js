@@ -5,6 +5,7 @@ import { transactionEventLogList } from '../../redux/actions/transactionsActions
 import { transactionInternalTxList, transactionTxDetail } from '../../redux/store/transactions'
 
 function mapStateToProps(state) {
+  {console.log(state, "state from tx detail container")}
   return {
     url: state.router.location,
     ...state.transactions
