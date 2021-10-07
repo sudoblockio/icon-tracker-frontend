@@ -5,27 +5,27 @@ import { trackerApiInstance } from '../api/restV3/config'
 
 const TX_PREFIX = `/v1/transactions`
 
-const TRANSACTION_RECENT_TX = 'TRANSACTION_RECENT_TX'
-const TRANSACTION_RECENT_TX_FULFILLED = 'TRANSACTION_RECENT_TX_FULFILLED'
-const TRANSACTION_RECENT_TX_REJECTED = 'TRANSACTION_RECENT_TX_REJECTED'
+export const TRANSACTION_RECENT_TX = 'TRANSACTION_RECENT_TX'
+export const TRANSACTION_RECENT_TX_FULFILLED = 'TRANSACTION_RECENT_TX_FULFILLED'
+export const TRANSACTION_RECENT_TX_REJECTED = 'TRANSACTION_RECENT_TX_REJECTED'
 
 // previously src/redux/actionTypes/actionTypes.js
-const TX_LIST = 'TX_LIST'
-const TX_DETAIL = 'TX_DETAIL'
-const TX_INT_LIST = 'TX_INT_LIST'
+export const TX_LIST = 'TX_LIST'
+export const TX_DETAIL = 'TX_DETAIL'
+export const TX_INT_LIST = 'TX_INT_LIST'
 
 // previously src/redux/actions/transactionsActions.js
-const transactionRecentTx = (payload) => ({
+export const transactionRecentTx = (payload) => ({
     type: TRANSACTION_RECENT_TX, 
     payload
 });
 
-const getTxIntList = (payload) => ({
+export const getTxIntList = (payload) => ({
     type: TX_INT_LIST, 
     payload
 })
 
-const getTxDetail = (payload) => ({
+export const getTxDetail = (payload) => ({
     type: TX_DETAIL,
     payload
 })
@@ -34,10 +34,10 @@ const getTxDetail = (payload) => ({
 
 export const transactionInternalTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
-    console.log(payload, "int tx list payload")
+
     try {
         const res = await trackerApi.get(`/api/v1/transactions/internal/${payload.txHash}`)
-        console.log(res, "int tx list res")
+
         if (res.status === 200) {
             const data = res.data
             dispatch(getTxIntList(data))
@@ -145,7 +145,7 @@ const transactionsReducer = (state = initialState, action) => {
         }
 
         case TRANSACTION_RECENT_TX_FULFILLED: {
-            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'recentTx')
+            return getState('ARR', REDUX_STEP.FULFILLED, newState, action, 'recentTx')
         }
         case TX_DETAIL: {
             newState = deepcopy(state)

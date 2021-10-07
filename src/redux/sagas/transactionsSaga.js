@@ -1,18 +1,34 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
+// ACTION TYPES
 import { convertEngineToTracker } from "../../utils/utils";
+// API CALLS
 import {
   txList as TRANSACTION_RECENT_TX_API,
-  transactionTxDetail as TRANSACTION_TX_DETAIL_API,
-  // transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
-  transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
-  // getTransactionResult as GET_TRANSACTION_RESULT_API,
-  // getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
-  // getTransaction as GET_TRANSACTION_API,
+//   transactionTxDetail as TRANSACTION_TX_DETAIL_API,
+//   // transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
+//   transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
+//   // getTransactionResult as GET_TRANSACTION_RESULT_API,
+//   // getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
+//   // getTransaction as GET_TRANSACTION_API,
 } from '../store/transactions';
-import { transactionEventLogList } from '../actions/transactionsActions';
 
-function* watchTransactionRecentTx() { yield takeLatest(AT.transactionRecentTx, transactionRecentTxFunc) }
+import { TRANSACTION_RECENT_TX } from '../store/transactions';
+
+import {
+  // transactionRecentTx as TRANSACTION_RECENT_TX_API,
+  transactionTxDetail as TRANSACTION_TX_DETAIL_API,
+  transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
+  transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
+  getTransactionResult as GET_TRANSACTION_RESULT_API,
+  getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
+  getTransaction as GET_TRANSACTION_API,
+} from '../api/restV3/transaction';
+import { transactionEventLogList } from '../actions/transactionsActions';
+// TAKES ACTION TYPES
+function* watchTransactionRecentTx() {
+
+  return  yield takeLatest(TRANSACTION_RECENT_TX, transactionRecentTxFunc) }
 function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
 function* watchTransactionEventLogList() { yield takeLatest(AT.transactionEventLogList, transactionEventLogListFunc) }
 // function* watchTransactionInternalTxList() { yield takeLatest(AT.transactionInternalTxList, transactionInternalTxListFunc) }
@@ -25,22 +41,24 @@ export default function* transactionsSaga() {
 }
 
 function* transactionRecentTxFunc(action) {
-  console.log(action, "called action")
+  console.log("recent func")
   try {
+    console.log("recent func")
     if (action.payload.count === 0) {
-      yield put({ type: AT.TRANSACTION_RECENT_TX_FULFILLED, payload: { data: [] } });
+      yield put({ type: 'TRANSACTION_RECENT_TX', payload: { data: [] } });
       return
     }
 
     const payload = yield call(TRANSACTION_RECENT_TX_API, action.payload);
-    console.log(payload, "other payload")
+    console.log("recent func")
     if (payload.result === '200') {
-      console.log(payload.result, "payload.result")
-      yield put({ type: AT.TRANSACTION_RECENT_TX_FULFILLED, payload: payload });
+      console.log("recent func")
+      yield put({ type: 'TRANSACTION_RECENT_TX_FULFILLED', payload: payload });
     } else {
       throw new Error();
     }
   } catch (e) {
+    console.log("recent func")
     yield put({ type: AT.transactionRecentTxRejected });
   }
 }

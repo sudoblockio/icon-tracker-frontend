@@ -40,7 +40,6 @@ class MainPage extends Component {
     }
 
     render() {
-        {console.log(this.props, "main props")}
         return (
             <div className="content-wrap">
                 <div className="screen2">

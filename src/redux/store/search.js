@@ -32,7 +32,6 @@ export function getSearchBlocks(payload) {
 
 
 export const searchBlocks = (payload) => async (dispatch) => {
-    console.log(payload, "we can finally see it")
     const trackerApi = await trackerApiInstance();
     try {
         const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload}`)
@@ -59,11 +58,9 @@ const initialState = {
   
 let newState;
 const searchReducer = (state = initialState, action) => {
-    console.log(action, "this is action")
     switch (action && action.type) {
         case SEARCH_BLOCKS: {
             newState = deepcopy(state);
-            console.log(newState, "this is the new state from search")
             newState.search = action.payload
             return Object.assign({}, state, {
                 loading: true

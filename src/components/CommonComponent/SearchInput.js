@@ -4,6 +4,10 @@ import searchReducer, { searchBlocks } from '../../redux/store/search';
 import { TX_TYPE } from '../../utils/const'
 import { connect } from 'react-redux'
 
+export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
+export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
+export const tx_re = new RegExp('^0x([A-Fa-f0-9]{64})$') 
+let searchByType;
 
 class SearchInput extends Component {
   constructor(props) {
@@ -52,10 +56,29 @@ class SearchInput extends Component {
 
   handleClick = () => {
     const { search } = this.state
-    this.props.search(search)
-    console.log(TX_TYPE, "what is this?")
+    searchByType = (search) => {
+      console.log(block_re.test('hx562dc1e2c7897432c298115bc7fbcc3b9d5df294'), "test a hash")
+      if (block_re.test(search) === true) {
+        console.log("is a block num")
+        this.props.searchBlocks(search)
+        this.props.history.push(`/blocks/${search}`)
+      } else if (add_re.test(search)){
+        console.log("is an address")
+      } else if (tx_re.test(search)) {
+        console.log("is a tx")
+        // this.props.history.searchTx(search)
+        // this.props.history.push(/transactions/${search})
+      } else {
+        // the search is not found. 
+        // handle error, make suggestion
+      }
+        
+
+    }
+    this.props.searchBlocks(search)
+    console.log(TX_TYPE)
     // refactor to be dynamic
-    this.props.history.push(`/transactions`)
+    
   }
   
   render() {
@@ -82,7 +105,6 @@ class SearchInput extends Component {
 }
 
 const mapStateToProps = (state) => {
-  {console.log(state, "this is state")}
   return {
     url: state.router.location, 
     redirect: state.search.redirect,
@@ -93,7 +115,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: payload => dispatch(searchBlocks(payload))
+    searchBlocks: payload => dispatch(searchBlocks(payload))
   }
 }
 

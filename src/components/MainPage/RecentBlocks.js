@@ -6,7 +6,6 @@ import { LoadingComponent, BlockLink } from '../../components'
 class RecentBlocks extends Component {
     render() {
         const { loading, blocks } = this.props
-        {console.log(this.props, "from the top")}
         const list = blocks ? blocks.slice(0, 10) : []
         return (
             <li className="left">
