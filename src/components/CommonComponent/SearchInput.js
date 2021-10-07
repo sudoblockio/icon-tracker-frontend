@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { searchBlocks } from '../../redux/store/search';
+import { withRouter } from 'react-router-dom';
+import searchReducer, { searchBlocks } from '../../redux/store/search';
 import { connect } from 'react-redux'
 
 
@@ -56,7 +57,6 @@ class SearchInput extends Component {
   
   render() {
     if (this.props.redirect === true) {
-      console.log("redirect is true")
     }
     const { search } = this.state
     const { placeholder, id } = this.props
@@ -83,6 +83,7 @@ const mapStateToProps = (state) => {
   return {
     url: state.router.location, 
     redirect: state.search.redirect,
+    router: state.router, 
     ...state.search,
   }
 }
@@ -93,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (SearchInput)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps) (SearchInput))

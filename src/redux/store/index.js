@@ -6,7 +6,6 @@ import blocksReducer from './blocks'
 import transactionsReducer from './transactions'
 import popupReducer from './popup';
 import searchReducer from './search';
-import { routerReducer } from 'react-router-redux'
 import { contractsReducer } from './contracts';
 import { storageReducer } from '../reducers/storageReducer';
 
