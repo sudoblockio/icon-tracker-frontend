@@ -11,7 +11,7 @@ import {
     LoadingComponent,
 } from '../../components'
 import { POPUP_TYPE } from '../../utils/const'
-import { getTrackerApiUrl } from '../../redux/api/restV3/config';
+import { getTrackerApiUrl, getWalletApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
 // import { calcFromLastBlock } from '../../utils/utils';
 
@@ -40,24 +40,32 @@ class GovernancePage extends Component {
 
 	checkedState = {}
 	// this is also not working
-	// getAdditionalData=async method=>{
-	// 	const network=await getTrackerApiUrl()
-	// 	const address=GetAddressForPrepList[network]
-	// 	const params={
-	// 		to:address,
-	// 		dataType:'call',
-	// 		data:{
-	// 			method:method
-	// 		}
-	// 	}
-	// 	const response = await icxCall(params);
-	// 	return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
-	// }
+	getAdditionalData= async (method)=>{
+		console.log(method, "the method")
+		
+		const network = await getWalletApiUrl()
+		console.log(network, "network")
+		// originally: 
+		// const address = GetAddressForPrepList.network
+		const address = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f'
+		console.log(GetAddressForPrepList, "get address")
+		console.log(address, "maybe this is broken")
+		const params={
+			to:address,
+			dataType:'call',
+			data:{
+				method:method
+			}
+		}
+		const response = await icxCall(params);
+		console.log(response, "data response gov")
+		return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
+	}
 	governanceData=[];
 	sponsorData={}
 	async componentDidMount() {
-		// this.governanceData = await this.getAdditionalData('get_PReps');
-		// this.sponsorData = await this.getAdditionalData('get_sponsors_record')
+		this.governanceData = await this.getAdditionalData('get_PReps');
+		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
 		// const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
@@ -80,9 +88,13 @@ class GovernancePage extends Component {
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
-			bp.status = bp.penaltyStatus
+			console.log(bp, "bp")
+			bp.status = bp.penalty
+			console.log(bp.status, "bp status")
 			return bp
 		})
+
+		console.log(blackPrep, "blackPrep")
 
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
@@ -169,7 +181,8 @@ class GovernancePage extends Component {
 			default:							
 		}
 	}
-	getGovernanceStatus = address=>{
+	getGovernanceStatus = (address) =>{
+		console.log(this.governanceData, "this gov")
 		let result =false;
 		this.governanceData.forEach(item=>{
 			if(item.address===address){
@@ -206,13 +219,15 @@ class GovernancePage extends Component {
 
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
-		
-		
-		
 		const list = blackChecked ? blackPrep : allPrep
+
+
+
+
 		// const list = blackChecked ? blackPrep : allPrep.filter(p => {
 		// 	return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		// })
+
 		
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
@@ -413,6 +428,7 @@ class TableRow extends Component {
 			governanceStatus,
 			sponsorCount
 		} = this.props
+		console.log(this.props, "governance page lower props")
 
 		const { 
 			name,

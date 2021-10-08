@@ -283,13 +283,15 @@ export async function prepList(grade) {
         payload.grade = grade
     }
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v1/preps`, payload))
+        trackerApi.get(`/api/v1/preps`)
             .then(result => {
+                console.log(result, "the result")
                 const { data } = result.data
-                console.log(result.data, "p rep data")
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+                console.log(nameSorted, "namesorted")
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
                 const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
+                console.log(_data, "underdata")
                 resolve(_data)
                 // const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
                 // const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)

@@ -43,10 +43,10 @@ export async function icxCall(params) {
       params: params,
       id: randomUint32()
     }
-    console.log(JSON.stringify(param))
+    console.log(JSON.stringify(param), `${param.id}, cheerio`)
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log(response)
+        console.log(response, "icx res")
         resolve(response);
       })
       .catch(error => {
