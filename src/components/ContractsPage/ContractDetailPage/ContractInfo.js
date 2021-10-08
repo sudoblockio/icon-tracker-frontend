@@ -16,11 +16,9 @@ class ContractInfo extends Component {
 
     render() {
         const { contract } = this.props
+        console.log(contract, "one contract")
         const { loading, data } = contract
         const Contents = () => {
-            if (loading) {
-                return <LoadingComponent height="206px" />
-            } else {
                 const { address, balance, createTx, creator, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount } = data
                 const isCreator = isValidData(creator)
                 const isCreateTx = isValidData(createTx)
@@ -112,7 +110,7 @@ class ContractInfo extends Component {
                         </div>
                     </div>
                 )
-            }
+            
         }
         return Contents()
     }

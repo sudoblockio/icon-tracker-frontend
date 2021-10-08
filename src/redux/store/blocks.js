@@ -66,11 +66,9 @@ export const blockInfo = (payload) => async (dispatch) => {
     try {
         // const response = await trackerApi.get(makeUrl(`${BLOCK_PREFIX}`, payload));
         const response = await trackerApi.get(`/api${BLOCK_PREFIX}/${payload.number}`)
-        console.log(response, "res from blockinfo")
         if (response.status === 200) {
             const data = response.data;
             dispatch(getblockInfo(data))
-            console.log(data, "data from blockINfo")
             return data
     } else {
         // setError(error)

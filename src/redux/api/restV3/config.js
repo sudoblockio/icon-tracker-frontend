@@ -1,11 +1,25 @@
 import axios from 'axios';
 
+async function getConfigJsonFile() {
+  try {
+    const response = await fetch('/config.json');
+    const responseJson = await response.json();
+    return responseJson;
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
+}
+
+
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl();
   return axios.create({
     baseURL: apiUrl
   });
 }
+
+
 
 export async function walletApiInstance() {
   const apiUrl = await getWalletApiUrl();
@@ -45,6 +59,8 @@ export async function getTrackerApiUrl() {
   }
   return '/';
 }
+
+export const tTest = trackerApiInstance()
 
 export async function getWalletApiUrl() {
   const configFile = await getConfigJsonFile();
@@ -100,15 +116,4 @@ export async function getIsSoloVersion() {
   }
 
   return false;
-}
-
-async function getConfigJsonFile() {
-  try {
-    const response = await fetch('/config.json');
-    const responseJson = await response.json();
-    return responseJson;
-  } catch (e) {
-    console.error(e);
-    return {};
-  }
 }

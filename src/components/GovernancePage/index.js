@@ -68,14 +68,18 @@ class GovernancePage extends Component {
 
 		// get this from new endpoint ...
 		// RPC call:
+		const test = await getPReps()
+		console.log(test, "testing here")
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
+
 		// coming from our REST:
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
+		// GET PUBLIC TREASURY*************
 		const  publicTreasury  = 4930167.9322
 		const icxSupply = await getTotalSupply()
 		const { height, peer_id } = lastBlock || {}
@@ -232,8 +236,8 @@ class GovernancePage extends Component {
 		// 	return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		// })
 
-		
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+		console.log(searched, "list")
 
 		return (
 			<div className="content-wrap governance">

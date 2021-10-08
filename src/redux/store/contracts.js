@@ -5,22 +5,29 @@ import { trackerApiInstance } from '../api/restV3/config'
 
 const CX_PREFIX = `/v1/contracts`;
 
-const SELECT_CONTRACT_LIST = 'SELECT_CONTRACT_LIST';
-const SELECT_CONTRACT_LIST_FULFILLED = 'SELECT_CONTRACT_LIST_FULFILLED';
-const SELECT_CONTRACT_LIST_REJECTED = 'SELECT_CONTRACT_LIST_REJECTED';
+export const SELECT_CONTRACT_LIST = 'SELECT_CONTRACT_LIST';
+export const SELECT_CONTRACT_LIST_FULFILLED = 'SELECT_CONTRACT_LIST_FULFILLED';
+export const SELECT_CONTRACT_LIST_REJECTED = 'SELECT_CONTRACT_LIST_REJECTED';
+
+export const CONTRACT_INFO = 'CONTRACT_INFO'
+export const CONTRACT_INFO_FULFILLED =  'CONTRACT_INFO_FULFILLED'
+export const CONTRACT_INFO_REJECTED = 'CONTRACT_INFO_REJECTED'
 
 const getContractList = (payload) => ({
     type: SELECT_CONTRACT_LIST,
     payload
 });
 
+const getContractListInfo = (payload) => ({
+  type: CONTRACT_INFO,
+  payload
+});
 
 export const contractList = (payload) => async (dispatch) => {
-    console.log(payload, "contracts payload")
     const trackerApi = await trackerApiInstance();
     try {
         const res = await trackerApi.get(makeUrl(`${CX_PREFIX}`, payload))
-        console.log(res, "res from contracts")
+
         if (res.status === 200) {
             const data = res.data
             dispatch(getContractList(data))
@@ -33,6 +40,29 @@ export const contractList = (payload) => async (dispatch) => {
         console.log(e)
     }
 }
+
+export const contractInfo = (payload) => async (dispatch) => {
+  console.log(payload, "contract info payload")
+  const trackerApi = await trackerApiInstance();
+  payload.addr ? payload = payload.addr : payload = payload
+  console.log(payload, "le payload")
+  try {
+    console.log(payload, "made it to hag")
+      const res = await trackerApi.get(`/api/v1/contracts/${payload}`)
+      console.log(res, "res from contracts")
+      if (res.data) {
+          const data = res.data
+          console.log(data, "data contract ")
+          dispatch(getContractListInfo(data))
+          return data
+      } else {
+          console.log(res, "didn't work")
+      }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
 
 const initialState = {
     contracts: INITIAL_STATE['ARR'],
@@ -66,6 +96,14 @@ const initialState = {
           }
           case SELECT_CONTRACT_LIST_REJECTED: {
             return getState('ARR', REDUX_STEP.REJECTED, state, action, 'contracts')
+          }
+
+          case CONTRACT_INFO: {
+            newState = deepcopy(state)
+            console.log(newState, "info")
+            newState.contract.data = action.payload
+            return newState;
+            // return getState('OBJ', REDUX_STEP.READY, newState, action, 'contract')
           }
           default: 
             return state;

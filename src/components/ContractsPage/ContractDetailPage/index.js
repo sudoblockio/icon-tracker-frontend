@@ -12,17 +12,25 @@ class ContractDetailPage extends Component {
 
     render() {
         const { contract } = this.props;
-        const { loading, error } = contract
+        console.log(this.props, "cx det index props")
+        const { loading, error, address } = contract
+        console.log(contract, "cs props")
+
         return (
             <DetailPage
-                {...this.props}
-                loading={loading}
-                error={error}
-                TABS={CONTRACT_TABS}
-                ROUTE="/contract"
-                getInfo={addr => { this.props.contractInfo({ addr }) }}
-                getList={[
-                    addr => {
+            {...this.props}
+            loading={loading}
+            error={error}
+            TABS={CONTRACT_TABS}
+            ROUTE="/contract"
+            getInfo={address => { 
+                console.log(address, "addr2day")
+                console.log(this.props.contractInfo, "cx info")
+                console.log(this.props, "?")
+                this.props.contractInfo({ address}) }}
+            getList={[
+                addr => {
+                        console.log(this.props.contractInfo(addr), "from contract container")
                         this.props.contractTxList({ addr, page: 1, count: 10 })
                     },
                     addr => {
