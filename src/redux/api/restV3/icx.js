@@ -35,6 +35,7 @@ export async function icxGetScore(params) {
 }
 
 export async function icxCall(params) {
+  console.log(params, "icx call params")
   const walletApi = await walletApiInstance()
   return new Promise(resolve => {
     const param = {

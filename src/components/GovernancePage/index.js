@@ -41,8 +41,10 @@ class GovernancePage extends Component {
 	checkedState = {}
 	// this is also not working
 	getAdditionalData= async (method)=>{
+		console.log(method, "each mthod")
 		const network = await getTrackerApiUrl()
 		const address = GetAddressForPrepList[network]
+		console.log(address, "each addr")
 		const params={
 			to:address,
 			dataType:'call',
@@ -59,15 +61,18 @@ class GovernancePage extends Component {
 	sponsorData={}
 	async componentDidMount() {
 		this.governanceData = await this.getAdditionalData('get_PReps');
+		console.log(this.governanceData, "goc data")
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
 		console.log(this.sponsorData, "sponsor")
 		// const { tmainInfo } = await getMainInfo()
 
 		// get this from new endpoint ...
+		// RPC call:
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
+		// coming from our REST:
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
@@ -185,9 +190,6 @@ class GovernancePage extends Component {
 		return result
 	}
 	getSponsorCount=address=>{
-		// console.log(Number(this.sponsorData.data.result[address]), "result sponsore")
-		// console.log(this.sponsorData.data.result[address] ? console.log("this") :0)
-		// return this.sponsorData.data.result[address] ? Number(this.sponsorData[address]):0
 		let sponsors
 		if (this.sponsorData.data.result[address] !== undefined) {
 			sponsors = Number(this.sponsorData.data.result[address])
@@ -468,7 +470,7 @@ class TableRow extends Component {
 					<ul>
 						<li>{badge}</li>
 						{/* <li><img src="/default.jpg" onError={this.onError} style={ this.state.loaded ? {display: "none"} : {}} loading="lazy" alt='logo'/></li> */}
-						<li><img src={logo_svg ? logo_svg : logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} loading="lazy" alt='logo'/></li>
+						<li><img src={logo_svg ? logo_svg : logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} /*loading="lazy"*/ alt='logo'/></li>
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>

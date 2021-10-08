@@ -286,7 +286,6 @@ export async function prepList(grade) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/preps`)
             .then(result => {
-                console.log(result, "the result")
                 const { data } = result.data
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
