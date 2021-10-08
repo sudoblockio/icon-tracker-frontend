@@ -185,9 +185,16 @@ class GovernancePage extends Component {
 		return result
 	}
 	getSponsorCount=address=>{
-		console.log(this.sponsorData.data.result[address], "result sponsore")
-		console.log(this.sponsorData.data.result[address] ? console.log("this") :0)
-		return this.sponsorData.data.result[address] ? Number(this.sponsorData[address]):0
+		// console.log(Number(this.sponsorData.data.result[address]), "result sponsore")
+		// console.log(this.sponsorData.data.result[address] ? console.log("this") :0)
+		// return this.sponsorData.data.result[address] ? Number(this.sponsorData[address]):0
+		let sponsors
+		if (this.sponsorData.data.result[address] !== undefined) {
+			sponsors = Number(this.sponsorData.data.result[address])
+		} else {
+			sponsors =  0
+		}
+		return sponsors
 	}
 	render() {
 		
