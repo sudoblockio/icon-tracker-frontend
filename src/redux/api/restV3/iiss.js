@@ -118,6 +118,7 @@ export async function getIISSInfo() {
 }
 
 export async function getPRep(address) {
+    console.log(address, "which address")
     if (!address) return {}
 
     const walletApi = await walletApiInstance()
@@ -288,10 +289,8 @@ export async function prepList(grade) {
                 console.log(result, "the result")
                 const { data } = result.data
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-                console.log(nameSorted, "namesorted")
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
                 const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
-                console.log(_data, "underdata")
                 resolve(_data)
                 // const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
                 // const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)

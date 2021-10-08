@@ -19,7 +19,8 @@ export const getAddressList = (payload) => ({
 export const addressList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
     try {
-        const res = await trackerApi.get(makeUrl(`${ADD_PREFIX}`, payload))
+        const res = await trackerApi.get(`/api${ADD_PREFIX}`)
+        console.log(res, "addressList res")
         // if 200
         if (res.status === 200) {
             const data = res.data
@@ -54,7 +55,7 @@ const initialState = {
           case addressListReady : {
             newState = deepcopy(state)
             newState.addresses.data = action.payload
-            return getState('ARR', REDUX_STEP.READY, state, action, 'addresses')
+            return getState('ARR', REDUX_STEP.READY, newState, action, 'addresses')
           }
           default:
               return state;

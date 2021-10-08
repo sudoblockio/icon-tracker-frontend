@@ -41,15 +41,8 @@ class GovernancePage extends Component {
 	checkedState = {}
 	// this is also not working
 	getAdditionalData= async (method)=>{
-		console.log(method, "the method")
-		
-		const network = await getWalletApiUrl()
-		console.log(network, "network")
-		// originally: 
-		// const address = GetAddressForPrepList.network
-		const address = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f'
-		console.log(GetAddressForPrepList, "get address")
-		console.log(address, "maybe this is broken")
+		const network = await getTrackerApiUrl()
+		const address = GetAddressForPrepList[network]
 		const params={
 			to:address,
 			dataType:'call',
@@ -58,15 +51,19 @@ class GovernancePage extends Component {
 			}
 		}
 		const response = await icxCall(params);
-		console.log(response, "data response gov")
-		return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
+		console.log(response, "add data res")
+		return response
+		// return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
 	}
 	governanceData=[];
 	sponsorData={}
 	async componentDidMount() {
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
+		console.log(this.sponsorData, "sponsor")
 		// const { tmainInfo } = await getMainInfo()
+
+		// get this from new endpoint ...
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
@@ -88,13 +85,10 @@ class GovernancePage extends Component {
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
-			console.log(bp, "bp")
 			bp.status = bp.penalty
-			console.log(bp.status, "bp status")
 			return bp
 		})
 
-		console.log(blackPrep, "blackPrep")
 
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
@@ -181,10 +175,9 @@ class GovernancePage extends Component {
 			default:							
 		}
 	}
-	getGovernanceStatus = (address) =>{
-		console.log(this.governanceData, "this gov")
+	getGovernanceStatus = (address) => {
 		let result =false;
-		this.governanceData.forEach(item=>{
+		this.governanceData.data.result.forEach(item=>{
 			if(item.address===address){
 				result = true;
 			}
@@ -192,7 +185,9 @@ class GovernancePage extends Component {
 		return result
 	}
 	getSponsorCount=address=>{
-		// return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
+		console.log(this.sponsorData.data.result[address], "result sponsore")
+		console.log(this.sponsorData.data.result[address] ? console.log("this") :0)
+		return this.sponsorData.data.result[address] ? Number(this.sponsorData[address]):0
 	}
 	render() {
 		
@@ -428,7 +423,6 @@ class TableRow extends Component {
 			governanceStatus,
 			sponsorCount
 		} = this.props
-		console.log(this.props, "governance page lower props")
 
 		const { 
 			name,
@@ -448,7 +442,6 @@ class TableRow extends Component {
 			status,
 			rank
 		} = prep
-		console.log(prep, "one pRep")
 
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
