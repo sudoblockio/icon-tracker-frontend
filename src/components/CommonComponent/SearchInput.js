@@ -4,7 +4,7 @@ import searchReducer, { searchBlocks } from '../../redux/store/search';
 import { TX_TYPE } from '../../utils/const'
 import { connect } from 'react-redux'
 
-export const block_re = new RegExp('([0-9][1-9][0-9]{1,7}|100000000)')
+export const block_re = new RegExp('[0-9][1-9][0-9]{1,7}|100000000')
 export const add_re = new RegExp('^hx[a-fA-F0-9]{40}$')
 export const tx_re = new RegExp('^0x([A-Fa-f0-9]{64})$') 
 let searchByType;
@@ -60,7 +60,7 @@ class SearchInput extends Component {
     if (block_re.test(search) === true) {
       console.log(search, "block regex tripped")
       // this.props.searchBlocks(search)
-      // this.props.history.push(`/blocks/${search}`)
+      this.props.history.push(`/block/${Number(search)}`)
     } else {
       console.log("not a block numver")
     }
