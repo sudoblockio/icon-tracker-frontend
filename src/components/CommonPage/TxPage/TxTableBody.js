@@ -176,9 +176,6 @@ class TxTableBody extends Component {
 				case TX_TYPE.BLOCK_TX:
 					{console.log(data, "le data")}
 						return (
-
-                                        
-								
 							<tr>
 								<TxHashCell isError={isError} txHash={data.hash} />
 								<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.targetContractAddr} />
@@ -263,11 +260,12 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
+					{console.log(data, "internal tx data")}
 					return (
 						<tr>
 							{/* <td>-</td> */}
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={convertHexToValue(data.amount)} symbol="ICX" />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.to_adress} />
+							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							{/* <td>-</td> */}
 						</tr>
 					)
