@@ -5,7 +5,6 @@ import { blockInfo, blockTxList, blockList } from '../../redux/store/blocks';
 
 
 const mapStateToProps = (state) => {
-  console.log(state, "state from BlockDetailPageContainer")
   return {
     url: state.router.location,
     ...state.blocks,

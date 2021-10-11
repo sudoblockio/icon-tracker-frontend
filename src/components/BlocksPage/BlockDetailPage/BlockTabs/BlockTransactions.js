@@ -5,6 +5,7 @@ import {
 
 class BlockTransactions extends Component {
   render() {
+    {console.log("tx botton props", this.props)}
     return <TxBottom {...this.props}/>
   }
 }

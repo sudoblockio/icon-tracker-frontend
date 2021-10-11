@@ -174,13 +174,18 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
+					{console.log(data, "le data")}
 						return (
+
+                                        
+								
 							<tr>
 								<TxHashCell isError={isError} txHash={data.hash} />
 								<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.targetContractAddr} />
-								<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
-								<AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
+								<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+								<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 							</tr>
+
 						)
 
 					

@@ -6,10 +6,9 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 class TxBottomComponent extends Component {
     render() {
         
-        const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
+        const { txData, txType, goAllTx, hash, tableClassName, noBoxText } = this.props
         console.log(this.props, "tx bottom props")
         const { data, listSize, totalSize, loading } = txData
-        console.log(txData, "this is txData listSize")
 
         const Content = () => {
             if (loading) {
@@ -19,8 +18,7 @@ class TxBottomComponent extends Component {
             } else {
 
                 const { from_address, to_address } = data
-                console.log(data, "from address data")
-                console.log(from_address, "from address")
+
                 return (
                     <div className="contents">
                         
@@ -33,12 +31,13 @@ class TxBottomComponent extends Component {
                                 </thead>
                                 <tbody>
                                     {data.map((item, index) => (
-                                        console.log(item, "item/index")
+                                        console.log(item, "item/index"),
+                                        console.log(index, "zee index")
                                     ))}
-                                    {console.log(typeof(data), "what type is data here? ")}
-                                    {[data].map((item, index) => (
+                                    {/* THIS I WAS [data], keep an eye out for code breaks */}
+                                    {data.map((item, index) => (
                                         
-                                        <TxTableBody key={index} data={item} txType={txType} address={address} />
+                                        <TxTableBody key={index} data={item} txType={txType} address={hash} />
                                     ))}
                                 </tbody>
                             </table>
