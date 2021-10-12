@@ -19,7 +19,7 @@ class RecentTransactions extends Component {
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
                             {list.map((tx, index) => {
-                                const { hash, value, fee, receipt_status } = tx
+                                const { hash, value, transaction_fee, receipt_status } = tx
                                 const isSuccess = Number(receipt_status) === 1
                                 return (
                                     <li key={index}>
@@ -45,7 +45,7 @@ class RecentTransactions extends Component {
                                         <p className="d">
                                             Fee
                                             <em>
-                                                {convertHexToValue(fee)} ICX
+                                                {convertHexToValue(transaction_fee)} ICX
                                             </em>
                                         </p>
                                     </li>
