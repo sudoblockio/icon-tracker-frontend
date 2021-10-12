@@ -109,7 +109,7 @@ export const txList = (payload) => async (dispatch) => {
 export const transactionTxDetail = (payload) => async (dispatch)=> {
     const trackerApi = await trackerApiInstance()
     try {
-        const res = await trackerApi.get(`/api/v1/transactions/${payload.txHash}`)
+        const res = await trackerApi.get(`/api/v1/transactions/details/${payload.txHash}`)
         if (res.status === 200) {
             const data = res.data
             dispatch(getTxDetail(data))
