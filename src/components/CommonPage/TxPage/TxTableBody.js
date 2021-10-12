@@ -260,7 +260,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
-					{console.log(data, "internal tx data")}
 					return (
 						<tr>
 							{/* <td>-</td> */}

@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { TxPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
-  contractTxList,
-  contractInternalTxList,
-  contractTokenTxList,
-  contractEventLogList
-} from '../../redux/actions/contractsActions';
+  contractInfo as contractTxList,
+  // contractInternalTxList,
+  // contractTokenTxList,
+  // contractEventLogList
+} from '../../redux/store/contracts';
 import { 
   addressList,
   addressTxList,
@@ -17,8 +17,8 @@ import {
 } from '../../redux/actions/addressesActions';
 import { 
   txList,
-  // transactionEventLogList,
-  // transactionInternalTxList
+  transactionEventLogList,
+  transactionInternalTxList
 } from '../../redux/store/transactions';
 import { 
   tokenTxList,
@@ -58,9 +58,9 @@ function mapDispatchToProps(dispatch)  {
   return  {
     addressVotedList: payload => dispatch(addressVotedList(payload)),
     contractTxList: payload => dispatch(contractTxList(payload)),
-    contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),
-    contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
-    contractEventLogList: payload => dispatch(contractEventLogList(payload)),
+    // contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),
+    // contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
+    // contractEventLogList: payload => dispatch(contractEventLogList(payload)),
     addressList: payload => dispatch(addressList(payload)),
     addressInternalTxList: payload => dispatch(addressInternalTxList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
@@ -71,8 +71,8 @@ function mapDispatchToProps(dispatch)  {
     blockTxList: payload => dispatch(blockTxList(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
-    // transactionEventLogList: payload => dispatch(transactionEventLogList(payload)),
-    // transactionInternalTxList: payload => dispatch(transactionInternalTxList(payload)),
+    transactionEventLogList: payload => dispatch(transactionEventLogList(payload)),
+    transactionInternalTxList: payload => dispatch(transactionInternalTxList(payload)),
     addressRewardList: payload => dispatch(addressRewardList(payload)),
   };
 }

@@ -9,10 +9,13 @@ export const TRANSACTION_RECENT_TX = 'TRANSACTION_RECENT_TX'
 export const TRANSACTION_RECENT_TX_FULFILLED = 'TRANSACTION_RECENT_TX_FULFILLED'
 export const TRANSACTION_RECENT_TX_REJECTED = 'TRANSACTION_RECENT_TX_REJECTED'
 
-// previously src/redux/actionTypes/actionTypes.js
+export const TRANSACTION_EVENT_LOG_LIST  =  'TRANSACTION_EVENT_LOG_LIST'
+export const TRANSACTION_EVENT_LOG_LIST_FULFILLED  =  'TRANSACTION_EVENT_LOG_LIST_FULFILLED'
+export const TRANSACTION_EVENT_LOG_LIST_REJECTED  =  'TRANSACTION_EVENT_LOG_LIST_REJECTED'
+
 export const TX_LIST = 'TX_LIST'
 export const TX_DETAIL = 'TX_DETAIL'
-export const TX_INT_LIST = 'TX_INT_LIST'
+export const TRANSACTION_INTERNAL_TX_LIST = 'TRANSACTION_INTERNAL_TX_LIST'
 
 // previously src/redux/actions/transactionsActions.js
 export const transactionRecentTx = (payload) => ({
@@ -21,7 +24,7 @@ export const transactionRecentTx = (payload) => ({
 });
 
 export const getTxIntList = (payload) => ({
-    type: TX_INT_LIST, 
+    type: TRANSACTION_INTERNAL_TX_LIST, 
     payload
 })
 
@@ -30,14 +33,39 @@ export const getTxDetail = (payload) => ({
     payload
 })
 
+export const getTransactionEventLogList = (payload) => ({
+    type: TRANSACTION_EVENT_LOG_LIST,
+    payload
+})
+
+
+export const transactionEventLogList = (payload) => async (dispatch) => {
+    const trackerApi = await trackerApiInstance()
+    console.log(payload, "??payload")
+
+    try {
+        const res = await trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
+        console.log(res, "event res")
+        if (res.status === 200) {
+            const data = res.data
+            dispatch(getTransactionEventLogList(data))
+            return data
+        } else {
+            // handle error
+        }
+    } catch (e){
+        console.log(e, "error from tx res")
+    }
+}
 
 
 export const transactionInternalTxList = (payload) => async (dispatch) => {
+    console.log("rheannone")
     const trackerApi = await trackerApiInstance()
-
+    console.log(payload.txHash, "rheannone")
     try {
         const res = await trackerApi.get(`/api/v1/transactions/internal/${payload.txHash}`)
-
+        console.log(res, "??payload")
         if (res.status === 200) {
             const data = res.data
             dispatch(getTxIntList(data))
@@ -153,10 +181,17 @@ const transactionsReducer = (state = initialState, action) => {
             newState.transaction.data = action.payload
             return newState
         }
-        case TX_INT_LIST: {
+        case TRANSACTION_INTERNAL_TX_LIST: {
             newState = deepcopy(state)
             newState.transactionInternalTx.data = action.payload
+            console.log(newState, "from internal tx")
             return newState 
+        }
+
+        case TRANSACTION_EVENT_LOG_LIST : {
+            newState = deepcopy(state)
+            newState.transactionEvents.data = action.payload
+            return getState('ARR', REDUX_STEP.READY, newState, action, 'transactionEvents') 
         }
         default:
             return state;

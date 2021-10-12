@@ -11,6 +11,7 @@ import transactionsReducer from './transactions'
 import popupReducer from './popup';
 import searchReducer from './search';
 import { contractsReducer } from './contracts';
+import addressesReducer from './addresses';
 import { storageReducer } from '../reducers/storageReducer';
 
 const createRootReducer = (history) => combineReducers ({
@@ -18,6 +19,7 @@ const createRootReducer = (history) => combineReducers ({
     blocks: blocksReducer,
     transactions: transactionsReducer,
     contracts: contractsReducer,
+    addresses: addressesReducer,
     search: searchReducer,
     popup: popupReducer,
     storage: storageReducer,

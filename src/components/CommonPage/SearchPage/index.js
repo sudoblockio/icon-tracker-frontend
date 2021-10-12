@@ -243,6 +243,7 @@ class SearchPage extends Component {
         }
 
         const Content = () => {
+            {console.log(this.props, "search box props on list")}
             if (loading && noData) {
                 return <LoadingComponent height="calc(100vh - 120px - 144px)" />
             } else {
