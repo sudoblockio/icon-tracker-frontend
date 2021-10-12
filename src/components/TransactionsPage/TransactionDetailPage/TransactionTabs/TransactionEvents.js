@@ -5,6 +5,7 @@ import {
 
 class TransactionEvents extends Component {
   render() {
+    console.log(this.props, "event props")
     return <TxBottom {...this.props}/>
   }
 }

@@ -60,9 +60,7 @@ export const transactionEventLogList = (payload) => async (dispatch) => {
 
 
 export const transactionInternalTxList = (payload) => async (dispatch) => {
-    console.log("rheannone")
     const trackerApi = await trackerApiInstance()
-    console.log(payload.txHash, "rheannone")
     try {
         const res = await trackerApi.get(`/api/v1/transactions/internal/${payload.txHash}`)
         console.log(res, "??payload")

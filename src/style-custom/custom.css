@@ -416,6 +416,7 @@
 
 .contents .txt {
     text-align: left;
+    overflow-wrap: break-word;
 }
 
 .table-typeB tr i.img {

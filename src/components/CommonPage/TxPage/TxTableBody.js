@@ -254,9 +254,10 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
+					console.log(JSON.stringify(data), "what we working with")
 					return (
 						<tr>
-							<td>{data.eventLog}</td>
+							<td>{JSON.stringify(data)}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:

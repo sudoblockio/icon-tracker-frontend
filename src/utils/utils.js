@@ -310,7 +310,7 @@ export function getArrayState(step, state, action, dataType) {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
-                    loading: true,
+                    // loading: true,
                     page: Number(page) || state[dataType].page,
                     count: Number(count) || state[dataType].count,
                     error: '',
@@ -365,7 +365,7 @@ export function getObjectState(step, state, action, dataType) {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
-                    loading: true,
+                    // loading: true,
                     data: {},
                     error: '',
                 },
