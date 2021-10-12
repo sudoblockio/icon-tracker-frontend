@@ -27,8 +27,9 @@ import {
 import { transactionEventLogList } from '../actions/transactionsActions';
 // TAKES ACTION TYPES
 function* watchTransactionRecentTx() {
-
-  return  yield takeLatest(TRANSACTION_RECENT_TX, transactionRecentTxFunc) }
+  console.log("happened")
+  return  yield takeLatest(TRANSACTION_RECENT_TX, transactionRecentTxFunc) 
+}
 function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
 function* watchTransactionEventLogList() { yield takeLatest(AT.transactionEventLogList, transactionEventLogListFunc) }
 // function* watchTransactionInternalTxList() { yield takeLatest(AT.transactionInternalTxList, transactionInternalTxListFunc) }

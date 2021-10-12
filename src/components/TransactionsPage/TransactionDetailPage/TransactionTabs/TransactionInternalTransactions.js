@@ -5,6 +5,7 @@ import {
 
 class TransactionInternalTransactions extends Component {
   render() {
+    console.log(this.props, "rheannone props")
     return <TxBottom {...this.props}/>
   }
 }

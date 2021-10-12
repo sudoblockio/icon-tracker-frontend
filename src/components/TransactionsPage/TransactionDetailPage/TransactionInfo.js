@@ -113,6 +113,7 @@ class TransactionInfo extends Component {
 					receipt_step_price,
 					receipt_step_used, 
 				} = data
+				console.log(data, "derstepUsedDetail")
 				
 				const confirmation = async (block_number) => await getConfirmations(block_number)
 				const _stepPrice = stepPrice || "0"
@@ -191,7 +192,7 @@ class TransactionInfo extends Component {
 														const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
 														return (
 															<p key={index}>
-																┗&emsp;<span className='mint'><AddressLink to={stepAddr} /></span>
+																┗&emsp;<span className='mint'><AddressLink to={to_address} /></span>
 																&emsp;{convertNumberToText(_stepUsed)}
 															</p>
 														)

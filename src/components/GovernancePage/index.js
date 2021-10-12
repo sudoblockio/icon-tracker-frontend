@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 // import { getMainInfo } from '../../redux/api/restV3/main';
 import { getMainInfo } from '../../redux/api/restV3';
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '../../utils/utils'
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList, getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss';
@@ -80,7 +80,7 @@ class GovernancePage extends Component {
 		const _blackPrep = await prepList(3)
 
 		// GET PUBLIC TREASURY*************
-		const  publicTreasury  = 4930167.9322
+		// const  publicTreasury  = 4930167.9322
 		const icxSupply = await getTotalSupply()
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
@@ -113,7 +113,7 @@ class GovernancePage extends Component {
 		this.setState({ 
 			loading: false,
 			totalSupply, 
-			publicTreasury,
+			// publicTreasury,
 			totalStaked,
 			totalVoted,
 			irep,
@@ -224,13 +224,11 @@ class GovernancePage extends Component {
 			restChecked,
 			blackChecked
 		} = this.state
+		console.log(this.state, "gov state")
 
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
-		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
+		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100 
 		const list = blackChecked ? blackPrep : allPrep
-
-
-
 
 		// const list = blackChecked ? blackPrep : allPrep.filter(p => {
 		// 	return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
@@ -255,7 +253,8 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury <em>(ICX)</em></p>
-									<p><span>{convertNumberToText(publicTreasury, 4)}</span></p>
+									{console.log(this.state, "yelluerr?")}
+									<p><span>{convertNumberToText(this.state.publicTreasury)}</span></p>
 								</div>
 							</div>
 							<ul>
@@ -436,24 +435,57 @@ class TableRow extends Component {
 			governanceStatus,
 			sponsorCount
 		} = this.props
+		console.log(this.props, "guvnuh props")
 
+		// all available v3 blocks
 		const { 
-			name,
-			address,
-			grade,
 			totalBlocks,
 			validatedBlocks,
-			stake,
-			delegated,
-			// irep,
-			// irepUpdatedBlockHeight,
 			active,
+			address,
+			api_endpoint,
+			balance,
+			city,
+			country,
+			created_block,
+			created_timestamp,
+			delegated,
+			details,
+			email,
+			facebook,
+			github,
+			grade,
+			irep,
+			irep_updated_block_height,
+			keybase,
+			last_updated_block,
+			last_updated_timestamp,
 			logo_256,
+			logo_1024,
 			logo_svg,
-			// balance,
-			// unstake,
+			name,
+			node_address,
+			p2p_endpoint,
+			penalty,
+			rank,
+			reddit,
+			server_city,
+			server_country,
+			server_type,
+			stake,
 			status,
-			rank
+			steemit,
+			telegram,
+			total_blocks,
+			twitter,
+			unstake,
+			unvalidated_sequence_blocks,
+			validated_blocks,
+			voted,
+			voting_power,
+			website,
+			wechat,
+			youtube,
 		} = prep
 
 
@@ -463,7 +495,7 @@ class TableRow extends Component {
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
-		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
+		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted /* * 100*/
 		const badge = this.getBadge(grade, active, status)
 		// const rank = index + 1
 
@@ -488,7 +520,7 @@ class TableRow extends Component {
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
-				{!blackChecked && <td><span>{votedRate.toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>}
+				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>}
 			</tr>
 		)
 	}
