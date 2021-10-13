@@ -61,6 +61,7 @@ export const transactionEventLogList = (payload) => async (dispatch) => {
 
 export const transactionInternalTxList = (payload) => async (dispatch) => {
     const trackerApi = await trackerApiInstance()
+    
     try {
         const res = await trackerApi.get(`/api/v1/transactions/internal/${payload.txHash}`)
         console.log(res, "??payload")
@@ -77,6 +78,7 @@ export const transactionInternalTxList = (payload) => async (dispatch) => {
 }
 
 export const txList = (payload) => async (dispatch) => {
+    console.log(payload, "txLIst payload")
     const trackerApi = await trackerApiInstance()
     try {
         const res = await trackerApi.get(makeUrl(`${TX_PREFIX}`, payload))
@@ -142,7 +144,7 @@ export const transactionTxDetail = (payload) => async (dispatch)=> {
             return data
         } else {
             //setError(e)
-            console.log(res, "yellow")
+
         }
     }
     catch (e) {
@@ -168,11 +170,12 @@ const transactionsReducer = (state = initialState, action) => {
         case TRANSACTION_RECENT_TX: {
             newState = deepcopy(state)
             newState.recentTx.data = action.payload
-            return getState('ARR', REDUX_STEP.READY, newState, action, 'recentTx')
+            getState('ARR', REDUX_STEP.READY, newState, action, 'recentTx')
+            return getState('ARR', REDUX_STEP.FULFILLED, newState, action, 'recentTx')
         }
 
         case TRANSACTION_RECENT_TX_FULFILLED: {
-            return getState('ARR', REDUX_STEP.FULFILLED, newState, action, 'recentTx')
+            return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'recentTx')
         }
         case TX_DETAIL: {
             newState = deepcopy(state)

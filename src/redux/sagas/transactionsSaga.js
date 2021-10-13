@@ -1,4 +1,4 @@
-import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import { fork, put, call, takeLatest} from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
 // ACTION TYPES
 import { convertEngineToTracker } from "../../utils/utils";
@@ -26,10 +26,8 @@ import {
 } from '../api/restV3/transaction';
 import { transactionEventLogList } from '../actions/transactionsActions';
 // TAKES ACTION TYPES
-function* watchTransactionRecentTx() {
-  console.log("happened")
-  return  yield takeLatest(TRANSACTION_RECENT_TX, transactionRecentTxFunc) 
-}
+
+function* watchTransactionRecentTx() { yield takeLatest(TRANSACTION_RECENT_TX, transactionRecentTxFunc) }
 function* watchTransactionTxDetail() { yield takeLatest(AT.transactionTxDetail, transactionTxDetailFunc) }
 function* watchTransactionEventLogList() { yield takeLatest(AT.transactionEventLogList, transactionEventLogListFunc) }
 // function* watchTransactionInternalTxList() { yield takeLatest(AT.transactionInternalTxList, transactionInternalTxListFunc) }
@@ -46,7 +44,7 @@ function* transactionRecentTxFunc(action) {
   try {
     console.log("recent func")
     if (action.payload.count === 0) {
-      yield put({ type: 'TRANSACTION_RECENT_TX', payload: { data: [] } });
+      yield put({ type: 'TRANSACTION_RECENT_TX_FULFILLED', payload: { data: [] } });
       return
     }
 

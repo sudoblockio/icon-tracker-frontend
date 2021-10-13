@@ -21,7 +21,7 @@ class Footer extends Component {
 			<div className="footer-wrap">
 				<div className="screen0">
 					<div className="wrap-holder">
-						<p>©2019 ICON Foundation</p>
+						<p>©2022 ICON Foundation</p>
 						<div className="sns">
 							<p className="mail"><span>Support & request to add the token homepage URL</span><a href={SUPPORT_URL} rel="noopener noreferrer" target='_blank'>Contact us</a></p>
 							<ul>

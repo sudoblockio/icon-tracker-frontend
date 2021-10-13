@@ -222,7 +222,7 @@ class TxTableBody extends Component {
 				case TX_TYPE.ADDRESSES:
 					return (
 						<tr>
-							<AddressCell targetAddr={addressInData} txType={data.txType} />
+							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.icxUsd} decimal={3} symbol="USD" />
 							<td><span>{data.percentage}</span><em>%</em></td>
@@ -254,16 +254,18 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
-					console.log(JSON.stringify(data), "what we working with")
 					return (
 						<tr>
+							{console.log(data, "internal transaction event data")}
 							<td>{JSON.stringify(data)}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
 					return (
+
 						<tr>
 							{/* <td>-</td> */}
+							{console.log(data, "internal transaction data")}
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.to_adress} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							{/* <td>-</td> */}

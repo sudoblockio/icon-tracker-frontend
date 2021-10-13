@@ -520,7 +520,7 @@ class TableRow extends Component {
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
-				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{convertNumberToText(prepVoted, 4)}</em></td>}
+				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{prepVoted / Math.pow(10, 8).toFixed(4)}</em></td>}
 			</tr>
 		)
 	}

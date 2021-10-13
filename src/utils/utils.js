@@ -303,27 +303,34 @@ export function tokenText(name, symbol, address, spanClassName) {
 
 export function getArrayState(step, state, action, dataType) {
     const { payload } = action
+    console.log(action, "array state action")
+    console.log(dataType, "array state action")
     switch (step) {
         case REDUX_STEP.READY:
+            console.log("redux step ready")
+            console.log(payload, "redux step ready payload")
             const { page, count } = payload
             return {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
-                    // loading: true,
+                    loading: true,
                     page: Number(page) || state[dataType].page,
                     count: Number(count) || state[dataType].count,
                     error: '',
                 },
             }
         case REDUX_STEP.FULFILLED:
+            console.log("redux step fulfilled")
+            console.log(payload, "redux step fulfilled payload")
             const { data, listSize, totalSize } = payload
+
             return {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
                     loading: false,
-                    data: data || [],
+                    data: payload || [],
                     listSize: listSize || 0,
                     totalSize: totalSize || 0,
                     error: '',
