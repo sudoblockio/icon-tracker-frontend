@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo } from '../../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
@@ -108,7 +108,7 @@ class BlockInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>TxFee</td>
-                                                <td>{convertNumberToText(transaction_fees)} ICX</td>
+                                                <td>{convertHexToValue(transaction_fees)} ICX</td>
                                             </tr>
                                             {number === 0 && (
                                                 <tr>
