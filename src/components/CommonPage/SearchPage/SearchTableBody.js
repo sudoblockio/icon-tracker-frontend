@@ -19,7 +19,6 @@ class SearchTableBody extends Component {
 	render() {
 		const TableRow = () => {
 			const { searchType, data } = this.props
-			console.log(this.props, "search table props")
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
 					return (

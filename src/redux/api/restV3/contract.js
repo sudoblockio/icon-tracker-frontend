@@ -7,7 +7,7 @@ export async function contractList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/api/v1/contracts', payload))
       .then(result => {
-        console.log(result, "contract result")
+        console.log(result.headers, "contract result")
         resolve(result)
       })
       .catch(error => {

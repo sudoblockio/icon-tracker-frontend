@@ -8,7 +8,6 @@ class TxBottomComponent extends Component {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
 
         const { data, listSize, totalSize, loading } = txData
-        console.log(txData, "txData")
 
         const Content = () => {
             if (loading) {
