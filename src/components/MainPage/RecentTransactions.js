@@ -44,7 +44,7 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                            {convertHexToValue(value)} ICX
+                                            {convertHexToValue(value).toFixed(2)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
