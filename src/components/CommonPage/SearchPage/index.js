@@ -176,7 +176,6 @@ class SearchPage extends Component {
 
     render() {
         const list = this.props[this.getSearchTypeData()['list']] || {}
-        console.log(list, "props today here very nice")
         const tableClassName = this.getSearchTypeData()['tableClassName'] || ''
         const contentsClassName =
             this.getSearchTypeData()['contentsClassName'] || ''
@@ -186,7 +185,6 @@ class SearchPage extends Component {
 
         const { keyword, status } = this.state
         const { loading, data, page, listSize, count } = list
-        console.log(list, "data")
         const noData = this.getNoData(data, status)
 
         const TableContent = () => {
@@ -243,7 +241,6 @@ class SearchPage extends Component {
         }
 
         const Content = () => {
-            {console.log(this.props, "search box props on list")}
             if (loading && noData) {
                 return <LoadingComponent height="calc(100vh - 120px - 144px)" />
             } else {

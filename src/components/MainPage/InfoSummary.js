@@ -7,13 +7,8 @@ class InfoSummary extends Component {
         super(props)
         this.state = {
             isSolo: false,
-            totalSupply: 0, 
-            marketCap: 0,
-            allTransactions: 0,
         }
     }
-
-    
 
     async componentDidMount() {
         const isSolo = await getIsSolo()
@@ -22,7 +17,7 @@ class InfoSummary extends Component {
         const allTransactions = await getAllTransactions()
         this.setState({ isSolo, totalSupply, marketCap, allTransactions })
     }
-    
+
     render() {
         const { tmainInfo } = this.props.info || {}
         const { icxCirculationy } = tmainInfo || {}

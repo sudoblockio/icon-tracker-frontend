@@ -61,7 +61,6 @@ class TxPage extends Component {
         const query = {
             page: isNumeric(page) ? page : 1,
             count: isNumeric(count) ? count : 25,
-            limit: 25
         }
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
@@ -150,6 +149,7 @@ class TxPage extends Component {
 
     getTxListByPage = page => {
         const count = this.getCount()
+        console.log(count, "tx list count")
         this.historyPush(page, count)
     }
 
@@ -207,9 +207,8 @@ class TxPage extends Component {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
-        console.log(tx, "all  the props on tx")
         const { loading, page, count, data, listSize, totalSize } = tx
-
+        console.log(tx, "this is tx")
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {

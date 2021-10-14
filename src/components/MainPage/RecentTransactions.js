@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { convertNumberToText, convertHexToValue } from '../../utils/utils'
+import { awaitGetRecentTx } from '../../redux/api/restV3/iiss'
 import { LoadingComponent, TransactionLink } from '../../components'
 
-
 class RecentTransactions extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            recentTx: 0
+        }
+    }
+    async componentDidMount() {
+        const recentTx = await awaitGetRecentTx()
+        this.setState({recentTx})
+    }
     render() {
-        const { loading, transactions } = this.props
-        const list = transactions ? transactions.slice(0, 10) : []
+        const loading = false;
+        const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
+        console.log(list, "recent txt list")
         return (
             <li className="right">
                 <p className="title">Transactions</p>
@@ -33,7 +44,7 @@ class RecentTransactions extends Component {
                                         <p className="b">
                                             Amount
                                             <em>
-                                                {convertHexToValue(value)} ICX
+                                            {convertHexToValue(value)} ICX
                                             </em>
                                         </p>
                                         <p className="c">
@@ -45,7 +56,7 @@ class RecentTransactions extends Component {
                                         <p className="d">
                                             Fee
                                             <em>
-                                                {convertHexToValue(transaction_fee)} ICX
+                                                {convertNumberToText(transaction_fee)} ICX
                                             </em>
                                         </p>
                                     </li>

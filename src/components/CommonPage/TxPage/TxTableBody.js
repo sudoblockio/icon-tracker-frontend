@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {
+	calcFromNow,
 	numberWithCommas,
+	dateToUTC,
 	isValidData,
 	tokenText,
 	is0xHash,
-	convertLoopToIcxDecimal,
 	convertHexToValue,
 	epochToFromNow,
-	dateToUTC 
+	convertLoopToIcxDecimal
 } from '../../../utils/utils'
 import {
 	TransactionLink,
@@ -76,6 +77,7 @@ class TxTableBody extends Component {
 				data,
 				address
 			} = this.props
+			
 			const addressInData = data.address
 			const isError = data.state === 0
 
@@ -174,20 +176,16 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
-					{console.log(data, "le data")}
-						return (
-							<tr>
-								<TxHashCell isError={isError} txHash={data.hash} />
-								<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.targetContractAddr} />
-								<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-								<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
-							</tr>
-
-						)
-
-					
+					return (
+						<tr>
+							<TxHashCell isError={isError} txHash={data.hash} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.to_address} />
+							<AmountCell amount={data.value} symbol="ICX" />
+							<AmountCell amount={data.transaction_fee} symbol="ICX" />
+						</tr>
+					)
 				case TX_TYPE.TRANSACTIONS:
-					// or statements to handle old endpoint column names:
+					
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash || data.txHash} />
@@ -247,7 +245,7 @@ class TxTableBody extends Component {
 							<td className="on">
 								<span className="ellipsis"><TransactionLink to={data.txHash} /></span><br />
 								<span><BlockLink label={`# ${data.height}`} to={data.height} /></span>
-								<p>{epochToFromNow(data.age)}</p>
+								<p>{calcFromNow(data.age)}</p>
 							</td>
 							<td>{data.method}</td>
 							<td>{data.eventLog}</td>
@@ -256,18 +254,15 @@ class TxTableBody extends Component {
 				case TX_TYPE.TRANSACTION_EVENTS:
 					return (
 						<tr>
-							{console.log(data, "internal transaction event data")}
-							<td>{JSON.stringify(data)}</td>
+							<td>{data.eventLog}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
 					return (
-
 						<tr>
 							{/* <td>-</td> */}
-							{console.log(data, "internal transaction data")}
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.to_adress} />
-							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
+							<AmountCell amount={data.amount} symbol="ICX" />
 							{/* <td>-</td> */}
 						</tr>
 					)

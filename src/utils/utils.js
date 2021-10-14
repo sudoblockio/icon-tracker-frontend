@@ -1,7 +1,6 @@
 import React from 'react'
 import moment from 'moment'
 import { getTrackerApiUrl } from '../redux/api/restV3/config'
-import { getLastBlock } from '../../src/redux/api/restV3/iiss'
 import BigNumber from 'bignumber.js'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { TokenLink } from '../components'
@@ -31,6 +30,26 @@ export function getTextFromHtml(data) {
     if (!data || typeof data !== 'string') return ''
 
     return data.replace(/(<([^>]+)>)/ig,"");
+}
+
+export const convertHexToValue = (hex) => {
+    let value;
+    if (hex === "0x0") {
+        value = 0
+    } else {
+        const bigNum = BigNumber(hex, 16)
+        const divisor = Math.pow(10, 18)
+        value = BigNumber(bigNum / divisor).toPrecision();
+    }
+
+    return Number(value);
+}
+
+export const epochToFromNow = (date) => {
+    let parsed = parseInt(date, 16)
+    let prettyDate;
+    typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
+    return prettyDate
 }
 
 export function numberWithCommas(x) {
@@ -100,7 +119,6 @@ export function getTimezoneMomentTime(date) {
 }
 
 export function getTimezoneMomentKSTTime(date) {
-    
     return moment(date).format('YYYY-MM-DD HH:mm:ss')
 }
 
@@ -145,8 +163,6 @@ export function makeFromNowText(fistTime, firstText, secondTime, secondText, lat
     return result.join(" ")
 }
 
-
-
 export function calcFromNow(createDate) {
     const M = 60
     const H = M * 60
@@ -165,29 +181,24 @@ export function calcFromNow(createDate) {
         return 'right now'
     }
     else if (diff > 0 && diff < M) {
-        console.log("1")
         return makeFromNowText(diff, 'second', undefined, '', later)
     }
     else if (diff >= M && diff < H) {
-        console.log("2")
         const minute = Math.floor(diff / M)
         const second = diff % M
         return makeFromNowText(minute, 'minute', second, 'second', later)
     }
     else if (diff >= H && diff < D) {
-        console.log("3")
         const hour = Math.floor(diff / H)
         const minute = Math.floor((diff % H) / M)
         return makeFromNowText(hour, 'hour', minute, 'minute', later)
     }
     else if (diff >= D && diff < W) {
-        console.log("4")
         const day = Math.floor(diff / D)
         const hour = Math.floor((diff % D) / H)
         return makeFromNowText(day, 'day', hour, 'hour', later)
     }
     else {
-        console.log("5")
         const week = Math.floor(diff / W)
         const day = Math.floor((diff % W) / D)
         return makeFromNowText(week, 'week', day, 'day', later)
@@ -253,11 +264,15 @@ export function makeUrl(url, payload) {
     if (!payload) {
         return url
     }
+
     let result = url
+    payload.limit = payload.count
+    delete payload.count
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
-    return "/api" + result
+    console.log(result, "url maker")
+    return result
 }
 
 export function randomUint32() {
@@ -303,12 +318,10 @@ export function tokenText(name, symbol, address, spanClassName) {
 
 export function getArrayState(step, state, action, dataType) {
     const { payload } = action
-    console.log(action, "array state action")
-    console.log(dataType, "array state action")
+    console.log(action, "get state")
     switch (step) {
         case REDUX_STEP.READY:
-            console.log("redux step ready")
-            console.log(payload, "redux step ready payload")
+            if (payload !== undefined ){
             const { page, count } = payload
             return {
                 ...state,
@@ -320,19 +333,29 @@ export function getArrayState(step, state, action, dataType) {
                     error: '',
                 },
             }
+        } else {
+            
+            return {
+                ...state,
+                [dataType]: {
+                    ...state[dataType],
+                    loading: true,
+                    page: 1 || state[dataType].page,
+                    count: 10 || state[dataType].count,
+                    error: '',
+                },
+            }
+        }
         case REDUX_STEP.FULFILLED:
-            console.log("redux step fulfilled")
-            console.log(payload, "redux step fulfilled payload")
             const { data, listSize, totalSize } = payload
-
             return {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
                     loading: false,
-                    data: payload || [],
-                    listSize: listSize || 0,
-                    totalSize: totalSize || 0,
+                    data: data || [],
+                    listSize: 50000 || 0,
+                    totalSize: payload.headers['x-total-count']|| 0,
                     error: '',
                 },
             }
@@ -372,7 +395,7 @@ export function getObjectState(step, state, action, dataType) {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
-                    // loading: true,
+                    loading: true,
                     data: {},
                     error: '',
                 },
@@ -725,29 +748,4 @@ export function addAt(text) {
 export function closeEm(text) {
     if (!text) return ''
     return text.replace(/<\/em>/gi, "</em").replace(/<\/em/gi, "</em>")
-}
-
-export const convertHexToValue = (hex) => {
-    let value;
-    if (hex === "0x0") {
-        value = 0
-    } else {
-        const bigNum = BigNumber(hex, 16)
-        const divisor = Math.pow(10, 18)
-        value = BigNumber(bigNum / divisor).toPrecision();
-    }
-
-    return Number(value);
-}
-
-export const epochToFromNow = (date) => {
-    let parsed = parseInt(date, 16)
-    let prettyDate;
-    typeof(date) === "string" ?  prettyDate =  moment(new Date(parsed / 1000)).fromNow() : prettyDate = moment(new Date(date / 1000)).fromNow();
-    return prettyDate
-}
-
-export const getConfirmations = async (block_number) => {
-    const lastBlock = await getLastBlock()
-    return Number(lastBlock - block_number)
 }

@@ -2,21 +2,19 @@ import { connect } from 'react-redux';
 import { MainPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { getMainInfo, getMainChart } from '../../redux/actions/mainPageActions'
-import { blockList} from '../../redux/store/blocks'
-import { txList } from '../../redux/store/transactions'
+import { blockList } from '../../redux/actions/blocksActions'
+import { transactionRecentTx } from '../../redux/actions/transactionsActions'
 
 function mapStateToProps(state) {
-  return {
-      blocks: state.blocks.blocks,
-      transactions: state.transactions
-  }
+  {{console.log(state, "containter stats")}}
+  return state.mainPage;
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    blockList: payload => dispatch(blockList(payload)),
-    txList: payload => dispatch(txList(payload)),
-    getMainChart: () => dispatch(getMainChart())
+    getBlockList: () => dispatch(blockList()),
+    getRecentTransactions: () => dispatch(transactionRecentTx()),
+    // getMainChart: () => dispatch(getMainChart())
   };
 }
 

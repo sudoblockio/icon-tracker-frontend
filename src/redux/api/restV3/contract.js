@@ -5,9 +5,10 @@ import { randomUint32 } from '../../../utils/utils'
 export async function contractList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/list', payload))
+    trackerApi.get(makeUrl('/api/v1/contracts', payload))
       .then(result => {
-        resolve(result.data)
+        console.log(result, "contract result")
+        resolve(result)
       })
       .catch(error => {
         reject(error)

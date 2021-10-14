@@ -13,20 +13,18 @@ class BlockDetailPage extends Component {
   render() {
     const { block } = this.props;
     const { loading, error } = block
-    {console.log(this.props, "what is this? ")}
 
     return (
-      
       <DetailPage
         {...this.props}
         loading={loading}
         error={error}
         TABS={BLOCK_TABS}
         ROUTE="/block"
-        getInfo={number => {this.props.blockInfo({ number })}}
+        getInfo={height => {this.props.blockInfo({ height })}}
         getList={[
-          number => {
-            this.props.blockTxList({ number, limit: 25, page: 1, count: 10})
+          height => {
+            this.props.blockTxList({ height, page: 1, count: 10})
           }
         ]}
         InfoComponent={BlockInfo}

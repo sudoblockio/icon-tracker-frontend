@@ -20,8 +20,6 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
-        console.log(this.props, "props from tx bottom title")
-        
 
         const Content = () => {
             const listSizeNum = listSize || 0

@@ -13,11 +13,11 @@ import {
 class BlockTabs extends Component {
 
     render() {
-        {console.log(this.props, "BlockTabs")}
         const { on, block, blockTx } = this.props
+        console.log(this.props, "tx detail props")
         const { loading, data } = block
-        const { height } = data
-        console.log(height, "height from blocktabs")
+        console.log(block, "tx detail data")
+        const { number } = data
         return (
             <TabTable
                 {...this.props}
@@ -30,7 +30,7 @@ class BlockTabs extends Component {
                             return (
                                 <BlockTransactions 
                                     txData={blockTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${height}`)}} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)}} 
                                     txType={TX_TYPE.BLOCK_TX} 
                                 />
                             )

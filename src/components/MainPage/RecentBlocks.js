@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
+import { awaitGetRecentBlocks } from '../../redux/api/restV3/iiss'
 import { LoadingComponent, BlockLink } from '../../components'
 
 class RecentBlocks extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            recentBx: 0
+        }
+    }
+
+    async componentDidMount() {
+        const recentBx = await awaitGetRecentBlocks()
+        this.setState({recentBx})
+    }
     render() {
-        const { loading, blocks } = this.props
-        const list = blocks ? blocks.slice(0, 10) : []
+        const loading = false;
+        const list = this.state.recentBx ? this.state.recentBx.slice(0, 10) : []
         return (
             <li className="left">
                 <p className="title">Blocks</p>

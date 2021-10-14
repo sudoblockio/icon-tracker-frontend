@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { ContractDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import {
+    contractInfo,
     contractDetailPopup,
     contractTxList,
     contractInternalTxList,
@@ -11,10 +12,8 @@ import {
     icxCall,
     readContractInformation
 } from '../../redux/actions/contractsActions'
-import { contractInfo } from '../../redux/store/contracts'
 
 function mapStateToProps(state) {
-    console.log(state, 'contrainer state')
     return {
         url: state.router.location,
         ...state.contracts

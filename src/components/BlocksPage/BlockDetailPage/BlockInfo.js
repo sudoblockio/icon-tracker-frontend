@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue, epochToFromNow, } from '../../../utils/utils'
+import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 
 class BlockInfo extends Component {
-
     handlePrevBlock = () => {
-        
         const { block } = this.props
         const { data } = block
         const { number } = data
@@ -21,6 +19,8 @@ class BlockInfo extends Component {
         const { block } = this.props
         const { data } = block
         const { number } = data
+        // if (lastBlock !== '-') return
+
         const nextHeight = number + 1
         this.props.history.push('/block/' + nextHeight)
     }
@@ -40,14 +40,11 @@ class BlockInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-               
-                const { number, timestamp, transaction_count, transaction_amount, transaction_fees, hash, parent_hash, blockSize, amount, fee, message, lastBlock, peer_id, crep } = data
-                {console.log(data, "data from component")}
+                console.log(data, "data")
+                const { number, timestamp, transaction_count, hash, parent_hash, blockSize, transaction_amount, transaction_fees, message, lastBlock, peer_id, crep } = data
                 const isFirst = number === 0
                 const isLast = lastBlock !== '-'
                 const prep = peer_id || crep
-                console.log(peer_id, "this blocks peer id, prep? ")
-                
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -59,11 +56,11 @@ class BlockInfo extends Component {
                                             <tr>
                                                 <td>Block Height</td>
                                                 <td>
-                                                    <p onClick={this.handlePrevBlock} className={`prev`}>
+                                                    <p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>
                                                     <em className="value">{numberWithCommas(number)}</em>
-                                                    <p onClick={this.handleNextBlock} className={`next`}>
+                                                    <p onClick={this.handleNextBlock} className={`next ${isLast ? '' : ''}`}>
                                                         <em className="img" />
                                                     </p>
                                                 </td>
@@ -78,8 +75,8 @@ class BlockInfo extends Component {
                                                     <td>-</td>
                                                 ) : (
                                                     <td>
-                                                        {new Date(timestamp / 1000).toString()}
-                                                        <em>{epochToFromNow(timestamp)}</em>
+                                                        {dateToUTC(timestamp)}
+                                                        <em>{utcDateInfo(timestamp)}</em>
                                                     </td>
                                                 )}
                                             </tr>
@@ -107,11 +104,11 @@ class BlockInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Amount</td>
-                                                <td>{numberWithCommas(convertHexToValue(transaction_amount)) } ICX</td>
+                                                <td>{convertNumberToText(transaction_amount)} ICX</td>
                                             </tr>
                                             <tr>
                                                 <td>TxFee</td>
-                                                <td>{convertHexToValue(transaction_fees)} ICX</td>
+                                                <td>{convertNumberToText(transaction_fees)} ICX</td>
                                             </tr>
                                             {number === 0 && (
                                                 <tr>

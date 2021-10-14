@@ -33,6 +33,7 @@ class AddressInfo extends Component {
 
     async componentDidMount() {
         const {totalDelegated} = await getPReps()
+        console.log(totalDelegated, "total delegated")
         this.setState({totalDelegated})
     }
 
@@ -80,6 +81,8 @@ class AddressInfo extends Component {
         const {notification, icxMore, tokenMore, showNode} = this.state
 
         const {wallet, walletAddress} = this.props
+        console.log(this.props, "walletAddress1")
+        console.log(walletAddress, "walletAddress2")
         const {loading, data, error} = wallet
         const {
             isPrep,
@@ -89,8 +92,10 @@ class AddressInfo extends Component {
             available,
             staked,
             unstakes,
+            // balance,
             iscore
         } = data
+        console.log(data, "the preps data")
 
         const {
             nodeAddress,
@@ -105,7 +110,7 @@ class AddressInfo extends Component {
             grade,
             status
         } = prep || {}
-
+        console.log(prep, "the preps")
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
             unstakes.map((list, idx) => {
@@ -127,8 +132,9 @@ class AddressInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px"/>
             } else {
-                const {address, nodeType, tokenList, reportedCount} = data
-                const _address = !!address ? address : error
+                const {public_key, nodeType, tokenList, reportedCount} = data
+                console.log(data, "address data prop")
+                const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
 
@@ -247,7 +253,7 @@ class AddressInfo extends Component {
                                                       onClick={this.clickShowBtn}>Show node address</span>
                                                 {isValidNodeType(nodeType) &&
                                                 <span className="crep">{`${nodeType}`}</span>}
-                                                {!isConnected && <ReportButton address={address}/>}
+                                                {!isConnected && <ReportButton address={public_key}/>}
                                             </td>
                                         </tr>
                                         <tr className="node-addr" style={{display: showNode}}>

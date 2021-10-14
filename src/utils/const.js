@@ -30,8 +30,11 @@ export const INITIAL_STATE = {
 
 export const CONTRACT_STATUS = {
   '0': 'Pending',
-  '1': 'Active',
+  'Pending': 'Pending',
+  'Accepted': 'Accepted',
+  'Active': 'Active',
   '2': 'Rejected',
+  'Rejected': 'Rejected',
   '3': 'Error'
 };
 export const CONTRACT_STATUS_NUM = {
@@ -309,7 +312,6 @@ export const SocialMediaType = [
   'telegram',
   'keybase'
 ];
-
 
 // need some help with this one 
 export const GetAddressForPrepList = {

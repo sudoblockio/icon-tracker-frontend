@@ -12,6 +12,7 @@ class AddressesDetailPage extends Component {
     
     render() {
         const { wallet } = this.props;
+        console.log(this.props, "address info comp props")
         const { loading, error, data } = wallet
         const { tokenList, internalTxCount, claimIScoreCount, hasDelegations, isPrep } = data
         const TABS = [], getList = []

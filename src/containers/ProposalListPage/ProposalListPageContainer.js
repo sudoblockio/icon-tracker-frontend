@@ -4,7 +4,7 @@ import { ProposalListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   setPopup 
-} from '../../redux/store/popup'
+} from '../../redux/actions/popupActions'
 
 function mapStateToProps(state) {
   return {

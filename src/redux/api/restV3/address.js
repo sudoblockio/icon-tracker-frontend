@@ -4,9 +4,9 @@ import { trackerApiInstance } from './config'
 export async function addressList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/address/list`, payload))
+        trackerApi.get(`/api/v1/addresses`)
             .then(result => {
-                resolve(result.data)
+                resolve(result)
             })
             .catch(error => {
                 reject(error)
@@ -17,9 +17,10 @@ export async function addressList(payload) {
 export async function addressInfo(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/address/info`, payload))
+        trackerApi.get(`/api/v1/addresses/details/${payload.address}`)
             .then(result => {
-                resolve(result.data)
+                console.log(result, "addy info result")
+                resolve(result)
             })
             .catch(error => {
                 reject(error)
@@ -58,6 +59,7 @@ export async function addressInternalTxList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
             .then(result => {
+                console.log(result)
                 resolve(result.data)
             })
             .catch(error => {
@@ -77,6 +79,7 @@ export async function addressVotedList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/delegate/list`, payload))
             .then(result => {
+                console.log(result)
                 resolve(result.data)
             })
             .catch(error => {

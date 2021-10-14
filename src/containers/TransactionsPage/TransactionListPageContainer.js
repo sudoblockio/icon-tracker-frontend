@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { TransactionListPage } from '../../components';
-import { txList } from '../../redux/store/transactions'
+import {
+  transactionRecentTx
+} from '../../redux/actions/transactionsActions'
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    transactionRecentTx: payload => dispatch(txList(payload)),
+    transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),
   };
 }
 

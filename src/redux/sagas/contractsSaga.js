@@ -53,7 +53,8 @@ export function* contractListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_LIST_API, action.payload);
-    if (payload.result === '200') {
+    console.log(payload, "contract saga payload")
+    if (payload.status === 200) {
       yield put({ type: AT.contractListFulfilled, payload });
     }
     else {

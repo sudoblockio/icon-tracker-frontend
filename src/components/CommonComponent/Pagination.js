@@ -19,6 +19,8 @@ class Pagination extends Component {
 
   getData = (target) => {
     let { getData, pageNum, maxPageNum } = this.props;
+    console.log(this.props, "target props")
+    console.log(target, "target props")
     pageNum = Number(pageNum);
     maxPageNum = Number(maxPageNum);
     switch (target) {
@@ -32,6 +34,8 @@ class Pagination extends Component {
         break;
       case 'next':
         if (pageNum === maxPageNum) return false;
+        console.log(pageNum+1, "if")
+        console.log(getData, "if")
         getData(pageNum+1);
         break;
       case 'end':
@@ -54,7 +58,6 @@ class Pagination extends Component {
 
   handleKeyPress = (e) => {
     const { getData } = this.props;
-    console.log(getData, "this is getData")
     if (!Number(this.state.pageNum)) return;
     if (e.key === 'Enter') {
       getData(this.state.pageNum)
@@ -62,8 +65,6 @@ class Pagination extends Component {
   }
 
   render() {
-    console.log(this.props, "props from pagination")
-    console.log(this.state, "state from pagination")
     const { maxPageNum } = this.props;
     const { pageNum } = this.state;
     const isFirst = pageNum === 1

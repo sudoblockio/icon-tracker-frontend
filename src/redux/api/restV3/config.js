@@ -1,25 +1,11 @@
 import axios from 'axios';
 
-async function getConfigJsonFile() {
-  try {
-    const response = await fetch('/config.json');
-    const responseJson = await response.json();
-    return responseJson;
-  } catch (e) {
-    console.error(e);
-    return {};
-  }
-}
-
-
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl();
   return axios.create({
     baseURL: apiUrl
   });
 }
-
-
 
 export async function walletApiInstance() {
   const apiUrl = await getWalletApiUrl();
@@ -43,8 +29,8 @@ export async function getTrackerApiUrl() {
         return 'https://trackerdev.icon.foundation';
       // return 'http://10.201.11.74:8081';
       case 'testnet1':
-        // return 'https://bicon.tracker.solidwallet.io';
-      return 'https://explorer.icon.geometry-dev.net';
+        return 'https://bicon.tracker.solidwallet.io';
+      // return 'http://10.201.11.74:8081';
       case 'sejong':
         return 'https://sejong.tracker.solidwallet.io';
       case 'custom':
@@ -57,15 +43,14 @@ export async function getTrackerApiUrl() {
       default:
     }
   }
+
   return '/';
 }
-
-export const tTest = trackerApiInstance()
 
 export async function getWalletApiUrl() {
   const configFile = await getConfigJsonFile();
   if (configFile && configFile.WALLET_API_URL) {
-    return configFile.WALLET_API_URL  ;
+    return configFile.WALLET_API_URL;
   }
 
   if (process.env.REACT_APP_ENV) {
@@ -116,4 +101,15 @@ export async function getIsSoloVersion() {
   }
 
   return false;
+}
+
+async function getConfigJsonFile() {
+  try {
+    const response = await fetch('/config.json');
+    const responseJson = await response.json();
+    return responseJson;
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
 }

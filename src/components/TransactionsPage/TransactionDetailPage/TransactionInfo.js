@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
-import { BigNumber} from 'bignumber.js'
+// import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
-import { getConfirmations } from '../../../utils/utils'
-import { getLastBlock } from '../../../redux/api/restV3/iiss';
 import twitterLogo from '../../../style-custom/twitter-logo.png'
 import {
 	CopyButton,
@@ -20,16 +18,12 @@ import {
 	numberWithCommas,
 	isValidData,
 	dateToUTC,
-	getTimezoneMomentKSTTime,
 	utcDateInfo,
 	beautifyJson,
 	removeQuotes,
 	isHex,
 	isImageData,
-	epochToFromNow,
-	convertHexToValue,
 } from '../../../utils/utils'
-
 
 const COUNT = 10
 
@@ -48,10 +42,6 @@ class TransactionInfo extends Component {
 		}
 
 		this.getDownloadLink(nextProps)
-	}
-
-	async componentDidMount()  {
-
 	}
 
 	getDownloadLink = async (props) => {
@@ -73,8 +63,8 @@ class TransactionInfo extends Component {
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
-		const link = `${url}/transaction/${this.props.transaction.data.hash}`
-		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,block_number=470")
+		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
+		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
 	render() {
@@ -83,45 +73,38 @@ class TransactionInfo extends Component {
 		const { loading, data } = transaction
 		const Contents = () => {
 			if (loading) {
-				return <LoadingComponent block_number='206px' />
+				return <LoadingComponent height='206px' />
 			}
 			else {
 				const {
 					errorMsg,
 					tokenTxList,
 					internalTxList,
-					type,
-					hash,
+					txType,
+					txHash,
 					status,
-					receipt_status,
 					createDate,
-					timestamp,
-					block_number,
-					from_address,
-					to_address,
-					value,
-					step_limit,
+					height,
+					confirmation,
+					fromAddr,
+					toAddr,
+					amount,
+					stepLimit,
 					stepUsedByTxn,
 					stepPrice,
-					data: dataString,
+					dataString,
 					fee,
 					feeUsd,
-					data_type,
+					dataType,
 					targetContractAddr,
 					reportedCount,
-					stepUsedDetails,
-					receipt_step_price,
-					receipt_step_used, 
+					stepUsedDetails
 				} = data
-				console.log(data, "derstepUsedDetail")
-				
-				const confirmation = async (block_number) => await getConfirmations(block_number)
 				const _stepPrice = stepPrice || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
-				const isFail = receipt_status === 'Fail'
-				const isSuccess = Number(receipt_status) === 1
+				const isFail = status === 'Fail'
 				const isErrorMsg = isValidData(errorMsg)
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
@@ -133,40 +116,40 @@ class TransactionInfo extends Component {
 								<table className="table-typeB transaction">
 									<tbody>
 										<tr>
-											<td>hash</td>
+											<td>TxHash</td>
 											<td className={scam ? "scam":""}>
 												{scam?<span className="scam-tag">Reported</span>:""}
-												{hash}
+												{txHash}
 												<span className="copy twit" onClick={this.onTwitterClick}>
 													{/* <i className="img twit-icon"></i> */}
 													<img className='custom-twitter' src={twitterLogo} alt='twitter'/>
-												</span><CopyButton data={hash} title={'Copy hash'} isSpan />
-												<ReportButton address={hash}/>
+												</span><CopyButton data={txHash} title={'Copy TxHash'} isSpan />
+												<ReportButton address={txHash}/>
 											</td>
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}>{isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
+											<td className={isFail ? 'fail' : ''}>{status} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
 										</tr>
 										<tr>
-											<td>Block</td>
-											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation()) : ' -'} Confirmation(s))`}</em></td>
+											<td>Block Height</td>
+											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
-											<td>{new Date(parseInt(timestamp, 16) / 1000).toString()}<em>{epochToFromNow(parseInt(timestamp, 16))}</em></td>
+											<td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={from_address} type={type} targetContractAddr={targetContractAddr} isFrom />
+											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={to_address} internalTxList={internalTxList} type={type} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
-											<td>{`${convertHexToValue(value)} ICX`}</td>
+											<td>{`${convertNumberToText(amount)} ICX`}</td>
 										</tr>
 										{
 											(!!tokenTxList && tokenTxList.length !== 0) &&
@@ -177,22 +160,22 @@ class TransactionInfo extends Component {
 										}
 										<tr>
 											<td>Step Price</td>
-											<td>{BigNumber(convertHexToValue(receipt_step_price)/100).toFixed()} ICX<em>({receipt_step_price/1000000000} Gloop)</em></td>
+											<td>{convertNumberToText(stepPriceIcx)} ICX<em>({convertNumberToText(stepPriceGloop)} Gloop)</em></td>
 										</tr>
 										<tr>
 											<td>Step Limit</td>
-											<td>{convertNumberToText(step_limit)} Steps</td>
+											<td>{convertNumberToText(stepLimit)} Steps</td>
 										</tr>
 										<tr>
 											<td>Fee in Step</td>
 											<td className='trans' style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
-												{convertNumberToText(receipt_step_used)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
+												{convertNumberToText(stepUsedByTxn)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
 												<div>
 													{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
 														const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
 														return (
 															<p key={index}>
-																┗&emsp;<span className='mint'><AddressLink to={to_address} /></span>
+																┗&emsp;<span className='mint'><AddressLink to={stepAddr} /></span>
 																&emsp;{convertNumberToText(_stepUsed)}
 															</p>
 														)
@@ -204,10 +187,10 @@ class TransactionInfo extends Component {
 											<td>Fee in ICX</td>
 											<td>{convertNumberToText(fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
-										{(data_type && dataString) ?
+										{(dataType && dataString) ?
 											<tr>
 												<td>Data</td>
-												<DataCell scam={scam} data_type={data_type} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+												<DataCell scam={scam} dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 											</tr>
 											:
 											null
@@ -269,13 +252,13 @@ class DataCell extends Component {
 	}
 
 	getDataString = () => {
-		const { data_type, dataString } = this.props
+		const { dataType, dataString } = this.props
 		const removed = removeQuotes(dataString)
 		const _isHex = isHex(removed)
 		const toHex = _isHex ? removed : IconConverter.toHex(removed)
 		const toUtf8 = _isHex ? IconConverter.toUtf8(removed) : removed
 		try {
-			if (data_type === 'message') {
+			if (dataType === 'message') {
 				const { viewHex } = this.state
 				if (viewHex && !_isHex) {
 					this.setState({ converted: toHex, toHex })
@@ -298,8 +281,8 @@ class DataCell extends Component {
 	}
 
 	handleClick = () => {
-		const { data_type } = this.props
-		if (data_type === 'message') {
+		const { dataType } = this.props
+		if (dataType === 'message') {
 			this.setState({ viewHex: !this.state.viewHex }, () => {
 				this.getDataString()
 			})
@@ -325,9 +308,9 @@ class DataCell extends Component {
 	}
 
 	render() {
-		const { data_type, scam } = this.props
+		const { dataType, scam } = this.props
 		const { converted, loading, viewHex, toUtf8, imgError } = this.state
-		const isMessage = data_type === 'message'
+		const isMessage = dataType === 'message'
 		const isButton = isMessage && !loading
 		const _isImageData = isMessage && isImageData(toUtf8) && !imgError
 		const buttonTitle = viewHex ? `Convert to ${_isImageData ? 'Image' : 'UTF-8'}` : 'Convert to HEX'
@@ -367,12 +350,12 @@ class TokenTransferCell extends Component {
 		return (
 			<td className="transfer">
 				{tokenTxListSliced.map((tokenTx, index) => {
-					const { from_address, quantity, symbol, to_address, tokenName } = tokenTx
+					const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
 					return (
 						<p key={index}>
 							{quantity} {symbol}<em>({tokenName})</em>
-							&emsp;from &emsp;<AddressLink to={from_address} label={<span className="ellipsis">{from_address}</span>} />
-							&emsp;to&emsp;<AddressLink to={to_address} label={<span className="ellipsis">{to_address}</span>} />
+							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
+							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{toAddr}</span>} />
 						</p>
 					)
 				})}
@@ -408,12 +391,12 @@ class InternalTx extends Component {
 		return (
 			<div>
 				{internalTxListSliced.map((tx, index) => {
-					const { amount, from_address, to_address } = tx
+					const { amount, fromAddr, toAddr } = tx
 					return (
 						<p key={index}>
 							┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-							&emsp;from &emsp;<span><AddressLink to={from_address} /></span>
-							&emsp;to&emsp;<span><AddressLink to={to_address} /></span>
+							&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
+							&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
 						</p>
 					)
 				})}
@@ -428,13 +411,13 @@ class InternalTx extends Component {
 	}
 }
 
-const AddressRow = ({ address, type, internalTxList, targetContractAddr, isFrom, download }) => {
+const AddressRow = ({ address, txType, internalTxList, targetContractAddr, isFrom, download }) => {
 	const isAddress = isValidData(address)
 	if (isAddress) {
 		return (
 			<AddressCell
 				targetAddr={address}
-				type={type}
+				txType={txType}
 				targetContractAddr={targetContractAddr}
 				spanNoEllipsis
 				tdClassName="trans"

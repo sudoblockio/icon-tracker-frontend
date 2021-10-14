@@ -12,10 +12,8 @@ class TransactionDetailPage extends Component {
 
     render() {
         const { transaction } = this.props;
-        console.log(this.props, "the transaction")
         const { loading, error, pending } = transaction
 
-        {console.log(this.props, "intxprops")}
         return (
             <DetailPage
                 {...this.props}

@@ -3,12 +3,30 @@ import { randomUint32, makeUrl } from '../../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
 
+export const awaitGetRecentBlocks = async () => {
+    const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')
+    const data = await bx.json()
+    return data 
+}
+
+export const awaitGetRecentTx = async () => {
+    const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
+    const data = await tx.json()
+    return data 
+}
 
 export async function coinGeckoMarketCap () {
     const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
     const data = await mktcap.json()
     return data[0].market_cap
 }
+
+export async function getAllTransactions () {
+    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
+    const data = await prepnode.json()
+    return data.total_tx;
+}
+
 
 export async function getTotalSupply () {
     const walletApi = await walletApiInstance()
@@ -37,12 +55,6 @@ export async function getTotalSupply () {
             }
         })
     })
-}
-
-export async function getAllTransactions () {
-    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
-    const data = await prepnode.json()
-    return data.total_tx;
 }
 
 export async function getPReps() {
@@ -118,7 +130,6 @@ export async function getIISSInfo() {
 }
 
 export async function getPRep(address) {
-    console.log(address, "which address")
     if (!address) return {}
 
     const walletApi = await walletApiInstance()
@@ -158,7 +169,6 @@ export async function getPRep(address) {
             })
     });
 }
-
 
 export async function getLastBlock() {
     const walletApi = await walletApiInstance()

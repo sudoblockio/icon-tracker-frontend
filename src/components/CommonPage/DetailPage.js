@@ -18,14 +18,8 @@ class DetailPage extends Component {
             on: 0
         }
     }
-    
-    componentWillMount() {
-        console.log(this.props, "url props")
-        this.setInitialData(this.props.url)
-    }
 
-    componentDidMount() {
-        console.log(this.props.url, "url props")
+    componentWillMount() {
         this.setInitialData(this.props.url)
     }
 
@@ -80,7 +74,7 @@ class DetailPage extends Component {
     }
 
     render() {
-        
+        console.log(this.props, "detail page props")
         const { loading, error, pending } = this.props;
         const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending
         
@@ -95,6 +89,7 @@ class DetailPage extends Component {
                 const { InfoComponent, TabsComponent } = this.props
                 return (
                     <div className="content-wrap">
+                        {console.log(this.props, "info props")}
                         <InfoComponent {...this.props}/>
                         <TabsComponent {...this.props} {...this.state} changeTab={this.changeTab}/>
                     </div>

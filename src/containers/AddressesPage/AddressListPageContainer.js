@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { AddressListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { addressList } from '../../redux/store/addresses';
+import { addressList } from '../../redux/actions/addressesActions';
 
 function mapStateToProps(state) {
   return {

@@ -107,6 +107,7 @@ export function* addressVotedListFunc(action) {
 }
 
 export function* addressListFunc(action) {
+
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.addressListFulfilled, payload: { data: [] } });
@@ -114,7 +115,8 @@ export function* addressListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_LIST_API, action.payload);
-    if (payload.result === '200') {
+
+    if (payload.length !== 0 ) {
       yield put({ type: AT.addressListFulfilled, payload: payload });
     }
     else {
@@ -129,10 +131,14 @@ export function* addressListFunc(action) {
 export function* addressInfoFunc(action) {
   try {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
-    if (payload.result === '200') {
+    console.log(payload, "addy info saga")
+    if (payload.status === 200) {
+      console.log(action, "addy info saga action")
       const { address } = action.payload
+      console.log(address, "addy address")
       const { delegations, totalDelegated } = yield call(getDelegation, address)
       const prep = yield call(getPRep, address)
+      console.log(prep, "addy prep call")
       const balance = yield call(getBalance, address)
       const { stake, unstakes } = yield call(getStake, address)
       const { iscore } = yield call(queryIScore, address)
@@ -169,7 +175,7 @@ export function* addressInfoFunc(action) {
         active,
         media,
       }
-      
+      console.log(payload, "addy info saga payload")
       yield put({ type: AT.addressInfoFulfilled, payload: payload });
     }
     else {      

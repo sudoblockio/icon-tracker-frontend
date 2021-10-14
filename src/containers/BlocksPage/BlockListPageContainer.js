@@ -1,20 +1,19 @@
 import { connect } from 'react-redux';
 import { BlockListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { blockList } from '../../redux/store/blocks';
+import { blockList } from '../../redux/actions/blocksActions';
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {
     url: state.router.location,
-    ...state.blocks,
-
+    ...state.blocks
   };
-};
+}
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return {
     blockList: payload => dispatch(blockList(payload)),
   };
-};
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlockListPage));

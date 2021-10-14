@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import { InfoSummary, RecentBlocks, RecentTransactions, SearchInput } from '../../components'
+import { InfoSummary, RecentBlocks, RecentTransactions } from '../../components'
 import { search } from '../../redux/actions/searchActions';
-import { blockList } from '../../redux/store/blocks'
-import { searchBlocks } from '../../redux/store/search'
-import { txList } from '../../redux/store/transactions'
 import { connect } from 'react-redux'
-
 
 class MainPage extends Component {
 
     state = {
-        'value': '',
-        'focused': 'false'
+        value: '',
+        focused: false
     }
+
     input = null
     notFocus = true
     focused = false
@@ -34,9 +31,9 @@ class MainPage extends Component {
     }
 
     componentWillMount() {
-        const payload = {limit: 10}
-        this.props.blockList(payload)
-        this.props.txList(payload)
+        // this.props.getRecentTransactions()
+        // this.props.getBlockList()
+
     }
 
     render() {
@@ -47,7 +44,43 @@ class MainPage extends Component {
                         <div className="content">
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
-                                < SearchInput />
+                                <input id='main-top-search-bar'
+                                    ref={ref => { 
+                                        this.input = ref 
+                                        if (this.input) {
+                                            this.input.onfocus = () => {
+                                                this.focused = true;
+                                            };
+                                            this.input.onblur = () => {
+                                                this.focused = false;
+                                            };
+                                        }
+                                    }}
+                                    type="text"
+                                    className="txt-type-search"
+                                    placeholder="Address, TxHash, Block, SCORE"
+                                    value={this.state.value}
+                                    onKeyDown={this.handleKeyDown}
+                                    onChange={this.handleChange}
+                                />
+                                {/* {!this.state.value && 
+                                <span onMouseDown={() => {
+                                        this.notFocus = this.focused
+                                    }} 
+                                    onMouseUp={e => {
+                                    if (!this.notFocus) {
+                                        this.notFocus = true
+                                        this.input.focus()
+                                    }
+                                }}>
+                                    <i className="img"></i>
+                                </span>} */}
+                                {this.state.value &&
+                                <em onMouseDown={() => {
+                                    this.setState({ value: '' })
+                                }}>
+                                    <i className="img"></i>
+                                </em>}
                             </div>
                         </div>
                     </div>
@@ -63,6 +96,7 @@ class MainPage extends Component {
                     <div className="bg">
                         <div className="wrap-holder">
                             <ul className="content">
+                                {console.log(this.props, "main page props")}
                                 <RecentBlocks {...this.props} />
                                 <RecentTransactions {...this.props} />
                             </ul>
@@ -75,18 +109,12 @@ class MainPage extends Component {
 }
 
 function mapStateToProps(state) {
-        return {
-            blocks: state.blocks.blocks.data,
-            transactions: state.transactions.recentTx.data,
-            redirect: state.search.redirect
-        }
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        search: param => dispatch(searchBlocks(param)),
-        blockList: payload => dispatch(blockList(payload)),
-        txList: payload => dispatch(txList(payload))
+        search: param => dispatch(search(param))
     };
 }
 

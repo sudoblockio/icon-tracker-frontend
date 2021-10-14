@@ -852,7 +852,6 @@ body {
 .home .content-wrap .screen1 .bg {
   width: 100%;
   position: relative;
-  height: 100%;
 }
 .home .content-wrap .screen0 .content {
   font-size: 0;
@@ -4252,7 +4251,6 @@ input[type='text']:focus.over {
   margin: 10px 2px;
 }
 
-
 .content-wrap .search-holder {
   float: right;
   margin-top: -28px;
@@ -4266,7 +4264,7 @@ input[type='text']:focus.over {
   margin-top: 3px;
 }
 .content-wrap .search-holder .search-group {
-  /* top: -30px; */
+  top: -30px;
 }
 
 .content-wrap .search-group.event {
@@ -5949,23 +5947,6 @@ input[type='checkbox']:checked + label {
 }
 .toggle em.noti input[type='checkbox']:checked + label + i._img {
   background-position-x: 0;
-}
-
-/* error messages*/
-.error-holder {
-  position: relative;
-  text-align: left;
-  
-
-}
-
-#error-message {
-  font-size: 10px;
-  padding-top: 5px;
-  padding-left: 2px;
-  color: #fff;
-  text-shadow: none;
-  
 }
 
 /*banner*/

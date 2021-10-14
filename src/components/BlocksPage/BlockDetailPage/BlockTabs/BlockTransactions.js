@@ -5,7 +5,7 @@ import {
 
 class BlockTransactions extends Component {
   render() {
-    {console.log("tx botton props", this.props)}
+    console.log(this.props, "block transaction props")
     return <TxBottom {...this.props}/>
   }
 }

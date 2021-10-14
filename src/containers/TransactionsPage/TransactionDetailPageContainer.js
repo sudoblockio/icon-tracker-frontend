@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import { TransactionDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-// import { transactionEventLogList } from '../../redux/actions/transactionsActions';
-import { transactionInternalTxList, transactionTxDetail, transactionEventLogList } from '../../redux/store/transactions'
+import { 
+  transactionTxDetail,
+  transactionEventLogList,
+  transactionInternalTxList,
+} from '../../redux/actions/transactionsActions';
 
 function mapStateToProps(state) {
-  {console.log(state, "state from tx detail container")}
   return {
     url: state.router.location,
     ...state.transactions

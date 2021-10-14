@@ -1,4 +1,5 @@
 import actionTypes from '../actionTypes/actionTypes';
+import * as deepcopy from 'deepcopy'
 import {
   getState
 } from '../../utils/utils'
@@ -20,7 +21,8 @@ export function transactionsReducer(state = initialState, action) {
     case actionTypes.transactionTxDetailFulfilled: return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'transaction') 
     case actionTypes.transactionTxDetailRejected: return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'transaction') 
 
-    case actionTypes.transactionRecentTx: return getState('ARR', REDUX_STEP.READY, state, action, 'recentTx') 
+    case actionTypes.transactionRecentTx: {
+      return getState('ARR', REDUX_STEP.READY, state, action, 'recentTx')} 
     case actionTypes.transactionRecentTxFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'recentTx') 
     case actionTypes.transactionRecentTxRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'recentTx') 
 

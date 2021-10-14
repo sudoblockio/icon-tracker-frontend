@@ -19,7 +19,7 @@ class SearchTableBody extends Component {
 	render() {
 		const TableRow = () => {
 			const { searchType, data } = this.props
-			console.log(data, "search table data")
+			console.log(this.props, "search table props")
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
 					return (
@@ -29,7 +29,7 @@ class SearchTableBody extends Component {
 							{/* <td>{data.compiler || '-'}</td> */}
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
 							<td>{numberWithCommas(data.txCount)}</td>
-							<td>{data.status}</td>
+							<td>{CONTRACT_STATUS[data.status]}</td>
 							<td>{onlyDate(data.verifiedDate)}</td>
 						</tr>
 					)

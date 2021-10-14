@@ -12,10 +12,9 @@ import {
   IRC_VERSION
 } from '../../utils/const'
 import {
-  // searchData as SEARCH_DATA_API,
+  searchData as SEARCH_DATA_API,
   blockInfo as BLOCK_INFO_API
-} from '../store/blocks'
-import { searchBlocks as SEARCH_DATA_API} from '../store/search'
+} from '../api/restV3'
 
 function* searchFunc(action) {
   try {

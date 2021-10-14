@@ -23,7 +23,6 @@ const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
-const ConfigWebpackPlugin = require("config-webpack");
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
@@ -277,8 +276,7 @@ module.exports = function(webpackEnv) {
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
-        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-
+        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
       ]
     },
     resolveLoader: {
@@ -470,15 +468,6 @@ module.exports = function(webpackEnv) {
       ]
     },
     plugins: [
-      // Gives node_config webpack support as node_config runs at build at therefore, 
-      // needs explicit configuruation to run in runtime, on browser, in 'production', vs localhost
-      // *** !IMPORTANT! This configuation also prevents sensitive env variables from being 
-      // written to the frontend. Without this configuration, env variables directly overwrite
-      // config variables.  !IMPORTANT! *** 
-      // see more: https://github.com/lorenwest/node-config/wiki/Webpack-Usage
-      // Create a custom config object: 
-      // new ConfigWebpackPlugin("myConfig", { numberOfTusks: 3, colorOfTusks: "yellow" })
-      new ConfigWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

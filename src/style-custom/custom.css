@@ -416,7 +416,6 @@
 
 .contents .txt {
     text-align: left;
-    overflow-wrap: break-word;
 }
 
 .table-typeB tr i.img {
@@ -590,7 +589,7 @@ p.prep-causion {
 .home .content-wrap .screen2 .search-group em {
     position: absolute;
     right: 19px;
-    top: 0px;
+    top: 15px;
     width: 20px;
     height: 20px;
     display: inline-block;

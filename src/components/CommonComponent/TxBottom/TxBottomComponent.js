@@ -5,10 +5,10 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 
 class TxBottomComponent extends Component {
     render() {
-        
-        const { txData, txType, goAllTx, hash, tableClassName, noBoxText } = this.props
-        console.log(this.props, "tx bottom props")
+        const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
+
         const { data, listSize, totalSize, loading } = txData
+        console.log(txData, "txData")
 
         const Content = () => {
             if (loading) {
@@ -16,28 +16,18 @@ class TxBottomComponent extends Component {
             } else if (!data || data.length === 0) {
                 return <NoBox text={noBoxText} />
             } else {
-
-                const { from_address, to_address } = data
-
+                const { from_address, to_address } = data[0]
                 return (
                     <div className="contents">
-                        
                         <TxBottomTitle txType={txType} listSize={listSize} totalSize={totalSize} goAllTx={goAllTx} fromAddr={from_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>
-                                    {console.log(txType, "tx Type from compo")}
                                     <TxTableHead txType={txType} />
                                 </thead>
                                 <tbody>
-                                    {data.map((item, index) => (
-                                        console.log(item, "item/index"),
-                                        console.log(index, "zee index")
-                                    ))}
-                                    {/* THIS I WAS [data], keep an eye out for code breaks */}
-                                    {data.map((item, index) => (
-                                        
-                                        <TxTableBody key={index} data={item} txType={txType} address={hash} />
+                                    {(data || []).map((item, index) => (
+                                        <TxTableBody key={index} data={item} txType={txType} address={address} />
                                     ))}
                                 </tbody>
                             </table>

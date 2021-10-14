@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 // import { getMainInfo } from '../../redux/api/restV3/main';
 import { getMainInfo } from '../../redux/api/restV3';
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue } from '../../utils/utils'
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getTotalSupply } from '../../redux/api/restV3/iiss';
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
     LoadingComponent,
 } from '../../components'
 import { POPUP_TYPE } from '../../utils/const'
-import { getTrackerApiUrl, getWalletApiUrl } from '../../redux/api/restV3/config';
+import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
 // import { calcFromLastBlock } from '../../utils/utils';
 
@@ -39,12 +39,9 @@ class GovernancePage extends Component {
 	}
 
 	checkedState = {}
-	// this is also not working
-	getAdditionalData= async (method)=>{
-		console.log(method, "each mthod")
-		const network = await getTrackerApiUrl()
-		const address = GetAddressForPrepList[network]
-		console.log(address, "each addr")
+	getAdditionalData=async method=>{
+		const network=await getTrackerApiUrl()
+		const address=GetAddressForPrepList[network]
 		const params={
 			to:address,
 			dataType:'call',
@@ -53,34 +50,24 @@ class GovernancePage extends Component {
 			}
 		}
 		const response = await icxCall(params);
-		console.log(response, "add data res")
-		return response
-		// return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
+		return response;
+		return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
 	}
 	governanceData=[];
 	sponsorData={}
 	async componentDidMount() {
 		this.governanceData = await this.getAdditionalData('get_PReps');
-		console.log(this.governanceData, "goc data")
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
-		console.log(this.sponsorData, "sponsor")
-		// const { tmainInfo } = await getMainInfo()
 
-		// get this from new endpoint ...
-		// RPC call:
-		const test = await getPReps()
-		console.log(test, "testing here")
+		// const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
-
-		// coming from our REST:
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
-		// GET PUBLIC TREASURY*************
-		// const  publicTreasury  = 4930167.9322
+		// const { publicTreasury } = tmainInfo || {}
 		const icxSupply = await getTotalSupply()
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
@@ -94,10 +81,9 @@ class GovernancePage extends Component {
 		})
 		const blackPrep = (_blackPrep || []).map(bp => {
 			bp.grade = 3
-			bp.status = bp.penalty
+			bp.status = bp.penaltyStatus
 			return bp
 		})
-
 
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
@@ -194,19 +180,12 @@ class GovernancePage extends Component {
 		return result
 	}
 	getSponsorCount=address=>{
-		let sponsors
-		if (this.sponsorData.data.result[address] !== undefined) {
-			sponsors = Number(this.sponsorData.data.result[address])
-		} else {
-			sponsors =  0
-		}
-		return sponsors
+		return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
 	}
 	render() {
-		
 		const {
 			totalSupply,
-			publicTreasury,
+			// publicTreasury,
 			totalStaked,
 			totalVoted,
 			irep,
@@ -224,18 +203,15 @@ class GovernancePage extends Component {
 			restChecked,
 			blackChecked
 		} = this.state
-		console.log(this.state, "gov state")
 
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
-		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100 
-		const list = blackChecked ? blackPrep : allPrep
-
-		// const list = blackChecked ? blackPrep : allPrep.filter(p => {
-		// 	return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
-		// })
+		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
+		
+		const list = blackChecked ? blackPrep : allPrep.filter(p => {
+			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+		})
 
 		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
-		console.log(searched, "list")
 
 		return (
 			<div className="content-wrap governance">
@@ -253,8 +229,7 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury <em>(ICX)</em></p>
-									{console.log(this.state, "yelluerr?")}
-									<p><span>{convertNumberToText(this.state.publicTreasury)}</span></p>
+									<p><span>{0}</span></p>
 								</div>
 							</div>
 							<ul>
@@ -349,7 +324,6 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
-										
 										{searched.map((prep, index) => (
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
@@ -417,13 +391,14 @@ class TableRow extends Component {
 	onError = () => {
 		this.setState({ logoError: true })
 	}
-
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
 
 	render() {
-		const { logoError } = this.state
+		const {
+			logoError
+		} = this.state
 
 		const {
 			totalVoted,
@@ -435,59 +410,26 @@ class TableRow extends Component {
 			governanceStatus,
 			sponsorCount
 		} = this.props
-		console.log(this.props, "guvnuh props")
 
-		// all available v3 blocks
 		const { 
+			rank, 
+			logo_256, 
+			logo_svg, 
+			name,
+			address,
+			grade,
 			totalBlocks,
 			validatedBlocks,
-			active,
-			address,
-			api_endpoint,
-			balance,
-			city,
-			country,
-			created_block,
-			created_timestamp,
-			delegated,
-			details,
-			email,
-			facebook,
-			github,
-			grade,
-			irep,
-			irep_updated_block_height,
-			keybase,
-			last_updated_block,
-			last_updated_timestamp,
-			logo_256,
-			logo_1024,
-			logo_svg,
-			name,
-			node_address,
-			p2p_endpoint,
-			penalty,
-			rank,
-			reddit,
-			server_city,
-			server_country,
-			server_type,
 			stake,
-			status,
-			steemit,
-			telegram,
-			total_blocks,
-			twitter,
-			unstake,
-			unvalidated_sequence_blocks,
-			validated_blocks,
-			voted,
-			voting_power,
-			website,
-			wechat,
-			youtube,
+			delegated,
+			// irep,
+			// irepUpdatedBlockHeight,
+			active,
+			logo,
+			// balance,
+			// unstake,
+			status
 		} = prep
-
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(validatedBlocks) / Number(totalBlocks) * 100).toFixed(2)}%`)
@@ -495,7 +437,7 @@ class TableRow extends Component {
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
-		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted /* * 100*/
+		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
 		const badge = this.getBadge(grade, active, status)
 		// const rank = index + 1
 
@@ -505,8 +447,9 @@ class TableRow extends Component {
 				<td className={(grade > 2 || grade === '0x3') ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
-						{/* <li><img src="/default.jpg" onError={this.onError} style={ this.state.loaded ? {display: "none"} : {}} loading="lazy" alt='logo'/></li> */}
+						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
 						<li><img src={logo_svg ? logo_svg : logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} /*loading="lazy"*/ alt='logo'/></li>
+
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
