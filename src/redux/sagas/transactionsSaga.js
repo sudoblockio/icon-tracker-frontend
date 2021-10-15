@@ -52,7 +52,7 @@ function* transactionTxDetailFunc(action) {
 
     yield put(transactionEventLogList({ txHash: action.payload.txHash, count: 10 }))
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload); 
-
+    console.log(trackerData, "the tracker data")
 
     if (trackerData.result === "200") {      
       let { stepUsedDetails } = trackerData.data
@@ -118,15 +118,15 @@ function* transactionEventLogListFunc(action) {
 }
 
 function* transactionInternalTxListFunc(action) {
-  console.log(action, "int txt list action")
+
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.transactionInternalTxListFulfilled, payload: { data: [] } });
       return
     }
     const payload = yield call(TRANSACTION_INTERNAL_TX_LIST_API, action.payload.txHash);
-    console.log(payload, "int txt")
-    if (payload.result === '200') {
+
+    if (payload.status === 200) {
       yield put({ type: AT.transactionInternalTxListFulfilled, payload: payload });
     } else {
       throw new Error();
