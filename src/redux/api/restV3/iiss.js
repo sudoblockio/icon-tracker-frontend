@@ -2,6 +2,13 @@ import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
+export const getSocialMedia = async (address) => {
+    const preps = await fetch('https://explorer.icon.geometry-dev.net/api/v1/preps')
+    const prepList = await preps.json()
+    console.log(prepList[0], "function test")
+}
+
+console.log(getSocialMedia('hx0b047c751658f7ce1b2595da34d57a0e7dad357d'), "well? ")
 
 export const awaitGetRecentBlocks = async () => {
     const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')

@@ -430,6 +430,7 @@ class TableRow extends Component {
 			// unstake,
 			status
 		} = prep
+		console.log(prep, "brit")
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(validatedBlocks) / Number(totalBlocks) * 100).toFixed(2)}%`)

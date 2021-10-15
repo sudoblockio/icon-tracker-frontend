@@ -81,13 +81,11 @@ class AddressInfo extends Component {
         const {notification, icxMore, tokenMore, showNode} = this.state
 
         const {wallet, walletAddress} = this.props
-        console.log(this.props, "walletAddress1")
-        console.log(walletAddress, "walletAddress2")
         const {loading, data, error} = wallet
         const {
             isPrep,
             prep,
-            media,
+            // media,
             active,
             available,
             staked,
@@ -107,10 +105,21 @@ class AddressInfo extends Component {
             // irepUpdateBlockHeight,
             lastGenerateBlockHeight,
             website,
+            twitter,
+            wechat, 
+            youtube,
+            telegram,
+            steemit,
+            reddit,
+            keybase,
+            github,
+            facebook,
             grade,
             status
         } = prep || {}
-        console.log(prep, "the preps")
+        
+        const media = {twitter, wechat, youtube, telegram, steemit, reddit, keybase, github, facebook}
+        console.log(media, "social media")
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
             unstakes.map((list, idx) => {
@@ -191,6 +200,7 @@ class AddressInfo extends Component {
                                                     const mediaValue = media[type]
 
                                                     if (!mediaValue) {
+                                                        console.log("no media value")
                                                         return null
                                                     }
 
