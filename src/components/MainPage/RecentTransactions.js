@@ -56,7 +56,7 @@ class RecentTransactions extends Component {
                                         <p className="d">
                                             Fee
                                             <em>
-                                                {convertNumberToText(transaction_fee)} ICX
+                                                {convertHexToValue(transaction_fee)} ICX
                                             </em>
                                         </p>
                                     </li>
