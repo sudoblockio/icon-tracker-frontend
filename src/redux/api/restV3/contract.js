@@ -19,9 +19,11 @@ export async function contractList(payload) {
 export async function contractInfo(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/info', payload))
+    console.log(payload, "contract info payload, ")
+    trackerApi.get(makeUrl(`/api/v1/contracts/${payload.addr}`, payload))
       .then(result => {
-        resolve(result.data)
+        console.log(result)
+        resolve(result)
       })
       .catch(error => {
         reject(error)
@@ -30,6 +32,7 @@ export async function contractInfo(payload) {
 }
 
 export async function contractDetail(payload) {
+  console.log(payload, "contract detail payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/v3/contract/detail', payload))
@@ -95,6 +98,7 @@ export async function contractInternalTxList(payload) {
 }
 
 export async function getScoreStatus(address) {
+  console.log(address, "address from getScoreStatus")
   const walletApi = await walletApiInstance()
   return new Promise(resolve => {
     const param = {
@@ -114,6 +118,7 @@ export async function getScoreStatus(address) {
     }
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
+        console.log(response.data, "yellow")
         resolve(response.data.result);
       })
       .catch(error => {

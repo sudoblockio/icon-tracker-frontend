@@ -12,6 +12,7 @@ class ContractDetailPage extends Component {
 
     render() {
         const { contract } = this.props;
+        console.log(this.props, "contract props")
         const { loading, error } = contract
         return (
             <DetailPage
