@@ -6,8 +6,6 @@ export async function transactionRecentTx(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/api/v1/transactions', payload))
       .then(result => {
-        console.log(result.headers, "does this exist ")
-        console.log(result, "the whole results")
         resolve(result)
       })
       .catch(error => {
@@ -18,7 +16,7 @@ export async function transactionRecentTx(payload) {
 }
 
 export async function transactionTxDetail(payload) {
-  console.log(payload, "tx detail payload")
+  
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/transactions/details/${payload.txHash}`)
@@ -36,7 +34,7 @@ export async function transactionEventLogList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
       .then(result => {
-        console.log(result, "event results")
+        
         resolve(result)
       })
       .catch(error => {

@@ -273,7 +273,6 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
-    console.log(result, "url maker")
     return result
 }
 
@@ -320,7 +319,6 @@ export function tokenText(name, symbol, address, spanClassName) {
 
 export function getArrayState(step, state, action, dataType) {
     const { payload } = action
-    console.log(action, "get state")
     switch (step) {
         case REDUX_STEP.READY:
             if (payload !== undefined ){
@@ -559,7 +557,6 @@ export function beautifyJson(data, tab) {
         }
         return JSON.stringify(_data, null, tab)
     } catch (e) {
-        console.log(e)
         return ''
     }
 }

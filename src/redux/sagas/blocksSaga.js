@@ -17,7 +17,6 @@ function* watchBlockInfo() { yield takeLatest(AT.blockInfo, blockInfoFunc) }
 function* watchBlockTxList() { yield takeLatest(AT.blockTxList, blockTxListFunc) }
 
 function* blockListFunc(action) {
-  console.log(action, "block list action")
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.blockListFulfilled, payload: { data: [] } });
@@ -50,7 +49,7 @@ function* blockInfoFunc(action) {
 }
 
 function* blockTxListFunc(action) {
-  console.log(action, "block tx action")
+
   try {
     if (action.status === 200) {
       yield put({ type: AT.blockTxListFulfilled, payload: { data: [] } });
@@ -58,7 +57,6 @@ function* blockTxListFunc(action) {
     }
 
     const payload = yield call(BLOCK_TX_LIST_API, action.payload);
-    console.log(payload, "block tx payload")
     if (payload.status === 200) {
       yield put({type: AT.blockTxListFulfilled, payload: payload});
     } else {

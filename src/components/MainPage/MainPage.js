@@ -15,10 +15,11 @@ class MainPage extends Component {
     focused = false
 
     handleChange = e => {
+        console.log(this.props.search, "Search props")
         const { value } = e.target
         this.setState({ value })
     }
-
+    
     handleKeyDown = e => {
         if (e.key === 'Enter') {
             this.props.search(this.state.value)
@@ -31,6 +32,7 @@ class MainPage extends Component {
     }
 
     componentWillMount() {
+        console.log(this.props.search, "Search props")
         // this.props.getRecentTransactions()
         // this.props.getBlockList()
 
