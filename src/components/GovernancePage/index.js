@@ -284,11 +284,11 @@ class GovernancePage extends Component {
 									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
 								</span>
-								<span className="blacklist">
-									<input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/>
+								{/* <span className="blacklist"> */}
+									{/* <input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/> */}
 									{/* <label htmlFor="cbox-04" className="label _img">Unregistered ({blackPrep.length})</label>									 */}
-									<label htmlFor="cbox-04" className="label _img">Unregistered</label>									
-								</span>
+									{/* <label htmlFor="cbox-04" className="label _img">Unregistered</label>									 */}
+								{/* </span> */}
 								<span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
 							<div className="table-box">
