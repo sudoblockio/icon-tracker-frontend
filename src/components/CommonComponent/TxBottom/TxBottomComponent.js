@@ -8,6 +8,7 @@ class TxBottomComponent extends Component {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
         {console.log(this.props, "event props")}
         const { data, listSize, totalSize, loading } = txData
+        console.log(txData, "what is the list size>")
 
         const Content = () => {
             if (loading) {
@@ -18,7 +19,7 @@ class TxBottomComponent extends Component {
                 const { from_address, to_address } = data[0]
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType} listSize={listSize} totalSize={totalSize} goAllTx={goAllTx} fromAddr={from_address} toAddr={to_address} />
+                        <TxBottomTitle txType={txType} listSize={data.length} totalSize={totalSize} goAllTx={goAllTx} fromAddr={from_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>

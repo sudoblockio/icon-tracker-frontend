@@ -449,8 +449,8 @@ class TableRow extends Component {
 					<ul>
 						<li>{badge}</li>
 						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
-						<li><img src={logo_svg ? logo_svg : logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} /*loading="lazy"*/ alt='logo'/></li>
-
+						<li><img src={logo_256 ? 'https://img.solidwallet.io/100/' + logo_256 : 'https://img.solidwallet.io/100/' + logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} /*loading="lazy"*/ alt='logo'/></li>
+						
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
