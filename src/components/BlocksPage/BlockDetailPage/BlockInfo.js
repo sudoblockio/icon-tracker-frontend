@@ -98,10 +98,10 @@ class BlockInfo extends Component {
                                                 <td>Prev Hash</td>
                                                 <td>{parent_hash ? <BlockLink to={number - 1} label={parent_hash} /> : '-'}</td>
                                             </tr>
-                                            <tr>
+                                             {/* <tr>
                                                 <td>Block Size</td>
                                                 <td>{numberWithCommas(blockSize)} bytes</td>
-                                            </tr>
+                                            </tr> */}
                                             <tr>
                                                 <td>Amount</td>
                                                 <td>{convertNumberToText(transaction_amount)} ICX</td>
