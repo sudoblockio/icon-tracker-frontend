@@ -37,7 +37,7 @@ export async function transactionEventLogList(payload) {
     trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
       .then(result => {
         console.log(result, "event results")
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

@@ -16,16 +16,17 @@ class ContractInfo extends Component {
 
     render() {
         const { contract } = this.props
-
         const { loading, data } = contract
         const test = data[0]
-        let address, balance, createTx, creator, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
+        let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                test ? { address, balance, createTx, creator, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount } = test : console.log("no test address")
-                const isCreator = isValidData(creator)
+                
+                test ? { address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount } = test : console.log("no test address")
+                console.log(test, "yeller")
+                const isCreator = isValidData(owner_address)
                 const isCreateTx = isValidData(createTx)
                 const scam = reportedCount >= 100 ? true : false
                 const { availableDeposit, availableVirtualStep } = depositInfo || {}
@@ -70,7 +71,8 @@ class ContractInfo extends Component {
                                                                 this.onMouseOut('address')
                                                             }}
                                                         >
-                                                            <AddressLink to={creator} />
+                                                            {console.log(owner_address, "??????????")}
+                                                            <AddressLink to={owner_address} />
                                                         </span>
                                                         <em>at Txn</em>
                                                         <span

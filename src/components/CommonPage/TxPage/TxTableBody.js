@@ -252,17 +252,19 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
+					console.log(JSON.stringify(data))
 					return (
 						<tr>
-							<td>{data.eventLog}</td>
+							<td>{`${JSON.stringify(data.address)}, ${JSON.stringify(data.indexed)},${JSON.stringify(data.data)}` }</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
+					{console.log(data, "int tx data")}
 					return (
 						<tr>
 							{/* <td>-</td> */}
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.targetContractAddr} />
-							<AmountCell amount={data.amount} symbol="ICX" />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.to_address} />
+							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							{/* <td>-</td> */}
 						</tr>
 					)

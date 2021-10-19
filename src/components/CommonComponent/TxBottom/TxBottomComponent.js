@@ -6,7 +6,7 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 class TxBottomComponent extends Component {
     render() {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
-
+        {console.log(this.props, "event props")}
         const { data, listSize, totalSize, loading } = txData
 
         const Content = () => {

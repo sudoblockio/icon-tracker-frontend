@@ -32,7 +32,6 @@ function* transactionRecentTxFunc(action) {
       return
     }
     const payload = yield call(TRANSACTION_RECENT_TX_API, action.payload);
-    console.log(payload, "new payload transaction")
     if (payload.status === 200) {
       yield put({ type: AT.transactionRecentTxFulfilled, payload: payload });
     } else {
@@ -47,14 +46,11 @@ function* transactionRecentTxFunc(action) {
 
 function* transactionTxDetailFunc(action) {
   let trackerData, resultData, byHashData, data
-
   try {
-
     yield put(transactionEventLogList({ txHash: action.payload.txHash, count: 10 }))
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload); 
-    console.log(trackerData, "the tracker data")
 
-    if (trackerData.result === "200") {      
+    if (trackerData.status === 200) {      
       let { stepUsedDetails } = trackerData.data
       if (stepUsedDetails) {
         trackerData.data.stepUsedDetails = JSON.parse(stepUsedDetails)
@@ -63,7 +59,6 @@ function* transactionTxDetailFunc(action) {
         const response = yield call(GET_TRANSACTION_RESULT_NOT_SDK_API, action.payload.txHash);
         trackerData.data.stepUsedDetails = response.stepUsedDetails
       }
-
       yield put({ type: AT.transactionTxDetailFulfilled, payload: trackerData });
       return
     }
@@ -107,7 +102,7 @@ function* transactionEventLogListFunc(action) {
     }
 
     const payload = yield call(TRANSACTION_EVENT_LOG_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.transactionEventLogListFulfilled, payload: payload });
     } else {
       throw new Error();

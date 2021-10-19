@@ -138,6 +138,7 @@ class SearchPage extends Component {
         this.setState({ keyword: nextSearch }, () => {
             const { status } = this.state
             const count = this.getCount()
+            // lean on the make url function but OLD error handling:
             const url = this.makeUrl(1, { count, status, keyword: nextSearch })
             this.props.history.push(url)
         })

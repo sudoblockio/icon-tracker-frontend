@@ -7,7 +7,7 @@ export async function contractList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/api/v1/contracts', payload))
       .then(result => {
-        console.log(result.headers, "contract result")
+      
         resolve(result)
       })
       .catch(error => {
@@ -35,7 +35,7 @@ export async function contractDetail(payload) {
   console.log(payload, "contract detail payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/detail', payload))
+    trackerApi.get(makeUrl('/api/v1/contracts/detail', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -48,7 +48,7 @@ export async function contractDetail(payload) {
 export async function contractTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/txList', payload))
+    trackerApi.get(makeUrl('/api/v1/contracts/txList', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -118,7 +118,6 @@ export async function getScoreStatus(address) {
     }
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log(response.data, "yellow")
         resolve(response.data.result);
       })
       .catch(error => {
