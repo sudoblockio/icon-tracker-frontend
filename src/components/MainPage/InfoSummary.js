@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
 import { getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss'
+import { getSupplyMetrics } from '../../redux/api/restV3/main'
 
 class InfoSummary extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class InfoSummary extends Component {
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
         const allTransactions = await getAllTransactions()
-        this.setState({ isSolo, totalSupply, marketCap, allTransactions })
+        const supplyMetrics = await getSupplyMetrics()
+        this.setState({ isSolo, totalSupply, marketCap, allTransactions, supplyMetrics })
     }
 
     render() {
@@ -23,6 +25,7 @@ class InfoSummary extends Component {
         const { icxCirculationy } = tmainInfo || {}
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
         const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
+        const icxCirculationStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
         return (
             <Fragment>
                 <li>
@@ -43,7 +46,7 @@ class InfoSummary extends Component {
                     <div>
                         <span className="icx"><i className="img"></i></span>
                         <p>ICX Circulation</p>
-                        <p>{convertNumberToText(icxCirculationy, 0)}</p>									
+                        <p>{numberWithCommas(icxCirculationStr)}</p>									
                     </div>
                 </li>
                 <li>

@@ -6,6 +6,7 @@ import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList, getTotalSupply } from '../../redux/api/restV3/iiss';
+import { getSupplyMetrics } from '../../redux/api/restV3/main'
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
     LoadingComponent,
@@ -69,6 +70,7 @@ class GovernancePage extends Component {
 
 		// const { publicTreasury } = tmainInfo || {}
 		const icxSupply = await getTotalSupply()
+		const supplyMetrics = await getSupplyMetrics()
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
@@ -99,7 +101,7 @@ class GovernancePage extends Component {
 		this.setState({ 
 			loading: false,
 			totalSupply, 
-			// publicTreasury,
+			supplyMetrics,
 			totalStaked,
 			totalVoted,
 			irep,
@@ -204,6 +206,7 @@ class GovernancePage extends Component {
 			blackChecked
 		} = this.state
 
+		const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 		

@@ -25,3 +25,16 @@ export async function getMainChart() {
       })
   })
 }
+
+export async function getSupplyMetrics() {
+  const trackerApi = await trackerApiInstance()
+  return new Promise((resolve, reject) => {
+    trackerApi.get('/api/v1/metrics/supply')
+      .then(result => {
+        resolve(result)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
