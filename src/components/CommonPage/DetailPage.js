@@ -74,7 +74,7 @@ class DetailPage extends Component {
     }
 
     render() {
-        console.log(this.props, "detail page props")
+        
         const { loading, error, pending } = this.props;
         const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending
         
@@ -89,7 +89,7 @@ class DetailPage extends Component {
                 const { InfoComponent, TabsComponent } = this.props
                 return (
                     <div className="content-wrap">
-                        {console.log(this.props, "info props")}
+                        
                         <InfoComponent {...this.props}/>
                         <TabsComponent {...this.props} {...this.state} changeTab={this.changeTab}/>
                     </div>

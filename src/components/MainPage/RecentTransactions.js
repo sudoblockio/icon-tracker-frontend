@@ -18,7 +18,7 @@ class RecentTransactions extends Component {
     render() {
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
-        console.log(list, "recent txt list")
+        
         return (
             <li className="right">
                 <p className="title">Transactions</p>

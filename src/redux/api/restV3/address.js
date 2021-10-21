@@ -1,6 +1,8 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 
+
+
 export async function addressList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
@@ -22,7 +24,7 @@ export async function addressInfo(payload) {
                 resolve(result)
             })
             .catch(error => {
-                console.log(error, "the address info saga error")
+                
                 reject(error)
             })
     })
@@ -55,12 +57,11 @@ export async function addressTokenTxList(payload) {
 }
 
 export async function addressInternalTxList(payload) {
-    console.log("rheannone")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/transactions/internal/address/${payload.address}`)
             .then(result => {
-                console.log(result, "addy int tx results")
+
                 resolve(result)
             })
             .catch(error => {
@@ -71,7 +72,7 @@ export async function addressInternalTxList(payload) {
 
 export async function addressVotedList(payload) {
     const trackerApi = await trackerApiInstance()
-
+   
     if (payload.address) {
         payload.prep = payload.address
         delete payload.address
@@ -80,7 +81,7 @@ export async function addressVotedList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`/v3/iiss/delegate/list`, payload))
             .then(result => {
-                console.log(result)
+                
                 resolve(result.data)
             })
             .catch(error => {

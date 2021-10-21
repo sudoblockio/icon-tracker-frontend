@@ -2,7 +2,6 @@ import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 
 export async function searchData(payload) {
-    console.log(payload, "search data payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         

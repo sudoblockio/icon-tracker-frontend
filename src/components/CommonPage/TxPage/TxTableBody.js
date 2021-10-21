@@ -124,7 +124,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_INTERNAL_TX:
-					console.log(data, "Address int tx datat")
+					
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
@@ -253,14 +253,14 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
-					console.log(JSON.stringify(data))
+					
 					return (
 						<tr>
 							<td>{`${JSON.stringify(data.address)}, ${JSON.stringify(data.indexed)},${JSON.stringify(data.data)}` }</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
-					{console.log(data, "int tx data")}
+					
 					return (
 						<tr>
 							{/* <td>-</td> */}

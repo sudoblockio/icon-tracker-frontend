@@ -6,7 +6,7 @@ import { blockList } from '../../redux/actions/blocksActions'
 import { transactionRecentTx } from '../../redux/actions/transactionsActions'
 
 function mapStateToProps(state) {
-  {{console.log(state, "containter stats")}}
+  
   return state.mainPage;
 }
 

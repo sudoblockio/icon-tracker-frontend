@@ -92,7 +92,8 @@ export function* addressVotedListFunc(action) {
       return
     }
 
-    const payload = yield call(ADDRESS_VOTED_LIST, action.payload);
+    const payload = yield call(ADDRESS_VOTED_LIST, action.payload.address);
+
     if (payload.status === 200) {
       yield put({ type: AT.addressVotedListFulfilled, payload: payload });
     }
@@ -203,7 +204,7 @@ export function* addressTxListFunc(action) {
 }
 
 export function* addressInternalTxListFunc(action) {
-  console.log("here")
+
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.addressInternalTxListFulfilled, payload: { data: [] } });

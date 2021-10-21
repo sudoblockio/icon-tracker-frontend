@@ -17,7 +17,7 @@ import {
 } from '../api/restV3'
 
 function* searchFunc(action) {
-  console.log("coffee")
+
   try {
     const { payload } = action
     const commaRemoved = payload.replace(/,/g, "")
@@ -25,7 +25,7 @@ function* searchFunc(action) {
       throw new Error();
     }
     else if (isHxAddress(payload)) {
-      console.log(payload, "isHxAddress")
+
       yield put(routerActions.push(`/address/${payload}`));
     }
     else if (isCxAddress(payload)) {

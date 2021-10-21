@@ -6,7 +6,7 @@ import { numberWithCommas } from '../../../utils/utils'
 class SearchTableDesc extends Component {
     render() {
         const { searchType, listSize } = this.props
-        console.log(this.props, "search table desc props")
+        
 
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)

@@ -15,7 +15,7 @@ class MainPage extends Component {
     focused = false
 
     handleChange = e => {
-        console.log(this.props.search, "Search props")
+        
         const { value } = e.target
         this.setState({ value })
     }
@@ -98,7 +98,7 @@ class MainPage extends Component {
                     <div className="bg">
                         <div className="wrap-holder">
                             <ul className="content">
-                                {console.log(this.props, "main page props")}
+                                
                                 <RecentBlocks {...this.props} />
                                 <RecentTransactions {...this.props} />
                             </ul>

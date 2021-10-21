@@ -13,10 +13,10 @@ export async function icxGetScore(params) {
       params: params,
       id: randomUint32()
     }
-    console.log(JSON.stringify(param))
+ 
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log(response)
+    
         resolve(response);
       })
       .catch(error => {
@@ -35,7 +35,7 @@ export async function icxGetScore(params) {
 }
 
 export async function icxCall(params) {
-  console.log(params, "icx call params")
+
   const walletApi = await walletApiInstance()
   return new Promise(resolve => {
     const param = {
@@ -44,10 +44,10 @@ export async function icxCall(params) {
       params: params,
       id: randomUint32()
     }
-    console.log(JSON.stringify(param))
+
     walletApi.post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log(response)
+
         resolve(response);
       })
       .catch(error => {

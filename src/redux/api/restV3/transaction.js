@@ -45,7 +45,6 @@ export async function transactionEventLogList(payload) {
 
 export async function transactionInternalTxList(payload) {
   const trackerApi = await trackerApiInstance()
-  console.log(payload, "int txt payload")
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/transactions/internal/${payload}`)
       .then(result => {

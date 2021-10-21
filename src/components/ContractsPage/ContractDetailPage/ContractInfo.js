@@ -24,8 +24,7 @@ class ContractInfo extends Component {
                 return <LoadingComponent height="206px" />
             } else {
                 
-                test ? { address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount } = test : console.log("no test address")
-                console.log(test, "yeller")
+
                 const isCreator = isValidData(owner_address)
                 const isCreateTx = isValidData(createTx)
                 const scam = reportedCount >= 100 ? true : false
@@ -71,7 +70,7 @@ class ContractInfo extends Component {
                                                                 this.onMouseOut('address')
                                                             }}
                                                         >
-                                                            {console.log(owner_address, "??????????")}
+                                                           
                                                             <AddressLink to={owner_address} />
                                                         </span>
                                                         <em>at Txn</em>

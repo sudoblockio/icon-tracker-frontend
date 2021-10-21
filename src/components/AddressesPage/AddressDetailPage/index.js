@@ -13,7 +13,7 @@ class AddressesDetailPage extends Component {
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount, transaction_count, claimIScoreCount, hasDelegations, isPrep } = data
+        const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations, isPrep } = data
         console.log(data, "int tx address data")
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
@@ -40,7 +40,7 @@ class AddressesDetailPage extends Component {
                 this.props.addressDelegationList({ address })
             })
         }
-        if (isPrep) {
+        if (is_prep) {
             TABS.push(ADDRESS_TABS[4])
             getList.push(address => {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
