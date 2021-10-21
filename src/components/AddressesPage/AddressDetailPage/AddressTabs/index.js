@@ -17,13 +17,15 @@ import {
 
 class WalletTabs extends Component {
     render() {
+        {console.log(this.props, "wallet tabs props")}
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
-        const { address, tokenList, internalTxCount, claimIScoreCount } = data
+        const { address, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount } = data
+        console.log(data, "wallet tabs data")
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-        if (internalTxCount && Number(internalTxCount) !== 0) {
+        if (transaction_count && Number(transaction_count) !== 0) {
             TABS.push(ADDRESS_TABS[1])
         }
         if (tokenList && tokenList.length !== 0) {
@@ -32,16 +34,17 @@ class WalletTabs extends Component {
         if (hasDelegations) {
             TABS.push(ADDRESS_TABS[3])
         }
-        if (isPrep) {
+        if (is_prep) {
             TABS.push(ADDRESS_TABS[4])
         }
-        if (claimIScoreCount && Number(claimIScoreCount) !== 0) {
+        if (iscore && Number(iscore) !== 0) {
             TABS.push(ADDRESS_TABS[5])
         }
-        
+        console.log(this.props, "tab table")
         return (
             <TabTable
                 {...this.props}
+                
                 TABS={TABS}
                 on={on}
                 loading={loading}

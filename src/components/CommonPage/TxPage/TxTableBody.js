@@ -124,13 +124,14 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_INTERNAL_TX:
+					console.log(data, "Address int tx datat")
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height} />
-							<DateCell date={data.createDate} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={address} />
-							<AmountCell amount={data.amount} symbol="ICX" />
+							<TxHashCell isError={isError} txHash={data.hash} />
+							<BlockCell height={data.block_number} />
+							<DateCell date={data.block_timestamp} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} />
+							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:

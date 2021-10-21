@@ -55,12 +55,13 @@ export async function addressTokenTxList(payload) {
 }
 
 export async function addressInternalTxList(payload) {
+    console.log("rheannone")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl('/v3/address/internalTxList', payload))
+        trackerApi.get(`/api/v1/transactions/internal/address/${payload.address}`)
             .then(result => {
-                console.log(result)
-                resolve(result.data)
+                console.log(result, "addy int tx results")
+                resolve(result)
             })
             .catch(error => {
                 reject(error)

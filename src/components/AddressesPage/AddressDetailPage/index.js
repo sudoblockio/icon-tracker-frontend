@@ -13,15 +13,16 @@ class AddressesDetailPage extends Component {
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount, claimIScoreCount, hasDelegations, isPrep } = data
-        console.log(data, "isPrep function")
+        const { tokenList, internalTxCount, transaction_count, claimIScoreCount, hasDelegations, isPrep } = data
+        console.log(data, "int tx address data")
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
-        
-        if (internalTxCount && Number(internalTxCount) !== 0) {
+        // NEED SOMETHING BESIDES TRANSACTION COUNT *** 
+        if (transaction_count && Number(transaction_count) !== 0) {
+            console.log("hitting the first getList")
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })

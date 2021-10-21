@@ -38,7 +38,7 @@ function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, ad
 export function* addressRewardListFunc(action) {
   try {
     const payload = yield call(ADDRESS_REWARD, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.addressRewardListFulfilled, payload: payload });
     }
     else {
@@ -93,7 +93,7 @@ export function* addressVotedListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_VOTED_LIST, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.addressVotedListFulfilled, payload: payload });
     }
     else {
@@ -203,6 +203,7 @@ export function* addressTxListFunc(action) {
 }
 
 export function* addressInternalTxListFunc(action) {
+  console.log("here")
   try {
     if (action.payload.count === 0) {
       yield put({ type: AT.addressInternalTxListFulfilled, payload: { data: [] } });
@@ -210,7 +211,7 @@ export function* addressInternalTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_INTERNAL_TX_LIST, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.addressInternalTxListFulfilled, payload: payload });
     }
     else {
