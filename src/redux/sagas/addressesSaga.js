@@ -131,7 +131,6 @@ export function* addressListFunc(action) {
 export function* addressInfoFunc(action) {
   try {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
-    console.log(payload, "addy info saga")
     if (payload.status === 200) {
       const { address } = action.payload
       const { delegations, totalDelegated } = yield call(getDelegation, address)
@@ -191,7 +190,7 @@ export function* addressTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_TX_LIST, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.addressTxListFulfilled, payload: payload });
     }
     else {

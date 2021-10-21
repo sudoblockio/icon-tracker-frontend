@@ -12,9 +12,9 @@ class AddressesDetailPage extends Component {
     
     render() {
         const { wallet } = this.props;
-        console.log(this.props, "address info comp props")
         const { loading, error, data } = wallet
         const { tokenList, internalTxCount, claimIScoreCount, hasDelegations, isPrep } = data
+        console.log(data, "isPrep function")
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {

@@ -19,10 +19,10 @@ export async function addressInfo(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/addresses/details/${payload.address}`)
             .then(result => {
-                console.log(result, "addy info result")
                 resolve(result)
             })
             .catch(error => {
+                console.log(error, "the address info saga error")
                 reject(error)
             })
     })
@@ -31,9 +31,9 @@ export async function addressInfo(payload) {
 export async function addressTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/address/txList`, payload))
+        trackerApi.get(`/api/v1/transactions/address/${payload.address}`)
             .then(result => {
-                resolve(result.data)
+                resolve(result)
             })
             .catch(error => {
                 reject(error)

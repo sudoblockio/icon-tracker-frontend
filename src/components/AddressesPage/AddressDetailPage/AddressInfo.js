@@ -31,6 +31,7 @@ class AddressInfo extends Component {
         }
     }
 
+    // move to our endpoint, do only if isPrep
     async componentDidMount() {
         const {totalDelegated} = await getPReps()
         console.log(totalDelegated, "total delegated")
@@ -93,7 +94,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
-        console.log(data, "the preps data")
+
 
         const {
             nodeAddress,

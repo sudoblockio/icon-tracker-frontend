@@ -18,6 +18,7 @@ import {
 } from '../../redux/actions/storageActions';
 
 function mapStateToProps(state) {
+  console.log(state, "address detail state to props")
   return {
     url: state.router.location,
     ...state.addresses,
