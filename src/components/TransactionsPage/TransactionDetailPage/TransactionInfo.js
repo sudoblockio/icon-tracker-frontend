@@ -145,11 +145,11 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={from_address} txType={txType} targetContractAddr={targetContractAddr} isFrom />
+											<AddressRow address={data.from_address !== "None" ? data.from_address : "-" } txType={txType} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={to_address} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={data.to_address !== "None" ? data.to_address : "-"} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
