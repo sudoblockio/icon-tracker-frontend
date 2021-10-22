@@ -322,3 +322,10 @@ export const GetAddressForPrepList = {
 
 };
 
+export const prefixes = {
+  ADDRESSES_PREFIX: '/api/v1/addresses',
+  TRANSACTIONS_PREFIX: '/api/v1/transactions',
+  BLOCKS_PREFIX: '/api/v1/blocks',
+  CONTRACTS_PREFIX: '/api/v1/contracts',
+
+}

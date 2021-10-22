@@ -1,11 +1,13 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance, walletApiInstance } from './config'
 import { randomUint32 } from '../../../utils/utils'
+import { prefixes } from '../../../utils/const'
 
+const { CONTRACTS_PREFIX, ADDRESSES_PREFIX } = prefixes
 export async function contractList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/api/v1/addresses/contracts', payload))
+    trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/contracts`, payload))
       .then(result => {
       
         resolve(result)
@@ -20,7 +22,7 @@ export async function contractInfo(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
 
-    trackerApi.get(makeUrl(`/api/v1/contracts/${payload.addr}`, payload))
+    trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/${payload.addr}`, payload))
       .then(result => {
         console.log(result)
         resolve(result)
@@ -35,7 +37,7 @@ export async function contractDetail(payload) {
 
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/api/v1/contracts/detail', payload))
+    trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/detail`, payload))
       .then(result => {
         resolve(result.data)
       })
@@ -48,7 +50,7 @@ export async function contractDetail(payload) {
 export async function contractTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/api/v1/contracts/txList', payload))
+    trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/txList`, payload))
       .then(result => {
         resolve(result.data)
       })
