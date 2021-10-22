@@ -4,6 +4,7 @@ import {
 	numberWithCommas,
 	tokenText,
 	onlyDate,
+	getTimezoneMomentTime,
 } from '../../../utils/utils'
 import {
 	AddressLink,
@@ -21,15 +22,16 @@ class SearchTableBody extends Component {
 			const { searchType, data } = this.props
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
+					console.log(data, "contract data")
 					return (
 						<tr>
-							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
+							<td className="on"><span className="ellipsis"><AddressLink to={data.public_key} /></span></td>
 							<td>{data.name || '-'}</td>
 							{/* <td>{data.compiler || '-'}</td> */}
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
-							<td>{numberWithCommas(data.txCount)}</td>
+							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{CONTRACT_STATUS[data.status]}</td>
-							<td>{onlyDate(data.verifiedDate)}</td>
+							<td>{onlyDate(data.created_timestamp /1000).toString()}</td>
 						</tr>
 					)
 				case SEARCH_TYPE.TOKENS:
