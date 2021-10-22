@@ -21,7 +21,7 @@ export async function transactionTxDetail(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/transactions/details/${payload.txHash}`)
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

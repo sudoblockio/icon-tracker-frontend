@@ -49,7 +49,7 @@ function* transactionTxDetailFunc(action) {
   try {
     yield put(transactionEventLogList({ txHash: action.payload.txHash, count: 10 }))
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload); 
-    if (trackerData.status === 200 || trackerData.hash !== undefined) {      
+    if (trackerData.status === 200) {      
       let { stepUsedDetails } = trackerData.data
       if (stepUsedDetails) {
         trackerData.data.stepUsedDetails = JSON.parse(stepUsedDetails)

@@ -23,6 +23,8 @@ import {
 	removeQuotes,
 	isHex,
 	isImageData,
+	epochToFromNow,
+	convertHexToValue,
 } from '../../../utils/utils'
 
 const COUNT = 10
@@ -81,30 +83,32 @@ class TransactionInfo extends Component {
 					tokenTxList,
 					internalTxList,
 					txType,
-					txHash,
-					status,
-					createDate,
-					height,
+					hash,
+					receipt_status,
+					block_timestamp,
+					block_number,
 					confirmation,
-					fromAddr,
-					toAddr,
-					amount,
-					stepLimit,
-					stepUsedByTxn,
-					stepPrice,
-					dataString,
-					fee,
+					from_address,
+					to_address,
+					value,
+					step_limit,
+					receipt_step_used,
+					receipt_step_price,
+					data: dataString,
+					transaction_fee,
 					feeUsd,
-					dataType,
+					data_type,
 					targetContractAddr,
 					reportedCount,
 					stepUsedDetails
 				} = data
-				const _stepPrice = stepPrice || "0"
+				console.log(dataString, "the data")
+				const _stepPrice = receipt_step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
-				const isFail = status === 'Fail'
+				const isFail = Number(receipt_status) === 0
+				const isSuccess = Number(receipt_status) === 1
 				const isErrorMsg = isValidData(errorMsg)
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
@@ -119,37 +123,37 @@ class TransactionInfo extends Component {
 											<td>TxHash</td>
 											<td className={scam ? "scam":""}>
 												{scam?<span className="scam-tag">Reported</span>:""}
-												{txHash}
+												{hash}
 												<span className="copy twit" onClick={this.onTwitterClick}>
 													{/* <i className="img twit-icon"></i> */}
 													<img className='custom-twitter' src={twitterLogo} alt='twitter'/>
-												</span><CopyButton data={txHash} title={'Copy TxHash'} isSpan />
-												<ReportButton address={txHash}/>
+												</span><CopyButton data={hash} title={'Copy TxHash'} isSpan />
+												<ReportButton address={hash}/>
 											</td>
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}>{status} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
+											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
-											<td><span><BlockLink to={height} label={numberWithCommas(height)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
+											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
-											<td>{dateToUTC(createDate)}<em>{utcDateInfo(createDate)}</em></td>
+											<td>{new Date(block_timestamp / 1000).toString()}<em>{epochToFromNow(block_timestamp)}</em></td>
 										</tr>
 										<tr>
 											<td>From</td>
-											<AddressRow address={fromAddr} txType={txType} targetContractAddr={targetContractAddr} isFrom />
+											<AddressRow address={from_address} txType={txType} targetContractAddr={targetContractAddr} isFrom />
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={toAddr} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={to_address} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
-											<td>{`${convertNumberToText(amount)} ICX`}</td>
+											<td>{`${convertHexToValue(value)} ICX`}</td>
 										</tr>
 										{
 											(!!tokenTxList && tokenTxList.length !== 0) &&
@@ -164,12 +168,12 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Step Limit</td>
-											<td>{convertNumberToText(stepLimit)} Steps</td>
+											<td>{convertNumberToText(step_limit)} Steps</td>
 										</tr>
 										<tr>
 											<td>Fee in Step</td>
 											<td className='trans' style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
-												{convertNumberToText(stepUsedByTxn)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
+												{convertNumberToText(receipt_step_used)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
 												<div>
 													{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
 														const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
@@ -185,12 +189,13 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in ICX</td>
-											<td>{convertNumberToText(fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
+											<td>{convertHexToValue(transaction_fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
-										{(dataType && dataString) ?
+										{console.log(data, "the data string")}
+										{(data_type && dataString) ?
 											<tr>
 												<td>Data</td>
-												<DataCell scam={scam} dataType={dataType} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
+												<DataCell scam={scam} dataType={data_type} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
 											</tr>
 											:
 											null
