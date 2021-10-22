@@ -219,13 +219,14 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
+					console.log(data, "addresses list data")
 					return (
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.icxUsd} decimal={3} symbol="USD" />
 							<td><span>{data.percentage}</span><em>%</em></td>
-							<td>{numberWithCommas(data.txCount)}</td>
+							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
 						</tr>
 					)
