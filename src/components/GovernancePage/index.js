@@ -5,7 +5,7 @@ import { getMainInfo } from '../../redux/api/restV3';
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getTotalSupply, getPrepStatusList } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/api/restV3/iiss';
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
@@ -61,15 +61,12 @@ class GovernancePage extends Component {
 		this.statusList = await getPrepStatusList()
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
-		// const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
-
-		// const { publicTreasury } = tmainInfo || {}
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
 		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
@@ -186,13 +183,24 @@ class GovernancePage extends Component {
 		})
 		return result
 	}
-	getSponsorCount=address=>{
-		return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
+	getSponsorCount= (address) =>{
+		let sponsors
+		if (this.sponsorData.data.result[address] !== undefined) {
+			sponsors = Number(this.sponsorData.data.result[address])
+		} else {
+			sponsors =  0
+		}
+		return sponsors
 	}
 
-	getPrepStatusList = (name) => {
-		console.log(this.statusList.prep_name = name, "is it working")
-		return this.statusList
+	getPrepStatus = (name) => {
+		const list = this.statusList
+		let status;
+		list.forEach(obj => {
+			obj.prep_name = name ? status = obj.state_id : status = null
+			return status
+		})
+		return null
 	}
 	render() {
 		const {
@@ -215,7 +223,7 @@ class GovernancePage extends Component {
 			blackChecked
 		} = this.state
 
-		const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+		// const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 		
@@ -340,7 +348,7 @@ class GovernancePage extends Component {
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
 											sponsorCount={this.getSponsorCount(prep.address)} 
-											statusList={this.getPrepStatusList(prep.name)}
+											statusList={this.getPrepStatus(prep.name)}
 											lastBlockHeight={height}
 												key={index}
 												index={index}
@@ -377,8 +385,9 @@ class TableRow extends Component {
 	}
 
 	// check if the name is on the list, if so, change css class
-
+	
 	getBadge = (grade, active, status) => {
+		
 		const className = (active ? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
@@ -434,35 +443,35 @@ class TableRow extends Component {
 			name,
 			address,
 			grade,
-			totalBlocks,
-			validatedBlocks,
+			total_blocks,
+			validated_blocks,
 			stake,
 			delegated,
 			// irep,
 			// irepUpdatedBlockHeight,
 			active,
 			logo,
+			status,
 			// balance,
 			// unstake,
-			status
+			
 		} = prep
 		
-		
-
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-		const productivity = !totalBlocks || Number(totalBlocks) === 0 ? 'None' : (Number(validatedBlocks) === 0 ? '0.00%' : `${(Number(validatedBlocks) / Number(totalBlocks) * 100).toFixed(2)}%`)
+		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
-		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted * 100
+		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
+		console.log(statusList, "the grade")
 		const badge = this.getBadge(grade, active, status)
 		// const rank = index + 1
 
 		return(
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
-				<td className={(grade > 2 || grade === '0x3') ? 'black' : 'on'}>
+				<td className={(Number(grade) > 2 || grade === '0x3') ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
 						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
@@ -476,12 +485,12 @@ class TableRow extends Component {
 				</td>
 				<td>{governanceStatus===true?'YES':'NO'}</td>
 				<td>{sponsorCount}</td>
-				<td><span>{productivity}</span><em>{numberWithCommas(Number(validatedBlocks))} / {numberWithCommas(Number(totalBlocks))}</em></td>
+				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
-				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{prepVoted / Math.pow(10, 8).toFixed(4)}</em></td>}
+				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{numberWithCommas((prepVoted / Math.pow(10, 8)).toFixed(4))}</em></td>}
 			</tr>
 		)
 	}
