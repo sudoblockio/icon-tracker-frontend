@@ -28,6 +28,7 @@ moment.updateLocale('en', {
 
 
 
+
 export function getTextFromHtml(data) {
     if (!data || typeof data !== 'string') return ''
 

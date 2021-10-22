@@ -5,7 +5,6 @@ import {
 
 class AddressListPage extends Component {
 	render() {
-		console.log(this.props, "????")
 		return <TxPage {...this.props}/>
 	}
 }

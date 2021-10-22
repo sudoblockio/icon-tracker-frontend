@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 // import { getMainInfo } from '../../redux/api/restV3/main';
 import { getMainInfo } from '../../redux/api/restV3';
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText } from '../../utils/utils'
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
 import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getTotalSupply } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getTotalSupply, getPrepStatusList } from '../../redux/api/restV3/iiss';
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 // import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
 import {
@@ -52,14 +52,15 @@ class GovernancePage extends Component {
 		}
 		const response = await icxCall(params);
 		return response;
-		return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
+		// return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
 	}
 	governanceData=[];
 	sponsorData={}
+	statusList=[]
 	async componentDidMount() {
+		this.statusList = await getPrepStatusList()
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
-
 		// const { tmainInfo } = await getMainInfo()
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
@@ -69,8 +70,11 @@ class GovernancePage extends Component {
 		const _blackPrep = await prepList(3)
 
 		// const { publicTreasury } = tmainInfo || {}
-		const icxSupply = await getTotalSupply()
 		const supplyMetrics = await getSupplyMetrics()
+		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
+		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
+
+
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
@@ -86,7 +90,7 @@ class GovernancePage extends Component {
 			bp.status = bp.penaltyStatus
 			return bp
 		})
-
+		console.log(this.statusList, "the object")
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
 	
@@ -98,6 +102,7 @@ class GovernancePage extends Component {
 		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		
+
 		this.setState({ 
 			loading: false,
 			totalSupply, 
@@ -111,7 +116,7 @@ class GovernancePage extends Component {
 			stepPrice,
 			allPrep,
 			blackPrep,
-			lastBlockPrepName
+			lastBlockPrepName,
 		})
 	}
 
@@ -184,10 +189,14 @@ class GovernancePage extends Component {
 	getSponsorCount=address=>{
 		return this.sponsorData[address]?parseInt(this.sponsorData[address]):0
 	}
+
+	getPrepStatusList = (name) => {
+		console.log(this.statusList.prep_name = name, "is it working")
+		return this.statusList
+	}
 	render() {
 		const {
 			totalSupply,
-			// publicTreasury,
 			totalStaked,
 			totalVoted,
 			irep,
@@ -232,7 +241,7 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury <em>(ICX)</em></p>
-									<p><span>{0}</span></p>
+									<p><span>{numberWithCommas(this.publicTreasury.toFixed(4))}</span></p>
 								</div>
 							</div>
 							<ul>
@@ -331,6 +340,7 @@ class GovernancePage extends Component {
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
 											sponsorCount={this.getSponsorCount(prep.address)} 
+											statusList={this.getPrepStatusList(prep.name)}
 											lastBlockHeight={height}
 												key={index}
 												index={index}
@@ -365,6 +375,8 @@ class TableRow extends Component {
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
+
+	// check if the name is on the list, if so, change css class
 
 	getBadge = (grade, active, status) => {
 		const className = (active ? 'prep-tag' : 'prep-tag off')
@@ -411,9 +423,10 @@ class TableRow extends Component {
 			blackChecked,
 			index,
 			governanceStatus,
-			sponsorCount
+			sponsorCount,
+			statusList,
 		} = this.props
-
+		
 		const { 
 			rank, 
 			logo_256, 
@@ -433,6 +446,7 @@ class TableRow extends Component {
 			// unstake,
 			status
 		} = prep
+		
 		
 
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;

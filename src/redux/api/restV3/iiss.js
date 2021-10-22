@@ -5,11 +5,14 @@ import { BigNumber } from "bignumber.js";
 export const getSocialMedia = async (address) => {
     const preps = await fetch('https://explorer.icon.geometry-dev.net/api/v1/preps')
     const prepList = await preps.json()
-    console.log(prepList[0], "function test")
 }
 
-console.log(getSocialMedia('hx0b047c751658f7ce1b2595da34d57a0e7dad357d'), "well? ")
-
+export const getPrepStatusList = async () => {
+    const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
+    const data = await response.json()
+    return data
+  }
+  
 export const awaitGetRecentBlocks = async () => {
     const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')
     const data = await bx.json()
@@ -34,7 +37,7 @@ export async function getAllTransactions () {
     return data.total_tx;
 }
 
-
+// CONVERT TO OUR ENDPOINT ****
 export async function getTotalSupply () {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -61,6 +64,30 @@ export async function getTotalSupply () {
                 })
             }
         })
+    })
+}
+
+export async function prepList(grade) {
+    const trackerApi = await trackerApiInstance()
+    const payload = { count: 500 }
+    if (grade) {
+        payload.grade = grade
+    }
+    return new Promise((resolve, reject) => {
+        trackerApi.get(`/api/v1/preps`)
+            .then(result => {
+                const { data } = result.data
+                const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+                const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
+                const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
+                resolve(_data)
+                // const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
+                // const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)
+                // resolve([...delegated, ...undelegated])
+            })
+            .catch(error => {
+                reject(error)
+            })
     })
 }
 
@@ -294,29 +321,6 @@ export async function prepSub() {
     })
 }
 
-export async function prepList(grade) {
-    const trackerApi = await trackerApiInstance()
-    const payload = { count: 500 }
-    if (grade) {
-        payload.grade = grade
-    }
-    return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/preps`)
-            .then(result => {
-                const { data } = result.data
-                const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-                const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
-                const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
-                resolve(_data)
-                // const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
-                // const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)
-                // resolve([...delegated, ...undelegated])
-            })
-            .catch(error => {
-                reject(error)
-            })
-    })
-}
 
 export async function getStake(address) {
     const walletApi = await walletApiInstance()
