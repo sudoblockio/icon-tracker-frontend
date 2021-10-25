@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-// import { getMainInfo } from '../../redux/api/restV3/main';
-import { getMainInfo } from '../../redux/api/restV3';
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
-import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/api/restV3/iiss';
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
-// import { prepMain, prepSub, getPRep } from '../../redux/api/restV3/iiss';
+import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
 import {
     LoadingComponent,
 } from '../../components'
 import { POPUP_TYPE } from '../../utils/const'
 import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
-// import { calcFromLastBlock } from '../../utils/utils';
 
 class GovernancePage extends Component {
 
@@ -58,15 +54,21 @@ class GovernancePage extends Component {
 	sponsorData={}
 	statusList=[]
 	async componentDidMount() {
+		// our endpoint
 		this.statusList = await getPrepStatusList()
+		// inspect
 		this.governanceData = await this.getAdditionalData('get_PReps');
+		// inspect
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
+		// inspect
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
+		// our endpoint
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
+		// our endpoint
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
 		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
@@ -87,7 +89,6 @@ class GovernancePage extends Component {
 			bp.status = bp.penaltyStatus
 			return bp
 		})
-		console.log(this.statusList, "the object")
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
 	
@@ -197,7 +198,8 @@ class GovernancePage extends Component {
 		const list = this.statusList
 		let status;
 		list.forEach(obj => {
-			obj.prep_name = name ? status = obj.state_id : status = null
+			obj.prep_name === name ? status = obj.state_id : status = null
+
 			return status
 		})
 		return null
@@ -222,7 +224,6 @@ class GovernancePage extends Component {
 			restChecked,
 			blackChecked
 		} = this.state
-
 		// const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
@@ -384,11 +385,23 @@ class TableRow extends Component {
 		this.setState({loaded: true})
 	}
 
+	getPrepStatus = (name) => {
+		const list = this.statusList
+		let status;
+		console.log(list, "from getPrepStatus")
+		list.forEach(obj => {
+			obj.prep_name === name ? status = obj.state_id : status = null
+			return status
+		})
+		return null
+	}
+
 	// check if the name is on the list, if so, change css class
 	
+
 	getBadge = (grade, active, status) => {
-		
-		const className = (active ? 'prep-tag' : 'prep-tag off')
+		console.log(status, "from get badge")
+		const className = (status !== null ? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
 			case 0:
@@ -433,9 +446,10 @@ class TableRow extends Component {
 			index,
 			governanceStatus,
 			sponsorCount,
-			statusList,
+			statusList
 		} = this.props
-		
+
+
 		const { 
 			rank, 
 			logo_256, 
@@ -451,12 +465,12 @@ class TableRow extends Component {
 			// irepUpdatedBlockHeight,
 			active,
 			logo,
-			status,
+			
 			// balance,
 			// unstake,
 			
 		} = prep
-		
+		const status = this.getPrepStatusList;
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
@@ -464,7 +478,6 @@ class TableRow extends Component {
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		console.log(statusList, "the grade")
 		const badge = this.getBadge(grade, active, status)
 		// const rank = index + 1
 
@@ -475,7 +488,7 @@ class TableRow extends Component {
 					<ul>
 						<li>{badge}</li>
 						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
-						<li><img src={logo_256 ? 'https://img.solidwallet.io/100/' + logo_256 : 'https://img.solidwallet.io/100/' + logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} /*loading="lazy"*/ alt='logo'/></li>
+						<li><img src={logo_256 ? 'https://img.solidwallet.io/100/' + logo_256 : 'https://img.solidwallet.io/100/' + logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/></li>
 						
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
@@ -485,11 +498,13 @@ class TableRow extends Component {
 				</td>
 				<td>{governanceStatus===true?'YES':'NO'}</td>
 				<td>{sponsorCount}</td>
+				{console.log(statusList, "?yellow")}
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
 				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
+				{/* *** need to figure out why this only works for main preps */}
 				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{numberWithCommas((prepVoted / Math.pow(10, 8)).toFixed(4))}</em></td>}
 			</tr>
 		)

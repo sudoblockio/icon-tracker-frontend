@@ -2,7 +2,7 @@ import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 import { prefixes } from '../../../utils/const'
 
-const  {ADDRESSES_PREFIX, TX_PREFIX} = prefixes
+const  {ADDRESSES_PREFIX, TRANSACTIONS_PREFIX} = prefixes
 
 
 export async function addressList(payload) {
@@ -35,7 +35,7 @@ export async function addressInfo(payload) {
 export async function addressTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${TX_PREFIX}/address/${payload.address}`)
+        trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.address}`)
             .then(result => {
                 resolve(result)
             })
@@ -61,7 +61,7 @@ export async function addressTokenTxList(payload) {
 export async function addressInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${TX_PREFIX}/internal/address/${payload.address}`)
+        trackerApi.get(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address}`)
             .then(result => {
 
                 resolve(result)
