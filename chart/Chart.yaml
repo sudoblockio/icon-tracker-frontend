@@ -1,6 +1,0 @@
-apiVersion: v2
-name: icon-fe
-description: Chart to ICON Explorer Frontend
-type: application
-version: 0.0.1
-appVersion: 0.1.0
