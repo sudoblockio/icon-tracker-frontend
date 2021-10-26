@@ -82,6 +82,7 @@ class AddressInfo extends Component {
         const {notification, icxMore, tokenMore, showNode} = this.state
 
         const {wallet, walletAddress} = this.props
+        console.log(this.props, "wallet")
         const {loading, data, error} = wallet
         const {
             isPrep,
@@ -94,6 +95,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
+
 
 
         const {

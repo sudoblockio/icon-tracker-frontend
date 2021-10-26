@@ -12,7 +12,7 @@ import {
   getPReps,
   getDelegation,
 } from '../api/restV3';
-import { getPRep, getStake, queryIScore, getBalance, iissPrepRepJsonActive } from '../api/restV3/iiss';
+import { getPRep, getStake, queryIScore, getBalance, /*iissPrepRepJsonActive*/ } from '../api/restV3/iiss';
 import { convertLoopToIcxDecimal } from '../../utils/utils';
 
 export default function* addressesSaga() {
@@ -139,7 +139,6 @@ export function* addressInfoFunc(action) {
       const balance = yield call(getBalance, address)
       const { stake, unstakes } = yield call(getStake, address)
       const { iscore } = yield call(queryIScore, address)
-
       const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
       const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
       const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
@@ -149,14 +148,14 @@ export function* addressInfoFunc(action) {
       let active = 'N/A', media = {}
 
       if (isPrep) {
-        const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
+        // const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
 
-        active = isActive ? 'Active' : 'Inactive'
-        if (repJson &&
-          repJson.representative &&
-          repJson.representative.media instanceof Object) {
-            media = repJson.representative.media
-        }
+        // active = isActive ? 'Active' : 'Inactive'
+        // if (repJson &&
+        //   repJson.representative &&
+        //   repJson.representative.media instanceof Object) {
+        //     media = repJson.representative.media
+        // }
       }
 
       payload.data = {

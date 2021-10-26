@@ -268,20 +268,20 @@ export async function getStepPrice() {
     });
 }
 
-export async function iissPrepRepJsonActive(payload) {
-    const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/prep/repJson`, payload))
-            .then(result => {
-                const { data } = result.data
-                resolve(data)
-            })
-            .catch(error => {
-                console.error(error)
-                resolve({})
-            })
-    })
-}
+// export async function iissPrepRepJsonActive(payload) {
+//     const trackerApi = await trackerApiInstance()
+//     return new Promise((resolve, reject) => {
+//         trackerApi.get(makeUrl(`/v3/iiss/prep/repJson`, payload))
+//             .then(result => {
+//                 const { data } = result.data
+//                 resolve(data)
+//             })
+//             .catch(error => {
+//                 console.error(error)
+//                 resolve({})
+//             })
+//     })
+// }
 
 export async function prepMain() {
     const trackerApi = await trackerApiInstance()

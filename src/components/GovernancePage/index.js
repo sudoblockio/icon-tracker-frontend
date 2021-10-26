@@ -450,7 +450,8 @@ class TableRow extends Component {
 			// unstake,
 		} = prep
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-		
+		console.log(total_blocks, "total preps")
+		console.log(validated_blocks, "validated preps" )
 		const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
