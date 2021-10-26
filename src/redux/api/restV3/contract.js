@@ -22,10 +22,8 @@ export async function contractList(payload) {
 export async function contractInfo(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    console.log(payload, "conract payload")
     trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.addr}`)
       .then(result => {
-        console.log(result, "conract result thing")
         resolve(result)
       })
       .catch(error => {

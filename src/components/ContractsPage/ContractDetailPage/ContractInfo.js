@@ -16,6 +16,7 @@ class ContractInfo extends Component {
 
     render() {
         const { contract } = this.props
+        console.log(this.props, "contract detail props")
         const { loading, data } = contract
         const test = data[0]
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
@@ -41,9 +42,9 @@ class ContractInfo extends Component {
                                                 <td>Address</td>
                                                 <td colSpan="3" className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
-                                                    {address} <QrCodeButton address={address} />
-                                                    <CopyButton data={address} title={'Copy Address'} isSpan />
-                                                    <ReportButton address={address} />
+                                                    {data.public_key} <QrCodeButton address={data.public_key} />
+                                                    <CopyButton data={data.public_key} title={'Copy Address'} isSpan />
+                                                    <ReportButton address={data.public_key} />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -92,16 +93,16 @@ class ContractInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Transactions</td>
-                                                <td>{numberWithCommas(txCount)} Txns</td>
+                                                <td>{numberWithCommas(data.transaction_count)} Txns</td>
                                                 <td>Status</td>
                                                 <td>
-                                                    {CONTRACT_STATUS[status]}
-                                                    <DetailButton contractAddr={address} contractDetailPopup={this.props.contractDetailPopup} />
+                                                    {data.status}
+                                                    <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} />
                                                 </td>
                                             </tr>                                            
                                             <tr>
                                                 <td>Balance</td>
-                                                <td>{convertNumberToText(balance)} ICX</td>
+                                                <td>{convertNumberToText(data.balance)} ICX</td>
                                                 <td>Deposit</td>
                                                 {availableDeposit ? <td>{convertNumberToText(convertLoopToIcxDecimal(availableDeposit))} ICX</td> : <td>-</td>}
                                             </tr>
