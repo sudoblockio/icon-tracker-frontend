@@ -52,13 +52,11 @@ class GovernancePage extends Component {
 	}
 	governanceData=[];
 	sponsorData={}
-
-
+	statusList = []
+	
 	async componentDidMount() {
 		// our endpoint
 		this.statusList = await getPrepStatusList()
-		
-
 		// gets "has governance" for each prep
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		// inspect
@@ -79,6 +77,7 @@ class GovernancePage extends Component {
 
 
 		const { height, peer_id } = lastBlock || {}
+		console.log(this.statusList, "under const")
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
 			if (index !== -1) {
@@ -95,7 +94,6 @@ class GovernancePage extends Component {
 		})
 		const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
 		const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
-	
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
@@ -103,7 +101,6 @@ class GovernancePage extends Component {
 		const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
 		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-		
 
 		this.setState({ 
 			loading: false,
@@ -345,6 +342,7 @@ class GovernancePage extends Component {
 											governanceStatus={this.getGovernanceStatus(prep.address)}
 											sponsorCount={this.getSponsorCount(prep.address)} 
 											lastBlockHeight={height}
+											statusData = { this.statusList}
 												key={index}
 												index={index}
 												prep={prep} 
@@ -381,26 +379,8 @@ class TableRow extends Component {
 		this.setState({loaded: true})
 	}
 	
-	async componentDidMount(){
-		this.statusList = await getPrepStatusList()
-		// console.log(this.statusList, "lower mount")
-	}
-	getPrepStatus = (name) => {
-		// console.log( "up top")
-		// console.log(name, "name")
-		// console.log(this.statusList, "name statusList")
-		// console.log("filtered", this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name ))
-		// return this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
-		// console.log(this.state.activeStatus, "name")
-		// this.setState({activeStatus: this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name ) })  
-		
-	}
-	
-	// check if the name is on the list, if so, change css class
-	
-	
-	getBadge = (grade, active, status ) => {
-		const className = (status? 'prep-tag' : 'prep-tag off')
+	getBadge = (grade, active, statusCheck ) => {
+		const className = (statusCheck.length && statusCheck[0].state_id <=2 ? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
 			case 0:
@@ -414,7 +394,7 @@ class TableRow extends Component {
 				return <span className={className}><i></i>Candidate</span>
 			case 3:
 			case '0x3':
-				return <span className={'prep-tag'}>{status === 2 ? 'Disqualified' : 'Unregistered'}</span>
+				return <span className={'prep-tag'}>{statusCheck === 2 ? 'Disqualified' : 'Unregistered'}</span>
 			default:
 				return null		
 		}
@@ -445,6 +425,7 @@ class TableRow extends Component {
 			index,
 			governanceStatus,
 			sponsorCount,
+			statusData,
 		} = this.props
 
 
@@ -469,13 +450,15 @@ class TableRow extends Component {
 			// unstake,
 		} = prep
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
+		
+		const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		const badge = this.getBadge(grade, active)
+		const badge = this.getBadge(grade, active, statusCheck)
 		// const rank = index + 1
 
 		return(
