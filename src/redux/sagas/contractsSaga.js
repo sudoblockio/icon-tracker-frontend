@@ -74,7 +74,7 @@ export function* contractListSearchFunc(action) {
     }
 
     const payload = yield call(CONTRACT_LIST_API, action.payload);
-    if (payload.result === '200' || 'NO Data') {
+    if (payload.status === 200 || 'NO Data') {
       yield put({ type: AT.contractListSearchFulfilled, payload });
     }
     else {
@@ -90,6 +90,8 @@ export function* contractInfoFunc(action) {
   try {
     const payload = yield call(CONTRACT_INFO_API, action.payload);
     if (payload.status === 200 && payload.data !== "NO_DATA") {
+      console.log(action.payload, "the thing")
+
       const  depositInfo  = yield call(getScoreStatus, action.payload.addr)
       payload.data.depositInfo = depositInfo
         yield put({ type: AT.contractInfoFulfilled, payload });

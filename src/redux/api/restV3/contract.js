@@ -4,6 +4,7 @@ import { randomUint32 } from '../../../utils/utils'
 import { prefixes } from '../../../utils/const'
 
 const { CONTRACTS_PREFIX, ADDRESSES_PREFIX } = prefixes
+
 export async function contractList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
@@ -21,9 +22,10 @@ export async function contractList(payload) {
 export async function contractInfo(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-
-    trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/${payload.addr}`, payload))
+    console.log(payload, "conract payload")
+    trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.addr}`)
       .then(result => {
+        console.log(result, "conract result thing")
         resolve(result)
       })
       .catch(error => {
