@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
+import { getLastBlock } from '../../../redux/api/restV3/iiss';
 // import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
@@ -34,7 +35,12 @@ class TransactionInfo extends Component {
 		super(props)
 		this.state = {
 			download: undefined,
+			lastBlock: 0
 		}
+	}
+
+	async componentDidMount() {
+		this.setState({lastBlock: await getLastBlock()})
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -102,7 +108,7 @@ class TransactionInfo extends Component {
 					reportedCount,
 					stepUsedDetails
 				} = data
-				console.log(dataString, "the data")
+
 				const _stepPrice = receipt_step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
@@ -137,7 +143,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Block Height</td>
-											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${confirmation ? numberWithCommas(confirmation) : ' -'} Confirmation(s))`}</em></td>
+											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${ this.state.lastBlock? Number(this.state.lastBlock.height - block_number) : ' -'} Confirmation(s))`}</em></td>
 										</tr>
 										<tr>
 											<td>Time Stamp</td>
@@ -191,7 +197,7 @@ class TransactionInfo extends Component {
 											<td>Fee in ICX</td>
 											<td>{convertHexToValue(transaction_fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
 										</tr>
-										{console.log(data, "the data string")}
+
 										{(data_type && dataString) ?
 											<tr>
 												<td>Data</td>
