@@ -244,7 +244,7 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury <em>(ICX)</em></p>
-									<p><span>{numberWithCommas(this.publicTreasury.toFixed(4))}</span></p>
+									<p><span>{numberWithCommas(this.publicTreasury.toFixed(0))}</span></p>
 								</div>
 							</div>
 							<ul>
