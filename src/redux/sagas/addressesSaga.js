@@ -188,9 +188,11 @@ export function* addressTxListFunc(action) {
       yield put({ type: AT.addressTxListFulfilled, payload: { data: [] } });
       return
     }
-
+    console.log(action, "from address saga")
     const payload = yield call(ADDRESS_TX_LIST, action.payload);
+
     if (payload.status === 200) {
+      console.log(payload, "from address saga")
       yield put({ type: AT.addressTxListFulfilled, payload: payload });
     }
     else {

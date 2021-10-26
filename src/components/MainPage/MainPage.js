@@ -31,12 +31,6 @@ class MainPage extends Component {
         }
     }
 
-    componentWillMount() {
-        console.log(this.props.search, "Search props")
-        // this.props.getRecentTransactions()
-        // this.props.getBlockList()
-
-    }
 
     render() {
         return (

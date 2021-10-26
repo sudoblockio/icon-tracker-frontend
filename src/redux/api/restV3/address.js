@@ -34,9 +34,11 @@ export async function addressInfo(payload) {
 
 export async function addressTxList(payload) {
     const trackerApi = await trackerApiInstance()
+    console.log(payload, "what is missing?")
     return new Promise((resolve, reject) => {
         trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.address}`)
             .then(result => {
+                {console.log(result, "from the api call")}
                 resolve(result)
             })
             .catch(error => {

@@ -221,6 +221,7 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
+                                {console.log(this.urlIndex, "what is url index")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}

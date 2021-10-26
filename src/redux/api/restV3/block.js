@@ -31,12 +31,10 @@ export async function blockInfo(payload) {
 }
 
 export async function blockTxList(payload) {
-
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`${TRANSACTIONS_PREFIX}?block_number=${payload.height}`)
       .then(result => {
-
         resolve(result)
       })
       .catch(error => {

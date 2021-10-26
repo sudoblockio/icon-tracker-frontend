@@ -20,7 +20,7 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
-
+        console.log(this.props, "bottom title props")
         const Content = () => {
             const listSizeNum = listSize || 0
             const totalSizeNum = totalSize || 0

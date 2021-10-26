@@ -20,7 +20,7 @@ class AddressesDetailPage extends Component {
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
-        // NEED SOMETHING BESIDES TRANSACTION COUNT *** 
+        
         if (transaction_count && Number(transaction_count) !== 0) {
             console.log("hitting the first getList")
             TABS.push(ADDRESS_TABS[1]) 

@@ -12,6 +12,7 @@ class TxBottom extends Component {
       txType,
       address
     } = this.props
+    console.log(this.props, "from tx bottom props")
 
     const tableClassName =
       TX_TYPE_DATA[txType] ?

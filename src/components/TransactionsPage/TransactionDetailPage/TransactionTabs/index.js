@@ -16,7 +16,8 @@ class TransactionTabs extends Component {
     const { loading, data } = transaction;
     const { loading: loadingE, data: dataE } = transactionEvents;
     const { loading: loadingI, data: dataI } = transactionInternalTx;
-    const { txHash } = data;
+    const {  hash } = data;
+  
     let TABS = [];
 
     if (dataI && dataI.length > 0) {
@@ -45,7 +46,7 @@ class TransactionTabs extends Component {
                   txData={transactionInternalTx}
                   goAllTx={() => {
                     this.props.history.push(
-                      `/${TX_TYPE.TRANSACTION_INTERNAL_TX}/${txHash}`
+                      `/${TX_TYPE.TRANSACTION_INTERNAL_TX}/${hash}`
                     );
                   }}
                   txType={TX_TYPE.TRANSACTION_INTERNAL_TX}
@@ -57,7 +58,7 @@ class TransactionTabs extends Component {
                   txData={transactionEvents}
                   goAllTx={() => {
                     this.props.history.push(
-                      `/${TX_TYPE.TRANSACTION_EVENTS}/${txHash}`
+                      `/${TX_TYPE.TRANSACTION_EVENTS}/${hash}`
                     );
                   }}
                   txType={TX_TYPE.TRANSACTION_EVENTS}
