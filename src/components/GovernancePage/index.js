@@ -377,26 +377,26 @@ class TableRow extends Component {
 		activeStatus: this.statusList,
 	}
 
-	async componentDidMount(){
-		this.statusList = await getPrepStatusList()
-		console.log(this.statusList, "lower mount")
-	}
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
-
+	
+	async componentDidMount(){
+		this.statusList = await getPrepStatusList()
+		// console.log(this.statusList, "lower mount")
+	}
 	getPrepStatus = (name) => {
-		console.log(this.statusList, "up top")
+		// console.log( "up top")
 		// console.log(name, "name")
 		// console.log(this.statusList, "name statusList")
+		// console.log("filtered", this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name ))
 		// return this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		// console.log(this.state.activeStatus, "name")
 		// this.setState({activeStatus: this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name ) })  
-
+		
 	}
-
-	// check if the name is on the list, if so, change css class
 	
+	// check if the name is on the list, if so, change css class
 	
 	
 	getBadge = (grade, active, status ) => {
@@ -467,7 +467,6 @@ class TableRow extends Component {
 			
 			// balance,
 			// unstake,
-			
 		} = prep
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
@@ -486,7 +485,7 @@ class TableRow extends Component {
 					<ul>
 						<li>{badge}</li>
 						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
-						<li><img src={logo_256 ? 'https://img.solidwallet.io/100/' + logo_256 : 'https://img.solidwallet.io/100/' + logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/></li>
+						<li><img src={logo_256 ?  logo_256 :  logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/></li>
 						
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
