@@ -4,7 +4,7 @@ import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/api/restV3/iiss';
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
-import { getPReps, getIISSInfo,icxCall } from '../../redux/api/restV3';
+import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
     LoadingComponent,
 } from '../../components'
@@ -15,6 +15,7 @@ import { GetAddressForPrepList } from '../../utils/const';
 class GovernancePage extends Component {
 
 	state = {
+		activePreps: [],
 		totalSupply: 0,
 		publicTreasury: 0,
 		totalStaked: 0,
@@ -48,20 +49,22 @@ class GovernancePage extends Component {
 		}
 		const response = await icxCall(params);
 		return response;
-		// return response && response.data&&response.data.result?response.data.result:method==='get_PReps'?[]:{}
 	}
 	governanceData=[];
 	sponsorData={}
 	statusList=[]
+
 	async componentDidMount() {
 		// our endpoint
 		this.statusList = await getPrepStatusList()
-		// inspect
+
+		// gets "has governance" for each prep
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		// inspect
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
 		// inspect
-		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()		
+		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()	
+		// rpc call for global comm rate etc 
 		const { variable } = await getIISSInfo()
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
@@ -193,17 +196,11 @@ class GovernancePage extends Component {
 		}
 		return sponsors
 	}
+		// list.forEach(obj => {
+		// 	obj.prep_name === name ? status = obj.state_id : status = null
 
-	getPrepStatus = (name) => {
-		const list = this.statusList
-		let status;
-		list.forEach(obj => {
-			obj.prep_name === name ? status = obj.state_id : status = null
+		// 	return status
 
-			return status
-		})
-		return null
-	}
 	render() {
 		const {
 			totalSupply,
@@ -345,11 +342,12 @@ class GovernancePage extends Component {
 										</tr>
 									</thead>
 									<tbody>
+
 										{searched.map((prep, index) => (
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
 											sponsorCount={this.getSponsorCount(prep.address)} 
-											statusList={this.getPrepStatus(prep.name)}
+											
 											lastBlockHeight={height}
 												key={index}
 												index={index}
@@ -379,7 +377,8 @@ class TableRow extends Component {
 
 	state = {
 		logoError: false,
-		loaded: false
+		loaded: false,
+		activeStatus: [],
 	}
 	loadImage = () => {
 		this.setState({loaded: true})
@@ -387,21 +386,16 @@ class TableRow extends Component {
 
 	getPrepStatus = (name) => {
 		const list = this.statusList
-		let status;
-		console.log(list, "from getPrepStatus")
-		list.forEach(obj => {
-			obj.prep_name === name ? status = obj.state_id : status = null
-			return status
-		})
-		return null
+		this.state.activeStatus = list.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 	}
 
 	// check if the name is on the list, if so, change css class
 	
+	
+	
+	getBadge = (grade, active, status ) => {
 
-	getBadge = (grade, active, status) => {
-		console.log(status, "from get badge")
-		const className = (status !== null ? 'prep-tag' : 'prep-tag off')
+		const className = (status? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
 			case 0:
@@ -446,8 +440,8 @@ class TableRow extends Component {
 			index,
 			governanceStatus,
 			sponsorCount,
-			statusList
 		} = this.props
+
 
 
 		const { 
@@ -470,7 +464,7 @@ class TableRow extends Component {
 			// unstake,
 			
 		} = prep
-		const status = this.getPrepStatusList;
+	
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
@@ -478,7 +472,7 @@ class TableRow extends Component {
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		const badge = this.getBadge(grade, active, status)
+		const badge = this.getBadge(grade, active, this.status.activeStatus)
 		// const rank = index + 1
 
 		return(
@@ -498,7 +492,6 @@ class TableRow extends Component {
 				</td>
 				<td>{governanceStatus===true?'YES':'NO'}</td>
 				<td>{sponsorCount}</td>
-				{console.log(statusList, "?yellow")}
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
 				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}

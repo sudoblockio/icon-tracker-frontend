@@ -128,6 +128,8 @@ export async function getPReps() {
     });
 }
 
+
+// GETS GLOBAL COMMISSIO RATE, GLOBAL I REP, REWARD RATE
 export async function getIISSInfo() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
