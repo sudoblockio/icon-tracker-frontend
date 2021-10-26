@@ -52,11 +52,12 @@ class GovernancePage extends Component {
 	}
 	governanceData=[];
 	sponsorData={}
-	statusList=[]
+
 
 	async componentDidMount() {
 		// our endpoint
 		this.statusList = await getPrepStatusList()
+		
 
 		// gets "has governance" for each prep
 		this.governanceData = await this.getAdditionalData('get_PReps');
@@ -196,10 +197,6 @@ class GovernancePage extends Component {
 		}
 		return sponsors
 	}
-		// list.forEach(obj => {
-		// 	obj.prep_name === name ? status = obj.state_id : status = null
-
-		// 	return status
 
 	render() {
 		const {
@@ -347,7 +344,6 @@ class GovernancePage extends Component {
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
 											sponsorCount={this.getSponsorCount(prep.address)} 
-											
 											lastBlockHeight={height}
 												key={index}
 												index={index}
@@ -374,19 +370,29 @@ class GovernancePage extends Component {
 }
 
 class TableRow extends Component {
-
+	
 	state = {
 		logoError: false,
 		loaded: false,
-		activeStatus: [],
+		activeStatus: this.statusList,
+	}
+
+	async componentDidMount(){
+		this.statusList = await getPrepStatusList()
+		console.log(this.statusList, "lower mount")
 	}
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
 
 	getPrepStatus = (name) => {
-		const list = this.statusList
-		this.state.activeStatus = list.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
+		console.log(this.statusList, "up top")
+		// console.log(name, "name")
+		// console.log(this.statusList, "name statusList")
+		// return this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
+		// console.log(this.state.activeStatus, "name")
+		// this.setState({activeStatus: this.statusList.filter(preps => preps.state_id <= 2 && preps.prep_name === name ) })  
+
 	}
 
 	// check if the name is on the list, if so, change css class
@@ -394,7 +400,6 @@ class TableRow extends Component {
 	
 	
 	getBadge = (grade, active, status ) => {
-
 		const className = (status? 'prep-tag' : 'prep-tag off')
 
 		switch(grade) {
@@ -464,7 +469,6 @@ class TableRow extends Component {
 			// unstake,
 			
 		} = prep
-	
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepStaked = IconConverter.toNumber(stake || 0)
@@ -472,7 +476,7 @@ class TableRow extends Component {
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		const badge = this.getBadge(grade, active, this.status.activeStatus)
+		const badge = this.getBadge(grade, active)
 		// const rank = index + 1
 
 		return(
