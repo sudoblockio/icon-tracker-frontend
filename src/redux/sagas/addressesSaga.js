@@ -148,15 +148,9 @@ export function* addressInfoFunc(action) {
       let active = 'N/A', media = {}
 
       if (isPrep) {
-        // const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
         const  statusData  = yield call(getPrepStatusList)
         const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === prep.name )
         active = statusCheck.length && statusCheck[0].state_id <= 2 ? 'Active' : 'Inactive'
-        // if (repJson &&
-        //   repJson.representative &&
-        //   repJson.representative.media instanceof Object) {
-        //     media = repJson.representative.media
-        // }
       }
 
       payload.data = {

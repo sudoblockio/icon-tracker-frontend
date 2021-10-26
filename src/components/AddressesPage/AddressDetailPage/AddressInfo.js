@@ -19,7 +19,13 @@ import {SocialMediaType} from '../../../utils/const'
 import {getPReps} from '../../../redux/api/restV3';
 
 const _isNotificationAvailable = NotificationManager.available()
-
+// psueudo code plan for social media icons
+// if the address is a prep, get the urls to social media
+// call our get preps api
+// give component access to social media links through props
+// so, maybe this should be called on the container
+// and then threaded through
+// map through available links in obj, render media icon where the name matches the prop key name
 class AddressInfo extends Component {
     constructor(props) {
         super(props)
@@ -119,6 +125,7 @@ class AddressInfo extends Component {
             grade,
             status
         } = prep || {}
+        console.log(prep, "the prep we are on")
         
         const media = {twitter, wechat, youtube, telegram, steemit, reddit, keybase, github, facebook}
         console.log(media, "social media")
