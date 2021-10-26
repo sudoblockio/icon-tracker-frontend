@@ -63,29 +63,16 @@ jobs:
           path: charts
           token: ${{ secrets.ICON_CHARTS_PAT }}
 
-      - name: Update dev-mainnet deployment values file (API)
+      - name: Update dev-mainnet deployment values file and re-commit
         uses: fjogeleit/yaml-update-action@master
         with:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/dev/mainnet/tracker-frontend/values.yaml'
-          propertyPath: 'api.image.tag'
+          propertyPath: 'deployment.image.tag'
           value: ${{ github.run_number }}
           branch: main
           createPR: 'false'
-          updateFile: true
-          commitChange: false
-
-      - name: Update dev-mainnet deployment values file (WORKER) and re-commit
-        uses: fjogeleit/yaml-update-action@master
-        with:
-          workDir: charts
-          repository: geometry-labs/icon-charts
-          valueFile: 'deployments/dev/mainnet/tracker-frontend/values.yaml'
-          propertyPath: 'worker.image.tag'
-          value: ${{ github.run_number }}
-          branch: main
-          createPR: 'false'
-          message: 'tracker-frontend dev deployment (mainnet) image versions to ${{ github.run_number }}'
+          message: 'tracker-frontend dev deployment (mainnet) image version to ${{ github.run_number }}'
           token: ${{ secrets.ICON_CHARTS_PAT }}
           updateFile: true
