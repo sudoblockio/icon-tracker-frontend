@@ -67,26 +67,37 @@ jobs:
             geometrylabs/icon-explorer-frontend:latest
             geometrylabs/icon-explorer-frontend:${{ steps.source.outputs.TAG }}
 
-      - name: Update prod-mainnet deployment values file and re-commit
-        uses: fjogeleit/yaml-update-action@master
+      - name: Checkout charts repo
+        uses: actions/checkout@v2
         with:
-          valueFile: 'chart/deployments/prod-mainnet/values.test.yaml'
-          propertyPath: 'deployment.image.tag'
-          value: ${{ github.run_number }}
-          branch: deployment
-          targetBranch: main
-          createPR: 'false'
-          message: 'Update prod deployment image version to ${{ github.run_number }}'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: geometry-labs/icon-charts
+          ref: main
+          path: charts
+          token: ${{ secrets.ICON_CHARTS_PAT }}
 
-      - name: Update prod-sejong deployment values file and re-commit
+      - name: Update prod-mainnet deployment values file (API)
         uses: fjogeleit/yaml-update-action@master
         with:
-          valueFile: 'chart/deployments/prod-sejong/values.test.yaml'
-          propertyPath: 'deployment.image.tag'
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod/mainnet/tracker-frontend/values.yaml'
+          propertyPath: 'api.image.tag'
           value: ${{ github.run_number }}
-          branch: deployment
-          targetBranch: main
+          branch: main
           createPR: 'false'
-          message: 'Update prod deployment image version to ${{ github.run_number }}'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-mainnet deployment values file (WORKER) and re-commit
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod/mainnet/tracker-frontend/values.yaml'
+          propertyPath: 'worker.image.tag'
+          value: ${{ github.run_number }}
+          branch: main
+          createPR: 'false'
+          message: 'tracker-frontend prod deployment (mainnet) image versions to ${{ github.run_number }}'
+          token: ${{ secrets.ICON_CHARTS_PAT }}
+          updateFile: true
