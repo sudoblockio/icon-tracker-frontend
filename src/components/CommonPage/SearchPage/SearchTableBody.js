@@ -22,7 +22,6 @@ class SearchTableBody extends Component {
 			const { searchType, data } = this.props
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
-					console.log(data, "contract data")
 					return (
 						<tr>
 							<td className="on"><span className="ellipsis"><AddressLink to={data.public_key} /></span></td>

@@ -24,7 +24,6 @@ export async function contractInfo(payload) {
 
     trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/${payload.addr}`, payload))
       .then(result => {
-        console.log(result)
         resolve(result)
       })
       .catch(error => {

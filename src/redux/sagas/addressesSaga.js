@@ -12,7 +12,7 @@ import {
   getPReps,
   getDelegation,
 } from '../api/restV3';
-import { getPRep, getStake, queryIScore, getBalance, /*iissPrepRepJsonActive*/ } from '../api/restV3/iiss';
+import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../api/restV3/iiss';
 import { convertLoopToIcxDecimal } from '../../utils/utils';
 
 export default function* addressesSaga() {
@@ -149,8 +149,9 @@ export function* addressInfoFunc(action) {
 
       if (isPrep) {
         // const { isActive, repJson } = yield call(iissPrepRepJsonActive, { address })
-
-        // active = isActive ? 'Active' : 'Inactive'
+        const  statusData  = yield call(getPrepStatusList)
+        const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === prep.name )
+        active = statusCheck.length && statusCheck[0].state_id <= 2 ? 'Active' : 'Inactive'
         // if (repJson &&
         //   repJson.representative &&
         //   repJson.representative.media instanceof Object) {

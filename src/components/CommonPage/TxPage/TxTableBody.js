@@ -118,7 +118,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<BlockCell height={data.block_number} />
 							<DateCell date={data.block_timestamp} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={data.targetContractAddr} />
+							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } address={address} txType={data.type} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
@@ -130,7 +130,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<BlockCell height={data.block_number} />
 							<DateCell date={data.block_timestamp} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} />
+							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } address={address} txType={data.type} targetContractAddr={address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 						</tr>
 					)
@@ -219,7 +219,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
-					console.log(data, "addresses list data")
 					return (
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />

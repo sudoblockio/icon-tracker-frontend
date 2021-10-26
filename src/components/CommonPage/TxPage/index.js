@@ -208,7 +208,6 @@ class TxPage extends Component {
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx
-        console.log(tx, "this is tx")
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {
@@ -221,7 +220,6 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
-                                {console.log(this.urlIndex, "what is url index")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}

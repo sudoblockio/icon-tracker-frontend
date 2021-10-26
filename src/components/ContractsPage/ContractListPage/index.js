@@ -5,7 +5,7 @@ import {
 
 class ContractListPage extends Component {
 	render() {
-		console.log(this.props, "contract props")
+
 		return <SearchPage {...this.props}/>
 	}
 }

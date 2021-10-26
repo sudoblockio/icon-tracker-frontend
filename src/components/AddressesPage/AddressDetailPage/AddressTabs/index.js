@@ -20,7 +20,8 @@ class WalletTabs extends Component {
         {console.log(this.props, "wallet tabs props")}
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
-        const { address, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount } = data
+        const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount } = data
+
         console.log(data, "wallet tabs data")
 
         const TABS = []
@@ -54,27 +55,27 @@ class WalletTabs extends Component {
                             return (
                                 <AddressTransactions
                                     txData={walletTx}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TX}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_TX}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         case ADDRESS_TABS[1]:
                             return (
                                 <AddressInternalTransactions
                                     txData={addressInternalTx}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_INTERNAL_TX}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         case ADDRESS_TABS[2]:
                             return (
                                 <AddressTokenTransfers
                                     txData={walletTokenTx}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_TOKEN_TX}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         case ADDRESS_TABS[3]:
@@ -82,25 +83,25 @@ class WalletTabs extends Component {
                                 <AddressDelegation
                                     txData={addressDelegation}
                                     txType={TX_TYPE.ADDRESS_DELEGATION}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         case ADDRESS_TABS[4]:
                             return (
                                 <AddressVoted
                                     txData={addressVoted}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_VOTED}/${address}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_VOTED}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_VOTED}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         case ADDRESS_TABS[5]:
                             return (
                                 <AddressReward
                                     txData={addressReward}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${address}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_REWARD}
-                                    address={address}
+                                    address={public_key}
                                 />
                             )
                         default:
