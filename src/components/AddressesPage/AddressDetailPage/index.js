@@ -13,7 +13,7 @@ class AddressesDetailPage extends Component {
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations, isPrep } = data
+        const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         console.log(data, "int tx address data")
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
@@ -65,7 +65,7 @@ class AddressesDetailPage extends Component {
                 InfoComponent={AddressInfo}
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
-                isPrep={isPrep}
+                isPrep={is_prep}
             />
         )
     }

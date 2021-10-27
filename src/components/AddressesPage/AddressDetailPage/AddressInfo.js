@@ -17,6 +17,7 @@ import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
 import {getPReps} from '../../../redux/api/restV3';
+import { prepList } from '../../../redux/api/restV3/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
 // psueudo code plan for social media icons
@@ -40,7 +41,7 @@ class AddressInfo extends Component {
     // move to our endpoint, do only if isPrep
     async componentDidMount() {
         const {totalDelegated} = await getPReps()
-        console.log(totalDelegated, "total delegated")
+        
         this.setState({totalDelegated})
     }
 
@@ -84,7 +85,20 @@ class AddressInfo extends Component {
         this.setState({showNode: "table-row"})
     }
 
+    media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
+    links = []
+
+    getSocialMediaLinks = async (name) => {
+        const allPreps = await prepList();
+        const prepArray = allPreps.filter(preps => preps.name === name )
+        const thisPrep = prepArray ? prepArray[0] : prepArray
+        this.media.map(site => {
+            this.links.indexOf(thisPrep[site]) === -1 ? this.links.push(thisPrep[site]) : console.log("found") 
+        })
+        return this.links
+    }
     render() {
+
         const {notification, icxMore, tokenMore, showNode} = this.state
 
         const {wallet, walletAddress} = this.props
@@ -127,8 +141,8 @@ class AddressInfo extends Component {
         } = prep || {}
         console.log(prep, "the prep we are on")
         
-        const media = {twitter, wechat, youtube, telegram, steemit, reddit, keybase, github, facebook}
-        console.log(media, "social media")
+        
+
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
             unstakes.map((list, idx) => {
@@ -151,7 +165,6 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount} = data
-                console.log(data, "address data prop")
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -206,10 +219,11 @@ class AddressInfo extends Component {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
                                                 {SocialMediaType.map((type, index) => {
-                                                    const mediaValue = media[type]
-
+                                                    const mediaValue = this.media[type]
+                                                    
                                                     if (!mediaValue) {
-                                                        console.log("no media value")
+                                                        console.log(name, "the name")
+                                                        console.log(this.getSocialMediaLinks(name), "giving the fn a name")
                                                         return null
                                                     }
 
