@@ -313,7 +313,6 @@ export const SocialMediaType = [
   'keybase'
 ];
 
-// need some help with this one ****
 export const GetAddressForPrepList = {
   'https://tracker.icon.foundation': 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f',
   'https://trackerdev.icon.foundation': '',

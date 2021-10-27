@@ -92,16 +92,9 @@ class AddressInfo extends Component {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
         const thisPrep = prepArray ? prepArray[0] : prepArray
-
         this.media.map(site => {
-            if(!this.links[site]) {
-                this.links[site] = thisPrep[site]
-            }
+            !this.links[site] ? this.links[site] = thisPrep[site] : console.log("found")
         })
-
-        // this.media.map(site => {
-        //    this.links.indexOf(thisPrep[site]) === -1 ? this.links.push(`${site}:${thisPrep[site]}`) : console.log("found") 
-        // })
         
     }
     render() {
@@ -154,7 +147,11 @@ class AddressInfo extends Component {
                 unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
             })
         }
-
+        let linkList;
+        if (isPrep) {
+            this.getSocialMediaLinks(name)
+            linkList=this.links
+        }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(totalBlocks)
         const validated = IconConverter.toNumber(validatedBlocks)
@@ -224,10 +221,10 @@ class AddressInfo extends Component {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
                                                 {SocialMediaType.map((type, index) => {
-                                                    const mediaValue = this.media[type]
+                                                    console.log(this.links, "maybe 2")
+                                                    const mediaValue = linkList[type]
+
                                                     if (!mediaValue) {
-                                                        this.getSocialMediaLinks(name)
-                                                        console.log(this.links, "maybe")
                                                         return null
                                                     }
 
