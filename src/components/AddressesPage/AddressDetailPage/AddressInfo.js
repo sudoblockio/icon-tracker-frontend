@@ -86,21 +86,26 @@ class AddressInfo extends Component {
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
-    links = []
+    links = {}
 
     getSocialMediaLinks = async (name) => {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
         const thisPrep = prepArray ? prepArray[0] : prepArray
+
         this.media.map(site => {
-            this.links.indexOf(thisPrep[site]) === -1 ? this.links.push(thisPrep[site]) : console.log("found") 
+            if(!this.links[site]) {
+                this.links[site] = thisPrep[site]
+            }
         })
-        return this.links
+
+        // this.media.map(site => {
+        //    this.links.indexOf(thisPrep[site]) === -1 ? this.links.push(`${site}:${thisPrep[site]}`) : console.log("found") 
+        // })
+        
     }
     render() {
-
         const {notification, icxMore, tokenMore, showNode} = this.state
-
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
         const {
@@ -139,7 +144,7 @@ class AddressInfo extends Component {
             grade,
             status
         } = prep || {}
-        console.log(prep, "the prep we are on")
+
         
         
 
@@ -220,10 +225,9 @@ class AddressInfo extends Component {
                                                 }}><i className="img"></i></span>}
                                                 {SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.media[type]
-                                                    
                                                     if (!mediaValue) {
-                                                        console.log(name, "the name")
-                                                        console.log(this.getSocialMediaLinks(name), "giving the fn a name")
+                                                        this.getSocialMediaLinks(name)
+                                                        console.log(this.links, "maybe")
                                                         return null
                                                     }
 
