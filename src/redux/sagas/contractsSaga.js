@@ -123,7 +123,7 @@ export function* contractDetailFunc(action) {
 export function* contractDetailPopupFunc(action) {
   try {
     const payload = yield call(CONTRACT_DETAIL_API, action.payload);
-    if (payload.result === '200' && payload.data !== "NO_DATA") {
+    if (payload.status === 200 && payload.data !== "NO_DATA") {
       payload.type = POPUP_TYPE.DETAIL
       yield put({ type: AT.setPopup, payload });
     }

@@ -145,6 +145,7 @@ export function* addressInfoFunc(action) {
       const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
 
       const isPrep = prep && Object.keys(prep).length > 0
+      console.log(isPrep, "from saga is prep")
       let active = 'N/A', media = {}
 
       if (isPrep) {

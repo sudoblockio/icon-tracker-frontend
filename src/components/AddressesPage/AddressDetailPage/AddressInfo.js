@@ -35,14 +35,14 @@ class AddressInfo extends Component {
             icxMore: false,
             tokenMore: false,
             showNode: "none",
+            isAPrep: false,
         }
     }
 
     // move to our endpoint, do only if isPrep
     async componentDidMount() {
         const {totalDelegated} = await getPReps()
-        
-        this.setState({totalDelegated})
+        this.setState({totalDelegated })
     }
 
     onNotificationChange = () => {
@@ -87,7 +87,6 @@ class AddressInfo extends Component {
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     links = {}
-
     getSocialMediaLinks = async (name) => {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
@@ -98,6 +97,7 @@ class AddressInfo extends Component {
         
     }
     render() {
+        
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
@@ -151,6 +151,8 @@ class AddressInfo extends Component {
         if (isPrep) {
             this.getSocialMediaLinks(name)
             linkList=this.links
+        } else {
+            console.log("didn't check if prep")
         }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(totalBlocks)
@@ -221,7 +223,7 @@ class AddressInfo extends Component {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
                                                 {SocialMediaType.map((type, index) => {
-                                                    console.log(this.links, "maybe 2")
+                                                    console.log(linkList[type], "INTERESTING")
                                                     const mediaValue = linkList[type]
 
                                                     if (!mediaValue) {

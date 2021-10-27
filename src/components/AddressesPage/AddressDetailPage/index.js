@@ -14,7 +14,7 @@ class AddressesDetailPage extends Component {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
-        console.log(data, "int tx address data")
+        console.log(is_prep, "what is happening?")
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {

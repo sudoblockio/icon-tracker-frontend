@@ -38,7 +38,7 @@ export async function contractDetail(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/detail`, payload))
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

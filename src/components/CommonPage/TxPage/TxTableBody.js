@@ -180,7 +180,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.to_address} />
+							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } txType={data.type} targetContractAddr={data.to_address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
