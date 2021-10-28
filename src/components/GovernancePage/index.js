@@ -479,12 +479,8 @@ class TableRow extends Component {
 				<td>{governanceStatus===true?'YES':'NO'}</td>
 				<td>{sponsorCount}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
-				{/* <td><span>{convertNumberToText(sugComRate, 2)}</span></td> */}
-				{/* <td><span>{calcFromLastBlock(lastBlockHeight - irepUpdatedBlockHeight)}</span></td> */}
-				{/* <td><span>{stakedRate.toFixed(1)}%</span><em>{convertNumberToText(prepStaked, 4)}</em></td> */}
 				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
-				{/* *** need to figure out why this only works for main preps */}
-				{!blackChecked && <td><span>{(votedRate / Math.pow(10, 8)).toFixed(1)}%</span><em>{numberWithCommas((prepVoted / Math.pow(10, 8)).toFixed(4))}</em></td>}
+				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span><em>{numberWithCommas((prepVoted).toFixed(0))}</em></td>}
 			</tr>
 		)
 	}

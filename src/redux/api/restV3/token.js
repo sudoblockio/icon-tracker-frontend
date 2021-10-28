@@ -4,9 +4,9 @@ import { trackerApiInstance } from './config'
 export async function tokenList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/token/list', payload))
+    trackerApi.get(makeUrl('/api/v1/token/list', payload))
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)
