@@ -90,9 +90,9 @@ export async function contractEventLogList(payload) {
 export async function contractInternalTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/internalTxList', payload))
+    trackerApi.get(`${TRANSACTIONS_PREFIX}/internal/address/${payload.addr}`)
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

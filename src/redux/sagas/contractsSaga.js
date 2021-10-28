@@ -164,7 +164,7 @@ export function* contractInternalTxListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_INTERNAL_TX_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.contractInternalTxListFulfilled, payload });
     }
     else {
