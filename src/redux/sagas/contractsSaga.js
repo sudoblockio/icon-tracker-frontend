@@ -205,7 +205,7 @@ export function* contractEventLogListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_EVENT_LOG_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.contractEventLogListFulfilled, payload });
     }
     else {

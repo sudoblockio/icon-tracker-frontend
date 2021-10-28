@@ -244,9 +244,9 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on">
-								<span className="ellipsis"><TransactionLink to={data.txHash} /></span><br />
-								<span><BlockLink label={`# ${data.height}`} to={data.height} /></span>
-								<p>{calcFromNow(data.age)}</p>
+								<span className="ellipsis"><TransactionLink to={data.transaction_hash} /></span><br />
+								<span><BlockLink label={`# ${data.block_number}`} to={data.block_number} /></span>
+								<p>{epochToFromNow(data.block_timestamp)}</p>
 							</td>
 							<td>{data.method}</td>
 							<td>{data.eventLog}</td>

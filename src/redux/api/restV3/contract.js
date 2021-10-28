@@ -61,7 +61,6 @@ export async function contractTxList(payload) {
 }
 
 export async function contractTokenTxList(payload) {
-  console.log(payload, "token contract payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`)
@@ -75,11 +74,12 @@ export async function contractTokenTxList(payload) {
 }
 
 export async function contractEventLogList(payload) {
+  console.log(payload, "contract log payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/eventLogList', payload))
+    trackerApi.get(`/api/v1/logs?score_address=${payload.contractAddr}`)
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)
