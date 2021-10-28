@@ -144,7 +144,7 @@ export function* contractTxListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_TX_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.contractTxListFulfilled, payload });
     }
     else {
@@ -184,7 +184,8 @@ export function* contractTokenTxListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
-    if (payload.result === '200') {
+    console.log(payload, "token contract saga")
+    if (payload.status === 200) {
       yield put({ type: AT.contractTokenTxListFulfilled, payload });
     }
     else {

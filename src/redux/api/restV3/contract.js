@@ -3,7 +3,7 @@ import { trackerApiInstance, walletApiInstance } from './config'
 import { randomUint32 } from '../../../utils/utils'
 import { prefixes } from '../../../utils/const'
 
-const { CONTRACTS_PREFIX, ADDRESSES_PREFIX } = prefixes
+const { CONTRACTS_PREFIX, ADDRESSES_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
 export async function contractList(payload) {
   const trackerApi = await trackerApiInstance()
@@ -60,11 +60,12 @@ export async function contractTxList(payload) {
 }
 
 export async function contractTokenTxList(payload) {
+  console.log(payload, "token contract payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/contract/tokenTxList', payload))
+    trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`)
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)
