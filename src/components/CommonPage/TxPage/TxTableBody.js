@@ -168,7 +168,7 @@ class TxTableBody extends Component {
 				case TX_TYPE.CONTRACT_TOKEN_TX:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
+							<TxHashCell isError={isError} txHash={data.transaction_hash} />
 							<DateCell date={data.age} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
