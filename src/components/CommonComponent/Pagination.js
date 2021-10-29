@@ -19,8 +19,6 @@ class Pagination extends Component {
 
   getData = (target) => {
     let { getData, pageNum, maxPageNum } = this.props;
-    console.log(this.props, "target props")
-    console.log(target, "target props")
     pageNum = Number(pageNum);
     maxPageNum = Number(maxPageNum);
     switch (target) {
@@ -34,8 +32,6 @@ class Pagination extends Component {
         break;
       case 'next':
         if (pageNum === maxPageNum) return false;
-        console.log(pageNum+1, "if")
-        console.log(getData, "if")
         getData(pageNum+1);
         break;
       case 'end':

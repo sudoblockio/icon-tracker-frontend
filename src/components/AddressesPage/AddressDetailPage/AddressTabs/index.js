@@ -41,7 +41,6 @@ class WalletTabs extends Component {
         if (iscore && Number(iscore) !== 0) {
             TABS.push(ADDRESS_TABS[5])
         }
-        console.log(this.props, "tab table")
         return (
             <TabTable
                 {...this.props}

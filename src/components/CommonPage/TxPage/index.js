@@ -105,6 +105,7 @@ class TxPage extends Component {
 
     getCount = () => {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
+        console.log(tx, "page getCount tx")
         const { count } = tx
         return count
     }
@@ -148,6 +149,7 @@ class TxPage extends Component {
     }
 
     getTxListByPage = page => {
+        console.log(page, "page")
         const count = this.getCount()
         
         this.historyPush(page, count)

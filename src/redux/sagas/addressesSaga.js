@@ -54,20 +54,25 @@ export function* addressDelegationListFunc(action) {
   try {
     const { address } = action.payload
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
+    console.log(payload, "delegations saga payload")
     const { delegations } = payload
+    console.log(delegations, "if delegations")
     if (delegations) {
       const { preps } = yield call(getPReps)
+      console.log(preps, "preps yield call")
       const data = delegations.map(prep => {
         const { address, value } = prep
+        console.log(prep, "from map in saga")
         const index = preps.findIndex(p => p.address === address)
         let searched = { address }
+        console.log(searched, "searched in saga")
         if (index !== -1) {
           searched = preps[index]
         }
         searched.value = value
         return searched
       })
-
+      console.log(data, "data from saga put")
       yield put({
         type: AT.addressDelegationListFulfilled, payload: {
           data,

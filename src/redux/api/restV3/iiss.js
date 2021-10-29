@@ -421,6 +421,7 @@ export async function getDelegation(address) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.log(response, "get delegation response")
                 resolve(response.data.result);
             })
             .catch(error => {

@@ -20,13 +20,14 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
-        console.log(this.props, "bottom title props")
+        console.log(totalSize, "bottom title props")
         const Content = () => {
             const listSizeNum = listSize || 0
             const totalSizeNum = totalSize || 0
             const listSizeUnder10 = (listSizeNum || 0) < 10 ? listSizeNum : 10
             const _listSize = numberWithCommas(listSizeNum)
             const _totalSize = numberWithCommas(totalSizeNum)
+            {console.log(_totalSize, "from content")}
             switch (txType) {
                 case TX_TYPE.ADDRESS_VOTED:                
                     return (
@@ -83,11 +84,12 @@ class TxPageTitle extends Component {
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TX:
+                    {console.log(_totalSize, "from the tx")}
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
+                                Latest<em>{listSize}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{totalSize} transaction(s)</em>
                             </span>
                         </p>
                     )

@@ -356,7 +356,7 @@ export function getArrayState(step, state, action, dataType) {
                     loading: false,
                     data: data || [],
                     listSize: 50000 || 0,
-                    totalSize: payload.headers['x-total-count']|| 0,
+                    totalSize: payload.headers? payload.headers['x-total-count']: 0,
                     error: '',
                 },
             }
