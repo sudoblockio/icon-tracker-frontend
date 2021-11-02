@@ -6,7 +6,8 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 class TxBottomComponent extends Component {
     render() {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
-        const { data, listSize, totalSize, loading } = txData
+        console.log(this.props, "props below bottom")
+        const { data, listSize, totalSize, loading, } = txData
         console.log(txData, "the data")
         console.log(goAllTx, "the data")
 
@@ -20,7 +21,7 @@ class TxBottomComponent extends Component {
                 return (
                     <div className="contents">
                         {console.log(totalSize, "from bottom")}
-                        <TxBottomTitle txType={txType} listSize={data.length} totalSize={Number(totalSize)} goAllTx={goAllTx} fromAddr={from_address} toAddr={to_address} />
+                        <TxBottomTitle txType={txType} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>

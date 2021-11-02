@@ -205,7 +205,6 @@ class TxPage extends Component {
 
     render() {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
-        console.log( "one single tx")
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx

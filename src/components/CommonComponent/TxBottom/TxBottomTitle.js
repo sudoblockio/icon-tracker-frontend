@@ -84,7 +84,7 @@ class TxPageTitle extends Component {
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TX:
-                    {console.log(_totalSize, "from the tx")}
+                    {console.log(totalSize, "from the tx")}
                     return (
                         <p className="txt">
                             <span>
