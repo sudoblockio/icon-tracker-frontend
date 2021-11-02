@@ -157,7 +157,7 @@ class TxPageTitle extends Component {
                             Blocks
                             <span />
                             <span className="right">
-                                A total of<em>{numberWithCommas(totalSize)}</em> total block(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em>
+                                A total of<em>{numberWithCommas(_totalSize)}</em> total block(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em>
                             </span>
                         </p>
                     )

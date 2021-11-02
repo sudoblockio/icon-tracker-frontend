@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { SEARCH_TYPE, IRC_VERSION } from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
-// import {  } from '../../../utils/const'
 
 class SearchTableDesc extends Component {
     render() {
-        const { searchType, listSize } = this.props
+        const { searchType, listSize, totalSize } = this.props
         
 
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
+            const _totalSize = numberWithCommas(totalSize || 0)
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
                         <span className="cont right">
-                            A total of {_listSize} verified contract source
+                            A total of {_totalSize} verified contract source
                             codes found
                         </span>
                     )
