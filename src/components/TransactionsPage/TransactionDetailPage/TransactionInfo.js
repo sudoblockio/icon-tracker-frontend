@@ -77,18 +77,18 @@ class TransactionInfo extends Component {
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
-	getFee = async (icx) => {
-		const data = await coinGeckoICXtoUSD(icx)
-		this.setState({feeInUSD: data})
-		return data
-	}
+	// getFee = async (icx) => {
+	// 	const data = await coinGeckoICXtoUSD(icx)
+	// 	this.setState({feeInUSD: data})
+	// 	return data
+	// }
 	
 
 	render()  {
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
-		this.getFee(convertHexToValue(data.transaction_fee))
+		// this.getFee(convertHexToValue(data.transaction_fee))
 
 		const Contents = () => {
 			if (loading) {
@@ -207,7 +207,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in ICX</td>
-											<td>{convertHexToValue(transaction_fee)} ICX<em>({ transaction_fee ?  this.state.feeInUSD.toFixed(4) : ' -'} USD)</em></td>
+											<td>{convertHexToValue(transaction_fee)} ICX<em>({ transaction_fee ?  2000 : ' -'} USD)</em></td>
 										</tr>
 
 										{(data_type && dataString) ?
