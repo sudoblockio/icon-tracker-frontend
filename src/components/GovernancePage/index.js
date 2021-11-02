@@ -54,13 +54,16 @@ class GovernancePage extends Component {
 	sponsorData={}
 	statusList = []
 	
-	async componentDidMount() {
+	async componentWillMount(){
 		// our endpoint
 		this.statusList = await getPrepStatusList()
 		// gets "has governance" for each prep
 		this.governanceData = await this.getAdditionalData('get_PReps');
 		// inspect
 		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
+	}
+	async componentDidMount() {
+
 		// inspect
 		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPReps()	
 		// rpc call for global comm rate etc 
