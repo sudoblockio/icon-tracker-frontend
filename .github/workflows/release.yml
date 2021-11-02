@@ -50,22 +50,22 @@ jobs:
           docker build --target prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          target: prod
-          push: true
-          tags: |
-            geometrylabs/icon-explorer-frontend:latest
-            geometrylabs/icon-explorer-frontend:${{ steps.source.outputs.TAG }}
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+#
+#      - name: Build and push
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          file: ./Dockerfile
+#          target: prod
+#          push: true
+#          tags: |
+#            geometrylabs/icon-explorer-frontend:latest
+#            geometrylabs/icon-explorer-frontend:${{ steps.source.outputs.TAG }}
 
       - name: Checkout charts repo
         uses: actions/checkout@v2
@@ -80,11 +80,18 @@ jobs:
         with:
           workDir: charts
           repository: geometry-labs/icon-charts
-          valueFile: 'deployments/prod/mainnet/tracker-frontend/values.yaml'
-          propertyPath: 'deployment.image.tag'
-          value: ${{ github.run_number }}
+          valueFile: 'deployments/prod-us-west-2/mainnet/tracker-frontend/values.yaml'
+          propertyPath: 'worker.image.tag'
+          value: ${{ steps.source.outputs.TAG }}
           branch: main
           createPR: 'false'
-          message: 'tracker-frontend prod deployment image versions to ${{ github.run_number }}'
+          message: 'tracker-frontend prod deployment (mainnet) image versions to ${{ steps.source.outputs.TAG }}'
           token: ${{ secrets.ICON_CHARTS_PAT }}
           updateFile: true
+
+      - name: Push tags
+        run: |
+          git tag -f tracker-frontend-prod-uswest2
+          git tag -f tracker-frontend-prod-euwest2
+          git push -f origin --tags
+        working-directory: charts
