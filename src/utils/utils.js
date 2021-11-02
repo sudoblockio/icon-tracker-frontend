@@ -270,7 +270,12 @@ export function makeUrl(url, payload) {
 
     let result = url
     payload.limit = payload.count
+    if (payload.page !==1){
+        payload.skip = Number(payload.page * payload.count)
+        delete payload.page
+    }
     delete payload.count
+    console.log(payload, "make url payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
