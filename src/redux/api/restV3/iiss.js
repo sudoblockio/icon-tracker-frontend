@@ -31,11 +31,10 @@ export async function coinGeckoMarketCap () {
     return data[0].market_cap
 }
 
-export async function coinGeckoICXtoUSD (icx) {
+export async function coinGeckoCurrentUSD () {
     const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
     const data = await icondetail.json()
-    const currentPrice = data.market_data.current_price.usd
-    return icx*currentPrice;
+    return data.market_data.current_price.usd
 }
 
 

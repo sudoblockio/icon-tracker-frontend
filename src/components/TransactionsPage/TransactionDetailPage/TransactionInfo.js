@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
-import { getLastBlock, coinGeckoICXtoUSD } from '../../../redux/api/restV3/iiss';
+import { getLastBlock, coinGeckoCurrentUSD } from '../../../redux/api/restV3/iiss';
 // import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
@@ -35,13 +35,14 @@ class TransactionInfo extends Component {
 		super(props)
 		this.state = {
 			download: undefined,
-			lastBlock: 0,
 			feeInUSD: 0
 		}
 	}
 
 	async componentDidMount() {
-		this.setState({lastBlock: await getLastBlock()})
+		const currentUSD = await coinGeckoCurrentUSD()
+		const lastBlock = await getLastBlock()
+		this.setState({lastBlock, currentUSD})
 		
 	}
 
@@ -88,8 +89,8 @@ class TransactionInfo extends Component {
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
-		// this.getFee(convertHexToValue(data.transaction_fee))
-
+		console.log(this.props.transaction.data.transaction_fee, "fee tx")
+		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent height='206px' />
@@ -207,7 +208,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in ICX</td>
-											<td>{convertHexToValue(transaction_fee)} ICX<em>({ transaction_fee ?  2000 : ' -'} USD)</em></td>
+											<td>{convertHexToValue(transaction_fee)} ICX<em>({ transaction_fee ?  toUSDNum : ' -'} USD)</em></td>
 										</tr>
 
 										{(data_type && dataString) ?
