@@ -77,19 +77,12 @@ class TransactionInfo extends Component {
 		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
-
-	// getFee = async (icx) => {
-	// 	const data = await coinGeckoICXtoUSD(icx)
-	// 	this.setState({feeInUSD: data})
-	// 	return data
-	// }
 	
 
 	render()  {
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
-		console.log(this.props.transaction.data.transaction_fee, "fee tx")
 		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
 		const Contents = () => {
 			if (loading) {

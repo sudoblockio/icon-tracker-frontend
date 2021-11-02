@@ -20,13 +20,7 @@ import {getPReps} from '../../../redux/api/restV3';
 import { prepList } from '../../../redux/api/restV3/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
-// psueudo code plan for social media icons
-// if the address is a prep, get the urls to social media
-// call our get preps api
-// give component access to social media links through props
-// so, maybe this should be called on the container
-// and then threaded through
-// map through available links in obj, render media icon where the name matches the prop key name
+
 class AddressInfo extends Component {
     constructor(props) {
         super(props)
@@ -112,6 +106,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
+        const showLinks = isPrep ? true : false
 
 
 
@@ -148,10 +143,12 @@ class AddressInfo extends Component {
             })
         }
         let linkList;
-        if (isPrep) {
+
+        if (showLinks) {
             this.getSocialMediaLinks(name)
             linkList=this.links
         } else {
+            console.log(isPrep, "didn't check if prep")
             console.log("didn't check if prep")
         }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;

@@ -10,8 +10,12 @@ import {
     SortHolder,
     NoBox,
 } from '../../../components'
+import {
+    coinGeckoCurrentUSD
+} from '../../../redux/api/restV3/iiss'
 import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
 import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
+import { getSupplyMetrics } from '../../../redux/api/restV3/main'
 
 class TxPage extends Component {
     constructor(props) {
@@ -20,14 +24,21 @@ class TxPage extends Component {
         this.urlIndex = ''
         this.pageId = 1
         this._getTxList = () => {}
+        this.state ={
+            currentUSD:0,
+        }
     }
 
     componentWillMount() {
         this.initPage(this.props.url)
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setInitialData(this.props.url)
+        const currentUSD = await coinGeckoCurrentUSD()
+        const supplyMetrics = await getSupplyMetrics()
+        const totalsupply = supplyMetrics.data.total_supply
+        this.setState({currentUSD, totalsupply})
     }
 
     componentWillReceiveProps(nextProps) {
@@ -204,6 +215,7 @@ class TxPage extends Component {
     }
 
     render() {
+        console.log(this.state, "tx page state")
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
@@ -220,12 +232,15 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
+                                {console.log(this.state, "state from tx page")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}
                                         data={item}
                                         txType={this.txType}
                                         address={this.urlIndex}
+                                        currentUSD={this.state?this.state.currentUSD:0 }
+                                        totalSupply={this.state?this.state.totalsupply:0}
                                     />
                                 ))}
                             </tbody>
