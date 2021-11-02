@@ -51,7 +51,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txns(s) from a total of
+                                Latest<em>{totalSizeNum}</em> Txns(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
                             </span>
                         </p>
