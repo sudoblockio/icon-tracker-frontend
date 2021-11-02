@@ -11,6 +11,9 @@ import {
 	convertLoopToIcxDecimal
 } from '../../../utils/utils'
 import {
+	coinGeckoCurrentUSD
+} from '../../../redux/api/restV3/iiss'
+import {
 	TransactionLink,
 	BlockLink,
 	AddressCell,
@@ -69,7 +72,20 @@ const BlockCell = ({ height }) => {
 	return <td className="on"><BlockLink to={height} label={numberWithCommas(height)} /></td>
 }
 
+
+
 class TxTableBody extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			currentUSD: 0
+		}
+	}
+	async componentDidMount(){
+		const currentUSD = await coinGeckoCurrentUSD() 
+		this.setState({currentUSD})
+	}
+	
 	render() {
 		const TableRow = (_props) => {
 			const {
@@ -77,7 +93,10 @@ class TxTableBody extends Component {
 				data,
 				address
 			} = this.props
-			
+			const { currentUSD } = this.state
+			console.log(currentUSD, "current usd")
+			console.log(data)
+			const toUSDNum = Number(currentUSD * data.balance)
 			const addressInData = data.address
 			const isError = data.state === 0
 
@@ -223,7 +242,7 @@ class TxTableBody extends Component {
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
-							<AmountCell amount={data.icxUsd} decimal={3} symbol="USD" />
+							<AmountCell amount={toUSDNum} decimal={3} symbol="USD" />
 							<td><span>{data.percentage}</span><em>%</em></td>
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
