@@ -27,7 +27,7 @@ class TxPageTitle extends Component {
                             Rewards
                             <span>for address {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> reward(s) found
+                                A total of<em>{_totalSize}</em> reward(s) found
                             </span>
                         </p>
                     )
@@ -37,7 +37,7 @@ class TxPageTitle extends Component {
                             Transactions
                             <span>for Contract {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> transaction(s) found
+                                A total of<em>{_totalSize}</em> transaction(s) found
                             </span>
                         </p>
                     )
@@ -47,7 +47,7 @@ class TxPageTitle extends Component {
                             Internal Transactions
                             <span>for Contract {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> internal transaction(s) found
+                                A total of<em>{_totalSize}</em> internal transaction(s) found
                             </span>
                         </p>
                     )
@@ -57,7 +57,7 @@ class TxPageTitle extends Component {
                             Token Transfers
                             <span>for Contract {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> token transfer(s) found
+                                A total of<em>{_totalSize}</em> token transfer(s) found
                             </span>
                         </p>
                     )
@@ -67,7 +67,7 @@ class TxPageTitle extends Component {
                             Events
                             <span>for Contract {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> event(s) found
+                                A total of<em>{_totalSize}</em> event(s) found
                             </span>
                         </p>
                     )
@@ -77,7 +77,7 @@ class TxPageTitle extends Component {
                             Transactions
                             <span>for Address {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> transaction(s) found
+                                A total of<em>{_totalSize}</em> transaction(s) found
                             </span>
                         </p>
                     )
@@ -87,7 +87,7 @@ class TxPageTitle extends Component {
                             Internal Transactions
                             <span>for Address {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> internal transaction(s) found
+                                A total of<em>{_totalSize}</em> internal transaction(s) found
                             </span>
                         </p>
                     )
@@ -97,7 +97,7 @@ class TxPageTitle extends Component {
                             Token Transfers
                             <span>for Address {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> token transfer(s) found
+                                A total of<em>{_totalSize}</em> token transfer(s) found
                             </span>
                         </p>
                     )
@@ -117,7 +117,7 @@ class TxPageTitle extends Component {
                             Token Transfers
                             <span>for Token {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> token transfer(s) found
+                                A total of<em>{_totalSize}</em> token transfer(s) found
                             </span>
                         </p>
                     )
@@ -147,7 +147,7 @@ class TxPageTitle extends Component {
                             Internal Transactions
                             <span>for Transaction {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> internal transaction(s) found
+                                A total of<em>{_totalSize}</em> internal transaction(s) found
                             </span>
                         </p>
                     )
