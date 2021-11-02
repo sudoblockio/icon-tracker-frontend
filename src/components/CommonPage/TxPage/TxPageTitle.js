@@ -5,6 +5,7 @@ import { numberWithCommas } from '../../../utils/utils'
 class TxPageTitle extends Component {
     render() {
         const { txType, urlIndex, listSize, totalSize } = this.props
+        console.log(this.props, "block tx list props")
 
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
@@ -106,7 +107,7 @@ class TxPageTitle extends Component {
                             Transactions
                             <span>for Block Height {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> transaction(s) found
+                                A total of<em>{_totalSize}</em> transaction(s) found
                             </span>
                         </p>
                     )

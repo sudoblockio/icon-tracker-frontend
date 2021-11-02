@@ -354,6 +354,8 @@ export function getArrayState(step, state, action, dataType) {
         }
         case REDUX_STEP.FULFILLED:
             const { data, listSize, totalSize } = payload
+            console.log(data, "from step fulfilled")
+            console.log(payload.headers, "headers available")
             return {
                 ...state,
                 [dataType]: {

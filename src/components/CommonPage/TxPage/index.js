@@ -105,7 +105,6 @@ class TxPage extends Component {
 
     getCount = () => {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
-        console.log(tx, "page getCount tx")
         const { count } = tx
         return count
     }
@@ -147,10 +146,8 @@ class TxPage extends Component {
     getTxListByCount = count => {
         this.historyPush(1, count)
     }
-// 41685218
-// 41685206
+
     getTxListByPage = page => {
-        console.log(page, "page")
         const count = this.getCount()
         
         this.historyPush(page, count)
@@ -208,6 +205,7 @@ class TxPage extends Component {
 
     render() {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
+        console.log( "one single tx")
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx
