@@ -47,9 +47,10 @@ export async function addressTxList(payload) {
 }
 
 export async function addressTokenTxList(payload) {
+    console.log(payload, "add token list payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/address/tokenTxList`, payload))
+        trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/address-tokens/${payload.address}`, payload))
             .then(result => {
                 resolve(result.data)
             })

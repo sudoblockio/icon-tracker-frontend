@@ -98,7 +98,7 @@ export function* addressVotedListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_VOTED_LIST, action.payload.address);
-
+    console.log(payload, "payload from voted list saga")
     if (payload.status === 200) {
       yield put({ type: AT.addressVotedListFulfilled, payload: payload });
     }

@@ -147,7 +147,8 @@ class TxPage extends Component {
     getTxListByCount = count => {
         this.historyPush(1, count)
     }
-
+// 41685218
+// 41685206
     getTxListByPage = page => {
         console.log(page, "page")
         const count = this.getCount()
