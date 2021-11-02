@@ -31,6 +31,14 @@ export async function coinGeckoMarketCap () {
     return data[0].market_cap
 }
 
+export async function coinGeckoICXtoUSD (icx) {
+    const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
+    const data = await icondetail.json()
+    const currentPrice = data.market_data.current_price.usd
+    return icx*currentPrice;
+}
+
+
 export async function getAllTransactions () {
     const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
     const data = await prepnode.json()

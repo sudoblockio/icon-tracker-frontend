@@ -21,6 +21,7 @@ class WalletTabs extends Component {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount } = data
+        
 
         console.log(data, "wallet tabs data")
 

@@ -60,7 +60,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} internal transaction(s)</em>
                             </span>
                         </p>
@@ -78,7 +78,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> event(s) from a total of
+                                Latest<em>{totalSizeNum}</em> event(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} event(s)</em>
                             </span>
                         </p>
@@ -88,8 +88,8 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSize}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{totalSize} transaction(s)</em>
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
                             </span>
                         </p>
                     )

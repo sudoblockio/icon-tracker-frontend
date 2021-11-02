@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
-import { getLastBlock } from '../../../redux/api/restV3/iiss';
+import { getLastBlock, coinGeckoICXtoUSD } from '../../../redux/api/restV3/iiss';
 // import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
@@ -35,12 +35,14 @@ class TransactionInfo extends Component {
 		super(props)
 		this.state = {
 			download: undefined,
-			lastBlock: 0
+			lastBlock: 0,
+			feeInUSD: 0
 		}
 	}
 
 	async componentDidMount() {
 		this.setState({lastBlock: await getLastBlock()})
+		
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -75,10 +77,19 @@ class TransactionInfo extends Component {
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
-	render() {
+	getFee = async (icx) => {
+		const data = await coinGeckoICXtoUSD(icx)
+		this.setState({feeInUSD: data})
+		return data
+	}
+	
+
+	render()  {
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
+		this.getFee(convertHexToValue(data.transaction_fee))
+
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent height='206px' />
@@ -117,6 +128,7 @@ class TransactionInfo extends Component {
 				const isSuccess = Number(receipt_status) === 1
 				const isErrorMsg = isValidData(errorMsg)
 				const scam = reportedCount >= 10 ?  true: false;
+				
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -195,7 +207,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in ICX</td>
-											<td>{convertHexToValue(transaction_fee)} ICX<em>({feeUsd ? convertNumberToText(feeUsd, 4) : ' -'} USD)</em></td>
+											<td>{convertHexToValue(transaction_fee)} ICX<em>({ transaction_fee ?  this.state.feeInUSD.toFixed(4) : ' -'} USD)</em></td>
 										</tr>
 
 										{(data_type && dataString) ?
