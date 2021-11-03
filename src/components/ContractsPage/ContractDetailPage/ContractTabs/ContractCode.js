@@ -50,7 +50,7 @@ class ContractCode extends Component {
                             <tr>
                                 <th>Contract Name</th>
                                 <th>Active </th>
-                                <th>Updated Contract Source Code</th>
+                                {/* <th>Updated Contract Source Code</th> */}
                             </tr>
                         </thead>
                         <tbody>
