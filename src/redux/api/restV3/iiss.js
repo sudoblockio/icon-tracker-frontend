@@ -52,35 +52,42 @@ export async function getSrcCodeLink (addr) {
     return code
 }
 
-// CONVERT TO OUR ENDPOINT ****
-export async function getTotalSupply () {
-    const walletApi = await walletApiInstance()
-    return new Promise(resolve => {
-        const param = {
-            jsonrpc: "2.0",
-            method: "icx_getTotalSupply",
-            id: randomUint32(),
-        }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
-        .then(response => {
-            const bigNum = BigNumber(response.data.result, 16)
-            const divisor = Math.pow(10, 18)
-            resolve(BigNumber(bigNum / divisor).toFixed());
-        })
-        .catch(error => {
-            if (!!error.response) {
-                resolve(error.response.data);
-            }
-            else {
-                resolve({
-                    error: {
-                        message: error.message
-                    }
-                })
-            }
-        })
-    })
+export async function getTotalSupply() {
+    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
+    const data = await prepnode.json()
+    console.log(data.total_supply)
+    return data.total_supply
 }
+
+// CONVERT TO OUR ENDPOINT ****
+// export async function getTotalSupply () {
+//     const walletApi = await walletApiInstance()
+//     return new Promise(resolve => {
+//         const param = {
+//             jsonrpc: "2.0",
+//             method: "icx_getTotalSupply",
+//             id: randomUint32(),
+//         }
+//         walletApi.post(`/api/v3`, JSON.stringify(param))
+//         .then(response => {
+//             const bigNum = BigNumber(response.data.result, 16)
+//             const divisor = Math.pow(10, 18)
+//             resolve(BigNumber(bigNum / divisor).toFixed());
+//         })
+//         .catch(error => {
+//             if (!!error.response) {
+//                 resolve(error.response.data);
+//             }
+//             else {
+//                 resolve({
+//                     error: {
+//                         message: error.message
+//                     }
+//                 })
+//             }
+//         })
+//     })
+// }
 
 export async function prepList(grade) {
     const trackerApi = await trackerApiInstance()
