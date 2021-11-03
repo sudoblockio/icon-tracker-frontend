@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
+import { getSrcCodeLink } from '../../../../redux/api/restV3/iiss'
 import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
@@ -12,8 +13,14 @@ class ContractCode extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        const { contract } = this.props
+        const { data } = contract
+        const { public_key } = data
+        console.log(this.props, "contract code comp")
         this.getDownloadLink()
+        const cxdata = await getSrcCodeLink(public_key)
+        console.log(cxdata, "contract code comp")
     }
 
     getDownloadLink = async () => {

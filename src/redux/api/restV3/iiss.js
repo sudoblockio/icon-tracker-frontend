@@ -47,7 +47,9 @@ export async function getAllTransactions () {
 export async function getSrcCodeLink (addr) {
     const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
     const cxJson = await cxdata.json()
-    console.log(cxJson, "the cx json")
+    let code;
+    cxJson[0] ? code=cxJson[0].source_code_link : code=0
+    return code
 }
 
 // CONVERT TO OUR ENDPOINT ****
