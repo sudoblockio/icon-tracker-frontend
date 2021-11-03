@@ -44,6 +44,12 @@ export async function getAllTransactions () {
     return data.total_tx;
 }
 
+export async function getSrcCodeLink (addr) {
+    const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
+    const cxJson = await cxdata.json()
+    console.log(cxJson, "the cx json")
+}
+
 // CONVERT TO OUR ENDPOINT ****
 export async function getTotalSupply () {
     const walletApi = await walletApiInstance()

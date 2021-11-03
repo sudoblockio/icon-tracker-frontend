@@ -18,6 +18,7 @@ class ContractCode extends Component {
 
     getDownloadLink = async () => {
         const { contract } = this.props
+        console.log(this.props, "download link props")
         const { data } = contract
         const { public_key, contractVersion, newVersion } = data
         if (isValidData(public_key)) {

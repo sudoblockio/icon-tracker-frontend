@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BigNumber from 'bignumber.js'
 import {
 	calcFromNow,
 	numberWithCommas,
@@ -88,7 +89,9 @@ class TxTableBody extends Component {
 				currentUSD,
 				totalSupply,
 			} = this.props
-			const percentage = totalSupply ?  Number(data.balance / Number(totalSupply)).toFixed(4) : 0;
+			const percentage = totalSupply ?  data.balance / totalSupply : 0;
+			const percentStr = BigNumber(percentage, 16)
+			console.log(percentStr,"to fixed")
 			const addressInData = data.address
 			const isError = data.state === 0
 			switch (txType) {
