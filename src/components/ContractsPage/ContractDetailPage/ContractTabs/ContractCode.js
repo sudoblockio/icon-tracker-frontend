@@ -17,10 +17,9 @@ class ContractCode extends Component {
         const { contract } = this.props
         const { data } = contract
         const { public_key } = data
-        console.log(this.props, "contract code comp")
         this.getDownloadLink()
-        const cxdata = await getSrcCodeLink(public_key)
-        console.log(cxdata, "contract code comp")
+        const srcCodeLink = await getSrcCodeLink(public_key)
+        this.setState({activeLink: srcCodeLink})
     }
 
     getDownloadLink = async () => {
@@ -29,9 +28,9 @@ class ContractCode extends Component {
         const { data } = contract
         const { public_key, contractVersion, newVersion } = data
         if (isValidData(public_key)) {
-            const activeLink = isValidData(contractVersion) ? await makeDownloadLink(public_key, contractVersion) : ''
+            const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
             const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
-            console.log(activeLink, updatedLink)
+            console.log(activeLink, "the active link")
             this.setState({ activeLink, updatedLink })
         }
     }
@@ -57,8 +56,8 @@ class ContractCode extends Component {
                         <tbody>
                             <tr className="">
                                 <td>{tokenText(name, symbol)}</td>
-                                <DownloadLink link={activeLink} name={`${name}_${contractVersion}.zip`} />
-                                <DownloadLink link={updatedLink} name={`${name}_${newVersion}.zip`} />
+                                <DownloadLink link={activeLink} name={`sssss.zip`} />
+                                {/* <DownloadLink link={updatedLink} name={`${name}_${newVersion}.zip`} /> */}
                             </tr>
                         </tbody>
                     </table>
@@ -85,7 +84,11 @@ class ContractCode extends Component {
 
 const DownloadLink = ({ link, name }) => {
     const Content = () => {
+        console.log(link, "from Download Link")
         if (link) {
+            console.log(link, "from Download Link after if")
+            console.log(name, "from Download link name")
+
             return (
                 <td>
                     <span>
