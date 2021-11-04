@@ -45,49 +45,20 @@ export async function getAllTransactions () {
 }
 
 export async function getSrcCodeLink (addr) {
+    if (addr !== undefined) {
     const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
     const cxJson = await cxdata.json()
     let code;
     cxJson[0] ? code=cxJson[0].source_code_link : code=0
-    return code
+    return code;
+    }
 }
 
 export async function getTotalSupply() {
-    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
+    const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
     const data = await prepnode.json()
-    console.log(data.total_supply)
     return data.total_supply
 }
-
-// CONVERT TO OUR ENDPOINT ****
-// export async function getTotalSupply () {
-//     const walletApi = await walletApiInstance()
-//     return new Promise(resolve => {
-//         const param = {
-//             jsonrpc: "2.0",
-//             method: "icx_getTotalSupply",
-//             id: randomUint32(),
-//         }
-//         walletApi.post(`/api/v3`, JSON.stringify(param))
-//         .then(response => {
-//             const bigNum = BigNumber(response.data.result, 16)
-//             const divisor = Math.pow(10, 18)
-//             resolve(BigNumber(bigNum / divisor).toFixed());
-//         })
-//         .catch(error => {
-//             if (!!error.response) {
-//                 resolve(error.response.data);
-//             }
-//             else {
-//                 resolve({
-//                     error: {
-//                         message: error.message
-//                     }
-//                 })
-//             }
-//         })
-//     })
-// }
 
 export async function prepList(grade) {
     const trackerApi = await trackerApiInstance()

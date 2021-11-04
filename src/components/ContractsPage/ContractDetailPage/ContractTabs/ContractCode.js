@@ -18,6 +18,7 @@ class ContractCode extends Component {
         const { data } = contract
         const { public_key } = data
         this.getDownloadLink()
+        console.log(public_key, "the public key")
         const srcCodeLink = await getSrcCodeLink(public_key)
         this.setState({activeLink: srcCodeLink})
     }
