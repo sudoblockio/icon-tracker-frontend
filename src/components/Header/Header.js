@@ -51,7 +51,7 @@ class Header extends Component {
                                 >
                                     <span>Transaction</span>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <span>
                                         Token
                                         <em className="img" />
@@ -72,7 +72,7 @@ class Header extends Component {
                                             <span>Token Transfers List</span>
                                         </li>
                                     </ol>
-                                </li>
+                                </li> */}
                                 <li>
                                     <span>
                                         Governance

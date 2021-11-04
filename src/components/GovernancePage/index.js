@@ -190,12 +190,15 @@ class GovernancePage extends Component {
 	}
 	getSponsorCount= (address) =>{
 		let sponsors
-		if (this.sponsorData.data.result[address] !== undefined) {
-			sponsors = Number(this.sponsorData.data.result[address])
-		} else {
-			sponsors =  0
+		if (this.sponsorData.data) {
+			if (this.sponsorData.data.result[address] !== undefined) {
+				sponsors = Number(this.sponsorData.data.result[address])
+			} else {
+				sponsors =  0
+			}
+			return sponsors
 		}
-		return sponsors
+		
 	}
 
 	render() {
