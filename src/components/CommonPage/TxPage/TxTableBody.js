@@ -90,8 +90,7 @@ class TxTableBody extends Component {
 				totalSupply,
 			} = this.props
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
-			const percentStr = BigNumber(percentage, 16)
-			console.log(percentStr,"to fixed")
+			
 			const addressInData = data.address
 			const isError = data.state === 0
 			switch (txType) {
@@ -266,7 +265,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
-					
+				
 					return (
 						<tr>
 							<td>{`${JSON.stringify(data.address)}, ${JSON.stringify(data.indexed)},${JSON.stringify(data.data)}` }</td>
