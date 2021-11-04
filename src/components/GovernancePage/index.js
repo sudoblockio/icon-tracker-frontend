@@ -51,7 +51,7 @@ class GovernancePage extends Component {
 		return response;
 	}
 	governanceData=[];
-	sponsorData={}
+
 	statusList = []
 	
 	async componentWillMount(){
@@ -59,8 +59,6 @@ class GovernancePage extends Component {
 		this.statusList = await getPrepStatusList()
 		// gets "has governance" for each prep
 		this.governanceData = await this.getAdditionalData('get_PReps');
-		// inspect
-		this.sponsorData = await this.getAdditionalData('get_sponsors_record')
 	}
 	async componentDidMount() {
 
@@ -187,18 +185,6 @@ class GovernancePage extends Component {
 			}
 		})
 		return result
-	}
-	getSponsorCount= (address) =>{
-		let sponsors
-		if (this.sponsorData.data) {
-			if (this.sponsorData.data.result[address] !== undefined) {
-				sponsors = Number(this.sponsorData.data.result[address])
-			} else {
-				sponsors =  0
-			}
-			return sponsors
-		}
-		
 	}
 
 	render() {
@@ -346,7 +332,6 @@ class GovernancePage extends Component {
 										{searched.map((prep, index) => (
 											<TableRow 
 											governanceStatus={this.getGovernanceStatus(prep.address)}
-											sponsorCount={this.getSponsorCount(prep.address)} 
 											lastBlockHeight={height}
 											statusData = { this.statusList}
 												key={index}
@@ -430,7 +415,7 @@ class TableRow extends Component {
 			blackChecked,
 			index,
 			governanceStatus,
-			sponsorCount,
+
 			statusData,
 		} = this.props
 
@@ -451,15 +436,16 @@ class TableRow extends Component {
 			// irepUpdatedBlockHeight,
 			active,
 			logo,
+			sponsored_cps_grants
 			
 			// balance,
 			// unstake,
 		} = prep
+		console.log(prep, "stake")
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 
 		const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
-		const prepStaked = IconConverter.toNumber(stake || 0)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
@@ -483,9 +469,9 @@ class TableRow extends Component {
 					</ul>
 				</td>
 				<td>{governanceStatus===true?'YES':'NO'}</td>
-				<td>{sponsorCount}</td>
+				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
-				{!blackChecked && <td><span>{convertNumberToText(prepStaked, 4)}</span></td>}
+				{!blackChecked && <td><span>{convertNumberToText(sponsored_cps_grants)}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span><em>{numberWithCommas((prepVoted).toFixed(0))}</em></td>}
 			</tr>
 		)
