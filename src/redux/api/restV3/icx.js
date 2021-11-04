@@ -4,35 +4,35 @@ import IconService, { HttpProvider } from "icon-sdk-js"
 import { getWalletApiUrl } from "./config"
 import axios from 'axios'
 
-// export async function icxGetScore(params) {
-//   const walletApi = await walletApiInstance()
-//   return new Promise(resolve => {
-//     const param = {
-//       jsonrpc: "2.0",
-//       method: "icx_getScoreApi",
-//       params: params,
-//       id: randomUint32()
-//     }
+export async function icxGetScore(params) {
+  const walletApi = await walletApiInstance()
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      method: "icx_getScoreApi",
+      params: params,
+      id: randomUint32()
+    }
  
-//     walletApi.post(`/api/v3`, JSON.stringify(param))
-//       .then(response => {
+    walletApi.post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
     
-//         resolve(response);
-//       })
-//       .catch(error => {
-//         if (!!error.response) {
-//           resolve(error.response.data);
-//         }
-//         else {
-//           resolve({
-//             error: {
-//               message: error.message
-//             }
-//           })
-//         }
-//       })
-//   });
-// }
+        resolve(response);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        }
+        else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          })
+        }
+      })
+  });
+}
 
 export async function icxCall(params) {
 

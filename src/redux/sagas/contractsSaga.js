@@ -12,9 +12,10 @@ import {
   contractInternalTxList as CONTRACT_INTERNAL_TX_LIST_API,
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
+  icxCall as ICX_CALL_API,
   // icxGetScore as ICX_GET_SCORE_API,
-  icxCall as ICX_CALL_API
 } from '../api/restV3';
+import {   getContractABI as ICX_GET_CONTRACT } from '../api/restV3/iiss'
 import { getScoreStatus } from '../api/restV3/contract';
 
 export default function* contractsSaga() {
@@ -88,7 +89,9 @@ export function* contractListSearchFunc(action) {
 
 export function* contractInfoFunc(action) {
   try {
-    const payload = yield call(CONTRACT_INFO_API, action.payload);
+    console.log(action.payload, "cx saga payload info")
+    const payload = yield call(CONTRACT_INFO_API, action.payload.addr);
+    console.log(payload, "cx saga payload info res")
     if (payload.status === 200 && payload.data !== "NO_DATA") {
       console.log(action.payload, "the thing")
 
@@ -101,6 +104,7 @@ export function* contractInfoFunc(action) {
     }
   }
   catch (e) {
+    console.log(e, "hit an error")
     yield put({ type: AT.contractInfoRejected, error: action.payload.addr });
   }
 }
@@ -184,7 +188,6 @@ export function* contractTokenTxListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_TOKEN_TX_LIST_API, action.payload);
-    console.log(payload, "token contract saga")
     if (payload.status === 200) {
       yield put({ type: AT.contractTokenTxListFulfilled, payload });
     }
@@ -219,14 +222,14 @@ export function* contractEventLogListFunc(action) {
 
 export function* icxGetSroreFunc(action) {
   try {
-    // const payload = yield call(ICX_GET_SCORE_API, action.payload);
-    // if (payload.status === 200) {
-    //   yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload.data.result } });
-    // }
-    // else {
-    //   const { message } = payload.error
-    //   throw new Error(message)
-    // }
+    const payload = yield call(ICX_GET_CONTRACT, action.payload);
+    if (payload.length !== 0) {
+      yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload } });
+    }
+    else {
+      const { message } = payload.error
+      throw new Error(message)
+    }
   }
   catch (e) {
     yield put({ type: AT.icxGetScoreRejected, error: e.message });
@@ -274,66 +277,67 @@ export function* icxCallFunc(action) {
 }
 
 export function* readContractInformationFunc(action) {
-  // try {
-  //   const score = yield call(ICX_GET_SCORE_API, action.payload);
-  //   if (score.status !== 200) {
-  //     const { message } = score.error
-  //     throw new Error(message)
-  //   }
-
-  //   const abiData = score.data.result
-  //   const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
-  //   const { address } = action.payload
-  //   const funcList = [...readOnlyFunc]
-  //   const _funcOutputs = yield all(
-  //     readOnlyFunc.map(
-  //       func => {
-  //         if (func["inputs"].length === 0) {
-  //           return call(ICX_CALL_API, {
-  //             from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
-  //             to: address,
-  //             dataType: "call",
-  //             data: {
-  //               method: func["name"]
-  //             }
-  //           })
-  //         }
-  //         else {
-  //           return ''
-  //         }
-  //       }
-  //     )
-  //   )
-  //   const funcOutputs = []
-  //   _funcOutputs.forEach(output => {
-  //     if (output === '') {
-  //       funcOutputs.push({
-  //         valueArray: [],
-  //         error: ''
-  //       })
-  //     }
-  //     else if (output.status === 200) {
-  //       const { result } = output.data
-  //       // TODO
-  //       // const valueArray = Array.isArray(result) ? result : [result]
-  //       const valueArray = [result]
-  //       funcOutputs.push({
-  //         valueArray,
-  //         error: ''
-  //       })
-  //     }
-  //     else {
-  //       const { message } = output.error
-  //       funcOutputs.push({
-  //         valueArray: [],
-  //         error: message
-  //       })
-  //     }
-  //   })
-  //   const payload = { funcList, funcOutputs }
-  //   yield put({ type: AT.readContractInformationFulfilled, payload })
-  // }
-  // catch (e) {
-  //   yield put({ type: AT.readContractInformationRejected, error: e.message })
-  // }
+  try {
+    console.log(action.payload, "what is the score action payload")
+    const score = yield call(ICX_GET_CONTRACT, action.payload.address);
+    if (score.length === 0) {
+      const { message } = score.error
+      throw new Error(message)
+    }
+    console.log(score, "score is abi")
+    const abiData = score
+    const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
+    const { address } = action.payload
+    const funcList = [...readOnlyFunc]
+    const _funcOutputs = yield all(
+      readOnlyFunc.map(
+        func => {
+          if (func["inputs"].length === 0) {
+            return call(ICX_CALL_API, {
+              from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
+              to: address,
+              dataType: "call",
+              data: {
+                method: func["name"]
+              }
+            })
+          }
+          else {
+            return ''
+          }
+        }
+      )
+    )
+    const funcOutputs = []
+    _funcOutputs.forEach(output => {
+      if (output === '') {
+        funcOutputs.push({
+          valueArray: [],
+          error: ''
+        })
+      }
+      else if (output.status === 200) {
+        const { result } = output.data
+        // TODO
+        // const valueArray = Array.isArray(result) ? result : [result]
+        const valueArray = [result]
+        funcOutputs.push({
+          valueArray,
+          error: ''
+        })
+      }
+      else {
+        const { message } = output.error
+        funcOutputs.push({
+          valueArray: [],
+          error: message
+        })
+      }
+    })
+    const payload = { funcList, funcOutputs }
+    yield put({ type: AT.readContractInformationFulfilled, payload })
+  }
+  catch (e) {
+    yield put({ type: AT.readContractInformationRejected, error: e.message })
+  }
 }

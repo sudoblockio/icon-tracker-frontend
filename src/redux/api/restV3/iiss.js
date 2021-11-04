@@ -55,6 +55,7 @@ export async function getSrcCodeLink (addr) {
 }
 
 export async function getContractABI (addr) {
+    console.log(addr, "the address func")
     if (addr !== undefined) {
         const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
         const cxJson = await cxdata.json()

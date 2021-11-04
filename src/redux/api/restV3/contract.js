@@ -20,10 +20,12 @@ export async function contractList(payload) {
 }
 
 export async function contractInfo(payload) {
+  console.log(payload, "the contract info payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.addr}`)
+    trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload}`)
       .then(result => {
+        console.log(result, "the contract info payload")
         resolve(result)
       })
       .catch(error => {
