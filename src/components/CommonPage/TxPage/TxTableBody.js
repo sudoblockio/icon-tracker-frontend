@@ -90,7 +90,6 @@ class TxTableBody extends Component {
 				totalSupply,
 			} = this.props
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
-			
 			const addressInData = data.address
 			const isError = data.state === 0
 			switch (txType) {
@@ -236,7 +235,7 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
-							<td><span>{percentage}</span><em>%</em></td>
+							<td><span>{percentage.toString().slice(0,3)}</span><em>%</em></td>
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
 						</tr>

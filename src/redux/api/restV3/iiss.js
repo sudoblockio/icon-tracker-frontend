@@ -67,7 +67,7 @@ export async function getContractABI (addr) {
 export async function getTotalSupply() {
     const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
     const data = await prepnode.json()
-    console.log(data.total_supply / Math.pow(10, 18), "total supply data")
+    console.log(data.total_supply / Math.pow(10, 18).toFixed(2), "total supply data")
     return data.total_supply/Math.pow(10, 18).toFixed(2)
 }
 

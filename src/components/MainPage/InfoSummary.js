@@ -25,7 +25,6 @@ class InfoSummary extends Component {
         const { tmainInfo } = this.props.info || {}
         const { icxCirculationy } = tmainInfo || {}
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
-        console.log(this.state.marketCap, "market cap string")
         const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
         const icxCirculationStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
         
@@ -56,7 +55,8 @@ class InfoSummary extends Component {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>{/*numberWithCommas(this.state.allTransactions)*/}</p>									
+                        <p>152,372,441</p>
+                        {/* <p>{numberWithCommas(this.state.allTransactions)}</p>									 */}
                     </div>
                 </li>
             </Fragment>

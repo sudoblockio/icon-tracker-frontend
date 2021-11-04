@@ -37,7 +37,7 @@ class TxPage extends Component {
         this.setInitialData(this.props.url)
         const currentUSD = await coinGeckoCurrentUSD()
         const supplyMetrics = await getSupplyMetrics()
-        const totalsupply = supplyMetrics.data.total_supply
+        const totalsupply = supplyMetrics.data.total_supply/Math.pow(10, 8)
         this.setState({currentUSD, totalsupply})
     }
 
@@ -215,7 +215,7 @@ class TxPage extends Component {
     }
 
     render() {
-        console.log(this.state, "tx page state")
+        
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
@@ -232,7 +232,6 @@ class TxPage extends Component {
                                 <TxTableHead txType={this.txType} />
                             </thead>
                             <tbody>
-                                {console.log(this.state, "state from tx page")}
                                 {data.map((item, index) => (
                                     <TxTableBody
                                         key={index}
