@@ -8,7 +8,7 @@ const  {ADDRESSES_PREFIX, TRANSACTIONS_PREFIX} = prefixes
 export async function addressList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${ADDRESSES_PREFIX}`)
+        trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}`, payload))
             .then(result => {
                 resolve(result)
             })

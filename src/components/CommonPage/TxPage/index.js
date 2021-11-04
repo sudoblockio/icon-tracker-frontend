@@ -160,7 +160,6 @@ class TxPage extends Component {
 
     getTxListByPage = page => {
         const count = this.getCount()
-        
         this.historyPush(page, count)
     }
 
@@ -181,7 +180,7 @@ class TxPage extends Component {
             case TX_TYPE.TOKEN_HOLDERS:
             case TX_TYPE.TRANSACTION_EVENTS:
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
-            case TX_TYPE.ADDRESS_REWARD:         
+            case TX_TYPE.ADDRESS_REWARD:        
                 url = this.makeUrl(page, count, this.urlIndex)
                 break
             case TX_TYPE.BLOCKS:
@@ -194,6 +193,7 @@ class TxPage extends Component {
             default:
                 return
         }
+       
         this.props.history.push(url)
     }
 
@@ -210,7 +210,6 @@ class TxPage extends Component {
         if (count) {
             url += `?count=${count}`
         }
-
         return url
     }
 

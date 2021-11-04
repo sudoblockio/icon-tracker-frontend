@@ -31,7 +31,6 @@ export async function getSupplyMetrics() {
   return new Promise((resolve, reject) => {
     trackerApi.get('/api/v1/metrics/supply')
       .then(result => {
-        console.log(result, "supply metrics result")
         resolve(result)
       })
       .catch(error => {

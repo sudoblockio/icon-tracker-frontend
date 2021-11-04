@@ -267,7 +267,6 @@ export function makeUrl(url, payload) {
     if (!payload) {
         return url
     }
-
     let result = url
     payload.limit = payload.count
     if (payload.page !==1){
@@ -275,7 +274,6 @@ export function makeUrl(url, payload) {
         delete payload.page
     }
     delete payload.count
-    console.log(payload, "make url payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })

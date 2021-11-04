@@ -15,7 +15,6 @@ class InfoSummary extends Component {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
-        console.log(marketCap, "market cap string")
         // const allTransactions = await getAllTransactions()
         const supplyMetrics = await getSupplyMetrics()
         this.setState({ isSolo, totalSupply, marketCap, /*allTransactions,*/ supplyMetrics })
