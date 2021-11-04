@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap, getAllTransactions } from '../../redux/api/restV3/iiss'
+import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/api/restV3/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 
 class InfoSummary extends Component {
@@ -15,17 +15,20 @@ class InfoSummary extends Component {
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
-        const allTransactions = await getAllTransactions()
+        console.log(marketCap, "market cap string")
+        // const allTransactions = await getAllTransactions()
         const supplyMetrics = await getSupplyMetrics()
-        this.setState({ isSolo, totalSupply, marketCap, allTransactions, supplyMetrics })
+        this.setState({ isSolo, totalSupply, marketCap, /*allTransactions,*/ supplyMetrics })
     }
 
     render() {
         const { tmainInfo } = this.props.info || {}
         const { icxCirculationy } = tmainInfo || {}
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
+        console.log(this.state.marketCap, "market cap string")
         const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
         const icxCirculationStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+        
         return (
             <Fragment>
                 <li>
@@ -53,7 +56,7 @@ class InfoSummary extends Component {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>{numberWithCommas(this.state.allTransactions)}</p>									
+                        <p>{/*numberWithCommas(this.state.allTransactions)*/}</p>									
                     </div>
                 </li>
             </Fragment>
