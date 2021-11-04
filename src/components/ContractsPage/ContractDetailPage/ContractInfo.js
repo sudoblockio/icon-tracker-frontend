@@ -16,7 +16,7 @@ class ContractInfo extends Component {
 
     render() {
         const { contract } = this.props
-        console.log(this.props, "contract detail props")
+  
         const { loading, data } = contract
         const test = data[0]
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount

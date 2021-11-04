@@ -55,7 +55,6 @@ export async function getSrcCodeLink (addr) {
 }
 
 export async function getContractABI (addr) {
-    console.log(addr, "the address func")
     if (addr !== undefined) {
         const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
         const cxJson = await cxdata.json()
@@ -68,7 +67,8 @@ export async function getContractABI (addr) {
 export async function getTotalSupply() {
     const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
     const data = await prepnode.json()
-    return data.total_supply
+    console.log(data.total_supply / Math.pow(10, 18), "total supply data")
+    return data.total_supply/Math.pow(10, 18).toFixed(2)
 }
 
 export async function prepList(grade) {
