@@ -48,7 +48,7 @@ import {
 } from './token'
 
 import {
-    icxGetScore,
+    // icxGetScore,
     icxCall,
     getTransactionResult,
     getTransaction,
@@ -102,7 +102,7 @@ export {
     tokenTransfersList,
     tokenHoldersList,
 
-    icxGetScore,
+    // icxGetScore,
     icxCall,
     getTransactionResult,
     getTransaction,

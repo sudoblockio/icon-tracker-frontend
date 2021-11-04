@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
-import { getSrcCodeLink } from '../../../../redux/api/restV3/iiss'
+import { getSrcCodeLink, getContractABI } from '../../../../redux/api/restV3/iiss'
 import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
@@ -10,6 +10,7 @@ class ContractCode extends Component {
         this.state = {
             activeLink: '',
             updatedLink: '',
+            cxABI: ''
         }
     }
 
@@ -18,31 +19,29 @@ class ContractCode extends Component {
         const { data } = contract
         const { public_key } = data
         this.getDownloadLink()
-        console.log(public_key, "the public key")
+        const cxABICode = await getContractABI(public_key)
         const srcCodeLink = await getSrcCodeLink(public_key)
-        this.setState({activeLink: srcCodeLink})
+        this.setState({activeLink: srcCodeLink, cxABI: cxABICode})
     }
 
     getDownloadLink = async () => {
         const { contract } = this.props
-        console.log(this.props, "download link props")
         const { data } = contract
-        const { public_key, contractVersion, newVersion } = data
+        const { public_key, newVersion } = data
         if (isValidData(public_key)) {
             const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
             const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
-            console.log(activeLink, "the active link")
             this.setState({ activeLink, updatedLink })
         }
     }
 
     render() {
         const { activeLink, updatedLink } = this.state
-        const { contract, contractAbi } = this.props
+        const { contract } = this.props
         const { data } = contract
         console.log(data, "render code data")
         const { public_key, name, symbol, contractVersion, newVersion } = data
-        const { loading, data: abiData, error } = contractAbi
+        // const { loading, data: abiData, error } = contractAbi
         return (
             <div className="contents">
                 <div className="table-box">
@@ -57,7 +56,7 @@ class ContractCode extends Component {
                         <tbody>
                             <tr className="">
                                 <td>{tokenText(name, symbol)}</td>
-                                <DownloadLink link={activeLink} name={`sssss.zip`} />
+                                <DownloadLink link={activeLink} name={`cx_src_code.zip`} />
                                 {/* <DownloadLink link={updatedLink} name={`${name}_${newVersion}.zip`} /> */}
                             </tr>
                         </tbody>
@@ -66,17 +65,18 @@ class ContractCode extends Component {
                 <div className="code-box api">
                     <div className="title-group">
                         <span className="title">Contract ABI</span>
-                        <CopyButton data={JSON.stringify(abiData)} title={'Copy ABI'} disabled={!!error} />
+                        <CopyButton data={JSON.stringify(this.state.cxABI)} title={'Copy ABI'} disabled={''} />
                     </div>
-                    {loading ? (
-                        <LoadingComponent height="230px" />
-                    ) : (
+                    {
+                    // loading ? 
+                    // ( <LoadingComponent height="230px" /> ) 
+                    // : 
                         <div className="scroll">
                             <p className="txt" style={{ whiteSpace: 'pre' }}>
-                                {!!error ? error : JSON.stringify(abiData, null, '\t')}
+                                {JSON.stringify(this.state.cxABI, null, '\t')}
                             </p>
                         </div>
-                    )}
+                    }
                 </div>
             </div>
         )
