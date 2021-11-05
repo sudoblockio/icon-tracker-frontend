@@ -441,7 +441,6 @@ class TableRow extends Component {
 			// balance,
 			// unstake,
 		} = prep
-		console.log(prep, "stake")
 		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 
 		const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
@@ -472,7 +471,9 @@ class TableRow extends Component {
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{!blackChecked && <td><span>{convertNumberToText(sponsored_cps_grants)}</span></td>}
-				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span><em>{numberWithCommas((prepVoted).toFixed(0))}</em></td>}
+				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
+				
+				<div><em><span>{numberWithCommas((prepVoted).toFixed(0))}</span></em></div></td>}
 			</tr>
 		)
 	}
