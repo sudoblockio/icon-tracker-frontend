@@ -473,7 +473,7 @@ class TableRow extends Component {
 				{!blackChecked && <td><span>{convertNumberToText(sponsored_cps_grants)}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				
-				<div><em><span>{numberWithCommas((prepVoted).toFixed(0))}</span></em></div></td>}
+				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
 			</tr>
 		)
 	}

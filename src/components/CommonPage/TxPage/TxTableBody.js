@@ -260,7 +260,7 @@ class TxTableBody extends Component {
 								<p>{epochToFromNow(data.block_timestamp)}</p>
 							</td>
 							<td>{data.method}</td>
-							<td>{data.eventLog}</td>
+							<td>{ JSON.stringify(data)}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
