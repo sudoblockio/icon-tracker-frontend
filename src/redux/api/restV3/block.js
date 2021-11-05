@@ -23,7 +23,7 @@ export async function blockInfo(payload) {
   const trackerApi = await trackerApiInstance()
   if (payload.height === '0' ) {
     const num = 800460000*Math.pow(10,18)
-    const response = {
+    const result = {
       data: {
         hash: "0xcf43b3fd45981431a0e64f79d07bfcf703e064b73b802c5f32834eec72142190",
         number: 0,
@@ -33,7 +33,7 @@ export async function blockInfo(payload) {
       },
       status: 200
     }
-    return response
+    return result
   }
   return new Promise((resolve, reject) => {
     trackerApi.get(`${BLOCKS_PREFIX}/${payload.height}`)
