@@ -14,8 +14,14 @@ class RecentTransactions extends Component {
     async componentDidMount() {
         const recentTx = await awaitGetRecentTx()
         this.setState({recentTx})
+        const txsocket = new WebSocket('wss://echo.websocket.org');
+        console.log(txsocket)
+        txsocket.onopen = function(event) {
+            console.log("connection established")
+        }
     }
     render() {
+
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
         
