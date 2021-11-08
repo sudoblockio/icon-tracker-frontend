@@ -267,7 +267,7 @@ class TxTableBody extends Component {
 				
 					return (
 						<tr>
-							<td>{`${JSON.stringify(data.address)}, ${JSON.stringify(data.indexed)},${JSON.stringify(data.data)}` }</td>
+							<td>{`${JSON.stringify(data.address, null, 2)}, ${JSON.stringify(data.indexed, null, 2)},${JSON.stringify(data.data, null, 2)}` }</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
