@@ -4,6 +4,16 @@ import { convertNumberToText, convertHexToValue } from '../../utils/utils'
 import { awaitGetRecentTx } from '../../redux/api/restV3/iiss'
 import { LoadingComponent, TransactionLink } from '../../components'
 
+
+
+// potential web socket pattern:
+// when the component mounts, establish a connection.
+// when there is a message from the web socket (a new block or transaction),
+// populate entire recent block or recent tx component by hitting new data, NOT RERENDERING ENTIRE PAGE
+// make the first row of the table a special class that increases opacity percentage (fade in)
+
+
+
 class RecentTransactions extends Component {
     constructor(props) {
         super(props)
