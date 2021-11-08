@@ -39,6 +39,18 @@ class AddressInfo extends Component {
         this.setState({totalDelegated })
     }
 
+    media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
+    links = {}
+    getSocialMediaLinks = async (name) => {
+        const allPreps = await prepList();
+        const prepArray = allPreps.filter(preps => preps.name === name )
+        const thisPrep = prepArray ? prepArray[0] : prepArray
+        this.media.map(site => {
+            this.links[site] = thisPrep[site]
+        })
+        
+    }
+
     onNotificationChange = () => {
         if (!_isNotificationAvailable) {
             return
@@ -79,19 +91,8 @@ class AddressInfo extends Component {
         this.setState({showNode: "table-row"})
     }
 
-    media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
-    links = {}
-    getSocialMediaLinks = async (name) => {
-        const allPreps = await prepList();
-        const prepArray = allPreps.filter(preps => preps.name === name )
-        const thisPrep = prepArray ? prepArray[0] : prepArray
-        this.media.map(site => {
-            !this.links[site] ? this.links[site] = thisPrep[site] : console.log("found")
-        })
-        
-    }
+
     render() {
-        
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
@@ -145,6 +146,9 @@ class AddressInfo extends Component {
         let linkList;
 
         if (showLinks) {
+            console.log(this.links, "what is show links")
+            console.log(this.getSocialMediaLinks, "what is show links get function")
+            console.log(name,"what is show links name")
             this.getSocialMediaLinks(name)
             linkList=this.links
         } else {
@@ -219,7 +223,7 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-                                                {SocialMediaType.map((type, index) => {
+                                                {linkList && SocialMediaType.map((type, index) => {
                                                     console.log(linkList[type], "INTERESTING")
                                                     const mediaValue = linkList[type]
 

@@ -23,10 +23,12 @@ export async function addressInfo(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.address}`)
             .then(result => {
+                console.log(result, "where is the result")
                 resolve(result)
             })
             .catch(error => {
-                
+                console.log(error, "where is the result")
+
                 reject(error)
             })
     })
