@@ -103,13 +103,13 @@ class ContractInfo extends Component {
                                             <tr>
                                                 <td>Balance</td>
                                                 <td>{convertNumberToText(data.balance)} ICX</td>
-                                                <td>Deposit</td>
-                                                {availableDeposit ? <td>{convertNumberToText(convertLoopToIcxDecimal(availableDeposit))} ICX</td> : <td>-</td>}
-                                            </tr>
-                                            <tr>
                                                 <td>Virtual Step</td>
                                                 {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
                                             </tr>
+                                            {/* <tr>
+                                                <td>Virtual Step</td>
+                                                {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
+                                            </tr> */}
                                         </tbody>
                                     </table>
                                 </div>

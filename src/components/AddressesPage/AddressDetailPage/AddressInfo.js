@@ -41,13 +41,16 @@ class AddressInfo extends Component {
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     links = {}
+    linkList = []
     getSocialMediaLinks = async (name) => {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
         const thisPrep = prepArray ? prepArray[0] : prepArray
         this.media.map(site => {
+
             this.links[site] = thisPrep[site]
         })
+        this.linkList=this.links
         
     }
 
@@ -143,14 +146,14 @@ class AddressInfo extends Component {
                 unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
             })
         }
-        let linkList;
+        
 
         if (showLinks) {
             console.log(this.links, "what is show links")
             console.log(this.getSocialMediaLinks, "what is show links get function")
             console.log(name,"what is show links name")
             this.getSocialMediaLinks(name)
-            linkList=this.links
+            // linkList=this.links
         } else {
             console.log(isPrep, "didn't check if prep")
             console.log("didn't check if prep")
@@ -223,9 +226,9 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-                                                {linkList && SocialMediaType.map((type, index) => {
-                                                    console.log(linkList[type], "INTERESTING")
-                                                    const mediaValue = linkList[type]
+                                                {this.linkList && SocialMediaType.map((type, index) => {
+                                                    console.log(this.linkList[type], "INTERESTING")
+                                                    const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
                                                         return null
