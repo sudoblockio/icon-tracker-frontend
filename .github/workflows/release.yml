@@ -77,6 +77,7 @@ jobs:
           token: ${{ secrets.ICON_CHARTS_PAT }}
 
       - name: Update prod-mainnet deployment values file and re-commit
+        id: yaml-update
         uses: fjogeleit/yaml-update-action@master
         with:
           workDir: charts
@@ -92,7 +93,7 @@ jobs:
 
       - name: Push tags
         run: |
-          git tag -f tracker-frontend-prod-uswest2
-          git tag -f tracker-frontend-prod-euwest2
+          git tag -f tracker-frontend-prod-uswest2 ${{ steps.yaml-update.outputs.commit }}
+          git tag -f tracker-frontend-prod-euwest2 ${{ steps.yaml-update.outputs.commit }}
           git push -f origin --tags
         working-directory: charts
