@@ -7,7 +7,7 @@ import { searchReducer } from '../store/search'
 import { routerReducer } from 'react-router-redux'
 import { tokensReducer } from './tokensReducer'
 import { contractsReducer } from '../store/contracts'
-import { popupReducer } from './popupReducer'
+import { popupReducer } from '../store/popups'
 import { storageReducer } from './storageReducer'
 
 const rootReducer = combineReducers({

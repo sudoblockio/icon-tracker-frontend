@@ -3,7 +3,7 @@ import { GovernancePage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   setPopup 
-} from '../../redux/actions/popupActions'
+} from '../../redux/store/popups'
 
 function mapStateToProps(state) {
   return {

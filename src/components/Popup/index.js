@@ -4,7 +4,7 @@ import AddressQrCode from './AddressQrCode';
 import ContractDetail from './ContractDetail';
 import Scam from './Scam';
 import Search from './Search';
-import { initPopup } from '../../redux/actions/popupActions';
+import { initPopup } from '../../redux/store/popups';
 import { POPUP_TYPE } from '../../utils/const';
 
 class Popup extends Component {
