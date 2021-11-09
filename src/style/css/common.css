@@ -1010,35 +1010,35 @@ body {
 }
 
 .fade {
-  animation: fadeIn linear 2s;
-  -webkit-animation: fadeIn linear 2s;
-  -moz-animation: fadeIn linear 2s;
-  -o-animation: fadeIn linear 2s;
-  -ms-animation: fadeIn linear 2s;
+  animation: fadeIn linear .5s;
+  -webkit-animation: fadeIn linear .5s;
+  -moz-animation: fadeIn linear .5s;
+  -o-animation: fadeIn linear .5s;
+  -ms-animation: fadeIn linear .5s;
 
 }
 @keyframes fadeIn {
-  0% {opacity:0;}
+  0% {opacity:.3;}
   100% {opacity:1;}
 }
 
 @-moz-keyframes fadeIn {
-  0% {opacity:0;}
+  0% {opacity:.3;}
   100% {opacity:1;}
 }
 
 @-webkit-keyframes fadeIn {
-  0% {opacity:0;}
+  0% {opacity:.3;}
   100% {opacity:1;}
 }
 
 @-o-keyframes fadeIn {
-  0% {opacity:0;}
+  0% {opacity:.3;}
   100% {opacity:1;}
 }
 
 @-ms-keyframes fadeIn {
-  0% {opacity:0;}
+  0% {opacity:.3;}
   100% {opacity:1;}
 }
 .flat {

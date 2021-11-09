@@ -12,7 +12,7 @@ class RecentTransactions extends Component {
         this.state = {
             recentTx: 0,
             liveTableRow: {},
-            liveTrClass: "fade"
+            liveTrClass: "flat"
         }
     }
 
@@ -31,7 +31,7 @@ class RecentTransactions extends Component {
         }
         this.txsocket.onmessage = async (event) =>  {
             this.latestTx = event.data
-            this.setState({liveTrClass:"fade"})
+            this.setState({liveTrClass:"flat"})
             this.recentTx = await awaitGetRecentTx()
             console.log(this.recentTx, "From onmessage")
             this.setState({recentTx: this.recentTx})
@@ -42,9 +42,9 @@ class RecentTransactions extends Component {
             try{
                const eventObj = JSON.parse(event.data)
                 this.setState({liveTableRow: eventObj})
-                this.setState({liveTrClass:"flat"})
+                this.setState({liveTrClass:"fade"})
                 console.log("hit the try block")
-                
+                console.log(this.state.liveTrClass, "the class in use")
             }
             catch (e) {
                 console.log(e, "websocket error")
@@ -73,21 +73,21 @@ class RecentTransactions extends Component {
                             <LoadingComponent />
                         </div>
                     ) : (
-                        <ul className={`list ${this.state.liveTrClass}`} style={{ height: list.length === 0 ? 511 : '' }}>
-                            <li key={1}>
-                                        {/* <p className={`icon ${!isSuccess ? 'fail' : ''}`}>T</p>
+                        <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
+                            <li key={1} className={`${this.state.liveTrClass}`}>
+                                         <p className={'icon'}>T</p>
                                         <p className="a">
                                             Status
                                             <em>
-                                                {isSuccess ? 'Success' : 'Fail'}
+                                                {'Success'}
                                             </em>
-                                        </p> */}
-                                        {/* <p className="b">
+                                        </p> 
+                                         <p className="b">
                                             Amount
                                             <em>
-                                            {convertHexToValue(value).toFixed(2)} ICX
+                                            .078 ICX
                                             </em>
-                                        </p> */}
+                                        </p>
                                         <p className="c"> 
                                             Hash
                                              <em>
