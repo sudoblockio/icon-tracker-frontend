@@ -19,17 +19,23 @@ class RecentTransactions extends Component {
     // initialize 
     txsocket;
     latestTx;
+    recentTx;
     async componentDidMount() {
-        const recentTx = await awaitGetRecentTx()
-        this.setState({recentTx})
+        this.recentTx = await awaitGetRecentTx()
+        this.setState({recentTx: this.recentTX})
         this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
-        console.log(this.txsocket)
+        console.log(this.recentTx, "from did mount")
+
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
-        this.txsocket.onmessage = (event) =>  {
+        this.txsocket.onmessage = async (event) =>  {
             this.latestTx = event.data
             this.setState({liveTrClass:"fade"})
+            this.recentTx = await awaitGetRecentTx()
+            console.log(this.recentTx, "From onmessage")
+            this.setState({recentTx: this.recentTx})
+            console.log(this.state, "is it state?")
             
             // this.setState({liveTableRow: event.data})
             // console.log(this.latestTx, "this")
@@ -53,6 +59,7 @@ class RecentTransactions extends Component {
 
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
+        console.log(this.state.recentTx, "what is the list")
         const latest = this.state.liveTableRow
         console.log(latest.hash, "the latest")
         console.log(this.state.liveTrClass, "the class in use")

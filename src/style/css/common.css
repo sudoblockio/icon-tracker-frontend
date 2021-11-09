@@ -1010,11 +1010,11 @@ body {
 }
 
 .fade {
-  animation: fadeIn linear .8s;
-  -webkit-animation: fadeIn linear .8s;
-  -moz-animation: fadeIn linear .8s;
-  -o-animation: fadeIn linear .8s;
-  -ms-animation: fadeIn linear .8s;
+  animation: fadeIn linear 2s;
+  -webkit-animation: fadeIn linear 2s;
+  -moz-animation: fadeIn linear 2s;
+  -o-animation: fadeIn linear 2s;
+  -ms-animation: fadeIn linear 2s;
 
 }
 @keyframes fadeIn {
