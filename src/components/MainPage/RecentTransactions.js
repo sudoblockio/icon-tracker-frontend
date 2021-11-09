@@ -6,14 +6,6 @@ import { LoadingComponent, TransactionLink } from '../../components'
 
 
 
-// potential web socket pattern:
-// when the component mounts, establish a connection.
-// when there is a message from the web socket (a new block or transaction),
-// populate entire recent block or recent tx component by hitting new data, NOT RERENDERING ENTIRE PAGE
-// make the first row of the table a special class that increases opacity percentage (fade in)
-
-
-
 class RecentTransactions extends Component {
     constructor(props) {
         super(props)
@@ -21,14 +13,23 @@ class RecentTransactions extends Component {
             recentTx: 0
         }
     }
+
+    txsocket;
     async componentDidMount() {
         const recentTx = await awaitGetRecentTx()
         this.setState({recentTx})
-        const txsocket = new WebSocket('wss://echo.websocket.org');
-        console.log(txsocket)
-        txsocket.onopen = function(event) {
+        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
+        console.log(this.txsocket)
+        this.txsocket.onopen = function(event) {
             console.log("connection established")
         }
+        this.txsocket.onmessage = function (event) {
+            console.log(event.data, "websocket event data")
+        }
+    }
+
+    componentWillUnmount() {
+       this.txsocket.close()
     }
     render() {
 

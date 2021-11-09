@@ -104,7 +104,8 @@
         "build:prep": "rm -rf build && REACT_APP_ENV=prep node scripts/build.js && zip -FSr build-prep.zip build",
         "build:qa": "rm -rf build && REACT_APP_ENV=qa node scripts/build.js && zip -FSr build-qa.zip build",
         "build:np": "rm -rf build && REACT_APP_ENV=np node scripts/build.js && zip -FSr build-np.zip build",
-        "test": "node scripts/test.js --env=jsdom --watchAll=False  --coverage --coverageDirectory=output/coverage/jest"
+        "test": "node scripts/test.js --env=jsdom",
+        "test:coverage": "node scripts/test.js --env=jsdom --watchAll=False  --coverage --coverageDirectory=output/coverage/jest"
     },
     "devDependencies": {
         "worker-loader": "^2.0.0"
