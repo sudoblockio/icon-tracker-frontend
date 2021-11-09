@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { AddressListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { addressList } from '../../redux/actions/addressesActions';
+import { addressListAction } from '../../redux/store/addresses';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addressList: (payload) => dispatch(addressList(payload)),
+    addressList: (payload) => dispatch(addressListAction(payload)),
   };
 }
 

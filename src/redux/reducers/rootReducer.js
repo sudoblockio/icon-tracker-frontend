@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { mainPageReducer } from './mainPageReducer'
-import { addressesReducer } from './addressesReducer'
+import { addressesReducer } from '../store/addresses'
 import { transactionsReducer } from '../store/transactions';
 import { blocksReducer } from '../store/blocks'
 import { searchReducer } from './searchReducer'

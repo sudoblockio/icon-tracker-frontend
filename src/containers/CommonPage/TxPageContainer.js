@@ -8,13 +8,13 @@ import {
   contractEventLogList
 } from '../../redux/actions/contractsActions';
 import { 
-  addressList,
-  addressTxList,
-  addressInternalTxList,
-  addressTokenTxList,
-  addressRewardList,
-  addressVotedList
-} from '../../redux/actions/addressesActions';
+  addressListAction,
+  addressTxListAction,
+  addressInternalTxListAction,
+  addressTokenTxListAction,
+  addressRewardListAction,
+  addressVotedListAction
+} from '../../redux/store/addresses';
 
 import { 
   transactionEventLogListAction, 
@@ -58,15 +58,15 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addressVotedList: payload => dispatch(addressVotedList(payload)),
+    addressVotedList: payload => dispatch(addressVotedListAction(payload)),
     contractTxList: payload => dispatch(contractTxList(payload)),
     contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),
     contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
     contractEventLogList: payload => dispatch(contractEventLogList(payload)),
-    addressList: payload => dispatch(addressList(payload)),
-    addressInternalTxList: payload => dispatch(addressInternalTxList(payload)),
-    addressTxList: payload => dispatch(addressTxList(payload)),
-    addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
+    addressList: payload => dispatch(addressListAction(payload)),
+    addressInternalTxList: payload => dispatch(addressInternalTxListAction(payload)),
+    addressTxList: payload => dispatch(addressTxListAction(payload)),
+    addressTokenTxList: payload => dispatch(addressTokenTxListAction(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTxAction(payload)),
     tokenTxList: payload => dispatch(tokenTxList(payload)),
     blockList: payload => dispatch(blockListAction(payload)),
@@ -75,7 +75,7 @@ function mapDispatchToProps(dispatch) {
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
     transactionEventLogListAction: payload => dispatch(transactionEventLogListAction(payload)),
     transactionInternalTxList: payload => dispatch(transactionInternalTxListAction(payload)),
-    addressRewardList: payload => dispatch(addressRewardList(payload)),
+    addressRewardList: payload => dispatch(addressRewardListAction(payload)),
   };
 }
 

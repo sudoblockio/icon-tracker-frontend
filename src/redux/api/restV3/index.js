@@ -14,7 +14,7 @@ import {
     addressInternalTxList,
     addressTokenTxList,
     addressVotedList
-} from './address'
+} from '../../store/addresses'
 
 import {
     blockList,

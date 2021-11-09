@@ -1,17 +1,24 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../actionTypes/actionTypes';
+
+// *** convert 
 import {
   getDelegation as ADDRESS_DELEGATION_LIST,
+  addressReward as ADDRESS_REWARD,
+  getPReps,
+  getDelegation,
+} from '../api/restV3';
+
+import {
   addressList as ADDRESS_LIST_API,
   addressInfo as ADDRESS_INFO_API,
   addressTxList as ADDRESS_TX_LIST,
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
-  addressReward as ADDRESS_REWARD,
   addressVotedList as ADDRESS_VOTED_LIST,
-  getPReps,
-  getDelegation,
-} from '../api/restV3';
+} from '../store/addresses'
+
+// *** take a deeper look, cull. 
 import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../api/restV3/iiss';
 import { convertLoopToIcxDecimal } from '../../utils/utils';
 

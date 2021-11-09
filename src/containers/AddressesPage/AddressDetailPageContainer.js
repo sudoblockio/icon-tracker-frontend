@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 import { AddressDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
-  addressDelegationList,
-  addressInfo,
-  addressTxList,
-  addressInternalTxList,
-  addressTokenTxList,
-  addressVotedList,
-  addressRewardList
-} from '../../redux/actions/addressesActions';
+  addressDelegationListAction,
+  addressInfoAction,
+  addressTxListAction,
+  addressInternalTxListAction,
+  addressTokenTxListAction,
+  addressVotedListAction,
+  addressRewardListAction
+} from '../../redux/store/addresses';
 import { 
   setPopup 
 } from '../../redux/actions/popupActions'
@@ -28,13 +28,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addressRewardList: payload => dispatch(addressRewardList(payload)),
-    addressDelegationList: (payload) => dispatch(addressDelegationList(payload)),
-    addressVotedList: (payload) => dispatch(addressVotedList(payload)),
-    addressInfo: (payload) => dispatch(addressInfo(payload)),
-    addressTxList: (payload) => dispatch(addressTxList(payload)),
-    addressInternalTxList: (payload) => dispatch(addressInternalTxList(payload)),
-    addressTokenTxList: (payload) => dispatch(addressTokenTxList(payload)),
+    addressRewardList: payload => dispatch(addressRewardListAction(payload)),
+    addressDelegationList: (payload) => dispatch(addressDelegationListAction(payload)),
+    addressVotedList: (payload) => dispatch(addressVotedListAction(payload)),
+    addressInfo: (payload) => dispatch(addressInfoAction(payload)),
+    addressTxList: (payload) => dispatch(addressTxListAction(payload)),
+    addressInternalTxList: (payload) => dispatch(addressInternalTxListAction(payload)),
+    addressTokenTxList: (payload) => dispatch(addressTokenTxListAction(payload)),
     setNotification: (payload) => dispatch(setNotification(payload)),
     setPopup: (payload) => dispatch(setPopup(payload))
   };

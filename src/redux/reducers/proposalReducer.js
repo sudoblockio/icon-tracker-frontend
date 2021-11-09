@@ -13,6 +13,8 @@ const initialState = {
     totalTokenVotes: INITIAL_STATE['ARR'],
 }
 
+
+// *** take a deeper look here***
 export function addressesReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.proposalInfo: return getState('OBJ', REDUX_STEP.READY, state, action, 'proposalInfo')
