@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { mainPageReducer } from './mainPageReducer'
 import { addressesReducer } from './addressesReducer'
-import { transactionsReducer } from './transactionsReducer'
+import { transactionsReducer } from '../store/transactions';
 import { blocksReducer } from './blocksReducer'
 import { searchReducer } from './searchReducer'
 import { routerReducer } from 'react-router-redux'

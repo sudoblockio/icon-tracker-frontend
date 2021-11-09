@@ -4,16 +4,17 @@ import { convertEngineToTracker } from "../../utils/utils";
 
 
 import {
-  transactionRecentTx as TRANSACTION_RECENT_TX_API,
-  transactionTxDetail as TRANSACTION_TX_DETAIL_API,
-  // transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
   transactionInternalTxList as TRANSACTION_INTERNAL_TX_LIST_API,
   getTransactionResult as GET_TRANSACTION_RESULT_API,
   getTransactionResultNotSdk as GET_TRANSACTION_RESULT_NOT_SDK_API,
   getTransaction as GET_TRANSACTION_API,
 } from '../api/restV3';
 
-import {transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API} from '../store/transactions'
+import {
+  transactionEventLogList as TRANSACTION_EVENT_LOG_LIST_API,
+  transactionRecentTx as TRANSACTION_RECENT_TX_API,
+  transactionTxDetail as TRANSACTION_TX_DETAIL_API,
+} from '../store/transactions'
 import { transactionEventLogListAction } from '../store/transactions';
 
 function* watchTransactionRecentTx() { yield takeLatest(AT.transactionRecentTx, transactionRecentTxFunc) }

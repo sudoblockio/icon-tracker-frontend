@@ -32,14 +32,12 @@ import {
     contractEventLogList,
 } from './contract'
 
-import {
-    // transactionRecentTx,
+import { 
+    transactionEventLogList,
+    transactionRecentTx,
     transactionTxDetail,
-    // transactionEventLogList,
-    transactionInternalTxList,
-} from './transaction'
-
-import { transactionEventLogList, transactionRecentTx } from '../../store/transactions'
+    transactionInternalTxList
+} from '../../store/transactions'
 
 import {
     tokenList,
