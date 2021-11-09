@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/MainPage/InfoChart.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/MainPage</a> InfoChart.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import Chart from 'chart.js'
+import moment from 'moment'
+import { LoadingComponent } from '../../components'
+&nbsp;
+class InfoChart extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props)</span>
+<span class="cstat-no" title="statement not covered" >    this.txChart = null</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillMount() {
+<span class="cstat-no" title="statement not covered" >    this.props.getMainChart()</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>mponentDidUpdate() {
+    const { tmainChart } = <span class="cstat-no" title="statement not covered" >this.props.chart</span>
+    const ctx = <span class="cstat-no" title="statement not covered" >document.getElementById("txChart");</span>
+&nbsp;
+    // canvas 가 랜더링 되기 전, 미리 생성된 차트가 있을 경우, 차트 데이터가 비어 있을 경우 return
+<span class="cstat-no" title="statement not covered" >    if (!ctx || !!this.txChart || !tmainChart || tmainChart.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const chartData = <span class="cstat-no" title="statement not covered" >this.makeChartData(tmainChart)</span>
+<span class="cstat-no" title="statement not covered" >    this.txChart = new Chart(ctx, {</span>
+      type: 'line',
+      data: {
+        labels: chartData.labels,
+        datasets: [{
+          data: chartData.data,
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true,
+          titleFontFamily: 'NanumSquare',
+          titleFontSize: 9,
+          bodyFontFamily: 'NanumSquare',
+          bodyFontSize: 10,
+          bodyFontStyle: 'bold',
+          displayColors: false,
+          cornerRadius: 0,
+          caretPadding: 7,
+        },
+        layout: {
+          padding: {
+            // left: 25,
+            // right: 30,
+            // top: 35,
+            // bottom: 20
+          }
+        },
+        elements: {
+          point: {
+            radius: 2.5,
+            hoverRadius: 2.5,
+            pointStyle: 'circle',
+            backgroundColor: '#1aaaba',
+            borderColor: '#fff',
+            borderWidth: 1.5,
+          },
+          line: {
+            tension: 0,
+            borderColor: '#fff',
+            borderWidth: 2,
+            backgroundColor: 'rgba(0,0,0,0)'
+          },
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              color: '#56c0cc',
+              drawTicks: true,
+              drawBorder: false
+            },
+            ticks: {
+              padding: 5,
+              fontSize: 9,
+              fontColor: '#9deaf2',
+              fontFamily: 'NanumSquare',
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              color: '#56c0cc',
+              zeroLineColor: '#fff',
+              borderDash: [2,2],
+              drawTicks: false,
+              drawBorder: false
+            },
+            ticks: {
+              padding: 10,
+              fontSize: 9,
+              fontColor: '#9deaf2',
+              fontFamily: 'NanumSquare',
+              beginAtZero: true,
+              max: chartData.max,
+              min: chartData.min,
+              stepSize: chartData.step
+            }
+          }]
+        }
+      }
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ma</span>keChartData(tmainChart) {
+<span class="cstat-no" title="statement not covered" >    if (tmainChart &amp;&amp; tmainChart.length !== 0) {</span>
+      const chartData = <span class="cstat-no" title="statement not covered" >tmainChart.sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >moment(a.targetDate).format('x') - moment(b.targetDate).format('x'))</span></span>
+      const labels = <span class="cstat-no" title="statement not covered" >[]</span>
+      const data = <span class="cstat-no" title="statement not covered" >[]</span>
+  
+<span class="cstat-no" title="statement not covered" >      chartData.forEach(<span class="fstat-no" title="function not covered" >(c</span>, i) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        labels.push(moment(c.targetDate).format('MMM D'))</span>
+<span class="cstat-no" title="statement not covered" >        data.push(c.txCount)</span>
+      })
+  
+      let max = <span class="cstat-no" title="statement not covered" >Math.max.apply(null, data)</span>
+      let min = <span class="cstat-no" title="statement not covered" >Math.min.apply(null, data)</span>
+      let step = <span class="cstat-no" title="statement not covered" >Math.round((max - min) / 4)</span>
+      let division = <span class="cstat-no" title="statement not covered" >Math.pow(10, step.toString().length - 2) * 5</span>
+  
+<span class="cstat-no" title="statement not covered" >      console.log(min, max, step, division)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      step = Math.ceil(step / division) * division</span>
+<span class="cstat-no" title="statement not covered" >      min = Math.floor(min / division) * division</span>
+<span class="cstat-no" title="statement not covered" >      max = min + step * 5</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      console.log(min, max, step)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return { </span>
+        labels, 
+        data, 
+        max, 
+        min, 
+        step 
+      }
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        labels: [],
+        data: [],
+        max: 100000,
+        min: 0,
+        step: 25000,
+      }
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    const { loading } = <span class="cstat-no" title="statement not covered" >this.props.chart</span>
+    const ChartHeight = <span class="cstat-no" title="statement not covered" >236</span>
+    const ChartWidth = <span class="cstat-no" title="statement not covered" >724</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;li className="right"&gt;
+        &lt;p className="subTitle"&gt;Daily Transactions&lt;/p&gt;
+        &lt;div className="graph" style={{background: '#1aaaba'}}&gt;
+          {
+            loading ?
+            &lt;div style={{ width: `${ChartWidth}px`, height: `${ChartHeight}px` }}&gt;
+              &lt;LoadingComponent /&gt;
+            &lt;/div&gt;
+            :
+            &lt;canvas id="txChart" width={`${ChartWidth}`} height={`${ChartHeight}`}&gt;&lt;/canvas&gt;
+          }
+        &lt;/div&gt;
+      &lt;/li&gt;
+    );
+  }
+}
+&nbsp;
+export default InfoChart;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

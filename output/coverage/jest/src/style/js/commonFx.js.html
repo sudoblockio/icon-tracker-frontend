@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/style/js/commonFx.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/style/js</a> commonFx.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// contract over
+var ctreteContract = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >	$(".table-typeB .link").mouseover(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+		var _class;
+<span class="cstat-no" title="statement not covered" >		if($(this).hasClass("address")){</span>
+<span class="cstat-no" title="statement not covered" >			_class = "address";</span>
+		} else <span class="cstat-no" title="statement not covered" >if($(this).hasClass("hash")){</span>
+<span class="cstat-no" title="statement not covered" >			_class = "hash";</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			_class = "token";</span>
+		}
+<span class="cstat-no" title="statement not covered" >		$(".table-typeB .help."+_class).addClass("animate");</span>
+	}).mouseout(<span class="fstat-no" title="function not covered" >function()</span>{
+		var _class;
+<span class="cstat-no" title="statement not covered" >		if($(this).hasClass("address")){</span>
+<span class="cstat-no" title="statement not covered" >			_class = "address";</span>
+		} else <span class="cstat-no" title="statement not covered" >if($(this).hasClass("hash")){</span>
+<span class="cstat-no" title="statement not covered" >			_class = "hash";</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			_class = "token";</span>
+		}
+<span class="cstat-no" title="statement not covered" >		$(".table-typeB .help."+_class).removeClass("animate");</span>
+	});
+}
+&nbsp;
+var createMenu = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function()</span>{</span>
+	// header
+<span class="cstat-no" title="statement not covered" >	$('.header-wrap ul li, .header-wrap .connect.join').mouseenter(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(this).find(".sub-menu").stop().slideDown(300, 'swing');</span>
+<span class="cstat-no" title="statement not covered" >		$(this).find("span").addClass("on");</span>
+	}).mouseleave(<span class="fstat-no" title="function not covered" >function()</span>{
+<span class="cstat-no" title="statement not covered" >		$(this).find(".sub-menu").stop().slideUp(300, 'swing');</span>
+<span class="cstat-no" title="statement not covered" >		$(this).find("span").removeClass("on");</span>
+	});
+&nbsp;
+	// sort
+<span class="cstat-no" title="statement not covered" >	$('.sort-holder ').mouseenter(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".sort-holder ul").stop().slideDown(300, 'swing');</span>
+	}).mouseleave(<span class="fstat-no" title="function not covered" >function()</span>{
+<span class="cstat-no" title="statement not covered" >		$(".sort-holder ul").stop().slideUp(300, 'swing');</span>
+	});
+&nbsp;
+	// sort
+<span class="cstat-no" title="statement not covered" >	$('.footer-wrap .mainnet').mouseenter(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".footer-wrap .mainnet ul").stop().slideDown(300, 'swing');</span>
+	}).mouseleave(<span class="fstat-no" title="function not covered" >function()</span>{
+<span class="cstat-no" title="statement not covered" >		$(".footer-wrap .mainnet ul").stop().slideUp(300, 'swing');</span>
+	});
+&nbsp;
+	// contract status
+<span class="cstat-no" title="statement not covered" >	$(".status-holder &gt; span").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".status-holder ul").stop().slideDown(300, 'swing');</span>
+<span class="cstat-no" title="statement not covered" >		$(this).addClass("on");</span>
+	});
+&nbsp;
+	// address token balance
+<span class="cstat-no" title="statement not covered" >	$(".table-typeB td .balance").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".combo-group").css({"display":"block"});</span>
+<span class="cstat-no" title="statement not covered" >		$(this).addClass("on");</span>
+	});
+&nbsp;
+	// qrcode popup
+<span class="cstat-no" title="statement not covered" >	$(".qrcode").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".popup-wrap.qr").fadeIn(350);</span>
+	});
+&nbsp;
+	// qrcode popup
+<span class="cstat-no" title="statement not covered" >	$(".btn-scam").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".popup-wrap.scam").fadeIn(350);</span>
+	});
+&nbsp;
+	// detail popup
+<span class="cstat-no" title="statement not covered" >	$(".status").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".popup-wrap.detail").css({"display":"block"});</span>
+	});
+&nbsp;
+	// close popup
+<span class="cstat-no" title="statement not covered" >	$(".close").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".popup-wrap").fadeOut(350);</span>
+	});	
+&nbsp;
+	// drop
+<span class="cstat-no" title="statement not covered" >	$(".drop-btn").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+		var _parent = <span class="cstat-no" title="statement not covered" >$(this).parent().parent();</span>
+<span class="cstat-no" title="statement not covered" >		_parent.toggleClass("on");</span>
+	});	
+&nbsp;
+	// governance
+<span class="cstat-no" title="statement not covered" >	$(".governance .start").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+		var _parent = <span class="cstat-no" title="statement not covered" >$(this).parent().parent();</span>
+<span class="cstat-no" title="statement not covered" >		$(".governance").toggleClass("on");</span>
+<span class="cstat-no" title="statement not covered" >		$(".governance .screen1 .table-box").slideToggle(500);</span>
+	});
+&nbsp;
+	// search
+<span class="cstat-no" title="statement not covered" >	$(".header-wrap .search-group span").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".pop-search").fadeIn(350);</span>
+	});
+	
+<span class="cstat-no" title="statement not covered" >	$(document).keyup(<span class="fstat-no" title="function not covered" >function(</span>e) {</span>
+<span class="cstat-no" title="statement not covered" >		if (e.keyCode == 27) {</span>
+<span class="cstat-no" title="statement not covered" >			$(".pop-search").fadeOut(100); </span>
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	$(".pop-search .dimmed").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".pop-search").fadeOut(100); </span>
+	});
+<span class="cstat-no" title="statement not covered" >	$(".search-group.txt .txt-type-search").on("change keyup", <span class="fstat-no" title="function not covered" >function() </span>{</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		console.log($(this).parents().hasClass("fixing"))</span>
+<span class="cstat-no" title="statement not covered" >		if($(this).parents().hasClass("fixing")){</span>
+<span class="cstat-no" title="statement not covered" >			if( $(this).val().length){</span>
+<span class="cstat-no" title="statement not covered" >				$(".home .search-group.txt em").css("display","inline-block");</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				$(".home .search-group.txt em").css("display","none");</span>
+			}
+		} else {
+<span class="cstat-no" title="statement not covered" >			if( $(this).val().length){</span>
+<span class="cstat-no" title="statement not covered" >				$(".pop-search .search-group.txt em").css("display","inline-block");</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				$(".pop-search .search-group.txt em").css("display","none");</span>
+			}
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	$(".search-group.txt em").click(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >		$(".search-group.txt .txt-type-search").val("");</span>
+<span class="cstat-no" title="statement not covered" >		$(this).css("display","none");</span>
+	});
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >$(document).ready(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >	$(document).mouseup(<span class="fstat-no" title="function not covered" >function(</span>e){</span>
+		var container = <span class="cstat-no" title="statement not covered" >$(".combo-group");</span>
+<span class="cstat-no" title="statement not covered" >		if(container.has(e.target).length===0){</span>
+<span class="cstat-no" title="statement not covered" >			container.css("display","none");</span>
+<span class="cstat-no" title="statement not covered" >			$(".table-typeB td .balance").removeClass("on");</span>
+		}
+		var status = <span class="cstat-no" title="statement not covered" >$(".header-wrap .logo");</span>
+<span class="cstat-no" title="statement not covered" >		if(status.has(e.target).length===0){</span>
+<span class="cstat-no" title="statement not covered" >			$(".status-holder ul").css("display","none");</span>
+<span class="cstat-no" title="statement not covered" >			$(".status-holder &gt; span").removeClass("on");</span>
+		}
+	});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	ctreteContract(</span>);
+<span class="cstat-no" title="statement not covered" >	createMenu(</span>);
+});
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >$(window).ready(<span class="fstat-no" title="function not covered" >function()</span>{</span>
+&nbsp;
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

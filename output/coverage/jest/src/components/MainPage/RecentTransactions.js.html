@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/MainPage/RecentTransactions.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/MainPage</a> RecentTransactions.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { convertNumberToText, convertHexToValue } from '../../utils/utils'
+import { awaitGetRecentTx } from '../../redux/api/restV3/iiss'
+import { LoadingComponent, TransactionLink } from '../../components'
+&nbsp;
+&nbsp;
+&nbsp;
+// potential web socket pattern:
+// when the component mounts, establish a connection.
+// when there is a message from the web socket (a new block or transaction),
+// populate entire recent block or recent tx component by hitting new data, NOT RERENDERING ENTIRE PAGE
+// make the first row of the table a special class that increases opacity percentage (fade in)
+&nbsp;
+&nbsp;
+&nbsp;
+class RecentTransactions extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            recentTx: 0
+        }
+    }
+    async componentDidMount() {
+        const recentTx = await awaitGetRecentTx()
+<span class="cstat-no" title="statement not covered" >        this.setState({recentTx})</span>
+        const txsocket = <span class="cstat-no" title="statement not covered" >new WebSocket('wss://echo.websocket.org');</span>
+<span class="cstat-no" title="statement not covered" >        console.log(txsocket)</span>
+<span class="cstat-no" title="statement not covered" >        txsocket.onopen = <span class="fstat-no" title="function not covered" >fu</span>nction(event) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log("connection established")</span>
+        }
+    }
+    render() {
+&nbsp;
+        const loading = false;
+        const list = this.state.recentTx ? <span class="branch-0 cbranch-no" title="branch not covered" >this.state.recentTx.slice(0, 10) </span>: []
+        
+        return (
+            &lt;li className="right"&gt;
+                &lt;p className="title"&gt;Transactions&lt;/p&gt;
+                &lt;div className="list-group"&gt;
+                    {loading ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >                        &lt;div style={{ height: '511px' }}&gt;</span>
+                            &lt;LoadingComponent /&gt;
+                        &lt;/div&gt;
+                    ) : (
+                        &lt;ul className="list" style={{ height: list.length === 0 ? 511 : <span class="branch-1 cbranch-no" title="branch not covered" >'' </span>}}&gt;
+                            {list.map(<span class="fstat-no" title="function not covered" >(t</span>x, index) =&gt; {
+                                const { hash, value, transaction_fee, receipt_status } = <span class="cstat-no" title="statement not covered" >tx</span>
+                                const isSuccess = <span class="cstat-no" title="statement not covered" >Number(receipt_status) === 1</span>
+<span class="cstat-no" title="statement not covered" >                                return (</span>
+                                    &lt;li key={index}&gt;
+                                        &lt;p className={`icon ${!isSuccess ? 'fail' : ''}`}&gt;T&lt;/p&gt;
+                                        &lt;p className="a"&gt;
+                                            Status
+                                            &lt;em&gt;
+                                                {isSuccess ? 'Success' : 'Fail'}
+                                            &lt;/em&gt;
+                                        &lt;/p&gt;
+                                        &lt;p className="b"&gt;
+                                            Amount
+                                            &lt;em&gt;
+                                            {convertHexToValue(value).toFixed(2)} ICX
+                                            &lt;/em&gt;
+                                        &lt;/p&gt;
+                                        &lt;p className="c"&gt;
+                                            Hash
+                                            &lt;em&gt;
+                                                &lt;TransactionLink to={hash} label={hash} /&gt;
+                                            &lt;/em&gt;
+                                        &lt;/p&gt;
+                                        &lt;p className="d"&gt;
+                                            Fee
+                                            &lt;em&gt;
+                                                {convertHexToValue(transaction_fee)} ICX
+                                            &lt;/em&gt;
+                                        &lt;/p&gt;
+                                    &lt;/li&gt;
+                                )
+                            })}
+                        &lt;/ul&gt;
+                    )}
+                &lt;/div&gt;
+                &lt;Link to="/transactions"&gt;
+                    &lt;p className="all"&gt;View all&lt;/p&gt;
+                &lt;/Link&gt;
+            &lt;/li&gt;
+        )
+    }
+}
+&nbsp;
+export default RecentTransactions
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

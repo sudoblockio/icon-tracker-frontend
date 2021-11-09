@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/reducers/proposalReducer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/redux/reducers</a> proposalReducer.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import actionTypes from '../actionTypes/actionTypes'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+    getState
+} from '../../utils/utils'
+<span class="cstat-no" title="statement not covered" >import {</span>
+    REDUX_STEP,
+    INITIAL_STATE
+} from '../../utils/const'
+&nbsp;
+const initialState = <span class="cstat-no" title="statement not covered" >{</span>
+    proposalInfo: INITIAL_STATE['OBJ'],
+    totalQuorum: INITIAL_STATE['ARR'],
+    totalTokenVotes: INITIAL_STATE['ARR'],
+}
+&nbsp;
+&nbsp;
+// *** take a deeper look here***
+export function <span class="fstat-no" title="function not covered" >addressesReducer(state = <span class="branch-0 cbranch-no" title="branch not covered" >initialState, action) {</span></span>
+<span class="cstat-no" title="statement not covered" >    switch (action.type) {</span>
+        case actionTypes.proposalInfo: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.READY, state, action, 'proposalInfo')</span>
+        case actionTypes.proposalInfoFulfilled: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'proposalInfo')</span>
+        case actionTypes.proposalInfoRejected: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'proposalInfo')</span>
+&nbsp;
+        case actionTypes.totalQuorum: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.READY, state, action, 'totalQuorum')</span>
+        case actionTypes.totalQuorumFulfilled: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'totalQuorum')</span>
+        case actionTypes.totalQuorumRejected: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.REJECTED, state, action, 'totalQuorum')</span>
+&nbsp;
+        case actionTypes.totalTokenVotes: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.READY, state, action, 'totalTokenVotes')</span>
+        case actionTypes.totalTokenVotesFulfilled: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'totalTokenVotes')</span>
+        case actionTypes.totalTokenVotesRejected: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.REJECTED, state, action, 'totalTokenVotes')</span>
+&nbsp;
+        default: {
+<span class="cstat-no" title="statement not covered" >            return state</span>
+        }
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

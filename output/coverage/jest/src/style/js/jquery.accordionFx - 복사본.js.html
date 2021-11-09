@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/style/js/jquery.accordionFx - 복사본.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/style/js</a> jquery.accordionFx - 복사본.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >(<span class="fstat-no" title="function not covered" >function(</span>$){</span>
+	var defaults = <span class="cstat-no" title="statement not covered" >{</span>
+		_fullOpen : true,
+		_isChild : false,
+		accorClick : <span class="fstat-no" title="function not covered" >function()</span>{},
+		company		: "상상의자유",
+		author 		: "kissyweb@gmail.com"
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	$.fn.accordionFx = <span class="fstat-no" title="function not covered" >function(</span>options){</span>
+		var I_F 			= <span class="cstat-no" title="statement not covered" >{};</span>
+		var _class 		= <span class="cstat-no" title="statement not covered" >this.attr("id");</span>
+		var _length 	= <span class="cstat-no" title="statement not covered" >2;</span>
+		var init = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >			I_F.set = $.extend({}, defaults, options);</span>
+<span class="cstat-no" title="statement not covered" >			loadedFx(</span>);
+		};
+		var loadedFx = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function()</span>{</span>
+<span class="cstat-no" title="statement not covered" >			$("#"+_class+" .one").click(<span class="fstat-no" title="function not covered" >function(</span>e){</span>
+&nbsp;
+				var _index = <span class="cstat-no" title="statement not covered" >$(e.target).closest("li").index();</span>
+				// var _length = $(this).parent().parent().children().length;
+				var _length = <span class="cstat-no" title="statement not covered" >$(this).parent().parent().parent().children().length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				$(this).parent().parent().addClass('on');</span>
+<span class="cstat-no" title="statement not covered" >				if(I_F.set._fullOpen){</span>
+<span class="cstat-no" title="statement not covered" >					accorClick(_class, _index, $(this).parent().parent().find(".content").is(':hidden'));</span>
+					// console.log( _length,  $(this).parent().parent().find(".content").is(':hidden') )
+					// if($(this).parent().find(".content").is(':hidden')){
+<span class="cstat-no" title="statement not covered" >					if($(this).parent().parent().find(".content").is(':hidden')){</span>
+						// $(this).parent().find(".title").addClass("on");
+					} else {
+						// $(this).parent().find(".title").removeClass("on");
+<span class="cstat-no" title="statement not covered" >						$(this).parent().parent().removeClass("on");</span>
+					}
+					// $(this).parent().find(".content").slideToggle(500);
+<span class="cstat-no" title="statement not covered" >					$(this).parent().parent().find(".content").slideToggle(500);</span>
+&nbsp;
+&nbsp;
+				} else {
+<span class="cstat-no" title="statement not covered" >					for(var i=0; i&lt;_length; i++){</span>
+<span class="cstat-no" title="statement not covered" >						if(i === _index){</span>
+<span class="cstat-no" title="statement not covered" >							if($(this).parent().parent().find(".content").is(':hidden')){</span>
+								// $(this).parent().find(".title").addClass("on");
+							} else {
+<span class="cstat-no" title="statement not covered" >								$(this).parent().parent().removeClass("on");</span>
+							}
+<span class="cstat-no" title="statement not covered" >							$(this).parent().parent().find(".content").slideToggle(500);</span>
+						} else {
+<span class="cstat-no" title="statement not covered" >							$("#"+_class+ " li:eq("+i+") .content").slideUp(500);</span>
+<span class="cstat-no" title="statement not covered" >							$("#"+_class+ " li:eq("+i+") .title").removeClass("on");</span>
+						}
+					}
+				}
+			});
+<span class="cstat-no" title="statement not covered" >			$("#"+_class+" .btnClose").click(<span class="fstat-no" title="function not covered" >function(</span>e){</span>
+<span class="cstat-no" title="statement not covered" >				$(this).parent().slideUp(500);</span>
+			});
+		};
+<span class="cstat-no" title="statement not covered" >		init(</span>);
+<span class="cstat-no" title="statement not covered" >		return this;</span>
+	};
+})(jQuery);</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

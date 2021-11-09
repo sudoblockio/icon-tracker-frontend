@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/CommonPage/SearchPage/SearchTableBody.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/CommonPage/SearchPage</a> SearchTableBody.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import {
+	convertNumberToText,
+	numberWithCommas,
+	tokenText,
+	onlyDate,
+	getTimezoneMomentTime,
+} from '../../../utils/utils'
+import {
+	AddressLink,
+	AmountCell,
+	LinkButton
+} from '../../../components'
+import {
+	CONTRACT_STATUS,
+	SEARCH_TYPE
+} from '../../../utils/const'
+&nbsp;
+class SearchTableBody extends Component {
+<span class="fstat-no" title="function not covered" >	re</span>nder() {
+		const TableRow = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+			const { searchType, data } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >			switch (searchType) {</span>
+				case SEARCH_TYPE.CONTRACTS:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td className="on"&gt;&lt;span className="ellipsis"&gt;&lt;AddressLink to={data.public_key} /&gt;&lt;/span&gt;&lt;/td&gt;
+							&lt;td&gt;{data.name || '-'}&lt;/td&gt;
+							{/* &lt;td&gt;{data.compiler || '-'}&lt;/td&gt; */}
+							&lt;AmountCell type="icx" amount={data.balance} symbol="ICX" /&gt;
+							&lt;td&gt;{numberWithCommas(data.transaction_count)}&lt;/td&gt;
+							&lt;td&gt;{CONTRACT_STATUS[data.status]}&lt;/td&gt;
+							&lt;td&gt;{onlyDate(data.created_timestamp /1000).toString()}&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case SEARCH_TYPE.TOKENS:
+					const { index, count, page } = <span class="cstat-no" title="statement not covered" >this.props</span>
+					const { usd, icx, btc, eth } = <span class="cstat-no" title="statement not covered" >data.price || {}</span>
+					const _changeVal = <span class="cstat-no" title="statement not covered" >data.changeVal || 0</span>
+					const className = <span class="cstat-no" title="statement not covered" >_changeVal &gt; 0 ? 'red' : _changeVal &lt; 0 ? 'blue' : ''</span>
+					const sign = <span class="cstat-no" title="statement not covered" >_changeVal &gt; 0 ? '+' : ''</span>
+					const ranking = <span class="cstat-no" title="statement not covered" >count * (page - 1) + index + 1</span>
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td&gt;{ranking}&lt;/td&gt;
+							&lt;td&gt;&lt;span className="ellipsis"&gt;{tokenText(data.name, data.symbol, data.contractAddr)}&lt;/span&gt;&lt;LinkButton address={data.contractAddr}/&gt;&lt;/td&gt;
+							&lt;td&gt;
+								&lt;p&gt;{convertNumberToText(usd, 8) || '-'}&lt;em&gt;USD&lt;/em&gt;&lt;/p&gt;
+								&lt;p&gt;{convertNumberToText(icx, 8) || '-'}&lt;em&gt;ICX&lt;/em&gt;&lt;/p&gt;
+								&lt;p&gt;{convertNumberToText(btc, 8) || '-'}&lt;em&gt;BTC&lt;/em&gt;&lt;/p&gt;
+								&lt;p&gt;{convertNumberToText(eth, 8) || '-'}&lt;em&gt;ETH&lt;/em&gt;&lt;/p&gt;
+							&lt;/td&gt;
+							&lt;td className={className}&gt;&lt;span&gt;{sign}{_changeVal || '-'}&lt;/span&gt; %&lt;/td&gt;
+							&lt;td&gt;{convertNumberToText(Math.floor(data.volume)) || '-'}&lt;em&gt;USD&lt;/em&gt;&lt;/td&gt;
+							&lt;td&gt;{convertNumberToText(Math.floor(data.marketCap)) || '-'}&lt;em&gt;USD&lt;/em&gt;&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				default:
+<span class="cstat-no" title="statement not covered" >					return &lt;tr&gt;&lt;/tr&gt;</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return TableRow()</span>
+	}
+}
+&nbsp;
+export default SearchTableBody</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

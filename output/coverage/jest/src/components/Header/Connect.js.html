@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Header/Connect.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/Header</a> Connect.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import { requestAddress } from '../../utils/connect'
+import { CopyButton } from '../../components'
+import checkIconex from 'check-iconex'
+import NotificationManager from '../../utils/NotificationManager'
+&nbsp;
+class Connect extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            disabled: false,
+            walletAddress: this.props.walletAddress,
+        }
+    }
+&nbsp;
+    async componentDidMount() {
+        const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
+        this.setState({
+            disabled: !(isChrome &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >iconexInstalled </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >hasIconWallet)</span>,
+        })
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps) {
+<span class="cstat-no" title="statement not covered" >        if (nextProps.walletAddress !== this.props.walletAddress) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState(</span>
+                {
+                    walletAddress: nextProps.walletAddress,
+                },
+<span class="fstat-no" title="function not covered" >                ()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                    window.dispatchEvent(</span>
+                        new CustomEvent('CUSTOM_FX', {
+                            detail: { type: 'SET_WALLET' },
+                        }),
+                    )
+                },
+            )
+        }
+    }
+&nbsp;
+    getWalletAddress = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (this.state.disabled) {</span>
+<span class="cstat-no" title="statement not covered" >            window.open('https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel', '_blank')</span>
+<span class="cstat-no" title="statement not covered" >            return</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.state.walletAddress) {</span>
+<span class="cstat-no" title="statement not covered" >            return</span>
+        }
+        
+        const walletAddress = <span class="cstat-no" title="statement not covered" >await requestAddress()</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({ walletAddress }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            window.dispatchEvent(</span>
+                new CustomEvent('CUSTOM_FX', {
+                    detail: { type: 'SET_WALLET' },
+                }),
+            )
+<span class="cstat-no" title="statement not covered" >            this.props.setAddress(walletAddress)</span>
+<span class="cstat-no" title="statement not covered" >            this.props.history.push(`/address/${walletAddress}`)</span>
+        })
+    }
+&nbsp;
+    disconnect = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.setState({ walletAddress: undefined }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            this.props.clearWallet()</span>
+<span class="cstat-no" title="statement not covered" >            NotificationManager.deregisterServiceWorker()</span>
+        })
+    }
+&nbsp;
+    render() {
+        const { walletAddress } = this.state
+        return (
+            &lt;div className={`connect ${walletAddress ? <span class="branch-0 cbranch-no" title="branch not covered" >'join' </span>: ''}`}&gt;
+                &lt;span onClick={this.getWalletAddress}&gt;
+                    &lt;em className="img" /&gt;
+                &lt;/span&gt;
+                {walletAddress ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >                    &lt;div className="sub-menu"&gt;</span>
+                        &lt;p&gt;
+                            &lt;span&gt;Wallet Address&lt;/span&gt;
+                            &lt;CopyButton data={walletAddress} title={'Copy Address'} wallet={true} /&gt;
+                        &lt;/p&gt;
+                        &lt;span className="btn" onClick={this.disconnect}&gt;
+                            Disconnect
+                        &lt;/span&gt;
+                        &lt;span
+                            className="btn"
+                            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                                this.props.history.push(`/address/${walletAddress}`)</span>
+                            }}
+                        &gt;
+                            View Details
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                ) : (
+                    ''
+                )}
+            &lt;/div&gt;
+        )
+    }
+}
+&nbsp;
+export default Connect
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

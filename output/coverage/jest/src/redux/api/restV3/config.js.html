@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/api/restV3/config.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/redux/api/restV3</a> config.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import axios from 'axios';
+&nbsp;
+export async function <span class="fstat-no" title="function not covered" >trackerApiInstance(</span>) {
+  const apiUrl = <span class="cstat-no" title="statement not covered" >await getTrackerApiUrl();</span>
+<span class="cstat-no" title="statement not covered" >  return axios.create({</span>
+    baseURL: apiUrl
+  });
+}
+&nbsp;
+export async function <span class="fstat-no" title="function not covered" >walletApiInstance(</span>) {
+  const apiUrl = <span class="cstat-no" title="statement not covered" >await getWalletApiUrl();</span>
+<span class="cstat-no" title="statement not covered" >  return axios.create({</span>
+    baseURL: apiUrl
+  });
+}
+&nbsp;
+export async function <span class="fstat-no" title="function not covered" >getTrackerApiUrl(</span>) {
+  const configFile = <span class="cstat-no" title="statement not covered" >await getConfigJsonFile();</span>
+<span class="cstat-no" title="statement not covered" >  if (configFile &amp;&amp; configFile.TRACKER_API_URL) {</span>
+<span class="cstat-no" title="statement not covered" >    return configFile.TRACKER_API_URL;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (process.env.REACT_APP_ENV) {</span>
+<span class="cstat-no" title="statement not covered" >    switch (process.env.REACT_APP_ENV) {</span>
+      case 'mainnet':
+<span class="cstat-no" title="statement not covered" >        return 'https://tracker.icon.foundation';</span>
+      // return 'https://bicon.tracker.solidwallet.io';
+      case 'testnet':
+<span class="cstat-no" title="statement not covered" >        return 'https://trackerdev.icon.foundation';</span>
+      // return 'http://10.201.11.74:8081';
+      case 'testnet1':
+<span class="cstat-no" title="statement not covered" >        return 'https://bicon.tracker.solidwallet.io';</span>
+      // return 'http://10.201.11.74:8081';
+      case 'sejong':
+<span class="cstat-no" title="statement not covered" >        return 'https://sejong.tracker.solidwallet.io';</span>
+      case 'custom':
+<span class="cstat-no" title="statement not covered" >        return 'http://trackerlocaldev.icon.foundation';</span>
+      case 'prep':
+      case 'np':
+<span class="cstat-no" title="statement not covered" >        return 'http://54.180.16.76';</span>
+      case 'qa':
+<span class="cstat-no" title="statement not covered" >        return 'http://13.125.236.68';</span>
+      default:
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return '/';</span>
+}
+&nbsp;
+export async function <span class="fstat-no" title="function not covered" >getWalletApiUrl(</span>) {
+  const configFile = <span class="cstat-no" title="statement not covered" >await getConfigJsonFile();</span>
+<span class="cstat-no" title="statement not covered" >  if (configFile &amp;&amp; configFile.WALLET_API_URL) {</span>
+<span class="cstat-no" title="statement not covered" >    return configFile.WALLET_API_URL;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (process.env.REACT_APP_ENV) {</span>
+<span class="cstat-no" title="statement not covered" >    switch (process.env.REACT_APP_ENV) {</span>
+      case 'mainnet':
+<span class="cstat-no" title="statement not covered" >        return 'https://wallet.icon.foundation';</span>
+      case 'testnet':
+<span class="cstat-no" title="statement not covered" >        return 'https://testwallet.icon.foundation';</span>
+      // return 'http://13.125.65.157:9000';
+      case 'testnet1':
+<span class="cstat-no" title="statement not covered" >        return 'https://bicon.net.solidwallet.io';</span>
+      // return 'http://13.125.65.157:9000';
+      case 'sejong':
+<span class="cstat-no" title="statement not covered" >        return 'https://sejong.net.solidwallet.io';</span>
+      case 'custom':
+<span class="cstat-no" title="statement not covered" >        return 'http://13.209.103.183:9000';</span>
+      case 'prep':
+      case 'np':
+<span class="cstat-no" title="statement not covered" >        return 'http://20.20.7.156:9000';</span>
+      case 'qa':
+<span class="cstat-no" title="statement not covered" >        return 'https://devorg.icon.foundation';</span>
+      default:
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return '/';</span>
+}
+&nbsp;
+export async function getIsSoloVersion() {
+  const configFile = await getConfigJsonFile();
+<span class="cstat-no" title="statement not covered" >  if (configFile &amp;&amp; configFile.IS_SOLO_VERSION) {</span>
+<span class="cstat-no" title="statement not covered" >    return !!configFile.IS_SOLO_VERSION;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (process.env.REACT_APP_ENV) {</span>
+<span class="cstat-no" title="statement not covered" >    switch (process.env.REACT_APP_ENV) {</span>
+      case 'mainnet':
+      case 'testnet':
+      case 'testnet1':
+      case 'sejong':
+      case 'custom':
+      case 'prep':
+      case 'np':
+      case 'qa':
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+      default:
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return false;</span>
+}
+&nbsp;
+async function getConfigJsonFile() {
+  try {
+    const response = await fetch('/config.json');
+    const responseJson = <span class="cstat-no" title="statement not covered" >await response.json();</span>
+<span class="cstat-no" title="statement not covered" >    return responseJson;</span>
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    console.error(e);</span>
+<span class="cstat-no" title="statement not covered" >    return {};</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

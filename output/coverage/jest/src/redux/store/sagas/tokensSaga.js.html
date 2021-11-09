@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/store/sagas/tokensSaga.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/redux/store/sagas</a> tokensSaga.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import AT from '../../actionTypes/actionTypes';
+import {
+  tokenList as TOKEN_LIST_API,
+  tokenTxList as TOKEN_TX_LIST_API,
+  tokenSummary as TOKEN_SUMMARY_API,
+  tokenTransfersList as TOKEN_TRANSFERS_LIST_API,
+  tokenHoldersList as TPKEN_HOLDERS_LIST_API
+} from '../../api/restV3';
+&nbsp;
+function* watchTokenList() { yield takeLatest(AT.tokenList, tokenListFunc) }
+function* watchTokenListSearch() { yield takeLatest(AT.tokenListSearch, tokenListSearchFunc) }
+function* watchTokenTxList() { yield takeLatest(AT.tokenTxList, tokenTxListFunc) }
+function* watchTokenSummary() { yield takeLatest(AT.tokenSummary, tokenSummaryFunc) }
+function* watchTokenTransfersList() { yield takeLatest(AT.tokenTransfersList, tokenTransfersListFunc) }
+function* watchTokenHoldersList() { yield takeLatest(AT.tokenHoldersList, tokenHoldersListFunc) }
+&nbsp;
+export default function* tokensSaga() {
+  yield fork(watchTokenList)
+  yield fork(watchTokenListSearch)
+  yield fork(watchTokenTxList)
+  yield fork(watchTokenSummary)
+  yield fork(watchTokenTransfersList)
+  yield fork(watchTokenHoldersList)
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TOKEN_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenListFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenListRejected });</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenListSearchFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenListSearchFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TOKEN_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200' || 'NO Data') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenListSearchFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenListSearchRejected });</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenTxListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenTxListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TOKEN_TX_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenTxListFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenTxListRejected });</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenSummaryFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TOKEN_SUMMARY_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenSummaryFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenSummaryRejected, error: action.payload.contractAddr });</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenTransfersListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenTransfersListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TOKEN_TRANSFERS_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenTransfersListFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenTransfersListRejected });</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >tokenHoldersListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenHoldersListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(TPKEN_HOLDERS_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.tokenHoldersListFulfilled, payload: payload });</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.tokenHoldersListRejected });</span>
+  }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

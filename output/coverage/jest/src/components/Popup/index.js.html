@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Popup/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/Popup</a> index.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AddressQrCode from './AddressQrCode';
+import ContractDetail from './ContractDetail';
+import Scam from './Scam';
+import Search from './Search';
+import { initPopup } from '../../redux/store/popups';
+import { POPUP_TYPE } from '../../utils/const';
+&nbsp;
+class Popup extends Component {
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillReceiveProps(nextProps) {
+    const { type: current } = <span class="cstat-no" title="statement not covered" >this.props;</span>
+    const { type: next } = <span class="cstat-no" title="statement not covered" >nextProps;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (current === '' &amp;&amp; next !== '') {</span>
+<span class="cstat-no" title="statement not covered" >      this.openPopup(next);</span>
+    }
+  }
+&nbsp;
+  openPopup = <span class="fstat-no" title="function not covered" >ty</span>pe =&gt; {
+<span class="cstat-no" title="statement not covered" >    switch (type) {</span>
+      case POPUP_TYPE.QR:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'qr' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.DETAIL:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'detail' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.SCAM:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'scam' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.SEARCH:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'search' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.ABOUT:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'about' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.SUGGEST:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'suggest' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.COMMISSION:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'commission' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.GOVERNANCE:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'governance' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case POPUP_TYPE.SPONSOR:
+<span class="cstat-no" title="statement not covered" >        window.dispatchEvent(</span>
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'sponsor' }
+          })
+        );
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      default:
+    }
+  };
+&nbsp;
+  closePopup = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: '' }
+      })
+    );
+  };
+  closeDetail = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'detail' }
+      })
+    );
+  };
+  closeScam = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'scam' }
+      })
+    );
+  };
+  closeSearch = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'search' }
+      })
+    );
+  };
+  closeAbout = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'about' }
+      })
+    );
+  };
+  closeAbout = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'suggest' }
+      })
+    );
+  };
+  closeAbout = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'commission' }
+      })
+    );
+  };
+  closeGovernance = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'governance' }
+      })
+    );
+  };
+  closeSponsor = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.props.initPopup();</span>
+<span class="cstat-no" title="statement not covered" >    window.dispatchEvent(</span>
+      new CustomEvent('CUSTOM_FX', {
+        detail: { type: 'POPUP_CLOSE', param: 'sponsor' }
+      })
+    );
+  };
+&nbsp;
+  render() {
+    const { type, data } = this.props;
+    const isQr = type === POPUP_TYPE.QR;
+    const qrData = isQr ? <span class="branch-0 cbranch-no" title="branch not covered" >data </span>: {};
+    const isDetail = type === POPUP_TYPE.DETAIL;
+    const detailData = isDetail ? <span class="branch-0 cbranch-no" title="branch not covered" >data </span>: {};
+    const isScam = type === POPUP_TYPE.SCAM;
+    const scamData = isScam ? <span class="branch-0 cbranch-no" title="branch not covered" >data </span>: {};
+    const isSearch = type === POPUP_TYPE.SEARCH;
+    const searchData = isSearch ? <span class="branch-0 cbranch-no" title="branch not covered" >data </span>: {};
+    return (
+      &lt;React.Fragment&gt;
+        &lt;div key='qr' className='popup-wrap qr'&gt;
+          &lt;div className='dimmed' /&gt;
+          &lt;div className='popup'&gt;
+            &lt;span className='close' onClick={this.closePopup}&gt;
+              &lt;em className='img' /&gt;
+            &lt;/span&gt;
+            {isQr &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;AddressQrCode data={qrData} /&gt;}</span>
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div key='detail' className='popup-wrap detail'&gt;
+          &lt;div className='dimmed' /&gt;
+          &lt;div className='popup contract'&gt;
+            &lt;span className='close' onClick={this.closePopup}&gt;
+              &lt;em className='img' /&gt;
+            &lt;/span&gt;
+            {isDetail &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;ContractDetail</span>
+                data={detailData}
+                closeDetail={this.closeDetail}
+              /&gt;
+            )}
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div key='scam' className='popup-wrap scam'&gt;
+          &lt;div className='dimmed' /&gt;
+          &lt;div className='popup scam'&gt;
+            &lt;span className='close' onClick={this.closePopup}&gt;
+              &lt;em className='img' /&gt;
+            &lt;/span&gt;
+            {isScam &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;Scam data={scamData} closeScam={this.closeScam} /&gt;}</span>
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          key='about'
+          className='popup-wrap about'
+          style={{ display: 'none' }}
+        &gt;
+          &lt;div className='dimmed'&gt;&lt;/div&gt;
+          &lt;div className='popup'&gt;
+            &lt;h1 className='title'&gt;About Governance&lt;/h1&gt;
+            &lt;p className='txt'&gt;
+              ICON Network is a blockchain network operated by Public
+              Representative (P-Rep). Therefore, Users (ICONist) must vote for
+              high qualified P-Reps so that ICON Network to be more stable. Each
+              P-Reps can submit the Monthly Reward Variable for Representative
+              (i_rep) that affects the total reward amount for the ICON Network.
+              Therefore, users should compare each i_reps submitted by each
+              P-Reps and make right decision. In addition, users who have
+              participated in the vote will receive reward with Annual
+              Delegation Reward Rate for Representative (r_rep).
+            &lt;/p&gt;
+            &lt;div className='box'&gt;
+              &lt;p className='sub-title'&gt;· Public Treasury&lt;/p&gt;
+              &lt;p className='txt'&gt;
+                Public Treasury, a fully automated reward fund that stores all
+                ICX rewards until ICONists claim their rewards using I-Score. It
+                is funded by ICX issuance and network fees (Step).
+              &lt;/p&gt;
+              &lt;p className='sub-title'&gt;· i_rep&lt;/p&gt;
+              &lt;p className='txt'&gt;
+                Monthly Reward Variable for Representative is a variable that
+                determines the reward amount for contribution by
+                Representatives.
+              &lt;/p&gt;
+              &lt;p className='sub-title'&gt;· r_rep&lt;/p&gt;
+              &lt;p className='txt'&gt;
+                Annual Delegation Reward Rate for Representative is the rate
+                received by an ICONist who delegates their ICX to a
+                Representative. At the moment, considering the r_eep and r_dapp,
+                the r_rep is tripled.
+              &lt;/p&gt;
+              &lt;p className='sub-title'&gt;· Step Price&lt;/p&gt;
+              &lt;p className='txt'&gt;
+                Step Price is a variable that determines the price of Step.
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className='btn-holder full'&gt;
+              &lt;button
+                className='btn-type-normal size-full'
+                onClick={this.closeAbout}
+              &gt;
+                &lt;span&gt;Confirm&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          key='suggest'
+          className='popup-wrap suggest'
+          style={{ display: 'none' }}
+        &gt;
+          &lt;div className='dimmed'&gt;&lt;/div&gt;
+          &lt;div className='popup'&gt;
+            &lt;h1 className='title'&gt;Suggested Commission Rate&lt;/h1&gt;
+            &lt;p className='txt'&gt;
+              Each Main P-Rep suggests a commission rate, then the ICON Network
+              takes an average to form the Global Commission Rate
+            &lt;/p&gt;
+            &lt;div className='btn-holder full'&gt;
+              &lt;button
+                className='btn-type-normal size-full'
+                onClick={this.closeAbout}
+              &gt;
+                &lt;span&gt;Confirm&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          key='commission'
+          className='popup-wrap commission'
+          style={{ display: 'none' }}
+        &gt;
+          &lt;div className='dimmed'&gt;&lt;/div&gt;
+          &lt;div className='popup'&gt;
+            &lt;h1 className='title'&gt;Global Commission Rate&lt;/h1&gt;
+            &lt;p className='txt'&gt;
+              The percentage of block rewards that go to P-Reps. For example,
+              with a 20% commission rate, if 100 ICX inflation is created then
+              20 goes to P-Reps and 80 goes to voters.
+            &lt;/p&gt;
+            &lt;div className='btn-holder full'&gt;
+              &lt;button
+                className='btn-type-normal size-full'
+                onClick={this.closeAbout}
+              &gt;
+                &lt;span&gt;Confirm&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          key='governance'
+          className='popup-wrap governance'
+          style={{ display: 'none' }}
+        &gt;
+          &lt;div className='dimmed'&gt;&lt;/div&gt;
+          &lt;div className='popup'&gt;
+            &lt;h1 className='title'&gt;Governance&lt;/h1&gt;
+            &lt;p className='txt'&gt;
+              Teams with a “Yes” are doing extra work to manage and grow the
+              ICON Network
+            &lt;/p&gt;
+            &lt;div className='btn-holder full'&gt;
+              &lt;button
+                className='btn-type-normal size-full'
+                onClick={this.closeGovernance}
+              &gt;
+                &lt;span&gt;Confirm&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          key='sponsor'
+          className='popup-wrap sponsor'
+          style={{ display: 'none' }}
+        &gt;
+          &lt;div className='dimmed'&gt;&lt;/div&gt;
+          &lt;div className='popup'&gt;
+            &lt;h1 className='title'&gt;Sponsored Projects&lt;/h1&gt;
+            &lt;p className='txt'&gt;
+              Sponsored Projects counts each time a team has invested their own
+              ICX to support a project
+            &lt;/p&gt;
+            &lt;div className='btn-holder full'&gt;
+              &lt;button
+                className='btn-type-normal size-full'
+                onClick={this.closeSponsor}
+              &gt;
+                &lt;span&gt;Confirm&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        {isSearch &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;Search</span>
+            key='search'
+            data={searchData}
+            closeSearch={this.closeSearch}
+          /&gt;
+        )}
+      &lt;/React.Fragment&gt;
+    );
+  }
+}
+&nbsp;
+function mapStateToProps(state) {
+  return {
+    type: state.popup.type,
+    data: state.popup.data
+  };
+}
+&nbsp;
+function mapDispatchToProps(dispatch) {
+  return {
+    initPopup: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >dispatch(initPopup())</span>
+  };
+}
+&nbsp;
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

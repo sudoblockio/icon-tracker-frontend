@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Popup/Scam.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/Popup</a> Scam.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import Dropzone from 'react-dropzone'
+import icon from '../../style/image/img-icon.png'
+import complete from '../../style/image/img-complete.png'
+import { requestAddress } from '../../utils/connect'
+import { reportScam } from '../../redux/actions/reportAction'
+import { setAddress } from '../../redux/actions/storageActions'
+&nbsp;
+class Scam extends Component {
+    state = {
+        connectStatus: this.props.walletAddress !== '' ? 2 : 0,
+        refUrl: '',
+        fileName: '',
+        dropBoxClass: '',
+        msg: '',
+        imgFile: null,
+    }
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps) {
+<span class="cstat-no" title="statement not covered" >        if (nextProps.walletAddress !== '') {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState({</span>
+                connectStatus: 1,
+            })
+        }
+    }
+    handleChange = <span class="fstat-no" title="function not covered" >e </span>=&gt; {
+<span class="cstat-no" title="statement not covered" >        if (e.target.value.length &gt; 256) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState({</span>
+                refUrl: e.target.value.substr(0, 256),
+            })
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            this.setState({</span>
+                refUrl: e.target.value,
+            })    
+        }        
+    }
+    readFile = <span class="fstat-no" title="function not covered" >fi</span>le =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (file &amp;&amp; file[0]) {</span>
+            const fileName = <span class="cstat-no" title="statement not covered" >file[0].name</span>
+            // if (!file[0].type.includes('image')) {
+            //     this.setState({
+            //         fileName,
+            //         dropBoxClass: 'error',
+            //         msg: 'Incorrect file form.',
+            //     })
+            //     return
+            // }
+<span class="cstat-no" title="statement not covered" >            if (file[0].size / 1024 / 1024 &gt; 5) {</span>
+<span class="cstat-no" title="statement not covered" >                this.setState({</span>
+                    fileName,
+                    dropBoxClass: 'error',
+                    msg: 'Exceeded file size limit.',
+                })
+<span class="cstat-no" title="statement not covered" >                return</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.setState({</span>
+                fileName,
+                dropBoxClass: 'normal',
+                imgFile: file,
+            })
+        }
+    }
+    handleClickDelete = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.setState({</span>
+            dropBoxClass: '',
+            imgFile: null,
+            msg: '',
+        })
+    }
+    handleSubmit = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
+        const { reportScam, data, walletAddress } = <span class="cstat-no" title="statement not covered" >this.props</span>
+        const { address } = <span class="cstat-no" title="statement not covered" >data</span>
+        const { refUrl, imgFile } = <span class="cstat-no" title="statement not covered" >this.state</span>
+<span class="cstat-no" title="statement not covered" >        await reportScam({</span>
+            reported: address,
+            reporter: walletAddress,
+            refUrl,
+            imgFile,
+        })
+<span class="cstat-no" title="statement not covered" >        this.props.closeScam()</span>
+    }
+    onClickNext = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
+        const { connectStatus } = <span class="cstat-no" title="statement not covered" >this.state</span>
+<span class="cstat-no" title="statement not covered" >        if (connectStatus === 1) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setState({</span>
+                connectStatus: 2,
+            })
+        } else <span class="cstat-no" title="statement not covered" >if (connectStatus === 0) {</span>
+            const walletAddress = <span class="cstat-no" title="statement not covered" >await requestAddress()</span>
+<span class="cstat-no" title="statement not covered" >            this.props.setAddress(walletAddress)</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        const { connectStatus, dropBoxClass, refUrl, fileName, msg } = <span class="cstat-no" title="statement not covered" >this.state</span>
+        const { walletAddress } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;Fragment&gt;
+                &lt;h1 key="h1" className="title"&gt;
+                    Report scam
+                &lt;/h1&gt;
+                &lt;div key="div" className="box"&gt;
+                    {connectStatus === 2 ? (
+                        &lt;Fragment&gt;
+                            &lt;h2&gt;The scam site URL or description. &lt;span&gt;(Optional)&lt;/span&gt;&lt;/h2&gt;
+                            &lt;input
+                                type="text"
+                                className="txt-type over"
+                                placeholder="Enter scam site URL or description"
+                                onChange={this.handleChange}
+                                value={refUrl}
+                            /&gt;
+                            &lt;h3&gt;Select a file or drag &amp; drop to the area below. &lt;span&gt;(Optional)&lt;/span&gt;&lt;/h3&gt;
+                            {dropBoxClass !== '' &amp;&amp; (&lt;Dropzone onDrop={<span class="fstat-no" title="function not covered" >fi</span>le =&gt; { 
+<span class="cstat-no" title="statement not covered" >                                this.readFile(file)</span>
+                            }}&gt;
+                                {<span class="fstat-no" title="function not covered" >({</span> getRootProps, getInputProps }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                                    &lt;Fragment&gt;</span>
+                                        &lt;div
+                                            className={`drop-box ${dropBoxClass}`}
+                                            {...getRootProps()}
+                                            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                                                return</span>
+                                            }}
+                                        &gt;
+                                            &lt;Fragment&gt;
+                                                &lt;i className="img" /&gt;
+                                                &lt;span className="ellipsis"&gt;{fileName}&lt;/span&gt;
+                                                {dropBoxClass === 'error' &amp;&amp; &lt;span className="msg"&gt;{msg}&lt;/span&gt;}
+                                                &lt;i className="img" onClick={this.handleClickDelete} /&gt;
+                                            &lt;/Fragment&gt;                                        
+                                            {dropBoxClass === '' &amp;&amp; &lt;span&gt;Please drag your file here.&lt;br/&gt;(Maximum upload file is 5MB.)&lt;/span&gt;}
+                                        &lt;/div&gt;
+                                        &lt;label htmlFor="file"&gt;Select file&lt;/label&gt;
+                                        &lt;input id="file" className="btn-type-normal select" {...getInputProps()} /&gt;
+                                    &lt;/Fragment&gt;
+                                )}
+                            &lt;/Dropzone&gt;)}
+                            {dropBoxClass === '' &amp;&amp; &lt;Dropzone onDrop={<span class="fstat-no" title="function not covered" >fi</span>le =&gt; { 
+<span class="cstat-no" title="statement not covered" >                                this.readFile(file)</span>
+                            }}&gt;
+                                {<span class="fstat-no" title="function not covered" >({</span> getRootProps, getInputProps }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                                    &lt;Fragment&gt;</span>
+                                        &lt;div
+                                            className={`drop-box ${dropBoxClass}`}
+                                            {...getRootProps()}
+                                            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                                                return</span>
+                                            }}
+                                        &gt;                                            
+                                            &lt;span&gt;Please drag your file here.&lt;br/&gt;(Maximum upload file is 5MB.)&lt;/span&gt;
+                                        &lt;/div&gt;
+                                        &lt;label htmlFor="file"&gt;Select file&lt;/label&gt;
+                                        &lt;input id="file" className="btn-type-normal select" {...getInputProps()} /&gt;
+                                    &lt;/Fragment&gt;
+                                )}
+                            &lt;/Dropzone&gt;}
+                            &lt;div className="btn-holder full"&gt;
+                                &lt;button className="btn-type-fill size-half" onClick={this.props.closeScam}&gt;
+                                    &lt;span&gt;{'Cancel'}&lt;/span&gt;
+                                &lt;/button&gt;                                
+                                &lt;button className="btn-type-normal size-half" disabled={dropBoxClass === 'error' ? true : false} onClick={this.handleSubmit}&gt;
+                                    &lt;span&gt;Submit&lt;/span&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/Fragment&gt;
+                    ) : (
+                        &lt;Fragment&gt;
+                            &lt;div className="icon"&gt;{connectStatus === 0 ? &lt;img src={icon} alt="icon" /&gt; : &lt;img src={complete} alt="complete" /&gt;}&lt;/div&gt;
+                            &lt;p className="sub-title"&gt;Connect to ICONex&lt;/p&gt;
+                            &lt;p className="txt"&gt;
+                                {connectStatus === 0 ? 'Reporting is only available after you connect the ICONex wallet.' : 'ICONex wallet is connected.'}
+                            &lt;/p&gt;
+                            {connectStatus === 1 &amp;&amp; &lt;p className="address"&gt;{walletAddress}&lt;/p&gt;}
+                            &lt;div className="btn-holder full"&gt;
+                                &lt;button className="btn-type-fill size-half" onClick={this.props.closeScam}&gt;
+                                    &lt;span&gt;{'Cancel'}&lt;/span&gt;
+                                &lt;/button&gt;
+                                &lt;button className="btn-type-normal size-half" onClick={this.onClickNext}&gt;
+                                    &lt;span&gt;{connectStatus === 0 ? 'Connect' : 'Next'}&lt;/span&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/Fragment&gt;
+                    )}
+                &lt;/div&gt;
+            &lt;/Fragment&gt;
+        )
+    }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        walletAddress: state.storage.walletAddress,
+    }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapDispatchToProps(</span>dispatch) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        reportScam: <span class="fstat-no" title="function not covered" >pa</span>yload =&gt; <span class="cstat-no" title="statement not covered" >dispatch(reportScam(payload)),</span>
+        setAddress: <span class="fstat-no" title="function not covered" >pa</span>yload =&gt; <span class="cstat-no" title="statement not covered" >dispatch(setAddress(payload)),</span>
+    }
+}
+&nbsp;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Scam)
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/store/sagas/blocksSaga.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/redux/store/sagas</a> blocksSaga.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import AT from '../../actionTypes/actionTypes';
+import {
+  blockList as BLOCK_LIST_API,
+  blockInfo as BLOCK_INFO_API,
+  blockTxList as BLOCK_TX_LIST_API
+} from '../../store/blocks';
+&nbsp;
+export default function* blocksSaga() {
+  yield fork(watchBlockList)
+  yield fork(watchBlockInfo);
+  yield fork(watchBlockTxList);
+}
+&nbsp;
+function* watchBlockList() { yield takeLatest(AT.blockList, blockListFunc) }
+function* watchBlockInfo() { yield takeLatest(AT.blockInfo, blockInfoFunc) }
+function* watchBlockTxList() { yield takeLatest(AT.blockTxList, blockTxListFunc) }
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >blockListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.blockListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(BLOCK_LIST_API, action.payload);</span>
+    
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      yield put({type: AT.blockListFulfilled, payload: payload});</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({type: AT.blockListRejected});</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >blockInfoFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(BLOCK_INFO_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({type: AT.blockInfoFulfilled, payload: payload});</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({type: AT.blockInfoRejected, error: action.payload.height});</span>
+  }
+}
+&nbsp;
+function* <span class="fstat-no" title="function not covered" >blockTxListFunc(</span>action) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.blockTxListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(BLOCK_TX_LIST_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({type: AT.blockTxListFulfilled, payload: payload});</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({type: AT.blockTxListRejected});</span>
+  }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Footer/Footer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/Footer</a> Footer.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { NETWORK_NAME, NETWORK_HOST } from '../../utils/const';
+import { SUPPORT_URL } from '../../utils/const';
+&nbsp;
+class Footer extends Component {
+&nbsp;
+	constructor(props) {
+		super(props);
+		this.state = {
+			current: NETWORK_NAME[window.location.host] || 'Mainnet'
+		};
+	}
+&nbsp;
+	onNetworkClick = <span class="fstat-no" title="function not covered" >ke</span>y =&gt; {
+<span class="cstat-no" title="statement not covered" >		window.open(`https://${NETWORK_HOST[key]}/`, '_blank')</span>
+	}
+&nbsp;
+	render() {
+		return (
+			&lt;div className="footer-wrap"&gt;
+				&lt;div className="screen0"&gt;
+					&lt;div className="wrap-holder"&gt;
+						&lt;p&gt;©2022 ICON Foundation&lt;/p&gt;
+						&lt;div className="sns"&gt;
+							&lt;p className="mail"&gt;&lt;span&gt;Support &amp; request to add the token homepage URL&lt;/span&gt;&lt;a href={SUPPORT_URL} rel="noopener noreferrer" target='_blank'&gt;Contact us&lt;/a&gt;&lt;/p&gt;
+							&lt;ul&gt;
+								&lt;li className="icon"&gt;&lt;a target='_black' href="https://www.icon.foundation"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+								&lt;li className="medium"&gt;&lt;a target='_black' href="https://medium.com/@helloiconworld"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+								&lt;li className="brunch"&gt;&lt;a target='_black' href="https://brunch.co.kr/@helloiconworld"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+								&lt;li className="twitter"&gt;&lt;a target='_black' href="https://twitter.com/helloiconworld"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+								&lt;li className="facebook"&gt;&lt;a target='_black' href="https://www.facebook.com/helloicon"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+								&lt;li className="github"&gt;&lt;a target='_black' href="https://github.com/icon-project"&gt;&lt;span className="img"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+							&lt;/ul&gt;
+							&lt;div className="mainnet"&gt;&lt;p&gt;{this.state.current}&lt;i className="img"&gt;&lt;/i&gt;&lt;/p&gt;
+								&lt;ul&gt;
+									{Object.keys(NETWORK_HOST).map(key =&gt; &lt;li key={key}&gt;&lt;span onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; { <span class="cstat-no" title="statement not covered" >this.onNetworkClick(key) </span>}}&gt;{key}&lt;/span&gt;&lt;/li&gt;)}
+								&lt;/ul&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		);
+	}
+}
+&nbsp;
+export default withRouter(Footer);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

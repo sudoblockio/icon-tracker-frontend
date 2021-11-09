@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utils/NotificationManager/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/utils/NotificationManager</a> index.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { pushRegister, pushWithdraw } from '../../redux/api/restV3/notification'
+import { delay } from '../utils';
+&nbsp;
+const path = '/sw.js'
+const PublicKey = 'BHu9mU0UUq95nIOkY2EGxHq4l2ibzVzVbcD0uZHAaibpLTQEBl9kL8sSUlXMMc_StUdlwIXa32gJFZKcOw6pw5A'
+&nbsp;
+class NotificationManager {
+    constructor() {
+        this.registration = null
+        this.address = ''
+        this.endpoint = ''
+    }    
+&nbsp;
+    available() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!('serviceWorker' in navigator)) return false    
+<span class="cstat-no" title="statement not covered" >        if (!('PushManager' in window)) <span class="cstat-no" title="statement not covered" >return false    </span></span>
+<span class="cstat-no" title="statement not covered" >        return true    </span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    as</span>ync registerServiceWorker(address) {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+            const registration = <span class="cstat-no" title="statement not covered" >await navigator.serviceWorker.register(path)</span>
+            const permission = <span class="cstat-no" title="statement not covered" >await this.requestPermission();</span>
+            const pushSubscription = <span class="cstat-no" title="statement not covered" >await registration.pushManager.subscribe({</span>
+                userVisibleOnly: true,
+                applicationServerKey: this.urlBase64ToUint8Array(PublicKey)
+            })       
+            const subscription = <span class="cstat-no" title="statement not covered" >pushSubscription.toJSON()</span>
+            const { endpoint, expirationTime: expireDate, keys } = <span class="cstat-no" title="statement not covered" >subscription</span>
+            const { p256dh, auth } = <span class="cstat-no" title="statement not covered" >keys</span>
+            
+<span class="cstat-no" title="statement not covered" >            await delay(500)</span>
+            const register = <span class="cstat-no" title="statement not covered" >await pushRegister({ address, auth, endpoint, expireDate, p256dh })</span>
+<span class="cstat-no" title="statement not covered" >            console.log(`${permission}, ${register.data.description}`)</span>
+            
+<span class="cstat-no" title="statement not covered" >            this.registration = registration</span>
+<span class="cstat-no" title="statement not covered" >            this.address = address</span>
+<span class="cstat-no" title="statement not covered" >            this.endpoint = endpoint</span>
+        }
+        catch(e) {
+<span class="cstat-no" title="statement not covered" >            console.error(e)        </span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    as</span>ync deregisterServiceWorker() {
+        const { registration, address, endpoint } = <span class="cstat-no" title="statement not covered" >this</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (registration) {</span>
+<span class="cstat-no" title="statement not covered" >            registration.unregister()</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (address &amp;&amp; endpoint) {</span>
+<span class="cstat-no" title="statement not covered" >            pushWithdraw({ address, endpoint })</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    as</span>ync requestPermission() {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+            const permissionResult = <span class="cstat-no" title="statement not covered" >await Notification.requestPermission()</span>
+<span class="cstat-no" title="statement not covered" >            return permissionResult</span>
+        }
+        catch(e) {
+<span class="cstat-no" title="statement not covered" >            console.error(e)        </span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    ur</span>lBase64ToUint8Array(base64String) {
+        const padding = <span class="cstat-no" title="statement not covered" >'='.repeat((4 - base64String.length % 4) % 4);</span>
+        const base64 = <span class="cstat-no" title="statement not covered" >(base64String + padding).replace(/-/g, '+').replace(/_/g, '/');</span>
+        const rawData = <span class="cstat-no" title="statement not covered" >window.atob(base64);</span>
+        const outputArray = <span class="cstat-no" title="statement not covered" >new Uint8Array(rawData.length);</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; rawData.length; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >            outputArray[i] = rawData.charCodeAt(i);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return outputArray;</span>
+    }
+}
+&nbsp;
+const NotificationManagerInstance = new NotificationManager()
+export default NotificationManagerInstance</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

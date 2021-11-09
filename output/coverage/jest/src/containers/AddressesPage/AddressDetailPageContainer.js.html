@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/AddressesPage/AddressDetailPageContainer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/containers/AddressesPage</a> AddressDetailPageContainer.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { connect } from 'react-redux';
+import { AddressDetailPage } from '../../components';
+import { withRouter } from 'react-router-dom';
+import { 
+  addressDelegationListAction,
+  addressInfoAction,
+  addressTxListAction,
+  addressInternalTxListAction,
+  addressTokenTxListAction,
+  addressVotedListAction,
+  addressRewardListAction
+} from '../../redux/store/addresses';
+import { 
+  setPopup 
+} from '../../redux/store/popups'
+import { 
+  setNotification,
+} from '../../redux/actions/storageActions';
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state) {
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    url: state.router.location,
+    ...state.addresses,
+    walletAddress: state.storage.walletAddress,
+    walletNotification: state.storage.walletNotification
+  };
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapDispatchToProps(</span>dispatch) {
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    addressRewardList: <span class="fstat-no" title="function not covered" >pa</span>yload =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressRewardListAction(payload)),</span>
+    addressDelegationList: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressDelegationListAction(payload)),</span>
+    addressVotedList: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressVotedListAction(payload)),</span>
+    addressInfo: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressInfoAction(payload)),</span>
+    addressTxList: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressTxListAction(payload)),</span>
+    addressInternalTxList: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressInternalTxListAction(payload)),</span>
+    addressTokenTxList: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(addressTokenTxListAction(payload)),</span>
+    setNotification: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(setNotification(payload)),</span>
+    setPopup: <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(setPopup(payload))</span>
+  };
+}
+&nbsp;
+const AddressListPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressDetailPage));
+&nbsp;
+export default AddressListPageContainer;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

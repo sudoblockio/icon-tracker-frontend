@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/store/blocks.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/redux/store</a> blocks.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { trackerApiInstance } from "../api/restV3/config";
+import actionTypes from "../actionTypes/actionTypes";
+import { getState, makeUrl } from "../../utils/utils";
+import { REDUX_STEP, INITIAL_STATE } from "../../utils/const";
+import { prefixes } from '../../utils/const'
+&nbsp;
+// ACTIONS
+export function <span class="fstat-no" title="function not covered" >blockListAction(</span>payload) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      type: actionTypes.blockList,
+      payload
+    }
+  }
+  
+  export function <span class="fstat-no" title="function not covered" >blockInfoAction(</span>payload) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      type: actionTypes.blockInfo,
+      payload
+    }
+  }
+  
+  export function <span class="fstat-no" title="function not covered" >blockTxListAction(</span>payload) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      type: actionTypes.blockTxList,
+      payload
+    }
+  }
+&nbsp;
+&nbsp;
+//   API
+// *update paths in utils/const to change prefixes app-wide.* 
+  const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
+&nbsp;
+  export async function <span class="fstat-no" title="function not covered" >blockList(</span>payload) {
+    const trackerApi = <span class="cstat-no" title="statement not covered" >await trackerApiInstance()</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      trackerApi.get(makeUrl(`${BLOCKS_PREFIX}`, payload))</span>
+        .then(<span class="fstat-no" title="function not covered" >re</span>sult =&gt; {
+  
+<span class="cstat-no" title="statement not covered" >          resolve(result)</span>
+        })
+        .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; {
+<span class="cstat-no" title="statement not covered" >          reject(error)</span>
+        })
+    })
+  }
+  
+  export async function <span class="fstat-no" title="function not covered" >blockInfo(</span>payload) {
+    const trackerApi = <span class="cstat-no" title="statement not covered" >await trackerApiInstance()</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.height === '0' ) {</span>
+      const num = <span class="cstat-no" title="statement not covered" >800460000*Math.pow(10,18)</span>
+      const result = <span class="cstat-no" title="statement not covered" >{</span>
+        data: {
+          hash: "0xcf43b3fd45981431a0e64f79d07bfcf703e064b73b802c5f32834eec72142190",
+          number: 0,
+          transaction_amount: num.toString(16),
+          transaction_fees: 0,
+          message: "A rhizome has no beginning or end; it is always in the middle, between things, interbeing, intermezzo. The tree is filiation, but the rhizome is alliance, uniquely alliance. The tree imposes the verb 'to be' but the fabric of the rhizome is the conjunction, 'and ... and ...and...' This conjunction carries enough force to shake and uproot the verb 'to be.' Where are you going? Where are you coming from? What are you heading for? These are totally useless questions. - Mille Plateaux, Gilles Deleuze &amp; Felix Guattari 'Hyperconnect the world'",
+        },
+        status: 200
+      }
+<span class="cstat-no" title="statement not covered" >      return result</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      trackerApi.get(`${BLOCKS_PREFIX}/${payload.height}`)</span>
+        .then(<span class="fstat-no" title="function not covered" >re</span>sult =&gt; {
+<span class="cstat-no" title="statement not covered" >          resolve(result)</span>
+        })
+        .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; {
+<span class="cstat-no" title="statement not covered" >          reject(error)</span>
+        })
+    })
+  }
+  
+  export async function <span class="fstat-no" title="function not covered" >blockTxList(</span>payload) {
+    const trackerApi = <span class="cstat-no" title="statement not covered" >await trackerApiInstance()</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      trackerApi.get(`${TRANSACTIONS_PREFIX}?block_number=${payload.height}`)</span>
+        .then(<span class="fstat-no" title="function not covered" >re</span>sult =&gt; {
+<span class="cstat-no" title="statement not covered" >          resolve(result)</span>
+        })
+        .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; {
+<span class="cstat-no" title="statement not covered" >          reject(error)</span>
+        })
+    })
+  }
+&nbsp;
+// REDUCER
+&nbsp;
+const initialState = {
+    blocks: INITIAL_STATE['ARR'],
+    block: INITIAL_STATE['OBJ'],
+    blockTx: INITIAL_STATE['ARR'],
+  }
+  
+  export function blocksReducer(state = initialState, action) {
+    switch (action.type) {
+<span class="branch-0 cbranch-no" title="branch not covered" >      case actionTypes.blockList: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.READY, state, action, 'blocks')</span></span>
+<span class="branch-1 cbranch-no" title="branch not covered" >      case actionTypes.blockListFulfilled: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blocks')</span></span>
+<span class="branch-2 cbranch-no" title="branch not covered" >      case actionTypes.blockListRejected: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blocks')</span></span>
+  
+<span class="branch-3 cbranch-no" title="branch not covered" >      case actionTypes.blockInfo: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.READY, state, action, 'block')</span></span>
+<span class="branch-4 cbranch-no" title="branch not covered" >      case actionTypes.blockInfoFulfilled: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.FULFILLED, state, action, 'block')</span></span>
+<span class="branch-5 cbranch-no" title="branch not covered" >      case actionTypes.blockInfoRejected: <span class="cstat-no" title="statement not covered" >return getState('OBJ', REDUX_STEP.REJECTED, state, action, 'block')</span></span>
+  
+<span class="branch-6 cbranch-no" title="branch not covered" >      case actionTypes.blockTxList: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.READY, state, action, 'blockTx')</span></span>
+<span class="branch-7 cbranch-no" title="branch not covered" >      case actionTypes.blockTxListFulfilled: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blockTx')</span></span>
+<span class="branch-8 cbranch-no" title="branch not covered" >      case actionTypes.blockTxListRejected: <span class="cstat-no" title="statement not covered" >return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blockTx')</span></span>
+  
+      default: {
+        return state
+      }
+    }
+  }
+  </pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

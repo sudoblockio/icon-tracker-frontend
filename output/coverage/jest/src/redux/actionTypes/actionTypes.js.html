@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/actionTypes/actionTypes.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/redux/actionTypes</a> actionTypes.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const actionTypes = {
+  getMainInfo: 'GET_MAIN_INFO',
+  getMainInfoFulfilled: 'GET_MAIN_INFO_FULFILLED',
+  getMainInfoRejected: 'GET_MAIN_INFO_REJECTED',
+&nbsp;
+  getMainChart: 'GET_MAIN_CHART',
+  getMainChartFulfilled: 'GET_MAIN_CHART_FULFILLED',
+  getMainChartRejected: 'GET_MAIN_CHART_REJECTED',
+&nbsp;
+  addressList: 'ADDRESS_LIST',
+  addressListFulfilled: 'ADDRESS_LIST_FULFILLED',
+  addressListRejected: 'ADDRESS_LIST_REJECTED',
+&nbsp;
+  blockList: 'BLOCK_LIST',
+  blockListFulfilled: 'BLOCK_LIST_FULFILLED',
+  blockListRejected: 'BLOCK_LIST_REJECTED',
+&nbsp;
+  transactionTxDetail: 'TRANSACTION_TX_DETAIL',
+  transactionTxDetailFulfilled: 'TRANSACTION_TX_DETAIL_FULFILLED',
+  transactionTxDetailRejected: 'TRANSACTION_TX_DETAIL_REJECTED',
+&nbsp;
+  search: 'SEARCH',
+  searchFulfilled: 'SEARCH_FULFILLED',
+  searchRejected: 'SEARCH_REJECTED',
+  searchErrorReset: 'SEARCH_ERROR_RESET',
+&nbsp;
+  addressInfo: 'ADDRESS_INFO',
+  addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
+  addressInfoRejected: 'ADDRESS_INFO_REJECTED',
+&nbsp;
+  addressInternalTxList: 'ADDRESS_INTERNAL_TX_LIST',
+  addressInternalTxListFulfilled: 'ADDRESS_INTERNAL_TX_LIST_FULFILLED',
+  addressInternalTxListRejected: 'ADDRESS_INTERNAL_TX_LIST_REJECTED',
+  
+  addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
+  addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
+  addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
+&nbsp;
+  blockInfo: 'BLOCK_INFO',
+  blockInfoFulfilled: 'BLOCK_INFO_FULFILLED',
+  blockInfoRejected: 'BLOCK_INFO_REJECTED',
+&nbsp;
+  blockTxList: 'BLOCK_TX_LIST',
+  blockTxListFulfilled: 'BLOCL_TX_LIST_FULFILLED',
+  blockTxListRejected: 'BLOCK_TX_LIST_REJECTED',
+&nbsp;
+  transactionRecentTx: 'TRANSACTION_RECENT_TX',
+  transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
+  transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',
+&nbsp;
+  transactionEventLogList: 'TRANSACTION_EVENT_LOG_LIST',
+  transactionEventLogListFulfilled: 'TRANSACTION_EVENT_LOG_LIST_FULFILLED',
+  transactionEventLogListRejected: 'TRANSACTION_EVENT_LOG_LIST_REJECTED',
+  
+  transactionInternalTxList: 'TRANSACTION_INTERNAL_TX_LIST',
+  transactionInternalTxListFulfilled: 'TRANSACTION_INTERNAL_TX_LIST_FULFILLED',
+  transactionInternalTxListRejected: 'TRANSACTION_INTERNAL_TX_LIST_REJECTED',
+&nbsp;
+  contractList: 'SELECT_CONTRACT_LIST',
+  contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
+  contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
+  
+  contractListSearch: 'SELECT_CONTRACT_LIST_SEARCH',
+  contractListSearchFulfilled: 'SELECT_CONTRACT_LIST_SEARCH_FULFILLED',
+  contractListSearchRejected: 'SELECT_CONTRACT_LIST_SEARCH_REJECTED',
+&nbsp;
+  contractTokenTxList: 'CONTRACT_TOKEN_TX_LIST',
+  contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',
+  contractTokenTxListRejected: 'CONTRACT_TOKEN_TX_LIST_REJECTED',
+&nbsp;
+  addressDelegationList: 'ADDRESS_DELEGATION_LIST',
+  addressDelegationListFulfilled: 'ADDRESS_DELEGATION_LIST_FULFILLED',
+  addressDelegationListRejected: 'ADDRESS_DELEGATION_LIST_REJECTED',
+&nbsp;
+  addressVotedList: 'ADDRESS_VOTED_LIST',
+  addressVotedListFulfilled: 'ADDRESS_VOTED_LIST_FULFILLED',
+  addressVotedListRejected: 'ADDRESS_VOTED_LIST_REJECTED',
+&nbsp;
+  addressRewardList: 'ADDRESS_REWARD_LIST',
+  addressRewardListFulfilled: 'ADDRESS_REWARD_LIST_FULFILLED',
+  addressRewardListRejected: 'ADDRESS_REWARD_LIST_REJECTED',
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+  contractInfo: 'CONTRACT_INFO',
+  contractInfoFulfilled: 'CONTRACT_INFO_FULFILLED',
+  contractInfoRejected: 'CONTRACT_INFO_REJECTED',
+&nbsp;
+  contractDetail: 'CONTRACT_DETAIL',
+  contractDetailFulfilled: 'CONTRACT_DETAIL_FULFILLED',
+  contractDetailRejected: 'CONTRACT_DETAIL_REJECTED',
+&nbsp;
+  contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
+  imageConverterPopup: 'IMAGE_CONVERTER_POPUP',
+&nbsp;
+  contractTxList: 'CONTRACT_TX_LIST',
+  contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
+  contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
+&nbsp;
+  contractInternalTxList: 'CONTRACT_INTERNAL_TX_LIST',
+  contractInternalTxListFulfilled: 'CONTRACT_INTERNAL_TX_LIST_FULFILLED',
+  contractInternalTxListRejected: 'CONTRACT_INTERNAL_TX_LIST_REJECTED',
+&nbsp;
+  contractEventLogList: 'CONTRACT_EVENT_LOG_LIST',
+  contractEventLogListFulfilled: 'CONTRACT_EVENT_LOG_LIST_FULFILLED',
+  contractEventLogListRejected: 'CONTRACT_EVENT_LOG_LIST_REJECTED',
+&nbsp;
+  addressTxList: 'ADDRESS_TX_LIST',
+  addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
+  addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
+&nbsp;
+  
+  icxGetScore: 'ICX_GET_SCORE',
+  icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
+  icxGetScoreRejected: 'ICX_GET_SCORE_REJECTED',
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+  tokenList: 'TOKEN_LIST',
+  tokenListFulfilled: 'TOKEN_LIST_FULFILLED',
+  tokenListRejected: 'TOKEN_LIST_REJECTED',
+  
+  tokenListSearch: 'TOKEN_LIST_SEARCH',
+  tokenListSearchFulfilled: 'TOKEN_LIST_FULFILLED_SEARCH',
+  tokenListSearchRejected: 'TOKEN_LIST_REJECTED_SEARCH',
+  
+  tokenTxList: 'TOKEN_TX_LIST',
+  tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
+  tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
+&nbsp;
+  tokenSummary: 'TOKEN_SUMMARY',
+  tokenSummaryFulfilled: 'TOKEN_SUMMARY_FULFILLED',
+  tokenSummaryRejected: 'TOKEN_SUMMARY_REJECTED',
+&nbsp;
+  tokenTransfersList: 'TOKEN_TRANSFERS_LIST',
+  tokenTransfersListFulfilled: 'TOKEN_TRANSFERS_LIST_FULFILLED',
+  tokenTransfersListRejected: 'TOKEN_TRANSFERS_LIST_REJECTED',
+&nbsp;
+  tokenHoldersList: 'TOKEN_HOLDERS_LIST',
+  tokenHoldersListFulfilled: 'TOKEN_HOLDERS_LIST_FULFILLED',
+  tokenHoldersListRejected: 'TOKEN_HOLDERS_LIST_REJECTED',
+&nbsp;
+  initPopup: 'INIT_POPUP',
+  setPopup: 'SET_POPUP',
+&nbsp;
+  readContractInformation: 'READ_CONTRACT_INFORMATION',
+  readContractInformationFulfilled: 'READ_CONTRACT_INFORMATION_FULFILLED',
+  readContractInformationRejected: 'READ_CONTRACT_INFORMATION_REJECTED',
+&nbsp;
+  icxCall: 'ICX_CALL',
+  icxCallFulfilled: 'ICX_CALL_FULFILLED',
+  icxCallRejected: 'ICX_CALL_REJECTED',
+&nbsp;
+  reportScam: 'REPORT_ADDRESS',
+  reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
+  reportScamRejected: 'REPORT_ADDRESS_REJECTED',
+&nbsp;
+  setBannerOption: 'SET_BANNER_OPTION',
+  
+  setAddress: 'SET_ADDRESS',
+  setAddressSuccess :'SET_ADDRESS_SUCCESS',
+  setNotification: 'SET_NOTIFICATION',
+  setNotificationSuccess :'SET_NOTIFICATION_SUCCESS',
+  clearWallet: 'CLEAR_WALLET',
+  clearWalletSuccess: 'CLEAR_WALLET_SUCCESS',
+&nbsp;
+  proposalInfo: 'PROPOSAL_INFO',
+  proposalInfoFulfilled: 'PROPOSAL_INFO_FULFILLED',
+  proposalInfoRejected: 'PROPOSAL_INFO_REJECTED',
+&nbsp;
+  totalQuorum: 'TOTAL_QUORUM',
+  totalQuorumFulfilled: 'TOTAL_QUORUM_FULFILLED',
+  totalQuorumRejected: 'TOTAL_QUORUM_REJECTED',
+&nbsp;
+  totalTokenVotes: 'TOTAL_TOKEN_VOTES',
+  totalTokenVotesFulfilled: 'TOTAL_TOKEN_VOTES_FULFILLED',
+  totalTokenVotesRejected: 'TOTAL_TOKEN_VOTES_REJECTED',
+}
+&nbsp;
+export default actionTypes
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

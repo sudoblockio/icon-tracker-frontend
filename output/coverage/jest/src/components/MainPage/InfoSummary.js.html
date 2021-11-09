@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/MainPage/InfoSummary.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/MainPage</a> InfoSummary.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component, Fragment } from 'react'
+import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
+import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/api/restV3/iiss'
+import { getSupplyMetrics } from '../../redux/api/restV3/main'
+&nbsp;
+class InfoSummary extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isSolo: false,
+        }
+    }
+&nbsp;
+    async componentDidMount() {
+        const isSolo = await getIsSolo()
+        const totalSupply = <span class="cstat-no" title="statement not covered" >await getTotalSupply()</span>
+        const marketCap = <span class="cstat-no" title="statement not covered" >await coinGeckoMarketCap()</span>
+        // const allTransactions = await getAllTransactions()
+        const supplyMetrics = <span class="cstat-no" title="statement not covered" >await getSupplyMetrics()</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({ isSolo, totalSupply, marketCap, /*allTransactions,*/ supplyMetrics })</span>
+    }
+&nbsp;
+    render() {
+        const { tmainInfo } = this.props.info || <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
+        const { icxCirculationy } = tmainInfo || <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
+        const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
+        const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
+        const icxCirculationStr = this.state.supplyMetrics ? <span class="branch-0 cbranch-no" title="branch not covered" >numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) </span>: 0;
+        
+        return (
+            &lt;Fragment&gt;
+                &lt;li&gt;
+                    &lt;div&gt;
+                        &lt;span className="usd"&gt;&lt;i className="img"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;p&gt;Market Cap &lt;em&gt;(USD)&lt;/em&gt;&lt;/p&gt;
+                        &lt;p&gt;{marketCapStr}&lt;/p&gt;									
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;div&gt;
+                        &lt;span className="icx"&gt;&lt;i className="img"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;p&gt;ICX Supply&lt;/p&gt;
+                        &lt;p&gt;{totalSupplyStr}&lt;/p&gt;									
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;div&gt;
+                        &lt;span className="icx"&gt;&lt;i className="img"&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;p&gt;ICX Circulation&lt;/p&gt;
+                        &lt;p&gt;{numberWithCommas(icxCirculationStr)}&lt;/p&gt;									
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;div&gt;
+                        &lt;span&gt;&lt;i className="img"&gt;T&lt;/i&gt;&lt;/span&gt;
+                        &lt;p&gt;All Transactions&lt;/p&gt;
+                        &lt;p&gt;152,372,441&lt;/p&gt;
+                        {/* &lt;p&gt;{numberWithCommas(this.state.allTransactions)}&lt;/p&gt;									 */}
+                    &lt;/div&gt;
+                &lt;/li&gt;
+            &lt;/Fragment&gt;
+        )
+    }
+}
+&nbsp;
+export default InfoSummary
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

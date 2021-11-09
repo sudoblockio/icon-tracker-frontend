@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/ContractsPage/ContractDetailPage/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/ContractsPage/ContractDetailPage</a> index.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import ContractInfo from './ContractInfo'
+import ContractTabs from './ContractTabs'
+import {
+    DetailPage
+} from '../../../components';
+import {
+    CONTRACT_TABS
+} from '../../../utils/const'
+&nbsp;
+class ContractDetailPage extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        const { contract } = <span class="cstat-no" title="statement not covered" >this.props;</span>
+        
+        const { loading, error } = <span class="cstat-no" title="statement not covered" >contract</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;DetailPage
+                {...this.props}
+                loading={loading}
+                error={error}
+                TABS={CONTRACT_TABS}
+                ROUTE="/contract"
+                getInfo={<span class="fstat-no" title="function not covered" >ad</span>dr =&gt; { <span class="cstat-no" title="statement not covered" >this.props.contractInfo({ addr }) </span>}}
+                getList={[
+<span class="fstat-no" title="function not covered" >                    ad</span>dr =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.contractTxList({ addr, page: 1, count: 10 })</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    ad</span>dr =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.contractInternalTxList({ addr, page: 1, count: 10 })</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    ad</span>dr =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.contractTokenTxList({ addr, page: 1, count: 10 })</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    ad</span>dress =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.icxGetScore({ address })</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    ad</span>dress =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.readContractInformation({ address  })</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    co</span>ntractAddr =&gt; {
+<span class="cstat-no" title="statement not covered" >                        this.props.contractEventLogList({ contractAddr, page: 1, count: 10 })</span>
+                    },
+                ]}
+                InfoComponent={ContractInfo}
+                TabsComponent={ContractTabs}
+            /&gt;
+        )
+    }
+}
+&nbsp;
+export default ContractDetailPage;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

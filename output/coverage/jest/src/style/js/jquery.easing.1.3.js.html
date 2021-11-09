@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/style/js/jquery.easing.1.3.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/style/js</a> jquery.easing.1.3.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
+ *
+ * Uses the built in easing capabilities added In jQuery 1.1
+ * to offer multiple easing options
+ *
+ * TERMS OF USE - jQuery Easing
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright © 2008 George McGinley Smith
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+*/
+&nbsp;
+// t: current time, b: begInnIng value, c: change In value, d: duration
+<span class="cstat-no" title="statement not covered" >jQuery.easing['jswing'] = jQuery.easing['swing'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >jQuery.extend( jQuery.easing,</span>
+{
+	def: 'easeOutQuad',
+	swing: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+		//alert(jQuery.easing.default);
+<span class="cstat-no" title="statement not covered" >		return jQuery.easing[jQuery.easing.def](x, t, b, c, d);</span>
+	},
+	easeInQuad: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*(t/=d)*t + b;</span>
+	},
+	easeOutQuad: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return -c *(t/=d)*(t-2) + b;</span>
+	},
+	easeInOutQuad: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2*t*t + b;</span>
+<span class="cstat-no" title="statement not covered" >		return -c/2 * ((--t)*(t-2) - 1) + b;</span>
+	},
+	easeInCubic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*(t/=d)*t*t + b;</span>
+	},
+	easeOutCubic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*((t=t/d-1)*t*t + 1) + b;</span>
+	},
+	easeInOutCubic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2*t*t*t + b;</span>
+<span class="cstat-no" title="statement not covered" >		return c/2*((t-=2)*t*t + 2) + b;</span>
+	},
+	easeInQuart: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*(t/=d)*t*t*t + b;</span>
+	},
+	easeOutQuart: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return -c * ((t=t/d-1)*t*t*t - 1) + b;</span>
+	},
+	easeInOutQuart: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2*t*t*t*t + b;</span>
+<span class="cstat-no" title="statement not covered" >		return -c/2 * ((t-=2)*t*t*t - 2) + b;</span>
+	},
+	easeInQuint: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*(t/=d)*t*t*t*t + b;</span>
+	},
+	easeOutQuint: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c*((t=t/d-1)*t*t*t*t + 1) + b;</span>
+	},
+	easeInOutQuint: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2*t*t*t*t*t + b;</span>
+<span class="cstat-no" title="statement not covered" >		return c/2*((t-=2)*t*t*t*t + 2) + b;</span>
+	},
+	easeInSine: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return -c * Math.cos(t/d * (Math.PI/2)) + c + b;</span>
+	},
+	easeOutSine: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c * Math.sin(t/d * (Math.PI/2)) + b;</span>
+	},
+	easeInOutSine: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;</span>
+	},
+	easeInExpo: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;</span>
+	},
+	easeOutExpo: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;</span>
+	},
+	easeInOutExpo: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if (t==0) <span class="cstat-no" title="statement not covered" >r</span>eturn b;</span>
+<span class="cstat-no" title="statement not covered" >		if (t==d) <span class="cstat-no" title="statement not covered" >r</span>eturn b+c;</span>
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2 * Math.pow(2, 10 * (t - 1)) + b;</span>
+<span class="cstat-no" title="statement not covered" >		return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;</span>
+	},
+	easeInCirc: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;</span>
+	},
+	easeOutCirc: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c * Math.sqrt(1 - (t=t/d-1)*t) + b;</span>
+	},
+	easeInOutCirc: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn -c/2 * (Math.sqrt(1 - t*t) - 1) + b;</span>
+<span class="cstat-no" title="statement not covered" >		return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;</span>
+	},
+	easeInElastic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+		var s=<span class="cstat-no" title="statement not covered" >1.70158;var p=<span class="cstat-no" title="statement not covered" >0;var a=<span class="cstat-no" title="statement not covered" >c;</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (t==0) <span class="cstat-no" title="statement not covered" >r</span>eturn b;  <span class="cstat-no" title="statement not covered" >if ((t/=d)==1) <span class="cstat-no" title="statement not covered" >r</span>eturn b+c;  <span class="cstat-no" title="statement not covered" >if (!p) <span class="cstat-no" title="statement not covered" >p</span>=d*.3;</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (a &lt; Math.abs(c)) { <span class="cstat-no" title="statement not covered" >a=c; var s=<span class="cstat-no" title="statement not covered" >p/4; }</span></span></span>
+		else var s = <span class="cstat-no" title="statement not covered" >p/(2*Math.PI) * Math.asin (c/a);</span>
+<span class="cstat-no" title="statement not covered" >		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;</span>
+	},
+	easeOutElastic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+		var s=<span class="cstat-no" title="statement not covered" >1.70158;var p=<span class="cstat-no" title="statement not covered" >0;var a=<span class="cstat-no" title="statement not covered" >c;</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (t==0) <span class="cstat-no" title="statement not covered" >r</span>eturn b;  <span class="cstat-no" title="statement not covered" >if ((t/=d)==1) <span class="cstat-no" title="statement not covered" >r</span>eturn b+c;  <span class="cstat-no" title="statement not covered" >if (!p) <span class="cstat-no" title="statement not covered" >p</span>=d*.3;</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (a &lt; Math.abs(c)) { <span class="cstat-no" title="statement not covered" >a=c; var s=<span class="cstat-no" title="statement not covered" >p/4; }</span></span></span>
+		else var s = <span class="cstat-no" title="statement not covered" >p/(2*Math.PI) * Math.asin (c/a);</span>
+<span class="cstat-no" title="statement not covered" >		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;</span>
+	},
+	easeInOutElastic: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+		var s=<span class="cstat-no" title="statement not covered" >1.70158;var p=<span class="cstat-no" title="statement not covered" >0;var a=<span class="cstat-no" title="statement not covered" >c;</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (t==0) <span class="cstat-no" title="statement not covered" >r</span>eturn b;  <span class="cstat-no" title="statement not covered" >if ((t/=d/2)==2) <span class="cstat-no" title="statement not covered" >r</span>eturn b+c;  <span class="cstat-no" title="statement not covered" >if (!p) <span class="cstat-no" title="statement not covered" >p</span>=d*(.3*1.5);</span></span></span>
+<span class="cstat-no" title="statement not covered" >		if (a &lt; Math.abs(c)) { <span class="cstat-no" title="statement not covered" >a=c; var s=<span class="cstat-no" title="statement not covered" >p/4; }</span></span></span>
+		else var s = <span class="cstat-no" title="statement not covered" >p/(2*Math.PI) * Math.asin (c/a);</span>
+<span class="cstat-no" title="statement not covered" >		if (t &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;</span>
+<span class="cstat-no" title="statement not covered" >		return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;</span>
+	},
+	easeInBack: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d, s) {
+<span class="cstat-no" title="statement not covered" >		if (s == undefined) <span class="cstat-no" title="statement not covered" >s</span> = 1.70158;</span>
+<span class="cstat-no" title="statement not covered" >		return c*(t/=d)*t*((s+1)*t - s) + b;</span>
+	},
+	easeOutBack: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d, s) {
+<span class="cstat-no" title="statement not covered" >		if (s == undefined) <span class="cstat-no" title="statement not covered" >s</span> = 1.70158;</span>
+<span class="cstat-no" title="statement not covered" >		return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;</span>
+	},
+	easeInOutBack: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d, s) {
+<span class="cstat-no" title="statement not covered" >		if (s == undefined) <span class="cstat-no" title="statement not covered" >s</span> = 1.70158; </span>
+<span class="cstat-no" title="statement not covered" >		if ((t/=d/2) &lt; 1) <span class="cstat-no" title="statement not covered" >r</span>eturn c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;</span>
+<span class="cstat-no" title="statement not covered" >		return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;</span>
+	},
+	easeInBounce: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d) + b;</span>
+	},
+	easeOutBounce: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if ((t/=d) &lt; (1/2.75)) {</span>
+<span class="cstat-no" title="statement not covered" >			return c*(7.5625*t*t) + b;</span>
+		} else <span class="cstat-no" title="statement not covered" >if (t &lt; (2/2.75)) {</span>
+<span class="cstat-no" title="statement not covered" >			return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;</span>
+		} else <span class="cstat-no" title="statement not covered" >if (t &lt; (2.5/2.75)) {</span>
+<span class="cstat-no" title="statement not covered" >			return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;</span>
+		}
+	},
+	easeInOutBounce: <span class="fstat-no" title="function not covered" >function (</span>x, t, b, c, d) {
+<span class="cstat-no" title="statement not covered" >		if (t &lt; d/2) <span class="cstat-no" title="statement not covered" >r</span>eturn jQuery.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;</span>
+<span class="cstat-no" title="statement not covered" >		return jQuery.easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;</span>
+	}
+});
+&nbsp;
+/*
+ *
+ * TERMS OF USE - EASING EQUATIONS
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright © 2001 Robert Penner
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ */</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

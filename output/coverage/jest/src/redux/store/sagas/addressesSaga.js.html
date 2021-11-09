@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/redux/store/sagas/addressesSaga.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/redux/store/sagas</a> addressesSaga.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import AT from '../../actionTypes/actionTypes';
+&nbsp;
+// *** convert 
+import {
+  getDelegation as ADDRESS_DELEGATION_LIST,
+  addressReward as ADDRESS_REWARD,
+  getPReps,
+  getDelegation,
+} from '../../api/restV3';
+&nbsp;
+import {
+  addressList as ADDRESS_LIST_API,
+  addressInfo as ADDRESS_INFO_API,
+  addressTxList as ADDRESS_TX_LIST,
+  addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
+  addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
+  addressVotedList as ADDRESS_VOTED_LIST,
+} from '../addresses'
+&nbsp;
+// *** take a deeper look, cull. 
+import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../api/restV3/iiss';
+import { convertLoopToIcxDecimal } from '../../../utils/utils';
+&nbsp;
+export default function* addressesSaga() {
+  yield fork(watchAddressRewardList);
+  yield fork(watchAddressDelegationList);
+  yield fork(watchAddressVotedList);
+  yield fork(watchAddressList);
+  yield fork(watchAddressInfo);
+  yield fork(watchAddressTxList);
+  yield fork(watchAddressInternalTxList);
+  yield fork(watchAddressTokenTxList);
+}
+&nbsp;
+function* watchAddressRewardList() { yield takeLatest(AT.addressRewardList, addressRewardListFunc) }
+function* watchAddressDelegationList() { yield takeLatest(AT.addressDelegationList, addressDelegationListFunc) }
+function* watchAddressVotedList() { yield takeLatest(AT.addressVotedList, addressVotedListFunc) }
+function* watchAddressList() { yield takeLatest(AT.addressList, addressListFunc) }
+function* watchAddressInfo() { yield takeLatest(AT.addressInfo, addressInfoFunc) }
+function* watchAddressTxList() { yield takeLatest(AT.addressTxList, addressTxListFunc) }
+function* watchAddressInternalTxList() { yield takeLatest(AT.addressInternalTxList, addressInternalTxListFunc) }
+function* watchAddressTokenTxList() { yield takeLatest(AT.addressTokenTxList, addressTokenTxListFunc) }
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressRewardListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_REWARD, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressRewardListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressRewardListRejected });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressDelegationListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const { address } = <span class="cstat-no" title="statement not covered" >action.payload</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_DELEGATION_LIST, address);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(payload, "delegations saga payload")</span>
+    const { delegations } = <span class="cstat-no" title="statement not covered" >payload</span>
+<span class="cstat-no" title="statement not covered" >    console.log(delegations, "if delegations")</span>
+<span class="cstat-no" title="statement not covered" >    if (delegations) {</span>
+      const { preps } = <span class="cstat-no" title="statement not covered" >yield call(getPReps)</span>
+<span class="cstat-no" title="statement not covered" >      console.log(preps, "preps yield call")</span>
+      const data = <span class="cstat-no" title="statement not covered" >delegations.map(<span class="fstat-no" title="function not covered" >pr</span>ep =&gt; {</span>
+        const { address, value } = <span class="cstat-no" title="statement not covered" >prep</span>
+<span class="cstat-no" title="statement not covered" >        console.log(prep, "from map in saga")</span>
+        const index = <span class="cstat-no" title="statement not covered" >preps.findIndex(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >p.address === address)</span></span>
+        let searched = <span class="cstat-no" title="statement not covered" >{ address }</span>
+<span class="cstat-no" title="statement not covered" >        console.log(searched, "searched in saga")</span>
+<span class="cstat-no" title="statement not covered" >        if (index !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >          searched = preps[index]</span>
+        }
+<span class="cstat-no" title="statement not covered" >        searched.value = value</span>
+<span class="cstat-no" title="statement not covered" >        return searched</span>
+      })
+<span class="cstat-no" title="statement not covered" >      console.log(data, "data from saga put")</span>
+<span class="cstat-no" title="statement not covered" >      yield put({</span>
+        type: AT.addressDelegationListFulfilled, payload: {
+          data,
+          listSize: data.length,
+          totalSize: data.length
+        }
+      });
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error()</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressDelegationListRejected });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressVotedListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressVotedListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_VOTED_LIST, action.payload.address);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(payload, "payload from voted list saga")</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressVotedListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressVotedListRejected });</span>
+  }
+&nbsp;
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressListFunc(</span>action) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_LIST_API, action.payload);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (payload.length !== 0 ) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressListRejected });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressInfoFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_INFO_API, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+      const { address } = <span class="cstat-no" title="statement not covered" >action.payload</span>
+      const { delegations, totalDelegated } = <span class="cstat-no" title="statement not covered" >yield call(getDelegation, address)</span>
+      const prep = <span class="cstat-no" title="statement not covered" >yield call(getPRep, address)</span>
+      const balance = <span class="cstat-no" title="statement not covered" >yield call(getBalance, address)</span>
+      const { stake, unstakes } = <span class="cstat-no" title="statement not covered" >yield call(getStake, address)</span>
+      const { iscore } = <span class="cstat-no" title="statement not covered" >yield call(queryIScore, address)</span>
+      const _balance = <span class="cstat-no" title="statement not covered" >!balance ? 0 : convertLoopToIcxDecimal(balance)</span>
+      const _stake = <span class="cstat-no" title="statement not covered" >!stake ? 0 : convertLoopToIcxDecimal(stake)</span>
+      const _totalDelegated = <span class="cstat-no" title="statement not covered" >!totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)</span>
+      const _iscore = <span class="cstat-no" title="statement not covered" >!iscore ? 0 : convertLoopToIcxDecimal(iscore)</span>
+&nbsp;
+      const isPrep = <span class="cstat-no" title="statement not covered" >prep &amp;&amp; Object.keys(prep).length &gt; 0</span>
+<span class="cstat-no" title="statement not covered" >      console.log(isPrep, "from saga is prep")</span>
+      let active = <span class="cstat-no" title="statement not covered" >'N/A',</span> media = <span class="cstat-no" title="statement not covered" >{}</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (isPrep) {</span>
+        const  statusData  = <span class="cstat-no" title="statement not covered" >yield call(getPrepStatusList)</span>
+        const statusCheck = <span class="cstat-no" title="statement not covered" >statusData.filter(<span class="fstat-no" title="function not covered" >pr</span>eps =&gt; <span class="cstat-no" title="statement not covered" >preps.state_id &lt;= 2 &amp;&amp; preps.prep_name === prep.name </span>)</span>
+<span class="cstat-no" title="statement not covered" >        active = statusCheck.length &amp;&amp; statusCheck[0].state_id &lt;= 2 ? 'Active' : 'Inactive'</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      payload.data = {</span>
+        ...payload.data,
+        hasDelegations: delegations.length &gt; 0,
+        isPrep,
+        available: _balance,
+        staked: _stake,
+        unstakes,
+        iscore: _iscore,
+        delegated: _totalDelegated,
+        prep,
+        active,
+        media,
+      }
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressInfoFulfilled, payload: payload });</span>
+    }
+    else {      
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressInfoRejected, error: action.payload.address });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressTxListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressTxListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+<span class="cstat-no" title="statement not covered" >    console.log(action, "from address saga")</span>
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_TX_LIST, action.payload);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      console.log(payload, "from address saga")</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressTxListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressTxListRejected });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressInternalTxListFunc(</span>action) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressInternalTxListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_INTERNAL_TX_LIST, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressInternalTxListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressInternalTxListRejected });</span>
+  }
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >addressTokenTxListFunc(</span>action) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (action.payload.count === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressTokenTxListFulfilled, payload: { data: [] } });</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+    const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_TOKEN_TX_LIST, action.payload);</span>
+<span class="cstat-no" title="statement not covered" >    if (payload.result === '200') {</span>
+<span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressTokenTxListFulfilled, payload: payload });</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      throw new Error();</span>
+    }
+  }
+  catch (e) {
+<span class="cstat-no" title="statement not covered" >    yield put({ type: AT.addressTokenTxListRejected });</span>
+  }
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

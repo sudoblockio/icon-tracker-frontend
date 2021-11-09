@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/BlocksPage/BlockDetailPage/BlockInfo.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/BlocksPage/BlockDetailPage</a> BlockInfo.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue, epochToFromNow } from '../../../utils/utils'
+import { TX_TYPE } from '../../../utils/const'
+import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
+&nbsp;
+class BlockInfo extends Component {
+    handlePrevBlock = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+        const { block } = <span class="cstat-no" title="statement not covered" >this.props</span>
+        const { data } = <span class="cstat-no" title="statement not covered" >block</span>
+        const { number } = <span class="cstat-no" title="statement not covered" >data</span>
+<span class="cstat-no" title="statement not covered" >        if (number === 0) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+        const prevHeight = <span class="cstat-no" title="statement not covered" >number - 1</span>
+<span class="cstat-no" title="statement not covered" >        this.props.history.push('/block/' + prevHeight)</span>
+    }
+&nbsp;
+    handleNextBlock = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+        const { block } = <span class="cstat-no" title="statement not covered" >this.props</span>
+        const { data } = <span class="cstat-no" title="statement not covered" >block</span>
+        const { number } = <span class="cstat-no" title="statement not covered" >data</span>
+        // if (lastBlock !== '-') return
+&nbsp;
+        const nextHeight = <span class="cstat-no" title="statement not covered" >number + 1</span>
+<span class="cstat-no" title="statement not covered" >        this.props.history.push('/block/' + nextHeight)</span>
+    }
+&nbsp;
+    goAllTx = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+        const { block } = <span class="cstat-no" title="statement not covered" >this.props</span>
+        const { data } = <span class="cstat-no" title="statement not covered" >block</span>
+        const { number } = <span class="cstat-no" title="statement not covered" >data</span>
+<span class="cstat-no" title="statement not covered" >        this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        const { block } = <span class="cstat-no" title="statement not covered" >this.props</span>
+        const { loading, data } = <span class="cstat-no" title="statement not covered" >block</span>
+&nbsp;
+        const Content = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (loading) {</span>
+<span class="cstat-no" title="statement not covered" >                return &lt;LoadingComponent height="206px" /&gt;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                console.log(data, "data")</span>
+                const { number, timestamp, transaction_count, hash, parent_hash, blockSize, transaction_amount, transaction_fees, message, lastBlock, peer_id, crep } = <span class="cstat-no" title="statement not covered" >data</span>
+                const isFirst = <span class="cstat-no" title="statement not covered" >number === 0</span>
+                const isLast = <span class="cstat-no" title="statement not covered" >lastBlock !== '-'</span>
+                const prep = <span class="cstat-no" title="statement not covered" >peer_id || crep</span>
+<span class="cstat-no" title="statement not covered" >                return (</span>
+                    &lt;div className="screen0"&gt;
+                        &lt;div className="wrap-holder"&gt;
+                            &lt;p className="title"&gt;Block&lt;/p&gt;
+                            &lt;div className="contents"&gt;
+                                &lt;div className="table-box"&gt;
+                                    &lt;table className="table-typeB detail"&gt;
+                                        &lt;tbody&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Block Height&lt;/td&gt;
+                                                &lt;td&gt;
+                                                    &lt;p onClick={this.handlePrevBlock} className={`prev ${isFirst ? 'disabled' : ''}`}&gt;
+                                                        &lt;em className="img" /&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;em className="value"&gt;{numberWithCommas(number)}&lt;/em&gt;
+                                                    &lt;p onClick={this.handleNextBlock} className={`next ${isLast ? '' : ''}`}&gt;
+                                                        &lt;em className="img" /&gt;
+                                                    &lt;/p&gt;
+                                                &lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Peer ID&lt;/td&gt;
+                                                &lt;td&gt;{prep ? &lt;AddressLink to={prep} /&gt; : '-'}&lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Time Stamp&lt;/td&gt;
+                                                {isFirst ? (
+                                                    &lt;td&gt;-&lt;/td&gt;
+                                                ) : (
+                                                    &lt;td&gt;
+                                                        {new Date(timestamp / 1000).toString()}
+                                                        &lt;em&gt;{epochToFromNow(timestamp)}&lt;/em&gt;
+                                                    &lt;/td&gt;
+                                                )}
+                                            &lt;/tr&gt;
+                                            {/*&lt;tr&gt;
+                                                &lt;td&gt;C-rep&lt;/td&gt;
+                                                &lt;td&gt;&lt;span&gt;{crep}&lt;/span&gt;&lt;/td&gt;
+                                            &lt;/tr&gt;*/}
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Transactions&lt;/td&gt;
+                                                &lt;td&gt;
+                                                    &lt;span onClick={this.goAllTx}&gt;{numberWithCommas(transaction_count)} Transaction(s)&lt;/span&gt; in this block
+                                                &lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Hash&lt;/td&gt;
+                                                &lt;td&gt;{hash ? hash : '-'}&lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Prev Hash&lt;/td&gt;
+                                                &lt;td&gt;{parent_hash ? &lt;BlockLink to={number - 1} label={parent_hash} /&gt; : '-'}&lt;/td&gt;
+                                            &lt;/tr&gt;
+                                             {/* &lt;tr&gt;
+                                                &lt;td&gt;Block Size&lt;/td&gt;
+                                                &lt;td&gt;{numberWithCommas(blockSize)} bytes&lt;/td&gt;
+                                            &lt;/tr&gt; */}
+                                            &lt;tr&gt;
+                                                &lt;td&gt;Amount&lt;/td&gt;
+                                                &lt;td&gt;{convertNumberToText(transaction_amount)} ICX&lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;TxFee&lt;/td&gt;
+                                                &lt;td&gt;{convertHexToValue(transaction_fees)} ICX&lt;/td&gt;
+                                            &lt;/tr&gt;
+                                            {number === 0 &amp;&amp; (
+                                                &lt;tr&gt;
+                                                    &lt;td&gt;Message&lt;/td&gt;
+                                                    &lt;td className="message"&gt;{message}&lt;/td&gt;
+                                                &lt;/tr&gt;
+                                            )}
+                                        &lt;/tbody&gt;
+                                    &lt;/table&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Content()</span>
+    }
+}
+&nbsp;
+export default withRouter(BlockInfo)
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

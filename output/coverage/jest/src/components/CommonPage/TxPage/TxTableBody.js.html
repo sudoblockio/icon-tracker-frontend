@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/CommonPage/TxPage/TxTableBody.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/CommonPage/TxPage</a> TxTableBody.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import BigNumber from 'bignumber.js'
+import {
+	calcFromNow,
+	numberWithCommas,
+	dateToUTC,
+	isValidData,
+	tokenText,
+	is0xHash,
+	convertHexToValue,
+	epochToFromNow,
+	convertLoopToIcxDecimal
+} from '../../../utils/utils'
+&nbsp;
+import {
+	TransactionLink,
+	BlockLink,
+	AddressCell,
+	AddressSet,
+	AmountCell
+} from '../../../components'
+import {
+	TX_TYPE,
+} from '../../../utils/const'
+import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
+import moment from 'moment';
+&nbsp;
+const TxHashCell = <span class="fstat-no" title="function not covered" >({</span> isError, txHash }) =&gt; {
+	let _txHash, className
+<span class="cstat-no" title="statement not covered" >	if (!isValidData(txHash)) {</span>
+<span class="cstat-no" title="statement not covered" >		_txHash = '-'</span>
+<span class="cstat-no" title="statement not covered" >		className = 'no'</span>
+	}
+	else {
+		const _is0xHash = <span class="cstat-no" title="statement not covered" >is0xHash(txHash)</span>
+<span class="cstat-no" title="statement not covered" >		_txHash = _is0xHash ? &lt;TransactionLink to={txHash} label={&lt;span className="ellipsis"&gt;{txHash}&lt;/span&gt;} /&gt; : txHash</span>
+<span class="cstat-no" title="statement not covered" >		className = `${isError ? 'icon error' : ''} ${_is0xHash ? 'on' : ''}`	</span>
+	}
+<span class="cstat-no" title="statement not covered" >	return (</span>
+		&lt;td className={className}&gt;
+			{(_txHash !== '-' &amp;&amp; isError) &amp;&amp; &lt;i className="img"&gt;&lt;/i&gt;}
+			{_txHash}
+		&lt;/td&gt;
+	)
+}
+&nbsp;
+const TokenCell = <span class="fstat-no" title="function not covered" >({</span> name, address }) =&gt; {
+<span class="cstat-no" title="statement not covered" >	return &lt;td&gt;&lt;span className="ellipsis"&gt;{tokenText(name, undefined, address, 'ellipsis')}&lt;/span&gt;&lt;/td&gt;</span>
+}
+&nbsp;
+const DateCell = <span class="fstat-no" title="function not covered" >({</span> date, isDate }) =&gt; {
+	let className, dateText
+<span class="cstat-no" title="statement not covered" >	if (!isValidData(date)) {</span>
+<span class="cstat-no" title="statement not covered" >		className = ""</span>
+<span class="cstat-no" title="statement not covered" >		dateText = "-"</span>
+	}
+	else {
+<span class="cstat-no" title="statement not covered" >		className = "break"</span>
+<span class="cstat-no" title="statement not covered" >		if (isDate) {</span>
+<span class="cstat-no" title="statement not covered" >			dateText = dateToUTC(date)</span>
+		}
+		else {
+<span class="cstat-no" title="statement not covered" >			dateText = epochToFromNow(date)</span>
+&nbsp;
+		}
+	}
+<span class="cstat-no" title="statement not covered" >	return &lt;td className={className}&gt;{dateText}&lt;/td&gt;</span>
+}
+&nbsp;
+const BlockCell = <span class="fstat-no" title="function not covered" >({</span> height }) =&gt; {
+<span class="cstat-no" title="statement not covered" >	return &lt;td className="on"&gt;&lt;BlockLink to={height} label={numberWithCommas(height)} /&gt;&lt;/td&gt;</span>
+}
+&nbsp;
+&nbsp;
+&nbsp;
+class TxTableBody extends Component {
+<span class="fstat-no" title="function not covered" >	co</span>nstructor(props){
+<span class="cstat-no" title="statement not covered" >		super(props)</span>
+&nbsp;
+	}
+&nbsp;
+	
+<span class="fstat-no" title="function not covered" >	re</span>nder() {
+		const TableRow = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(_</span>props) =&gt; {</span>
+			const {
+				txType,
+				data,
+				address,
+				currentUSD,
+				totalSupply,
+			} = <span class="cstat-no" title="statement not covered" >this.props</span>
+			const percentage = <span class="cstat-no" title="statement not covered" >totalSupply ?  data.balance / totalSupply : 0;</span>
+			const addressInData = <span class="cstat-no" title="statement not covered" >data.address</span>
+			const isError = <span class="cstat-no" title="statement not covered" >data.state === 0</span>
+<span class="cstat-no" title="statement not covered" >			switch (txType) {</span>
+				case TX_TYPE.ADDRESS_REWARD:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.txHash} /&gt;
+							&lt;BlockCell height={data.height} /&gt;
+							&lt;DateCell date={moment.utc(data.createDate).local()} /&gt;
+							&lt;AmountCell amount={data.iscore} symbol="I-Score" noEllipsis/&gt;
+							&lt;AmountCell amount={data.icx} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESS_DELEGATION:
+					const value = <span class="cstat-no" title="statement not covered" >convertLoopToIcxDecimal(data.value)</span>
+					const badgeTitle = <span class="cstat-no" title="statement not covered" >getBadgeTitle(data.grade, data.status)</span>
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td className="on" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >								window.open('/address/' + data.address)</span>
+							}}&gt;&lt;span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}&gt;{badgeTitle}&lt;/span&gt;{data.name || data.address}&lt;/td&gt;
+							&lt;td className="plus"&gt;&lt;span&gt;{convertNumberToText(value)}&lt;/span&gt;&lt;em&gt;ICX&lt;/em&gt;&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESS_VOTED:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td className="on" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >								window.open('/address/' + data.address)</span>
+							}}&gt;{data.address}&lt;/td&gt;
+							&lt;td className="plus"&gt;&lt;span&gt;{convertNumberToText(data.amount)}&lt;/span&gt;&lt;em&gt;ICX&lt;/em&gt;&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESS_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash} /&gt;
+							&lt;BlockCell height={data.block_number} /&gt;
+							&lt;DateCell date={data.block_timestamp} /&gt;
+							&lt;AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } address={address} txType={data.type} targetContractAddr={data.targetContractAddr} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESS_INTERNAL_TX:
+					
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash} /&gt;
+							&lt;BlockCell height={data.block_number} /&gt;
+							&lt;DateCell date={data.block_timestamp} /&gt;
+							&lt;AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } address={address} txType={data.type} targetContractAddr={address} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESS_TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.txHash} /&gt;
+							&lt;DateCell date={data.createDate} /&gt;
+							&lt;AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} address={address} txType={data.txType} targetContractAddr={data.contractAddr} /&gt;
+							&lt;AmountCell amount={data.quantity} symbol={data.contractSymbol} /&gt;
+							&lt;TokenCell name={data.contractName} address={data.contractAddr} /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.CONTRACT_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash} /&gt;
+							&lt;BlockCell height={data.block_number} /&gt;
+							&lt;DateCell date={data.block_timestamp} /&gt;
+							&lt;AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.CONTRACT_INTERNAL_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash} /&gt;
+							&lt;BlockCell height={data.block_number} /&gt;
+							&lt;DateCell date={data.block_timestamp} /&gt;
+							&lt;AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.CONTRACT_TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.transaction_hash} /&gt;
+							&lt;DateCell date={data.age} /&gt;
+							&lt;AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={address} /&gt;
+							&lt;AmountCell amount={data.quantity} symbol={data.symbol} /&gt;
+							&lt;TokenCell name={data.name} address={data.tradeTokenAddr} /&gt;
+							&lt;AmountCell amount={data.fee} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.BLOCK_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash} /&gt;
+							&lt;AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } txType={data.type} targetContractAddr={data.to_address} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TRANSACTIONS:
+					
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.hash || data.txHash} /&gt;
+							&lt;BlockCell height={data.block_number || data.height} /&gt;
+							&lt;DateCell date={data.block_timestamp || data.createDate} /&gt;
+							&lt;AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-"} txType={data.txType} targetContractAddr={data.targetContractAddr} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" /&gt;
+							&lt;AmountCell amount={data.fee} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TOKEN_TRANSFERS:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.txHash} /&gt;
+							&lt;DateCell date={data.age} /&gt;
+							&lt;AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} /&gt;
+							&lt;AmountCell amount={data.quantity} symbol={data.symbol} /&gt;
+							&lt;TokenCell name={data.tokenName} address={data.contractAddr} /&gt;
+							&lt;AmountCell amount={data.fee} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;TxHashCell isError={isError} txHash={data.txHash} /&gt;
+							&lt;DateCell date={data.age} /&gt;
+							&lt;AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} /&gt;
+							&lt;AmountCell amount={data.quantity} symbol={data.symbol} /&gt;
+							&lt;AmountCell amount={data.fee} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.ADDRESSES:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;AddressCell targetAddr={data.public_key} txType={data.txType} /&gt;
+							&lt;AmountCell amount={data.balance} symbol="ICX" /&gt;
+							&lt;AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" /&gt;
+							&lt;td&gt;&lt;span&gt;{percentage.toString().slice(0,3)}&lt;/span&gt;&lt;em&gt;%&lt;/em&gt;&lt;/td&gt;
+							&lt;td&gt;{numberWithCommas(data.transaction_count)}&lt;/td&gt;
+							&lt;td&gt;{data.nodeType}&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.BLOCKS:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;BlockCell height={data.number} /&gt;
+							&lt;DateCell date={data.timestamp} /&gt;
+							&lt;td&gt;{numberWithCommas(data.transaction_count)}&lt;/td&gt;
+							&lt;td&gt;&lt;BlockLink label={data.hash} to={data.number} ellipsis /&gt;&lt;/td&gt;
+							&lt;AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" /&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.CONTRACT_EVENTS:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td className="on"&gt;
+								&lt;span className="ellipsis"&gt;&lt;TransactionLink to={data.transaction_hash} /&gt;&lt;/span&gt;&lt;br /&gt;
+								&lt;span&gt;&lt;BlockLink label={`# ${data.block_number}`} to={data.block_number} /&gt;&lt;/span&gt;
+								&lt;p&gt;{epochToFromNow(data.block_timestamp)}&lt;/p&gt;
+							&lt;/td&gt;
+							&lt;td&gt;{data.method}&lt;/td&gt;
+							&lt;td&gt;{ JSON.stringify(data, null, 2)}&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TRANSACTION_EVENTS:
+				
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td&gt;{`${JSON.stringify(data.address, null, 2)}, ${JSON.stringify(data.indexed, null, 2)},${JSON.stringify(data.data, null, 2)}` }&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TRANSACTION_INTERNAL_TX:
+					
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							{/* &lt;td&gt;-&lt;/td&gt; */}
+							&lt;AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.to_address} /&gt;
+							&lt;AmountCell amount={convertHexToValue(data.value)} symbol="ICX" /&gt;
+							{/* &lt;td&gt;-&lt;/td&gt; */}
+						&lt;/tr&gt;
+					)
+				case TX_TYPE.TOKEN_HOLDERS:
+<span class="cstat-no" title="statement not covered" >					return (</span>
+						&lt;tr&gt;
+							&lt;td&gt;{data.rank}&lt;/td&gt;
+							&lt;AddressCell targetAddr={addressInData} txType={data.txType} spanNoEllipsis /&gt;
+							&lt;AmountCell amount={data.quantity} symbol={data.symbol} /&gt;
+							&lt;td&gt;&lt;span&gt;{percentage}&lt;/span&gt;&lt;em&gt;%&lt;/em&gt;&lt;/td&gt;
+						&lt;/tr&gt;
+					)
+				default:
+<span class="cstat-no" title="statement not covered" >					return &lt;tr&gt;&lt;/tr&gt;</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return TableRow(this.props)</span>
+	}
+}
+&nbsp;
+export default TxTableBody</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

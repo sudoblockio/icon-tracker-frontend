@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/ProposalListPage/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/ProposalListPage</a> index.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
+import { getProposals } from '../../redux/api/restV3/iiss';
+import { ProposalType, ProposalStatus, ProposalStatusClass, VIEW_NUMBER } from '../../utils/const';
+import { valueToString, getTextFromHtml } from '../../utils/utils';
+import {
+	LoadingComponent
+} from '../../components';
+import imgNoProposal from '../../style/image/img-no-proposal.png'
+&nbsp;
+class ProposalListPage extends Component {
+&nbsp;
+	state = {
+		loading: true,
+		proposals: []
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	as</span>ync componentDidMount() {
+		const { proposals } = <span class="cstat-no" title="statement not covered" >await getProposals()</span>
+<span class="cstat-no" title="statement not covered" >		this.setState({ loading: false, proposals })</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	re</span>nder() {
+		const {
+			loading,
+			proposals
+		} = <span class="cstat-no" title="statement not covered" >this.state</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return (</span>
+			&lt;div className="content-wrap"&gt;
+				{loading &amp;&amp; &lt;LoadingComponent height='600px' /&gt;}
+				{!loading &amp;&amp; &lt;div className="screen0"&gt;
+					&lt;div className="wrap-holder"&gt;
+						&lt;p className="title"&gt;Network Proposal&lt;/p&gt;
+						&lt;div className="content"&gt;
+							{proposals.length === 0 ?
+							&lt;div className="no-proposal"&gt;&lt;img src={imgNoProposal} alt='no-proposal' /&gt;&lt;/div&gt;						
+							:	
+							&lt;div className="proposal-list"&gt;
+								{(proposals || []).reverse().map(<span class="fstat-no" title="function not covered" >pr</span>oposal =&gt; {
+									const { id, contents, vote, status, proposerName } = <span class="cstat-no" title="statement not covered" >proposal</span>
+									const { type, title, value } = <span class="cstat-no" title="statement not covered" >contents</span>
+									// const { description } = contents
+									const { agree, disagree, noVote } = <span class="cstat-no" title="statement not covered" >vote</span>
+									const allCount = <span class="cstat-no" title="statement not covered" >Number(agree.count) + Number(disagree.count) + Number(noVote.count)</span>
+									const allAmount = <span class="cstat-no" title="statement not covered" >Number(agree.amount) + Number(disagree.amount)</span>
+									// const allAmount = Number(agree.amount) + Number(disagree.amount) + Number(noVote.amount)
+									const agreeCount = <span class="cstat-no" title="statement not covered" >((agree.count / allCount) * 100).toFixed()</span>
+									const disagreeCount = <span class="cstat-no" title="statement not covered" >((disagree.count / allCount) * 100).toFixed()</span>
+									const topCount = <span class="cstat-no" title="statement not covered" >100 - agreeCount - disagreeCount</span>
+									const agreeAmount = <span class="cstat-no" title="statement not covered" >!allAmount ? 0 : ((agree.amount / allAmount) * 100).toFixed()</span>
+									const disagreeAmount = <span class="cstat-no" title="statement not covered" >!allAmount ? 0 : ((disagree.amount / allAmount) * 100).toFixed()</span>
+									const topAmount = <span class="cstat-no" title="statement not covered" >!allAmount ? 100 : 0 </span>
+<span class="cstat-no" title="statement not covered" >									return (</span>
+										&lt;ul key={id} className='proposal-pointer' onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; { <span class="cstat-no" title="statement not covered" >this.props.history.push('/proposal/' + id) </span>}}&gt;
+											&lt;li&gt;
+												&lt;h3 className="label"&gt;{ProposalType[type]} Proposal&lt;/h3&gt;
+												{/* &lt;h1&gt;{title}&lt;br /&gt;{getTextFromHtml(description)}&lt;/h1&gt; */}
+												&lt;h1&gt;{title}&lt;/h1&gt;
+												&lt;div&gt;
+													&lt;span className={`proposal-status ${ProposalStatusClass[status]}`}&gt;{ProposalStatus[status]}&lt;/span&gt;&lt;h3 className='proposer-name'&gt;Proposed by &lt;span&gt;{proposerName}&lt;/span&gt;&lt;/h3&gt;
+												&lt;/div&gt;
+											&lt;/li&gt;
+											&lt;li&gt;
+												&lt;h3 className="label"&gt;Value&lt;/h3&gt;
+												&lt;h2&gt;{getTextFromHtml(valueToString(value))}&lt;/h2&gt;
+												&lt;div&gt;
+													&lt;div className="percent-group"&gt;
+														&lt;h3 className="label"&gt;Voter&lt;/h3&gt;
+														&lt;div&gt;&lt;h4&gt;Agreed&lt;/h4&gt;&lt;span&gt;{agreeCount}&lt;/span&gt;%&lt;/div&gt;
+														&lt;div&gt;&lt;h4&gt;Disagreed&lt;/h4&gt;&lt;span&gt;{disagreeCount}&lt;/span&gt;%&lt;/div&gt;
+													&lt;/div&gt;
+													&lt;div className="percent-group"&gt;
+														&lt;h3 className="label"&gt;Token Vote&lt;/h3&gt;
+														&lt;div&gt;&lt;h4&gt;Agreed&lt;/h4&gt;&lt;span&gt;{agreeAmount}&lt;/span&gt;%&lt;/div&gt;
+														&lt;div&gt;&lt;h4&gt;Disagreed&lt;/h4&gt;&lt;span&gt;{disagreeAmount}&lt;/span&gt;%&lt;/div&gt;
+													&lt;/div&gt;
+												&lt;/div&gt;
+&nbsp;
+											&lt;/li&gt;
+											&lt;li&gt;
+												&lt;h4&gt;Voter&lt;/h4&gt;
+												&lt;div className="bar-wrap"&gt;
+													&lt;div className="bar-container"&gt;
+														&lt;div className="bar-foreground" style={{ height: `${agreeCount}%`, top: `${topCount}%` }}&gt;
+															{(VIEW_NUMBER || agreeCount &gt;= 30) &amp;&amp; &lt;span&gt;&lt;em&gt;{agreeCount}&lt;/em&gt;%&lt;/span&gt;}
+														&lt;/div&gt;
+														&lt;div className="bar-background" style={{ height: `${disagreeCount}%`, top: `${topCount}%` }}&gt;
+															{(VIEW_NUMBER || disagreeCount &gt;= 30) &amp;&amp; &lt;span&gt;&lt;em&gt;{disagreeCount}&lt;/em&gt;%&lt;/span&gt;}
+														&lt;/div&gt;
+													&lt;/div&gt;
+												&lt;/div&gt;
+											&lt;/li&gt;
+											&lt;li&gt;
+												&lt;h4&gt;Token Vote&lt;/h4&gt;
+												&lt;div className="bar-wrap"&gt;
+													&lt;div className="bar-container"&gt;
+														&lt;div className="bar-foreground" style={{ height: `${agreeAmount}%`, top: `${topAmount}%` }}&gt;
+															{/* &lt;div className="bar-foreground" style={{ height: `${agreeAmount}%`, top: `${noVoteAmount}%` }}&gt; */}
+															{(VIEW_NUMBER || agreeAmount &gt;= 30) &amp;&amp; &lt;span&gt;&lt;em&gt;{agreeAmount}&lt;/em&gt;%&lt;/span&gt;}
+														&lt;/div&gt;
+														&lt;div className="bar-background" style={{ height: `${disagreeAmount}%`, top: `${topAmount}%`  }}&gt;
+															{/* &lt;div className="bar-background" style={{ height: `${disagreeAmount}%`, top: `${noVoteAmount}%` }}&gt; */}
+															{(VIEW_NUMBER || disagreeAmount &gt;= 30) &amp;&amp; &lt;span&gt;&lt;em&gt;{disagreeAmount}&lt;/em&gt;%&lt;/span&gt;}
+														&lt;/div&gt;
+													&lt;/div&gt;
+												&lt;/div&gt;
+											&lt;/li&gt;
+										&lt;/ul&gt;
+									)
+								})}
+							&lt;/div&gt;
+							}
+						&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;}
+			&lt;/div&gt;
+		)
+	}
+}
+&nbsp;
+export default withRouter(ProposalListPage);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/CommonPage/TxPage/TxPageTitle.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/components/CommonPage/TxPage</a> TxPageTitle.js
+    </h1>
+    <div class='clearfix'>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import { TX_TYPE, IRC_VERSION } from '../../../utils/const'
+import { numberWithCommas } from '../../../utils/utils'
+&nbsp;
+class TxPageTitle extends Component {
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        const { txType, urlIndex, listSize, totalSize } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >        console.log(this.props, "block tx list props")</span>
+&nbsp;
+        const Content = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+            const _listSize = <span class="cstat-no" title="statement not covered" >numberWithCommas(listSize || 0)</span>
+            const _totalSize = <span class="cstat-no" title="statement not covered" >numberWithCommas(totalSize || 0)</span>
+<span class="cstat-no" title="statement not covered" >            switch (txType) {</span>
+                case TX_TYPE.ADDRESS_VOTED:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Voters
+                            &lt;span&gt;for address {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_listSize}&lt;/em&gt; voter(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.ADDRESS_REWARD:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Rewards
+                            &lt;span&gt;for address {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; reward(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.CONTRACT_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Transactions
+                            &lt;span&gt;for Contract {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.CONTRACT_INTERNAL_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Internal Transactions
+                            &lt;span&gt;for Contract {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; internal transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.CONTRACT_TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Token Transfers
+                            &lt;span&gt;for Contract {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; token transfer(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.CONTRACT_EVENTS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Events
+                            &lt;span&gt;for Contract {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; event(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.ADDRESS_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Transactions
+                            &lt;span&gt;for Address {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.ADDRESS_INTERNAL_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Internal Transactions
+                            &lt;span&gt;for Address {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; internal transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.ADDRESS_TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Token Transfers
+                            &lt;span&gt;for Address {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; token transfer(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.BLOCK_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Transactions
+                            &lt;span&gt;for Block Height {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.TOKEN_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Token Transfers
+                            &lt;span&gt;for Token {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; token transfer(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.TOKEN_HOLDERS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Token Holders
+                            &lt;span&gt;for Token {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; holder(s) found&lt;em className="gray"&gt;(Showing the top {_listSize} holder(s) only)&lt;/em&gt;
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.TRANSACTION_EVENTS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Events
+                            &lt;span&gt;for Transaction {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; event(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.TRANSACTION_INTERNAL_TX:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title"&gt;
+                            Internal Transactions
+                            &lt;span&gt;for Transaction {urlIndex}&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; internal transaction(s) found
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.BLOCKS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title token"&gt;
+                            Blocks
+                            &lt;span /&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{numberWithCommas(_totalSize)}&lt;/em&gt; total block(s) found&lt;em className="gray"&gt;(Showing the last {_listSize} record(s) only)&lt;/em&gt;
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.ADDRESSES:
+<span class="cstat-no" title="statement not covered" >                    return &lt;p className="title"&gt;Addresses&lt;/p&gt;</span>
+                case TX_TYPE.TRANSACTIONS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title token"&gt;
+                            Transactions
+                            &lt;span /&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; total transaction(s) found
+                                &lt;em className="gray"&gt;(Showing the last {_listSize} record(s) only)&lt;/em&gt;
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                case TX_TYPE.TOKEN_TRANSFERS:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;p className="title token"&gt;
+                            Token Transfers
+                            &lt;span&gt;({IRC_VERSION[2]})&lt;/span&gt;
+                            &lt;span className="right"&gt;
+                                A total of&lt;em&gt;{_totalSize}&lt;/em&gt; token transfer(s) found&lt;em className="gray"&gt;(Showing the last {_listSize} record(s) only)&lt;/em&gt;
+                            &lt;/span&gt;
+                        &lt;/p&gt;
+                    )
+                default:
+<span class="cstat-no" title="statement not covered" >                    return &lt;p /&gt;</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return Content()</span>
+    }
+}
+&nbsp;
+export default TxPageTitle
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 11:04:40 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>
