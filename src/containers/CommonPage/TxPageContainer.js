@@ -15,12 +15,12 @@ import {
   addressRewardList,
   addressVotedList
 } from '../../redux/actions/addressesActions';
-import { 
-  
-  transactionInternalTxList
-} from '../../redux/actions/transactionsActions';
 
-import { transactionEventLogListAction, transactionRecentTxAction } from '../../redux/store/transactions'
+import { 
+  transactionEventLogListAction, 
+  transactionRecentTxAction, 
+  transactionInternalTxListAction 
+} from '../../redux/store/transactions'
 
 import { 
   tokenTxList,
@@ -28,9 +28,9 @@ import {
   tokenHoldersList
 } from '../../redux/actions/tokensActions';
 import { 
-  blockList,
-  blockTxList,
-} from '../../redux/actions/blocksActions';
+  blockListAction,
+  blockTxListAction,
+} from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
   return {
@@ -69,12 +69,12 @@ function mapDispatchToProps(dispatch) {
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
     transactionRecentTx: payload => dispatch(transactionRecentTxAction(payload)),
     tokenTxList: payload => dispatch(tokenTxList(payload)),
-    blockList: payload => dispatch(blockList(payload)),
-    blockTxList: payload => dispatch(blockTxList(payload)),
+    blockList: payload => dispatch(blockListAction(payload)),
+    blockTxList: payload => dispatch(blockTxListAction(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
     transactionEventLogListAction: payload => dispatch(transactionEventLogListAction(payload)),
-    transactionInternalTxList: payload => dispatch(transactionInternalTxList(payload)),
+    transactionInternalTxList: payload => dispatch(transactionInternalTxListAction(payload)),
     addressRewardList: payload => dispatch(addressRewardList(payload)),
   };
 }

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { MainPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { getMainInfo, getMainChart } from '../../redux/actions/mainPageActions'
-import { blockList } from '../../redux/actions/blocksActions'
+import { blockListAction } from '../../redux/store/blocks'
 import { transactionRecentTxAction } from '../../redux/store/transactions'
 
 function mapStateToProps(state) {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBlockList: () => dispatch(blockList()),
+    getBlockList: () => dispatch(blockListAction()),
     getRecentTransactions: () => dispatch(transactionRecentTxAction()),
     // getMainChart: () => dispatch(getMainChart())
   };

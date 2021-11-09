@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { mainPageReducer } from './mainPageReducer'
 import { addressesReducer } from './addressesReducer'
 import { transactionsReducer } from '../store/transactions';
-import { blocksReducer } from './blocksReducer'
+import { blocksReducer } from '../store/blocks'
 import { searchReducer } from './searchReducer'
 import { routerReducer } from 'react-router-redux'
 import { tokensReducer } from './tokensReducer'

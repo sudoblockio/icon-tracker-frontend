@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { BlockDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import {
-  blockInfo,
-  blockTxList,
-} from '../../redux/actions/blocksActions';
+  blockInfoAction,
+  blockTxListAction,
+} from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
   return {
@@ -15,8 +15,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    blockInfo: (payload) => dispatch(blockInfo(payload)),
-    blockTxList: (payload) => dispatch(blockTxList(payload)),
+    blockInfo: (payload) => dispatch(blockInfoAction(payload)),
+    blockTxList: (payload) => dispatch(blockTxListAction(payload)),
   };
 }
 

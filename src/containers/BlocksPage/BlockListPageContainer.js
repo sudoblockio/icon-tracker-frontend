@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { BlockListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { blockList } from '../../redux/actions/blocksActions';
+import { blockListAction } from '../../redux/store/blocks';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    blockList: payload => dispatch(blockList(payload)),
+    blockList: payload => dispatch(blockListAction(payload)),
   };
 }
 

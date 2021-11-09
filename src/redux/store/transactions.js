@@ -5,7 +5,6 @@ import { REDUX_STEP, INITIAL_STATE } from "../../utils/const";
 
 
 // ACTIONS
-
 export function transactionRecentTxAction(payload) {
     return {
       type: actionTypes.transactionRecentTx,
@@ -25,8 +24,15 @@ export function transactionEventLogListAction(payload){
       type: actionTypes.transactionEventLogList,
       payload
     };
+  
   }
 
+export function transactionInternalTxListAction(payload){
+    return {
+      type: actionTypes.transactionInternalTxList,
+      payload
+    };
+  }
 
   
 //   API 

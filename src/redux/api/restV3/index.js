@@ -20,7 +20,7 @@ import {
     blockList,
     blockInfo,
     blockTxList,
-} from './block'
+} from '../../store/blocks'
 
 import {
     contractList,
