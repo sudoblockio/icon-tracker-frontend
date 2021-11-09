@@ -14,7 +14,7 @@ import {
 import {
   searchData as SEARCH_DATA_API,
   blockInfo as BLOCK_INFO_API
-} from '../api/restV3'
+} from '../store/search'
 
 function* searchFunc(action) {
 

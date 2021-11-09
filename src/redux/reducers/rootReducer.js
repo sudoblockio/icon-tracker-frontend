@@ -3,10 +3,10 @@ import { mainPageReducer } from './mainPageReducer'
 import { addressesReducer } from '../store/addresses'
 import { transactionsReducer } from '../store/transactions';
 import { blocksReducer } from '../store/blocks'
-import { searchReducer } from './searchReducer'
+import { searchReducer } from '../store/search'
 import { routerReducer } from 'react-router-redux'
 import { tokensReducer } from './tokensReducer'
-import { contractsReducer } from './contractsReducer'
+import { contractsReducer } from '../store/contracts'
 import { popupReducer } from './popupReducer'
 import { storageReducer } from './storageReducer'
 

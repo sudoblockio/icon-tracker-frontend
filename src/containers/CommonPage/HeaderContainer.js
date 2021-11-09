@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Header } from '../../components';
-import { search } from '../../redux/actions/searchActions';
+import { search } from '../../redux/store/search';
 import { setAddress, clearWallet } from "../../redux/actions/storageActions"
 
 function mapStateToProps(state) {

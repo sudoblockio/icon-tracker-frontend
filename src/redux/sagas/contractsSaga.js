@@ -16,7 +16,7 @@ import {
   // icxGetScore as ICX_GET_SCORE_API,
 } from '../api/restV3';
 import {   getContractABI as ICX_GET_CONTRACT } from '../api/restV3/iiss'
-import { getScoreStatus } from '../api/restV3/contract';
+import { getScoreStatus } from '../store/contracts';
 
 export default function* contractsSaga() {
   yield fork(watchContractList);
@@ -253,8 +253,6 @@ export function* icxCallFunc(action) {
     const { index } = action.payload
     if (outputs.status === 200) {
       const { result } = outputs.data
-      // TODO 아웃풋 배열로 오는지 확인
-      // const valueArray = Array.isArray(result) ? result : [result]
       const valueArray = [result]
       funcOutputs[index] = {
         valueArray,
@@ -318,8 +316,6 @@ export function* readContractInformationFunc(action) {
       }
       else if (output.status === 200) {
         const { result } = output.data
-        // TODO
-        // const valueArray = Array.isArray(result) ? result : [result]
         const valueArray = [result]
         funcOutputs.push({
           valueArray,

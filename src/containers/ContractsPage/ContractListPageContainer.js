@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { ContractListPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
-  contractList,
-  contractListSearch
-} from '../../redux/actions/contractsActions';
+  contractListAction,
+  contractListSearchAction
+} from '../../redux/store/contracts';
 
 function mapStateToProps(state) {
   return {
@@ -15,8 +15,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    contractList: payload => dispatch(contractList(payload)),
-    contractListSearch: payload => dispatch(contractListSearch(payload)),
+    contractList: payload => dispatch(contractListAction(payload)),
+    contractListSearch: payload => dispatch(contractListSearchAction(payload)),
   };
 }
 

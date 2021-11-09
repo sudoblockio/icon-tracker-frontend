@@ -7,9 +7,9 @@ import {
   tokenHoldersList
 } from '../../redux/actions/tokensActions'
 import {
-  icxCall,
-  readContractInformation
-} from '../../redux/actions/contractsActions'
+  icxCallAction,
+  readContractInformationAction
+} from '../../redux/store/contracts'
 
 function mapStateToProps(state) {
   return {
@@ -24,8 +24,8 @@ function mapDispatchToProps(dispatch) {
     tokenSummary: payload => dispatch(tokenSummary(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
-    icxCall: payload => dispatch(icxCall(payload)),        
-    readContractInformation: payload => dispatch(readContractInformation(payload))
+    icxCall: payload => dispatch(icxCallAction(payload)),        
+    readContractInformation: payload => dispatch(readContractInformationAction(payload))
   };
 }
 

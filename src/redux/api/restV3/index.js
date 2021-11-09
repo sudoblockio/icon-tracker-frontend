@@ -3,9 +3,9 @@ import {
     getMainChart,
 } from './main'
 
-import {
-    searchData,
-} from './search'
+// import {
+//     searchData,
+// } from './search'
 
 import {
     addressList,
@@ -30,7 +30,7 @@ import {
     contractInternalTxList,
     contractTokenTxList,
     contractEventLogList,
-} from './contract'
+} from '../../store/contracts'
 
 import { 
     transactionEventLogList,
@@ -69,8 +69,6 @@ import{
 export {
     getMainInfo,
     getMainChart,
-
-    searchData,
 
     addressList,
     addressInfo,

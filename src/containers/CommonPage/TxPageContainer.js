@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { TxPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
-  contractTxList,
-  contractInternalTxList,
-  contractTokenTxList,
-  contractEventLogList
-} from '../../redux/actions/contractsActions';
+  contractTxListAction,
+  contractInternalTxListAction,
+  contractTokenTxListAction,
+  contractEventLogListAction
+} from '../../redux/store/contracts';
 import { 
   addressListAction,
   addressTxListAction,
@@ -59,10 +59,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addressVotedList: payload => dispatch(addressVotedListAction(payload)),
-    contractTxList: payload => dispatch(contractTxList(payload)),
-    contractInternalTxList: payload => dispatch(contractInternalTxList(payload)),
-    contractTokenTxList: payload => dispatch(contractTokenTxList(payload)),
-    contractEventLogList: payload => dispatch(contractEventLogList(payload)),
+    contractTxList: payload => dispatch(contractTxListAction(payload)),
+    contractInternalTxList: payload => dispatch(contractInternalTxListAction(payload)),
+    contractTokenTxList: payload => dispatch(contractTokenTxListAction(payload)),
+    contractEventLogList: payload => dispatch(contractEventLogListAction(payload)),
     addressList: payload => dispatch(addressListAction(payload)),
     addressInternalTxList: payload => dispatch(addressInternalTxListAction(payload)),
     addressTxList: payload => dispatch(addressTxListAction(payload)),

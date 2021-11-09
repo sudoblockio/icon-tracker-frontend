@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { NotFoundPage } from '../../components';
-import { searchErrorReset } from '../../redux/actions/searchActions'
+import { searchErrorReset } from '../../redux/store/search'
 
 function mapStateToProps(state) {
   return {
