@@ -1,20 +1,6 @@
 import { makeUrl } from '../../../utils/utils'
 import { trackerApiInstance } from './config'
 
-export async function transactionRecentTx(payload) {
-  const trackerApi = await trackerApiInstance()
-  return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/api/v1/transactions', payload))
-      .then(result => {
-        resolve(result)
-      })
-      .catch(error => {
-
-        reject(error)
-      })
-  })
-}
-
 export async function transactionTxDetail(payload) {
   
   const trackerApi = await trackerApiInstance()

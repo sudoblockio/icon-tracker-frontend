@@ -16,10 +16,12 @@ import {
   addressVotedList
 } from '../../redux/actions/addressesActions';
 import { 
-  transactionRecentTx,
-  transactionEventLogListAction,
+  
   transactionInternalTxList
 } from '../../redux/actions/transactionsActions';
+
+import { transactionEventLogListAction, transactionRecentTxAction } from '../../redux/store/transactions'
+
 import { 
   tokenTxList,
   tokenTransfersList,
@@ -65,7 +67,7 @@ function mapDispatchToProps(dispatch) {
     addressInternalTxList: payload => dispatch(addressInternalTxList(payload)),
     addressTxList: payload => dispatch(addressTxList(payload)),
     addressTokenTxList: payload => dispatch(addressTokenTxList(payload)),
-    transactionRecentTx: payload => dispatch(transactionRecentTx(payload)),
+    transactionRecentTx: payload => dispatch(transactionRecentTxAction(payload)),
     tokenTxList: payload => dispatch(tokenTxList(payload)),
     blockList: payload => dispatch(blockList(payload)),
     blockTxList: payload => dispatch(blockTxList(payload)),

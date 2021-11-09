@@ -12,7 +12,29 @@ export function transactionEventLogListAction(payload){
     };
   }
 
+export function transactionRecentTxAction(payload) {
+    return {
+      type: actionTypes.transactionRecentTx,
+      payload
+    }
+  }
+  
 //   API 
+
+export async function transactionRecentTx(payload) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject) => {
+      trackerApi.get(makeUrl('/api/v1/transactions', payload))
+        .then(result => {
+          resolve(result)
+        })
+        .catch(error => {
+  
+          reject(error)
+        })
+    })
+  }
+
 export async function transactionEventLogList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {

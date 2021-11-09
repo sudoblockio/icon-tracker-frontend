@@ -3,9 +3,10 @@ import { TransactionDetailPage } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { 
   transactionTxDetail,
-  transactionEventLogListAction,
   transactionInternalTxList,
 } from '../../redux/actions/transactionsActions';
+
+import {transactionEventLogListAction} from '../../redux/store/transactions'
 
 function mapStateToProps(state) {
   return {

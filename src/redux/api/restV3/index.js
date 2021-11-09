@@ -33,13 +33,13 @@ import {
 } from './contract'
 
 import {
-    transactionRecentTx,
+    // transactionRecentTx,
     transactionTxDetail,
     // transactionEventLogList,
     transactionInternalTxList,
 } from './transaction'
 
-import { transactionEventLogList } from '../../store/transactions'
+import { transactionEventLogList, transactionRecentTx } from '../../store/transactions'
 
 import {
     tokenList,
