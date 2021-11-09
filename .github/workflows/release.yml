@@ -93,6 +93,7 @@ jobs:
 
       - name: Push tags
         run: |
+          git pull
           git tag -f tracker-frontend-prod-uswest2 ${{ steps.yaml-update.outputs.commit }}
           git tag -f tracker-frontend-prod-euwest2 ${{ steps.yaml-update.outputs.commit }}
           git push -f origin --tags
