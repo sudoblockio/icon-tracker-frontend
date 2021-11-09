@@ -82,7 +82,7 @@ jobs:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/prod-us-west-2/mainnet/tracker-frontend/values.yaml'
-          propertyPath: 'worker.image.tag'
+          propertyPath: 'deployment.image.tag'
           value: ${{ steps.source.outputs.TAG }}
           branch: main
           createPR: 'false'
