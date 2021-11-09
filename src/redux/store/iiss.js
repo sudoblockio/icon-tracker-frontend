@@ -1,11 +1,6 @@
-import { walletApiInstance, trackerApiInstance } from './config'
-import { randomUint32, makeUrl } from '../../../utils/utils'
+import { walletApiInstance, trackerApiInstance } from '../api/restV3/config'
+import { randomUint32, makeUrl } from '../../utils/utils'
 import { BigNumber } from "bignumber.js";
-
-export const getSocialMedia = async (address) => {
-    const preps = await fetch('https://explorer.icon.geometry-dev.net/api/v1/preps')
-    const prepList = await preps.json()
-}
 
 export const getPrepStatusList = async () => {
     const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
@@ -95,6 +90,8 @@ export async function prepList(grade) {
     })
 }
 
+// *** this will be replaced by node-state?network_name=
+
 export async function getPReps() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -118,16 +115,6 @@ export async function getPReps() {
             .catch(error => {
                 console.error(error)
                 resolve({ preps: [] });
-                // if (!!error.response) {
-                //     resolve(error.response.data);
-                // }
-                // else {
-                //     resolve({
-                //         error: {
-                //             message: error.message
-                //         }
-                //     })
-                // }
             })
     });
 }
@@ -196,16 +183,6 @@ export async function getPRep(address) {
             })
             .catch(error => {
                 resolve({})
-                // if (!!error.response) {
-                //     resolve(error.response.data);
-                // }
-                // else {
-                //     resolve({
-                //         error: {
-                //             message: error.message
-                //         }
-                //     })
-                // }
             })
     });
 }

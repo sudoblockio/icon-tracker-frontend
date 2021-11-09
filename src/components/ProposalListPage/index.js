@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { getProposals } from '../../redux/api/restV3/iiss';
+import { getProposals } from '../../redux/store/iiss';
 import { ProposalType, ProposalStatus, ProposalStatusClass, VIEW_NUMBER } from '../../utils/const';
 import { valueToString, getTextFromHtml } from '../../utils/utils';
 import {

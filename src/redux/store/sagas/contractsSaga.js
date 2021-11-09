@@ -15,7 +15,7 @@ import {
   icxCall as ICX_CALL_API,
   // icxGetScore as ICX_GET_SCORE_API,
 } from '../../api/restV3';
-import {   getContractABI as ICX_GET_CONTRACT } from '../../api/restV3/iiss'
+import {   getContractABI as ICX_GET_CONTRACT } from '../../store/iiss'
 import { getScoreStatus } from '../../store/contracts';
 
 export default function* contractsSaga() {

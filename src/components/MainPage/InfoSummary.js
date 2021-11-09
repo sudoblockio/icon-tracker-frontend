@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/api/restV3/iiss'
+import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 
 class InfoSummary extends Component {

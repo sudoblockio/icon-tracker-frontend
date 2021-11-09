@@ -17,7 +17,7 @@ import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
 import {getPReps} from '../../../redux/api/restV3';
-import { prepList } from '../../../redux/api/restV3/iiss'
+import { prepList } from '../../../redux/store/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
 

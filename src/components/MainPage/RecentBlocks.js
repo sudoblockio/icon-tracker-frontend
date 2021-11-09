@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
-import { awaitGetRecentBlocks } from '../../redux/api/restV3/iiss'
+import { awaitGetRecentBlocks } from '../../redux/store/iiss'
 import { LoadingComponent, BlockLink } from '../../components'
 
 class RecentBlocks extends Component {

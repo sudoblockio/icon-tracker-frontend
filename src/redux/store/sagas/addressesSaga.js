@@ -19,7 +19,7 @@ import {
 } from '../addresses'
 
 // *** take a deeper look, cull. 
-import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../api/restV3/iiss';
+import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../store/iiss';
 import { convertLoopToIcxDecimal } from '../../../utils/utils';
 
 export default function* addressesSaga() {

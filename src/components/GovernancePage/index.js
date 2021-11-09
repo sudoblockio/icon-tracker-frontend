@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/store/iiss';
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
