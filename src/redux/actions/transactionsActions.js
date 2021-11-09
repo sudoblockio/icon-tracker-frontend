@@ -14,7 +14,7 @@ export function transactionTxDetail(payload){
   };
 }
 
-export function transactionEventLogList(payload){
+export function transactionEventLogListAction(payload){
   return {
     type: actionTypes.transactionEventLogList,
     payload

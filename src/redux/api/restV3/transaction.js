@@ -29,19 +29,19 @@ export async function transactionTxDetail(payload) {
   })
 }
 
-export async function transactionEventLogList(payload) {
-  const trackerApi = await trackerApiInstance()
-  return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
-      .then(result => {
+// export async function transactionEventLogList(payload) {
+//   const trackerApi = await trackerApiInstance()
+//   return new Promise((resolve, reject) => {
+//     trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
+//       .then(result => {
         
-        resolve(result)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
+//         resolve(result)
+//       })
+//       .catch(error => {
+//         reject(error)
+//       })
+//   })
+// }
 
 export async function transactionInternalTxList(payload) {
   const trackerApi = await trackerApiInstance()

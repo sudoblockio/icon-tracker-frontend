@@ -35,9 +35,11 @@ import {
 import {
     transactionRecentTx,
     transactionTxDetail,
-    transactionEventLogList,
+    // transactionEventLogList,
     transactionInternalTxList,
 } from './transaction'
+
+import { transactionEventLogList } from '../../store/transactions'
 
 import {
     tokenList,
