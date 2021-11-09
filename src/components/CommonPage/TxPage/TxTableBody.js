@@ -81,6 +81,7 @@ class TxTableBody extends Component {
 
 	
 	render() {
+		
 		const TableRow = (_props) => {
 			const {
 				txType,
@@ -92,6 +93,15 @@ class TxTableBody extends Component {
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
 			const addressInData = data.address
 			const isError = data.state === 0
+			const formattedLogData = ""
+
+			const replacer = (key, value) => {
+				const string = JSON.stringify(value)
+				console.log(string.replace("'\'", ""))
+			}
+			console.log(JSON.stringify(data, null, 2).replace("'\'" ||'\"', ""))
+			
+
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
 					return (
@@ -260,13 +270,15 @@ class TxTableBody extends Component {
 								<p>{epochToFromNow(data.block_timestamp)}</p>
 							</td>
 							<td>{data.method}</td>
-							<td>{ JSON.stringify(data, null, 2)}</td>
+							
+							<td><code>`${JSON.stringify(data, null, 2)}`</code></td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
 				
 					return (
 						<tr>
+							
 							<td>{`${JSON.stringify(data.address, null, 2)}, ${JSON.stringify(data.indexed, null, 2)},${JSON.stringify(data.data, null, 2)}` }</td>
 						</tr>
 					)
