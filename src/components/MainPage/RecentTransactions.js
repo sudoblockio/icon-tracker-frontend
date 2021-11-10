@@ -4,8 +4,6 @@ import { convertNumberToText, convertHexToValue } from '../../utils/utils'
 import { awaitGetRecentTx } from '../../redux/store/iiss'
 import { LoadingComponent, TransactionLink } from '../../components'
 
-
-
 class RecentTransactions extends Component {
     constructor(props) {
         super(props)
@@ -30,6 +28,7 @@ class RecentTransactions extends Component {
             console.log("connection established")
         }
         this.txsocket.onmessage = async (event) =>  {
+            console.log("message occurred")
             this.latestTx = event.data
             this.setState({liveTrClass:"flat"})
             this.recentTx = await awaitGetRecentTx()
@@ -56,13 +55,13 @@ class RecentTransactions extends Component {
        this.txsocket.close()
     }
     render() {
-
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
+
+        const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : this.recentTx  ?  this.recentTx.slice(0,10) : []
         console.log(this.state.recentTx, "what is the list")
+        console.log(this.recentTx, "this recent tx")
         const latest = this.state.liveTableRow
-        console.log(latest.hash, "the latest")
-        console.log(this.state.liveTrClass, "the class in use")
+
 
         return (
             <li className="right">
@@ -91,15 +90,16 @@ class RecentTransactions extends Component {
                                         <p className="c"> 
                                             Hash
                                              <em>
-                                                <TransactionLink to={latest.hash? latest.hash : null} label={latest.hash ? latest.hash : null} />
+                                                
+                                                <TransactionLink to={latest.hash? latest.hash : list[0]? list[0].hash : null} label={latest.hash ? latest.hash : null} />
                                             </em>
                                         </p>
-                                        {/* <p className="d">
+                                         <p className="d">
                                             Fee
                                             <em>
-                                                {convertHexToValue(transaction_fee)} ICX
+                                                .00352 ICX
                                             </em>
-                                        </p> */}
+                                        </p> 
                              </li>
                             {list.map((tx, index) => {
                                 const { hash, value, transaction_fee, receipt_status } = tx
