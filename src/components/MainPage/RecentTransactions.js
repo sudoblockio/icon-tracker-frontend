@@ -22,28 +22,19 @@ class RecentTransactions extends Component {
         this.recentTx = await awaitGetRecentTx()
         this.setState({recentTx: this.recentTX})
         this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
-        console.log(this.recentTx, "from did mount")
 
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
         this.txsocket.onmessage = async (event) =>  {
-            console.log("message occurred")
             this.latestTx = event.data
             this.setState({liveTrClass:"flat"})
             this.recentTx = await awaitGetRecentTx()
-            console.log(this.recentTx, "From onmessage")
             this.setState({recentTx: this.recentTx})
-            console.log(this.state, "is it state?")
-            
-            // this.setState({liveTableRow: event.data})
-            // console.log(this.latestTx, "this")
             try{
                const eventObj = JSON.parse(event.data)
                 this.setState({liveTableRow: eventObj})
                 this.setState({liveTrClass:"fade"})
-                console.log("hit the try block")
-                console.log(this.state.liveTrClass, "the class in use")
             }
             catch (e) {
                 console.log(e, "websocket error")
