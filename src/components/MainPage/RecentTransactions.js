@@ -21,7 +21,7 @@ class RecentTransactions extends Component {
     async componentDidMount() {
         this.recentTx = await awaitGetRecentTx()
         this.setState({recentTx: this.recentTX})
-        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
+        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
         console.log(this.recentTx, "from did mount")
 
         this.txsocket.onopen = (event) => {
@@ -57,7 +57,7 @@ class RecentTransactions extends Component {
     render() {
         const loading = false;
 
-        const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : this.recentTx  ?  this.recentTx.slice(0,10) : []
+        const list = this.state.recentTx ? this.state.recentTx.slice(1, 10) : this.recentTx  ?  this.recentTx.slice(0,10) : []
         console.log(this.state.recentTx, "what is the list")
         console.log(this.recentTx, "this recent tx")
         const latest = this.state.liveTableRow
