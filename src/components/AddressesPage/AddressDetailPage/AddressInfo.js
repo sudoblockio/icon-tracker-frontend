@@ -48,13 +48,14 @@ class AddressInfo extends Component {
         const prepArray = allPreps.filter(preps => preps.name === name )
         console.log(prepArray, "prep array? ")
         const thisPrep = prepArray ? prepArray[0] : prepArray
+        console.log(thisPrep, "this prep hmm?")
         
         this.media.map(site => {
-            console.log(site)
-            console.log(this.links.site, "the links")
-            console.log(thisPrep, "this prep at site")
-            this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
-            // this.links[site] = thisPrep[site]
+            console.log(site, "***site")
+            console.log(this.links, "***the links")
+            console.log(thisPrep, "***this prep at site")
+            // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
+            this.links[site] = thisPrep[site]
         })
         this.linkList=this.links
         console.log(this.linkList, "the list of links")
@@ -105,7 +106,7 @@ class AddressInfo extends Component {
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
-        console.log(wallet, "the wallet? ")
+
         const {
             isPrep,
             prep,
@@ -119,7 +120,6 @@ class AddressInfo extends Component {
         } = data
 
         const showLinks = isPrep ? true : false
-        // console.log(prep ? prep.data[0]: "nope", "did the prep work? ")
 
             const {
                 address,
@@ -186,8 +186,7 @@ class AddressInfo extends Component {
             this.getSocialMediaLinks(name)
             // linkList=this.links
         } else {
-            console.log(isPrep, "didn't check if prep")
-            console.log("didn't check if prep")
+
         }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(total_blocks)
@@ -204,7 +203,6 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount} = data
-                console.log(data, "Data from content")
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -254,13 +252,11 @@ class AddressInfo extends Component {
                                         {isPrep && <tr className="p-rep">
                                             <td>Name</td>
                                             <td colSpan="3">
-                                                {console.log(name, "what is the name? ")}
                                                 <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
                                                 {this.linkList && SocialMediaType.map((type, index) => {
-                                                    console.log(this.linkList[type], "INTERESTING")
                                                     const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
