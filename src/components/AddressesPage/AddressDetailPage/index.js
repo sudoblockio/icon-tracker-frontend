@@ -11,8 +11,10 @@ import {
 class AddressesDetailPage extends Component {
     
     render() {
+        console.log(this.props, "props from")
         const { wallet } = this.props;
         const { loading, error, data } = wallet
+        console.log(wallet, "the wallet on index")
         const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         console.log(data, "data from detail page")
 

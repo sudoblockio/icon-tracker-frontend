@@ -99,7 +99,7 @@ class TxTableBody extends Component {
 				const string = JSON.stringify(value)
 				console.log(string.replace("'\'", ""))
 			}
-			console.log(JSON.stringify(data, null, 2).replace("'\'" ||'\"', ""))
+
 			
 
 			switch (txType) {

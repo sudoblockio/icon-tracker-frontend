@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
-// import BigNumber from 'bignumber.js'
 import {
     numberWithCommas,
     convertNumberToText,
@@ -11,7 +10,6 @@ import {
     addAt,
     addUnregisteredStyle
 } from '../../../utils/utils'
-// import { searchLowerCase, isValidData } from 'utils/utils'
 import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
@@ -31,26 +29,23 @@ class AddressInfo extends Component {
             isAPrep: false,
         }
     }
-
-    // move to our endpoint, do only if isPrep
+    
     async componentDidMount() {
-        // const {totalDelegated} = await getPReps()
-        // this.setState({totalDelegated })
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
-    links = {}
+    links = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
+    // links = {}
     linkList = []
     getSocialMediaLinks = async (name) => {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
         const thisPrep = prepArray ? prepArray[0] : prepArray
         this.media.map(site => {
-
+            // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
             this.links[site] = thisPrep[site]
         })
         this.linkList=this.links
-        
     }
 
     onNotificationChange = () => {
@@ -98,6 +93,7 @@ class AddressInfo extends Component {
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
+
         const {
             isPrep,
             prep,
@@ -109,34 +105,54 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
+
         const showLinks = isPrep ? true : false
 
+            const {
+                address,
+                api_endpoint,
+                city,
+                country,
+                created_block,
+                created_timestamp,
+                delegated,
+                details,
+                email,
+                facebook,
+                github,
+                grade,
+                irep,
+                irep_updated_block_height,
+                keybase,
+                last_updated_block,
+                last_updated_timestamp,
+                logo_256,
+                logo_1024,
+                logo_svg,
+                name,
+                node_address,
+                p2p_endpoint,
+                penalty,
+                reddit,
+                server_city,
+                server_country,
+                server_type,
+                sponsored_cps_grants,
+                stake,
+                status,
+                steemit,
+                telegram,
+                total_blocks,
+                twitter,
+                unvalidated_sequence_blocks,
+                validated_blocks,
+                voted,
+                voting_power,
+                website,
+                wechat,
+                youtube,
+            } = prep || {}
 
-
-        const {
-            nodeAddress,
-            delegated,
-            name,
-            totalBlocks,
-            validatedBlocks,
-            // irep,
-            // irepUpdateBlockHeight,
-            lastGenerateBlockHeight,
-            website,
-            twitter,
-            wechat, 
-            youtube,
-            telegram,
-            steemit,
-            reddit,
-            keybase,
-            github,
-            facebook,
-            grade,
-            status
-        } = prep || {}
-
-        
         
 
         let unstakeSum = 0;
@@ -148,23 +164,16 @@ class AddressInfo extends Component {
         
 
         if (showLinks) {
-            console.log(this.links, "what is show links")
-            console.log(this.getSocialMediaLinks, "what is show links get function")
-            console.log(name,"what is show links name")
             this.getSocialMediaLinks(name)
             // linkList=this.links
         } else {
-            console.log(isPrep, "didn't check if prep")
-            console.log("didn't check if prep")
+
         }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
-        const produced = IconConverter.toNumber(totalBlocks)
-        const validated = IconConverter.toNumber(validatedBlocks)
+        const produced = IconConverter.toNumber(total_blocks)
+        const validated = IconConverter.toNumber(validated_blocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
-
-        // const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        // const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
-        const _lastGenerateBlockHeight = !lastGenerateBlockHeight ? 'None' : IconConverter.toNumber(lastGenerateBlockHeight)
+        const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
 
         const badge = getBadgeTitle(grade, status)
         const Content = () => {
@@ -226,7 +235,6 @@ class AddressInfo extends Component {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
                                                 {this.linkList && SocialMediaType.map((type, index) => {
-                                                    console.log(this.linkList[type], "INTERESTING")
                                                     const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
@@ -299,7 +307,7 @@ class AddressInfo extends Component {
                                             <td>Node Address</td>
                                             <td colSpan="3">
                                                 <i className="img node-addr"></i>
-                                                {nodeAddress}
+                                                {node_address}
                                             </td>
                                         </tr>
                                         <tr>
