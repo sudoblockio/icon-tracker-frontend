@@ -14,7 +14,6 @@ class RecentTransactions extends Component {
         }
     }
 
-    // initialize 
     txsocket;
     latestTx;
     recentTx;
@@ -31,6 +30,7 @@ class RecentTransactions extends Component {
             this.setState({liveTrClass:"flat"})
             this.recentTx = await awaitGetRecentTx()
             this.setState({recentTx: this.recentTx})
+
             try{
                const eventObj = JSON.parse(event.data)
                 this.setState({liveTableRow: eventObj})
@@ -48,9 +48,7 @@ class RecentTransactions extends Component {
     render() {
         const loading = false;
 
-        const list = this.state.recentTx ? this.state.recentTx.slice(1, 10) : this.recentTx  ?  this.recentTx.slice(0,10) : []
-        console.log(this.state.recentTx, "what is the list")
-        console.log(this.recentTx, "this recent tx")
+        const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(0,9) : []
         const latest = this.state.liveTableRow
 
 

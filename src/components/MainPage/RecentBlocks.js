@@ -48,7 +48,7 @@ class RecentBlocks extends Component {
      }
     render() {
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentBx.slice(1, 10) : this.recentBx  ?  this.recentBx.slice(1,10) : []
+        const list = this.state.recentTx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
         return (
             <li className="left">
@@ -71,17 +71,17 @@ class RecentBlocks extends Component {
                                         </p>
                                         <p className="b">
                                             Transactions
-                                            {/* <em>{numberWithCommas(transaction_count)}</em> */}
+                                            <em>{numberWithCommas(latest.transaction_count? latest.transaction_count : list[0]? list[0].transaction_count : null)}</em>
                                         </p>
                                         <p className="c">
                                             Hash
                                             <em>
-                                                {/* <BlockLink to={number} label={hash} /> */}
+                                                <BlockLink to={latest.number? latest.number : list[0]? list[0].number : null} label={latest.hash? latest.hash : list[0]? list[0].hash : null} />
                                             </em>
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            {/* <em>{getTimezoneMomentTime(createDate)}</em> */}
+                                            <em>{getTimezoneMomentTime(new Date)}</em>
                                         </p>
                                     </li>
 
