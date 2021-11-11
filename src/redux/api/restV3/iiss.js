@@ -2,11 +2,6 @@ import { walletApiInstance, trackerApiInstance } from './config'
 import { randomUint32, makeUrl } from '../../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
-export const getSocialMedia = async (address) => {
-    const preps = await fetch('https://explorer.icon.geometry-dev.net/api/v1/preps')
-    const prepList = await preps.json()
-}
-
 export const getPrepStatusList = async () => {
     const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
     const data = await response.json()
@@ -100,7 +95,7 @@ export async function getDelegation(address) {
     return new Promise((resolve, reject)  => {
         trackerApi.get(`/api/v1/preps/${address}`)
             .then(result => {
-                console.log(result, "what we getting here? ")
+
                 resolve(result)
             })
             .catch(error => {
@@ -110,40 +105,19 @@ export async function getDelegation(address) {
 }
 
 export async function getPReps() {
-    const walletApi = await walletApiInstance()
-    return new Promise(resolve => {
-        const param = {
-            jsonrpc: "2.0",
-            method: "icx_call",
-            id: randomUint32(),
-            params: {
-                "from": "hx0000000000000000000000000000000000000000",
-                "to": "cx0000000000000000000000000000000000000000",
-                "dataType": "call",
-                "data": {
-                    "method": 'getPReps',
-                }
-            }
-        }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
-            .then(response => {
-                resolve(response.data.result);
+    const trackerApi = await trackerApiInstance()
+
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/preps`)
+            .then(result => {
+                console.log(result,  "getPReps result")
+                resolve(result)
             })
             .catch(error => {
-                console.error(error)
-                resolve({ preps: [] });
-                // if (!!error.response) {
-                //     resolve(error.response.data);
-                // }
-                // else {
-                //     resolve({
-                //         error: {
-                //             message: error.message
-                //         }
-                //     })
-                // }
+                reject(error)
             })
     });
+        
 }
 
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
-// import BigNumber from 'bignumber.js'
 import {
     numberWithCommas,
     convertNumberToText,
@@ -11,7 +10,6 @@ import {
     addAt,
     addUnregisteredStyle
 } from '../../../utils/utils'
-// import { searchLowerCase, isValidData } from 'utils/utils'
 import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
@@ -31,8 +29,7 @@ class AddressInfo extends Component {
             isAPrep: false,
         }
     }
-
-    // move to our endpoint, do only if isPrep
+    
     async componentDidMount() {
 
     }
@@ -42,23 +39,14 @@ class AddressInfo extends Component {
     // links = {}
     linkList = []
     getSocialMediaLinks = async (name) => {
-        console.log(name, "the name")
         const allPreps = await prepList();
-        console.log(allPreps, "all preps? ")
         const prepArray = allPreps.filter(preps => preps.name === name )
-        console.log(prepArray, "prep array? ")
         const thisPrep = prepArray ? prepArray[0] : prepArray
-        console.log(thisPrep, "this prep hmm?")
-        
         this.media.map(site => {
-            console.log(site, "***site")
-            console.log(this.links, "***the links")
-            console.log(thisPrep, "***this prep at site")
             // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
             this.links[site] = thisPrep[site]
         })
         this.linkList=this.links
-        console.log(this.linkList, "the list of links")
     }
 
     onNotificationChange = () => {
@@ -165,13 +153,7 @@ class AddressInfo extends Component {
                 wechat,
                 youtube,
             } = prep || {}
-        
 
-
-    
-
-// *** if it is a prep, get delegation here 
-        
         
 
         let unstakeSum = 0;
@@ -192,9 +174,6 @@ class AddressInfo extends Component {
         const produced = IconConverter.toNumber(total_blocks)
         const validated = IconConverter.toNumber(validated_blocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
-
-        // const _irep = !irep ? 0 : convertLoopToIcxDecimal(irep)
-        // const _irepUpdateBlockHeight = !irepUpdateBlockHeight ? 0 : IconConverter.toNumber(irepUpdateBlockHeight)
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
 
         const badge = getBadgeTitle(grade, status)
