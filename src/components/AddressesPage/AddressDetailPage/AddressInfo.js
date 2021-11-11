@@ -165,6 +165,7 @@ class AddressInfo extends Component {
             wechat,
             youtube,
         } = prep || {}
+        console.log(prep, "what prep sir?")
     
 
 // *** if it is a prep, get delegation here 
@@ -201,6 +202,7 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount} = data
+                console.log(data, "Data from content")
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -250,6 +252,7 @@ class AddressInfo extends Component {
                                         {isPrep && <tr className="p-rep">
                                             <td>Name</td>
                                             <td colSpan="3">
+                                                {console.log(name, "what is the name? ")}
                                                 <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
@@ -328,7 +331,7 @@ class AddressInfo extends Component {
                                             <td>Node Address</td>
                                             <td colSpan="3">
                                                 <i className="img node-addr"></i>
-                                                {api_endpoint}
+                                                {node_address}
                                             </td>
                                         </tr>
                                         <tr>
