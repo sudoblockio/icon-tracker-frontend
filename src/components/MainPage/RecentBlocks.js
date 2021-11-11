@@ -17,6 +17,7 @@ class RecentBlocks extends Component {
     bxsocket;
     latestBx;
     recentBx;
+
     async componentDidMount() {
         this.recentBx = await awaitGetRecentBlocks()
         this.setState({recentBx: this.recentTx})
@@ -26,12 +27,12 @@ class RecentBlocks extends Component {
         }
         this.bxsocket.onmessage = async (event) =>  {
             this.latestBx = event.data
-            console.log(event.data, "latest block")
             this.setState({liveTrClass:"flat"})
             this.recentBx = await awaitGetRecentBlocks()
             this.setState({recentBx: this.recentBx})
             // this.setState({liveTableRow: event.data})
             // console.log(this.latestTx, "this")
+
             try{
                const eventObj = JSON.parse(event.data)
                 this.setState({liveTableRow: eventObj})
@@ -50,6 +51,7 @@ class RecentBlocks extends Component {
         const loading = false;
         const list = this.state.recentTx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
+        console.log(latest, "the latest")
         return (
             <li className="left">
                 <p className="title">Blocks</p>
@@ -66,7 +68,7 @@ class RecentBlocks extends Component {
                                         <p className="a">
                                             Block
                                             <em>
-                                                <BlockLink to={latest.number? latest.number : list[0]? list[0].number : null} label={latest.number ? latest.number : null} label={latest.number? latest.number : list[0]? list[0].number : null} label={latest.number ? latest.number : null} />
+                                                <BlockLink to={latest.number? latest.number : list[0]? list[0].number : null}  label={ numberWithCommas(latest.number ? latest.number : null) } />
                                             </em>
                                         </p>
                                         <p className="b">
@@ -81,12 +83,13 @@ class RecentBlocks extends Component {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            <em>{getTimezoneMomentTime(new Date)}</em>
+                                            {/*  */}
+                                            <em>{latest.timestamp? new Date(latest.timestamp / 1000).toLocaleTimeString() : list[0]? new Date(list[0].timestamp / 1000).toLocaleTimeString(): null}</em>
                                         </p>
                                     </li>
 
                             {list.map((block, index) => {
-                                const { number, createDate, hash, transaction_count } = block
+                                const { number, createDate, hash, transaction_count, timestamp } = block
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
@@ -108,7 +111,8 @@ class RecentBlocks extends Component {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            <em>{getTimezoneMomentTime(createDate)}</em>
+
+                                            <em>{ new Date(timestamp / 1000).toLocaleTimeString()}</em>
                                         </p>
                                     </li>
                                 )

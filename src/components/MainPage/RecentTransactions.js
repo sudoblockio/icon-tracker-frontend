@@ -15,6 +15,7 @@ class RecentTransactions extends Component {
     }
 
     txsocket;
+    // *** add some comments
     latestTx;
     recentTx;
     async componentDidMount() {
@@ -50,7 +51,7 @@ class RecentTransactions extends Component {
 
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(0,9) : []
         const latest = this.state.liveTableRow
-
+        const isSuccess = Number(latest.receipt_status) === 1
 
         return (
             <li className="right">
@@ -62,18 +63,21 @@ class RecentTransactions extends Component {
                         </div>
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
+                            
                             <li key={1} className={`${this.state.liveTrClass}`}>
                                          <p className={'icon'}>T</p>
                                         <p className="a">
                                             Status
                                             <em>
-                                                {'Success'}
+                                            {isSuccess ? 'Success' : 'Fail'}
                                             </em>
                                         </p> 
                                          <p className="b">
                                             Amount
                                             <em>
-                                            .078 ICX
+                                            
+                                            {latest.value? convertHexToValue(latest.value).toFixed(2): list[0]? list[0].value:null} ICX
+
                                             </em>
                                         </p>
                                         <p className="c"> 
@@ -86,7 +90,7 @@ class RecentTransactions extends Component {
                                          <p className="d">
                                             Fee
                                             <em>
-                                                .00352 ICX
+                                            {latest.transaction_fee ? convertHexToValue(latest.transaction_fee) : list[0]? list[0].transaction_fee : null} ICX
                                             </em>
                                         </p> 
                              </li>
