@@ -101,7 +101,7 @@ export async function getDelegation(address) {
         trackerApi.get(`/api/v1/preps/${address}`)
             .then(result => {
                 console.log(result, "what we getting here? ")
-                resolve(result.data)
+                resolve(result)
             })
             .catch(error => {
                 reject(error)
