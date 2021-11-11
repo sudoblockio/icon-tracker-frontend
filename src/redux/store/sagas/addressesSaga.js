@@ -180,7 +180,7 @@ export function* addressInfoFunc(action) {
         unstakes,
         iscore: _iscore,
         delegated,
-        prep,
+        prep: prep.data[0],
         active,
         media,
       }
