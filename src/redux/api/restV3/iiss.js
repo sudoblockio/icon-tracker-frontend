@@ -95,6 +95,20 @@ export async function prepList(grade) {
     })
 }
 
+export async function getDelegation(address) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/preps/${address}`)
+            .then(result => {
+                console.log(result, "what we getting here? ")
+                resolve(result.data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });
+}
+
 export async function getPReps() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -404,46 +418,6 @@ export async function queryIScore(address) {
     });
 }
 
-export async function getDelegation(address) {
-    const walletApi = await walletApiInstance()
-    return new Promise(resolve => {
-        const param = {
-            jsonrpc: "2.0",
-            id: randomUint32(),
-            method: "icx_call",
-            params: {
-                "from": "hx0000000000000000000000000000000000000000",
-                "to": "cx0000000000000000000000000000000000000000",
-                "dataType": "call",
-                "data": {
-                    "method": "getDelegation",
-                    "params": {
-                        address
-                    }
-                }
-            }
-        }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
-            .then(response => {
-                console.log(response, "get delegation response")
-                resolve(response.data.result);
-            })
-            .catch(error => {
-                console.error(error)
-                resolve({ delegations: [] });
-                // if (!!error.response) {
-                //     resolve(error.response.data);
-                // }
-                // else {
-                //     resolve({
-                //         error: {
-                //             message: error.message
-                //         }
-                //     })
-                // }
-            })
-    });
-}
 
 export async function getBalance(address) {
     const walletApi = await walletApiInstance()

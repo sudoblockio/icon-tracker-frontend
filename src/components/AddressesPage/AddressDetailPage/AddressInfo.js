@@ -16,7 +16,6 @@ import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../..
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import {getPReps} from '../../../redux/api/restV3';
 import { prepList } from '../../../redux/api/restV3/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
@@ -35,8 +34,7 @@ class AddressInfo extends Component {
 
     // move to our endpoint, do only if isPrep
     async componentDidMount() {
-        const {totalDelegated} = await getPReps()
-        this.setState({totalDelegated })
+
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
@@ -136,7 +134,7 @@ class AddressInfo extends Component {
             grade,
             status
         } = prep || {}
-
+// *** if it is a prep, get delegation here 
         
         
 
