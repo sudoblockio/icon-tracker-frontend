@@ -58,7 +58,10 @@ class GovernancePage extends Component {
 	async componentWillMount(){
 		// our endpoints
 		this.statusList = await getPrepStatusList()
-		this.governanceData = await this.getAdditionalData('get_PReps');
+		this.governanceData = await getPReps();
+		console.log(this.governanceData, "gov data")
+		const test = await getPReps()
+		console.log(test, "???s")
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
@@ -181,7 +184,7 @@ class GovernancePage extends Component {
 	}
 	getGovernanceStatus = (address) => {
 		let result =false;
-		this.governanceData.data.result.forEach(item=>{
+		this.governanceData.data.forEach(item=>{
 			if(item.address===address){
 				result = true;
 			}
