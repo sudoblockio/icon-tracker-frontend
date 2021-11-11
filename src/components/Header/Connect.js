@@ -59,6 +59,7 @@ class Connect extends Component {
         })
     }
 
+
     disconnect = () => {
         this.setState({ walletAddress: undefined }, () => {
             this.props.clearWallet()

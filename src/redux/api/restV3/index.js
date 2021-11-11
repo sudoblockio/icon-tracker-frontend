@@ -64,7 +64,7 @@ import{
     getIISSInfo,
     getDelegation,
     addressReward
-} from './iiss';
+} from '../../store/iiss';
 
 export {
     getMainInfo,

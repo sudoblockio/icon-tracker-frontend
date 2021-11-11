@@ -1,30 +1,45 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { convertNumberToText, convertHexToValue } from '../../utils/utils'
-import { awaitGetRecentTx } from '../../redux/api/restV3/iiss'
+import { awaitGetRecentTx } from '../../redux/store/iiss'
 import { LoadingComponent, TransactionLink } from '../../components'
-
-
 
 class RecentTransactions extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            recentTx: 0
+            recentTx: 0,
+            liveTableRow: {},
+            liveTrClass: "flat"
         }
     }
 
     txsocket;
+    // *** add some comments
+    latestTx;
+    recentTx;
     async componentDidMount() {
-        const recentTx = await awaitGetRecentTx()
-        this.setState({recentTx})
-        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
-        console.log(this.txsocket)
-        this.txsocket.onopen = function(event) {
+        this.recentTx = await awaitGetRecentTx()
+        this.setState({recentTx: this.recentTX})
+        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
+
+        this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
-        this.txsocket.onmessage = function (event) {
-            console.log(event.data, "websocket event data")
+        this.txsocket.onmessage = async (event) =>  {
+            this.latestTx = event.data
+            this.setState({liveTrClass:"flat"})
+            this.recentTx = await awaitGetRecentTx()
+            this.setState({recentTx: this.recentTx})
+
+            try{
+               const eventObj = JSON.parse(event.data)
+                this.setState({liveTableRow: eventObj})
+                this.setState({liveTrClass:"fade"})
+            }
+            catch (e) {
+                console.log(e, "websocket error")
+            }
         }
     }
 
@@ -32,10 +47,12 @@ class RecentTransactions extends Component {
        this.txsocket.close()
     }
     render() {
-
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentTx.slice(0, 10) : []
-        
+
+        const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(0,9) : []
+        const latest = this.state.liveTableRow
+        const isSuccess = Number(latest.receipt_status) === 1
+
         return (
             <li className="right">
                 <p className="title">Transactions</p>
@@ -46,6 +63,37 @@ class RecentTransactions extends Component {
                         </div>
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
+                            
+                            <li key={1} className={`${this.state.liveTrClass}`}>
+                                         <p className={'icon'}>T</p>
+                                        <p className="a">
+                                            Status
+                                            <em>
+                                            {isSuccess ? 'Success' : 'Fail'}
+                                            </em>
+                                        </p> 
+                                         <p className="b">
+                                            Amount
+                                            <em>
+                                            
+                                            {latest.value? convertHexToValue(latest.value).toFixed(2): list[0]? list[0].value:null} ICX
+
+                                            </em>
+                                        </p>
+                                        <p className="c"> 
+                                            Hash
+                                             <em>
+                                                
+                                                <TransactionLink to={latest.hash? latest.hash : list[0]? list[0].hash : null} label={latest.hash ? latest.hash : null} />
+                                            </em>
+                                        </p>
+                                         <p className="d">
+                                            Fee
+                                            <em>
+                                            {latest.transaction_fee ? convertHexToValue(latest.transaction_fee) : list[0]? list[0].transaction_fee : null} ICX
+                                            </em>
+                                        </p> 
+                             </li>
                             {list.map((tx, index) => {
                                 const { hash, value, transaction_fee, receipt_status } = tx
                                 const isSuccess = Number(receipt_status) === 1

@@ -12,7 +12,7 @@ import {
 } from '../../../components'
 import {
     coinGeckoCurrentUSD
-} from '../../../redux/api/restV3/iiss'
+} from '../../../redux/store/iiss'
 import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
 import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
 import { getSupplyMetrics } from '../../../redux/api/restV3/main'

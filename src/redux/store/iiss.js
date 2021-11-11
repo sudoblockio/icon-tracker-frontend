@@ -1,5 +1,5 @@
-import { walletApiInstance, trackerApiInstance } from './config'
-import { randomUint32, makeUrl } from '../../../utils/utils'
+import { walletApiInstance, trackerApiInstance } from '../api/restV3/config'
+import { randomUint32, makeUrl } from '../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
 export const getPrepStatusList = async () => {
@@ -184,16 +184,6 @@ export async function getPRep(address) {
             })
             .catch(error => {
                 resolve({})
-                // if (!!error.response) {
-                //     resolve(error.response.data);
-                // }
-                // else {
-                //     resolve({
-                //         error: {
-                //             message: error.message
-                //         }
-                //     })
-                // }
             })
     });
 }

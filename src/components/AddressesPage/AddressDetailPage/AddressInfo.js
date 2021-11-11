@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../..
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList } from '../../../redux/api/restV3/iiss'
+import { prepList } from '../../../redux/store/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -31,7 +31,6 @@ class AddressInfo extends Component {
     }
     
     async componentDidMount() {
-
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]

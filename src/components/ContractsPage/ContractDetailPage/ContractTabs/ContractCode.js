@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
-import { getSrcCodeLink, getContractABI } from '../../../../redux/api/restV3/iiss'
+import { getSrcCodeLink, getContractABI } from '../../../../redux/store/iiss'
 import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
