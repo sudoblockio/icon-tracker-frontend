@@ -105,6 +105,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
+        console.log(data, "what is the data? ")
 
         const showLinks = isPrep ? true : false
 
@@ -116,41 +117,16 @@ class AddressInfo extends Component {
                 created_block,
                 created_timestamp,
                 delegated,
-                details,
-                email,
-                facebook,
-                github,
                 grade,
-                irep,
-                irep_updated_block_height,
-                keybase,
                 last_updated_block,
-                last_updated_timestamp,
-                logo_256,
-                logo_1024,
-                logo_svg,
                 name,
                 node_address,
-                p2p_endpoint,
-                penalty,
-                reddit,
-                server_city,
-                server_country,
-                server_type,
-                sponsored_cps_grants,
-                stake,
                 status,
-                steemit,
-                telegram,
                 total_blocks,
-                twitter,
-                unvalidated_sequence_blocks,
                 validated_blocks,
-                voted,
-                voting_power,
+
                 website,
-                wechat,
-                youtube,
+
             } = prep || {}
 
         
@@ -269,7 +245,9 @@ class AddressInfo extends Component {
                                         {isPrep && <tr className="">
                                             <td>Total Votes</td>
                                             <td colSpan="3">
-                                                <span>{convertNumberToText(convertLoopToIcxDecimal(delegated))}<em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}% )</em>{/* <em>( 90.02 % )</em> */}</span>
+                                                <span>{convertNumberToText(delegated)}
+                                                <em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}% )</em>
+                                                {/* <em>( 90.02 % )</em> */}</span>
                                             </td>
                                             {/* <td>24h Change Amount</td>
                                                 <td><span>▲  900,000,000.0004</span></td> */}

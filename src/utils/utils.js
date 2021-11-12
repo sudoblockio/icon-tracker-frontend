@@ -706,6 +706,7 @@ export function getBadgeTitle(grade, status) {
 }
 
 export function addUnregisteredStyle(status, grade) {
+    console.log(status, grade, "unregistered inputs")
     const _status = Number(status)
     const _grade = Number(grade)
     if (!isNaN(_status) && (_status > 0 && _status < 3)) {

@@ -90,15 +90,12 @@ class TxTableBody extends Component {
 				currentUSD,
 				totalSupply,
 			} = this.props
+			// *** 
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
+
 			const addressInData = data.address
 			const isError = data.state === 0
 			const formattedLogData = ""
-
-			const replacer = (key, value) => {
-				const string = JSON.stringify(value)
-				console.log(string.replace("'\'", ""))
-			}
 
 			
 

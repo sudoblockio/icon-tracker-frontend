@@ -34,7 +34,7 @@ class MainPage extends Component {
 
 
     render() {
-        document.addEventListener('keydown', this.handleKeyDown)
+        
         return (
             <div className="content-wrap">
                 <div className="screen2">
