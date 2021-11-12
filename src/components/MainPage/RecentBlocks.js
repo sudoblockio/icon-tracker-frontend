@@ -10,7 +10,8 @@ class RecentBlocks extends Component {
         this.state = {
             recentBx: 0,
             liveTableRow: {},
-            liveTrClass: "flat"
+            liveTrClass: "flat",
+            play: true,
         }
     }
 
@@ -22,7 +23,7 @@ class RecentBlocks extends Component {
         this.recentBx = await awaitGetRecentBlocks()
         this.setState({recentBx: this.recentTx})
         this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
-    this.bxsocket.onopen = (event) => {
+        this.bxsocket.onopen = (event) => {
             console.log("connection established")
         }
         this.bxsocket.onmessage = async (event) =>  {
@@ -47,11 +48,45 @@ class RecentBlocks extends Component {
     componentWillUnmount() {
         this.bxsocket.close()
      }
+
+     handleKeyDown = e => {
+        if (e.key === 'p') {
+            console.log(this.state.play, "play state")
+            this.setState({play: this.state.play === true ? false : true})
+            console.log(this.state.play, "the play state right after the switch")
+            if (this.state.play === false) {
+                console.log("pause")
+                this.bxsocket.close()
+            } else {
+                this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks')
+                this.bxsocket.onmessage = async (event) =>  {
+                    this.latestBx = event.data
+                    this.setState({liveTrClass:"flat"})
+                    this.recentBx = await awaitGetRecentBlocks()
+                    this.setState({recentBx: this.recentBx})
+                    // this.setState({liveTableRow: event.data})
+                    // console.log(this.latestTx, "this")
+        
+                    try{
+                       const eventObj = JSON.parse(event.data)
+                        this.setState({liveTableRow: eventObj})
+                        this.setState({liveTrClass:"fade"})
+                    }
+                    catch (e) {
+                        console.log(e, "websocket error")
+                    }
+                }
+            }
+        }
+        
+    }
+    
     render() {
+        document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
         const list = this.state.recentTx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
-        console.log(latest, "the latest")
+
         return (
             <li className="left">
                 <p className="title">Blocks</p>

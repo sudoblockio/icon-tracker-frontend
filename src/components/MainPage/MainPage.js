@@ -29,10 +29,12 @@ class MainPage extends Component {
                 this.input.blur()
             })
         }
+        
     }
 
 
     render() {
+        document.addEventListener('keydown', this.handleKeyDown)
         return (
             <div className="content-wrap">
                 <div className="screen2">
