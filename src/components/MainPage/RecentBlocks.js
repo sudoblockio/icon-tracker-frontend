@@ -16,7 +16,10 @@ class RecentBlocks extends Component {
     }
 
     bxsocket;
+    // latest is the top most recent table row
     latestBx;
+    // recent is the rest of the rows called from REST
+
     recentBx;
 
     async componentDidMount() {

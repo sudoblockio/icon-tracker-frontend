@@ -15,8 +15,9 @@ class RecentTransactions extends Component {
     }
 
     txsocket;
-    // *** add some comments
+    // latest is the top most recent table row
     latestTx;
+    // recent is the rest of the rows called from REST
     recentTx;
     async componentDidMount() {
         this.recentTx = await awaitGetRecentTx()

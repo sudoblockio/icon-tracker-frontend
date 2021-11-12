@@ -14,6 +14,7 @@ export const awaitGetRecentBlocks = async () => {
     return data 
 }
 
+// *** 
 export const awaitGetRecentTx = async () => {
     const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
     const data = await tx.json()
@@ -110,7 +111,6 @@ export async function getPReps() {
     return new Promise((resolve, reject)  => {
         trackerApi.get(`/api/v1/preps`)
             .then(result => {
-                console.log(result,  "getPReps result")
                 resolve(result)
             })
             .catch(error => {
@@ -119,6 +119,36 @@ export async function getPReps() {
     });
         
 }
+
+export async function getPRepsLegacy() {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params: {
+                "from": "hx0000000000000000000000000000000000000000",
+                "to": "cx0000000000000000000000000000000000000000",
+                "dataType": "call",
+                "data": {
+                    "method": 'getPReps',
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                console.error(error)
+                resolve({ preps: [] });
+            })
+    });
+}
+
+
+
 
 
 
