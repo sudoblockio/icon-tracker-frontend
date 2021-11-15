@@ -3,68 +3,111 @@ import { randomUint32, makeUrl } from '../../utils/utils'
 import { BigNumber } from "bignumber.js";
 
 export const getPrepStatusList = async () => {
-    const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
-    const data = await response.json()
-    return data
-  }
-  
-export const awaitGetRecentBlocks = async () => {
-    const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')
-    const data = await bx.json()
-    return data 
-}
+    try {
+        const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
+        const data = await response.json()
+        return data
+    } catch (e) {
+        console.log(e, "error")
+    }
 
-// *** 
+  }
+export const awaitGetRecentBlocks = async () => {
+    try {
+        const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')
+        const data = await bx.json()
+        return data 
+    } catch(e) {
+        console.log(e, "error")
+    }
+
+
+}
 export const awaitGetRecentTx = async () => {
-    const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
-    const data = await tx.json()
-    return data 
+    try {
+        const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
+        const data = await tx.json()
+        return data 
+    } catch (e){
+        console.log(e, "error")
+    }
+
 }
 
 export async function coinGeckoMarketCap () {
-    const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-    const data = await mktcap.json()
-    return data[0].market_cap
+    try {
+        const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+        const data = await mktcap.json()
+        return data[0].market_cap
+    
+    }
+    catch (e){
+        console.log(e, "error")
+    }
+
 }
 
 export async function coinGeckoCurrentUSD () {
-    const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
-    const data = await icondetail.json()
-    return data.market_data.current_price.usd
-}
+    try{
+        const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
+        const data = await icondetail.json()
+        return data.market_data.current_price.usd
+    }
+    catch (e){
+        console.log(e, "error")
+    }
+}   
 
 
 export async function getAllTransactions () {
-    const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
-    const data = await prepnode.json()
-    return data.total_tx;
+    try{
+        const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
+        const data = await prepnode.json()
+        return data.total_tx;
+    }
+    catch (e){
+        console.log(e, "error")
+    }
 }
 
 export async function getSrcCodeLink (addr) {
-    if (addr !== undefined) {
-    const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
-    const cxJson = await cxdata.json()
-    let code;
-    cxJson[0] ? code=cxJson[0].source_code_link : code=0
-    return code;
+    try{
+        if (addr !== undefined) {
+            const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
+            const cxJson = await cxdata.json()
+            let code;
+            cxJson[0] ? code=cxJson[0].source_code_link : code=0
+            return code; }
+    }
+    catch (e){
+        console.log(e, "error")
     }
 }
 
 export async function getContractABI (addr) {
-    if (addr !== undefined) {
-        const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
-        const cxJson = await cxdata.json()
-        let abi;
-        cxJson[0] ? abi=cxJson[0].abi : abi=0
-        return abi;
-        }
+    try{
+        if (addr !== undefined) {
+            const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
+            const cxJson = await cxdata.json()
+            let abi;
+            cxJson[0] ? abi=cxJson[0].abi : abi=0
+            return abi;
+            }
+    } catch(e) {
+        console.log(e, "error")
+    }
 }
 
 export async function getTotalSupply() {
-    const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
-    const data = await prepnode.json()
-    console.log(data.total_supply / Math.pow(10, 18).toFixed(2), "total supply data")
-    return data.total_supply/Math.pow(10, 18).toFixed(2)
+    try{
+        const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
+        const data = await prepnode.json()
+        console.log(data.total_supply / Math.pow(10, 18).toFixed(2), "total supply data")
+        return data.total_supply/Math.pow(10, 18).toFixed(2)
+    } catch(e) {
+        console.log(e, "error")
+    }
+    
 }
 
 export async function prepList(grade) {
