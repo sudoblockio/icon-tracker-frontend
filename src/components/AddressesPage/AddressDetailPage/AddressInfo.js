@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../..
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList } from '../../../redux/store/iiss'
+import { prepList, getPRepsLegacy } from '../../../redux/store/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -31,6 +31,8 @@ class AddressInfo extends Component {
     }
     
     async componentDidMount() {
+        const {totalDelegated} = await getPRepsLegacy()
+        this.setState({totalDelegated })
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
@@ -246,7 +248,8 @@ class AddressInfo extends Component {
                                             <td>Total Votes</td>
                                             <td colSpan="3">
                                                 <span>{convertNumberToText(delegated)}
-                                                <em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}% )</em>
+                                                {console.log(Number(this.state.totalDelegated), "this state total del")}
+                                                <em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated)).toFixed(2)}% )</em>
                                                 {/* <em>( 90.02 % )</em> */}</span>
                                             </td>
                                             {/* <td>24h Change Amount</td>

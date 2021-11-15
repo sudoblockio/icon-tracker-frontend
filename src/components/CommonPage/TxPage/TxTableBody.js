@@ -268,7 +268,7 @@ class TxTableBody extends Component {
 							</td>
 							<td>{data.method}</td>
 							
-							<td><code>`${JSON.stringify(data, null, 2)}`</code></td>
+							<td>{JSON.stringify(data.address, null, 2)}{ JSON.stringify(data.indexed, null, 20)}{ JSON.stringify(data.data, null, 2)}}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
