@@ -45,7 +45,10 @@ class AddressInfo extends Component {
         const thisPrep = prepArray ? prepArray[0] : prepArray
         this.media.map(site => {
             // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
-            this.links[site] = thisPrep[site]
+            // this.links ? this.links[site] = thisPrep[site] : null
+            if (this.links) {
+                this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
+            }
         })
         this.linkList=this.links
     }

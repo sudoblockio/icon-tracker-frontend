@@ -10,7 +10,6 @@ export const getPrepStatusList = async () => {
     } catch (e) {
         console.log(e, "error")
     }
-
   }
 export const awaitGetRecentBlocks = async () => {
     try {
@@ -20,8 +19,6 @@ export const awaitGetRecentBlocks = async () => {
     } catch(e) {
         console.log(e, "error")
     }
-
-
 }
 export const awaitGetRecentTx = async () => {
     try {
@@ -31,20 +28,16 @@ export const awaitGetRecentTx = async () => {
     } catch (e){
         console.log(e, "error")
     }
-
 }
-
 export async function coinGeckoMarketCap () {
     try {
         const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
         const data = await mktcap.json()
         return data[0].market_cap
-    
     }
     catch (e){
         console.log(e, "error")
     }
-
 }
 
 export async function coinGeckoCurrentUSD () {

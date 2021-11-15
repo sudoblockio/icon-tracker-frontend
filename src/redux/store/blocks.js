@@ -28,6 +28,7 @@ export function blockListAction(payload) {
 
 
 //   API
+
 // *update paths in utils/const to change prefixes app-wide.* 
   const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 

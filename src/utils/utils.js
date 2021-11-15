@@ -264,6 +264,8 @@ export function isContractAddress(address) {
 }
 
 export function makeUrl(url, payload) {
+    console.log(payload, "make url payload")
+    console.log(url, "make url url")
     if (!payload) {
         return url
     }
