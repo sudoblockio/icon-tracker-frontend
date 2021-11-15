@@ -50,7 +50,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: icon-explorer-frontend
-          IMAGE_TAG: ${{ github.run_number }}
+          IMAGE_TAG: dev-${{ github.run_number }}
         run: |
           docker build --target prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -70,7 +70,7 @@ jobs:
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/dev/mainnet/tracker-frontend/values.yaml'
           propertyPath: 'deployment.image.tag'
-          value: ${{ github.run_number }}
+          value: dev-${{ github.run_number }}
           branch: main
           createPR: 'false'
           message: 'tracker-frontend dev deployment (mainnet) image version to ${{ github.run_number }}'
