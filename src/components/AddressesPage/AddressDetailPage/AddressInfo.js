@@ -101,7 +101,7 @@ class AddressInfo extends Component {
         const {loading, data, error} = wallet
 
         const {
-            isPrep,
+            is_prep,
             prep,
             // media,
             active,
@@ -113,7 +113,7 @@ class AddressInfo extends Component {
         } = data
         console.log(data, "what is the data? ")
 
-        const showLinks = isPrep ? true : false
+        const showLinks = is_prep ? true : false
 
             const {
                 address,

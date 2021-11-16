@@ -9,22 +9,34 @@ import {
 } from '../../../utils/const'
 
 class AddressesDetailPage extends Component {
+     constructor(props) {
+         super(props)
+         this.state = {
+             internalTxns: ""
+         }
+     }
     
+    async componentDidMount(){
+        const intTxns = this.props.addressInternalTxList
+        const payload = {page:1, count: 25, limit: 25}
+        intTxns(payload)
+        this.setState({internalTxns: intTxns(payload)})
+
+    }
     render() {
         console.log(this.props, "props from")
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         console.log(wallet, "the wallet on index")
-        const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
+        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         console.log(data, "data from detail page")
-
-
+       
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
-        
+        console.log(this.props.addressInternalTxList, "props function on tabs")
         if (transaction_count && Number(transaction_count) !== 0) {
             console.log(transaction_count, "hitting the first getList")
             TABS.push(ADDRESS_TABS[1]) 
