@@ -23,35 +23,42 @@ class RecentTransactions extends Component {
         this.recentTx = await awaitGetRecentTx()
         this.setState({recentTx: this.recentTX})
         this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
-
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
-        this.txsocket.onmessage = async (event) =>  {
+
+
+            this.txsocket.onmessage = async (event) =>  {
             // console.log(event, "entire socket event")
-            this.latestTx = event.data
+            
             this.setState({liveTrClass:"flat"})
             this.recentTx = await awaitGetRecentTx()
             this.setState({recentTx: this.recentTx})
+            setTimeout(function() {
+                this.latestTx = event.data
+                try{
+                    const eventObj = JSON.parse(event.data)
+                     this.setState({liveTableRow: eventObj})
+                     this.setState({liveTrClass:"fade"})
+                 }
+                 catch (e) {
+                     console.log(e, "websocket error")
+                 }
+            }, 100)
+    
 
-            try{
-               const eventObj = JSON.parse(event.data)
-                this.setState({liveTableRow: eventObj})
-                this.setState({liveTrClass:"fade"})
-            }
-            catch (e) {
-                console.log(e, "websocket error")
-            }
         }
     }
+    
     componentWillUnmount() {
        this.txsocket.close()
        console.log("websocket connection closed")
 
     }
     render() {
-        const loading = false;
 
+
+        const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(0,9) : []
         const latest = this.state.liveTableRow
         const isSuccess = Number(latest.receipt_status) === 1

@@ -30,7 +30,7 @@ class AddressesDetailPage extends Component {
         console.log(wallet, "the wallet on index")
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         console.log(data, "data from detail page")
-       
+        console.log()
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
