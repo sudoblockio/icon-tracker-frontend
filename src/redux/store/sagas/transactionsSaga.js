@@ -30,13 +30,16 @@ export default function* transactionsSaga() {
 }
 
 function* transactionRecentTxFunc(action) {
-  try {
+  console.log(action, "top saga action")
 
+  try {
     if (action.payload.count === 0) {
       yield put({ type: AT.transactionRecentTxFulfilled, payload: { data: [] } });
       return
     }
     const payload = yield call(TRANSACTION_RECENT_TX_API, action.payload);
+    console.log(payload, "payload recent tx saga")
+
     if (payload.status === 200) {
       yield put({ type: AT.transactionRecentTxFulfilled, payload: payload });
     } else {

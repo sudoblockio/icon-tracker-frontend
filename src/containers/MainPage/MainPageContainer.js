@@ -5,14 +5,13 @@ import { blockListAction } from '../../redux/store/blocks'
 import { transactionRecentTxAction } from '../../redux/store/transactions'
 
 function mapStateToProps(state) {
-  
-  return state.mainPage;
+  return {...state.mainPage, ...state.transactions}
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getBlockList: () => dispatch(blockListAction()),
-    getRecentTransactions: () => dispatch(transactionRecentTxAction()),
+    getRecentTransactions: (payload) => dispatch(transactionRecentTxAction(payload)),
   };
 }
 

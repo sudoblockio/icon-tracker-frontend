@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/store/iiss'
+import { numberWithCommas, getIsSolo } from '../../utils/utils'
+import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 
 class InfoSummary extends Component {
@@ -12,12 +12,15 @@ class InfoSummary extends Component {
     }
 
     async componentDidMount() {
+        const totalTxs = this.props.getRecentTransactions
+        const payload = {page: 1, count:1, limit: 1}
+        totalTxs(payload)
+        let totalTx;
         const isSolo = await getIsSolo()
         const totalSupply = await getTotalSupply()
         const marketCap = await coinGeckoMarketCap()
-        // const allTransactions = await getAllTransactions()
         const supplyMetrics = await getSupplyMetrics()
-        this.setState({ isSolo, totalSupply, marketCap, /*allTransactions,*/ supplyMetrics })
+        this.setState({ isSolo, totalSupply, marketCap,supplyMetrics, totalTx })
     }
 
     render() {
@@ -26,7 +29,6 @@ class InfoSummary extends Component {
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
         const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
         const icxCirculationStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
-        
         return (
             <Fragment>
                 <li>
@@ -54,8 +56,7 @@ class InfoSummary extends Component {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>152,372,441</p>
-                        {/* <p>{numberWithCommas(this.state.allTransactions)}</p>									 */}
+                        <p>{numberWithCommas(this.props.recentTx.totalSize)}</p>									
                     </div>
                 </li>
             </Fragment>

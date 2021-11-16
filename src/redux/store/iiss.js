@@ -24,6 +24,7 @@ export const awaitGetRecentTx = async () => {
     try {
         const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
         const data = await tx.json()
+        console.log(data, "recenttx await")
         return data 
     } catch (e){
         console.log(e, "error")
@@ -50,18 +51,6 @@ export async function coinGeckoCurrentUSD () {
         console.log(e, "error")
     }
 }   
-
-
-export async function getAllTransactions () {
-    try{
-        const prepnode = await fetch('https://icon.geometry-dev.net/api/v1/status/peer')
-        const data = await prepnode.json()
-        return data.total_tx;
-    }
-    catch (e){
-        console.log(e, "error")
-    }
-}
 
 export async function getSrcCodeLink (addr) {
     try{
@@ -95,7 +84,6 @@ export async function getTotalSupply() {
     try{
         const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
         const data = await prepnode.json()
-        console.log(data.total_supply / Math.pow(10, 18).toFixed(2), "total supply data")
         return data.total_supply/Math.pow(10, 18).toFixed(2)
     } catch(e) {
         console.log(e, "error")
