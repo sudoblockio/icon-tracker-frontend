@@ -26,7 +26,7 @@ class AddressesDetailPage extends Component {
         })
         
         if (transaction_count && Number(transaction_count) !== 0) {
-            console.log("hitting the first getList")
+            console.log(transaction_count, "hitting the first getList")
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })

@@ -18,7 +18,6 @@ import {
 } from '../../redux/actions/storageActions';
 
 function mapStateToProps(state) {
-  console.log(state, "the state from containter")
   return {
     url: state.router.location,
     ...state.addresses,

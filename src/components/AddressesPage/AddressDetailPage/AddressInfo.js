@@ -33,6 +33,7 @@ class AddressInfo extends Component {
     async componentDidMount() {
         const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
+        
     }
 
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
@@ -161,7 +162,8 @@ class AddressInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px"/>
             } else {
-                const {public_key, nodeType, tokenList, reportedCount} = data
+                const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
+                console.log(data, "the address detail content data")
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -173,7 +175,7 @@ class AddressInfo extends Component {
                         <div className="wrap-holder">
                             {isConnected ? (
                                 <p className="title">
-                                    My Address{isPrep &&
+                                    My Address{is_prep &&
                                 <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}
                                     <span className="connected">
                                         <i className="img"/>Connected to ICONex
@@ -195,7 +197,7 @@ class AddressInfo extends Component {
                                     </span>
                                 </p>
                             ) : (
-                                <p className="title">Address{isPrep &&
+                                <p className="title">Address{is_prep &&
                                 <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}</p>
                             )}
                             <div className="contents">
@@ -208,7 +210,8 @@ class AddressInfo extends Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {isPrep && <tr className="p-rep">
+                                            {console.log(is_prep, "is_prep on this address")}
+                                        {is_prep && <tr className="p-rep">
                                             <td>Name</td>
                                             <td colSpan="3">
                                                 <span>{/* <em>1<sub>st.</sub></em> */}{name}</span>
@@ -247,7 +250,7 @@ class AddressInfo extends Component {
                                                 {/* <span className="btn-scam">Go to Voting</span> */}
                                             </td>
                                         </tr>}
-                                        {isPrep && <tr className="">
+                                        {is_prep && <tr className="">
                                             <td>Total Votes</td>
                                             <td colSpan="3">
                                                 <span>{convertNumberToText(delegated)}
@@ -258,7 +261,7 @@ class AddressInfo extends Component {
                                             {/* <td>24h Change Amount</td>
                                                 <td><span>▲  900,000,000.0004</span></td> */}
                                         </tr>}
-                                        {isPrep && <tr className="last">
+                                        {is_prep && <tr className="last">
                                             <td>Productivity<br/>(Produced / (Produced + Missed))</td>
                                             <td>
                                                 <span>{productivity}<em>( {numberWithCommas(validated)} / {numberWithCommas(produced)} )</em></span>
@@ -275,12 +278,12 @@ class AddressInfo extends Component {
                                         </tr>}
                                         <tr className="">
                                             <td>Address</td>
-                                            <td colSpan={isPrep ? '3' : '1'} className={scam ? 'scam' : ''}>
+                                            <td colSpan={is_prep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                                 {scam && <span className="scam-tag">Scam</span>}
                                                 {_address} <QrCodeButton address={_address}/>
                                                 <CopyButton data={_address} title={'Copy Address'} isSpan/>
                                                 <span className="show-node-addr"
-                                                      style={isPrep ? {display: ""} : {display: "none"}}
+                                                      style={is_prep ? {display: ""} : {display: "none"}}
                                                       onClick={this.clickShowBtn}>Show node address</span>
                                                 {isValidNodeType(nodeType) &&
                                                 <span className="crep">{`${nodeType}`}</span>}
