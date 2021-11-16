@@ -51,6 +51,7 @@ class RecentBlocks extends Component {
 
     componentWillUnmount() {
         this.bxsocket.close()
+        console.log("websocket connection closed")
      }
 
      handleKeyDown = e => {

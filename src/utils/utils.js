@@ -264,17 +264,16 @@ export function isContractAddress(address) {
 }
 
 export function makeUrl(url, payload) {
-    console.log(payload, "make url payload")
     if (!payload) {
         return url
     }
     let result = url
     payload.limit = Number(payload.count)
-    if (payload.page !==1 || payload.page !== '1'){
+    if (Number(payload.page) !== 1){
         payload.skip = Number(payload.page * payload.count)
-        delete payload.page
-    } 
-    payload.skip = 0
+    }  else if (Number(payload.page) === 1){
+        payload.skip = 0
+    }
     delete payload.count
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`

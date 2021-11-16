@@ -24,7 +24,6 @@ export const awaitGetRecentTx = async () => {
     try {
         const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
         const data = await tx.json()
-        console.log(data, "recenttx await")
         return data 
     } catch (e){
         console.log(e, "error")
