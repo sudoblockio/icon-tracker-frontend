@@ -76,6 +76,32 @@ jobs:
           path: charts
           token: ${{ secrets.ICON_CHARTS_PAT }}
 
+      - name: Update prod-mainnet-eu-west-1 deployment values file
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-eu-west-1/mainnet/tracker-frontend/values.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: prod-${{ steps.source.outputs.TAG }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-sejong-us-west-2 deployment values file
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/sejong/tracker-frontend/values.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: prod-${{ steps.source.outputs.TAG }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
       - name: Update prod-mainnet deployment values file and re-commit
         id: yaml-update
         uses: fjogeleit/yaml-update-action@master
