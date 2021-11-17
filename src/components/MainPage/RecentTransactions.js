@@ -35,7 +35,7 @@ class RecentTransactions extends Component {
             this.recentTx = await awaitGetRecentTx()
             this.setState({recentTx: this.recentTx})
 
-            setTimeout(function() {
+
                 this.latestTx = event.data
                 try{
                     const eventObj = JSON.parse(event.data)
@@ -45,7 +45,7 @@ class RecentTransactions extends Component {
                  catch (e) {
                      console.log(e, "websocket error")
                  }
-            }, 100)
+
     
 
         }
@@ -60,8 +60,9 @@ class RecentTransactions extends Component {
 
 
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(0,9) : []
+        const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(1,9) : []
         const latest = this.state.liveTableRow
+        console.log(latest, "the latest")
         const isSuccess = Number(latest.receipt_status) === 1
 
         return (
