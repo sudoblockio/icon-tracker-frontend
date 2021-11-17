@@ -505,7 +505,11 @@
 480
 481
 482
-483</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+483
+484
+485
+486
+487</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -564,19 +568,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -714,9 +722,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -948,7 +956,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -991,7 +999,7 @@
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getPrepStatusList } from '../../redux/api/restV3/iiss';
+import { getLastBlock, getStepPrice, prepList, getPrepStatusList, getPRepsLegacy  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
@@ -1039,28 +1047,32 @@ class GovernancePage extends Component {
 		const response = <span class="cstat-no" title="statement not covered" >await icxCall(params);</span>
 <span class="cstat-no" title="statement not covered" >		return response;</span>
 	}
-	governanceData=[];
 &nbsp;
+	governanceData=[];
 	statusList = []
 	
 <span class="fstat-no" title="function not covered" >	as</span>ync componentWillMount(){
-		// our endpoint
+		// our endpoints
 <span class="cstat-no" title="statement not covered" >		this.statusList = await getPrepStatusList()</span>
-		// gets "has governance" for each prep
-<span class="cstat-no" title="statement not covered" >		this.governanceData = await this.getAdditionalData('get_PReps');</span>
+<span class="cstat-no" title="statement not covered" >		this.governanceData = await getPReps();</span>
+<span class="cstat-no" title="statement not covered" >		console.log(this.governanceData, "gov data")</span>
+		const test = <span class="cstat-no" title="statement not covered" >await getPReps()</span>
+<span class="cstat-no" title="statement not covered" >		console.log(test, "???s")</span>
 	}
 <span class="fstat-no" title="function not covered" >	as</span>ync componentDidMount() {
-&nbsp;
-		// inspect
-		const { preps, totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = <span class="cstat-no" title="statement not covered" >await getPReps()	</span>
-		// rpc call for global comm rate etc 
+		const { data: preps } = <span class="cstat-no" title="statement not covered" >await getPReps()	</span>
+		// previous call response destructure:
+		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = <span class="cstat-no" title="statement not covered" >await getPRepsLegacy()	</span>
+		// rpc calls for 3 lower boxes, total stakes and total voted above chart. 
+		// *** convert to suppy metric endpoint?
 		const { variable } = <span class="cstat-no" title="statement not covered" >await getIISSInfo()</span>
 		const lastBlock = <span class="cstat-no" title="statement not covered" >await getLastBlock()</span>
 		const stepPriceLoop = <span class="cstat-no" title="statement not covered" >await getStepPrice()</span>
-		// our endpoint
+		// our endpoints
 		const _allPrep = <span class="cstat-no" title="statement not covered" >await prepList()</span>
+		// *** inspect deeper. Our endpoint but we aren't using the 3. 
 		const _blackPrep = <span class="cstat-no" title="statement not covered" >await prepList(3)</span>
-		// our endpoint
+		// our endpoints
 		const supplyMetrics = <span class="cstat-no" title="statement not covered" >await getSupplyMetrics()</span>
 		const icxSupply = <span class="cstat-no" title="statement not covered" >supplyMetrics.data.total_supply / Math.pow(10, 18)</span>
 <span class="cstat-no" title="statement not covered" >		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)</span>
@@ -1168,7 +1180,7 @@ class GovernancePage extends Component {
 	}
 	getGovernanceStatus = <span class="fstat-no" title="function not covered" >(a</span>ddress) =&gt; {
 		let result =<span class="cstat-no" title="statement not covered" >false;</span>
-<span class="cstat-no" title="statement not covered" >		this.governanceData.data.result.forEach(<span class="fstat-no" title="function not covered" >it</span>em=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >		this.governanceData.data.forEach(<span class="fstat-no" title="function not covered" >it</span>em=&gt;{</span>
 <span class="cstat-no" title="statement not covered" >			if(item.address===address){</span>
 <span class="cstat-no" title="statement not covered" >				result = true;</span>
 			}
@@ -1196,7 +1208,7 @@ class GovernancePage extends Component {
 			restChecked,
 			blackChecked
 		} = <span class="cstat-no" title="statement not covered" >this.state</span>
-		// const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+		const icxPublicTreasuryStr = <span class="cstat-no" title="statement not covered" >this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;</span>
 		const totalStakedRate = <span class="cstat-no" title="statement not covered" >!totalSupply ? '-' : totalStaked / totalSupply * 100</span>
 		const totalVotedRate = <span class="cstat-no" title="statement not covered" >!totalSupply ? '-' : totalVoted / totalSupply * 100</span>
 		
@@ -1398,9 +1410,9 @@ class TableRow extends Component {
 &nbsp;
 		const {
 			totalVoted,
-			// rrep,
+			rrep,
 			prep,
-			// lastBlockHeight,
+			lastBlockHeight,
 			blackChecked,
 			index,
 			governanceStatus,
@@ -1421,8 +1433,8 @@ class TableRow extends Component {
 			validated_blocks,
 			stake,
 			delegated,
-			// irep,
-			// irepUpdatedBlockHeight,
+			irep,
+			irepUpdatedBlockHeight,
 			active,
 			logo,
 			sponsored_cps_grants
@@ -1430,7 +1442,7 @@ class TableRow extends Component {
 			// balance,
 			// unstake,
 		} = <span class="cstat-no" title="statement not covered" >prep</span>
-		// const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
+		const sugComRate = <span class="cstat-no" title="statement not covered" >( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;</span>
 &nbsp;
 		const statusCheck = <span class="cstat-no" title="statement not covered" >statusData.filter(<span class="fstat-no" title="function not covered" >pr</span>eps =&gt; <span class="cstat-no" title="statement not covered" >preps.state_id &lt;= 2 &amp;&amp; preps.prep_name === name </span>)</span>
 		const productivity = <span class="cstat-no" title="statement not covered" >!total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)</span>
@@ -1475,7 +1487,7 @@ export default withRouter(GovernancePage);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 15:15:49 GMT-0500 (Eastern Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 17 2021 12:13:46 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -278,7 +278,14 @@
 253
 254
 255
-256</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+256
+257
+258
+259
+260
+261
+262
+263</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -428,22 +435,27 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -459,6 +471,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -554,7 +568,7 @@ import {
 } from '../addresses'
 &nbsp;
 // *** take a deeper look, cull. 
-import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../api/restV3/iiss';
+import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../store/iiss';
 import { convertLoopToIcxDecimal } from '../../../utils/utils';
 &nbsp;
 export default function* addressesSaga() {
@@ -681,19 +695,24 @@ export function* <span class="fstat-no" title="function not covered" >addressInf
     const payload = <span class="cstat-no" title="statement not covered" >yield call(ADDRESS_INFO_API, action.payload);</span>
 <span class="cstat-no" title="statement not covered" >    if (payload.status === 200) {</span>
       const { address } = <span class="cstat-no" title="statement not covered" >action.payload</span>
-      const { delegations, totalDelegated } = <span class="cstat-no" title="statement not covered" >yield call(getDelegation, address)</span>
-      const prep = <span class="cstat-no" title="statement not covered" >yield call(getPRep, address)</span>
+<span class="cstat-no" title="statement not covered" >      console.log(address, "yeero")</span>
+<span class="cstat-no" title="statement not covered" >      console.log(yield call(getDelegation, address), "yeero")</span>
+&nbsp;
+      const { delegated } = <span class="cstat-no" title="statement not covered" >yield call(getDelegation, address)</span>
+      const prep = <span class="cstat-no" title="statement not covered" >yield call(getDelegation, address)</span>
+<span class="cstat-no" title="statement not covered" >      console.log(prep, "what is the prep? ")</span>
       const balance = <span class="cstat-no" title="statement not covered" >yield call(getBalance, address)</span>
       const { stake, unstakes } = <span class="cstat-no" title="statement not covered" >yield call(getStake, address)</span>
-      const { iscore } = <span class="cstat-no" title="statement not covered" >yield call(queryIScore, address)</span>
+      const { iscore } = <span class="cstat-no" title="statement not covered" >yield call(queryIScore,address)</span>
       const _balance = <span class="cstat-no" title="statement not covered" >!balance ? 0 : convertLoopToIcxDecimal(balance)</span>
       const _stake = <span class="cstat-no" title="statement not covered" >!stake ? 0 : convertLoopToIcxDecimal(stake)</span>
-      const _totalDelegated = <span class="cstat-no" title="statement not covered" >!totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)</span>
+      // const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
       const _iscore = <span class="cstat-no" title="statement not covered" >!iscore ? 0 : convertLoopToIcxDecimal(iscore)</span>
 &nbsp;
       const isPrep = <span class="cstat-no" title="statement not covered" >prep &amp;&amp; Object.keys(prep).length &gt; 0</span>
-<span class="cstat-no" title="statement not covered" >      console.log(isPrep, "from saga is prep")</span>
-      let active = <span class="cstat-no" title="statement not covered" >'N/A',</span> media = <span class="cstat-no" title="statement not covered" >{}</span>
+&nbsp;
+      let active;
+      let media = <span class="cstat-no" title="statement not covered" >{}</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (isPrep) {</span>
         const  statusData  = <span class="cstat-no" title="statement not covered" >yield call(getPrepStatusList)</span>
@@ -703,17 +722,19 @@ export function* <span class="fstat-no" title="function not covered" >addressInf
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      payload.data = {</span>
         ...payload.data,
-        hasDelegations: delegations.length &gt; 0,
+        hasDelegations: delegated,
         isPrep,
         available: _balance,
         staked: _stake,
         unstakes,
         iscore: _iscore,
-        delegated: _totalDelegated,
-        prep,
+        delegated,
+        prep: prep.data[0],
         active,
         media,
       }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      console.log(payload, "final data submitted")</span>
 <span class="cstat-no" title="statement not covered" >      yield put({ type: AT.addressInfoFulfilled, payload: payload });</span>
     }
     else {      
@@ -794,7 +815,7 @@ export function* <span class="fstat-no" title="function not covered" >addressTok
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 15:15:49 GMT-0500 (Eastern Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 17 2021 12:13:46 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

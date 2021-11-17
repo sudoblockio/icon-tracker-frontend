@@ -99,8 +99,21 @@
 74
 75
 76
-77</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,16 +127,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -186,22 +214,36 @@ import {
 } from '../../../utils/const'
 &nbsp;
 class AddressesDetailPage extends Component {
+<span class="fstat-no" title="function not covered" >     co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >         super(props)</span>
+<span class="cstat-no" title="statement not covered" >         this.state = {</span>
+             internalTxns: ""
+         }
+     }
     
+<span class="fstat-no" title="function not covered" >    as</span>ync componentDidMount(){
+        const intTxns = <span class="cstat-no" title="statement not covered" >this.props.addressInternalTxList</span>
+        const payload = <span class="cstat-no" title="statement not covered" >{page:1, count: 25, limit: 25}</span>
+<span class="cstat-no" title="statement not covered" >        intTxns(payload)</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({internalTxns: intTxns(payload)})</span>
+&nbsp;
+    }
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        console.log(this.props, "props from")</span>
         const { wallet } = <span class="cstat-no" title="statement not covered" >this.props;</span>
         const { loading, error, data } = <span class="cstat-no" title="statement not covered" >wallet</span>
-        const { tokenList, internalTxCount, is_prep, transaction_count, claimIScoreCount, hasDelegations } = <span class="cstat-no" title="statement not covered" >data</span>
+<span class="cstat-no" title="statement not covered" >        console.log(wallet, "the wallet on index")</span>
+        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = <span class="cstat-no" title="statement not covered" >data</span>
 <span class="cstat-no" title="statement not covered" >        console.log(data, "data from detail page")</span>
-&nbsp;
-&nbsp;
+<span class="cstat-no" title="statement not covered" >        console.log()</span>
         const TABS = <span class="cstat-no" title="statement not covered" >[],</span> getList = <span class="cstat-no" title="statement not covered" >[]</span>
 <span class="cstat-no" title="statement not covered" >        TABS.push(ADDRESS_TABS[0])</span>
 <span class="cstat-no" title="statement not covered" >        getList.push(<span class="fstat-no" title="function not covered" >ad</span>dress =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >            this.props.addressTxList({ address, page: 1, count: 10 })</span>
         })
-        
+<span class="cstat-no" title="statement not covered" >        console.log(this.props.addressInternalTxList, "props function on tabs")</span>
 <span class="cstat-no" title="statement not covered" >        if (transaction_count &amp;&amp; Number(transaction_count) !== 0) {</span>
-<span class="cstat-no" title="statement not covered" >            console.log("hitting the first getList")</span>
+<span class="cstat-no" title="statement not covered" >            console.log(transaction_count, "hitting the first getList")</span>
 <span class="cstat-no" title="statement not covered" >            TABS.push(ADDRESS_TABS[1]) </span>
 <span class="cstat-no" title="statement not covered" >            getList.push(<span class="fstat-no" title="function not covered" >ad</span>dress =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                this.props.addressInternalTxList({ address, page: 1, count: 10 })</span>
@@ -257,7 +299,7 @@ export default AddressesDetailPage;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 15:15:49 GMT-0500 (Eastern Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 17 2021 12:13:46 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

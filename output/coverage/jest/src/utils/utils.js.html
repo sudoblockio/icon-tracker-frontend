@@ -779,7 +779,10 @@
 754
 755
 756
-757</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+757
+758
+759
+760</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -837,8 +840,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1053,7 +1056,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1103,12 +1108,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1226,9 +1231,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1487,6 +1492,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1805,12 +1811,14 @@ export function <span class="fstat-no" title="function not covered" >makeUrl(</s
 <span class="cstat-no" title="statement not covered" >        return url</span>
     }
     let result = <span class="cstat-no" title="statement not covered" >url</span>
-<span class="cstat-no" title="statement not covered" >    payload.limit = payload.count</span>
-<span class="cstat-no" title="statement not covered" >    if (payload.page !==1){</span>
+<span class="cstat-no" title="statement not covered" >    payload.limit = Number(payload.count)</span>
+<span class="cstat-no" title="statement not covered" >    if (Number(payload.page) !== 1){</span>
 <span class="cstat-no" title="statement not covered" >        payload.skip = Number(payload.page * payload.count)</span>
-<span class="cstat-no" title="statement not covered" >        delete payload.page</span>
+    }  else <span class="cstat-no" title="statement not covered" >if (Number(payload.page) === 1){</span>
+<span class="cstat-no" title="statement not covered" >        payload.skip = 0</span>
     }
 <span class="cstat-no" title="statement not covered" >    delete payload.count</span>
+<span class="cstat-no" title="statement not covered" >    delete payload.page</span>
 <span class="cstat-no" title="statement not covered" >    Object.keys(payload).forEach(<span class="fstat-no" title="function not covered" >(k</span>ey, index) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        result += `${index === 0 ? '?' : '&amp;'}${key}=${payload[key]}`</span>
     })
@@ -1858,19 +1866,19 @@ export function <span class="fstat-no" title="function not covered" >tokenText(<
     }
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >getArrayState(</span>step, state, action, dataType) {
-    const { payload } = <span class="cstat-no" title="statement not covered" >action</span>
-<span class="cstat-no" title="statement not covered" >    switch (step) {</span>
+export function getArrayState(step, state, action, dataType) {
+    const { payload } = action
+    switch (step) {
         case REDUX_STEP.READY:
-<span class="cstat-no" title="statement not covered" >            if (payload !== undefined ){</span>
-            const { page, count } = <span class="cstat-no" title="statement not covered" >payload</span>
-<span class="cstat-no" title="statement not covered" >            return {</span>
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (payload !== undefined ){
+            const { page, count } = payload
+            return {
                 ...state,
                 [dataType]: {
                     ...state[dataType],
                     loading: true,
-                    page: Number(page) || state[dataType].page,
-                    count: Number(count) || state[dataType].count,
+                    page: Number(page) || <span class="branch-1 cbranch-no" title="branch not covered" >state[dataType].page,</span>
+                    count: Number(count) || <span class="branch-1 cbranch-no" title="branch not covered" >state[dataType].count,</span>
                     error: '',
                 },
             }
@@ -1887,7 +1895,7 @@ export function <span class="fstat-no" title="function not covered" >getArraySta
                 },
             }
         }
-        case REDUX_STEP.FULFILLED:
+<span class="branch-1 cbranch-no" title="branch not covered" >        case REDUX_STEP.FULFILLED:</span>
             const { data, listSize, totalSize } = <span class="cstat-no" title="statement not covered" >payload</span>
 <span class="cstat-no" title="statement not covered" >            console.log(data, "from step fulfilled")</span>
 <span class="cstat-no" title="statement not covered" >            console.log(payload.headers, "headers available")</span>
@@ -1902,7 +1910,7 @@ export function <span class="fstat-no" title="function not covered" >getArraySta
                     error: '',
                 },
             }
-        case REDUX_STEP.REJECTED:
+<span class="branch-2 cbranch-no" title="branch not covered" >        case REDUX_STEP.REJECTED:</span>
             const { error } = <span class="cstat-no" title="statement not covered" >action</span>
 <span class="cstat-no" title="statement not covered" >            return {</span>
                 ...state,
@@ -1913,7 +1921,7 @@ export function <span class="fstat-no" title="function not covered" >getArraySta
                     error: error,
                 },
             }
-        case REDUX_STEP.INIT:
+<span class="branch-3 cbranch-no" title="branch not covered" >        case REDUX_STEP.INIT:</span>
 <span class="cstat-no" title="statement not covered" >            return {</span>
                 ...state,
                 [dataType]: {
@@ -1926,7 +1934,7 @@ export function <span class="fstat-no" title="function not covered" >getArraySta
                     error: '',
                 },
             }
-        default:
+<span class="branch-4 cbranch-no" title="branch not covered" >        default:</span>
 <span class="cstat-no" title="statement not covered" >            return state</span>
     }
 }
@@ -1981,13 +1989,13 @@ export function <span class="fstat-no" title="function not covered" >getObjectSt
     }
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >getState(</span>type, step, state, action, dataType) {
-<span class="cstat-no" title="statement not covered" >    switch (type) {</span>
+export function getState(type, step, state, action, dataType) {
+    switch (type) {
         case 'ARR':
-<span class="cstat-no" title="statement not covered" >            return getArrayState(step, state, action, dataType)</span>
-        case 'OBJ':
+            return getArrayState(step, state, action, dataType)
+<span class="branch-1 cbranch-no" title="branch not covered" >        case 'OBJ':</span>
 <span class="cstat-no" title="statement not covered" >            return getObjectState(step, state, action, dataType)</span>
-        default:
+<span class="branch-2 cbranch-no" title="branch not covered" >        default:</span>
 <span class="cstat-no" title="statement not covered" >            return state</span>
     }
 }
@@ -2243,6 +2251,7 @@ export function <span class="fstat-no" title="function not covered" >getBadgeTit
 }
 &nbsp;
 export function <span class="fstat-no" title="function not covered" >addUnregisteredStyle(</span>status, grade) {
+<span class="cstat-no" title="statement not covered" >    console.log(status, grade, "unregistered inputs")</span>
     const _status = <span class="cstat-no" title="statement not covered" >Number(status)</span>
     const _grade = <span class="cstat-no" title="statement not covered" >Number(grade)</span>
 <span class="cstat-no" title="statement not covered" >    if (!isNaN(_status) &amp;&amp; (_status &gt; 0 &amp;&amp; _status &lt; 3)) {</span>
@@ -2297,7 +2306,7 @@ export function <span class="fstat-no" title="function not covered" >closeEm(</s
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 15:15:49 GMT-0500 (Eastern Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 17 2021 12:13:46 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

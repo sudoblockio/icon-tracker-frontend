@@ -89,7 +89,8 @@
 64
 65
 66
-67</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+67
+68</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -102,24 +103,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,8 +158,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component, Fragment } from 'react'
-import { numberWithCommas, convertNumberToText, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap, /*getAllTransactions*/ } from '../../redux/api/restV3/iiss'
+import { numberWithCommas, getIsSolo } from '../../utils/utils'
+import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 &nbsp;
 class InfoSummary extends Component {
@@ -169,12 +171,15 @@ class InfoSummary extends Component {
     }
 &nbsp;
     async componentDidMount() {
+        const totalTxs = this.props.getRecentTransactions
+        const payload = {page: 1, count:1, limit: 1}
+        totalTxs(payload)
+        let totalTx;
         const isSolo = await getIsSolo()
         const totalSupply = <span class="cstat-no" title="statement not covered" >await getTotalSupply()</span>
         const marketCap = <span class="cstat-no" title="statement not covered" >await coinGeckoMarketCap()</span>
-        // const allTransactions = await getAllTransactions()
         const supplyMetrics = <span class="cstat-no" title="statement not covered" >await getSupplyMetrics()</span>
-<span class="cstat-no" title="statement not covered" >        this.setState({ isSolo, totalSupply, marketCap, /*allTransactions,*/ supplyMetrics })</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({ isSolo, totalSupply, marketCap,supplyMetrics, totalTx })</span>
     }
 &nbsp;
     render() {
@@ -183,7 +188,6 @@ class InfoSummary extends Component {
         const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
         const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
         const icxCirculationStr = this.state.supplyMetrics ? <span class="branch-0 cbranch-no" title="branch not covered" >numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) </span>: 0;
-        
         return (
             &lt;Fragment&gt;
                 &lt;li&gt;
@@ -211,8 +215,7 @@ class InfoSummary extends Component {
                     &lt;div&gt;
                         &lt;span&gt;&lt;i className="img"&gt;T&lt;/i&gt;&lt;/span&gt;
                         &lt;p&gt;All Transactions&lt;/p&gt;
-                        &lt;p&gt;152,372,441&lt;/p&gt;
-                        {/* &lt;p&gt;{numberWithCommas(this.state.allTransactions)}&lt;/p&gt;									 */}
+                        &lt;p&gt;{numberWithCommas(this.props.recentTx.totalSize)}&lt;/p&gt;									
                     &lt;/div&gt;
                 &lt;/li&gt;
             &lt;/Fragment&gt;
@@ -227,7 +230,7 @@ export default InfoSummary
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 09 2021 15:15:49 GMT-0500 (Eastern Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 17 2021 12:13:46 GMT-0500 (Eastern Standard Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -120,7 +120,8 @@
     "jest": {
         "coverageReporters": [
             "text",
-            "html"
+            "html",
+            "json-summary"
           ],
         "collectCoverageFrom": [
             "src/**/*.{js,jsx,ts,tsx}",
