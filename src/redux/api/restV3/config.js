@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {configJson} from '../../../config.js'  
 
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl();
@@ -103,14 +104,23 @@ export async function getIsSoloVersion() {
   return false;
 }
 
+// async function getConfigJsonFile() {
+//   try {
+//     const response = await fetch('/config.json');
+//     const responseJson = await response.json();
+//     console.log(process.env, "config response")
+//     return responseJson;
+//   } catch (e) {
+//     console.error(e);
+//     return {};
+//   }
+// }
+
 async function getConfigJsonFile() {
   try {
-    const response = await fetch('/config.json');
-    const responseJson = await response.json();
-    console.log(responseJson, "config response")
-    return responseJson;
-  } catch (e) {
-    console.error(e);
-    return {};
+    return configJson
+  } catch(e) {
+    console.error(e)
+    return {}
   }
 }
