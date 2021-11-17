@@ -50,6 +50,7 @@ class RecentBlocks extends Component {
     }
 
     componentWillUnmount() {
+        this.bxsocket? this.bxsocket.close() :console.log("no websocket open")
         this.bxsocket.close()
         console.log("websocket connection closed")
      }

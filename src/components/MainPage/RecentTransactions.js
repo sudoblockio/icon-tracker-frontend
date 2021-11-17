@@ -52,7 +52,7 @@ class RecentTransactions extends Component {
     }
     
     componentWillUnmount() {
-       this.txsocket.close()
+        this.txsocket? this.txsocket.close() : console.log("no websocket open")
        console.log("websocket connection closed")
 
     }
