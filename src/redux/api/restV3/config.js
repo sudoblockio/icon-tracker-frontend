@@ -107,6 +107,7 @@ async function getConfigJsonFile() {
   try {
     const response = await fetch('/config.json');
     const responseJson = await response.json();
+    console.log(responseJson, "config response")
     return responseJson;
   } catch (e) {
     console.error(e);

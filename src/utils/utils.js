@@ -275,6 +275,7 @@ export function makeUrl(url, payload) {
         payload.skip = 0
     }
     delete payload.count
+    delete payload.page
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
