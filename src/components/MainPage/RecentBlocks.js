@@ -30,7 +30,6 @@ class RecentBlocks extends Component {
             console.log("connection established")
         }
         this.bxsocket.onmessage = async (event) =>  {
-
             this.latestBx = event.data
             this.setState({liveTrClass:"flat"})
             this.recentBx = await awaitGetRecentBlocks()

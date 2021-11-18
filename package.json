@@ -47,6 +47,7 @@
         "js-beautify": "^1.7.5",
         "mini-css-extract-plugin": "0.5.0",
         "moment": "^2.24.0",
+        "node": "^16.0.0",
         "object-assign": "4.1.1",
         "optimize-css-assets-webpack-plugin": "5.0.1",
         "path": "^0.12.7",
@@ -110,19 +111,21 @@
     "devDependencies": {
         "worker-loader": "^2.0.0"
     },
+    "engines": {
+        "node": ">=16"
+    },
     "browserslist": [
         ">0.2%",
         "not dead",
         "not ie <= 11",
         "not op_mini all"
     ],
-
     "jest": {
         "coverageReporters": [
             "text",
             "html",
             "json-summary"
-          ],
+        ],
         "collectCoverageFrom": [
             "src/**/*.{js,jsx,ts,tsx}",
             "!src/**/*.d.ts"
@@ -172,4 +175,3 @@
         "extends": "react-app"
     }
 }
-

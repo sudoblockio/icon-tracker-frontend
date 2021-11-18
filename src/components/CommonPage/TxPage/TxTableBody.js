@@ -92,6 +92,13 @@ class TxTableBody extends Component {
 			} = this.props
 			// *** 
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
+			console.log(data.balance, "balance")
+			console.log(totalSupply, "total supply")
+
+
+			const bigNum = new BigNumber(data.balance / totalSupply)
+
+			console.log(bigNum.toPrecision(2), "big number")
 
 			const addressInData = data.address
 			const isError = data.state === 0
@@ -134,7 +141,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
-							<BlockCell height={data.block_number} />
+							<BlockCell height={data.block_number} />	
 							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-" } toAddr={data.to_address !== "None" ? data.to_address : "-" } address={address} txType={data.type} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
