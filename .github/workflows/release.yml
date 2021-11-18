@@ -118,6 +118,9 @@ jobs:
           commitChange: false
 
       - name: Commit all updates
+        uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.ICON_CHARTS_PAT }}'
         run: |
           git add -A
           git commit -m "tracker-frontend prod deployment (mainnet) image versions to ${{ steps.source.outputs.TAG }}"
