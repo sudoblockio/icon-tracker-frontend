@@ -1,6 +1,6 @@
 let backendEndpoint;
-// *** ready for env var:
-switch (process.env.DEPLOYMENT_ENVIRONMENT) {
+
+switch (process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT) {
     case 'development':
         backendEndpoint = 'https://explorer.icon.geometry-dev.net'
         break
@@ -8,7 +8,6 @@ switch (process.env.DEPLOYMENT_ENVIRONMENT) {
         backendEndpoint = 'https://explorer.icon.geometry.io'
         break
 }
-console.log(process.env, "the whole env")
 
 export const configJson =
  {   

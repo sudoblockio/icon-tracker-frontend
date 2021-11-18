@@ -18,6 +18,7 @@ export async function walletApiInstance() {
 export async function getTrackerApiUrl() {
   const configFile = await getConfigJsonFile();
   if (configFile && configFile.TRACKER_API_URL) {
+    console.log(configFile.TRACKER_API_URL, "what url")
     return configFile.TRACKER_API_URL;
   }
 
@@ -118,6 +119,7 @@ export async function getIsSoloVersion() {
 
 async function getConfigJsonFile() {
   try {
+    // console.log(configJson, "config json on util")
     return configJson
   } catch(e) {
     console.error(e)

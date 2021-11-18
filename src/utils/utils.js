@@ -279,6 +279,7 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
+    console.log(result, "What is the url result")
     return result
 }
 
