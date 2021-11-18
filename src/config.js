@@ -1,10 +1,10 @@
 let backendEndpoint;
-switch (process.env.DEPLOYMENT_ENVIRONEMNT || process.env.NODE_ENV) {
+switch (process.env.DEPLOYMENT_ENVIRONMENT || process.env.NODE_ENV) {
     case 'development':
-        backendEndpoint = 'https://www.explorer.icon.geometry-dev.net'
+        backendEndpoint = 'https://explorer.icon.geometry-dev.net'
         break
     case 'production' :
-        backendEndpoint = 'https://www.explorer.icon.geometry.net'
+        backendEndpoint = 'https://explorer.icon.geometry.net'
         break
 }
 export const configJson =
