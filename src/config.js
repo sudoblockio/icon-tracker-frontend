@@ -1,10 +1,10 @@
 let backendEndpoint;
-
+// *** ready for env var:
 switch (process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT) {
-    case 'development':
+    case 'dev':
         backendEndpoint = 'https://explorer.icon.geometry-dev.net'
         break
-    case 'production' :
+    case 'prod' :
         backendEndpoint = 'https://explorer.icon.geometry.io'
         break
 }

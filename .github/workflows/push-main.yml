@@ -58,7 +58,7 @@ jobs:
           ECR_REPOSITORY: ${{ matrix.ecr-repository }}
           IMAGE_TAG: dev-${{ github.run_number }}
         run: |
-          docker build --target prod --build-arg NETWORK_NAME=$NETWORK_NAME --build-arg DEPLOYMENT_ENVIRONMENT=$DEPLOYMENT_ENVIRONMENT -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --target prod --build-arg REACT_APP_NETWORK_NAME=$NETWORK_NAME --build-arg REACT_APP_DEPLOYMENT_ENVIRONMENT=$DEPLOYMENT_ENVIRONMENT -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   update-values:
