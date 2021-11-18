@@ -1,11 +1,10 @@
 let backendEndpoint;
-
-if (process.env.NODE_ENV === 'development'){
-    backendEndpoint = 'https://explorer.icon.geometry-dev.net'
-} else if (process.env.NODE_ENV === 'production'){
-    backendEndpoint = 'https://explorer.icon.geometry.net'
+switch (process.env.DEPLOYMENT_ENVIRONMENT) {
+    case 'development':
+        backendEndpoint = 'https://www.explorer.icon.geometry-dev.net'
+    case 'production' :
+        backendEndpoint = 'https://www.explorer.icon.geometry.net'
 }
-
 export const configJson =
  {   
     "VERSION": "1.0.18_20190313_0",
