@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {configJson} from '../../../config.js'  
+import configJson from '../../../config.js'  
 
 export async function trackerApiInstance() {
   const apiUrl = await getTrackerApiUrl();
