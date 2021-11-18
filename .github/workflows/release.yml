@@ -70,6 +70,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Tag name
+        id: source
+        run: |
+          echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
+
       - name: Checkout charts repo
         uses: actions/checkout@v2
         with:
