@@ -102,7 +102,7 @@ jobs:
           updateFile: true
           commitChange: false
 
-      - name: Update prod-mainnet deployment values file and re-commit
+      - name: Update prod-mainnet deployment values file
         id: yaml-update
         uses: fjogeleit/yaml-update-action@master
         with:
@@ -113,15 +113,24 @@ jobs:
           value: prod-${{ steps.source.outputs.TAG }}
           branch: main
           createPR: 'false'
-          message: 'tracker-frontend prod deployment (mainnet) image versions to ${{ steps.source.outputs.TAG }}'
           token: ${{ secrets.ICON_CHARTS_PAT }}
           updateFile: true
+          commitChange: false
+
+      - name: Commit all updates
+        run: |
+          git add -A
+          git commit -m "tracker-frontend prod deployment (mainnet) image versions to ${{ steps.source.outputs.TAG }}"
+          git push origin
+        working-directory: charts
 
       - name: Push tags
         run: |
-          git stash
-          git pull
-          git tag -f tracker-frontend-prod-uswest2 ${{ steps.yaml-update.outputs.commit }}
-          git tag -f tracker-frontend-prod-euwest2 ${{ steps.yaml-update.outputs.commit }}
+#          git stash
+#          git pull
+#          git tag -f tracker-frontend-prod-uswest2 ${{ steps.yaml-update.outputs.commit }}
+#          git tag -f tracker-frontend-prod-euwest2 ${{ steps.yaml-update.outputs.commit }}
+          git tag -f tracker-frontend-prod-uswest2
+          git tag -f tracker-frontend-prod-euwest2
           git push -f origin --tags
         working-directory: charts
