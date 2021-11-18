@@ -245,6 +245,7 @@ class TxTableBody extends Component {
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
 							<td><span>{percentage.toString().slice(0,3).concat(percentage.toString().slice(percentage.toString().length - 4, percentage.toString().length))}</span><em>%</em></td>
+							{/* <td>{percentage}</td> */}
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
 						</tr>
