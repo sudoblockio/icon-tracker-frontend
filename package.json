@@ -111,9 +111,6 @@
     "devDependencies": {
         "worker-loader": "^2.0.0"
     },
-    "engines": {
-        "node": ">=16"
-    },
     "browserslist": [
         ">0.2%",
         "not dead",
