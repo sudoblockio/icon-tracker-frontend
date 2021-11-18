@@ -12,34 +12,40 @@ on:
       - 'chart/**'
 
 jobs:
-  docker:
+#  tests:
+#  name: Run tests
+#    runs-on: ubuntu-latest
+#    steps:
+
+  build:
+    name: Build containers
     runs-on: ubuntu-latest
+#    needs: tests
+    strategy:
+      matrix:
+        include:
+          - network-name: mainnet
+            deployment-environment: dev
+            akid-ref: AWS_ACCESS_KEY_ID_MAINNET
+            sak-ref: AWS_SECRET_ACCESS_KEY_MAINNET
+            ecr-repository: icon-explorer-frontend-mainnet
+          - network-name: sejong
+            deployment-environment: dev
+            akid-ref: AWS_ACCESS_KEY_ID_SEJONG
+            sak-ref: AWS_SECRET_ACCESS_KEY_SEJONG
+            ecr-repository: icon-explorer-frontend-sejong
+    env:
+      NETWORK_NAME: ${{ matrix.network-name }}
+      DEPLOYMENT_ENVIRONMENT: ${{ matrix.deployment-environment }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build the container
-        run: docker-compose build
-
-#      - uses: codecov/codecov-action@v2
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          files: ./src/coverage.out
-#          flags: unit
-#          fail_ci_if_error: true
-#
-#      - uses: codecov/codecov-action@v2
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          files: ./tests/coverage.out
-#          flags: integration
-#          fail_ci_if_error: true
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets[matrix.akid-ref] }}
+          aws-secret-access-key: ${{ secrets[matrix.sak-ref] }}
           aws-region: us-west-2
 
       - name: Login to Amazon ECR
@@ -49,12 +55,17 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: icon-explorer-frontend
+          ECR_REPOSITORY: ${{ matrix.ecr-repository }}
           IMAGE_TAG: dev-${{ github.run_number }}
         run: |
-          docker build --target prod -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --target prod --build-arg NETWORK_NAME=$NETWORK_NAME --build-arg DEPLOYMENT_ENVIRONMENT=$DEPLOYMENT_ENVIRONMENT -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
+  update-values:
+    name: Update values files
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Checkout charts repo
         uses: actions/checkout@v2
         with:
