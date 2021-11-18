@@ -23,16 +23,18 @@ class RecentTransactions extends Component {
         this.recentTx = await awaitGetRecentTx()
         this.setState({recentTx: this.recentTX})
         this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
+       
+       
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
-
-            this.setState({liveTrClass:"flat"})
             this.txsocket.onmessage = async (event) =>  {
+            this.latestTx = event.data
+            this.setState({liveTrClass:"flat"})
             // console.log(event, "entire socket event")
             this.recentTx = await awaitGetRecentTx()
             this.setState({recentTx: this.recentTx})
-            this.latestTx = event.data
+
                 try{
                     const eventObj = JSON.parse(event.data)
                      this.setState({liveTableRow: eventObj})
