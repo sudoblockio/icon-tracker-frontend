@@ -1,5 +1,5 @@
 let backendEndpoint;
-// *** remove or case when issue is closed. Only needed temporarily.  
+// *** ready for env var:
 // switch (process.env.DEPLOYMENT_ENVIRONMENT) {
 //     case 'development':
 //         backendEndpoint = 'https://explorer.icon.geometry-dev.net'

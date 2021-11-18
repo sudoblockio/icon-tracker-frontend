@@ -83,7 +83,7 @@ export async function getTotalSupply() {
     try{
         const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
         const data = await prepnode.json()
-        return data.total_supply/Math.pow(10, 18).toFixed(2)
+        return data.total_supply/Math.pow(10, 18)
     } catch(e) {
         console.log(e, "error")
     }

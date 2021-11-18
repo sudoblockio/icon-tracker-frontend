@@ -92,14 +92,8 @@ class TxTableBody extends Component {
 			} = this.props
 			// *** 
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
-			console.log(data.balance, "balance")
-			console.log(totalSupply, "total supply")
-
-
 			const bigNum = new BigNumber(data.balance / totalSupply)
-
 			console.log(bigNum.toPrecision(2), "big number")
-
 			const addressInData = data.address
 			const isError = data.state === 0
 			const formattedLogData = ""
@@ -244,12 +238,13 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
+					{console.log(percentage, "the percentage")}
 					return (
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
-							<td><span>{percentage.toString().slice(0,3)}</span><em>%</em></td>
+							<td><span>{percentage.toString().slice(0,3).concat(percentage.toString().slice(percentage.toString().length - 4, percentage.toString().length))}</span><em>%</em></td>
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
 						</tr>
