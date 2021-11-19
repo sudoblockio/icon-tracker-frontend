@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
-import { awaitGetRecentBlocks } from '../../redux/store/iiss'
 import { LoadingComponent, BlockLink } from '../../components'
+import { blockList } from '../../redux/store/blocks'
 
 class RecentBlocks extends Component {
     constructor(props) {
@@ -19,12 +19,12 @@ class RecentBlocks extends Component {
     // latest is the top most recent table row
     latestBx;
     // recent is the rest of the rows called from REST
-
     recentBx;
 
     async componentDidMount() {
-        this.recentBx = await awaitGetRecentBlocks()
-        this.setState({recentBx: this.recentTx})
+        const blockListData = await blockList()
+        this.recentBx = blockListData.data
+        this.setState({recentBx: this.recentBx})
         this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
@@ -32,10 +32,9 @@ class RecentBlocks extends Component {
         this.bxsocket.onmessage = async (event) =>  {
             this.latestBx = event.data
             this.setState({liveTrClass:"flat"})
-            this.recentBx = await awaitGetRecentBlocks()
+            const blockListData = await blockList()
+            this.recentBx = blockListData.data
             this.setState({recentBx: this.recentBx})
-            // this.setState({liveTableRow: event.data})
-            // console.log(this.latestTx, "this")
 
             try{
                const eventObj = JSON.parse(event.data)
@@ -50,7 +49,6 @@ class RecentBlocks extends Component {
 
     componentWillUnmount() {
         this.bxsocket? this.bxsocket.close() :console.log("no websocket open")
-        this.bxsocket.close()
         console.log("websocket connection closed")
      }
 
@@ -67,7 +65,8 @@ class RecentBlocks extends Component {
                 this.bxsocket.onmessage = async (event) =>  {
                     this.latestBx = event.data
                     this.setState({liveTrClass:"flat"})
-                    this.recentBx = await awaitGetRecentBlocks()
+                    const blockListData = await blockList()
+                    this.recentBx = blockListData.data
                     this.setState({recentBx: this.recentBx})
                     // this.setState({liveTableRow: event.data})
                     // console.log(this.latestTx, "this")
@@ -89,7 +88,7 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
+        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
 
         return (

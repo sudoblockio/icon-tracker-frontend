@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { convertNumberToText, convertHexToValue } from '../../utils/utils'
-import { awaitGetRecentTx } from '../../redux/store/iiss'
 import { LoadingComponent, TransactionLink } from '../../components'
+import { transactionRecentTx } from '../../redux/store/transactions'
 
 class RecentTransactions extends Component {
     constructor(props) {
@@ -20,7 +20,8 @@ class RecentTransactions extends Component {
     // recent is the rest of the rows called from REST
     recentTx;
     async componentDidMount() {
-        this.recentTx = await awaitGetRecentTx()
+        const txListData = await transactionRecentTx()
+        this.recentTx = txListData.data
         this.setState({recentTx: this.recentTX})
         this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
        
@@ -32,7 +33,8 @@ class RecentTransactions extends Component {
             this.latestTx = event.data
             this.setState({liveTrClass:"flat"})
             // console.log(event, "entire socket event")
-            this.recentTx = await awaitGetRecentTx()
+            const txListData = await transactionRecentTx()
+            this.recentTx = txListData.data
             this.setState({recentTx: this.recentTx})
 
                 try{

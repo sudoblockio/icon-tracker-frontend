@@ -1,6 +1,18 @@
 import { walletApiInstance, trackerApiInstance } from '../api/restV3/config'
 import { randomUint32, makeUrl } from '../../utils/utils'
-import { BigNumber } from "bignumber.js";
+
+export async function getTotalSupply() {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/metrics/supply`)
+            .then(result => {
+                resolve(result.data.total_supply/Math.pow(10, 18))
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });  
+}
 
 export const getPrepStatusList = async () => {
     try {
@@ -11,24 +23,6 @@ export const getPrepStatusList = async () => {
         console.log(e, "error")
     }
   }
-export const awaitGetRecentBlocks = async () => {
-    try {
-        const bx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/blocks?limit=10')
-        const data = await bx.json()
-        return data 
-    } catch(e) {
-        console.log(e, "error")
-    }
-}
-export const awaitGetRecentTx = async () => {
-    try {
-        const tx = await fetch('https://explorer.icon.geometry-dev.net/api/v1/transactions?limit=10')
-        const data = await tx.json()
-        return data 
-    } catch (e){
-        console.log(e, "error")
-    }
-}
 export async function coinGeckoMarketCap () {
     try {
         const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
@@ -39,7 +33,6 @@ export async function coinGeckoMarketCap () {
         console.log(e, "error")
     }
 }
-
 export async function coinGeckoCurrentUSD () {
     try{
         const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
@@ -79,16 +72,7 @@ export async function getContractABI (addr) {
     }
 }
 
-export async function getTotalSupply() {
-    try{
-        const prepnode = await fetch('https://explorer.icon.geometry-dev.net/api/v1/metrics/supply')
-        const data = await prepnode.json()
-        return data.total_supply/Math.pow(10, 18)
-    } catch(e) {
-        console.log(e, "error")
-    }
-    
-}
+
 
 export async function prepList(grade) {
     const trackerApi = await trackerApiInstance()
@@ -169,11 +153,6 @@ export async function getPRepsLegacy() {
             })
     });
 }
-
-
-
-
-
 
 export async function getIISSInfo() {
     const walletApi = await walletApiInstance()
