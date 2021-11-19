@@ -26,16 +26,11 @@ class AddressInfo extends Component {
             icxMore: false,
             tokenMore: false,
             showNode: "none",
-            isAPrep: false,
+            links: ""
+
         }
     }
-    
-    async componentDidMount() {
-        const {totalDelegated} = await getPRepsLegacy()
-        this.setState({totalDelegated })
-        
-    }
-
+    isAPrep = 'false'
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     links = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     // links = {}
@@ -47,12 +42,24 @@ class AddressInfo extends Component {
         this.media.map(site => {
             // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
             // this.links ? this.links[site] = thisPrep[site] : null
-            if (this.links) {
-                this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
+            
+            if (this.links && thisPrep) {
+                console.log(site, "the site")
+                console.log(thisPrep[site], "the prep at site")
+                this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
             }
         })
+
         this.linkList=this.links
+        this.state.links = this.links
     }
+    
+    async componentDidMount() {
+        const {totalDelegated} = await getPRepsLegacy()
+        this.setState({totalDelegated })
+        // this.getSocialMediaLinks(name)
+    }
+    
 
     onNotificationChange = () => {
         if (!_isNotificationAvailable) {
@@ -114,6 +121,7 @@ class AddressInfo extends Component {
         console.log(data, "what is the data? ")
 
         const showLinks = is_prep ? true : false
+        console.log(showLinks, "what showLinks is doing")
 
             const {
                 address,
@@ -145,12 +153,10 @@ class AddressInfo extends Component {
         }
         
 
-        if (showLinks) {
+
             this.getSocialMediaLinks(name)
             // linkList=this.links
-        } else {
 
-        }
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
         const produced = IconConverter.toNumber(total_blocks)
         const validated = IconConverter.toNumber(validated_blocks)
@@ -169,6 +175,8 @@ class AddressInfo extends Component {
                 const disabled = !_isNotificationAvailable
 
                 const scam = reportedCount >= 100 ? true : false
+
+                    this.getSocialMediaLinks(name)
 
                 return (
                     <div className="screen0">
@@ -218,7 +226,8 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-                                                {this.linkList && SocialMediaType.map((type, index) => {
+                                                
+                                                {this.state.links && SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
@@ -315,7 +324,7 @@ class AddressInfo extends Component {
                                                         <span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span>
                                                     </p>
                                                     {/* <p><span>Staked</span><span><em>{(!balance ? 0 : Number(staked) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(staked)}`}<em>ICX</em></span></p> */}
-                                                    <p>
+                                                    
                                                         <span>Unstaking</span>
                                                         <span>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
                                                         {/* <span><em>{(!balance ? 0 : Number(unstakeSum) / balance * 100).toFixed(2)}%</em>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span> */}
@@ -334,7 +343,7 @@ class AddressInfo extends Component {
                                                                     )
                                                                 }) : ''}
                                                         </div>
-                                                    </p>
+                                                    
                                                     {/* <p><span>Voted</span><span><em>{(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
                                                     <p>
                                                         <span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span>

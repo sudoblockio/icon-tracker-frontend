@@ -7,7 +7,7 @@ import {
 import {
     ADDRESS_TABS
 } from '../../../utils/const'
-
+import { addressInternalTxList } from '../../../redux/store/addresses';
 class AddressesDetailPage extends Component {
      constructor(props) {
          super(props)
@@ -17,10 +17,7 @@ class AddressesDetailPage extends Component {
      }
     
     async componentDidMount(){
-        const intTxns = this.props.addressInternalTxList
-        const payload = {page:1, count: 25, limit: 25}
-        intTxns(payload)
-        this.setState({internalTxns: intTxns(payload)})
+
 
     }
     render() {
@@ -30,7 +27,8 @@ class AddressesDetailPage extends Component {
         console.log(wallet, "the wallet on index")
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         console.log(data, "data from detail page")
-        console.log()
+        console.log(data.public_key, "the public key")
+
         const TABS = [], getList = []
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
