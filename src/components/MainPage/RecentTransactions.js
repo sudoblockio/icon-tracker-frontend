@@ -29,8 +29,9 @@ class RecentTransactions extends Component {
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
-            this.txsocket.onmessage = async (event) =>  {
-            this.latestTx = event.data
+
+        setTimeout(this.txsocket.onmessage = async (event) =>  {
+            event ? this.latestTx = event.data : this.latestTx = null
             this.setState({liveTrClass:"flat"})
             // console.log(event, "entire socket event")
             const txListData = await transactionRecentTx()
@@ -48,7 +49,8 @@ class RecentTransactions extends Component {
 
     
 
-        }
+        }, 1000)
+
     }
     
     componentWillUnmount() {
