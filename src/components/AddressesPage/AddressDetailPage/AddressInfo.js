@@ -40,12 +40,8 @@ class AddressInfo extends Component {
         const prepArray = allPreps.filter(preps => preps.name === name )
         const thisPrep = prepArray ? prepArray[0] : prepArray
         this.media.map(site => {
-            // this.links[site] === undefined  ? this.links[site] = thisPrep[site] : console.log("found")
-            // this.links ? this.links[site] = thisPrep[site] : null
             
             if (this.links && thisPrep) {
-                console.log(site, "the site")
-                console.log(thisPrep[site], "the prep at site")
                 this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
             }
         })
@@ -118,10 +114,10 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
-        console.log(data, "what is the data? ")
+
 
         const showLinks = is_prep ? true : false
-        console.log(showLinks, "what showLinks is doing")
+
 
             const {
                 address,
@@ -169,7 +165,7 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
-                console.log(data, "the address detail content data")
+
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -177,6 +173,8 @@ class AddressInfo extends Component {
                 const scam = reportedCount >= 100 ? true : false
 
                     this.getSocialMediaLinks(name)
+                let totalVotes; 
+                !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
 
                 return (
                     <div className="screen0">
@@ -218,7 +216,7 @@ class AddressInfo extends Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {console.log(is_prep, "is_prep on this address")}
+s
                                         {is_prep && <tr className="p-rep">
                                             <td>Name</td>
                                             <td colSpan="3">
@@ -263,8 +261,7 @@ class AddressInfo extends Component {
                                             <td>Total Votes</td>
                                             <td colSpan="3">
                                                 <span>{convertNumberToText(delegated)}
-                                                {console.log(Number(this.state.totalDelegated), "this state total del")}
-                                                <em>( {(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated)).toFixed(2)}% )</em>
+                                                <em>( {totalVotes.toString().slice(0,3)}% )</em>
                                                 {/* <em>( 90.02 % )</em> */}</span>
                                             </td>
                                             {/* <td>24h Change Amount</td>
