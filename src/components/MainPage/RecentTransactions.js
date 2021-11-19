@@ -19,6 +19,7 @@ class RecentTransactions extends Component {
     latestTx;
     // recent is the rest of the rows called from REST
     recentTx;
+    msgCounter = 0 
     async componentDidMount() {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
@@ -30,8 +31,12 @@ class RecentTransactions extends Component {
             console.log("connection established")
         }
 
-        setTimeout(this.txsocket.onmessage = async (event) =>  {
-            event ? this.latestTx = event.data : this.latestTx = null
+        setTimeout(
+            this.txsocket.onmessage = async (event) =>  {
+            
+            if (this.msgCounter === 0){
+                this.msgCounter++ 
+                event ? this.latestTx = event.data : this.latestTx = null
             this.setState({liveTrClass:"flat"})
             // console.log(event, "entire socket event")
             const txListData = await transactionRecentTx()
@@ -47,6 +52,10 @@ class RecentTransactions extends Component {
                      console.log(e, "websocket error")
                  }
 
+            } else {
+                this.msgCounter = 0
+            }
+            
     
 
         }, 1000)
