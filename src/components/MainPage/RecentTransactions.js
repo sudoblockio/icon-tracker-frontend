@@ -31,12 +31,11 @@ class RecentTransactions extends Component {
             console.log("connection established")
         }
 
-        setTimeout(
+        /*setTimeout(*/
             this.txsocket.onmessage = async (event) =>  {
-            
             if (this.msgCounter === 0){
                 this.msgCounter++ 
-                event ? this.latestTx = event.data : this.latestTx = null
+                this.latestTx = event.data 
             this.setState({liveTrClass:"flat"})
             // console.log(event, "entire socket event")
             const txListData = await transactionRecentTx()
@@ -55,21 +54,18 @@ class RecentTransactions extends Component {
             } else {
                 this.msgCounter = 0
             }
-            
-    
-
-        }, 1000)
+        }/*, 500)*/
 
     }
-    
+
     componentWillUnmount() {
         this.txsocket? this.txsocket.close() : console.log("no websocket open")
-       console.log("websocket connection closed")
 
     }
+    
     render() {
 
-
+        console.log(this.msgCounter, "the message counter")
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(1,9) : []
         const latest = this.state.liveTableRow
