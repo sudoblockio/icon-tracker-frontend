@@ -35,6 +35,7 @@ class AddressInfo extends Component {
     links = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     // links = {}
     linkList = []
+
     getSocialMediaLinks = async (name) => {
         const allPreps = await prepList();
         const prepArray = allPreps.filter(preps => preps.name === name )
@@ -165,6 +166,7 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
+                
 
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
@@ -175,7 +177,7 @@ class AddressInfo extends Component {
                     this.getSocialMediaLinks(name)
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
-
+                console.log(data, "token list maybe?")
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -204,7 +206,8 @@ class AddressInfo extends Component {
                                 </p>
                             ) : (
                                 <p className="title">Address{is_prep &&
-                                <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}</p>
+                                <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}
+                                </p>
                             )}
                             <div className="contents">
                                 <div className="table-box">
@@ -216,7 +219,6 @@ class AddressInfo extends Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-s
                                         {is_prep && <tr className="p-rep">
                                             <td>Name</td>
                                             <td colSpan="3">

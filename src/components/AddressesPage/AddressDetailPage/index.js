@@ -17,23 +17,28 @@ class AddressesDetailPage extends Component {
      }
     
     async componentDidMount(){
-
+        const { wallet } = this.props;
+        const { loading, error, data } = wallet
+        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
+        const addr = data.public_key
+        console.log(addr, "What addr")
+        const tokens  = this.props.addressTokenTxList({ addr, page: 1, count: 10 })
+        console.log(tokens, "What tokens?")
 
     }
     render() {
-        console.log(this.props, "props from")
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        console.log(wallet, "the wallet on index")
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
-        console.log(data, "data from detail page")
-        console.log(data.public_key, "the public key")
+
 
         const TABS = [], getList = []
+
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
+
         console.log(this.props.addressInternalTxList, "props function on tabs")
         if (transaction_count && Number(transaction_count) !== 0) {
             console.log(transaction_count, "hitting the first getList")
@@ -46,6 +51,7 @@ class AddressesDetailPage extends Component {
             TABS.push(ADDRESS_TABS[2])
             getList.push(address => {
                 this.props.addressTokenTxList({ address, page: 1, count: 10 })
+                
             })
         }
         if (hasDelegations) {
@@ -66,8 +72,9 @@ class AddressesDetailPage extends Component {
                 this.props.addressRewardList({ address })
             })    
         }
-
+        {console.log(getList, "What getList")}
         return (
+            
             <DetailPage
                 {...this.props}
                 loading={loading}
@@ -80,6 +87,7 @@ class AddressesDetailPage extends Component {
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
                 isPrep={is_prep}
+                tokenList={address => {this.props.addressTokenTxList({address})}}
             />
         )
     }

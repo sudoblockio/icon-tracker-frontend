@@ -72,9 +72,9 @@ class DetailPage extends Component {
         const { pathname } = url
         this.props.history.push(`${pathname}#${noSpaceLowerCase(TABS[index])}`);
     }
-
+    
     render() {
-        
+        console.log(this.props, "the props detail page")
         const { loading, error, pending } = this.props;
         const isNotFoundPage = !loading && error !== "" && !isHxAddress(error) && !pending
         
