@@ -68,9 +68,6 @@ class RecentBlocks extends Component {
                     const blockListData = await blockList()
                     this.recentBx = blockListData.data
                     this.setState({recentBx: this.recentBx})
-                    // this.setState({liveTableRow: event.data})
-                    // console.log(this.latestTx, "this")
-        
                     try{
                        const eventObj = JSON.parse(event.data)
                         this.setState({liveTableRow: eventObj})
