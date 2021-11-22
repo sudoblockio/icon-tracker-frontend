@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { convertNumberToText, convertHexToValue } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import { transactionRecentTx } from '../../redux/store/transactions'
+import configJson from '../../config'
 
 class RecentTransactions extends Component {
     constructor(props) {
@@ -24,9 +25,7 @@ class RecentTransactions extends Component {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
         this.setState({recentTx: this.recentTX})
-        this.txsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/transactions');
-       
-       
+        this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/transactions")
         this.txsocket.onopen = (event) => {
             console.log("connection established")
         }
@@ -65,7 +64,7 @@ class RecentTransactions extends Component {
     
     render() {
 
-        console.log(this.msgCounter, "the message counter")
+
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(1,9) : []
         const latest = this.state.liveTableRow

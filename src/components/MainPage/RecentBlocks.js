@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
 import { LoadingComponent, BlockLink } from '../../components'
 import { blockList } from '../../redux/store/blocks'
+import configJson from '../../config'
 
 class RecentBlocks extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class RecentBlocks extends Component {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
         this.setState({recentBx: this.recentBx})
-        this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks');
+        this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
         }
@@ -54,11 +55,8 @@ class RecentBlocks extends Component {
 
      handleKeyDown = e => {
         if (e.key === 'p') {
-            console.log(this.state.play, "play state")
             this.setState({play: this.state.play === true ? false : true})
-            console.log(this.state.play, "the play state right after the switch")
             if (this.state.play === false) {
-                console.log("pause")
                 this.bxsocket.close()
             } else {
                 this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks')
