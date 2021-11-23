@@ -58,9 +58,8 @@ class GovernancePage extends Component {
 		// our endpoints
 		this.statusList = await getPrepStatusList()
 		this.governanceData = await getPReps();
-		console.log(this.governanceData, "gov data")
-		const test = await getPReps()
-		console.log(test, "???s")
+		
+		console.log(this.governanceData.data, "gov data")
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
@@ -440,6 +439,7 @@ class TableRow extends Component {
 			irepUpdatedBlockHeight,
 			active,
 			logo,
+			status,
 			sponsored_cps_grants
 			
 			// balance,
@@ -447,13 +447,14 @@ class TableRow extends Component {
 		} = prep
 		const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 
-		const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
+		// const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		const badge = this.getBadge(grade, active, statusCheck)
+		console.log(prep, "prep status?")
+		const badge = this.getBadge(grade, active, prep.status)
 		// const rank = index + 1
 
 		return(
