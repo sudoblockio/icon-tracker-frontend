@@ -120,6 +120,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
+        console.log(data, "what data")
 
         
         const showLinks = is_prep ? true : false
@@ -145,7 +146,7 @@ class AddressInfo extends Component {
                 website,
 
             } = prep || {}
-
+       
         
 
         let unstakeSum = 0;
@@ -320,7 +321,7 @@ class AddressInfo extends Component {
                                             <td colSpan="3" className="balance">
                                                 <div className={icxMore ? 'on' : ''}>
                                                     <p><span><i
-                                                        className="coin icon"></i>ICX</span><span>{`${convertNumberToText(balance, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
+                                                        className="coin icon"></i>ICX</span><span>{`${convertNumberToText(data.balance ? data.balance.toFixed() : 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
                                                         className="drop-btn" onClick={this.toggleIcxMore}><i
                                                         className="img"></i></em></p>
                                                     <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span>

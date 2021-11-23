@@ -146,41 +146,49 @@ export function* addressInfoFunc(action) {
     const payload = yield call(ADDRESS_INFO_API, action.payload);
     if (payload.status === 200) {
       const { address } = action.payload
-      console.log(address, "yeero")
-      console.log(yield call(getDelegation, address), "yeero")
 
-      const { delegated } = yield call(getDelegation, address)
-      const prep = yield call(getDelegation, address)
-      console.log(prep, "what is the prep? ")
       const balance = yield call(getBalance, address)
-      const { stake, unstakes } = yield call(getStake, address)
+      
       const { iscore } = yield call(queryIScore,address)
       const _balance = !balance ? 0 : convertLoopToIcxDecimal(balance)
-      const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
       // const _totalDelegated = !totalDelegated ? 0 : convertLoopToIcxDecimal(totalDelegated)
       const _iscore = !iscore ? 0 : convertLoopToIcxDecimal(iscore)
-
-      const isPrep = prep && Object.keys(prep).length > 0
+      console.log(payload, "the payload")
+      const isPrep = payload.data.is_prep
 
       let active;
       let media = {}
 
       if (isPrep) {
+        const { stake, unstakes } = yield call(getStake, address)
+        const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
+        const prep = yield call(getDelegation, address)
+        const { delegated } = yield call(getDelegation, address)
         const  statusData  = yield call(getPrepStatusList)
         const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === prep.name )
         active = statusCheck.length && statusCheck[0].state_id <= 2 ? 'Active' : 'Inactive'
+        payload.data = {
+          ...payload.data,
+          hasDelegations: delegated,
+          isPrep,
+          available: _balance,
+          staked: _stake,
+          unstakes,
+          iscore: _iscore,
+          delegated,
+          prep: prep.data[0],
+          active,
+          media,
+        }
+        yield put({ type: AT.addressInfoFulfilled, payload: payload });
       }
 
       payload.data = {
         ...payload.data,
-        hasDelegations: delegated,
+        hasDelegations: false,
         isPrep,
         available: _balance,
-        staked: _stake,
-        unstakes,
         iscore: _iscore,
-        delegated,
-        prep: prep.data[0],
         active,
         media,
       }
