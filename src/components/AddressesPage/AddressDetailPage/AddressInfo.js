@@ -36,7 +36,6 @@ class AddressInfo extends Component {
     linkList = []
 
     getSocialMediaLinks = async (name) => {
-        console.log(this.props.wallet.data, "prop wallet data")
         if (this.props.wallet.data.is_prep) {
             const allPreps = await prepList();
             const prepArray = allPreps.filter(preps => preps.name === name )
