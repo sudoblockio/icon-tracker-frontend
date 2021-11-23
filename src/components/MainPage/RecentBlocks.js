@@ -83,7 +83,7 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
+        const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
         const latest = this.state.liveTableRow
 
         return (

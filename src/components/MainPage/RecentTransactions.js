@@ -66,7 +66,7 @@ class RecentTransactions extends Component {
 
 
         const loading = false;
-        const list = this.state.recentTx ? this.state.recentTx.slice(1, 9) : this.recentTx  ?  this.recentTx.slice(1,9) : []
+        const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
         const isSuccess = Number(latest.receipt_status) === 1
 
