@@ -234,7 +234,7 @@ class SearchPage extends Component {
                     <Pagination
                         key="Pagination"
                         pageNum={page}
-                        maxPageNum={calcMaxPageNum(listSize, count)}
+                        maxPageNum={calcMaxPageNum(totalSize, count)}
                         getData={this.getListByPage}
                     />,
                 ]
