@@ -90,14 +90,8 @@ class TxTableBody extends Component {
 				currentUSD,
 				totalSupply,
 			} = this.props
-			// *** 
-			const percentage = totalSupply ?  data.balance / totalSupply : 0;
-			console.log(percentage * Math.pow(1, 10), "(address balance / total supply) * 1e10  ")
-			// 5.4738906996113465e-12 '(address balance / total supply) * 1e10  '
-			console.log(data.balance, "address balance")
-			// 50000000 'address balance'
-			console.log(totalSupply, "total supply ")
-			// 9134270803680838000 'total supply '
+			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
+			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
 			const addressInData = data.address
 			const isError = data.state === 0
 			const formattedLogData = ""
@@ -242,14 +236,12 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
-					{console.log(percentage, "the percentage")}
 					return (
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
-							<td><span>{percentage.toString().slice(0,3).concat(percentage.toString().slice(percentage.toString().length - 4, percentage.toString().length))}</span><em>%</em></td>
-							{/* <td>{percentage}</td> */}
+							<td><span>{multiplied.toFixed(3)}</span><em>%</em></td>
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
 						</tr>
@@ -303,7 +295,7 @@ class TxTableBody extends Component {
 							<td>{data.rank}</td>
 							<AddressCell targetAddr={addressInData} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
-							<td><span>{percentage}</span><em>%</em></td>
+							{/* <td><span>{percentage}</span><em>%</em></td> */}
 						</tr>
 					)
 				default:
