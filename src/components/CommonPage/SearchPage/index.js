@@ -130,7 +130,7 @@ class SearchPage extends Component {
         })
     }
 
-    // *** modified search
+
     getListBySearch = nextSearch => {
         const { keyword } = this.state
         if (keyword === '' && nextSearch === '') {
@@ -139,7 +139,6 @@ class SearchPage extends Component {
         this.setState({ keyword: nextSearch }, () => {
             const { status } = this.state
             const count = this.getCount()
-            // leverages the make url function but OLD error handling:
             const url = this.makeUrl(1, { count, status, keyword: nextSearch })
             this.props.history.push(url)
         })
@@ -186,7 +185,7 @@ class SearchPage extends Component {
         const title = this.getSearchTypeData()['title'] || ''
 
         const { keyword, status } = this.state
-        const { loading, data, page, listSize, count } = list
+        const { loading, data, page, listSize, totalSize, count } = list
         const noData = this.getNoData(data, status)
 
         const TableContent = () => {
@@ -253,7 +252,7 @@ class SearchPage extends Component {
                                 {title}
                                 <SearchTableDesc
                                     searchType={this.searchType}
-                                    listSize={listSize}
+                                    listSize={totalSize}
                                 />
                             </p>
                             <SearchInput
