@@ -92,8 +92,12 @@ class TxTableBody extends Component {
 			} = this.props
 			// *** 
 			const percentage = totalSupply ?  data.balance / totalSupply : 0;
-			const bigNum = new BigNumber(data.balance / totalSupply)
-			console.log(bigNum.toPrecision(2), "big number")
+			console.log(percentage * Math.pow(1, 10), "(address balance / total supply) * 1e10  ")
+			// 5.4738906996113465e-12 '(address balance / total supply) * 1e10  '
+			console.log(data.balance, "address balance")
+			// 50000000 'address balance'
+			console.log(totalSupply, "total supply ")
+			// 9134270803680838000 'total supply '
 			const addressInData = data.address
 			const isError = data.state === 0
 			const formattedLogData = ""

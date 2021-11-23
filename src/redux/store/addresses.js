@@ -128,7 +128,6 @@ export async function addressTokenTxList(payload) {
 }
 
 export async function addressInternalTxList(payload) {
-  console.log(payload, "What payload here?")
   // typeof(payload) === 'string' ? payload = {address:payload} :console.log("had a payload")
   // console.log(payload, "after if statement")
     const trackerApi = await trackerApiInstance()

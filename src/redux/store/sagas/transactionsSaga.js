@@ -57,6 +57,7 @@ function* transactionTxDetailFunc(action) {
   try {
     yield put(transactionEventLogListAction({ txHash: action.payload.txHash, count: 10 }))
     trackerData = yield call(TRANSACTION_TX_DETAIL_API, action.payload); 
+    console.log(trackerData)
     if (trackerData.status === 200) {      
       let { stepUsedDetails } = trackerData.data
       if (stepUsedDetails) {
@@ -73,30 +74,25 @@ function* transactionTxDetailFunc(action) {
   catch (e) {
     console.error(e)
   }
-
   try {
     resultData = yield call(GET_TRANSACTION_RESULT_API, action.payload.txHash);
     if (resultData && resultData.status === undefined) {
       yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
       return
     }
-    
     byHashData = yield call(GET_TRANSACTION_API, action.payload.txHash);
     data = convertEngineToTracker(resultData, byHashData)
     if (data) {
       yield put({ type: AT.transactionTxDetailFulfilled, payload: { data } });
       return
-    }
-    
+    } 
     throw Error()
   }
   catch (e) {
     console.error(e)
-
     if (data) {
       return
     }
-
     yield put({ type: AT.transactionTxDetailRejected, error: action.payload.txHash });
   }
 }

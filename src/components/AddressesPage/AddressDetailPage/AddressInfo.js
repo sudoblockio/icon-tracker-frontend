@@ -54,6 +54,8 @@ class AddressInfo extends Component {
     async componentDidMount() {
         const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
+        console.log(this.props.match.params.addressId, "props at mount")
+        this.getTokenList(this.props.match.params.addressId)
         // this.getSocialMediaLinks(name)
     }
     
@@ -98,12 +100,15 @@ class AddressInfo extends Component {
         this.setState({showNode: "table-row"})
     }
 
-
+    getTokenList = (public_key) => {
+        this.setState({tokenList: this.props.tokenList(public_key)})
+    }
     render() {
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
+        console.log(this.props, "props on address info component")
         const {loading, data, error} = wallet
-
+        console.log(this.state, "token  list from state")
         const {
             is_prep,
             prep,
@@ -116,8 +121,9 @@ class AddressInfo extends Component {
             iscore
         } = data
 
-
+        
         const showLinks = is_prep ? true : false
+ 
 
 
             const {
