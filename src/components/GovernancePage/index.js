@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getPrepStatusList, getPRepsLegacy  } from '../../redux/store/iiss'
+import { getLastBlock, getStepPrice, prepList, getPRepsLegacy  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
@@ -56,10 +56,8 @@ class GovernancePage extends Component {
 	
 	async componentWillMount(){
 		// our endpoints
-		this.statusList = await getPrepStatusList()
 		this.governanceData = await getPReps();
 		
-		console.log(this.governanceData.data, "gov data")
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
@@ -373,9 +371,8 @@ class TableRow extends Component {
 		this.setState({loaded: true})
 	}
 	
-	getBadge = (grade, active, statusCheck ) => {
-		const className = (statusCheck.length && statusCheck[0].state_id <=2 ? 'prep-tag' : 'prep-tag off')
-
+	getBadge = (grade, node_state ) => {
+		const className = node_state === 'Synced' ? 'prep-tag' : node_state === 'Inactive'? 'prep-tag off' : 'prep-tag block-synced'
 		switch(grade) {
 			case 0:
 			case '0x0':
@@ -386,9 +383,9 @@ class TableRow extends Component {
 			case 2:
 			case '0x2':
 				return <span className={className}><i></i>Candidate</span>
-			case 3:
-			case '0x3':
-				return <span className={'prep-tag'}>{statusCheck === 2 ? 'Disqualified' : 'Unregistered'}</span>
+			// case 3:
+			// case '0x3':
+			// 	return <span className={'prep-tag'}>{statusCheck === 2 ? 'Disqualified' : 'Unregistered'}</span>
 			default:
 				return null		
 		}
@@ -437,7 +434,8 @@ class TableRow extends Component {
 			delegated,
 			irep,
 			irepUpdatedBlockHeight,
-			active,
+
+			node_state,
 			logo,
 			status,
 			sponsored_cps_grants
@@ -453,8 +451,8 @@ class TableRow extends Component {
 		// const totalBalcne = balance + prepStaked + prepUnstaked
 		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-		console.log(prep, "prep status?")
-		const badge = this.getBadge(grade, active, prep.status)
+
+		const badge = this.getBadge(grade, prep.node_state)
 		// const rank = index + 1
 
 		return(

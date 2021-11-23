@@ -68,7 +68,7 @@ class RecentTransactions extends Component {
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
-        const isSuccess = Number(latest.receipt_status) === 1
+        const isSuccess = latest.receipt_status? Number(latest.receipt_status) === 1 : 1
 
         return (
             <li className="right">

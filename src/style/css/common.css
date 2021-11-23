@@ -3346,9 +3346,13 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
   border: 1px solid #d8edf0;
   background: #fff;
 }
+.table-typeP .prep-tag.block-synced {
+  border: 1px solid #ececec;
+  background: #ececec;
+}
 .table-typeP .prep-tag.off i {
   background: #fff;
-  border: 1px solid #1aaaba;
+  border: 1px solid #ececec;
 }
 .table-typeP .ellipsis {
   width: 380px;
