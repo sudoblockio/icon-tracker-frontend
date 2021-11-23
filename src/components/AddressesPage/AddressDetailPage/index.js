@@ -21,7 +21,7 @@ class AddressesDetailPage extends Component {
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         const addr = data.public_key
-        console.log(addr, "What addr")
+        console.log(data, "What addr")
         const tokens  = this.props.addressTokenTxList({ addr, page: 1, count: 10 })
         console.log(tokens, "What tokens?")
 

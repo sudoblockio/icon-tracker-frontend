@@ -53,11 +53,12 @@ class AddressInfo extends Component {
     }
     
     async componentDidMount() {
-        const {totalDelegated} = await getPRepsLegacy()
+        if (this.props.wallet.data.is_prep){
+            const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
-        console.log(this.props.match.params.addressId, "props at mount")
+        }
         this.getTokenList(this.props.match.params.addressId)
-        // this.getSocialMediaLinks(name)
+
     }
     
 
@@ -107,9 +108,7 @@ class AddressInfo extends Component {
     render() {
         const {notification, icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
-        console.log(this.props, "props on address info component")
         const {loading, data, error} = wallet
-        console.log(this.state, "token  list from state")
         const {
             is_prep,
             prep,
@@ -121,7 +120,7 @@ class AddressInfo extends Component {
             // balance,
             iscore
         } = data
-        console.log(data, "what data")
+
 
         
         const showLinks = is_prep ? true : false
@@ -141,13 +140,14 @@ class AddressInfo extends Component {
                 name,
                 node_address,
                 status,
+                node_state,
                 total_blocks,
                 validated_blocks,
 
                 website,
 
             } = prep || {}
-       
+
         
 
         let unstakeSum = 0;
@@ -168,7 +168,7 @@ class AddressInfo extends Component {
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
 
-        const badge = getBadgeTitle(grade, status)
+        const badge = getBadgeTitle(grade, node_state)
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px"/>
@@ -185,7 +185,6 @@ class AddressInfo extends Component {
                    is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
-                console.log(data, "token list maybe?")
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -262,8 +261,9 @@ class AddressInfo extends Component {
                                                     )
                                                 })}
                                                 {/* <span className="home"><i className="img"></i></span><span className="twitter"><i className="img"></i></span><span className="email"><i className="img"></i></span> */}
+                                                
                                                 <span
-                                                    className={`active ${active === 'Active' ? 'on' : 'off'}`}><i></i>{active}</span>
+                                                    className={`active ${node_state === 'Synced' ? 'on' : node_state==='Inactive' ?  'off' : node_state === 'BlockSync' ? 'Active' : 'Inactive'}`}><i></i>{node_state}</span>
                                                 {/* <span className="btn-scam">Go to Voting</span> */}
                                             </td>
                                         </tr>}
