@@ -30,25 +30,27 @@ class AddressInfo extends Component {
 
         }
     }
-    isAPrep = 'false'
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     links = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     // links = {}
     linkList = []
 
     getSocialMediaLinks = async (name) => {
-        const allPreps = await prepList();
-        const prepArray = allPreps.filter(preps => preps.name === name )
-        const thisPrep = prepArray ? prepArray[0] : prepArray
-        this.media.map(site => {
-            
-            if (this.links && thisPrep) {
-                this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
-            }
-        })
-
-        this.linkList=this.links
-        this.state.links = this.links
+        console.log(this.props.wallet.data, "prop wallet data")
+        if (this.props.wallet.data.is_prep) {
+            const allPreps = await prepList();
+            const prepArray = allPreps.filter(preps => preps.name === name )
+            const thisPrep = prepArray ? prepArray[0] : prepArray
+            this.media.map(site => {
+                if (this.links && thisPrep) {
+                    this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
+                }
+            })
+    
+            this.linkList=this.links
+            this.state.links = this.links
+        }
+        
     }
     
     async componentDidMount() {
@@ -181,7 +183,7 @@ class AddressInfo extends Component {
 
                 const scam = reportedCount >= 100 ? true : false
 
-                    this.getSocialMediaLinks(name)
+                   is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
                 console.log(data, "token list maybe?")
