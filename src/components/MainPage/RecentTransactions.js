@@ -11,7 +11,8 @@ class RecentTransactions extends Component {
         this.state = {
             recentTx: 0,
             liveTableRow: {},
-            liveTrClass: "flat"
+            liveTrClass: "flat",
+            txRows: []
         }
     }
 
@@ -21,26 +22,40 @@ class RecentTransactions extends Component {
     // recent is the rest of the rows called from REST
     recentTx;
     msgCounter = 0 
+    txRows = []
+// hit the endpoint one time
+// open the websocket connection
+// collect each message and push to this.txRows
+// get all rows from  this.TxRows 
+
     async componentDidMount() {
+        // hit REST when the component first mounst 
         const txListData = await transactionRecentTx()
+        // save that response data , 10 rows. 
         this.recentTx = txListData.data
-        this.setState({recentTx: this.recentTX})
+        this.setState({recentTx: this.recentTx})
+        // open the websocket
         this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/transactions")
         this.txsocket.onopen = (event) => {
             console.log("connection established")
-        }
+            // if the websocket opens, push the 10 REST rows into the instance row array, this.txRows.
 
-        /*setTimeout(*/
+            this.state.txRows.push(this.state.recentTx)
+
+        }
             this.txsocket.onmessage = async (event) =>  {
+                // When a new message comes in, check if the msgCounter has reset. 
             if (this.msgCounter === 0){
                 this.msgCounter++ 
+                // set the top row as the most recent websocket message.
                 this.latestTx = event.data 
+                this.state.txRows.push(this.latestTx)
+                console.log(this.state.txRows, "the tx rows")
+                // flip the css class for the fade effect
             this.setState({liveTrClass:"flat"})
-            // console.log(event, "entire socket event")
-            const txListData = await transactionRecentTx()
-            this.recentTx = txListData.data
+            // const txListData = await transactionRecentTx()
+            this.recentTx = this.state.recentTx
             this.setState({recentTx: this.recentTx})
-
                 try{
                     const eventObj = JSON.parse(event.data)
                      this.setState({liveTableRow: eventObj})
@@ -53,7 +68,7 @@ class RecentTransactions extends Component {
             } else {
                 this.msgCounter = 0
             }
-        }/*, 500)*/
+        }
 
     }
 
@@ -63,8 +78,6 @@ class RecentTransactions extends Component {
     }
     
     render() {
-
-
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
