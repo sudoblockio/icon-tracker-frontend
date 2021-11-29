@@ -33,14 +33,15 @@ class RecentTransactions extends Component {
         const txListData = await transactionRecentTx()
         // save that response data , 10 rows. 
         this.recentTx = txListData.data
-        this.setState({recentTx: this.recentTx})
+        // set the recent tx and 
+        this.setState({recentTx: this.recentTx, txRows: this.recentTx})
         // open the websocket
         this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/transactions")
         this.txsocket.onopen = (event) => {
             console.log("connection established")
             // if the websocket opens, push the 10 REST rows into the instance row array, this.txRows.
 
-            this.state.txRows.push(this.state.recentTx)
+            this.state.txRows.unshift(this.state.recentTx)
 
         }
             this.txsocket.onmessage = async (event) =>  {
@@ -49,8 +50,7 @@ class RecentTransactions extends Component {
                 this.msgCounter++ 
                 // set the top row as the most recent websocket message.
                 this.latestTx = event.data 
-                this.state.txRows.push(this.latestTx)
-                console.log(this.state.txRows, "the tx rows")
+                this.state.txRows.unshift(this.latestTx)
                 // flip the css class for the fade effect
             this.setState({liveTrClass:"flat"})
             // const txListData = await transactionRecentTx()
@@ -80,6 +80,9 @@ class RecentTransactions extends Component {
     render() {
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
+        {console.log(this.state.recentTx, "this state recent tx")}
+        {console.log(this.recentTx, "this recent tx")}
+        {console.log(list, "list in render")}
         const latest = this.state.liveTableRow
         const isSuccess = latest.receipt_status? Number(latest.receipt_status) === 1 : 1
 
