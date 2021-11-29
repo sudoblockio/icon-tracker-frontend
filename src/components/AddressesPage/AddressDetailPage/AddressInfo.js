@@ -167,7 +167,7 @@ class AddressInfo extends Component {
         const validated = IconConverter.toNumber(validated_blocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
-
+        
         const badge = getBadgeTitle(grade, node_state)
         const Content = () => {
             if (loading) {

@@ -199,6 +199,7 @@ export function* addressInfoFunc(action) {
     }
   }
   catch (e) {
+    console.log(e, "what is the error")
     yield put({ type: AT.addressInfoRejected, error: action.payload.address });
   }
 }
