@@ -13,6 +13,7 @@ class RecentBlocks extends Component {
             liveTableRow: {},
             liveTrClass: "flat",
             play: true,
+            bxRows: []
         }
     }
 
@@ -21,20 +22,24 @@ class RecentBlocks extends Component {
     latestBx;
     // recent is the rest of the rows called from REST
     recentBx;
+    bxRows = []
 
     async componentDidMount() {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
-        this.setState({recentBx: this.recentBx})
+        this.setState({recentBx: this.recentBx, bxRows: this.recentBx})
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
+            this.state.bxRows.unshift(this.state.recentBx)
         }
+
         this.bxsocket.onmessage = async (event) =>  {
             this.latestBx = event.data
+            this.state.bxRows.unshift(JSON.parse(this.latestBx))
             this.setState({liveTrClass:"flat"})
-            const blockListData = await blockList()
-            this.recentBx = blockListData.data
+            // const blockListData = await blockList()
+            this.recentBx = this.state.recentBx
             this.setState({recentBx: this.recentBx})
 
             try{

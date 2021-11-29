@@ -52,14 +52,14 @@ class RecentTransactions extends Component {
                 this.latestTx = event.data 
                 this.state.txRows.unshift(JSON.parse(this.latestTx))
                 // flip the css class for the fade effect
-                this.setState({liveTrClass:"flat"})
+                this.setState({liveTrClass:"fade"})
                 // const txListData = await transactionRecentTx()
                 this.recentTx = this.state.recentTx
                 this.setState({recentTx: this.recentTx})
                     try{
                         const eventObj = JSON.parse(event.data)
                         this.setState({liveTableRow: eventObj})
-                        this.setState({liveTrClass:"fade"})
+                        this.setState({liveTrClass:"flat"})
                     }
                     catch (e) {
                         console.log(e, "websocket error")
