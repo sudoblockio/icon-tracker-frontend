@@ -50,20 +50,20 @@ class RecentTransactions extends Component {
                 this.msgCounter++ 
                 // set the top row as the most recent websocket message.
                 this.latestTx = event.data 
-                this.state.txRows.unshift(this.latestTx)
+                this.state.txRows.unshift(JSON.parse(this.latestTx))
                 // flip the css class for the fade effect
-            this.setState({liveTrClass:"flat"})
-            // const txListData = await transactionRecentTx()
-            this.recentTx = this.state.recentTx
-            this.setState({recentTx: this.recentTx})
-                try{
-                    const eventObj = JSON.parse(event.data)
-                     this.setState({liveTableRow: eventObj})
-                     this.setState({liveTrClass:"fade"})
-                 }
-                 catch (e) {
-                     console.log(e, "websocket error")
-                 }
+                this.setState({liveTrClass:"flat"})
+                // const txListData = await transactionRecentTx()
+                this.recentTx = this.state.recentTx
+                this.setState({recentTx: this.recentTx})
+                    try{
+                        const eventObj = JSON.parse(event.data)
+                        this.setState({liveTableRow: eventObj})
+                        this.setState({liveTrClass:"fade"})
+                    }
+                    catch (e) {
+                        console.log(e, "websocket error")
+                    }
 
             } else {
                 this.msgCounter = 0
