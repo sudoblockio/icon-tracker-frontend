@@ -15,7 +15,6 @@ if (!NODE_ENV) {
     'The NODE_ENV environment variable is required but was not specified.'
   );
 } else {
-  console.log(NODE_ENV, "the node env")
 }
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
