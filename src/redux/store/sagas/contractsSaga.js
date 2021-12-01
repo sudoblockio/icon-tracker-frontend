@@ -222,7 +222,7 @@ export function* contractEventLogListFunc(action) {
 
 export function* icxGetSroreFunc(action) {
   try {
-    const payload = yield call(ICX_GET_CONTRACT, action.payload);
+    const payload = yield call(ICX_GET_CONTRACT, action.payload.address);
     if (payload.length !== 0) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload } });
     }

@@ -36,6 +36,8 @@ class ContractCode extends Component {
     }
 
     render() {
+        console.log(this.state, "cx code state")
+        console.log(this.props, "cx code props")
         const { activeLink, updatedLink } = this.state
         const { contract } = this.props
         const { data } = contract
