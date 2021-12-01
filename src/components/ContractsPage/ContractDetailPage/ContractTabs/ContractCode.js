@@ -30,6 +30,7 @@ class ContractCode extends Component {
         const { public_key, newVersion } = data
         if (isValidData(public_key)) {
             const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
+            console.log(activeLink, "activeLink in is valid data")
             const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
             this.setState({ activeLink, updatedLink })
         }

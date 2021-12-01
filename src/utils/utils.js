@@ -296,7 +296,7 @@ export function randomUint32() {
 
 export async function makeDownloadLink(address, version) {
     const apiUrl = await getTrackerApiUrl()
-    return `${apiUrl}/score/${address}_${version}.zip`
+    return `${apiUrl}/score/${address}.zip`
 }
 
 export function tokenText(name, symbol, address, spanClassName) {

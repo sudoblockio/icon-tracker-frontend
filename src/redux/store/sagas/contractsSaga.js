@@ -12,9 +12,10 @@ import {
   contractInternalTxList as CONTRACT_INTERNAL_TX_LIST_API,
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
-  icxCall as ICX_CALL_API,
+
   // icxGetScore as ICX_GET_SCORE_API,
-} from '../../api/restV3';
+} from '../contracts';
+import  { icxCall as ICX_CALL_API}from '../../api/restV3'
 import {   getContractABI as ICX_GET_CONTRACT } from '../../store/iiss'
 import { getScoreStatus } from '../../store/contracts';
 
@@ -223,6 +224,8 @@ export function* contractEventLogListFunc(action) {
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_CONTRACT, action.payload.address);
+    console.log(payload, "saga payload")
+    console.log(action.payload, "saga action payload")
     if (payload.length !== 0) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload } });
     }

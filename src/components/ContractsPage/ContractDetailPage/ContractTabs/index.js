@@ -20,7 +20,9 @@ class ContractTabs extends Component {
 
     render() {
         const { on, contract, contractTx, contractInternalTx, contractTokenTx, contractEvents, contractAbi, contractReadInfo } = this.props
+        console.log(this.props, "larger comp props")
         const { loading, data } = contract
+        console.log(contract, "the contract")
         const { public_key } = data
         return (
             <TabTable
