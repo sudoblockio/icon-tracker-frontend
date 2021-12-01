@@ -183,6 +183,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
+					console.log(data, "cx token transfr data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -215,6 +216,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
+
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
