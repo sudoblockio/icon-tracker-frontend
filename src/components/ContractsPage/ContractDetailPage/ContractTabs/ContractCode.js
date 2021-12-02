@@ -20,6 +20,7 @@ class ContractCode extends Component {
         const { public_key } = data
         this.getDownloadLink()
         const cxABICode = await getContractABI(public_key)
+        console.log(cxABICode, "cx abi code")
         const srcCodeLink = await getSrcCodeLink(public_key)
         this.setState({activeLink: srcCodeLink, cxABI: cxABICode})
     }

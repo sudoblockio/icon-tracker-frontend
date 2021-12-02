@@ -63,8 +63,9 @@ export async function getContractABI (addr) {
         if (addr !== undefined) {
             const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
             const cxJson = await cxdata.json()
+            console.log(cxJson, "cx json")
             let abi;
-            cxJson[0] ? abi=cxJson[0].abi : abi=0
+            cxJson ? abi=cxJson.abi : abi=0
             return abi;
             }
     } catch(e) {
