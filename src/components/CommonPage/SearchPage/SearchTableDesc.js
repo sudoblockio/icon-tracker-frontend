@@ -13,7 +13,7 @@ class SearchTableDesc extends Component {
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
-                        <span className="cont right" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}>
+                        <span className="cont right" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.VERIFICATION })}}>
                             <i className="img"></i>
                             A total of {_listSize} verified contract source
                             codes found. [+] Contract Verification

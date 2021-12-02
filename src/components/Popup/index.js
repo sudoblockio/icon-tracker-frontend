@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddressQrCode from './AddressQrCode';
 import ContractDetail from './ContractDetail';
+import ContractVerification from './ContractVerification';
 import Scam from './Scam';
 import Search from './Search';
 import { initPopup } from '../../redux/store/popups';
@@ -37,6 +38,13 @@ class Popup extends Component {
         window.dispatchEvent(
           new CustomEvent('CUSTOM_FX', {
             detail: { type: 'POPUP_OPEN', param: 'scam' }
+          })
+        );
+        break;
+      case POPUP_TYPE.VERIFICATION:
+        window.dispatchEvent(
+          new CustomEvent('CUSTOM_FX', {
+            detail: { type: 'POPUP_OPEN', param: 'verification' }
           })
         );
         break;

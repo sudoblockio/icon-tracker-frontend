@@ -25,6 +25,7 @@ export default function* contractsSaga() {
   yield fork(watchContractInfo);
   yield fork(watchContractDetail);
   yield fork(watchContractDetailPopup);
+  yield fork(watchContractVerificationPopup)
   yield fork(watchContractTxList);
   yield fork(watchContractInternalTxList);
   yield fork(watchContractTokenTxList);
@@ -39,6 +40,7 @@ function* watchContractListSearch() { yield takeLatest(AT.contractListSearch, co
 function* watchContractInfo() { yield takeLatest(AT.contractInfo, contractInfoFunc) }
 function* watchContractDetail() { yield takeLatest(AT.contractDetail, contractDetailFunc) }
 function* watchContractDetailPopup() { yield takeLatest(AT.contractDetailPopup, contractDetailPopupFunc) }
+function* watchContractVerificationPopup() {yield takeLatest(AT.contractVerificationPopup, contractVerificationPopupFunc)}
 function* watchContractTxList() { yield takeLatest(AT.contractTxList, contractTxListFunc) }
 function* watchContractInternalTxList() { yield takeLatest(AT.contractInternalTxList, contractInternalTxListFunc) }
 function* watchContractTokenTxList() { yield takeLatest(AT.contractTokenTxList, contractTokenTxListFunc) }
@@ -138,6 +140,16 @@ export function* contractDetailPopupFunc(action) {
   }
   catch (e) {
     console.log(e)
+  }
+}
+
+export function* contractVerificationPopupFunc(action) {
+  let payload
+  payload.type= POPUP_TYPE.VERIFICATION
+  try{
+    yield put({type: AT.setPopup, payload})
+  } catch(e) {
+    console.log(e, "error")
   }
 }
 

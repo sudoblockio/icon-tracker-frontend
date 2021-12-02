@@ -24,6 +24,7 @@ export function popupReducer(state = initialState, action) {
             return initialState
 
         case actionTypes.setPopup: 
+        console.log(action, "action from popup reducer")
             return action.payload
 
         default: 

@@ -105,6 +105,7 @@ const actionTypes = {
 
   contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
   imageConverterPopup: 'IMAGE_CONVERTER_POPUP',
+  contractVerificationPopup: 'CONTRACT_VERIFICATION_POPUP',
 
   contractTxList: 'CONTRACT_TX_LIST',
   contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
