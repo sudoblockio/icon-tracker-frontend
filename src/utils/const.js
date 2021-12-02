@@ -108,7 +108,8 @@ export const POPUP_TYPE = {
   SUGGEST: 'suggest',
   COMMISSION: 'commission',
   GOVERNANCE: 'governance',
-  SPONSOR: 'sponsor'
+  SPONSOR: 'sponsor',
+  VERIFICATION: 'verification'
 };
 
 export const SEARCH_TYPE = {

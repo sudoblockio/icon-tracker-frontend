@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SEARCH_TYPE, IRC_VERSION } from '../../../utils/const'
+import { SEARCH_TYPE, IRC_VERSION, POPUP_TYPE} from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
 
 class SearchTableDesc extends Component {
@@ -13,10 +13,13 @@ class SearchTableDesc extends Component {
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
-                        <span className="cont right">
+                        <span className="cont right" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}>
+                            <i className="img"></i>
                             A total of {_listSize} verified contract source
-                            codes found
+                            codes found. [+] Contract Verification
+                            
                         </span>
+                        
                     )
                 case SEARCH_TYPE.TOKENS:
                     return (

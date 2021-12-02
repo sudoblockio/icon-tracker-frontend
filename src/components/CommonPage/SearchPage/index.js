@@ -199,6 +199,7 @@ class SearchPage extends Component {
                                 <SearchTableHead
                                     searchType={this.searchType}
                                     getListByStatus={this.getListByStatus}
+                                    setPopup={this.props.setPopup}
                                 />
                             </thead>
                             <tbody>
@@ -253,6 +254,7 @@ class SearchPage extends Component {
                                 <SearchTableDesc
                                     searchType={this.searchType}
                                     listSize={totalSize}
+                                    setPopup={this.props.setPopup}
                                 />
                             </p>
                             <SearchInput

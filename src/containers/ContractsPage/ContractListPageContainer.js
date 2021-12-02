@@ -5,6 +5,7 @@ import {
   contractListAction,
   contractListSearchAction
 } from '../../redux/store/contracts';
+import { setPopup } from '../../redux/store/popups'
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setPopup: payload => dispatch(setPopup(payload)),
     contractList: payload => dispatch(contractListAction(payload)),
     contractListSearch: payload => dispatch(contractListSearchAction(payload)),
   };
