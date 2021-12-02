@@ -72,11 +72,12 @@ export function blockListAction(payload) {
         })
     })
   }
-  
+
+
   export async function blockTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`${TRANSACTIONS_PREFIX}?block_number=${payload.height}`)
+      trackerApi.get(`${TRANSACTIONS_PREFIX}/block-number/${payload.height}`)
         .then(result => {
           resolve(result)
         })
