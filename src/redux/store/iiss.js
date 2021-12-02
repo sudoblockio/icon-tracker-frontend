@@ -65,7 +65,7 @@ export async function getContractABI (addr) {
             const cxJson = await cxdata.json()
             console.log(cxJson, "cx json")
             let abi;
-            cxJson ? abi=cxJson.abi : abi=0
+            cxJson ? abi=cxJson : abi=0
             return abi;
             }
     } catch(e) {

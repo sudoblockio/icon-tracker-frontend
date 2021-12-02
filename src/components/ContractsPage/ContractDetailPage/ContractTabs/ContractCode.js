@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
-import { getSrcCodeLink, getContractABI } from '../../../../redux/store/iiss'
+import { getContractABI } from '../../../../redux/store/iiss'
 import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
@@ -18,24 +18,24 @@ class ContractCode extends Component {
         const { contract } = this.props
         const { data } = contract
         const { public_key } = data
-        this.getDownloadLink()
         const cxABICode = await getContractABI(public_key)
-        console.log(cxABICode, "cx abi code")
-        const srcCodeLink = await getSrcCodeLink(public_key)
-        this.setState({activeLink: srcCodeLink, cxABI: cxABICode})
+        let abi, code
+        cxABICode ? abi = cxABICode.abi : abi=""
+        cxABICode ? code = cxABICode.source_code_link : code =""
+        // const srcCodeLink = await getSrcCodeLink(public_key)
+        this.setState({activeLink: code, cxABI: abi})
     }
 
-    getDownloadLink = async () => {
-        const { contract } = this.props
-        const { data } = contract
-        const { public_key, newVersion } = data
-        if (isValidData(public_key)) {
-            const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
-            console.log(activeLink, "activeLink in is valid data")
-            const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
-            this.setState({ activeLink, updatedLink })
-        }
-    }
+    // getDownloadLink = async () => {
+    //     const { contract } = this.props
+    //     const { data } = contract
+    //     const { public_key, newVersion } = data
+    //     if (isValidData(public_key)) {
+    //         // const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
+    //         // const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
+    //         // this.setState({ activeLink, updatedLink })
+    //     }
+    // }
 
     render() {
         console.log(this.state, "cx code state")
@@ -43,8 +43,7 @@ class ContractCode extends Component {
         const { activeLink, updatedLink } = this.state
         const { contract } = this.props
         const { data } = contract
-        console.log(data, "render code data")
-        const { public_key, name, symbol, contractVersion, newVersion } = data
+        const { public_key, name, symbol, } = data
         // const { loading, data: abiData, error } = contractAbi
         return (
             <div className="contents">
