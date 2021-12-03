@@ -196,19 +196,10 @@ class AddressInfo extends Component {
                                         <i className="img"/>Connected to ICONex
                                     </span>
                                     <span className={`toggle${disabled ? ' disabled' : ''}`}>
-                                        <em>
-                                            <input
-                                                id="cbox-02"
-                                                className="cbox-type"
-                                                type="checkbox"
-                                                name="notification"
-                                                onChange={this.onNotificationChange}
-                                                checked={notification}
-                                                disabled={disabled}
-                                            />
-                                            <label htmlFor="cbox-02"
-                                                   className="label _img"/>Notifications<span>(Beta)</span>
-                                        </em>
+                                        
+                                            
+                                            <span><QrCodeButton address={_address} isSpan/></span>
+                                        
                                     </span>
                                 </p>
                             ) : (
@@ -296,7 +287,7 @@ class AddressInfo extends Component {
                                             <td>Address</td>
                                             <td colSpan={is_prep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                                 {scam && <span className="scam-tag">Scam</span>}
-                                                {_address} <QrCodeButton address={_address}/>
+                                                {_address} {/*<QrCodeButton address={_address}/>*/}
                                                 <CopyButton data={_address} title={'Copy Address'} isSpan/>
                                                 <span className="show-node-addr"
                                                       style={is_prep ? {display: ""} : {display: "none"}}

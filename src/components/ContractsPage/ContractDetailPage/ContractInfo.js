@@ -42,7 +42,7 @@ class ContractInfo extends Component {
                                                 <td>Address</td>
                                                 <td colSpan="3" className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
-                                                    {data.public_key} <QrCodeButton address={data.public_key} />
+                                                    {data.public_key} {/*<QrCodeButton address={data.public_key/>*/} 
                                                     <CopyButton data={data.public_key} title={'Copy Address'} isSpan />
                                                     <ReportButton address={data.public_key} />
                                                 </td>
@@ -126,6 +126,7 @@ class ContractInfo extends Component {
 class DetailButton extends Component {
     handleClick = () => {
         const { contractAddr } = this.props
+        console.log(this.props, "detail button props")
         this.props.contractDetailPopup({ contractAddr })
     }
 

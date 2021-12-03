@@ -21,9 +21,7 @@ class AddressesDetailPage extends Component {
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
         const addr = data.public_key
-        console.log(data, "What addr")
         const tokens  = this.props.addressTokenTxList({ addr, page: 1, count: 10 })
-        console.log(tokens, "What tokens?")
 
     }
     render() {
@@ -39,7 +37,6 @@ class AddressesDetailPage extends Component {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
 
-        console.log(this.props.addressInternalTxList, "props function on tabs")
         if (transaction_count && Number(transaction_count) !== 0) {
             console.log(transaction_count, "hitting the first getList")
             TABS.push(ADDRESS_TABS[1]) 
@@ -72,7 +69,7 @@ class AddressesDetailPage extends Component {
                 this.props.addressRewardList({ address })
             })    
         }
-        {console.log(getList, "What getList")}
+
         return (
             
             <DetailPage

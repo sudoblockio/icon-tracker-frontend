@@ -15,7 +15,8 @@ class QrCodeButton extends Component {
     render() {
         return (
             <span className="qrcode" onClick={this.handleClick}>
-                <i className="img" />
+                {/* <i className="img" /> */}
+                + Verify a Contract
             </span>
         )
     }
