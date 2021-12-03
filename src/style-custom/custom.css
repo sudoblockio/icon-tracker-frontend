@@ -485,6 +485,11 @@
 input.txt-type-search.modified {
     padding: 12px 32px 12px 10px !important;
 }
+input.txt-type-search.modified.cv{
+    padding:5px 5px 5px 5px ;
+    /* background-color: blue; */
+}
+
 
 .table-typeB td.balance p span:first-child{width: 180px;}
 .table-typeB td.balance p span:nth-of-type(2){width: 300px;}
@@ -690,3 +695,12 @@ i.img.node-addr{
 }
 
 div.table-box table.table-typeP thead tr{height: 80px;}
+
+.cv-label {
+    text-align: left;
+}
+
+div.cv-label-container {
+    display:flex;
+    justify-content: space-between;
+}
