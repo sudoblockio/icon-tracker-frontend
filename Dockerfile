@@ -21,12 +21,7 @@ RUN yarn run build
 
 # production environment
 FROM nginx:1.21 as prod
-RUN apt update \
-    && apt install -y software-properties-common \
-    && apt-add-repository -y ppa:hda-me/nginx-stable \
-    && apt update \
-    && apt install -y brotli nginx-module-brotli \
-    && rm -rf /var/lib/apt/lists/*
+COPY nginx/modules /etc/nginx/modules
 COPY --from=build /app/nginx_main.conf /etc/nginx/nginx.conf
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
