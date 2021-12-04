@@ -20,9 +20,7 @@ RUN apk --no-cache upgrade
 RUN yarn run build
 
 # production environment
-FROM nginx:1.16 as prod
-COPY nginx/modules /etc/nginx/modules
-COPY --from=build /app/nginx_main.conf /etc/nginx/nginx.conf
+FROM nginx:1.21 as prod
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 8080
