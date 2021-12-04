@@ -20,7 +20,12 @@ RUN apk --no-cache upgrade
 RUN yarn run build
 
 # production environment
-FROM nginx:1.17 as prod
+FROM nginx:1.21 as prod
+RUN apt-add-repository -y ppa:hda-me/nginx-stable \
+    && apt-get update \
+    && apt-get install brotli nginx nginx-module-brotli \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=build /app/nginx_main.conf /etc/nginx/nginx.conf
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 8080
