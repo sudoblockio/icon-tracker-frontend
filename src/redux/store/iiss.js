@@ -144,7 +144,7 @@ export async function getPRepsLegacy() {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -171,7 +171,7 @@ export async function getIISSInfo() {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -211,7 +211,7 @@ export async function getPRep(address) {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -229,7 +229,7 @@ export async function getLastBlock() {
             method: "icx_getLastBlock",
             id: randomUint32(),
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -263,7 +263,7 @@ export async function getStepPrice() {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -321,7 +321,7 @@ export async function prepMain() {
 export async function prepSub() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/prep/sub`, { count: 100 }))
+        trackerApi.get(makeUrl(`/v1/iiss/prep/sub`, { count: 100 }))
             .then(result => {
                 const { data } = result.data
                 const _data = data.map((item, index) => {
@@ -358,7 +358,7 @@ export async function getStake(address) {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -396,7 +396,7 @@ export async function queryIScore(address) {
                 }
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -427,7 +427,7 @@ export async function getBalance(address) {
                 address
             }
         }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
+        walletApi.post(`/api/v1`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -484,7 +484,7 @@ export async function getProposals() {
         // }
         // resolve(mock)
         const walletApi = await walletApiInstance()
-        walletApi.post(`/api/v3`, JSON.stringify({
+        walletApi.post(`/api/v1`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",
@@ -601,7 +601,7 @@ export async function getProposal(id) {
         // }
         // resolve(mock)
         const walletApi = await walletApiInstance()
-        walletApi.post(`/api/v3`, JSON.stringify({
+        walletApi.post(`/api/v1`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",
@@ -630,7 +630,7 @@ export async function getProposal(id) {
 export async function addressReward(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/address/claimIScoreList`, payload))
+        trackerApi.get(makeUrl(`/v1/address/claimIScoreList`, payload))
             .then(result => {
                 resolve(result.data)
             })

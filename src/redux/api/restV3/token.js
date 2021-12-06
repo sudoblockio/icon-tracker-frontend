@@ -17,7 +17,7 @@ export async function tokenList(payload) {
 export async function tokenTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/token/txList', payload))
+    trackerApi.get(makeUrl('/v1/token/txList', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -30,7 +30,7 @@ export async function tokenTxList(payload) {
 export async function tokenSummary(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/token/summary', payload))
+    trackerApi.get(makeUrl('/v1/token/summary', payload))
       .then(result => {
         resolve(result.data)
       })
@@ -47,7 +47,7 @@ export async function tokenTransfersList(payload) {
 export async function tokenHoldersList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v3/token/holders', payload))
+    trackerApi.get(makeUrl('/v1/token/holders', payload))
       .then(result => {
         resolve(result.data)
       })

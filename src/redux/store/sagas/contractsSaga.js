@@ -57,7 +57,7 @@ export function* contractListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_LIST_API, action.payload);
-
+    console.log(payload, "the very first place we hit the endpoint")
     if (payload.status === 200) {
       yield put({ type: AT.contractListFulfilled, payload });
     }

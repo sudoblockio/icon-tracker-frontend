@@ -3,7 +3,7 @@ import { getWalletApiUrl } from "../redux/api/restV3/config"
 
 export async function getUrl(params) {
   const walletApiUrl = await getWalletApiUrl()
-  const provider = new HttpProvider(`${walletApiUrl}/api/v3`)
+  const provider = new HttpProvider(`${walletApiUrl}/api/v1`)
   const iconService = new IconService(provider)
   const scoreAddress =
     walletApiUrl === "https://wallet.icon.foundation"
