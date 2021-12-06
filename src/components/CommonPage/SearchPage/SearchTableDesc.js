@@ -5,7 +5,7 @@ import { numberWithCommas } from '../../../utils/utils'
 class SearchTableDesc extends Component {
     render() {
         const { searchType, listSize, totalSize } = this.props
-        console.log(this.props, "search page props")
+
 
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
@@ -13,10 +13,10 @@ class SearchTableDesc extends Component {
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
-                        <span className="cont right" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.VERIFICATION })}}>
-                            <i className="img"></i>
+                        <span className="cont right">
+
                             A total of {_listSize} verified contract source
-                            codes found. [+] Contract Verification
+                            codes found. 
                             
                         </span>
                         

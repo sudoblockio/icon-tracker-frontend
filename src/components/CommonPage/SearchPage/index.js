@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+  import React, { Component } from 'react'
 import queryString from 'query-string'
 import SearchTableHead from './SearchTableHead'
 import SearchTableBody from './SearchTableBody'
