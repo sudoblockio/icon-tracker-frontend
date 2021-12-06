@@ -31,14 +31,13 @@ class RecentBlocks extends Component {
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
-            this.state.bxRows.unshift(this.state.recentBx)
+            // this.state.bxRows.unshift(this.state.recentBx)
         }
 
         this.bxsocket.onmessage = async (event) =>  {
             this.latestBx = event.data
             this.state.bxRows.unshift(JSON.parse(this.latestBx))
             this.setState({liveTrClass:"flat"})
-            // const blockListData = await blockList()
             this.recentBx = this.state.recentBx
             this.setState({recentBx: this.recentBx})
 
@@ -89,6 +88,7 @@ class RecentBlocks extends Component {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
         const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
+        console.log(list, "what is the list? ")
         const latest = this.state.liveTableRow
 
         return (
@@ -129,6 +129,7 @@ class RecentBlocks extends Component {
 
                             {list.map((block, index) => {
                                 const { number, createDate, hash, transaction_count, timestamp } = block
+                                console.log(block, "what is the block? ")
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
