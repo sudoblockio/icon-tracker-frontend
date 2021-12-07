@@ -1,4 +1,4 @@
-import { walletApiInstance, trackerApiInstance } from '../api/restV3/config'
+import { walletApiInstance, trackerApiInstance, getTrackerApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl } from '../../utils/utils'
 
 
@@ -61,29 +61,17 @@ export async function getTotalSupply() {
 }
 
 export async function getContractABI (addr) {
-    const trackerApi = await trackerApiInstance()
-    // return new Promise((resolve, reject)  => {
-    //     trackerApi.get(`/api/v1/contracts/${addr}`)
-    //         .then(result => {
-    //             console.log(result, "the result we need coode")
-    //             resolve(result.abi)
-    //         })
-    //         .catch(error => {
-    //             reject(error)
-    //         })
-    // });  
+    const apiUrl = await getTrackerApiUrl()
     try{
         if (addr !== undefined) {
-            const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
+            const cxdata = await fetch(`${apiUrl}/api/v1/contracts/${addr}`)
             const cxJson = await cxdata.json()
-            console.log(cxJson, "cx json")
             let abi;
             cxJson ? abi=cxJson.abi : abi=0
             return abi;
             }
     } catch(e) {
         console.log(e, "error")
-        console.log("abi didn't work")
     }
 }
 
