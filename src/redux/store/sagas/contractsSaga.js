@@ -293,13 +293,15 @@ export function* icxCallFunc(action) {
 
 export function* readContractInformationFunc(action) {
   try {
-    console.log(action.payload, "what is the score action payload")
     const score = yield call(ICX_GET_CONTRACT, action.payload.address);
+    console.log(action.payload, "score is abi")
+    console.log(score, "score is response")
+
     if (score.length === 0) {
       const { message } = score.error
       throw new Error(message)
     }
-    console.log(score, "score is abi")
+    
     const abiData = score
     const readOnlyFunc = (abiData || []).filter(func => func["type"] === "function" && func["readonly"] === "0x1")
     const { address } = action.payload
