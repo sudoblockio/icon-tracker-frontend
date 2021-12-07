@@ -114,7 +114,7 @@ async function makeData(origin, address, txHash) {
 
 async function getTxDetail(host, txHash) {
     try {
-        const url = `${host}/v3/transaction/txDetail?txHash=${txHash}`
+        const url = `${host}/v1/transaction/txDetail?txHash=${txHash}`
         const response = await fetch(url)
         const { result, data, description } = await response.json()
         if (result === '200') {

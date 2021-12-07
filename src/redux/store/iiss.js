@@ -315,7 +315,7 @@ export async function getStepPrice() {
 export async function prepMain() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v3/iiss/prep/main`, { count: 22 }))
+        trackerApi.get(makeUrl(`/v1/iiss/prep/main`, { count: 22 }))
             .then(result => {
                 const { data } = result.data
                 const _data = data.map((item, index) => {

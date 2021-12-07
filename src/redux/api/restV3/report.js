@@ -5,7 +5,7 @@ import { trackerApiInstance } from './config'
     const {reported, reporter, imgFile, refUrl} = payload;
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.post(makeUrl(`/v3/report/address?reported=${reported}&reporter=${reporter}&refUrl=${refUrl}`,imgFile))
+      trackerApi.post(makeUrl(`/v1/report/address?reported=${reported}&reporter=${reporter}&refUrl=${refUrl}`,imgFile))
         .then(result => {
           resolve(result.data)
           if (result.data.result === "208") {
