@@ -92,11 +92,11 @@ export function* contractListSearchFunc(action) {
 
 export function* contractInfoFunc(action) {
   try {
-    console.log(action.payload, "cx saga payload info")
+
     const payload = yield call(CONTRACT_INFO_API, action.payload.addr);
-    console.log(payload, "cx saga payload info res")
+
     if (payload.status === 200 && payload.data !== "NO_DATA") {
-      console.log(action.payload, "the thing")
+
 
       // const  depositInfo  = yield call(getScoreStatus, action.payload.addr)
       // payload.data.depositInfo = depositInfo
@@ -238,8 +238,6 @@ export function* contractEventLogListFunc(action) {
 export function* icxGetSroreFunc(action) {
   try {
     const payload = yield call(ICX_GET_CONTRACT, action.payload.address);
-    console.log(payload, "saga payload")
-    console.log(action.payload, "saga action payload")
     if (payload.length !== 0) {
       yield put({ type: AT.icxGetScoreFulfilled, payload: { data: payload } });
     }

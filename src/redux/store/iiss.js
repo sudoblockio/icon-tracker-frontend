@@ -496,7 +496,8 @@ export async function getProposals() {
         // }
         // resolve(mock)
         const walletApi = await walletApiInstance()
-        walletApi.post(`/api/v1`, JSON.stringify({
+        // TEST: prod endpoint works not dev:
+        walletApi.post(`https://api.icon.geometry.io/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",
@@ -613,7 +614,7 @@ export async function getProposal(id) {
         // }
         // resolve(mock)
         const walletApi = await walletApiInstance()
-        walletApi.post(`/api/v1`, JSON.stringify({
+        walletApi.post(`https://api.icon.geometry.io/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",
