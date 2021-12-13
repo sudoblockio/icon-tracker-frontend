@@ -34,17 +34,16 @@ export async function coinGeckoCurrentUSD () {
 }   
 
 export async function getSrcCodeLink (addr) {
-    try{
-        if (addr !== undefined) {
-            const cxdata = await fetch(`https://explorer.icon.geometry-dev.net/api/v1/contracts/${addr}`)
-            const cxJson = await cxdata.json()
-            let code;
-            cxJson? code=cxJson.source_code_link : code=0
-            return code; }
-    }
-    catch (e){
-        console.log(e, "error")
-    }
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/contracts/${addr}`)
+            .then(result => {
+                resolve(result.data.source_code_link)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });  
 }
 
 export async function getContractListCount() {
