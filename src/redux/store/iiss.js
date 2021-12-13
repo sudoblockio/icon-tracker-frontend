@@ -74,18 +74,16 @@ export async function getTotalSupply() {
 }
 
 export async function getContractABI (addr) {
-    const apiUrl = await getTrackerApiUrl()
-    try{
-        if (addr !== undefined) {
-            const cxdata = await fetch(`${apiUrl}/api/v1/contracts/${addr}`)
-            const cxJson = await cxdata.json()
-            let abi;
-            cxJson ? abi=cxJson.abi : abi=0
-            return abi;
-            }
-    } catch(e) {
-        console.log(e, "error")
-    }
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/contracts/${addr}`)
+            .then(result => {
+                resolve(result.data.abi)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    }); 
 }
 
 
