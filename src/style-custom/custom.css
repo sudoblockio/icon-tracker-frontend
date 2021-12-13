@@ -704,3 +704,9 @@ div.cv-label-container {
     display:flex;
     justify-content: space-between;
 }
+
+.event-log-table {
+    overflow-wrap: break-word;
+    word-break: break-all;
+    width: 90%;
+}

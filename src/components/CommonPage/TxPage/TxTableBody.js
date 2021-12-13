@@ -270,7 +270,7 @@ class TxTableBody extends Component {
 							<td>{data.method}</td>
 							{console.log(data, "the whole data")}
 							{console.log(data.indexed, "data indexed")}
-							<td>{data.address}{data.indexed}{data.data}{data.indexed}</td>
+							<td className="event-log-table">{data.address}{data.indexed}{data.data}{data.indexed}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
