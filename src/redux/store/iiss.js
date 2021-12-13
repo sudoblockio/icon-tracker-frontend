@@ -156,7 +156,7 @@ export async function getPRepsLegacy() {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -183,7 +183,7 @@ export async function getIISSInfo() {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -241,7 +241,7 @@ export async function getLastBlock() {
             method: "icx_getLastBlock",
             id: randomUint32(),
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -275,7 +275,7 @@ export async function getStepPrice() {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -614,7 +614,7 @@ export async function getProposal(id) {
         // }
         // resolve(mock)
         const walletApi = await walletApiInstance()
-        walletApi.post(`https://api.icon.geometry.io/api/v3`, JSON.stringify({
+        walletApi.post(`/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",
