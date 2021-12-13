@@ -3,7 +3,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
     case 'dev-mainnet':
         configJson =  {   
             "VERSION": "1.0.18_20190313_0",
-            "TRACKER_API_URL": 'https://explorer.icon.geometry-dev.net',
+            "TRACKER_API_URL": 'https://tracker.icon.geometry.io',
             "WALLET_API_URL": "https://icon.geometry-dev.net",
             "__IS_SOLO_VERSION": false}
         break
