@@ -4,8 +4,12 @@ import { getTrackerApiUrl } from '../redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { TokenLink } from '../components'
+import { getContractListCount } from '../redux/store/iiss'
 import { REDUX_STEP, SERVER_TX_TYPE } from './const'
 import { getIsSoloVersion } from '../redux/api/restV3/config'
+
+
+
 
 moment.updateLocale('en', {
     relativeTime: {
@@ -355,18 +359,38 @@ export function getArrayState(step, state, action, dataType) {
         }
         case REDUX_STEP.FULFILLED:
             const { data, listSize, totalSize } = payload
+            console.log(data, "redux step data")
             console.log(payload.headers, "headers available")
-            return {
-                ...state,
-                [dataType]: {
-                    ...state[dataType],
-                    loading: false,
-                    data: data || [],
-                    listSize: 50000 || 0,
-                    totalSize: payload.headers? payload.headers['x-total-count']: 0,
-                    error: '',
-                },
+            // if the data is a contract list response
+            if (data.status !== undefined) {
+                // get the total count from contracts 
+                
+                return {
+                    ...state,
+                    [dataType]: {
+                        ...state[dataType],
+                        loading: false,
+                        data: data || [],
+                        listSize: 50000 || 0,
+                        totalSize: payload.headers? payload.headers['x-total-count']: 0,
+                        error: '',
+                    },
+                }
+            } else {
+                // if the data is not a contract list reponse:
+                return {
+                    ...state,
+                    [dataType]: {
+                        ...state[dataType],
+                        loading: false,
+                        data: data || [],
+                        listSize: 50000 || 0,
+                        totalSize: payload.headers? payload.headers['x-total-count']: 0,
+                        error: '',
+                    },
+                }
             }
+
         case REDUX_STEP.REJECTED:
             const { error } = action
             return {

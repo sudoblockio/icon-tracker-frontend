@@ -47,6 +47,19 @@ export async function getSrcCodeLink (addr) {
     }
 }
 
+export async function getContractListCount() {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/contracts`)
+            .then(result => {
+                resolve(result)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });  
+}
+
 export async function getTotalSupply() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject)  => {
