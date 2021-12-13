@@ -22,10 +22,9 @@ class SearchTableBody extends Component {
 			const { searchType, data } = this.props
 			switch (searchType) {
 				case SEARCH_TYPE.CONTRACTS:
-					console.log(data, "the contract data")
 					return (
 						<tr>
-							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
+							<td className="on"><span className="ellipsis"><AddressLink to={data.address || data.public_key} /></span></td>
 							<td>{data.name || '-'}</td>
 							{/* <td>{data.compiler || '-'}</td> */}
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
