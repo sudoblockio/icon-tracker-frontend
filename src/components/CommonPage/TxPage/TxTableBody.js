@@ -277,7 +277,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							
-							<td>{data.address}{data.indexed}{data.data}</td>
+							<td className='event-log-table'>{data.address}{data.indexed}{data.data}</td>
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
