@@ -34,13 +34,14 @@ class RecentBlocks extends Component {
         
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
-            this.state.bxRows? this.state.bxRows.push(this.state.recentBx) : console.log("no rows")
+            this.state.bxRows? this.state.bxRows.unshift(this.state.recentBx) : console.log("no rows")
         }
 
         this.bxsocket.onmessage = async (event) =>  {
+            console.log(event.data, "the events")
             this.setState({liveTrClass:"flat"})
-            if (this.msgCounter === 0){
-                this.msgCounter++ 
+            // if (this.msgCounter === 0){
+            //     this.msgCounter++ 
                 this.latestBx = event.data 
                 this.state.bxRows? this.state.bxRows.unshift(JSON.parse(this.latestBx)) : console.log("no tx rows")
                 try{
@@ -52,9 +53,9 @@ class RecentBlocks extends Component {
                      console.log(e, "websocket error")
                  }
 
-            } else {
-                this.msgCounter = 0
-            }
+            // } else {
+            //     this.msgCounter = 0
+            // }
         }
     }
 
