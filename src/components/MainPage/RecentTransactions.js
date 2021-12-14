@@ -15,19 +15,18 @@ class RecentTransactions extends Component {
             txRows: []
         }
     }
-
     txsocket;
-    // latest is the top most recent table row
     latestTx;
-    // recent is the rest of the rows called from REST
     recentTx;
     msgCounter = 0 
     txRows = []
+
     async componentDidMount() {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
         this.setState({recentTx: this.recentTx, txRows: txListData.data})
         this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/transactions")
+        
         this.txsocket.onopen = (event) => {
             console.log("connection established")
             this.state.txRows? this.state.txRows.push(this.state.recentTx) : console.log("no rows")
@@ -35,47 +34,34 @@ class RecentTransactions extends Component {
 
             this.txsocket.onmessage = async (event) =>  {
                 this.setState({liveTrClass:"flat"})
-            if (this.msgCounter === 0){
-                this.msgCounter++ 
-                this.latestTx = event.data 
-                
-                this.state.txRows? this.state.txRows.unshift(JSON.parse(this.latestTx)) : console.log("no tx rows")
-                
-            
-            // console.log(event, "entire socket event")
-            // const txListData = await transactionRecentTx()
-            // this.recentTx = txListData.data
-            // this.setState({recentTx: this.recentTx})
 
+                this.latestTx = event.data 
+                this.state.txRows? this.state.txRows.unshift(JSON.parse(this.latestTx)) : console.log("no tx rows")
                 try{
+                    if (this.msgCounter === 0){
+                        this.msgCounter++ 
                     const eventObj = JSON.parse(event.data)
                      this.setState({liveTableRow: eventObj})
                      this.setState({liveTrClass:"fade"})
+                    } else {
+                        this.msgCounter = 0
+                    }
                  }
                  catch (e) {
                      console.log(e, "websocket error")
                  }
 
-            } else {
-                this.msgCounter = 0
-            }
+
         }/*, 500)*/
-
     }
-
     componentWillUnmount() {
         this.txsocket? this.txsocket.close() : console.log("no websocket open")
-
     }
-    
     render() {
-
-
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
         const isSuccess = latest.receipt_status? Number(latest.receipt_status) === 1 : 1
-
         return (
             <li className="right">
                 <p className="title">Transactions</p>

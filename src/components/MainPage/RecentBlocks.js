@@ -38,24 +38,25 @@ class RecentBlocks extends Component {
         }
 
         this.bxsocket.onmessage = async (event) =>  {
-            console.log(event.data, "the events")
             this.setState({liveTrClass:"flat"})
-            // if (this.msgCounter === 0){
-            //     this.msgCounter++ 
+
                 this.latestBx = event.data 
                 this.state.bxRows? this.state.bxRows.unshift(JSON.parse(this.latestBx)) : console.log("no tx rows")
                 try{
+                    if (this.msgCounter === 0){
+                        this.msgCounter++ 
                     const eventObj = JSON.parse(event.data)
                      this.setState({liveTableRow: eventObj})
                      this.setState({liveTrClass:"fade"})
+                    } else {
+                        this.msgCounter = 0
+                    }
                  }
                  catch (e) {
                      console.log(e, "websocket error")
                  }
 
-            // } else {
-            //     this.msgCounter = 0
-            // }
+
         }
     }
 
@@ -94,7 +95,7 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(0, 9) : this.recentBx  ?  this.recentBx.slice(0,9) : []
+        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
 
         return (
