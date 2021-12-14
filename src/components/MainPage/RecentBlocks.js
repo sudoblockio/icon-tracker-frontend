@@ -24,12 +24,12 @@ class RecentBlocks extends Component {
     // recent is the rest of the rows called from REST
     recentBx;
     msgCounter = 0
-    txRows = []
+    bxRows = []
 
     async componentDidMount() {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
-        this.setState({recentBx: this.recentBx})
+        this.setState({recentBx: this.recentBx, bxRows: blockListData.data})
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
         
         this.bxsocket.onopen = (event) => {
@@ -42,7 +42,7 @@ class RecentBlocks extends Component {
             if (this.msgCounter === 0){
                 this.msgCounter++ 
                 this.latestBx = event.data 
-                this.state.txRows? this.state.txRows.unshift(JSON.parse(this.latestTx)) : console.log("no tx rows")
+                this.state.bxRows? this.state.bxRows.unshift(JSON.parse(this.latestBx)) : console.log("no tx rows")
                 try{
                     const eventObj = JSON.parse(event.data)
                      this.setState({liveTableRow: eventObj})
@@ -93,7 +93,7 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
+        const list = this.state.recentBx ? this.state.recentBx.slice(0, 9) : this.recentBx  ?  this.recentBx.slice(0,9) : []
         const latest = this.state.liveTableRow
 
         return (
