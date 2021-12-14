@@ -13,7 +13,6 @@ class RecentBlocks extends Component {
             liveTableRow: {},
             liveTrClass: "flat",
             play: true,
-            bxRows: []
         }
     }
 
@@ -22,26 +21,20 @@ class RecentBlocks extends Component {
     latestBx;
     // recent is the rest of the rows called from REST
     recentBx;
-    bxRows = []
 
     async componentDidMount() {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
-        this.setState({recentBx: this.recentBx, bxRows: this.recentBx})
-
+        this.setState({recentBx: this.recentBx})
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
-        console.log(this.state.liveTableRow, "live table row at did mount")
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
-            console.log(this.state.liveTableRow, "live table row at websocket open")
-            // this.state.bxRows.unshift(this.state.recentBx)
         }
-
         this.bxsocket.onmessage = async (event) =>  {
             this.latestBx = event.data
-            this.state.bxRows.unshift(JSON.parse(this.latestBx))
             this.setState({liveTrClass:"flat"})
-            this.recentBx = this.state.recentBx
+            const blockListData = await blockList()
+            this.recentBx = blockListData.data
             this.setState({recentBx: this.recentBx})
 
             try{
@@ -90,10 +83,8 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
-
+        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
         const latest = this.state.liveTableRow
-        console.log(latest, "the latest")
 
         return (
             <li className="left">
@@ -133,7 +124,6 @@ class RecentBlocks extends Component {
 
                             {list.map((block, index) => {
                                 const { number, createDate, hash, transaction_count, timestamp } = block
-
                                 return (
                                     <li key={index}>
                                         <p className="icon">B</p>
