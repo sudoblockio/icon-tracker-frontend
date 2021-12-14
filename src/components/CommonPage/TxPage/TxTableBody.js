@@ -216,12 +216,11 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
-
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
+							<TxHashCell isError={isError} txHash={data.transaction_hash} />
 							<DateCell date={data.age} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<TokenCell name={data.tokenName} address={data.contractAddr} />
 							<AmountCell amount={data.fee} symbol="ICX" />

@@ -19,7 +19,7 @@ export async function tokenTxList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(makeUrl('/api/v1/transactions/token-transfers', payload))
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

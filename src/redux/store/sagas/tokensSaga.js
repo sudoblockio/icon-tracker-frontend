@@ -68,7 +68,8 @@ function* tokenTxListFunc(action) {
     }
 
     const payload = yield call(TOKEN_TX_LIST_API, action.payload);
-    if (payload.result === '200') {
+    console.log(payload, "token tx payload")
+    if (payload.status === 200) {
       yield put({ type: AT.tokenTxListFulfilled, payload: payload });
     } else {
       throw new Error();
