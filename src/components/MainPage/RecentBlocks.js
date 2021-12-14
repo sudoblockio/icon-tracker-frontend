@@ -96,7 +96,7 @@ class RecentBlocks extends Component {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
         const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
-
+        console.log(list," whole list")
         const latest = this.state.liveTableRow
 
         return (
@@ -137,30 +137,30 @@ class RecentBlocks extends Component {
 
                             {list.map((block, index) => {
                                 const { number, createDate, hash, transaction_count, timestamp } = block
-
+                                const time = timestamp !== undefined? timestamp : new Date()
                                     return (
                                         <li key={index}>
                                             <p className="icon">B</p>
                                             <p className="a">
                                                 Block
                                                 <em>
-                                                    <BlockLink to={number} label={numberWithCommas(number) || 2000} />
+                                                    <BlockLink to={number || latest.number-1} label={numberWithCommas(number) || numberWithCommas(latest.number-1)} />
                                                 </em>
                                             </p>
                                             <p className="b">
                                                 Transactions
-                                                <em>{numberWithCommas(transaction_count)}</em>
+                                                <em>{numberWithCommas(transaction_count || latest.transaction_count)}</em>
                                             </p>
                                             <p className="c">
                                                 Hash
                                                 <em>
-                                                    <BlockLink to={number} label={hash} />
+                                                    <BlockLink to={number || latest.number-1} label={hash || latest.hash} />
                                                 </em>
                                             </p>
                                             <p className="d">
                                                 Time (UTC+9)
     
-                                                <em>{ new Date(timestamp / 1000).toLocaleTimeString()}</em>
+                                                <em>{ new Date(time / 1000).toLocaleTimeString()}</em>
                                             </p>
                                         </li>
                                     ) 
