@@ -13,6 +13,8 @@ class RecentBlocks extends Component {
             liveTableRow: {},
             liveTrClass: "flat",
             play: true,
+            bxRows: []
+            
         }
     }
 
@@ -21,29 +23,37 @@ class RecentBlocks extends Component {
     latestBx;
     // recent is the rest of the rows called from REST
     recentBx;
+    msgCounter = 0
+    txRows = []
 
     async componentDidMount() {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
         this.setState({recentBx: this.recentBx})
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
+        
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
+            this.state.bxRows? this.state.bxRows.push(this.state.recentBx) : console.log("no rows")
         }
-        this.bxsocket.onmessage = async (event) =>  {
-            this.latestBx = event.data
-            this.setState({liveTrClass:"flat"})
-            const blockListData = await blockList()
-            this.recentBx = blockListData.data
-            this.setState({recentBx: this.recentBx})
 
-            try{
-               const eventObj = JSON.parse(event.data)
-                this.setState({liveTableRow: eventObj})
-                this.setState({liveTrClass:"fade"})
-            }
-            catch (e) {
-                console.log(e, "websocket error")
+        this.bxsocket.onmessage = async (event) =>  {
+            this.setState({liveTrClass:"flat"})
+            if (this.msgCounter === 0){
+                this.msgCounter++ 
+                this.latestBx = event.data 
+                this.state.txRows? this.state.txRows.unshift(JSON.parse(this.latestTx)) : console.log("no tx rows")
+                try{
+                    const eventObj = JSON.parse(event.data)
+                     this.setState({liveTableRow: eventObj})
+                     this.setState({liveTrClass:"fade"})
+                 }
+                 catch (e) {
+                     console.log(e, "websocket error")
+                 }
+
+            } else {
+                this.msgCounter = 0
             }
         }
     }

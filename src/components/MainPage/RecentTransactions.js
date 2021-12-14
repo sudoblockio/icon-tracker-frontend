@@ -26,7 +26,7 @@ class RecentTransactions extends Component {
     async componentDidMount() {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
-        this.setState({recentTx: this.recentTx, txRows: this.recentx})
+        this.setState({recentTx: this.recentTx, txRows: txListData.data})
         this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/transactions")
         this.txsocket.onopen = (event) => {
             console.log("connection established")
@@ -34,10 +34,11 @@ class RecentTransactions extends Component {
         };
 
             this.txsocket.onmessage = async (event) =>  {
+                this.setState({liveTrClass:"flat"})
             if (this.msgCounter === 0){
                 this.msgCounter++ 
                 this.latestTx = event.data 
-                this.setState({liveTrClass:"flat"})
+                
                 this.state.txRows? this.state.txRows.unshift(JSON.parse(this.latestTx)) : console.log("no tx rows")
                 
             
@@ -86,7 +87,7 @@ class RecentTransactions extends Component {
                     ) : (
                         <ul className="list" style={{ height: list.length === 0 ? 511 : '' }}>
                             
-                            <li key={1} className={`${this.state.liveTrClass}`}>
+                            <li key={1}  className={`${this.state.liveTrClass}`}>
                                          <p className={'icon'}>T</p>
                                         <p className="a">
                                             Status
