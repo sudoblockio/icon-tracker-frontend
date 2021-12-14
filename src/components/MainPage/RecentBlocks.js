@@ -137,7 +137,7 @@ class RecentBlocks extends Component {
 
                             {list.map((block, index) => {
                                 const { number, createDate, hash, transaction_count, timestamp } = block
-                                if (block.number !== undefined) {
+
                                     return (
                                         <li key={index}>
                                             <p className="icon">B</p>
@@ -164,7 +164,7 @@ class RecentBlocks extends Component {
                                             </p>
                                         </li>
                                     ) 
-                                }
+                              
 
                             })}
                         </ul>
