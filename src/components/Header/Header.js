@@ -51,19 +51,19 @@ class Header extends Component {
                                 >
                                     <span>Transaction</span>
                                 </li>
-                                {/* <li>
+                                <li>
                                     <span>
                                         Token
                                         <em className="img" />
                                     </span>
                                     <ol className="sub-menu">
-                                        <li
+                                        {/* <li
                                             onClick={() => {
                                                 this.props.history.push('/tokens')
                                             }}
                                         >
                                             <span>Tokens List</span>
-                                        </li>
+                                        </li> */}
                                         <li
                                             onClick={() => {
                                                 this.props.history.push('/tokentransfers')
@@ -72,7 +72,7 @@ class Header extends Component {
                                             <span>Token Transfers List</span>
                                         </li>
                                     </ol>
-                                </li> */}
+                                </li>
                                 <li>
                                     <span>
                                         Governance

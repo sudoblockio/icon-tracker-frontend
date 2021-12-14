@@ -95,7 +95,8 @@ class RecentBlocks extends Component {
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(1, 9) : this.recentBx  ?  this.recentBx.slice(1,9) : []
+        const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
+
         const latest = this.state.liveTableRow
 
         return (
@@ -136,32 +137,35 @@ class RecentBlocks extends Component {
 
                             {list.map((block, index) => {
                                 const { number, createDate, hash, transaction_count, timestamp } = block
-                                return (
-                                    <li key={index}>
-                                        <p className="icon">B</p>
-                                        <p className="a">
-                                            Block
-                                            <em>
-                                                <BlockLink to={number} label={numberWithCommas(number)} />
-                                            </em>
-                                        </p>
-                                        <p className="b">
-                                            Transactions
-                                            <em>{numberWithCommas(transaction_count)}</em>
-                                        </p>
-                                        <p className="c">
-                                            Hash
-                                            <em>
-                                                <BlockLink to={number} label={hash} />
-                                            </em>
-                                        </p>
-                                        <p className="d">
-                                            Time (UTC+9)
+                                if (block.number !== undefined) {
+                                    return (
+                                        <li key={index}>
+                                            <p className="icon">B</p>
+                                            <p className="a">
+                                                Block
+                                                <em>
+                                                    <BlockLink to={number} label={numberWithCommas(number) || 2000} />
+                                                </em>
+                                            </p>
+                                            <p className="b">
+                                                Transactions
+                                                <em>{numberWithCommas(transaction_count)}</em>
+                                            </p>
+                                            <p className="c">
+                                                Hash
+                                                <em>
+                                                    <BlockLink to={number} label={hash} />
+                                                </em>
+                                            </p>
+                                            <p className="d">
+                                                Time (UTC+9)
+    
+                                                <em>{ new Date(timestamp / 1000).toLocaleTimeString()}</em>
+                                            </p>
+                                        </li>
+                                    ) 
+                                }
 
-                                            <em>{ new Date(timestamp / 1000).toLocaleTimeString()}</em>
-                                        </p>
-                                    </li>
-                                )
                             })}
                         </ul>
                     )}
