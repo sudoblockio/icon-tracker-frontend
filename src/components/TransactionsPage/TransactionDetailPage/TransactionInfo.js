@@ -46,6 +46,8 @@ class TransactionInfo extends Component {
 		
 	}
 
+
+
 	componentWillReceiveProps(nextProps) {
 		const { download } = this.state
 		if (download) {
@@ -66,11 +68,20 @@ class TransactionInfo extends Component {
 			this.setState({
 				download: {
 					link, name
-				}
+				},
+				errMsg: []
 			})
 		}
 	}
-
+	errorMsgList =[]
+	failMsg = async (txHash) => {
+		const msg = await getFailMessage(txHash)
+		// console.log(typeof(this.errorMsgList), "tis error ms list")
+		// this.errorMsgList? this.errorMsgList.push(msg) : console.log("no")
+		// this.errorMsgList = this.errorMsgList[0];
+		// this.setState({errMsg: this.errorMsgList[0]})
+		
+	}
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
@@ -78,16 +89,10 @@ class TransactionInfo extends Component {
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
-	failMsg = async (txHash) => {
-		const msg = await getFailMessage(txHash)
-		console.log(msg, "the message")
-		this.errorMsgList.push(msg)
-		this.errorMsgList = this.errorMsgList[0];
-		console.log(this.errorMsgList, "what list m8")
-	}
-	errorMsgList = []
+
 
 	render()  {
+		
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
@@ -129,20 +134,19 @@ class TransactionInfo extends Component {
 				const isFail = Number(receipt_status) === 0
 				const isSuccess = Number(receipt_status) === 1
 				const isErrorMsg = isFail? this.failMsg(hash) : null
+
 				const ErrorFn = () => {
 					const bulletmsg = this.errorMsgList.map( (msg) =>
 					<li>{msg}</li>
 					);
-					
 					return (
-						
 						<ul>{bulletmsg}</ul>
 					)
 				}
 
 				const scam = reportedCount >= 10 ?  true: false;
-				
-
+				console.log(this.errorMsgList, "error message list")
+				console.log(this.state, "the whole state")
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -165,7 +169,8 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `-` && <ul><li>{this.errorMsgList.map(msg => <li>`${msg}`</li>)}</li></ul>}</td>
+											{console.log(this.errorMsgList.length, "in comp")}
+											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${this.errorMsgList}`}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>

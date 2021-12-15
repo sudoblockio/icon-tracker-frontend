@@ -93,7 +93,8 @@ class TxTableBody extends Component {
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
 			const addressInData = data.address
-			const isError = data.state === 0
+			console.log(data, "the data loo")
+			const isError = data.receipt_status === 0
 			const formattedLogData = ""
 
 			
