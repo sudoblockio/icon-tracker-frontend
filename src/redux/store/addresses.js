@@ -132,7 +132,7 @@ export async function addressInternalTxList(payload) {
   // console.log(payload, "after if statement")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address}`)
+        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address}`, payload))
             .then(result => {
                 resolve(result)
             })
