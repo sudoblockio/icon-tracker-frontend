@@ -3,6 +3,7 @@ import { randomUint32, makeUrl } from '../../utils/utils'
 
 
 
+
 export const getPrepStatusList = async () => {
     try {
         const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
@@ -259,6 +260,51 @@ export async function getLastBlock() {
             })
     });
 }
+
+export const getFailMessage = async (txHash) => {
+    const param = {
+        jsonrpc: "2.0",
+        id: randomUint32(),
+        "method": "debug_getTrace",
+        "params": {
+            "txHash": `${txHash}`,
+        }
+    }
+    try {
+        const response = await fetch(`https://ctz.solidwallet.io/api/v3d`, {
+            method: 'POST',
+            body: JSON.stringify(param)
+        })
+        const data = await response.json()
+        console.log(data, "the ctz data")
+    } catch {
+
+    }
+}
+
+// export async function getFailMessage(txHash) {
+//     return new Promise(resolve => {
+//         const param = {
+//             jsonrpc: "2.0",
+//             id: randomUint32(),
+//             "method": "debug_getTrace",
+//             "params": {
+//                 "txHash": `${txHash}`,
+//             }
+//         }
+//         fetch(`https://ctz.solidwallet.io/api/v3d`, {
+//             method: 'POST',
+//             body: JSON.stringify(param)
+//         })
+//             .then(response => {
+//                 console.log(data, "the res")
+//                 resolve(response);
+//             })
+//             .catch(error => {
+//                 console.log(error, "the error")
+//             })
+//     } )
+// }
 
 export async function getStepPrice() {
     const walletApi = await walletApiInstance()

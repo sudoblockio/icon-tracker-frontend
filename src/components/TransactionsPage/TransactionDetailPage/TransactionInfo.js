@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
-import { getLastBlock, coinGeckoCurrentUSD } from '../../../redux/store/iiss';
+import { getLastBlock, coinGeckoCurrentUSD, getFailMessage } from '../../../redux/store/iiss';
 // import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
@@ -77,6 +77,11 @@ class TransactionInfo extends Component {
 		const link = `${url}/transaction/${this.props.transaction.data.txHash}`
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
+
+	failMsg = async (txHash) => {
+		const msg = await getFailMessage(txHash)
+		console.log(msg, "the message")
+	}
 	
 
 	render()  {
@@ -120,7 +125,8 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = Number(receipt_status) === 0
 				const isSuccess = Number(receipt_status) === 1
-				const isErrorMsg = isValidData(errorMsg)
+				const isErrorMsg = isFail? this.failMsg(hash) : null
+
 				const scam = reportedCount >= 10 ?  true: false;
 				
 				return (

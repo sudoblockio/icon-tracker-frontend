@@ -67,7 +67,7 @@ export async function transactionTxDetail(payload) {
 export async function transactionInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`/api/v1/transactions/internal/${payload}`)
+      trackerApi.get(makeUrl(`/api/v1/transactions/internal/${payload}`, payload))
         .then(result => {
           resolve(result)
         })
@@ -80,7 +80,7 @@ export async function transactionInternalTxList(payload) {
 export async function transactionEventLogList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
+      trackerApi.get(makeUrl(`/api/v1/logs?transaction_hash=${payload.txHash}` , payload))
         .then(result => {
           
           resolve(result)
