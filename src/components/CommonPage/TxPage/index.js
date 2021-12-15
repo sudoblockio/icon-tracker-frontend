@@ -141,6 +141,7 @@ class TxPage extends Component {
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
             case TX_TYPE.ADDRESS_REWARD:         
                 this.urlIndex = pathname.split('/')[2] || ''
+                console.log(this.urlIndex, "the url index")
                 this.pageId = pathname.split('/')[3] || 1
                 break
             case TX_TYPE.BLOCKS:
@@ -162,10 +163,13 @@ class TxPage extends Component {
     getTxListByPage = page => {
         console.log(page, "by page")
         const count = this.getCount()
+        console.log(count, "by page count")
         this.historyPush(page, count)
     }
 
     historyPush = (page, count) => {
+        console.log(count, "historyPush count")
+        console.log(page, "history push page")
         let url = ''
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
@@ -184,18 +188,20 @@ class TxPage extends Component {
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
             case TX_TYPE.ADDRESS_REWARD:        
                 url = this.makeUrl(page, count, this.urlIndex)
+                console.log(url, "top url")
                 break
             case TX_TYPE.BLOCKS:
             case TX_TYPE.ADDRESSES:
             case TX_TYPE.TRANSACTIONS:
             case TX_TYPE.TOKEN_TRANSFERS:
                 url = this.makeUrl(page, count)
+                console.log(url, "bottom url")
                 break
 
             default:
                 return
         }
-       
+       console.log(this.props.history, "this props history")
         this.props.history.push(url)
     }
 
