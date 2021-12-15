@@ -777,5 +777,6 @@ export function addAt(text) {
 
 export function closeEm(text) {
     if (!text) return ''
+    console.log(text, "the text")
     return text.replace(/<\/em>/gi, "</em").replace(/<\/em/gi, "</em>")
 }

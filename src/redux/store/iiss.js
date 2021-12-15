@@ -1,4 +1,4 @@
-import { walletApiInstance, trackerApiInstance, getTrackerApiUrl } from '../api/restV3/config'
+import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl } from '../../utils/utils'
 
 
@@ -271,7 +271,8 @@ export const getFailMessage = async (txHash) => {
         }
     }
     try {
-        const response = await fetch(`https://ctz.solidwallet.io/api/v3d`, {
+        const apiUrl = await getWalletApiUrl()
+        const response = await fetch(`${apiUrl}/api/v3d`, {
             method: 'POST',
             body: JSON.stringify(param)
         })

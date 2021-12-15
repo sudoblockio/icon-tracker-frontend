@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { IconAmount, IconConverter } from 'icon-sdk-js'
 import { getLastBlock, coinGeckoCurrentUSD, getFailMessage } from '../../../redux/store/iiss';
-// import Worker from 'worker-loader!workers/converter.js'; // eslint-disable-line import/no-webpack-loader-syntax
 import { getTrackerApiUrl } from '../../../redux/api/restV3/config'
 import twitterLogo from '../../../style-custom/twitter-logo.png'
 import {
@@ -69,13 +68,15 @@ class TransactionInfo extends Component {
 				download: {
 					link, name
 				},
-				errMsg: []
 			})
 		}
 	}
 	errorMsgList =[]
+	err;
 	failMsg = async (txHash) => {
 		const msg = await getFailMessage(txHash)
+		this.err = msg
+		this.setState({errMsg: msg})
 		// console.log(typeof(this.errorMsgList), "tis error ms list")
 		// this.errorMsgList? this.errorMsgList.push(msg) : console.log("no")
 		// this.errorMsgList = this.errorMsgList[0];
@@ -126,27 +127,16 @@ class TransactionInfo extends Component {
 					reportedCount,
 					stepUsedDetails
 				} = data
-
+				// this.failMsg(hash)
 				const _stepPrice = receipt_step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = Number(receipt_status) === 0
 				const isSuccess = Number(receipt_status) === 1
-				const isErrorMsg = isFail? this.failMsg(hash) : null
-
-				const ErrorFn = () => {
-					const bulletmsg = this.errorMsgList.map( (msg) =>
-					<li>{msg}</li>
-					);
-					return (
-						<ul>{bulletmsg}</ul>
-					)
-				}
+				// const isErrorMsg = isFail? this.failMsg(hash) : null
 
 				const scam = reportedCount >= 10 ?  true: false;
-				console.log(this.errorMsgList, "error message list")
-				console.log(this.state, "the whole state")
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -169,8 +159,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											{console.log(this.errorMsgList.length, "in comp")}
-											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${this.errorMsgList}`}</td>
+											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) && `- ${this.state.errMsg}`}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
