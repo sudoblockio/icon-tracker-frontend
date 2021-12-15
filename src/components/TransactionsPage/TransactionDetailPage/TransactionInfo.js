@@ -81,8 +81,11 @@ class TransactionInfo extends Component {
 	failMsg = async (txHash) => {
 		const msg = await getFailMessage(txHash)
 		console.log(msg, "the message")
+		this.errorMsgList.push(msg)
+		this.errorMsgList = this.errorMsgList[0];
+		console.log(this.errorMsgList, "what list m8")
 	}
-	
+	errorMsgList = []
 
 	render()  {
 		const { download } = this.state
@@ -126,9 +129,20 @@ class TransactionInfo extends Component {
 				const isFail = Number(receipt_status) === 0
 				const isSuccess = Number(receipt_status) === 1
 				const isErrorMsg = isFail? this.failMsg(hash) : null
+				const ErrorFn = () => {
+					const bulletmsg = this.errorMsgList.map( (msg) =>
+					<li>{msg}</li>
+					);
+					
+					return (
+						
+						<ul>{bulletmsg}</ul>
+					)
+				}
 
 				const scam = reportedCount >= 10 ?  true: false;
 				
+
 				return (
 					<div className="screen0">
 						<div className="wrap-holder">
@@ -151,7 +165,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `- ${errorMsg}`}</td>
+											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail && isErrorMsg) && `-` && <ul><li>{this.errorMsgList.map(msg => <li>`${msg}`</li>)}</li></ul>}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>

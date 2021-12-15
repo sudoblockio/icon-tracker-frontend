@@ -276,35 +276,16 @@ export const getFailMessage = async (txHash) => {
             body: JSON.stringify(param)
         })
         const data = await response.json()
-        console.log(data, "the ctz data")
-    } catch {
+        const errorList = []
+        data.result.logs.map(log => {
+            log.level === 0 && errorList.push(log.msg) 
+        })
+        return errorList;
+    } catch(e) {
+        console.log(e, "Error from getFailMessage")
 
     }
 }
-
-// export async function getFailMessage(txHash) {
-//     return new Promise(resolve => {
-//         const param = {
-//             jsonrpc: "2.0",
-//             id: randomUint32(),
-//             "method": "debug_getTrace",
-//             "params": {
-//                 "txHash": `${txHash}`,
-//             }
-//         }
-//         fetch(`https://ctz.solidwallet.io/api/v3d`, {
-//             method: 'POST',
-//             body: JSON.stringify(param)
-//         })
-//             .then(response => {
-//                 console.log(data, "the res")
-//                 resolve(response);
-//             })
-//             .catch(error => {
-//                 console.log(error, "the error")
-//             })
-//     } )
-// }
 
 export async function getStepPrice() {
     const walletApi = await walletApiInstance()
