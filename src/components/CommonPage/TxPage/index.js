@@ -265,7 +265,7 @@ class TxPage extends Component {
                     <Pagination
                         key="Pagination"
                         pageNum={page}
-                        maxPageNum={calcMaxPageNum(totalSize, count)}
+                        maxPageNum={calcMaxPageNum(totalSize, count)-1}
                         getData={this.getTxListByPage}
                     />,
                 ]
