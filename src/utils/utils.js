@@ -359,6 +359,7 @@ export function getArrayState(step, state, action, dataType) {
         }
         case REDUX_STEP.FULFILLED:
             const { data, listSize, totalSize } = payload
+            console.log(data, "redux step daya")
             // if the data is a contract list response
             if (data.status !== undefined) {
                 // get the total count from contracts 
@@ -376,6 +377,7 @@ export function getArrayState(step, state, action, dataType) {
                 }
             } else {
                 // if the data is not a contract list reponse:
+                console.log(data, "redux data after if")
                 return {
                     ...state,
                     [dataType]: {

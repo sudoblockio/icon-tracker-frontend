@@ -18,11 +18,13 @@ import {
 } from '../../redux/actions/storageActions';
 
 function mapStateToProps(state) {
+  console.log(state, "the state")
   return {
     url: state.router.location,
     ...state.addresses,
     walletAddress: state.storage.walletAddress,
-    walletNotification: state.storage.walletNotification
+    walletNotification: state.storage.walletNotification,
+    walletTokens: state.walletTokenTx
   };
 }
 

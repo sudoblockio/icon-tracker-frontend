@@ -105,15 +105,16 @@ class AddressInfo extends Component {
 
     getTokenList = (public_key) => {
         console.log(public_key, "the pubic key in get token list")
-        console.log(this.props.tokenList, "what is this?")
+        console.log(this.props.tokenList(public_key), "what is this?")
         this.setState({tokenList: this.props.tokenList(public_key)})
-        console.log(this.state.tokenList, "whole state after get token list")
+        console.log(this.state, "whole state after get token list")
     }
     render() {
 
-        const {notification, icxMore, tokenMore, showNode} = this.state
+        const {notification, icxMore, tokenMore, showNode, tokenList} = this.state
         console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
+        console.log(this.props.walletTokenTx.data, "All props")
         const {loading, data, error} = wallet
         const {
             is_prep,
