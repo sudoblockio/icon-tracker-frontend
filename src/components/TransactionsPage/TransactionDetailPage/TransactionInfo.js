@@ -45,9 +45,6 @@ class TransactionInfo extends Component {
 		
 		
 	}
-
-
-
 	async componentWillReceiveProps(nextProps) {
 
 		const { download } = this.state
@@ -57,7 +54,6 @@ class TransactionInfo extends Component {
 
 		this.getDownloadLink(nextProps)
 	}
-
 	getDownloadLink = async (props) => {
 		const { transaction } = props
 		const { data } = transaction
@@ -73,17 +69,11 @@ class TransactionInfo extends Component {
 			})
 		}
 	}
-	errorMsgList =[]
-	err;
+
 	failMsg = async (txHash) => {
 		const msg = await getFailMessage(txHash)
-		this.err = msg
-		this.setState({errMsg: msg})
-		// console.log(typeof(this.errorMsgList), "tis error ms list")
-		// this.errorMsgList? this.errorMsgList.push(msg) : console.log("no")
-		// this.errorMsgList = this.errorMsgList[0];
-		// this.setState({errMsg: this.errorMsgList[0]})
-		
+		// this.setState({errMsg: msg})
+		console.log(msg, "the msg")
 	}
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
@@ -99,6 +89,8 @@ class TransactionInfo extends Component {
 		const { transaction } = this.props
 		const { loading, data } = transaction
 		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
+		const test = this.failMsg(this.props.transaction.data.hash)
+		console.log(test, "the test")
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent height='206px' />
@@ -128,14 +120,13 @@ class TransactionInfo extends Component {
 					reportedCount,
 					stepUsedDetails
 				} = data
-				// this.failMsg(hash)
+				
 				const _stepPrice = receipt_step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = Number(receipt_status) === 0
 				const isSuccess = Number(receipt_status) === 1
-				// const isErrorMsg = isFail? this.failMsg(hash) : null
 
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
@@ -160,7 +151,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''} onClick={(hash) => isFail ? this.failMsg(hash) : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) &&<code> `- ${this.state.errMsg}`</code>}</td>
+											<td className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) &&<code> `- ${}`</code>}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
