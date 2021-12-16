@@ -57,6 +57,7 @@ class AddressInfo extends Component {
             const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
         }
+        console.log(this.props, "the props at did mount")
         this.getTokenList(this.props.match.params.addressId)
 
     }
@@ -103,10 +104,15 @@ class AddressInfo extends Component {
     }
 
     getTokenList = (public_key) => {
+        console.log(public_key, "the pubic key in get token list")
+        console.log(this.props.tokenList, "what is this?")
         this.setState({tokenList: this.props.tokenList(public_key)})
+        console.log(this.state.tokenList, "whole state after get token list")
     }
     render() {
+
         const {notification, icxMore, tokenMore, showNode} = this.state
+        console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
         const {
@@ -148,8 +154,6 @@ class AddressInfo extends Component {
 
             } = prep || {}
 
-        
-
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
             unstakes.map((list, idx) => {
@@ -174,6 +178,8 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
+                console.log()
+                console.log(tokenList, "what token list")
                 
 
                 const _address = !!public_key ? public_key : error

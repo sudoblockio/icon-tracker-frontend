@@ -255,7 +255,9 @@ export function* addressTokenTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_TOKEN_TX_LIST, action.payload);
-    if (payload.result === '200') {
+    console.log(action, "the payload")
+    if (payload.status === 200) {
+      console.log(payload, "the payload")
       yield put({ type: AT.addressTokenTxListFulfilled, payload: payload });
     }
     else {

@@ -398,7 +398,7 @@ export async function getStake(address) {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -436,7 +436,7 @@ export async function queryIScore(address) {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -467,7 +467,7 @@ export async function getBalance(address) {
                 address
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })

@@ -20,8 +20,7 @@ class AddressesDetailPage extends Component {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
-        const addr = data.public_key
-        const tokens  = this.props.addressTokenTxList({ addr, page: 1, count: 10 })
+
 
     }
     render() {

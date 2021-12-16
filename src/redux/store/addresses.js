@@ -119,7 +119,8 @@ export async function addressTokenTxList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/address-tokens/${payload.address}`, payload))
             .then(result => {
-                resolve(result.data)
+              console.log(result, "token result")
+                resolve(result)
             })
             .catch(error => {
                 reject(error)
