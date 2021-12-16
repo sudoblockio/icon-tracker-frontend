@@ -57,13 +57,13 @@ class Header extends Component {
                                         <em className="img" />
                                     </span>
                                     <ol className="sub-menu">
-                                        {/* <li
+                                        <li
                                             onClick={() => {
                                                 this.props.history.push('/tokens')
                                             }}
                                         >
                                             <span>Tokens List</span>
-                                        </li> */}
+                                        </li>
                                         <li
                                             onClick={() => {
                                                 this.props.history.push('/tokentransfers')
