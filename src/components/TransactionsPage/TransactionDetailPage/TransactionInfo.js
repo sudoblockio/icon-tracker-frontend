@@ -38,22 +38,18 @@ class TransactionInfo extends Component {
 		}
 	}
 
-	async componentDidMount(props) {
+	async componentDidMount() {
 		const currentUSD = await coinGeckoCurrentUSD()
 		const lastBlock = await getLastBlock()
 		this.setState({lastBlock, currentUSD})
-		console.log(this.props.transaction.data.hash, "eh?")
-		const txHash = this.props.transaction.data.hash
-		const msg = await getFailMessage(this.props.transaction.data.hash)
-		console.log(msg, "ehh?")
-		this.err = msg
-		this.setState({errMsg: msg})
+		
 		
 	}
 
 
 
-	componentWillReceiveProps(nextProps) {
+	async componentWillReceiveProps(nextProps) {
+
 		const { download } = this.state
 		if (download) {
 			return
@@ -79,16 +75,16 @@ class TransactionInfo extends Component {
 	}
 	errorMsgList =[]
 	err;
-	// failMsg = async (txHash) => {
-	// 	const msg = await getFailMessage(txHash)
-	// 	this.err = msg
-	// 	this.setState({errMsg: msg})
-	// 	// console.log(typeof(this.errorMsgList), "tis error ms list")
-	// 	// this.errorMsgList? this.errorMsgList.push(msg) : console.log("no")
-	// 	// this.errorMsgList = this.errorMsgList[0];
-	// 	// this.setState({errMsg: this.errorMsgList[0]})
+	failMsg = async (txHash) => {
+		const msg = await getFailMessage(txHash)
+		this.err = msg
+		this.setState({errMsg: msg})
+		// console.log(typeof(this.errorMsgList), "tis error ms list")
+		// this.errorMsgList? this.errorMsgList.push(msg) : console.log("no")
+		// this.errorMsgList = this.errorMsgList[0];
+		// this.setState({errMsg: this.errorMsgList[0]})
 		
-	// }
+	}
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
@@ -164,7 +160,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''}> {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) &&<code> `- ${this.state.errMsg}`</code>}</td>
+											<td className={isFail ? 'fail' : ''} onClick={(hash) => isFail ? this.failMsg(hash) : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) &&<code> `- ${this.state.errMsg}`</code>}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
