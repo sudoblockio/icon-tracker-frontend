@@ -104,11 +104,12 @@ class AddressInfo extends Component {
     }
 
     getTokenList = (public_key) => {
-        console.log(public_key, "the pubic key in get token list")
-        console.log(this.props.tokenList(public_key), "what is this?")
         this.setState({tokenList: this.props.tokenList(public_key)})
-        console.log(this.state, "whole state after get token list")
+
     }
+// design a pattern to get the list of tokens, and then for each address, 
+// query the contracts service to get the individual token information. 
+
     render() {
 
         const {notification, icxMore, tokenMore, showNode, tokenList} = this.state
@@ -358,8 +359,9 @@ class AddressInfo extends Component {
                                                     </p>
                                                 </div>
                                                 <div className={tokenMore ? 'on' : ''}>
+                                                    {console.log(this.props.walletTokenTx)}
                                                     <p><span><i
-                                                        className="coin"></i>Token</span><span>{(tokenList || []).length}<em>Tokens</em></span><em
+                                                        className="coin"></i>Token</span><span>{(this.props.walletTokenTx.data || []).length}<em>Tokens</em></span><em
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
                                                     {(tokenList || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((token, index) => {
