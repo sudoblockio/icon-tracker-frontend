@@ -324,7 +324,7 @@ class GovernancePage extends Component {
 												this.props.setPopup({type:POPUP_TYPE.SPONSOR})
 											}}></i></th>
 											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
-											{!blackChecked && <th>Staked</th>}
+											{!blackChecked && <th>Bonded</th>}
 											{!blackChecked && <th>Total Votes</th>}
 										</tr>
 									</thead>
