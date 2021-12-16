@@ -438,11 +438,14 @@ class TableRow extends Component {
 			node_state,
 			logo,
 			status,
-			sponsored_cps_grants
+			sponsored_cps_grants,
+			bonded
 			
 			// balance,
 			// unstake,
 		} = prep
+
+		console.log(prep, "does prep have bonded m8??")
 		const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 
 		// const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
@@ -473,7 +476,7 @@ class TableRow extends Component {
 				<td>{governanceStatus===true?'YES':'NO'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
-				{!blackChecked && <td><span>{convertNumberToText(sponsored_cps_grants)}</span></td>}
+				{!blackChecked && <td><span>{convertNumberToText(bonded / Math.pow(10, 18))}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
