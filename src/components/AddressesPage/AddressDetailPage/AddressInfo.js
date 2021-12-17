@@ -57,9 +57,7 @@ class AddressInfo extends Component {
             const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
         }
-        console.log(this.props, "the props at did mount")
         this.getTokenList(this.props.match.params.addressId)
-
     }
     
 
@@ -112,10 +110,9 @@ class AddressInfo extends Component {
 
     render() {
 
-        const {notification, icxMore, tokenMore, showNode, tokenList} = this.state
+        const {notification, icxMore, tokenMore, showNode} = this.state
         console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
-        console.log(this.props.walletTokenTx.data, "All props")
         const {loading, data, error} = wallet
         const {
             is_prep,
@@ -359,7 +356,6 @@ class AddressInfo extends Component {
                                                     </p>
                                                 </div>
                                                 <div className={tokenMore ? 'on' : ''}>
-                                                    {console.log(this.props.walletTokenTx)}
                                                     <p><span><i
                                                         className="coin"></i>Token</span><span>{(this.props.walletTokenTx.data || []).length}<em>Tokens</em></span><em
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i

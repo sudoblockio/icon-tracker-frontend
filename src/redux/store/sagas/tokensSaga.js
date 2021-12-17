@@ -32,7 +32,7 @@ function* tokenListFunc(action) {
     }
 
     const payload = yield call(TOKEN_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.tokenListFulfilled, payload: payload });
     } else {
       throw new Error();

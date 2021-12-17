@@ -17,8 +17,8 @@ class SearchTableDesc extends Component {
         const { searchType, listSize, totalSize } = this.props
         const count = this.state.cxCount ? this.state.cxCount : 0
         const Content = () => {
-            const _listSize = numberWithCommas(listSize || 0)
-            const _totalSize = numberWithCommas(totalSize || 0)
+            const listSize = numberWithCommas(listSize || 0)
+            const totalSize = numberWithCommas(totalSize || 0)
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
@@ -33,7 +33,7 @@ class SearchTableDesc extends Component {
                 case SEARCH_TYPE.TOKENS:
                     return (
                         <span className="cont right">
-                            A total of {listSize} {IRC_VERSION[2]} IRC2 Token
+                            A total of {totalSize} IRC2 Token
                             Contract(s) found
                         </span>
                     )

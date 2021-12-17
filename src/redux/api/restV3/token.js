@@ -4,7 +4,7 @@ import { trackerApiInstance } from './config'
 export async function tokenList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/api/v1/token/list', payload))
+    trackerApi.get('/api/v1/contracts?contract_type=IRC2')
       .then(result => {
         resolve(result)
       })
