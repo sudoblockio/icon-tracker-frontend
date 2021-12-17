@@ -28,11 +28,11 @@ class SearchTableHead extends Component {
                         <tr>
                             <th>No.</th>
                             <th>Token</th>
-                            <th>Price</th>
-                            <th>% Change (24h)</th>
-                            <th>Volume (24h)</th>
+                            <th>Symbol</th>
+                            {/* <th>% Change (24h)</th> */}
+                            {/* <th>Volume (24h)</th> */}
                             {/* <th className="marketcap"><span>MarketCap<em className="img"></em></span></th> */}
-                            <th>MarketCap</th>
+                            {/* <th>Status</th> */}
                         </tr>
                     )
                 default:

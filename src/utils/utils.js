@@ -360,6 +360,7 @@ export function getArrayState(step, state, action, dataType) {
         case REDUX_STEP.FULFILLED:
             const { data, listSize, totalSize } = payload
             console.log(data, "redux step daya")
+            console.log(payload.headers, "headers available")
             // if the data is a contract list response
             if (data.status !== undefined) {
                 // get the total count from contracts 

@@ -43,16 +43,15 @@ class SearchTableBody extends Component {
 					return (
 						<tr>
 							<td>{ranking}</td>
-							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.contractAddr)}</span><LinkButton address={data.contractAddr}/></td>
+	
+							<td><span onClick={()=>console.log(this.props, "token list props")} className="ellipsis">{tokenText(data.name, data.contractAddr)}</span></td>
+							{/* <LinkButton address={data.contractAddr}/> */}
 							<td>
-								<p>{convertNumberToText(usd, 8) || '-'}<em>USD</em></p>
-								<p>{convertNumberToText(icx, 8) || '-'}<em>ICX</em></p>
-								<p>{convertNumberToText(btc, 8) || '-'}<em>BTC</em></p>
-								<p>{convertNumberToText(eth, 8) || '-'}<em>ETH</em></p>
+								<p><em>{data.symbol}</em></p>
 							</td>
-							<td className={className}><span>{sign}{_changeVal || '-'}</span> %</td>
+							{/* <td className={className}><span>{sign}{_changeVal || '-'}</span> %</td>
 							<td>{convertNumberToText(Math.floor(data.volume)) || '-'}<em>USD</em></td>
-							<td>{convertNumberToText(Math.floor(data.marketCap)) || '-'}<em>USD</em></td>
+							<td>{convertNumberToText(Math.floor(data.marketCap)) || '-'}<em>USD</em></td> */}
 						</tr>
 					)
 				default:

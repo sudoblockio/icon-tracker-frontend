@@ -15,6 +15,7 @@ class SearchTableDesc extends Component {
     }
     render() {
         const { searchType, listSize, totalSize } = this.props
+        console.log(this.props, "token list props")
         const count = this.state.cxCount ? this.state.cxCount : 0
         const Content = () => {
             const listSize = numberWithCommas(listSize || 0)
