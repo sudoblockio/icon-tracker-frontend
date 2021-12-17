@@ -33,6 +33,16 @@ jobs:
             akid-ref: AWS_ACCESS_KEY_ID_SEJONG
             sak-ref: AWS_SECRET_ACCESS_KEY_SEJONG
             ecr-repository: icon-explorer-frontend-sejong
+          - network-name: lisbon
+            deployment-environment: prod
+            akid-ref: AWS_ACCESS_KEY_ID_LISBON
+            sak-ref: AWS_SECRET_ACCESS_KEY_LISBON
+            ecr-repository: icon-explorer-frontend-lisbon
+          - network-name: berlin
+            deployment-environment: prod
+            akid-ref: AWS_ACCESS_KEY_ID_BERLIN
+            sak-ref: AWS_SECRET_ACCESS_KEY_BERLIN
+            ecr-repository: icon-explorer-frontend-berlin
     env:
       NETWORK_NAME: ${{ matrix.network-name }}
       DEPLOYMENT_ENVIRONMENT: ${{ matrix.deployment-environment }}
@@ -102,6 +112,32 @@ jobs:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/prod-us-west-2/sejong/tracker-frontend/values.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: prod-${{ steps.source.outputs.TAG }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-lisbon-us-west-2 deployment values file
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/lisbon/tracker-frontend/values.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: prod-${{ steps.source.outputs.TAG }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-berlin-us-west-2 deployment values file
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/berlin/tracker-frontend/values.yaml'
           propertyPath: 'deployment.image.tag'
           value: prod-${{ steps.source.outputs.TAG }}
           branch: main
