@@ -157,7 +157,7 @@ class TxPageTitle extends Component {
                             Blocks
                             <span />
                             <span className="right">
-                                A total of<em>{numberWithCommas(_totalSize)}</em> total block(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em>
+                                A total of<em>{numberWithCommas(_totalSize)}</em> total block(s) found<em className="gray"></em>
                             </span>
                         </p>
                     )
@@ -170,7 +170,7 @@ class TxPageTitle extends Component {
                             <span />
                             <span className="right">
                                 A total of<em>{_totalSize}</em> total transaction(s) found
-                                <em className="gray">(Showing the last {_listSize} record(s) only)</em>
+                                
                             </span>
                         </p>
                     )
@@ -180,7 +180,7 @@ class TxPageTitle extends Component {
                             Token Transfers
                             <span>({IRC_VERSION[2]})</span>
                             <span className="right">
-                                A total of<em>{_totalSize}</em> token transfer(s) found<em className="gray">(Showing the last {_listSize} record(s) only)</em>
+                                A total of<em>{_totalSize}</em> token transfer(s) found
                             </span>
                         </p>
                     )
