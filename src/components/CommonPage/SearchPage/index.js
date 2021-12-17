@@ -257,12 +257,12 @@ class SearchPage extends Component {
                                     setPopup={this.props.setPopup}
                                 />
                             </p>
-                            <SearchInput
+                            {/* <SearchInput
                                 id="sub-search-input"
                                 placeholder={placeholder}
                                 searchKeyword={keyword}
                                 changeSearch={this.getListBySearch}
-                            />
+                            /> */}
                             <div className={contentsClassName}>
                                 {TableContent()}
                             </div>
