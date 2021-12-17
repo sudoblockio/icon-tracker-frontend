@@ -42,6 +42,8 @@ class TransactionInfo extends Component {
 		const currentUSD = await coinGeckoCurrentUSD()
 		const lastBlock = await getLastBlock()
 		this.setState({lastBlock, currentUSD})
+		const moreMsg = await getFailMessage(this.props.match.params.txHash)
+		this.setState({msgList: moreMsg})
 		
 		
 	}
@@ -73,8 +75,9 @@ class TransactionInfo extends Component {
 	failMsg = async (txHash) => {
 		const msg = await getFailMessage(txHash)
 		// this.setState({errMsg: msg})
-		console.log(msg, "the msg")
+
 	}
+
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
 		const url = await getTrackerApiUrl()
@@ -82,15 +85,19 @@ class TransactionInfo extends Component {
 		window.open(`https://twitter.com/intent/tweet?text=${text}&url=${link}`, "_blank", "width=500,height=470")
 	}
 
-
+	msgFormat = () => {
+		if (this.state.msgList !== undefined) {
+			return this.state.msgList.map((msg) => {})
+		}
+	}
 	
 	render()  {
+	
 		const { download } = this.state
 		const { transaction } = this.props
 		const { loading, data } = transaction
+		console.log(this.state.msgList, "inside render msg list")
 		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
-		const test = this.failMsg(this.props.transaction.data.hash)
-		console.log(test, "the test")
 		const Contents = () => {
 			if (loading) {
 				return <LoadingComponent height='206px' />
@@ -151,7 +158,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Status</td>
-											<td className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail /*&& isErrorMsg*/) &&<code> `- ${}`</code>}</td>
+											<td className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail) &&  `- ${this.state.msgList}`}</td>
 										</tr>
 										<tr>
 											<td>Block Height</td>
