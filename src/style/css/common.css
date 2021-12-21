@@ -3291,7 +3291,7 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
   text-align: center;
 }
 .table-typeP td.rank + td + td + td + td + td {
-  text-align: right;
+  text-align: center;
 }
 .table-typeP td.rank + td + td + td + td + td + td {
   text-align: right;
