@@ -183,7 +183,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-					console.log(data, "cx token transfr data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -219,11 +218,11 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
-							<DateCell date={data.age} />
+							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.value_decimal} symbol={data.symbol} />
-							<TokenCell name={data.tokenName} address={data.contractAddr} />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<TokenCell name={data.token_contract_name} address={data.contractAddr} />
+							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
