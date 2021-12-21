@@ -473,7 +473,7 @@ class TableRow extends Component {
 						</li>
 					</ul>
 				</td>
-				<td>{governanceStatus===true?'YES':'NO'}</td>
+				<td>{sponsored_cps_grants !== null ?'✓':'-'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{productivity}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{!blackChecked && <td className={"bonded"}><span>{bonded / Math.pow(10, 18)}</span></td>}
