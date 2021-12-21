@@ -25,7 +25,7 @@ class SearchTableDesc extends Component {
                     return (
                         <span className="cont right">
 
-                            A total of {count} verified contract source
+                            A total of {count} contract source
                             codes found. 
                             
                         </span>
