@@ -15,26 +15,22 @@ class SearchTableDesc extends Component {
     }
     render() {
         const { searchType, listSize, totalSize } = this.props
-        console.log(this.props, "token list props")
         const count = this.state.cxCount ? this.state.cxCount : 0
         const Content = () => {
-            const listSize = numberWithCommas(listSize || 0)
-            const totalSize = numberWithCommas(totalSize || 0)
+            const _listSize = numberWithCommas(listSize || 0)
+            const _totalSize = numberWithCommas(totalSize || 0)
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
                         <span className="cont right">
-
                             A total of {count} contract source
                             codes found. 
-                            
-                        </span>
-                        
+                        </span>                     
                     )
                 case SEARCH_TYPE.TOKENS:
                     return (
                         <span className="cont right">
-                            A total of {totalSize} IRC2 Token
+                            A total of {_listSize} IRC2 Token
                             Contract(s) found
                         </span>
                     )
