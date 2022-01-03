@@ -216,7 +216,7 @@ class GovernancePage extends Component {
 			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		})
 
-		const searched = !search ? list : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+		const searched = !search ? list.sort((a,b) => b.voting_power - a.voting_power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
 		return (
 			<div className="content-wrap governance">
@@ -326,6 +326,7 @@ class GovernancePage extends Component {
 											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
 											{!blackChecked && <th>Bonded</th>}
 											{!blackChecked && <th>Total Votes</th>}
+											<th>Power</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -419,8 +420,6 @@ class TableRow extends Component {
 			statusData,
 		} = this.props
 
-
-
 		const { 
 			rank, 
 			logo_256, 
@@ -439,15 +438,15 @@ class TableRow extends Component {
 			logo,
 			status,
 			sponsored_cps_grants,
-			bonded
+			bonded,
+			voting_power
 			
 			// balance,
 			// unstake,
 		} = prep
-
-		console.log(prep, "does prep have bonded m8??")
+		console.log("a prep:", prep)
 		const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-
+		
 		// const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
@@ -457,8 +456,9 @@ class TableRow extends Component {
 
 		const badge = this.getBadge(grade, prep.node_state)
 		// const rank = index + 1
-
+		
 		return(
+			
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
 				<td className={(Number(grade) > 2 || grade === '0x3') ? 'black' : 'on'}>
@@ -480,6 +480,7 @@ class TableRow extends Component {
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
+				<td>{voting_power.toFixed()}</td>
 			</tr>
 		)
 	}
