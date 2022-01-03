@@ -118,7 +118,7 @@ function* tokenHoldersListFunc(action) {
     }
 
     const payload = yield call(TPKEN_HOLDERS_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.tokenHoldersListFulfilled, payload: payload });
     } else {
       throw new Error();
