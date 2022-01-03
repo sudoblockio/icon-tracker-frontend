@@ -100,7 +100,7 @@ function* tokenTransfersListFunc(action) {
     }
 
     const payload = yield call(TOKEN_TRANSFERS_LIST_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.tokenTransfersListFulfilled, payload: payload });
     } else {
       throw new Error();

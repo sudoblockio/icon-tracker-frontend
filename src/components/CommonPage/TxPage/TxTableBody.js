@@ -95,7 +95,7 @@ class TxTableBody extends Component {
 			const addressInData = data.address
 			const isError = data.receipt_status === 0
 			const formattedLogData = ""
-
+			console.log(txType, "Which Tx Type")
 			
 
 			switch (txType) {
@@ -130,6 +130,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
@@ -152,6 +154,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.txHash} />
@@ -183,6 +187,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
+					console.log("this case")
+
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -215,9 +221,10 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
+					console.log("case token transfer")
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.transaction_hash} />
+							<TxHashCell isErrpor={isError} txHash={data.transaction_hash} />
 							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.value_decimal} symbol={data.symbol} />
@@ -226,16 +233,20 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
+					console.log(data, "poop")
+
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<DateCell date={data.age} />
-							<AddressSet fromAddr={data.fromAddr} toAddr={data.toAddr} txType={data.txType} targetContractAddr={data.contractAddr} />
-							<AmountCell amount={data.quantity} symbol={data.symbol} />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<TxHashCell isError={isError} txHash={data.transaction_hash} />
+							<DateCell date={data.block_timestamp} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.to_address} />
+							<AmountCell amount={data.quantity} symbol={data.token_contract_name} />
+							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							<AddressCell targetAddr={data.public_key} txType={data.txType} />
@@ -258,6 +269,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							<td className="on">
@@ -270,6 +283,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
+					console.log("case token transfer")
+
 				
 					return (
 						<tr>
@@ -278,7 +293,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
-					
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							{/* <td>-</td> */}
@@ -288,6 +304,8 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
+					console.log("case token transfer")
+
 					return (
 						<tr>
 							<td>{data.rank}</td>

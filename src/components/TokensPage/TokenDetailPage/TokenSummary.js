@@ -7,13 +7,15 @@ class TokenSummary extends Component {
     render() {
         const { token } = this.props
         const { loading, data } = token
-
+        console.log(data, "each tokem data")
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const { tokenName, totalSupply, contract, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
+                const { tokenName, totalSupply, address, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
+                
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
+                
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -33,7 +35,7 @@ class TokenSummary extends Component {
                                                 <td>Contract </td>
                                                 <td>
                                                     {/* <i className="img" /> */}
-                                                    <span>{contract ? <AddressLink to={contract} /> : '-'}</span>
+                                                    <span>{address ? <AddressLink to={address} /> : '-'}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -47,7 +49,7 @@ class TokenSummary extends Component {
                                                     <td>-</td>
                                                 )}
                                                 <td>Decimals</td>
-                                                <td>{decimals}</td>
+                                                <td>{Number(decimals)}</td>
                                             </tr>
                                             <tr>
                                                 <td>Holders</td>
