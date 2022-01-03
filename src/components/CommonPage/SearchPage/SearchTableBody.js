@@ -9,8 +9,9 @@ import {
 import {
 	AddressLink,
 	AmountCell,
-	LinkButton
+	
 } from '../../../components'
+import  LinkButton  from '../../CommonComponent/LinkButton'
 import {
 	CONTRACT_STATUS,
 	SEARCH_TYPE
@@ -43,9 +44,9 @@ class SearchTableBody extends Component {
 					return (
 						<tr>
 							<td>{ranking}</td>
-	
-							<td><span onClick={()=>console.log(this.props, "token list props")} className="ellipsis">{tokenText(data.name, data.contractAddr)}</span></td>
-							{/* <LinkButton address={data.contractAddr}/> */}
+							{console.log(data, "what data exactly per contract?")}
+							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span><LinkButton address={data.address}/></td>
+
 							<td>
 								<p><em>{data.symbol}</em></p>
 							</td>

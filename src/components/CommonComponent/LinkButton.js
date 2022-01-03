@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from "react"
 import { getUrl } from "../../utils/score"
 
-// const LinkButton = ({ address }) => {
-//   const [url, setUrl] = useState(false)
-//   const [loading, setLoading] = useState(false)
+const LinkButton = ({ address }) => {
+  const [url, setUrl] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-//   const process = async () => {
-//     setLoading(true)
-//     try {
-//       const res = await getUrl({ _contract: address })
-//       setUrl(res)
-//     } catch (e) {
-//       console.log(e)
-//     }
-//     setLoading(false)
-//   }
-//   useEffect(() => {
-//     process()
-//   }, [address])
+  const process = async () => {
+    setLoading(true)
+    try {
+      const res = await getUrl({ _contract: address })
+      setUrl(res)
+    } catch (e) {
+      console.log(e)
+    }
+    setLoading(false)
+  }
+  useEffect(() => {
+    process()
+  }, [address])
 
-//   const onClickLink = () => {
-//     window.open(url)
-//   }
+  const onClickLink = () => {
+    window.open(url)
+  }
 
-//   if (!!url && !loading) {
-//     return <i className="img" onClick={onClickLink} />
-//   } else {
-//     return null
-//   }
-// }
+  if (!!url && !loading) {
+    return <i className="img" onClick={onClickLink} />
+  } else {
+    return null
+  }
+}
 
-// export default LinkButton
+export default LinkButton

@@ -39,7 +39,11 @@ class ProposalListPage extends Component {
 							<div className="proposal-list">
 								{(proposals || []).reverse().map(proposal => {
 									const { id, contents, vote, status, proposerName } = proposal
-									const { type, title, value } = contents
+									let { type, title, value } = contents
+									// check if the value is an object, if it is, format properly. 
+									if (value.toString() === "[object Object]"){
+										console.log(Object.entries(value), "incorrect format")
+									}
 									// const { description } = contents
 									const { agree, disagree, noVote } = vote
 									const allCount = Number(agree.count) + Number(disagree.count) + Number(noVote.count)
