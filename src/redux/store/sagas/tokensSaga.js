@@ -82,7 +82,7 @@ function* tokenTxListFunc(action) {
 function* tokenSummaryFunc(action) {
   try {
     const payload = yield call(TOKEN_SUMMARY_API, action.payload);
-    if (payload.result === '200') {
+    if (payload.status === 200) {
       yield put({ type: AT.tokenSummaryFulfilled, payload: payload });
     } else {
       throw new Error();

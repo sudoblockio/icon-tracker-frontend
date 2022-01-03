@@ -30,9 +30,9 @@ export async function tokenTxList(payload) {
 export async function tokenSummary(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl('/v1/token/summary', payload))
+    trackerApi.get(`api/v1/contracts/${payload.contractAddr}`)
       .then(result => {
-        resolve(result.data)
+        resolve(result)
       })
       .catch(error => {
         reject(error)

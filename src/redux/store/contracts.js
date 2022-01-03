@@ -166,7 +166,7 @@ export async function contractEventLogList(payload) {
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/logs?score_address=${payload.contractAddr}`)
       .then(result => {
-        console.log(result, "contract event log data")
+
         resolve(result)
       })
       .catch(error => {
