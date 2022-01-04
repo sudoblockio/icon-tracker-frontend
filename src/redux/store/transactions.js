@@ -80,7 +80,7 @@ export async function transactionInternalTxList(payload) {
 export async function transactionEventLogList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(makeUrl(`/api/v1/logs?transaction_hash=${payload.txHash}` , payload))
+      trackerApi.get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
         .then(result => {
           
           resolve(result)

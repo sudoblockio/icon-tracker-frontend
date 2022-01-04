@@ -7,7 +7,7 @@ import {
 import {
     ADDRESS_TABS
 } from '../../../utils/const'
-import { addressInternalTxList } from '../../../redux/store/addresses';
+
 class AddressesDetailPage extends Component {
      constructor(props) {
          super(props)
@@ -19,7 +19,7 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
+        // const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
 
 
     }

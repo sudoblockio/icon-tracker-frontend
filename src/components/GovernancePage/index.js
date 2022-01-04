@@ -444,7 +444,7 @@ class TableRow extends Component {
 			// balance,
 			// unstake,
 		} = prep
-		console.log("a prep:", prep)
+
 		const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
 		
 		// const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )

@@ -53,11 +53,12 @@ class AddressInfo extends Component {
     }
     
     async componentDidMount() {
+        this.getTokenList(this.props.match.params.addressId)
+
         if (this.props.wallet.data.is_prep){
             const {totalDelegated} = await getPRepsLegacy()
         this.setState({totalDelegated })
         }
-        this.getTokenList(this.props.match.params.addressId)
     }
     
 
@@ -85,6 +86,7 @@ class AddressInfo extends Component {
 
     toggleTokenMore = () => {
         this.setState({tokenMore: !this.state.tokenMore})
+        console.log(this.state.tokenMore, "the tokenMore state")
     }
 
     goBlock = height => {
@@ -103,6 +105,7 @@ class AddressInfo extends Component {
 
     getTokenList = (public_key) => {
         this.setState({tokenList: this.props.tokenList(public_key)})
+        console.log(this.props.tokenList, "what is the tokenList Prop? ")
 
     }
 // design a pattern to get the list of tokens, and then for each address, 
@@ -177,8 +180,7 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
-                console.log()
-                console.log(tokenList, "what token list")
+
                 
 
                 const _address = !!public_key ? public_key : error
@@ -187,7 +189,7 @@ class AddressInfo extends Component {
 
                 const scam = reportedCount >= 100 ? true : false
 
-                   is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
+                is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
                 return (
