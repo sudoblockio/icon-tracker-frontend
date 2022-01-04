@@ -104,8 +104,9 @@ class AddressInfo extends Component {
     }
 
     getTokenList = (public_key) => {
+        console.log(public_key, "the public key sent to tokenList fn")
         this.setState({tokenList: this.props.tokenList(public_key)})
-        console.log(this.props.tokenList, "what is the tokenList Prop? ")
+        console.log(this.props.tokenList, "what is the tokenList state? ")
 
     }
 // design a pattern to get the list of tokens, and then for each address, 
