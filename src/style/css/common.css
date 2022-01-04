@@ -4276,7 +4276,10 @@ input[type='text']:focus.over {
   width: 150px;
   vertical-align: top;
 }
-
+.token-img-link {
+  top: 30%;
+  left: 45%;
+}
 .content-wrap .search-group span {
   position: absolute;
   right: 50px;

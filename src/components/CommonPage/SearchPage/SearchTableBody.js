@@ -45,9 +45,8 @@ class SearchTableBody extends Component {
 						<tr>
 							<td>{ranking}</td>
 							
-							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}<LinkButton address={data.address} className="token-link"/></span>
-							
-							</td>
+							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span></td>
+							<td><span className="ellipsis"><LinkButton address={data.address}/></span></td>
 							
 							<td>
 								<p><em>{data.symbol}</em></p>

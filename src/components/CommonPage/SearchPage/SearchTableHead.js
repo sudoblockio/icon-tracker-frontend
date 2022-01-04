@@ -28,6 +28,7 @@ class SearchTableHead extends Component {
                         <tr>
                             <th>No.</th>
                             <th>Token</th>
+                            <th>Website</th>
                             <th>Symbol</th>
                             {/* <th>% Change (24h)</th> */}
                             {/* <th>Volume (24h)</th> */}
