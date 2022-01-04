@@ -7,7 +7,7 @@ export async function getUrl(params) {
   const iconService = new IconService(provider)
 
   const scoreAddress =
-    walletApiUrl === "https://wallet.icon.foundation"
+    walletApiUrl === "https://api.icon.geometry.io"
       ? "cx372e64ed320a6d8d978f81716d0959f1bb33a18e"
       : "cx2f9ed6ce329af3f97a1a0e745852efe4e7a46263"
   const { CallBuilder } = IconBuilder
