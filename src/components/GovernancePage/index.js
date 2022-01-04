@@ -480,7 +480,7 @@ class TableRow extends Component {
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
-				<td>{power.toFixed() / Math.pow(10, 18)}</td>
+				<td>{Number(power / Math.pow(10, 18)).toFixed()}</td>
 			</tr>
 		)
 	}
