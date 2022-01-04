@@ -89,14 +89,14 @@ export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes'];
 
 export const NETWORK_HOST = {
   Mainnet: 'tracker.icon.foundation',
-  Euljiro: 'trackerdev.icon.foundation',
-  Yeouido: 'bicon.tracker.solidwallet.io'
+  Lisbon: 'tracker.lisbon.geometry.io',
+  Berlin: 'tracker.berlin.geometry.io'
 };
 
 export const NETWORK_NAME = {
   'tracker.icon.foundation': 'Mainnet',
-  'trackerdev.icon.foundation': 'Euljiro',
-  'bicon.tracker.solidwallet.io': 'Yeouido'
+  'tracker.lisbon.geometry.io': 'Lisbon',
+  'tracker.berlin.geometry.io': 'Berlin'
 };
 
 export const POPUP_TYPE = {

@@ -102,7 +102,7 @@ export async function addressInfo(payload) {
 export async function addressTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.address}`, payload))
+        trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.address}`)
             .then(result => {
 
                 resolve(result)
