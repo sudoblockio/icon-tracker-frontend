@@ -19,7 +19,6 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        // const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
 
 
     }

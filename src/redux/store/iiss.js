@@ -168,6 +168,23 @@ export async function getPRepsLegacy() {
     });
 }
 
+export async function getTokenTotalSupply(address){
+    const walletApi = walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            "jsonrpc": "2.0",
+            "id": randomUint32(),
+            "params" : {
+                "to": `${address}`,
+                "dataType": "call",
+                "data": {
+                    "method": "totalSupply"
+                }
+            }
+        }
+    })
+}
+
 export async function getIISSInfo() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {

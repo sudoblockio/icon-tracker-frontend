@@ -7,13 +7,21 @@ import {
 import {
     TOKEN_TABS
 } from '../../../utils/const'
-
+import {tokenTransfersList } from '../../../redux/api/restV3/token'
 class TokenDetailPage extends Component {
+    
+    async componentDidMount() {
+        console.log(this.props.match.params.tokenId, "props for token detail")
+        const holderData = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
+        console.log(holderData, "holder data? ")
+
+    }
 
     render() {
         const { token } = this.props;
         const { loading, error } = token
-
+         
+        
         return (
             <DetailPage
                 {...this.props}
