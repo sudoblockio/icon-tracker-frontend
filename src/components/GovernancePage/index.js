@@ -216,7 +216,7 @@ class GovernancePage extends Component {
 			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		})
 
-		const searched = !search ? list.sort((a,b) => b.voting_power - a.voting_power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+		const searched = !search ? list.sort((a,b) => b.power - a.power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
 		return (
 			<div className="content-wrap governance">
@@ -439,7 +439,7 @@ class TableRow extends Component {
 			status,
 			sponsored_cps_grants,
 			bonded,
-			voting_power
+			power
 			
 			// balance,
 			// unstake,
@@ -480,7 +480,7 @@ class TableRow extends Component {
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
-				<td>{voting_power.toFixed()}</td>
+				<td>{power.toFixed() / Math.pow(10, 18)}</td>
 			</tr>
 		)
 	}
