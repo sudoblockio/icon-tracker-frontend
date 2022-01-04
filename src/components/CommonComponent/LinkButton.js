@@ -24,7 +24,7 @@ const LinkButton = ({ address }) => {
   }
 
   if (!!url && !loading) {
-    return <i className="img" onClick={onClickLink} />
+    return <i className="img token-img-link" onClick={onClickLink} />
   } else {
     return null
   }

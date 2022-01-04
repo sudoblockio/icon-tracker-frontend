@@ -3022,7 +3022,7 @@ body {
   cursor: pointer;
   position: absolute;
   right: 20px;
-  top: 24px;
+  /* top: 24px; */
 }
 .table-typeI td:nth-child(2) .ellipsis {
   width: 300px;

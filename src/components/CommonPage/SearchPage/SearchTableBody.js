@@ -44,9 +44,11 @@ class SearchTableBody extends Component {
 					return (
 						<tr>
 							<td>{ranking}</td>
-							{console.log(data, "what data exactly per contract?")}
-							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span><LinkButton address={data.address}/></td>
-
+							
+							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}<LinkButton address={data.address} className="token-link"/></span>
+							
+							</td>
+							
 							<td>
 								<p><em>{data.symbol}</em></p>
 							</td>
