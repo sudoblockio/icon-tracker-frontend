@@ -19,6 +19,7 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
+        console.log(this.props, "address comp props")
 
 
     }

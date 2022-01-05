@@ -10,16 +10,17 @@ import {
 import {tokenTransfersList } from '../../../redux/api/restV3/token'
 import { getTokenTotalSupply } from '../../../redux/store/iiss'
 class TokenDetailPage extends Component {
-    
+    holderData;
     async componentDidMount() {
         console.log(this.props.match.params.tokenId, "props for token detail")
-        const holderData = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
-        console.log(holderData, "holder data? ")
-
+        this.holderData = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
+        console.log(this.props, "holder data? ")
+        console.log(this.holderData.headers["x-total-count"], "holder data pt 2?")
 
     }
 
     render() {
+        console.log(this.holderData, "holder data in render")
         const { token } = this.props;
         const { loading, error } = token
          
@@ -44,6 +45,7 @@ class TokenDetailPage extends Component {
                     }
                 ]}
                 InfoComponent={TokenSummary}
+                addrHolderCount={[this.props.tokenTransfers.totalSize, this.holderData? this.holderData.headers["x-total-count"]: 0]}
                 TabsComponent={TokenTabs}
             />
         )

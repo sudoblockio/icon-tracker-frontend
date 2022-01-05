@@ -11,8 +11,18 @@ class TokenSummary extends Component {
 
     }
 
+    componentDidMount(){
+        
+    }
+
     render() {
+        const transferCount = this.props.addrHolderCount[0]
+        const holderCount = this.props.addrHolderCount[1]
+        console.log(holderCount, "the holder count did mount")
+        console.log(transferCount, "the transfer count did mount")
+        console.log(this.props, "the did mount props")
         const { token } = this.props
+        console.log(this.props, "the token summary props")
         const { loading, data } = token
         const Content = () => {
             if (loading) {
@@ -55,13 +65,13 @@ class TokenSummary extends Component {
                                                     <td>-</td>
                                                 )} */}
                                                                                                 <td>Transfers</td>
-                                                <td>{numberWithCommas(transfers)}</td>
+                                                <td>{numberWithCommas(transferCount)}</td>
                                                 <td>Decimals</td>
                                                 <td>{Number(decimals)}</td>
                                             </tr>
                                             <tr>
                                                 <td>Holders</td>
-                                                <td>{numberWithCommas(holders)} Address(es)</td>
+                                                <td>{numberWithCommas(holderCount)} Address(es)</td>
 
                                             </tr>
                                         </tbody>
