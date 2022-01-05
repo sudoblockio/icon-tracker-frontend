@@ -8,7 +8,7 @@ class TokenSummary extends Component {
     tokenTotalSupply;
     async componentWillMount(){
         this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
-        console.log(this.tokenTotalSupply, "total supply for this token")
+
     }
 
     render() {

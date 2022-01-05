@@ -4,15 +4,7 @@ import { randomUint32, makeUrl, convertHexToValue } from '../../utils/utils'
 
 
 
-export const getPrepStatusList = async () => {
-    try {
-        const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
-        const data = await response.json()
-        return data
-    } catch (e) {
-        console.log(e, "error")
-    }
-  }
+
 export async function coinGeckoMarketCap () {
     try {
         const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
@@ -46,6 +38,16 @@ export async function getSrcCodeLink (addr) {
             })
     });  
 }
+
+// export const getPrepStatusList = async () => {
+//     try {
+//         const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");
+//         const data = await response.json()
+//         return data
+//     } catch (e) {
+//         console.log(e, "error")
+//     }
+//   }
 
 export async function getContractListCount() {
     const trackerApi = await trackerApiInstance()
@@ -259,7 +261,7 @@ export async function getPRep(address) {
                 }
             }
         }
-        walletApi.post(`/api/v1`, JSON.stringify(param))
+        walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
             })
@@ -521,6 +523,7 @@ export async function getBalance(address) {
     });
 }
 
+
 export async function getProposals() {
     return new Promise(async resolve => {
         // const mock = {
@@ -560,7 +563,7 @@ export async function getProposals() {
         // resolve(mock)
         const walletApi = await walletApiInstance()
         // TEST: prod endpoint works not dev:
-        walletApi.post(`https://api.icon.geometry.io/api/v3`, JSON.stringify({
+        walletApi.post(`/api/v3`, JSON.stringify({
             jsonrpc: "2.0",
             id: randomUint32(),
             method: "icx_call",

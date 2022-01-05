@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { convertNumberToText, convertHexToValue } from '../../utils/utils'
+import { convertNumberToText, convertHexToValue, numberWithCommas } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import { transactionRecentTx } from '../../redux/store/transactions'
 import configJson from '../../config'
@@ -85,7 +85,7 @@ class RecentTransactions extends Component {
                                             Amount
                                             <em>
                                             
-                                            {latest.value? convertHexToValue(latest.value).toFixed(2): list[0]? list[0].value:null} ICX
+                                            {latest.value? numberWithCommas(convertHexToValue(latest.value).toFixed(2)): list[0]? convertHexToValue(list[0].value) :null} ICX
 
                                             </em>
                                         </p>
@@ -99,7 +99,7 @@ class RecentTransactions extends Component {
                                          <p className="d">
                                             Fee
                                             <em>
-                                            {latest.transaction_fee ? convertHexToValue(latest.transaction_fee) : list[0]? list[0].transaction_fee : null} ICX
+                                            {latest.transaction_fee ? convertHexToValue(latest.transaction_fee) : list[0]? convertHexToValue(list[0].transaction_fee)  : null} ICX
                                             </em>
                                         </p> 
                              </li>

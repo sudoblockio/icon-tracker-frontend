@@ -304,13 +304,13 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-					console.log(data, "case token transfer")
+					console.log(data, "case token holder")
 
 					return (
 						<tr>
 							<td>{data.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={convertHexToValue(data.value) } symbol={data.symbol} />
+							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
 							<td><span>{}</span><em>%</em></td>
 						</tr>
 					)
