@@ -18,9 +18,7 @@ class TokenSummary extends Component {
     render() {
         const transferCount = this.props.addrHolderCount[0]
         const holderCount = this.props.addrHolderCount[1]
-        console.log(holderCount, "the holder count did mount")
-        console.log(transferCount, "the transfer count did mount")
-        console.log(this.props, "the did mount props")
+
         const { token } = this.props
         console.log(this.props, "the token summary props")
         const { loading, data } = token

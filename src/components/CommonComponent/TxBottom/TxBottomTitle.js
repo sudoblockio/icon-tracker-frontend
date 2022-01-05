@@ -21,13 +21,13 @@ class TxPageTitle extends Component {
             toAddr
         } = this.props
         console.log(totalSize, "bottom title props")
+        console.log(goAllTx, "what is go all tx")
         const Content = () => {
             const listSizeNum = listSize || 0
             const totalSizeNum = totalSize || 0
             const listSizeUnder10 = (listSizeNum || 0) < 10 ? listSizeNum : 10
             const _listSize = numberWithCommas(listSizeNum)
             const _totalSize = numberWithCommas(totalSizeNum)
-            {console.log(_totalSize, "from content")}
             switch (txType) {
                 case TX_TYPE.ADDRESS_VOTED:                
                     return (
