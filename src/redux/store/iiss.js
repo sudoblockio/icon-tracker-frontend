@@ -182,6 +182,7 @@ export async function getTokenTotalSupply(address){
                 }
             }
         }
+        walletApi.post(``)
     })
 }
 
@@ -203,6 +204,7 @@ export async function getIISSInfo() {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.log(response, "get iiss info response")
                 resolve(response.data.result);
             })
             .catch(error => {

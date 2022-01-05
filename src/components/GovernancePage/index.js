@@ -65,7 +65,8 @@ class GovernancePage extends Component {
 		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsLegacy()	
 		// rpc calls for 3 lower boxes, total stakes and total voted above chart. 
 		// *** convert to suppy metric endpoint?
-		const { variable } = await getIISSInfo()
+		const  variable  = await getIISSInfo()
+		console.log(variable, "variable")
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
 		// our endpoints
@@ -99,7 +100,7 @@ class GovernancePage extends Component {
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-		const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
+		const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).iprep || 0));
 		const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
 		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)

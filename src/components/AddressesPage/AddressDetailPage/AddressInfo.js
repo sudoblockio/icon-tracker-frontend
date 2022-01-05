@@ -167,6 +167,7 @@ class AddressInfo extends Component {
 
 
             this.getSocialMediaLinks(name)
+
             // linkList=this.links
 
         const balance = Number(available || 0) + Number(staked || 0) + unstakeSum;
@@ -174,8 +175,8 @@ class AddressInfo extends Component {
         const validated = IconConverter.toNumber(validated_blocks)
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
-        
         const badge = getBadgeTitle(grade, node_state)
+        const tokenCxs = this.props.walletTokenTx.data
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px"/>
@@ -361,6 +362,7 @@ class AddressInfo extends Component {
                                                 <div className={tokenMore ? 'on' : ''}>
                                                     <p><span><i
                                                         className="coin"></i>Token</span><span>{(this.props.walletTokenTx.data || []).length}<em>Tokens</em></span><em
+                                                        
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
                                                     {(tokenList || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((token, index) => {

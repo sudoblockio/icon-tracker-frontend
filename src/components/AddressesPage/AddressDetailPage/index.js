@@ -28,7 +28,7 @@ class AddressesDetailPage extends Component {
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
 
 
-        const TABS = [], getList = []
+        const TABS = [], getList = [], tokenNames = []
 
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
