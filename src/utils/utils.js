@@ -274,7 +274,7 @@ export function makeUrl(url, payload) {
     let result = url
     payload.limit = Number(payload.count)
     if (Number(payload.page) > 2){
-        payload.skip = Number(payload.page * payload.count)
+        payload.skip = Number(Number(payload.page -1) * payload.count)
     } else if(Number(payload.page) === 2){
         payload.skip = payload.count
     }  else if (Number(payload.page) === 1){
