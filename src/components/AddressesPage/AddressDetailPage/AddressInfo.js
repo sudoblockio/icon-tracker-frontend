@@ -177,6 +177,9 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
+        console.log(tokenCxs, "the thing")
+
+        // for each contract address, query contracts and.....
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px"/>
@@ -351,7 +354,24 @@ class AddressInfo extends Component {
                                                                 }) : ''}
                                                         </div>
                                                     
-                                                    {/* <p><span>Voted</span><span><em>{(!Number(delegated) ? 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
+                                                    {/* <p><span>Voted</span><span><em>{(!Number(delegated) ?Address
+
+Address	hxc4193cda4a75526bf50896ec242d6713bb6b02a3 Report scam
+Balance	
+ICX42,272,003ICX
+
+Available42,359,732.077366143275843123ICX
+
+Staked0ICX
+
+Unstaking0ICX
+Voted0ICX
+
+I_SCORE0I-Score
+
+Token5Tokens
+
+ 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
                                                     <p>
                                                         <span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span>
                                                     </p>
@@ -365,10 +385,11 @@ class AddressInfo extends Component {
                                                         
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
-                                                    {(tokenList || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((token, index) => {
-                                                        const {contractName, contractSymbol, quantity} = token
+                                                    {(tokenCxs || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((tokenContract, index) => {
+                                                        console.log(tokenContract, "after map token")
+                                                        const {contractName, contractSymbol, quantity} = tokenContract
                                                         return <p key={index}>
-                                                            <span>{contractName}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span>
+                                                            <span>{tokenContract}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span>
                                                         </p>
                                                     })}
                                                 </div>
