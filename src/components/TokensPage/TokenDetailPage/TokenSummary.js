@@ -2,8 +2,15 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../../utils/utils'
 import { LoadingComponent, AddressLink } from '../../../components'
+import {getTokenTotalSupply} from '../../../redux/store/iiss'
 
 class TokenSummary extends Component {
+    tokenTotalSupply;
+    async componentWillMount(){
+        this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
+        console.log(this.tokenTotalSupply, "total supply for this token")
+    }
+
     render() {
         const { token } = this.props
         const { loading, data } = token
@@ -28,7 +35,7 @@ class TokenSummary extends Component {
                                             <tr>
                                                 <td>Total Supply</td>
                                                 <td>
-                                                    {numberWithCommas(totalSupply)} {symbol}
+                                                    {numberWithCommas(this.tokenTotalSupply)} {symbol}
                                                     {!!_totalSupplyUsd && <em>({convertNumberToText(_totalSupplyUsd, 0)} USD)</em>}
                                                 </td>
                                                 <td>Contract </td>

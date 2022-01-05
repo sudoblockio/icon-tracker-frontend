@@ -8,12 +8,14 @@ import {
     TOKEN_TABS
 } from '../../../utils/const'
 import {tokenTransfersList } from '../../../redux/api/restV3/token'
+import { getTokenTotalSupply } from '../../../redux/store/iiss'
 class TokenDetailPage extends Component {
     
     async componentDidMount() {
         console.log(this.props.match.params.tokenId, "props for token detail")
         const holderData = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
         console.log(holderData, "holder data? ")
+
 
     }
 

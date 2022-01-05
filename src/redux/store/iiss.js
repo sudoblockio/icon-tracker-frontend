@@ -1,5 +1,5 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
-import { randomUint32, makeUrl } from '../../utils/utils'
+import { randomUint32, makeUrl, convertHexToValue } from '../../utils/utils'
 
 
 
@@ -169,12 +169,13 @@ export async function getPRepsLegacy() {
 }
 
 export async function getTokenTotalSupply(address){
-    const walletApi = walletApiInstance()
+    const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
-            "jsonrpc": "2.0",
-            "id": randomUint32(),
-            "params" : {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params : {
                 "to": `${address}`,
                 "dataType": "call",
                 "data": {
@@ -182,7 +183,22 @@ export async function getTokenTotalSupply(address){
                 }
             }
         }
-        walletApi.post(``)
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(convertHexToValue(response.data.result) );
+            })
+            .catch(error => {
+                if(!!error.response){
+                    resolve(error.response.data);
+                }
+                else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
     })
 }
 

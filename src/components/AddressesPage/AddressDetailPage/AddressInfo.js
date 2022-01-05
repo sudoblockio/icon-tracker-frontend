@@ -328,7 +328,7 @@ class AddressInfo extends Component {
                                                         className="coin icon"></i>ICX</span><span>{`${convertNumberToText(data.balance ? data.balance.toFixed() : 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
                                                         className="drop-btn" onClick={this.toggleIcxMore}><i
                                                         className="img"></i></em></p>
-                                                    <p><span>Available</span><span>{`${convertNumberToText(available)}`}<em>ICX</em></span>
+                                                    <p><span>Available</span><span>{`${convertNumberToText(Number(available).toFixed())}`}<em>ICX</em></span>
                                                     </p>
                                                     <p>
                                                         <span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span>
