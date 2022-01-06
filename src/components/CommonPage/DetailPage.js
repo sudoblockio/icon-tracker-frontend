@@ -19,7 +19,7 @@ class DetailPage extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setInitialData(this.props.url)
     }
 

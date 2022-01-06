@@ -36,7 +36,6 @@ class AddressInfo extends Component {
     linkList = []
 
     getSocialMediaLinks = async (name) => {
-        if (this.props.wallet.data.is_prep) {
             const allPreps = await prepList();
             const prepArray = allPreps.filter(preps => preps.name === name )
             const thisPrep = prepArray ? prepArray[0] : prepArray
@@ -45,19 +44,18 @@ class AddressInfo extends Component {
                     this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
                 }
             })
-    
             this.linkList=this.links
-            this.state.links = this.links
-        }
-        
+            this.setState({links: this.linkList})
+            // this.state.links = this.links
     }
     
-    async componentDidMount() {
+    async componentMount() {
         this.getTokenList(this.props.match.params.addressId)
-
-        if (this.props.wallet.data.is_prep){
+        if (this.props.wallet.data.is_prep === true){
+            console.log("will mount true")
             const {totalDelegated} = await getPRepsLegacy()
-        this.setState({totalDelegated })
+            this.getSocialMediaLinks(this.props.wallet.data.prep.name) 
+            this.setState({totalDelegated })
         }
     }
     
@@ -113,7 +111,10 @@ class AddressInfo extends Component {
 // query the contracts service to get the individual token information. 
 
     render() {
-
+        if (this.props.wallet.data.is_prep === true){
+            console.log("will mount true")
+            this.getSocialMediaLinks(this.props.wallet.data.prep.name) 
+        }
         const {notification, icxMore, tokenMore, showNode} = this.state
         console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
@@ -156,6 +157,7 @@ class AddressInfo extends Component {
                 website,
 
             } = prep || {}
+            // is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
 
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
@@ -166,7 +168,7 @@ class AddressInfo extends Component {
         
 
 
-            this.getSocialMediaLinks(name)
+            // this.getSocialMediaLinks(name)
 
             // linkList=this.links
 
@@ -177,6 +179,7 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
+
         console.log(tokenCxs, "the thing")
 
         // for each contract address, query contracts and.....
@@ -194,7 +197,6 @@ class AddressInfo extends Component {
 
                 const scam = reportedCount >= 100 ? true : false
 
-                is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
                 return (
@@ -236,7 +238,7 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-                                                
+                                                {console.log(this.state.links, "this state links")}
                                                 {this.state.links && SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.linkList[type]
 
