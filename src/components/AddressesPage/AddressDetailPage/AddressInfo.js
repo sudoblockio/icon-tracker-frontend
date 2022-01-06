@@ -49,14 +49,8 @@ class AddressInfo extends Component {
             // this.state.links = this.links
     }
     
-    async componentMount() {
+    async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
-        if (this.props.wallet.data.is_prep === true){
-            console.log("will mount true")
-            const {totalDelegated} = await getPRepsLegacy()
-            this.getSocialMediaLinks(this.props.wallet.data.prep.name) 
-            this.setState({totalDelegated })
-        }
     }
     
 
