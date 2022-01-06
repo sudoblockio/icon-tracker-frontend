@@ -3,31 +3,34 @@ import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../../utils/utils'
 import { LoadingComponent, AddressLink } from '../../../components'
 import {getTokenTotalSupply} from '../../../redux/store/iiss'
+import {tokenTransfersList, tokenHoldersList} from '../../../redux/api/restV3/token'
 
 class TokenSummary extends Component {
     tokenTotalSupply;
+    holdersCount;
+    transferCount
+
     async componentWillMount(){
+        this.transferCount = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
+        this.holdersCount = await tokenHoldersList({contractAddr: this.props.match.params.tokenId})
         this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
-
+        this.transferCount = this.transferCount.headers["x-total-count"]
+        this.holdersCount = this.holdersCount.headers["x-total-count"]
+        console.log(this.holdersCount, "this holder")
+        console.log(this.transferCount, "this transfer")
+            
     }
-
-    componentDidMount(){
-        
-    }
+    
 
     render() {
-        const transferCount = this.props.addrHolderCount[0]
-        const holderCount = this.props.addrHolderCount[1]
 
         const { token } = this.props
-        console.log(this.props, "the token summary props")
         const { loading, data } = token
         const Content = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
                 const { name, totalSupply, address, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
-                console.log(data, "this token data")
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
                 
                 return (
@@ -63,13 +66,13 @@ class TokenSummary extends Component {
                                                     <td>-</td>
                                                 )} */}
                                                                                                 <td>Transfers</td>
-                                                <td>{numberWithCommas(transferCount)}</td>
+                                                <td>{numberWithCommas(this.transferCount)}</td>
                                                 <td>Decimals</td>
                                                 <td>{Number(decimals)}</td>
                                             </tr>
                                             <tr>
                                                 <td>Holders</td>
-                                                <td>{numberWithCommas(holderCount)} Address(es)</td>
+                                                <td>{numberWithCommas(this.holdersCount)} Address(es)</td>
 
                                             </tr>
                                         </tbody>

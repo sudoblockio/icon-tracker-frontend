@@ -138,7 +138,7 @@ export async function contractDetail(payload) {
 export async function contractTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.addr}`, payload))
+    trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.addr}`)
       .then(result => {
         resolve(result)
       })

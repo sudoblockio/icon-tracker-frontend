@@ -12,7 +12,6 @@ import { getTokenTotalSupply } from '../../../redux/store/iiss'
 class TokenDetailPage extends Component {
     holderData;
     async componentDidMount() {
-        console.log(this.props.match.params.tokenId, "props for token detail")
         this.holderData = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
         console.log(this.props, "holder data? ")
         console.log(this.holderData.headers["x-total-count"], "holder data pt 2?")
@@ -20,7 +19,6 @@ class TokenDetailPage extends Component {
     }
 
     render() {
-        console.log(this.holderData, "holder data in render")
         const { token } = this.props;
         const { loading, error } = token
          

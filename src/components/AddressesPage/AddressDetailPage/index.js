@@ -19,7 +19,6 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        console.log(this.props, "address comp props")
 
 
     }
@@ -29,7 +28,7 @@ class AddressesDetailPage extends Component {
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
 
 
-        const TABS = [], getList = [], tokenNames = []
+        const TABS = [], getList = []
 
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
