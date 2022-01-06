@@ -104,7 +104,7 @@ class BlockInfo extends Component {
                                             </tr> */}
                                             <tr>
                                                 <td>Amount</td>
-                                                <td>{convertNumberToText(transaction_amount)} ICX</td>
+                                                <td>{convertNumberToText(transaction_amount / Math.pow(10, 18))} ICX</td>
                                             </tr>
                                             <tr>
                                                 <td>TxFee</td>
