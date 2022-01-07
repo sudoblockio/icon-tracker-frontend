@@ -422,7 +422,7 @@ class TableRow extends Component {
 		} = this.props
 
 		const { 
-			rank, 
+			// rank, 
 			logo_256, 
 			logo_svg, 
 			name,
@@ -456,7 +456,7 @@ class TableRow extends Component {
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
 
 		const badge = this.getBadge(grade, prep.node_state)
-		// const rank = index + 1
+		const rank = index + 1
 		
 		return(
 			

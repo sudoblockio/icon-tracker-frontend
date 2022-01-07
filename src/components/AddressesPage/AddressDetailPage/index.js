@@ -26,6 +26,7 @@ class AddressesDetailPage extends Component {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
+        console.log(data, "the address index data")
 
 
         const TABS = [], getList = []
@@ -50,6 +51,7 @@ class AddressesDetailPage extends Component {
             })
         }
         if (hasDelegations) {
+            console.log("has delegations")
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })
