@@ -68,6 +68,21 @@ export function addressListAction(payload) {
 
 const  {ADDRESSES_PREFIX, TRANSACTIONS_PREFIX} = prefixes
 
+export async function addressDelegationList(payload){
+  console.log(payload, "address delagation payload")
+  const trackerApi = await trackerApiInstance()
+  return new Promise((resolve, reject) => {
+    trackerApi.get(`/api/v1/governance/${payload.address}`)
+      .then(result => {
+        console.log(result, "delegation result")
+        resolve(result)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 
 export async function addressList(payload) {
   console.log(payload, "address list payload")

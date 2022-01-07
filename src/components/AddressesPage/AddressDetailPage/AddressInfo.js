@@ -78,7 +78,6 @@ class AddressInfo extends Component {
 
     toggleTokenMore = () => {
         this.setState({tokenMore: !this.state.tokenMore})
-        console.log(this.state.tokenMore, "the tokenMore state")
     }
 
     goBlock = height => {
@@ -96,9 +95,7 @@ class AddressInfo extends Component {
     }
 
     getTokenList = (public_key) => {
-        console.log(public_key, "the public key sent to tokenList fn")
         this.setState({tokenList: this.props.tokenList(public_key)})
-        console.log(this.props.tokenList, "what is the tokenList state? ")
 
     }
 // design a pattern to get the list of tokens, and then for each address, 
@@ -173,8 +170,6 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
-
-        console.log(tokenCxs, "the thing")
 
         // for each contract address, query contracts and.....
         const Content = () => {
