@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText,  } from '../../utils/utils'
+import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice, prepList, getPRepsLegacy  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
@@ -77,7 +77,7 @@ class GovernancePage extends Component {
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
 		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
-
+		console.log(Number(0x27b46536c66c8e3000000), "i global number")
 
 		const { height, peer_id } = lastBlock || {}
 

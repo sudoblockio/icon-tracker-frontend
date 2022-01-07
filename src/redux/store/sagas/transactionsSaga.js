@@ -116,13 +116,16 @@ function* transactionEventLogListFunc(action) {
 }
 
 function* transactionInternalTxListFunc(action) {
-
+console.log("hitting saga")
   try {
     if (action.payload.count === 0) {
+      console.log(action.payload.count, "action payload count")
       yield put({ type: AT.transactionInternalTxListFulfilled, payload: { data: [] } });
       return
     }
+    console.log("right above")
     const payload = yield call(TRANSACTION_INTERNAL_TX_LIST_API, action.payload.txHash);
+    console.log("right below")
 
     if (payload.status === 200) {
       yield put({ type: AT.transactionInternalTxListFulfilled, payload: payload });
@@ -130,6 +133,7 @@ function* transactionInternalTxListFunc(action) {
       throw new Error();
     }
   } catch (e) {
+    console.log(e, "the error")
     yield put({ type: AT.transactionInternalTxListRejected });
   }
 }
