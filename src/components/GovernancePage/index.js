@@ -434,7 +434,6 @@ class TableRow extends Component {
 			delegated,
 			irep,
 			irepUpdatedBlockHeight,
-
 			node_state,
 			logo,
 			status,
