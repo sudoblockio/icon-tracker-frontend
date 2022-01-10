@@ -170,6 +170,28 @@ export async function getPRepsLegacy() {
     });
 }
 
+export async function getBalanceOf(tokenAddr) {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params : {
+                "to": "cx0000000000000000000000000000000000000000",
+                "dataType": "call",
+                "data": {
+                    "method": "balanceOf",
+                        "params": {
+                            "_owner": `${tokenAddr}`
+                        }
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+    })
+}
+
 export async function getTokenTotalSupply(address){
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
