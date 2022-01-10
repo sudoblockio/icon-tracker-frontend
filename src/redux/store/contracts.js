@@ -151,7 +151,7 @@ export async function contractTxList(payload) {
 export async function contractTokenTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`)
+    trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.addr}`)
       .then(result => {
         resolve(result)
       })

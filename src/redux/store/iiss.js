@@ -170,43 +170,7 @@ export async function getPRepsLegacy() {
     });
 }
 
-export async function getBalanceOf(address) {
-    const walletApi = await walletApiInstance()
-    return new Promise(resolve => {
-        const param = {
-            jsonrpc: "2.0",
-            method: "icx_call",
-            id: randomUint32(),
-            params : {
-                "to": "cx0000000000000000000000000000000000000000",
-                "dataType": "call",
-                "data": {
-                    "method": "balanceOf",
-                        "params": {
-                            "_owner": `${address}`
-                        }
-                }
-            }
-        }
-        walletApi.post(`/api/v3`, JSON.stringify(param))
-            .then(response => {
-                console.log(response, "balance of response")
-                resolve(response.data.result)
-            })
-            .catch(error => {
-                if (!!error.message) {
-                    resolve(error.response.data)
-                } 
-                else {
-                    resolve({
-                        error: {
-                            message: error.message
-                        }
-                    })
-                }
-            })
-    })
-}
+
 
 export async function getTokenTotalSupply(address){
     const walletApi = await walletApiInstance()
@@ -276,6 +240,43 @@ export async function getIISSInfo() {
                 }
             })
     });
+}
+
+export async function getBalanceOf(address) {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params : {
+                "to": "cx0000000000000000000000000000000000000000",
+                "dataType": "call",
+                "data": {
+                    "method": "balanceOf",
+                    "params": {
+                            "_owner": address
+                    }
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result)
+            })
+            .catch(error => {
+                if (!!error.message) {
+                    resolve(error.response.data)
+                } 
+                else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    })
 }
 
 export async function getPRep(address) {
