@@ -170,7 +170,7 @@ export async function getPRepsLegacy() {
     });
 }
 
-export async function getBalanceOf(tokenAddr) {
+export async function getBalanceOf(address) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -183,12 +183,28 @@ export async function getBalanceOf(tokenAddr) {
                 "data": {
                     "method": "balanceOf",
                         "params": {
-                            "_owner": `${tokenAddr}`
+                            "_owner": `${address}`
                         }
                 }
             }
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                console.log(response, "balance of response")
+                resolve(response.data.result)
+            })
+            .catch(error => {
+                if (!!error.message) {
+                    resolve(error.response.data)
+                } 
+                else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
     })
 }
 

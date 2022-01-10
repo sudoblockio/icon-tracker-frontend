@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../..
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsLegacy } from '../../../redux/store/iiss'
+import { prepList, getPRepsLegacy, getBalanceOf, getBalance } from '../../../redux/store/iiss'
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -51,6 +51,8 @@ class AddressInfo extends Component {
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
+        const someBalance = await getBalanceOf("cx66f2ed0663d5aa7efe92ab41b1e0e19ac73007a4")
+        console.log(someBalance, "some balance")
     }
     
 
@@ -378,6 +380,7 @@ Token5Tokens
                                                         const {contractName, contractSymbol, quantity} = tokenContract
                                                         {console.log(tokenContract, "each token contract")}
                                                         // take each token, call balanceOf ICX call, see what happens. 
+
                                                         return <p key={index}>
                                                             <span>{tokenContract}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span>
                                                         </p>
