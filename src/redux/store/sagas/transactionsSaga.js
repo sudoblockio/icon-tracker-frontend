@@ -124,6 +124,7 @@ console.log("hitting saga")
       return
     }
     console.log("right above")
+    
     const payload = yield call(TRANSACTION_INTERNAL_TX_LIST_API, action.payload.txHash);
     console.log("right below")
 

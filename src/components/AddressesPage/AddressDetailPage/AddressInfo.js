@@ -177,9 +177,6 @@ class AddressInfo extends Component {
                 return <LoadingComponent height="206px"/>
             } else {
                 const {public_key, nodeType, tokenList, reportedCount, is_prep} = data
-
-                
-
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
@@ -379,6 +376,8 @@ Token5Tokens
                                                     {(tokenCxs || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((tokenContract, index) => {
                                                         console.log(tokenContract, "after map token")
                                                         const {contractName, contractSymbol, quantity} = tokenContract
+                                                        {console.log(tokenContract, "each token contract")}
+                                                        // take each token, call balanceOf ICX call, see what happens. 
                                                         return <p key={index}>
                                                             <span>{tokenContract}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span>
                                                         </p>

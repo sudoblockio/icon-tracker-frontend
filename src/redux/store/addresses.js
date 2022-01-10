@@ -129,12 +129,10 @@ export async function addressTxList(payload) {
 }
 
 export async function addressTokenTxList(payload) {
-    console.log(payload, "add token list payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(`${ADDRESSES_PREFIX}/address-tokens/${payload.address}`)
             .then(result => {
-              console.log(result, "token result")
                 resolve(result)
             })
             .catch(error => {
@@ -144,11 +142,9 @@ export async function addressTokenTxList(payload) {
 }
 
 export async function addressInternalTxList(payload) {
-  // typeof(payload) === 'string' ? payload = {address:payload} :console.log("had a payload")
-  // console.log(payload, "after if statement")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address || payload.prep}`, payload))
+        trackerApi.get(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address || payload.prep}`)
             .then(result => {
                 resolve(result)
             })
@@ -169,7 +165,6 @@ export async function addressVotedList(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/governance/delegations/${payload.prep}`)
             .then(result => {
-                console.log(result, "delegation result")
                 resolve(result)
             })
             .catch(error => {
