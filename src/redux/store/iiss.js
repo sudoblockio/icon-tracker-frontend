@@ -242,6 +242,8 @@ export async function getIISSInfo() {
     });
 }
 
+
+// change 
 export async function getBalanceOf(address) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -250,10 +252,10 @@ export async function getBalanceOf(address) {
             method: "icx_call",
             id: randomUint32(),
             params : {
-                "to": "cx0000000000000000000000000000000000000000",
+                "to": "hxcd6f04b2a5184715ca89e523b6c823ceef2f9c3d",
                 "dataType": "call",
                 "data": {
-                    "method": "balanceOf",
+                    "method": "_balanceOf",
                     "params": {
                             "_owner": address
                     }

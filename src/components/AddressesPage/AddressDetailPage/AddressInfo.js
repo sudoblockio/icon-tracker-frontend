@@ -45,14 +45,13 @@ class AddressInfo extends Component {
                 }
             })
             this.linkList=this.links
-            this.setState({links: this.linkList})
+            // this.setState({links: this.linkList})
             // this.state.links = this.links
     }
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
-        const someBalance = await getBalanceOf("cx66f2ed0663d5aa7efe92ab41b1e0e19ac73007a4")
-        console.log(someBalance, "some balance")
+        const someBalance = await getBalanceOf("")
     }
     
 
@@ -105,9 +104,9 @@ class AddressInfo extends Component {
 
     render() {
         if (this.props.wallet.data.is_prep === true){
-            console.log("will mount true")
             this.getSocialMediaLinks(this.props.wallet.data.prep.name) 
         }
+
         const {notification, icxMore, tokenMore, showNode} = this.state
         console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
@@ -226,8 +225,8 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-                                                {console.log(this.state.links, "this state links")}
-                                                {this.state.links && SocialMediaType.map((type, index) => {
+
+                                                {this.linkList && SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
