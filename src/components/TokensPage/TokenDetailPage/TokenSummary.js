@@ -6,23 +6,20 @@ import {getTokenTotalSupply} from '../../../redux/store/iiss'
 import {tokenTransfersList, tokenHoldersList} from '../../../redux/api/restV3/token'
 
 class TokenSummary extends Component {
-    tokenTotalSupply;
-    holdersCount;
-    transferCount
 
-    async componentWillMount(){
+    async componentDidMount(){
         this.transferCount = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
         this.holdersCount = await tokenHoldersList({contractAddr: this.props.match.params.tokenId})
         this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
         this.transferCount = this.transferCount.headers["x-total-count"]
         this.holdersCount = this.holdersCount.headers["x-total-count"]
-        console.log(this.holdersCount, "this holder")
-        console.log(this.transferCount, "this transfer")
-            
+        this.setState({hC: this.holdersCount})
     }
     
-
     render() {
+        
+        const hC = this.holdersCount
+        const tC = this.transferCount
 
         const { token } = this.props
         const { loading, data } = token
@@ -72,7 +69,7 @@ class TokenSummary extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Holders</td>
-                                                <td>{numberWithCommas(this.holdersCount)} Address(es)</td>
+                                                <td>{numberWithCommas(hC)} Address(es)</td>
 
                                             </tr>
                                         </tbody>

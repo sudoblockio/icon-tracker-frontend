@@ -89,7 +89,6 @@ class TxTableBody extends Component {
 				address,
 				currentUSD,
 				totalSupply,
-				key,
 				rank
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
@@ -98,7 +97,6 @@ class TxTableBody extends Component {
 			const isError = data.receipt_status === 0
 			const formattedLogData = ""
 			
-			console.log(txType, "Which Tx Type")
 
 
 			switch (txType) {
@@ -133,7 +131,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
-					console.log("case token transfer")
 
 					return (
 						<tr>
@@ -157,7 +154,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TOKEN_TX:
-					console.log("case token transfer")
 
 					return (
 						<tr>
@@ -190,7 +186,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-					console.log("this case")
 
 					return (
 						<tr>
@@ -224,7 +219,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
-					console.log("case token transfer")
 					return (
 						<tr>
 							<TxHashCell isErrpor={isError} txHash={data.transaction_hash} />
@@ -236,7 +230,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
-					console.log(data, "poop")
 
 					return (
 						<tr>
@@ -248,7 +241,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESSES:
-					console.log("case token transfer")
 
 					return (
 						<tr>
@@ -272,7 +264,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_EVENTS:
-					console.log("case token transfer")
 
 					return (
 						<tr>
@@ -286,7 +277,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_EVENTS:
-					console.log("case token transfer")
 
 
 					return (
@@ -296,7 +286,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TRANSACTION_INTERNAL_TX:
-					console.log("case token transfer")
 
 					return (
 						<tr>
@@ -313,15 +302,12 @@ class TxTableBody extends Component {
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
 							<td><span>{}</span><em>%</em></td>
-						</tr>
-						
+						</tr>					
 					)
-				
 				default:
 					return <tr></tr>
 			}
 		}
-
 		return TableRow(this.props)
 	}
 }
