@@ -44,7 +44,7 @@ class AddressInfo extends Component {
                     this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
                 }
             })
-            this.linkList=this.links
+            // this.linkList=this.links
             // this.setState({links: this.linkList})
             // this.state.links = this.links
     }
@@ -104,7 +104,8 @@ class AddressInfo extends Component {
 
     render() {
         if (this.props.wallet.data.is_prep === true){
-            this.getSocialMediaLinks(this.props.wallet.data.prep.name) 
+            this.getSocialMediaLinks(this.props.wallet.data.prep.name)
+            this.linkList=this.links
         }
 
         const {notification, icxMore, tokenMore, showNode} = this.state
@@ -225,8 +226,8 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-
-                                                {this.linkList && SocialMediaType.map((type, index) => {
+{console.log(this.linkList, "the link list")}
+                                                {SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.linkList[type]
 
                                                     if (!mediaValue) {
