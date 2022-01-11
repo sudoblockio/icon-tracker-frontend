@@ -65,8 +65,6 @@ class GovernancePage extends Component {
 		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsLegacy()	
 		// rpc calls for 3 lower boxes, total stakes and total voted above chart. 
 		// *** convert to suppy metric endpoint?
-		const  variable  = await getIISSInfo()
-		console.log(variable, "variable")
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
 		// our endpoints
@@ -77,7 +75,6 @@ class GovernancePage extends Component {
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
 		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
-		console.log(Number(0x27b46536c66c8e3000000), "i global number")
 
 		const { height, peer_id } = lastBlock || {}
 
@@ -100,10 +97,11 @@ class GovernancePage extends Component {
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-		const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
-		const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
-		const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
+		// const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
+		// const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
+		// const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+		const IISSData = await getIISSInfo()
 
 		this.setState({ 
 			loading: false,
@@ -111,14 +109,20 @@ class GovernancePage extends Component {
 			supplyMetrics,
 			totalStaked,
 			totalVoted,
-			irep,
-			rrep,
-			glbComRate,
+			// irep,
+			// rrep,
+			// glbComRate,
 			height,
 			stepPrice,
 			allPrep,
 			blackPrep,
 			lastBlockPrepName,
+			Ivoter: IISSData.variable.Ivoter,
+			Irelay: IISSData.variable.Irelay,
+			Icps: IISSData.variable.Icps,
+			Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
+			Iprep: IISSData.variable.Iprep, 
+
 		})
 	}
 
@@ -212,7 +216,8 @@ class GovernancePage extends Component {
 		const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
 		const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
 		const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
-		
+
+
 		const list = blackChecked ? blackPrep : allPrep.filter(p => {
 			return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
 		})
@@ -241,26 +246,29 @@ class GovernancePage extends Component {
 							<ul>
 								<li>
 									<div>
-										<p>Global Commission Rate <em>(%)</em> <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}}></i></p>
-										<p><span>{convertNumberToText(glbComRate, 4)}</span></p>
+										<p>Voter Reward Rate <em>(%)</em> 
+										{/* <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}}></i> */}
+										</p>
+										{console.log(Number(this.state.Ivoter), "what i voter state")}
+										<p><span>{Number(this.state.Ivoter)}</span></p>
 									</div>
 								</li>
 								<li>
 									<div>
-										<p>Global i_rep <em>(ICX)</em></p>
-										<p><span>{convertNumberToText(irep, 4)}</span></p>
+										<p>Prep Reward Rate <em>(%)</em></p>
+										<p><span>{Number(this.state.Iprep)}</span></p>
 									</div>
 								</li>
 								<li>
 									<div>
-										<p>Reward Rate <em>(%)</em></p>
-										<p><span>{convertNumberToText((rrep / 100) * 3, 4)}</span></p>
+										<p>CPS Reward Rate <em>(%)</em></p>
+										<p><span>{Number(this.state.Icps)}</span></p>
 									</div>
 								</li>
 								<li>
 									<div>
-										<p>Step Price <em>(ICX)</em></p>
-										<p><span>{numberWithCommas(stepPrice)}</span></p>
+										<p>Monthly Inflation <em>(ICX)</em></p>
+										<p><span>{numberWithCommas(this.state.Iglobal)}</span></p>
 									</div>
 								</li>
 								<li>
