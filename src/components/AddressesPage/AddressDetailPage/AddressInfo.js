@@ -99,8 +99,6 @@ class AddressInfo extends Component {
         this.setState({tokenList: this.props.tokenList(public_key)})
 
     }
-// design a pattern to get the list of tokens, and then for each address, 
-// query the contracts service to get the individual token information. 
 
     render() {
         if (this.props.wallet.data.is_prep === true){

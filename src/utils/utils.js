@@ -285,9 +285,32 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
-    console.log(result, "What is the url result")
     return result
 }
+
+export function makeTokenUrl(url, payload) {
+    if (!payload) {
+        return url
+    }
+    let result = url
+    payload.limit = Number(payload.count)
+    if (Number(payload.page) > 2){
+        payload.skip = Number(Number(payload.page -1) * payload.count)
+    } else if(Number(payload.page) === 2){
+        payload.skip = payload.count
+    }  else if (Number(payload.page) === 1){
+        payload.skip = 0
+    }
+    delete payload.count
+    delete payload.page
+    Object.keys(payload).forEach((key, index) => {
+        result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+        
+    })
+    result = result + "&contract_type=IRC2"
+    return result
+}
+
 
 export function randomUint32() {
     if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {
