@@ -89,12 +89,15 @@ class TxTableBody extends Component {
 				address,
 				currentUSD,
 				totalSupply,
+				key,
+				rank
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
 			const addressInData = data.address
 			const isError = data.receipt_status === 0
 			const formattedLogData = ""
+			
 			console.log(txType, "Which Tx Type")
 
 
@@ -304,16 +307,16 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-					console.log(data, "case token holder")
-
 					return (
 						<tr>
-							<td>{data.rank}</td>
+							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
 							<td><span>{}</span><em>%</em></td>
 						</tr>
+						
 					)
+				
 				default:
 					return <tr></tr>
 			}

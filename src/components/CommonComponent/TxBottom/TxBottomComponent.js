@@ -25,7 +25,7 @@ class TxBottomComponent extends Component {
                                 </thead>
                                 <tbody>
                                     {(data || []).map((item, index) => (
-                                        <TxTableBody key={index} data={item} txType={txType} address={address} />
+                                        <TxTableBody key={index} rank={index +1} data={item} txType={txType} address={address} />
                                     ))}
                                 </tbody>
                             </table>
