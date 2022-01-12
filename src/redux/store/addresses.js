@@ -68,6 +68,21 @@ export function addressListAction(payload) {
 
 const  {ADDRESSES_PREFIX, TRANSACTIONS_PREFIX} = prefixes
 
+export async function addressRewardList(payload) {
+  const trackerApi = await trackerApiInstance()
+  return new Promise((resolve, reject ) => {
+    trackerApi.get(`${TRANSACTIONS_PREFIX}?from=${payload.address}&method=claimIscore`)
+      .then(result => {
+        console.log(result, "address reward result")
+        resolve(result)
+      })
+      .catch(error => {
+        console.log(error, "reward error")
+        reject(error)
+      })
+  })
+}
+
 export async function addressDelegationList(payload){
   console.log(payload, "address delagation payload")
   const trackerApi = await trackerApiInstance()
