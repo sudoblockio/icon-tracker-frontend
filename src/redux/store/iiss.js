@@ -750,9 +750,9 @@ export async function getProposal(id) {
 export async function addressReward(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v1/address/claimIScoreList`, payload))
+        trackerApi.get(`/api/v1/transactions?from=${payload.address}&method=claimIScore`)
             .then(result => {
-                resolve(result.data)
+                resolve(result)
             })
             .catch(error => {
                 reject(error)

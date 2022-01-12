@@ -63,7 +63,7 @@ class AddressesDetailPage extends Component {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
             })
         }
-        if (claimIScoreCount && Number(claimIScoreCount) !== 0) {
+        if (data) {
             TABS.push(ADDRESS_TABS[5])
             getList.push(address => {
                 this.props.addressRewardList({ address })
