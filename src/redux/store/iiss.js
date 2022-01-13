@@ -268,7 +268,7 @@ export async function getBalanceOf(owner, tokenContract) {
             })
             .catch(error => {
                 if (!!error.message) {
-                    resolve(error.response.data)
+                    resolve(error.response)
                 } 
                 else {
                     resolve({

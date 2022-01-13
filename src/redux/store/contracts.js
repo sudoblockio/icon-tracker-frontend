@@ -122,10 +122,10 @@ export async function contractInfo(payload) {
 }
 
 export async function contractDetail(payload) {
-
+console.log(payload, "contract detail payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl(`${CONTRACTS_PREFIX}/detail`, payload))
+    trackerApi.get(`${CONTRACTS_PREFIX}/${payload}`)
       .then(result => {
         resolve(result)
       })

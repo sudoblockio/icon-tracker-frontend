@@ -15,6 +15,7 @@ import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
 import { prepList, getPRepsLegacy, getBalanceOf, getBalance } from '../../../redux/store/iiss'
+import { contractDetail } from '../../../redux/store/contracts'
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -35,6 +36,13 @@ class AddressInfo extends Component {
     // links = {}
     linkList = []
     tokenBalance = ""
+    tokenName = ""
+
+    getContractName = async (tokenContract) => {
+        const res = await contractDetail(tokenContract)
+        console.log(res.data.name, "the contract name data?")
+        this.tokenName = res.data.name
+    }
 
     getSocialMediaLinks = async (name) => {
             const allPreps = await prepList();
@@ -54,6 +62,11 @@ class AddressInfo extends Component {
         this.getTokenList(this.props.match.params.addressId)
         this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
         
+    }
+
+    getTokenBalance = async (tokenContract) => {
+        this.tokenBalance = await getBalanceOf(this.props.match.params.addressId, tokenContract)
+        console.log("hit getTokenBalance")
     }
     
 
@@ -172,6 +185,7 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
+        console.log(this.props, "wallet tx propos")
 
         // for each contract address, query contracts and.....
         const Content = () => {
@@ -378,12 +392,14 @@ Token5Tokens
                                                     {(tokenCxs || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((tokenContract, index) => {
                                                         console.log(tokenContract, "after map token")
                                                         const {contractName, contractSymbol, quantity} = tokenContract
+                                                        this.getTokenBalance(tokenContract)
+                                                        console.log(this.tokenBalance, tokenContract, "what is this token")
                                                         {console.log(tokenContract, "each token contract")}
+                                                        this.getContractName(tokenContract)
                                                         // take each token, call balanceOf ICX call, see what happens. 
-
                                                         return <p key={index}>
                                                             {console.log(this.tokenBalance, "what token balance? ")}
-                                                            <span>{tokenContract}</span><span>{`${convertNumberToText(Number(this.tokenBalance))}`}<em>{contractSymbol}</em></span>
+                                                            <span>{this.tokenName}</span><span>{`${convertNumberToText(Number(this.tokenBalance) / Math.pow(10, 18))}`}<em>{contractSymbol}</em></span>
                                                         </p>
                                                     })}
                                                 </div>
