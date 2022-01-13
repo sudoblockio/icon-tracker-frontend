@@ -78,8 +78,13 @@ class TxTableBody extends Component {
 		super(props)
 
 	}
-
-
+	tts = 0
+	async componentWillMount() {
+		if (this.props.txType === "tokenholders") {
+			this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
+			// this.tts = tokenTotalSupply
+		}
+	}
 	render() {
 
 		const TableRow = (_props) => {
@@ -96,7 +101,9 @@ class TxTableBody extends Component {
 			const addressInData = data.address
 			const isError = data.receipt_status === 0
 			const formattedLogData = ""
-			
+
+
+	
 
 
 			switch (txType) {
@@ -296,19 +303,22 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-					this.list=[]
 
-						this.props.tokenTotal(data.token_contract_address).then((result) => this.list.push(result))
-					let meh = this.list[0]
+
+					// 	if (this.props.txType === "tokenholders") {
+					// 		this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
+					// 		yer = this.tts
+					//  }
+						// this.tts = tokenTotalSupply
+
 					return (
 					
 						<tr>
-							{console.log(this.list? this.list : "no", "what list")}
-							{console.log(meh, "meh")}
+
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							<td><span>{meh}</span><em>%</em></td>
+							<td><span>{}</span><em>%</em></td>
 						</tr>					
 					)
 				default:
