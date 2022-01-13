@@ -296,23 +296,19 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-					this.tokenTotalSupply = getTokenTotalSupply(data.token_contract_address)
-					this.total = this.tokenTotalSupply
-						.then((result) => {
-							return (
-								result
-							)
-						})
-						this.props.tokenTotal(data.token_contract_address).then((result) => this.setState({result: result}))
-						
+					this.list=[]
+
+						this.props.tokenTotal(data.token_contract_address).then((result) => this.list.push(result))
+					let meh = this.list[0]
 					return (
-						
+					
 						<tr>
+							{console.log(this.list? this.list : "no", "what list")}
+							{console.log(meh, "meh")}
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							{console.log(this.state? this.state.result : this.state, "weeeet")}
-							<td><span>{this.result}</span><em>%</em></td>
+							<td><span>{meh}</span><em>%</em></td>
 						</tr>					
 					)
 				default:
