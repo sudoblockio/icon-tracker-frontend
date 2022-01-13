@@ -19,14 +19,13 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-
+        console.log(this.props, "address detail props")
 
     }
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
-        console.log(data, "the address index data")
 
 
         const TABS = [], getList = []
@@ -85,6 +84,7 @@ class AddressesDetailPage extends Component {
                 hasDelegations={hasDelegations}
                 isPrep={is_prep}
                 tokenList={address => {this.props.addressTokenTxList({address})}}
+                balanceOf={payload => {this.props.getBalanceOf({payload})}}
             />
         )
     }

@@ -34,6 +34,7 @@ class AddressInfo extends Component {
     links = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     // links = {}
     linkList = []
+    tokenBalance = ""
 
     getSocialMediaLinks = async (name) => {
             const allPreps = await prepList();
@@ -51,8 +52,8 @@ class AddressInfo extends Component {
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
-        const someBalance = await getBalanceOf('hx0b047c751658f7ce1b2595da34d57a0e7dad357d','cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
-        console.log(someBalance, "Some balance? ")
+        this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
+        
     }
     
 
@@ -381,7 +382,8 @@ Token5Tokens
                                                         // take each token, call balanceOf ICX call, see what happens. 
 
                                                         return <p key={index}>
-                                                            <span>{tokenContract}</span><span>{`${convertNumberToText(quantity)}`}<em>{contractSymbol}</em></span>
+                                                            {console.log(this.tokenBalance, "what token balance? ")}
+                                                            <span>{tokenContract}</span><span>{`${convertNumberToText(Number(this.tokenBalance))}`}<em>{contractSymbol}</em></span>
                                                         </p>
                                                     })}
                                                 </div>

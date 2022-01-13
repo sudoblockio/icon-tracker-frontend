@@ -16,9 +16,9 @@ import {
 import { 
   setNotification,
 } from '../../redux/actions/storageActions';
+import { getBalanceOf } from '../../redux/store/iiss';
 
 function mapStateToProps(state) {
-  console.log(state, "the state")
   return {
     url: state.router.location,
     ...state.addresses,
@@ -31,6 +31,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
+    getBalanceOf: payload => dispatch(getBalanceOf(payload)),
     addressDelegationList: (payload) => dispatch(addressDelegationListAction(payload)),
     addressVotedList: (payload) => dispatch(addressVotedListAction(payload)),
     addressInfo: (payload) => dispatch(addressInfoAction(payload)),
