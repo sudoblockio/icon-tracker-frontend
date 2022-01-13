@@ -4,7 +4,9 @@ import {
 } from '../../../../components'
 
 class TokenHolders extends Component {
+  
   render() {
+
     return <TxBottom {...this.props}/>
   }
 }

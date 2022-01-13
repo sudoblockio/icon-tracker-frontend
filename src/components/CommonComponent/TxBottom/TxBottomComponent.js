@@ -5,8 +5,9 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 
 class TxBottomComponent extends Component {
     render() {
-        const { txData, txType, goAllTx, address, tableClassName, noBoxText } = this.props
+        const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
+        console.log(this.props, "comp props")
 
         const Content = () => {
             if (loading) {
@@ -25,7 +26,7 @@ class TxBottomComponent extends Component {
                                 </thead>
                                 <tbody>
                                     {(data || []).map((item, index) => (
-                                        <TxTableBody key={index} rank={index +1} data={item} txType={txType} address={address} />
+                                        <TxTableBody key={index} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
                                     ))}
                                 </tbody>
                             </table>

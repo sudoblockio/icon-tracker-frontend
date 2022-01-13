@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../..
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsLegacy, getBalanceOf, getBalance } from '../../../redux/store/iiss'
+import { prepList, getPRepsLegacy, getBalanceOf} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 
 const _isNotificationAvailable = NotificationManager.available()

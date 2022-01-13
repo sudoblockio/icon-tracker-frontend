@@ -11,13 +11,19 @@ import {
     TX_TYPE,
     TOKEN_TABS,
 } from '../../../../utils/const'
+import {getTokenTotalSupply} from '../../../../redux/store/iiss'
 
 class TokenTabs extends Component {
-
+    total = async () => {
+        const res = await getTokenTotalSupply(this.props.match.params.tokenId)
+        return res;
+    }
     render() {
         const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
         const { loading, data } = token
         const { contract } = data
+        this.theTokenTotal = this.total()        
+
         return (
             <TabTable
                 {...this.props}
@@ -40,6 +46,7 @@ class TokenTabs extends Component {
                                     txData={tokenHolders}
                                     goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`) }}
                                     txType={TX_TYPE.TOKEN_HOLDERS}
+                                    tokenTotal={()=> this.total()}
                                 />
                             )
                         case 2:

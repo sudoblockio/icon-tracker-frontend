@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
     tokenSummary: payload => dispatch(tokenSummary(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
-    icxCall: payload => dispatch(icxCallAction(payload)),        
+    icxCall: payload => dispatch(icxCallAction(payload)),       
     readContractInformation: payload => dispatch(readContractInformationAction(payload))
   };
 }

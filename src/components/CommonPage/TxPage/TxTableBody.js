@@ -303,14 +303,16 @@ class TxTableBody extends Component {
 								result
 							)
 						})
+						this.props.tokenTotal(data.token_contract_address).then((result) => this.setState({result: result}))
 						
 					return (
+						
 						<tr>
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							{console.log(this.total, "a promise")}
-							<td><span>{this.total.result}</span><em>%</em></td>
+							{console.log(this.state? this.state.result : this.state, "weeeet")}
+							<td><span>{this.result}</span><em>%</em></td>
 						</tr>					
 					)
 				default:

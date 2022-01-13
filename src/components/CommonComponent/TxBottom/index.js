@@ -10,7 +10,8 @@ class TxBottom extends Component {
       txData,
       goAllTx,
       txType,
-      address
+      address,
+      tokenTotal
     } = this.props
     console.log(this.props, "from tx bottom props")
 
@@ -30,6 +31,7 @@ class TxBottom extends Component {
         address={address}
         tableClassName={tableClassName}
         noBoxText={noBoxText}
+        tokenTotal={tokenTotal}
       />
     )
   }
