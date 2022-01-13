@@ -244,7 +244,7 @@ export async function getIISSInfo() {
 
 
 // change 
-export async function getBalanceOf(address) {
+export async function getBalanceOf(owner, tokenContract) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -252,12 +252,12 @@ export async function getBalanceOf(address) {
             method: "icx_call",
             id: randomUint32(),
             params : {
-                "to": "hxcd6f04b2a5184715ca89e523b6c823ceef2f9c3d",
+                "to": `${tokenContract}`,
                 "dataType": "call",
                 "data": {
-                    "method": "_balanceOf",
+                    "method": "balanceOf",
                     "params": {
-                            "_owner": address
+                            "_owner": owner
                     }
                 }
             }
@@ -752,6 +752,7 @@ export async function addressReward(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/transactions?from=${payload.address}&method=claimIScore`)
             .then(result => {
+                console.log(result, "reward result")
                 resolve(result)
             })
             .catch(error => {

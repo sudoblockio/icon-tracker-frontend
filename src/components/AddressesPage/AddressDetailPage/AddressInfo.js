@@ -51,7 +51,8 @@ class AddressInfo extends Component {
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
-        const someBalance = await getBalanceOf("")
+        const someBalance = await getBalanceOf('hx0b047c751658f7ce1b2595da34d57a0e7dad357d','cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
+        console.log(someBalance, "Some balance? ")
     }
     
 

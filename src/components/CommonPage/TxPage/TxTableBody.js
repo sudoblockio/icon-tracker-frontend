@@ -103,9 +103,9 @@ class TxTableBody extends Component {
 				case TX_TYPE.ADDRESS_REWARD:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.txHash} />
-							<BlockCell height={data.height} />
-							<DateCell date={moment.utc(data.createDate).local()} />
+							<TxHashCell isError={isError} txHash={data.hash} />
+							<BlockCell height={data.block_number} />
+							<DateCell date={data.block_timestamp} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis />
 							<AmountCell amount={data.icx} symbol="ICX" />
 						</tr>
