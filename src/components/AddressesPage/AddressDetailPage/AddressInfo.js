@@ -36,12 +36,11 @@ class AddressInfo extends Component {
     // links = {}
     linkList = []
     tokenBalance = ""
-    tokenName = ""
+    tokenName = []
 
     getContractName = async (tokenContract) => {
         const res = await contractDetail(tokenContract)
-        console.log(res.data.name, "the contract name data?")
-        this.tokenName = res.data.name
+        this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, tokenContract)
     }
 
     getSocialMediaLinks = async (name) => {
@@ -66,7 +65,6 @@ class AddressInfo extends Component {
 
     getTokenBalance = async (tokenContract) => {
         this.tokenBalance = await getBalanceOf(this.props.match.params.addressId, tokenContract)
-        console.log("hit getTokenBalance")
     }
     
 
@@ -122,7 +120,6 @@ class AddressInfo extends Component {
         }
 
         const {notification, icxMore, tokenMore, showNode} = this.state
-        console.log(this.state, "state in render")
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
         const {
@@ -185,7 +182,6 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
-        console.log(this.props, "wallet tx propos")
 
         // for each contract address, query contracts and.....
         const Content = () => {
@@ -240,7 +236,6 @@ class AddressInfo extends Component {
                                                 {website && <span className="home" onClick={() => {
                                                     this.onSocialClick(website)
                                                 }}><i className="img"></i></span>}
-{console.log(this.linkList, "the link list")}
                                                 {SocialMediaType.map((type, index) => {
                                                     const mediaValue = this.linkList[type]
 
@@ -390,16 +385,16 @@ Token5Tokens
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
                                                     {(tokenCxs || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((tokenContract, index) => {
-                                                        console.log(tokenContract, "after map token")
-                                                        const {contractName, contractSymbol, quantity} = tokenContract
+
+
                                                         this.getTokenBalance(tokenContract)
-                                                        console.log(this.tokenBalance, tokenContract, "what is this token")
-                                                        {console.log(tokenContract, "each token contract")}
                                                         this.getContractName(tokenContract)
                                                         // take each token, call balanceOf ICX call, see what happens. 
+
                                                         return <p key={index}>
-                                                            {console.log(this.tokenBalance, "what token balance? ")}
-                                                            <span>{this.tokenName}</span><span>{`${convertNumberToText(Number(this.tokenBalance) / Math.pow(10, 18))}`}<em>{contractSymbol}</em></span>
+                                                            <span>{this.getContractName(tokenContract).name}</span><span>{`${convertNumberToText(Number(this.tokenBalance) / Math.pow(10, 18))}`}
+                                                            {/* <em>{contractSymbol}</em> */}
+                                                            </span>
                                                         </p>
                                                     })}
                                                 </div>

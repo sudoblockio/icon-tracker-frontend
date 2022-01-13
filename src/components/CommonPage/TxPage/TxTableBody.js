@@ -22,8 +22,8 @@ import {
 import {
 	TX_TYPE,
 } from '../../../utils/const'
+import {getTokenTotalSupply} from '../../../redux/store/iiss'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
-import moment from 'moment';
 
 const TxHashCell = ({ isError, txHash }) => {
 	let _txHash, className
@@ -296,12 +296,21 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
+					this.tokenTotalSupply = getTokenTotalSupply(data.token_contract_address)
+					this.total = this.tokenTotalSupply
+						.then((result) => {
+							return (
+								result
+							)
+						})
+						
 					return (
 						<tr>
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							<td><span>{}</span><em>%</em></td>
+							{console.log(this.total, "a promise")}
+							<td><span>{this.total.result}</span><em>%</em></td>
 						</tr>					
 					)
 				default:
