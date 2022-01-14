@@ -20,14 +20,14 @@ class WalletTabs extends Component {
         {console.log(this.props, "wallet tabs props")}
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
-        const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount } = data
+        const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
         
 
         console.log(data, "wallet tabs data")
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-        if (transaction_count && Number(transaction_count) !== 0) {
+        if (log_count && Number(log_count) !== 0) {
             TABS.push(ADDRESS_TABS[1])
         }
         if (tokenList && tokenList.length !== 0) {

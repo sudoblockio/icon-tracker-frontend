@@ -19,14 +19,12 @@ class AddressesDetailPage extends Component {
     async componentDidMount(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        console.log(this.props, "address detail props")
-
+        
     }
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
-        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations } = data
-
+        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations, log_count } = data
 
         const TABS = [], getList = []
 
@@ -34,9 +32,8 @@ class AddressesDetailPage extends Component {
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
-
-        if (transaction_count && Number(transaction_count) !== 0) {
-            console.log(transaction_count, "hitting the first getList")
+        console.log(log_count, "what is the log count")
+        if (Number(log_count) !== 0) {
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })

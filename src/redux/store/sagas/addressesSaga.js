@@ -235,6 +235,7 @@ export function* addressInternalTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_INTERNAL_TX_LIST, action.payload);
+    console.log(payload, "addr int tx payload")
     if (payload.status === 200) {
       yield put({ type: AT.addressInternalTxListFulfilled, payload: payload });
     }

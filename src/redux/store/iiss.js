@@ -1,5 +1,5 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
-import { randomUint32, makeUrl, convertHexToValue } from '../../utils/utils'
+import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
 
 
 
@@ -749,10 +749,11 @@ export async function getProposal(id) {
 
 export async function addressReward(payload) {
     const trackerApi = await trackerApiInstance()
+    console.log(payload, "reward api payload")
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/governance/rewards/${payload.address}`)
+        trackerApi.get(makeRewardsUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
             .then(result => {
-                console.log(result, "reward result")
+                console.log(result, "what result")
                 resolve(result)
             })
             .catch(error => {

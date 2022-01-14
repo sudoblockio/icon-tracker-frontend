@@ -311,6 +311,34 @@ export function makeTokenUrl(url, payload) {
     return result
 }
 
+export function makeRewardsUrl(url, payload) {
+    if (!payload) {
+        return url
+    }
+    let result = url
+    payload.limit = Number(payload.count)
+    if (Number(payload.page) > 2){
+        payload.skip = Number(Number(payload.page -1) * payload.count)
+    } else if(Number(payload.page) === 2){
+        payload.skip = payload.count
+    }  else if (Number(payload.page) === 1){
+        payload.skip = 0
+    }
+    !payload.skip ? payload.skip = 0 : payload.skip = payload.skip
+    payload.limit ? payload.limit = payload.limit : payload.limit = 10
+
+    delete payload.count
+    delete payload.page
+    delete payload.address
+    console.log(payload, "reward makeUrl payload")
+    Object.keys(payload).forEach((key, index) => {
+        result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+        
+    })
+    
+    return result
+}
+
 
 export function randomUint32() {
     if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {

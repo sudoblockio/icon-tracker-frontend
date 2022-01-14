@@ -160,6 +160,7 @@ class AddressInfo extends Component {
                 website,
 
             } = prep || {}
+
             // is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
 
         let unstakeSum = 0;
@@ -197,6 +198,7 @@ class AddressInfo extends Component {
 
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
+                console.log(delegated, "total votes?")
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -358,19 +360,15 @@ class AddressInfo extends Component {
 Address	hxc4193cda4a75526bf50896ec242d6713bb6b02a3 Report scam
 Balance	
 ICX42,272,003ICX
-
+totalDe
 Available42,359,732.077366143275843123ICX
-
 Staked0ICX
-
 Unstaking0ICX
 Voted0ICX
-
 I_SCORE0I-Score
-
 Token5Tokens
+0 : Number(delegated) / Number(this.state.legated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
 
- 0 : Number(delegated) / Number(this.state.totalDelegated) * 100).toFixed(2)}%</em>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span></p> */}
                                                     <p>
                                                         <span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span>
                                                     </p>
