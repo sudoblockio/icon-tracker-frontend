@@ -110,11 +110,11 @@ class TxTableBody extends Component {
 				case TX_TYPE.ADDRESS_REWARD:
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.hash} />
-							<BlockCell height={data.block_number} />
-							<DateCell date={data.block_timestamp} />
+							<TxHashCell isError={isError} txHash={data.address} />
+							<BlockCell height={data.block} />
+							<DateCell date={data.timestamp} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis />
-							<AmountCell amount={data.icx} symbol="ICX" />
+							<AmountCell amount={data.value} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_DELEGATION:
