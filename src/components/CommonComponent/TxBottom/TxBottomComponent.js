@@ -2,14 +2,20 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import TxBottomTitle from './TxBottomTitle'
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../components'
+import { getTokenTotalSupply } from '../../../redux/store/iiss'
 
 class TxBottomComponent extends Component {
+    tts ;
     render() {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
-        console.log(this.props, "comp props")
 
         const Content = () => {
+            // if (this.props.txType === 'tokenHolders') {
+            //     this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
+    
+            // }
+
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if (!data || data.length === 0) {
@@ -26,7 +32,7 @@ class TxBottomComponent extends Component {
                                 </thead>
                                 <tbody>
                                     {(data || []).map((item, index) => (
-                                        <TxTableBody key={index} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
+                                        <TxTableBody key={index} totalSupply rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
                                     ))}
                                 </tbody>
                             </table>

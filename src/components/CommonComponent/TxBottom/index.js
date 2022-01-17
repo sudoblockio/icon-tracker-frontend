@@ -13,7 +13,7 @@ class TxBottom extends Component {
       address,
       tokenTotal
     } = this.props
-    console.log(this.props, "from tx bottom props")
+
 
     const tableClassName =
       TX_TYPE_DATA[txType] ?
@@ -24,6 +24,7 @@ class TxBottom extends Component {
       TX_TYPE_DATA[txType]['noBoxText'] : ''
 
     return (
+      
       <TxBottomComponent
         txData={txData}
         goAllTx={goAllTx}

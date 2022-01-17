@@ -23,7 +23,7 @@ class TokenTabs extends Component {
         const { loading, data } = token
         const { contract } = data
         this.theTokenTotal = this.total()        
-
+        this.theTokenTotal.then(result => this.tokenTotalSupply = result).catch(error => console.log(error, "the promise error"))
         return (
             <TabTable
                 {...this.props}
@@ -41,12 +41,14 @@ class TokenTabs extends Component {
                                 />
                             )
                         case 1:
+                            {console.log(this.tokenTotalSupply, "this token's total")}
+                            const tokenTotal = this.tokenTotalSupply
                             return (
                                 <TokenHolders
                                     txData={tokenHolders}
                                     goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`) }}
                                     txType={TX_TYPE.TOKEN_HOLDERS}
-                                    tokenTotal={()=> this.total()}
+                                    tokenTotal={tokenTotal}
                                 />
                             )
                         case 2:

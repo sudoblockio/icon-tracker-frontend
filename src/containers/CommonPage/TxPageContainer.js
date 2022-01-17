@@ -32,6 +32,8 @@ import {
   blockTxListAction,
 } from '../../redux/store/blocks';
 
+import {getTokenTotalSupply} from '../../redux/store/iiss'
+
 function mapStateToProps(state) {
   return {
     url: state.router.location,
@@ -58,6 +60,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    tokenTotalSupply: payload => dispatch(getTokenTotalSupply(payload)),
     addressVotedList: payload => dispatch(addressVotedListAction(payload)),
     contractTxList: payload => dispatch(contractTxListAction(payload)),
     contractInternalTxList: payload => dispatch(contractInternalTxListAction(payload)),

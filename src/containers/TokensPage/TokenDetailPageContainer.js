@@ -10,6 +10,7 @@ import {
   icxCallAction,
   readContractInformationAction
 } from '../../redux/store/contracts'
+import { getTokenTotalSupply } from '../../redux/store/iiss';
 
 function mapStateToProps(state) {
   return {
@@ -21,6 +22,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    tokenTotalSupply: payload => dispatch(getTokenTotalSupply(payload)),
     tokenSummary: payload => dispatch(tokenSummary(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
