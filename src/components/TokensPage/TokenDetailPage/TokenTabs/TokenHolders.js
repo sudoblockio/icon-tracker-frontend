@@ -6,7 +6,7 @@ import {
 class TokenHolders extends Component {
   
   render() {
-
+    console.log(this.props, "token holder bottom props")
     return <TxBottom {...this.props}/>
   }
 }

@@ -310,15 +310,15 @@ class TxTableBody extends Component {
 					// 		yer = this.tts
 					//  }
 						// this.tts = tokenTotalSupply
+						console.log(this.props, "What props?")
 
 					return (
-					
 						<tr>
 
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							<td><span>{}</span><em>%</em></td>
+							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100 }</span><em>%</em></td>
 						</tr>					
 					)
 				default:
