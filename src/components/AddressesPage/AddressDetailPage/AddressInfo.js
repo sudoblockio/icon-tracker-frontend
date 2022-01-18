@@ -39,7 +39,7 @@ class AddressInfo extends Component {
     tokenName = []
 
 getContractName = async (tokenContract) => {
-        console.log(tokenContract, "get contract name  tokenContract")
+
         const res = await contractDetail(tokenContract)
         this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, res.data.address)
 
@@ -162,7 +162,7 @@ getContractName = async (tokenContract) => {
 
             } = prep || {}
 
-            // is_prep?  this.getSocialMediaLinks(name) : console.log("not prep")
+
 
         let unstakeSum = 0;
         if (unstakes && unstakes.length !== 0) {
@@ -194,10 +194,9 @@ getContractName = async (tokenContract) => {
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
                 const scam = reportedCount >= 100 ? true : false
-                console.log(this.tokenName, "token name in content")
+
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
-                console.log(delegated, "total votes?")
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -387,11 +386,10 @@ Token5Tokens
                                                         this.getContractName(tokenContract)
                                                     }
                                                     )}
-                                                    {console.log(this.tokenName, "each token")}
-                                                    {this.tokenName.map((token, index ) => {
-                                                        console.log("in the map")
+                                                    
+                                                    {Object.entries(this.tokenName).map((token, index ) => {
                                                         return <p key={index}>
-                                                        <span>{""}</span><span>{``}
+                                                        <span>{token[0]}</span><span>{`${convertNumberToText(Number(token[1]) / Math.pow(10, 18))}`}
                                                         {/* <em>{contractSymbol}</em> */}
                                                         </span>
                                                     </p>
