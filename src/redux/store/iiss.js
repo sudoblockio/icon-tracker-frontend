@@ -1,6 +1,8 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
+import RELAY_REQUEST_CONST from '../../utils/const'
 import IconService from 'icon-sdk-js';
+import { version } from 'os';
 
 // build transaction
 
@@ -247,19 +249,58 @@ export async function getIISSInfo() {
             })
     });
 }
-
+// from https://github.com/ibriz/CPS: 
+// var CPSScore = 'cx724a3cf07c91a12dd7fd4987be130f383168b631';
+// var CPSScore = 'cxdf3c1ea6ba87e21957c63b21a54151a38a6ecb80';
+// var CPSScore = 'cx00c1e2d9b009fca69002c53c1ce3ed377708381e';
+// var CPSScore = 'cx6bb0e6683dd326165d42289c12b6bd0eaa596cc9';
+// var CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
+export const CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
+// export const CPSScore = 'cx7b98401aa6578296abd311b4cb70e90812e9ebae';
+var nid = 1;
 
 export async function sendTransaction({
+    // write function to get logged in wallets public_key
     fromAddress = "account address",
-    scoreAddress = "CPSScore",
+    scoreAddress = CPSScore,
     icxAmount = 0, 
     method,
     params = {},
     id = null,
 }){
     const { IconConverter, IconBuilder, IconAmount } = IconService
-    const builder = new IconBuilder.CallTransactionBuilder()
+    const builder = new IconBuilder.CallTransactionBuilder();
+    const txData = builder 
+        .from(fromAddress)
+        .to(scoreAddress)
+        .nid(IconConverter.toBigNumber(nid))
+        .timestamp(new Date().getTime() * 1000)
+        .stepLimit(IconConverter.toBigNumber(100000000))
+        .version(IconConverter.toBigNumber(3))
+        .method(method)
+        .params(params)
+        .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
+        .build();
+
+        const txPayload = {
+            jsonrpc: '2.0',
+            method: 'icx_sendTransaction',
+            params: IconConverter.toRawTransaction(txData),
+            id: id ? RELAY_REQUEST_CONST[id] : RELAY_REQUEST_CONST[method]
+        };
+        window.parent.dispatchEvent(
+            new CustomEvent('ICONEX_RELAY_REQUEST', {
+                detail: {
+                    type: 'REQUEST_JSON_RPC',
+                    payload: txPayload,
+                },
+            }),
+        );
 }
+
+
+
+
 export async function getBalanceOf(owner, tokenContract) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
