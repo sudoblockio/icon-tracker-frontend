@@ -256,6 +256,7 @@ class SearchPage extends Component {
                                     listSize={totalSize}
                                     setPopup={this.props.setPopup}
                                 />
+                            
                             </p>
                             {/* <SearchInput
                                 id="sub-search-input"

@@ -319,7 +319,7 @@ class TxTableBody extends Component {
 
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
+							<AmountCell amount={convertHexToValue(data.value).toFixed(1) } symbol={data.symbol} />
 							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100 }</span><em>%</em></td>
 						</tr>					
 					)

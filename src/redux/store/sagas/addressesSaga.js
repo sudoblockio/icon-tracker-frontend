@@ -156,7 +156,7 @@ export function* addressInfoFunc(action) {
 
       if (isPrep) {
         try{
-          console.log(payload.data, "isPrep")
+
           const { stake, unstakes } = yield call(getStake, address)
           const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
           const prep = yield call(getDelegation, address)
@@ -191,7 +191,7 @@ export function* addressInfoFunc(action) {
         media,
       }
 
-      console.log(payload, "final data submitted")
+
       yield put({ type: AT.addressInfoFulfilled, payload: payload });
     }
     else {      

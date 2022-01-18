@@ -1,5 +1,11 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
+import IconService from 'icon-sdk-js';
+
+// build transaction
+
+
+
 
 
 
@@ -243,7 +249,17 @@ export async function getIISSInfo() {
 }
 
 
-// change 
+export async function sendTransaction({
+    fromAddress = "account address",
+    scoreAddress = "CPSScore",
+    icxAmount = 0, 
+    method,
+    params = {},
+    id = null,
+}){
+    const { IconConverter, IconBuilder, IconAmount } = IconService
+    const builder = new IconBuilder.CallTransactionBuilder()
+}
 export async function getBalanceOf(owner, tokenContract) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {

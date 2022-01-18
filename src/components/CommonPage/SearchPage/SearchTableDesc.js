@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { SEARCH_TYPE, IRC_VERSION, POPUP_TYPE} from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
 import { getContractListCount } from '../../../redux/store/iiss'
-
+import { QrCodeButton } from '../../../components'
+// import { isConnected } '../../'
 class SearchTableDesc extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +13,7 @@ class SearchTableDesc extends Component {
         const cxListCount = await getContractListCount()
         const { headers } = await cxListCount
         this.setState({cxCount:headers['x-total-count']})
+        console.log(this.props, "contract list props")
     }
     render() {
         const { searchType, listSize, totalSize } = this.props
@@ -22,10 +24,13 @@ class SearchTableDesc extends Component {
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
+                        <>
                         <span className="cont right">
                             A total of {count} contract source
                             codes found. 
-                        </span>                     
+                        </span>
+                        <QrCodeButton/>
+                        </>                     
                     )
                 case SEARCH_TYPE.TOKENS:
                     return (
