@@ -38,10 +38,13 @@ class AddressInfo extends Component {
     tokenBalance = ""
     tokenName = []
 
-    getContractName = async (tokenContract) => {
+getContractName = async (tokenContract) => {
+        console.log(tokenContract, "get contract name  tokenContract")
         const res = await contractDetail(tokenContract)
-        this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, tokenContract)
+        this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, res.data.address)
+
     }
+    
 
     getSocialMediaLinks = async (name) => {
             const allPreps = await prepList();
@@ -52,14 +55,11 @@ class AddressInfo extends Component {
                     this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
                 }
             })
-            // this.linkList=this.links
-            // this.setState({links: this.linkList})
-            // this.state.links = this.links
     }
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
-        this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
+        // this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
         
     }
 
@@ -135,6 +135,7 @@ class AddressInfo extends Component {
         } = data
 
 
+
         
         const showLinks = is_prep ? true : false
  
@@ -183,7 +184,6 @@ class AddressInfo extends Component {
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
         const tokenCxs = this.props.walletTokenTx.data
-
         // for each contract address, query contracts and.....
         const Content = () => {
             if (loading) {
@@ -193,9 +193,8 @@ class AddressInfo extends Component {
                 const _address = !!public_key ? public_key : error
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
-
                 const scam = reportedCount >= 100 ? true : false
-
+                console.log(this.tokenName, "token name in content")
                 let totalVotes; 
                 !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
                 console.log(delegated, "total votes?")
@@ -376,24 +375,26 @@ Token5Tokens
                                                         <span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span>
                                                     </p>
                                                 </div>
+                                                
                                                 <div className={tokenMore ? 'on' : ''}>
                                                     <p><span><i
                                                         className="coin"></i>Token</span><span>{(this.props.walletTokenTx.data || []).length}<em>Tokens</em></span><em
                                                         
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
-                                                    {(tokenCxs || []).sort((a, b) => (a.contractName < b.contractName ? -1 : a.contractName > b.contractName ? 1 : 0)).map((tokenContract, index) => {
 
-
-                                                        this.getTokenBalance(tokenContract)
+                                                    {tokenCxs.forEach((tokenContract, index) => {
                                                         this.getContractName(tokenContract)
-                                                        // take each token, call balanceOf ICX call, see what happens. 
-
+                                                    }
+                                                    )}
+                                                    {console.log(this.tokenName, "each token")}
+                                                    {this.tokenName.map((token, index ) => {
+                                                        console.log("in the map")
                                                         return <p key={index}>
-                                                            <span>{this.getContractName(tokenContract).name}</span><span>{`${convertNumberToText(Number(this.tokenBalance) / Math.pow(10, 18))}`}
-                                                            {/* <em>{contractSymbol}</em> */}
-                                                            </span>
-                                                        </p>
+                                                        <span>{""}</span><span>{``}
+                                                        {/* <em>{contractSymbol}</em> */}
+                                                        </span>
+                                                    </p>
                                                     })}
                                                 </div>
                                             </td>

@@ -64,6 +64,7 @@ const DateCell = ({ date, isDate }) => {
 
 		}
 	}
+
 	return <td className={className}>{dateText}</td>
 }
 
@@ -108,9 +109,10 @@ class TxTableBody extends Component {
 
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
+					console.log(data.timestamp, "the data")
 					return (
 						<tr>
-							<TxHashCell isError={isError} txHash={data.address} />
+							<TxHashCell isError={isError} txHash={data.tx_hash} />
 							<BlockCell height={data.block} />
 							<DateCell date={data.timestamp} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis />

@@ -102,6 +102,7 @@ class ContractInfo extends Component {
                                             </tr>                                            
                                             <tr>
                                                 <td>Balance</td>
+
                                                 <td>{convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX</td>
                                                 <td>Virtual Step</td>
                                                 {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
