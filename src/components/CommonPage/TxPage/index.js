@@ -34,6 +34,7 @@ class TxPage extends Component {
     }
 
     async componentDidMount() {
+        console.log(this, "what this")
         this.setInitialData(this.props.url)
         const currentUSD = await coinGeckoCurrentUSD()
         const supplyMetrics = await getSupplyMetrics()
@@ -69,6 +70,7 @@ class TxPage extends Component {
     }
 
     getTxList = (page, count, urlIndex) => {
+        console.log(urlIndex, "url index")
         const query = {
             page: isNumeric(page) ? page : 1,
             count: isNumeric(count) ? count : 25,
@@ -93,6 +95,7 @@ class TxPage extends Component {
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:
             case TX_TYPE.CONTRACT_EVENTS:
+                console.log(query, "the query")
                 query.contractAddr = urlIndex
                 break
             case TX_TYPE.BLOCKS:

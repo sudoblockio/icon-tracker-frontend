@@ -93,6 +93,9 @@ export async function transactionEventLogList(payload) {
     })
   }
 
+
+
+
 // REDUCER
 const initialState = {
     transaction: INITIAL_STATE['OBJ'],

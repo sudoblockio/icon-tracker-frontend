@@ -32,6 +32,7 @@ class SearchPage extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props, "search page props")
         this.setInitialData(this.props.url)
     }
 

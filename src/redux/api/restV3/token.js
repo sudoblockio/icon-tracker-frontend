@@ -71,6 +71,7 @@ export async function tokenTransfersList(payload) {
 }
 
 export async function tokenHoldersList(payload) {
+  console.trace(payload, "contract holder payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/transactions/token-holders/token-contract/${payload.contractAddr}`)

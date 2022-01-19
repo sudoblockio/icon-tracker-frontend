@@ -126,7 +126,7 @@ class TxPageTitle extends Component {
                             Token Holders
                             <span>for Token {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{listSize}</em> holder(s) found<em className="gray">(Showing the top {_listSize} holder(s) only)</em>
+                                A total of<em>{_totalSize}</em> holder(s) found<em className="gray">(Showing the top {_listSize} holder(s) only)</em>
                             </span>
                         </p>
                     )

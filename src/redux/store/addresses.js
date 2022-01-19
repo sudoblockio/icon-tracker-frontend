@@ -178,7 +178,7 @@ export async function addressVotedList(payload) {
     }
 
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/governance/delegations/${payload.prep}`)
+        trackerApi.get(`/api/v1/governance/votes/${payload.prep}`)
             .then(result => {
                 resolve(result)
             })
