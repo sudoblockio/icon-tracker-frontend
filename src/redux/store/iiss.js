@@ -1,17 +1,7 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
-import RELAY_REQUEST_CONST from '../../utils/const'
+import {RELAY_REQUEST_CONST} from '../../utils/const'
 import IconService from 'icon-sdk-js';
-import { version } from 'os';
-
-// build transaction
-
-
-
-
-
-
-
 
 export async function coinGeckoMarketCap () {
     try {
@@ -151,7 +141,7 @@ export async function getPReps() {
         
 }
 
-export async function getPRepsLegacy() {
+export async function getPRepsRPC() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -257,11 +247,11 @@ export async function getIISSInfo() {
 // var CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
 export const CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
 // export const CPSScore = 'cx7b98401aa6578296abd311b4cb70e90812e9ebae';
-var nid = 1;
+
 
 export async function sendTransaction({
     // write function to get logged in wallets public_key
-    fromAddress = "account address",
+    fromAddress = "wallet address",
     scoreAddress = CPSScore,
     icxAmount = 0, 
     method,
@@ -273,7 +263,7 @@ export async function sendTransaction({
     const txData = builder 
         .from(fromAddress)
         .to(scoreAddress)
-        .nid(IconConverter.toBigNumber(nid))
+        .nid(IconConverter.toBigNumber(1))
         .timestamp(new Date().getTime() * 1000)
         .stepLimit(IconConverter.toBigNumber(100000000))
         .version(IconConverter.toBigNumber(3))

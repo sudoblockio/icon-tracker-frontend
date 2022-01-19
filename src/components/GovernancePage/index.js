@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getPRepsLegacy  } from '../../redux/store/iiss'
+import { getLastBlock, getStepPrice, prepList, getPRepsRPC  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
@@ -62,7 +62,7 @@ class GovernancePage extends Component {
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
 		// previous call response destructure:
-		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsLegacy()	
+		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()	
 		// rpc calls for 3 lower boxes, total stakes and total voted above chart. 
 		// *** convert to suppy metric endpoint?
 		const lastBlock = await getLastBlock()
@@ -486,6 +486,7 @@ class TableRow extends Component {
 				</td>
 				<td>{sponsored_cps_grants !== null ?'✓':'-'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
+
 				<td><span>{ productivity !== "None" ? productivity : "0.00%"}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>

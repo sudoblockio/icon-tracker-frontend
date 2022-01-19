@@ -12,11 +12,12 @@ import {
 } from '../../../utils/utils'
 import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
-import {IconConverter} from 'icon-sdk-js'
+import {IconConverter, IconAmount} from 'icon-sdk-js'
 
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsLegacy, getBalanceOf} from '../../../redux/store/iiss'
+import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
+
 
 const _isNotificationAvailable = NotificationManager.available()
 
@@ -60,6 +61,9 @@ getContractName = async (tokenContract) => {
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
+        const {totalDelegated: totalVotedLoop } = await getPRepsRPC()	
+		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+        this.setState({totalVoted})
         // this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
         
     }
@@ -115,13 +119,12 @@ getContractName = async (tokenContract) => {
     }
 
     render() {
-        {console.log(this.props, "wallet props maybe")}
         if (this.props.wallet.data.is_prep === true){
             this.getSocialMediaLinks(this.props.wallet.data.prep.name)
             this.linkList=this.links
         }
 
-        const {notification, icxMore, tokenMore, showNode} = this.state
+        const {icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress} = this.props
         const {loading, data, error} = wallet
         const {
@@ -196,9 +199,9 @@ getContractName = async (tokenContract) => {
                 const isConnected = walletAddress === _address
                 const disabled = !_isNotificationAvailable
                 const scam = reportedCount >= 100 ? true : false
-
+                
                 let totalVotes; 
-                !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(delegated) / Number(this.state.totalDelegated)
+                !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(Number(delegated) / Number(this.state.totalVoted)) / Math.pow(10, 18)
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
@@ -275,6 +278,7 @@ getContractName = async (tokenContract) => {
                                             <td>Total Votes</td>
                                             <td colSpan="3">
                                                 <span>{convertNumberToText(delegated)}
+
                                                 <em>( {totalVotes.toString().slice(0,3)}% )</em>
                                                 {/* <em>( 90.02 % )</em> */}</span>
                                             </td>
