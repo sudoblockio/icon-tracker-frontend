@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import {
     QrCodeComponent
 } from '../../components'
+import { sendTransaction } from '../../redux/store/iiss'
 
 class AddressQrCode extends Component {
+    handleSubmit = (e) => {
+        console.log("handle submit")
+        e.preventDefault()
+        sendTransaction(
+            { fromAddress: this.props.data.address,} 
+        )
 
+
+
+    }
+    // ICONEXsendTransaction= (address) => {
+    //     sendTransaction(address)
+    // }
     render() {
         const { data } = this.props
         const { address } = data
@@ -12,11 +25,11 @@ class AddressQrCode extends Component {
         return ([
             <h1 key='h1' className="title">Submit a Contract for Verification</h1>,
             <div className="cv-form-container">
-                <form>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <section>
                     <fieldset>
                     <p>
-                    Enter An Address: <input class="txt-type-search modified" type="text" name="address" placeholder={address}/>
+                    Address: <input class="txt-type-search modified" type="text" name="address" value={address} placeholder={address}/>
                     </p>
                     <br/>
                     </fieldset>
@@ -72,14 +85,18 @@ class AddressQrCode extends Component {
                             </div>
                         </section>
                     </div>
-                </form>
-
-                <div className='btn-holder full'>
-                <input type="file" id="myFile" name="filename"/>
-                    <button className='btn-type-normal size-full'>
+                    <div className='btn-holder full'>
+                    <input type="file" id="myFile" name="filename"/>
+                    <button type="submit"className='btn-type-normal size-full' >
                         <span>Submit</span>
                     </button>
-                </div>
+                    </div>
+                </form>
+
+                
+                
+
+                
             </div>
             // <div key='div' className="qr">
             //     <QrCodeComponent text={address} scale={5}/>

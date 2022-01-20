@@ -215,7 +215,7 @@ getContractName = async (tokenContract) => {
                                     <span className={`toggle${disabled ? ' disabled' : ''}`}>
                                         
                                             
-                                            {/* <span><QrCodeButton address={_address} isSpan/></span> */}
+                                           
                                         
                                     </span>
                                 </p>
@@ -304,7 +304,8 @@ getContractName = async (tokenContract) => {
                                             <td>Address</td>
                                             <td colSpan={is_prep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                                 {scam && <span className="scam-tag">Scam</span>}
-                                                {_address} <QrCodeButton address={_address}/>
+                                                {_address} 
+                                                {/* <QrCodeButton address={_address}/> */}
                                                 <CopyButton data={_address} title={'Copy Address'} isSpan/>
                                                 <span className="show-node-addr"
                                                       style={is_prep ? {display: ""} : {display: "none"}}

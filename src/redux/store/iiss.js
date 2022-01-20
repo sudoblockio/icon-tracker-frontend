@@ -1,6 +1,6 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
-import {RELAY_REQUEST_CONST} from '../../utils/const'
+
 import IconService from 'icon-sdk-js';
 
 export async function coinGeckoMarketCap () {
@@ -251,15 +251,16 @@ export const CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
 
 export async function sendTransaction({
     // write function to get logged in wallets public_key
-    fromAddress = "wallet address",
+    fromAddress,
     scoreAddress = CPSScore,
     icxAmount = 0, 
-    method,
+    method = "sendTransaction",
     params = {},
     id = null,
 }){
+    console.log(fromAddress, "from teh iconex function")
     const { IconConverter, IconBuilder, IconAmount } = IconService
-    const builder = new IconBuilder.CallTransactionBuilder();
+    const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
         .from(fromAddress)
         .to(scoreAddress)
@@ -268,17 +269,20 @@ export async function sendTransaction({
         .stepLimit(IconConverter.toBigNumber(100000000))
         .version(IconConverter.toBigNumber(3))
         .method(method)
-        .params(params)
+        .params({"amount": 1})
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
+
+        const convertedToRaw = IconConverter.toRawTransaction(txData)
 
         const txPayload = {
             jsonrpc: '2.0',
             method: 'icx_sendTransaction',
-            params: IconConverter.toRawTransaction(txData),
-            id: id ? RELAY_REQUEST_CONST[id] : RELAY_REQUEST_CONST[method]
+            params: convertedToRaw,
+            id: Math.floor((Math.random() * 90000) + 10000)
         };
-        window.parent.dispatchEvent(
+        console.log(txPayload, "txData")
+        window.dispatchEvent(
             new CustomEvent('ICONEX_RELAY_REQUEST', {
                 detail: {
                     type: 'REQUEST_JSON_RPC',

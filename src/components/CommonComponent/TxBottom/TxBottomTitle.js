@@ -20,8 +20,7 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
-        console.log(totalSize, "bottom title props")
-        console.log(goAllTx, "what is go all tx")
+
         const Content = () => {
             const listSizeNum = listSize || 0
             const totalSizeNum = totalSize || 0

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SEARCH_TYPE, IRC_VERSION, POPUP_TYPE } from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
 import { getContractListCount } from '../../../redux/store/iiss'
-import { QrCodeButton } from '../../../components'
+import { QrCodeButton, Connect } from '../../../components'
 // import { isConnected } '../../'
 class SearchTableDesc extends Component {
     constructor(props) {
@@ -29,7 +29,12 @@ class SearchTableDesc extends Component {
                                 A total of {count} contract source
                                 codes found.
                             </span>
-                            <QrCodeButton address={address} />
+
+                             <QrCodeButton address={address} />   
+
+                        
+                            {}
+                            
                         </>
                     )
                 case SEARCH_TYPE.TOKENS:
