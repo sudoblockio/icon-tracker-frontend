@@ -28,7 +28,7 @@ class QrCodeButton extends Component {
             </span>
             :
             <span className="qrcode" onClick={this.connectWallet}> 
-            | [#]  Connect a Wallet
+            {/* | [#]  Connect a Wallet */}
             </span>
         )
     }

@@ -88,7 +88,7 @@ class AddressQrCode extends Component {
                     <div className='btn-holder full'>
                     <input type="file" id="myFile" name="filename"/>
                     <button type="submit"className='btn-type-normal size-full' >
-                        <span>Submit</span>
+                        <span>Sign & Submit</span>
                     </button>
                     </div>
                 </form>

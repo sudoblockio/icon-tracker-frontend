@@ -1,7 +1,8 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
-
+import checkIconex from 'check-iconex'
 import IconService from 'icon-sdk-js';
+import { requestAddress, requestJsonRpc } from '../../utils/connect';
 
 export async function coinGeckoMarketCap () {
     try {
@@ -239,57 +240,57 @@ export async function getIISSInfo() {
             })
     });
 }
-// from https://github.com/ibriz/CPS: 
-// var CPSScore = 'cx724a3cf07c91a12dd7fd4987be130f383168b631';
-// var CPSScore = 'cxdf3c1ea6ba87e21957c63b21a54151a38a6ecb80';
-// var CPSScore = 'cx00c1e2d9b009fca69002c53c1ce3ed377708381e';
-// var CPSScore = 'cx6bb0e6683dd326165d42289c12b6bd0eaa596cc9';
-// var CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
-export const CPSScore = 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f';
-// export const CPSScore = 'cx7b98401aa6578296abd311b4cb70e90812e9ebae';
-
-
+export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
 export async function sendTransaction({
     // write function to get logged in wallets public_key
+    
+    // connected users wallet address
     fromAddress,
-    scoreAddress = CPSScore,
+    // actual contract needs to be here 
+    scoreAddress = VerificationScore,
+    // set to zero because we are just signing
     icxAmount = 0, 
+    // method from docs
     method = "sendTransaction",
-    params = {},
-    id = null,
+    params = {}
 }){
-    console.log(fromAddress, "from teh iconex function")
+    // const res = await requestAddress()
+    // console.log(res, "address res")
+    // console.log(fromAddress, "from teh iconex function")
+    const nid =1 
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
         .from(fromAddress)
         .to(scoreAddress)
-        .nid(IconConverter.toBigNumber(1))
+        .nid(IconConverter.toBigNumber(nid))
         .timestamp(new Date().getTime() * 1000)
         .stepLimit(IconConverter.toBigNumber(100000000))
         .version(IconConverter.toBigNumber(3))
         .method(method)
-        .params({"amount": 1})
+        .params(params)
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
 
         const convertedToRaw = IconConverter.toRawTransaction(txData)
+        requestJsonRpc(convertedToRaw)
 
-        const txPayload = {
-            jsonrpc: '2.0',
-            method: 'icx_sendTransaction',
-            params: convertedToRaw,
-            id: Math.floor((Math.random() * 90000) + 10000)
-        };
-        console.log(txPayload, "txData")
-        window.dispatchEvent(
-            new CustomEvent('ICONEX_RELAY_REQUEST', {
-                detail: {
-                    type: 'REQUEST_JSON_RPC',
-                    payload: txPayload,
-                },
-            }),
-        );
+        // const txPayload = {
+        //     jsonrpc: '2.0',
+        //     method: 'icx_sendTransaction',
+        //     params: convertedToRaw,
+        //     id: Math.floor((Math.random() * 90000) + 10000)
+        // };
+        // console.log(txPayload, "txData")
+        // console.log(window, "What does window")
+        // window.parent.dispatchEvent(
+        //     new CustomEvent('ICONEX_RELAY_REQUEST', {
+        //         detail: {
+        //             type: 'REQUEST_JSON_RPC',
+        //             payload: txPayload,
+        //         },
+        //     }),
+        // );
 }
 
 

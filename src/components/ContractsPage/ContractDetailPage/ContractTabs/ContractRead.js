@@ -23,13 +23,16 @@ class ContractRead extends Component {
     }
 
     handleClick = (address, method, inputs, index) => {
+        console.log(address, "params address")
         const params = this.makeParams(method, inputs)
         this.props.icxCall({
             address,
             method,
             params,
-            index
+            index,
+            
         })
+        console.log( method, inputs, index, "What handle params")
     }
 
     makeParams = (funcName, inputs) => {
@@ -50,6 +53,7 @@ class ContractRead extends Component {
         const { contract, contractReadInfo } = this.props
         const { data } = contract
         const { address } = data
+        console.log(data, "params data")
         const { loading, funcList, funcOutputs, error } = contractReadInfo
 
         return (
