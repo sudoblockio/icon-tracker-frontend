@@ -16,7 +16,7 @@ class AddressQrCode extends Component {
                     <section>
                     <fieldset>
                     <p>
-                    Enter An Address: <input class="txt-type-search modified" type="text" name="address" />
+                    Enter An Address: <input class="txt-type-search modified" type="text" name="address" placeholder={address}/>
                     </p>
                     <br/>
                     </fieldset>
@@ -35,7 +35,7 @@ class AddressQrCode extends Component {
                         <p className="cv-label">
                         Website: 
                         </p>
-                        <input class="txt-type-search modified" type="text" name="website" />
+                        <input className="txt-type-search modified" type="text" name="website" />
                         </div>
 
                         <div className="cv-label-container">

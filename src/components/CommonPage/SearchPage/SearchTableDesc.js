@@ -16,7 +16,7 @@ class SearchTableDesc extends Component {
         console.log(this.props, "contract list props")
     }
     render() {
-        const { searchType, listSize, totalSize } = this.props
+        const { searchType, listSize, totalSize, address } = this.props
         const count = this.state.cxCount ? this.state.cxCount : 0
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
@@ -29,7 +29,7 @@ class SearchTableDesc extends Component {
                                 A total of {count} contract source
                                 codes found.
                             </span>
-                            <QrCodeButton />
+                            <QrCodeButton address={address} />
                         </>
                     )
                 case SEARCH_TYPE.TOKENS:

@@ -13,6 +13,7 @@ class TxBottom extends Component {
       address,
       tokenTotal
     } = this.props
+    console.log(this.props, "rank props mayve")
 
 
     const tableClassName =

@@ -8,9 +8,11 @@ import {
 import { setPopup } from '../../redux/store/popups'
 
 function mapStateToProps(state) {
+  console.log(state, "whole state")
   return {
     url: state.router.location,
-    ...state.contracts
+    ...state.contracts,
+    wallet: state.storage.walletAddress
   };
 }
 
