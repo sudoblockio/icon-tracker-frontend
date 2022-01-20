@@ -49,7 +49,7 @@ class ContractRead extends Component {
         const { params } = this.state
         const { contract, contractReadInfo } = this.props
         const { data } = contract
-        const { address } = data
+        const { public_key: address } = data
         const { loading, funcList, funcOutputs, error } = contractReadInfo
 
         return (
