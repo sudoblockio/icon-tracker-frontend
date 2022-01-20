@@ -195,15 +195,15 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-
+						console.log(data, "What data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
-							<DateCell date={data.age} />
+							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
-							<TokenCell name={data.name} address={data.tradeTokenAddr} />
-							<AmountCell amount={data.fee} symbol="ICX" />
+							<TokenCell name={data.token_contract_address} address={data.token_contract_address} />
+							<AmountCell amount={convertHexToValue(data.transaction_fee) } symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
@@ -228,6 +228,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
+					console.log(data, "What data")
 					return (
 						<tr>
 							<TxHashCell isErrpor={isError} txHash={data.transaction_hash} />
