@@ -139,6 +139,15 @@ class TxTableBody extends Component {
 							<td className="plus"><span>{convertNumberToText(data.amount)}</span><em>ICX</em></td>
 						</tr>
 					)
+				case TX_TYPE.ADDRESS_BONDED:
+					return (
+						<tr>
+														<td className="on" onClick={() => {
+								window.open('/address/' + data.address)
+							}}>{data.address}</td>
+							<AmountCell amount={data.value} symbol="ICX" />
+						</tr>
+						)
 				case TX_TYPE.ADDRESS_TX:
 
 					return (

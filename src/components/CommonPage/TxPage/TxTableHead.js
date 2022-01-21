@@ -30,6 +30,13 @@ class TxTableHead extends Component {
                             <th>Delegation</th>
                         </tr>
                     )
+                case TX_TYPE.ADDRESS_BONDED:
+                        return (
+                            <tr>
+                                <th>Address</th>
+                                <th>Value</th>
+                            </tr>
+                        )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>

@@ -6,6 +6,7 @@ import AddressTokenTransfers from './AddressTokenTransfers'
 import AddressDelegation from './AddressDelegation'
 import AddressVoted from './AddressVoted'
 import AddressReward from './AddressReward'
+import AddressBonded from './AddressBonded'
 import {
     TX_TYPE,
     ADDRESS_TABS,
@@ -36,13 +37,14 @@ class WalletTabs extends Component {
             TABS.push(ADDRESS_TABS[3])
         }
         if (is_prep) {
+            TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
         if (iscore && Number(iscore) !== 0) {
             TABS.push(ADDRESS_TABS[5])
         }
 
-            TABS.push(ADDRESS_TABS[6])
+            
 
         return (
             <TabTable
@@ -109,10 +111,10 @@ class WalletTabs extends Component {
                             )
                             case ADDRESS_TABS[6]:
                                 return (
-                                    <AddressReward
+                                    <AddressBonded
                                         txData={addressReward}
                                         goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${public_key}`) }}
-                                        txType={TX_TYPE.ADDRESS_REWARD}
+                                        txType={TX_TYPE.ADDRESS_BONDED}
                                         address={public_key}
                                     />
                                 )

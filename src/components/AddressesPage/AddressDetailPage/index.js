@@ -31,7 +31,7 @@ class AddressesDetailPage extends Component {
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
-        console.log(log_count, "what is the log count")
+
         if (Number(log_count) !== 0) {
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
@@ -52,6 +52,7 @@ class AddressesDetailPage extends Component {
             })
         }
         if (is_prep) {
+            TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
             getList.push(address => {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
