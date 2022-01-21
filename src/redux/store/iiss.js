@@ -226,6 +226,7 @@ export async function getBondList(address) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.log(response, "bonded response")
                 resolve(response.data.result.bonds);
             })
             .catch(error => {

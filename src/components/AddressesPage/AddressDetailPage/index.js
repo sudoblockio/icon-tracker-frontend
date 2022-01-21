@@ -17,8 +17,7 @@ class AddressesDetailPage extends Component {
      }
     
     async componentDidMount(){
-        const { wallet } = this.props;
-        const { loading, error, data } = wallet
+
         
     }
     render() {
@@ -47,7 +46,6 @@ class AddressesDetailPage extends Component {
             })
         }
         if (hasDelegations) {
-            console.log("has delegations")
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })

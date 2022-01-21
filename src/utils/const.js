@@ -72,7 +72,8 @@ export const ADDRESS_TABS = [
   'Token Transfers',
   'Delegations',
   'Voters',
-  'Rewards'
+  'Rewards',
+  'Bonded'
 ];
 export const CONTRACT_TABS = [
   'Transactions',
