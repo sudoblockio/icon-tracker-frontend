@@ -88,7 +88,7 @@ export async function addressDelegationList(payload){
   console.log(payload, "address delagation payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/governance/delegations/${payload.address}`)
+    trackerApi.get(`/api/v1/governance/votes/${payload.address}`)
       .then(result => {
         resolve(result)
       })
