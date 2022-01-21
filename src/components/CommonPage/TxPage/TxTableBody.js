@@ -22,7 +22,7 @@ import {
 import {
 	TX_TYPE,
 } from '../../../utils/const'
-import {getTokenTotalSupply} from '../../../redux/store/iiss'
+import { getTokenTotalSupply } from '../../../redux/store/iiss'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
 
 const TxHashCell = ({ isError, txHash }) => {
@@ -104,7 +104,7 @@ class TxTableBody extends Component {
 			const formattedLogData = ""
 
 
-	
+
 
 
 			switch (txType) {
@@ -140,14 +140,15 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_BONDED:
+					console.log(data, "bonded data")
 					return (
 						<tr>
-														<td className="on" onClick={() => {
-								window.open('/address/' + data.address)
-							}}>{data.address}</td>
+							<td className="on" onClick={() => {
+								window.open('/address/' + data.tx_hash)
+							}}>{data.tx_hash}</td>
 							<AmountCell amount={data.value} symbol="ICX" />
 						</tr>
-						)
+					)
 				case TX_TYPE.ADDRESS_TX:
 
 					return (
@@ -204,7 +205,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-						console.log(data, "What data")
+					console.log(data, "What data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -212,7 +213,7 @@ class TxTableBody extends Component {
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={address} />
 							<AmountCell amount={data.quantity} symbol={data.symbol} />
 							<TokenCell name={data.token_contract_address} address={data.token_contract_address} />
-							<AmountCell amount={convertHexToValue(data.transaction_fee) } symbol="ICX" />
+							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.BLOCK_TX:
@@ -321,17 +322,17 @@ class TxTableBody extends Component {
 					// 		this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
 					// 		yer = this.tts
 					//  }
-						// this.tts = tokenTotalSupply
-						console.log(this.props, "What props?")
+					// this.tts = tokenTotalSupply
+					console.log(this.props, "What props?")
 
 					return (
 						<tr>
 
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={convertHexToValue(data.value).toFixed() } symbol={data.symbol} />
-							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100 }</span><em>%</em></td>
-						</tr>					
+							<AmountCell amount={convertHexToValue(data.value).toFixed()} symbol={data.symbol} />
+							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
+						</tr>
 					)
 				default:
 					return <tr></tr>
