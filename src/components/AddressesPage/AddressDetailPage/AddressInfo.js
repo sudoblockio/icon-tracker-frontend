@@ -10,10 +10,9 @@ import {
     addAt,
     addUnregisteredStyle
 } from '../../../utils/utils'
-import {CopyButton, LoadingComponent, QrCodeButton, ReportButton} from '../../../components'
+import {CopyButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
-
 import {SocialMediaType} from '../../../utils/const'
 import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
@@ -221,9 +220,13 @@ getContractName = async (tokenContract) => {
                                 </p>
                             ) : (
                                 <p className="title">Address{is_prep &&
-                                <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}
+                                    <>
+                                <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>
+                                </>
+                                }
                                 </p>
                             )}
+                            {/* *********** */}
                             <div className="contents">
                                 <div className="table-box">
                                     <table className="table-typeB address">

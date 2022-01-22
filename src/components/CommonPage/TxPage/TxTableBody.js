@@ -109,7 +109,7 @@ class TxTableBody extends Component {
 
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
-					console.log(data.timestamp, "the data")
+					console.log(data, "the data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.tx_hash} />

@@ -12,7 +12,6 @@ class ContractDetailPage extends Component {
 
     render() {
         const { contract } = this.props;
-        
         const { loading, error } = contract
         return (
             <DetailPage
@@ -41,6 +40,7 @@ class ContractDetailPage extends Component {
                     contractAddr => {
                         this.props.contractEventLogList({ contractAddr, page: 1, count: 10 })
                     },
+
                 ]}
                 InfoComponent={ContractInfo}
                 TabsComponent={ContractTabs}

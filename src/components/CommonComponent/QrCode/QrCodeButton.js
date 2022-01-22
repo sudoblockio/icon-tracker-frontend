@@ -6,10 +6,11 @@ import  Connect  from '../../Header/Connect'
 
 class QrCodeButton extends Component {
     handleClick = () => {
-        const { address } = this.props
+        console.log(this.props, "button props")
+        const { address, contract } = this.props
         this.props.setPopup({
             type: POPUP_TYPE.QR,
-            data: { address },
+            data: { address, contract },  
         })
     }
 

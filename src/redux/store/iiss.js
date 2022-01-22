@@ -243,21 +243,19 @@ export async function getIISSInfo() {
 export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
 export async function sendTransaction({
     // write function to get logged in wallets public_key
-    
     // connected users wallet address
     fromAddress,
-    // actual contract needs to be here 
+    // actual contract needs to be here :
+    actualcx = "",
     scoreAddress = VerificationScore,
     // set to zero because we are just signing
     icxAmount = 0, 
     // method from docs
-    method = "sendTransaction",
+    method = "verify",
     params = {}
 }){
-    // const res = await requestAddress()
-    // console.log(res, "address res")
-    // console.log(fromAddress, "from teh iconex function")
-    const nid =1 
+
+    const nid =7
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
@@ -274,6 +272,9 @@ export async function sendTransaction({
 
         const convertedToRaw = IconConverter.toRawTransaction(txData)
         requestJsonRpc(convertedToRaw)
+
+
+
 
         // const txPayload = {
         //     jsonrpc: '2.0',

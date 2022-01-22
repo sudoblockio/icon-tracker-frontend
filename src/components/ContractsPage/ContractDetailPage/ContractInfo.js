@@ -15,8 +15,7 @@ class ContractInfo extends Component {
     }
 
     render() {
-        const { contract } = this.props
-  
+        const { contract, walletAddress } = this.props
         const { loading, data } = contract
         const test = data[0]
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
@@ -34,17 +33,22 @@ class ContractInfo extends Component {
                     <div className="screen0">
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
+                            <div className={"cx-submit"}>
+                            <QrCodeButton address={walletAddress} contract={data.public_key}/> 
+                            </div>
                             <div className="contents">
                                 <div className="table-box">
+                                                    
                                     <table className="table-typeB contract">
                                         <tbody>
-                                            <tr className="qr">
+                                            <tr className="">
                                                 <td>Address</td>
                                                 <td colSpan="3" className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
-                                                    {data.public_key} {/*<QrCodeButton address={data.public_key/>*/} 
+                                                    {data.public_key} 
                                                     <CopyButton data={data.public_key} title={'Copy Address'} isSpan />
                                                     <ReportButton address={data.public_key} />
+                                                    
                                                 </td>
                                             </tr>
                                             <tr>

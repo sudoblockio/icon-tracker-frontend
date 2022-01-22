@@ -168,6 +168,7 @@ class Popup extends Component {
   };
 
   render() {
+    console.log(this.props, "popup props")
     const { type, data } = this.props;
     const isQr = type === POPUP_TYPE.QR;
     const qrData = isQr ? data : {};
