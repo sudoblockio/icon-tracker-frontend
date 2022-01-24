@@ -6,7 +6,6 @@ import  Connect  from '../../Header/Connect'
 
 class QrCodeButton extends Component {
     handleClick = () => {
-        console.log(this.props, "button props")
         const { address, contract } = this.props
         this.props.setPopup({
             type: POPUP_TYPE.QR,
@@ -29,7 +28,7 @@ class QrCodeButton extends Component {
             </span>
             :
             <span className="qrcode" onClick={this.connectWallet}> 
-            {/* | [#]  Connect a Wallet */}
+            | [#]  Connect a Wallet
             </span>
         )
     }

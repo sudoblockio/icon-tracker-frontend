@@ -180,9 +180,9 @@ class Popup extends Component {
     const searchData = isSearch ? data : {};
     return (
       <React.Fragment>
-        <div key='qr' className='popup-wrap qr'>
+        <div key='qr' className='popup-wrap qr '>
           <div className='dimmed' />
-          <div className='popup'>
+          <div className='popup verify'>
             <span className='close' onClick={this.closePopup}>
               <em className='img' />
             </span>

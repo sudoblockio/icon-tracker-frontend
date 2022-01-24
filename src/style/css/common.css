@@ -5350,6 +5350,17 @@ input[type='text']:focus.over {
   border: solid 2px #262626;
   overflow: hidden;
 }
+.verify{ 
+  width: max-content !important;
+  height: max-content !important;
+  
+}
+
+.verify-form {
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
 .popup-wrap .popup .title {
   font-size: 20px;
   font-weight: 500;

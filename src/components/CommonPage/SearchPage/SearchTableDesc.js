@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { SEARCH_TYPE, IRC_VERSION, POPUP_TYPE } from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
 import { getContractListCount } from '../../../redux/store/iiss'
-import { QrCodeButton, Connect } from '../../../components'
-// import { isConnected } '../../'
+import { QrCodeButton } from '../../../components'
 class SearchTableDesc extends Component {
     constructor(props) {
         super(props)
@@ -29,7 +28,7 @@ class SearchTableDesc extends Component {
                                 A total of {count} contract source
                                 codes found.
                             </span>
-                             <QrCodeButton address={address} contract={"cxf61cd5a45dc9f91c15aa65831a30a90d59a09619"} />   
+                             <QrCodeButton address={address} contract={"contractAddress"} />   
 
                         
                             {}
