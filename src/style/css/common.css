@@ -5352,11 +5352,12 @@ input[type='text']:focus.over {
 }
 .verify{ 
   width: max-content !important;
-  height: auto !important;
+  height: max-content !important;
   display:flex;
   flex-flow: column wrap;
   justify-content:center;
   align-items: center;
+  padding: 3em;
   
 }
 
