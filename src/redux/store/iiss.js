@@ -240,6 +240,8 @@ export async function getIISSInfo() {
             })
     });
 }
+
+// if there is a transaction result, post to v3
 export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
 export async function sendTransaction({
     // write function to get logged in wallets public_key

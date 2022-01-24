@@ -5352,14 +5352,21 @@ input[type='text']:focus.over {
 }
 .verify{ 
   width: max-content !important;
-  height: max-content !important;
+  height: auto !important;
+  display:flex;
+  flex-flow: column wrap;
+  justify-content:center;
+  align-items: center;
   
 }
 
+
+
 .verify-form {
-  display:flex;
+  /* display:flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  align-items: center; */
 }
 .popup-wrap .popup .title {
   font-size: 20px;
@@ -6100,6 +6107,12 @@ input[type='checkbox']:checked + label {
   -webkit-animation: bubble 2s ease infinite;
   -moz-animation: bubble 2s ease infinite;
   animation: bubble 2s ease infinite;
+}
+
+.cv-label {
+  text-align: left;
+  font-size:  .8em !important;
+  padding: .3em;
 }
 
 @-webkit-keyframes bubble {
