@@ -6,6 +6,7 @@ import AddressTokenTransfers from './AddressTokenTransfers'
 import AddressDelegation from './AddressDelegation'
 import AddressVoted from './AddressVoted'
 import AddressReward from './AddressReward'
+import AddressBonded from './AddressBonded'
 import {
     TX_TYPE,
     ADDRESS_TABS,
@@ -17,13 +18,12 @@ import {
 
 class WalletTabs extends Component {
     render() {
-        {console.log(this.props, "wallet tabs props")}
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
         
 
-        console.log(data, "wallet tabs data")
+        console.log(this.props, "wallet tabs data")
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
@@ -37,11 +37,15 @@ class WalletTabs extends Component {
             TABS.push(ADDRESS_TABS[3])
         }
         if (is_prep) {
+            TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
         if (iscore && Number(iscore) !== 0) {
             TABS.push(ADDRESS_TABS[5])
         }
+
+            
+
         return (
             <TabTable
                 {...this.props}
@@ -87,6 +91,7 @@ class WalletTabs extends Component {
                                 />
                             )
                         case ADDRESS_TABS[4]:
+
                             return (
                                 <AddressVoted
                                     txData={addressVoted}
@@ -104,6 +109,15 @@ class WalletTabs extends Component {
                                     address={public_key}
                                 />
                             )
+                            case ADDRESS_TABS[6]:
+                                return (
+                                    <AddressBonded
+                                        txData={addressReward}
+                                        goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${public_key}`) }}
+                                        txType={TX_TYPE.ADDRESS_BONDED}
+                                        address={public_key}
+                                    />
+                                )
                         default:
                             return <NoBox text="No Data" />
                     }

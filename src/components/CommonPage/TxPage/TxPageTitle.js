@@ -30,6 +30,16 @@ class TxPageTitle extends Component {
                             </span>
                         </p>
                     )
+                case TX_TYPE.ADDRESS_BONDED:
+                        return (
+                            <p className="title">
+                                Rewards
+                                <span>for address {urlIndex}</span>
+                                <span className="right">
+                                    A total of<em>{_totalSize}</em> bond(s) found
+                                </span>
+                            </p>
+                        )
                 case TX_TYPE.CONTRACT_TX:
                     return (
                         <p className="title">
@@ -126,7 +136,7 @@ class TxPageTitle extends Component {
                             Token Holders
                             <span>for Token {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{listSize}</em> holder(s) found<em className="gray">(Showing the top {_listSize} holder(s) only)</em>
+                                A total of<em>{_totalSize}</em> holder(s) found<em className="gray">(Showing the top {_listSize} holder(s) only)</em>
                             </span>
                         </p>
                     )

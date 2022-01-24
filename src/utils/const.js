@@ -72,7 +72,8 @@ export const ADDRESS_TABS = [
   'Token Transfers',
   'Delegations',
   'Voters',
-  'Rewards'
+  'Rewards',
+  'Bonded'
 ];
 export const CONTRACT_TABS = [
   'Transactions',
@@ -140,6 +141,7 @@ export const SEARCH_TYPE_DATA = {
 
 export const TX_TYPE = {
   ADDRESS_REWARD: 'addressreward',
+  ADDRESS_BONDED: 'addressbonded',
   ADDRESS_DELEGATION: 'addressdelegations',
   ADDRESS_VOTED: 'addressvoters',
   ADDRESS_TX: 'addresstx',
@@ -172,6 +174,12 @@ export const TX_TYPE_DATA = {
     getTxList: 'addressDelegationList',
     className: 'table-typeC voter',
     noBoxText: 'No Delegation'
+  },
+  [TX_TYPE.ADDRESS_BONDED]: {
+    tx: 'addressDelegation',
+    getTxList: 'addressBonded',
+    className: 'table-typeC voter',
+    noBoxText: 'No Bonds'
   },
   [TX_TYPE.ADDRESS_VOTED]: {
     tx: 'addressVoted',

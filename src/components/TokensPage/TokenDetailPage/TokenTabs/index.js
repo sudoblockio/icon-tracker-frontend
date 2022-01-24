@@ -21,7 +21,7 @@ class TokenTabs extends Component {
     render() {
         const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
         const { loading, data } = token
-        const { contract } = data
+        const { address } = data
         this.theTokenTotal = this.total()        
         this.theTokenTotal.then(result => this.tokenTotalSupply = result).catch(error => console.log(error, "the promise error"))
         return (
@@ -36,7 +36,7 @@ class TokenTabs extends Component {
                             return (
                                 <TokenTransfers
                                     txData={tokenTransfers}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${contract}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${address}`) }}
                                     txType={TX_TYPE.TOKEN_TX}
                                 />
                             )
@@ -46,7 +46,7 @@ class TokenTabs extends Component {
                             return (
                                 <TokenHolders
                                     txData={tokenHolders}
-                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${contract}`) }}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_HOLDERS}/${address}`) }}
                                     txType={TX_TYPE.TOKEN_HOLDERS}
                                     tokenTotal={tokenTotal}
                                 />
@@ -54,7 +54,7 @@ class TokenTabs extends Component {
                         case 2:
                             return (
                                 <TokenContractRead
-                                    contract={{ data: { address: contract } }}
+                                    contract={{ data: { address } }}
                                     contractReadInfo={contractReadInfo}
                                     icxCall={this.props.icxCall}
                                 />

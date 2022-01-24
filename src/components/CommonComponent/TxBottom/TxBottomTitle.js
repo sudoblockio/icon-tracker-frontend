@@ -20,7 +20,7 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
-
+        
         const Content = () => {
             const listSizeNum = listSize || 0
             const totalSizeNum = totalSize || 0
@@ -32,7 +32,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Voter(s) from a total of
+                                Latest<em>{totalSizeNum}</em> Voter(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} Voter(s)</em>
                             </span>
                         </p>
@@ -41,8 +41,17 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{_listSize} reward(s)</em>
+                            </span>
+                        </p>
+                    )
+                case TX_TYPE.ADDRESS_BONDED:                
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} bonder(s)</em>
                             </span>
                         </p>
                     )

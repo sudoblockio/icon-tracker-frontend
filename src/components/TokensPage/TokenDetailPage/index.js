@@ -8,7 +8,6 @@ import {
     TOKEN_TABS
 } from '../../../utils/const'
 import { tokenTransfersList } from '../../../redux/api/restV3/token'
-import { getTokenTotalSupply } from '../../../redux/store/iiss'
 class TokenDetailPage extends Component {
     holderData;
     async componentDidMount() {

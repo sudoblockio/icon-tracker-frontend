@@ -16,7 +16,7 @@ import {
 import { 
   setNotification,
 } from '../../redux/actions/storageActions';
-import { getBalanceOf } from '../../redux/store/iiss';
+import { getBalanceOf, getBondList } from '../../redux/store/iiss';
 
 function mapStateToProps(state) {
   return {
@@ -30,6 +30,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    bondList: payload => dispatch(getBondList(payload)),
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
     getBalanceOf: payload => dispatch(getBalanceOf(payload)),
     addressDelegationList: (payload) => dispatch(addressDelegationListAction(payload)),
