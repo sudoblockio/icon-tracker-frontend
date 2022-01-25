@@ -8,7 +8,8 @@ import {
   addressInternalTxListAction,
   addressTokenTxListAction,
   addressVotedListAction,
-  addressRewardListAction
+  addressRewardListAction,
+  addressTokens
 } from '../../redux/store/addresses';
 import { 
   setPopup 
@@ -30,6 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    getAddressTokens: payload => dispatch(addressTokens(payload)),
     bondList: payload => dispatch(getBondList(payload)),
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
     getBalanceOf: payload => dispatch(getBalanceOf(payload)),

@@ -21,16 +21,17 @@ class AddressesDetailPage extends Component {
         
     }
     render() {
-        const { wallet } = this.props;
+        const { wallet, walletTokenTx } = this.props;
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations, log_count } = data
 
-        const TABS = [], getList = []
+        const TABS = [], getList = []   
 
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
+
 
         if (Number(log_count) !== 0) {
             TABS.push(ADDRESS_TABS[1]) 
@@ -38,7 +39,7 @@ class AddressesDetailPage extends Component {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })
             })
         }
-        if (tokenList && tokenList.length !== 0) {
+        if (data) {
             TABS.push(ADDRESS_TABS[2])
             getList.push(address => {
                 this.props.addressTokenTxList({ address, page: 1, count: 10 })
@@ -79,8 +80,9 @@ class AddressesDetailPage extends Component {
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
                 isPrep={is_prep}
-                tokenList={address => {this.props.addressTokenTxList({address})}}
+                tokenList={payload => {this.props.addressTokenTxList({payload})}}
                 balanceOf={payload => {this.props.getBalanceOf({payload})}}
+                
             />
         )
     }

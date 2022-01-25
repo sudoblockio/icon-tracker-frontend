@@ -23,7 +23,6 @@ class ContractInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                
 
                 const isCreator = isValidData(owner_address)
                 const isCreateTx = isValidData(createTx)
@@ -34,7 +33,8 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                            <QrCodeButton address={walletAddress} contract={data.public_key}/> 
+                                
+                            {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>  */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">

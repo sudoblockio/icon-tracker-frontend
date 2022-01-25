@@ -16,6 +16,7 @@ import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
 import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
+import { addressTokens } from '../../../redux/store/addresses'
 
 
 const _isNotificationAvailable = NotificationManager.available()
@@ -42,11 +43,11 @@ class AddressInfo extends Component {
 getContractName = async (tokenContract) => {
 
         const res = await contractDetail(tokenContract)
-        this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, res.data.address)
+        this.tokenName[res.data.name] = await getBalanceOf(this.props.match.params.addressId, tokenContract)
 
     }
     
-
+    tokens;
     getSocialMediaLinks = async (name) => {
             const allPreps = await prepList();
             const prepArray = allPreps.filter(preps => preps.name === name )
@@ -63,6 +64,8 @@ getContractName = async (tokenContract) => {
         const {totalDelegated: totalVotedLoop } = await getPRepsRPC()	
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
         this.setState({totalVoted})
+        this.tokens = await addressTokens(this.props.match.params.addressId)
+
         // this.tokenBalance = await getBalanceOf(this.props.match.params.addressId,'cxc0b5b52c9f8b4251a47e91dda3bd61e5512cd782')
         
     }
@@ -112,10 +115,15 @@ getContractName = async (tokenContract) => {
         this.setState({showNode: "table-row"})
     }
 
-    getTokenList = (public_key) => {
-        this.setState({tokenList: this.props.tokenList(public_key)})
+    getTokenList = async (public_key) => {
+        console.log(public_key, "What key")
+        console.log(this.props, "what son")
+        // this.setState({tokenList: this.props.getAddressTokens(public_key)})
+
 
     }
+
+
 
     render() {
         if (this.props.wallet.data.is_prep === true){
@@ -124,7 +132,7 @@ getContractName = async (tokenContract) => {
         }
 
         const {icxMore, tokenMore, showNode} = this.state
-        const {wallet, walletAddress} = this.props
+        const {wallet, walletAddress, addrTokens} = this.props
         const {loading, data, error} = wallet
         const {
             is_prep,
@@ -187,7 +195,7 @@ getContractName = async (tokenContract) => {
         const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
         const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
         const badge = getBadgeTitle(grade, node_state)
-        const tokenCxs = this.props.walletTokenTx.data
+        const tokenCxs = this.tokens ? this.tokens.data: []
         // for each contract address, query contracts and.....
         const Content = () => {
             if (loading) {
@@ -387,11 +395,10 @@ Token5Tokens
                                                 
                                                 <div className={tokenMore ? 'on' : ''}>
                                                     <p><span><i
-                                                        className="coin"></i>Token</span><span>{(this.props.walletTokenTx.data || []).length}<em>Tokens</em></span><em
+                                                        className="coin"></i>Token</span><span>{(tokenCxs || []).length}<em>Tokens</em></span><em
                                                         
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
-
                                                     {tokenCxs.forEach((tokenContract, index) => {
                                                         this.getContractName(tokenContract)
                                                     }

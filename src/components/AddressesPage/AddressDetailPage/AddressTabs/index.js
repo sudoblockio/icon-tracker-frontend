@@ -30,7 +30,7 @@ class WalletTabs extends Component {
         if (log_count && Number(log_count) !== 0) {
             TABS.push(ADDRESS_TABS[1])
         }
-        if (tokenList && tokenList.length !== 0) {
+        if (data !== 0) {
             TABS.push(ADDRESS_TABS[2])
         }
         if (hasDelegations) {
@@ -40,7 +40,7 @@ class WalletTabs extends Component {
             TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
-        if (iscore && Number(iscore) !== 0) {
+        if (data) {
             TABS.push(ADDRESS_TABS[5])
         }
 

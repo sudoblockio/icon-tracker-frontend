@@ -46,6 +46,7 @@ export function* addressRewardListFunc(action) {
   try {
     const payload = yield call(ADDRESS_REWARD, action.payload);
     if (payload.status === 200) {
+      console.log(payload, "reward payload")
       yield put({ type: AT.addressRewardListFulfilled, payload: payload });
     }
     else {

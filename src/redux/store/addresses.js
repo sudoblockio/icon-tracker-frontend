@@ -118,15 +118,31 @@ export async function addressInfo(payload) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.address}`)
             .then(result => {
-                console.log(result, "where is the result")
+
                 resolve(result)
             })
             .catch(error => {
-                console.log(error, "where is the result")
+
 
                 reject(error)
             })
     })
+}
+
+export async function addressTokens(payload) {
+  console.log(payload, "token payload maybe")
+  const trackerApi = await trackerApiInstance()
+  return new Promise((resolve, reject) => {
+      trackerApi.get(`${ADDRESSES_PREFIX}/address-tokens/${payload.address || payload}`)
+          .then(result => {
+              resolve(result)
+          })
+          .catch(error => {
+
+
+              reject(error)
+          })
+  })
 }
 
 export async function addressTxList(payload) {
@@ -146,7 +162,7 @@ export async function addressTxList(payload) {
 export async function addressTokenTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${ADDRESSES_PREFIX}/address-tokens/${payload.address}`)
+        trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`)
             .then(result => {
                 resolve(result)
             })
