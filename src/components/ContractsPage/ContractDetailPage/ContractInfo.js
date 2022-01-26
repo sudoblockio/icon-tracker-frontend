@@ -5,6 +5,7 @@ import { convertNumberToText, numberWithCommas, tokenText, isValidData } from '.
 import { CONTRACT_STATUS, IRC_VERSION } from '../../../utils/const'
 import { convertLoopToIcxDecimal } from '../../../utils/utils'
 
+
 class ContractInfo extends Component {
     onMouseOver = param => {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OVER', param } }))
@@ -14,16 +15,24 @@ class ContractInfo extends Component {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OUT', param } }))
     }
 
-    render() {
-        const { contract, walletAddress } = this.props
-        const { loading, data } = contract
+    componentDidMount() {
 
+        this.payload = {contractAddr: this.props.match.params.contractId}
+        this.props.getTokenSummary(this.payload)
+            
+
+    }
+
+    render() {
+        const { contract, walletAddress, getTokenSummary } = this.props
+        const { loading, data } = contract
+        console.log(this.props, "render cx props")
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-
+                console.log(owner_address, "what owner address")
                 const isCreator = isValidData(owner_address)
                 const isCreateTx = isValidData(createTx)
                 const scam = reportedCount >= 100 ? true : false
@@ -33,8 +42,9 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                                
-                            {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>  */}
+                              {/* {isCreator ? 
+                              <QrCodeButton address={walletAddress} contract={data.public_key}/> 
+                            : ""}   */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">
@@ -132,7 +142,6 @@ class ContractInfo extends Component {
 class DetailButton extends Component {
     handleClick = () => {
         const { contractAddr } = this.props
-        console.log(this.props, "detail button props")
         this.props.contractDetailPopup({ contractAddr })
     }
 

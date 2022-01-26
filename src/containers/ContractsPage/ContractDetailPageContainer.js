@@ -13,8 +13,10 @@ import {
     icxCallAction,
     readContractInformationAction
 } from '../../redux/store/contracts'
+import { tokenSummary } from '../../redux/actions/tokensActions'
 
 function mapStateToProps(state) {
+    console.log(state, "token cx state")
     return {
         url: state.router.location,
         ...state.contracts,
@@ -24,6 +26,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        getTokenSummary: payload => dispatch(tokenSummary(payload)),
         contractInfo: payload => dispatch(contractInfoAction(payload)),
         contractDetail: payload => dispatch(contractDetailAction(payload)),
         contractDetailPopup: payload => dispatch(contractDetailPopupAction(payload)),
