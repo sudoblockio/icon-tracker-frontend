@@ -15,10 +15,9 @@ class AddressesDetailPage extends Component {
              internalTxns: ""
          }
      }
-    
+
     async componentDidMount(){
 
-        
     }
     render() {
         const { wallet, walletTokenTx } = this.props;

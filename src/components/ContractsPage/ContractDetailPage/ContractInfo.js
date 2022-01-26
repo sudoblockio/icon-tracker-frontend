@@ -17,7 +17,7 @@ class ContractInfo extends Component {
     render() {
         const { contract, walletAddress } = this.props
         const { loading, data } = contract
-        const test = data[0]
+
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
             if (loading) {
@@ -52,11 +52,12 @@ class ContractInfo extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
+
                                                 <td>Token Contract</td>
                                                 <TokenContractCell
-                                                    tokenName={tokenName}
+                                                    tokenName={data.name}
                                                     symbol={symbol}
-                                                    address={address}
+                                                    address={data.public_key}
                                                     ircVersion={ircVersion}
                                                     onMouseOver={this.onMouseOver}
                                                     onMouseOut={this.onMouseOut}
@@ -148,7 +149,7 @@ class TokenContractCell extends Component {
     render() {
         const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut } = this.props
         const Content = () => {
-            if (ircVersion === IRC_VERSION[2]) {
+            if (tokenName) {
                 return (
                     <td>
                         <span className="help token">{ircVersion} Token</span>
