@@ -242,7 +242,7 @@ class TxTableBody extends Component {
 							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.value_decimal} symbol={data.symbol} />
-							<TokenCell name={data.token_contract_name} address={data.contractAddr} />
+							<TokenCell name={data.token_contract_name} address={data.token_contract_address} />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
 					)
