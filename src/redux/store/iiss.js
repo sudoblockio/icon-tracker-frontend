@@ -280,7 +280,8 @@ export async function getIISSInfo() {
 }
 
 // if there is a transaction result, post to v3
-export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
+// export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
+export const VerificationScore = 'cx338322697c252ec776bf81157f55e1f47beb7d78'
 export async function sendTransaction({
     // write function to get logged in wallets public_key
     // connected users wallet address
@@ -309,7 +310,6 @@ export async function sendTransaction({
     website,
     wechat,
     youtube,
-    // method from docs
     method = "verify",
     params = { 
     "city": `${city}`,
@@ -331,10 +331,12 @@ export async function sendTransaction({
     "website": `${website}`,
     "wechat": `${wechat}`,
     "youtube": `${youtube}`,
-    "zipped_source_code": zip}
+    "zipped_source_code": "0x"+zip}
 }){
-    console.log(params, "what param")
-    const nid =7
+    // berlin
+    // const nid =7
+    // lisbon:
+    const nid=2
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
@@ -350,8 +352,8 @@ export async function sendTransaction({
         .build();
 
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        // requestJsonRpc(convertedToRaw)
-
+        requestJsonRpc(convertedToRaw)
+        // bring back in to sign ^^^^^^^^^^^^^^^^^^^^^^^
 
 
 

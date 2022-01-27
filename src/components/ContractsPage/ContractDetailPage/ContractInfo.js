@@ -32,7 +32,6 @@ class ContractInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                console.log(owner_address, "what owner address")
                 const isCreator = isValidData(owner_address)
                 const isCreateTx = isValidData(createTx)
                 const scam = reportedCount >= 100 ? true : false
@@ -42,9 +41,9 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                              {isCreator ? 
-                              <QrCodeButton address={walletAddress} contract={data.public_key}/> 
-                             : ""}   
+                              {/* {isCreator ?  */}
+                              {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>  */}
+                             {/* : ""}    */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">

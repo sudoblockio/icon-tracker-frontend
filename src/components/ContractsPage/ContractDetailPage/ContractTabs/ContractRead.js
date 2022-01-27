@@ -32,7 +32,6 @@ class ContractRead extends Component {
             index,
             
         })
-        console.log( method, inputs, index, "What handle params")
     }
 
     makeParams = (funcName, inputs) => {

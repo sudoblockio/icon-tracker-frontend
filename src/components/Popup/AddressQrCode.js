@@ -90,28 +90,9 @@ class AddressQrCode extends Component {
                 website: this.state.website,
                 wechat: this.state.wechat,
                 youtube: this.state.youtube,
-            }
+                }
             )
         })
-
-
-
-
-
-
-
-
-        let textPromise = file.text()
-        let newFile
-        // file.text().then(text => {
-        //     sendTransaction(
-        //         { fromAddress: this.props.data.address, contract: this.props.data.contract, zip: text }
-        //     )
-        // })
-
-        
-
-
 
     }
     setName = (e) => {
@@ -316,7 +297,7 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container">
                                         <p className="cv-label">
-                                            .zip File:</p><input type="file" id="contractzip" name="filename" onChange={(e) => this.setZip(e.target.value)}/>
+                                            .zip File:</p><input type="file" accept=".zip" id="contractzip" name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
                                     </div>
 
 

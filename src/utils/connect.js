@@ -29,7 +29,7 @@ export function requestAddress() {
             type: "REQUEST_JSON-RPC",
             payload: {
               jsonrpc: "2.0",
-              method: "icx_sendTransaction",
+              method: "verify",
               params: rawTransaction,
               id: 50889
             }
