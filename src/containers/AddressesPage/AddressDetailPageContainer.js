@@ -35,7 +35,7 @@ function mapDispatchToProps(dispatch) {
     bondList: payload => dispatch(getBondList(payload)),
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
     getBalanceOf: payload => dispatch(getBalanceOf(payload)),
-    addressDelegationList: (payload) => dispatch(addressDelegationListAction(payload)),
+    addressDelegationList: payload => dispatch(addressDelegationListAction(payload)),
     addressVotedList: (payload) => dispatch(addressVotedListAction(payload)),
     addressInfo: (payload) => dispatch(addressInfoAction(payload)),
     addressTxList: (payload) => dispatch(addressTxListAction(payload)),

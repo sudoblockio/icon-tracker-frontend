@@ -42,9 +42,9 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                              {/* {isCreator ?  */}
-                              {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>  */}
-                            {/* : ""}   */}
+                              {isCreator ? 
+                              <QrCodeButton address={walletAddress} contract={data.public_key}/> 
+                             : ""}   
                             </div>
                             <div className="contents">
                                 <div className="table-box">

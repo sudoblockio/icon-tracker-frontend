@@ -140,7 +140,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_BONDED:
-					console.log(data, "bonded data")
 					return (
 						<tr>
 							<td className="on" onClick={() => {
@@ -150,7 +149,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
-
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />

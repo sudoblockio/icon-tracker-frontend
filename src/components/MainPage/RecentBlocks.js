@@ -33,7 +33,7 @@ class RecentBlocks extends Component {
         this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
         
         this.bxsocket.onopen = (event) => {
-            console.log("connection established")
+            "connection established")
             this.state.bxRows? this.state.bxRows.unshift(this.state.recentBx) : console.log("no rows")
         }
 

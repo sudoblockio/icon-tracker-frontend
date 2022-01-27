@@ -89,10 +89,7 @@ class ContractCode extends Component {
 
 const DownloadLink = ({ link, name }) => {
     const Content = () => {
-        console.log(link, "from Download Link")
         if (link) {
-            console.log(link, "from Download Link after if")
-            console.log(name, "from Download link name")
 
             return (
                 <td>

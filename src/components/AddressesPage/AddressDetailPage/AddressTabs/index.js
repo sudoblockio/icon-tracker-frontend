@@ -27,22 +27,22 @@ class WalletTabs extends Component {
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-        if (log_count && Number(log_count) !== 0) {
+        if (data) {
             TABS.push(ADDRESS_TABS[1])
         }
         if (data !== 0) {
             TABS.push(ADDRESS_TABS[2])
         }
-        if (hasDelegations) {
+        if (data) {
             TABS.push(ADDRESS_TABS[3])
         }
         if (is_prep) {
             TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
-        if (data) {
-            TABS.push(ADDRESS_TABS[5])
-        }
+        // if (data) {
+        //     TABS.push(ADDRESS_TABS[5])
+        // }
 
             
 

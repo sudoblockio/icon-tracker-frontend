@@ -32,7 +32,7 @@ class AddressesDetailPage extends Component {
         })
 
 
-        if (Number(log_count) !== 0) {
+        if (data) {
             TABS.push(ADDRESS_TABS[1]) 
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })
@@ -45,7 +45,7 @@ class AddressesDetailPage extends Component {
                 
             })
         }
-        if (hasDelegations) {
+        if (data) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })
@@ -58,12 +58,12 @@ class AddressesDetailPage extends Component {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
             })
         }
-        if (data) {
-            TABS.push(ADDRESS_TABS[5])
-            getList.push(address => {
-                this.props.addressRewardList({ address })
-            })    
-        }
+        // if (data) {
+        //     TABS.push(ADDRESS_TABS[5])
+        //     getList.push(address => {
+        //         this.props.addressRewardList({ address })
+        //     })    
+        // }
 
         return (
             

@@ -3,7 +3,7 @@ import AT from '../../actionTypes/actionTypes';
 
 // *** convert 
 import {
-  getDelegation as ADDRESS_DELEGATION_LIST,
+  // getDelegation as ADDRESS_DELEGATION_LIST,
   addressReward as ADDRESS_REWARD,
   getPReps,
   getDelegation,
@@ -16,6 +16,7 @@ import {
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
   addressVotedList as ADDRESS_VOTED_LIST,
+  addressDelegationList as ADDRESS_DELEGATION_LIST
 } from '../addresses'
 
 // *** take a deeper look, cull. 
@@ -59,28 +60,24 @@ export function* addressRewardListFunc(action) {
 }
 
 export function* addressDelegationListFunc(action) {
+  console.log(action, "what action")
   try {
     const { address } = action.payload
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
-    console.log(payload, "delegations saga payload")
-    const { delegations } = payload
-    console.log(delegations, "if delegations")
-    if (delegations) {
-      const { preps } = yield call(getPReps)
-      console.log(preps, "preps yield call")
-      const data = delegations.map(prep => {
+    const { delegations, data } = payload
+    if (data) {
+      const { data: preps } = yield call(getPReps)
+      const test = yield call(getPReps)
+      const list = data.map(prep => {
         const { address, value } = prep
-        console.log(prep, "from map in saga")
         const index = preps.findIndex(p => p.address === address)
         let searched = { address }
-        console.log(searched, "searched in saga")
         if (index !== -1) {
-          searched = preps[index]
+          searched = list[index]
         }
         searched.value = value
         return searched
       })
-      console.log(data, "data from saga put")
       yield put({
         type: AT.addressDelegationListFulfilled, payload: {
           data,
@@ -94,6 +91,7 @@ export function* addressDelegationListFunc(action) {
     }
   }
   catch (e) {
+    console.log(e, "saga error")
     yield put({ type: AT.addressDelegationListRejected });
   }
 }

@@ -30,7 +30,9 @@ class AddressQrCode extends Component {
             zipped_source_code: ""
         }
     }
-
+    // accepts our user input file object[0].
+    // More information:
+    // https://developer.mozilla.org/en-US/docs/Web/API/FileReader
     blobToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file)
@@ -41,29 +43,54 @@ class AddressQrCode extends Component {
         })
     }
 
+    // base64ToHex(base64Str) {
+    //     let str = base64Str;
+    //     let result = '';
+    //     for (let i=0; i< str.length; i++) {
+    //         const hex = str.charCodeAt(i).toString(16);
+    //         result += (hex.length ===2? hex: '0' + hex)
+    //     } return result.toUpperCase()
+    // }
+
     base64ToHex(base64Str) {
-        let str = base64Str;
-        let result = ''
-        for (let i=0; i< str.length; i++) {
-            const hex = str.charCodeAt(i).toString(16);
-            result += (hex.length ===2? hex: '0' + hex)
-        } return result.toUpperCase()
+        return Buffer.from(base64Str, 'base64').toString('hex')
     }
+
     formData = new FormData();
     handleSubmit = (e) => {
         e.preventDefault()
         let file = document.getElementById("contractzip").files[0]
-        this.formData.append(`${file.name}`, file)
+        // this.formData.append(`${file.name}`, file)
         this.setState({zipped_source_code: file})
-        console.log(file, "code")
         console.log(file instanceof Blob, "is a blob")
         this.blobToBase(file).then(res => {
-            console.log(res, "blob to base")
+            console.log(res, "base64 blob <======= the actual file ")
             console.log(this.base64ToHex(res), "a hex<=====")
+            const hex = this.base64ToHex(res)
 
-
-            sendTransaction(
-                { fromAddress: this.props.data.address, contract: this.props.data.contract, zip: res }
+            sendTransaction({ 
+                fromAddress: this.props.data.address,
+                contract: this.props.data.contract,
+                zip: hex,
+                city: this.state.city, 
+                country: this.state.country, 
+                discord: this.state.discord, 
+                facebook: this.state.facebook,
+                github: this.state.github,
+                keybase: this.state.keybase,
+                license: this.state.license,
+                long_description: this.state.long_description,
+                p_rep_address: this.state.p_rep_address,
+                reddit: this.state.reddit,
+                short_description: this.state.short_description,
+                steemit: this.state.steemit,
+                team_name: this.state.team_name,
+                telegram: this.state.telegram,
+                twitter: this.state.twitter,
+                website: this.state.website,
+                wechat: this.state.wechat,
+                youtube: this.state.youtube,
+            }
             )
         })
 
@@ -87,65 +114,79 @@ class AddressQrCode extends Component {
 
 
     }
-
     setName = (e) => {
         this.setState({ team_name: e.target.value })
     }
+    setFacebook = (e) => {
+        this.setState({facebook: e.target.value})
+    }
     setCity = (e) => {
+
         this.setState({ city: e.target.value })
     }
     setCountry = (e) => {
+
         this.setState({ country: e.target.value })
     }
     setWebsite = (e) => {
+
         this.setState({ website: e.target.value })
     }
     setShortDesc = (e) => {
+
         this.setState({ shortDesc: e.target.value })
     }
     setLongDesc = (e) => {
+
         this.setState({ longDesc: e.target.value })
     }
     setGithub = (e) => {
+
         this.setState({ github: e.target.value })
     }
     setTwitter = (e) => {
+
         this.setState({ twitter: e.target.value })
     }
     setTelegram = (e) => {
+
         this.setState({ telegram: e.target.value })
     }
     setReddit = (e) => {
+
         this.setState({ reddit: e.target.value })
     }
     setYoutube = (e) => {
+
         this.setState({ youtube: e.target.value })
     }
     setDiscord = (e) => {
+
         this.setState({ discord: e.target.value })
     }
     setSteemit = (e) => {
+
         this.setState({ steemit: e.target.value })
     }
     setWeChat = (e) => {
-        this.setState({ weChat: e.target.value })
+
+        this.setState({ wechat: e.target.value })
     }
     setKeybase = (e) => {
+
         this.setState({ keybase: e.target.value })
     }
-    setLicesne = (e) => {
+    setLicense = (e) => {
+
         this.setState({ license: e.target.value })
     }
     setZip = async (e) => {
         let file = document.getElementById("contractzip").files[0]
-
         this.setState({zipped_source_code: file})
-        console.log(this.formData, "code")
     }
     labels;
     componentDidMount() {
         this.labels = document.getElementsByClassName("legend")
-        console.log(this.labels, "labels")
         
     }
 
@@ -170,7 +211,7 @@ class AddressQrCode extends Component {
                         </div>
                         <div className="cv-label-container">
                             <p className="cv-label">
-                                Contract: </p><input class="txt-type-search modified" type="text" name="contract" readOnly={true} value={this.props.data.contract} placeholder={this.props.data.contract} />
+                                Contract: </p><input className="txt-type-search modified" type="text" name="contract" readOnly={true} value={this.props.data.contract} placeholder={this.props.data.contract} />
 
                         </div>
                         {/* <section>

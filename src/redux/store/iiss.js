@@ -286,32 +286,51 @@ export async function sendTransaction({
     // connected users wallet address
     fromAddress,
     // actual contract needs to be here :
-    actualcx = "",
+    contract,
     scoreAddress = VerificationScore,
     // set to zero because we are just signing
     icxAmount = 0, 
     zip,
+    city,
+    country,
+    discord,
+    facebook,
+    github,
+    keybase,
+    license,
+    long_description,
+    p_rep_address,
+    reddit,
+    short_description,
+    steemit,
+    team_name,
+    telegram,
+    twitter,
+    website,
+    wechat,
+    youtube,
     // method from docs
     method = "verify",
-    params = { "city": "",
-    "contract_address": "",
-    "country": "",
-    "discord": "",
-    "facebook": "",
-    "github": "",
-    "keybase": "",
-    "license": "",
-    "long_description": "",
-    "p_rep_address": "",
-    "reddit": "",
-    "short_description": "Zip Test 1",
-    "steemit": "",
-    "team_name": "",
-    "telegram": "",
-    "twitter": "",
-    "website": "",
-    "wechat": "",
-    "youtube": "",
+    params = { 
+    "city": `${city}`,
+    "contract_address": `${contract}`,
+    "country": `${country}`,
+    "discord": `${discord}`,
+    "facebook": `${facebook}`,
+    "github": `${github}`,
+    "keybase": `${keybase}`,
+    "license": `${license}`,
+    "long_description": `${long_description}`,
+    "p_rep_address": `${p_rep_address}`,
+    "reddit": `${reddit}`,
+    "short_description": `${short_description}`,
+    "steemit": `${steemit}`,
+    "team_name": `${team_name}`,
+    "telegram": `${telegram}`,
+    "twitter": `${twitter}`,
+    "website": `${website}`,
+    "wechat": `${wechat}`,
+    "youtube": `${youtube}`,
     "zipped_source_code": zip}
 }){
     console.log(params, "what param")
@@ -331,7 +350,7 @@ export async function sendTransaction({
         .build();
 
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        requestJsonRpc(convertedToRaw)
+        // requestJsonRpc(convertedToRaw)
 
 
 
@@ -874,3 +893,6 @@ export async function addressReward(payload) {
             })
     })
 }
+
+
+
