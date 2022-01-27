@@ -9,7 +9,7 @@ class AddressQrCode extends Component {
         super(props)
         this.state = {
             city: "",
-            countract_address: this.props.contract,
+            contract_address: this.props.contract,
             country: "",
             discord: "",
             facebook: "",
@@ -31,11 +31,58 @@ class AddressQrCode extends Component {
         }
     }
 
+    blobToBase = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        return new Promise(resolve => {
+            reader.onloadend = () => {
+                resolve(reader.result)
+            }
+        })
+    }
+
+    base64ToHex(base64Str) {
+        let str = base64Str;
+        let result = ''
+        for (let i=0; i< str.length; i++) {
+            const hex = str.charCodeAt(i).toString(16);
+            result += (hex.length ===2? hex: '0' + hex)
+        } return result.toUpperCase()
+    }
+    formData = new FormData();
     handleSubmit = (e) => {
         e.preventDefault()
-        sendTransaction(
-            { fromAddress: this.props.data.address, contract: this.props.data.contract }
-        )
+        let file = document.getElementById("contractzip").files[0]
+        this.formData.append(`${file.name}`, file)
+        this.setState({zipped_source_code: file})
+        console.log(file, "code")
+        console.log(file instanceof Blob, "is a blob")
+        this.blobToBase(file).then(res => {
+            console.log(res, "blob to base")
+            console.log(this.base64ToHex(res), "a hex<=====")
+
+
+            sendTransaction(
+                { fromAddress: this.props.data.address, contract: this.props.data.contract, zip: res }
+            )
+        })
+
+
+
+
+
+
+
+
+        let textPromise = file.text()
+        let newFile
+        // file.text().then(text => {
+        //     sendTransaction(
+        //         { fromAddress: this.props.data.address, contract: this.props.data.contract, zip: text }
+        //     )
+        // })
+
+        
 
 
 
@@ -89,8 +136,11 @@ class AddressQrCode extends Component {
     setLicesne = (e) => {
         this.setState({ license: e.target.value })
     }
-    setZip = (e) => {
-        this.setState({ zip: e.target.value })
+    setZip = async (e) => {
+        let file = document.getElementById("contractzip").files[0]
+
+        this.setState({zipped_source_code: file})
+        console.log(this.formData, "code")
     }
     labels;
     componentDidMount() {
@@ -112,7 +162,7 @@ class AddressQrCode extends Component {
             <>
                 <h1 key='h1' className="title">Submit a Contract for Verification</h1>
                 <div className="cv-form-container verify">
-                    <form onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="myForm">
+                    <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container">
                             <p className="cv-label">
                                 Wallet: </p><input className="txt-type-search modified" type="text" name="address" readOnly={true} value={address} placeholder={address} />
@@ -225,7 +275,7 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container">
                                         <p className="cv-label">
-                                            .zip File:</p><input type="file" id="myFile" name="filename" />
+                                            .zip File:</p><input type="file" id="contractzip" name="filename" onChange={(e) => this.setZip(e.target.value)}/>
                                     </div>
 
 

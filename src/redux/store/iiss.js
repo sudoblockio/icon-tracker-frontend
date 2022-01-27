@@ -290,11 +290,31 @@ export async function sendTransaction({
     scoreAddress = VerificationScore,
     // set to zero because we are just signing
     icxAmount = 0, 
+    zip,
     // method from docs
     method = "verify",
-    params = {}
+    params = { "city": "",
+    "contract_address": "",
+    "country": "",
+    "discord": "",
+    "facebook": "",
+    "github": "",
+    "keybase": "",
+    "license": "",
+    "long_description": "",
+    "p_rep_address": "",
+    "reddit": "",
+    "short_description": "Zip Test 1",
+    "steemit": "",
+    "team_name": "",
+    "telegram": "",
+    "twitter": "",
+    "website": "",
+    "wechat": "",
+    "youtube": "",
+    "zipped_source_code": zip}
 }){
-
+    console.log(params, "what param")
     const nid =7
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;

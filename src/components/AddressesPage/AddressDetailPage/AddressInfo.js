@@ -399,10 +399,10 @@ Token5Tokens
                                                         
                                                         className="drop-btn" onClick={this.toggleTokenMore}><i
                                                         className="img"></i></em></p>
-                                                    {tokenCxs.forEach((tokenContract, index) => {
+                                                    {tokenCxs.length? tokenCxs.forEach((tokenContract, index) => {
                                                         this.getContractName(tokenContract)
-                                                    }
-                                                    )}
+                                                    } 
+                                                    ):""}
                                                     
                                                     {Object.entries(this.tokenName).map((token, index ) => {
                                                         return <p key={index}>
