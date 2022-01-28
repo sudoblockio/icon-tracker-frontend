@@ -24,7 +24,7 @@ class ContractInfo extends Component {
     }
 
     render() {
-        const { contract, walletAddress, getTokenSummary } = this.props
+        const { contract, walletAddress, getTokenSummary, TxCount } = this.props
         const { loading, data } = contract
         console.log(this.props, "render cx props")
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
@@ -107,7 +107,7 @@ class ContractInfo extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Transactions</td>
-                                                <td>{numberWithCommas(data.transaction_count)} Txns</td>
+                                                <td>{numberWithCommas(TxCount)} Txns</td>
                                                 <td>Status</td>
                                                 <td>
                                                     {data.status}

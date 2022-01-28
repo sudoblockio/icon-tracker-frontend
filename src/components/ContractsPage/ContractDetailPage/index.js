@@ -10,6 +10,7 @@ import {
 
 class ContractDetailPage extends Component {
 
+
     render() {
         const { contract } = this.props;
         const { loading, error } = contract
@@ -44,6 +45,7 @@ class ContractDetailPage extends Component {
                 ]}
                 InfoComponent={ContractInfo}
                 TabsComponent={ContractTabs}
+                TxCount={this.props.contractTx.totalSize}
             />
         )
     }

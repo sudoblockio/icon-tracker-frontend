@@ -311,6 +311,7 @@ export async function sendTransaction({
     wechat,
     youtube,
     method = "verify",
+    
     params = { 
     "city": `${city}`,
     "contract_address": `${contract}`,

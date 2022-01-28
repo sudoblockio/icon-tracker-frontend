@@ -202,7 +202,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-					console.log(data, "What data")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
