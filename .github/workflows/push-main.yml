@@ -29,6 +29,7 @@ jobs:
             akid-ref: AWS_ACCESS_KEY_ID_MAINNET
             sak-ref: AWS_SECRET_ACCESS_KEY_MAINNET
             ecr-repository: icon-explorer-frontend-mainnet
+
 #          - network-name: sejong
 #            deployment-environment: dev
 #            akid-ref: AWS_ACCESS_KEY_ID_SEJONG
@@ -74,6 +75,58 @@ jobs:
           path: charts
           token: ${{ secrets.ICON_CHARTS_PAT }}
 
+      - name: Update prod-berlin-us-west-2 deployment values file (API)
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/berlin/tracker-frontend/values.yaml'
+          propertyPath: 'api.image.tag'
+          value: dev-${{ github.run_number }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-berlin-us-west-2 deployment values file (WORKER)
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/berlin/tracker-frontend/values.yaml'
+          propertyPath: 'worker.image.tag'
+          value: dev-${{ github.run_number }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-lisbon-us-west-2 deployment values file (API)
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/lisbon/tracker-frontend/values.yaml'
+          propertyPath: 'api.image.tag'
+          value: dev-${{ github.run_number }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Update prod-lisbon-us-west-2 deployment values file (WORKER)
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: geometry-labs/icon-charts
+          valueFile: 'deployments/prod-us-west-2/lisbon/tracker-frontend/values.yaml'
+          propertyPath: 'worker.image.tag'
+          value: dev-${{ github.run_number }}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
       - name: Update dev-mainnet deployment values file and re-commit
         uses: fjogeleit/yaml-update-action@master
         with:
@@ -85,5 +138,27 @@ jobs:
           branch: main
           createPR: 'false'
           message: 'tracker-frontend dev deployment (mainnet) image version to ${{ github.run_number }}'
-          token: ${{ secrets.ICON_CHARTS_PAT }}
+#          token: ${{ secrets.ICON_CHARTS_PAT }}
+#          updateFile: true
           updateFile: true
+          commitChange: false
+
+      - name: Configure credentials
+        uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.ICON_CHARTS_PAT }}'
+          global: true
+
+      - name: Commit all updates
+        run: |
+          git add -A
+          git commit -m "tracker-frontend dev and testnet deployment image versions to ${{ github.run_number }}"
+          git push origin
+        working-directory: charts
+
+      - name: Push tags
+        run: |
+          git tag -f tracker-frontend-prod-uswest2
+          git tag -f tracker-frontend-prod-euwest1
+          git push -f origin --tags
+        working-directory: charts
