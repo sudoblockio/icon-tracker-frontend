@@ -163,7 +163,7 @@ export async function addressTxList(payload) {
 export async function addressTokenTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`)
+        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`, payload))
             .then(result => {
                 resolve(result)
             })

@@ -5,7 +5,7 @@ import AT from '../../actionTypes/actionTypes';
 import {
   // getDelegation as ADDRESS_DELEGATION_LIST,
   addressReward as ADDRESS_REWARD,
-  getPReps,
+  // getPReps,
   getDelegation,
 } from '../../api/restV3';
 
@@ -16,11 +16,11 @@ import {
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
   addressVotedList as ADDRESS_VOTED_LIST,
-  addressDelegationList as ADDRESS_DELEGATION_LIST
+  // addressDelegationList as ADDRESS_DELEGATION_LIST
 } from '../addresses'
 
 // *** take a deeper look, cull. 
-import { getPRep, getStake, queryIScore, getBalance, getPrepStatusList} from '../../store/iiss';
+import { getPRepsRPC, prepList, getPReps, getStake, queryIScore, getBalance, getPrepStatusList, getDelegation as ADDRESS_DELEGATION_LIST} from '../../store/iiss';
 import { convertLoopToIcxDecimal } from '../../../utils/utils';
 
 export default function* addressesSaga() {
@@ -60,20 +60,18 @@ export function* addressRewardListFunc(action) {
 }
 
 export function* addressDelegationListFunc(action) {
-  console.log(action, "what action")
   try {
     const { address } = action.payload
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
-    const { delegations, data } = payload
-    if (data) {
-      const { data: preps } = yield call(getPReps)
-      const test = yield call(getPReps)
-      const list = data.map(prep => {
+    const { delegations } = payload
+    if (delegations) {
+      const res = yield call(prepList)
+      const data = delegations.map(prep => {
         const { address, value } = prep
-        const index = preps.findIndex(p => p.address === address)
+        const index = res.findIndex(p => p.address === address)
         let searched = { address }
         if (index !== -1) {
-          searched = list[index]
+          searched = res[index]
         }
         searched.value = value
         return searched
@@ -95,7 +93,6 @@ export function* addressDelegationListFunc(action) {
     yield put({ type: AT.addressDelegationListRejected });
   }
 }
-
 export function* addressVotedListFunc(action) {
   try {
     if (action.payload.count === 0) {

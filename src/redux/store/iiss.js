@@ -113,23 +113,10 @@ export async function prepList(grade) {
     })
 }
 
-export async function getDelegation(address) {
-    const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
-        trackerApi.get(`/api/v1/preps/${address}`)
-            .then(result => {
 
-                resolve(result)
-            })
-            .catch(error => {
-                reject(error)
-            })
-    });
-}
 
 export async function getPReps() {
     const trackerApi = await trackerApiInstance()
-
     return new Promise((resolve, reject)  => {
         trackerApi.get(`/api/v1/preps`)
             .then(result => {
@@ -141,6 +128,52 @@ export async function getPReps() {
     });
         
 }
+
+export async function getDelegation(address) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/preps/${address}`)
+            .then(result => {
+                resolve(result)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });
+        
+}
+
+
+
+// export async function getDelegation(address) {
+//     const walletApi = await walletApiInstance()
+//     return new Promise(resolve => {
+//         const param = {
+//             jsonrpc: "2.0",
+//             method: "icx_call",
+//             id: randomUint32(),
+//             params: {
+//                 "from": "hx0000000000000000000000000000000000000000",
+//                 "to": "cx0000000000000000000000000000000000000000",
+//                 "dataType": "call",
+//                 "data": {
+//                     "method": 'getDelegation',
+//                     "params": {
+//                         "address": address
+//                     }
+//                 }
+//             }
+//         }
+//         walletApi.post(`/api/v3`, JSON.stringify(param))
+//             .then(response => {
+//                 resolve(response.data.result);
+//             })
+//             .catch(error => {
+//                 console.error(error)
+//                 resolve({ preps: [] });
+//             })
+//     });
+// }
 
 export async function getPRepsRPC() {
     const walletApi = await walletApiInstance()

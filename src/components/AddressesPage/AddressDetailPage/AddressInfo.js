@@ -127,13 +127,14 @@ getContractName = async (tokenContract) => {
 
     render() {
         if (this.props.wallet.data.is_prep === true){
-            this.getSocialMediaLinks(this.props.wallet.data.prep.name)
+            this.getSocialMediaLinks(this.props.wallet.data.name)
             this.linkList=this.links
         }
 
         const {icxMore, tokenMore, showNode} = this.state
         const {wallet, walletAddress, addrTokens} = this.props
         const {loading, data, error} = wallet
+        console.log(wallet, "wallet wallet")
         const {
             is_prep,
             prep,
