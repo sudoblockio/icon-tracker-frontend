@@ -67,7 +67,7 @@ class AddressQrCode extends Component {
             console.log(res, "base64 blob <======= the actual file ")
             console.log(this.base64ToHex(res), "a hex<=====")
             const hex = this.base64ToHex(res)
-
+            console.log(this.state.short_description)
             sendTransaction({ 
                 fromAddress: this.props.data.address,
                 contract: this.props.data.contract,
@@ -115,11 +115,11 @@ class AddressQrCode extends Component {
     }
     setShortDesc = (e) => {
 
-        this.setState({ shortDesc: e.target.value })
+        this.setState({ short_description: e.target.value })
     }
     setLongDesc = (e) => {
 
-        this.setState({ longDesc: e.target.value })
+        this.setState({ long_description: e.target.value })
     }
     setGithub = (e) => {
 

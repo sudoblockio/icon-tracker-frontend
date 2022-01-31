@@ -344,7 +344,6 @@ export async function sendTransaction({
     wechat,
     youtube,
     method = "verify",
-    
     params = { 
     "city": `${city}`,
     "contract_address": `${contract}`,
@@ -365,7 +364,9 @@ export async function sendTransaction({
     "website": `${website}`,
     "wechat": `${wechat}`,
     "youtube": `${youtube}`,
-    "zipped_source_code": "0x"+zip}
+    "zipped_source_code": "0x"+zip,
+    "source_code_location": "./irc31-token/build/libs/irc31-token-0.1.0-optimized.jar"
+    }
 }){
     // berlin
     // const nid =7
@@ -384,9 +385,18 @@ export async function sendTransaction({
         .params(params)
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
-
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        requestJsonRpc(convertedToRaw)
+        let response = await requestJsonRpc(convertedToRaw)
+        let txHash = response.result
+
+        //check that the result is a hash, not an error
+        // if it worked, maybe redirect to the tx page 
+        // if it did work, set some errors. 
+        setTimeout(() => {
+            txHash.startsWith("0x") ? window.location.href=`https://tracker.lisbon.geometry.io/transaction/${txHash}`
+        : console.log("not a tx hash")}, 9000)
+        
+
         // bring back in to sign ^^^^^^^^^^^^^^^^^^^^^^^
 
 
