@@ -388,35 +388,9 @@ export async function sendTransaction({
         const convertedToRaw = IconConverter.toRawTransaction(txData)
         let response = await requestJsonRpc(convertedToRaw)
         let txHash = response.result
-
-        //check that the result is a hash, not an error
-        // if it worked, maybe redirect to the tx page 
-        // if it did work, set some errors. 
         setTimeout(() => {
-            txHash.startsWith("0x") ? window.location.href=`https://tracker.lisbon.geometry.io/transaction/${txHash}`
-        : console.log("not a tx hash")}, 9000)
-        
-
-        // bring back in to sign ^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-        // const txPayload = {
-        //     jsonrpc: '2.0',
-        //     method: 'icx_sendTransaction',
-        //     params: convertedToRaw,
-        //     id: Math.floor((Math.random() * 90000) + 10000)
-        // };
-        // console.log(txPayload, "txData")
-        // console.log(window, "What does window")
-        // window.parent.dispatchEvent(
-        //     new CustomEvent('ICONEX_RELAY_REQUEST', {
-        //         detail: {
-        //             type: 'REQUEST_JSON_RPC',
-        //             payload: txPayload,
-        //         },
-        //     }),
-        // );
+                window.location.href=`${window.location.hostname}/transaction/${txHash}`
+        }, 1000)
 }
 
 
