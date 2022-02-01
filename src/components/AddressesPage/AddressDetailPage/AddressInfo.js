@@ -116,8 +116,7 @@ getContractName = async (tokenContract) => {
     }
 
     getTokenList = async (public_key) => {
-        console.log(public_key, "What key")
-        console.log(this.props, "what son")
+
         // this.setState({tokenList: this.props.getAddressTokens(public_key)})
 
 

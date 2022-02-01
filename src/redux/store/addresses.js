@@ -1,6 +1,6 @@
 import { trackerApiInstance } from "../api/restV3/config";
 import actionTypes from "../actionTypes/actionTypes";
-import { getState, makeUrl } from "../../utils/utils";
+import { getState, makeUrl, makeTokenUrl } from "../../utils/utils";
 import { REDUX_STEP, INITIAL_STATE } from "../../utils/const";
 import { prefixes } from '../../utils/const'
 // *update paths in prefixes object to change app-wide.*
@@ -161,10 +161,13 @@ export async function addressTxList(payload) {
 }
 
 export async function addressTokenTxList(payload) {
+  console.log("hit")
+  console.log(payload, "tx payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`, payload))
             .then(result => {
+              console.log(result, "result")
                 resolve(result)
             })
             .catch(error => {
@@ -187,9 +190,7 @@ export async function addressInternalTxList(payload) {
 }
 
 export async function addressVotedList(payload) {
-  console.log("address voted")
     const trackerApi = await trackerApiInstance()
-   console.log(payload, "what payload")
     if (payload.address) {
         payload.prep = payload.address
         delete payload.address

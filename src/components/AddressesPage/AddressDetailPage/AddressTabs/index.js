@@ -15,34 +15,66 @@ import {
     NoBox,
     TabTable
 } from '../../../../components'
+import {addressRewardList, addressTokenTxList, addressVotedList, addressDelegationList, addressInternalTxList} from '../../../../redux/store/addresses'
+ 
+// export const ADDRESS_TABS = [
+//     'Transactions',
+//     'Internal Transactions',
+//     'Token Transfers',
+//     'Delegations',
+//     'Voters',
+//     'Rewards',
+//     'Bonded'
+//   ];
 
 class WalletTabs extends Component {
+    
+    checkTabs = async (address) => {
+        let payload = {address: `${address}`, page:1, count:10}
+        this.tokentransfers  =  await addressTokenTxList(payload)
+        this.voted = await addressVotedList(address)
+        this.rewards = await addressRewardList(payload)
+        this.deleg = await addressDelegationList(payload)
+        this.tokenTx = await addressTokenTxList(payload)
+        this.intTx = await addressInternalTxList(payload)
+
+        console.log(this.tokentransfers, "checking...")
+        
+    }
+
+    async componentDidMount(){
+        this.checkTabs(this.props.match.params.addressId)
+
+    }
     render() {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
+        console.log(this.props, "tab props")
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
         
 
-        console.log(this.props, "wallet tabs data")
+        console.log(this.tokentransfers, "wallet tabs data")
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-        if (data) {
+
+        if (this.intTx? this.intTx.data.length : null) {
             TABS.push(ADDRESS_TABS[1])
         }
-        if (data !== 0) {
+        if (this.tokentransfers? this.tokentransfers.data.length : null) {
             TABS.push(ADDRESS_TABS[2])
         }
-        if (data) {
+        if (this.deleg? this.deleg.data.length : null) {
             TABS.push(ADDRESS_TABS[3])
         }
-        if (is_prep) {
-            TABS.push(ADDRESS_TABS[6])
+        if (this.voted? this.voted.data.length : null) {
+            // TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
-        // if (data) {
-        //     TABS.push(ADDRESS_TABS[5])
-        // }
+        console.log(this.props.addressReward, "Address reward")
+        if (this.props.addressReward) {
+            TABS.push(ADDRESS_TABS[5])
+        }
 
             
 

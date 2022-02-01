@@ -20,7 +20,7 @@ import {
 } from '../addresses'
 
 // *** take a deeper look, cull. 
-import { getPRepsRPC, prepList, getPReps, getStake, queryIScore, getBalance, getPrepStatusList, getDelegation as ADDRESS_DELEGATION_LIST} from '../../store/iiss';
+import { getPRepsRPC, getDelegationPrep, prepList, getPReps, getStake, queryIScore, getBalance, getPrepStatusList, getDelegation as ADDRESS_DELEGATION_LIST} from '../../store/iiss';
 import { convertLoopToIcxDecimal } from '../../../utils/utils';
 
 export default function* addressesSaga() {
@@ -63,6 +63,7 @@ export function* addressDelegationListFunc(action) {
   try {
     const { address } = action.payload
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
+    console.log(payload, "delegations payload")
     const { delegations } = payload
     if (delegations) {
       const res = yield call(prepList)
@@ -155,7 +156,7 @@ export function* addressInfoFunc(action) {
 
           const { stake, unstakes } = yield call(getStake, address)
           const _stake = !stake ? 0 : convertLoopToIcxDecimal(stake)
-          const prep = yield call(getDelegation, address)
+          const prep = yield call(getDelegationPrep, address)
           const { delegated } = yield call(getDelegation, address)
           active = payload.data && payload.data.status <= 2 ? 'Active' : 'Inactive'
           payload.data = {
@@ -195,7 +196,7 @@ export function* addressInfoFunc(action) {
     }
   }
   catch (e) {
-    console.log(e, "what is the error")
+    console.log(e, "error")
     yield put({ type: AT.addressInfoRejected, error: action.payload.address });
   }
 }
@@ -206,11 +207,9 @@ export function* addressTxListFunc(action) {
       yield put({ type: AT.addressTxListFulfilled, payload: { data: [] } });
       return
     }
-    console.log(action, "from address saga")
     const payload = yield call(ADDRESS_TX_LIST, action.payload);
 
     if (payload.status === 200) {
-      console.log(payload, "from address saga")
       yield put({ type: AT.addressTxListFulfilled, payload: payload });
     }
     else {

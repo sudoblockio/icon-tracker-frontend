@@ -20,12 +20,15 @@ import {
 import { getBalanceOf, getBondList } from '../../redux/store/iiss';
 
 function mapStateToProps(state) {
+
+  console.log(state, "Whole state")
   return {
     url: state.router.location,
     ...state.addresses,
     walletAddress: state.storage.walletAddress,
     walletNotification: state.storage.walletNotification,
-    walletTokens: state.walletTokenTx
+    walletTokens: state.walletTokenTx,
+    
   };
 }
 

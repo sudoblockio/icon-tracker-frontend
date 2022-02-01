@@ -7,6 +7,7 @@ import {
 import {
     ADDRESS_TABS
 } from '../../../utils/const'
+import { addressInternalTxList } from '../../../redux/store/addresses';
 
 class AddressesDetailPage extends Component {
      constructor(props) {
@@ -16,11 +17,10 @@ class AddressesDetailPage extends Component {
          }
      }
 
-    async componentDidMount(){
 
-    }
     render() {
-        const { wallet, walletTokenTx } = this.props;
+        const { wallet, walletTokenTx, addressInternalTx } = this.props;
+        console.log(this.props, "outer tab props")
         const { loading, error, data } = wallet
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations, log_count } = data
 
@@ -52,18 +52,18 @@ class AddressesDetailPage extends Component {
             })
         }
         if (is_prep) {
-            TABS.push(ADDRESS_TABS[6])
+            // TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
             getList.push(address => {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
             })
         }
-        // if (data) {
-        //     TABS.push(ADDRESS_TABS[5])
-        //     getList.push(address => {
-        //         this.props.addressRewardList({ address })
-        //     })    
-        // }
+        if (data) {
+            TABS.push(ADDRESS_TABS[5])
+            getList.push(address => {
+                this.props.addressRewardList({ address })
+            })    
+        }
 
         return (
             

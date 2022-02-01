@@ -129,7 +129,7 @@ export async function getPReps() {
         
 }
 
-export async function getDelegation(address) {
+export async function getDelegationPrep(address) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject)  => {
         trackerApi.get(`/api/v1/preps/${address}`)
@@ -145,35 +145,35 @@ export async function getDelegation(address) {
 
 
 
-// export async function getDelegation(address) {
-//     const walletApi = await walletApiInstance()
-//     return new Promise(resolve => {
-//         const param = {
-//             jsonrpc: "2.0",
-//             method: "icx_call",
-//             id: randomUint32(),
-//             params: {
-//                 "from": "hx0000000000000000000000000000000000000000",
-//                 "to": "cx0000000000000000000000000000000000000000",
-//                 "dataType": "call",
-//                 "data": {
-//                     "method": 'getDelegation',
-//                     "params": {
-//                         "address": address
-//                     }
-//                 }
-//             }
-//         }
-//         walletApi.post(`/api/v3`, JSON.stringify(param))
-//             .then(response => {
-//                 resolve(response.data.result);
-//             })
-//             .catch(error => {
-//                 console.error(error)
-//                 resolve({ preps: [] });
-//             })
-//     });
-// }
+export async function getDelegation(address) {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params: {
+                "from": "hx0000000000000000000000000000000000000000",
+                "to": "cx0000000000000000000000000000000000000000",
+                "dataType": "call",
+                "data": {
+                    "method": 'getDelegation',
+                    "params": {
+                        "address": address
+                    }
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                console.error(error)
+                resolve({ preps: [] });
+            })
+    });
+}
 
 export async function getPRepsRPC() {
     const walletApi = await walletApiInstance()
@@ -313,8 +313,11 @@ export async function getIISSInfo() {
 }
 
 // if there is a transaction result, post to v3
+//berlin
+export const VerificationScore=`cxdd61820cd8e5e13f65ee368ffea34b3aa1d94461`
 // export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
-export const VerificationScore = 'cx338322697c252ec776bf81157f55e1f47beb7d78'
+// lisbon
+// export const VerificationScore = 'cx338322697c252ec776bf81157f55e1f47beb7d78'
 export async function sendTransaction({
     // write function to get logged in wallets public_key
     // connected users wallet address
@@ -346,7 +349,7 @@ export async function sendTransaction({
     method = "verify",
     params = { 
     "city": `${city}`,
-    "contract_address": `${contract}`,
+    "contract_address": `cx03f38c36460b2e9ce68a67f83fc9608690b1f64e`,
     "country": `${country}`,
     "discord": `${discord}`,
     "facebook": `${facebook}`,
@@ -371,7 +374,7 @@ export async function sendTransaction({
     // berlin
     // const nid =7
     // lisbon:
-    const nid=2
+    const nid=7
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
@@ -388,9 +391,9 @@ export async function sendTransaction({
         const convertedToRaw = IconConverter.toRawTransaction(txData)
         let response = await requestJsonRpc(convertedToRaw)
         let txHash = response.result
-        setTimeout(() => {
-                window.location.href=`${window.location.hostname}/transaction/${txHash}`
-        }, 1000)
+        // setTimeout(() => {
+        //         window.location.href=`${window.location.hostname}/transaction/${txHash}`
+        // }, 1000)
 }
 
 
