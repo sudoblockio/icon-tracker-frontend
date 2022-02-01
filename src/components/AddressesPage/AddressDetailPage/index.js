@@ -61,6 +61,7 @@ class AddressesDetailPage extends Component {
 
             })
         }
+        console.log(this.deleg, "outer detail")
         if (this.deleg) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {

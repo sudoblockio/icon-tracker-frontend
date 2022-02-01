@@ -49,21 +49,19 @@ class WalletTabs extends Component {
     }
     render() {
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
-        console.log(this.props, "tab props")
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
-        console.log(this.voted, "deeper")
 
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-        console.log(this.intTx, "this int tx")
         if (this.intTx? this.intTx.data.length : null) {
             TABS.push(ADDRESS_TABS[1])
         }
         if (this.tokentransfers? this.tokentransfers.data.length : null) {
             TABS.push(ADDRESS_TABS[2])
         }
+        console.log(this.deleg, "inner deleg")
         if (this.deleg) {
             TABS.push(ADDRESS_TABS[3])
         }
@@ -74,9 +72,9 @@ class WalletTabs extends Component {
         if (this.rewards? this.rewards.data.length: null) {
             TABS.push(ADDRESS_TABS[5])
         }
-         if (this.bondList ? this.bondList.length : null) {
-             TABS.push(ADDRESS_TABS[6])
-         }
+        //  if (this.bondList ? this.bondList.length : null) {
+        //      TABS.push(ADDRESS_TABS[6])
+        //  }
         
 
         return (
@@ -135,7 +133,6 @@ class WalletTabs extends Component {
                                 />
                             )
                         case ADDRESS_TABS[5]:
-                            console.log(addressReward, "what is reward")
                             return (
                                 <AddressReward
                                     txData={addressReward}
@@ -145,7 +142,6 @@ class WalletTabs extends Component {
                                 />
                             )
                             // case ADDRESS_TABS[6]:
-                            //     console.log(this.bondList, "before")
                             //     return (
                             //         <AddressBonded
                             //             txData={this.bondList}

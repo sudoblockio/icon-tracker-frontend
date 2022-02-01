@@ -1,5 +1,6 @@
-import { trackerApiInstance } from "../api/restV3/config";
+import { trackerApiInstance, walletApiInstance } from "../api/restV3/config";
 import actionTypes from "../actionTypes/actionTypes";
+import { randomUint32 } from "../../utils/utils";
 import { getState, makeUrl, makeTokenUrl } from "../../utils/utils";
 import { REDUX_STEP, INITIAL_STATE } from "../../utils/const";
 import { prefixes } from '../../utils/const'
@@ -201,6 +202,38 @@ export async function addressVotedList(payload) {
             })
     })
 }
+
+export async function addressDelegationList(address) {
+  const walletApi = await walletApiInstance()
+  return new Promise(resolve => {
+      const param = {
+          jsonrpc: "2.0",
+          method: "icx_call",
+          id: randomUint32(),
+          params: {
+              "from": "hx0000000000000000000000000000000000000000",
+              "to": "cx0000000000000000000000000000000000000000",
+              "dataType": "call",
+              "data": {
+                  "method": 'getDelegation',
+                  "params": {
+                      "address": address
+                  }
+              }
+          }
+      }
+      walletApi.post(`/api/v3`, JSON.stringify(param))
+          .then(response => {
+              console.log(response, "here")
+              resolve(response.data.result);
+          })
+          .catch(error => {
+              console.error(error, "here")
+              resolve({ preps: [] });
+          })
+  });
+}
+
 
 // REDUCER
 

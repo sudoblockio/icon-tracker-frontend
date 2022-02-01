@@ -17,7 +17,7 @@ import {
 import { 
   setNotification,
 } from '../../redux/actions/storageActions';
-import { getBalanceOf, getBondList } from '../../redux/store/iiss';
+import { getBalanceOf, getBondList, getDelegation } from '../../redux/store/iiss';
 
 function mapStateToProps(state) {
 

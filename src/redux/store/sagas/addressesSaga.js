@@ -63,7 +63,6 @@ export function* addressDelegationListFunc(action) {
   try {
     const { address } = action.payload
     const payload = yield call(ADDRESS_DELEGATION_LIST, address);
-    console.log(payload, "delegations payload")
     const { delegations } = payload
     if (delegations) {
       const res = yield call(prepList)

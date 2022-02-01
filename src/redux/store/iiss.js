@@ -166,10 +166,11 @@ export async function getDelegation(address) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.log(response, "here")
                 resolve(response.data.result);
             })
             .catch(error => {
-                console.error(error)
+                console.error(error, "here")
                 resolve({ preps: [] });
             })
     });
@@ -197,7 +198,11 @@ export async function getPRepsRPC() {
             })
             .catch(error => {
                 console.error(error)
-                resolve({ preps: [] });
+                resolve({
+                    error: {
+                        message: error.message
+                    }
+                })
             })
     });
 }
