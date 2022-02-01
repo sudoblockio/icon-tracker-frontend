@@ -48,6 +48,7 @@ export function blockListAction(payload) {
   
   export async function blockInfo(payload) {
     const trackerApi = await trackerApiInstance()
+    debugger
     if (payload.height === '0' ) {
       const num = 800460000*Math.pow(10,18)
       const result = {
