@@ -130,7 +130,7 @@ html, body{height: 100%;}
 .header-wrap {position: fixed; width: 100%; color: #fff;font-size: 14px; font-weight: 600;z-index: 10; background: rgba(26, 170, 186, 0.95);     height: 60px;     /*max-width: 1900px;*/}
 .header-wrap .wrap-holder{/*margin-top: 30px;  */  min-width: 1260px; width: auto; height: 60px;}
 .header-wrap li{display: inline-block;}
-.header-wrap .logo{background: url(../image/icon_logo.svg) left top no-repeat; width: 128px; height: 60px; display: inline-block;/* margin-left: -30px;  */  margin-top: 0px;}
+.header-wrap .logo{background: url(../image/small2022.png) left top no-repeat; width: 128px; height: 60px; display: inline-block;/* margin-left: -30px;  */  margin-top: 0px;}
 .header-wrap .logo em{font-weight: 500; font-size: 20px;     margin: 7px 96px; display: inline-block; color: #fff;}
 .header-wrap .link {display: inline-block; float: right; margin-top: 10px; }
 .header-wrap .link ul{display: inline-block;font-weight: 400; vertical-align: text-top; font-size: 0; }
