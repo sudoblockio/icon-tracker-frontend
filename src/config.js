@@ -1,7 +1,7 @@
 let configJson;
 // const apiUrl = `${window.location.host}` === "localhost:3000" ? 'https://tracker.icon.community' : `${window.location.host}`
-let apiUrl = `${window.location.host}`
-// let apiUrl = `https://tracker.icon.community`
+// let apiUrl = `${window.location.host}`
+let apiUrl = `https://tracker.icon.community`
 
 switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}` ) {
     case 'dev-mainnet':
