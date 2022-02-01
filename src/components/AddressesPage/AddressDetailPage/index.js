@@ -7,8 +7,8 @@ import {
 import {
     ADDRESS_TABS
 } from '../../../utils/const'
-import { addressInternalTxList, addressDelegationList, addressRewardList, addressVotedList, addressTokenTxList } from '../../../redux/store/addresses';
-import { getBondList } from '../../../redux/store/iiss'
+import { addressInternalTxList, addressRewardList, addressVotedList, addressTokenTxList } from '../../../redux/store/addresses';
+import { getBondList, getDelegation } from '../../../redux/store/iiss'
 class AddressesDetailPage extends Component {
     constructor(props) {
         super(props)
@@ -19,9 +19,9 @@ class AddressesDetailPage extends Component {
     checkTabs = async (address) => {
         let payload = { address: `${address}`, page: 1, count: 10 }
         this.tokentransfers = await addressTokenTxList(payload)
-        this.voted = await addressVotedList(address)
+        this.voted = await addressVotedList(payload)
         this.rewards = await addressRewardList(payload)
-        this.deleg = await addressDelegationList(payload)
+        this.deleg = await getDelegation(payload)
         this.tokenTx = await addressTokenTxList(payload)
         
     }
@@ -42,7 +42,6 @@ class AddressesDetailPage extends Component {
 
         const TABS = [], getList = []
 
-        console.log(TABS, "get list")
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
@@ -62,8 +61,7 @@ class AddressesDetailPage extends Component {
 
             })
         }
-        console.log(this.deleg, "this deleg shouldn't")
-        if (this.deleg ? deleg.data.length : null) {
+        if (this.deleg) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })

@@ -15,8 +15,8 @@ import {
     NoBox,
     TabTable
 } from '../../../../components'
-import {addressRewardList, addressTokenTxList, addressVotedList, addressDelegationList, addressInternalTxList} from '../../../../redux/store/addresses'
-import {getBondList} from '../../../../redux/store/iiss'
+import {addressRewardList, addressTokenTxList, addressVotedList, addressInternalTxList} from '../../../../redux/store/addresses'
+import {getBondList, getDelegation} from '../../../../redux/store/iiss'
 // export const ADDRESS_TABS = [
 //     'Transactions',
 //     'Internal Transactions',
@@ -32,9 +32,8 @@ class WalletTabs extends Component {
     checkTabs = async (address) => {
         let payload = {address: `${address}`, page:1, count:10}
         this.tokentransfers  =  await addressTokenTxList(payload)
-        this.voted = await addressVotedList(address)
         this.rewards = await addressRewardList(payload)
-        this.deleg = await addressDelegationList(payload)
+        this.deleg = await getDelegation(payload)
         this.tokenTx = await addressTokenTxList(payload)
         
         
@@ -42,6 +41,7 @@ class WalletTabs extends Component {
     
     async componentDidMount(){
         let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
+        this.voted = await addressVotedList(payload)
         this.bondList = await getBondList(payload)
         this.intTx = await addressInternalTxList(payload)
         this.checkTabs(this.props.match.params.addressId)
@@ -52,7 +52,7 @@ class WalletTabs extends Component {
         console.log(this.props, "tab props")
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
-        console.log(this.bondList, "deeper")
+        console.log(this.voted, "deeper")
 
 
         const TABS = []
@@ -64,7 +64,7 @@ class WalletTabs extends Component {
         if (this.tokentransfers? this.tokentransfers.data.length : null) {
             TABS.push(ADDRESS_TABS[2])
         }
-        if (this.deleg? this.deleg.data.length : null) {
+        if (this.deleg) {
             TABS.push(ADDRESS_TABS[3])
         }
         if (this.voted? this.voted.data.length : null) {
@@ -74,9 +74,9 @@ class WalletTabs extends Component {
         if (this.rewards? this.rewards.data.length: null) {
             TABS.push(ADDRESS_TABS[5])
         }
-        //  if (this.bondList ? this.bondList.length : null) {
-        //      TABS.push(ADDRESS_TABS[6])
-        //  }
+         if (this.bondList ? this.bondList.length : null) {
+             TABS.push(ADDRESS_TABS[6])
+         }
         
 
         return (

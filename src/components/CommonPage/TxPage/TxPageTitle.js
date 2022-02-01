@@ -16,7 +16,7 @@ class TxPageTitle extends Component {
                             Voters
                             <span>for address {urlIndex}</span>
                             <span className="right">
-                                A total of<em>{_listSize}</em> voter(s) found
+                                A total of<em>{_totalSize}</em> voter(s) found
                             </span>
                         </p>
                     )

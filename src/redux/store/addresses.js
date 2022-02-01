@@ -83,20 +83,20 @@ export async function addressRewardList(payload) {
   })
 }
 
-export async function addressDelegationList(payload){
-  console.log(payload, "address delagation payload")
-  payload.address ? payload = payload.address : payload = payload
-  const trackerApi = await trackerApiInstance()
-  return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/governance/delegations/${payload}`)
-      .then(result => {
-        resolve(result)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
+// export async function addressDelegationList(payload){
+//   console.log(payload, "address delagation payload")
+//   payload.address ? payload = payload.address : payload = payload
+//   const trackerApi = await trackerApiInstance()
+//   return new Promise((resolve, reject) => {
+//     trackerApi.get(`/api/v1/governance/delegations/${payload}`)
+//       .then(result => {
+//         resolve(result)
+//       })
+//       .catch(error => {
+//         reject(error)
+//       })
+//   })
+// }
 
 
 export async function addressList(payload) {
@@ -184,14 +184,15 @@ export async function addressInternalTxList(payload) {
 }
 
 export async function addressVotedList(payload) {
+  console.log(payload, "vote payload")
     const trackerApi = await trackerApiInstance()
-    if (payload.address) {
-        payload.prep = payload.address
-        delete payload.address
-    }
+    // if (payload.address) {
+    //     payload.prep = payload.address
+    //     delete payload.address
+    // } 
 
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/governance/votes/${payload}`)
+        trackerApi.get(`/api/v1/governance/votes/${payload.address || payload}`)
             .then(result => {
                 resolve(result)
             })
