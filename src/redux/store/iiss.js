@@ -238,7 +238,7 @@ export async function getTokenTotalSupply(address){
     })
 }
 
-export async function getBondList(address) {
+export async function getBondList(payload) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -251,14 +251,13 @@ export async function getBondList(address) {
                 "data": {
                     "method": 'getBond',
                     "params": {
-                        "address": address
+                        "address": payload.address
                     }
                 }
             }
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                console.log(response, "bonded response")
                 resolve(response.data.result.bonds);
             })
             .catch(error => {
@@ -294,7 +293,6 @@ export async function getIISSInfo() {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                console.log(response, "get iiss info response")
                 resolve(response.data.result);
             })
             .catch(error => {

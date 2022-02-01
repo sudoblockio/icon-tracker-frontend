@@ -38,7 +38,6 @@ class WalletTabs extends Component {
         this.tokenTx = await addressTokenTxList(payload)
         this.intTx = await addressInternalTxList(payload)
 
-        console.log(this.tokentransfers, "checking...")
         
     }
 
@@ -53,7 +52,6 @@ class WalletTabs extends Component {
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
         
 
-        console.log(this.tokentransfers, "wallet tabs data")
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
@@ -71,12 +69,11 @@ class WalletTabs extends Component {
             // TABS.push(ADDRESS_TABS[6])
             TABS.push(ADDRESS_TABS[4])
         }
-        console.log(this.props.addressReward, "Address reward")
-        if (this.props.addressReward) {
+        if (this.rewards? this.rewards.data.length: null) {
             TABS.push(ADDRESS_TABS[5])
         }
 
-            
+        
 
         return (
             <TabTable
@@ -118,6 +115,7 @@ class WalletTabs extends Component {
                             return (
                                 <AddressDelegation
                                     txData={addressDelegation}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_DELEGATIONS}/${public_key}`) }}
                                     txType={TX_TYPE.ADDRESS_DELEGATION}
                                     address={public_key}
                                 />

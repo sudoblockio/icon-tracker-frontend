@@ -72,9 +72,8 @@ export async function addressRewardList(payload) {
   console.log("hit this function")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject ) => {
-    trackerApi.get(`${TRANSACTIONS_PREFIX}?from=${payload.address}&method=claimIscore`)
+    trackerApi.get(`/api/v1/governance/rewards/${payload.address}`)
       .then(result => {
-        console.log(result, "address reward result")
         resolve(result)
       })
       .catch(error => {
@@ -101,7 +100,6 @@ export async function addressDelegationList(payload){
 
 
 export async function addressList(payload) {
-  console.log(payload, "address list payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}`, payload))
@@ -131,7 +129,6 @@ export async function addressInfo(payload) {
 }
 
 export async function addressTokens(payload) {
-  console.log(payload, "token payload maybe")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
       trackerApi.get(`${ADDRESSES_PREFIX}/address-tokens/${payload.address || payload}`)
@@ -161,13 +158,10 @@ export async function addressTxList(payload) {
 }
 
 export async function addressTokenTxList(payload) {
-  console.log("hit")
-  console.log(payload, "tx payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`, payload))
             .then(result => {
-              console.log(result, "result")
                 resolve(result)
             })
             .catch(error => {
