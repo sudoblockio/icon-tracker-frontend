@@ -35,7 +35,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getAddressTokens: payload => dispatch(addressTokens(payload)),
-    bondList: payload => dispatch(getBondList(payload)),
+    // getBondList: payload => dispatch(getBondList(payload)),
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
     getBalanceOf: payload => dispatch(getBalanceOf(payload)),
     addressDelegationList: payload => dispatch(addressDelegationListAction(payload)),

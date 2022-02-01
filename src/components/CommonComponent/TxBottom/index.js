@@ -13,9 +13,8 @@ class TxBottom extends Component {
       address,
       tokenTotal
     } = this.props
-    console.log(this.props, "rank props mayve")
 
-
+    console.log(this.props, "bonded bottom props")
     const tableClassName =
       TX_TYPE_DATA[txType] ?
       TX_TYPE_DATA[txType]['className'] : ''

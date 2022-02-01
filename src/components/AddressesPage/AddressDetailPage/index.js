@@ -7,27 +7,29 @@ import {
 import {
     ADDRESS_TABS
 } from '../../../utils/const'
-import { addressInternalTxList , addressDelegationList, addressRewardList, addressVotedList, addressTokenTxList} from '../../../redux/store/addresses';
-import {getBondList } from '../../../redux/store/iiss'
+import { addressInternalTxList, addressDelegationList, addressRewardList, addressVotedList, addressTokenTxList } from '../../../redux/store/addresses';
+import { getBondList } from '../../../redux/store/iiss'
 class AddressesDetailPage extends Component {
-     constructor(props) {
-         super(props)
-         this.state = {
-             internalTxns: ""
-         }
-     }
-     checkTabs = async (address) => {
-        let payload = {address: `${address}`, page:1, count:10}
-        this.tokentransfers  =  await addressTokenTxList(payload)
+    constructor(props) {
+        super(props)
+        this.state = {
+            internalTxns: ""
+        }
+    }
+    checkTabs = async (address) => {
+        let payload = { address: `${address}`, page: 1, count: 10 }
+        this.tokentransfers = await addressTokenTxList(payload)
         this.voted = await addressVotedList(address)
         this.rewards = await addressRewardList(payload)
         this.deleg = await addressDelegationList(payload)
         this.tokenTx = await addressTokenTxList(payload)
-        this.intTx = await addressInternalTxList(payload)
         
     }
-
-    async componentDidMount(){
+    
+    async componentDidMount() {
+        let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
+        this.intTx = await addressInternalTxList(payload)
+        this.bondList = await getBondList(payload)
         this.checkTabs(this.props.match.params.addressId)
 
     }
@@ -38,49 +40,57 @@ class AddressesDetailPage extends Component {
         const deleg = this.deleg
         const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations, log_count } = data
 
-        const TABS = [], getList = []   
+        const TABS = [], getList = []
+
+        console.log(TABS, "get list")
         TABS.push(ADDRESS_TABS[0])
         getList.push(address => {
             this.props.addressTxList({ address, page: 1, count: 10 })
         })
 
 
-        if (this.intTx? this.intTx.data.length : null) {
-            TABS.push(ADDRESS_TABS[1]) 
+        if (this.intTx ? this.intTx.data.length : null) {
+            TABS.push(ADDRESS_TABS[1])
             getList.push(address => {
                 this.props.addressInternalTxList({ address, page: 1, count: 10 })
             })
         }
-        if (this.tokentransfers? this.tokentransfers.data.length : null) {
+        if (this.tokentransfers ? this.tokentransfers.data.length : null) {
             TABS.push(ADDRESS_TABS[2])
             getList.push(address => {
                 this.props.addressTokenTxList({ address, page: 1, count: 10 })
-                
+
             })
         }
-        if (this.deleg? deleg.data.length : null) {
+        console.log(this.deleg, "this deleg shouldn't")
+        if (this.deleg ? deleg.data.length : null) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })
             })
         }
-        if (this.voted? this.voted.data.length : null) {
-            // TABS.push(ADDRESS_TABS[6])
+        if (this.voted ? this.voted.data.length : null) {
             TABS.push(ADDRESS_TABS[4])
             getList.push(address => {
                 this.props.addressVotedList({ address, page: 1, count: 10 })
             })
         }
-
-        if (this.rewards? this.rewards.data.length : null) {
+        
+        if (this.rewards ? this.rewards.data.length : null) {
             TABS.push(ADDRESS_TABS[5])
             getList.push(address => {
                 this.props.addressRewardList({ address })
-            })    
+            })
         }
-
+        console.log(this.bondList, "the bond list")
+        // if (this.bondList ? this.bondList.length : null) {
+        //     TABS.push(ADDRESS_TABS[6])
+        //     getList.push(address => {
+        //         getBondList({address})
+        //     })
+        // }
         return (
-            
+
             <DetailPage
                 {...this.props}
                 loading={loading}
@@ -93,10 +103,10 @@ class AddressesDetailPage extends Component {
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
                 isPrep={is_prep}
-                tokenList={payload => {this.props.addressTokenTxList({payload})}}
-                balanceOf={payload => {this.props.getBalanceOf({payload})}}
+                tokenList={payload => { this.props.addressTokenTxList({ payload }) }}
+                balanceOf={payload => { this.props.getBalanceOf({ payload }) }}
                 delegations={deleg}
-                
+
             />
         )
     }

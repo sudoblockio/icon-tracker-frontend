@@ -16,7 +16,7 @@ import {
     TabTable
 } from '../../../../components'
 import {addressRewardList, addressTokenTxList, addressVotedList, addressDelegationList, addressInternalTxList} from '../../../../redux/store/addresses'
- 
+import {getBondList} from '../../../../redux/store/iiss'
 // export const ADDRESS_TABS = [
 //     'Transactions',
 //     'Internal Transactions',
@@ -36,12 +36,14 @@ class WalletTabs extends Component {
         this.rewards = await addressRewardList(payload)
         this.deleg = await addressDelegationList(payload)
         this.tokenTx = await addressTokenTxList(payload)
-        this.intTx = await addressInternalTxList(payload)
-
+        
         
     }
-
+    
     async componentDidMount(){
+        let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
+        this.bondList = await getBondList(payload)
+        this.intTx = await addressInternalTxList(payload)
         this.checkTabs(this.props.match.params.addressId)
 
     }
@@ -50,12 +52,12 @@ class WalletTabs extends Component {
         console.log(this.props, "tab props")
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
-        
+        console.log(this.bondList, "deeper")
 
 
         const TABS = []
         TABS.push(ADDRESS_TABS[0])
-
+        console.log(this.intTx, "this int tx")
         if (this.intTx? this.intTx.data.length : null) {
             TABS.push(ADDRESS_TABS[1])
         }
@@ -72,7 +74,9 @@ class WalletTabs extends Component {
         if (this.rewards? this.rewards.data.length: null) {
             TABS.push(ADDRESS_TABS[5])
         }
-
+        //  if (this.bondList ? this.bondList.length : null) {
+        //      TABS.push(ADDRESS_TABS[6])
+        //  }
         
 
         return (
@@ -131,6 +135,7 @@ class WalletTabs extends Component {
                                 />
                             )
                         case ADDRESS_TABS[5]:
+                            console.log(addressReward, "what is reward")
                             return (
                                 <AddressReward
                                     txData={addressReward}
@@ -139,15 +144,16 @@ class WalletTabs extends Component {
                                     address={public_key}
                                 />
                             )
-                            case ADDRESS_TABS[6]:
-                                return (
-                                    <AddressBonded
-                                        txData={addressReward}
-                                        goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${public_key}`) }}
-                                        txType={TX_TYPE.ADDRESS_BONDED}
-                                        address={public_key}
-                                    />
-                                )
+                            // case ADDRESS_TABS[6]:
+                            //     console.log(this.bondList, "before")
+                            //     return (
+                            //         <AddressBonded
+                            //             txData={this.bondList}
+                            //             goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_BONDED}/${public_key}`) }}
+                            //             txType={TX_TYPE.ADDRESS_BONDED}
+                            //             address={public_key}
+                            //         />
+                            //     )
                         default:
                             return <NoBox text="No Data" />
                     }

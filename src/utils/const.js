@@ -159,7 +159,8 @@ export const TX_TYPE = {
   CONTRACT_EVENTS: 'contractevents',
   TRANSACTION_EVENTS: 'transactionevents',
   TRANSACTION_INTERNAL_TX: 'transactioninternaltx',
-  TOKEN_HOLDERS: 'tokenholders'
+  TOKEN_HOLDERS: 'tokenholders',
+  ADDRESS_BONDED: 'addressBonded'
 };
 
 export const TX_TYPE_DATA = {
@@ -176,7 +177,7 @@ export const TX_TYPE_DATA = {
     noBoxText: 'No Delegation'
   },
   [TX_TYPE.ADDRESS_BONDED]: {
-    tx: 'addressDelegation',
+    tx: 'addressBonded',
     getTxList: 'addressBonded',
     className: 'table-typeC voter',
     noBoxText: 'No Bonds'

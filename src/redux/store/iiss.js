@@ -239,6 +239,8 @@ export async function getTokenTotalSupply(address){
 }
 
 export async function getBondList(payload) {
+    console.log(payload, "What payload")
+    console.log("call function")
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -258,6 +260,7 @@ export async function getBondList(payload) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
+                console.trace(response, "What response")
                 resolve(response.data.result.bonds);
             })
             .catch(error => {

@@ -131,12 +131,13 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_VOTED:
+					console.log(Number(Number(data.value) / Math.pow(10,18)).toFixed(), "the voted data")
 					return (
 						<tr>
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}>{data.address}</td>
-							<td className="plus"><span>{convertNumberToText(data.amount)}</span><em>ICX</em></td>
+							<td className="plus"><span>{Number(Number(data.value) / Math.pow(10,18)).toFixed()}</span><em>ICX</em></td>
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_BONDED:
