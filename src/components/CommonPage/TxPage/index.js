@@ -34,7 +34,6 @@ class TxPage extends Component {
     }
 
     async componentDidMount() {
-        console.log(this, "what this")
         this.setInitialData(this.props.url)
         const currentUSD = await coinGeckoCurrentUSD()
         const supplyMetrics = await getSupplyMetrics()
@@ -165,7 +164,6 @@ class TxPage extends Component {
 
     getTxListByPage = page => {
         const count = this.getCount()
-        console.log(page, count, "what page count")
         this.historyPush(page, count)
     }
 
@@ -226,7 +224,6 @@ class TxPage extends Component {
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx
-        console.log(tx, "this tx")
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {

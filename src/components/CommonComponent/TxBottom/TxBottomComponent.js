@@ -14,7 +14,6 @@ class TxBottomComponent extends Component {
     }
 
     render() {
-        console.log(this.bondList, "the props")
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
         const Content = () => {
@@ -22,14 +21,13 @@ class TxBottomComponent extends Component {
             //     this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
     
             // }
-            console.log(this.bondList, "deepest")
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if(txType === 'addressBonded'){
                 // const { from_address, to_address } = data[0]
                 return (
                     <div className="contents">
-                        {/* <TxBottomTitle txType={txType} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} /> */}
+                        <TxBottomTitle txType={txType} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={"hellos"} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>

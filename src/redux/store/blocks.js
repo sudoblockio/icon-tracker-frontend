@@ -33,11 +33,11 @@ export function blockListAction(payload) {
   const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
   export async function blockList(payload) {
+    console.log(`${window.location.host}`, "window location host")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
       trackerApi.get(makeUrl(`${BLOCKS_PREFIX}`, payload))
         .then(result => {
-  
           resolve(result)
         })
         .catch(error => {
