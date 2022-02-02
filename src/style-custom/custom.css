@@ -18,7 +18,27 @@
     padding-left: 85%;
 }
 
+.accordion-top {
+    transition: .5s;
+}
 
+.acc-closed { 
+    height:0px;
+    transition: .5s;
+}
+
+.acc-open { 
+    height:auto;
+    transition: .5s;
+}
+
+.verify-title{
+    padding: 1em;
+}
+
+.verify-row{
+    padding: 2px;
+}
 
 .table-typeB .scroll img {
     max-width: 850px; /* cursor: pointer; */
