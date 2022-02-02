@@ -1,6 +1,6 @@
 let configJson;
-const apiUrl = `${window.location.origin}` === "http://localhost:3000" ? 'https://tracker.icon.community' : `${window.location.origin}`
-// let apiUrl = `${window.location.origin}`
+// const apiUrl = `${window.location.origin}` === "http://localhost:3000" ? 'https://tracker.icon.community' : `${window.location.origin}`
+let apiUrl = `${window.location.origin}`
 // let apiUrl = `https://tracker.icon.community`
 
 switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}` ) {
