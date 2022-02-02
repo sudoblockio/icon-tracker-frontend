@@ -19,7 +19,7 @@ class ContractInfo extends Component {
 
         this.payload = {contractAddr: this.props.match.params.contractId}
         this.props.getTokenSummary(this.payload)
-            
+        console.log(process.env.REACT_APP_NETWORK_NAME, "network")
 
     }
 
@@ -41,9 +41,9 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                              {/* {isCreator ?  */}
-                              {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>  */}
-                             {/* : ""}    */}
+                              {process.env.REACT_APP_NETWORK_NAME !== `mainnet` ? 
+                               <QrCodeButton address={walletAddress} contract={data.public_key}/>  
+                             : ""}   
                             </div>
                             <div className="contents">
                                 <div className="table-box">
