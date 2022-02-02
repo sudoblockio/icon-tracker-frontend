@@ -26,9 +26,9 @@ jobs:
         include:
           - network-name: mainnet
             deployment-environment: dev
-            akid-ref: AWS_ACCESS_KEY_ID_MAINNET
-            sak-ref: AWS_SECRET_ACCESS_KEY_MAINNET
-            ecr-repository: icon-explorer-frontend-mainnet
+            akid-ref: AWS_ACCESS_KEY_ID
+            sak-ref: AWS_SECRET_ACCESS_KEY
+            ecr-repository: icon-explorer-frontend
 
 #          - network-name: sejong
 #            deployment-environment: dev
@@ -133,6 +133,5 @@ jobs:
       - name: Push tags
         run: |
           git tag -f tracker-frontend-prod-uswest2
-          git tag -f tracker-frontend-prod-euwest1
           git push -f origin --tags
         working-directory: charts
