@@ -28,7 +28,7 @@ jobs:
             deployment-environment: dev
             akid-ref: AWS_ACCESS_KEY_ID_MAINNET
             sak-ref: AWS_SECRET_ACCESS_KEY_MAINNET
-            ecr-repository: icon-explorer-frontend-mainnet
+            ecr-repository: icon-explorer-frontend
 
 #          - network-name: sejong
 #            deployment-environment: dev
