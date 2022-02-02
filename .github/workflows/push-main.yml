@@ -75,52 +75,26 @@ jobs:
           path: charts
           token: ${{ secrets.ICON_CHARTS_PAT }}
 
-      - name: Update prod-berlin-us-west-2 deployment values file (API)
+      - name: Update prod-berlin-us-west-2 deployment values file
         uses: fjogeleit/yaml-update-action@master
         with:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/prod-us-west-2/berlin/tracker-frontend/values.yaml'
-          propertyPath: 'api.image.tag'
+          propertyPath: 'deployment.image.tag'
           value: dev-${{ github.run_number }}
           branch: main
           createPR: 'false'
           updateFile: true
           commitChange: false
 
-      - name: Update prod-berlin-us-west-2 deployment values file (WORKER)
-        uses: fjogeleit/yaml-update-action@master
-        with:
-          workDir: charts
-          repository: geometry-labs/icon-charts
-          valueFile: 'deployments/prod-us-west-2/berlin/tracker-frontend/values.yaml'
-          propertyPath: 'worker.image.tag'
-          value: dev-${{ github.run_number }}
-          branch: main
-          createPR: 'false'
-          updateFile: true
-          commitChange: false
-
-      - name: Update prod-lisbon-us-west-2 deployment values file (API)
+      - name: Update prod-lisbon-us-west-2 deployment values file
         uses: fjogeleit/yaml-update-action@master
         with:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/prod-us-west-2/lisbon/tracker-frontend/values.yaml'
-          propertyPath: 'api.image.tag'
-          value: dev-${{ github.run_number }}
-          branch: main
-          createPR: 'false'
-          updateFile: true
-          commitChange: false
-
-      - name: Update prod-lisbon-us-west-2 deployment values file (WORKER)
-        uses: fjogeleit/yaml-update-action@master
-        with:
-          workDir: charts
-          repository: geometry-labs/icon-charts
-          valueFile: 'deployments/prod-us-west-2/lisbon/tracker-frontend/values.yaml'
-          propertyPath: 'worker.image.tag'
+          propertyPath: 'deployment.image.tag'
           value: dev-${{ github.run_number }}
           branch: main
           createPR: 'false'
