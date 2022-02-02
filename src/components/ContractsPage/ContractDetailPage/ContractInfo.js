@@ -26,7 +26,6 @@ class ContractInfo extends Component {
     render() {
         const { contract, walletAddress, getTokenSummary, TxCount } = this.props
         const { loading, data } = contract
-        console.log(this.props, "render cx props")
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
             if (loading) {
@@ -41,6 +40,8 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
+                                {/* get contract creator address and load conditionally 
+                                if logged in wallet Address */}
                               {process.env.REACT_APP_NETWORK_NAME !== `mainnet` ? 
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                              : ""}   
