@@ -242,7 +242,7 @@ class GovernancePage extends Component {
 									<p>Public Treasury <em>(ICX)</em></p>
 									{/* <p><span>{numberWithCommas(this.publicTreasury.toFixed(0))}</span></p> */}
 									
-									<p><span>{numberWithCommas(9652409)}</span></p>
+									<p><span>{numberWithCommas(8215065)}</span></p>
 
 								</div>
 							</div>
