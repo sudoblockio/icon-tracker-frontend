@@ -72,9 +72,9 @@ class WalletTabs extends Component {
         if (this.rewards? this.rewards.data.length: null) {
             TABS.push(ADDRESS_TABS[5])
         }
-        //  if (this.bondList ? this.bondList.length : null) {
-        //      TABS.push(ADDRESS_TABS[6])
-        //  }
+         if (this.bondList ? this.bondList.length : null) {
+             TABS.push(ADDRESS_TABS[6])
+         }
         
 
         return (
@@ -141,15 +141,16 @@ class WalletTabs extends Component {
                                     address={public_key}
                                 />
                             )
-                            // case ADDRESS_TABS[6]:
-                            //     return (
-                            //         <AddressBonded
-                            //             txData={this.bondList}
-                            //             goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_BONDED}/${public_key}`) }}
-                            //             txType={TX_TYPE.ADDRESS_BONDED}
-                            //             address={public_key}
-                            //         />
-                            //     )
+                            case ADDRESS_TABS[6]:
+                                console.log(this.bondList, "one level up")
+                                return (
+                                    <AddressBonded
+                                        txData={this.bondList}
+                                        goAllTx={() => { this.props.history.push(`/${TX_TYPE.ADDRESS_BONDED}/${public_key}`) }}
+                                        txType={TX_TYPE.ADDRESS_BONDED}
+                                        address={public_key}
+                                    />
+                                )
                         default:
                             return <NoBox text="No Data" />
                     }

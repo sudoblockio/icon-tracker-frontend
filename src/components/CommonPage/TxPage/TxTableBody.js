@@ -144,9 +144,9 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<td className="on" onClick={() => {
-								window.open('/address/' + data.tx_hash)
-							}}>{data.tx_hash}</td>
-							<AmountCell amount={data.value} symbol="ICX" />
+								window.open('/address/' + data.address)
+							}}>{data.address}</td>
+							<AmountCell amount={Number(Number(data.value) / Math.pow(10,18)).toFixed()} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:

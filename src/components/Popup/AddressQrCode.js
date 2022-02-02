@@ -30,6 +30,7 @@ class AddressQrCode extends Component {
             zipped_source_code: "",
             isActive: false,
             flipLicense: false,
+            srcCodeLocation: ""
         }
     }
     // accepts our user input file object[0].
@@ -92,6 +93,7 @@ class AddressQrCode extends Component {
                 website: this.state.website,
                 wechat: this.state.wechat,
                 youtube: this.state.youtube,
+                source_code_location: this.state.srcCodeLocation
                 }
             )
         })
@@ -167,7 +169,9 @@ class AddressQrCode extends Component {
         let file = document.getElementById("contractzip").files[0]
         this.setState({zipped_source_code: file})
     }
-    labels;
+    setSrcCodeLocation = (e) => {
+        this.setState({srcCodeLocation: e.target.value})
+    }
     accordion='acc-closed'
     flipActive=() => {
         this.setState({isActive: !this.state.isActive})
@@ -245,7 +249,13 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            .zip File:</p><input type="file" accept=".zip" id="contractzip" name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
+                                            Src Code Path:
+                                        </p>
+                                        <input class="txt-type-search modified" type="srcpath" name="srcpath"  placeholder='../../to/cx/src/code' value={this.state.srcCodeLocation} onChange={(e) => this.setSrcCodeLocation(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            .zip File:</p><input type="file" accept=".zip" id="contractzip"  name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
                                     </div>
 
 

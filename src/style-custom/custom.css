@@ -20,16 +20,19 @@
 
 .accordion-top {
     transition: .5s;
+    cursor: pointer;
 }
 
 .acc-closed { 
     height:0px;
     transition: .5s;
+    cursor: pointer;
 }
 
 .acc-open { 
     height:auto;
     transition: .5s;
+    cursor: pointer;
 }
 
 .verify-title{

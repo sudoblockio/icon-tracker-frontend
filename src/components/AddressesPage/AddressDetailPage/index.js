@@ -82,12 +82,12 @@ class AddressesDetailPage extends Component {
             })
         }
         console.log(this.bondList, "the bond list")
-        // if (this.bondList ? this.bondList.length : null) {
-        //     TABS.push(ADDRESS_TABS[6])
-        //     getList.push(address => {
-        //         getBondList({address})
-        //     })
-        // }
+        if (this.bondList ? this.bondList.length : null) {
+            TABS.push(ADDRESS_TABS[6])
+            getList.push(address => {
+                getBondList({address})
+            })
+        }
         return (
 
             <DetailPage

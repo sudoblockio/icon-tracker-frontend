@@ -12,7 +12,7 @@ class AddressBonded extends Component {
 
   }
     render() {
-      
+      console.log(this.props, "what props here")
     return <TxBottom 
       {...this.props}
       />
