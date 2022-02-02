@@ -62,7 +62,7 @@ class WalletTabs extends Component {
             TABS.push(ADDRESS_TABS[2])
         }
         console.log(this.deleg, "inner deleg")
-        if (this.deleg) {
+        if (this.deleg && !this.deleg.error) {
             TABS.push(ADDRESS_TABS[3])
         }
         if (this.voted? this.voted.data.length : null) {

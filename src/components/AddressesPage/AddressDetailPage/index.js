@@ -62,7 +62,7 @@ class AddressesDetailPage extends Component {
             })
         }
         console.log(this.deleg, "outer detail")
-        if (this.deleg) {
+        if (this.deleg && !this.deleg.error) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
                 this.props.addressDelegationList({ address })

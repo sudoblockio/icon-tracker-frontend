@@ -171,7 +171,10 @@ export async function getDelegation(address) {
             })
             .catch(error => {
                 console.error(error, "here")
-                resolve({ preps: [] });
+                resolve({
+                    error: 
+                        {message: error.message}
+                });
             })
     });
 }

@@ -224,12 +224,12 @@ export async function addressDelegationList(address) {
       }
       walletApi.post(`/api/v3`, JSON.stringify(param))
           .then(response => {
-              console.log(response, "here")
+              console.log(response, "deleg response")
               resolve(response.data.result);
           })
           .catch(error => {
-              console.error(error, "here")
-              resolve({ preps: [] });
+
+              resolve({ error });
           })
   });
 }
