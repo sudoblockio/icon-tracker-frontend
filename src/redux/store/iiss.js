@@ -145,7 +145,8 @@ export async function getDelegationPrep(address) {
 
 
 
-export async function getDelegation(address) {
+export async function getDelegation(payload) {
+    let input = payload.address? payload : {address:`${payload}`}
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -159,7 +160,7 @@ export async function getDelegation(address) {
                 "data": {
                     "method": 'getDelegation',
                     "params": {
-                        "address": address
+                        "address": input.address
                     }
                 }
             }
