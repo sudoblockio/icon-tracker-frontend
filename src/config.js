@@ -5,11 +5,13 @@ let apiUrl = `${window.location.origin}`
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
     'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',
-    'https://tracker.lisbon.geometyr.io': 'https://lisbon.net.solidwallet.io',
+    'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',
     'localhost:3000': 'https://api.icon.geometry.io'
 }
 let nodeApiUrl = walletUrls[`${apiUrl}`]
-console.log(nodeApiUrl, "node api url")
+//this switch case isn't being hit anymore. 
+// one possibility is to add a default case and keep same format in case 
+// someone wants to use env vars in the future. 
 switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}` ) {
     case 'dev-mainnet':
         configJson =  {   
