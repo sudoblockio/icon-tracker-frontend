@@ -27,7 +27,8 @@ class AddressQrCode extends Component {
             website: "",
             wechat: "",
             youtube: "",
-            zipped_source_code: ""
+            zipped_source_code: "",
+            isActive: false,
         }
     }
     // accepts our user input file object[0].
@@ -166,9 +167,12 @@ class AddressQrCode extends Component {
         this.setState({zipped_source_code: file})
     }
     labels;
+
+    flipActive=() => {
+        this.setState({isActive: !this.state.isActive})
+    }
     componentDidMount() {
-        this.labels = document.getElementsByClassName("legend")
-        
+        // this.labels = document.getElementsByClassName("legend")
     }
 
 
@@ -250,7 +254,10 @@ class AddressQrCode extends Component {
                         <input class="txt-type-search modified" type="text" name="prep_address" />
                         </div> */}
                                 </section>
-                                <div>
+                                <div className = 'accordion-top' onClick={() => this.flipActive()}>
+                                    <div>{this.state.isActive ? '-' : '+'}</div>
+                                    {this.state.isActive && 
+                                    <>
                                     <div className="cv-label-container">
                                         <p className="cv-label">
                                             Github: </p><input class="txt-type-search modified" type="text" name="github" value={this.state.github} onChange={(e) => this.setGithub(e)} />
@@ -291,6 +298,11 @@ class AddressQrCode extends Component {
                                         <p className="cv-label">
                                             Keybase:</p><input class="txt-type-search modified" type="text" name="keybase" value={this.state.keybase} onChange={(e) => this.setKeybase(e)} />
                                     </div>
+                                    </>
+                                    
+                                    
+                                    
+                                    }
                                     <div className="cv-label-container">
                                         <p className="cv-label">
                                             License:</p><input class="txt-type-search modified" type="text" name="keybase" value={this.state.keybase} onChange={(e) => this.setKeybase(e)} />

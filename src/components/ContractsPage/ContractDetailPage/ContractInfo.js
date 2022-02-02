@@ -42,9 +42,9 @@ class ContractInfo extends Component {
                             <div className={"cx-submit"}>
                                 {/* get contract creator address and load conditionally 
                                 if logged in wallet Address */}
-                              {process.env.REACT_APP_NETWORK_NAME !== `mainnet` ? 
+                              {/* {process.env.REACT_APP_NETWORK_NAME !== `mainnet` ?  */}
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                             : ""}   
+                             {/* : ""}    */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">
