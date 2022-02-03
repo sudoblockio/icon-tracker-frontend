@@ -356,10 +356,11 @@ export async function sendTransaction({
     website,
     wechat,
     youtube,
+    source_code_location,
     method = "verify",
     params = { 
     "city": `${city}`,
-    "contract_address": `cx03f38c36460b2e9ce68a67f83fc9608690b1f64e`,
+    "contract_address": `${contract}`,
     "country": `${country}`,
     "discord": `${discord}`,
     "facebook": `${facebook}`,
@@ -377,13 +378,13 @@ export async function sendTransaction({
     "website": `${website}`,
     "wechat": `${wechat}`,
     "youtube": `${youtube}`,
-    "zipped_source_code": "0x"+zip,
-    "source_code_location": "./irc31-token/build/libs/irc31-token-0.1.0-optimized.jar"
+    "zipped_source_code": zip,
+    "source_code_location": `${source_code_location}`
     }
 }){
     // berlin
     // const nid =7
-    // lisbon:
+
     const nid=7
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
@@ -399,11 +400,11 @@ export async function sendTransaction({
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        // let response = await requestJsonRpc(convertedToRaw)
-        // let txHash = response.result
-        // setTimeout(() => {
-                // window.location.href=`${window.location.hostname}/transaction/${txHash}`
-        // }, 1000)
+        let response = await requestJsonRpc(convertedToRaw)
+        let txHash = response.result
+        setTimeout(() => {
+                window.location.href=`${window.location.origin}/transaction/${txHash}`
+        }, 2000)
 }
 
 
