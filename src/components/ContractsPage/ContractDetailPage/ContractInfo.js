@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData } from '../../../utils/utils'
-import  configJson  from '../../../config'
+import  {nodeApiUrl}  from '../../../config'
 
 class ContractInfo extends Component {
     onMouseOver = param => {
@@ -38,7 +38,7 @@ class ContractInfo extends Component {
                             <div className={"cx-submit"}>
                                 {/* get contract creator address and load conditionally 
                                 if logged in wallet Address */}
-                              {`${configJson.TRACKER_API_URL}` === `https://tracker.berlin.geometry.io/` ? 
+                              {nodeApiUrl === 'https://berlin.net.solidwallet.io' ? 
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                  : ""}   
                             </div>
