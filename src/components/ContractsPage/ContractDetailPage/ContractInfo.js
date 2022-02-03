@@ -43,7 +43,7 @@ class ContractInfo extends Component {
                                 {/* get contract creator address and load conditionally 
                                 if logged in wallet Address */}
 
-                              {process.env.REACT_APP_NETWORK_NAME === `testnet` ? 
+                              {window.location.origin === `https://tracker.berlin.geometry.io/` ? 
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                  : ""}   
                             </div>
