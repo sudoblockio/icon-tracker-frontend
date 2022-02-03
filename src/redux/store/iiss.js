@@ -403,7 +403,7 @@ export async function sendTransaction({
         let response = await requestJsonRpc(convertedToRaw)
         let txHash = response.result
         setTimeout(() => {
-                window.location.href=`${window.location.origin}/transaction/${txHash}`
+                window.location=`${window.location.origin}/transaction/${txHash}`
         }, 2000)
 }
 

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-    QrCodeComponent
-} from '../../components'
 import { sendTransaction } from '../../redux/store/iiss'
 
 class AddressQrCode extends Component {
@@ -41,18 +38,22 @@ class AddressQrCode extends Component {
         reader.readAsBinaryString(file)
         return new Promise(resolve => {
             reader.onloadend = () => {
+                // wait unti file is read,
+                // result is the ArrayBuffer: 
                 resolve(reader.result)
             }
         })
     }
 
     arrayBufferToHex(arraybufferdata) {
+        // Treat the ArrayBuffer like a string:
         let str = arraybufferdata;
         let result = '';
         for (let i=0; i< str.length; i++) {
+            // get EACH idx's charCode and convert that to base 16
+           // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
             const hex = str.charCodeAt(i).toString(16);
             result += (hex.length ===2? hex: '0' + hex)
-
         } 
         return "0x"+result.toUpperCase()
     }
@@ -172,9 +173,6 @@ class AddressQrCode extends Component {
 
     flipLicense = () => {
         this.setState({flipLicense: !this.state.flipLicense})
-    }
-    componentDidMount() {
-        // this.labels = document.getElementsByClassName("legend")
     }
 
     render() {
