@@ -38,7 +38,7 @@ class AddressQrCode extends Component {
     // https://developer.mozilla.org/en-US/docs/Web/API/FileReader
     blobToBase = (file) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file)
+        reader.readAsBinaryString(file)
         return new Promise(resolve => {
             reader.onloadend = () => {
                 resolve(reader.result)
@@ -46,14 +46,36 @@ class AddressQrCode extends Component {
         })
     }
 
-    // base64ToHex(base64Str) {
-    //     let str = base64Str;
-    //     let result = '';
-    //     for (let i=0; i< str.length; i++) {
-    //         const hex = str.charCodeAt(i).toString(16);
-    //         result += (hex.length ===2? hex: '0' + hex)
-    //     } return result.toUpperCase()
+
+    // arrBuff = (file) => {
+    //     file.arrayBuffer().then(buffer =>{
+    //         console.log(buffer, "a buffer? ")
+    //         return [... new Uint8Array(buffer)]
+    //             .map(el => el.toString(16).padStart(2,0))
+    //             .join('')
+    //     })
     // }
+
+    blobToHex = (res) => {
+        console.log(typeof(res),"what res type")
+
+
+    const hexdata = res.toString('hex');
+    console.log(hexdata, "the hex")
+    // const textHext = Buffer.from(file, 'binary').toString('hex')
+    // console.log(textHext, "test hex")
+    }
+
+    moop64ToHex(base64Str) {
+        let str = base64Str;
+        let result = '';
+        for (let i=0; i< str.length; i++) {
+            const hex = str.charCodeAt(i).toString(16);
+            result += (hex.length ===2? hex: '0' + hex)
+
+        } 
+        return "0x"+result.toUpperCase()
+    }
 
     base64ToHex(base64Str) {
         return Buffer.from(base64Str, 'base64').toString('hex')
@@ -66,11 +88,15 @@ class AddressQrCode extends Component {
         // this.formData.append(`${file.name}`, file)
         this.setState({zipped_source_code: file})
         console.log(file instanceof Blob, "is a blob")
+        // this.arrBuff(file)
+        this.moop64ToHex(file)
+
         this.blobToBase(file).then(res => {
-            console.log(res, "base64 blob <======= the actual file ")
-            console.log(this.base64ToHex(res), "a hex<=====")
-            const hex = this.base64ToHex(res)
-            console.log(this.state.short_description)
+            console.log(this.moop64ToHex(res), "moop 64")
+            // console.log(this.arrBuff(res), "well well well")
+            console.log(typeof(res), "right after promise")
+            const hex = this.blobToHex(res)
+
             sendTransaction({ 
                 fromAddress: this.props.data.address,
                 contract: this.props.data.contract,
