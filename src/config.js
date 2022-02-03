@@ -8,6 +8,8 @@ let walletUrls = {
     'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',
     'localhost:3000': 'https://api.icon.geometry.io'
 }
+
+
 let nodeApiUrl = walletUrls[`${apiUrl}`]
 //this switch case isn't being hit anymore. 
 // one possibility is to add a default case and keep same format in case 

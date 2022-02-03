@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData } from '../../../utils/utils'
-import { CONTRACT_STATUS, IRC_VERSION } from '../../../utils/const'
-import { convertLoopToIcxDecimal } from '../../../utils/utils'
-
+import  configJson  from '../../../config'
 
 class ContractInfo extends Component {
     onMouseOver = param => {
@@ -14,14 +12,12 @@ class ContractInfo extends Component {
     onMouseOut = param => {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OUT', param } }))
     }
-
-    componentDidMount() {
+    async componentDidMount() {
 
         this.payload = {contractAddr: this.props.match.params.contractId}
         this.props.getTokenSummary(this.payload)
-        console.log(process.env.REACT_APP_NETWORK_NAME, "network")
-
     }
+    
 
     render() {
         const { contract, walletAddress, getTokenSummary, TxCount } = this.props
@@ -42,8 +38,7 @@ class ContractInfo extends Component {
                             <div className={"cx-submit"}>
                                 {/* get contract creator address and load conditionally 
                                 if logged in wallet Address */}
-
-                              {window.location.origin === `https://tracker.berlin.geometry.io/` ? 
+                              {`${configJson.TRACKER_API_URL}` === `https://tracker.berlin.geometry.io/` ? 
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                  : ""}   
                             </div>
