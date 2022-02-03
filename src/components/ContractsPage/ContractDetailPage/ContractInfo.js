@@ -40,7 +40,7 @@ class ContractInfo extends Component {
                                 if logged in wallet Address */}
                               {nodeApiUrl === 'https://berlin.net.solidwallet.io' ? 
                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                 : ""}   
+                                  : ""}    
                             </div>
                             <div className="contents">
                                 <div className="table-box">

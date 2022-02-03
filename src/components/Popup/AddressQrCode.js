@@ -231,11 +231,24 @@ class AddressQrCode extends Component {
                                         </p>
                                         <input class="txt-type-search modified" type="website" name="website" autocomplete="website" value={this.state.website} onChange={(e) => this.setWebsite(e)} />
                                     </div>
+                                    <div className="cv-label-container">
+                                        <p className="cv-label">
+                                            Short Desc:</p>
+                                        <input className="txt-type-search modified cv" autocomplete="off" value={this.state.shortDesc} type="text" name="shortdesc" onChange={(e) => this.setShortDesc(e)} />
+                                    </div>                              <div className="cv-label-container">
+                                        <p className="cv-label">
+                                            Long Desc:</p>
+                                        <textarea rows="3" cols="41" className="modified cv" autocomplete="off" value={this.state.longDesc} type="textarea" name="longdesc" onChange={(e) => this.setLongDesc(e)} />
+                                    </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             Src Code Path:
                                         </p>
                                         <input class="txt-type-search modified" type="srcpath" name="srcpath"  placeholder='../../to/cx/src/code' value={this.state.srcCodeLocation} onChange={(e) => this.setSrcCodeLocation(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            License:</p><input class="txt-type-search modified" type="text" name="keybase" placeholder="dropdown" value={this.state.keybase} onChange={(e) => this.setKeybase(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
@@ -251,19 +264,11 @@ class AddressQrCode extends Component {
                         </div> */}
                                 </section>
                                 <div className = 'accordion-top' >
-                                    <div className="cv-label verify-title" onClick={() => this.flipActive()}>{this.state.isActive ? '▼ More Details' : '► More Details:'}</div>
+                                    <div className="cv-label verify-title" onClick={() => this.flipActive()}>{this.state.isActive ? '▼ Social Media' : '► Social Media:'}</div>
                                     {this.state.isActive && 
         
                                     <div className={`${this.accordion}`}>
-                                                                                  <div className="cv-label-container">
-                                        <p className="cv-label">
-                                            Short Desc:</p>
-                                        <input className="txt-type-search modified cv" autocomplete="off" value={this.state.shortDesc} type="text" name="shortdesc" onChange={(e) => this.setShortDesc(e)} />
-                                    </div>                              <div className="cv-label-container">
-                                        <p className="cv-label">
-                                            Long Desc:</p>
-                                        <textarea rows="3" cols="41" className="modified cv" autocomplete="off" value={this.state.longDesc} type="textarea" name="longdesc" onChange={(e) => this.setLongDesc(e)} />
-                                    </div>
+
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             Github: </p><input class="txt-type-search modified" type="text" name="github" value={this.state.github} onChange={(e) => this.setGithub(e)} />
@@ -310,14 +315,11 @@ class AddressQrCode extends Component {
                                     
                                       }  
 
-                                    <div className="cv-label verify-title" onClick={() => this.flipLicense()}>{this.state.flipLicense ? '▼ License' : '► License:'}</div>
-                                    {this.state.flipLicense &&
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                            License:</p><input class="txt-type-search modified" type="text" name="keybase" placeholder="dropdown" value={this.state.keybase} onChange={(e) => this.setKeybase(e)} />
-                                    </div>
+                                    <div className="cv-label verify-title" ></div>
                                     
-                                    }
+
+                                    
+                                    
 
 
 
