@@ -109,12 +109,12 @@ class TxTableBody extends Component {
 
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
-					console.log(data, "the data")
+
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.tx_hash} />
 							<BlockCell height={data.block} />
-							<DateCell date={data.timestamp} />
+							<DateCell date={Number(data.timestamp) * 1000000} />
 							<AmountCell amount={data.iscore} symbol="I-Score" noEllipsis />
 							<AmountCell amount={data.value} symbol="ICX" />
 						</tr>
@@ -150,6 +150,7 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
+					console.log(data.block_timestamp, "block timestamp")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />
