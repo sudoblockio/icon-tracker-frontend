@@ -30,11 +30,11 @@ class AddressesDetailPage extends Component {
         let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
         this.intTx = await addressInternalTxList(payload)
         this.bondList = await getBondList(payload)
-        this.checkTabs(this.props.match.params.addressId)
-
+        
     }
-
+    
     render() {
+        this.checkTabs(this.props.match.params.addressId)
         const { wallet, walletTokenTx, addressInternalTx } = this.props;
         const { loading, error, data } = wallet
         const deleg = this.deleg

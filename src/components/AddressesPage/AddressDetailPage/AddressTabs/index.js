@@ -39,15 +39,17 @@ class WalletTabs extends Component {
         
     }
     
+    
+
     async componentDidMount(){
         let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
         this.voted = await addressVotedList(payload)
         this.bondList = await getBondList(payload)
         this.intTx = await addressInternalTxList(payload)
-        this.checkTabs(this.props.match.params.addressId)
-
+        
     }
     render() {
+        this.checkTabs(this.props.match.params.addressId)
         const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = this.props
         const { loading, data } = wallet
         const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
