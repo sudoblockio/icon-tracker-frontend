@@ -35,6 +35,7 @@ class WalletTabs extends Component {
         this.rewards = await addressRewardList(payload)
         this.deleg = await getDelegation(payload)
         this.tokenTx = await addressTokenTxList(payload)
+        this.voted = await addressVotedList(payload)
         
         
     }
@@ -46,6 +47,10 @@ class WalletTabs extends Component {
         this.voted = await addressVotedList(payload)
         this.bondList = await getBondList(payload)
         this.intTx = await addressInternalTxList(payload)
+        this.tokentransfers  =  await addressTokenTxList(payload)
+        this.rewards = await addressRewardList(payload)
+        this.deleg = await getDelegation(payload)
+        this.tokenTx = await addressTokenTxList(payload)
         
     }
     render() {

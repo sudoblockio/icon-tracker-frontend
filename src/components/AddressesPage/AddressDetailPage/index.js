@@ -28,8 +28,13 @@ class AddressesDetailPage extends Component {
     
     async componentDidMount() {
         let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
-        this.intTx = await addressInternalTxList(payload)
+        this.voted = await addressVotedList(payload)
         this.bondList = await getBondList(payload)
+        this.intTx = await addressInternalTxList(payload)
+        this.tokentransfers = await addressTokenTxList(payload)
+        this.rewards = await addressRewardList(payload)
+        this.deleg = await getDelegation(payload)
+        this.tokenTx = await addressTokenTxList(payload)
         
     }
     
