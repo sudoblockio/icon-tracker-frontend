@@ -293,7 +293,7 @@ export function makeTokenUrl(url, payload) {
         return url
     }
     let result = url
-    payload.limit = Number(payload.count)
+    payload.limit = Number(payload.count || payload.limit)
     if (Number(payload.page) > 2){
         payload.skip = Number(Number(payload.page -1) * payload.count)
     } else if(Number(payload.page) === 2){

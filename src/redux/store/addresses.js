@@ -145,6 +145,7 @@ export async function addressTokens(payload) {
 }
 
 export async function addressTxList(payload) {
+
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
         trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.address}`)
@@ -159,9 +160,10 @@ export async function addressTxList(payload) {
 }
 
 export async function addressTokenTxList(payload) {
+  console.trace(payload, "Each payload")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`, payload))
+        trackerApi.get(makeTokenUrl(`${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`, payload))
             .then(result => {
                 resolve(result)
             })
