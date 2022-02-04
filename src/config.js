@@ -1,7 +1,7 @@
 let configJson;
 // const apiUrl = `${window.location.origin}` === "http://localhost:3000" ? 'https://tracker.icon.community' : `${window.location.origin}`
-// let apiUrl = `${window.location.origin}`
-let apiUrl = `https://tracker.icon.community`
+let apiUrl = `${window.location.origin}`
+// let apiUrl = `https://tracker.icon.community`
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
     'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',
