@@ -15,7 +15,7 @@ import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
 import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
-import { contractDetail } from '../../../redux/store/contracts'
+import { contractDetail, cxSocialMedia } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
 
 
@@ -48,16 +48,18 @@ getContractName = async (tokenContract) => {
     }
     
     tokens;
-    getSocialMediaLinks = async (name) => {
-            const allPreps = await prepList();
-            const prepArray = allPreps.filter(preps => preps.name === name )
-            const thisPrep = prepArray ? prepArray[0] : prepArray
-            this.media.map(site => {
-                if (this.links && thisPrep) {
-                    this.links[site] !== thisPrep[site]  ? this.links[site] = thisPrep[site] : console.log("found")
-                }
-            })
-    }
+
+    // hit new social endpoint, map through, check if our current link list matches the response, if not, reset value. 
+
+    getSocialMediaLinks = async (contract) => {
+        const socialLinksMap = await cxSocialMedia(contract);
+        this.media.map(site =>{
+            if (this.links && socialLinksMap){
+                this.links[site] !== socialLinksMap[site] ? this.links[site] = socialLinksMap[site] : console.log("no link")
+            }
+        })
+
+}
     
     async componentDidMount() {
         this.getTokenList(this.props.match.params.addressId)
@@ -126,7 +128,7 @@ getContractName = async (tokenContract) => {
 
     render() {
         if (this.props.wallet.data.is_prep === true){
-            this.getSocialMediaLinks(this.props.wallet.data.name)
+            this.getSocialMediaLinks(this.props.wallet.data.address)
             this.linkList=this.links
         }
 
