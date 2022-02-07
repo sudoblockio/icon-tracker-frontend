@@ -8,7 +8,9 @@ let configJson;
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 // -*-*-*--*-*-*--*-*-*--*-*-*-*-*-*--*-*-*--*-*-*--*-*-*-
-
+// -*-*-*- Prod Env Vars-*-*-*-:
+let apiUrl = `${window.location.origin}`
+export const nodeApiUrl = walletUrls[`${apiUrl}`]
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
@@ -16,8 +18,6 @@ let walletUrls = {
     'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',
     'localhost:3000': 'https://api.icon.geometry.io'
 }
-let apiUrl = `${window.location.origin}`
-export const nodeApiUrl = walletUrls[`${apiUrl}`]
 
 
 //this switch case isn't being hit anymore. 
