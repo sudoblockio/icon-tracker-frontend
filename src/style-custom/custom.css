@@ -41,7 +41,22 @@
 
 
 }
+.cv-title {
+    font-size: 1em;
+    font-weight: 500;
+    text-align: left;
 
+    padding-top:13px;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    letter-spacing: -0.5px;
+}
+.small {
+    font-size:.9em !important;
+}
+.cv-howto {
+    padding: 5x;
+}
 .cx-submit-tooltip:hover .cx-submit-tooltip-text{
     opacity:1;
     visibility: visible;

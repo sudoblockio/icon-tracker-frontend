@@ -191,7 +191,23 @@ class AddressQrCode extends Component {
         const { address } = data
         return ([
             <>
-                <h1 key='h1' className="title">Submit a Contract for Verification</h1>
+                <div className="cv-title" >
+                <h2 key='h2' className="cv-title">Upload Contract Source Code and / or Associate Metadata for Your Contract  </h2>
+                <div><p className='cv-howto small'>
+                    <br />
+                    <p className="cv-howto small">To upload contract source code, follow these steps:</p>
+
+                    <ol>
+                        <li className="cv-howto small">1. Zip your code ahead of time with the "build.gradle" and "settings.gradle" files along with the directory with your source code.</li>
+                        <li className="cv-howto small">2. Provide the path to the output binary along with the task (typically "optimizedJar") needed to build your contract.</li>
+                        <li className="cv-howto small">3. Optional - Provide a target for your gradle build if needed to build your contract.  Would build with "./gradlew :TARGET:TASK"</li>
+                        <li className="cv-howto small"> </li>
+                        
+                    </ol>
+
+                    <p className="cv-howto small">For more information, check out the<b> <a style={{ textDecoration: 'underline dotted grey' }} href="https://github.com/geometry-labs/icon-contracts">docs</a></b>.</p>
+                    </p></div>
+                </div>
                 <div className="cv-form-container verify">
                     <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container verify-row">
@@ -253,6 +269,9 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
+                                            <div className='cx-submit-tooltip'>[?]
+                                            <span className='cx-submit-tooltip-text'>An <b>optional</b> field for when building with gradlew - Ex, "./gradlew :TARGET:TASK". Leave blank to just run task.</span>
+                                            </div>
                                             Gradle Target:
                                         </p>
                                         <input class="txt-type-search modified" type="gradle_target" name="gradle_target"  placeholder='' value={this.state.gradle_target} onChange={(e) => this.setGradleTarget(e)} />
@@ -267,6 +286,8 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div>
                                             Src Code Path:
                                         </p>
                                         <input class="txt-type-search modified" type="srcpath" name="srcpath"  placeholder='../../to/cx/src/code' value={this.state.srcCodeLocation} onChange={(e) => this.setSrcCodeLocation(e)} />

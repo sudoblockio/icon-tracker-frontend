@@ -5360,7 +5360,7 @@ input[type='text']:focus.over {
   flex-flow: column wrap;
   justify-content:center;
   align-items: center;
-  padding: 3em;
+  padding: 1em;
   
 }
 
