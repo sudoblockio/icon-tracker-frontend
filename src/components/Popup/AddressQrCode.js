@@ -27,6 +27,8 @@ class AddressQrCode extends Component {
             zipped_source_code: "",
             isActive: false,
             flipLicense: false,
+            gradle_target:"",
+            gradle_task: "",
             srcCodeLocation: ""
         }
     }
@@ -86,6 +88,8 @@ class AddressQrCode extends Component {
                 website: this.state.website,
                 wechat: this.state.wechat,
                 youtube: this.state.youtube,
+                gradle_target: this.state.grade_target,
+                gradle_task:this.state.gradel_task,
                 source_code_location: this.state.srcCodeLocation
                 }
             )
@@ -170,10 +174,17 @@ class AddressQrCode extends Component {
         this.setState({isActive: !this.state.isActive})
         this.accordion=!this.accordion
     }
-
+    setGradleTarget=(e)=> {
+        this.setState({gradle_target: e.target.value})
+    }
+    setGradleTask=(e)=>{
+        this.setState({gradle_task: e.target.value})
+    }
     flipLicense = () => {
         this.setState({flipLicense: !this.state.flipLicense})
     }
+
+
 
     render() {
         const { data } = this.props
@@ -239,6 +250,18 @@ class AddressQrCode extends Component {
                                         <p className="cv-label">
                                             Long Desc:</p>
                                         <textarea rows="3" cols="41" className="modified cv" autocomplete="off" value={this.state.longDesc} type="textarea" name="longdesc" onChange={(e) => this.setLongDesc(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            Gradle Target:
+                                        </p>
+                                        <input class="txt-type-search modified" type="gradle_target" name="gradle_target"  placeholder='' value={this.state.gradle_target} onChange={(e) => this.setGradleTarget(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            Gradle Task:
+                                        </p>
+                                        <input class="txt-type-search modified" type="gradle_task" name="gradle_task"  placeholder='' value={this.state.gradle_task} onChange={(e) => this.setGradleTask(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
