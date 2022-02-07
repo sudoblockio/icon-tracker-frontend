@@ -17,6 +17,38 @@
 .cx-submit {
     padding-left: 85%;
 }
+.cx-submit-tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    transition: .3s;
+}
+.cx-submit-tooltip .cx-submit-tooltip-text{
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    z-index: Infinity;
+    opacity: 0;
+    transition: .3s;
+
+
+}
+
+.cx-submit-tooltip:hover .cx-submit-tooltip-text{
+    opacity:1;
+    visibility: visible;
+    transition: .3s;
+
+
+}
 
 .accordion-top {
     transition: .5s;

@@ -259,6 +259,8 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The gradle task to run - Ex, "./gradlew TASK" normally just `optimizedJar`</span></div>
                                             Gradle Task:
                                         </p>
                                         <input class="txt-type-search modified" type="gradle_task" name="gradle_task"  placeholder='' value={this.state.gradle_task} onChange={(e) => this.setGradleTask(e)} />
