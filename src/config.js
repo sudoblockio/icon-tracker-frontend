@@ -2,15 +2,15 @@ let configJson;
 
 // -*-*-*--*-*-*--*-*-*--*-*-*-*-*-*--*-*-*--*-*-*--*-*-*-
 // -*-*-*- Berlin Dev Vars-*-*-*-:
-let apiUrl = `https://tracker.berlin.geometry.io`
-export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
+// let apiUrl = `https://tracker.berlin.geometry.io`
+// export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
 // -*-*-*- Mainnet Dev Vars-*-*-*-:
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 // -*-*-*--*-*-*--*-*-*--*-*-*-*-*-*--*-*-*--*-*-*--*-*-*-
 // -*-*-*- Prod Env Vars-*-*-*-:
-// let apiUrl = `${window.location.origin}`
-// export const nodeApiUrl = walletUrls[`${apiUrl}`]
+let apiUrl = `${window.location.origin}`
+export const nodeApiUrl = walletUrls[`${apiUrl}`]
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
