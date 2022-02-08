@@ -25,14 +25,15 @@ class ContractInfo extends Component {
 
     render() {
         const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = this.props
+        console.log(contractDetails, "contract details info")
         const { loading, data } = contract
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const isCreator = isValidData(owner_address)
-                const isCreateTx = isValidData(createTx)
+                const isCreator = isValidData(contractDetails.owner_address)
+                const isCreateTx = isValidData(contractDetails.creation_hash)
                 const scam = reportedCount >= 100 ? true : false
                 const { availableDeposit, availableVirtualStep } = depositInfo || {}
                 return (
@@ -75,7 +76,7 @@ class ContractInfo extends Component {
                                                     onMouseOut={this.onMouseOut}
                                                 />
                                                 <td>Contract Creator</td>
-                                                {isCreator && isCreateTx ? (
+                                                {isCreator && isCreateTx ? ( 
                                                     <td>
                                                         <span className="help address">Creator Address</span>
                                                         <span className="help hash">Creator Transaction Hash</span>
@@ -89,7 +90,7 @@ class ContractInfo extends Component {
                                                             }}
                                                         >
                                                            
-                                                            <AddressLink to={owner_address} />
+                                                            <AddressLink to={contractDetails.owner_address} />
                                                         </span>
                                                         <em>at Txn</em>
                                                         <span
@@ -101,12 +102,10 @@ class ContractInfo extends Component {
                                                                 this.onMouseOut('hash')
                                                             }}
                                                         >
-                                                            <TransactionLink to={createTx} />
+                                                            <TransactionLink to={contractDetails.creation_hash} />
                                                         </span>
                                                     </td>
-                                                ) : (
-                                                    <td>-</td>
-                                                )}
+                                                 ) : (<td>-</td>)} 
                                             </tr>
                                             <tr>
                                                 <td>Transactions</td>
