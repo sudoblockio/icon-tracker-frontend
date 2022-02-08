@@ -347,7 +347,7 @@ class AddressQrCode extends Component {
                     <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container verify-row">
                             <p className="cv-label">
-                                Wallet: </p><input className="txt-type-search modified" onClick={} type="text" name="address" readOnly={true} value={address} placeholder={address} />
+                                Wallet: </p><input className="txt-type-search modified" type="text" name="address" readOnly={true} value={address} placeholder={address} />
                                 
                         </div>
                         <div className="cv-label-container verify-row">
