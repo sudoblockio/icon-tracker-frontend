@@ -64,6 +64,7 @@ class AddressQrCode extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         let file = document.getElementById("contractzip").files[0]
+        file ? 
         this.fileToBinaryString(file).then(res => {
             const hex = this.arrayBufferToHex(res)
             sendTransaction({ 
@@ -88,12 +89,42 @@ class AddressQrCode extends Component {
                 website: this.state.website,
                 wechat: this.state.wechat,
                 youtube: this.state.youtube,
-                gradle_target: this.state.grade_target,
-                gradle_task:this.state.gradel_task,
+                gradle_target: this.state.gradle_target,
+                gradle_task:this.state.gradle_task,
                 source_code_location: this.state.srcCodeLocation
                 }
             )
         })
+        
+        :
+
+        sendTransaction({ 
+            fromAddress: this.props.data.address,
+            contract: this.props.data.contract,
+            zip: "",
+            city: this.state.city, 
+            country: this.state.country, 
+            discord: this.state.discord, 
+            facebook: this.state.facebook,
+            github: this.state.github,
+            keybase: this.state.keybase,
+            license: this.state.license,
+            long_description: this.state.long_description,
+            p_rep_address: this.state.p_rep_address,
+            reddit: this.state.reddit,
+            short_description: this.state.short_description,
+            steemit: this.state.steemit,
+            team_name: this.state.team_name,
+            telegram: this.state.telegram,
+            twitter: this.state.twitter,
+            website: this.state.website,
+            wechat: this.state.wechat,
+            youtube: this.state.youtube,
+            gradle_target: this.state.gradle_target,
+            gradle_task:this.state.gradle_task,
+            source_code_location: this.state.srcCodeLocation
+            }
+        )
 
     }
     setName = (e) => {
@@ -316,8 +347,8 @@ class AddressQrCode extends Component {
                     <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container verify-row">
                             <p className="cv-label">
-                                Wallet: </p><input className="txt-type-search modified" type="text" name="address" readOnly={true} value={address} placeholder={address} />
-
+                                Wallet: </p><input className="txt-type-search modified" onClick={} type="text" name="address" readOnly={true} value={address} placeholder={address} />
+                                
                         </div>
                         <div className="cv-label-container verify-row">
                             <p className="cv-label">

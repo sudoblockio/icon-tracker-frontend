@@ -190,9 +190,8 @@ export async function contractInternalTxList(payload) {
 export async function cxSocialMedia(cxAddr) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${CONTRACTS_PREFIX}/social-media/cx03f38c36460b2e9ce68a67f83fc9608690b1f64e`)
+    trackerApi.get(`${CONTRACTS_PREFIX}/${cxAddr}`)
       .then(result => {
-        console.log(result, "social media result ")
         resolve(result)
       })
       .catch(error => {

@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
+import { prepList, getPRepsRPC, getBalanceOf, getTokenTotalSupply} from '../../../redux/store/iiss'
 import { contractDetail, cxSocialMedia } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
 
@@ -28,6 +28,7 @@ function AddressInfo(props) {
     const [links, setLinks] = useState("")
     const [totalVoted, setTotalVoted] = useState("")
     const [tokens, setTokens ] = useState("")
+    
 
 
     const {wallet, walletAddress, addrTokens} = props
@@ -76,32 +77,52 @@ function AddressInfo(props) {
     let checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     let linkList = []
     let tokenBalance = ""
-    let tokenName = []
-
+    let tokenName = {}
+    let tokenMap = {};
+    const getContractName = async (tokenContract) => {
+        const res = await contractDetail(tokenContract)
+        // tokenName.push(res.data.name)
+        // console.log(tokenName, "right after push")
+        tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
+        setTokens(Object.entries(tokenName))
+        tokenMap = Object.entries(tokenName)
+        setTokens(tokenMap)
+        
+    }
     const getVoted = async () => {
         const {totalDelegated: totalVotedLoop } = await getPRepsRPC()
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
         setTotalVoted(totalVoted)
         let tokenRes = await addressTokens(props.match.params.addressId)
-        setTokens(tokenRes)
+        tokenRes.data.forEach(contract => getContractName(contract))
+        // setTokens(tokenRes.data)
+        // console.log(tokenRes.data, "Whatttt tokens")
+    }
+    const getTokens = async () => {
+        let tokenRes = await addressTokens(props.match.params.addressId)
+        tokenRes.data.forEach(contract => {
+            contractDetail(contract).then(contractRes => {
+                getBalanceOf(props.match.params.addressId, contract).then(balance => {
+                    tokenMap[`${contractRes.data.name}`] = balance 
+                })
+            })
+            
+        })
     }
 
     useEffect(() => {
+        getTokens()
         getVoted()
-
+        
         if (props.wallet.data.is_prep === true){
             getSocialMediaLinks(props.wallet.data.address)
             linkList=links
         }
 
 
-
     }, [])
 
-    const getContractName = async (tokenContract) => {
-        const res = await contractDetail(tokenContract)
-        tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
-    }
+
     const getSocialMediaLinks = async (contract) => {
         const socialLinksMap = await cxSocialMedia(contract);
         media.map(site =>{
@@ -140,7 +161,7 @@ function AddressInfo(props) {
     const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
     const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
     const badge = getBadgeTitle(grade, node_state)
-    const tokenCxs = tokens ? tokens.data: []
+    const tokenCxs = tokenMap ? tokenMap: []
 
     const Content = () => {
         if (loading) {
@@ -344,18 +365,17 @@ Token5Tokens
                                                     
                                                     className="drop-btn" onClick={toggleTokenMore}><i
                                                     className="img"></i></em></p>
-                                                {tokenCxs.length? tokenCxs.forEach((tokenContract, index) => {
+                                                {/* {tokenCxs? tokenCxs.forEach((tokenContract, index) => {
                                                     getContractName(tokenContract)
                                                 } 
-                                                ):""}
-                                                
-                                                {Object.entries(tokenName).map((token, index ) => {
+                                                ):""} */}
+                                                {tokenName ? Object.entries(tokenName).map((token, index ) => {
                                                     return <p key={index}>
                                                     <span>{token[0]}</span><span>{`${convertNumberToText(Number(token[1]) / Math.pow(10, 18))}`}
                                                     {/* <em>{contractSymbol}</em> */}
                                                     </span>
                                                 </p>
-                                                })}
+                                                }) : ""}
                                             </div>
                                         </td>
                                     </tr>
