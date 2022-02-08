@@ -108,7 +108,6 @@ export async function contractList(payload) {
 }
 
 export async function contractInfo(payload) {
-  console.log(payload, "the contract info payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload}`)
@@ -122,7 +121,6 @@ export async function contractInfo(payload) {
 }
 
 export async function contractDetail(payload) {
-console.log(payload, "contract detail payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`${CONTRACTS_PREFIX}/${payload}`)

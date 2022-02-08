@@ -20,7 +20,8 @@ function mapStateToProps(state) {
     return {
         url: state.router.location,
         ...state.contracts,
-        walletAddress: state.storage.walletAddress
+        walletAddress: state.storage.walletAddress,
+        contractDetails: state.contracts.contractDetail.data
     };
 }
 

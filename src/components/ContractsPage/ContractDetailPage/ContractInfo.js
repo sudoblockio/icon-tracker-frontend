@@ -16,11 +16,15 @@ class ContractInfo extends Component {
 
         this.payload = {contractAddr: this.props.match.params.contractId}
         this.props.getTokenSummary(this.payload)
+        this.props.contractDetail(this.props.match.params.contractId)
+       
+
+        
     }
     
 
     render() {
-        const { contract, walletAddress, getTokenSummary, TxCount } = this.props
+        const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = this.props
         const { loading, data } = contract
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
@@ -36,11 +40,12 @@ class ContractInfo extends Component {
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-                                {/* get contract creator address and load conditionally 
-                                if logged in wallet Address */}
-                              {nodeApiUrl === 'https://berlin.net.solidwallet.io' ? 
-                               <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                  : ""}    
+                                {/* check the contract owner. If the logged in wallet address matches, give option to upload contract. */}
+                                {contractDetails.owner_address === walletAddress? 
+                                                                                nodeApiUrl === 'https://berlin.net.solidwallet.io' ? 
+                                                                                <QrCodeButton address={walletAddress} contract={data.public_key}/>  
+                                                                                : "" 
+                                                                                : ""}
                             </div>
                             <div className="contents">
                                 <div className="table-box">
