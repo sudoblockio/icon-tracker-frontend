@@ -67,10 +67,12 @@ class ContractInfo extends Component {
                                             <tr>
 
                                                 <td>Token Contract</td>
+                                                
                                                 <TokenContractCell
-                                                    tokenName={data.name}
-                                                    symbol={symbol}
-                                                    address={data.public_key}
+                                                    isToken={contractDetails.is_token}
+                                                    tokenName={contractDetails.name}
+                                                    symbol={contractDetails.symbol}
+                                                    address={contractDetails.address}
                                                     ircVersion={ircVersion}
                                                     onMouseOver={this.onMouseOver}
                                                     onMouseOut={this.onMouseOut}
@@ -157,9 +159,9 @@ class DetailButton extends Component {
 
 class TokenContractCell extends Component {
     render() {
-        const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut } = this.props
+        const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut, isToken } = this.props
         const Content = () => {
-            if (tokenName) {
+            if (isToken) {
                 return (
                     <td>
                         <span className="help token">{ircVersion} Token</span>
