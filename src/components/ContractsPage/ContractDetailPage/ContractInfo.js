@@ -41,11 +41,12 @@ class ContractInfo extends Component {
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
                                 {/* check the contract owner. If the logged in wallet address matches, give option to upload contract. */}
-                                {contractDetails.owner_address === walletAddress? 
-                                                                                nodeApiUrl === 'https://berlin.net.solidwallet.io' ? 
+                                {/* {contractDetails.owner_address === walletAddress?  */}
+
+                                                                                {/* nodeApiUrl === 'https://berlin.net.solidwallet.io' ?  */}
                                                                                 <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                                                                : "" 
-                                                                                : ""}
+                                                                                {/* : ""  */}
+                                                                                {/* : ""} */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">

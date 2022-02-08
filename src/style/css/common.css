@@ -5360,8 +5360,17 @@ input[type='text']:focus.over {
   flex-flow: column wrap;
   justify-content:center;
   align-items: center;
-  padding: 1em;
-  
+  /* padding: 1em; */
+}
+
+.cv-form-container { 
+  grid-area: form;
+  padding: 1.25em;
+}
+
+.upload { 
+  grid-area: choosefile;
+  padding: 1.25em;
 }
 
 

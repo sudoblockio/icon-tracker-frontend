@@ -41,11 +41,21 @@
 
 
 }
+
+.howto-container { 
+    grid-area: howto;
+    justify-self: start;
+    text-align: left;
+    line-height: 110%;
+    padding-left: 25px;
+
+}
 .cv-title {
-    font-size: 1em;
+    grid-area: title;
+    justify-self: center;
+    font-size: 1.25em;
     font-weight: 500;
     text-align: left;
-
     padding-top:13px;
     font-weight: 700;
     font-family: 'Montserrat';
@@ -53,6 +63,10 @@
 }
 .small {
     font-size:.9em !important;
+}
+
+.narrow {
+
 }
 .cv-howto {
     padding: 5x;
@@ -783,4 +797,12 @@ div.cv-label-container {
     overflow-wrap: break-word;
     word-break: break-all;
     width: 90%;
+}
+
+.cv-popup-container { 
+    display: grid;
+    grid-template-areas:
+    "title title"
+    "howto howto"
+    "form choosefile"
 }
