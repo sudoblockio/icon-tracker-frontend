@@ -143,7 +143,35 @@ export async function getDelegationPrep(address) {
         
 }
 
-
+export async function getPublicTreasury(){
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            id: randomUint32(),
+            method: "icx_getBalance",
+            params: {
+                address: 'hx1000000000000000000000000000000000000000'
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error.response.data);
+                }
+                else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    });
+}
 
 export async function getDelegation(payload) {
     let input = payload.address? payload : {address:`${payload}`}
