@@ -58,7 +58,7 @@ class ContractInfo extends Component {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.public_key} 
                                                     <CopyButton data={data.public_key} title={'Copy Address'} isSpan />
-                                                    {contractDetails.owner_address === walletAddress? 
+                                                    {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
                                                     <ReportButton address={data.public_key} />

@@ -1,6 +1,7 @@
 import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
 import checkIconex from 'check-iconex'
+import { nodeApiUrl } from '../../config';
 import IconService from 'icon-sdk-js';
 import { requestAddress, requestJsonRpc } from '../../utils/connect';
 
@@ -351,8 +352,11 @@ export async function getIISSInfo() {
 }
 
 // if there is a transaction result, post to v3
-//berlin
-export const VerificationScore=`cxdd61820cd8e5e13f65ee368ffea34b3aa1d94461`
+const score = {'https://berlin.net.solidwallet.io': 'cx2bbf7df401b7d2fc92c52232e9011376884eddb8',
+                'https://lisbon.net.solidwallet.io': 'cxe35dca03767116ea3c92b25df0a05e29c970e0b0'}
+const nodeId = {'https://berlin.net.solidwallet.io': '7',
+                'https://lisbon.net.solidwallet.io': '2'}
+export const VerificationScore=score[nodeApiUrl]
 // export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
 // lisbon
 // export const VerificationScore = 'cx338322697c252ec776bf81157f55e1f47beb7d78'
@@ -413,7 +417,7 @@ export async function sendTransaction({
     // berlin
     // const nid =7
 
-    const nid=7
+    const nid=nodeId[nodeApiUrl]
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
     const txData = builder 
@@ -430,9 +434,9 @@ export async function sendTransaction({
         const convertedToRaw = IconConverter.toRawTransaction(txData)
         let response = await requestJsonRpc(convertedToRaw)
         let txHash = response.result
-        setTimeout(() => {
-                window.location=`${window.location.origin}/transaction/${txHash}`
-        }, 2000)
+        // setTimeout(() => {
+        //         window.location=`${window.location.origin}/transaction/${txHash}`
+        // }, 5000)
 }
 
 
@@ -551,7 +555,7 @@ export const getFailMessage = async (txHash) => {
         const data = await response.json()
         const errorList = []
         data.result.logs.map(log => {
-            log.level === 0 && errorList.push(log.msg) 
+             errorList.push(log.msg) 
         })
         return errorList;
     } catch(e) {
