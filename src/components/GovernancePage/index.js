@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue,  } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, prepList, getPRepsRPC  } from '../../redux/store/iiss'
+import { getLastBlock, getStepPrice,getPublicTreasury, prepList, getPRepsRPC  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
@@ -57,7 +57,8 @@ class GovernancePage extends Component {
 	async componentWillMount(){
 		// our endpoints
 		this.governanceData = await getPReps();
-		
+		this.publicTreasury = await getPublicTreasury()
+		console.log(this.publicTreasury)
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
@@ -74,7 +75,7 @@ class GovernancePage extends Component {
 		// our endpoints
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
-		this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
+		// this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
 
 		const { height, peer_id } = lastBlock || {}
 
@@ -240,9 +241,9 @@ class GovernancePage extends Component {
 								</div>
 								<div className="total">
 									<p>Public Treasury <em>(ICX)</em></p>
-									{/* <p><span>{numberWithCommas(this.publicTreasury.toFixed(0))}</span></p> */}
+									<p><span>{numberWithCommas(Number(this.publicTreasury / Math.pow(10, 18)).toFixed(0))}</span></p>
 									
-									<p><span>{numberWithCommas(8215065)}</span></p>
+									{/* <p><span>{numberWithCommas(8215065)}</span></p> */}
 
 								</div>
 							</div>
