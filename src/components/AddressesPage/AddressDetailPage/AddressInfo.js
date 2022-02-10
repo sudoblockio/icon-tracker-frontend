@@ -86,7 +86,17 @@ function AddressInfo(props) {
         setTokens(Object.entries(tokenName))
         tokenMap = Object.entries(tokenName)
         setTokens(tokenMap)
-        
+    }
+    const getPrepSocialMedia = async (address)  => {
+        const allPreps = await prepList()
+        const prepArray = allPreps.filter(preps => preps.address === address)
+        const thisPrep = prepArray ? prepArray[0] : prepArray
+        media.map(site => {
+            if (checkLinks && thisPrep){
+                checkLinks[site] !== thisPrep[site] ? checkLinks[site] = thisPrep[site] : console.log("no links")
+            }
+        })
+        setLinks(checkLinks)
     }
     const getVoted = async () => {
         const {totalDelegated: totalVotedLoop } = await getPRepsRPC()
@@ -110,23 +120,25 @@ function AddressInfo(props) {
     useEffect(() => {
         getTokens()
         getVoted()
+        getPrepSocialMedia(props.match.params.addressId)
         
-        if (props.wallet.data.is_prep === true){
-            getSocialMediaLinks(props.wallet.data.address)
-            linkList=links
-        }
+        
+        // if (props.wallet.data.is_prep === true){
+        //     // getSocialMediaLinks(props.wallet.data.address)
+        //     linkList=links
+        // }
         setTokens(tokenMap)
     }, [])
 
 
-    const getSocialMediaLinks = async (contract) => {
-        const socialLinksMap = await cxSocialMedia(contract);
-        media.map(site =>{
-            if (checkLinks && socialLinksMap){
-                checkLinks[site] !== socialLinksMap[site] ? checkLinks[site] = socialLinksMap[site] : console.log("no link")
-            }
-        })
-    }
+    // const getSocialMediaLinks = async (contract) => {
+    //     const socialLinksMap = await cxSocialMedia(contract);
+    //     media.map(site =>{
+    //         if (checkLinks && socialLinksMap){
+    //             checkLinks[site] !== socialLinksMap[site] ? checkLinks[site] = socialLinksMap[site] : console.log("no link")
+    //         }
+    //     })
+    // }
     const getTokenBalance = async (tokenContract) => {
         let tokenBalance = await getBalanceOf(props.match.params.addressId, tokenContract)
     }
@@ -214,7 +226,7 @@ function AddressInfo(props) {
                                                 onSocialClick(website)
                                             }}><i className="img"></i></span>}
                                             {SocialMediaType.map((type, index) => {
-                                                const mediaValue = linkList[type]
+                                                const mediaValue = links[type]
 
                                                 if (!mediaValue) {
                                                     return null

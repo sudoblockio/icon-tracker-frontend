@@ -39,6 +39,19 @@ export async function getSrcCodeLink (addr) {
     });  
 }
 
+export async function getVerSrcCodeLink (addr) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject)  => {
+        trackerApi.get(`/api/v1/contracts/${addr}`)
+            .then(result => {
+                resolve(result.data.verified_source_code_link)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    });  
+}
+
 // export const getPrepStatusList = async () => {
 //     try {
 //         const response = await fetch("https://explorer.icon.geometry-dev.net/api/v1/metrics/node-state?network_name=mainnet");

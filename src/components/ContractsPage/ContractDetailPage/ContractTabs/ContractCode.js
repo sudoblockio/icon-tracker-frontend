@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
-import { getSrcCodeLink, getContractABI } from '../../../../redux/store/iiss'
+import { getSrcCodeLink, getVerSrcCodeLink, getContractABI } from '../../../../redux/store/iiss'
 import { CopyButton, LoadingComponent } from '../../../../components'
 
 class ContractCode extends Component {
@@ -31,8 +31,7 @@ class ContractCode extends Component {
         const { public_key, newVersion } = data
         if (isValidData(public_key)) {
             const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
-            console.log(activeLink, "activeLink in is valid data")
-            const updatedLink = isValidData(newVersion) ? await makeDownloadLink(public_key, newVersion) : ''
+            const updatedLink = await getVerSrcCodeLink(this.props.match.params.contractId)
             this.setState({ activeLink, updatedLink })
         }
     }
@@ -53,15 +52,15 @@ class ContractCode extends Component {
                         <thead>
                             <tr>
                                 <th>Contract Name</th>
-                                <th>Active </th>
-                                {/* <th>Updated Contract Source Code</th> */}
+                                <th>On-Chain Source Code </th>
+                                <th>Verified Source Code</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr className="">
                                 <td>{tokenText(name, symbol)}</td>
                                 <DownloadLink link={activeLink} name={`cx_src_code.zip`} />
-                                {/* <DownloadLink link={updatedLink} name={`${name}_${newVersion}.zip`} /> */}
+                                <DownloadLink link={updatedLink} name={`${name}_${newVersion}.zip`} />
                             </tr>
                         </tbody>
                     </table>

@@ -26,9 +26,12 @@ class ContractInfo extends Component {
     }
     media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
-
+    website
     getSocialMediaLinks = async (contract) => {
         const socialLinksMap = await cxSocialMedia(contract);
+        this.verified_data = socialLinksMap.data
+        this.website = socialLinksMap.data.website
+
         this.media.map(site =>{
             if (this.checkLinks && socialLinksMap){
                 this.checkLinks[site] !== socialLinksMap.data[site] ? this.checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
@@ -43,7 +46,6 @@ class ContractInfo extends Component {
 
     render() {
         const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = this.props
-        console.log(contractDetails, "contract details info")
         const { loading, data } = contract
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
@@ -79,6 +81,9 @@ class ContractInfo extends Component {
                                                     {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
+                                                    {this.website && <span className="home" onClick={() => {
+                                                    this.onSocialClick(this.website)
+                                                    }}><i className="img"></i></span>}
                                                     {SocialMediaType.map((type, index) => {
                                                 const mediaValue = this.checkLinks[type]
                                                 if (!mediaValue) {
@@ -111,7 +116,7 @@ class ContractInfo extends Component {
                                             </tr>
                                             <tr>
 
-                                                <td>Token Contract</td>
+                                                <td>Name</td>
                                                 
                                                 <TokenContractCell
                                                     isToken={contractDetails.is_token}
@@ -155,20 +160,27 @@ class ContractInfo extends Component {
                                                  ) : (<td>-</td>)} 
                                             </tr>
                                             <tr>
+                                                <td>Team Name</td>
+                                                <td>{this.verified_data ? <a href={`${window.location.origin}/address/${this.verified_data.p_rep_address}`}>{this.verified_data.team_name}</a>  : '-'}</td>
                                                 <td>Transactions</td>
                                                 <td>{numberWithCommas(TxCount)} Txns</td>
-                                                <td>Status</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Short Description</td>
+                                                <td>{this.verified_data ? this.verified_data.short_description : ""}</td>
+                                                <td>Balance</td>
                                                 <td>
-                                                    {data.status}
-                                                    <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} />
+                                                {convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX
+                                                    {/* <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} /> */}
                                                 </td>
                                             </tr>                                            
                                             <tr>
-                                                <td>Balance</td>
+                                                {/* <td>Balance</td> */}
 
-                                                <td>{convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX</td>
-                                                <td>Virtual Step</td>
-                                                {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
+                                                {/* <td>{convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX</td> */}
+                                                {/* <td>Virtual Step</td> */}
+                                                {/* {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>} */}
                                             </tr>
                                             {/* <tr>
                                                 <td>Virtual Step</td>
