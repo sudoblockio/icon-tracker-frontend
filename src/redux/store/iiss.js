@@ -807,11 +807,15 @@ export async function getProposals() {
             id: randomUint32(),
             method: "icx_call",
             params: {
-                "from": "hx0000000000000000000000000000000000000000",
+                "from": "hx8f21e5c54f006b6a5d5fe65486908592151a7c57",
                 "to": "cx0000000000000000000000000000000000000001",
                 "dataType": "call",
                 "data": {
                     "method": "getProposals",
+                    "params": {
+                        "start": "0x1",
+                        "size": "0xAA"
+                    }
                 }
             }
         }))
