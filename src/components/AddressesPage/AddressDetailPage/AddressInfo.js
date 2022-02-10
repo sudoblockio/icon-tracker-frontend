@@ -118,8 +118,7 @@ function AddressInfo(props) {
             getSocialMediaLinks(props.wallet.data.address)
             linkList=links
         }
-
-
+        setTokens(tokenMap)
     }, [])
 
 
@@ -161,8 +160,7 @@ function AddressInfo(props) {
     const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
     const _lastGenerateBlockHeight = !last_updated_block ? 'None' : IconConverter.toNumber(last_updated_block)
     const badge = getBadgeTitle(grade, node_state)
-    const tokenCxs = tokenMap ? tokenMap: []
-
+    const tokenCxs = tokens ? tokens: []
     const Content = () => {
         if (loading) {
             return <LoadingComponent height="206px"/>
@@ -365,13 +363,15 @@ Token5Tokens
                                                     
                                                     className="drop-btn" onClick={toggleTokenMore}><i
                                                     className="img"></i></em></p>
-                                                {/* {tokenCxs? tokenCxs.forEach((tokenContract, index) => {
+                                                {/* {tokenCxs? tokenCxs.map((tokenContract, index) => {
                                                     getContractName(tokenContract)
-                                                } 
-                                                ):""} */}
-                                                {tokenName ? Object.entries(tokenName).map((token, index ) => {
+                                                }  */}
+                                                {/* ):""} */}
+                                                {console.log(tokens, "token state below")}
+                                                {tokens ? Object.entries(tokens).map((token, index ) => {
+                                                    console.log(token, "weettt")
                                                     return <p key={index}>
-                                                    <span>{token[0]}</span><span>{`${convertNumberToText(Number(token[1]) / Math.pow(10, 18))}`}
+                                                    <span>{token[1][0]}</span><span>{`${convertNumberToText(Number(token[1][1]) / Math.pow(10, 18))}`}
                                                     {/* <em>{contractSymbol}</em> */}
                                                     </span>
                                                 </p>
