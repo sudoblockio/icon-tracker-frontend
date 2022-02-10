@@ -190,7 +190,7 @@ export async function contractInternalTxList(payload) {
 export async function cxSocialMedia(cxAddr) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${CONTRACTS_PREFIX}/${cxAddr}`)
+    trackerApi.get(`${CONTRACTS_PREFIX}/social-media/${cxAddr}`)
       .then(result => {
         resolve(result)
       })

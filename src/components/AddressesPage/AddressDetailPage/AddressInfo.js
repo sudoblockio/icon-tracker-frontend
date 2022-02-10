@@ -79,10 +79,9 @@ function AddressInfo(props) {
     let tokenBalance = ""
     let tokenName = {}
     let tokenMap = {};
+
     const getContractName = async (tokenContract) => {
         const res = await contractDetail(tokenContract)
-        // tokenName.push(res.data.name)
-        // console.log(tokenName, "right after push")
         tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
         setTokens(Object.entries(tokenName))
         tokenMap = Object.entries(tokenName)
@@ -94,20 +93,18 @@ function AddressInfo(props) {
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
         setTotalVoted(totalVoted)
         let tokenRes = await addressTokens(props.match.params.addressId)
-        tokenRes.data.forEach(contract => getContractName(contract))
-        // setTokens(tokenRes.data)
-        // console.log(tokenRes.data, "Whatttt tokens")
+        tokenRes.status !== 204? tokenRes.data.forEach(contract => getContractName(contract)) : console.log("no tokens")
     }
     const getTokens = async () => {
         let tokenRes = await addressTokens(props.match.params.addressId)
-        tokenRes.data.forEach(contract => {
+        tokenRes.status === 200 ? tokenRes.data.forEach(contract => {
             contractDetail(contract).then(contractRes => {
                 getBalanceOf(props.match.params.addressId, contract).then(balance => {
                     tokenMap[`${contractRes.data.name}`] = balance 
                 })
             })
             
-        })
+        }) : console.log("no tokens")
     }
 
     useEffect(() => {
@@ -367,9 +364,7 @@ Token5Tokens
                                                     getContractName(tokenContract)
                                                 }  */}
                                                 {/* ):""} */}
-                                                {console.log(tokens, "token state below")}
                                                 {tokens ? Object.entries(tokens).map((token, index ) => {
-                                                    console.log(token, "weettt")
                                                     return <p key={index}>
                                                     <span>{token[1][0]}</span><span>{`${convertNumberToText(Number(token[1][1]) / Math.pow(10, 18))}`}
                                                     {/* <em>{contractSymbol}</em> */}

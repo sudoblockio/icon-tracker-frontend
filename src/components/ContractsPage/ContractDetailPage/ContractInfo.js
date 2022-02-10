@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { SocialMediaType } from '../../../utils/const'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
-import { convertNumberToText, numberWithCommas, tokenText, isValidData } from '../../../utils/utils'
+import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from '../../../utils/utils'
+import { cxSocialMedia } from '../../../redux/store/contracts'
 import  {nodeApiUrl}  from '../../../config'
 
 class ContractInfo extends Component {
@@ -17,11 +19,27 @@ class ContractInfo extends Component {
         this.payload = {contractAddr: this.props.match.params.contractId}
         this.props.getTokenSummary(this.payload)
         this.props.contractDetail(this.props.match.params.contractId)
-       
+        const socialLinks = await cxSocialMedia(this.props.match.params.contractId)
+        this.getSocialMediaLinks(this.props.match.params.contractId)
 
         
     }
-    
+    media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
+    checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
+
+    getSocialMediaLinks = async (contract) => {
+        const socialLinksMap = await cxSocialMedia(contract);
+        this.media.map(site =>{
+            if (this.checkLinks && socialLinksMap){
+                this.checkLinks[site] !== socialLinksMap.data[site] ? this.checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
+            }
+        })
+    }
+    onSocialClick = async link => {
+        if (isUrl(link)) {
+            window.open(link, '_blank')
+        }
+    }
 
     render() {
         const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = this.props
@@ -52,15 +70,40 @@ class ContractInfo extends Component {
                                                     
                                     <table className="table-typeB contract">
                                         <tbody>
-                                            <tr className="">
+                                            <tr className="p-rep">
                                                 <td>Address</td>
                                                 <td colSpan="3" className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.public_key} 
-                                                    <CopyButton data={data.public_key} title={'Copy Address'} isSpan />
+                                                   <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
                                                     {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
+                                                    {SocialMediaType.map((type, index) => {
+                                                const mediaValue = this.checkLinks[type]
+                                                if (!mediaValue) {
+                                                    return null
+                                                }
+
+                                                return (
+                                                    <span key={index} className={`table-typeB ${type} i`} onClick={() => {
+                                                        this.onSocialClick(mediaValue)
+                                                    }}>
+                                                            {isUrl(mediaValue) ?
+                                                                <i className="img"></i>
+                                                                :
+                                                                [
+                                                                    <i key="i" className="img tooltip"></i>
+                                                                    ,
+                                                                    <div key="div" className="help-layer">
+                                                                        <p className='txt'>{addAt(mediaValue)}</p>
+                                                                        <div className='tri'></div>
+                                                                    </div>
+                                                                ]
+                                                            }
+                                                        </span>
+                                                )
+                                            })}
                                                     <ReportButton address={data.public_key} />
 
                                                     

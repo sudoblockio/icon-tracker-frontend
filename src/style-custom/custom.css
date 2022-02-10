@@ -483,6 +483,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center !important;
+    width: 80%;
+    height: 80%;
+    right: 2px;
 }
 
 .table-typeB .btn-scam {
