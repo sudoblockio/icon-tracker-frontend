@@ -160,21 +160,28 @@ class ContractInfo extends Component {
                                                  ) : (<td>-</td>)} 
                                             </tr>
                                             <tr>
-                                                <td>Team Name</td>
-                                                <td>{this.verified_data ? <a href={`${window.location.origin}/address/${this.verified_data.p_rep_address}`}>{this.verified_data.team_name}</a>  : '-'}</td>
-                                                <td>Transactions</td>
-                                                <td>{numberWithCommas(TxCount)} Txns</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>Short Description</td>
-                                                <td>{this.verified_data ? this.verified_data.short_description : ""}</td>
+                                                
+                                               
                                                 <td>Balance</td>
                                                 <td>
                                                 {convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX
                                                     {/* <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} /> */}
                                                 </td>
-                                            </tr>                                            
+                                                <td>Transactions</td>
+                                                <td>{numberWithCommas(TxCount)} Txns</td>
+
+                                            </tr>
+                                           
+                                           {this.verified_data ? 
+                                           <tr>
+                                           <td>Team Name</td>
+                                               <td>{this.verified_data ? <a href={`${window.location.origin}/address/${this.verified_data.p_rep_address}`}>{this.verified_data.team_name}</a>  : '-'}</td>
+                                               <td>Description</td>
+                                               <td>{this.verified_data ? this.verified_data.short_description : ""}</td>
+
+                                           </tr>      
+                                        : ""}
+                                                                                  
                                             <tr>
                                                 {/* <td>Balance</td> */}
 
@@ -236,7 +243,12 @@ class TokenContractCell extends Component {
                     </td>
                 )
             } else {
-                return <td>-</td>
+                return (
+                    <td>
+                        {tokenName}
+                        
+                    </td>
+                )
             }
         }
         return Content()
