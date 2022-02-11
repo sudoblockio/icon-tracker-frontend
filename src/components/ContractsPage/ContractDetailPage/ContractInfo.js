@@ -32,7 +32,6 @@ function ContractInfo(props) {
         let data = socialLinksMap.data
         setVerified_Data(data)
         let website = socialLinksMap.data.website
-
         media.map(site =>{
             if (checkLinks && socialLinksMap){
                 checkLinks[site] !== socialLinksMap.data[site] ? checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
@@ -83,32 +82,37 @@ function ContractInfo(props) {
                                                     {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
-                                                    {website && <span className="home" onClick={() => {
-                                                    onSocialClick(website)
+
+                                                    {verified_data.website && <span className="home" onClick={() => {
+                                                    onSocialClick(verified_data.website)
                                                     }}><i className="img"></i></span>}
                                                     {SocialMediaType.map((type, index) => {
-                                                const mediaValue = checkLinks[type]
+                                                const mediaValue = verified_data[type]
                                                 if (!mediaValue) {
                                                     return null
                                                 }
 
                                                 return (
-                                                    <span key={index} className={`table-typeB ${type} i`} onClick={() => {
-                                                        onSocialClick(mediaValue)
-                                                    }}>
-                                                            {isUrl(mediaValue) ?
-                                                                <i className="img"></i>
-                                                                :
-                                                                [
-                                                                    <i key="i" className="img tooltip"></i>
-                                                                    ,
-                                                                    <div key="div" className="help-layer">
-                                                                        <p className='txt'>{addAt(mediaValue)}</p>
-                                                                        <div className='tri'></div>
-                                                                    </div>
-                                                                ]
-                                                            }
-                                                        </span>
+                                                    <>{mediaValue && 
+                                                        <span key={index} className={`table-typeB ${type} i`} onClick={() => {
+                                                            onSocialClick(mediaValue)
+                                                        }}>
+                                                                {isUrl(mediaValue) ?
+                                                                    <i className="img"></i>
+                                                                    :
+                                                                    [
+                                                                        <i key="i" className="img tooltip"></i>
+                                                                        ,
+                                                                        <div key="div" className="help-layer">
+                                                                            <p className='txt'>{addAt(mediaValue)}</p>
+                                                                            <div className='tri'></div>
+                                                                        </div>
+                                                                    ]
+                                                                }
+                                                            </span>                                     
+                                                    }
+               
+                                                        </>
                                                 )
                                             })}
                                                     <ReportButton address={data.public_key} />
