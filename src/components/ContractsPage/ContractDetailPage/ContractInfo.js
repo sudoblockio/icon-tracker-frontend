@@ -1,51 +1,53 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { SocialMediaType } from '../../../utils/const'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from '../../../utils/utils'
-import { cxSocialMedia } from '../../../redux/store/contracts'
+import { cxSocialMedia, contractTxList } from '../../../redux/store/contracts'
 import  {nodeApiUrl}  from '../../../config'
 
-class ContractInfo extends Component {
-    onMouseOver = param => {
+function ContractInfo(props) {
+    const [verified_data, setVerified_Data] = useState("")
+    useEffect(() => {
+        const payload = {contractAddr: props.match.params.contractId}
+        props.getTokenSummary(payload)
+        props.contractDetail(props.match.params.contractId)
+        getSocialMediaLinks(props.match.params.contractId)
+        props.contractTxList(props.match.params.contractId)
+
+    },[])
+    const onMouseOver = param => {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OVER', param } }))
     }
 
-    onMouseOut = param => {
+    const onMouseOut = param => {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OUT', param } }))
     }
-    async componentDidMount() {
 
-        this.payload = {contractAddr: this.props.match.params.contractId}
-        this.props.getTokenSummary(this.payload)
-        this.props.contractDetail(this.props.match.params.contractId)
-        const socialLinks = await cxSocialMedia(this.props.match.params.contractId)
-        this.getSocialMediaLinks(this.props.match.params.contractId)
-
-        
-    }
-    media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
-    checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
-    website
-    getSocialMediaLinks = async (contract) => {
+    const media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
+    const checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
+    let website;
+    const getSocialMediaLinks = async (contract) => {
         const socialLinksMap = await cxSocialMedia(contract);
-        this.verified_data = socialLinksMap.data
-        this.website = socialLinksMap.data.website
+        let data = socialLinksMap.data
+        setVerified_Data(data)
+        let website = socialLinksMap.data.website
 
-        this.media.map(site =>{
-            if (this.checkLinks && socialLinksMap){
-                this.checkLinks[site] !== socialLinksMap.data[site] ? this.checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
+        media.map(site =>{
+            if (checkLinks && socialLinksMap){
+                checkLinks[site] !== socialLinksMap.data[site] ? checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
             }
         })
     }
-    onSocialClick = async link => {
+    const onSocialClick = async link => {
         if (isUrl(link)) {
             window.open(link, '_blank')
         }
     }
+    
 
-    render() {
-        const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = this.props
+
+        const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = props
         const { loading, data } = contract
         let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
         const Contents = () => {
@@ -81,18 +83,18 @@ class ContractInfo extends Component {
                                                     {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
-                                                    {this.website && <span className="home" onClick={() => {
-                                                    this.onSocialClick(this.website)
+                                                    {website && <span className="home" onClick={() => {
+                                                    onSocialClick(website)
                                                     }}><i className="img"></i></span>}
                                                     {SocialMediaType.map((type, index) => {
-                                                const mediaValue = this.checkLinks[type]
+                                                const mediaValue = checkLinks[type]
                                                 if (!mediaValue) {
                                                     return null
                                                 }
 
                                                 return (
                                                     <span key={index} className={`table-typeB ${type} i`} onClick={() => {
-                                                        this.onSocialClick(mediaValue)
+                                                        onSocialClick(mediaValue)
                                                     }}>
                                                             {isUrl(mediaValue) ?
                                                                 <i className="img"></i>
@@ -124,8 +126,8 @@ class ContractInfo extends Component {
                                                     symbol={contractDetails.symbol}
                                                     address={contractDetails.address}
                                                     ircVersion={ircVersion}
-                                                    onMouseOver={this.onMouseOver}
-                                                    onMouseOut={this.onMouseOut}
+                                                    onMouseOver={onMouseOver}
+                                                    onMouseOut={onMouseOut}
                                                 />
                                                 <td>Contract Creator</td>
                                                 {isCreator && isCreateTx ? ( 
@@ -135,10 +137,10 @@ class ContractInfo extends Component {
                                                         <span
                                                             className="link address ellipsis"
                                                             onMouseOver={() => {
-                                                                this.onMouseOver('address')
+                                                                onMouseOver('address')
                                                             }}
                                                             onMouseOut={() => {
-                                                                this.onMouseOut('address')
+                                                                onMouseOut('address')
                                                             }}
                                                         >
                                                            
@@ -148,10 +150,10 @@ class ContractInfo extends Component {
                                                         <span
                                                             className="link hash ellipsis"
                                                             onMouseOver={() => {
-                                                                this.onMouseOver('hash')
+                                                                onMouseOver('hash')
                                                             }}
                                                             onMouseOut={() => {
-                                                                this.onMouseOut('hash')
+                                                                onMouseOut('hash')
                                                             }}
                                                         >
                                                             <TransactionLink to={contractDetails.creation_hash} />
@@ -168,18 +170,18 @@ class ContractInfo extends Component {
                                                     {/* <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} /> */}
                                                 </td>
                                                 <td>Transactions</td>
-                                                <td>{numberWithCommas(TxCount)} Txns</td>
+                                                <td>{numberWithCommas(props.contractTx.totalSize)} Txns</td>
 
                                             </tr>
                                            
-                                           {this.verified_data ? 
+                                           {verified_data ? 
                                            <tr>
-                                           <td>Team Name</td>
-                                               <td>{this.verified_data ? <a href={`${window.location.origin}/address/${this.verified_data.p_rep_address}`}>{this.verified_data.team_name}</a>  : '-'}</td>
-                                               <td>Description</td>
-                                               <td>{this.verified_data ? this.verified_data.short_description : ""}</td>
+                                            <td>Team Name</td>
+                                                <td>{verified_data ? <a href={`${window.location.origin}/address/${verified_data.p_rep_address}`}>{verified_data.team_name}</a>  : '-'}</td>
+                                                <td>Description</td>
+                                                <td>{verified_data ? verified_data.short_description : ""}</td>
 
-                                           </tr>      
+                                            </tr>      
                                         : ""}
                                                                                   
                                             <tr>
@@ -204,7 +206,7 @@ class ContractInfo extends Component {
         }
         return Contents()
     }
-}
+
 
 class DetailButton extends Component {
     handleClick = () => {
