@@ -79,7 +79,8 @@ function ContractInfo(props) {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.public_key} 
                                                    <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
-                                                    {contractDetails.owner_address === walletAddress && nodeApiUrl===`https://berlin.net.solidwallet.io`? 
+                                                    
+                                                    {contractDetails.owner_address === walletAddress? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                     :""}
 
@@ -147,7 +148,7 @@ function ContractInfo(props) {
                                                                 onMouseOut('address')
                                                             }}
                                                         >
-                                                           
+ 
                                                             <AddressLink to={contractDetails.owner_address} />
                                                         </span>
                                                         <em>at Txn</em>
