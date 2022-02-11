@@ -365,8 +365,8 @@ export async function getIISSInfo() {
 }
 
 // if there is a transaction result, post to v3
-const score = {'https://berlin.net.solidwallet.io': 'cx2bbf7df401b7d2fc92c52232e9011376884eddb8',
-                'https://lisbon.net.solidwallet.io': 'cxe35dca03767116ea3c92b25df0a05e29c970e0b0'}
+const score = {'https://berlin.net.solidwallet.io': 'cx0744c46c005f254e512ae6b60aacd0a9b06eda1f',
+                'https://lisbon.net.solidwallet.io': 'cxd7a4b4e228708e23682184e94046c6e812a971cd'}
 const nodeId = {'https://berlin.net.solidwallet.io': '7',
                 'https://lisbon.net.solidwallet.io': '2'}
 export const VerificationScore=score[nodeApiUrl]
@@ -402,6 +402,8 @@ export async function sendTransaction({
     wechat,
     youtube,
     source_code_location,
+    gradle_target, 
+    gradle_task,
     method = "verify",
     params = { 
     "city": `${city}`,
@@ -424,7 +426,9 @@ export async function sendTransaction({
     "wechat": `${wechat}`,
     "youtube": `${youtube}`,
     "zipped_source_code": zip,
-    "source_code_location": `${source_code_location}`
+    "source_code_location": `${source_code_location}`,
+    "gradle_task": `${gradle_task}`,
+    "gradle_target": `${gradle_target}`
     }
 }){
     // berlin

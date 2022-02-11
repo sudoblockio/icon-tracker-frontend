@@ -82,7 +82,7 @@ function ContractInfo(props) {
                                                     
                                                     {contractDetails.owner_address === walletAddress? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                                    :""}
+                                                      :""} 
 
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)

@@ -27,12 +27,13 @@
 .cx-submit-tooltip .cx-submit-tooltip-text{
     visibility: hidden;
     background-color: black;
+    word-wrap: break-word;
     color: #fff;
     text-align: center;
     padding: 5px;
     border-radius: 6px;
     position: absolute;
-    width: 120px;
+    width: 335px;
     bottom: 100%;
     left: 50%;
     margin-left: -60px;

@@ -130,6 +130,9 @@ class AddressQrCode extends Component {
     setName = (e) => {
         this.setState({ team_name: e.target.value })
     }
+    setPrep = (e) => {
+        this.setState({p_rep_address: e.target.value})
+    }
     setFacebook = (e) => {
         this.setState({facebook: e.target.value})
     }
@@ -190,7 +193,7 @@ class AddressQrCode extends Component {
         this.setState({ keybase: e.target.value })
     }
     setLicense = (e) => {
-
+        console.log(e, "what e")
         this.setState({ license: e.target.value })
     }
     setZip = async (e) => {
@@ -268,7 +271,7 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            License:</p><input class="txt-type-search modified" type="text" name="keybase" placeholder="dropdown" value={this.state.keybase} onChange={(e) => this.setKeybase(e)} />
+                                            License:</p><input class="txt-type-search modified" type="text" name="license" placeholder="" value={this.state.license} onChange={(e) => this.setLicense(e)} />
                                     </div>
                 <div className="cv-label-container verify-row">
                                         <p className="cv-label">
@@ -286,7 +289,7 @@ class AddressQrCode extends Component {
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            Twitter:</p> <input class="txt-type-search modified" type="text" name="twitter" placeholder={"@handle"} value={this.state.twitter} onChange={(e) => this.setTwitter(e)} />
+                                            Twitter:</p> <input class="txt-type-search modified" type="text" name="twitter" placeholder="" value={this.state.twitter} onChange={(e) => this.setTwitter(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
@@ -371,22 +374,15 @@ class AddressQrCode extends Component {
                                             Team Name:</p>
                                         <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.name} type="text" name="name" onChange={(e) => this.setName(e)} />
                                     </div>
-
-
-
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            City:
-                                        </p>
-                                        <input className="txt-type-search modified" type="text" name="city" autocomplete="city" value={this.state.city} onChange={(e) => this.setCity(e)} />
+                                            p_rep Address:</p>
+                                        <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.p_rep_address} type="text" name="name" onChange={(e) => this.setPrep(e)} />
                                     </div>
 
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                            Country:
-                                        </p>
-                                        <input class="txt-type-search modified" type="country" name="country" autocomplete="country-name" value={this.state.country} onChange={(e) => this.setCountry(e)} />
-                                    </div>
+
+
+                                    
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             Website:
@@ -397,11 +393,8 @@ class AddressQrCode extends Component {
                                         <p className="cv-label">
                                             Short Desc:</p>
                                         <input className="txt-type-search modified cv" autocomplete="off" value={this.state.shortDesc} type="text" name="shortdesc" onChange={(e) => this.setShortDesc(e)} />
-                                    </div>                              <div className="cv-label-container">
-                                        <p className="cv-label">
-                                            Long Desc:</p>
-                                        <textarea rows="3" cols="41" className="modified cv" autocomplete="off" value={this.state.longDesc} type="textarea" name="longdesc" onChange={(e) => this.setLongDesc(e)} />
-                                    </div>
+                                    </div>                              
+
                                     
 
 
