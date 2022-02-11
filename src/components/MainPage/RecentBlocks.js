@@ -66,12 +66,12 @@ class RecentBlocks extends Component {
      }
 
      handleKeyDown = e => {
-        if (e.key === 'p') {
+        if (e.key === 'i') {
             this.setState({play: this.state.play === true ? false : true})
             if (this.state.play === false) {
                 this.bxsocket.close()
             } else {
-                this.bxsocket = new WebSocket('wss://explorer.icon.geometry-dev.net/ws/v1/blocks')
+                this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
                 this.bxsocket.onmessage = async (event) =>  {
                     this.latestBx = event.data
                     this.setState({liveTrClass:"flat"})

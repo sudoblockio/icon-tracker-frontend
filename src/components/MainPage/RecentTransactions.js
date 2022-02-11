@@ -12,6 +12,7 @@ class RecentTransactions extends Component {
             recentTx: 0,
             liveTableRow: {},
             liveTrClass: "flat",
+            play: true,
             txRows: []
         }
     }
@@ -57,7 +58,34 @@ class RecentTransactions extends Component {
     componentWillUnmount() {
         this.txsocket? this.txsocket.close() : console.log("no websocket open")
     }
+    handleKeyDown = e => {
+        if (e.key === 'i') {
+            this.setState({play: this.state.play === true ? false : true})
+            if (this.state.play === false) {
+                this.txsocket.close()
+            } else {
+                this.txsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
+                this.txsocket.onmessage = async (event) =>  {
+                    this.latestTx = event.data
+                    this.setState({liveTrClass:"flat"})
+                    const txListData = await transactionRecentTx()
+                    this.recentTx = txListData.data
+                    this.setState({recentTx: this.recentTx})
+                    try{
+                       const eventObj = JSON.parse(event.data)
+                        this.setState({liveTableRow: eventObj})
+                        this.setState({liveTrClass:"fade"})
+                    }
+                    catch (e) {
+                        console.log(e, "websocket error")
+                    }
+                }
+            }
+        }
+        
+    }
     render() {
+        document.addEventListener('keydown', this.handleKeyDown)
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
