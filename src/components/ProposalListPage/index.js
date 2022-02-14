@@ -67,7 +67,10 @@ class ProposalListPage extends Component {
 											</li>
 											<li>
 												<h3 className="label">Value</h3>
-												<h2>{getTextFromHtml(valueToString(value))}</h2>
+												<h2>{getTextFromHtml(valueToString(value)) !== '[object Object]' ?
+												getTextFromHtml(valueToString(value)) :
+												JSON.stringify(value)
+												}</h2>
 												<div>
 													<div className="percent-group">
 														<h3 className="label">Voter</h3>

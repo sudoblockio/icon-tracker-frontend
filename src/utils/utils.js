@@ -812,6 +812,7 @@ export function valueToString(value) {
         Object.keys(value).forEach(key => {
             result += (result !== '' ? ', ' : '') + value[key]
         })
+        console.log(typeof(result), "Each result")
     }
 
     return result
