@@ -5,17 +5,24 @@ import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLin
 import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from '../../../utils/utils'
 import { cxSocialMedia, contractTxList } from '../../../redux/store/contracts'
 import  {nodeApiUrl}  from '../../../config'
+import {getBalance } from '../../../redux/store/iiss'
 
 function ContractInfo(props) {
     const [verified_data, setVerified_Data] = useState("")
+    const [cxBalance, setCxBalance] = useState(0)
     useEffect(() => {
         const payload = {contractAddr: props.match.params.contractId}
         props.getTokenSummary(payload)
         props.contractDetail(props.match.params.contractId)
         getSocialMediaLinks(props.match.params.contractId)
         props.contractTxList(props.match.params.contractId)
+        getCxBalance(props.match.params.contractId)
 
     },[])
+    const getCxBalance = async (addr) => {
+        const result = await getBalance(addr)
+        setCxBalance(Number(Number(result) / Math.pow(10,18)).toFixed(3))
+    }
     const onMouseOver = param => {
         window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OVER', param } }))
     }
@@ -171,7 +178,7 @@ function ContractInfo(props) {
                                                
                                                 <td>Balance</td>
                                                 <td>
-                                                {convertNumberToText(data.balance? data.balance.toFixed(): 0)} ICX
+                                                {convertNumberToText(cxBalance|| 0)} ICX
                                                     {/* <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} /> */}
                                                 </td>
                                                 <td>Transactions</td>

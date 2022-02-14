@@ -3,26 +3,34 @@ import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue, epochToFromNow } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
+import {getLastBlock } from '../../../redux/store/iiss'
 
 class BlockInfo extends Component {
-    handlePrevBlock = () => {
+    handlePrevBlock =  () => {
         const { block } = this.props
         const { data } = block
         const { number } = data
         if (number === 0) return
-
+        
         const prevHeight = number - 1
         this.props.history.push('/block/' + prevHeight)
     }
+    
+    handleNextBlock = async () => {
 
-    handleNextBlock = () => {
         const { block } = this.props
         const { data } = block
         const { number } = data
         // if (lastBlock !== '-') return
+        
 
         const nextHeight = number + 1
-        this.props.history.push('/block/' + nextHeight)
+        console.log(number + 1, this.lastBlock, "count test")
+        if (nextHeight < this.lastBlock){
+            this.props.history.push('/block/' + nextHeight)
+        } else {
+            console.log("last block")
+        }
     }
 
     goAllTx = () => {
@@ -30,6 +38,13 @@ class BlockInfo extends Component {
         const { data } = block
         const { number } = data
         this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)
+    }
+    checkLast = async () => {
+        const data = await getLastBlock()
+        this.lastBlock = data.height
+    }
+    componentDidMount(){
+        this.checkLast()
     }
 
     render() {
@@ -43,7 +58,7 @@ class BlockInfo extends Component {
                 console.log(data, "data")
                 const { number, timestamp, transaction_count, hash, parent_hash, blockSize, transaction_amount, transaction_fees, message, lastBlock, peer_id, crep } = data
                 const isFirst = number === 0
-                const isLast = lastBlock !== '-'
+                const isLast = this.lastBlock > number
                 const prep = peer_id || crep
                 return (
                     <div className="screen0">
@@ -60,7 +75,7 @@ class BlockInfo extends Component {
                                                         <em className="img" />
                                                     </p>
                                                     <em className="value">{numberWithCommas(number)}</em>
-                                                    <p onClick={this.handleNextBlock} className={`next ${isLast ? '' : ''}`}>
+                                                    <p onClick={this.handleNextBlock} className={`next ${isLast ? 'disabled' : ''}`}>
                                                         <em className="img" />
                                                     </p>
                                                 </td>

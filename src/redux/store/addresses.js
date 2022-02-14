@@ -148,7 +148,7 @@ export async function addressTxList(payload) {
 
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${TRANSACTIONS_PREFIX}/address/${payload.address}`)
+        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.address}`, payload))
             .then(result => {
 
                 resolve(result)

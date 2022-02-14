@@ -33,7 +33,6 @@ export function blockListAction(payload) {
   const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
   export async function blockList(payload) {
-    console.log(`${window.location.host}`, "window location host")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
       trackerApi.get(makeUrl(`${BLOCKS_PREFIX}`, payload))
@@ -48,7 +47,7 @@ export function blockListAction(payload) {
   
   export async function blockInfo(payload) {
     const trackerApi = await trackerApiInstance()
-    debugger
+
     if (payload.height === '0' ) {
       const num = 800460000*Math.pow(10,18)
       const result = {
