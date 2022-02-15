@@ -269,11 +269,13 @@ class AddressQrCode extends Component {
                     <h1 className="cvp-column-title">Java Compilation Options</h1>
 
 
-                <div className="cv-label verify-title" onClick={() => this.flipZip()}>{this.state.flipZip ? '▼ Zip Upload' : '► Zip Upload:'}
+                <div className="cv-label verify-title" >Zip Upload
                 <p className='fineprint'>up to 500kb </p> 
                 </div> 
                              
-                {this.state.flipZip && <div className='cv-form-container upload'>
+                
+                
+                <div className='cv-form-container upload'>
                 <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             <div className='cx-submit-tooltip'>[?]
@@ -304,41 +306,42 @@ class AddressQrCode extends Component {
                                         <p className="cv-label">
                                             .zip File:</p><input type="file" accept=".zip" id="contractzip"  name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
                                     </div>
-                                    </div>}
+                                    </div>
 
 
                                     <div>
-                                    <div className="cv-label verify-title" onClick={() => this.flipGit()}>{this.state.flipGit ? '▼ Github Resources' : '► Github Resources:'}</div>               
-                                    {this.state.flipGit && <div className='cv-form-container upload'>
+                                    <div className="cv-label verify-title">Github Resources</div>               
+                                    <div className='cv-form-container upload'>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            <div className='cx-submit-tooltip'>[?]
+                                            {/* <div className='cx-submit-tooltip'>[?]
                                             <span className='cx-submit-tooltip-text'>An <b>optional</b> field for when building with gradlew - Ex, "./gradlew :TARGET:TASK". Leave blank to just run task.</span>
-                                            </div>
+                                            </div> */}
                                             Github Repository:
                                         </p>
                                         <input class="txt-type-search modified" type="github_repo" name="github_repo"  placeholder='' value={this.state.github_repo} onChange={(e) => this.setRepo(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                        <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The gradle task to run - Ex, "./gradlew TASK" normally just `optimizedJar`</span></div>
+                                        {/* <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The gradle task to run - Ex, "./gradlew TASK" normally just `optimizedJar`</span></div> */}
                                             Github Organization:
                                         </p>
                                         <input class="txt-type-search modified" type="github_org" name="github_org"  placeholder='' value={this.state.github_org} onChange={(e) => this.setOrg(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                        <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div>
+                                        {/* <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div> */}
                                             Github Directory:
                                         </p>
                                         <input class="txt-type-search modified" type="github_directory" name="github_directory"  placeholder='' value={this.state.github_directory} onChange={(e) => this.setDirectory(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                        <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div>
+                                        {/* <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span>
+                                        </div> */}
                                             Github Release:
                                         </p>
                                         <input class="txt-type-search modified" type="github_release" name="github_release"  placeholder='' value={this.state.github_release} onChange={(e) => this.setRelease(e)} />
@@ -347,7 +350,7 @@ class AddressQrCode extends Component {
                 <div className="cv-label-container verify-row">
                                         
                                     </div>
-                                    </div>}
+                                    </div>
                                     </div>
 
                                     
@@ -372,7 +375,7 @@ class AddressQrCode extends Component {
                 </div>
                 
                 <div className="cv-form-container verify">
-                <h1 className='cvp-column-title'>Metadata</h1>
+                {/* <h1 className='cvp-column-title'>Metadata</h1> */}
                     <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container verify-row">
                             <p className="cv-label">
