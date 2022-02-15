@@ -5359,7 +5359,8 @@ input[type='text']:focus.over {
   display:flex;
   flex-flow: column wrap;
   justify-content:center;
-  align-items: center;
+  align-items: stretch;
+
   /* padding: 1em; */
 }
 
@@ -5371,6 +5372,7 @@ input[type='text']:focus.over {
 .upload { 
   grid-area: choosefile;
   padding: 1.25em;
+
 }
 
 

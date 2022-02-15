@@ -84,6 +84,7 @@
 .accordion-top {
     transition: .5s;
     cursor: pointer;
+    align-self: center;
 }
 
 .acc-closed { 

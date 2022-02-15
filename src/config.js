@@ -8,12 +8,12 @@ let configJson;
 // -------
 // Mainnet
 // ----------------------------------------------------------------
-// let apiUrl = `https://tracker.icon.community`
+let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 // -------
 //  Prod
 // ----------------------------------------------------------------
-let apiUrl = `${window.location.origin}`
+// let apiUrl = `${window.location.origin}`
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',

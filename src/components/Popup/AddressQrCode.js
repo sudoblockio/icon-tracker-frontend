@@ -27,6 +27,7 @@ class AddressQrCode extends Component {
             zipped_source_code: "",
             isActive: false,
             flipLicense: false,
+            flipZip: false,
             gradle_target:"",
             gradle_task: "optimizedJar",
             srcCodeLocation: ""
@@ -122,7 +123,11 @@ class AddressQrCode extends Component {
             youtube: this.state.youtube,
             gradle_target: this.state.gradle_target,
             gradle_task:this.state.gradle_task,
-            source_code_location: this.state.srcCodeLocation
+            source_code_location: this.state.srcCodeLocation,
+            github_repo: this.state.github_repo, 
+            github_org: this.state.github_org,
+            github_directory: this.state.github_directory,
+            github_release: this.state.github_release, 
             }
         )
 
@@ -214,10 +219,27 @@ class AddressQrCode extends Component {
     setGradleTask=(e)=>{
         this.setState({gradle_task: e.target.value})
     }
+    setOrg = (e) => {
+        this.setState({github_org: e.target.value})
+    }
+    setRepo = (e) => {
+        this.setState({github_repo: e.target.value})
+    }
+    setRelease = (e) => {
+        this.setState({github_release: e.target.value})
+    }
+    setDirectory = (e) => {
+        this.setState({github_directory: e.target.value})
+    }
     flipLicense = () => {
         this.setState({flipLicense: !this.state.flipLicense})
     }
-
+    flipZip = () => {
+        this.setState({flipZip: !this.state.flipZip})
+    }
+    flipGit = () => {
+        this.setState({flipGit: !this.state.flipGit})
+    }
 
 
     render() {
@@ -242,8 +264,9 @@ class AddressQrCode extends Component {
                     <p className="cv-howto small">For more information, check out the<b> <a style={{ textDecoration: 'underline dotted grey' }} href="https://github.com/geometry-labs/icon-contracts">docs</a></b>.</p>
                     </p>
                     </div>
-                
-                <div className='cv-form-container upload'>
+                <div className = 'accordion-top'>
+                <div className="cv-label verify-title" onClick={() => this.flipZip()}>{this.state.flipZip ? '▼ Zipped Upload' : '► Zipped Upload:'}</div>               
+                {this.state.flipZip && <div className='cv-form-container upload'>
                 <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             <div className='cx-submit-tooltip'>[?]
@@ -269,13 +292,128 @@ class AddressQrCode extends Component {
                                         </p>
                                         <input class="txt-type-search modified" type="srcpath" name="srcpath"  placeholder='../../to/cx/src/code' value={this.state.srcCodeLocation} onChange={(e) => this.setSrcCodeLocation(e)} />
                                     </div>
+
+                <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            .zip File:</p><input type="file" accept=".zip" id="contractzip"  name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
+                                    </div>
+                                    </div>}
+
+
+                                    <div className = 'accordion-top'>
+                                    <div className="cv-label verify-title" onClick={() => this.flipGit()}>{this.state.flipGit ? '▼ Github Resources' : '► Github Resources:'}</div>               
+                                    {this.state.flipGit && <div className='cv-form-container upload'>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            <div className='cx-submit-tooltip'>[?]
+                                            <span className='cx-submit-tooltip-text'>An <b>optional</b> field for when building with gradlew - Ex, "./gradlew :TARGET:TASK". Leave blank to just run task.</span>
+                                            </div>
+                                            Github Repository:
+                                        </p>
+                                        <input class="txt-type-search modified" type="github_repo" name="github_repo"  placeholder='' value={this.state.github_repo} onChange={(e) => this.setRepo(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The gradle task to run - Ex, "./gradlew TASK" normally just `optimizedJar`</span></div>
+                                            Github Organization:
+                                        </p>
+                                        <input class="txt-type-search modified" type="github_org" name="github_org"  placeholder='' value={this.state.github_org} onChange={(e) => this.setOrg(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div>
+                                            Github Directory:
+                                        </p>
+                                        <input class="txt-type-search modified" type="github_directory" name="github_directory"  placeholder='' value={this.state.github_directory} onChange={(e) => this.setDirectory(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div>
+                                            Github Release:
+                                        </p>
+                                        <input class="txt-type-search modified" type="github_release" name="github_release"  placeholder='' value={this.state.github_release} onChange={(e) => this.setRelease(e)} />
+                                    </div>
+
+                <div className="cv-label-container verify-row">
+                                        
+                                    </div>
+                                    </div>}
+
+
+                                    
+
+                                    
+
+
+
+
+                    
+                </div>
+
+
+                                    
+
+                                    
+
+
+
+
+                    
+                </div>
+                
+                <div className="cv-form-container verify">
+                    <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
+                        <div className="cv-label-container verify-row">
+                            <p className="cv-label">
+                                Wallet: </p><input className="txt-type-search modified" type="text" name="address" readOnly={true} value={address} placeholder={address} />
+                                
+                        </div>
+                        <div className="cv-label-container verify-row">
+                            <p className="cv-label">
+                                Contract: </p><input className="txt-type-search modified" type="text" name="contract" readOnly={true} value={this.props.data.contract} placeholder={this.props.data.contract} />
+
+                        </div>
+                        {/* <section>
+                            <fieldset>
+                                <p>
+                                </p>
+                                <br />
+                            </fieldset>
+                        </section> */}
+                        <div className="verify-form">
+                            <div>
+                                <section>
+
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            Team Name:</p>
+                                        <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.name} type="text" name="name" onChange={(e) => this.setName(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                            p_rep Address:</p>
+                                        <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.p_rep_address} type="text" name="name" onChange={(e) => this.setPrep(e)} />
+                                    </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             License:</p><input class="txt-type-search modified" type="text" name="license" placeholder="" value={this.state.license} onChange={(e) => this.setLicense(e)} />
                                     </div>
-                <div className="cv-label-container verify-row">
+
+
+                                    
+                                    <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            .zip File:</p><input type="file" accept=".zip" id="contractzip"  name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
+                                            Website:
+                                        </p>
+                                        <input class="txt-type-search modified" type="website" name="website" autocomplete="website" value={this.state.website} onChange={(e) => this.setWebsite(e)} />
+                                    </div>
+                                    <div className="cv-label-container">
+                                        <p className="cv-label">
+                                            Short Desc:</p>
+                                        <input className="txt-type-search modified cv" autocomplete="off" value={this.state.shortDesc} type="text" name="shortdesc" onChange={(e) => this.setShortDesc(e)} />
                                     </div>
                                     <div className = 'accordion-top' >
                                     <div className="cv-label verify-title" onClick={() => this.flipActive()}>{this.state.isActive ? '▼ Social Media' : '► Social Media:'}</div>
@@ -337,63 +475,7 @@ class AddressQrCode extends Component {
 
 
 
-                                </div>
-
-
-
-
-
-
-                    
-                </div>
-                <div className="cv-form-container verify">
-                    <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
-                        <div className="cv-label-container verify-row">
-                            <p className="cv-label">
-                                Wallet: </p><input className="txt-type-search modified" type="text" name="address" readOnly={true} value={address} placeholder={address} />
-                                
-                        </div>
-                        <div className="cv-label-container verify-row">
-                            <p className="cv-label">
-                                Contract: </p><input className="txt-type-search modified" type="text" name="contract" readOnly={true} value={this.props.data.contract} placeholder={this.props.data.contract} />
-
-                        </div>
-                        {/* <section>
-                            <fieldset>
-                                <p>
-                                </p>
-                                <br />
-                            </fieldset>
-                        </section> */}
-                        <div className="verify-form">
-                            <div>
-                                <section>
-
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                            Team Name:</p>
-                                        <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.name} type="text" name="name" onChange={(e) => this.setName(e)} />
-                                    </div>
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                            p_rep Address:</p>
-                                        <input className="verify-row txt-type-search" autocomplete="organization" value={this.state.p_rep_address} type="text" name="name" onChange={(e) => this.setPrep(e)} />
-                                    </div>
-
-
-
-                                    
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                            Website:
-                                        </p>
-                                        <input class="txt-type-search modified" type="website" name="website" autocomplete="website" value={this.state.website} onChange={(e) => this.setWebsite(e)} />
-                                    </div>
-                                    <div className="cv-label-container">
-                                        <p className="cv-label">
-                                            Short Desc:</p>
-                                        <input className="txt-type-search modified cv" autocomplete="off" value={this.state.shortDesc} type="text" name="shortdesc" onChange={(e) => this.setShortDesc(e)} />
-                                    </div>                              
+                                </div>                              
 
                                     
 
