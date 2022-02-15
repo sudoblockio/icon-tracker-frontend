@@ -272,16 +272,7 @@ class AddressQrCode extends Component {
                 <div className = 'accordion-top'>
             <div className='cv-form-container verify'>
                     <h1 className="cvp-column-title">Java Compilation Options</h1>
-
-
-                <div className="cv-label verify-title" >Zip Upload
-                <p className='fineprint'>up to 500kb </p> 
-                </div> 
-                             
-                
-                
-                <div className='cv-form-container upload'>
-                <div className="cv-label-container verify-row">
+                    <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             <div className='cx-submit-tooltip'>[?]
                                             <span className='cx-submit-tooltip-text'>An <b>optional</b> field for when building with gradlew - Ex, "./gradlew :TARGET:TASK". Leave blank to just run task.</span>
@@ -307,6 +298,14 @@ class AddressQrCode extends Component {
                                         <input class="txt-type-search modified" type="srcpath" name="srcpath"  placeholder='../../to/cx/src/code' value={this.state.srcCodeLocation} onChange={(e) => this.setSrcCodeLocation(e)} />
                                     </div>
 
+                <div className="cv-label verify-title" >Zip Upload
+                <p className='fineprint'>up to 500kb </p> 
+                </div> 
+                             
+                
+                
+                <div className='cv-form-container upload'>
+
                 <div className="cv-label-container verify-row">
                                         <p className="cv-label">
                                             .zip File:</p><input type="file" accept=".zip" id="contractzip"  name="cxsrccode" onChange={(e) => this.setZip(e.target.value)}/>
@@ -319,37 +318,37 @@ class AddressQrCode extends Component {
                                     <div className='cv-form-container upload'>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                            {/* <div className='cx-submit-tooltip'>[?]
-                                            <span className='cx-submit-tooltip-text'>An <b>optional</b> field for when building with gradlew - Ex, "./gradlew :TARGET:TASK". Leave blank to just run task.</span>
-                                            </div> */}
-                                            Github Repository:
-                                        </p>
-                                        <input class="txt-type-search modified" type="github_repo" name="github_repo"  placeholder='' value={this.state.github_repo} onChange={(e) => this.setRepo(e)} />
-                                    </div>
-                                    <div className="cv-label-container verify-row">
-                                        <p className="cv-label">
-                                        {/* <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The gradle task to run - Ex, "./gradlew TASK" normally just `optimizedJar`</span></div> */}
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The github username / organization the repo is in</span></div>
                                             Github Organization:
                                         </p>
                                         <input class="txt-type-search modified" type="github_org" name="github_org"  placeholder='' value={this.state.github_org} onChange={(e) => this.setOrg(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                        {/* <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span></div> */}
-                                            Github Directory:
+                                            <div className='cx-submit-tooltip'>[?]
+                                            <span className='cx-submit-tooltip-text'>The github repository name</span>
+                                            </div>
+                                            Github Repository:
                                         </p>
-                                        <input class="txt-type-search modified" type="github_directory" name="github_directory"  placeholder='' value={this.state.github_directory} onChange={(e) => this.setDirectory(e)} />
+                                        <input class="txt-type-search modified" type="github_repo" name="github_repo"  placeholder='' value={this.state.github_repo} onChange={(e) => this.setRepo(e)} />
                                     </div>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
-                                        {/* <div className='cx-submit-tooltip'>[?]
-                                        <span className='cx-submit-tooltip-text'>The path to the optimized jar including the directory being unzipped - Ex, `zip-name/contract-name/build/libs/contract-name-0.1.0-optimized.jar`</span>
-                                        </div> */}
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The release name you want to validate (ie v0.1.0)</span>
+                                        </div>
                                             Github Release:
                                         </p>
                                         <input class="txt-type-search modified" type="github_release" name="github_release"  placeholder='' value={this.state.github_release} onChange={(e) => this.setRelease(e)} />
+                                    </div>
+                                    <div className="cv-label-container verify-row">
+                                        <p className="cv-label">
+                                        <div className='cx-submit-tooltip'>[?]
+                                        <span className='cx-submit-tooltip-text'>The directory within the repository the gradle build command needs to be run from</span></div>
+                                            Github Directory:
+                                        </p>
+                                        <input class="txt-type-search modified" type="github_directory" name="github_directory"  placeholder='' value={this.state.github_directory} onChange={(e) => this.setDirectory(e)} />
                                     </div>
 
                 <div className="cv-label-container verify-row">
