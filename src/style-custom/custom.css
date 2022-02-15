@@ -98,7 +98,19 @@
     transition: .5s;
     cursor: pointer;
 }
+.cvp-column-title{
+    align-self: flex-start;
+    
+    font-weight: 800;
+}
 
+.fineprint { 
+    
+    font-size: .8em !important;
+    line-height: .9em;
+    margin-top: 5px;
+    color: grey;
+}
 .verify-title{
     padding: 1em;
 }

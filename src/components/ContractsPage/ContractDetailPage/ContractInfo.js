@@ -87,9 +87,9 @@ function ContractInfo(props) {
                                                     {data.public_key} 
                                                    <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
                                                     
-                                                    {/* {contractDetails.owner_address === walletAddress?  */}
+                                                    {contractDetails.owner_address === walletAddress? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                                       {/* :""}   */}
+                                                        :""}   
 
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)

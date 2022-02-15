@@ -96,7 +96,7 @@ class AddressQrCode extends Component {
                 }
             )
         })
-        
+
         :
 
         sendTransaction({ 
@@ -265,7 +265,14 @@ class AddressQrCode extends Component {
                     </p>
                     </div>
                 <div className = 'accordion-top'>
-                <div className="cv-label verify-title" onClick={() => this.flipZip()}>{this.state.flipZip ? '▼ Zipped Upload' : '► Zipped Upload:'}</div>               
+            <div className='cv-form-container verify'>
+                    <h1 className="cvp-column-title">Java Compilation Options</h1>
+
+
+                <div className="cv-label verify-title" onClick={() => this.flipZip()}>{this.state.flipZip ? '▼ Zip Upload' : '► Zip Upload:'}
+                <p className='fineprint'>up to 500kb </p> 
+                </div> 
+                             
                 {this.state.flipZip && <div className='cv-form-container upload'>
                 <div className="cv-label-container verify-row">
                                         <p className="cv-label">
@@ -300,7 +307,7 @@ class AddressQrCode extends Component {
                                     </div>}
 
 
-                                    <div className = 'accordion-top'>
+                                    <div>
                                     <div className="cv-label verify-title" onClick={() => this.flipGit()}>{this.state.flipGit ? '▼ Github Resources' : '► Github Resources:'}</div>               
                                     {this.state.flipGit && <div className='cv-form-container upload'>
                                     <div className="cv-label-container verify-row">
@@ -341,7 +348,7 @@ class AddressQrCode extends Component {
                                         
                                     </div>
                                     </div>}
-
+                                    </div>
 
                                     
 
@@ -365,6 +372,7 @@ class AddressQrCode extends Component {
                 </div>
                 
                 <div className="cv-form-container verify">
+                <h1 className='cvp-column-title'>Metadata</h1>
                     <form actionmethod="POST"onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" id="contractform">
                         <div className="cv-label-container verify-row">
                             <p className="cv-label">
