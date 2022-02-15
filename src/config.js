@@ -3,12 +3,12 @@ let configJson;
 // -------
 // Berlin
 // ----------------------------------------------------------------
-let apiUrl = `https://tracker.berlin.geometry.io`
+// let apiUrl = `https://tracker.berlin.geometry.io`
 // export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
 // -------
 // Mainnet
 // ----------------------------------------------------------------
-// let apiUrl = `https://tracker.icon.community`
+let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 // -------
 //  Prod

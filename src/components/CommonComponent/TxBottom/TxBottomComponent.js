@@ -16,7 +16,6 @@ class TxBottomComponent extends Component {
         console.log(this.bondList, "after render")
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
-        console.log(this.props, "what props m8")
         const Content = () => {
             // if (this.props.txType === 'tokenHolders') {
             //     this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
@@ -36,7 +35,6 @@ class TxBottomComponent extends Component {
                                     <TxTableHead txType={txType} />
                                 </thead>
                                 <tbody>
-                                    {console.log(txData, "in array")}
                                     {(txData || []).map((item, index) => (
                                         
                                         <TxTableBody key={index} totalSupply={tokenTotal} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />

@@ -47,7 +47,6 @@ export function* addressRewardListFunc(action) {
   try {
     const payload = yield call(ADDRESS_REWARD, action.payload);
     if (payload.status === 200) {
-      console.log(payload, "reward payload")
       yield put({ type: AT.addressRewardListFulfilled, payload: payload });
     }
     else {
@@ -99,9 +98,7 @@ export function* addressVotedListFunc(action) {
       yield put({ type: AT.addressVotedListFulfilled, payload: { data: [] } });
       return
     }
-
-    const payload = yield call(ADDRESS_VOTED_LIST, action.payload.address);
-    console.log(payload, "payload from voted list saga")
+    const payload = yield call(ADDRESS_VOTED_LIST, action.payload);
     if (payload.status === 200) {
       yield put({ type: AT.addressVotedListFulfilled, payload: payload });
     }
@@ -250,9 +247,7 @@ export function* addressTokenTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_TOKEN_TX_LIST, action.payload);
-    console.log(action, "the payload")
     if (payload.status === 200) {
-      console.log(payload, "the payload")
       yield put({ type: AT.addressTokenTxListFulfilled, payload: payload });
     }
     else {

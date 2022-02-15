@@ -188,18 +188,16 @@ export async function addressInternalTxList(payload) {
 
 export async function addressVotedList(payload) {
   console.log(payload, "vote payload")
-    const trackerApi = await trackerApiInstance()
-    // if (payload.address) {
-    //     payload.prep = payload.address
-    //     delete payload.address
-    // } 
 
+    const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/governance/votes/${payload.address || payload}`)
+        trackerApi.get(makeUrl(`/api/v1/governance/votes/${payload.address || payload}`, payload))
             .then(result => {
+          console.log(result, "what result")
                 resolve(result)
             })
             .catch(error => {
+              console.log(error, "What error")
                 reject(error)
             })
     })

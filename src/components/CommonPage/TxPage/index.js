@@ -163,7 +163,9 @@ class TxPage extends Component {
     }
 
     getTxListByPage = page => {
+        console.log(page, "what page")
         const count = this.getCount()
+        console.log(count, "What count")
         this.historyPush(page, count)
     }
 
@@ -215,15 +217,18 @@ class TxPage extends Component {
         if (count) {
             url += `?count=${count}`
         }
+        console.log(url, "lower url")
         return url
     }
 
     render() {
-        
+        {console.log("are we here yet")}
+        {console.log(totalSize, "what total size")}
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx
+        console.log(tx, "this tx m88")
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {
@@ -276,6 +281,7 @@ class TxPage extends Component {
         }
 
         const Content = () => {
+            
             if (loading && noData) {
                 return <LoadingComponent height="calc(100vh - 120px - 144px)" />
             } else {
