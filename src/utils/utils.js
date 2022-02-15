@@ -282,8 +282,30 @@ export function makeUrl(url, payload) {
     }
     delete payload.count
     delete payload.page
+    console.log(payload, "cx event payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
+    })
+    return result
+}
+export function makeEventUrl(url, payload) {
+    if (!payload) {
+        return url
+    }
+    let result = url
+    payload.limit = Number(payload.count)
+    if (Number(payload.page) > 2){
+        payload.skip = Number(Number(payload.page -1) * payload.count)
+    } else if(Number(payload.page) === 2){
+        payload.skip = payload.count
+    }  else if (Number(payload.page) === 1){
+        payload.skip = 0
+    }
+    delete payload.count
+    delete payload.page
+    console.log(payload, "cx event payload")
+    Object.keys(payload).forEach((key, index) => {
+        result += `${'&'}${key}=${payload[key]}`
     })
     return result
 }

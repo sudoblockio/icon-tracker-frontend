@@ -30,7 +30,12 @@ class AddressQrCode extends Component {
             flipZip: false,
             gradle_target:"",
             gradle_task: "optimizedJar",
-            srcCodeLocation: ""
+            srcCodeLocation: "",
+            github_release: "",
+            github_repo: "",
+            github_directory:"",
+            github_org: ""
+
         }
     }
     // accepts our user input file object[0].

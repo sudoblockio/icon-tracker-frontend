@@ -1,9 +1,8 @@
 import { trackerApiInstance } from "../api/restV3/config";
 import actionTypes from "../actionTypes/actionTypes";
-import { getState, makeUrl } from "../../utils/utils";
+import { getState, makeUrl, makeEventUrl } from "../../utils/utils";
 import { REDUX_STEP, INITIAL_STATE } from "../../utils/const";
 import { prefixes } from '../../utils/const'
-// *update paths in prefixes object to change app-wide.*
 
 // ACTIONS
 export function contractListAction(payload) {
@@ -162,9 +161,12 @@ export async function contractTokenTxList(payload) {
 }
 
 export async function contractEventLogList(payload) {
+  console.log(payload, "the cx log payload")
+  payload.contractAddr? payload.address = payload.contractAddr : console.log("no contractAddr")
+  delete payload.contractAddr
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/logs?score_address=${payload.contractAddr}`)
+    trackerApi.get(makeEventUrl(`/api/v1/logs?score_address=${payload.address}`, payload))
       .then(result => {
 
         resolve(result)

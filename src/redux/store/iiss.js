@@ -404,6 +404,10 @@ export async function sendTransaction({
     source_code_location,
     gradle_target, 
     gradle_task,
+    github_repo, 
+    github_org, 
+    github_directory, 
+    github_release,
     method = "verify",
     params = { 
     "city": `${city}`,
@@ -428,7 +432,11 @@ export async function sendTransaction({
     "zipped_source_code": zip,
     "source_code_location": `${source_code_location}`,
     "gradle_task": `${gradle_task}`,
-    "gradle_target": `${gradle_target}`
+    "gradle_target": `${gradle_target}`,
+    "github_org": `${github_org}`,
+    "github_repo": `${github_repo}`,
+    "github_directory": `${github_directory}`,
+    "github_release": `${github_release}`
     }
 }){
     // berlin

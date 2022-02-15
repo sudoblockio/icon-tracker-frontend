@@ -3,7 +3,7 @@ let configJson;
 // -------
 // Berlin
 // ----------------------------------------------------------------
-// let apiUrl = `https://tracker.berlin.geometry.io`
+let apiUrl = `https://tracker.berlin.geometry.io`
 // export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
 // -------
 // Mainnet
@@ -13,7 +13,7 @@ let configJson;
 // -------
 //  Prod
 // ----------------------------------------------------------------
-let apiUrl = `${window.location.origin}`
+// let apiUrl = `${window.location.origin}`
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
