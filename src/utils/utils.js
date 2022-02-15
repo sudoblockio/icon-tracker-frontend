@@ -282,7 +282,6 @@ export function makeUrl(url, payload) {
     }
     delete payload.count
     delete payload.page
-    console.log(payload, "cx event payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
@@ -303,7 +302,6 @@ export function makeEventUrl(url, payload) {
     }
     delete payload.count
     delete payload.page
-    console.log(payload, "cx event payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${'&'}${key}=${payload[key]}`
     })

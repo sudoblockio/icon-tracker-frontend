@@ -97,7 +97,11 @@ class AddressQrCode extends Component {
                 youtube: this.state.youtube,
                 gradle_target: this.state.gradle_target,
                 gradle_task:this.state.gradle_task,
-                source_code_location: this.state.srcCodeLocation
+                source_code_location: this.state.srcCodeLocation,
+                github_repo: this.state.github_repo, 
+                github_org: this.state.github_org,
+                github_directory: this.state.github_directory,
+                github_release: this.state.github_release, 
                 }
             )
         })
