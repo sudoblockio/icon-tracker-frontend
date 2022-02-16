@@ -260,16 +260,18 @@ class AddressQrCode extends Component {
                 <h2 key='h2' className="cv-title">Upload Contract Source Code and / or Associate Metadata for Your Contract  </h2>
                 <div className="howto-container"><p className='cv-howto small'>
                     <br />
+                    <p className="cv-howto small">Instructions:</p>
+                    <p className="cv-howto small"> Contracts can have metadata / social media details associated with them or for Java contracts, contract source code can be uploaded / validated via a zip upload (small contracts) or through a reference to a github release.</p>
+                   <br/>
                     <p className="cv-howto small">To upload contract source code, follow these steps:</p>
-
                     <ol>
-                        <li className="cv-howto small">1. Zip your code ahead of time with the "build.gradle" and "settings.gradle" files along with the directory with your source code.</li>
+                        <li className="cv-howto small">1a. For zip uploads, zip your code ahead of time with the "build.gradle" and "settings.gradle" files along with the directory with your source code.</li>
+                        <li className="cv-howto small">1b. For github references, release your code on github and provide the necessary details.</li>
                         <li className="cv-howto small">2. Provide the path to the output binary along with the task (typically "optimizedJar") needed to build your contract.</li>
-                        <li className="cv-howto small">3. Optional - Provide a target for your gradle build if needed to build your contract.  Would build with "./gradlew :TARGET:TASK"</li>
-                        <li className="cv-howto small"> </li>
+                        <li className="cv-howto small">3. Optional - Provide a target for your gradle build if needed to build your contract. Would build with "./gradlew :TARGET:TASK"</li>
                         
                     </ol>
-
+                    <br />
                     <p className="cv-howto small">For more information, check out the<b> <a style={{ textDecoration: 'underline dotted grey' }} href="https://github.com/geometry-labs/icon-contracts">docs</a></b>.</p>
                     </p>
                     </div>
@@ -318,7 +320,7 @@ class AddressQrCode extends Component {
 
 
                                     <div>
-                                    <div className="cv-label verify-title">Github Resources</div>               
+                                    <div className="cv-label verify-title">Github References</div>               
                                     <div className='cv-form-container upload'>
                                     <div className="cv-label-container verify-row">
                                         <p className="cv-label">
