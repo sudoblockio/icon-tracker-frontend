@@ -18,28 +18,28 @@ class AddressesDetailPage extends Component {
     }
     checkTabs = async (address) => {
         let payload = { address: `${address}`, page: 1, count: 10 }
+        this.intTx = await addressInternalTxList(payload)
         this.tokentransfers = await addressTokenTxList(payload)
         this.voted = await addressVotedList(payload)
         this.rewards = await addressRewardList(payload)
         this.deleg = await getDelegation(payload)
         this.tokenTx = await addressTokenTxList(payload)
+        this.bondList = await getBondList(payload)
         
     }
     
     async componentDidMount() {
-        let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
-        this.voted = await addressVotedList(payload)
-        this.bondList = await getBondList(payload)
-        this.intTx = await addressInternalTxList(payload)
-        this.tokentransfers = await addressTokenTxList(payload)
-        this.rewards = await addressRewardList(payload)
-        this.deleg = await getDelegation(payload)
-        this.tokenTx = await addressTokenTxList(payload)
+        this.checkTabs(this.props.match.params.addressId)
+        // let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
+        // this.voted = await addressVotedList(payload)
+        // this.tokentransfers = await addressTokenTxList(payload)
+        // this.rewards = await addressRewardList(payload)
+        // this.deleg = await getDelegation(payload)
+        // this.tokenTx = await addressTokenTxList(payload)
         
     }
     
     render() {
-        this.checkTabs(this.props.match.params.addressId)
         const { wallet, walletTokenTx, addressInternalTx } = this.props;
         const { loading, error, data } = wallet
         const deleg = this.deleg
@@ -69,7 +69,7 @@ class AddressesDetailPage extends Component {
         if (this.deleg? this.deleg.delegations.length: null) {
             TABS.push(ADDRESS_TABS[3])
             getList.push(address => {
-                this.props.addressDelegationList({ address })
+                this.props.addressDelegationList({ address, page: 1, count: 10 })
             })
         }
         if (this.voted ? this.voted.data.length : null) {

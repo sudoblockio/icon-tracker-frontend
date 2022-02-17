@@ -457,8 +457,8 @@ export async function sendTransaction({
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        let response = await requestJsonRpc(convertedToRaw)
-        let txHash = response.result
+        // let response = await requestJsonRpc(convertedToRaw)
+        // let txHash = response.result
         // setTimeout(() => {
         //         window.location=`${window.location.origin}/transaction/${txHash}`
         // }, 5000)

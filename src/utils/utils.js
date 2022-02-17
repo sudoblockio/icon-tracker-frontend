@@ -272,7 +272,7 @@ export function makeUrl(url, payload) {
         return url
     }
     let result = url
-    payload.limit = Number(payload.count)
+    payload.limit = Number(payload.count? payload.count : 10)
     if (Number(payload.page) > 2){
         payload.skip = Number(Number(payload.page -1) * payload.count)
     } else if(Number(payload.page) === 2){
@@ -285,6 +285,7 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
+    console.log(result, "What result url")
     return result
 }
 export function makeEventUrl(url, payload) {

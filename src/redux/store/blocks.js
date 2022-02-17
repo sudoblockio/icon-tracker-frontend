@@ -33,6 +33,7 @@ export function blockListAction(payload) {
   const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
   export async function blockList(payload) {
+    console.log(payload, "block payload what format youwant")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
       trackerApi.get(makeUrl(`${BLOCKS_PREFIX}`, payload))

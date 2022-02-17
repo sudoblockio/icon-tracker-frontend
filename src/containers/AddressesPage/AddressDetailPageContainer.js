@@ -21,7 +21,6 @@ import { getBalanceOf, getBondList, getDelegation } from '../../redux/store/iiss
 
 function mapStateToProps(state) {
 
-  console.log(state, "Whole state")
   return {
     url: state.router.location,
     ...state.addresses,
