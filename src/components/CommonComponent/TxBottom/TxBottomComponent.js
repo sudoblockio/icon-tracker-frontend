@@ -13,7 +13,6 @@ class TxBottomComponent extends Component {
     }
     
     render() {
-        console.log(this.bondList, "after render")
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
         const Content = () => {

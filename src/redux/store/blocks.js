@@ -32,7 +32,7 @@ export function blockListAction(payload) {
 // *update paths in utils/const to change prefixes app-wide.* 
   const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
-  export async function blockList(payload) {
+export async function blockList(payload) {
     console.log(payload, "block payload what format youwant")
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {

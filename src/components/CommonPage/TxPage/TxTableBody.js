@@ -150,7 +150,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
-					console.log(data.block_timestamp, "block timestamp")
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash} />

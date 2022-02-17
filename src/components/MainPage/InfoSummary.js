@@ -1,34 +1,50 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useState, useEffect } from 'react'
 import { numberWithCommas, getIsSolo } from '../../utils/utils'
 import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 
-class InfoSummary extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isSolo: false,
-        }
+function InfoSummary(props) {
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         isSolo: false,
+    //     }
+    // }
+    const [isSolo, setIsSolo] = useState(false)
+    const [totalTxs, setTotalTxs] = useState("")
+    const [totalSupply, setTotalSupply] = useState("")
+    const [marketCap, setMarketCap] = useState("")
+    const [supplyMetrics, setSupplyMetrics] = useState("")
+    
+    const checkData = async () => {
+        const isSoloData = await getIsSolo()
+        setIsSolo(isSoloData)
+        const totalSupplyData = await getTotalSupply()
+        setTotalSupply(totalSupplyData)
+        const marketCapData = await coinGeckoMarketCap()
+        setMarketCap(marketCapData)
+        const supplyMetricsData = await getSupplyMetrics()
+        setSupplyMetrics(supplyMetricsData)
+        
     }
 
-    async componentDidMount() {
-        const totalTxs = this.props.getRecentTransactions
-        const payload = {page: 1, count:1, limit: 1}
-        totalTxs(payload)
-        let totalTx;
-        const isSolo = await getIsSolo()
-        const totalSupply = await getTotalSupply()
-        const marketCap = await coinGeckoMarketCap()
-        const supplyMetrics = await getSupplyMetrics()
-        this.setState({ isSolo, totalSupply, marketCap,supplyMetrics, totalTx })
-    }
+    useEffect(() => {
+        checkData()
+    })
 
-    render() {
-        const { tmainInfo } = this.props.info || {}
-        const { icxCirculationy } = tmainInfo || {}
-        const marketCapStr = numberWithCommas(Math.floor(this.state.marketCap))
-        const totalSupplyStr = numberWithCommas(Math.floor(this.state.totalSupply))
-        const icxCirculationStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+    // async componentDidMount() {
+    //     const totalTxs = this.props.getRecentTransactions
+    //     totalTxs(payload)
+    //     let totalTx;
+    //     this.setState({ isSolo, totalSupply, marketCap,supplyMetrics, totalTx })
+    // }
+    
+    const { tmainInfo } = props.info || {}
+    const { icxCirculationy } = tmainInfo || {}
+    const marketCapStr = numberWithCommas(Math.floor(marketCap))
+    const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
+    const icxCirculationStr = supplyMetrics ? numberWithCommas(Math.floor(supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+    
         return (
             <Fragment>
                 <li>
@@ -56,12 +72,12 @@ class InfoSummary extends Component {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>{numberWithCommas(this.props.recentTx.totalSize)}</p>									
+                        <p>{numberWithCommas(props.recentTx.totalSize)}</p>									
                     </div>
                 </li>
             </Fragment>
         )
-    }
+    
 }
 
 export default InfoSummary

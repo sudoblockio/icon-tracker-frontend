@@ -89,13 +89,13 @@ export const TRANSACTION_TABS = ['Internal Transactions', 'Events'];
 export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes'];
 
 export const NETWORK_HOST = {
-  Mainnet: 'tracker.icon.foundation',
+  Mainnet: 'tracker.icon.community',
   Lisbon: 'tracker.lisbon.geometry.io',
   Berlin: 'tracker.berlin.geometry.io'
 };
 
 export const NETWORK_NAME = {
-  'tracker.icon.foundation': 'Mainnet',
+  'tracker.icon.community': 'Mainnet',
   'tracker.lisbon.geometry.io': 'Lisbon',
   'tracker.berlin.geometry.io': 'Berlin'
 };
