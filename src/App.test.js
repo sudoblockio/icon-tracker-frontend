@@ -10,7 +10,7 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
 });
 
-it('Table values do not change unexpectedly, no undefined or NaN', () => {
+it('Table values do not change unexpectedly', () => {
   const component = renderer.create(
     <TxTableBody/>
   )
