@@ -2,14 +2,11 @@ import React, { Component, Fragment, useState, useEffect } from 'react'
 import { numberWithCommas, getIsSolo } from '../../utils/utils'
 import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
+import {transactionRecentTx} from '../../redux/store/transactions'
 
 function InfoSummary(props) {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         isSolo: false,
-    //     }
-    // }
+
+    const [recentTx, setRecentTx] = useState("")
     const [isSolo, setIsSolo] = useState(false)
     const [totalTxs, setTotalTxs] = useState("")
     const [totalSupply, setTotalSupply] = useState("")
@@ -19,32 +16,27 @@ function InfoSummary(props) {
     const checkData = async () => {
         const isSoloData = await getIsSolo()
         setIsSolo(isSoloData)
+
         const totalSupplyData = await getTotalSupply()
         setTotalSupply(totalSupplyData)
+
         const marketCapData = await coinGeckoMarketCap()
         setMarketCap(marketCapData)
+
         const supplyMetricsData = await getSupplyMetrics()
         setSupplyMetrics(supplyMetricsData)
-        
+
+        const recentTxData = await transactionRecentTx()
+        setRecentTx(recentTxData? recentTxData.headers["x-total-count"] : 0)
     }
-
-    useEffect(() => {
-        checkData()
-    })
-
-    // async componentDidMount() {
-    //     const totalTxs = this.props.getRecentTransactions
-    //     totalTxs(payload)
-    //     let totalTx;
-    //     this.setState({ isSolo, totalSupply, marketCap,supplyMetrics, totalTx })
-    // }
     
-    const { tmainInfo } = props.info || {}
-    const { icxCirculationy } = tmainInfo || {}
     const marketCapStr = numberWithCommas(Math.floor(marketCap))
     const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
     const icxCirculationStr = supplyMetrics ? numberWithCommas(Math.floor(supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
     
+    useEffect(() => {
+        checkData()
+    }, [])
         return (
             <Fragment>
                 <li>
@@ -72,7 +64,7 @@ function InfoSummary(props) {
                     <div>
                         <span><i className="img">T</i></span>
                         <p>All Transactions</p>
-                        <p>{numberWithCommas(props.recentTx.totalSize)}</p>									
+                        <p>{numberWithCommas(recentTx)}</p>									
                     </div>
                 </li>
             </Fragment>
