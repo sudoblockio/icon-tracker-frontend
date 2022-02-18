@@ -20,32 +20,9 @@ jobs:
     name: Build containers
     runs-on: ubuntu-latest
 #    needs: tests
-    strategy:
-      matrix:
-        include:
-          - network-name: mainnet
-            deployment-environment: prod
-            akid-ref: AWS_ACCESS_KEY_ID_MAINNET
-            sak-ref: AWS_SECRET_ACCESS_KEY_MAINNET
-            ecr-repository: icon-explorer-frontend-mainnet
-          - network-name: sejong
-            deployment-environment: prod
-            akid-ref: AWS_ACCESS_KEY_ID_SEJONG
-            sak-ref: AWS_SECRET_ACCESS_KEY_SEJONG
-            ecr-repository: icon-explorer-frontend-sejong
-          - network-name: lisbon
-            deployment-environment: prod
-            akid-ref: AWS_ACCESS_KEY_ID_LISBON
-            sak-ref: AWS_SECRET_ACCESS_KEY_LISBON
-            ecr-repository: icon-explorer-frontend-lisbon
-          - network-name: berlin
-            deployment-environment: prod
-            akid-ref: AWS_ACCESS_KEY_ID_BERLIN
-            sak-ref: AWS_SECRET_ACCESS_KEY_BERLIN
-            ecr-repository: icon-explorer-frontend-berlin
     env:
-      NETWORK_NAME: ${{ matrix.network-name }}
-      DEPLOYMENT_ENVIRONMENT: ${{ matrix.deployment-environment }}
+      NETWORK_NAME: mainnet
+      DEPLOYMENT_ENVIRONMENT: prod
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -58,8 +35,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets[matrix.akid-ref] }}
-          aws-secret-access-key: ${{ secrets[matrix.sak-ref] }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
       - name: Login to Amazon ECR
@@ -69,7 +46,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ matrix.ecr-repository }}
+          ECR_REPOSITORY: icon-explorer-frontend
           IMAGE_TAG: prod-${{ steps.source.outputs.TAG }}
         run: |
           docker build --target prod --build-arg REACT_APP_NETWORK_NAME=$NETWORK_NAME --build-arg REACT_APP_DEPLOYMENT_ENVIRONMENT=$DEPLOYMENT_ENVIRONMENT -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -99,19 +76,6 @@ jobs:
           workDir: charts
           repository: geometry-labs/icon-charts
           valueFile: 'deployments/prod-eu-west-1/mainnet/tracker-frontend/values.yaml'
-          propertyPath: 'deployment.image.tag'
-          value: prod-${{ steps.source.outputs.TAG }}
-          branch: main
-          createPR: 'false'
-          updateFile: true
-          commitChange: false
-
-      - name: Update prod-sejong-us-west-2 deployment values file
-        uses: fjogeleit/yaml-update-action@master
-        with:
-          workDir: charts
-          repository: geometry-labs/icon-charts
-          valueFile: 'deployments/prod-us-west-2/sejong/tracker-frontend/values.yaml'
           propertyPath: 'deployment.image.tag'
           value: prod-${{ steps.source.outputs.TAG }}
           branch: main
