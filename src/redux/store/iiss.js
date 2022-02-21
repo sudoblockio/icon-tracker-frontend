@@ -364,23 +364,16 @@ export async function getIISSInfo() {
     });
 }
 
-// if there is a transaction result, post to v3
 const score = {'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b7a59874f5599acd',
                 'https://lisbon.net.solidwallet.io': 'cx59fd09b8fd87ad82961c29c4ff5e44773f629330'}
-const nodeId = {'https://berlin.net.solidwallet.io': '7',
-                'https://lisbon.net.solidwallet.io': '2'}
+const nodeId = {'https://berlin.net.solidwallet.io': '0x7',
+                'https://lisbon.net.solidwallet.io': '0x2',
+                'tracker.icon.community': 1}
 export const VerificationScore=score[nodeApiUrl]
-// export const VerificationScore = 'cx84c88b975f60aeff9ee534b5efdb69d66d239596'
-// lisbon
-// export const VerificationScore = 'cx338322697c252ec776bf81157f55e1f47beb7d78'
 export async function sendTransaction({
-    // write function to get logged in wallets public_key
-    // connected users wallet address
     fromAddress,
-    // actual contract needs to be here :
     contract,
     scoreAddress = VerificationScore,
-    // set to zero because we are just signing
     icxAmount = 0, 
     zip,
     city,
