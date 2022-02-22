@@ -1,5 +1,4 @@
 import { fork, put, takeLatest, call, all, select } from 'redux-saga/effects'
-// import { delay } from 'redux-saga'
 import AT from '../../actionTypes/actionTypes';
 import {
   POPUP_TYPE
@@ -13,11 +12,9 @@ import {
   contractTokenTxList as CONTRACT_TOKEN_TX_LIST_API,
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API,
 
-  // icxGetScore as ICX_GET_SCORE_API,
 } from '../contracts';
 import  { icxCall as ICX_CALL_API}from '../../api/restV3'
 import {   getContractABI as ICX_GET_CONTRACT } from '../../store/iiss'
-import { getScoreStatus } from '../../store/contracts';
 
 export default function* contractsSaga() {
   yield fork(watchContractList);
@@ -57,7 +54,6 @@ export function* contractListFunc(action) {
     }
 
     const payload = yield call(CONTRACT_LIST_API, action.payload);
-    console.log(payload, "the very first place we hit the endpoint")
     if (payload.status === 200) {
       yield put({ type: AT.contractListFulfilled, payload });
     }
@@ -96,10 +92,6 @@ export function* contractInfoFunc(action) {
     const payload = yield call(CONTRACT_INFO_API, action.payload.addr);
 
     if (payload.status === 200 && payload.data !== "NO_DATA") {
-
-
-      // const  depositInfo  = yield call(getScoreStatus, action.payload.addr)
-      // payload.data.depositInfo = depositInfo
         yield put({ type: AT.contractInfoFulfilled, payload });
     }
     else {
@@ -128,10 +120,8 @@ export function* contractDetailFunc(action) {
 }
 
 export function* contractDetailPopupFunc(action) {
-  console.log(action, "contract detail action")
   try {
     const payload = yield call(CONTRACT_DETAIL_API, action.payload);
-    console.log(payload, "contract popup payload")
     if (payload.status === 200 && payload.data !== "NO_DATA") {
       payload.type = POPUP_TYPE.DETAIL
       yield put({ type: AT.setPopup, payload });
@@ -292,8 +282,6 @@ export function* icxCallFunc(action) {
 export function* readContractInformationFunc(action) {
   try {
     const score = yield call(ICX_GET_CONTRACT, action.payload.address);
-    console.log(action.payload, "score is abi")
-    console.log(score, "score is response")
 
     if (score.length === 0) {
       const { message } = score.error

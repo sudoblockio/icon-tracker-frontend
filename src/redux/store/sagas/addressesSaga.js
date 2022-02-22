@@ -1,11 +1,8 @@
 import { fork, put, takeLatest, call } from 'redux-saga/effects'
 import AT from '../../actionTypes/actionTypes';
 
-// *** convert 
 import {
-  // getDelegation as ADDRESS_DELEGATION_LIST,
   addressReward as ADDRESS_REWARD,
-  // getPReps,
   getDelegation,
 } from '../../api/restV3';
 
@@ -16,11 +13,9 @@ import {
   addressInternalTxList as ADDRESS_INTERNAL_TX_LIST,
   addressTokenTxList as ADDRESS_TOKEN_TX_LIST,
   addressVotedList as ADDRESS_VOTED_LIST,
-  // addressDelegationList as ADDRESS_DELEGATION_LIST
 } from '../addresses'
 
-// *** take a deeper look, cull. 
-import { getPRepsRPC, getDelegationPrep, prepList, getPReps, getStake, queryIScore, getBalance, getPrepStatusList, getDelegation as ADDRESS_DELEGATION_LIST} from '../../store/iiss';
+import { getDelegationPrep, prepList, getStake, queryIScore, getBalance, getDelegation as ADDRESS_DELEGATION_LIST} from '../../store/iiss';
 import { convertLoopToIcxDecimal } from '../../../utils/utils';
 
 export default function* addressesSaga() {
@@ -226,7 +221,6 @@ export function* addressInternalTxListFunc(action) {
     }
 
     const payload = yield call(ADDRESS_INTERNAL_TX_LIST, action.payload);
-    console.log(payload, "addr int tx payload")
     if (payload.status === 200) {
       yield put({ type: AT.addressInternalTxListFulfilled, payload: payload });
     }

@@ -1,4 +1,4 @@
-import { fork, put, takeLatest, call } from 'redux-saga/effects'
+import { fork, put, takeLatest } from 'redux-saga/effects'
 import { routerActions } from 'react-router-redux'
 import AT from '../../actionTypes/actionTypes';
 import {
@@ -8,13 +8,6 @@ import {
   isHash,
   isNumeric
 } from '../../../utils/utils'
-import {
-  IRC_VERSION
-} from '../../../utils/const'
-import {
-  searchData as SEARCH_DATA_API,
-  blockInfo as BLOCK_INFO_API
-} from '../../store/search'
 
 function* searchFunc(action) {
 

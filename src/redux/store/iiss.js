@@ -1,9 +1,8 @@
-import { walletApiInstance, trackerApiInstance, getTrackerApiUrl, getWalletApiUrl } from '../api/restV3/config'
+import { walletApiInstance, trackerApiInstance, getWalletApiUrl } from '../api/restV3/config'
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
-import checkIconex from 'check-iconex'
 import { nodeApiUrl } from '../../config';
 import IconService from 'icon-sdk-js';
-import { requestAddress, requestJsonRpc } from '../../utils/connect';
+import { requestJsonRpc } from '../../utils/connect';
 
 export async function coinGeckoMarketCap () {
     try {
@@ -112,22 +111,16 @@ export async function prepList(grade) {
     return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/preps`)
             .then(result => {
-                const { data } = result.data
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
                 const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
                 resolve(_data)
-                // const delegated = _data.filter(item => item.delegated !== 0).map((item, index) => ({ ...item, rank: index + 1 }))
-                // const undelegated = _data.filter(item => item.delegated === 0).sort((a, b) => a.grade - b.grade)
-                // resolve([...delegated, ...undelegated])
             })
             .catch(error => {
                 reject(error)
             })
     })
 }
-
-
 
 export async function getPReps() {
     const trackerApi = await trackerApiInstance()
@@ -432,9 +425,6 @@ export async function sendTransaction({
     "github_release": `${github_release}`
     }
 }){
-    // berlin
-    // const nid =7
-
     const nid=nodeId[nodeApiUrl]
     const { IconConverter, IconBuilder, IconAmount } = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
@@ -450,8 +440,8 @@ export async function sendTransaction({
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
         const convertedToRaw = IconConverter.toRawTransaction(txData)
-        // let response = await requestJsonRpc(convertedToRaw)
-        // let txHash = response.result
+        let response = await requestJsonRpc(convertedToRaw)
+        let txHash = response.result
         // setTimeout(() => {
         //         window.location=`${window.location.origin}/transaction/${txHash}`
         // }, 5000)

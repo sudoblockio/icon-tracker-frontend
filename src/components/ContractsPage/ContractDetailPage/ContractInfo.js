@@ -4,7 +4,7 @@ import { SocialMediaType } from '../../../utils/const'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from '../../../utils/utils'
 import { cxSocialMedia } from '../../../redux/store/contracts'
-import {getBalance } from '../../../redux/store/iiss'
+import { getBalance } from '../../../redux/store/iiss'
 
 function ContractInfo(props) {
     const [verified_data, setVerified_Data] = useState("")
@@ -40,6 +40,7 @@ function ContractInfo(props) {
             if (checkLinks && socialLinksMap){
                 return checkLinks[site] !== socialLinksMap.data[site] ? checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
             }
+            
         })
     }
     const onSocialClick = async link => {
@@ -50,9 +51,9 @@ function ContractInfo(props) {
     
 
 
-        const { contract, walletAddress, getTokenSummary, TxCount, contractDetails } = props
+        const { contract, walletAddress, contractDetails } = props
         const { loading, data } = contract
-        let address, balance, createTx, owner_address, ircVersion, status, symbol, txCount, depositInfo, tokenName, reportedCount
+        let ircVersion, reportedCount
         const Contents = () => {
             if (loading) {
                 return <LoadingComponent height="206px" />
@@ -60,21 +61,14 @@ function ContractInfo(props) {
                 const isCreator = isValidData(contractDetails.owner_address)
                 const isCreateTx = isValidData(contractDetails.creation_hash)
                 const scam = reportedCount >= 100 ? true : false
-                const { availableDeposit, availableVirtualStep } = depositInfo || {}
                 return (
                     <div className="screen0">
                         <div className="wrap-holder">
                             <p className="title">Contract</p>
                             <div className={"cx-submit"}>
-
-                                                                                {/* nodeApiUrl === 'https://berlin.net.solidwallet.io' ?  */}
-                                                                                {/* <QrCodeButton address={walletAddress} contract={data.public_key}/>   */}
-                                                                                {/* : ""  */}
-                                                                                {/* : ""} */}
                             </div>
                             <div className="contents">
                                 <div className="table-box">
-                                                    
                                     <table className="table-typeB contract">
                                         <tbody>
                                             <tr className="p-rep">
@@ -83,11 +77,9 @@ function ContractInfo(props) {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.public_key} 
                                                    <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
-                                                    
                                                     {contractDetails.owner_address === walletAddress? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
                                                          :""} 
-
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)
                                                     }}><i className="img"></i></span>}
@@ -96,7 +88,6 @@ function ContractInfo(props) {
                                                 if (!mediaValue) {
                                                     return null
                                                 }
-
                                                 return (
                                                     <>{mediaValue && 
                                                         <span key={index} className={`table-typeB ${type} i`} onClick={() => {
@@ -176,7 +167,6 @@ function ContractInfo(props) {
                                                 <td>Balance</td>
                                                 <td>
                                                 {convertNumberToText(cxBalance|| 0)} ICX
-                                                    {/* <DetailButton contractAddr={data.public_key} contractDetailPopup={this.props.contractDetailPopup} /> */}
                                                 </td>
                                                 <td>Transactions</td>
                                                 <td>{numberWithCommas(props.contractTx.totalSize)} Txns</td>
@@ -200,10 +190,7 @@ function ContractInfo(props) {
                                                 {/* <td>Virtual Step</td> */}
                                                 {/* {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>} */}
                                             </tr>
-                                            {/* <tr>
-                                                <td>Virtual Step</td>
-                                                {availableVirtualStep? <td>{convertNumberToText(availableVirtualStep)} Steps</td> : <td>-</td>}
-                                            </tr> */}
+
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import AddressTransactions from './AddressTransactions'
 import AddressInternalTransactions from './AddressInternalTransactions'
@@ -73,9 +73,9 @@ function WalletTabs(props){
     useEffect(() => {
         checkTabs(props.match.params.addressId)
     },[])
-    const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, hasDelegations, isPrep, addressReward } = props
+    const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, addressReward } = props
     const { loading, data } = wallet
-    const { public_key, tokenList, transaction_count, iscore, internalTxCount, is_prep, claimIScoreCount, log_count } = data
+    const { public_key} = data
 
 
     const TABS = []

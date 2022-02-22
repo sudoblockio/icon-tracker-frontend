@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import QrCode from 'qrcode';
 
 // const Id = 'qr'
 class QrCodeComponent extends Component {

@@ -19,7 +19,6 @@ class TokenSummary extends Component {
     render() {
         
         const hC = this.holdersCount
-        const tC = this.transferCount
 
         const { token } = this.props
         const { loading, data } = token
@@ -27,7 +26,7 @@ class TokenSummary extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                const { name, totalSupply, address, price, decimals, holders, transfers, totalSupplyUsd, priceUsd, symbol } = data
+                const { name, address, decimals, totalSupplyUsd, symbol } = data
                 const _totalSupplyUsd = numberWithCommas(totalSupplyUsd)
                 
                 return (
@@ -48,21 +47,11 @@ class TokenSummary extends Component {
                                                 </td>
                                                 <td>Contract </td>
                                                 <td>
-                                                    {/* <i className="img" /> */}
                                                     <span>{address ? <AddressLink to={address} /> : '-'}</span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                {/* <td>Price</td> */}
-                                                {/* {!!price ? (
-                                                    <td>
-                                                        {convertNumberToText(price, 8)} ICX
-                                                        <em>({convertNumberToText(priceUsd, 8)} USD)</em>
-                                                    </td>
-                                                ) : (
-                                                    <td>-</td>
-                                                )} */}
-                                                                                                <td>Transfers</td>
+                                                <td>Transfers</td>
                                                 <td>{numberWithCommas(this.transferCount)}</td>
                                                 <td>Decimals</td>
                                                 <td>{Number(decimals)}</td>

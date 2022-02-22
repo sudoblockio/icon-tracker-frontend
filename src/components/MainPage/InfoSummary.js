@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState, useEffect } from 'react'
+import React, {Fragment, useState, useEffect } from 'react'
 import { numberWithCommas, getIsSolo } from '../../utils/utils'
 import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
@@ -7,8 +7,7 @@ import {transactionRecentTx} from '../../redux/store/transactions'
 function InfoSummary(props) {
 
     const [recentTx, setRecentTx] = useState("")
-    const [isSolo, setIsSolo] = useState(false)
-    const [totalTxs, setTotalTxs] = useState("")
+    const [setIsSolo] = useState(false)
     const [totalSupply, setTotalSupply] = useState("")
     const [marketCap, setMarketCap] = useState("")
     const [supplyMetrics, setSupplyMetrics] = useState("")

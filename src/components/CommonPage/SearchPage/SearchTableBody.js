@@ -33,7 +33,6 @@ class SearchTableBody extends Component {
 					)
 				case SEARCH_TYPE.TOKENS:
 					const { index, count, page } = this.props
-					const _changeVal = data.changeVal || 0
 					const ranking = count * (page - 1) + index + 1
 					return (
 						<tr>

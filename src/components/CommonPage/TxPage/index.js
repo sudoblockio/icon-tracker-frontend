@@ -69,7 +69,6 @@ class TxPage extends Component {
     }
 
     getTxList = (page, count, urlIndex) => {
-        console.log(urlIndex, "url index")
         const query = {
             page: isNumeric(page) ? page : 1,
             count: isNumeric(count) ? count : 25,
@@ -95,7 +94,6 @@ class TxPage extends Component {
             case TX_TYPE.TOKEN_TX:
             case TX_TYPE.TOKEN_HOLDERS:
             case TX_TYPE.CONTRACT_EVENTS:
-                console.log(query, "the query")
                 query.contractAddr = urlIndex
                 break
             case TX_TYPE.BLOCKS:
@@ -144,7 +142,6 @@ class TxPage extends Component {
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
             case TX_TYPE.ADDRESS_REWARD:         
                 this.urlIndex = pathname.split('/')[2] || ''
-                console.log(this.urlIndex, "the url index")
                 this.pageId = pathname.split('/')[3] || 1
                 break
             case TX_TYPE.BLOCKS:
@@ -163,9 +160,7 @@ class TxPage extends Component {
     }
 
     getTxListByPage = page => {
-        console.log(page, "what page")
         const count = this.getCount()
-        console.log(count, "What count")
         this.historyPush(page, count)
     }
 
@@ -189,7 +184,6 @@ class TxPage extends Component {
             case TX_TYPE.ADDRESS_REWARD:
                 case TX_TYPE.ADDRESS_BONDED:        
                 url = this.makeUrl(page, count, this.urlIndex)
-                console.log(url, "top url")
                 break
             case TX_TYPE.BLOCKS:
             case TX_TYPE.ADDRESSES:
@@ -217,18 +211,14 @@ class TxPage extends Component {
         if (count) {
             url += `?count=${count}`
         }
-        console.log(url, "lower url")
         return url
     }
 
     render() {
-        {console.log("are we here yet")}
-        {console.log(totalSize, "what total size")}
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
         const { loading, page, count, data, listSize, totalSize } = tx
-        console.log(tx, "this tx m88")
         const noData = !(data && data.length !== 0)
         const TableContent = () => {
             if (noData) {

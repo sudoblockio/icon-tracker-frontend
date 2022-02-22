@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SEARCH_TYPE, IRC_VERSION, POPUP_TYPE } from '../../../utils/const'
+import { SEARCH_TYPE } from '../../../utils/const'
 import { numberWithCommas } from '../../../utils/utils'
 import { getContractListCount } from '../../../redux/store/iiss'
 class SearchTableDesc extends Component {
@@ -13,11 +13,10 @@ class SearchTableDesc extends Component {
         this.setState({ cxCount: headers['x-total-count'] })
     }
     render() {
-        const { searchType, listSize, totalSize, address } = this.props
+        const { searchType, listSize} = this.props
         const count = this.state.cxCount ? this.state.cxCount : 0
         const Content = () => {
             const _listSize = numberWithCommas(listSize || 0)
-            const _totalSize = numberWithCommas(totalSize || 0)
             switch (searchType) {
                 case SEARCH_TYPE.CONTRACTS:
                     return (
@@ -26,10 +25,7 @@ class SearchTableDesc extends Component {
                                 A total of {count} contract source
                                 codes found.
                             </span>
-
-                        
                             {}
-                            
                         </>
                     )
                 case SEARCH_TYPE.TOKENS:

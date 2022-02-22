@@ -8,12 +8,12 @@ let configJson;
 // -------
 // Mainnet
 // ----------------------------------------------------------------
-// let apiUrl = `https://tracker.icon.community`
+let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 // -------
 //  Prod
 // ----------------------------------------------------------------
-let apiUrl = `${window.location.origin}`
+// let apiUrl = `${window.location.origin}`
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',
@@ -61,6 +61,14 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
+    default:
+        configJson =  {   
+            "VERSION": "1.0.18_20190313_0",
+            "TRACKER_API_URL": apiUrl,
+            "WALLET_API_URL": nodeApiUrl,
+            "__IS_SOLO_VERSION": false}
+        break
+
 }
 
 export default configJson;

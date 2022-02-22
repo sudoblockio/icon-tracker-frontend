@@ -17,8 +17,6 @@ import {
 	convertNumberToText,
 	numberWithCommas,
 	isValidData,
-	dateToUTC,
-	utcDateInfo,
 	beautifyJson,
 	removeQuotes,
 	isHex,
@@ -73,8 +71,6 @@ class TransactionInfo extends Component {
 	}
 
 	failMsg = async (txHash) => {
-		const msg = await getFailMessage(txHash)
-		// this.setState({errMsg: msg})
 
 	}
 
@@ -104,7 +100,6 @@ class TransactionInfo extends Component {
 			}
 			else {
 				const {
-					errorMsg,
 					tokenTxList,
 					internalTxList,
 					txType,
@@ -112,16 +107,12 @@ class TransactionInfo extends Component {
 					receipt_status,
 					block_timestamp,
 					block_number,
-					confirmation,
-					from_address,
-					to_address,
 					value,
 					step_limit,
 					receipt_step_used,
 					receipt_step_price,
 					data: dataString,
 					transaction_fee,
-					feeUsd,
 					data_type,
 					targetContractAddr,
 					reportedCount,
@@ -150,7 +141,6 @@ class TransactionInfo extends Component {
 												{scam?<span className="scam-tag">Reported</span>:""}
 												{hash}
 												<span className="copy twit" onClick={this.onTwitterClick}>
-													{/* <i className="img twit-icon"></i> */}
 													<img className='custom-twitter' src={twitterLogo} alt='twitter'/>
 												</span><CopyButton data={hash} title={'Copy TxHash'} isSpan />
 												<ReportButton address={hash}/>
