@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertLoopToIcxDecimal, convertNumberToText, convertHexToValue,  } from '../../utils/utils'
+import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { getLastBlock, getStepPrice,getPublicTreasury, prepList, getPRepsRPC  } from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
@@ -58,7 +58,6 @@ class GovernancePage extends Component {
 		// our endpoints
 		this.governanceData = await getPReps();
 		this.publicTreasury = await getPublicTreasury()
-		console.log(this.publicTreasury)
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
@@ -227,7 +226,6 @@ class GovernancePage extends Component {
 									<p>Public Treasury <em>(ICX)</em></p>
 									<p><span>{numberWithCommas(Number(this.publicTreasury / Math.pow(10, 18)).toFixed(0))}</span></p>
 									
-									{/* <p><span>{numberWithCommas(8215065)}</span></p> */}
 
 								</div>
 							</div>
@@ -235,9 +233,7 @@ class GovernancePage extends Component {
 								<li>
 									<div>
 										<p>Voter Reward Rate <em>(%)</em> 
-										{/* <i className="img screamer" onClick={() => {this.props.setPopup({ type: POPUP_TYPE.COMMISSION })}}></i> */}
 										</p>
-										{console.log(Number(this.state.Ivoter), "what i voter state")}
 										<p><span>{Number(this.state.Ivoter)}</span></p>
 									</div>
 								</li>
@@ -286,11 +282,6 @@ class GovernancePage extends Component {
 									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
 									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
 								</span>
-								{/* <span className="blacklist"> */}
-									{/* <input id="cbox-04" className="cbox-type" type="checkbox" name="black" value='black' checked={blackChecked} onChange={this.handleChange}/> */}
-									{/* <label htmlFor="cbox-04" className="label _img">Unregistered ({blackPrep.length})</label>									 */}
-									{/* <label htmlFor="cbox-04" className="label _img">Unregistered</label>									 */}
-								{/* </span> */}
 								<span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
 							</div>
 							<div className="table-box">
@@ -380,9 +371,6 @@ class TableRow extends Component {
 			case 2:
 			case '0x2':
 				return <span className={className}><i></i>Candidate</span>
-			// case 3:
-			// case '0x3':
-			// 	return <span className={'prep-tag'}>{statusCheck === 2 ? 'Disqualified' : 'Unregistered'}</span>
 			default:
 				return null		
 		}

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { POPUP_TYPE } from '../../../utils/const'
 import { setPopup } from '../../../redux/store/popups'
-import  Connect  from '../../Header/Connect'
 
 class QrCodeButton extends Component {
     handleClick = () => {

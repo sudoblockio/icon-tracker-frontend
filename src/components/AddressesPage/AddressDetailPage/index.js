@@ -29,21 +29,14 @@ class AddressesDetailPage extends Component {
     }
     
     async componentDidMount() {
-        this.checkTabs(this.props.match.params.addressId)
-        // let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
-        // this.voted = await addressVotedList(payload)
-        // this.tokentransfers = await addressTokenTxList(payload)
-        // this.rewards = await addressRewardList(payload)
-        // this.deleg = await getDelegation(payload)
-        // this.tokenTx = await addressTokenTxList(payload)
-        
+        this.checkTabs(this.props.match.params.addressId)   
     }
     
     render() {
-        const { wallet, walletTokenTx, addressInternalTx } = this.props;
+        const { wallet } = this.props;
         const { loading, error, data } = wallet
         const deleg = this.deleg
-        const { tokenList, /*internalTxCount,*/ is_prep, transaction_count, claimIScoreCount, hasDelegations, log_count } = data
+        const { is_prep, hasDelegations } = data
 
         const TABS = [], getList = []
 
@@ -85,7 +78,6 @@ class AddressesDetailPage extends Component {
                 this.props.addressRewardList({ address })
             })
         }
-        console.log(this.bondList, "the bond list")
         if (this.bondList ? this.bondList.length : null) {
             TABS.push(ADDRESS_TABS[6])
             getList.push(address => {

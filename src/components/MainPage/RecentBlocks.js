@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { numberWithCommas, getTimezoneMomentTime } from '../../utils/utils'
+import { numberWithCommas } from '../../utils/utils'
 import { LoadingComponent, BlockLink } from '../../components'
 import { blockList } from '../../redux/store/blocks'
 import configJson from '../../config'
@@ -19,9 +19,7 @@ class RecentBlocks extends Component {
     }
 
     bxsocket;
-    // latest is the top most recent table row
     latestBx;
-    // recent is the rest of the rows called from REST
     recentBx;
     msgCounter = 0
     bxRows = []
@@ -135,7 +133,7 @@ class RecentBlocks extends Component {
                                     </li>
 
                             {list.map((block, index) => {
-                                const { number, createDate, hash, transaction_count, timestamp } = block
+                                const { number, hash, transaction_count, timestamp } = block
                                 const time = timestamp !== undefined? timestamp : new Date()
                                     return (
                                         <li key={index}>

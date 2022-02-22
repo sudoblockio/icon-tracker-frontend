@@ -4,7 +4,6 @@ import { getTrackerApiUrl } from '../redux/api/restV3/config'
 import BigNumber from 'bignumber.js'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { TokenLink } from '../components'
-import { getContractListCount } from '../redux/store/iiss'
 import { REDUX_STEP, SERVER_TX_TYPE } from './const'
 import { getIsSoloVersion } from '../redux/api/restV3/config'
 
@@ -285,7 +284,6 @@ export function makeUrl(url, payload) {
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
     })
-    console.log(result, "What result url")
     return result
 }
 export function makeEventUrl(url, payload) {
@@ -351,7 +349,6 @@ export function makeRewardsUrl(url, payload) {
     delete payload.count
     delete payload.page
     delete payload.address
-    console.log(payload, "reward makeUrl payload")
     Object.keys(payload).forEach((key, index) => {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
         
@@ -432,13 +429,8 @@ export function getArrayState(step, state, action, dataType) {
             }
         }
         case REDUX_STEP.FULFILLED:
-            const { data, listSize, totalSize } = payload
-            console.log(data, "redux step daya")
-            console.log(payload.headers, "headers available")
-            // if the data is a contract list response
+            const { data } = payload
             if (data.status !== undefined) {
-                // get the total count from contracts 
-                
                 return {
                     ...state,
                     [dataType]: {
@@ -451,8 +443,6 @@ export function getArrayState(step, state, action, dataType) {
                     },
                 }
             } else {
-                // if the data is not a contract list reponse:
-                console.log(data, "redux data after if")
                 return {
                     ...state,
                     [dataType]: {
@@ -807,7 +797,6 @@ export function getBadgeTitle(grade, status) {
 }
 
 export function addUnregisteredStyle(status, grade) {
-    console.log(status, grade, "unregistered inputs")
     const _status = Number(status)
     const _grade = Number(grade)
     if (!isNaN(_status) && (_status > 0 && _status < 3)) {
@@ -833,7 +822,6 @@ export function valueToString(value) {
         Object.keys(value).forEach(key => {
             result += (result !== '' ? ', ' : '') + value[key]
         })
-        console.log(typeof(result), "Each result")
     }
 
     return result
@@ -855,6 +843,5 @@ export function addAt(text) {
 
 export function closeEm(text) {
     if (!text) return ''
-    console.log(text, "the text")
     return text.replace(/<\/em>/gi, "</em").replace(/<\/em/gi, "</em>")
 }

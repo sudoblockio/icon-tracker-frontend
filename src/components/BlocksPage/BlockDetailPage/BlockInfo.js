@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { numberWithCommas, convertNumberToText, dateToUTC, utcDateInfo, convertHexToValue, epochToFromNow } from '../../../utils/utils'
+import { numberWithCommas, convertNumberToText, convertHexToValue, epochToFromNow } from '../../../utils/utils'
 import { TX_TYPE } from '../../../utils/const'
 import { BlockLink, AddressLink, LoadingComponent } from '../../../components'
 import {getLastBlock } from '../../../redux/store/iiss'
@@ -25,11 +25,9 @@ class BlockInfo extends Component {
         
 
         const nextHeight = number + 1
-        console.log(number + 1, this.lastBlock, "count test")
         if (nextHeight < this.lastBlock){
             this.props.history.push('/block/' + nextHeight)
         } else {
-            console.log("last block")
         }
     }
 
@@ -55,8 +53,7 @@ class BlockInfo extends Component {
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
-                console.log(data, "data")
-                const { number, timestamp, transaction_count, hash, parent_hash, blockSize, transaction_amount, transaction_fees, message, lastBlock, peer_id, crep } = data
+                const { number, timestamp, transaction_count, hash, parent_hash, transaction_amount, transaction_fees, message, peer_id, crep } = data
                 const isFirst = number === 0
                 const isLast = this.lastBlock > number
                 const prep = peer_id || crep
@@ -95,10 +92,6 @@ class BlockInfo extends Component {
                                                     </td>
                                                 )}
                                             </tr>
-                                            {/*<tr>
-                                                <td>C-rep</td>
-                                                <td><span>{crep}</span></td>
-                                            </tr>*/}
                                             <tr>
                                                 <td>Transactions</td>
                                                 <td>
@@ -113,10 +106,6 @@ class BlockInfo extends Component {
                                                 <td>Prev Hash</td>
                                                 <td>{parent_hash ? <BlockLink to={number - 1} label={parent_hash} /> : '-'}</td>
                                             </tr>
-                                             {/* <tr>
-                                                <td>Block Size</td>
-                                                <td>{numberWithCommas(blockSize)} bytes</td>
-                                            </tr> */}
                                             <tr>
                                                 <td>Amount</td>
                                                 <td>{convertNumberToText(transaction_amount / Math.pow(10, 18))} ICX</td>

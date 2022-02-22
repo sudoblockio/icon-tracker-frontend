@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BigNumber from 'bignumber.js'
 import {
-	calcFromNow,
 	numberWithCommas,
 	dateToUTC,
 	isValidData,
@@ -77,13 +76,11 @@ const BlockCell = ({ height }) => {
 class TxTableBody extends Component {
 	constructor(props) {
 		super(props)
-
 	}
 	tts = 0
 	async componentWillMount() {
 		if (this.props.txType === "tokenholders") {
 			this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
-			// this.tts = tokenTotalSupply
 		}
 	}
 	render() {
@@ -95,21 +92,12 @@ class TxTableBody extends Component {
 				address,
 				currentUSD,
 				totalSupply,
-				rank
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
-			const addressInData = data.address
 			const isError = data.receipt_status === 0
-			const formattedLogData = ""
-
-
-
-
-
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
-
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.tx_hash} />
@@ -131,7 +119,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_VOTED:
-					console.log(Number(Number(data.value) / Math.pow(10,18)).toFixed(), "the voted data")
 					return (
 						<tr>
 							<td className="on" onClick={() => {
@@ -203,7 +190,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TOKEN_TX:
-					{console.log(data, "contract data")}
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -306,25 +292,14 @@ class TxTableBody extends Component {
 
 					return (
 						<tr>
-							{/* <td>-</td> */}
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.type} targetContractAddr={data.to_address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-							{/* <td>-</td> */}
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
 
-
-					// 	if (this.props.txType === "tokenholders") {
-					// 		this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
-					// 		yer = this.tts
-					//  }
-					// this.tts = tokenTotalSupply
-
-
 					return (
 						<tr>
-
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={convertHexToValue(data.value).toFixed()} symbol={data.symbol} />

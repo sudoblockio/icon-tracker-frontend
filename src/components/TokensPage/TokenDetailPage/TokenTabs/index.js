@@ -41,7 +41,6 @@ class TokenTabs extends Component {
                                 />
                             )
                         case 1:
-                            {console.log(this.tokenTotalSupply, "this token's total")}
                             const tokenTotal = this.tokenTotalSupply
                             return (
                                 <TokenHolders

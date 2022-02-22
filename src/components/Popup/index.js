@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddressQrCode from './AddressQrCode';
 import ContractDetail from './ContractDetail';
-import ContractVerification from './ContractVerification';
 import Scam from './Scam';
 import Search from './Search';
 import { initPopup } from '../../redux/store/popups';
@@ -168,7 +167,6 @@ class Popup extends Component {
   };
 
   render() {
-    console.log(this.props, "popup props")
     const { type, data } = this.props;
     const isQr = type === POPUP_TYPE.QR;
     const qrData = isQr ? data : {};

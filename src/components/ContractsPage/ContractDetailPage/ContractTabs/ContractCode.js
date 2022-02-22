@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
 import { getSrcCodeLink, getVerSrcCodeLink, getContractABI } from '../../../../redux/store/iiss'
-import { CopyButton, LoadingComponent } from '../../../../components'
+import { CopyButton } from '../../../../components'
 
 class ContractCode extends Component {
     constructor(props) {
@@ -20,7 +20,6 @@ class ContractCode extends Component {
         const { public_key } = data
         this.getDownloadLink()
         const cxABICode = await getContractABI(public_key)
-        console.log(cxABICode, "cx abi code")
         const srcCodeLink = await getSrcCodeLink(public_key)
         this.setState({activeLink: srcCodeLink, cxABI: cxABICode})
     }
@@ -28,7 +27,7 @@ class ContractCode extends Component {
     getDownloadLink = async () => {
         const { contract } = this.props
         const { data } = contract
-        const { public_key, newVersion } = data
+        const { public_key} = data
         if (isValidData(public_key)) {
             const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
             const updatedLink = await getVerSrcCodeLink(this.props.match.params.contractId)
@@ -37,14 +36,10 @@ class ContractCode extends Component {
     }
 
     render() {
-        console.log(this.state, "cx code state")
-        console.log(this.props, "cx code props")
         const { activeLink, updatedLink } = this.state
         const { contract } = this.props
         const { data } = contract
-        console.log(data, "render code data")
-        const { public_key, name, symbol, contractVersion, newVersion } = data
-        // const { loading, data: abiData, error } = contractAbi
+        const { name, symbol, newVersion } = data
         return (
             <div className="contents">
                 <div className="table-box">
@@ -71,9 +66,6 @@ class ContractCode extends Component {
                         <CopyButton data={JSON.stringify(this.state.cxABI)} title={'Copy ABI'} disabled={''} />
                     </div>
                     {
-                    // loading ? 
-                    // ( <LoadingComponent height="230px" /> ) 
-                    // : 
                         <div className="scroll">
                             <p className="txt" style={{ whiteSpace: 'pre' }}>
                                 {JSON.stringify(this.state.cxABI, null, '\t')}
@@ -88,11 +80,7 @@ class ContractCode extends Component {
 
 const DownloadLink = ({ link, name }) => {
     const Content = () => {
-        console.log(link, "from Download Link")
         if (link) {
-            console.log(link, "from Download Link after if")
-            console.log(name, "from Download link name")
-
             return (
                 <td>
                     <span>

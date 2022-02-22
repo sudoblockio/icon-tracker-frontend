@@ -3,8 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { SocialMediaType } from '../../../utils/const'
 import { CopyButton, TransactionLink, LoadingComponent, QrCodeButton, AddressLink, ReportButton } from '../../../components'
 import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from '../../../utils/utils'
-import { cxSocialMedia, contractTxList } from '../../../redux/store/contracts'
-import  {nodeApiUrl}  from '../../../config'
+import { cxSocialMedia } from '../../../redux/store/contracts'
 import {getBalance } from '../../../redux/store/iiss'
 
 function ContractInfo(props) {
@@ -33,15 +32,13 @@ function ContractInfo(props) {
 
     const media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     const checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
-    let website;
     const getSocialMediaLinks = async (contract) => {
         const socialLinksMap = await cxSocialMedia(contract);
         let data = socialLinksMap.data
         setVerified_Data(data)
-        let website = socialLinksMap.data.website
         media.map(site =>{
             if (checkLinks && socialLinksMap){
-                checkLinks[site] !== socialLinksMap.data[site] ? checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
+                return checkLinks[site] !== socialLinksMap.data[site] ? checkLinks[site] = socialLinksMap.data[site] : console.log("no link")
             }
         })
     }
