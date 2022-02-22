@@ -62,23 +62,14 @@ class GovernancePage extends Component {
 	}
 	async componentDidMount() {
 		const { data: preps } = await getPReps()	
-		// previous call response destructure:
 		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()	
-		// rpc calls for 3 lower boxes, total stakes and total voted above chart. 
-		// *** convert to suppy metric endpoint?
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()
-		// our endpoints
 		const _allPrep = await prepList()
-		// *** inspect deeper. Our endpoint but we aren't using the 3. 
 		const _blackPrep = await prepList(3)
-		// our endpoints
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
-		// this.publicTreasury = supplyMetrics.data.organization_supply / Math.pow(10, 18)
-
 		const { height, peer_id } = lastBlock || {}
-
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
 			if (index !== -1) {
@@ -98,9 +89,6 @@ class GovernancePage extends Component {
 		const totalSupply = Number(icxSupply || 0)
 		const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 		const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-		// const irep =  IconConverter.toNumber(convertLoopToIcxDecimal((variable || {}).irep || 0));
-		// const rrep = IconConverter.toNumber((variable || {}).rrep || 0);
-		// const glbComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
 		const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
 		const IISSData = await getIISSInfo()
 
@@ -110,9 +98,6 @@ class GovernancePage extends Component {
 			supplyMetrics,
 			totalStaked,
 			totalVoted,
-			// irep,
-			// rrep,
-			// glbComRate,
 			height,
 			stepPrice,
 			allPrep,
@@ -193,7 +178,6 @@ class GovernancePage extends Component {
 		})
 		return result
 	}
-
 	render() {
 		const {
 			totalSupply,
@@ -384,7 +368,6 @@ class TableRow extends Component {
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
-	
 	getBadge = (grade, node_state ) => {
 		const className = node_state === 'Synced' ? 'prep-tag' : node_state === 'Inactive'? 'prep-tag off' : 'prep-tag block-synced'
 		switch(grade) {
@@ -404,23 +387,19 @@ class TableRow extends Component {
 				return null		
 		}
 	}
-
 	goAddress = address => {
 		this.props.history.push('/address/' + address)
 	}
-
 	onError = () => {
 		this.setState({ logoError: true })
 	}
 	loadImage = () => {
 		this.setState({loaded: true})
 	}
-
 	render() {
 		const {
 			logoError
 		} = this.state
-
 		const {
 			totalVoted,
 			rrep,
@@ -432,7 +411,6 @@ class TableRow extends Component {
 
 			statusData,
 		} = this.props
-
 		const { 
 			// rank, 
 			logo_256, 
@@ -456,29 +434,19 @@ class TableRow extends Component {
 			// balance,
 			// unstake,
 		} = prep
-
 		const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
-		
-		// const statusCheck = statusData.filter(preps => preps.state_id <= 2 && preps.prep_name === name )
 		const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
 		const prepVoted = IconConverter.toNumber(delegated || 0)
-		// const totalBalcne = balance + prepStaked + prepUnstaked
-		// const stakedRate = !totalBalcne ? 0 : prepStaked / totalBalcne * 100
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
-
 		const badge = this.getBadge(grade, prep.node_state)
 		const rank = index + 1
-		
 		return(
-			
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
 				<td className={(Number(grade) > 2 || grade === '0x3') ? 'black' : 'on'}>
 					<ul>
 						<li>{badge}</li>
-						{/* {logo && !logoError && <li><img src={'https://img.solidwallet.io/100/' + logo} onError={this.onError} alt='logo'/></li>} */}
-						<li><img src={logo_256 ?  logo_256 :  logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/></li>
-						
+						<li>{logo_256 ? <img src={logo_256 ?  logo_256 :  logo_svg} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/>:""}</li>
 						<li>
 							<span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
 							<em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
@@ -487,11 +455,9 @@ class TableRow extends Component {
 				</td>
 				<td>{sponsored_cps_grants !== null ?'✓':'-'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
-
 				<td><span>{ productivity !== "None" ? productivity : "0.00%"}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
-				
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
 				<td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
 			</tr>
