@@ -7,7 +7,7 @@ import {transactionRecentTx} from '../../redux/store/transactions'
 function InfoSummary(props) {
 
     const [recentTx, setRecentTx] = useState("")
-    const [setIsSolo] = useState(false)
+    const [isSolo, setIsSolo] = useState(false)
     const [totalSupply, setTotalSupply] = useState("")
     const [marketCap, setMarketCap] = useState("")
     const [supplyMetrics, setSupplyMetrics] = useState("")
