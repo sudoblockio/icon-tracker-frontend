@@ -281,10 +281,43 @@ export async function getTokenTotalSupply(address){
             })
     })
 }
-
+export async function getBonders(payload){
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params: {
+                "to": "cx0000000000000000000000000000000000000000",
+                "dataType": "call",
+                "data": {
+                    "method": 'getBonderList',
+                    "params": {
+                        "address": payload.address
+                    }
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+        .then(response => {
+            resolve(response);
+        })
+        .catch(error => {
+            if (!!error.response) {
+                resolve(error);
+            }
+            else {
+                resolve({
+                    error: {
+                        message: error.message
+                    }
+                })
+            }
+        })
+    })
+}
 export async function getBondList(payload) {
-    console.log(payload, "What payload")
-    console.log("call function")
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -304,7 +337,6 @@ export async function getBondList(payload) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                console.trace(response, "What response")
                 resolve(response.data.result.bonds);
             })
             .catch(error => {
