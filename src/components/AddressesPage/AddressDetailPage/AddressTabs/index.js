@@ -15,33 +15,26 @@ import {
     NoBox,
     TabTable
 } from '../../../../components'
-import {addressRewardList, addressTokenTxList, addressVotedList, addressInternalTxList} from '../../../../redux/store/addresses'
+import { addressTxList } from '../../../../redux/store/addresses';
+import {addressRewardList, addressTokenTxList, addressVotedList, addressInternalTxList, } from '../../../../redux/store/addresses'
 import {getBondList, getDelegation} from '../../../../redux/store/iiss'
-// export const ADDRESS_TABS = [
-//     'Transactions',
-//     'Internal Transactions',
-//     'Token Transfers',
-//     'Delegations',
-//     'Voters',
-//     'Rewards',
-//     'Bonded'
-//   ];
 
 function WalletTabs(props){
 
     const [bondList, setBondList] = useState("")
-    const [intTx, setIntTx] = useState("")
+    const [addrTx, setAddrTx ] = useState("")
+    const [intTx, setIntTx] =  useState("")
     const [tokenTransfers, setTokenTransfers] = useState("")
     const [rewards, setRewards] = useState("")
     const [deleg, setDeleg] = useState("")
     const [tokenTx, setTokenTx] = useState("")
     const [voted, setVoted] = useState("")
-
-
-
     
     const checkTabs = async (address) => {
         let payload = {address: `${address}`, count:10, page:1}
+        let txData = await addressTxList(payload)
+        console.log(txData, "whole data")
+        setAddrTx(txData)
         let bondData = await getBondList(payload)
         setBondList(bondData)
         let intTxData = await addressInternalTxList(payload)
@@ -58,22 +51,10 @@ function WalletTabs(props){
         setVoted(votedData)
     }
     
-    
-
-    // async componentDidMount(){
-    //     this.checkTabs(this.props.match.params.addressId)
-    //     // let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
-    //     // this.voted = await addressVotedList(payload)
-    //     // this.tokentransfers  =  await addressTokenTxList(payload)
-    //     // this.rewards = await addressRewardList(payload)
-    //     // this.deleg = await getDelegation(payload)
-    //     // this.tokenTx = await addressTokenTxList(payload)
-        
-    // }
     useEffect(() => {
         checkTabs(props.match.params.addressId)
     },[])
-    const { on, wallet, walletTx, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, addressReward } = props
+    const { on, wallet, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, addressReward } = props
     const { loading, data } = wallet
     const { public_key} = data
 
@@ -98,13 +79,10 @@ function WalletTabs(props){
      if (bondList ? bondList.length : null) {
          TABS.push(ADDRESS_TABS[6])
      }
-    
-        
 
         return (
             <TabTable
                 {...props}
-                
                 TABS={TABS}
                 on={on}
                 loading={loading}
@@ -113,12 +91,13 @@ function WalletTabs(props){
                         case ADDRESS_TABS[0]:
                             return (
                                 <AddressTransactions
-                                    txData={walletTx}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TX}/${public_key}`) }}
-                                    txType={TX_TYPE.ADDRESS_TX}
-                                    address={public_key}
+                                txData={addrTx}
+                                goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TX}/${public_key}`) }}
+                                txType={TX_TYPE.ADDRESS_TX}
+                                address={public_key}
+                                total={addrTx.headers? addrTx.headers["x-total-count"]:0}
                                 />
-                            )
+                                )
                         case ADDRESS_TABS[1]:
                             return (
                                 <AddressInternalTransactions

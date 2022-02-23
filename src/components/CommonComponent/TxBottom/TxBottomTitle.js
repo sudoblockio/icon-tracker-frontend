@@ -20,6 +20,7 @@ class TxPageTitle extends Component {
             fromAddr,
             toAddr
         } = this.props
+        console.log(this.props, "le bottom props")
         
         const Content = () => {
             const listSizeNum = listSize || 0
@@ -92,12 +93,12 @@ class TxPageTitle extends Component {
                         </p>
                     )
                 case TX_TYPE.ADDRESS_TX:
-                    {console.log(totalSize, "from the tx")}
+                    
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
+                                Latest<em>{totalSizeNum}</em> Txn(s)  total of
+                                <em className="mint" onClick={goAllTx}>{this.props.total} transaction(s)</em>
                             </span>
                         </p>
                     )
