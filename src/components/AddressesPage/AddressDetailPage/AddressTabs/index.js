@@ -32,8 +32,8 @@ function WalletTabs(props){
     
     const checkTabs = async (address) => {
         let payload = {address: `${address}`, count:10, page:1}
+        
         let txData = await addressTxList(payload)
-        console.log(txData, "whole data")
         setAddrTx(txData)
         let bondData = await getBondList(payload)
         setBondList(bondData)

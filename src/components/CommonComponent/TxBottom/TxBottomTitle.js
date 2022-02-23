@@ -18,7 +18,7 @@ class TxPageTitle extends Component {
             totalSize,
             goAllTx,
             fromAddr,
-            toAddr
+            toAddr,
         } = this.props
         console.log(this.props, "le bottom props")
         
@@ -97,7 +97,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{totalSizeNum}</em> Txn(s)  total of
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
                                 <em className="mint" onClick={goAllTx}>{this.props.total} transaction(s)</em>
                             </span>
                         </p>

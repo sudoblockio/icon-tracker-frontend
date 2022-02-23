@@ -8,8 +8,8 @@ class TxBottomComponent extends Component {
     async componentDidMount() {
         let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
 
-        this.bondList = await getBondList(payload)
-        console.log(this.bondList, "here bond")
+        // this.bondList = await getBondList(payload)
+        // console.log(this.bondList, "here bond")
     }
     
     render() {
@@ -23,11 +23,9 @@ class TxBottomComponent extends Component {
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if(txType === 'addressBonded'){
-                // const { from_address, to_address } = data[0]
-                console.log(txData, "before return bond list")
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType} listSize={Number(txData.length)} totalSize={Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />
+                        <TxBottomTitle txType={txType}  listSize={Number(txData.length)} totalSize={Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>
@@ -50,7 +48,7 @@ class TxBottomComponent extends Component {
                 const { from_address, to_address } = data[0] || this.props.txData
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
+                        <TxBottomTitle txType={txType} total={this.props.total} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>

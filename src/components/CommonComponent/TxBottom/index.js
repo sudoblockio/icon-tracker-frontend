@@ -14,7 +14,7 @@ class TxBottom extends Component {
       tokenTotal
     } = this.props
 
-    console.log(this.props, "bonded bottom props")
+
     const tableClassName =
       TX_TYPE_DATA[txType] ?
       TX_TYPE_DATA[txType]['className'] : ''
@@ -33,6 +33,7 @@ class TxBottom extends Component {
         tableClassName={tableClassName}
         noBoxText={noBoxText}
         tokenTotal={tokenTotal}
+        total={this.props.total}
       />
     )
   }
