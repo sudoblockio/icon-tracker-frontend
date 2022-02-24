@@ -7,6 +7,7 @@ import AddressDelegation from './AddressDelegation'
 import AddressVoted from './AddressVoted'
 import AddressReward from './AddressReward'
 import AddressBonded from './AddressBonded'
+import AddressBonders from './AddressBonders'
 import {
     TX_TYPE,
     ADDRESS_TABS,
@@ -17,11 +18,12 @@ import {
 } from '../../../../components'
 import { addressTxList } from '../../../../redux/store/addresses';
 import {addressRewardList, addressTokenTxList, addressVotedList, addressInternalTxList, } from '../../../../redux/store/addresses'
-import {getBondList, getDelegation} from '../../../../redux/store/iiss'
+import {getBondList, getBonders, getDelegation} from '../../../../redux/store/iiss'
 
 function WalletTabs(props){
 
     const [bondList, setBondList] = useState("")
+    const [bonderList, setBonderList] = useState("")
     const [addrTx, setAddrTx ] = useState("")
     const [intTx, setIntTx] =  useState("")
     const [tokenTransfers, setTokenTransfers] = useState("")
@@ -32,7 +34,7 @@ function WalletTabs(props){
     
     const checkTabs = async (address) => {
         let payload = {address: `${address}`, count:10, page:1}
-        
+
         let txData = await addressTxList(payload)
         setAddrTx(txData)
         let bondData = await getBondList(payload)
@@ -49,6 +51,9 @@ function WalletTabs(props){
         setTokenTx(tokenTxData)
         let votedData = await addressVotedList(payload)
         setVoted(votedData)
+        let bonderListData = await getBonders(payload)
+        console.log(bonderListData, "bonder list data")
+        setBonderList(bonderListData)
     }
     
     useEffect(() => {
@@ -79,6 +84,9 @@ function WalletTabs(props){
      if (bondList ? bondList.length : null) {
          TABS.push(ADDRESS_TABS[6])
      }
+     if (bonderList ? bonderList.length : null) {
+        TABS.push(ADDRESS_TABS[7])
+    }
 
         return (
             <TabTable
@@ -153,6 +161,15 @@ function WalletTabs(props){
                                         address={public_key}
                                     />
                                 )
+                                case ADDRESS_TABS[7]:
+                                    return (
+                                        <AddressBonders
+                                            txData={bonderList}
+                                            goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDERS}/${public_key}`) }}
+                                            txType={TX_TYPE.ADDRESS_BONDERS}
+                                            address={public_key}
+                                        />
+                                    )
                         default:
                             return <NoBox text="No Data" />
                     }

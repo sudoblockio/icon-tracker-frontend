@@ -73,7 +73,8 @@ export const ADDRESS_TABS = [
   'Delegations',
   'Voters',
   'Rewards',
-  'Bonded'
+  'Bonded',
+  'Bonders'
 ];
 export const CONTRACT_TABS = [
   'Transactions',
@@ -283,6 +284,12 @@ export const TX_TYPE_DATA = {
     getTxList: 'tokenHoldersList',
     className: 'table-typeM',
     noBoxText: 'No Holder'
+  },
+  [TX_TYPE.ADDRESS_BONDERS]: {
+    tx: 'addressBonders',
+    getTxList: 'addressBonders',
+    className: 'table-typeM',
+    noBoxText: 'No Bonders'
   }
 };
 
