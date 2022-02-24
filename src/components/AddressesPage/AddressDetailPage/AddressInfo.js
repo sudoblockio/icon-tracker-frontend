@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsRPC, getBalanceOf} from '../../../redux/store/iiss'
+import { prepList, getPRepsRPC, getBalanceOf, getBalance} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
 
@@ -28,7 +28,7 @@ function AddressInfo(props) {
     const [links, setLinks] = useState("")
     const [totalVoted, setTotalVoted] = useState("")
     const [tokens, setTokens ] = useState("")
-    
+    const [addrBalance, setAddrBalance] = useState("")
 
 
     const {wallet, walletAddress} = props
@@ -102,11 +102,17 @@ function AddressInfo(props) {
         }) : console.log("no tokens")
     }
 
+    const getAddrBalance = async () => {
+        const balanceData = await getBalance(props.match.params.addressId)
+        setAddrBalance(balanceData)
+    }
+
     useEffect(() => {
         getTokens()
         getVoted()
         getPrepSocialMedia(props.match.params.addressId)
         setTokens(tokenMap)
+        getAddrBalance()
     }, [])
     const toggleIcxMore = () => {
         setIcxMore(!icxMore)
@@ -269,7 +275,7 @@ function AddressInfo(props) {
                                         <td colSpan="3" className="balance">
                                             <div className={icxMore ? 'on' : ''}>
                                                 <p><span><i
-                                                    className="coin icon"></i>ICX</span><span>{`${convertNumberToText(data.balance ? data.balance.toFixed() : 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
+                                                    className="coin icon"></i>ICX</span><span>{`${convertNumberToText(addrBalance ? Number(Number(addrBalance)/ Math.pow(10,18)).toFixed(3): 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
                                                     className="drop-btn" onClick={toggleIcxMore}><i
                                                     className="img"></i></em></p>
                                                 <p><span>Available</span><span>{`${convertNumberToText(Number(available).toFixed())}`}<em>ICX</em></span>
