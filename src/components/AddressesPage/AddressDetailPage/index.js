@@ -8,7 +8,7 @@ import {
     ADDRESS_TABS
 } from '../../../utils/const'
 import { addressInternalTxList, addressRewardList, addressVotedList, addressTokenTxList } from '../../../redux/store/addresses';
-import { getBondList, getDelegation } from '../../../redux/store/iiss'
+import { getBondList, getBonders, getDelegation } from '../../../redux/store/iiss'
 class AddressesDetailPage extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +25,7 @@ class AddressesDetailPage extends Component {
         this.deleg = await getDelegation(payload)
         this.tokenTx = await addressTokenTxList(payload)
         this.bondList = await getBondList(payload)
+        this.bonderList = await getBonders(payload)
         
     }
     
@@ -82,6 +83,12 @@ class AddressesDetailPage extends Component {
             TABS.push(ADDRESS_TABS[6])
             getList.push(address => {
                 getBondList({address})
+            })
+        }
+        if (this.bonderList ? this.bonderList.length : null) {
+            TABS.push(ADDRESS_TABS[7])
+            getList.push(address => {
+                getBonders({address})
             })
         }
         return (
