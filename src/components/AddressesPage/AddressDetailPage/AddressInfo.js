@@ -275,10 +275,10 @@ function AddressInfo(props) {
                                         <td colSpan="3" className="balance">
                                             <div className={icxMore ? 'on' : ''}>
                                                 <p><span><i
-                                                    className="coin icon"></i>ICX</span><span>{`${convertNumberToText(addrBalance ? Number(Number(addrBalance)/ Math.pow(10,18)).toFixed(3): 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
+                                                    className="coin icon"></i>ICX</span><span>{`${convertNumberToText(addrBalance ? Number(Number(addrBalance)/ Math.pow(10,18)).toFixed(4): 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
                                                     className="drop-btn" onClick={toggleIcxMore}><i
                                                     className="img"></i></em></p>
-                                                <p><span>Available</span><span>{`${convertNumberToText(Number(available).toFixed())}`}<em>ICX</em></span>
+                                                <p><span>Available</span><span>{`${Number(addrBalance)/Math.pow(10,18)}`}<em>ICX</em></span>
                                                 </p>
                                                 <p>
                                                     <span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span>

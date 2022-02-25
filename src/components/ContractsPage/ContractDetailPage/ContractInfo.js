@@ -55,6 +55,7 @@ function ContractInfo(props) {
         const { loading, data } = contract
         let ircVersion, reportedCount
         const Contents = () => {
+            {console.log(cxBalance, "what cx balance")}
             if (loading) {
                 return <LoadingComponent height="206px" />
             } else {
@@ -77,9 +78,9 @@ function ContractInfo(props) {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.public_key} 
                                                    <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
-                                                    {contractDetails.owner_address === walletAddress? 
+                                                     {contractDetails.owner_address === walletAddress? 
                                                     <QrCodeButton address={walletAddress} contract={data.public_key}/>  
-                                                         :""} 
+                                                          :""} 
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)
                                                     }}><i className="img"></i></span>}
