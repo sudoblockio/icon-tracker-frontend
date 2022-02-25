@@ -211,7 +211,7 @@ class TransactionInfo extends Component {
 											<tr>
 												<td>Data</td>
 												<DataCell scam={scam} dataType={data_type} dataString={dataString} imageConverterPopup={this.props.imageConverterPopup} />
-											</tr>
+										</tr>
 											:
 											null
 
