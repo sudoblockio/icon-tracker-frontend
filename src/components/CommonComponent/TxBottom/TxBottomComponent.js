@@ -5,24 +5,15 @@ import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../comp
 import { getBondList } from '../../../redux/store/iiss'
 
 class TxBottomComponent extends Component {
-    async componentDidMount() {
-        let payload = { address: `${this.props.match.params.addressId}`, page: 1, count: 10 }
-
-        // this.bondList = await getBondList(payload)
-        // console.log(this.bondList, "here bond")
-    }
     
     render() {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
         const Content = () => {
-            // if (this.props.txType === 'tokenHolders') {
-            //     this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
-    
-            // }
+            console.log(this.props, "tx comp propspos")
             if (loading) {
                 return <LoadingComponent height="349px" />
-            } else if(txType === 'addressBonded'){
+            } else if(txType === 'addressBonded' || txType === 'addressBonders'){
                 return (
                     <div className="contents">
                         <TxBottomTitle txType={txType}  listSize={Number(txData.length)} totalSize={Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />

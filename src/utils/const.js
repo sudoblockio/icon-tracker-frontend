@@ -161,7 +161,7 @@ export const TX_TYPE = {
   TRANSACTION_EVENTS: 'transactionevents',
   TRANSACTION_INTERNAL_TX: 'transactioninternaltx',
   TOKEN_HOLDERS: 'tokenholders',
-  ADDRESS_BONDED: 'addressBonded'
+  ADDRESS_BONDERS: 'addressBonders'
 };
 
 export const TX_TYPE_DATA = {

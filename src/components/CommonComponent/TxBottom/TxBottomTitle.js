@@ -51,7 +51,7 @@ class TxPageTitle extends Component {
                     return (
                         <p className="txt">
                             <span>
-                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
+                                Latest<em>{totalSizeNum}</em> of
                                 <em className="mint" onClick={goAllTx}>{_listSize} bonder(s)</em>
                             </span>
                         </p>
@@ -172,6 +172,27 @@ class TxPageTitle extends Component {
                             } produced {_listSize} contract internal transaction(s)
                         </p>
                     )
+                    case TX_TYPE.TRANSACTION_INTERNAL_TX:
+                        return (
+                            <p className="txt">
+                                {
+                                    <span>
+                                    The Contract Call From
+                                    <AddressLink to={fromAddr} label={<em className="mint ellipsis">{fromAddr}</em>} /> To
+                                    <AddressLink to={toAddr} label={<em className="mint ellipsis">{toAddr}</em>}/>
+                                    </span>
+                                } produced {_listSize} contract internal transaction(s)
+                            </p>
+                        )
+                     case TX_TYPE.ADDRESS_BONDERS:
+                            return (
+                                <p className="txt">
+                                <span>
+                                    Latest<em>{totalSizeNum}</em> of
+                                    <em className="mint" onClick={goAllTx}>{_listSize} bonder(s)</em>
+                                </span>
+                            </p>
+                            )
                 default:
                     return (
                         <p></p>

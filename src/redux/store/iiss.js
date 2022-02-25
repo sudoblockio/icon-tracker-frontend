@@ -301,7 +301,7 @@ export async function getBonders(payload){
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
         .then(response => {
-            resolve(response.result);
+            resolve(response.data.result.bonderList);
         })
         .catch(error => {
             if (!!error.response) {

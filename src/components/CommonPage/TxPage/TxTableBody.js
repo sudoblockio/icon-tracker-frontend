@@ -306,6 +306,15 @@ class TxTableBody extends Component {
 							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
 						</tr>
 					)
+					case TX_TYPE.ADDRESS_BONDERS:
+						console.log(data, "bonder bonder data")
+						return (
+							<tr>
+								<AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
+								<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
+								
+							</tr>
+						)
 				default:
 					return <tr></tr>
 			}

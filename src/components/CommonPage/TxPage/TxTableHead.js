@@ -37,6 +37,13 @@ class TxTableHead extends Component {
                                 <th>Value</th>
                             </tr>
                         )
+                        case TX_TYPE.ADDRESS_BONDERS:
+                            return (
+                                <tr>
+                                    <th>Address</th>
+                                    <th>Bond</th>
+                                </tr>
+                            )
                 case TX_TYPE.ADDRESS_TX:
                     return (
                         <tr>

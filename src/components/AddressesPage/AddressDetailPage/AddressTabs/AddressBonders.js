@@ -5,8 +5,8 @@ import {
 } from '../../../../components'
 class AddressBonders extends Component {
   
-
-    render() {
+  render() {
+      
     return <TxBottom  {...this.props}/>
   }
 }
