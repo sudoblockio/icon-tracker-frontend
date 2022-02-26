@@ -394,7 +394,7 @@ const score = {'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b
             'https://www.tracker.icon.community':'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'}
 const nodeId = {'https://berlin.net.solidwallet.io': '0x7',
                 'https://lisbon.net.solidwallet.io': '0x2',
-                'https://tracker.icon.community': 1}
+                'https://tracker.icon.community': '0x1'}
 export const VerificationScore=score[nodeApiUrl]
 export async function sendTransaction({
     fromAddress,
