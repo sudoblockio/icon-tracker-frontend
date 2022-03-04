@@ -14,7 +14,7 @@ import {CopyButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
-import { prepList, getPRepsRPC, getBalanceOf, getBalance} from '../../../redux/store/iiss'
+import { prepList, getPRepsRPC, getBalanceOf, getBalance, getStake, getBondList} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
 
@@ -29,6 +29,9 @@ function AddressInfo(props) {
     const [totalVoted, setTotalVoted] = useState("")
     const [tokens, setTokens ] = useState("")
     const [addrBalance, setAddrBalance] = useState("")
+    const [stakeAmt, setStake] = useState("")
+    const [unstakeList, setUnstakeList] = useState("")
+    const [addrBond, setAddrBond] = useState("")
 
 
     const {wallet, walletAddress} = props
@@ -37,11 +40,9 @@ function AddressInfo(props) {
         is_prep,
         prep,
         available,
-        staked,
-        unstakes,
+        
         iscore
     } = data
-    console.log(data, "what data")
     const {
         delegated,
         grade,
@@ -54,18 +55,25 @@ function AddressInfo(props) {
         validated_blocks,
         website,
     } = prep || {}
-    let unstakeSum = 0;
-        if (unstakes && unstakes.length !== 0) {
-            unstakes.map((list) => {
-                unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
-            })
-        }
+
         
     let media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"]
     let checkLinks = {twitter:"", wechat:"", youtube:"", telegram:"", steemit:"", reddit:"", keybase:"", github:"", facebook:""}
     let tokenName = {}
     let tokenMap = {};
 
+    const getAddrStake = async (addr) => {
+        const res = await getStake(addr)
+        setStake(res.stake)
+        setUnstakeList(res.unstakes)
+        
+    }
+    let unstakeSum = 0;
+    if (unstakeList && unstakeList.length !== 0) {
+        unstakeList.map((list) => {
+            unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
+        })
+    }
     const getContractName = async (tokenContract) => {
         const res = await contractDetail(tokenContract)
         tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
@@ -108,12 +116,24 @@ function AddressInfo(props) {
         setAddrBalance(balanceData)
     }
 
+    const getAddrBond = async (addr) => {
+        let payload = { address: `${addr}`, page: 1, count: 10 }
+
+        const res = await getBondList(payload)
+        console.log(Number(res[0].value) / Math.pow(10,18), "what bond res")
+        setAddrBond(Number(res[0].value) / Math.pow(10,18))
+        }
+        let totalBal;
     useEffect(() => {
         getTokens()
         getVoted()
         getPrepSocialMedia(props.match.params.addressId)
+        getAddrStake(props.match.params.addressId)
+        getAddrBond(props.match.params.addressId)
         setTokens(tokenMap)
         getAddrBalance()
+
+
     }, [])
     const toggleIcxMore = () => {
         setIcxMore(!icxMore)
@@ -133,8 +153,10 @@ function AddressInfo(props) {
     const clickShowBtn = () => {
         setShowNode("table-row")
     }
+    console.log(addrBond, "what addrBond")
 
-
+    totalBal = Number(addrBond) + Number(stakeAmt) + Number(delegated) + Number(Number(addrBalance)/Math.pow(10,18))
+    console.log(totalBal, "what total bal")
     const produced = IconConverter.toNumber(total_blocks)
     const validated = IconConverter.toNumber(validated_blocks)
     const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
@@ -276,20 +298,26 @@ function AddressInfo(props) {
                                         <td colSpan="3" className="balance">
                                             <div className={icxMore ? 'on' : ''}>
                                                 <p><span><i
-                                                    className="coin icon"></i>ICX</span><span>{`${convertNumberToText(addrBalance ? Number(Number(addrBalance)/ Math.pow(10,18)).toFixed(4): 0, icxMore ? undefined : 4)}`}<em>ICX</em></span><em
+                                                    className="coin icon"></i>ICX</span><span>{`${totalBal ? totalBal: 0}`}<em>ICX</em></span><em
                                                     className="drop-btn" onClick={toggleIcxMore}><i
                                                     className="img"></i></em></p>
                                                 <p><span>Available</span><span>{`${Number(addrBalance)/Math.pow(10,18)}`}<em>ICX</em></span>
                                                 </p>
                                                 <p>
-                                                    <span>Staked</span><span>{`${convertNumberToText(staked)}`}<em>ICX</em></span>
+                                                    <span>Staked</span><span>{`${convertNumberToText(stakeAmt/Math.pow(10,18))}`}<em>ICX</em></span>
                                                 </p>
                                                 
+                                                    <p>
                                                     <span>Unstaking</span>
                                                     <span>{`${convertNumberToText(unstakeSum)}`}<em>ICX</em></span>
+                                                    </p>
+                                                    <p>
+                                                    <span>Bonded</span>
+                                                    <span>{`${addrBond}`}<em>ICX</em></span>
+                                                    </p>
                                                     <div className="unstaking-list">
-                                                        {unstakes && unstakes.length !== 0 ?
-                                                            unstakes.map((dataList) => {
+                                                        {unstakeList && unstakeList.length !== 0 ?
+                                                            unstakeList.map((dataList) => {
 
                                                                 return (
                                                                     <p>
@@ -303,7 +331,7 @@ function AddressInfo(props) {
                                                             }) : ''}
                                                     </div>
                                                 <p>
-                                                    <span>Voted</span><span>{`${convertNumberToText(delegated / (10 ** 18))}`}<em>ICX</em></span>
+                                                    <span>Voted</span><span>{`${convertNumberToText(delegated)}`}<em>ICX</em></span>
                                                 </p>
                                                 <p>
                                                     <span>I_SCORE</span><span>{`${convertNumberToText(iscore)}`}<em>I-Score</em></span>
