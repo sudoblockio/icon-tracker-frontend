@@ -386,7 +386,8 @@ export async function getIISSInfo() {
 const score = {
     'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b7a59874f5599acd',
     'https://lisbon.net.solidwallet.io': 'cx59fd09b8fd87ad82961c29c4ff5e44773f629330',
-    'https://www.tracker.icon.community': 'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'
+    // 'https://tracker.icon.community': 'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'
+    'https://api.icon.geometry.io': 'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'
 }
 const nodeId = {
     'https://berlin.net.solidwallet.io': '0x7',
