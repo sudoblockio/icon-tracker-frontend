@@ -1,33 +1,32 @@
-import { walletApiInstance, trackerApiInstance, getWalletApiUrl } from '../api/restV3/config'
-import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from '../../utils/utils'
-import { nodeApiUrl } from '../../config';
+import {walletApiInstance, trackerApiInstance, getWalletApiUrl} from '../api/restV3/config'
+import {randomUint32, makeUrl, makeRewardsUrl, convertHexToValue} from '../../utils/utils'
+import {nodeApiUrl} from '../../config';
 import IconService from 'icon-sdk-js';
-import { requestJsonRpc } from '../../utils/connect';
+import {requestJsonRpc} from '../../utils/connect';
 
-export async function coinGeckoMarketCap () {
+export async function coinGeckoMarketCap() {
     try {
         const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
         const data = await mktcap.json()
         return data[0].market_cap
-    }
-    catch (e){
+    } catch (e) {
         console.log(e, "error")
     }
 }
-export async function coinGeckoCurrentUSD () {
-    try{
+
+export async function coinGeckoCurrentUSD() {
+    try {
         const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
         const data = await icondetail.json()
         return data.market_data.current_price.usd
-    }
-    catch (e){
+    } catch (e) {
         console.log(e, "error")
     }
-}   
+}
 
-export async function getSrcCodeLink (addr) {
+export async function getSrcCodeLink(addr) {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/contracts/${addr}`)
             .then(result => {
                 resolve(result.data.source_code_link)
@@ -35,12 +34,12 @@ export async function getSrcCodeLink (addr) {
             .catch(error => {
                 reject(error)
             })
-    });  
+    });
 }
 
-export async function getVerSrcCodeLink (addr) {
+export async function getVerSrcCodeLink(addr) {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/contracts/${addr}`)
             .then(result => {
                 resolve(result.data.verified_source_code_link)
@@ -48,7 +47,7 @@ export async function getVerSrcCodeLink (addr) {
             .catch(error => {
                 reject(error)
             })
-    });  
+    });
 }
 
 // export const getPrepStatusList = async () => {
@@ -63,7 +62,7 @@ export async function getVerSrcCodeLink (addr) {
 
 export async function getContractListCount() {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/contracts`)
             .then(result => {
                 resolve(result)
@@ -71,25 +70,25 @@ export async function getContractListCount() {
             .catch(error => {
                 reject(error)
             })
-    });  
+    });
 }
 
 export async function getTotalSupply() {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/metrics/supply`)
             .then(result => {
-                resolve(result.data.total_supply/Math.pow(10, 18))
+                resolve(result.data.total_supply / Math.pow(10, 18))
             })
             .catch(error => {
                 reject(error)
             })
-    });  
+    });
 }
 
-export async function getContractABI (addr) {
+export async function getContractABI(addr) {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/contracts/${addr}`)
             .then(result => {
                 resolve(result.data.abi)
@@ -97,14 +96,13 @@ export async function getContractABI (addr) {
             .catch(error => {
                 reject(error)
             })
-    }); 
+    });
 }
-
 
 
 export async function prepList(grade) {
     const trackerApi = await trackerApiInstance()
-    const payload = { count: 500 }
+    const payload = {count: 500}
     if (grade) {
         payload.grade = grade
     }
@@ -113,7 +111,7 @@ export async function prepList(grade) {
             .then(result => {
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
-                const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }))
+                const _data = delegatedSorted.map((item, index) => ({...item, rank: index + 1}))
                 resolve(_data)
             })
             .catch(error => {
@@ -124,7 +122,7 @@ export async function prepList(grade) {
 
 export async function getPReps() {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/preps`)
             .then(result => {
                 resolve(result)
@@ -133,12 +131,12 @@ export async function getPReps() {
                 reject(error)
             })
     });
-        
+
 }
 
 export async function getDelegationPrep(address) {
     const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         trackerApi.get(`/api/v1/preps/${address}`)
             .then(result => {
                 resolve(result)
@@ -147,10 +145,10 @@ export async function getDelegationPrep(address) {
                 reject(error)
             })
     });
-        
+
 }
 
-export async function getPublicTreasury(){
+export async function getPublicTreasury() {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -168,8 +166,7 @@ export async function getPublicTreasury(){
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -181,7 +178,7 @@ export async function getPublicTreasury(){
 }
 
 export async function getDelegation(payload) {
-    let input = payload.address? payload : {address:`${payload}`}
+    let input = payload.address ? payload : {address: `${payload}`}
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -208,7 +205,7 @@ export async function getDelegation(payload) {
             .catch(error => {
                 console.error(error, "here")
                 resolve({
-                    error: 
+                    error:
                         {message: error.message}
                 });
             })
@@ -247,15 +244,14 @@ export async function getPRepsRPC() {
 }
 
 
-
-export async function getTokenTotalSupply(address){
+export async function getTokenTotalSupply(address) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
             jsonrpc: "2.0",
             method: "icx_call",
             id: randomUint32(),
-            params : {
+            params: {
                 "to": `${address}`,
                 "dataType": "call",
                 "data": {
@@ -265,13 +261,12 @@ export async function getTokenTotalSupply(address){
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                resolve(convertHexToValue(response.data.result) );
+                resolve(convertHexToValue(response.data.result));
             })
             .catch(error => {
-                if(!!error.response){
+                if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -281,7 +276,8 @@ export async function getTokenTotalSupply(address){
             })
     })
 }
-export async function getBonders(payload){
+
+export async function getBonders(payload) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
         const param = {
@@ -300,23 +296,23 @@ export async function getBonders(payload){
             }
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
-        .then(response => {
-            resolve(response.data.result.bonderList);
-        })
-        .catch(error => {
-            if (!!error.response) {
-                resolve(error);
-            }
-            else {
-                resolve({
-                    error: {
-                        message: error.message
-                    }
-                })
-            }
-        })
+            .then(response => {
+                resolve(response.data.result.bonderList);
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error);
+                } else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
     })
 }
+
 export async function getBondList(payload) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -342,8 +338,7 @@ export async function getBondList(payload) {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -377,8 +372,7 @@ export async function getIISSInfo() {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -389,79 +383,85 @@ export async function getIISSInfo() {
     });
 }
 
-const score = {'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b7a59874f5599acd',
-                'https://lisbon.net.solidwallet.io': 'cx59fd09b8fd87ad82961c29c4ff5e44773f629330',
-            'https://www.tracker.icon.community':'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'}
-const nodeId = {'https://berlin.net.solidwallet.io': '0x7',
-                'https://lisbon.net.solidwallet.io': '0x2',
-                'https://tracker.icon.community': '0x1'}
-export const VerificationScore=score[nodeApiUrl]
+const score = {
+    'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b7a59874f5599acd',
+    'https://lisbon.net.solidwallet.io': 'cx59fd09b8fd87ad82961c29c4ff5e44773f629330',
+    'https://www.tracker.icon.community': 'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'
+}
+const nodeId = {
+    'https://berlin.net.solidwallet.io': '0x7',
+    'https://lisbon.net.solidwallet.io': '0x2',
+    // 'https://tracker.icon.community': '0x1'
+    'https://api.icon.geometry.io': '0x1'
+}
+export const VerificationScore = score[nodeApiUrl]
+
 export async function sendTransaction({
-    fromAddress,
-    contract,
-    scoreAddress = VerificationScore,
-    icxAmount = 0, 
-    zip,
-    city,
-    country,
-    discord,
-    facebook,
-    github,
-    keybase,
-    license,
-    long_description,
-    p_rep_address,
-    reddit,
-    short_description,
-    steemit,
-    team_name,
-    telegram,
-    twitter,
-    website,
-    wechat,
-    youtube,
-    source_code_location,
-    gradle_target, 
-    gradle_task,
-    github_repo, 
-    github_org, 
-    github_directory, 
-    github_release,
-    method = "verify",
-    params = { 
-    "city": `${city}`,
-    "contract_address": `${contract}`,
-    "country": `${country}`,
-    "discord": `${discord}`,
-    "facebook": `${facebook}`,
-    "github": `${github}`,
-    "keybase": `${keybase}`,
-    "license": `${license}`,
-    "long_description": `${long_description}`,
-    "p_rep_address": `${p_rep_address}`,
-    "reddit": `${reddit}`,
-    "short_description": `${short_description}`,
-    "steemit": `${steemit}`,
-    "team_name": `${team_name}`,
-    "telegram": `${telegram}`,
-    "twitter": `${twitter}`,
-    "website": `${website}`,
-    "wechat": `${wechat}`,
-    "youtube": `${youtube}`,
-    "zipped_source_code": zip,
-    "source_code_location": `${source_code_location}`,
-    "gradle_task": `${gradle_task}`,
-    "gradle_target": `${gradle_target}`,
-    "github_org": `${github_org}`,
-    "github_repo": `${github_repo}`,
-    "github_directory": `${github_directory}`,
-    "github_release": `${github_release}`
-    }
-}){
-    const nid=nodeId[nodeApiUrl]
-    const { IconConverter, IconBuilder, IconAmount } = IconService
+                                          fromAddress,
+                                          contract,
+                                          scoreAddress = VerificationScore,
+                                          icxAmount = 0,
+                                          zip,
+                                          city,
+                                          country,
+                                          discord,
+                                          facebook,
+                                          github,
+                                          keybase,
+                                          license,
+                                          long_description,
+                                          p_rep_address,
+                                          reddit,
+                                          short_description,
+                                          steemit,
+                                          team_name,
+                                          telegram,
+                                          twitter,
+                                          website,
+                                          wechat,
+                                          youtube,
+                                          source_code_location,
+                                          gradle_target,
+                                          gradle_task,
+                                          github_repo,
+                                          github_org,
+                                          github_directory,
+                                          github_release,
+                                          method = "verify",
+                                          params = {
+                                              "city": `${city}`,
+                                              "contract_address": `${contract}`,
+                                              "country": `${country}`,
+                                              "discord": `${discord}`,
+                                              "facebook": `${facebook}`,
+                                              "github": `${github}`,
+                                              "keybase": `${keybase}`,
+                                              "license": `${license}`,
+                                              "long_description": `${long_description}`,
+                                              "p_rep_address": `${p_rep_address}`,
+                                              "reddit": `${reddit}`,
+                                              "short_description": `${short_description}`,
+                                              "steemit": `${steemit}`,
+                                              "team_name": `${team_name}`,
+                                              "telegram": `${telegram}`,
+                                              "twitter": `${twitter}`,
+                                              "website": `${website}`,
+                                              "wechat": `${wechat}`,
+                                              "youtube": `${youtube}`,
+                                              "zipped_source_code": zip,
+                                              "source_code_location": `${source_code_location}`,
+                                              "gradle_task": `${gradle_task}`,
+                                              "gradle_target": `${gradle_target}`,
+                                              "github_org": `${github_org}`,
+                                              "github_repo": `${github_repo}`,
+                                              "github_directory": `${github_directory}`,
+                                              "github_release": `${github_release}`
+                                          }
+                                      }) {
+    const nid = nodeId[nodeApiUrl]
+    const {IconConverter, IconBuilder, IconAmount} = IconService
     const builder = new IconBuilder.CallTransactionBuilder;
-    const txData = builder 
+    const txData = builder
         .from(fromAddress)
         .to(scoreAddress)
         .nid(IconConverter.toBigNumber(nid))
@@ -472,15 +472,13 @@ export async function sendTransaction({
         .params(params)
         .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
         .build();
-        const convertedToRaw = IconConverter.toRawTransaction(txData)
-        let response = await requestJsonRpc(convertedToRaw)
-        let txHash = response.result
-        // setTimeout(() => {
-        //         window.location=`${window.location.origin}/transaction/${txHash}`
-        // }, 5000)
+    const convertedToRaw = IconConverter.toRawTransaction(txData)
+    let response = await requestJsonRpc(convertedToRaw)
+    let txHash = response.result
+    // setTimeout(() => {
+    //         window.location=`${window.location.origin}/transaction/${txHash}`
+    // }, 5000)
 }
-
-
 
 
 export async function getBalanceOf(owner, tokenContract) {
@@ -490,13 +488,13 @@ export async function getBalanceOf(owner, tokenContract) {
             jsonrpc: "2.0",
             method: "icx_call",
             id: randomUint32(),
-            params : {
+            params: {
                 "to": `${tokenContract}`,
                 "dataType": "call",
                 "data": {
                     "method": "balanceOf",
                     "params": {
-                            "_owner": owner
+                        "_owner": owner
                     }
                 }
             }
@@ -508,8 +506,7 @@ export async function getBalanceOf(owner, tokenContract) {
             .catch(error => {
                 if (!!error.message) {
                     resolve(error.response)
-                } 
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -566,8 +563,7 @@ export async function getLastBlock() {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -596,10 +592,10 @@ export const getFailMessage = async (txHash) => {
         const data = await response.json()
         const errorList = []
         data.result.logs.map(log => {
-             errorList.push(log.msg) 
+            errorList.push(log.msg)
         })
         return errorList;
-    } catch(e) {
+    } catch (e) {
         console.log(e, "Error from getFailMessage")
 
     }
@@ -658,9 +654,9 @@ export async function getStepPrice() {
 export async function prepMain() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v1/iiss/prep/main`, { count: 22 }))
+        trackerApi.get(makeUrl(`/v1/iiss/prep/main`, {count: 22}))
             .then(result => {
-                const { data } = result.data
+                const {data} = result.data
                 const _data = data.map((item, index) => {
                     if (!item.rank) {
                         item.rank = index + 1
@@ -678,9 +674,9 @@ export async function prepMain() {
 export async function prepSub() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(makeUrl(`/v1/iiss/prep/sub`, { count: 100 }))
+        trackerApi.get(makeUrl(`/v1/iiss/prep/sub`, {count: 100}))
             .then(result => {
-                const { data } = result.data
+                const {data} = result.data
                 const _data = data.map((item, index) => {
                     if (!item.rank) {
                         item.rank = index + 1
@@ -722,8 +718,7 @@ export async function getStake(address) {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -760,8 +755,7 @@ export async function queryIScore(address) {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -791,8 +785,7 @@ export async function getBalance(address) {
             .catch(error => {
                 if (!!error.response) {
                     resolve(error.response.data);
-                }
-                else {
+                } else {
                     resolve({
                         error: {
                             message: error.message
@@ -865,7 +858,7 @@ export async function getProposals() {
             })
             .catch(error => {
                 console.error(error)
-                resolve({ proposals: [] });
+                resolve({proposals: []});
             })
     });
 }
