@@ -6,7 +6,7 @@ import {
 class AddressBonders extends Component {
   
   render() {
-      
+      console.log(this.props, "props here")
     return <TxBottom  {...this.props}/>
   }
 }

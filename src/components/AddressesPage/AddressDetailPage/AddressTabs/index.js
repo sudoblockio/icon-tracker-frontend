@@ -24,6 +24,7 @@ function WalletTabs(props){
 
     const [bondList, setBondList] = useState("")
     const [bonderList, setBonderList] = useState("")
+    const [bondMap, setBondMap] = useState("")
     const [addrTx, setAddrTx ] = useState("")
     const [intTx, setIntTx] =  useState("")
     const [tokenTransfers, setTokenTransfers] = useState("")
@@ -32,10 +33,14 @@ function WalletTabs(props){
     const [tokenTx, setTokenTx] = useState("")
     const [voted, setVoted] = useState("")
     const [alist, setAList] = useState({})
-    
+    let bondObj={}
     const getEachBond = async (addr) => {
+        let address = addr.address
         const bondAmount = await getBondList(addr)
-        console.log(bondAmount[0]? Number(Number(bondAmount[0].value) / Math.pow(10,18)): bondAmount, "each bond amount")
+        bondAmount[0]? bondObj[address]=Number(Number(bondAmount[0].value) / Math.pow(10,18)): bondObj[address]=bondAmount
+        console.log(bondObj, "bond object")
+        setBondMap(bondObj)
+        
     }
 
     const checkTabs = async (address) => {
@@ -58,10 +63,12 @@ function WalletTabs(props){
         setVoted(votedData)
         let bonderListData = await getBonders(payload)
         setBonderList(bonderListData)
-        bonderList?bonderList.map(bonder =>{
+        if(bonderListData.length){
+        bonderListData.map(bonder =>{
             getEachBond({"address": bonder})
-        }):console.log("no bonder")
-
+        })
+    }
+        
     }
     useEffect(() => {
         checkTabs(props.match.params.addressId)
@@ -95,6 +102,7 @@ function WalletTabs(props){
         TABS.push(ADDRESS_TABS[7])
     }
 
+    
         return (
             <TabTable
                 {...props}
@@ -169,14 +177,13 @@ function WalletTabs(props){
                                     />
                                 )
                                 case ADDRESS_TABS[7]:
-                                    console.log("this case here")
                                     return (
                                         <AddressBonders
                                             txData={bonderList}
                                             goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDERS}/${public_key}`) }}
                                             txType={TX_TYPE.ADDRESS_BONDERS}
                                             address={public_key}
-                                            // bonded={}
+                                            bondMap={bondMap}
                                         />
                                     )
                         default:

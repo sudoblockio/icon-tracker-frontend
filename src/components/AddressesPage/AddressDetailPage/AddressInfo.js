@@ -41,6 +41,7 @@ function AddressInfo(props) {
         unstakes,
         iscore
     } = data
+    console.log(data, "what data")
     const {
         delegated,
         grade,

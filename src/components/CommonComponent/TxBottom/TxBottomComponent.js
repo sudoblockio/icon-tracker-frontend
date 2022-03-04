@@ -10,11 +10,12 @@ class TxBottomComponent extends Component {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
         const Content = () => {
-            console.log(this.props, "tx comp propspos")
+            console.log(this.props.bondMap, "tx comp props bonder")
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if(txType === 'addressBonded' || txType === 'addressBonders'){
                 return (
+                    
                     <div className="contents">
                         <TxBottomTitle txType={txType}  listSize={Number(txData.length)} totalSize={Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />
                         <div className="table-box">
@@ -25,7 +26,7 @@ class TxBottomComponent extends Component {
                                 <tbody>
                                     {(txData || []).map((item, index) => (
                                         
-                                        <TxTableBody key={index} totalSupply={tokenTotal} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
+                                        <TxTableBody key={index} bondMap={this.props.bondMap} totalSupply={tokenTotal} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
                                         ))}
                                 </tbody>
                             </table>

@@ -34,6 +34,7 @@ class TxBottom extends Component {
         noBoxText={noBoxText}
         tokenTotal={tokenTotal}
         total={this.props.total}
+        bondMap={this.props.bondMap?this.props.bondMap:""}
       />
     )
   }

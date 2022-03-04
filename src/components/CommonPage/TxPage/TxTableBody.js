@@ -307,13 +307,14 @@ class TxTableBody extends Component {
 						</tr>
 					)
 					case TX_TYPE.ADDRESS_BONDERS:
-						console.log(data, "bonder bonder data")
+						console.log(this.props.bondMap[data] > 0, "bonder bonder data")
 						return (
+							this.props.bondMap[data] > 0 ?
 							<tr>
 								<AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
-								<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
+								<td><span>{numberWithCommas(this.props.bondMap[data])}</span><em>ICX</em></td>
 								
-							</tr>
+							</tr> : ""
 						)
 				default:
 					return <tr></tr>
