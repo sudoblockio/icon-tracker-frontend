@@ -173,8 +173,8 @@ function AddressInfo(props) {
             const disabled = !_isNotificationAvailable
             const scam = reportedCount >= 100 ? true : false
             
-            let totalVotes; 
-            !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(Number(delegated) / Number(totalVoted)) / Math.pow(10, 18)
+            let totalVotes;
+            !Number(delegated) ? totalVotes =  0 :  totalVotes = Number(Number(delegated) / Number(totalVoted))
             return (
                 <div className="screen0">
                     <div className="wrap-holder">
@@ -253,7 +253,7 @@ function AddressInfo(props) {
                                         <td colSpan="3">
                                             <span>{convertNumberToText(delegated)}
 
-                                            <em>( {totalVotes.toString().slice(0,3)}% )</em>
+                                            <em>( {(totalVotes*100).toPrecision(3)}% )</em>
                                             </span>
                                         </td>
                                     </tr>}
