@@ -40,7 +40,6 @@ function AddressInfo(props) {
         is_prep,
         prep,
         available,
-        
         iscore
     } = data
     const {
@@ -120,9 +119,8 @@ function AddressInfo(props) {
         let payload = { address: `${addr}`, page: 1, count: 10 }
 
         const res = await getBondList(payload)
-        console.log(Number(res[0].value) / Math.pow(10,18), "what bond res")
         setAddrBond(Number(res[0].value) / Math.pow(10,18))
-        }
+    }
         let totalBal;
     useEffect(() => {
         getTokens()
@@ -155,7 +153,8 @@ function AddressInfo(props) {
     }
     console.log(addrBond, "what addrBond")
 
-    totalBal = Number(addrBond) + Number(stakeAmt) + Number(delegated) + Number(Number(addrBalance)/Math.pow(10,18))
+    totalBal = Number(addrBond/Math.pow(10,18)) + Number(addrBalance/Math.pow(10,18)) + Number(stakeAmt/Math.pow(10,18)) + Number(unstakeSum/Math.pow(10,18))
+
     console.log(totalBal, "what total bal")
     const produced = IconConverter.toNumber(total_blocks)
     const validated = IconConverter.toNumber(validated_blocks)
