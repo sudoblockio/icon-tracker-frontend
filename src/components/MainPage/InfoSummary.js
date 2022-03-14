@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect } from 'react'
 import { numberWithCommas, getIsSolo } from '../../utils/utils'
-import { getTotalSupply, coinGeckoMarketCap} from '../../redux/store/iiss'
+import {getTotalSupply, coinGeckoMarketCap, getBalance} from '../../redux/store/iiss'
 import { getSupplyMetrics } from '../../redux/api/restV3/main'
 import {transactionRecentTx} from '../../redux/store/transactions'
 
@@ -10,8 +10,12 @@ function InfoSummary(props) {
     const [isSolo, setIsSolo] = useState(false)
     const [totalSupply, setTotalSupply] = useState("")
     const [marketCap, setMarketCap] = useState("")
-    const [supplyMetrics, setSupplyMetrics] = useState("")
-    
+
+    // TODO: RM this when total supply is completely cut over
+    // https://github.com/geometry-labs/icon-tracker-frontend/issues/281
+    // const [supplyMetrics, setSupplyMetrics] = useState("")
+    const [burnData, setBurnData] = useState("")
+
     const checkData = async () => {
         const isSoloData = await getIsSolo()
         setIsSolo(isSoloData)
@@ -19,11 +23,15 @@ function InfoSummary(props) {
         const totalSupplyData = await getTotalSupply()
         setTotalSupply(totalSupplyData)
 
+        // Burn address balance
+        const burnWalletBalance = await getBalance("hx1000000000000000000000000000000000000000")
+        setBurnData(burnWalletBalance)
+
         const marketCapData = await coinGeckoMarketCap()
         setMarketCap(marketCapData)
 
-        const supplyMetricsData = await getSupplyMetrics()
-        setSupplyMetrics(supplyMetricsData)
+        // const supplyMetricsData = await getSupplyMetrics()
+        // setSupplyMetrics(supplyMetricsData)
 
         const recentTxData = await transactionRecentTx()
         setRecentTx(recentTxData? recentTxData.headers["x-total-count"] : 0)
@@ -31,8 +39,10 @@ function InfoSummary(props) {
     
     const marketCapStr = numberWithCommas(Math.floor(marketCap))
     const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
-    const icxCirculationStr = supplyMetrics ? numberWithCommas(Math.floor(supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
-    
+
+    // const icxCirculationStr = supplyMetrics ? numberWithCommas(Math.floor(supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+    const icxCirculationStr = totalSupply ? numberWithCommas(Math.floor(totalSupply - Number(burnData) / Math.pow(10, 18))) : 0;
+
     useEffect(() => {
         checkData()
     }, [])
