@@ -25,10 +25,10 @@ class QrCodeButton extends Component {
                 {/* <i className="img" /> */}
                Verify Contract
             </span>
-            :
-            <span className="qrcode" onClick={this.connectWallet}> 
-            | [#]  Connect a Wallet
-            </span>
+            : ""
+            // <span className="qrcode" onClick={this.connectWallet}>
+            // | [#]  Connect a Wallet
+            // </span>
         )
     }
 }
