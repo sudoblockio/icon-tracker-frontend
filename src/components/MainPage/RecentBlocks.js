@@ -112,7 +112,7 @@ class RecentBlocks extends Component {
                                         <p className="a">
                                             Block
                                             <em>
-                                                <BlockLink to={latest.number? numberWithCommas(latest.number)  : list[0]? numberWithCommas(list[0].number) : null}  label={ latest.number ? numberWithCommas(latest.number) : null } />
+                                                <BlockLink to={latest.number? latest.number : list[0]? numberWithCommas(list[0].number) : null}  label={ latest.number ? numberWithCommas(latest.number) : null } />
                                             </em>
                                         </p>
                                         <p className="b">
