@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect } from 'react'
 import { numberWithCommas, getIsSolo } from '../../utils/utils'
-import {getTotalSupply, coinGeckoMarketCap, getBalance} from '../../redux/store/iiss'
+import {getTotalSupply, coinGeckoCurrentUSD, getBalance} from '../../redux/store/iiss'
 import {transactionRecentTx} from '../../redux/store/transactions'
 
 function InfoSummary(props) {
@@ -8,7 +8,7 @@ function InfoSummary(props) {
     const [recentTx, setRecentTx] = useState("")
     const [isSolo, setIsSolo] = useState(false)
     const [totalSupply, setTotalSupply] = useState("")
-    const [marketCap, setMarketCap] = useState("")
+    const [currentPrice, setCurrentPrice] = useState("")
     const [burnData, setBurnData] = useState("")
 
     const checkData = async () => {
@@ -22,17 +22,16 @@ function InfoSummary(props) {
         const burnWalletBalance = await getBalance("hx1000000000000000000000000000000000000000")
         setBurnData(burnWalletBalance)
 
-        const marketCapData = await coinGeckoMarketCap()
-        setMarketCap(marketCapData)
+        const currentPrice = await coinGeckoCurrentUSD()
+        setCurrentPrice(currentPrice)
 
         const recentTxData = await transactionRecentTx()
         setRecentTx(recentTxData? recentTxData.headers["x-total-count"] : 0)
     }
-    
-    const marketCapStr = numberWithCommas(Math.floor(marketCap))
-    const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
 
+    const marketCapStr = numberWithCommas(Math.floor((totalSupply - Number(burnData) / Math.pow(10, 18)) * currentPrice))
     const icxCirculationStr = totalSupply ? numberWithCommas(Math.floor(totalSupply - Number(burnData) / Math.pow(10, 18))) : 0;
+    const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
 
     useEffect(() => {
         checkData()
