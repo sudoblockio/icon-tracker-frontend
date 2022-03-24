@@ -91,14 +91,14 @@ export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes'];
 
 export const NETWORK_HOST = {
   Mainnet: 'tracker.icon.community',
-  Lisbon: 'tracker.lisbon.geometry.io',
-  Berlin: 'tracker.berlin.geometry.io'
+  Lisbon: 'tracker.lisbon.icon.community',
+  Berlin: 'tracker.berlin.icon.community'
 };
 
 export const NETWORK_NAME = {
   'tracker.icon.community': 'Mainnet',
-  'tracker.lisbon.geometry.io': 'Lisbon',
-  'tracker.berlin.geometry.io': 'Berlin'
+  'tracker.lisbon.icon.community': 'Lisbon',
+  'tracker.berlin.icon.community': 'Berlin'
 };
 
 export const POPUP_TYPE = {
