@@ -1,0 +1,100 @@
+name: push-main-dockerhub
+
+# 1. Run unit and integration tests
+# 2. Push containers to dockerhub with tag based on incrementing build number
+# 3. Recommit an update to the chart's deployments with the updated build number in the `deployment` branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.source.outputs.TAG }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: last
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          repository: ${{ github.repository }}
+
+      - name: Tag name
+        id: source
+        run: |
+          echo ::set-output name=TAG::${{ steps.last.outputs.release }}-${{ github.run_number }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          target: prod
+          push: true
+          tags: sudoblock/icon-tacker-frontend:latest, sudoblock/icon-tacker-frontend:${{ steps.source.outputs.TAG }}
+
+  push_refs:
+    runs-on: ubuntu-latest
+    needs: docker
+    strategy:
+      matrix:
+        include:
+          - cluster: dev-lax
+            network_name: mainnet
+            network_version: v1
+          - cluster: dev-lax
+            network_name: sejong
+            network_version: v1
+
+    steps:
+
+      - name: Checkout charts repo
+        uses: actions/checkout@v2
+        with:
+          repository: sudoblockio/icon-charts
+          ref: main
+          path: charts
+          token: ${{ secrets.ICON_CHARTS_PAT }}
+
+      - name: Git pull the latest
+        run: |
+          git pull
+        working-directory: charts
+
+      - name: Update ${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }} image tags file
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          workDir: charts
+          repository: sudoblockio/icon-charts
+          valueFile: 'deployments/${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }}/frontend/tags.yaml'
+          propertyPath: 'deployment.image.tag'
+          value: ${{needs.docker.outputs.tag}}
+          branch: main
+          createPR: 'false'
+          updateFile: true
+          commitChange: false
+
+      - name: Configure credentials
+        uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.ICON_CHARTS_PAT }}'
+          global: true
+
+      - name: Commit all updates
+        run: |
+          git pull
+          git add -A
+          git commit -m "frontend ${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }} deployment image version to ${{needs.docker.outputs.tag}}"
+          git push origin
+        working-directory: charts
