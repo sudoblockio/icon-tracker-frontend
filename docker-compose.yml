@@ -3,6 +3,6 @@ services:
   frontend:
     build:
       context: ${FRONTEND_CONTEXT:-.}
-      target: test
+      target: ${FRONTEND_CONTEXT:-prod}
     ports:
       - "8080:8080"
