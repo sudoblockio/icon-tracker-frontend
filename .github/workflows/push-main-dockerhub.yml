@@ -77,7 +77,7 @@ jobs:
         with:
           workDir: charts
           repository: sudoblockio/icon-charts
-          valueFile: 'deployments/${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }}/frontend/tags.yaml'
+          valueFile: 'deployments/${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }}/tracker-frontend/tags.yaml'
           propertyPath: 'deployment.image.tag'
           value: ${{needs.docker.outputs.tag}}
           branch: main
