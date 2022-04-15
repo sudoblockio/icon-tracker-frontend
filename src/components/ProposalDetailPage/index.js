@@ -101,7 +101,8 @@ class ProposalDetailPage extends Component {
 			proposer,
 			startBlockHeight,
 			endBlockHeight,
-			vote
+			vote,
+			apply
 		} = proposal
 
 		const {
@@ -129,15 +130,20 @@ class ProposalDetailPage extends Component {
 		const _agreeLength = ((agreeLength / prepsLength) * 100).toFixed()
 		const _disagreeLength = ((disagreeLength / prepsLength) * 100).toFixed()
 		const _voteLength = ((voteLength / prepsLength) * 100).toFixed()
-		const topLength = ((noVoteLength / prepsLength) * 100).toFixed()
+		// const topLength = ((noVoteLength / prepsLength) * 100).toFixed()
+		const topLength = 100 - _voteLength
 
 		const agreeAmount = agree ? IconConverter.toNumber(agree.amount) : 0
 		const disagreeAmount = disagree ? IconConverter.toNumber(disagree.amount) : 0
 		const voteAmount = agreeAmount + disagreeAmount
 
-		const _agreeAmount = !voteAmount ? 0 : ((agreeAmount / voteAmount) * 100).toFixed()
-		const _disagreeAmount = !voteAmount ? 0 : ((disagreeAmount / voteAmount) * 100).toFixed()
-		const topAmount = !voteAmount ? 100 : 0
+		const noVoteAmount = noVote ? IconConverter.toNumber(noVote.amount) : 0
+		const totalVoteAmount = voteAmount + noVoteAmount
+
+		const _agreeAmount = (agreeAmount * 100 / totalVoteAmount).toFixed()
+		const _disagreeAmount = (disagreeAmount * 100 / totalVoteAmount).toFixed()
+		const topAmount = 100 - _agreeAmount - _disagreeAmount
+
 
 		const tabVotes = this.state.tab === PROPOSAL_TABS[1]
 
@@ -170,8 +176,12 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Status</td>
-													<td><em className={`proposal-status ${ProposalStatusClass[status]}`}>{ProposalStatus[status]}</em></td>
-												</tr>
+													<td>
+														<em className={`proposal-status ${ProposalStatusClass[status]}`}>{ProposalStatus[status]}</em>
+														{ apply &&(
+															<p style={{margin: 0}}><span className="dot" />Applied By <span className="on proposal-pointer" onClick={() => { window.open('/address/' + apply.address, '_blank') }}>{apply.name}</span>, Tx Hash <span style={{verticalAlign: "middle"}}className="link proposal-pointer" onClick={() => { window.open('/transaction/' + apply.id, '_blank') }}>{apply.id}</span>, <span>{dateToUTC(IconConverter.toNumber(apply.timestamp) / 1000)}</span></p>
+														)}
+													</td>												</tr>
 												<tr>
 													<td>Type</td>
 													<td><span>{ProposalType[type]} Proposal</span></td>
@@ -246,7 +256,7 @@ class ProposalDetailPage extends Component {
 																</div>
 																<div className="info">
 																	<p>Total Token Votes</p>
-																	<p><span><em>{convertNumberToText(convertLoopToIcxDecimal(voteAmount))} ICX</em></span> ICX</p>
+																	<p><span><em>{convertNumberToText(convertLoopToIcxDecimal(totalVoteAmount))}</em></span> ICX</p>
 																	<p className="on">Agreed<span><em>{convertNumberToText(convertLoopToIcxDecimal(agreeAmount))}</em> ICX ({_agreeAmount}%)</span></p>
 																	<p>Disagreed<span><em>{convertNumberToText(convertLoopToIcxDecimal(disagreeAmount))}</em> ICX ({_disagreeAmount}%)</span></p>
 																</div>
@@ -285,7 +295,7 @@ class ProposalDetailPage extends Component {
 														<th>Voter</th>
 														{tabVotes && <th>Votes</th>}
 														<th>Answer</th>
-														<th>Tx hash</th>
+														<th>Tx Hash</th>
 														<th>Time ({getUTCString()})</th>
 													</tr>
 												</thead>
