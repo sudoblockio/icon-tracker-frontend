@@ -37,13 +37,13 @@ class ProposalListPage extends Component {
 							<div className="no-proposal"><img src={imgNoProposal} alt='no-proposal' /></div>						
 							:	
 							<div className="proposal-list">
-								{(proposals || []).reverse().map(proposal => {
+								{(proposals || []).map(proposal => {
 									const { id, contents, vote, status, proposerName } = proposal
-									let { type, title, value } = contents
+									let { type, title } = contents
 									// check if the value is an object, if it is, format properly. 
-									if (value.toString() === "[object Object]"){
-										console.log(Object.entries(value), "incorrect format")
-									}
+									// if (value.toString() === "[object Object]"){
+									// 	console.log(Object.entries(value), "incorrect format")
+									// }
 									// const { description } = contents
 									const { agree, disagree, noVote } = vote
 									const allCount = Number(agree.count) + Number(disagree.count) + Number(noVote.count)
@@ -67,10 +67,11 @@ class ProposalListPage extends Component {
 											</li>
 											<li>
 												<h3 className="label">Value</h3>
-												<h2>{getTextFromHtml(valueToString(value)) !== '[object Object]' ?
-												getTextFromHtml(valueToString(value)) :
-												JSON.stringify(value)
-												}</h2>
+												{/*<h2>{getTextFromHtml(valueToString(value)) !== '[object Object]' ?*/}
+												{/*getTextFromHtml(valueToString(value)) :*/}
+												{/*JSON.stringify(value)*/}
+												{/*}</h2>*/}
+												<div style={{height: 70}}></div>
 												<div>
 													<div className="percent-group">
 														<h3 className="label">Voter</h3>

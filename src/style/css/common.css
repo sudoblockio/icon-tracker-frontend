@@ -1492,14 +1492,20 @@ body {
 .proposal-status.period {
   background: #006199;
 }
+.proposal-status.applied {
+  background: #2db350;
+}
 .proposal-status.disapproved {
-  background: #545454;
+  background: #ff1900;
+}
+.proposal-status.canceled {
+  background: #b3b3b3;
 }
 .proposal-status.approved {
   background: #00b8cc;
 }
-.proposal-status.canceled {
-  background: #b3b3b3;
+.proposal-status.expired {
+  background: #545454;
 }
 [class*='table-type'] .comment {
   line-height: 20px;

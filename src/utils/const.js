@@ -304,16 +304,20 @@ export const ProposalType = {
 
 export const ProposalStatus = {
   '0x0': 'Voting Period',
-  '0x1': 'Approved',
+  '0x1': 'Applied',
   '0x2': 'Disapproved',
-  '0x3': 'Canceled'
+  '0x3': 'Canceled',
+  '0x4': 'Approved',
+  '0x5': 'Expired'
 };
 
 export const ProposalStatusClass = {
   '0x0': 'period',
-  '0x1': 'approved',
+  '0x1': 'applied',
   '0x2': 'disapproved',
-  '0x3': 'canceled'
+  '0x3': 'canceled',
+  '0x4': 'approved',
+  '0x5': 'expired'
 };
 
 export const VIEW_NUMBER = false;
