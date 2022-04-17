@@ -12,15 +12,10 @@ on:
       - 'chart/**'
 
 jobs:
-#  tests:
-#  name: Run tests
-#    runs-on: ubuntu-latest
-#    steps:
 
   build:
     name: Build containers
     runs-on: ubuntu-latest
-#    needs: tests
     env:
       NETWORK_NAME: mainnet
       DEPLOYMENT_ENVIRONMENT: dev

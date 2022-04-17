@@ -181,7 +181,8 @@ class ProposalDetailPage extends Component {
 														{ apply &&(
 															<p style={{margin: 0}}><span className="dot" />Applied By <span className="on proposal-pointer" onClick={() => { window.open('/address/' + apply.address, '_blank') }}>{apply.name}</span>, Tx Hash <span style={{verticalAlign: "middle"}}className="link proposal-pointer" onClick={() => { window.open('/transaction/' + apply.id, '_blank') }}>{apply.id}</span>, <span>{dateToUTC(IconConverter.toNumber(apply.timestamp) / 1000)}</span></p>
 														)}
-													</td>												</tr>
+													</td>
+												</tr>
 												<tr>
 													<td>Type</td>
 													<td><span>{ProposalType[type]} Proposal</span></td>

@@ -1,28 +1,21 @@
 let configJson;
 
-// -------
-// Berlin
-// ----------------------------------------------------------------
-// let apiUrl = `https://tracker.berlin.geometry.io`
+let apiUrl = `https://tracker.berlin.icon.community`
 // export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
-// -------
-// Mainnet
-// ----------------------------------------------------------------
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
-// -------
-//  Prod
-// ----------------------------------------------------------------
-let apiUrl = `${window.location.origin}`
+// let apiUrl = `${window.location.origin}`
 
 let walletUrls = {
-    'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
+    // 'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
+    'https://tracker.icon.community': 'https://ctz.solidwallet.io',  // Change
     'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',  // RM
     'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',  // RM
     'https://tracker.berlin.icon.community': 'https://berlin.net.solidwallet.io',
     'https://tracker.lisbon.icon.community': 'https://lisbon.net.solidwallet.io',
     'https://tracker.sejong.icon.community': 'https://sejong.net.solidwallet.io',
-    'localhost:3000': 'https://api.icon.geometry.io'
+    'localhost:3000': 'https://api.icon.geometry.io',
+    // 'localhost:3000': 'https://berlin.net.solidwallet.io',
 }
 
 export const nodeApiUrl = walletUrls[`${apiUrl}`]

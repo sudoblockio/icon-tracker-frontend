@@ -66,8 +66,12 @@ class GovernancePage extends Component {
 		const stepPriceLoop = await getStepPrice()
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
+
 		const supplyMetrics = await getSupplyMetrics()
 		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
+
+
+
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
 			const index = preps.findIndex(p => prep.address === p.address)
