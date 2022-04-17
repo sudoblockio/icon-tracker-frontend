@@ -113,6 +113,5 @@ jobs:
           branch: main
           createPR: 'false'
           updateFile: true
-          commitChange: false
-          message: "extractor ${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }} deployment image version to ${{needs.docker.outputs.tag}}"
+          message: "tracker frontend ${{ matrix.cluster }}/${{ matrix.network_name }}-${{ matrix.network_version }} deployment image version to ${{needs.docker.outputs.tag}}"
           token: '${{ secrets.ICON_CHARTS_PAT }}'
