@@ -42,7 +42,7 @@ jobs:
           file: ./Dockerfile
           target: prod
           push: true
-          tags: sudoblock/icon-tacker-frontend:latest, sudoblock/icon-tacker-frontend:${{ steps.source.outputs.TAG }}
+          tags: sudoblock/icon-tracker-frontend:latest, sudoblock/icon-tracker-frontend:${{ steps.source.outputs.TAG }}
 
   push_refs:
     runs-on: ubuntu-latest
