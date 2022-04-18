@@ -16,8 +16,6 @@ class RecentTransactions extends Component {
             txRows: []
         }
     }
-    protocol = "wss"
-    websocket_path = "/ws/v1/transactions"
     txsocket;
     latestTx;
     recentTx;
@@ -28,7 +26,7 @@ class RecentTransactions extends Component {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
         this.setState({recentTx: this.recentTx, txRows: txListData.data})
-        this.txsocket = new WebSocket(`${this.protocol}` + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+ `${this.websocket_path}`)
+        this.txsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/transactions");
         
         this.txsocket.onopen = () => {
             this.state.txRows? this.state.txRows.push(this.state.recentTx) : console.log("no rows")
@@ -65,7 +63,7 @@ class RecentTransactions extends Component {
             if (this.state.play === false) {
                 this.txsocket.close()
             } else {
-                this.txsocket = new WebSocket(`${this.protocol}` + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+`${this.websocket_path}`);
+                this.txsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/transactions");
                 this.txsocket.onmessage = async (event) =>  {
                     this.latestTx = event.data
                     this.setState({liveTrClass:"flat"})

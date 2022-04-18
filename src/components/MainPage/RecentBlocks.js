@@ -28,7 +28,7 @@ class RecentBlocks extends Component {
         const blockListData = await blockList()
         this.recentBx = blockListData.data
         this.setState({recentBx: this.recentBx, bxRows: blockListData.data})
-        this.bxsocket = new WebSocket("wss" + `${configJson.TRACKER_API_URL.slice(5 , configJson.TRACKER_API_URL.length)}`+"/ws/v1/blocks");
+        this.bxsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/blocks");
         
         this.bxsocket.onopen = (event) => {
             console.log("connection established")
