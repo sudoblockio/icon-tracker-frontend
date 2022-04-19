@@ -247,7 +247,7 @@ class TxTableBody extends Component {
 
 					return (
 						<tr>
-							<AddressCell targetAddr={data.public_key} txType={data.txType} />
+							<AddressCell targetAddr={data.address} txType={data.txType} />
 							<AmountCell amount={data.balance} symbol="ICX" />
 							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
 							<td><span>{multiplied.toFixed(3)}</span><em>%</em></td>

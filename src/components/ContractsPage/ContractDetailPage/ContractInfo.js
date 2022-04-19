@@ -75,10 +75,10 @@ function ContractInfo(props) {
                                                 <td>Address</td>
                                                 <td colSpan="3" className={scam ? 'scam' : ''}>
                                                     {scam && <span className="scam-tag">Scam</span>}
-                                                    {data.public_key} 
-                                                   <span> <CopyButton data={data.public_key} title={'Copy Address'} isSpan /></span>
+                                                    {data.address} 
+                                                   <span> <CopyButton data={data.address} title={'Copy Address'} isSpan /></span>
                                                      {/* {contractDetails.owner_address === walletAddress?  */}
-                                                    <QrCodeButton address={walletAddress} contract={data.public_key}/>  
+                                                    <QrCodeButton address={walletAddress} contract={data.address}/>  
                                                           {/* :""}  */}
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)
@@ -111,7 +111,7 @@ function ContractInfo(props) {
                                                         </>
                                                 )
                                             })}
-                                                    <ReportButton address={data.public_key} />
+                                                    <ReportButton address={data.address} />
 
                                                     
                                                 </td>

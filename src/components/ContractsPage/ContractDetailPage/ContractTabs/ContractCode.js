@@ -17,19 +17,19 @@ class ContractCode extends Component {
     async componentDidMount() {
         const { contract } = this.props
         const { data } = contract
-        const { public_key } = data
+        const { address } = data
         this.getDownloadLink()
-        const cxABICode = await getContractABI(public_key)
-        const srcCodeLink = await getSrcCodeLink(public_key)
+        const cxABICode = await getContractABI(address)
+        const srcCodeLink = await getSrcCodeLink(address)
         this.setState({activeLink: srcCodeLink, cxABI: cxABICode})
     }
 
     getDownloadLink = async () => {
         const { contract } = this.props
         const { data } = contract
-        const { public_key} = data
-        if (isValidData(public_key)) {
-            const activeLink =  await makeDownloadLink(public_key, this.state.activeLink) 
+        const { address} = data
+        if (isValidData(address)) {
+            const activeLink =  await makeDownloadLink(address, this.state.activeLink) 
             const updatedLink = await getVerSrcCodeLink(this.props.match.params.contractId)
             this.setState({ activeLink, updatedLink })
         }

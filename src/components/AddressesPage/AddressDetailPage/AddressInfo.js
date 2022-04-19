@@ -119,7 +119,9 @@ function AddressInfo(props) {
         let payload = { address: `${addr}`, page: 1, count: 10 }
 
         const res = await getBondList(payload)
-        setAddrBond(Number(res[0].value) / Math.pow(10,18))
+        if (res.length != 0) {
+          setAddrBond(Number(res[0].value) / Math.pow(10,18))
+        }
     }
         let totalBal;
     useEffect(() => {
@@ -151,11 +153,7 @@ function AddressInfo(props) {
     const clickShowBtn = () => {
         setShowNode("table-row")
     }
-    console.log(addrBond, "what addrBond")
-
     totalBal = Number(addrBond/Math.pow(10,18)) + Number(addrBalance/Math.pow(10,18)) + Number(stakeAmt/Math.pow(10,18)) + Number(unstakeSum/Math.pow(10,18))
-
-    console.log(totalBal, "what total bal")
     const produced = IconConverter.toNumber(total_blocks)
     const validated = IconConverter.toNumber(validated_blocks)
     const productivity = !produced ? 'None' : `${(validated / produced * 100).toFixed(2)}%`
@@ -166,8 +164,8 @@ function AddressInfo(props) {
         if (loading) {
             return <LoadingComponent height="206px"/>
         } else {
-            const {public_key, nodeType, reportedCount, is_prep} = data
-            const _address = !!public_key ? public_key : error
+            const {address, nodeType, reportedCount, is_prep} = data
+            const _address = !!address ? address : error
             const isConnected = walletAddress === _address
             const disabled = !_isNotificationAvailable
             const scam = reportedCount >= 100 ? true : false
@@ -282,7 +280,7 @@ function AddressInfo(props) {
                                                   onClick={clickShowBtn}>Show node address</span>
                                             {isValidNodeType(nodeType) &&
                                             <span className="crep">{`${nodeType}`}</span>}
-                                            {!isConnected && <ReportButton address={public_key}/>}
+                                            {!isConnected && <ReportButton address={address}/>}
                                         </td>
                                     </tr>
                                     <tr className="node-addr" style={{display: showNode}}>

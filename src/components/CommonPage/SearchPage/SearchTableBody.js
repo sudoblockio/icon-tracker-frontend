@@ -23,7 +23,7 @@ class SearchTableBody extends Component {
 				case SEARCH_TYPE.CONTRACTS:
 					return (
 						<tr>
-							<td className="on"><span className="ellipsis"><AddressLink to={data.address || data.public_key} /></span></td>
+							<td className="on"><span className="ellipsis"><AddressLink to={data.address} /></span></td>
 							<td>{data.name || '-'}</td>
 							<AmountCell type="icx" amount={data.balance} symbol="ICX" />
 							<td>{numberWithCommas(data.transaction_count)}</td>

@@ -5,6 +5,9 @@ let configJson;
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
 let apiUrl = `${window.location.origin}`
+let wsURL = "wss://" + `${window.location.host}`
+// let apiUrl = 'http://149.28.67.183:8000'
+// let wsURL = 'ws://149.28.67.183:8000'
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
@@ -16,6 +19,7 @@ let walletUrls = {
     'https://tracker.sejong.icon.community': 'https://sejong.net.solidwallet.io',
     // 'localhost:3000': 'https://api.icon.geometry.io',
     'localhost:3000': 'https://berlin.net.solidwallet.io',
+    'http://149.28.67.183:8000': 'https://api.icon.geometry.io',
 }
 
 export const nodeApiUrl = walletUrls[`${apiUrl}`]
@@ -26,6 +30,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {   
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
@@ -33,6 +38,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {   
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl, 
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
@@ -40,6 +46,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {   
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
@@ -47,6 +54,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
@@ -54,6 +62,7 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
@@ -61,10 +70,10 @@ switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env
         configJson =  {   
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
+            "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
             "__IS_SOLO_VERSION": false}
         break
-
 }
 
 export default configJson;

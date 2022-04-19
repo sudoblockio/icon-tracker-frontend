@@ -23,7 +23,7 @@ class ContractTabs extends Component {
         console.log(this.props, "larger comp props")
         const { loading, data } = contract
         console.log(contract, "the contract")
-        const { public_key } = data
+        const { address } = data
         return (
             <TabTable
                 {...this.props}
@@ -36,27 +36,27 @@ class ContractTabs extends Component {
                             return (
                                 <ContractTransactions 
                                     txData={contractTx}
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_TX}/${public_key}`)}} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_TX}/${address}`)}} 
                                     txType={TX_TYPE.CONTRACT_TX}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case 1:
                             return (
                                 <ContractInternalTransactions 
                                     txData={contractInternalTx}
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_INTERNAL_TX}/${public_key}`)}} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_INTERNAL_TX}/${address}`)}} 
                                     txType={TX_TYPE.CONTRACT_INTERNAL_TX}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case 2:
                             return (
                                 <ContractTokenTransfers 
                                     txData={contractTokenTx}
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_TOKEN_TX}/${public_key}`)}} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_TOKEN_TX}/${address}`)}} 
                                     txType={TX_TYPE.CONTRACT_TOKEN_TX}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case 3:
@@ -78,7 +78,7 @@ class ContractTabs extends Component {
                             return (
                                 <ContractEvents
                                     txData={contractEvents}                            
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_EVENTS}/${public_key}`)}} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.CONTRACT_EVENTS}/${address}`)}} 
                                     txType={TX_TYPE.CONTRACT_EVENTS}
                                 />
                             )

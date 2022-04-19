@@ -75,7 +75,7 @@ function WalletTabs(props){
     },[])
     const { on, wallet, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, addressReward } = props
     const { loading, data } = wallet
-    const { public_key} = data
+    const { address} = data
     
 
     const TABS = []
@@ -115,9 +115,9 @@ function WalletTabs(props){
                             return (
                                 <AddressTransactions
                                 txData={addrTx}
-                                goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TX}/${public_key}`) }}
+                                goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TX}/${address}`) }}
                                 txType={TX_TYPE.ADDRESS_TX}
-                                address={public_key}
+                                address={address}
                                 total={addrTx.headers? addrTx.headers["x-total-count"]:0}
                                 />
                                 )
@@ -125,27 +125,27 @@ function WalletTabs(props){
                             return (
                                 <AddressInternalTransactions
                                     txData={addressInternalTx}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${public_key}`) }}
+                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_INTERNAL_TX}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[2]:
                             return (
                                 <AddressTokenTransfers
                                     txData={walletTokenTx}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${public_key}`) }}
+                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_TOKEN_TX}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_TOKEN_TX}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[3]:
                             return (
                                 <AddressDelegation
                                     txData={addressDelegation}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_DELEGATIONS}/${public_key}`) }}
+                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_DELEGATIONS}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_DELEGATION}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[4]:
@@ -153,36 +153,36 @@ function WalletTabs(props){
                             return (
                                 <AddressVoted
                                     txData={addressVoted}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_VOTED}/${public_key}`) }}
+                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_VOTED}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_VOTED}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                         case ADDRESS_TABS[5]:
                             return (
                                 <AddressReward
                                     txData={addressReward}
-                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${public_key}`) }}
+                                    goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_REWARD}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_REWARD}
-                                    address={public_key}
+                                    address={address}
                                 />
                             )
                             case ADDRESS_TABS[6]:
                                 return (
                                     <AddressBonded
                                         txData={bondList}
-                                        goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDED}/${public_key}`) }}
+                                        goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDED}/${address}`) }}
                                         txType={TX_TYPE.ADDRESS_BONDED}
-                                        address={public_key}
+                                        address={address}
                                     />
                                 )
                                 case ADDRESS_TABS[7]:
                                     return (
                                         <AddressBonders
                                             txData={bonderList}
-                                            goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDERS}/${public_key}`) }}
+                                            goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_BONDERS}/${address}`) }}
                                             txType={TX_TYPE.ADDRESS_BONDERS}
-                                            address={public_key}
+                                            address={address}
                                             bondMap={bondMap}
                                         />
                                     )
