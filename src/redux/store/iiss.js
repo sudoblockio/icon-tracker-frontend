@@ -74,16 +74,7 @@ export async function getContractListCount() {
 }
 
 export async function getTotalSupply() {
-    const trackerApi = await trackerApiInstance()
-    return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/metrics/supply`)
-            .then(result => {
-                resolve(result.data.total_supply / Math.pow(10, 18))
-            })
-            .catch(error => {
-                reject(error)
-            })
-    });
+    return new Promise(() => {});
 }
 
 export async function getContractABI(addr) {
