@@ -1,23 +1,31 @@
 let configJson;
 
+// Dev Settings - DO NOT COMMIT!
 // let apiUrl = `https://tracker.berlin.icon.community`
 // export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
-// let apiUrl = `${window.location.origin}`
-// let wsURL = "wss://" + `${window.location.host}`
 // let apiUrl = 'http://149.28.67.183:8000'
 // let wsURL = 'ws://149.28.67.183:8000'
-let apiUrl = 'http://localhost:8000'
-let wsURL = 'ws://localhost:8000'
+// let apiUrl = 'http://localhost:8000'
+// let wsURL = 'ws://localhost:8000'
+
+let apiUrl = `${window.location.origin}`
+let wsURL = "wss://" + `${window.location.host}`
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
-    'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',  // RM
-    'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',  // RM
     'https://tracker.berlin.icon.community': 'https://berlin.net.solidwallet.io',
     'https://tracker.lisbon.icon.community': 'https://lisbon.net.solidwallet.io',
     'https://tracker.sejong.icon.community': 'https://sejong.net.solidwallet.io',
+
+    'https://tracker.v2.mainnet.lax.vultr.sudoblock.dev': 'https://api.icon.community',
+    'https://tracker.v2.berlin.lax.vultr.sudoblock.dev': 'https://api.berlin.icon.community',
+    'https://tracker.v2.lisbon.lax.vultr.sudoblock.dev': 'https://api.lisbon.icon.community',
+    'https://tracker.v2.sejong.lax.vultr.sudoblock.dev': 'https://api.sejong.icon.community',
+
+    'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',  // RM
+    'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',  // RM
 }
 
 export const nodeApiUrl = walletUrls[`${apiUrl}`] || 'https://ctz.solidwallet.io/api/v3'
