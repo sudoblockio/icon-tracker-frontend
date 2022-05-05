@@ -25,7 +25,3 @@ export async function getMainChart() {
       })
   })
 }
-
-export async function getSupplyMetrics() {
-  return new Promise(() => {})
-}

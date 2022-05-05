@@ -73,9 +73,6 @@ export async function getContractListCount() {
     });
 }
 
-export async function getTotalSupply() {
-    return new Promise(() => {});
-}
 
 export async function getContractABI(addr) {
     const trackerApi = await trackerApiInstance()
@@ -167,6 +164,35 @@ export async function getPublicTreasury() {
             })
     });
 }
+
+
+export async function getTotalSupply() {
+    // return new Promise(() => {});
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            id: randomUint32(),
+            method: "icx_getTotalSupply",
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error.response.data);
+                } else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    });
+}
+
 
 export async function getDelegation(payload) {
     let input = payload.address ? payload : {address: `${payload}`}

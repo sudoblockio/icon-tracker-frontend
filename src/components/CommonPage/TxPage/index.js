@@ -11,11 +11,10 @@ import {
     NoBox,
 } from '../../../components'
 import {
-    coinGeckoCurrentUSD
+    coinGeckoCurrentUSD, getTotalSupply
 } from '../../../redux/store/iiss'
 import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
 import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
-import { getSupplyMetrics } from '../../../redux/api/restV3/main'
 
 class TxPage extends Component {
     constructor(props) {
@@ -36,9 +35,11 @@ class TxPage extends Component {
     async componentDidMount() {
         this.setInitialData(this.props.url)
         const currentUSD = await coinGeckoCurrentUSD()
-        const supplyMetrics = await getSupplyMetrics()
-        const totalsupply = supplyMetrics.data.total_supply/Math.pow(10, 8)
-        this.setState({currentUSD, totalsupply})
+        const supplyMetrics = await getTotalSupply()
+        const totalSupply = Number(supplyMetrics / Math.pow(10, 8))
+        // this.setState({currentUSD, totalsupply})
+        // this.setState({currentUSD, currentUSD})
+        this.setState({currentUSD, totalSupply})
     }
 
     componentWillReceiveProps(nextProps) {
@@ -238,7 +239,7 @@ class TxPage extends Component {
                                         txType={this.txType}
                                         address={this.urlIndex}
                                         currentUSD={this.state?this.state.currentUSD:0 }
-                                        totalSupply={this.state?this.state.totalsupply:0}
+                                        totalSupply={this.state?this.state.totalSupply:0}
                                     />
                                 ))}
                             </tbody>

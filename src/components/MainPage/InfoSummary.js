@@ -29,9 +29,10 @@ function InfoSummary(props) {
         setRecentTx(recentTxData? recentTxData.headers["x-total-count"] : 0)
     }
 
-    const marketCapStr = numberWithCommas(Math.floor((totalSupply - Number(burnData) / Math.pow(10, 18)) * currentPrice))
-    const icxCirculationStr = totalSupply ? numberWithCommas(Math.floor(totalSupply - Number(burnData) / Math.pow(10, 18))) : 0;
-    const totalSupplyStr = numberWithCommas(Math.floor(totalSupply))
+    const normalizedTotalSupply = Number(totalSupply / Math.pow(10, 18))
+    const marketCapStr = numberWithCommas(Math.floor((normalizedTotalSupply - Number(burnData) / Math.pow(10, 18)) * currentPrice))
+    const icxCirculationStr = normalizedTotalSupply ? numberWithCommas(Math.floor(normalizedTotalSupply - Number(burnData) / Math.pow(10, 18))) : 0;
+    const totalSupplyStr = numberWithCommas(Math.floor(normalizedTotalSupply))
 
     useEffect(() => {
         checkData()
