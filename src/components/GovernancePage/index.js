@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice,getPublicTreasury, prepList, getPRepsRPC  } from '../../redux/store/iiss'
-import { getSupplyMetrics } from '../../redux/api/restV3/main'
+import { getLastBlock, getStepPrice, getPublicTreasury, prepList, getPRepsRPC, getTotalSupply } from '../../redux/store/iiss'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
     LoadingComponent,
@@ -67,10 +66,8 @@ class GovernancePage extends Component {
 		const _allPrep = await prepList()
 		const _blackPrep = await prepList(3)
 
-		const supplyMetrics = await getSupplyMetrics()
-		const icxSupply = supplyMetrics.data.total_supply / Math.pow(10, 18)
-
-
+		const total_supply = await getTotalSupply()
+		const icxSupply = Number(total_supply / Math.pow(10, 18))
 
 		const { height, peer_id } = lastBlock || {}
 		const allPrep = (_allPrep || []).map(prep => {
@@ -98,7 +95,6 @@ class GovernancePage extends Component {
 		this.setState({ 
 			loading: false,
 			totalSupply, 
-			supplyMetrics,
 			totalStaked,
 			totalVoted,
 			height,
