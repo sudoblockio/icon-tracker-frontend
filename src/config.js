@@ -5,13 +5,18 @@ let configJson;
 // export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
 // let apiUrl = `https://tracker.icon.community`
 // export const nodeApiUrl = 'https://api.icon.geometry.io'
-// let apiUrl = 'http://149.28.67.183:8000'
-// let wsURL = 'ws://149.28.67.183:8000'
 // let apiUrl = 'http://localhost:8000'
 // let wsURL = 'ws://localhost:8000'
 
-let apiUrl = `${window.location.origin}`
+// let apiUrl = 'https://tracker.v2.sejong.lax.vultr.sudoblock.dev'
+// let wsURL = "wss://tracker.v2.sejong.lax.vultr.sudoblock.dev"
+
+// let apiUrl = 'https://tracker-v2-bu.sudoblock.dev/'
+// let wsURL = 'wss://tracker-v2-bu.sudoblock.dev/'
+
 let wsURL = "wss://" + `${window.location.host}`
+let apiUrl = `${window.location.origin}`
+
 
 let walletUrls = {
     'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
@@ -28,57 +33,63 @@ let walletUrls = {
     'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',  // RM
 }
 
-export const nodeApiUrl = walletUrls[`${apiUrl}`] || 'https://ctz.solidwallet.io/api/v3'
+export const nodeApiUrl = walletUrls[`${apiUrl}`] || 'https://ctz.solidwallet.io'
 
 
-switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}` ) {
+switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}`) {
     case 'dev-mainnet':
-        configJson =  {   
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
     case 'prod-mainnet' :
-        configJson =  {   
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
-            "TRACKER_API_URL": apiUrl, 
+            "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
     case 'prod-sejong' :
-        configJson =  {   
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
     case 'prod-berlin' :
-        configJson =  {
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
     case 'prod-lisbon' :
-        configJson =  {
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
     default:
-        configJson =  {   
+        configJson = {
             "VERSION": "1.0.18_20190313_0",
             "TRACKER_API_URL": apiUrl,
             "TRACKER_WS_URL": wsURL,
             "WALLET_API_URL": nodeApiUrl,
-            "__IS_SOLO_VERSION": false}
+            "__IS_SOLO_VERSION": false
+        }
         break
 }
 
