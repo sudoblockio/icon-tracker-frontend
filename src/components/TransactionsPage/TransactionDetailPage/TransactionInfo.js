@@ -70,9 +70,9 @@ class TransactionInfo extends Component {
 		}
 	}
 
-	failMsg = async (txHash) => {
-
-	}
+	// failMsg = async (txHash) => {
+	//
+	// }
 
 	onTwitterClick = async () => {
 		const text = encodeURIComponent('New transaction made #Hyperconnected_ICON ')
@@ -104,27 +104,29 @@ class TransactionInfo extends Component {
 					internalTxList,
 					txType,
 					hash,
-					receipt_status,
+					status,
 					block_timestamp,
 					block_number,
 					value,
 					step_limit,
-					receipt_step_used,
-					receipt_step_price,
+					// receipt_step_used,
+					step_price,
+					step_used,
+					// receipt_step_price,
 					data: dataString,
 					transaction_fee,
 					data_type,
 					targetContractAddr,
 					reportedCount,
-					stepUsedDetails
+					// stepUsedDetails
 				} = data
-				
-				const _stepPrice = receipt_step_price || "0"
+
+				const _stepPrice = step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
 				const stepPriceGloop = stepPriceLoop.convertUnit(9).toString()
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
-				const isFail = Number(receipt_status) === 0
-				const isSuccess = Number(receipt_status) === 1
+				const isFail = Number(status) === 0
+				const isSuccess = Number(status) === 1
 
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
@@ -187,20 +189,21 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>Fee in Step</td>
-											<td className='trans' style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>
-												{convertNumberToText(receipt_step_used)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>
-												<div>
-													{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {
-														const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()
-														return (
-															<p key={index}>
-																┗&emsp;<span className='mint'><AddressLink to={stepAddr} /></span>
-																&emsp;{convertNumberToText(_stepUsed)}
-															</p>
-														)
-													})}
-												</div>
-											</td>
+											<td>{convertNumberToText(step_used)} Steps</td>
+											{/*<td className='trans' style={{ paddingTop: stepUsedDetails ? 18 : undefined }}>*/}
+											{/*	{convertNumberToText(receipt_step_used)} Steps <em>{stepUsedDetails && 'Fee Sharing'}</em>*/}
+											{/*	<div>*/}
+											{/*		{stepUsedDetails && Object.keys(stepUsedDetails).map((stepAddr, index) => {*/}
+											{/*			const _stepUsed = IconAmount.of(stepUsedDetails[stepAddr]).toString()*/}
+											{/*			return (*/}
+											{/*				<p key={index}>*/}
+											{/*					┗&emsp;<span className='mint'><AddressLink to={stepAddr} /></span>*/}
+											{/*					&emsp;{convertNumberToText(_stepUsed)}*/}
+											{/*				</p>*/}
+											{/*			)*/}
+											{/*		})}*/}
+											{/*	</div>*/}
+											{/*</td>*/}
 										</tr>
 										<tr>
 											<td>Fee in ICX</td>
