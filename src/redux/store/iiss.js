@@ -95,7 +95,7 @@ export async function prepList(grade) {
         payload.grade = grade
     }
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/preps`)
+        trackerApi.get(`/api/v1/governance/preps`)
             .then(result => {
                 const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
                 const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
@@ -111,7 +111,7 @@ export async function prepList(grade) {
 export async function getPReps() {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/preps`)
+        trackerApi.get(`/api/v1/governance/preps`)
             .then(result => {
                 resolve(result)
             })
@@ -125,7 +125,7 @@ export async function getPReps() {
 export async function getDelegationPrep(address) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`/api/v1/preps/${address}`)
+        trackerApi.get(`/api/v1/governance/preps/${address}`)
             .then(result => {
                 resolve(result)
             })
