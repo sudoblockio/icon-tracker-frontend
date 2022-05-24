@@ -863,7 +863,7 @@ export async function getProposals() {
                 "data": {
                     "method": "getProposals",
                     "params": {
-                        "start": "0x1",
+                        "start": "0x0",
                         "size": "0xA"
                     }
                 }
