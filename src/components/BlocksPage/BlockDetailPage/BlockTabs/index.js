@@ -9,6 +9,8 @@ import {
     NoBox,
     TabTable
 } from '../../../../components'
+import TransactionInternalTransactions
+    from "../../../TransactionsPage/TransactionDetailPage/TransactionTabs/TransactionInternalTransactions";
 
 class BlockTabs extends Component {
 
@@ -28,10 +30,18 @@ class BlockTabs extends Component {
                     switch (on) {
                         case 0:
                             return (
-                                <BlockTransactions 
-                                    txData={blockTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)}} 
-                                    txType={TX_TYPE.BLOCK_TX} 
+                                <BlockTransactions
+                                    txData={blockTx}
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)}}
+                                    txType={TX_TYPE.BLOCK_TX}
+                                />
+                            )
+                        case 1:
+                            return (
+                                <TransactionInternalTransactions
+                                    txData={blockTx}
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.TRANSACTION_INTERNAL_TX}/${number}`)}}
+                                    txType={TX_TYPE.TRANSACTION_INTERNAL_TX}
                                 />
                             )
                         default:
