@@ -90,7 +90,7 @@ class TransactionInfo extends Component {
 	render()  {
 	
 		const { download } = this.state
-		const { transaction } = this.props
+		const { transaction, recentTokenTx } = this.props
 		const { loading, data } = transaction
 		console.log(this.state.msgList, "inside render msg list")
 		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
@@ -173,11 +173,19 @@ class TransactionInfo extends Component {
 											<td>{`${convertHexToValue(value)} ICX`}</td>
 										</tr>
 										{
-											(!!tokenTxList && tokenTxList.length !== 0) &&
-											<tr>
-												<td>Token transfer</td>
-												<TokenTransferCell tokenTxList={tokenTxList} />
-											</tr>
+											(recentTokenTx && recentTokenTx.data && recentTokenTx.data.length)?(
+												<tr>
+													<td>Token transfer</td>
+													<TokenTransferCell tokenTxList={recentTokenTx.data} />
+												</tr>
+											) : (
+												recentTokenTx && recentTokenTx.loading?(
+													<tr>
+														<td>Token transfer</td>
+														<td>Loading...</td>
+												</tr>
+												):null
+											)											
 										}
 										<tr>
 											<td>Step Price</td>
@@ -373,12 +381,12 @@ class TokenTransferCell extends Component {
 		return (
 			<td className="transfer">
 				{tokenTxListSliced.map((tokenTx, index) => {
-					const { fromAddr, quantity, symbol, toAddr, tokenName } = tokenTx
+					const { from_address, value_decimal, token_contract_symbol, to_address, token_contract_name } = tokenTx
 					return (
 						<p key={index}>
-							{quantity} {symbol}<em>({tokenName})</em>
-							&emsp;from &emsp;<AddressLink to={fromAddr} label={<span className="ellipsis">{fromAddr}</span>} />
-							&emsp;to&emsp;<AddressLink to={toAddr} label={<span className="ellipsis">{toAddr}</span>} />
+							{value_decimal} {token_contract_symbol}<em>({token_contract_name})</em>
+							&emsp;from &emsp;<AddressLink to={from_address} label={<span className="ellipsis">{from_address}</span>} />
+							&emsp;to&emsp;<AddressLink to={to_address} label={<span className="ellipsis">{to_address}</span>} />
 						</p>
 					)
 				})}
