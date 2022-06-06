@@ -84,7 +84,7 @@ export const CONTRACT_TABS = [
   'Read Contract',
   'Events'
 ];
-export const BLOCK_TABS = ['Transactions'];
+export const BLOCK_TABS = ['Transactions', 'Internal Transactions'];
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract'];
 export const TRANSACTION_TABS = ['Internal Transactions', 'Events'];
 export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes'];
@@ -154,6 +154,7 @@ export const TX_TYPE = {
   CONTRACT_INTERNAL_TX: 'contractinternaltx',
   CONTRACT_TOKEN_TX: 'contracttokentx',
   BLOCK_TX: 'blocktx',
+  BLOCK_INTTX: 'blockinttx',
   TRANSACTIONS: 'transactions',
   TOKEN_TRANSFERS: 'tokentransfers',
   TOKEN_TX: 'tokentx',
@@ -230,6 +231,12 @@ export const TX_TYPE_DATA = {
   [TX_TYPE.BLOCK_TX]: {
     tx: 'blockTx',
     getTxList: 'blockTxList',
+    className: 'table-typeD',
+    noBoxText: 'No Transaction'
+  },
+  [TX_TYPE.BLOCK_INTTX]: {
+    tx: 'blockIntTx',
+    getTxList: 'blockIntTxList',
     className: 'table-typeD',
     noBoxText: 'No Transaction'
   },
@@ -347,6 +354,7 @@ export const GetAddressForPrepList = {
 export const prefixes = {
   ADDRESSES_PREFIX: '/api/v1/addresses',
   TRANSACTIONS_PREFIX: '/api/v1/transactions',
+  INTERNAL_TRANSACTIONS_PREFIX: '/api/v1/transactions/internal',
   BLOCKS_PREFIX: '/api/v1/blocks',
   CONTRACTS_PREFIX: '/api/v1/contracts',
 

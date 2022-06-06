@@ -44,6 +44,10 @@ const actionTypes = {
   blockTxListFulfilled: 'BLOCL_TX_LIST_FULFILLED',
   blockTxListRejected: 'BLOCK_TX_LIST_REJECTED',
 
+  blockIntTxList: 'BLOCK_INT_TX_LIST',
+  blockIntTxListFulfilled: 'BLOCL_INT_TX_LIST_FULFILLED',
+  blockIntTxListRejected: 'BLOCK_INT_TX_LIST_REJECTED',
+
   transactionRecentTx: 'TRANSACTION_RECENT_TX',
   transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
   transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',

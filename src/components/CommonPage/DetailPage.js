@@ -48,6 +48,10 @@ class DetailPage extends Component {
             const { TABS } = this.props
             this.props.getInfo(query)
             this.setTab(findTabIndex(TABS, url.hash), query)
+            if(this.props.ROUTE === "/block") {
+                // Execute initial time for Internal TX
+                this.props.getList[1](query);
+            }
         }
     }
 
@@ -55,7 +59,7 @@ class DetailPage extends Component {
         const _index = index !== -1 ? index : 0
         this.setState({ on: _index },
             () => {
-                this.setList(this.props.getList[_index], query)
+                this.setList(this.props.getList[_index], query)                                
             }
         )
     }

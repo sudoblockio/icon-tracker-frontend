@@ -26,11 +26,18 @@ export function blockListAction(payload) {
     }
   }
 
+  export function blockIntTxListAction(payload) {
+    return {
+      type: actionTypes.blockIntTxList,
+      payload
+    }
+  }
+
 
 //   API
 
 // *update paths in utils/const to change prefixes app-wide.* 
-  const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX } = prefixes
+  const { BLOCKS_PREFIX, TRANSACTIONS_PREFIX, INTERNAL_TRANSACTIONS_PREFIX } = prefixes
 
 export async function blockList(payload) {
     console.log(payload, "block payload what format youwant")
@@ -88,12 +95,27 @@ export async function blockList(payload) {
     })
   }
 
+  export async function blockIntTxList(payload) {
+    const trackerApi = await trackerApiInstance()
+    return new Promise((resolve, reject) => {
+      trackerApi.get(`${INTERNAL_TRANSACTIONS_PREFIX}/block-number/${payload.height}`)
+        .then(result => {
+          resolve(result)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  }
+
+
 // REDUCER
 
 const initialState = {
     blocks: INITIAL_STATE['ARR'],
     block: INITIAL_STATE['OBJ'],
     blockTx: INITIAL_STATE['ARR'],
+    blockIntTx: INITIAL_STATE['ARR'],
   }
   
   export function blocksReducer(state = initialState, action) {
@@ -109,6 +131,10 @@ const initialState = {
       case actionTypes.blockTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'blockTx')
       case actionTypes.blockTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blockTx')
       case actionTypes.blockTxListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blockTx')
+
+      case actionTypes.blockIntTxList: return getState('ARR', REDUX_STEP.READY, state, action, 'blockIntTx')
+      case actionTypes.blockIntTxListFulfilled: return getState('ARR', REDUX_STEP.FULFILLED, state, action, 'blockIntTx')
+      case actionTypes.blockIntTxListRejected: return getState('ARR', REDUX_STEP.REJECTED, state, action, 'blockIntTx')
   
       default: {
         return state

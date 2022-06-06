@@ -38,6 +38,7 @@ class TxBottomComponent extends Component {
             }
             else {
                 const { from_address, to_address } = data[0] || this.props.txData
+
                 return (
                     <div className="contents">
                         <TxBottomTitle txType={txType} total={this.props.total} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />

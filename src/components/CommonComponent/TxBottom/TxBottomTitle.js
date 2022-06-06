@@ -137,6 +137,15 @@ class TxPageTitle extends Component {
                             </span>
                         </p>
                     )
+                case TX_TYPE.BLOCK_INTTX:
+                    return (
+                        <p className="txt">
+                            <span>
+                                Latest<em>{totalSizeNum}</em> Txn(s) from a total of
+                                <em className="mint" onClick={goAllTx}>{_listSize} transaction(s)</em>
+                            </span>
+                        </p>
+                    )
                 case TX_TYPE.TOKEN_TX:
                     return (
                         <p className="txt">

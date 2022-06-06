@@ -130,6 +130,17 @@ class TxTableHead extends Component {
                             <th>TxFee</th>
                         </tr>
                     )
+                case TX_TYPE.BLOCK_INTTX:
+                    return (
+                        <tr>
+                            <th>Tx Hash</th>
+                            <th>From</th>
+                            <th className="table-sign" />
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>TxFee</th>
+                        </tr>
+                    )
                 case TX_TYPE.TRANSACTIONS:
                     return (
                         <tr>

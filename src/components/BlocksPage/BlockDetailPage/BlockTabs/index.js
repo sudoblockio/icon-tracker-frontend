@@ -13,15 +13,19 @@ import {
 class BlockTabs extends Component {
 
     render() {
-        const { on, block, blockTx } = this.props
+        const { on, block, blockTx, blockIntTx } = this.props
         console.log(this.props, "tx detail props")
         const { loading, data } = block
         console.log(block, "tx detail data")
         const { number } = data
+        let BlockTabs = BLOCK_TABS;
+        if(blockIntTx && blockIntTx.data && blockIntTx.data.length === 0) {
+            BlockTabs = [BlockTabs[0]];
+        }
         return (
             <TabTable
                 {...this.props}
-                TABS={BLOCK_TABS}
+                TABS={BlockTabs}
                 on={on}
                 loading={loading}
                 TableContents={on => {
@@ -32,6 +36,14 @@ class BlockTabs extends Component {
                                     txData={blockTx} 
                                     goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)}} 
                                     txType={TX_TYPE.BLOCK_TX} 
+                                />
+                            )
+                        case 1:
+                            return (
+                                <BlockTransactions 
+                                    txData={blockIntTx} 
+                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_INTTX}/${number}`)}} 
+                                    txType={TX_TYPE.BLOCK_INTTX} 
                                 />
                             )
                         default:
