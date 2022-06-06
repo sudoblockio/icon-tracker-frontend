@@ -52,6 +52,9 @@ class DetailPage extends Component {
                 // Execute initial time for Internal TX
                 this.props.getList[1](query);
             }
+            if(this.props.ROUTE === "/transaction") {
+                this.props.tokenTxList && this.props.tokenTxList({transaction_hash: query})
+            }
         }
     }
 
