@@ -25,6 +25,9 @@ class BlockDetailPage extends Component {
         getList={[
           height => {
             this.props.blockTxList({ height, page: 1, count: 10})
+          },
+          height => {
+            this.props.blockIntTxList({ height, page: 1, count: 10})
           }
         ]}
         InfoComponent={BlockInfo}
