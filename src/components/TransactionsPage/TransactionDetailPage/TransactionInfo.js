@@ -90,7 +90,7 @@ class TransactionInfo extends Component {
 	render()  {
 	
 		const { download } = this.state
-		const { transaction, recentTokenTx } = this.props
+		const { transaction, recentTokenTx, transactionInternalTx } = this.props
 		const { loading, data } = transaction
 		console.log(this.state.msgList, "inside render msg list")
 		const toUSDNum = Number(this.state.currentUSD * convertHexToValue(this.props.transaction.data.transaction_fee) ).toFixed(4)
@@ -127,7 +127,6 @@ class TransactionInfo extends Component {
 				const stepPriceIcx = stepPriceLoop.convertUnit(IconAmount.Unit.ICX)
 				const isFail = Number(status) === 0
 				const isSuccess = Number(status) === 1
-
 				const scam = reportedCount >= 10 ?  true: false;
 				return (
 					<div className="screen0">
@@ -166,7 +165,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td>To</td>
-											<AddressRow address={data.to_address !== "None" ? data.to_address : "-"} internalTxList={internalTxList} txType={txType} targetContractAddr={targetContractAddr} download={download} />
+											<AddressRow address={data.to_address !== "None" ? data.to_address : "-"} internalTxList={(transactionInternalTx && transactionInternalTx.data) || []} txType={txType} targetContractAddr={targetContractAddr} download={download} />
 										</tr>
 										<tr>
 											<td>Amount</td>
@@ -422,12 +421,12 @@ class InternalTx extends Component {
 		return (
 			<div>
 				{internalTxListSliced.map((tx, index) => {
-					const { amount, fromAddr, toAddr } = tx
+					const { value, from_address, to_address } = tx
 					return (
 						<p key={index}>
-							┗&emsp;TRANSFER {convertNumberToText(amount)} ICX
-							&emsp;from &emsp;<span><AddressLink to={fromAddr} /></span>
-							&emsp;to&emsp;<span><AddressLink to={toAddr} /></span>
+							┗&emsp;TRANSFER {convertHexToValue(value).toFixed(4)} ICX
+							&emsp;from &emsp;<span><AddressLink to={from_address} /></span>
+							&emsp;to&emsp;<span><AddressLink to={to_address} /></span>
 						</p>
 					)
 				})}
