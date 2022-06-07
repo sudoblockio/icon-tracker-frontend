@@ -47,14 +47,14 @@ class ProposalListPage extends Component {
 									// const { description } = contents
 									const { agree, disagree, noVote } = vote
 									const allCount = Number(agree.count) + Number(disagree.count) + Number(noVote.count)
-									const allAmount = Number(agree.amount) + Number(disagree.amount)
-									// const allAmount = Number(agree.amount) + Number(disagree.amount) + Number(noVote.amount)
+									// const allAmount = Number(agree.amount) + Number(disagree.amount)
+									const allAmount = Number(agree.amount) + Number(disagree.amount) + Number(noVote.amount)
 									const agreeCount = ((agree.count / allCount) * 100).toFixed()
 									const disagreeCount = ((disagree.count / allCount) * 100).toFixed()
 									const topCount = 100 - agreeCount - disagreeCount
 									const agreeAmount = !allAmount ? 0 : ((agree.amount / allAmount) * 100).toFixed()
 									const disagreeAmount = !allAmount ? 0 : ((disagree.amount / allAmount) * 100).toFixed()
-									const topAmount = !allAmount ? 100 : 0 
+									const topAmount = 100 - agreeAmount - disagreeAmount; //!allAmount ? 100 : 0 
 									return (
 										<ul key={id} className='proposal-pointer' onClick={() => { this.props.history.push('/proposal/' + id) }}>
 											<li>
