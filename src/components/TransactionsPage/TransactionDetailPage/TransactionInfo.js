@@ -40,11 +40,13 @@ class TransactionInfo extends Component {
 		const currentUSD = await coinGeckoCurrentUSD()
 		const lastBlock = await getLastBlock()
 		this.setState({lastBlock, currentUSD})
-		const moreMsg = await getFailMessage(this.props.match.params.txHash)
-		this.setState({msgList: moreMsg})
-		
-		
+		let moreMsg = await getFailMessage(this.props.match.params.txHash)
+		if(moreMsg && Array.isArray(moreMsg) && moreMsg.length) {
+			moreMsg = moreMsg[moreMsg.length - 1]
+		}
+		this.setState({msgList: moreMsg})				
 	}
+	
 	async componentWillReceiveProps(nextProps) {
 
 		const { download } = this.state
