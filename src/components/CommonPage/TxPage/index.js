@@ -219,8 +219,12 @@ class TxPage extends Component {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
         const noBoxText = this.getTxTypeData()['noBoxText'] || ''
-        const { loading, page, count, data, listSize, totalSize } = tx
+        const { loading, page, count, data, listSize } = tx
+        let totalSize = tx.totalSize;
         const noData = !(data && data.length !== 0)
+        if(!noData) {
+            totalSize = data[0].number || totalSize;
+        }
         const TableContent = () => {
             if (noData) {
                 return <NoBox text={noBoxText} />
