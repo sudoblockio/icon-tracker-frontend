@@ -326,7 +326,7 @@ export function makeTokenUrl(url, payload) {
         result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
         
     })
-    result = result + "&contract_type=IRC2"
+    result = result + "&is_token=true"
     return result
 }
 
