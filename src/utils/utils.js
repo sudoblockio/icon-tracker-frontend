@@ -357,7 +357,6 @@ export function makeRewardsUrl(url, payload) {
     return result
 }
 
-
 export function randomUint32() {
     if (window && window.crypto && window.crypto.getRandomValues && Uint32Array) {
         var o = new Uint32Array(1)
