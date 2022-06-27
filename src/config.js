@@ -11,35 +11,41 @@ let configJson;
 // let apiUrl = 'https://tracker.v2.sejong.lax.vultr.sudoblock.dev'
 // let wsURL = "wss://tracker.v2.sejong.lax.vultr.sudoblock.dev"
 
-// let apiUrl = 'https://tracker.v2.sejong.sng.vultr.sudoblock.dev'
-// let wsURL = 'wss://tracker-v2-bu.sudoblock.dev/'
+// let apiUrl = 'https://tracker.v2.mainnet.sng.vultr.icon.community/'
+// let wsURL = 'wss://tracker.v2.mainnet.sng.vultr.icon.community/'
 
 let wsURL = "wss://" + `${window.location.host}`
 let apiUrl = `${window.location.origin}`
 
+if (apiUrl === 'http://localhost:3000') {
+    // Testing endpoint
+    apiUrl = 'https://tracker.v2.mainnet.ams.vultr.icon.community/'
+}
 
 let walletUrls = {
-    'https://tracker.icon.community': 'https://api.icon.geometry.io',  // Change
-    'https://tracker.berlin.icon.community': 'https://berlin.net.solidwallet.io',
-    'https://tracker.lisbon.icon.community': 'https://lisbon.net.solidwallet.io',
-    'https://tracker.sejong.icon.community': 'https://sejong.net.solidwallet.io',
+    'https://tracker.icon.community': 'https://api.icon.community',
+    'https://tracker.berlin.icon.community': 'https://api.berlin.icon.community',
+    'https://tracker.lisbon.icon.community': 'https://api.lisbon.icon.community',
+    'https://tracker.sejong.icon.community': 'https://api.sejong.icon.community',
 
     // Singapore regional prod
-    'https://tracker.v2.mainnet.sng.vultr.icon.community': 'https://api.icon.community',
-    'https://tracker.v2.berlin.sng.vultr.icon.community': 'https://api.berlin.icon.community',
-    'https://tracker.v2.lisbon.sng.vultr.icon.community': 'https://api.lisbon.icon.community',
-    'https://tracker.v2.sejong.sng.vultr.icon.community': 'https://api.sejong.icon.community',
+    'https://tracker.v2.mainnet.sng.vultr.icon.community': 'https://api.mainnet.sng.vultr.icon.community',
+    'https://tracker.v2.berlin.sng.vultr.icon.community': 'https://api.berlin.sng.vultr.icon.community',
+    'https://tracker.v2.lisbon.sng.vultr.icon.community': 'https://api.lisbon.sng.vultr.icon.community',
+    'https://tracker.v2.sejong.sng.vultr.icon.community': 'https://api.sejong.sng.vultr.icon.community',
     // Amsterdam regional prod
-    'https://tracker.v2.mainnet.ams.vultr.icon.community': 'https://api.icon.community',
-    'https://tracker.v2.berlin.ams.vultr.icon.community': 'https://api.berlin.icon.community',
-    'https://tracker.v2.lisbon.ams.vultr.icon.community': 'https://api.lisbon.icon.community',
-    'https://tracker.v2.sejong.ams.vultr.icon.community': 'https://api.sejong.icon.community',
+    'https://tracker.v2.mainnet.ams.vultr.icon.community': 'https://api.mainnet.ams.vultr.icon.community',
+    'https://tracker.v2.berlin.ams.vultr.icon.community': 'https://api.berlin.ams.vultr.icon.community',
+    'https://tracker.v2.lisbon.ams.vultr.icon.community': 'https://api.lisbon.ams.vultr.icon.community',
+    'https://tracker.v2.sejong.ams.vultr.icon.community': 'https://api.sejong.ams.vultr.icon.community',
 
     'https://tracker.berlin.geometry.io': 'https://berlin.net.solidwallet.io',  // RM
     'https://tracker.lisbon.geometry.io': 'https://lisbon.net.solidwallet.io',  // RM
+
+    'localhost:3000': 'https://ctz.solidwallet.io',
 }
 
-export const nodeApiUrl = walletUrls[`${apiUrl}`] || 'https://ctz.solidwallet.io'
+export const nodeApiUrl = walletUrls[`${apiUrl}`] || 'https://api.icon.community'
 
 
 switch (`${process.env.REACT_APP_DEPLOYMENT_ENVIRONMENT}` + `-` + `${process.env.REACT_APP_NETWORK_NAME}`) {
