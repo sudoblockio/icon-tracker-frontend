@@ -31,7 +31,7 @@ class SearchTableDesc extends Component {
                 case SEARCH_TYPE.TOKENS:
                     return (
                         <span className="cont right">
-                            A total of {_listSize} IRC2 Token
+                            A total of {_listSize} Token
                             Contract(s) found
                         </span>
                     )
