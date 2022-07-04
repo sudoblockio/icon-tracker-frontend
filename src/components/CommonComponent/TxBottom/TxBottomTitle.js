@@ -98,7 +98,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{totalSizeNum}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{this.props.total} transaction(s)</em>
+                                <em className="mint" onClick={goAllTx}>{Number(this.props.total).toLocaleString('en-US')} transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -116,7 +116,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} token transfer(s)</em>
+                                <em className="mint" onClick={goAllTx}>{_listSize.toLocaleString('en-US')} token transfer(s)</em>
                             </span>
                         </p>
                     )
