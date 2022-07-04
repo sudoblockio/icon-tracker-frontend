@@ -19,6 +19,9 @@ class SearchInput extends Component {
   handleChange = (e) => {
     const { name, value } = e.target
     const prevSearch = this.state[name]
+    if(this.props.handleChange){
+      this.props.handleChange(value);  
+    }
     this.setState({ [name]: value }, () => {
       if (prevSearch !== '' && value === '') {
         this.handleClick()

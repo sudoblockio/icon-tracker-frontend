@@ -1,4 +1,4 @@
-  import React, { Component } from 'react'
+import React, { Component } from 'react'
 import queryString from 'query-string'
 import SearchTableHead from './SearchTableHead'
 import SearchTableBody from './SearchTableBody'
@@ -32,7 +32,6 @@ class SearchPage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props, "search page props")
         this.setInitialData(this.props.url)
     }
 
@@ -41,7 +40,7 @@ class SearchPage extends Component {
         const { pathname: nextPath } = nextProps.url
         const { search: currentSearch } = this.props.url
         const { search: nextSearch } = nextProps.url
-        if (currentPath !== nextPath || currentSearch !== nextSearch) {
+        if (currentPath !== nextPath || currentSearch !== nextSearch && this.state.keyword.length===0) {
             this.setInitialData(nextProps.url)
         }
     }
@@ -137,14 +136,23 @@ class SearchPage extends Component {
         if (keyword === '' && nextSearch === '') {
             return
         }
+        
         this.setState({ keyword: nextSearch }, () => {
             const { status } = this.state
             const count = this.getCount()
             const url = this.makeUrl(1, { count, status, keyword: nextSearch })
-            this.props.history.push(url)
+            this.props.history.push(url);
         })
+        
     }
-
+    getSearchedList=(nextSearch)=>{
+        if(this.props.type==="contract"){
+            this.props.contractList({search:nextSearch});
+        }else{
+            this.props.tokenList({search:nextSearch,limit:10});
+        }
+        
+    }
     makeUrl = (page, query) => {
         let url = `/${this.searchType}`
 
@@ -187,6 +195,7 @@ class SearchPage extends Component {
 
         const { keyword, status } = this.state
         const { loading, data, page, listSize, totalSize, count } = list
+        console.log(list,"listData============>")
         const noData = this.getNoData(data, status)
 
         const TableContent = () => {
@@ -259,12 +268,15 @@ class SearchPage extends Component {
                                     address={this.props.wallet}
                                 />
                             </p>
-                            {/* <SearchInput
+                            
+                            <SearchInput
                                 id="sub-search-input"
                                 placeholder={placeholder}
                                 searchKeyword={keyword}
-                                changeSearch={this.getListBySearch}
-                            /> */}
+                                changeSearch={this.getSearchedList}
+                                handleChange={this.getListBySearch}
+                            />
+                            
                             <div className={contentsClassName}>
                                 {TableContent()}
                             </div>

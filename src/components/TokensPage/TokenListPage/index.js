@@ -5,7 +5,7 @@ class TokenListPage extends Component {
     
     render() {
         
-        return <SearchPage {...this.props} />
+        return <SearchPage {...this.props} type="token"/>
     }
 }
 export default TokenListPage
