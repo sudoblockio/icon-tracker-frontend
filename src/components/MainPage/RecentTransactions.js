@@ -88,7 +88,7 @@ class RecentTransactions extends Component {
         const loading = false;
         const list = this.state.recentTx ? this.state.recentTx.slice(1, 8) : this.recentTx  ?  this.recentTx.slice(1,8) : []
         const latest = this.state.liveTableRow
-        const isSuccess = latest.receipt_status? Number(latest.receipt_status) === 1 : 1
+        const isSuccess = latest.status ? Number(latest.status) === 1 : 1
         return (
             <li className="right">
                 <p className="title">Transactions</p>
@@ -131,8 +131,8 @@ class RecentTransactions extends Component {
                                         </p> 
                              </li>
                             {list.map((tx, index) => {
-                                const { hash, value, transaction_fee, receipt_status } = tx
-                                const isSuccess = Number(receipt_status) === 1
+                                const { hash, value, transaction_fee, status } = tx
+                                const isSuccess = Number(status) === 1
                                 return (
                                     <li key={index}>
                                         <p className={`icon ${!isSuccess ? 'fail' : ''}`}>T</p>

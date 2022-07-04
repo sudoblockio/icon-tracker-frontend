@@ -95,7 +95,7 @@ class TxTableBody extends Component {
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
-			const isError = data.receipt_status === 0
+			const isError = Number(data.status) === 0
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
 					return (
