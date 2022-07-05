@@ -12,7 +12,9 @@ import {
 	NotFoundPage,
 	LoadingComponent
 } from '../../components';
-
+import { blockInfo } from '../../redux/store/blocks';
+import { getLastBlock } from '../../redux/store/iiss';
+import moment from 'moment';
 class ProposalDetailPage extends Component {
 
 	constructor(props) {
@@ -21,7 +23,10 @@ class ProposalDetailPage extends Component {
 			loading: true,
 			error: false,
 			proposal: {},
-			tab: this.getTab(this.props.url.hash)
+			tab: this.getTab(this.props.url.hash),
+			startTimeDate:'',
+			currentBlockHeight:'',
+			endingBlockHeight:''
 		}
 	}
 
@@ -29,14 +34,35 @@ class ProposalDetailPage extends Component {
 		const id = this.getId(this.props.url.pathname)
 		try {
 			const proposal = await getProposal(id)
-			this.setState({ loading: false, proposal })
+			const data = await getLastBlock();
+			console.log(data.height,"height======>")
+			this.setState({ currentBlockHeight:data.height,loading: false, proposal },()=>{
+				this.getStartBlockHeight();
+				this.getLastBlockHeight();
+			})
 		}
 		catch (e) {
 			console.error(e)
 			this.setState({ error: id })
 		}
 	}
-
+	getLastBlockHeight=()=>{
+		const difference=Number(this.state.currentBlockHeight)-Number(IconConverter.toNumber(this.state.proposal.endBlockHeight));
+		const sum=difference*2;
+		const latestDate=new Date().getTime();
+		const totalSum=sum+latestDate;
+		const date = new Date(totalSum);
+		this.setState({endingBlockHeight:date})
+	}
+	getStartBlockHeight=async()=>{
+		const payload={
+			height:IconConverter.toNumber(this.state.proposal.startBlockHeight)
+		}
+		const res=await blockInfo(payload);
+		const date = new Date(res.data.timestamp/1e6*1000);
+		this.setState({startTimeDate:date});
+		
+	}
 	async componentWillReceiveProps(nextProps) {
 		// const prev = this.getId(this.props.url.pathname)
 		// const next = this.getId(nextProps.url.pathname)
@@ -120,7 +146,7 @@ class ProposalDetailPage extends Component {
 
 		const start = startBlockHeight ? IconConverter.toNumber(startBlockHeight) : '-'
 		const end = endBlockHeight ? IconConverter.toNumber(endBlockHeight) : '-'
-
+		
 		const agreeLength = agree ? agree.list.length : 0
 		const disagreeLength = disagree ? disagree.list.length : 0
 		const noVoteLength = noVote ? noVote.list.length : 0
@@ -198,7 +224,9 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>Start Blockheight</td>
 													{!isNaN(start) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}</span> </td>
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}{"   "}
+														 {new Date(this.state.startTimeDate).toDateString()} {new Date(this.state.startTimeDate).toLocaleTimeString()} UTC
+														 </span> </td>
 														:
 														<td><span>-</span></td>
 													}
@@ -206,7 +234,9 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>End Blockheight</td>
 													{!isNaN(end) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end}</span> </td>
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end} {"    "}
+														{new Date(this.state.endingBlockHeight).toDateString()} {new Date(this.state.endingBlockHeight).toLocaleTimeString()} ~UTC
+														</span> </td>
 														:
 														<td><span>-</span></td>
 													}
