@@ -1,4 +1,4 @@
-name: push-main-dockerhub
+name: push-main
 
 # 1. Run unit and integration tests
 # 2. Push containers to dockerhub with tag based on incrementing build number
@@ -53,7 +53,7 @@ jobs:
         include:
           # Only push AMS to Berlin
 
-          - cluster: prod-ams
+          - cluster: prod-sng
             network_name: berlin
             network_version: v2
 
