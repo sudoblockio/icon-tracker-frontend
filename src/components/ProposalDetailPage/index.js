@@ -234,8 +234,8 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>End Blockheight</td>
 													{!isNaN(end) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end} {"    "}
-														{new Date(this.state.endingBlockHeight).toDateString()} {new Date(this.state.endingBlockHeight).toLocaleTimeString()} ~UTC
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end} {"~"}
+														{new Date(this.state.endingBlockHeight).toDateString()} {new Date(this.state.endingBlockHeight).toLocaleTimeString()} UTC
 														</span> </td>
 														:
 														<td><span>-</span></td>
