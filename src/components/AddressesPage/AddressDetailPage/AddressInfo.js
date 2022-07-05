@@ -295,7 +295,7 @@ function AddressInfo(props) {
                                         <td colSpan="3" className="balance">
                                             <div className={icxMore ? 'on' : ''}>
                                                 <p><span><i
-                                                    className="coin icon"></i>ICX</span><span>{`${totalBal ? totalBal: 0}`}<em>ICX</em></span><em
+                                                    className="coin icon"></i>ICX</span><span>{`${totalBal ? totalBal.toFixed(4): 0}`}<em>ICX</em></span><em
                                                     className="drop-btn" onClick={toggleIcxMore}><i
                                                     className="img"></i></em></p>
                                                 <p><span>Available</span><span>{`${Number(addrBalance)/Math.pow(10,18)}`}<em>ICX</em></span>
