@@ -271,6 +271,9 @@ input.txt-type-search {
   color: #4d4d4d;
   padding: 12px 10px 12px;
 }
+input#sub-search-input {
+margin-top: -41px;
+}
 input.txt-type-search:hover {
   border: 1px solid #4d4d4d;
 }
@@ -4297,6 +4300,10 @@ input[type='text']:focus.over {
   height: 28px;
   cursor: pointer;
   z-index: 1;
+  
+}
+span#search-icon {
+  margin-top: -26px;
 }
 .content-wrap .search-group span .img {
   width: 16px;

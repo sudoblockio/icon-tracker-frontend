@@ -19,6 +19,9 @@ class SearchInput extends Component {
   handleChange = (e) => {
     const { name, value } = e.target
     const prevSearch = this.state[name]
+    if(this.props.handleChange){
+      this.props.handleChange(value);  
+    }
     this.setState({ [name]: value }, () => {
       if (prevSearch !== '' && value === '') {
         this.handleClick()
@@ -55,7 +58,7 @@ class SearchInput extends Component {
     return (
       <div className="search-holder">
         <div className="search-group">
-          <input name="search" type="text" className="txt-type-search"
+          <input name="search" type="text" className="txt-type-search search-type-fix"
             id={id}
             placeholder={placeholder}
             value={search}
@@ -63,7 +66,7 @@ class SearchInput extends Component {
             onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}
           />
-          <span onClick={this.handleClick}><em className="img"></em></span>
+          <span id={'search-icon'} onClick={this.handleClick}><em className="img search-icon-fix"></em></span>
         </div>
       </div>
     )
