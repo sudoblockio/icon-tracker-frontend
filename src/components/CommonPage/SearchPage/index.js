@@ -32,7 +32,11 @@ class SearchPage extends Component {
     }
 
     componentDidMount() {
-        this.setInitialData(this.props.url)
+        if(this.props.type==="contract"){
+            this.props.contractList({search:this.state.keyword,count:25});
+        }else{
+            this.props.tokenList({search:this.state.keyword,limit:25});
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -41,7 +45,7 @@ class SearchPage extends Component {
         const { search: currentSearch } = this.props.url
         const { search: nextSearch } = nextProps.url
         if (currentPath !== nextPath || currentSearch !== nextSearch && this.state.keyword.length===0) {
-            this.setInitialData(nextProps.url)
+           this.setInitialData(nextProps.url)
         }
     }
 
@@ -73,7 +77,7 @@ class SearchPage extends Component {
     getList = (page, count, status, keyword) => {
         const query = {
             page: isNumeric(page) ? page : 1,
-            count: isNumeric(count) ? count : 25,
+            count: 25,
         }
 
         if (!!status && !!CONTRACT_STATUS_NUM[status]) {
@@ -112,7 +116,8 @@ class SearchPage extends Component {
         const count = this.getCount()
         const { status, keyword } = this.state
         const url = this.makeUrl(page, { count, status, keyword })
-        this.props.history.push(url)
+        this.props.history.push(url);
+        // this.props.contractList({search:this.state.keyword,limit:25,skip:page});
     }
 
     getListByCount = count => {
@@ -139,19 +144,20 @@ class SearchPage extends Component {
         
         this.setState({ keyword: nextSearch }, () => {
             const { status } = this.state
-            const count = this.getCount()
+            const count = this.getCount();
             const url = this.makeUrl(1, { count, status, keyword: nextSearch })
             this.props.history.push(url);
         })
         
     }
     getSearchedList=(nextSearch)=>{
-        if(this.props.type==="contract"){
-            this.props.contractList({search:nextSearch});
-        }else{
-            this.props.tokenList({search:nextSearch,limit:10});
+        if(this.state.keyword.trim().length>=3){
+            if(this.props.type==="contract" ){
+                this.props.contractList({search:nextSearch,count:100});
+            }else{
+                this.props.tokenList({search:nextSearch,limit:100});
+            }
         }
-        
     }
     makeUrl = (page, query) => {
         let url = `/${this.searchType}`
@@ -195,7 +201,6 @@ class SearchPage extends Component {
 
         const { keyword, status } = this.state
         const { loading, data, page, listSize, totalSize, count } = list
-        console.log(list,"listData============>")
         const noData = this.getNoData(data, status)
 
         const TableContent = () => {
@@ -213,7 +218,17 @@ class SearchPage extends Component {
                                 />
                             </thead>
                             <tbody>
-                                {data.map((item, index) => (
+                                {this.props.type==="contract"  && this.props.contracts.data.map((item, index) => (
+                                    <SearchTableBody
+                                        key={index}
+                                        data={item}
+                                        searchType={this.searchType}
+                                        index={index}
+                                        count={count}
+                                        page={page}
+                                    />
+                                ))}
+                                {this.props.type==="token"  && this.props.tokens.data.map((item, index) => (
                                     <SearchTableBody
                                         key={index}
                                         data={item}
@@ -242,7 +257,7 @@ class SearchPage extends Component {
                             }}
                         />
                     ),
-                    <Pagination
+                   !this.state.keyword.length && <Pagination
                         key="Pagination"
                         pageNum={page}
                         maxPageNum={calcMaxPageNum(totalSize, count)}
@@ -263,9 +278,10 @@ class SearchPage extends Component {
                                 {title}
                                 <SearchTableDesc
                                     searchType={this.searchType}
-                                    listSize={totalSize}
+                                    listSize={this.props.type==="contract"?this.props.contracts.totalSize :this.props.tokens.totalSize}
                                     setPopup={this.props.setPopup}
                                     address={this.props.wallet}
+                                    count={this.props.type==="contract"?this.props.contracts.totalSize:this.props.tokens.totalSize}
                                 />
                             </p>
                             
