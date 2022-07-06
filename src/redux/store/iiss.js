@@ -229,10 +229,10 @@ export async function getDelegation(payload) {
     });
 }
 
-export async function getPRepsRPC() {
+export async function getPRepsRPC(height=null) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
-        const param = {
+        var param = {
             jsonrpc: "2.0",
             method: "icx_call",
             id: randomUint32(),
@@ -245,6 +245,11 @@ export async function getPRepsRPC() {
                 }
             }
         }
+
+        if (height != null) {
+            param.params.data.height = height
+        }
+
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
                 resolve(response.data.result);
