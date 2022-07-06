@@ -165,7 +165,7 @@ class TxTableBody extends Component {
 							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol={data.contractSymbol} />
-							<TokenCell name={data.token_contract_name} address={data.token_contract_name} />
+							<TokenCell name={data.token_contract_name} address={data.token_contract_address} />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TX:
@@ -242,7 +242,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
-
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
