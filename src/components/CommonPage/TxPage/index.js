@@ -25,6 +25,7 @@ class TxPage extends Component {
         this._getTxList = () => {}
         this.state ={
             currentUSD:0,
+            age:"Age"
         }
     }
 
@@ -214,7 +215,13 @@ class TxPage extends Component {
         }
         return url
     }
-
+    handleClick=(value)=>{
+        if(value==="Age"){
+            this.setState({age:"Date Time (UTC)"})
+        }else{
+            this.setState({age:"Age"})
+        }
+    }
     render() {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
@@ -233,11 +240,12 @@ class TxPage extends Component {
                     <div className="table-box" key="table">
                         <table className={className}>
                             <thead>
-                                <TxTableHead txType={this.txType} />
+                                <TxTableHead age={this.state.age} handleClick={this.handleClick} txType={this.txType} />
                             </thead>
                             <tbody>
                                 {data.map((item, index) => (
                                     <TxTableBody
+                                        age={this.state.age}
                                         key={index}
                                         data={item}
                                         txType={this.txType}

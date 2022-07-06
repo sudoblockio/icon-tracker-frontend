@@ -6135,6 +6135,10 @@ input[type='checkbox']:checked + label {
   font-size:  .8em !important;
   padding: .3em;
 }
+th#age-format {
+  color: #3498db;
+  cursor: pointer;
+}
 
 @-webkit-keyframes bubble {
   0% {

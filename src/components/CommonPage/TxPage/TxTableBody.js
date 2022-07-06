@@ -47,7 +47,9 @@ const TokenCell = ({ name, address }) => {
 	return <td><span className="ellipsis">{tokenText(name, undefined, address, 'ellipsis')}</span></td>
 }
 
-const DateCell = ({ date, isDate }) => {
+const DateCell = ({ date, isDate,type }) => {
+	const formatDate = new Date(date/1e6*1000);
+	const changedDate=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(formatDate);
 	let className, dateText
 	if (!isValidData(date)) {
 		className = ""
@@ -63,8 +65,9 @@ const DateCell = ({ date, isDate }) => {
 
 		}
 	}
-
-	return <td className={className}>{dateText}</td>
+	
+	return <td className={className}>{type==="Age"?dateText:type==="Date Time (UTC)"?
+	 changedDate:dateText}</td>
 }
 
 const BlockCell = ({ height }) => {
@@ -92,6 +95,7 @@ class TxTableBody extends Component {
 				address,
 				currentUSD,
 				totalSupply,
+				age,
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
@@ -224,7 +228,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash || data.txHash} />
 							<BlockCell height={data.block_number || data.height} />
-							<DateCell date={data.block_timestamp || data.createDate} />
+							<DateCell type={age} date={data.block_timestamp || data.createDate} />
 							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-"} toAddr={data.to_address !== "None" ? data.to_address : "-"} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
@@ -234,7 +238,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isErrpor={isError} txHash={data.transaction_hash} />
-							<DateCell date={data.block_timestamp} />
+							<DateCell type={age} date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.value_decimal} symbol={data.symbol} />
 							<TokenCell name={data.token_contract_name} address={data.token_contract_address} />
@@ -268,7 +272,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<BlockCell height={data.number} />
-							<DateCell date={data.timestamp} />
+							<DateCell type={age} date={data.timestamp} />
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td><BlockLink label={data.hash} to={data.number} ellipsis /></td>
 							<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
