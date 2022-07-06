@@ -46,13 +46,24 @@ class ProposalDetailPage extends Component {
 			this.setState({ error: id })
 		}
 	}
-	getLastBlockHeight=()=>{
-		const difference=Number(this.state.currentBlockHeight)-Number(IconConverter.toNumber(this.state.proposal.endBlockHeight));
+	getLastBlockHeight=async()=>{
+		const payload={
+			height:IconConverter.toNumber(this.state.proposal.endBlockHeight)
+		}
+		const res=await blockInfo(payload);
+		if(Number(this.state.currentBlockHeight)>Number(res.data.timestamp)){
+		const date = new Date(res.data.timestamp/1e6*1000);
+		this.setState({endingBlockHeight:date})
+		}
+		else{
+		const difference=Number(res.data.timestamp)-Number(this.state.currentBlockHeight);
 		const sum=difference*2;
 		const latestDate=new Date().getTime();
 		const totalSum=sum+latestDate;
-		const date = new Date(totalSum);
+		const date = new Date(totalSum/1e6*1000);
 		this.setState({endingBlockHeight:date})
+		}
+		
 	}
 	getStartBlockHeight=async()=>{
 		const payload={
