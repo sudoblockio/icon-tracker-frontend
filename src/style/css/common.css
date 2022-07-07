@@ -6139,6 +6139,43 @@ th#age-format {
   color: #3498db;
   cursor: pointer;
 }
+.div-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.div-tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: #6c757e;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin-top: 4px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  /* left: 10%; */
+  margin-left: -96px;
+}
+.div-tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #6c757e transparent;
+}
+.div-tooltip:hover .tooltiptext {
+  visibility: visible;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
 
 @-webkit-keyframes bubble {
   0% {
