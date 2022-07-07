@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Logs from '../components/ErrorBlock/index'
+import { transactionTxDetailAction } from '../redux/store/transactions';
+import { connect } from 'react-redux';
 class TraceTransaction extends Component {
 	constructor(props) {
-        
-		super(props)
+    super(props)
 		this.state = {
 			
 		}
@@ -28,7 +29,7 @@ class TraceTransaction extends Component {
       };
 
         render()  {
-            console.log(this.props.location.state.detail,"state Value=======>");
+            console.log(this.props.match.params.txHash,"state Value=======>");
 	            return (
                     <div className="content-wrap">
 					<div className="screen0">
@@ -42,9 +43,21 @@ class TraceTransaction extends Component {
 			}
 		
 }
-	
+function mapStateToProps(state) {
+  return {
+    url: state.router.location,
+    ...state.transactions,
+    recentTokenTx: state.tokens.recentTokenTx
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    transactionTxDetail: (payload) => dispatch(transactionTxDetailAction(payload)),
+  };
+}
 
 
 
 
-export default withRouter(TraceTransaction);
+export default connect(mapStateToProps, mapDispatchToProps)(TraceTransaction);
