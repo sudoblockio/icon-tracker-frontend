@@ -12,6 +12,7 @@ import {
 	NotFoundPage,
 	LoadingComponent
 } from '../../components';
+import { getPReps,getPRepsRPC } from '../../redux/store/iiss';
 
 class ProposalDetailPage extends Component {
 
@@ -21,7 +22,8 @@ class ProposalDetailPage extends Component {
 			loading: true,
 			error: false,
 			proposal: {},
-			tab: this.getTab(this.props.url.hash)
+			tab: this.getTab(this.props.url.hash),
+			prepsList:null
 		}
 	}
 
@@ -29,7 +31,9 @@ class ProposalDetailPage extends Component {
 		const id = this.getId(this.props.url.pathname)
 		try {
 			const proposal = await getProposal(id)
-			this.setState({ loading: false, proposal })
+			const prepRpc=await getPRepsRPC();
+			console.log(prepRpc,"preplist==========>")
+			this.setState({ loading: false, proposal,prepsList:prepRpc.preps })
 		}
 		catch (e) {
 			console.error(e)
@@ -64,9 +68,9 @@ class ProposalDetailPage extends Component {
 
 
 		const {
-			agree, disagree
+			agree, disagree, noVote
 		} = vote
-
+		console.log(vote,"votes===========>")
 		let result = []
 
 		if (agree) {
@@ -82,7 +86,12 @@ class ProposalDetailPage extends Component {
 				result.push(item)
 			})
 		}
-
+		if (vote && noVote) {
+			noVote.list.forEach(item => {
+				const data=this.state.prepsList.filter(e=>e.address===item);
+				result.push({address:item,amount:data[0].power,name:data[0].name,answer:"No Vote"})
+			})
+		}
 		return result.sort((a, b) => Number(b.timestamp) - Number(a.timestamp))
 	}
 
@@ -147,8 +156,8 @@ class ProposalDetailPage extends Component {
 
 		const tabVotes = this.state.tab === PROPOSAL_TABS[1]
 
-		const tabList = this.getTabList(vote)
-
+		const tabList = this.getTabList(vote);
+		
 		const Content = () => {
 			if (error) {
 				return <NotFoundPage error={error} />
@@ -217,7 +226,6 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Value</td>
-													{console.log(typeof(value), "value type")}
 													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = valueToString(Object.values(value).toString()) }}></span></td>
 												</tr>
 												<tr>
@@ -294,7 +302,7 @@ class ProposalDetailPage extends Component {
 												<thead>
 													<tr>
 														<th>Voter</th>
-														{tabVotes && <th>Votes</th>}
+														<th>Votes</th>
 														<th>Answer</th>
 														<th>Tx Hash</th>
 														<th>Time ({getUTCString()})</th>
@@ -303,11 +311,12 @@ class ProposalDetailPage extends Component {
 												<tbody>
 													{tabList.map((item, index) => {
 														const { id, address, name, timestamp, amount, answer } = item
+														console.log(amount,"amount-=========>")
 														const _amount = IconConverter.toNumber(amount)
 														return (
 															<tr key={index}>
 																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-																{tabVotes && <td><span>{convertNumberToText(convertLoopToIcxDecimal(_amount))}</span><em>ICX</em></td>}
+																<td><span>{convertNumberToText(convertLoopToIcxDecimal(_amount))}</span></td>
 																<td className='center-align'><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
