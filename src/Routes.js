@@ -19,6 +19,7 @@ import GovernancePage from './pages/GovernancePage'
 import ProposalListPage from './pages/ProposalListPage'
 import ProposalDetailPage from './pages/ProposalDetailPage'
 import TxPage from './pages/TxPage'
+import TraceTransactionPage from './pages/TraceTransactionPage'
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
 import { getIsSolo } from './utils/utils'
 import BodyClassName from 'react-body-classname'
@@ -62,6 +63,7 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}`} component={TransactionListPage} exact />
                 <Route onEnter={window.scroll(0, 0)} path={`/${TX_TYPE.TRANSACTIONS}/:pageId`} component={TransactionListPage} />
                 <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact />
+                <Route onEnter={window.scroll(0, 0)} path='/transaction/trace/:txHash' component={TraceTransactionPage} />
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}`} component={ContractListPage} exact />
                 <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractListPage} />

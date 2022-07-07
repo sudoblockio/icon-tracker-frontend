@@ -163,6 +163,7 @@ export const TX_TYPE = {
   CONTRACT_EVENTS: 'contractevents',
   TRANSACTION_EVENTS: 'transactionevents',
   TRANSACTION_INTERNAL_TX: 'transactioninternaltx',
+  TRACE_TRANSACTION_INTERNAL_TX:'transactioninternaltx/trace',
   TOKEN_HOLDERS: 'tokenholders',
   ADDRESS_BONDERS: 'addressBonders'
 };

@@ -1963,7 +1963,7 @@ body {
 }
 .table-typeB .fail {
   color: #e6001b;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .table-typeB .fail em {
   color: #e6001b;
