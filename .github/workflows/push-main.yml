@@ -51,9 +51,13 @@ jobs:
       max-parallel: 1
       matrix:
         include:
-          # Only push AMS to Berlin
-
-          - cluster: prod-sng
+          - cluster: prod-ams
+            network_name: sejong
+            network_version: v2
+          - cluster: prod-ams
+            network_name: lisbon
+            network_version: v2
+          - cluster: prod-ams
             network_name: berlin
             network_version: v2
 
