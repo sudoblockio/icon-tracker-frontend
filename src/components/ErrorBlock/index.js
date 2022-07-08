@@ -41,10 +41,10 @@ function Logs({ logs, logs_error, checkError }) {
         {viewLog && viewLog?.map(({ level, msg, ts }, index) => {
           let color = "#dadada";
           let dotBackground = "rgb(113, 211, 0)";
-        //   if (checkError(msg)) {
-        //     color = "#CE2F2F";
-        //     dotBackground = "#CE2F2F";
-        //   }
+          if (checkError(msg)) {
+            color = "#CE2F2F";
+            dotBackground = "#CE2F2F";
+          }
           return (
             <li className={`feed-item time-${ts}`} key={index}>
               <time className={`date`}>

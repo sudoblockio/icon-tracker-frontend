@@ -13,6 +13,7 @@ export function transactionRecentTxAction(payload) {
   }
 
   export function transactionTxDetailAction(payload){
+    console.log(payload,"payload=======>")
     return {
       type: actionTypes.transactionTxDetail,
       payload

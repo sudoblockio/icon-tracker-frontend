@@ -590,7 +590,7 @@ export async function getLastBlock() {
     });
 }
 
-export const getFailMessage = async (txHash) => {
+export const getFailMessage = async (txHash,type) => {
     const param = {
         jsonrpc: "2.0",
         id: randomUint32(),
@@ -610,7 +610,8 @@ export const getFailMessage = async (txHash) => {
         data.result.logs.map(log => {
             errorList.push(log.msg)
         })
-        return errorList;
+         return type==="wholemsg"? data:errorList;
+        
     } catch (e) {
         console.log(e, "Error from getFailMessage")
 

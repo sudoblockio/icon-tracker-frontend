@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import Logs from '../components/ErrorBlock/index'
-import { transactionTxDetailAction } from '../redux/store/transactions';
-import { connect } from 'react-redux';
+import { getFailMessage } from '../redux/store/iiss';
 class TraceTransaction extends Component {
 	constructor(props) {
     super(props)
 		this.state = {
-			
+			logs:null,
+      logs_error:[]
 		}
 	}
-     checkError = (data) => {
+ async componentDidMount(){
+    let moreMsg = await getFailMessage(this.props.match.params.txHash,'wholemsg');
+    let err=[];
+    moreMsg.result.logs.map(e=>{
+      if (this.checkError(e.msg)) {
+        err.push(e);
+      }
+      })
+      this.setState({logs:moreMsg.result.logs,logs_error:err})
+  }
+  checkError = (data) => {
         if (
           data.toUpperCase().includes("ERROR") ||
           data.toUpperCase().includes("FAILURE") ||
@@ -29,35 +38,18 @@ class TraceTransaction extends Component {
       };
 
         render()  {
-            console.log(this.props.match.params.txHash,"state Value=======>");
-	            return (
-                    <div className="content-wrap">
-					<div className="screen0">
-						<div className="wrap-holder">
-							<p className="title">Transaction</p>
-							<Logs   logs={this.props.location.state.detail}/>
-						</div>
-					</div>
-                    </div>
+            return (
+                <div className="content-wrap">
+                <div className="screen0">
+                <div className="wrap-holder">
+                  <p className="title">Transaction Logs</p>
+                  <Logs checkError={this.checkError} logs_error={this.state.logs_error} logs={this.state.logs} />
+                </div>
+              </div>
+          </div>
 				)
 			}
 		
 }
-function mapStateToProps(state) {
-  return {
-    url: state.router.location,
-    ...state.transactions,
-    recentTokenTx: state.tokens.recentTokenTx
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    transactionTxDetail: (payload) => dispatch(transactionTxDetailAction(payload)),
-  };
-}
-
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(TraceTransaction);
+export default TraceTransaction;

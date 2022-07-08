@@ -156,7 +156,7 @@ class TransactionInfo extends Component {
 										</tr>
 										<tr>
 											<td >Status</td>
-											<td style={{cursor:isFail? 'pointer':'none'}} onClick={()=>isFail && this.props.history.push({pathname:`/transaction/trace/${hash}`,state:{detail:this.state.errorlogs}})} className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail) &&  `- ${this.state.msgList}`}</td>
+											<td style={{cursor:isFail? 'pointer':'none'}} onClick={()=>isFail && this.props.history.push(`/transaction/trace/${hash}`)} className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail) &&  `- ${this.state.msgList}`}</td>
 										</tr> 
 										<tr>
 											<td>Block Height</td>
