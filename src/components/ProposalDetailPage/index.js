@@ -12,7 +12,7 @@ import {
 	NotFoundPage,
 	LoadingComponent
 } from '../../components';
-import { getPReps,getPRepsRPC } from '../../redux/store/iiss';
+import { getPRepsRPC } from '../../redux/store/iiss';
 
 class ProposalDetailPage extends Component {
 
@@ -32,7 +32,6 @@ class ProposalDetailPage extends Component {
 		try {
 			const proposal = await getProposal(id)
 			const prepRpc=await getPRepsRPC();
-			console.log(prepRpc,"preplist==========>")
 			this.setState({ loading: false, proposal,prepsList:prepRpc.preps })
 		}
 		catch (e) {
@@ -70,7 +69,6 @@ class ProposalDetailPage extends Component {
 		const {
 			agree, disagree, noVote
 		} = vote
-		console.log(vote,"votes===========>")
 		let result = []
 
 		if (agree) {
@@ -311,12 +309,12 @@ class ProposalDetailPage extends Component {
 												<tbody>
 													{tabList.map((item, index) => {
 														const { id, address, name, timestamp, amount, answer } = item
-														console.log(amount,"amount-=========>")
 														const _amount = IconConverter.toNumber(amount)
+														const finalAmount=convertNumberToText(convertLoopToIcxDecimal(_amount)).split('.');
 														return (
 															<tr key={index}>
 																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-																<td><span>{convertNumberToText(convertLoopToIcxDecimal(_amount))}</span></td>
+																<td><span>{finalAmount[0]}</span></td>
 																<td className='center-align'><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>
