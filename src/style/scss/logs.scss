@@ -11,16 +11,20 @@ a {
 }
 .log_block {
   margin: 0 auto;
+  padding-left: 45px;
 }
 .activity-feed {
-  padding: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
   list-style: none;
 
   .feed-item {
     position: relative;
     padding-bottom: 30px;
     padding-left: 30px;
+    padding-right: 14px;
     border-left: 2px solid #e4e8eb;
+    word-break: break-word;
 
     &:last-child {
       border-color: transparent;
@@ -30,7 +34,7 @@ a {
       content: "";
       display: block;
       position: absolute;
-      top: 0;
+      top: -12px;
       left: -6px;
       width: 10px;
       height: 10px;

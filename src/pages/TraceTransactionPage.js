@@ -6,10 +6,12 @@ class TraceTransaction extends Component {
     super(props)
 		this.state = {
 			logs:null,
-      logs_error:[]
+      logs_error:[],
+      status:true
 		}
 	}
  async componentDidMount(){
+   try {
     let moreMsg = await getFailMessage(this.props.match.params.txHash,'wholemsg');
     let err=[];
     moreMsg.result.logs.map(e=>{
@@ -17,7 +19,11 @@ class TraceTransaction extends Component {
         err.push(e);
       }
       })
-      this.setState({logs:moreMsg.result.logs,logs_error:err})
+      this.setState({logs:moreMsg.result.logs,logs_error:err,status:true})
+   } catch (error) {
+     this.setState({status:false})
+   }
+    
   }
   checkError = (data) => {
         if (
@@ -38,16 +44,22 @@ class TraceTransaction extends Component {
       };
 
         render()  {
+          console.log(this.state.logs_error.length,"length========>")
             return (
-                <div className="content-wrap">
-                <div className="screen0">
-                <div className="wrap-holder">
-                  <p className="title">Transaction Logs</p>
-                  <Logs checkError={this.checkError} logs_error={this.state.logs_error} logs={this.state.logs} />
+              <div className="tx-screen0">
+                <h2 className="tx-title">Transaction Logs</h2>
+                  {this.state.status ?
+                <Logs checkError={this.checkError} logs_error={this.state.logs_error} logs={this.state.logs} />
+                : 
+                <div className="log_block">
+                <h2>
+                  Transaction has been completed successfully
+                </h2>
+              </div>  
+                }
+                
                 </div>
-              </div>
-          </div>
-				)
+              )
 			}
 		
 }

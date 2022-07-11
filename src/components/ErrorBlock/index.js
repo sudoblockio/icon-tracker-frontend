@@ -39,6 +39,7 @@ function Logs({ logs, logs_error, checkError }) {
       </h2>
       <ol className="activity-feed">
         {viewLog && viewLog?.map(({ level, msg, ts }, index) => {
+          console.log(msg,level,ts,'===========================>value')
           let color = "#dadada";
           let dotBackground = "rgb(113, 211, 0)";
           if (checkError(msg)) {

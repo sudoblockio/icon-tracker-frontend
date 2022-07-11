@@ -600,6 +600,7 @@ export const getFailMessage = async (txHash,type) => {
         }
     }
     try {
+        
         const apiUrl = await getWalletApiUrl()
         const response = await fetch(`${apiUrl}/api/v3d`, {
             method: 'POST',

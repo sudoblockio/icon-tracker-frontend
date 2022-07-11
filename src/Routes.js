@@ -41,7 +41,7 @@ class Routes extends Component {
     const isMain = window.location.pathname === '/' 
     const isGovernance = window.location.pathname.includes('governance')    
     const bodyClassName = isMain ? 'main-back' : (isGovernance ? 'main-back' : '')
-
+    console.log(window.location.pathname.includes('trace'),"pathname")
     return (
       <BodyClassName className={bodyClassName}>
         <div id="app-root">
@@ -127,7 +127,7 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage} />
               </Switch>
             </div>
-            <div className="blank"></div>
+            <div className={window.location.pathname.includes('trace') ?"tx-blank": "blank"}></div>
           </div>
           <Footer />
           <Popup />
