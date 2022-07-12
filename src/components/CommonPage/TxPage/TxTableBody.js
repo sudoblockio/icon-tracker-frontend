@@ -306,13 +306,13 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-
+						
 					return (
 						<tr>
 							<td>{this.props.rank}</td>
-							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={convertHexToValue(data.value).toFixed()} symbol={data.symbol} />
-							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
+							<AddressCell targetAddr={data.address} txType={data.txType} spanNoEllipsis />
+							<AmountCell amount={data.balance.toFixed()} symbol={data.symbol} />
+							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance.toFixed() / this.props.totalSupply.toFixed(3) * 100).toFixed(2) :"-"}</span><em>%</em></td>
 						</tr>
 					)
 					case TX_TYPE.ADDRESS_BONDERS:

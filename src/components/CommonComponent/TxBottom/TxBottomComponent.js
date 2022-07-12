@@ -48,10 +48,10 @@ class TxBottomComponent extends Component {
                                     <TxTableHead txType={txType} />
                                 </thead>
                                 <tbody>
-                                    {(data || []).map((item, index) => (
-                                        
+                                    {(data || []).map((item, index) => {
+                                        return(
                                         <TxTableBody key={index} totalSupply={tokenTotal} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />
-                                    ))}
+                                    )})}
                                 </tbody>
                             </table>
                         </div>
