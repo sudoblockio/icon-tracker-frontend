@@ -174,7 +174,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<BlockCell height={data.block_number} />
 							<DateCell date={data.block_timestamp} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.transaction_type} targetContractAddr={address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>

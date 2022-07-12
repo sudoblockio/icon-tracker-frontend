@@ -19,7 +19,8 @@ let apiUrl = `${window.location.origin}`
 
 if (apiUrl === 'http://localhost:3000') {
     // Testing endpoint
-    apiUrl = 'https://tracker.v2.mainnet.ams.vultr.icon.community/'
+    // apiUrl = 'https://tracker.v2.mainnet.ams.vultr.icon.community/'
+    apiUrl = 'https://tracker.berlin.icon.community/'
 }
 
 let walletUrls = {
