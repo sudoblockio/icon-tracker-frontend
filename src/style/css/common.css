@@ -429,7 +429,11 @@ body {
   position: relative;
   background: #fff;
 }
-
+.tx-blank {
+  min-height: 200px;
+  position: relative;
+  background: black;
+}
 .content.half > li {
   width: 50%;
 }
@@ -1966,7 +1970,7 @@ body {
 }
 .table-typeB .fail {
   color: #e6001b;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .table-typeB .fail em {
   color: #e6001b;
@@ -6142,6 +6146,7 @@ input[type='checkbox']:checked + label {
   font-size:  .8em !important;
   padding: .3em;
 }
+
 th#age-format {
   color: #3498db;
   cursor: pointer;
@@ -6182,6 +6187,18 @@ th#age-format {
   color: white;
   font-size: 12px;
   font-weight: 600;
+}
+
+.tx-screen0 {
+    background-color: black;
+    padding-top: 120px;
+    min-height: 500px;
+}
+h2.tx-title {
+  color: #b6b6b6;
+  padding-left: 42px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 @-webkit-keyframes bubble {
