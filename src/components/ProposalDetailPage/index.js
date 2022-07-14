@@ -12,6 +12,9 @@ import {
 	NotFoundPage,
 	LoadingComponent
 } from '../../components';
+import { blockInfo } from '../../redux/store/blocks';
+import { getLastBlock, getPRepsRPC } from '../../redux/store/iiss';
+
 
 class ProposalDetailPage extends Component {
 
@@ -21,7 +24,11 @@ class ProposalDetailPage extends Component {
 			loading: true,
 			error: false,
 			proposal: {},
-			tab: this.getTab(this.props.url.hash)
+			tab: this.getTab(this.props.url.hash),
+			startTimeDate:'',
+			currentBlockHeight:'',
+			endingBlockHeight:'',
+			prepsList:null,
 		}
 	}
 
@@ -29,14 +36,48 @@ class ProposalDetailPage extends Component {
 		const id = this.getId(this.props.url.pathname)
 		try {
 			const proposal = await getProposal(id)
-			this.setState({ loading: false, proposal })
+			const data = await getLastBlock();
+			console.log(data.height,"height======>")
+			this.setState({ currentBlockHeight:data.height,loading: false, proposal },()=>{
+				this.getStartBlockHeight();
+				this.getLastBlockHeight();
+			})
+			const prepRpc=await getPRepsRPC();
+			this.setState({ loading: false, proposal,prepsList:prepRpc.preps })
 		}
 		catch (e) {
 			console.error(e)
 			this.setState({ error: id })
 		}
 	}
-
+	getLastBlockHeight=async()=>{
+		const payload={
+			height:IconConverter.toNumber(this.state.proposal.endBlockHeight)
+		}
+		const res=await blockInfo(payload);
+		if(Number(this.state.currentBlockHeight)>Number(res.data.timestamp)){
+		const date = new Date(res.data.timestamp/1e6*1000);
+		this.setState({endingBlockHeight:date})
+		}
+		else{
+		const difference=Number(res.data.timestamp)-Number(this.state.currentBlockHeight);
+		const sum=difference*2;
+		const latestDate=new Date().getTime();
+		const totalSum=sum+latestDate;
+		const date = new Date(totalSum/1e6*1000);
+		this.setState({endingBlockHeight:date})
+		}
+		
+	}
+	getStartBlockHeight=async()=>{
+		const payload={
+			height:IconConverter.toNumber(this.state.proposal.startBlockHeight)
+		}
+		const res=await blockInfo(payload);
+		const date = new Date(res.data.timestamp/1e6*1000);
+		this.setState({startTimeDate:date});
+		
+	}
 	async componentWillReceiveProps(nextProps) {
 		// const prev = this.getId(this.props.url.pathname)
 		// const next = this.getId(nextProps.url.pathname)
@@ -64,9 +105,8 @@ class ProposalDetailPage extends Component {
 
 
 		const {
-			agree, disagree
+			agree, disagree, noVote
 		} = vote
-
 		let result = []
 
 		if (agree) {
@@ -82,7 +122,12 @@ class ProposalDetailPage extends Component {
 				result.push(item)
 			})
 		}
-
+		if (vote && noVote && this.state.prepsList != null) {
+			noVote.list.forEach(item => {
+				const data=this.state.prepsList.filter(e=>e.address===item);
+				result.push({address:item,amount:data[0].power,name:data[0].name,answer:"No Vote"})
+			})
+		}
 		return result.sort((a, b) => Number(b.timestamp) - Number(a.timestamp))
 	}
 
@@ -120,7 +165,7 @@ class ProposalDetailPage extends Component {
 
 		const start = startBlockHeight ? IconConverter.toNumber(startBlockHeight) : '-'
 		const end = endBlockHeight ? IconConverter.toNumber(endBlockHeight) : '-'
-
+		
 		const agreeLength = agree ? agree.list.length : 0
 		const disagreeLength = disagree ? disagree.list.length : 0
 		const noVoteLength = noVote ? noVote.list.length : 0
@@ -147,8 +192,8 @@ class ProposalDetailPage extends Component {
 
 		const tabVotes = this.state.tab === PROPOSAL_TABS[1]
 
-		const tabList = this.getTabList(vote)
-
+		const tabList = this.getTabList(vote);
+		
 		const Content = () => {
 			if (error) {
 				return <NotFoundPage error={error} />
@@ -198,7 +243,9 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>Start Blockheight</td>
 													{!isNaN(start) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}</span> </td>
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}{"   "}
+														 {new Date(this.state.startTimeDate).toDateString()} {new Date(this.state.startTimeDate).toLocaleTimeString()} UTC
+														 </span> </td>
 														:
 														<td><span>-</span></td>
 													}
@@ -206,7 +253,9 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>End Blockheight</td>
 													{!isNaN(end) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end}</span> </td>
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + end, '_blank') }}>{end} {"~"}
+														{new Date(this.state.endingBlockHeight).toDateString()} {new Date(this.state.endingBlockHeight).toLocaleTimeString()} UTC
+														</span> </td>
 														:
 														<td><span>-</span></td>
 													}
@@ -217,7 +266,6 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Value</td>
-													{console.log(typeof(value), "value type")}
 													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = valueToString(Object.values(value).toString()) }}></span></td>
 												</tr>
 												<tr>
@@ -294,7 +342,7 @@ class ProposalDetailPage extends Component {
 												<thead>
 													<tr>
 														<th>Voter</th>
-														{tabVotes && <th>Votes</th>}
+														<th>Votes</th>
 														<th>Answer</th>
 														<th>Tx Hash</th>
 														<th>Time ({getUTCString()})</th>
@@ -304,10 +352,11 @@ class ProposalDetailPage extends Component {
 													{tabList.map((item, index) => {
 														const { id, address, name, timestamp, amount, answer } = item
 														const _amount = IconConverter.toNumber(amount)
+														const finalAmount=convertNumberToText(convertLoopToIcxDecimal(_amount)).split('.');
 														return (
 															<tr key={index}>
 																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
-																{tabVotes && <td><span>{convertNumberToText(convertLoopToIcxDecimal(_amount))}</span><em>ICX</em></td>}
+																<td><span>{finalAmount[0]}</span></td>
 																<td className='center-align'><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
 																<td><span>{dateToUTC(IconConverter.toNumber(timestamp) / 1000)}</span></td>

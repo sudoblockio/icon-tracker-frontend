@@ -8,7 +8,7 @@ class ContractListPage extends Component {
 	render() {
 
 
-		return <SearchPage {...this.props}/>
+		return <SearchPage {...this.props} type="contract"/>
 	}
 }
 export default ContractListPage

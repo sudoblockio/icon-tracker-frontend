@@ -271,6 +271,9 @@ input.txt-type-search {
   color: #4d4d4d;
   padding: 12px 10px 12px;
 }
+input#sub-search-input {
+margin-top: -41px;
+}
 input.txt-type-search:hover {
   border: 1px solid #4d4d4d;
 }
@@ -426,7 +429,11 @@ body {
   position: relative;
   background: #fff;
 }
-
+.tx-blank {
+  min-height: 200px;
+  position: relative;
+  background: black;
+}
 .content.half > li {
   width: 50%;
 }
@@ -1963,7 +1970,7 @@ body {
 }
 .table-typeB .fail {
   color: #e6001b;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .table-typeB .fail em {
   color: #e6001b;
@@ -4297,6 +4304,10 @@ input[type='text']:focus.over {
   height: 28px;
   cursor: pointer;
   z-index: 1;
+  
+}
+span#search-icon {
+  margin-top: -26px;
 }
 .content-wrap .search-group span .img {
   width: 16px;
@@ -6134,6 +6145,60 @@ input[type='checkbox']:checked + label {
   text-align: left;
   font-size:  .8em !important;
   padding: .3em;
+}
+
+th#age-format {
+  color: #3498db;
+  cursor: pointer;
+}
+.div-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.div-tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: #6c757e;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin-top: 4px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  /* left: 10%; */
+  margin-left: -96px;
+}
+.div-tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #6c757e transparent;
+}
+.div-tooltip:hover .tooltiptext {
+  visibility: visible;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tx-screen0 {
+    background-color: black;
+    padding-top: 120px;
+    min-height: 500px;
+}
+h2.tx-title {
+  color: #b6b6b6;
+  padding-left: 42px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 @-webkit-keyframes bubble {

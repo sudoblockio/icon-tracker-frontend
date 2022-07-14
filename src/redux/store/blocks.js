@@ -74,9 +74,10 @@ export async function blockList(payload) {
       trackerApi.get(`${BLOCKS_PREFIX}/${payload.height}`)
         .then(result => {
           resolve(result)
+           return result
         })
         .catch(error => {
-          reject(error)
+          return reject(error)
         })
     })
   }
