@@ -1,4 +1,4 @@
-name: push-main-dockerhub
+name: push-main
 
 # 1. Run unit and integration tests
 # 2. Push containers to dockerhub with tag based on incrementing build number
@@ -51,16 +51,6 @@ jobs:
       max-parallel: 1
       matrix:
         include:
-          # Only push to testnets
-          - cluster: prod-sng
-            network_name: sejong
-            network_version: v2
-          - cluster: prod-sng
-            network_name: lisbon
-            network_version: v2
-          - cluster: prod-sng
-            network_name: berlin
-            network_version: v2
           - cluster: prod-ams
             network_name: sejong
             network_version: v2

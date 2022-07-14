@@ -146,7 +146,11 @@ class TxTableHead extends Component {
                         <tr>
                             <th>TxHash</th>
                             <th>Block</th>
-                            <th>Age</th>
+                            <th  id='age-format' onClick={()=>this.props.handleClick?this.props.handleClick(this.props.age):null}>
+                                <div class= {this.props.age==="Age"&& "div-tooltip"}>{this.props.age}
+                        {this.props.age==="Age"&& <span class="tooltiptext">Click to show Datetime Format</span>}
+                        </div>
+                                </th>
                             <th>From</th>
                             <th className="table-sign" />
                             <th>To</th>
@@ -158,7 +162,11 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>Tx Hash</th>
-                            <th>Age</th>
+                            <th  id='age-format' onClick={()=>this.props.handleClick?this.props.handleClick(this.props.age):null}>
+                                <div class= {this.props.age==="Age"&& "div-tooltip"}>{this.props.age}
+                        {this.props.age==="Age"&& <span class="tooltiptext">Click to show Datetime Format</span>}
+                        </div>
+                                </th>
                             <th>From</th>
                             <th className="table-sign" />
                             <th>To</th>
@@ -196,7 +204,11 @@ class TxTableHead extends Component {
                     return (
                         <tr>
                             <th>Block</th>
-                            <th>Age</th>
+                            <th  id='age-format' onClick={()=>this.props.handleClick?this.props.handleClick(this.props.age):null}>
+                                <div class= {this.props.age==="Age"&& "div-tooltip"}>{this.props.age}
+                        {this.props.age==="Age"&& <span class="tooltiptext">Click to show Datetime Format</span>}
+                        </div>
+                                </th>
                             <th>No of Txns</th>
                             <th>Block Hash</th>
                             <th>Amount</th>

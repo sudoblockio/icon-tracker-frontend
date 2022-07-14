@@ -1,25 +1,14 @@
 let configJson;
 
-// Dev Settings - DO NOT COMMIT!
-// let apiUrl = `https://tracker.berlin.icon.community`
-// export const nodeApiUrl = 'https://berlin.net.solidwallet.io'
-// let apiUrl = `https://tracker.icon.community`
-// export const nodeApiUrl = 'https://api.icon.geometry.io'
-// let apiUrl = 'http://localhost:8000'
-// let wsURL = 'ws://localhost:8000'
-
-// let apiUrl = 'https://tracker.v2.sejong.lax.vultr.sudoblock.dev'
-// let wsURL = "wss://tracker.v2.sejong.lax.vultr.sudoblock.dev"
-
-// let apiUrl = 'https://tracker.v2.mainnet.sng.vultr.icon.community/'
-// let wsURL = 'wss://tracker.v2.mainnet.sng.vultr.icon.community/'
-
 let wsURL = "wss://" + `${window.location.host}`
 let apiUrl = `${window.location.origin}`
 
+// For local development
 if (apiUrl === 'http://localhost:3000') {
-    // Testing endpoint
-    apiUrl = 'https://tracker.v2.mainnet.ams.vultr.icon.community/'
+    apiUrl = 'https://tracker.icon.community/'
+}
+if (wsURL === 'wss://localhost:3000') {
+    wsURL = 'wss://tracker.icon.community'
 }
 
 let walletUrls = {

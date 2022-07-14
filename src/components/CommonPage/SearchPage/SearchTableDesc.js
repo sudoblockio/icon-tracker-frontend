@@ -10,7 +10,9 @@ class SearchTableDesc extends Component {
     async componentDidMount() {
         const cxListCount = await getContractListCount()
         const { headers } = await cxListCount
-        this.setState({ cxCount: headers['x-total-count'] })
+        this.setState({ cxCount: headers['x-total-count'] },(res)=>{
+            console.log(res,"res")
+        })
     }
     render() {
         const { searchType, listSize} = this.props
@@ -22,7 +24,7 @@ class SearchTableDesc extends Component {
                     return (
                         <>
                             <span className="cont right">
-                                A total of {count} contract source
+                                A total of {this.props.count?this.props.count: count} contract source
                                 codes found.
                             </span>
                             {}

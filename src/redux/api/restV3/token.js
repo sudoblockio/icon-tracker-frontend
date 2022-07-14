@@ -4,7 +4,7 @@ import { trackerApiInstance } from './config'
 export async function tokenList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeTokenUrl('/api/v1/contracts', payload))
+    trackerApi.get(makeTokenUrl('/api/v1/addresses/contracts', payload))
       .then(result => {
         resolve(result)
       })
