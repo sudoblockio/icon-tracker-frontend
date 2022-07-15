@@ -2954,10 +2954,13 @@ body {
 .table-typeI td:nth-child(4) {
   text-align: center;
 }
+.table-typeI td:nth-child(3) {
+  text-transform: uppercase;
+}
 .table-typeI td:nth-child(3),
 .table-typeI td:nth-child(5),
 .table-typeI td:nth-child(6) {
-  text-align: right;
+  text-align: center;
 }
 
 .table-typeI tbody {
