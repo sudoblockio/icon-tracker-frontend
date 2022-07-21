@@ -137,7 +137,7 @@ class TxTableBody extends Component {
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}>{data.address}</td>
-							<AmountCell amount={Number(Number(data.value) / Math.pow(10,18)).toFixed()} symbol="ICX" />
+							<AmountCell amount={Number(Number(data.value) / Math.pow(10,18)).toFixed() || 0} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
@@ -321,12 +321,11 @@ class TxTableBody extends Component {
 					case TX_TYPE.ADDRESS_BONDERS:
 						console.log(this.props.bondMap[data] > 0, "bonder bonder data")
 						return (
-							this.props.bondMap[data] > 0 ?
 							<tr>
 								<AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
-								<td><span>{numberWithCommas(this.props.bondMap[data])}</span><em>ICX</em></td>
+								<td><span>{numberWithCommas(this.props.bondMap[data]) || 0}</span><em>ICX</em></td>
 								
-							</tr> : ""
+							</tr> 
 						)
 				default:
 					return <tr></tr>
