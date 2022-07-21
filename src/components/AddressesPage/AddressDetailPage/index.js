@@ -13,8 +13,12 @@ class AddressesDetailPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            internalTxns: ""
+            internalTxns: "",
+            active:false,
+            tabs:null,
+            getList:null
         }
+        this.checkTabs(this.props.match.params.addressId)    
     }
     checkTabs = async (address) => {
         let payload = { address: `${address}`, page: 1, count: 10 }
@@ -22,18 +26,13 @@ class AddressesDetailPage extends Component {
         this.tokentransfers = await addressTokenTxList(payload)
         this.voted = await addressVotedList(payload)
         this.rewards = await addressRewardList(payload)
-        this.deleg = await getDelegation(payload)
-        this.tokenTx = await addressTokenTxList(payload)
         this.bondList = await getBondList(payload)
         this.bonderList = await getBonders(payload)
-        
+        this.deleg = await getDelegation(payload)
+        this.tokenTx = await addressTokenTxList(payload)
+        this.setData();
     }
-    
-    async componentDidMount() {
-        this.checkTabs(this.props.match.params.addressId)   
-    }
-    
-    render() {
+    setData(){
         const { wallet } = this.props;
         const { loading, error, data } = wallet
         const deleg = this.deleg
@@ -91,16 +90,28 @@ class AddressesDetailPage extends Component {
                 getBonders({address})
             })
         }
+        this.setState({tabs:TABS,getList:getList})
+        console.log(TABS,"tabsvalue================================>")
+    }
+    
+    // async componentDidMount() {
+    //     this.checkTabs(this.props.match.params.addressId)   
+    // }
+    
+    render() {
+        const { wallet } = this.props;
+        const { loading, error, data } = wallet
+        const deleg = this.deleg
+        const { is_prep, hasDelegations } = data
         return (
-
             <DetailPage
                 {...this.props}
                 loading={loading}
                 error={error}
-                TABS={TABS}
+                TABS={this.state.tabs!==null && this.state.tabs}
                 ROUTE="/address"
                 getInfo={address => { this.props.addressInfo({ address }) }}
-                getList={getList}
+                getList={this.state.getList!==null && this.state.getList}
                 InfoComponent={AddressInfo}
                 TabsComponent={AddressTabs}
                 hasDelegations={hasDelegations}
