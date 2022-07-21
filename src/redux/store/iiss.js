@@ -260,7 +260,7 @@ export async function getPRepsRPC() {
     });
 }
 
-
+// TODO: Remove this and only use getTotalSupply (line 169) and refactor rest of application to do the same
 export async function getTokenTotalSupply(address) {
     const walletApi = await walletApiInstance()
     return new Promise(resolve => {
@@ -293,6 +293,41 @@ export async function getTokenTotalSupply(address) {
             })
     })
 }
+
+
+export async function getDecimals(address) {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params: {
+                "to": `${address}`,
+                "dataType": "call",
+                "data": {
+                    "method": "decimals"
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error.response.data);
+                } else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    })
+}
+
 
 export async function getBonders(payload) {
     const walletApi = await walletApiInstance()
