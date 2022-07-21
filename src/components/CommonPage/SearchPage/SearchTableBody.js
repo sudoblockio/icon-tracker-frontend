@@ -34,15 +34,20 @@ class SearchTableBody extends Component {
 				case SEARCH_TYPE.TOKENS:
 					const { index, count, page } = this.props
 					const ranking = count * (page - 1) + index + 1
+					console.log(data,"data========>")
 					return (
 						<tr>
 							<td>{ranking}</td>
 							
-							<td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span></td>
-							<td><span className="ellipsis"><LinkButton address={data.address}/></span></td>
-							<td>
+							<td style={{fontSize:'13px'}}><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span></td>
+							<td style={{fontSize:'13px'}}><span className="ellipsis">{data.token_standard}</span></td>
+							<td><span className="ellipsis">{data.transaction_count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span></td>
+							{/* <td><span className="ellipsis">{tokenText(data.name, data.symbol, data.address)}</span></td> */}
+							<td style={{fontSize:'13px'}}>
 								<p><em>{data.symbol}</em></p>
 							</td>
+							<td style={{fontSize:'13px'}}><span className="ellipsis">{onlyDate(data.created_timestamp /1000).toString()}</span></td>
+							
 						</tr>
 					)
 				default:

@@ -87,7 +87,7 @@ export const CONTRACT_TABS = [
 export const BLOCK_TABS = ['Transactions', 'Internal Transactions'];
 export const TOKEN_TABS = ['Token Transfers', 'Token Holders', 'Read Contract'];
 export const TRANSACTION_TABS = ['Internal Transactions', 'Events'];
-export const PROPOSAL_TABS = ['Total Voters', 'Total Token Votes'];
+export const PROPOSAL_TABS = ['Total Voters'];
 
 export const NETWORK_HOST = {
   Mainnet: 'tracker.icon.community',
@@ -163,6 +163,7 @@ export const TX_TYPE = {
   CONTRACT_EVENTS: 'contractevents',
   TRANSACTION_EVENTS: 'transactionevents',
   TRANSACTION_INTERNAL_TX: 'transactioninternaltx',
+  TRACE_TRANSACTION_INTERNAL_TX:'transactioninternaltx/trace',
   TOKEN_HOLDERS: 'tokenholders',
   ADDRESS_BONDERS: 'addressBonders'
 };

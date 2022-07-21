@@ -59,7 +59,7 @@ class GovernancePage extends Component {
 		this.publicTreasury = await getPublicTreasury()
 	}
 	async componentDidMount() {
-		const { data: preps } = await getPReps()	
+		const { data: preps } = await getPReps();	
 		const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()	
 		const lastBlock = await getLastBlock()
 		const stepPriceLoop = await getStepPrice()

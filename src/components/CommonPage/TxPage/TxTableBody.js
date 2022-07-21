@@ -47,7 +47,9 @@ const TokenCell = ({ name, address }) => {
 	return <td><span className="ellipsis">{tokenText(name, undefined, address, 'ellipsis')}</span></td>
 }
 
-const DateCell = ({ date, isDate }) => {
+const DateCell = ({ date, isDate,type }) => {
+	const formatDate = new Date(date/1e6*1000);
+	const changedDate=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(formatDate);
 	let className, dateText
 	if (!isValidData(date)) {
 		className = ""
@@ -63,8 +65,9 @@ const DateCell = ({ date, isDate }) => {
 
 		}
 	}
-
-	return <td className={className}>{dateText}</td>
+	
+	return <td className={className}>{type==="Age"?dateText:type==="Date Time (UTC)"?
+	 changedDate:dateText}</td>
 }
 
 const BlockCell = ({ height }) => {
@@ -92,10 +95,11 @@ class TxTableBody extends Component {
 				address,
 				currentUSD,
 				totalSupply,
+				age,
 			} = this.props
 			const bigNumPercentage = new BigNumber(data.balance / totalSupply)
 			const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
-			const isError = data.receipt_status === 0
+			const isError = Number(data.status) === 0
 			switch (txType) {
 				case TX_TYPE.ADDRESS_REWARD:
 					return (
@@ -133,7 +137,7 @@ class TxTableBody extends Component {
 							<td className="on" onClick={() => {
 								window.open('/address/' + data.address)
 							}}>{data.address}</td>
-							<AmountCell amount={Number(Number(data.value) / Math.pow(10,18)).toFixed()} symbol="ICX" />
+							<AmountCell amount={Number(Number(data.value) / Math.pow(10,18)).toFixed() || 0} symbol="ICX" />
 						</tr>
 					)
 				case TX_TYPE.ADDRESS_TX:
@@ -165,7 +169,7 @@ class TxTableBody extends Component {
 							<DateCell date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.txType} targetContractAddr={data.contractAddr} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol={data.contractSymbol} />
-							<TokenCell name={data.token_contract_name} address={data.token_contract_name} />
+							<TokenCell name={data.token_contract_name} address={data.token_contract_address} />
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_TX:
@@ -174,7 +178,7 @@ class TxTableBody extends Component {
 							<TxHashCell isError={isError} txHash={data.hash} />
 							<BlockCell height={data.block_number} />
 							<DateCell date={data.block_timestamp} />
-							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.type} targetContractAddr={address} />
+							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.transaction_type} targetContractAddr={address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
 						</tr>
@@ -224,7 +228,7 @@ class TxTableBody extends Component {
 						<tr>
 							<TxHashCell isError={isError} txHash={data.hash || data.txHash} />
 							<BlockCell height={data.block_number || data.height} />
-							<DateCell date={data.block_timestamp || data.createDate} />
+							<DateCell type={age} date={data.block_timestamp || data.createDate} />
 							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-"} toAddr={data.to_address !== "None" ? data.to_address : "-"} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
@@ -234,7 +238,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<TxHashCell isErrpor={isError} txHash={data.transaction_hash} />
-							<DateCell date={data.block_timestamp} />
+							<DateCell type={age} date={data.block_timestamp} />
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} txType={data.txType} targetContractAddr={data.token_contract_address} />
 							<AmountCell amount={data.value_decimal} symbol={data.symbol} />
 							<TokenCell name={data.token_contract_name} address={data.token_contract_address} />
@@ -242,7 +246,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TX:
-
 					return (
 						<tr>
 							<TxHashCell isError={isError} txHash={data.transaction_hash} />
@@ -257,8 +260,8 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<AddressCell targetAddr={data.address} txType={data.txType} />
-							<AmountCell amount={data.balance} symbol="ICX" />
-							<AmountCell amount={data.balance * currentUSD} decimal={3} symbol="USD" />
+							<AmountCell amount={data.balance.toFixed()} symbol="ICX" />
+							<AmountCell amount={Number(data.balance * currentUSD).toFixed()} decimal={3} symbol="USD" />
 							<td><span>{multiplied.toFixed(3)}</span><em>%</em></td>
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td>{data.nodeType}</td>
@@ -268,7 +271,7 @@ class TxTableBody extends Component {
 					return (
 						<tr>
 							<BlockCell height={data.number} />
-							<DateCell date={data.timestamp} />
+							<DateCell type={age} date={data.timestamp} />
 							<td>{numberWithCommas(data.transaction_count)}</td>
 							<td><BlockLink label={data.hash} to={data.number} ellipsis /></td>
 							<AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
@@ -306,24 +309,23 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-
+						
 					return (
 						<tr>
 							<td>{this.props.rank}</td>
-							<AddressCell targetAddr={data.holder_address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={convertHexToValue(data.value).toFixed()} symbol={data.symbol} />
-							<td><span>{Number(convertHexToValue(data.value).toFixed() / this.props.totalSupply).toFixed(3) * 100}</span><em>%</em></td>
+							<AddressCell targetAddr={data.address} txType={data.txType} spanNoEllipsis />
+							<AmountCell amount={data.balance.toFixed()} symbol={data.symbol} />
+							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance.toFixed() / this.props.totalSupply.toFixed(3) * 100).toFixed(2) :"-"}</span><em>%</em></td>
 						</tr>
 					)
 					case TX_TYPE.ADDRESS_BONDERS:
 						console.log(this.props.bondMap[data] > 0, "bonder bonder data")
 						return (
-							this.props.bondMap[data] > 0 ?
 							<tr>
 								<AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
-								<td><span>{numberWithCommas(this.props.bondMap[data])}</span><em>ICX</em></td>
+								<td><span>{numberWithCommas(this.props.bondMap[data]) || 0}</span><em>ICX</em></td>
 								
-							</tr> : ""
+							</tr> 
 						)
 				default:
 					return <tr></tr>

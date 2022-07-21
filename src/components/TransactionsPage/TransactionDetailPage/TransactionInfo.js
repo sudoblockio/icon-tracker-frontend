@@ -24,6 +24,7 @@ import {
 	epochToFromNow,
 	convertHexToValue,
 } from '../../../utils/utils'
+import { TX_TYPE } from '../../../utils/const';
 
 const COUNT = 10
 
@@ -32,7 +33,8 @@ class TransactionInfo extends Component {
 		super(props)
 		this.state = {
 			download: undefined,
-			feeInUSD: 0
+			feeInUSD: 0,
+			errorlogs:null
 		}
 	}
 
@@ -41,6 +43,8 @@ class TransactionInfo extends Component {
 		const lastBlock = await getLastBlock()
 		this.setState({lastBlock, currentUSD})
 		let moreMsg = await getFailMessage(this.props.match.params.txHash)
+
+		this.setState({errorlogs:moreMsg})
 		if(moreMsg && Array.isArray(moreMsg) && moreMsg.length) {
 			moreMsg = moreMsg[moreMsg.length - 1]
 		}
@@ -122,6 +126,7 @@ class TransactionInfo extends Component {
 					reportedCount,
 					// stepUsedDetails
 				} = data
+				console.log(data,"values========>")
 
 				const _stepPrice = step_price || "0"
 				const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -150,9 +155,9 @@ class TransactionInfo extends Component {
 											</td>
 										</tr>
 										<tr>
-											<td>Status</td>
-											<td className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail) &&  `- ${this.state.msgList}`}</td>
-										</tr>
+											<td >Status</td>
+											<td style={{cursor:isFail? 'pointer':'none'}} onClick={()=>isFail && this.props.history.push(`/transaction/trace/${hash}`)} className={isFail ? 'fail' : ''} > {isSuccess ? 'Success' : 'Fail'} {(isFail) &&  `- ${this.state.msgList}`}</td>
+										</tr> 
 										<tr>
 											<td>Block Height</td>
 											<td><span><BlockLink to={block_number} label={numberWithCommas(block_number)} /></span><em>{`(${ this.state.lastBlock? Number(this.state.lastBlock.height - block_number) : ' -'} Confirmation(s))`}</em></td>
