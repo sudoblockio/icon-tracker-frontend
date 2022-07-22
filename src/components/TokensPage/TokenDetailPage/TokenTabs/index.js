@@ -11,11 +11,14 @@ import {
     TX_TYPE,
     TOKEN_TABS,
 } from '../../../../utils/const'
-import {getTokenTotalSupply} from '../../../../redux/store/iiss'
+import {getTokenTotalSupply,getDecimals} from '../../../../redux/store/iiss'
+import BigNumber from 'bignumber.js';
 
 class TokenTabs extends Component {
     total = async () => {
-        const res = await getTokenTotalSupply(this.props.match.params.tokenId)
+        const totalSupply = await getTokenTotalSupply(this.props.match.params.tokenId);
+        const decimals = await getDecimals(this.props.match.params.tokenId);
+        const res = BigNumber(totalSupply).toString()/Math.pow(10,decimals);
         return res;
     }
     render() {

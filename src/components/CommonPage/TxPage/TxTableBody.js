@@ -21,7 +21,7 @@ import {
 import {
 	TX_TYPE,
 } from '../../../utils/const'
-import { getTokenTotalSupply } from '../../../redux/store/iiss'
+import { getTokenTotalSupply ,getDecimals} from '../../../redux/store/iiss'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils';
 
 const TxHashCell = ({ isError, txHash }) => {
@@ -83,7 +83,10 @@ class TxTableBody extends Component {
 	tts = 0
 	async componentWillMount() {
 		if (this.props.txType === "tokenholders") {
-			this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
+			const totalSupply=  await getTokenTotalSupply(this.props.data.token_contract_address);
+			const decimals = await getDecimals(this.props.data.token_contract_address);
+			this.tokenTotalSupply=BigNumber(totalSupply).toString()/Math.pow(10,decimals);
+			this.tts = BigNumber(totalSupply).toString()/Math.pow(10,decimals);
 		}
 	}
 	render() {
@@ -315,7 +318,7 @@ class TxTableBody extends Component {
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.address} txType={data.txType} spanNoEllipsis />
 							<AmountCell amount={data.balance.toFixed()} symbol={data.symbol} />
-							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance.toFixed() / this.props.totalSupply.toFixed(3) * 100).toFixed(2) :"-"}</span><em>%</em></td>
+							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance.toFixed() / Number(this.props.totalSupply).toFixed(3) * 100).toFixed(2) :"-"}</span><em>%</em></td>
 						</tr>
 					)
 					case TX_TYPE.ADDRESS_BONDERS:

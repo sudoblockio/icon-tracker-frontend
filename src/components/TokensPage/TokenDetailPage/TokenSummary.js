@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../../utils/utils'
 import { LoadingComponent, AddressLink } from '../../../components'
-import {getTokenTotalSupply} from '../../../redux/store/iiss'
+import {getTokenTotalSupply,getTotalSupply,getDecimals} from '../../../redux/store/iiss'
 import {tokenTransfersList, tokenHoldersList} from '../../../redux/api/restV3/token'
-
+import BigNumber from 'bignumber.js'
 class TokenSummary extends Component {
 
     async componentDidMount(){
         this.transferCount = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
         this.holdersCount = await tokenHoldersList({contractAddr: this.props.match.params.tokenId})
-        this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
+        const totalSupply=  await getTokenTotalSupply(this.props.match.params.tokenId);
+        const decimals = await getDecimals(this.props.match.params.tokenId);
+        this.tokenTotalSupply=BigNumber(totalSupply).toString()/Math.pow(10,decimals);
         this.transferCount = this.transferCount.headers["x-total-count"]
         this.holdersCount = this.holdersCount.headers["x-total-count"]
         this.setState({hC: this.holdersCount})
