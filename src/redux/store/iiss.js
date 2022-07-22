@@ -278,7 +278,7 @@ export async function getTokenTotalSupply(address) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                resolve(convertHexToValue(response.data.result));
+                resolve(response.data.result);
             })
             .catch(error => {
                 if (!!error.response) {
