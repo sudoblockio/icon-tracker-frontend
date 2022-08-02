@@ -416,6 +416,7 @@ class TableRow extends Component {
 			logo,
 			status,
 			sponsored_cps_grants,
+			cps_governance,
 			bonded,
 			power
 			
@@ -441,7 +442,7 @@ class TableRow extends Component {
 						</li>
 					</ul>
 				</td>
-				<td>{sponsored_cps_grants !== null ?'✓':'-'}</td>
+				<td>{cps_governance ?'✓':'-'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{ productivity !== "None" ? productivity : "0.00%"}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
 				{!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span></td>}
