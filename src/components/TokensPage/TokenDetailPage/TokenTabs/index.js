@@ -11,19 +11,25 @@ import {
     TX_TYPE,
     TOKEN_TABS,
 } from '../../../../utils/const'
-import {getTokenTotalSupply} from '../../../../redux/store/iiss'
+import {getTokenDecimals, getTokenTotalSupply} from '../../../../redux/store/iiss'
+// import {tokenHoldersList, tokenTransfersList} from "../../../../redux/api/restV3";
 
 class TokenTabs extends Component {
-    total = async () => {
-        const res = await getTokenTotalSupply(this.props.match.params.tokenId)
-        return res;
+
+    async componentDidMount(){
+        // this.transferCount = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
+        // this.holdersCount = await tokenHoldersList({contractAddr: this.props.match.params.tokenId})
+        // this.transferCount = this.transferCount.headers["x-total-count"]
+        // this.holdersCount = this.holdersCount.headers["x-total-count"]
+        // this.setState({hC: this.holdersCount})
+        this.tokenDecimals = await getTokenDecimals(this.props.match.params.tokenId)
+        this.tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId) / Math.pow(10, this.tokenDecimals)
     }
+
     render() {
         const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
         const { loading, data } = token
         const { address } = data
-        this.theTokenTotal = this.total()        
-        this.theTokenTotal.then(result => this.tokenTotalSupply = result).catch(error => console.log(error, "the promise error"))
         return (
             <TabTable
                 {...this.props}

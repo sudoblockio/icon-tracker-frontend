@@ -11,7 +11,7 @@ import {
     NoBox,
 } from '../../../components'
 import {
-    coinGeckoCurrentUSD, getTotalSupply
+    coinGeckoCurrentUSD, getTokenDecimals, getTokenTotalSupply, getTotalSupply
 } from '../../../redux/store/iiss'
 import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
 import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
@@ -35,12 +35,18 @@ class TxPage extends Component {
 
     async componentDidMount() {
         this.setInitialData(this.props.url)
-        const currentUSD = await coinGeckoCurrentUSD()
-        const supplyMetrics = await getTotalSupply()
-        const totalSupply = Number(supplyMetrics / Math.pow(10, 8))
-        // this.setState({currentUSD, totalsupply})
-        // this.setState({currentUSD, currentUSD})
-        this.setState({currentUSD, totalSupply})
+
+        if (this.txType === "tokenholders") {
+            const tokenDecimals = await getTokenDecimals(this.props.match.params.tokenId)
+            const tokenTotalSupply = await getTokenTotalSupply(this.props.match.params.tokenId)
+            const totalSupply = Number(tokenTotalSupply / Math.pow(10, tokenDecimals))
+            this.setState({totalSupply})
+        } else {
+            const currentUSD = await coinGeckoCurrentUSD()
+            const supplyMetrics = await getTotalSupply()
+            const totalSupply = Number(supplyMetrics / Math.pow(10, 8))
+            this.setState({currentUSD, totalSupply})
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -252,6 +258,7 @@ class TxPage extends Component {
                                         address={this.urlIndex}
                                         currentUSD={this.state?this.state.currentUSD:0 }
                                         totalSupply={this.state?this.state.totalSupply:0}
+                                        rank={index+1}
                                     />
                                 ))}
                             </tbody>
