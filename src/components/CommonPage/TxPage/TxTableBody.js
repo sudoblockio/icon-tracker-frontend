@@ -80,12 +80,6 @@ class TxTableBody extends Component {
 	constructor(props) {
 		super(props)
 	}
-	tts = 0
-	async componentWillMount() {
-		if (this.props.txType === "tokenholders") {
-			this.tts = await getTokenTotalSupply(this.props.data.token_contract_address)
-		}
-	}
 	render() {
 
 		const TableRow = (_props) => {
@@ -309,7 +303,6 @@ class TxTableBody extends Component {
 						</tr>
 					)
 				case TX_TYPE.TOKEN_HOLDERS:
-						
 					return (
 						<tr>
 							<td>{this.props.rank}</td>
@@ -324,8 +317,7 @@ class TxTableBody extends Component {
 							<tr>
 								<AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
 								<td><span>{numberWithCommas(this.props.bondMap[data]) || 0}</span><em>ICX</em></td>
-								
-							</tr> 
+							</tr>
 						)
 				default:
 					return <tr></tr>

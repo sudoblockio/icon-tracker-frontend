@@ -278,7 +278,41 @@ export async function getTokenTotalSupply(address) {
         }
         walletApi.post(`/api/v3`, JSON.stringify(param))
             .then(response => {
-                resolve(convertHexToValue(response.data.result));
+                resolve(response.data.result);
+            })
+            .catch(error => {
+                if (!!error.response) {
+                    resolve(error.response.data);
+                } else {
+                    resolve({
+                        error: {
+                            message: error.message
+                        }
+                    })
+                }
+            })
+    })
+}
+
+
+export async function getTokenDecimals(address) {
+    const walletApi = await walletApiInstance()
+    return new Promise(resolve => {
+        const param = {
+            jsonrpc: "2.0",
+            method: "icx_call",
+            id: randomUint32(),
+            params: {
+                "to": `${address}`,
+                "dataType": "call",
+                "data": {
+                    "method": "decimals"
+                }
+            }
+        }
+        walletApi.post(`/api/v3`, JSON.stringify(param))
+            .then(response => {
+                resolve(response.data.result);
             })
             .catch(error => {
                 if (!!error.response) {
@@ -590,7 +624,7 @@ export async function getLastBlock() {
     });
 }
 
-export const getFailMessage = async (txHash,type) => {
+export const getFailMessage = async (txHash, type) => {
     const param = {
         jsonrpc: "2.0",
         id: randomUint32(),
@@ -600,7 +634,7 @@ export const getFailMessage = async (txHash,type) => {
         }
     }
     try {
-        
+
         const apiUrl = await getWalletApiUrl()
         const response = await fetch(`${apiUrl}/api/v3d`, {
             method: 'POST',
@@ -611,8 +645,8 @@ export const getFailMessage = async (txHash,type) => {
         data.result.logs.map(log => {
             errorList.push(log.msg)
         })
-         return type==="wholemsg"? data:errorList;
-        
+        return type === "wholemsg" ? data : errorList;
+
     } catch (e) {
         console.log(e, "Error from getFailMessage")
 
