@@ -31,7 +31,7 @@ class TxBottomComponent extends Component {
                         </div>
                     </div>
                 )
-            } else if (!data || data.length === 0 && txType !== 'addressBonded') {
+            } else if ((!data || data.length === 0) && (txType !== 'addressBonded')) {
                 return <NoBox text={noBoxText} />
             }
             else {
@@ -39,7 +39,7 @@ class TxBottomComponent extends Component {
 
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType} total={this.props.total} listSize={totalSize} totalSize={Number(data.length)} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
+                        <TxBottomTitle txType={txType} total={this.props.total} listSize={Number(data.length)} totalSize={totalSize} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>
