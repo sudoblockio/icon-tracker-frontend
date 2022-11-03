@@ -10,7 +10,7 @@ import {
     addAt,
     addUnregisteredStyle
 } from '../../../utils/utils'
-import {CopyButton, LoadingComponent, ReportButton} from '../../../components'
+import {CopyButton, QrCodeButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
 import {SocialMediaType} from '../../../utils/const'
@@ -274,6 +274,7 @@ function AddressInfo(props) {
                                         <td colSpan={is_prep ? '3' : '1'} className={scam ? 'scam' : ''}>
                                             {scam && <span className="scam-tag">Scam</span>}
                                             {_address} 
+                                            <QrCodeButton address={data.address}/>
                                             <CopyButton data={_address} title={'Copy Address'} isSpan/>
                                             <span className="show-node-addr"
                                                   style={is_prep ? {display: ""} : {display: "none"}}

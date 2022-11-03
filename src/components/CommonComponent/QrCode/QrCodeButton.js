@@ -20,12 +20,13 @@ class QrCodeButton extends Component {
     render() {
         
         return  (
-            this.props.address ? 
-            <span className="cv-button" onClick={this.handleClick}>
-                {/* <i className="img" /> */}
-               Verify Contract
+            // this.props.address ? 
+            <span className="qrcode" onClick={this.handleClick}>
+                <i className="img" />
+               {/* Verify Contract */}
             </span>
-            : ""
+            // : ""
+
             // <span className="qrcode" onClick={this.connectWallet}>
             // | [#]  Connect a Wallet
             // </span>
