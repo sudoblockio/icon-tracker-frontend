@@ -184,7 +184,12 @@ class Popup extends Component {
             <span className='close' onClick={this.closePopup}>
               <em className='img' />
             </span>
-            {isQr && <AddressQrCode data={qrData} />}
+            {/* {isQr && <AddressQrCode data={qrData} />} */}
+            <h1 class="title">Address</h1>
+            <div class="qr">
+              <canvas id="qr" height="145" width="145" style={{height: '145px', width: '145px'}}></canvas>
+            </div>
+            <p>{ data.address }</p>
           </div>
         </div>
         <div key='detail' className='popup-wrap detail'>
