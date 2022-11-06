@@ -51,7 +51,7 @@ function ContractInfo(props) {
     
 
 
-        const { contract, walletAddress, contractDetails } = props
+        const { contract, contractDetails } = props
         const { loading, data } = contract
         let ircVersion, reportedCount
         const Contents = () => {
@@ -78,7 +78,6 @@ function ContractInfo(props) {
                                                     {data.address} 
                                                    <span> <CopyButton data={data.address} title={'Copy Address'} isSpan /></span>
                                                      {/* {contractDetails.owner_address === walletAddress?  */}
-                                                    {/* <QrCodeButton address={walletAddress} contract={data.address}/>   */ }
                                                     <QrCodeButton address={data.address}/>
                                                           {/* :""}  */}
                                                     {verified_data.website && <span className="home" onClick={() => {
