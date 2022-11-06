@@ -5,31 +5,18 @@ import { setPopup } from '../../../redux/store/popups'
 
 class QrCodeButton extends Component {
     handleClick = () => {
-        const { address, contract } = this.props
+        const { address } = this.props
         this.props.setPopup({
             type: POPUP_TYPE.QR,
-            data: { address, contract },  
+            data: { address },  
         })
     }
 
-    connectWallet = () => {
-        // use connect component to 
-        // handle wallet connect workflow
-    }
-
-    render() {
-        
+    render() {        
         return  (
-            // this.props.address ? 
             <span className="qrcode" onClick={this.handleClick}>
                 <i className="img" />
-               {/* Verify Contract */}
             </span>
-            // : ""
-
-            // <span className="qrcode" onClick={this.connectWallet}>
-            // | [#]  Connect a Wallet
-            // </span>
         )
     }
 }
