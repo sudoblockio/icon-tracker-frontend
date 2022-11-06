@@ -77,9 +77,8 @@ function ContractInfo(props) {
                                                     {scam && <span className="scam-tag">Scam</span>}
                                                     {data.address} 
                                                    <span> <CopyButton data={data.address} title={'Copy Address'} isSpan /></span>
-                                                     {/* {contractDetails.owner_address === walletAddress?  */}
-                                                    <QrCodeButton address={data.address}/>
-                                                          {/* :""}  */}
+                                                   {contractDetails.owner_address === walletAddress?
+                                                    <QrCodeButton address={data.address}/> : "" }
                                                     {verified_data.website && <span className="home" onClick={() => {
                                                     onSocialClick(verified_data.website)
                                                     }}><i className="img"></i></span>}
