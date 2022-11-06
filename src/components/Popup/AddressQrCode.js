@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import QrCodeComponent from '../../components';
+import QrCodeComponent from '../CommonComponent/QrCode/QrCodeComponent';
 
 class AddressQrCode extends Component {
 

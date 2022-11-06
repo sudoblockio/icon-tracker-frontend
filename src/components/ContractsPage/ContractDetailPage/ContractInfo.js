@@ -51,7 +51,7 @@ function ContractInfo(props) {
     
 
 
-        const { contract, contractDetails } = props
+        const { contract, walletAddress, contractDetails } = props
         const { loading, data } = contract
         let ircVersion, reportedCount
         const Contents = () => {
