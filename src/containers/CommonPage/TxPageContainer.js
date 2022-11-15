@@ -76,7 +76,7 @@ function mapDispatchToProps(dispatch) {
     blockTxList: payload => dispatch(blockTxListAction(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
-    transactionEventLogListAction: payload => dispatch(transactionEventLogListAction(payload)),
+    transactionEventLogList: payload => dispatch(transactionEventLogListAction(payload)),
     transactionInternalTxList: payload => dispatch(transactionInternalTxListAction(payload)),
     addressRewardList: payload => dispatch(addressRewardListAction(payload)),
   };
