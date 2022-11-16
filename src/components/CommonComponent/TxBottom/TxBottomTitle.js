@@ -70,7 +70,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeNum}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} internal transaction(s)</em>
+                                <em className="mint" onClick={goAllTx}>{_totalSize} internal transaction(s)</em>
                             </span>
                         </p>
                     )
@@ -79,7 +79,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeUnder10}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} token transfer(s)</em>
+                                <em className="mint" onClick={goAllTx}>{_totalSize} token transfer(s)</em>
                             </span>
                         </p>
                     )
@@ -88,7 +88,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeNum}</em> event(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} event(s)</em>
+                                <em className="mint" onClick={goAllTx}>{_totalSize} event(s)</em>
                             </span>
                         </p>
                     )
@@ -107,7 +107,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeNum}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} internal transaction(s)</em>
+                                <em className="mint" onClick={goAllTx}>{_totalSize} internal transaction(s)</em>
                             </span>
                         </p>
                     )
