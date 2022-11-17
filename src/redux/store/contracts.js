@@ -150,7 +150,7 @@ export async function contractTokenTxList(payload) {
   if (!payload.addr) payload = {addr: payload, count: 10, skip: 0}
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`)
+    trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`, payload))
       .then(result => {
         resolve(result)
       })
@@ -180,7 +180,7 @@ export async function contractEventLogList(payload) {
 export async function contractInternalTxList(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi.get(`${TRANSACTIONS_PREFIX}/internal/address/${payload.addr}`)
+    trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.addr}`, payload))
       .then(result => {
         resolve(result)
       })
