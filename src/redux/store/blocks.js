@@ -86,7 +86,7 @@ export async function blockList(payload) {
   export async function blockTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`${TRANSACTIONS_PREFIX}/block-number/${payload.height}`)
+      trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/block-number/${payload.height}`, payload))
         .then(result => {
           resolve(result)
         })
@@ -99,7 +99,7 @@ export async function blockList(payload) {
   export async function blockIntTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`${INTERNAL_TRANSACTIONS_PREFIX}/block-number/${payload.height}`)
+      trackerApi.get(makeUrl(`${INTERNAL_TRANSACTIONS_PREFIX}/block-number/${payload.height}`, payload))
         .then(result => {
           resolve(result)
         })

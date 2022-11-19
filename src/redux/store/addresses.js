@@ -73,7 +73,7 @@ export async function addressRewardList(payload) {
   console.log("hit this function")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject ) => {
-    trackerApi.get(`/api/v1/governance/rewards/${payload.address}`)
+    trackerApi.get(makeUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
       .then(result => {
         resolve(result)
       })
@@ -116,7 +116,7 @@ export async function addressList(payload) {
 export async function addressInfo(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get(`${ADDRESSES_PREFIX}/details/${payload.address}`)
+        trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/details/${payload.address}`, payload))
             .then(result => {
 
                 resolve(result)
@@ -132,7 +132,7 @@ export async function addressInfo(payload) {
 export async function addressTokens(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-      trackerApi.get(`${ADDRESSES_PREFIX}/token-addresses/${payload.address || payload}`)
+      trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/token-addresses/${payload.address || payload}`, payload))
           .then(result => {
               resolve(result)
           })
@@ -176,7 +176,7 @@ export async function addressTokenTxList(payload) {
 export async function addressInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-        trackerApi.get( makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address || payload.prep}`, payload))
+        trackerApi.get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.address || payload.prep}`, payload))
             .then(result => {
                 resolve(result)
             })

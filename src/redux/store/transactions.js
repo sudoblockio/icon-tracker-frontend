@@ -68,7 +68,8 @@ export async function transactionTxDetail(payload) {
 export async function transactionInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
     return new Promise((resolve, reject) => {
-      trackerApi.get(`/api/v1/transactions/internal/${payload}`)
+      //  TODO: Check this later!
+      trackerApi.get(makeUrl(`/api/v1/transactions/internal/${payload}`, payload))
       
         .then(result => {
           console.log(result, "api result tx int")

@@ -57,7 +57,7 @@ export async function tokenTransfersList(payload) {
     })
   } else {
     return new Promise((resolve, reject) => {
-      trackerApi.get(makeUrl(`/api/v1/transactions/token-transfers/token-contract/${payload.contractAddr}`, payload) )
+      trackerApi.get(makeUrl(`/api/v1/transactions/token-transfers/token-contract/${payload.contractAddr}`, payload))
         .then(result => {
           resolve(result)
         })
@@ -74,12 +74,12 @@ export async function tokenHoldersList(payload) {
   console.trace(payload, "contract holder payload")
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-    trackerApi
-      .get(
-        makeUrl(`/api/v1/transactions/token-holders/token-contract/${payload.contractAddr}`, payload)
-      )
-      .then((result) => {
-        resolve(result);
+    trackerApi.get(makeUrl(`/api/v1/transactions/token-holders/token-contract/${payload.contractAddr}`, payload))
+      .then(result => {
+        resolve(result)
+      })
+      .catch(error => {
+        reject(error)
       })
       .catch((error) => {
         reject(error);
