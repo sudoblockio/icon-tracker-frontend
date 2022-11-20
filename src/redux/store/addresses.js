@@ -132,7 +132,7 @@ export async function addressInfo(payload) {
 export async function addressTokens(payload) {
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
-      trackerApi.get(makeUrl(`${ADDRESSES_PREFIX}/token-addresses/${payload.address || payload}`, payload))
+      trackerApi.get(`${ADDRESSES_PREFIX}/token-addresses/${payload.address || payload}`)
           .then(result => {
               resolve(result)
           })
