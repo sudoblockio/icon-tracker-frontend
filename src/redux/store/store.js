@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger'
+import {createStore, applyMiddleware} from 'redux';
+import {createLogger} from 'redux-logger'
 import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { createBrowserHistory as createHistory } from 'history'
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createBrowserHistory as createHistory} from 'history'
 import rootReducer from '../reducers/rootReducer';
 import rootSaga from '../store/sagas/rootSaga';
-import { routerMiddleware } from 'react-router-redux'
+import {routerMiddleware} from 'react-router-redux'
 import persistState from 'redux-localstorage'
 
 const logger = createLogger()
@@ -18,7 +18,7 @@ const store = createStore(rootReducer, {}, composeWithDevTools(
   applyMiddleware(logger),
   persistState(null, {
     slicer: () => state => {
-      return { storage: state.storage }
+      return {storage: state.storage}
     }
   })
 ));

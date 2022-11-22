@@ -1,34 +1,30 @@
-
-import { fork, put, takeLatest } from 'redux-saga/effects'
+import {fork, put, takeLatest} from 'redux-saga/effects'
 import AT from '../../actionTypes/actionTypes';
 
 function* setAddress(action) {
   try {
-    const { payload } = action;
+    const {payload} = action;
     if (payload) {
-      yield put({ type: AT.setAddressSuccess, payload });
+      yield put({type: AT.setAddressSuccess, payload});
     }
-  } 
-  catch (e) {
+  } catch (e) {
     console.log(e)
   }
 }
 
 function* setNotification(action) {
   try {
-    const { payload } = action;
-    yield put({ type: AT.setNotificationSuccess, payload });
-  } 
-  catch (e) {
+    const {payload} = action;
+    yield put({type: AT.setNotificationSuccess, payload});
+  } catch (e) {
     console.log(e)
   }
 }
 
 function* clearWallet() {
   try {
-    yield put({ type: AT.clearWalletSuccess });
-  } 
-  catch (e) {
+    yield put({type: AT.clearWalletSuccess});
+  } catch (e) {
     console.log(e)
   }
 }

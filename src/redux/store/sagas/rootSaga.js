@@ -1,4 +1,4 @@
-import { all, fork } from 'redux-saga/effects';
+import {all, fork} from 'redux-saga/effects';
 import mainPageSaga from './mainPageSaga';
 import addressesSaga from './addressesSaga';
 import blocksSaga from './blocksSaga';

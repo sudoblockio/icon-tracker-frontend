@@ -1,5 +1,5 @@
-import { fork, put, takeLatest } from 'redux-saga/effects'
-import { routerActions } from 'react-router-redux'
+import {fork, put, takeLatest} from 'redux-saga/effects'
+import {routerActions} from 'react-router-redux'
 import AT from '../../actionTypes/actionTypes';
 import {
   isHxAddress,
@@ -12,35 +12,29 @@ import {
 function* searchFunc(action) {
 
   try {
-    const { payload } = action
+    const {payload} = action
     const commaRemoved = payload.replace(/,/g, "")
     if (!payload) {
       throw new Error();
-    }
-    else if (isHxAddress(payload)) {
+    } else if (isHxAddress(payload)) {
 
       yield put(routerActions.push(`/address/${payload}`));
-    }
-    else if (isCxAddress(payload)) {
+    } else if (isCxAddress(payload)) {
       yield put(routerActions.push(`/contract/${payload}`))
-    }
-    else if (is0xHash(payload)) {
+    } else if (is0xHash(payload)) {
       yield put(routerActions.push(`/transaction/${payload}`));
-    }
-    else if (isHash(payload)) {
+    } else if (isHash(payload)) {
       yield put(routerActions.push(`/transaction/${payload}`));
-    }
-    else if (isNumeric(commaRemoved)) {    
-      
+    } else if (isNumeric(commaRemoved)) {
+
       yield put(routerActions.push(`/block/${commaRemoved}`));
-    }
-    else {
+    } else {
       throw new Error();
     }
-    yield put({ type: AT.searchFulfilled });
+    yield put({type: AT.searchFulfilled});
   } catch (e) {
 
-    yield put({ type: AT.searchRejected, error: action.payload });
+    yield put({type: AT.searchRejected, error: action.payload});
     yield put(routerActions.push('/notfound'));
   }
 }
