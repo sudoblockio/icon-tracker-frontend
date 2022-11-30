@@ -9,11 +9,12 @@ class RecentBlocks extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            recentBx: 0,
+            recentBx: [],
             liveTableRow: {},
             liveTrClass: "flat",
             play: true,
-            bxRows: []
+            bxRows: [],
+            loading: true,
             
         }
     }
@@ -25,21 +26,39 @@ class RecentBlocks extends Component {
     bxRows = []
 
     async componentDidMount() {
-        const blockListData = await blockList()
-        this.recentBx = blockListData.data
-        this.setState({recentBx: this.recentBx, bxRows: blockListData.data})
+        // const blockListData = await blockList()
+        // this.recentBx = blockListData.data
+        // this.setState({recentBx: this.recentBx, bxRows: blockListData.data})
+
         this.bxsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/blocks");
         
-        this.bxsocket.onopen = (event) => {
-            console.log("connection established")
-            this.state.bxRows? this.state.bxRows.unshift(this.state.recentBx) : console.log("no rows")
+        this.bxsocket.onopen = async (event) => {
+          console.log("connection established");
+        //   this.state.bxRows
+        //     ? this.state.bxRows.unshift(this.state.recentBx)
+        //     : console.log("no rows");
+
+          this.setState({loading:false})
+          const blockListData = await blockList()
+          this.recentBx = blockListData.data
+          this.setState({recentBx: blockListData.data.slice(0,8), bxRows: blockListData.data})
         }
 
         this.bxsocket.onmessage = async (event) =>  {
             this.setState({liveTrClass:"flat"})
 
-                this.latestBx = event.data 
-                this.state.bxRows? this.state.bxRows.unshift(JSON.parse(this.latestBx)) : console.log("no tx rows")
+                // this.latestBx = event.data 
+                // this.state.bxRows? this.state.bxRows.unshift(JSON.parse(this.latestBx)) : console.log("no tx rows")
+
+                  this.setState((prev) => {
+                    const newArray = [
+                      { ...JSON.parse(event.data), isNew: true },
+                    ]
+                      .concat(prev.recentBx)
+                      .slice(0, 8);
+                    return { recentBx: newArray };
+                  });
+
                 try{
                     if (this.msgCounter === 0){
                         this.msgCounter++ 
@@ -92,22 +111,24 @@ class RecentBlocks extends Component {
     
     render() {
         document.addEventListener('keydown', this.handleKeyDown)
-        const loading = false;
-        const list = this.state.recentBx ? this.state.recentBx.slice(1, 8) : this.recentBx  ?  this.recentBx.slice(1,8) : []
+        const loading = this.state.loading;
+        const list = this.state.recentBx;
         const latest = this.state.liveTableRow
+
+        console.log({loading})
 
         return (
             <li className="left">
                 <p className="title">Blocks</p>
                 <div className="list-group">
                     {loading ? (
-                        <div style={{ height: '511px' }}>
+                        <div style={{ height: '522px' }}>
                             <LoadingComponent />
                         </div>
                     ) : (
                         
                         <ul className={"list"} style={{ height: list.length === 0 ? 511 : '' }}>
-                                <li key={1}  className={`${this.state.liveTrClass}`}>
+                                {/* <li key={1}  className={`${this.state.liveTrClass}`}>
                                         <p className="icon">B</p>
                                         <p className="a">
                                             Block
@@ -127,40 +148,60 @@ class RecentBlocks extends Component {
                                         </p>
                                         <p className="d">
                                             Time (UTC+9)
-                                            {/*  */}
                                             <em>{latest.timestamp? new Date(latest.timestamp / 1000).toLocaleTimeString() : list[0]? new Date(list[0].timestamp / 1000).toLocaleTimeString(): null}</em>
                                         </p>
-                                    </li>
+                                </li> */}
 
                             {list.map((block, index) => {
                                 const { number, hash, transaction_count, timestamp } = block
                                 const time = timestamp !== undefined? timestamp : new Date()
                                     return (
-                                        <li key={index}>
-                                            <p className="icon">B</p>
-                                            <p className="a">
-                                                Block
-                                                <em>
-                                                    <BlockLink to={number || latest.number-1} label={numberWithCommas(number) || numberWithCommas(latest.number-1)} />
-                                                </em>
-                                            </p>
-                                            <p className="b">
-                                                Transactions
-                                                <em>{numberWithCommas(transaction_count || latest.transaction_count)}</em>
-                                            </p>
-                                            <p className="c">
-                                                Hash
-                                                <em>
-                                                    <BlockLink to={number || latest.number-1} label={hash || latest.hash} />
-                                                </em>
-                                            </p>
-                                            <p className="d">
-                                                Time (UTC+9)
-    
-                                                <em>{ new Date(time / 1000).toLocaleTimeString()}</em>
-                                            </p>
-                                        </li>
-                                    ) 
+                                      <li
+                                        key={index} className={ block.isNew ? `fade-in-anim` : ""}
+                                      >
+                                        <p className="icon">B</p>
+                                        <p className="a">
+                                          Block
+                                          <em>
+                                            <BlockLink
+                                              to={number || latest.number - 1}
+                                              label={
+                                                numberWithCommas(number) ||
+                                                numberWithCommas(
+                                                  latest.number - 1
+                                                )
+                                              }
+                                            />
+                                          </em>
+                                        </p>
+                                        <p className="b">
+                                          Transactions
+                                          <em>
+                                            {numberWithCommas(
+                                              transaction_count ||
+                                                latest.transaction_count
+                                            )}
+                                          </em>
+                                        </p>
+                                        <p className="c">
+                                          Hash
+                                          <em>
+                                            <BlockLink
+                                              to={number || latest.number - 1}
+                                              label={hash || latest.hash}
+                                            />
+                                          </em>
+                                        </p>
+                                        <p className="d">
+                                          Time (UTC+9)
+                                          <em>
+                                            {new Date(
+                                              time / 1000
+                                            ).toLocaleTimeString()}
+                                          </em>
+                                        </p>
+                                      </li>
+                                    ); 
                               
 
                             })}

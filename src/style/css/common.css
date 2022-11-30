@@ -1055,6 +1055,9 @@ body {
   opacity: 1;
   transition: .05s;
 }
+.fade-in-anim{
+  animation: fadeIn 0.5s ;
+}
 
 
 .home .content-wrap .screen1 .content .list {
