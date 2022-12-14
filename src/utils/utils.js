@@ -271,7 +271,11 @@ export function makeUrl(url, payload) {
         return url
     }
     let result = url
-    payload.limit = Number(payload.count? payload.count : 10)
+     
+    if(url !== "/api/v1/transactions/token-transfers"){
+        payload.limit = Number(payload.count? payload.count : 10)
+    }
+
     if (Number(payload.page) > 2){
         payload.skip = Number(Number(payload.page -1) * payload.count)
     } else if(Number(payload.page) === 2){
