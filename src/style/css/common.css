@@ -3076,6 +3076,11 @@ body {
 .table-typeJ th:nth-child(8) {
   width: 150px;
 }
+.table-typeJ td:nth-child(9) {
+  min-width: 120px ;
+  max-width: 120px; 
+  width: 120px;
+}
 .table-typeJ td:nth-child(1) .ellipsis {
   width: 155px;
 }

@@ -74,6 +74,10 @@ const BlockCell = ({ height }) => {
 	return <td className="on"><BlockLink to={height} label={numberWithCommas(height)} /></td>
 }
 
+const MethodCell = ({method}) =>{
+	return method ? <td>{method}</td> : <td>-</td>
+}
+
 
 
 class TxTableBody extends Component {
@@ -226,6 +230,7 @@ class TxTableBody extends Component {
 							<AddressSet fromAddr={data.from_address !== "None" ? data.from_address : "-"} toAddr={data.to_address !== "None" ? data.to_address : "-"} txType={data.txType} targetContractAddr={data.targetContractAddr} />
 							<AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" />
 							<AmountCell amount={data.fee} symbol="ICX" />
+							<MethodCell method={data.method}/>
 						</tr>
 					)
 				case TX_TYPE.TOKEN_TRANSFERS:
