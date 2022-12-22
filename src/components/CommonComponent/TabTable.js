@@ -48,7 +48,7 @@ class TabTable extends Component {
                                 <ul>
                                     {
                                         TABS.map((tab, index) => (
-                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.changeTab(index) }}>{tab}</li>
+                                            <li key={index} className={on === index ? 'on' : ''} onClick={() => { this.props.onClickTab(index) }}>{tab}</li>
                                         ))
                                     }
                                 </ul>
