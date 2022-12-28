@@ -97,7 +97,7 @@ class AddressesDetailPage extends Component {
     // async componentDidMount() {
     //     this.checkTabs(this.props.match.params.addressId)   
     // }
-    
+
     render() {
         const { wallet } = this.props;
         const { loading, error, data } = wallet
