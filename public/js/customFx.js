@@ -69,11 +69,13 @@ $(window).on('CUSTOM_FX', function(e) {
             $('.table-typeB td .balance').addClass('on')
             break
         case 'CONTRACT_STATUS':
+        case 'TOKEN_STANDARD':
             $('.status-holder ul')
                 .stop()
                 .slideDown(300, 'swing')
             $('.status-holder > span').addClass('on')
             break
+        
 
         default:
     }

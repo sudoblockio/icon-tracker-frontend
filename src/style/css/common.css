@@ -1557,6 +1557,11 @@ body {
   position: relative;
   cursor: pointer;
 }
+.status-holder .img{
+  width: 7px !important;
+  height: 5px !important;
+  background-position: 0 -50px !important;
+}
 .status-holder > span:hover {
   color: #1aaaba;
 }

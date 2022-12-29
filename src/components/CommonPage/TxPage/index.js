@@ -61,7 +61,7 @@ class TxPage extends Component {
 
     initPage = url => {
         this.getParams(url)
-        this.getTxList(1, 0, this.urlIndex)
+        this.getTxList({page:1, count:0, urlIndex:this.urlIndex})
     }
 
     setInitialData = url => {
@@ -72,15 +72,19 @@ class TxPage extends Component {
     setQueryToList = search => {
         const parsed = queryString.parse(search)
         const { urlIndex, pageId } = this
-        const { count } = parsed
-        this.getTxList(pageId, count, urlIndex)
+        const { count , sort} = parsed
+        this.getTxList({page:pageId, count, urlIndex,sort})
     }
 
-    getTxList = (page, count, urlIndex) => {
+    getTxList = ({page, count, urlIndex, sort}) => {
         const query = {
             page: isNumeric(page) ? page : 1,
             count: isNumeric(count) ? count : 25,
         }
+
+        if(sort) query.sort = sort;    
+        
+       
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
             case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -164,15 +168,20 @@ class TxPage extends Component {
     }
 
     getTxListByCount = count => {
-        this.historyPush(1, count)
+        const {sort} = queryString.parse(this.props.url.search);
+        if(sort) this.historyPush(1, count, sort)
+        else this.historyPush(1, count);
     }
 
     getTxListByPage = page => {
         const count = this.getCount()
-        this.historyPush(page, count)
+        const {sort} = queryString.parse(this.props.url.search);
+
+        if(sort) this.historyPush(page, count, sort)
+        else this.historyPush(page, count)
     }
 
-    historyPush = (page, count) => {
+    historyPush = (page, count, sort) => {
         let url = ''
         switch (this.txType) {
             case TX_TYPE.CONTRACT_TX:
@@ -191,13 +200,13 @@ class TxPage extends Component {
             case TX_TYPE.TRANSACTION_INTERNAL_TX:
             case TX_TYPE.ADDRESS_REWARD:
                 case TX_TYPE.ADDRESS_BONDED:        
-                url = this.makeUrl(page, count, this.urlIndex)
+                url = this.makeUrl({page, count, urlIndex:this.urlIndex})
                 break
             case TX_TYPE.BLOCKS:
             case TX_TYPE.ADDRESSES:
             case TX_TYPE.TRANSACTIONS:
             case TX_TYPE.TOKEN_TRANSFERS:
-                url = this.makeUrl(page, count)
+                url = this.makeUrl({page, count, sort})
                 break
 
             default:
@@ -206,7 +215,7 @@ class TxPage extends Component {
         this.props.history.push(url)
     }
 
-    makeUrl = (page, count, urlIndex) => {
+    makeUrl = ({page, count, urlIndex, sort}) => {
         let url = `/${this.txType}`
         if (urlIndex) {
             url += `/${urlIndex}`
@@ -216,11 +225,18 @@ class TxPage extends Component {
             url += `/${page}`
         }
 
-        if (count) {
+        if (count && !sort) {
             url += `?count=${count}`
+        }else  if (!count && sort) {
+            url += `?sort=${sort}`
+        }else  if (count && sort) {
+            url += `?count=${count}&sort=${sort}`
         }
+       
         return url
     }
+
+
     handleClick=(value)=>{
         if(value==="Age"){
             this.setState({age:"Date Time (UTC)"})
@@ -228,6 +244,12 @@ class TxPage extends Component {
             this.setState({age:"Age"})
         }
     }
+
+    handleClickSortHeader = (head)=>{
+       const count = this.getCount()
+       this.historyPush(1,count,head);
+    }
+
     render() {
         const tx = this.props[this.getTxTypeData()['tx']] || {}
         const className = this.getTxTypeData()['className'] || ''
@@ -243,49 +265,54 @@ class TxPage extends Component {
                 return <NoBox text={noBoxText} />
             } else {
                 return [
-                    <div className="table-box" key="table">
-                        <table className={className}>
-                            <thead>
-                                <TxTableHead age={this.state.age} handleClick={this.handleClick} txType={this.txType} />
-                            </thead>
-                            <tbody>
-                                {data.map((item, index) => (
-                                    <TxTableBody
-                                        age={this.state.age}
-                                        key={index}
-                                        data={item}
-                                        txType={this.txType}
-                                        address={this.urlIndex}
-                                        currentUSD={this.state?this.state.currentUSD:0 }
-                                        totalSupply={this.state?this.state.totalSupply:0}
-                                        rank={index+1}
-                                    />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>,
-                    <SortHolder
-                        key="SortHolder"
-                        count={count >= 100 ? 100 : count}
-                        getData={this.getTxListByCount}
-                    />,
-                    loading && (
-                        <LoadingComponent
-                            key="LoadingComponent"
-                            style={{
-                                position: 'absolute',
-                                width: '0',
-                                left: '185px',
-                                bottom: '10px',
-                            }}
+                  <div className="table-box" key="table">
+                    <table className={className}>
+                      <thead>
+                        <TxTableHead
+                          age={this.state.age}
+                          handleClick={this.handleClick}
+                          onClickSortHeader={this.handleClickSortHeader}
+                          txType={this.txType}
                         />
-                    ),
-                    <Pagination
-                        key="Pagination"
-                        pageNum={page}
-                        maxPageNum={calcMaxPageNum(totalSize, count)}
-                        getData={this.getTxListByPage}
-                    />,
+                      </thead>
+                      <tbody>
+                        {data.map((item, index) => (
+                          <TxTableBody
+                            age={this.state.age}
+                            key={index}
+                            data={item}
+                            txType={this.txType}
+                            address={this.urlIndex}
+                            currentUSD={this.state?this.state.currentUSD:0 }
+                            totalSupply={this.state?this.state.totalSupply:0}
+                            rank={index+1}
+                          />
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>,
+                  <SortHolder
+                    key="SortHolder"
+                    count={count >= 100 ? 100 : count}
+                    getData={this.getTxListByCount}
+                  />,
+                  loading && (
+                    <LoadingComponent
+                      key="LoadingComponent"
+                      style={{
+                        position: 'absolute',
+                        width: '0',
+                        left: '185px',
+                        bottom: '10px',
+                      }}
+                    />
+                  ),
+                  <Pagination
+                    key="Pagination"
+                    pageNum={page}
+                    maxPageNum={calcMaxPageNum(totalSize, count)}
+                    getData={this.getTxListByPage}
+                  />,
                 ]
             }
         }
@@ -315,4 +342,4 @@ class TxPage extends Component {
     }
 }
 
-export default withRouter(TxPage)
+    export default withRouter(TxPage)

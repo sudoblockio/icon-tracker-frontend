@@ -42,6 +42,7 @@ class SearchPage extends Component {
         const url = this.makeUrl(this.state.pageNum, { count, status, keyword })
         this.props.history.push(url);
         if(this.props.type==="contract"){
+            console.log("Getting contract list")
             this.props.contractList({search:this.state.keyword,count:this.state.count})
         }
         else{
@@ -118,8 +119,9 @@ class SearchPage extends Component {
         if (!!keyword) {
             query.keyword = keyword
         }
+ 
 
-        this._getList(query)
+        this._getList({...query, sort: "-name"})
     }
 
     getSearchTypeData = () => {
@@ -145,28 +147,81 @@ class SearchPage extends Component {
     }
 
     getListByPage = page => {
+        const qs = queryString.parse(this.props.url.search);
+        const {sort, token_standard} = qs;
+
         const count = this.state.count;
         this.setState({pageNum:page})
         const { status, keyword } = this.state
-        const url = this.makeUrl(page, { count, status, keyword })
+
+        const query = {count,status,keyword};
+        if(sort) query.sort = sort;
+        if(token_standard) query.token_standard = token_standard; 
+        
+        const url = this.makeUrl(page,query)
         this.props.history.push(url);
+
+        const paramsContract = {
+            search:this.state.keyword,count:this.state.count,skip:count*(page-1)
+        }
+        const paramsToken = {
+            search:this.state.keyword,limit:this.state.count,skip:count*(page-1)
+        }
+        
+        if(sort) {
+            paramsContract.sort = sort;
+            paramsToken.sort = sort;
+        }
+
+        if(token_standard) {
+            paramsToken.token_standard = token_standard;
+        } 
+        
+
         if(this.props.type==="contract"){
-            this.props.contractList({search:this.state.keyword,count:this.state.count,skip:count*(page-1)});
+            this.props.contractList(paramsContract);
         }else{
-            this.props.tokenList({search:this.state.keyword,limit:this.state.count,skip:count*(page-1)});
+            this.props.tokenList(paramsToken);
         }
     }
 
     getListByCount = count => {
+        const qs = queryString.parse(this.props.url.search);
+        const {sort, token_standard} = qs;
+
+        this.setState({pageNum:1})
+
         this.setState({count:count},()=>{
-        const { status, keyword } = this.state
-        const url = this.makeUrl(1, { count, status, keyword })
-        this.props.history.push(url);
-        if(this.props.type==="contract"){
-            this.props.contractList({search:this.state.keyword,count:count});
-        }else{
-            this.props.tokenList({search:this.state.keyword,limit:count});
-        }
+            const { status, keyword } = this.state
+            const query = {count,status,keyword};
+            if(sort) query.sort = sort;
+            if(token_standard) query.token_standard = token_standard; 
+            
+            const url = this.makeUrl(1, query)
+            this.props.history.push(url);
+
+            const paramsContract = {
+                search:this.state.keyword,count:this.state.count,skip:0
+            }
+            const paramsToken = {
+                search:this.state.keyword,limit:this.state.count,skip:0
+            }
+            
+            if(sort) {
+                paramsContract.sort = sort;
+                paramsToken.sort = sort;
+            }
+    
+            if(token_standard) {
+                paramsToken.token_standard = token_standard;
+            } 
+            
+    
+            if(this.props.type==="contract"){
+                this.props.contractList(paramsContract);
+            }else{
+                this.props.tokenList(paramsToken);
+            }
         })
         
     }
@@ -175,11 +230,52 @@ class SearchPage extends Component {
         this.setState({ status }, () => {
             const { keyword } = this.state
             const count = this.getCount()
-            const url = this.makeUrl(1, { count, status, keyword })
-            this.props.history.push(url)
+            const query = {count,status,keyword};
+            const url = this.makeUrl(1, query)
+            this.props.history.push(url);
+
+            const params = {
+                search:this.state.keyword,count:this.state.count,skip:0, status
+            }
+
+             
+            if(this.props.type==="contract"){
+                console.log("params", params)
+                this.props.contractList(params);
+            }else{
+                this.props.tokenList({search:this.state.keyword,limit:count});
+            }
         })
     }
 
+    getListByTokenStandard = tokenStandard => {
+        this.setState({ tokenStandard }, () => {
+            const { keyword } = this.state
+            const count = this.getCount()
+            const query = {count,token_standard: tokenStandard,keyword};
+            const url = this.makeUrl(1, query)
+            this.props.history.push(url);
+
+            this.setState({pageNum:1})
+
+            const paramsContract = {
+                search:this.state.keyword,count:this.state.count,skip:0
+            }
+            const paramsToken = {
+                search:this.state.keyword,limit:this.state.count,skip:0
+            }
+
+            paramsToken.skip = 0;
+            paramsToken.token_standard = tokenStandard;
+        
+            
+            if(this.props.type==="contract"){
+                this.props.contractList(paramsContract);
+            }else{
+                this.props.tokenList(paramsToken);
+            }
+        })
+    }
 
     getListBySearch = nextSearch => {
         console.log(nextSearch.length,"nextSearch======>")
@@ -253,6 +349,23 @@ class SearchPage extends Component {
         }
     }
 
+    handleClickSortHeader = (head)=>{
+        const count = this.state.count;
+
+        this.setState({pageNum:1})
+        const { status, keyword } = this.state
+        const url = this.makeUrl(1, { count, status, keyword, sort:head })
+        this.props.history.push(url);
+
+        if(this.props.type==="contract"){
+            this.props.contractList({search:this.state.keyword,count:this.state.count, sort: head, skip:0})
+        }else{
+            this.props.tokenList({search:this.state.keyword,limit:this.state.count,skip:0,sort: head});
+        }
+       
+     }
+ 
+
     render() {
         const list = this.props[this.getSearchTypeData()['list']] || {}
         const tableClassName = this.getSearchTypeData()['tableClassName'] || ''
@@ -277,7 +390,9 @@ class SearchPage extends Component {
                                 <SearchTableHead
                                     searchType={this.searchType}
                                     getListByStatus={this.getListByStatus}
+                                    getListByTokenStandard={this.getListByTokenStandard}
                                     setPopup={this.props.setPopup}
+                                    onClickSortHeader={this.handleClickSortHeader}
                                 />
                             </thead>
                             <tbody>

@@ -67,6 +67,7 @@
         "react-dev-utils": "^8.0.0",
         "react-dom": "^16.2.0",
         "react-dropzone": "^10.1.5",
+        "react-icons": "^4.7.1",
         "react-redux": "^5.0.6",
         "react-router-dom": "^4.2.2",
         "react-router-redux": "^5.0.0-alpha.9",
@@ -159,10 +160,10 @@
     "babel": {
         "presets": [
             "react-app",
-            "@babel/preset-env", 
+            "@babel/preset-env",
             "@babel/preset-react",
             "@babel/preset-typescript"
-            ],
+        ],
         "plugins": [
             "@babel/proposal-class-properties",
             "@babel/proposal-object-rest-spread"

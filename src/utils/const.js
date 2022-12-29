@@ -65,6 +65,7 @@ export const IRC_VERSION = {
 
 export const SORT_TYPE = [10, 25, 50, 100];
 export const STATUS_TYPE = ['All', 'Active', 'Pending', 'Rejected'];
+export const TOKEN_STANDARDS = ['All', 'irc2', 'irc3', 'irc31']
 
 export const ADDRESS_TABS = [
   'Transactions',
