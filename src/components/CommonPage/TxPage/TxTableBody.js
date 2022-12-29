@@ -179,6 +179,7 @@ class TxTableBody extends Component {
 							<AddressSet fromAddr={data.from_address} toAddr={data.to_address} address={address} txType={data.transaction_type} targetContractAddr={address} />
 							<AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
 							<AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+							<MethodCell method={data.method}/>
 						</tr>
 					)
 				case TX_TYPE.CONTRACT_INTERNAL_TX:
