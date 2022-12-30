@@ -92,6 +92,7 @@ class TxTableHead extends Component {
                             <th>To</th>
                             <th>Amount</th>
                             <th>TxFee</th>
+                            <th>Method</th>
                         </tr>
                     )
                 case TX_TYPE.CONTRACT_INTERNAL_TX:

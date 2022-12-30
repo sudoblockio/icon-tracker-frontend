@@ -2461,6 +2461,9 @@ body {
 .table-typeC th:nth-child(8) {
   width: 150px;
 }
+.table-typeC th:nth-child(9) {
+  width: 150px;
+}
 .table-typeC td:nth-child(1) .ellipsis {
   width: 163px;
 }
