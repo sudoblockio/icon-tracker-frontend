@@ -1,8 +1,70 @@
 import React, { Component } from 'react'
 import { TX_TYPE } from '../../../utils/const'
+import { BiChevronDown, BiChevronUp } from "react-icons/bi"
 
+const sortParams = {
+    "Balance": "balance",
+    "USD Value": "balance",
+    "Percentage": "balance",
+    "No of Txns": "transaction_count"
+}
+
+const sortOrderEncoding = {
+    "asc": "-",
+    "dsc": ""
+}
 class TxTableHead extends Component {
+    constructor(props) {
+        super(props)
+        this.state ={
+            sortOrder:{
+             "Balance": "dsc",
+             "Name": "dsc"
+            }
+        }
+    }
+
+    handleClickSortHeader(name){
+        const currOrder = this.state.sortOrder[name];
+        let newSortOrder = "";
+
+        switch(currOrder){
+            case null:
+            case undefined:
+            case "asc":
+                newSortOrder = "dsc";
+                break;
+            case "dsc":
+                newSortOrder = "asc";
+                break;
+            default:
+                newSortOrder = null;
+
+        }
+        if(newSortOrder!==null) {
+            const query = sortOrderEncoding[newSortOrder] + sortParams[name];
+            this.setState(prev=>({...prev, sortOrder: {...prev, [name]:newSortOrder}}) )
+            this.props.onClickSortHeader(query)
+        }
+    }
+
+  
     render() {
+        const withClickAction = (name)=>{
+            const currOrder = this.state.sortOrder[name];
+            return <th style={{cursor: "pointer"}} onClick={this.handleClickSortHeader.bind(this,name)}>
+                        {name} 
+                        <span style={{position: "relative", top: "1px", left: "5px"}}>
+                            {currOrder !== null &&  currOrder !== undefined &&
+                                <>
+                                    {currOrder === "dsc" ?   <BiChevronDown/> :   <BiChevronUp/>}
+                                </>
+                            }
+                          
+                        </span> 
+                    </th>
+        }
+
         const TableHead = _props => {
             const { txType } = _props
             switch (txType) {
@@ -192,14 +254,12 @@ class TxTableHead extends Component {
                 case TX_TYPE.ADDRESSES:
                     return (
                         <tr>
-                            <th>Address</th>
-                            <th>Balance</th>
-                            <th>USD Value</th>
-                            <th>
-                                Percentage<em>%</em>
-                            </th>
-                            <th>No of Txns</th>
-                            <th>Address type</th>
+                           <th>Address</th>
+                            {withClickAction("Balance")}
+                            {withClickAction("USD Value")}
+                            {withClickAction("Percentage")}
+                            {withClickAction("No of Txns")}
+                            <th>Address type</th> 
                         </tr>
                     )
                 case TX_TYPE.BLOCKS:
