@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.0...v0.2.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* release ci ([b0060d8](https://github.com/sudoblockio/icon-tracker-frontend/commit/b0060d878e18e9b3eb1eea19b644f3f6e66a21b4))
+* release ci release type ([4388c94](https://github.com/sudoblockio/icon-tracker-frontend/commit/4388c94c53a5a70400e441a3bc2020abc38d7797))
+
 ## [0.2.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.1.7...v0.2.0) (2022-12-30)
 
 
