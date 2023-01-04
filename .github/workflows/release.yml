@@ -1,18 +1,29 @@
 name: release
 
-# 1. Run unit and integration tests
-# 2. Push containers to AWS ECR and dockerhub tagged with release
-# 3. Recommit an update to the chart's deployments with the updated build number in the `deployment` branch
-
 on:
-  release:
-    types: [created]
-    tags:
-      - "v*.*.*"
+  push:
+    branches:
+      - main
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: google-github-actions/release-please-action@v3
+        id: release-please
+# TODO: https://github.com/sudoblockio/icon-tracker-frontend/issues/104
+#        with:
+#          release-type: go
+#          extra-files: |
+#            src/global/global.go
+
   docker:
     runs-on: ubuntu-latest
+    needs: release
+    if: ${{ needs.release.outputs.release_created }}
     outputs:
       tag: ${{ steps.source.outputs.TAG }}
 
@@ -48,6 +59,7 @@ jobs:
   push_refs:
     runs-on: ubuntu-latest
     needs: docker
+    if: ${{ needs.release.outputs.release_created }}
     strategy:
       max-parallel: 1
       matrix:
