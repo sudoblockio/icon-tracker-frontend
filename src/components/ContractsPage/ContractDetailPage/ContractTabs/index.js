@@ -27,6 +27,7 @@ class ContractTabs extends Component {
         return (
             <TabTable
                 {...this.props}
+                onClickTab = {this.props.changeTab}
                 TABS={CONTRACT_TABS}
                 on={on}
                 loading={loading}
