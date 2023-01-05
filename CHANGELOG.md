@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.1...v0.2.2) (2023-01-05)
+
+
+### Bug Fixes
+
+* contract tabs not working - regression [#106](https://github.com/sudoblockio/icon-tracker-frontend/issues/106) ([8c98011](https://github.com/sudoblockio/icon-tracker-frontend/commit/8c98011b2176e6723010bbe46512b764d8eef827))
+* TabsTable onClick handler regression [#106](https://github.com/sudoblockio/icon-tracker-frontend/issues/106) ([922e99a](https://github.com/sudoblockio/icon-tracker-frontend/commit/922e99a4118382be74dc21c171a1fb2ec0dcc5a8))
+* token tabs onClick regression [#106](https://github.com/sudoblockio/icon-tracker-frontend/issues/106) ([ed45b54](https://github.com/sudoblockio/icon-tracker-frontend/commit/ed45b5447e8666177238780b3bb379ed520dcddf))
+
 ## [0.2.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.0...v0.2.1) (2023-01-04)
 
 
