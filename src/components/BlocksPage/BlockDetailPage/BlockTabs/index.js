@@ -26,6 +26,7 @@ class BlockTabs extends Component {
             <TabTable
                 {...this.props}
                 TABS={BlockTabs}
+                onClickTab={this.props.changeTab}
                 on={on}
                 loading={loading}
                 TableContents={on => {

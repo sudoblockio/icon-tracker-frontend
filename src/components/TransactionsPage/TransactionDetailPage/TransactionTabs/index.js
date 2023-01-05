@@ -35,6 +35,7 @@ class TransactionTabs extends Component {
     return (
       <TabTable
         {...this.props}
+        onClickTab={this.props.changeTab}
         TABS={TABS}
         on={on}
         loading={loading && loadingE && loadingI}
