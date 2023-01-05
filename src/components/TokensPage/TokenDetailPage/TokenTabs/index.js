@@ -33,6 +33,7 @@ class TokenTabs extends Component {
         return (
             <TabTable
                 {...this.props}
+                onClickTab={this.props.changeTab}
                 TABS={TOKEN_TABS}
                 on={on}
                 loading={loading}
