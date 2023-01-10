@@ -12,6 +12,8 @@ import {
 	NotFoundPage,
 	LoadingComponent
 } from '../../components';
+import ReactJsonBeautify from 'react-json-beautify';
+import '../../style-custom/react-json-beautify-custom.css';
 import { blockInfo } from '../../redux/store/blocks';
 import { getLastBlock, getPRepsRPC } from '../../redux/store/iiss';
 
@@ -56,16 +58,24 @@ class ProposalDetailPage extends Component {
 		}
 		const res=await blockInfo(payload);
 		if(Number(this.state.currentBlockHeight)>Number(res.data.timestamp)){
-		const date = new Date(res.data.timestamp/1e6*1000);
-		this.setState({endingBlockHeight:date})
+			const date = new Date(res.data.timestamp/1e6*1000);
+			this.setState({endingBlockHeight:date})
 		}
-		else{
-		const difference=Number(res.data.timestamp)-Number(this.state.currentBlockHeight);
-		const sum=difference*2;
-		const latestDate=new Date().getTime();
-		const totalSum=sum+latestDate;
-		const date = new Date(totalSum/1e6*1000);
-		this.setState({endingBlockHeight:date})
+			else{
+			const difference=Number(res.data.timestamp)-Number(this.state.currentBlockHeight);
+			const sum=difference*2;
+			const latestDate=new Date().valueOf();
+			const totalSum=sum+latestDate;
+			const date = new Date(totalSum/1e6*1000);
+
+			console.log({endBlockNumber: Number(res.data.timestamp)})
+			console.log({currentBlockNumber:Number(this.state.currentBlockHeight)})
+			console.log({difference})
+			console.log({[`sum(*2)`]:sum})
+			console.log({currTime: latestDate})
+			console.log({totalSum})
+			console.log({finalDate:date})
+			this.setState({endingBlockHeight:date})
 		}
 		
 	}
@@ -129,6 +139,28 @@ class ProposalDetailPage extends Component {
 			})
 		}
 		return result.sort((a, b) => Number(b.timestamp) - Number(a.timestamp))
+	}
+
+	getContentsValue = (value) => {
+		try {
+			if(value.hasOwnProperty('data')) {
+				return JSON.parse(valueToString(value));
+			}
+			return value;
+		} catch(e) {
+			console.log("JSON Parsing Error: ", e);
+		}
+	}
+
+	getContentsDeepOfValue = (value) => {
+		try {
+			if(value.hasOwnProperty('data')) {
+				return 2;
+			}
+			return 1;
+		} catch(e) {
+			console.log("JSON Parsing Error: ", e);
+		}
 	}
 
 	render() {
@@ -243,7 +275,7 @@ class ProposalDetailPage extends Component {
 												<tr>
 													<td>Start Blockheight</td>
 													{!isNaN(start) ?
-														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}{"   "}
+														<td><span className="on proposal-pointer" onClick={() => { window.open('/block/' + start, '_blank') }}>{start}{"~"}
 														 {new Date(this.state.startTimeDate).toDateString()} {new Date(this.state.startTimeDate).toLocaleTimeString()} UTC
 														 </span> </td>
 														:
@@ -266,7 +298,17 @@ class ProposalDetailPage extends Component {
 												</tr>
 												<tr>
 													<td>Value</td>
-													<td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = valueToString(Object.values(value).toString()) }}></span></td>
+													{/* <td><span className="comment default-style" ref={ref => { if (ref) ref.innerHTML = valueToString(Object.values(value).toString()) }}></span></td>*/}
+													<td>
+														<ReactJsonBeautify
+															data={this.getContentsValue(value)}
+															deep={this.getContentsDeepOfValue(value)}
+															showLength={true}
+															showLine={true}
+															collapsedOnClickBrackets={true}
+															showSelectController={true}
+														/>
+													</td>
 												</tr>
 												<tr>
 													<td>Votes</td>
