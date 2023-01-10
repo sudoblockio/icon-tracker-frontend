@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.2...v0.2.3) (2023-01-10)
+
+
+### Bug Fixes
+
+* internal tx tab empty bug [#114](https://github.com/sudoblockio/icon-tracker-frontend/issues/114) ([c456716](https://github.com/sudoblockio/icon-tracker-frontend/commit/c456716b2a00be7273e96da2d2970a1e0b75fc42))
+* Value UI beautify ([f195b98](https://github.com/sudoblockio/icon-tracker-frontend/commit/f195b98f7c9e1cf3bb194efb5a62ab6990270b0e))
+
 ## [0.2.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.1...v0.2.2) (2023-01-05)
 
 
