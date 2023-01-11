@@ -61,6 +61,7 @@ export async function getVerSrcCodeLink(addr) {
 //   }
 
 export async function getContractListCount() {
+  console.trace("Contact list count");
   const trackerApi = await trackerApiInstance()
   return new Promise((resolve, reject) => {
     trackerApi.get(`/api/v1/contracts`)
