@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.3...v0.2.4) (2023-01-11)
+
+
+### Bug Fixes
+
+* contracts page status empty bug and removed /v1/contracts api call ([a022973](https://github.com/sudoblockio/icon-tracker-frontend/commit/a022973bb08845e32fceff8fc0277d6d51739d6c))
+
 ## [0.2.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.2...v0.2.3) (2023-01-10)
 
 
