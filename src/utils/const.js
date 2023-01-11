@@ -31,10 +31,14 @@ export const INITIAL_STATE = {
 export const CONTRACT_STATUS = {
   '0': 'Pending',
   'Pending': 'Pending',
+  'pending': 'Pending',
   'Accepted': 'Accepted',
+  'accepted': 'Accepted',
   'Active': 'Active',
+  'active': 'Active',
   '2': 'Rejected',
   'Rejected': 'Rejected',
+  'rejected': 'Rejected',
   '3': 'Error'
 };
 export const CONTRACT_STATUS_NUM = {
