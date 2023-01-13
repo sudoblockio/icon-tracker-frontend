@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.4...v0.2.5) (2023-01-13)
+
+
+### Bug Fixes
+
+* method column in address tx 103 ([c77d087](https://github.com/sudoblockio/icon-tracker-frontend/commit/c77d087aceb124f97c8b85f13b7d370a2d0e5b41))
+
 ## [0.2.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.3...v0.2.4) (2023-01-11)
 
 
