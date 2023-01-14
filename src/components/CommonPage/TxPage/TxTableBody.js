@@ -314,8 +314,8 @@ class TxTableBody extends Component {
 						<tr>
 							<td>{this.props.rank}</td>
 							<AddressCell targetAddr={data.address} txType={data.txType} spanNoEllipsis />
-							<AmountCell amount={data.balance.toFixed()} symbol={data.symbol} />
-							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance.toFixed() / this.props.totalSupply.toFixed(3) * 100).toFixed(2) :"-"}</span><em>%</em></td>
+							<AmountCell amount={data.balance} symbol={data.symbol} />
+							<td><span>{data.balance && this.props.totalSupply ? Number(data.balance / this.props.totalSupply * 100).toFixed(4) :"-"}</span><em>%</em></td>
 						</tr>
 					)
 					case TX_TYPE.ADDRESS_BONDERS:
