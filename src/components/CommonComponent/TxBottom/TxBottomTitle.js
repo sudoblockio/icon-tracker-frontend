@@ -34,7 +34,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeNum}</em> Voter(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} Voter(s)</em>
+                                <em className="mint" onClick={goAllTx}>{numberWithCommas(totalSizeNum)} Voter(s)</em>
                             </span>
                         </p>
                     )
