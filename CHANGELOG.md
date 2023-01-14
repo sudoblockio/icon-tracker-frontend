@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.5...v0.2.6) (2023-01-14)
+
+
+### Bug Fixes
+
+* token percent rounding [#113](https://github.com/sudoblockio/icon-tracker-frontend/issues/113) ([97e70f3](https://github.com/sudoblockio/icon-tracker-frontend/commit/97e70f36746d48edbb1e5906da8d1102af5c8485))
+* voters count in address pages [#121](https://github.com/sudoblockio/icon-tracker-frontend/issues/121) ([d342e45](https://github.com/sudoblockio/icon-tracker-frontend/commit/d342e45f244c499249484c311c2bdc631e391ae2))
+
 ## [0.2.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.4...v0.2.5) (2023-01-13)
 
 
