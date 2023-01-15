@@ -10,7 +10,14 @@ class TxBottomComponent extends Component {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
 
-        let totalCount = txData.headers ? txData.headers["x-total-count"] : -1;;
+        let totalCount = txData.headers ? txData.headers["x-total-count"] : -1;
+
+        let tableBodyData;
+        if(txType === "addressBonders")
+            tableBodyData = txData.filter(f=> this.props.bondMap[f] !== null)
+        else
+            tableBodyData = txData;
+        
 
         const Content = () => {
             console.log(txType, "tx comp props bonder")
@@ -26,7 +33,7 @@ class TxBottomComponent extends Component {
                                     <TxTableHead txType={txType} />
                                 </thead>
                                 <tbody>
-                                    {txData.map((item,index)=>(
+                                    {tableBodyData.map((item,index)=>(
                                        <TxTableBody key={index} bondMap={this.props.bondMap} totalSupply={tokenTotal} rank={index +1} data={item} txType={txType} address={address} tokenTotal={tokenTotal} />  
                                     ))}
                                 </tbody>
