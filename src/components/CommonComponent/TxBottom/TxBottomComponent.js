@@ -9,8 +9,9 @@ class TxBottomComponent extends Component {
     render() {
         const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props
         const { data, listSize, totalSize, loading, } = txData
+        
+        let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
 
-        let totalCount = txData.headers ? txData.headers["x-total-count"] : -1;
 
         let tableBodyData;
         if(txType === "addressBonders")
@@ -49,7 +50,7 @@ class TxBottomComponent extends Component {
 
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType} total={this.props.total} listSize={Number(data.length)} totalSize={txType === "addressvoters" ? totalCount : totalSize} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
+                        <TxBottomTitle txType={txType} total={this.props.total} listSize={Number(data.length)} totalSize={txType === "addressvoters" || txType === "addressreward" ? totalCount : totalSize} goAllTx={goAllTx} fromAddr={from_address || data[0].token_contract_address} toAddr={to_address} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>
