@@ -43,7 +43,7 @@ class TxPageTitle extends Component {
                         <p className="txt">
                             <span>
                                 Latest<em>{listSizeNum}</em> Txn(s) from a total of
-                                <em className="mint" onClick={goAllTx}>{_listSize} reward(s)</em>
+                                <em className="mint" onClick={goAllTx}>{numberWithCommas(totalSizeNum)} reward(s)</em>
                             </span>
                         </p>
                     )
