@@ -132,10 +132,20 @@ class ProposalDetailPage extends Component {
 				result.push(item)
 			})
 		}
+
+		console.log({abc: this.state.prepsList});
 		if (vote && noVote && this.state.prepsList != null) {
 			noVote.list.forEach(item => {
-				const data=this.state.prepsList.filter(e=>e.address===item);
-				result.push({address:item,amount:data[0].power,name:data[0].name,answer:"No Vote"})
+				// console.log(e.address, item) 
+				const data=this.state.prepsList.filter(e=>{console.log(e.address, item, "adddd"); return e.address===item});
+				if(!data[0]) {
+					 result.push({address: "--", amount:"--", name: "Unregistered Prop", answer: "No Vote"})
+					console.log({address: item})
+				}else{
+					result.push({address:item,amount:data[0]?.power,name:data[0]?.name,answer:"No Vote"})
+
+				}
+
 			})
 		}
 		return result.sort((a, b) => Number(b.timestamp) - Number(a.timestamp))
@@ -393,11 +403,16 @@ class ProposalDetailPage extends Component {
 												<tbody>
 													{tabList.map((item, index) => {
 														const { id, address, name, timestamp, amount, answer } = item
-														const _amount = IconConverter.toNumber(amount)
-														const finalAmount=convertNumberToText(convertLoopToIcxDecimal(_amount)).split('.');
+														const _amount = amount !== "--" ? IconConverter.toNumber(amount) : "--" 
+														const finalAmount= _amount !== "--"  ? convertNumberToText(convertLoopToIcxDecimal(_amount)).split('.') : "-";
 														return (
 															<tr key={index}>
-																<td><span className="tab-color proposal-pointer" onClick={() => { window.open('/address/' + address, '_blank') }}>{name}</span></td>
+																<td>
+																	<span 
+																     className={address !== "--" ? "tab-color proposal-pointer": ""} 
+																     onClick={() => {
+																		if(address !== "--") window.open('/address/' + address, '_blank') }}>{name}</span>
+																</td>
 																<td><span>{finalAmount[0]}</span></td>
 																<td className='center-align'><span>{answer}</span></td>
 																<td className=""><span className="ellipsis proposal-pointer" onClick={() => { window.open('/transaction/' + id, '_blank') }}>{id}</span></td>
