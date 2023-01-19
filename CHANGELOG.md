@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.6...v0.2.7) (2023-01-19)
+
+
+### Bug Fixes
+
+* address rewards tab count ([cd97d81](https://github.com/sudoblockio/icon-tracker-frontend/commit/cd97d81cd76cdbb0718134cbe7f39e0ecbfdda27))
+* bonders listing bug [#122](https://github.com/sudoblockio/icon-tracker-frontend/issues/122) ([1d83f6b](https://github.com/sudoblockio/icon-tracker-frontend/commit/1d83f6bc6977f4c220e6c389f403e4c330e038c6))
+* proposal page unregistered address ([c6350a9](https://github.com/sudoblockio/icon-tracker-frontend/commit/c6350a90b086301702990809ca25ea07011345f0))
+
 ## [0.2.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.5...v0.2.6) (2023-01-14)
 
 
