@@ -199,8 +199,8 @@ class TxPageTitle extends Component {
                             return (
                                 <p className="txt">
                                 <span>
-                                    Latest<em>{listSizeNum}</em> of
-                                    <em className="mint" onClick={goAllTx}>{_listSize} bonder(s)</em>
+                                    Latest<em>{totalSize}</em> of
+                                    <em className="mint" onClick={goAllTx}>{totalSize} bonder(s)</em>
                                 </span>
                             </p>
                             )

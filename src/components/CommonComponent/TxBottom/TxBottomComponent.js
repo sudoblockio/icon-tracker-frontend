@@ -13,11 +13,13 @@ class TxBottomComponent extends Component {
         let totalCount = txData.headers ? txData.headers["x-total-count"] : -1;
 
         let tableBodyData;
-        if(txType === "addressBonders")
+        if(txType === "addressBonders"){
             tableBodyData = txData.filter(f=> this.props.bondMap[f] !== null)
+            totalCount = tableBodyData.length;
+        }
         else
             tableBodyData = txData;
-        
+
 
         const Content = () => {
             console.log(txType, "tx comp props bonder")
@@ -26,7 +28,7 @@ class TxBottomComponent extends Component {
             } else if(txType === 'addressbonded' || txType === 'addressbonders' || txType === 'addressBonded' || txType === 'addressBonders'){
                 return (
                     <div className="contents">
-                        <TxBottomTitle txType={txType}  listSize={Number(txData.length)} totalSize={Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />
+                        <TxBottomTitle txType={txType}  listSize={Number(txData.length)} totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)} goAllTx={goAllTx} fromAddr={"hello"} />
                         <div className="table-box">
                             <table className={tableClassName}>
                                 <thead>
