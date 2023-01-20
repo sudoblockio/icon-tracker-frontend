@@ -47,11 +47,13 @@ function WalletTabs(props){
             let address = addr.address
             const bondAmount = await getBondList(addr)
             const addressId = props.match.params.addressId; 
-            if(bondAmount.find(f=> f.address === addressId)){
-                bondAmount[0]? bondObj[address]=Number(Number(bondAmount[0].value) / Math.pow(10,18)): bondObj[address]=bondAmount
+            
+            const foundBond = bondAmount.find(f=> f.address === addressId)
+            if(foundBond){
+                bondObj[address]= Number(Number(foundBond.value) / Math.pow(10,18));
             }else{
                 bondObj[address] = null;
-            }           
+            }  
             setBondMap(bondObj)
         }catch(err){
             console.log(err);
