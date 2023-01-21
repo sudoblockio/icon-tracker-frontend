@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.7...v0.2.8) (2023-01-21)
+
+
+### Bug Fixes
+
+* address bonders count ([e227e64](https://github.com/sudoblockio/icon-tracker-frontend/commit/e227e649037584bfd6b0cb018c950b5950b74f3b))
+* wrong bond value [#103](https://github.com/sudoblockio/icon-tracker-frontend/issues/103) ([db4757c](https://github.com/sudoblockio/icon-tracker-frontend/commit/db4757c7f2dba3d00d04793ec71cb16ccbcb87b7))
+* wrong quantity value in address token tx ([9b8c55a](https://github.com/sudoblockio/icon-tracker-frontend/commit/9b8c55abd90d5b2516e550a1ee376dd281d069b7))
+
 ## [0.2.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.6...v0.2.7) (2023-01-19)
 
 
