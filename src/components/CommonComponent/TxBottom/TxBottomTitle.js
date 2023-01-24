@@ -200,7 +200,7 @@ class TxPageTitle extends Component {
                                 <p className="txt">
                                 <span>
                                     Latest<em>{totalSize}</em> of
-                                    <em className="mint" onClick={goAllTx}>{totalSize} bonder(s)</em>
+                                    <em>{totalSize} bonder(s)</em>
                                 </span>
                             </p>
                             )
