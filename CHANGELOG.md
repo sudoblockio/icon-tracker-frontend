@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.9](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.8...v0.2.9) (2023-01-24)
+
+
+### Bug Fixes
+
+* address token tx header count [#145](https://github.com/sudoblockio/icon-tracker-frontend/issues/145) ([c34074e](https://github.com/sudoblockio/icon-tracker-frontend/commit/c34074e3c60c4c730981599e0d5d232b530e71d9))
+* removed bonders list link [#140](https://github.com/sudoblockio/icon-tracker-frontend/issues/140) ([08b7032](https://github.com/sudoblockio/icon-tracker-frontend/commit/08b7032526622729b47674dc417c4d136969ac8e))
+* wrong decimals in iusdsc token ([3be72e4](https://github.com/sudoblockio/icon-tracker-frontend/commit/3be72e407fc5ab76b78a11c72b58bf7f1a150c8f))
+
 ## [0.2.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.7...v0.2.8) (2023-01-21)
 
 
