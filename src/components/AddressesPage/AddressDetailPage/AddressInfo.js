@@ -13,7 +13,7 @@ import {
 import {CopyButton, QrCodeButton, LoadingComponent, ReportButton} from '../../../components'
 import NotificationManager from '../../../utils/NotificationManager'
 import {IconConverter, IconAmount} from 'icon-sdk-js'
-import {SocialMediaType} from '../../../utils/const'
+import {SEARCH_TYPE, SocialMediaType} from '../../../utils/const'
 import { prepList, getPRepsRPC, getBalanceOf, getBalance, getStake, getBondList} from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
@@ -32,6 +32,8 @@ function AddressInfo(props) {
     const [stakeAmt, setStake] = useState("")
     const [unstakeList, setUnstakeList] = useState("")
     const [addrBond, setAddrBond] = useState("")
+
+    const [newTokens, setNewTokens] = useState({});
 
 
     const {wallet, walletAddress} = props
@@ -79,6 +81,9 @@ function AddressInfo(props) {
         setTokens(Object.entries(tokenName))
         tokenMap = Object.entries(tokenName)
         setTokens(tokenMap)
+
+        const balance =  await getBalanceOf(props.match.params.addressId, tokenContract);
+        setNewTokens(prev=> ({...prev, [res.data.name]: {...res.data , balance }}))
     }
     const getPrepSocialMedia = async (address)  => {
         const allPreps = await prepList()
@@ -100,9 +105,11 @@ function AddressInfo(props) {
     }
     const getTokens = async () => {
         let tokenRes = await addressTokens(props.match.params.addressId)
+        
         tokenRes.status === 200 ? tokenRes.data.forEach(contract => {
             contractDetail(contract).then(contractRes => {
                 getBalanceOf(props.match.params.addressId, contract).then(balance => {
+                    console.log("Res-Token-Res", props.match.params.addressId,  balance);
                     tokenMap[`${contractRes.data.name}`] = balance 
                 })
             })
@@ -130,7 +137,7 @@ function AddressInfo(props) {
         getPrepSocialMedia(props.match.params.addressId)
         getAddrStake(props.match.params.addressId)
         getAddrBond(props.match.params.addressId)
-        setTokens(tokenMap)
+        // setTokens(tokenMap)
         getAddrBalance()
 
 
@@ -337,17 +344,30 @@ function AddressInfo(props) {
                                             </div>
                                             
                                             <div className={tokenMore ? 'on' : ''}>
-                                                <p><span><i
-                                                    className="coin"></i>Token</span><span>{(tokenCxs || []).length}<em>Tokens</em></span><em
-                                                    
-                                                    className="drop-btn" onClick={toggleTokenMore}><i
-                                                    className="img"></i></em></p>
-                                                {tokens ? Object.entries(tokens).map((token, index ) => {
-                                                    return <p key={index}>
-                                                    <span>{token[1][0]}</span><span>{`${convertNumberToText(Number(token[1][1]) / Math.pow(10, 18))}`}
+                                                <p>
+                                                   <span>
+                                                        <i className="coin"></i>Token
+                                                   </span>
+                                                    <span>
+                                                        {(tokenCxs || []).length}
+                                                        <em>Tokens</em>
                                                     </span>
+                                                    <em className="drop-btn" onClick={toggleTokenMore}>
+                                                        <i className="img"></i>
+                                                    </em>
                                                 </p>
-                                                }) : ""}
+
+                                            {Object.entries(newTokens).map(([key,value],index) => <p key={index}>    
+                                                <em style={{ cursor:"pointer"}} onClick={()=>{props.history.push(`/token/${value.address}`)}}  >
+                                                    <span style={{color:"#1aaaba"}}>
+                                                        {key}
+                                                    </span>
+                                                </em>
+                                                <span>
+                                                    {`${convertNumberToText(Number(value.balance) / Math.pow(10, Number(value.decimals)))}`}
+                                                </span>
+                                            </p>
+                                            )}
                                             </div>
                                         </td>
                                     </tr>
