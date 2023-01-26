@@ -255,7 +255,7 @@ function WalletTabs(props){
                         case ADDRESS_TABS[1]:
                             return (
                                 <AddressInternalTransactions
-                                    txData={addressInternalTx}
+                                    txData={intTx}
                                     goAllTx={() => { props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`) }}
                                     txType={TX_TYPE.ADDRESS_INTERNAL_TX}
                                     address={address}
