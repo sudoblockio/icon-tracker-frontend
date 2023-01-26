@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.10](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.9...v0.2.10) (2023-01-26)
+
+
+### Bug Fixes
+
+* internal tx tab broken [#146](https://github.com/sudoblockio/icon-tracker-frontend/issues/146) ([125d6e1](https://github.com/sudoblockio/icon-tracker-frontend/commit/125d6e1267cb81e72d9094539939ef4337159f5e))
+
 ## [0.2.9](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.8...v0.2.9) (2023-01-24)
 
 
