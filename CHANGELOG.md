@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.11](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.10...v0.2.11) (2023-02-04)
+
+
+### Bug Fixes
+
+* api not being called on address change [#161](https://github.com/sudoblockio/icon-tracker-frontend/issues/161) ([b727833](https://github.com/sudoblockio/icon-tracker-frontend/commit/b727833b471668f7c0939aab63b6a663c28b1c50))
+
 ## [0.2.10](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.9...v0.2.10) (2023-01-26)
 
 
