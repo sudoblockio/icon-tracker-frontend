@@ -80,8 +80,9 @@ function AddressInfo(props) {
   }
   const getContractName = async (tokenContract) => {
     const res = await contractDetail(tokenContract);
+    if (!res.data) return;
+
     tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract);
-    // setTokens(Object.entries(tokenName));
     tokenMap = Object.entries(tokenName);
     setTokens(tokenMap);
 
@@ -186,7 +187,7 @@ function AddressInfo(props) {
   const validated = IconConverter.toNumber(validated_blocks);
   const productivity = !produced ? "None" : `${((validated / produced) * 100).toFixed(2)}%`;
   const _lastGenerateBlockHeight = !last_updated_block ? "None" : IconConverter.toNumber(last_updated_block);
-  const tokenCxs = tokens ? tokens : [];
+  // const tokenCxs = tokens ? tokens : [];
   const badge = getBadgeTitle(grade, node_state);
 
   const Content = () => {
@@ -454,7 +455,7 @@ function AddressInfo(props) {
                               <i className="coin"></i>Token
                             </span>
                             <span>
-                              {(tokenCxs || []).length}
+                              {(Object.entries(newTokens) || []).length}
                               <em>Tokens</em>
                             </span>
                             <em className="drop-btn" onClick={toggleTokenMore}>
@@ -462,21 +463,22 @@ function AddressInfo(props) {
                             </em>
                           </p>
 
-                          {Object.entries(newTokens).map(([key, value], index) => (
-                            <p key={index}>
-                              <em
-                                style={{ cursor: "pointer" }}
-                                onClick={() => {
-                                  props.history.push(`/token/${value.address}`);
-                                }}
-                              >
-                                <span style={{ color: "#1aaaba" }}>{key}</span>
-                              </em>
-                              <span>{`${convertNumberToText(
-                                Number(value.balance) / Math.pow(10, Number(value.decimals))
-                              )}`}</span>
-                            </p>
-                          ))}
+                          {!!Object.entries(newTokens) &&
+                            Object.entries(newTokens).map(([key, value], index) => (
+                              <p key={index}>
+                                <em
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => {
+                                    props.history.push(`/token/${value.address}`);
+                                  }}
+                                >
+                                  <span style={{ color: "#1aaaba" }}>{key}</span>
+                                </em>
+                                <span>{`${convertNumberToText(
+                                  Number(value.balance) / Math.pow(10, Number(value.decimals))
+                                )}`}</span>
+                              </p>
+                            ))}
                         </div>
                       </td>
                     </tr>
