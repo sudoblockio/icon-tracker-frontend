@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.12](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.11...v0.2.12) (2023-02-14)
+
+
+### Bug Fixes
+
+* block navigation selector grey out fix [#164](https://github.com/sudoblockio/icon-tracker-frontend/issues/164) ([e662614](https://github.com/sudoblockio/icon-tracker-frontend/commit/e662614ca56e2256102962880435b6c6dee35741))
+* network proposal date fix [#85](https://github.com/sudoblockio/icon-tracker-frontend/issues/85) ([6a82430](https://github.com/sudoblockio/icon-tracker-frontend/commit/6a824301621dd04f3fdc7eda3ad44d263ec2c055))
+* token dropdown undefined [#169](https://github.com/sudoblockio/icon-tracker-frontend/issues/169) ([23e6b15](https://github.com/sudoblockio/icon-tracker-frontend/commit/23e6b152e36ec2e2bb42581eda1a6195405daf25))
+* token-tx-quantity-value [#168](https://github.com/sudoblockio/icon-tracker-frontend/issues/168) ([d3f70e7](https://github.com/sudoblockio/icon-tracker-frontend/commit/d3f70e7ab3348376ade697c9c33c911e7dfc16b7))
+
 ## [0.2.11](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.10...v0.2.11) (2023-02-04)
 
 
