@@ -197,6 +197,11 @@ class ProposalDetailPage extends Component {
 
     const tabList = this.getTabList(vote);
 
+    function getTruncVotes(amount) {
+      const totalTokenVotesNumber = Number(convertLoopToIcxDecimal(amount));
+      return convertNumberToText(totalTokenVotesNumber.toFixed(0));
+    }
+
     const Content = () => {
       if (error) {
         return <NotFoundPage error={error} />;
@@ -438,23 +443,23 @@ class ProposalDetailPage extends Component {
                                   <div className="info">
                                     <p>Total Token Votes</p>
                                     <p>
-                                      <span>
-                                        <em>{convertNumberToText(convertLoopToIcxDecimal(totalVoteAmount))}</em>
-                                      </span>{" "}
+                                      {totalVoteAmount && (
+                                        <span>
+                                          <em>{getTruncVotes(totalVoteAmount)}</em>
+                                        </span>
+                                      )}{" "}
                                       ICX
                                     </p>
                                     <p className="on">
                                       Agreed
                                       <span>
-                                        <em>{convertNumberToText(convertLoopToIcxDecimal(agreeAmount))}</em> ICX (
-                                        {_agreeAmount}%)
+                                        <em>{getTruncVotes(agreeAmount)}</em> ICX ({_agreeAmount}%)
                                       </span>
                                     </p>
                                     <p>
                                       Disagreed
                                       <span>
-                                        <em>{convertNumberToText(convertLoopToIcxDecimal(disagreeAmount))}</em> ICX (
-                                        {_disagreeAmount}%)
+                                        <em>{getTruncVotes(disagreeAmount)}</em> ICX ({_disagreeAmount}%)
                                       </span>
                                     </p>
                                   </div>
