@@ -186,6 +186,7 @@ class TxTableBody extends Component {
                 targetContractAddr={address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+              <MethodCell method={data.method} />
             </tr>
           );
         case TX_TYPE.ADDRESS_TOKEN_TX:
@@ -236,6 +237,7 @@ class TxTableBody extends Component {
                 targetContractAddr={address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+              <MethodCell method={data.method} />
             </tr>
           );
         case TX_TYPE.CONTRACT_TOKEN_TX:
@@ -400,6 +402,7 @@ class TxTableBody extends Component {
                 targetContractAddr={data.to_address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
+              <MethodCell method={data.method} />
             </tr>
           );
         case TX_TYPE.TOKEN_HOLDERS:
