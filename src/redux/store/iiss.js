@@ -1,52 +1,70 @@
-import {walletApiInstance, trackerApiInstance, getWalletApiUrl} from '../api/restV3/config'
-import {randomUint32, makeUrl, makeRewardsUrl, convertHexToValue} from '../../utils/utils'
-import {nodeApiUrl} from '../../config';
-import IconService from 'icon-sdk-js';
-import {requestJsonRpc} from '../../utils/connect';
+import { walletApiInstance, trackerApiInstance, getWalletApiUrl } from "../api/restV3/config";
+import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from "../../utils/utils";
+import { nodeApiUrl } from "../../config";
+import IconService from "icon-sdk-js";
+import { requestJsonRpc } from "../../utils/connect";
+
+export async function getStats() {
+  const trackerApi = await trackerApiInstance();
+  return new Promise((resolve, reject) => {
+    trackerApi
+      .get(`/api/v1/stats`)
+      .then((result) => {
+        resolve(result.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
 
 export async function coinGeckoMarketCap() {
   try {
-    const mktcap = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-    const data = await mktcap.json()
-    return data[0].market_cap
+    const mktcap = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=icon&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+    );
+    const data = await mktcap.json();
+    return data[0].market_cap;
   } catch (e) {
-    console.log(e, "error")
+    console.log(e, "error");
   }
 }
 
 export async function coinGeckoCurrentUSD() {
   try {
-    const icondetail = await fetch('https://api.coingecko.com/api/v3/coins/icon')
-    const data = await icondetail.json()
-    return data.market_data.current_price.usd
+    const icondetail = await fetch("https://api.coingecko.com/api/v3/coins/icon");
+    const data = await icondetail.json();
+    return data.market_data.current_price.usd;
   } catch (e) {
-    console.log(e, "error")
+    console.log(e, "error");
   }
 }
 
 export async function getSrcCodeLink(addr) {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/contracts/${addr}`)
-      .then(result => {
-        resolve(result.data.source_code_link)
+    trackerApi
+      .get(`/api/v1/contracts/${addr}`)
+      .then((result) => {
+        resolve(result.data.source_code_link);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 
 export async function getVerSrcCodeLink(addr) {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/contracts/${addr}`)
-      .then(result => {
-        resolve(result.data.verified_source_code_link)
+    trackerApi
+      .get(`/api/v1/contracts/${addr}`)
+      .then((result) => {
+        resolve(result.data.verified_source_code_link);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 
@@ -62,456 +80,463 @@ export async function getVerSrcCodeLink(addr) {
 
 export async function getContractListCount() {
   console.trace("Contact list count");
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/contracts`)
-      .then(result => {
-        resolve(result)
+    trackerApi
+      .get(`/api/v1/contracts`)
+      .then((result) => {
+        resolve(result);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
-
 
 export async function getContractABI(addr) {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/contracts/${addr}`)
-      .then(result => {
-        resolve(result.data.abi)
+    trackerApi
+      .get(`/api/v1/contracts/${addr}`)
+      .then((result) => {
+        resolve(result.data.abi);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 
-
 export async function prepList(grade) {
-  const trackerApi = await trackerApiInstance()
-  const payload = {count: 500}
+  const trackerApi = await trackerApiInstance();
+  const payload = { count: 500 };
   if (grade) {
-    payload.grade = grade
+    payload.grade = grade;
   }
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/governance/preps`)
-      .then(result => {
-        const nameSorted = (result.data || []).sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-        const delegatedSorted = nameSorted.sort((b, a) => a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0)
-        const _data = delegatedSorted.map((item, index) => ({...item, rank: index + 1}))
-        resolve(_data)
+    trackerApi
+      .get(`/api/v1/governance/preps`)
+      .then((result) => {
+        const nameSorted = (result.data || []).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+        const delegatedSorted = nameSorted.sort((b, a) =>
+          a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0
+        );
+        const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }));
+        resolve(_data);
       })
-      .catch(error => {
-        reject(error)
-      })
-  })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export async function getPReps() {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/governance/preps`)
-      .then(result => {
-        resolve(result)
+    trackerApi
+      .get(`/api/v1/governance/preps`)
+      .then((result) => {
+        resolve(result);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
-
 }
 
 export async function getDelegationPrep(address) {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(`/api/v1/governance/preps/${address}`)
-      .then(result => {
-        resolve(result)
+    trackerApi
+      .get(`/api/v1/governance/preps/${address}`)
+      .then((result) => {
+        resolve(result);
       })
-      .catch(error => {
-        reject(error)
-      })
+      .catch((error) => {
+        reject(error);
+      });
   });
-
 }
 
 export async function getPublicTreasury() {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_getBalance",
       params: {
-        address: 'hx1000000000000000000000000000000000000000'
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        address: "hx1000000000000000000000000000000000000000",
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
-
 export async function getTotalSupply() {
   // return new Promise(() => {});
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_getTotalSupply",
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
-
 export async function getDelegation(payload) {
-  let input = payload.address ? payload : {address: `${payload}`}
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  let input = payload.address ? payload : { address: `${payload}` };
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": 'getDelegation',
-          "params": {
-            "address": input.address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        console.log(response, "here")
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getDelegation",
+          params: {
+            address: input.address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
+        console.log(response, "here");
         resolve(response.data.result);
       })
-      .catch(error => {
-        console.error(error, "here")
+      .catch((error) => {
+        console.error(error, "here");
         resolve({
-          error:
-            {message: error.message}
+          error: { message: error.message },
         });
-      })
+      });
   });
 }
 
 export async function getPRepsRPC() {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": 'getPReps',
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getPReps",
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
-        console.error(error)
+      .catch((error) => {
+        console.error(error);
         resolve({
           error: {
-            message: error.message
-          }
-        })
-      })
+            message: error.message,
+          },
+        });
+      });
   });
 }
 
-
 export async function getTokenTotalSupply(address) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "to": `${address}`,
-        "dataType": "call",
-        "data": {
-          "method": "totalSupply"
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        to: `${address}`,
+        dataType: "call",
+        data: {
+          method: "totalSupply",
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
-  })
+      });
+  });
 }
 
-
 export async function getTokenDecimals(address) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "to": `${address}`,
-        "dataType": "call",
-        "data": {
-          "method": "decimals"
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        to: `${address}`,
+        dataType: "call",
+        data: {
+          method: "decimals",
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
-  })
+      });
+  });
 }
 
 export async function getBonders(payload) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": 'getBonderList',
-          "params": {
-            "address": payload.address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getBonderList",
+          params: {
+            address: payload.address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result.bonderList);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
-  })
+      });
+  });
 }
 
 export async function getBondList(payload) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": 'getBond',
-          "params": {
-            "address": payload.address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getBond",
+          params: {
+            address: payload.address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result.bonds);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
 export async function getIISSInfo() {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": 'getIISSInfo',
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getIISSInfo",
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
 const score = {
-  'https://berlin.net.solidwallet.io': 'cx4a574176f82852487b547126b7a59874f5599acd',
-  'https://lisbon.net.solidwallet.io': 'cx59fd09b8fd87ad82961c29c4ff5e44773f629330',
-  'https://api.icon.geometry.io': 'cxfc514c18d8dd85f06e31509a1f231efc5d8939e0'
-}
+  "https://berlin.net.solidwallet.io": "cx4a574176f82852487b547126b7a59874f5599acd",
+  "https://lisbon.net.solidwallet.io": "cx59fd09b8fd87ad82961c29c4ff5e44773f629330",
+  "https://api.icon.geometry.io": "cxfc514c18d8dd85f06e31509a1f231efc5d8939e0",
+};
 const nodeId = {
-  'https://berlin.net.solidwallet.io': '0x7',
-  'https://lisbon.net.solidwallet.io': '0x2',
-  'https://api.icon.geometry.io': '0x1'
-}
-export const VerificationScore = score[nodeApiUrl]
+  "https://berlin.net.solidwallet.io": "0x7",
+  "https://lisbon.net.solidwallet.io": "0x2",
+  "https://api.icon.geometry.io": "0x1",
+};
+export const VerificationScore = score[nodeApiUrl];
 
 export async function sendTransaction({
-                                        fromAddress,
-                                        contract,
-                                        scoreAddress = VerificationScore,
-                                        icxAmount = 0,
-                                        zip,
-                                        city,
-                                        country,
-                                        discord,
-                                        facebook,
-                                        github,
-                                        keybase,
-                                        license,
-                                        long_description,
-                                        p_rep_address,
-                                        reddit,
-                                        short_description,
-                                        steemit,
-                                        team_name,
-                                        telegram,
-                                        twitter,
-                                        website,
-                                        wechat,
-                                        youtube,
-                                        source_code_location,
-                                        gradle_target,
-                                        gradle_task,
-                                        github_repo,
-                                        github_org,
-                                        github_directory,
-                                        github_release,
-                                        method = "verify",
-                                        params = {
-                                          "city": `${city}`,
-                                          "contract_address": `${contract}`,
-                                          "country": `${country}`,
-                                          "discord": `${discord}`,
-                                          "facebook": `${facebook}`,
-                                          "github": `${github}`,
-                                          "keybase": `${keybase}`,
-                                          "license": `${license}`,
-                                          "long_description": `${long_description}`,
-                                          "p_rep_address": `${p_rep_address}`,
-                                          "reddit": `${reddit}`,
-                                          "short_description": `${short_description}`,
-                                          "steemit": `${steemit}`,
-                                          "team_name": `${team_name}`,
-                                          "telegram": `${telegram}`,
-                                          "twitter": `${twitter}`,
-                                          "website": `${website}`,
-                                          "wechat": `${wechat}`,
-                                          "youtube": `${youtube}`,
-                                          "zipped_source_code": zip,
-                                          "source_code_location": `${source_code_location}`,
-                                          "gradle_task": `${gradle_task}`,
-                                          "gradle_target": `${gradle_target}`,
-                                          "github_org": `${github_org}`,
-                                          "github_repo": `${github_repo}`,
-                                          "github_directory": `${github_directory}`,
-                                          "github_release": `${github_release}`
-                                        }
-                                      }) {
-  const nid = nodeId[nodeApiUrl]
-  const {IconConverter, IconBuilder, IconAmount} = IconService
-  const builder = new IconBuilder.CallTransactionBuilder;
+  fromAddress,
+  contract,
+  scoreAddress = VerificationScore,
+  icxAmount = 0,
+  zip,
+  city,
+  country,
+  discord,
+  facebook,
+  github,
+  keybase,
+  license,
+  long_description,
+  p_rep_address,
+  reddit,
+  short_description,
+  steemit,
+  team_name,
+  telegram,
+  twitter,
+  website,
+  wechat,
+  youtube,
+  source_code_location,
+  gradle_target,
+  gradle_task,
+  github_repo,
+  github_org,
+  github_directory,
+  github_release,
+  method = "verify",
+  params = {
+    city: `${city}`,
+    contract_address: `${contract}`,
+    country: `${country}`,
+    discord: `${discord}`,
+    facebook: `${facebook}`,
+    github: `${github}`,
+    keybase: `${keybase}`,
+    license: `${license}`,
+    long_description: `${long_description}`,
+    p_rep_address: `${p_rep_address}`,
+    reddit: `${reddit}`,
+    short_description: `${short_description}`,
+    steemit: `${steemit}`,
+    team_name: `${team_name}`,
+    telegram: `${telegram}`,
+    twitter: `${twitter}`,
+    website: `${website}`,
+    wechat: `${wechat}`,
+    youtube: `${youtube}`,
+    zipped_source_code: zip,
+    source_code_location: `${source_code_location}`,
+    gradle_task: `${gradle_task}`,
+    gradle_target: `${gradle_target}`,
+    github_org: `${github_org}`,
+    github_repo: `${github_repo}`,
+    github_directory: `${github_directory}`,
+    github_release: `${github_release}`,
+  },
+}) {
+  const nid = nodeId[nodeApiUrl];
+  const { IconConverter, IconBuilder, IconAmount } = IconService;
+  const builder = new IconBuilder.CallTransactionBuilder();
   const txData = builder
     .from(fromAddress)
     .to(scoreAddress)
@@ -523,105 +548,107 @@ export async function sendTransaction({
     .params(params)
     .value(IconAmount.of(icxAmount, IconAmount.Unit.ICX).toLoop())
     .build();
-  const convertedToRaw = IconConverter.toRawTransaction(txData)
-  let response = await requestJsonRpc(convertedToRaw)
-  let txHash = response.result
+  const convertedToRaw = IconConverter.toRawTransaction(txData);
+  let response = await requestJsonRpc(convertedToRaw);
+  let txHash = response.result;
   // setTimeout(() => {
   //         window.location=`${window.location.origin}/transaction/${txHash}`
   // }, 5000)
 }
 
-
 export async function getBalanceOf(owner, tokenContract) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
       id: randomUint32(),
       params: {
-        "to": `${tokenContract}`,
-        "dataType": "call",
-        "data": {
-          "method": "balanceOf",
-          "params": {
-            "_owner": owner
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result)
+        to: `${tokenContract}`,
+        dataType: "call",
+        data: {
+          method: "balanceOf",
+          params: {
+            _owner: owner,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
+        resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.message) {
-          resolve(error.response)
+          resolve(error.response);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
-  })
+      });
+  });
 }
 
 export async function getPRep(address) {
-  if (!address) return {}
+  if (!address) return {};
 
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_call",
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": "getPRep",
-          "params": {
-            address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getPRep",
+          params: {
+            address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
-        resolve({})
-      })
+      .catch((error) => {
+        resolve({});
+      });
   });
 }
 
 export async function getLastBlock() {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_getLastBlock",
       id: randomUint32(),
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
@@ -629,51 +656,49 @@ export const getFailMessage = async (txHash, type) => {
   const param = {
     jsonrpc: "2.0",
     id: randomUint32(),
-    "method": "debug_getTrace",
-    "params": {
-      "txHash": `${txHash}`,
-    }
-  }
+    method: "debug_getTrace",
+    params: {
+      txHash: `${txHash}`,
+    },
+  };
   try {
-
-    const apiUrl = await getWalletApiUrl()
+    const apiUrl = await getWalletApiUrl();
     const response = await fetch(`${apiUrl}/api/v3d`, {
-      method: 'POST',
-      body: JSON.stringify(param)
-    })
-    const data = await response.json()
-    const errorList = []
-    data.result.logs.map(log => {
-      errorList.push(log.msg)
-    })
+      method: "POST",
+      body: JSON.stringify(param),
+    });
+    const data = await response.json();
+    const errorList = [];
+    data.result.logs.map((log) => {
+      errorList.push(log.msg);
+    });
     return type === "wholemsg" ? data : errorList;
-
   } catch (e) {
-    console.log(e, "Error from getFailMessage")
-
+    console.log(e, "Error from getFailMessage");
   }
-}
+};
 
 export async function getStepPrice() {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
-      "method": "icx_call",
-      "params": {
-        "to": "cx0000000000000000000000000000000000000001",
-        "dataType": "call",
-        "data": {
-          "method": "getStepPrice"
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+      method: "icx_call",
+      params: {
+        to: "cx0000000000000000000000000000000000000001",
+        dataType: "call",
+        data: {
+          method: "getStepPrice",
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         // if (!!error.response) {
         //     resolve(error.response.data);
         // }
@@ -684,8 +709,8 @@ export async function getStepPrice() {
         //         }
         //     })
         // }
-        resolve(0x0)
-      })
+        resolve(0x0);
+      });
   });
 }
 
@@ -705,153 +730,155 @@ export async function getStepPrice() {
 // }
 
 export async function prepMain() {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl(`/v1/iiss/prep/main`, {count: 22}))
-      .then(result => {
-        const {data} = result.data
+    trackerApi
+      .get(makeUrl(`/v1/iiss/prep/main`, { count: 22 }))
+      .then((result) => {
+        const { data } = result.data;
         const _data = data.map((item, index) => {
           if (!item.rank) {
-            item.rank = index + 1
+            item.rank = index + 1;
           }
-          return item
-        })
-        resolve(_data)
+          return item;
+        });
+        resolve(_data);
       })
-      .catch(error => {
-        reject(error)
-      })
-  })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export async function prepSub() {
-  const trackerApi = await trackerApiInstance()
+  const trackerApi = await trackerApiInstance();
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeUrl(`/v1/iiss/prep/sub`, {count: 100}))
-      .then(result => {
-        const {data} = result.data
+    trackerApi
+      .get(makeUrl(`/v1/iiss/prep/sub`, { count: 100 }))
+      .then((result) => {
+        const { data } = result.data;
         const _data = data.map((item, index) => {
           if (!item.rank) {
-            item.rank = index + 1
+            item.rank = index + 1;
           }
-          return item
-        })
-        resolve(_data)
+          return item;
+        });
+        resolve(_data);
       })
-      .catch(error => {
-        reject(error)
-      })
-  })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
-
 export async function getStake(address) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_call",
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": "getStake",
-          "params": {
-            address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getStake",
+          params: {
+            address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
 export async function queryIScore(address) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_call",
       params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000000",
-        "dataType": "call",
-        "data": {
-          "method": "queryIScore",
-          "params": {
-            address
-          }
-        }
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "queryIScore",
+          params: {
+            address,
+          },
+        },
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
-
 export async function getBalance(address) {
-  const walletApi = await walletApiInstance()
-  return new Promise(resolve => {
+  const walletApi = await walletApiInstance();
+  return new Promise((resolve) => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_getBalance",
       params: {
-        address
-      }
-    }
-    walletApi.post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
+        address,
+      },
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message
-            }
-          })
+              message: error.message,
+            },
+          });
         }
-      })
+      });
   });
 }
 
-
 export async function getProposals() {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     // const mock = {
     //     "proposals": [
     //         {
@@ -887,37 +914,41 @@ export async function getProposals() {
     //     ]
     // }
     // resolve(mock)
-    const walletApi = await walletApiInstance()
+    const walletApi = await walletApiInstance();
     // TEST: prod endpoint works not dev:
-    walletApi.post(`/api/v3`, JSON.stringify({
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        "from": "hx8f21e5c54f006b6a5d5fe65486908592151a7c57",
-        "to": "cx0000000000000000000000000000000000000001",
-        "dataType": "call",
-        "data": {
-          "method": "getProposals",
-          "params": {
-            "start": "0x0",
-            "size": "0xA"
-          }
-        }
-      }
-    }))
-      .then(response => {
+    walletApi
+      .post(
+        `/api/v3`,
+        JSON.stringify({
+          jsonrpc: "2.0",
+          id: randomUint32(),
+          method: "icx_call",
+          params: {
+            from: "hx8f21e5c54f006b6a5d5fe65486908592151a7c57",
+            to: "cx0000000000000000000000000000000000000001",
+            dataType: "call",
+            data: {
+              method: "getProposals",
+              params: {
+                start: "0x0",
+                size: "0xA",
+              },
+            },
+          },
+        })
+      )
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
-        console.error(error)
-        resolve({proposals: []});
-      })
+      .catch((error) => {
+        console.error(error);
+        resolve({ proposals: [] });
+      });
   });
 }
 
 export async function getProposal(id) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     // const mock = {
     //     "id": id,
     //     "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
@@ -1009,47 +1040,49 @@ export async function getProposal(id) {
     //     }
     // }
     // resolve(mock)
-    const walletApi = await walletApiInstance()
-    walletApi.post(`/api/v3`, JSON.stringify({
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        "from": "hx0000000000000000000000000000000000000000",
-        "to": "cx0000000000000000000000000000000000000001",
-        "dataType": "call",
-        "data": {
-          "method": "getProposal",
-          "params": {
-            "id": id
-          }
-        }
-      }
-    }))
-      .then(response => {
+    const walletApi = await walletApiInstance();
+    walletApi
+      .post(
+        `/api/v3`,
+        JSON.stringify({
+          jsonrpc: "2.0",
+          id: randomUint32(),
+          method: "icx_call",
+          params: {
+            from: "hx0000000000000000000000000000000000000000",
+            to: "cx0000000000000000000000000000000000000001",
+            dataType: "call",
+            data: {
+              method: "getProposal",
+              params: {
+                id: id,
+              },
+            },
+          },
+        })
+      )
+      .then((response) => {
         resolve(response.data.result);
       })
-      .catch(error => {
-        console.error(error)
+      .catch((error) => {
+        console.error(error);
         resolve({});
-      })
+      });
   });
 }
 
 export async function addressReward(payload) {
-  const trackerApi = await trackerApiInstance()
-  console.log(payload, "reward api payload")
+  const trackerApi = await trackerApiInstance();
+  console.log(payload, "reward api payload");
   return new Promise((resolve, reject) => {
-    trackerApi.get(makeRewardsUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
-      .then(result => {
-        console.log(result, "what result")
-        resolve(result)
+    trackerApi
+      .get(makeRewardsUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
+      .then((result) => {
+        console.log(result, "what result");
+        resolve(result);
       })
-      .catch(error => {
-        reject(error)
-      })
-  })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
-
-
-
