@@ -114,7 +114,7 @@ class TxTableBody extends Component {
                   window.open("/address/" + data.address);
                 }}
               >
-                <span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}>{badgeTitle}</span>
+                {/* <span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}>{badgeTitle}</span> */}
                 {data.name || data.address}
               </td>
               <td className="plus">

@@ -264,7 +264,7 @@ function AddressTabs(props) {
           case ADDRESS_TABS[3]:
             return (
               <AddressDelegation
-                txData={addressDelegation}
+                txData={deleg}
                 goAllTx={() => {
                   props.history.push(`/${TX_TYPE.ADDRESS_DELEGATIONS}/${address}`);
                 }}
