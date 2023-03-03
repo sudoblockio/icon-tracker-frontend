@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.14](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.13...v0.2.14) (2023-03-03)
+
+
+### Bug Fixes
+
+* proposals page pagination [#181](https://github.com/sudoblockio/icon-tracker-frontend/issues/181) ([b797bf2](https://github.com/sudoblockio/icon-tracker-frontend/commit/b797bf2a0be4fa21ff9c70148ca14f5f35e6ecb8))
+
 ## [0.2.13](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.12...v0.2.13) (2023-03-02)
 
 
