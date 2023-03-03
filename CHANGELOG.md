@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.13](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.12...v0.2.13) (2023-03-02)
+
+
+### Bug Fixes
+
+* added method column to internal tx tables [#160](https://github.com/sudoblockio/icon-tracker-frontend/issues/160) ([c123510](https://github.com/sudoblockio/icon-tracker-frontend/commit/c123510651238fb462dde3ed4c14d38478d1e62b))
+* address delegation tabs [#184](https://github.com/sudoblockio/icon-tracker-frontend/issues/184) ([2ea3637](https://github.com/sudoblockio/icon-tracker-frontend/commit/2ea3637aaf8d6e800b2c1fb138c0f4071c14c6fe))
+* info summary market cap loading & api [#87](https://github.com/sudoblockio/icon-tracker-frontend/issues/87) ([b17c013](https://github.com/sudoblockio/icon-tracker-frontend/commit/b17c0136f966db544bb01649859f04a9323a8c44))
+* missing tabs in network proposals [#176](https://github.com/sudoblockio/icon-tracker-frontend/issues/176) ([aa7108b](https://github.com/sudoblockio/icon-tracker-frontend/commit/aa7108bea7f07f187ac860e50596093254d19cd7))
+* removed decimals in token vote value in network proposal [#177](https://github.com/sudoblockio/icon-tracker-frontend/issues/177) ([dc5164a](https://github.com/sudoblockio/icon-tracker-frontend/commit/dc5164afc9f7af8db0b3f31a36ce658e8d2e0f6d))
+
 ## [0.2.12](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.11...v0.2.12) (2023-02-14)
 
 
