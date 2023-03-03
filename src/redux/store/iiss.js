@@ -877,7 +877,7 @@ export async function getBalance(address) {
   });
 }
 
-export async function getProposals() {
+export async function getProposals(payload) {
   return new Promise(async (resolve) => {
     // const mock = {
     //     "proposals": [
@@ -916,6 +916,17 @@ export async function getProposals() {
     // resolve(mock)
     const walletApi = await walletApiInstance();
     // TEST: prod endpoint works not dev:
+
+    let params = {
+      start: "0x0",
+      size: "0xA",
+    };
+
+    if (payload) {
+      if (payload.pageNo) params.start = `0x${((payload.pageNo - 1) * payload.pageSize).toString(16)}`;
+      if (payload.pageSize) params.size = `0x${payload.pageSize.toString(16)}`;
+    }
+
     walletApi
       .post(
         `/api/v3`,
@@ -929,10 +940,7 @@ export async function getProposals() {
             dataType: "call",
             data: {
               method: "getProposals",
-              params: {
-                start: "0x0",
-                size: "0xA",
-              },
+              params,
             },
           },
         })
