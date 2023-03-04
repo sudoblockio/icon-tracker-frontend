@@ -12,6 +12,7 @@ import {
   isUrl,
   addAt,
   addUnregisteredStyle,
+  sortArrOfObjects,
 } from "../../../utils/utils";
 import { SocialMediaType } from "../../../utils/const";
 import NotificationManager from "../../../utils/NotificationManager";
@@ -27,13 +28,13 @@ function AddressInfo(props) {
   const [showNode, setShowNode] = useState("none");
   const [links, setLinks] = useState("");
   const [totalVoted, setTotalVoted] = useState("");
-  const [tokens, setTokens] = useState("");
+
   const [addrBalance, setAddrBalance] = useState("");
   const [stakeAmt, setStake] = useState("");
   const [unstakeList, setUnstakeList] = useState("");
   const [addrBond, setAddrBond] = useState("");
 
-  const [newTokens, setNewTokens] = useState({});
+  const [tokens, setTokens] = useState([]);
 
   const { wallet, walletAddress } = props;
   const { loading, data, error } = wallet;
@@ -84,14 +85,21 @@ function AddressInfo(props) {
 
     tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract);
     tokenMap = Object.entries(tokenName);
-    setTokens(tokenMap);
 
     const balance = await getBalanceOf(props.match.params.addressId, tokenContract);
-    setNewTokens((prev) => ({
-      ...prev,
-      [res.data.name]: { ...res.data, balance },
-    }));
+
+    setTokens((prev) => {
+      const oldTokensWithLowerCaseName = [...prev].map((token) => ({ ...token, nameLower: token.name.toLowerCase() }));
+      const sortedTokenArray = sortArrOfObjects(
+        [...oldTokensWithLowerCaseName, { ...res.data, balance, nameLower: res.data.name.toLowerCase() }],
+        "nameLower",
+        "asc"
+      );
+
+      return sortedTokenArray;
+    });
   };
+
   const getPrepSocialMedia = async (address) => {
     const allPreps = await prepList();
     const prepArray = allPreps.filter((preps) => preps.address === address);
@@ -455,7 +463,7 @@ function AddressInfo(props) {
                               <i className="coin"></i>Token
                             </span>
                             <span>
-                              {(Object.entries(newTokens) || []).length}
+                              {tokens.length}
                               <em>Tokens</em>
                             </span>
                             <em className="drop-btn" onClick={toggleTokenMore}>
@@ -463,22 +471,21 @@ function AddressInfo(props) {
                             </em>
                           </p>
 
-                          {!!Object.entries(newTokens) &&
-                            Object.entries(newTokens).map(([key, value], index) => (
-                              <p key={index}>
-                                <em
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => {
-                                    props.history.push(`/token/${value.address}`);
-                                  }}
-                                >
-                                  <span style={{ color: "#1aaaba" }}>{key}</span>
-                                </em>
-                                <span>{`${convertNumberToText(
-                                  Number(value.balance) / Math.pow(10, Number(value.decimals))
-                                )}`}</span>
-                              </p>
-                            ))}
+                          {tokens.map((token, index) => (
+                            <p key={index}>
+                              <em
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                  props.history.push(`/token/${token.address}`);
+                                }}
+                              >
+                                <span style={{ color: "#1aaaba" }}>{token.name}</span>
+                              </em>
+                              <span>{`${convertNumberToText(
+                                Number(token.balance) / Math.pow(10, Number(token.decimals))
+                              )}`}</span>
+                            </p>
+                          ))}
                         </div>
                       </td>
                     </tr>
