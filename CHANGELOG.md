@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.15](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.14...v0.2.15) (2023-03-10)
+
+
+### Bug Fixes
+
+* bonded tab in address page [#202](https://github.com/sudoblockio/icon-tracker-frontend/issues/202) ([1e13397](https://github.com/sudoblockio/icon-tracker-frontend/commit/1e13397ee33e462432249f2ee32ff0107c0710d3))
+* token dropdown sort in addr info [#153](https://github.com/sudoblockio/icon-tracker-frontend/issues/153) ([c572b51](https://github.com/sudoblockio/icon-tracker-frontend/commit/c572b51230c9f78cda73eb10697d1df83ae1f10b))
+* voters address were opening on new tab [#201](https://github.com/sudoblockio/icon-tracker-frontend/issues/201) ([3e86335](https://github.com/sudoblockio/icon-tracker-frontend/commit/3e86335d89e7f738dc66b56293efc96f936afdf2))
+
 ## [0.2.14](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.13...v0.2.14) (2023-03-03)
 
 
