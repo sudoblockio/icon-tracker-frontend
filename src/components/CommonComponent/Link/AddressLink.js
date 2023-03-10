@@ -4,7 +4,7 @@ import {
   isContractAddress
 } from '../../../utils/utils'
 
-const AddressLink = ({to, label, onClick}) => {
+const AddressLink = ({to, label, onClick, onClickTab}) => {
   return (
     <LinkCell
       pageType={isContractAddress(to) ? 'contract' : 'address'}
@@ -12,6 +12,7 @@ const AddressLink = ({to, label, onClick}) => {
       to={to}
       label={label}
       onClick={onClick}
+      onClickTab={onClickTab}
     />
   )
 }
