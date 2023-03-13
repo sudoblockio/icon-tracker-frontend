@@ -11,7 +11,8 @@ class TxBottom extends Component {
       goAllTx,
       txType,
       address,
-      tokenTotal
+      tokenTotal,
+      onClickTab
     } = this.props
 
 
@@ -35,6 +36,7 @@ class TxBottom extends Component {
         tokenTotal={tokenTotal}
         total={this.props.total}
         bondMap={this.props.bondMap?this.props.bondMap:""}
+        onClickTab={onClickTab}
       />
     )
   }

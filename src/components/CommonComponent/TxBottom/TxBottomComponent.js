@@ -6,7 +6,16 @@ import { getBondList } from "../../../redux/store/iiss";
 
 class TxBottomComponent extends Component {
   render() {
-    const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props;
+    const { 
+      txData,
+      txType,
+      goAllTx,
+      address,
+      tableClassName,
+      noBoxText,
+      tokenTotal,
+      onClickTab
+    } = this.props;
     const { data, listSize, totalSize, loading } = txData;
 
     let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
@@ -44,7 +53,7 @@ class TxBottomComponent extends Component {
                 <tbody>
                   {tableBodyData.map((item, index) => (
                     <TxTableBody
-                      key={index}
+                      key={`${index}-${address}`}
                       bondMap={this.props.bondMap}
                       totalSupply={tokenTotal}
                       rank={index + 1}
@@ -52,6 +61,7 @@ class TxBottomComponent extends Component {
                       txType={txType}
                       address={address}
                       tokenTotal={tokenTotal}
+                      onClickTab={onClickTab}
                     />
                   ))}
                 </tbody>
