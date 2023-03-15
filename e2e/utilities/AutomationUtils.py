@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from tests.utilities.Logger import LogGen
+from e2e.utilities.Logger import LogGen
 
 
 class AutomationUtils:
@@ -22,5 +22,5 @@ class AutomationUtils:
     @staticmethod
     def log_error(self, error, screenshot_name):
         self.logger.info(">>"+error)
-        self.driver.save_screenshot('./tests/screenshots/' + screenshot_name)
+        self.driver.save_screenshot('./e2e/screenshots/' + screenshot_name)
 

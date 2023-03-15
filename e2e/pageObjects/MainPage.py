@@ -3,8 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from tests.utilities.Logger import LogGen
-from tests.utilities.AutomationUtils import AutomationUtils
+from e2e.utilities.Logger import LogGen
+from e2e.utilities.AutomationUtils import AutomationUtils
 
 
 class MainPage:

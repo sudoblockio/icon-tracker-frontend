@@ -1,6 +1,6 @@
-from tests.pageObjects.MainPage import MainPage
-from tests.utilities.Logger import LogGen
-from tests.utilities.ReadProperties import ReadConfig
+from e2e.pageObjects.MainPage import MainPage
+from e2e.utilities.Logger import LogGen
+from e2e.utilities.ReadProperties import ReadConfig
 
 
 class Test_001_Verify_card_numbers_in_main_page:
