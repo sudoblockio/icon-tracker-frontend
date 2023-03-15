@@ -1,33 +1,19 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
-import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
-import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
   render() {
-    const { 
-      txData,
-      txType,
-      goAllTx,
-      address,
-      tableClassName,
-      noBoxText,
-      tokenTotal,
-      onClickTab
-    } = this.props;
+    const { txData, txType, goAllTx, address, tableClassName, noBoxText, tokenTotal } = this.props;
     const { data, listSize, totalSize, loading } = txData;
 
     let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
 
     let tableBodyData;
-
-    if (txTypeIsBonder(txType)) {
-      tableBodyData = txData.filter((f) => {
-        return this.props.bondMap[f] !== null
-      });
+    if (txType === "addressBonders") {
+      tableBodyData = txData.filter((f) => this.props.bondMap[f] !== null);
       totalCount = tableBodyData.length;
     } else if (txType === "addressdelegations") {
       tableBodyData = txData.delegations;
@@ -37,16 +23,20 @@ class TxBottomComponent extends Component {
       console.log(txType, "tx comp props bonder");
       if (loading) {
         return <LoadingComponent height="349px" />;
-      } else if (txTypeIsBonder(txType)) {
+      } else if (
+        txType === "addressbonded" ||
+        txType === "addressbonders" ||
+        txType === "addressBonded" ||
+        txType === "addressBonders"
+      ) {
         return (
           <div className="contents">
-            <CustomHeader
-              txData={txData}
+            <TxBottomTitle
               txType={txType}
-              totalCount={totalCount}
+              listSize={Number(txData.length)}
+              totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
               goAllTx={goAllTx}
-              bondMap={this.props.bondMap}
-              address={this.props.address}
+              fromAddr={"hello"}
             />
             <div className="table-box">
               <table className={tableClassName}>
@@ -56,7 +46,7 @@ class TxBottomComponent extends Component {
                 <tbody>
                   {tableBodyData.map((item, index) => (
                     <TxTableBody
-                      key={`${index}-${address}`}
+                      key={index}
                       bondMap={this.props.bondMap}
                       totalSupply={tokenTotal}
                       rank={index + 1}
@@ -64,7 +54,6 @@ class TxBottomComponent extends Component {
                       txType={txType}
                       address={address}
                       tokenTotal={tokenTotal}
-                      onClickTab={onClickTab}
                     />
                   ))}
                 </tbody>
@@ -127,43 +116,3 @@ class TxBottomComponent extends Component {
 }
 
 export default withRouter(TxBottomComponent);
-
-function txTypeIsBonder(txType) {
-  const ar = [
-    "addressbonded",
-    "addressbonders",
-    "addressBonded",
-    "addressBonders"
-  ];
-
-  return ar.includes(txType);
-}
-
-function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function toggleModal() {
-    console.log('click on modal');
-    setIsModalOpen(!isModalOpen);
-  }
-  return (
-    <>
-      <BondersModal
-        bondMap={bondMap}
-        address={address}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-      />
-      <div className={customStyles.headerContainer}>
-        <TxBottomTitle
-          txType={txType}
-          listSize={Number(txData.length)}
-          totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
-          goAllTx={goAllTx}
-          fromAddr={"hello"}
-        />
-        <button onClick={toggleModal}>Update</button>
-      </div>
-    </>
-  )
-}
