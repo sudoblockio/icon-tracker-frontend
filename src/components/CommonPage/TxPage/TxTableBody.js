@@ -432,11 +432,19 @@ class TxTableBody extends Component {
               </td>
             </tr>
           );
-        case TX_TYPE.ADDRESS_BONDERS:
+        case TX_TYPE.ADDRESS_BONDERS: // TODO: HERE!
           console.log(this.props.bondMap[data] > 0, "bonder bonder data");
+          console.log('this.props');
+          console.log(this.props)
           return (
             <tr>
-              <AddressCell targetAddr={data} txType={data.txType} spanNoEllipsis />
+              <AddressCell 
+                targetAddr={data} 
+                txType={data.txType} 
+                spanNoEllipsis 
+                onClickTab={this.props.onClickTab}
+              />
+              {/* <TxAddressCell isError={isError} address={data} /> */}
               <td>
                 <span>{numberWithCommas(this.props.bondMap[data]) || 0}</span>
                 <em>ICX</em>

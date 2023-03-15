@@ -87,7 +87,7 @@ function getInnerElements(props, booleans) {
 	else {
 		elements.push(
 			<span key="span" className={props.spanNoEllipsis ? '' : 'ellipsis'}>
-				{_isOtherAddress ? <AddressLink to={props.targetAddr} /> : props.address}
+				{_isOtherAddress ? <AddressLink to={props.targetAddr} onClickTab={props.onClickTab} /> : props.address}
 			</span>			
 		)
 	}
@@ -123,3 +123,4 @@ class AddressCell extends Component {
 }
 
 export default AddressCell
+

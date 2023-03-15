@@ -315,6 +315,7 @@ function AddressTabs(props) {
                 txType={TX_TYPE.ADDRESS_BONDERS}
                 address={address}
                 bondMap={bondMap}
+                onClickTab={handleClickTab}
               />
             );
           default:
