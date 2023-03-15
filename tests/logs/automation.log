@@ -28,3 +28,7 @@
 03/14/2023 08:33:24 PM: INFO: >>waiting for element to be visible
 03/14/2023 08:33:24 PM: INFO: >>verifying the numeric values in main page cards
 03/14/2023 08:33:28 PM: INFO: ********Finished execution Test_001_Verify_card_numbers_in_main_page...*******
+03/15/2023 03:59:17 PM: INFO: ********Starting test case Test_001_Verify_card_numbers_in_main_page...*******
+03/15/2023 03:59:17 PM: INFO: >>waiting for element to be visible
+03/15/2023 03:59:17 PM: INFO: >>verifying the numeric values in main page cards
+03/15/2023 03:59:22 PM: INFO: ********Finished execution Test_001_Verify_card_numbers_in_main_page...*******
