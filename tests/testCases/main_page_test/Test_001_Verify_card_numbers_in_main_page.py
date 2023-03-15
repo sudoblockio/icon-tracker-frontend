@@ -1,8 +1,6 @@
-import pytest
-from selenium import webdriver
 from tests.pageObjects.MainPage import MainPage
-from tests.utilities.ReadProperties import ReadConfig
 from tests.utilities.Logger import LogGen
+from tests.utilities.ReadProperties import ReadConfig
 
 
 class Test_001_Verify_card_numbers_in_main_page:
