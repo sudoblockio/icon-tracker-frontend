@@ -12,8 +12,11 @@ class TxBottomComponent extends Component {
     let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
 
     let tableBodyData;
-    if (txType === "addressBonders") {
-      tableBodyData = txData.filter((f) => this.props.bondMap[f] !== null);
+
+    if (txTypeIsBonder(txType)) {
+      tableBodyData = txData.filter((f) => {
+        return this.props.bondMap[f] !== null
+      });
       totalCount = tableBodyData.length;
     } else if (txType === "addressdelegations") {
       tableBodyData = txData.delegations;
@@ -23,12 +26,7 @@ class TxBottomComponent extends Component {
       console.log(txType, "tx comp props bonder");
       if (loading) {
         return <LoadingComponent height="349px" />;
-      } else if (
-        txType === "addressbonded" ||
-        txType === "addressbonders" ||
-        txType === "addressBonded" ||
-        txType === "addressBonders"
-      ) {
+      } else if (txTypeIsBonder(txType)) {
         return (
           <div className="contents">
             <TxBottomTitle
@@ -116,3 +114,15 @@ class TxBottomComponent extends Component {
 }
 
 export default withRouter(TxBottomComponent);
+
+function txTypeIsBonder(txType) {
+  const ar = [
+    "addressbonded",
+    "addressbonders",
+    "addressBonded",
+    "addressBonders"
+  ];
+
+  return ar.includes(txType);
+}
+
