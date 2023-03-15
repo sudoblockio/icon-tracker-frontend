@@ -6,16 +6,34 @@ import {
   isValidData,
   tokenText,
   is0xHash,
+  isHxAddress,
   convertHexToValue,
   epochToFromNow,
   convertLoopToIcxDecimal,
 } from "../../../utils/utils";
 
-import { TransactionLink, BlockLink, AddressCell, AddressSet, AmountCell } from "../../../components";
+import { TransactionLink, AddressLink, BlockLink, AddressCell, AddressSet, AmountCell } from "../../../components";
 import { TX_TYPE } from "../../../utils/const";
 import { getTokenTotalSupply } from "../../../redux/store/iiss";
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from "../../../utils/utils";
 
+const TxAddressCell = ({ isError, address }) => {
+  let _address, className;
+  if (!isValidData(address)) {
+    _address = "-";
+    className = "no";
+  } else {
+    const _isHxAddress = isHxAddress(address);
+    _address = _isHxAddress ? <AddressLink to={address} label={<span className="ellipsis">{address}</span>} /> : address;
+    className = `${isError ? "icon error" : ""} ${_isHxAddress ? "on" : ""}`;
+  }
+  return (
+    <td className={className}>
+      {_address !== "-" && isError && <i className="img"></i>}
+      {_address}
+    </td>
+  );
+};
 const TxHashCell = ({ isError, txHash }) => {
   let _txHash, className;
   if (!isValidData(txHash)) {
@@ -126,14 +144,7 @@ class TxTableBody extends Component {
         case TX_TYPE.ADDRESS_VOTED:
           return (
             <tr>
-              <td
-                className="on"
-                onClick={() => {
-                  window.open("/address/" + data.address);
-                }}
-              >
-                {data.address}
-              </td>
+              <TxAddressCell isError={isError} address={data.address} />
               <td className="plus">
                 <span>{Number(Number(data.value) / Math.pow(10, 18)).toFixed()}</span>
                 <em>ICX</em>
@@ -441,3 +452,4 @@ class TxTableBody extends Component {
 }
 
 export default TxTableBody;
+
