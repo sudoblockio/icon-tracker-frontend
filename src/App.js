@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { store, history } from './redux/store/store'
-import Routes from './Routes.js'
+import IconTrackerRoutes from './Routes.js'
 import { ConnectedRouter } from 'react-router-redux'
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <Routes />
+                    <IconTrackerRoutes />
                 </ConnectedRouter>
             </Provider>
         )
