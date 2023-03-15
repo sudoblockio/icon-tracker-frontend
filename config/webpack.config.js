@@ -12,17 +12,19 @@ const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const safePostCssParser = require("postcss-safe-parser");
-const ManifestPlugin = require("webpack-manifest-plugin");
+// const WebpackManifestPlugin = require("webpack-manifest-plugin");
+
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
+// const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const paths = require("./paths");
 const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
-const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
+// const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
@@ -97,6 +99,17 @@ module.exports = function(webpackEnv) {
               stage: 3
             })
           ],
+          // postcssOptions: {
+          //   plugins: () => [
+          //     require("postcss-flexbugs-fixes"),
+          //     require("postcss-preset-env")({
+          //       autoprefixer: {
+          //         flexbox: "no-2009"
+          //       },
+          //       stage: 3
+          //     })
+          //   ],
+          // },
           sourceMap: isEnvProduction && shouldUseSourceMap
         }
       }
@@ -525,8 +538,6 @@ module.exports = function(webpackEnv) {
       // to restart the development server for Webpack to discover it. This plugin
       // makes the discovery automatic so you don't have to restart.
       // See https://github.com/facebook/create-react-app/issues/186
-      isEnvDevelopment &&
-        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
@@ -537,7 +548,7 @@ module.exports = function(webpackEnv) {
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
       // having to parse `index.html`.
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         fileName: "asset-manifest.json",
         publicPath: publicPath
       }),
@@ -546,7 +557,8 @@ module.exports = function(webpackEnv) {
       // solution that requires the user to opt into importing specific locales.
       // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
       // You can remove this if you don't use Moment.js:
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /\/moment\/$/ }),
+      new webpack.IgnorePlugin({resourceRegExp: /\.\/native/, contextRegExp: /\/pg\// }),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the Webpack build.
       isEnvProduction &&
@@ -584,19 +596,25 @@ module.exports = function(webpackEnv) {
           watch: paths.appSrc,
           silent: true,
           // The formatter is invoked directly in WebpackDevServerUtils during development
-          formatter: isEnvProduction ? typescriptFormatter : undefined
+          // formatter: isEnvProduction ? typescriptFormatter : undefined
+          formatter: undefined
         })
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
-    node: {
-      module: "empty",
-      dgram: "empty",
-      dns: "mock",
-      fs: "empty",
-      net: "empty",
-      tls: "empty",
-      child_process: "empty"
+    // node: {
+    //   module: "empty",
+    //   dgram: "empty",
+    //   dns: "mock",
+    //   fs: "empty",
+    //   net: "empty",
+    //   tls: "empty",
+    //   child_process: "empty"
+    // },
+    resolve: {
+      fallback: {
+        fs: false
+      }
     },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
