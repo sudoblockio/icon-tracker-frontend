@@ -1,5 +1,6 @@
 # build environment
-FROM node:12.22.4-alpine as build
+#FROM node:14.21.3-alpine as build
+FROM node:18.15.0-alpine3.17 as build
 
 ARG REACT_APP_NETWORK_NAME
 ENV REACT_APP_NETWORK_NAME ${REACT_APP_NETWORK_NAME:-mainnet}
@@ -13,7 +14,11 @@ COPY package.json /app/package.json
 
 RUN yarn install
 
-COPY . .
+COPY nginx.conf .eslintrc.json ./
+COPY scripts ./scripts
+COPY config ./config
+COPY src ./src
+COPY public ./public
 
 RUN apk --no-cache upgrade
 
