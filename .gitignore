@@ -30,3 +30,7 @@ yarn-error.log*
 .vscode
 .output
 .idea
+
+# misc 
+.vimrc
+*.swp*
