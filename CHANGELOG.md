@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.16](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.15...v0.2.16) (2023-03-16)
+
+
+### Bug Fixes
+
+* bonded tab in address page [#202](https://github.com/sudoblockio/icon-tracker-frontend/issues/202) ([ac1b7da](https://github.com/sudoblockio/icon-tracker-frontend/commit/ac1b7da429710edbca3f5ccee745419a3fef8e9f))
+* This commits fixes [#200](https://github.com/sudoblockio/icon-tracker-frontend/issues/200). The solution implemented to fix this issue is that now when someone clicks on an address in the bonders tab the state of the current active tab gets reset to the first tab (Transactions) ([d6a47be](https://github.com/sudoblockio/icon-tracker-frontend/commit/d6a47be84d586cf159ff0dba0ba27e6c3bce9d77))
+* This commits fixes [#200](https://github.com/sudoblockio/icon-tracker-frontend/issues/200). The solution implemented to fix this issue is that now when someone clicks on an address in the bonders tab the state of the current active tab gets reset to the first tab (Transactions) ([b31bb89](https://github.com/sudoblockio/icon-tracker-frontend/commit/b31bb895e02b69b826e10960bdaa00c89feec153))
+* voters address were opening on new tab [#201](https://github.com/sudoblockio/icon-tracker-frontend/issues/201) ([4f6e0c2](https://github.com/sudoblockio/icon-tracker-frontend/commit/4f6e0c2a08d16f6fadda1f34ed7f8f087b17fe57))
+
 ## [0.2.15](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.14...v0.2.15) (2023-03-10)
 
 
