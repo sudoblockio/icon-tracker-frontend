@@ -123,4 +123,3 @@ class AddressCell extends Component {
 }
 
 export default AddressCell
-

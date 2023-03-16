@@ -135,4 +135,3 @@ function txTypeIsBonder(txType) {
 
   return ar.includes(txType);
 }
-
