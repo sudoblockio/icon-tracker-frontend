@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import { IconConverter, IconAmount } from "icon-sdk-js";
 
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from "../../../components";
+
+import GenericModal from "../../../components/GenericModal/genericModal";
 import {
   numberWithCommas,
   convertNumberToText,
@@ -37,6 +39,7 @@ function AddressInfo(props) {
   const [addrBond, setAddrBond] = useState("");
 
   const [tokens, setTokens] = useState([]);
+  const [isPrepModalOpen, setIsPrepModalOpen] = useState(false);
 
   const { wallet, walletAddress } = props;
   const { loading, data, error } = wallet;
@@ -69,6 +72,10 @@ function AddressInfo(props) {
   };
   let tokenName = {};
   let tokenMap = {};
+
+  function togglePrepModal() {
+    setIsPrepModalOpen(!isPrepModalOpen);
+  };
 
   const getAddrStake = async (addr) => {
     const res = await getStake(addr);
@@ -219,6 +226,14 @@ function AddressInfo(props) {
 
       return (
         <div className="screen0">
+          <GenericModal
+            isOpen={isPrepModalOpen}
+            onClose={togglePrepModal}
+            useSmall={true}
+          >
+            <h1>SOME HEADER HERE</h1>
+            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+          </GenericModal>
           <div className="wrap-holder">
             {isConnected ? (
               <p className="title">
@@ -298,7 +313,10 @@ function AddressInfo(props) {
                           <span
                             className={compStyles.buttonUpdatePrep}
                           >
-                            <button disabled={!is_prep || !isConnected}>Update</button>
+                            <button 
+                              disabled={!is_prep || !isConnected}
+                              onClick={togglePrepModal}
+                            >Update</button>
                           </span>
                           <span
                             className={`active ${
