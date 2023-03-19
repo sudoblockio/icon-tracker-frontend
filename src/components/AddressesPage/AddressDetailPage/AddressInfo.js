@@ -20,6 +20,8 @@ import { prepList, getPRepsRPC, getBalanceOf, getBalance, getStake, getBondList 
 import { contractDetail } from "../../../redux/store/contracts";
 import { addressTokens } from "../../../redux/store/addresses";
 
+import compStyles from "./AddressInfo.module.css";
+
 const _isNotificationAvailable = NotificationManager.available();
 
 function AddressInfo(props) {
@@ -175,6 +177,10 @@ function AddressInfo(props) {
     setShowNode("table-row");
   };
 
+  function enableUpdateButton() {
+    //
+  }
+
   useEffect(() => {
     getContractName();
     getTokens();
@@ -210,6 +216,7 @@ function AddressInfo(props) {
 
       let totalVotes;
       !Number(delegated) ? (totalVotes = 0) : (totalVotes = Number(Number(delegated) / Number(totalVoted)));
+
       return (
         <div className="screen0">
           <div className="wrap-holder">
@@ -288,6 +295,11 @@ function AddressInfo(props) {
                             );
                           })}
 
+                          <span
+                            className={compStyles.buttonUpdatePrep}
+                          >
+                            <button disabled={!is_prep || !isConnected}>Update</button>
+                          </span>
                           <span
                             className={`active ${
                               node_state === "Synced"
