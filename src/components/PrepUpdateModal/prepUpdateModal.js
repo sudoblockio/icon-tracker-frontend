@@ -6,6 +6,7 @@ import {
   governanceProviderRPC,
   chainProviderRPC
 } from "../../browser-js-provider";
+import { getBonders } from "../../redux/store/iiss";
 // import NodeButlerSDK from "../utils/customLib";
 // import { v4 as uuidv4 } from "uuid";
 import utils from "./utils";
@@ -76,10 +77,11 @@ export default function PrepModal({ prepInfo }) {
   // const [overviewState, setOverviewState] = useState(initPrepDetailsForm);
   // const [overviewState, setOverviewState] = useState(null);
   // const [prepDetailsState, setPrepDetailsState] = useState(null);
-  const [bondedInfoState, setBondedInfoState] = useState(null);
+  // const [bondedInfoState, setBondedInfoState] = useState(null);
+  const [bonderList, setBonderList] = useState([]);
   const [prepDetailsForm, setPrepDetailsForm] = useState(initPrepDetailsForm);
   const [txResults, setTxResults] = useState(initialTxResultState);
-  // const [bonderForm, setBonderForm] = useState(initBonderForm);
+  const [bonderForm, setBonderForm] = useState(initBonderForm);
   const [walletModalIsOpen, setWalletModalIsOpen] = useState(false);
   const [walletResponse, setWalletResponse] = useState(null);
 
@@ -96,15 +98,16 @@ export default function PrepModal({ prepInfo }) {
     handleClearInterval();
   }
 
-  // function handleFormInputChange(evnt) {
-  //   const value = evnt.target.value;
-  //   setBonderForm(bonderState => {
-  //     let newState = { ...bonderState };
-  //     newState[evnt.target.name] = value;
+  function handleFormInputChange(evnt) {
+    const { value, name } = evnt.target;
 
-  //     return newState;
-  //   });
-  // }
+    setBonderForm(bonderState => {
+      let newState = { ...bonderState };
+      newState[name] = value;
+
+      return newState;
+    });
+  }
 
   function dispatchTxEvent(txData) {
     window.dispatchEvent(
@@ -157,10 +160,11 @@ export default function PrepModal({ prepInfo }) {
   }
 
   function handlePrepFormInputChange(evnt) {
-    const value = evnt.target.value;
+    const { value, name } = evnt.target
     setPrepDetailsForm(prepFormState => {
-      let newState = { ...prepFormState };
-      newState[evnt.target.name] = value;
+      console.log(prepFormState);
+      const newState = { ...prepFormState };
+      newState[name] = value;
 
       return newState;
     });
@@ -204,6 +208,24 @@ export default function PrepModal({ prepInfo }) {
       );
     };
   }, []);
+
+  useEffect(() => {
+
+    async function getBondersData() {
+      //
+      const payload = { address: prepInfo.node_address };
+      const bonderListData = await getBonders(payload);
+      if (bonderListData != null && bonderListData.length != null) {
+        setBonderList(bonderListData);
+      }
+    }
+    if (prepInfo != null) {
+      if (prepInfo.node_address != null) {
+        getBondersData();
+      }
+    }
+
+  }, [prepInfo])
 
   useEffect(() => {
     if (
@@ -253,18 +275,18 @@ export default function PrepModal({ prepInfo }) {
                 window before approving the transaction.
               </p>
               <p>Current wallets allowed to place bond for your node:</p>
-                {/* <ul> */}
-                {/*   {bondedInfoState.map((wallet, index) => { */}
-                {/*     return ( */}
-                {/*       <li key={`${wallet}-${index}`}> */}
-                {/*         {/1* <a href={utils.parseBonderWallet(wallet)} target="_blank"> *1/} */}
-                {/*         {/1*   {wallet} *1/} */}
-                {/*         {/1* </a> *1/} */}
-                {/*           {wallet} */}
-                {/*       </li> */}
-                {/*     ); */}
-                {/*   })} */}
-                {/* </ul> */}
+                <ul>
+                  {bonderList.map((wallet, index) => {
+                    return (
+                      <li key={`${wallet}-${index}`}>
+                        {/* <a href={utils.parseBonderWallet(wallet)} target="_blank"> */}
+                        {/*   {wallet} */}
+                        {/* </a> */}
+                          {wallet}
+                      </li>
+                    );
+                  })}
+                </ul>
               <div className={styles.setPrepForm}>
                 <div
                   style={{
@@ -273,42 +295,43 @@ export default function PrepModal({ prepInfo }) {
                     alignSelf: "center"
                   }}
                 >
-                  {/* <div className={styles.table}> */}
-                  {/*   {[ */}
-                  {/*     ["bonder1", bonderForm.bonder1, "Bonder 1:"], */}
-                  {/*     ["bonder2", bonderForm.bonder2, "Bonder 2:"], */}
-                  {/*     ["bonder3", bonderForm.bonder3, "Bonder 3:"], */}
-                  {/*     ["bonder4", bonderForm.bonder4, "Bonder 4:"], */}
-                  {/*     ["bonder5", bonderForm.bonder5, "Bonder 5:"], */}
-                  {/*     ["bonder6", bonderForm.bonder6, "Bonder 6:"], */}
-                  {/*     ["bonder7", bonderForm.bonder7, "Bonder 7:"], */}
-                  {/*     ["bonder8", bonderForm.bonder8, "Bonder 8:"], */}
-                  {/*     ["bonder9", bonderForm.bonder9, "Bonder 9:"], */}
-                  {/*     ["bonder10", bonderForm.bonder10, "Bonder 10:"] */}
-                  {/*   ].map((arrItem, index) => { */}
-                  {/*     return ( */}
-                  {/*       <div */}
-                  {/*         key={`bonder-item-${index}`} */}
-                  {/*         className={styles.tableRow} */}
-                  {/*       > */}
-                  {/*         <p className={styles.tableRowLabel}> */}
-                  {/*           <b>{arrItem[2]}</b> */}
-                  {/*         </p> */}
-                  {/*         <input */}
-                  {/*           type="text" */}
-                  {/*           name={arrItem[0]} */}
-                  {/*           value={arrItem[1]} */}
-                  {/*           onChange={handleFormInputChange} */}
-                  {/*           className={ */}
-                  {/*             isValidICONAddress(arrItem[1]) === true */}
-                  {/*               ? `${styles.tableRowInput} ${styles.tableRowInputValid}` */}
-                  {/*               : `${styles.tableRowInput} ${styles.tableRowInputInvalid}` */}
-                  {/*           } */}
-                  {/*         /> */}
-                  {/*       </div> */}
-                  {/*     ); */}
-                  {/*   })} */}
-                  {/* </div> */}
+                  <div className={styles.table}>
+                    {[
+                      ["bonder1", bonderForm.bonder1, "Bonder 1:"],
+                      ["bonder2", bonderForm.bonder2, "Bonder 2:"],
+                      ["bonder3", bonderForm.bonder3, "Bonder 3:"],
+                      ["bonder4", bonderForm.bonder4, "Bonder 4:"],
+                      ["bonder5", bonderForm.bonder5, "Bonder 5:"],
+                      ["bonder6", bonderForm.bonder6, "Bonder 6:"],
+                      ["bonder7", bonderForm.bonder7, "Bonder 7:"],
+                      ["bonder8", bonderForm.bonder8, "Bonder 8:"],
+                      ["bonder9", bonderForm.bonder9, "Bonder 9:"],
+                      ["bonder10", bonderForm.bonder10, "Bonder 10:"]
+                    ].map((arrItem, index) => {
+                      return (
+                        <div
+                          key={`bonder-item-${index}`}
+                          className={styles.tableRow}
+                        >
+                          <p className={styles.tableRowLabel}>
+                            <b>{arrItem[2]}</b>
+                          </p>
+                          <input
+                            type="text"
+                            name={arrItem[0]}
+                            value={arrItem[1]}
+                            onChange={handleFormInputChange}
+                            placeholder={bonderList[index] || ""}
+                            className={
+                              isValidICONAddress(arrItem[1]) === true
+                                ? `${styles.tableRowInput} ${styles.tableRowInputValid}`
+                                : `${styles.tableRowInput} ${styles.tableRowInputInvalid}`
+                            }
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
                   <button
                     className={styles.button}
                     onClick={handleBonderFormSubmit}
