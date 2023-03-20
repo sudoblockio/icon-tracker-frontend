@@ -1,0 +1,74 @@
+/* styles/cpsProposalsSection.module.css */
+.main {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.main > h2 {
+  margin: 5px;
+}
+.imgLoading {
+  height: 200px;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+.imgLoadingItem {
+  height: 40%;
+  width: 3px;
+  border-radius: 3px;
+  background-color: #eb5900;
+  margin-right: 3px;
+  animation: wave 1s linear infinite;
+}
+
+.imgLoadingItem:nth-child(1) {
+  animation-delay: 0.2s;
+  height: 12%;
+}
+.imgLoadingItem:nth-child(2) {
+  animation-delay: 0.1s;
+  height: 25%;
+}
+.imgLoadingItem:nth-child(3) {
+  /* animation-delay: 0.2s; */
+}
+.imgLoadingItem:nth-child(4) {
+  animation-delay: 0.1s;
+  height: 25%;
+}
+
+.imgLoadingItem:nth-child(5) {
+  animation-delay: 0.2s;
+  height: 12%;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+/* Wallet Modal Container */
+.modalContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
