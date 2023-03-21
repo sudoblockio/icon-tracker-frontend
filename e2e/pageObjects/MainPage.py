@@ -18,12 +18,11 @@ class MainPage:
     def __init__(self, driver):
         self.driver = driver
 
-    """
-        verify_main_page_card_numbers
-        - this method is used to verify main page card contains numeric values or not
-    """
     def verify_main_page_card_numbers(self):
-
+        """
+              verify_main_page_card_numbers
+              - this method is used to verify main page card contains numeric values or not
+        """
         pass_array = []
         try:
             AutomationUtils.wait_for_element_to_load(self, self.number_cards_xpath % '4')
@@ -53,13 +52,12 @@ class MainPage:
         finally:
             self.driver.quit()
 
-    """
-        enter_query_in_search_bar
-        -this method is used to enter query in a search bar
-        @param - query: search input needed to execute the search 
-    """
     def enter_query_in_search_bar(self, query):
-
+        """
+                enter_query_in_search_bar
+                -this method is used to enter query in a search bar
+                @param - query: search input needed to execute the search
+        """
         try:
             self.logger.info(">>waiting for search bar to be visible")
             AutomationUtils.wait_for_element_to_load(self, self.search_bar)
