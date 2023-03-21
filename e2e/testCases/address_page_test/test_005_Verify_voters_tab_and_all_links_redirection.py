@@ -1,3 +1,5 @@
+import pytest
+
 from e2e.pageObjects.MainPage import MainPage
 from e2e.pageObjects.AddressPage import AddressPage
 
@@ -5,6 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
+@pytest.mark.address_page
 class Test_005_Verify_voters_tab_and_all_links_redirection:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
@@ -19,7 +22,7 @@ class Test_005_Verify_voters_tab_and_all_links_redirection:
         self.logger.info("********Starting test case Test_005_Verify_voters_tab_and_all_links_redirection...*******")
         self.driver.get(ReadConfig.getExpectedUrl(1))
 
-        self.addressPageObj.click_on_voters_tab()
+        self.addressPageObj.click_on_rewards_tab()
 
         for i in range(0, 10, 1):
             self.addressPageObj.verify_all_links_in_voters_tab_works(count=i)

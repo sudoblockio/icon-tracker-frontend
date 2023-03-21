@@ -1,3 +1,5 @@
+import pytest
+
 from e2e.pageObjects.MainPage import MainPage
 from e2e.pageObjects.AddressPage import AddressPage
 
@@ -5,6 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
+@pytest.mark.address_page
 class Test_003_Verify_address_page_transaction_table:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()

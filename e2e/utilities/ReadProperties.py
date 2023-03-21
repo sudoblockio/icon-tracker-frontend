@@ -27,3 +27,8 @@ class ReadConfig:
             return config.get('search param', 'query_two_url')
         elif count == 3:
             return config.get('search param', 'query_three_url')
+
+    @staticmethod
+    def getAddressUrl():
+        return config.get('address url', 'address_url')
+

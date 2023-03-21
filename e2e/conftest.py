@@ -10,6 +10,9 @@ def setup(browser):
     elif browser == 'firefox':
         driver = webdriver.Firefox()
         print("Launching firefox browser.........")
+    else:
+        driver = webdriver.Chrome()
+        print("Launching chrome browser.........")
     return driver
 
 
