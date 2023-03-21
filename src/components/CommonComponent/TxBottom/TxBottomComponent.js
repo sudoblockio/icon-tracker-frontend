@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
+import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
   render() {
@@ -38,13 +39,16 @@ class TxBottomComponent extends Component {
       } else if (txTypeIsBonder(txType)) {
         return (
           <div className="contents">
-            <TxBottomTitle
-              txType={txType}
-              listSize={Number(txData.length)}
-              totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
-              goAllTx={goAllTx}
-              fromAddr={"hello"}
-            />
+            <div className={customStyles.headerContainer}>
+              <TxBottomTitle
+                txType={txType}
+                listSize={Number(txData.length)}
+                totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+                goAllTx={goAllTx}
+                fromAddr={"hello"}
+              />
+              <button>Update</button>
+            </div>
             <div className="table-box">
               <table className={tableClassName}>
                 <thead>

@@ -3,8 +3,6 @@ import { withRouter } from "react-router-dom";
 import { IconConverter, IconAmount } from "icon-sdk-js";
 
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from "../../../components";
-
-import GenericModal from "../../../components/GenericModal/genericModal";
 import PrepUpdateModal from "../../../components/PrepUpdateModal/prepUpdateModal";
 import {
   numberWithCommas,
@@ -227,13 +225,11 @@ function AddressInfo(props) {
 
       return (
         <div className="screen0">
-          <GenericModal
-            isOpen={isPrepModalOpen}
-            onClose={togglePrepModal}
-            useSmall={true}
-          >
-            <PrepUpdateModal prepInfo={data.prep} />
-          </GenericModal>
+            <PrepUpdateModal
+              prepInfo={data.prep}
+              isOpen={isPrepModalOpen}
+              onClose={togglePrepModal}
+            />
           <div className="wrap-holder">
             {isConnected ? (
               <p className="title">
