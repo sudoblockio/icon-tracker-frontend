@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
+import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
 import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
@@ -138,4 +139,19 @@ function txTypeIsBonder(txType) {
   ];
 
   return ar.includes(txType);
+}
+
+function CustomHeader({ txData, txType, totalCount, goAllTx }) {
+  return (
+    <div className={customStyles.headerContainer}>
+      <TxBottomTitle
+        txType={txType}
+        listSize={Number(txData.length)}
+        totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+        goAllTx={goAllTx}
+        fromAddr={"hello"}
+      />
+      <button>Update</button>
+    </div>
+  )
 }

@@ -239,98 +239,100 @@ export default function BondersModal({ prepInfo, isOpen, onClose }) {
 
   return (
     <div>
-      {prepInfo != null ? (
-        <div>
-          <div className={styles.main}>
-            <div className={styles.defaultSection}>
-              <h2>Bonded Info:</h2>
-              <p>
-                A maximum of 10 addresses are allowed to be added to the{" "}
-                <i>bonderList</i> of your node. You can use the following form to
-                update your <i>bonderList</i> configuration, a transaction will be
-                signed with your address using your preffered wallet software, the
-                details of the transaction will be shown in the wallet popup
-                window before approving the transaction.
-              </p>
-              <p>Current wallets allowed to place bond for your node:</p>
-                <ul>
-                  {bonderList.map((wallet, index) => {
-                    return (
-                      <li key={`${wallet}-${index}`}>
-                        {/* <a href={utils.parseBonderWallet(wallet)} target="_blank"> */}
-                        {/*   {wallet} */}
-                        {/* </a> */}
-                          {wallet}
-                      </li>
-                    );
-                  })}
-                </ul>
-              <div className={styles.setPrepForm}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexFlow: "column nowrap",
-                    alignSelf: "center"
-                  }}
-                >
-                  <div className={styles.table}>
-                    {[
-                      ["bonder1", bonderForm.bonder1, "Bonder 1:"],
-                      ["bonder2", bonderForm.bonder2, "Bonder 2:"],
-                      ["bonder3", bonderForm.bonder3, "Bonder 3:"],
-                      ["bonder4", bonderForm.bonder4, "Bonder 4:"],
-                      ["bonder5", bonderForm.bonder5, "Bonder 5:"],
-                      ["bonder6", bonderForm.bonder6, "Bonder 6:"],
-                      ["bonder7", bonderForm.bonder7, "Bonder 7:"],
-                      ["bonder8", bonderForm.bonder8, "Bonder 8:"],
-                      ["bonder9", bonderForm.bonder9, "Bonder 9:"],
-                      ["bonder10", bonderForm.bonder10, "Bonder 10:"]
-                    ].map((arrItem, index) => {
-                      return (
-                        <div
-                          key={`bonder-item-${index}`}
-                          className={styles.tableRow}
-                        >
-                          <p className={styles.tableRowLabel}>
-                            <b>{arrItem[2]}</b>
-                          </p>
-                          <input
-                            type="text"
-                            name={arrItem[0]}
-                            value={arrItem[1]}
-                            onChange={handleFormInputChange}
-                            placeholder={bonderList[index] || ""}
-                            className={
-                              isValidICONAddress(arrItem[1]) === true
-                                ? `${styles.tableRowInput} ${styles.tableRowInputValid}`
-                                : `${styles.tableRowInput} ${styles.tableRowInputInvalid}`
-                            }
-                          />
+      {
+        prepInfo != null 
+          ? (
+              <div>
+                <div className={styles.main}>
+                  <div className={styles.defaultSection}>
+                    <h2>Bonded Info:</h2>
+                    <p>
+                      A maximum of 10 addresses are allowed to be added to the{" "}
+                      <i>bonderList</i> of your node. You can use the following form to
+                      update your <i>bonderList</i> configuration, a transaction will be
+                      signed with your address using your preffered wallet software, the
+                      details of the transaction will be shown in the wallet popup
+                      window before approving the transaction.
+                    </p>
+                    <p>Current wallets allowed to place bond for your node:</p>
+                      <ul>
+                        {bonderList.map((wallet, index) => {
+                          return (
+                            <li key={`${wallet}-${index}`}>
+                              {/* <a href={utils.parseBonderWallet(wallet)} target="_blank"> */}
+                              {/*   {wallet} */}
+                              {/* </a> */}
+                                {wallet}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    <div className={styles.setPrepForm}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexFlow: "column nowrap",
+                          alignSelf: "center"
+                        }}
+                      >
+                        <div className={styles.table}>
+                          {[
+                            ["bonder1", bonderForm.bonder1, "Bonder 1:"],
+                            ["bonder2", bonderForm.bonder2, "Bonder 2:"],
+                            ["bonder3", bonderForm.bonder3, "Bonder 3:"],
+                            ["bonder4", bonderForm.bonder4, "Bonder 4:"],
+                            ["bonder5", bonderForm.bonder5, "Bonder 5:"],
+                            ["bonder6", bonderForm.bonder6, "Bonder 6:"],
+                            ["bonder7", bonderForm.bonder7, "Bonder 7:"],
+                            ["bonder8", bonderForm.bonder8, "Bonder 8:"],
+                            ["bonder9", bonderForm.bonder9, "Bonder 9:"],
+                            ["bonder10", bonderForm.bonder10, "Bonder 10:"]
+                          ].map((arrItem, index) => {
+                            return (
+                              <div
+                                key={`bonder-item-${index}`}
+                                className={styles.tableRow}
+                              >
+                                <p className={styles.tableRowLabel}>
+                                  <b>{arrItem[2]}</b>
+                                </p>
+                                <input
+                                  type="text"
+                                  name={arrItem[0]}
+                                  value={arrItem[1]}
+                                  onChange={handleFormInputChange}
+                                  placeholder={bonderList[index] || ""}
+                                  className={
+                                    isValidICONAddress(arrItem[1]) === true
+                                      ? `${styles.tableRowInput} ${styles.tableRowInputValid}`
+                                      : `${styles.tableRowInput} ${styles.tableRowInputInvalid}`
+                                  }
+                                />
+                              </div>
+                            );
+                          })}
                         </div>
-                      );
-                    })}
+                        <button
+                          className={styles.button}
+                          onClick={handleBonderFormSubmit}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                    <Hr />
                   </div>
-                  <button
-                    className={styles.button}
-                    onClick={handleBonderFormSubmit}
-                  >
-                    Submit
-                  </button>
-                </div>
+                <WalletResponseModal
+                  isOpen={walletModalIsOpen}
+                  onClose={handleWalletModalOnClose}
+                  txData={txResults}
+                  walletResponse={walletResponse}
+                />
               </div>
-              <Hr />
-            </div>
-          <WalletResponseModal
-            isOpen={walletModalIsOpen}
-            onClose={handleWalletModalOnClose}
-            txData={txResults}
-            walletResponse={walletResponse}
-          />
-        </div>
-      ) : (
-        <></>
-      )
-      }
+            ) : (
+              <></>
+            )
+          }
     </div>
-  );
+  )
 }
