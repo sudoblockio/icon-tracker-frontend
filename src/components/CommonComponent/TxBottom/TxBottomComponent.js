@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
@@ -40,16 +40,14 @@ class TxBottomComponent extends Component {
       } else if (txTypeIsBonder(txType)) {
         return (
           <div className="contents">
-            <div className={customStyles.headerContainer}>
-              <TxBottomTitle
-                txType={txType}
-                listSize={Number(txData.length)}
-                totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
-                goAllTx={goAllTx}
-                fromAddr={"hello"}
-              />
-              <button>Update</button>
-            </div>
+            <CustomHeader
+              txData={txData}
+              txType={txType}
+              totalCount={totalCount}
+              goAllTx={goAllTx}
+              bondMap={this.props.bondMap}
+              addres={this.props.address}
+            />
             <div className="table-box">
               <table className={tableClassName}>
                 <thead>
@@ -141,17 +139,31 @@ function txTypeIsBonder(txType) {
   return ar.includes(txType);
 }
 
-function CustomHeader({ txData, txType, totalCount, goAllTx }) {
+function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function toggleModal() {
+    console.log('click on modal');
+    setIsModalOpen(!isModalOpen);
+  }
   return (
-    <div className={customStyles.headerContainer}>
-      <TxBottomTitle
-        txType={txType}
-        listSize={Number(txData.length)}
-        totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
-        goAllTx={goAllTx}
-        fromAddr={"hello"}
+    <>
+      <BondersModal
+        bondMap={bondMap}
+        address={address}
+        isOpen={isModalOpen}
+        onClose={toggleModal}
       />
-      <button>Update</button>
-    </div>
+      <div className={customStyles.headerContainer}>
+        <TxBottomTitle
+          txType={txType}
+          listSize={Number(txData.length)}
+          totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+          goAllTx={goAllTx}
+          fromAddr={"hello"}
+        />
+        <button onClick={toggleModal}>Update</button>
+      </div>
+    </>
   )
 }
