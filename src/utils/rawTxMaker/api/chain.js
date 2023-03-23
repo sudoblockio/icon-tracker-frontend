@@ -1,4 +1,4 @@
-// browser-js-provider/api/chain.js
+// rawTxMaker/api/chain.js
 //
 // Imports
 import { scores, makeTxCallRPCObj }  from "./helpers"
@@ -28,8 +28,8 @@ function setPrep(wallet, prepData, nid) {
     nid
   )
 }
-const chainProviderRPC = {
+const chainMethods = {
   setBonderList,
   setPrep
 }
-export default chainProviderRPC;
+export default chainMethods;

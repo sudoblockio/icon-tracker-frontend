@@ -3,9 +3,9 @@ import styles from "./bondersUpdateModal.module.css";
 import { WalletResponseModal } from "../CommonComponent/customComponents";
 import GenericModal from "../GenericModal/genericModal";
 // import {
-  // governanceProviderRPC,
-  // chainProviderRPC
-// } from "../../browser-js-provider";
+  // governanceMethods,
+  // chainMethods
+// } from "../../utils/rawTxMaker";
 import { getBonders } from "../../redux/store/iiss";
 // import NodeButlerSDK from "../utils/customLib";
 // import { v4 as uuidv4 } from "uuid";
@@ -28,7 +28,7 @@ import utils from "../../utils/utils2";
 // Constants
 // const {
 //   setPrep
-// } = chainProviderRPC;
+// } = chainMethods;
 
 const initBonderForm = {
   bonder1: "",

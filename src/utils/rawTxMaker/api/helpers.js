@@ -1,4 +1,4 @@
-// browser-js-provider/api/helpers.js
+// rawTxMaker/api/helpers.js
 //
 // Imports
 import scores from "../scores";

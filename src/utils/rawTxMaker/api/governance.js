@@ -1,4 +1,4 @@
-// browser-js-provider/api/governance.js
+// rawTxMaker/api/governance.js
 //
 // Imports
 import { scores, makeTxCallRPCObj } from "./helpers"
@@ -34,9 +34,9 @@ function rejectNetworkProposal(proposalId, prepAddress, nid) {
   return voteNetworkProposal(proposalId, "0x0", prepAddress, nid);
 };
 
-const governanceProviderRPC = {
+const governanceMethods= {
   voteNetworkProposal, 
   approveNetworkProposal,
   rejectNetworkProposal
 }
-export default governanceProviderRPC;
+export default governanceMethods;
