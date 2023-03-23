@@ -5,6 +5,7 @@ import GenericModal from "../GenericModal/genericModal";
 import {
   chainMethods
 } from "../../utils/rawTxMaker";
+import { requestJsonRpc } from "../../utils/connect";
 // import { getBonders } from "../../redux/store/iiss";
 // import NodeButlerSDK from "../utils/customLib";
 // import { v4 as uuidv4 } from "uuid";
@@ -44,7 +45,7 @@ const initialTxResultState = utils.initialTxResultState;
 
 // this NID is hardcoded to lisbon testnet until a way to fix the nid
 // depending on the network is developed
-const HARDCODED_NID_FIX_THIS = 2;
+const HARDCODED_NID_FIX_THIS = 1;
 
 const {
   // parseBonderFormInputs,
@@ -76,34 +77,38 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     handleClearInterval();
   }
 
-  function dispatchTxEvent(txData) {
-    window.dispatchEvent(
-      new CustomEvent("ICONEX_RELAY_REQUEST", {
-        detail: {
-          type: "REQUEST_JSON-RPC",
-          payload: txData
-        }
-      })
-    );
-    // open modal window to show result of wallet tx request
-    setWalletModalIsOpen(true);
-  }
+  // function dispatchTxEvent(txData) {
+  //   window.dispatchEvent(
+  //     new CustomEvent("ICONEX_RELAY_REQUEST", {
+  //       detail: {
+  //         type: "REQUEST_JSON-RPC",
+  //         payload: txData
+  //       }
+  //     })
+  //   );
+  //   // open modal window to show result of wallet tx request
+  //   setWalletModalIsOpen(true);
+  // }
 
   function handlePrepFormSubmit() {
     handleFormSubmit("prep");
   }
 
-  function handleFormSubmit(type) {
+  async function handleFormSubmit(type) {
     let inputData = null;
     let txData = null;
 
     switch (type) {
       case "prep":
         inputData = parsePrepFormInputs(prepDetailsForm);
+        console.log('inputData');
+        console.log(inputData);
 
         if (inputData == null) {
         } else {
           txData = setPrep(prepInfo.address, inputData, nid);
+          console.log('txData');
+          console.log(txData);
         }
         break;
       default:
@@ -114,7 +119,10 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     if (txData == null) {
       alert("Data for transaction is invalid");
     } else {
-      dispatchTxEvent(txData);
+      // dispatchTxEvent(txData);
+      // TODO:
+      const walletResponse = await requestJsonRpc(txData.params);
+
     }
   }
 
@@ -139,43 +147,43 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     }
   }
 
-  useEffect(() => {
-    // define wallet event listener
-    function handleWalletResponse(response) {
-      setWalletResponse(response);
-    }
+  // useEffect(() => {
+  //   // define wallet event listener
+  //   function handleWalletResponse(response) {
+  //     setWalletResponse(response);
+  //   }
 
-    function runWalletEventListener(evnt) {
-      utils.customWalletEventListener(
-        evnt,
-        handleWalletResponse,
-        null,
-        null,
-        handleWalletModalOnClose
-      );
-    }
+  //   function runWalletEventListener(evnt) {
+  //     utils.customWalletEventListener(
+  //       evnt,
+  //       handleWalletResponse,
+  //       null,
+  //       null,
+  //       handleWalletModalOnClose
+  //     );
+  //   }
 
-    // create event listener for Hana and ICONex wallets
-    window.addEventListener("ICONEX_RELAY_RESPONSE", runWalletEventListener);
+  //   // create event listener for Hana and ICONex wallets
+  //   // window.addEventListener("ICONEX_RELAY_RESPONSE", runWalletEventListener);
 
-    // return the following function to perform cleanup of the event
-    // listener on component unmount
-    return function removeCustomEventListener() {
-      window.removeEventListener(
-        "ICONEX_RELAY_RESPONSE",
-        runWalletEventListener
-      );
-    };
-  }, []);
+  //   // return the following function to perform cleanup of the event
+  //   // listener on component unmount
+  //   // return function removeCustomEventListener() {
+  //   //   window.removeEventListener(
+  //   //     "ICONEX_RELAY_RESPONSE",
+  //   //     runWalletEventListener
+  //   //   );
+  //   // };
+  // }, []);
 
-  useEffect(() => {
-    if (
-      txResults.txExists === true ||
-      countdownRef.current >= MAX_WAIT_PERIOD
-    ) {
-      handleClearInterval();
-    }
-  }, [txResults]);
+  // useEffect(() => {
+  //   if (
+  //     txResults.txExists === true ||
+  //     countdownRef.current >= MAX_WAIT_PERIOD
+  //   ) {
+  //     handleClearInterval();
+  //   }
+  // }, [txResults]);
 
   // useEffect(() => {
   //   if (walletResponse == null) {
