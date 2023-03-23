@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./bondersUpdateModal.module.css";
 import { WalletResponseModal } from "../CommonComponent/customComponents";
 import GenericModal from "../GenericModal/genericModal";
-import {
-  governanceProviderRPC,
-  chainProviderRPC
-} from "../../browser-js-provider";
+// import {
+  // governanceProviderRPC,
+  // chainProviderRPC
+// } from "../../browser-js-provider";
 import { getBonders } from "../../redux/store/iiss";
 // import NodeButlerSDK from "../utils/customLib";
 // import { v4 as uuidv4 } from "uuid";
@@ -26,9 +26,9 @@ import utils from "../../utils/utils2";
 // } = nodeButlerLib;
 
 // Constants
-const {
-  setPrep
-} = chainProviderRPC;
+// const {
+//   setPrep
+// } = chainProviderRPC;
 
 const initBonderForm = {
   bonder1: "",
@@ -43,16 +43,6 @@ const initBonderForm = {
   bonder10: ""
 };
 
-const initPrepDetailsForm = {
-  name: "",
-  email: "",
-  country: "",
-  city: "",
-  website: "",
-  details: "",
-  nodeAddress: ""
-};
-
 const MAX_WAIT_PERIOD = utils.MAX_WAIT_PERIOD;
 const initialTxResultState = utils.initialTxResultState;
 
@@ -62,16 +52,16 @@ const HARDCODED_NID_FIX_THIS = 2;
 
 const {
   parseBonderFormInputs,
-  parsePrepFormInputs,
-  samples,
+  // parsePrepFormInputs,
+  // samples,
   isValidICONAddress
 } = utils;
 
-const { 
-  DETAILS_SAMPLE: CODE,
-  SET_PREP_SAMPLE: SETPREP,
-  DETAILS_2_SAMPLE: DETAILSJSON
-} = samples;
+// const { 
+//   DETAILS_SAMPLE: CODE,
+//   SET_PREP_SAMPLE: SETPREP,
+//   DETAILS_2_SAMPLE: DETAILSJSON
+// } = samples;
 
 export default function BondersModal({ bondMap, address, isOpen, onClose }) {
   const [bonderList, setBonderList] = useState([]);
@@ -83,6 +73,7 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
   let txRef = useRef(null);
   let countdownRef = useRef(0);
   const nid = HARDCODED_NID_FIX_THIS;
+  void nid;
 
   function handleWalletModalOnClose() {
     setWalletModalIsOpen(false);

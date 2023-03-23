@@ -46,7 +46,7 @@ class TxBottomComponent extends Component {
               totalCount={totalCount}
               goAllTx={goAllTx}
               bondMap={this.props.bondMap}
-              addres={this.props.address}
+              address={this.props.address}
             />
             <div className="table-box">
               <table className={tableClassName}>
