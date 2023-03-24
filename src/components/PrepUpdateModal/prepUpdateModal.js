@@ -1,29 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./prepUpdateModal.module.css";
-import { WalletResponseModal } from "../CommonComponent/customComponents";
 import GenericModal from "../GenericModal/genericModal";
 import {
   chainMethods
 } from "../../utils/rawTxMaker";
 import { requestJsonRpc } from "../../utils/connect";
-// import { getBonders } from "../../redux/store/iiss";
-// import NodeButlerSDK from "../utils/customLib";
-// import { v4 as uuidv4 } from "uuid";
 import utils from "../../utils/utils2";
-
-// const nodeButlerLib = new NodeButlerSDK();
-// const {
-//   getPrep,
-//   parsePrepData,
-//   getBonderList,
-//   getPrepFromNB,
-//   parsePrepFromNB,
-//   getPrepLogoUrl,
-//   setBonderList,
-//   getParsedTxResult,
-//   makeTxCallRPCObj,
-//   setPrep
-// } = nodeButlerLib;
 
 // Constants
 const {
@@ -40,55 +22,23 @@ const initPrepDetailsForm = {
   nodeAddress: ""
 };
 
-const MAX_WAIT_PERIOD = utils.MAX_WAIT_PERIOD;
-const initialTxResultState = utils.initialTxResultState;
-
 // this NID is hardcoded to lisbon testnet until a way to fix the nid
 // depending on the network is developed
-const HARDCODED_NID_FIX_THIS = 1;
+const HARDCODED_NID_FIX_THIS = 2;
 
 const {
-  // parseBonderFormInputs,
   parsePrepFormInputs,
   samples
-  // isValidICONAddress
 } = utils;
 
 const { 
-  // DETAILS_SAMPLE: CODE,
   SET_PREP_SAMPLE: SETPREP
-  // DETAILS_2_SAMPLE: DETAILSJSON
 } = samples;
 
 export default function PrepModal({ prepInfo, isOpen, onClose }) {
   const [prepDetailsForm, setPrepDetailsForm] = useState(initPrepDetailsForm);
-  const [txResults, setTxResults] = useState(initialTxResultState);
-  const [walletModalIsOpen, setWalletModalIsOpen] = useState(false);
-  const [walletResponse, setWalletResponse] = useState(null);
 
-  let txRef = useRef(null);
-  let countdownRef = useRef(0);
   const nid = HARDCODED_NID_FIX_THIS;
-
-  function handleWalletModalOnClose() {
-    setWalletModalIsOpen(false);
-    setWalletResponse(null);
-    setTxResults(initialTxResultState);
-    handleClearInterval();
-  }
-
-  // function dispatchTxEvent(txData) {
-  //   window.dispatchEvent(
-  //     new CustomEvent("ICONEX_RELAY_REQUEST", {
-  //       detail: {
-  //         type: "REQUEST_JSON-RPC",
-  //         payload: txData
-  //       }
-  //     })
-  //   );
-  //   // open modal window to show result of wallet tx request
-  //   setWalletModalIsOpen(true);
-  // }
 
   function handlePrepFormSubmit() {
     handleFormSubmit("prep");
@@ -119,9 +69,10 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     if (txData == null) {
       alert("Data for transaction is invalid");
     } else {
-      // dispatchTxEvent(txData);
       // TODO:
       const walletResponse = await requestJsonRpc(txData.params);
+      console.log('wallet response');
+      console.log(walletResponse);
 
     }
   }
@@ -129,84 +80,12 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
   function handlePrepFormInputChange(evnt) {
     const { value, name } = evnt.target
     setPrepDetailsForm(prepFormState => {
-      console.log(prepFormState);
       const newState = { ...prepFormState };
       newState[name] = value;
 
       return newState;
     });
   }
-
-  function handleClearInterval() {
-    try {
-      countdownRef.current = 0;
-      clearInterval(txRef.current);
-    } catch (err) {
-      console.log("error trying to clear interval");
-      console.log(err);
-    }
-  }
-
-  // useEffect(() => {
-  //   // define wallet event listener
-  //   function handleWalletResponse(response) {
-  //     setWalletResponse(response);
-  //   }
-
-  //   function runWalletEventListener(evnt) {
-  //     utils.customWalletEventListener(
-  //       evnt,
-  //       handleWalletResponse,
-  //       null,
-  //       null,
-  //       handleWalletModalOnClose
-  //     );
-  //   }
-
-  //   // create event listener for Hana and ICONex wallets
-  //   // window.addEventListener("ICONEX_RELAY_RESPONSE", runWalletEventListener);
-
-  //   // return the following function to perform cleanup of the event
-  //   // listener on component unmount
-  //   // return function removeCustomEventListener() {
-  //   //   window.removeEventListener(
-  //   //     "ICONEX_RELAY_RESPONSE",
-  //   //     runWalletEventListener
-  //   //   );
-  //   // };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (
-  //     txResults.txExists === true ||
-  //     countdownRef.current >= MAX_WAIT_PERIOD
-  //   ) {
-  //     handleClearInterval();
-  //   }
-  // }, [txResults]);
-
-  // useEffect(() => {
-  //   if (walletResponse == null) {
-  //   } else {
-  //     if (walletResponse.isError === true) {
-  //     } else {
-  //       txRef.current = setInterval(async () => {
-  //         const txData = await getParsedTxResult(walletResponse.result);
-  //         setTxResults(txData);
-
-  //         countdownRef.current += 1;
-  //       }, 1000);
-  //     }
-  //   }
-
-  //   // returns function to clear interval on component dismount
-  //   return () => {
-  //     if (txRef.current == null) {
-  //     } else {
-  //       handleClearInterval();
-  //     }
-  //   };
-  // }, [walletResponse]);
 
   return (
     <div>
@@ -318,12 +197,6 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                 </div>
               </div>
             </div>
-            <WalletResponseModal
-              isOpen={walletModalIsOpen}
-              onClose={handleWalletModalOnClose}
-              txData={txResults}
-              walletResponse={walletResponse}
-            />
           </div>
         </GenericModal>
       ) : (
