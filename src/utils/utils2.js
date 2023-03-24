@@ -121,6 +121,7 @@ function parseBonderFormInputs(rawInputState) {
   }
   return validWallets;
 }
+
 function parsePrepFormInputs(rawInputState) {
   let result = {};
   const objKeys = Object.keys(rawInputState);
@@ -153,6 +154,7 @@ function isValidScore(scoreAddress) {
   const regex = /([cC][xX][a-fA-F0-9]{40})$/;
   return regex.test(scoreAddress);
 }
+
 function isValidICONAddress(address) {
   // check is the input is a valid ICON Wallet address
   const regex = /([hH][xX][a-fA-F0-9]{40})$/;
@@ -176,68 +178,6 @@ function parseScore(scoreApi) {
     parsedScore += "},\n";
   }
   return parsedScore;
-}
-
-function formatResponsePayload(payload) {
-  let result = { isError: null, result: null, code: null, message: null };
-
-  if (payload.code == null) {
-    // if payload.code doesnt exists then the result is not an error
-    result.isError = false;
-    result.result = payload.result;
-  } else {
-    // if payload.code exists then the result is an error
-    result.isError = true;
-    result.code = payload.code;
-    result.message = payload.message;
-  }
-
-  return result;
-}
-function customWalletEventListener(
-  evnt,
-  mainCallback,
-  preMainCallback = null,
-  postMainCallback = null,
-  postMainCallback2 = null
-) {
-  // fetch event data
-  const { type, payload } = evnt.detail;
-  // console.log("event");
-  // console.log(evnt);
-
-  // switch case for every type of event raised
-  switch (type) {
-    case "RESPONSE_JSON-RPC":
-      // catching the wallet response in the case of a JSON-RPC event raised
-
-      // if preMainCallback was defined execute before mainCallback
-      if (preMainCallback == null) {
-      } else {
-        preMainCallback(payload);
-      }
-
-      const parsedPayload = formatResponsePayload(payload);
-      const mainCallbackResponse = mainCallback(parsedPayload);
-      // execute mainCallback with delay defined by setTimeout
-      // setTimeout(async () => {
-      //   const parsedPayload = formatResponsePayload(payload);
-      //   const mainCallbackResponse = await mainCallback(parsedPayload);
-      //   console.log("mainCallback response");
-      //   console.log(mainCallbackResponse);
-      // }, 3000);
-      break;
-    case "CANCEL_JSON-RPC":
-      // if the user cancels ICONex tx and postMainCallback2 was defined
-      if (postMainCallback2 == null) {
-      } else {
-        // postMainCallback2 should be a method that takes a bool value
-        // where 'false' is a param that will close the modal window
-        postMainCallback2(false);
-      }
-      break;
-    default:
-  }
 }
 
 function getAllPrepsAddresses(prepData) {
@@ -288,10 +228,6 @@ function checkIfPrepNeedToVote(arrayOfPreps, localPrep) {
   return result;
 }
 
-function parsePrepData(prepData) {
-  //
-}
-
 const utils = {
   data,
   samples,
@@ -303,7 +239,6 @@ const utils = {
   isValidScore,
   isValidICONAddress,
   parseScore,
-  customWalletEventListener,
   getAllPrepsAddresses,
   getProposalVotes,
   MAX_WAIT_PERIOD,

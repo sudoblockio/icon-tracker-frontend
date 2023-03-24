@@ -78,7 +78,8 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
   }
 
   function handlePrepFormInputChange(evnt) {
-    const { value, name } = evnt.target
+    const { value, name } = evnt.target;
+
     setPrepDetailsForm(prepFormState => {
       const newState = { ...prepFormState };
       newState[name] = value;
