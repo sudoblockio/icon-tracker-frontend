@@ -7,12 +7,12 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-@pytest.mark.address_page
 class Test_005_Verify_voters_tab_and_all_links_redirection:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = "https://tracker.icon.community/addressvoters/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
 
+    @pytest.mark.address_page
     def test_005_Verify_voters_tab_and_all_links_redirection(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
@@ -22,7 +22,7 @@ class Test_005_Verify_voters_tab_and_all_links_redirection:
         self.logger.info("********Starting test case Test_005_Verify_voters_tab_and_all_links_redirection...*******")
         self.driver.get(ReadConfig.getExpectedUrl(1))
 
-        self.addressPageObj.click_on_rewards_tab()
+        self.addressPageObj.click_on_voters_tab()
 
         for i in range(0, 10, 1):
             self.addressPageObj.verify_all_links_in_voters_tab_works(count=i)

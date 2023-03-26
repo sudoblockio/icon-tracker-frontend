@@ -9,11 +9,11 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-@pytest.mark.address_page
 class Test_007_Verify_bonders_tab_and_all_links:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
+    @pytest.mark.address_page
     def test_007_Verify_bonders_tab_and_all_links(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)

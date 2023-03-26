@@ -32,3 +32,7 @@ class ReadConfig:
     def getAddressUrl():
         return config.get('address url', 'address_url')
 
+    @staticmethod
+    def getContractMainUrl():
+        return config.get('contract url', 'contract_main_url')
+

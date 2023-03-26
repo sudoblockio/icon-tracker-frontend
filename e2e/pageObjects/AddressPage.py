@@ -26,6 +26,8 @@ class AddressPage:
     address_bonded_table = "//li[contains(text(),'Bonded')]"
     address_transaction_detail_value = "//*[contains(text(),'%s')]"
     address_transaction_new_table = "//a//span[@class='ellipsis']"
+    address_delegation_cta = "//li[contains(text(),'Delegations')]"
+    address_delegation_table = "//td[@class='on']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -185,7 +187,7 @@ class AddressPage:
                 assert False
         finally:
             self.driver.get(ReadConfig.getExpectedUrl(1))
-            self.click_on_rewards_tab()
+            self.click_on_voters_tab()
 
     def click_on_rewards_tab(self):
         """
@@ -302,3 +304,32 @@ class AddressPage:
         elif current_handle == total_windows:
             assert True
 
+    def click_on_delegation_tab(self):
+        """
+            click_on_delegation_tab
+            -this method is used to click on the delegations tab
+        """
+        self.logger.info(">>trying to click on delegations tab")
+        AutomationUtils.wait_for_element_to_load(self, self.address_delegation_cta)
+        self.driver.find_element("xpath", self.address_delegation_cta).click()
+        self.logger.info(">>clicked on delegations tab")
+
+    def verify_all_links_in_delegation_table(self, count):
+        """
+                verify_all_links_in_delegation_table
+                -this method is used to verify all the links present in delegations tab is working as expected in
+                new address url https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
+        """
+
+        self.logger.info(">>verifying all the links in delegations tab")
+        AutomationUtils.wait_for_element_to_load(self, self.address_delegation_table)
+        items = self.driver.find_elements("xpath", self.address_delegation_table)
+        var = items[count].text
+        self.logger.info(">>delegation value " + var)
+        items[count].click()
+        if var in self.driver.current_url:
+            assert True
+        else:
+            AutomationUtils.log_error(self, 'redirected url is not as expected'
+                                      , 'redirected_url_is_not_as_expected_transaction.png')
+            assert False
