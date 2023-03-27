@@ -32,3 +32,4 @@ yarn-error.log*
 .idea
 .vimrc
 *.swp*
+.eslintrc*

@@ -1,0 +1,131 @@
+/* styles/appSection.module.css */
+.main {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.main > h2 {
+  margin: 5px;
+}
+
+.topSection {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 800px;
+  align-self: center;
+}
+.topSectionInfo,
+.modalContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+.topSectionInfo > p,
+.bottomSection p {
+  margin: 2px 0px;
+}
+
+.topSectionLogo {
+  max-width: 150px;
+}
+
+.bottomSection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  /* align-items: flex-start; */
+}
+.bottomSectionRow:first-child {
+  flex: 2;
+  max-width: 200px;
+}
+.bottomSectionRow:nth-child(2) {
+  flex: 1;
+  max-width: 400px;
+}
+.bottomSectionRow {
+  padding: 10px;
+}
+.defaultSection {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.codeBlockContainer2 {
+  align-self: center;
+  /* width: 100%; */
+  max-width: 80%;
+  padding: 10px;
+  font-size: 0.6rem;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  margin: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-x: scroll;
+}
+.button {
+  margin: 4px;
+  height: 30px;
+  width: 80px;
+}
+.setPrepForm {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.setPrepForm .button {
+  align-self: flex-end;
+}
+.table {
+  display: flex;
+  flex-flow: column nowrap;
+  /* align-self: center; */
+  /* justify-content: center; */
+  border: 1px solid #d6d3d1;
+  padding: 10px;
+}
+.tableRow {
+  justify-content: space-between;
+  margin: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.tableRowLabel {
+  margin: 0px 4px;
+}
+.tableRowInput {
+  border-radius: 4px;
+}
+.tableRowInputValid {
+  /* border: 1px solid #d6d3d1; */
+  border: 1px solid green;
+  width: 60%;
+}
+.tableRowInputInvalid {
+  border: 1px solid red;
+  width: 60%;
+}
+
+/* .tableSetPrep > * { */
+/*   /1* flex: 1; *1/ */
+/* } */
+/* .tableSetPrep tr { */
+/*   display: flex; */
+/*   flex-flow: column nowrap; */
+/*   align-items: flex-end; */
+/* } */
+/* .tableSetPrep > thead { */
+/*   margin-right: 5px; */
+/* } */
