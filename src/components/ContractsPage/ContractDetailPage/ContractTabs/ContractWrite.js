@@ -1,29 +1,26 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, Component } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
+import styles from "./ContractWrite.module.css";
 
-class ContractWrite extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      params: {}
-    };
-  }
+function ContractWrite({ contract, contractWriteInfo, icxCall }) {
+  const [paramsState, setParamsState] = useState({});
+  const { data } = contract;
+  const { address: address } = data;
+  const { loading, funcList, funcOutputs, error } = contractWriteInfo;
 
-  handleChange = e => {
+  function handleChange(e) {
     const { name, value } = e.target;
-    this.setState({
-      params: {
-        ...this.state.params,
-        [name]: value
-      }
-    });
+    setParamsState(state => {
+      const newState = { ...state, [name]: value};
+      return newState;
+    })
   };
 
-  handleClick = (address, method, inputs, index) => {
+  function handleClick(address, method, inputs, index) {
     console.log(address, "params address");
-    const params = this.makeParams(method, inputs);
-    this.props.icxCall({
+    const params = makeParams(method, inputs);
+    icxCall({
       address,
       method,
       params,
@@ -31,8 +28,8 @@ class ContractWrite extends Component {
     });
   };
 
-  makeParams = (funcName, inputs) => {
-    const { params } = this.state;
+  function makeParams(funcName, inputs) {
+    const { params } = paramsState;
     const result = {};
     inputs.forEach(item => {
       const name = item["name"];
@@ -43,13 +40,6 @@ class ContractWrite extends Component {
     });
     return result;
   };
-
-  render() {
-    const { params } = this.state;
-    const { contract, contractWriteInfo } = this.props;
-    const { data } = contract;
-    const { address: address } = data;
-    const { loading, funcList, funcOutputs, error } = contractWriteInfo;
 
     return (
       <div className="contents">
@@ -79,8 +69,8 @@ class ContractWrite extends Component {
                           {
                             <Inputs
                               inputs={inputs}
-                              params={params}
-                              handleChange={this.handleChange}
+                              params={paramsState}
+                              handleChange={handleChange}
                               funcName={funcName}
                             />
                           }
@@ -88,7 +78,7 @@ class ContractWrite extends Component {
                             key="button"
                             className="btn-type-query"
                             onClick={() => {
-                              this.handleClick(
+                              handleClick(
                                 address,
                                 funcName,
                                 inputs,
@@ -125,7 +115,6 @@ class ContractWrite extends Component {
       </div>
     );
   }
-}
 
 function isEmptyOutput(outputs) {
   if (!outputs) {
@@ -147,7 +136,7 @@ function getOutValue(type, value) {
   }
 }
 
-const Inputs = ({ funcName, inputs, params, handleChange }) => {
+function Inputs({ funcName, inputs, params, handleChange }) {
   return inputs.map((item, i) => {
     const name = item["name"];
     const type = item["type"];
@@ -168,7 +157,7 @@ const Inputs = ({ funcName, inputs, params, handleChange }) => {
   });
 };
 
-const OutputTypes = ({ func }) => {
+function OutputTypes({ func }) {
   const list = func["outputs"];
   return list.map((output, index) => {
     const type = output["type"];
@@ -180,7 +169,7 @@ const OutputTypes = ({ func }) => {
   });
 };
 
-const OutputResults = ({ func, outputs }) => {
+function OutputResults({ func, outputs }) {
   const name = func["name"];
   const { valueArray, error } = outputs;
   return (
@@ -203,7 +192,7 @@ const OutputResults = ({ func, outputs }) => {
   );
 };
 
-const Outputs = ({ func, outputs, index }) => {
+function Outputs({ func, outputs, index }) {
   const { valueArray, error } = outputs;
   if (error) {
     return (
