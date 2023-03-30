@@ -92,7 +92,6 @@ class ContractTabs extends Component {
                 <ContractWrite
                   contract={contract}
                   contractWriteInfo={contractWriteInfo}
-                  icxCall={this.props.icxCall}
                 />
               );
             case 6:
