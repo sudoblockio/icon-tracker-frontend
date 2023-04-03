@@ -51,7 +51,15 @@ function ContractRead({ contract, contractReadInfo, icxCall }) {
       />
       <div className="code-box read">
         <div className="title-group">
-          <span className="title">Read contract information</span>
+          {activeSection === 0 ? (
+            <span className="title">Read/Write Contract information</span>
+          ) : activeSection === 1 ? (
+            <span className="title">Read contract methods</span>
+          ) : activeSection === 2 ? (
+            <span className="title">Write contract events</span>
+          ) : (
+            <span className="title">Read/Write Contract information</span>
+          )}
         </div>
         {loading ? (
           <LoadingComponent height="322px" />
