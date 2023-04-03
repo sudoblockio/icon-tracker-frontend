@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
+import ButtonSet from "./ButtonSet";
 import customStyles from "./ContractRead.module.css";
 
 function ContractRead({ contract, contractReadInfo, icxCall }) {
   const [params, setParams] = useState({});
+  const [activeSection, setActiveSection] = useState(0);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -43,6 +45,10 @@ function ContractRead({ contract, contractReadInfo, icxCall }) {
 
   return (
     <div className="contents">
+      <ButtonSet
+        activeButton={activeSection}
+        handleActiveChange={setActiveSection}
+      />
       <div className="code-box read">
         <div className="title-group">
           <span className="title">Read contract information</span>
