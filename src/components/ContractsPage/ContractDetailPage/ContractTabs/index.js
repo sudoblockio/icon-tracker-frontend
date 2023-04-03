@@ -83,13 +83,6 @@ function ContractTabs(props) {
         );
       case 5:
         return (
-          <ContractWrite
-            contract={contract}
-            contractWriteInfo={contractWriteInfo}
-          />
-        );
-      case 6:
-        return (
           <ContractEvents
             txData={contractEvents}
             goAllTx={() => {
