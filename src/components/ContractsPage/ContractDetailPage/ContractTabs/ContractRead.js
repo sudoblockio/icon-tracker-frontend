@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
 import ButtonSet from "./ButtonSet";
 import customStyles from "./ContractRead.module.css";
 
-function ContractRead({ contract, contractReadInfo, icxCall }) {
+function ContractRead({
+  contract,
+  contractReadInfo,
+  icxCall
+}) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
 
@@ -43,6 +47,11 @@ function ContractRead({ contract, contractReadInfo, icxCall }) {
   const { address } = data;
   const { loading, funcList, funcOutputs, error } = contractReadInfo;
 
+  useEffect(() => {
+    console.log("contractReadInfo and contractWriteInfo");
+    console.log(contractReadInfo);
+    // console.log(contractWriteInfo);
+  }, [contractReadInfo]);
   return (
     <div className="contents">
       <ButtonSet

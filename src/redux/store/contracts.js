@@ -245,6 +245,14 @@ const initialState = {
   contractReadInfo: {
     loading: false,
     funcList: [],
+    writeFuncList: [],
+    funcOutputs: [],
+    funcError: [],
+    error: ""
+  },
+  contractWriteInfo: {
+    loading: false,
+    funcList: [],
     funcOutputs: [],
     funcError: [],
     error: ""
@@ -440,33 +448,33 @@ export function contractsReducer(state = initialState, action) {
           error: action.error
         }
       };
-    case actionTypes.writeContractInformation:
-      return {
-        ...state,
-        contractWriteInfo: {
-          ...state.contractWriteInfo,
-          loading: true,
-          error: ""
-        }
-      };
-    case actionTypes.writeContractInformationFulfilled:
-      return {
-        ...state,
-        contractWriteInfo: {
-          ...action.payload,
-          loading: false,
-          error: ""
-        }
-      };
-    case actionTypes.writeContractInformationRejected:
-      return {
-        ...state,
-        contractWriteInfo: {
-          ...state.contractWriteInfo,
-          loading: false,
-          error: action.error
-        }
-      };
+    // case actionTypes.writeContractInformation:
+    //   return {
+    //     ...state,
+    //     contractWriteInfo: {
+    //       ...state.contractWriteInfo,
+    //       loading: true,
+    //       error: ""
+    //     }
+    //   };
+    // case actionTypes.writeContractInformationFulfilled:
+    //   return {
+    //     ...state,
+    //     contractWriteInfo: {
+    //       ...action.payload,
+    //       loading: false,
+    //       error: ""
+    //     }
+    //   };
+    // case actionTypes.writeContractInformationRejected:
+    //   return {
+    //     ...state,
+    //     contractWriteInfo: {
+    //       ...state.contractWriteInfo,
+    //       loading: false,
+    //       error: action.error
+    //     }
+    //   };
 
     default: {
       return state;

@@ -78,6 +78,7 @@ function ContractTabs(props) {
           <ContractRead
             contract={contract}
             contractReadInfo={contractReadInfo}
+            contractWriteInfo={contractWriteInfo}
             icxCall={icxCall}
           />
         );
