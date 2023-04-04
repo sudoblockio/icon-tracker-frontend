@@ -172,9 +172,9 @@ const actionTypes = {
   readContractInformationFulfilled: 'READ_CONTRACT_INFORMATION_FULFILLED',
   readContractInformationRejected: 'READ_CONTRACT_INFORMATION_REJECTED',
 
-  writeContractInformation: 'WRITE_CONTRACT_INFORMATION',
-  writeContractInformationFulfilled: 'WRITE_CONTRACT_INFORMATION_FULFILLED',
-  writeContractInformationRejected: 'WRITE_CONTRACT_INFORMATION_REJECTED',
+  // writeContractInformation: 'WRITE_CONTRACT_INFORMATION',
+  // writeContractInformationFulfilled: 'WRITE_CONTRACT_INFORMATION_FULFILLED',
+  // writeContractInformationRejected: 'WRITE_CONTRACT_INFORMATION_REJECTED',
 
   icxCall: 'ICX_CALL',
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
