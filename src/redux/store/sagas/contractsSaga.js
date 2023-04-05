@@ -320,8 +320,8 @@ export function* readContractInformationFunc(action) {
     }
 
     const abiData = score;
-    console.log('abidata read');
-    console.log(abiData);
+    // console.log('abidata read');
+    // console.log(abiData);
     const readOnlyFunc = (abiData || []).filter(
       func => func["type"] === "function" && func["readonly"] === "0x1"
     );
@@ -375,54 +375,3 @@ export function* readContractInformationFunc(action) {
     yield put({ type: AT.readContractInformationRejected, error: e.message });
   }
 }
-
-// export function* writeContractInformationFunc(action) {
-//   try {
-//     const score = yield call(ICX_GET_CONTRACT, action.payload.address);
-
-//     if (score.length === 0) {
-//       const { message } = score.error;
-//       throw new Error(message);
-//     }
-
-//     const abiData = score;
-//     console.log('abidata');
-//     console.log(abiData);
-//     const writeFunc = (abiData || []).filter(
-//       func => func["type"] === "function" && func["readonly"] !== "0x1"
-//     );
-//     const { address } = action.payload;
-//     const funcList = [...writeFunc];
-//     const _funcOutputs = yield all(
-//       writeFunc.map(func => {
-//         return "";
-//       })
-//     );
-//     const funcOutputs = [];
-//     _funcOutputs.forEach(output => {
-//       if (output === "") {
-//         funcOutputs.push({
-//           valueArray: [],
-//           error: ""
-//         });
-//       } else if (output.status === 200) {
-//         const { result } = output.data;
-//         const valueArray = [result];
-//         funcOutputs.push({
-//           valueArray,
-//           error: ""
-//         });
-//       } else {
-//         const { message } = output.error;
-//         funcOutputs.push({
-//           valueArray: [],
-//           error: message
-//         });
-//       }
-//     });
-//     const payload = { funcList, funcOutputs };
-//     yield put({ type: AT.writeContractInformationFulfilled, payload });
-//   } catch (e) {
-//     yield put({ type: AT.writeContractInformationRejected, error: e.message });
-//   }
-// }

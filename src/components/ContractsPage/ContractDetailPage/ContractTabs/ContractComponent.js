@@ -4,13 +4,14 @@ import { LoadingComponent } from "../../../../components";
 import ButtonSet from "./ButtonSet";
 import customStyles from "./ContractComponent.module.css";
 
-function ContractComponent({
-  contract,
-  contractReadWriteInfo,
-  icxCall
-}) {
+function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
+  // TODO: refactor code to make component use this state
+  // instead of contractReadWriteInfo
+  const [contractMethodsState, setContractMethodsState] = useState(
+    createContractMethodsState(contractReadWriteInfo)
+  );
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -51,7 +52,10 @@ function ContractComponent({
     console.log("contractReadWriteInfo and contractWriteInfo");
     console.log(contractReadWriteInfo);
     // console.log(contractWriteInfo);
+    console.log('contract method state');
+    console.log(contractMethodsState);
   }, [contractReadWriteInfo]);
+
   return (
     <div className="contents">
       <ButtonSet
@@ -93,6 +97,32 @@ function ContractComponent({
       </div>
     </div>
   );
+}
+
+function createContractMethodsState(contractReadWriteInfo) {
+  //
+  const { funcList, funcOutputs, writeFuncList } = contractReadWriteInfo;
+  const result = {};
+  funcList.forEach((func, index) => {
+    const funcName = func["name"];
+    const inputs = { ...func };
+    const outputs = funcOutputs[index];
+    result[funcName] = {
+      inputs,
+      outputs
+    };
+  });
+  writeFuncList.forEach((func, index) => {
+    const funcName = func["name"];
+    const inputs = { ...func };
+    const outputs = { error: "", valueArray: [] };
+    result[funcName] = {
+      inputs,
+      outputs
+    };
+  });
+
+  return result;
 }
 
 function WriteMethodItems({
