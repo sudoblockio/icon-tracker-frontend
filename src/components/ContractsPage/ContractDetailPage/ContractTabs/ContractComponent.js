@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
 import ButtonSet from "./ButtonSet";
-import customStyles from "./ContractRead.module.css";
+import customStyles from "./ContractComponent.module.css";
 
-function ContractRead({
+function ContractComponent({
   contract,
-  contractReadInfo,
+  contractReadWriteInfo,
   icxCall
 }) {
   const [params, setParams] = useState({});
@@ -45,13 +45,13 @@ function ContractRead({
 
   const { data } = contract;
   const { address } = data;
-  const { loading, funcList, funcOutputs, error } = contractReadInfo;
+  const { loading, funcList, funcOutputs, error } = contractReadWriteInfo;
 
   useEffect(() => {
-    console.log("contractReadInfo and contractWriteInfo");
-    console.log(contractReadInfo);
+    console.log("contractReadWriteInfo and contractWriteInfo");
+    console.log(contractReadWriteInfo);
     // console.log(contractWriteInfo);
-  }, [contractReadInfo]);
+  }, [contractReadWriteInfo]);
   return (
     <div className="contents">
       <ButtonSet
@@ -79,7 +79,7 @@ function ContractRead({
                 <li>{error}</li>
               </ul>
             ) : (
-              <MethodItems
+              <ReadMethodItems
                 funcList={funcList}
                 funcOutputs={funcOutputs}
                 params={params}
@@ -95,7 +95,7 @@ function ContractRead({
   );
 }
 
-function MethodItems({
+function WriteMethodItems({
   funcList,
   funcOutputs,
   params,
@@ -108,7 +108,7 @@ function MethodItems({
       {funcList.map((func, index) => {
         return (
           <div key={`MethodItem-${index}`}>
-            <MethodItem
+            <WriteMethodItem
               func={func}
               index={index}
               funcOutputs={funcOutputs}
@@ -124,7 +124,84 @@ function MethodItems({
   );
 }
 
-function MethodItem({
+function WriteMethodItem({
+  func,
+  index,
+  funcOutputs,
+  params,
+  handleChange,
+  handleClick,
+  address
+}) {
+  const outputs = funcOutputs[index];
+  const inputs = func["inputs"];
+  const isQuery = inputs.length > 0;
+  const funcName = func["name"];
+  return isQuery ? (
+    <>
+      <li key="li0" className="input">
+        <span className="label">
+          {index + 1}. {funcName} >{" "}
+        </span>
+        <Inputs
+          inputs={inputs}
+          params={params}
+          handleChange={handleChange}
+          funcName={funcName}
+        />
+        <button
+          key="button"
+          className="btn-type-query"
+          onClick={() => {
+            handleClick(address, funcName, inputs, index);
+          }}
+        >
+          Query
+        </button>
+      </li>
+      ,
+      <li key="li1" className="result">
+        <OutputTypes func={func} />
+        {!isEmptyOutput(outputs) && (
+          <OutputResults func={func} outputs={outputs} />
+        )}
+      </li>
+    </>
+  ) : (
+    <Outputs key={index} func={func} outputs={outputs} index={index} />
+  );
+}
+
+function ReadMethodItems({
+  funcList,
+  funcOutputs,
+  params,
+  handleChange,
+  handleClick,
+  address
+}) {
+  return (
+    <ul className="list">
+      {funcList.map((func, index) => {
+        return (
+          <div key={`MethodItem-${index}`}>
+            <ReadMethodItem
+              func={func}
+              index={index}
+              funcOutputs={funcOutputs}
+              params={params}
+              handleChange={handleChange}
+              handleClick={handleClick}
+              address={address}
+            />
+          </div>
+        );
+      })}
+    </ul>
+  );
+}
+
+function ReadMethodItem({
   func,
   index,
   funcOutputs,
@@ -288,4 +365,4 @@ function Outputs({ func, outputs, index }) {
   }
 }
 
-export default ContractRead;
+export default ContractComponent;

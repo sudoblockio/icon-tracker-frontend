@@ -4,7 +4,7 @@ import ContractTransactions from "./ContractTransactions";
 import ContractInternalTransactions from "./ContractInternalTransactions";
 import ContractTokenTransfers from "./ContractTokenTransfers";
 import ContractCode from "./ContractCode";
-import ContractRead from "./ContractRead";
+import ContractComponent from "./ContractComponent";
 import ContractEvents from "./ContractEvents";
 import ContractWrite from "./ContractWrite";
 import { NoBox, TabTable } from "../../../../components";
@@ -75,10 +75,10 @@ function ContractTabs(props) {
         return <ContractCode contract={contract} contractAbi={contractAbi} />;
       case 4:
         return (
-          <ContractRead
+          <ContractComponent
             contract={contract}
-            contractReadInfo={contractReadInfo}
-            contractWriteInfo={contractWriteInfo}
+            contractReadWriteInfo={contractReadInfo}
+            // contractWriteInfo={contractWriteInfo}
             icxCall={icxCall}
           />
         );
