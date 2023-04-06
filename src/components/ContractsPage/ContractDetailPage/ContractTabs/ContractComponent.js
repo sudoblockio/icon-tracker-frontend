@@ -10,9 +10,6 @@ const { ReadMethodItems, ReadMethodItems2 } = MiscComponents;
 function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
-  const [contractMethodsState, setContractMethodsState] = useState(
-    createContractMethodsState(contractReadWriteInfo)
-  );
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -47,8 +44,14 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
 
   const { data } = contract;
   const { address } = data;
+  //TODO: after finishing testing and refactoring we can remove 
+  // funcList and funcOutputs, then we can rename the methods with 
+  // names ending in "2" (readMethodItems2, createContractMethodsState2, etc)
+  // to the original names (readMethodItems, createContractMethodsState, etc)
   const { loading, funcList, funcOutputs, error } = contractReadWriteInfo;
+  const contractMethodsState = createContractMethodsState(contractReadWriteInfo)
 
+  //TODO: remove this useEffect after testing and refactoring
   useEffect(() => {
     console.log("contractReadWriteInfo and contractWriteInfo");
     console.log(contractReadWriteInfo);
