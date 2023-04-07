@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { IconConverter, IconAmount } from "icon-sdk-js";
 
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from "../../../components";
+import PrepUpdateModal from "../../../components/PrepUpdateModal/prepUpdateModal";
 import {
   numberWithCommas,
   convertNumberToText,
@@ -20,6 +21,8 @@ import { prepList, getPRepsRPC, getBalanceOf, getBalance, getStake, getBondList 
 import { contractDetail } from "../../../redux/store/contracts";
 import { addressTokens } from "../../../redux/store/addresses";
 
+import compStyles from "./AddressInfo.module.css";
+
 const _isNotificationAvailable = NotificationManager.available();
 
 function AddressInfo(props) {
@@ -35,6 +38,7 @@ function AddressInfo(props) {
   const [addrBond, setAddrBond] = useState("");
 
   const [tokens, setTokens] = useState([]);
+  const [isPrepModalOpen, setIsPrepModalOpen] = useState(false);
 
   const { wallet, walletAddress } = props;
   const { loading, data, error } = wallet;
@@ -67,6 +71,10 @@ function AddressInfo(props) {
   };
   let tokenName = {};
   let tokenMap = {};
+
+  function togglePrepModal() {
+    setIsPrepModalOpen(!isPrepModalOpen);
+  };
 
   const getAddrStake = async (addr) => {
     const res = await getStake(addr);
@@ -175,6 +183,10 @@ function AddressInfo(props) {
     setShowNode("table-row");
   };
 
+  function enableUpdateButton() {
+    //
+  }
+
   useEffect(() => {
     getContractName();
     getTokens();
@@ -210,8 +222,14 @@ function AddressInfo(props) {
 
       let totalVotes;
       !Number(delegated) ? (totalVotes = 0) : (totalVotes = Number(Number(delegated) / Number(totalVoted)));
+
       return (
         <div className="screen0">
+            <PrepUpdateModal
+              prepInfo={data.prep}
+              isOpen={isPrepModalOpen}
+              onClose={togglePrepModal}
+            />
           <div className="wrap-holder">
             {isConnected ? (
               <p className="title">
@@ -288,6 +306,14 @@ function AddressInfo(props) {
                             );
                           })}
 
+                          <span
+                            className={compStyles.buttonUpdatePrep}
+                          >
+                            <button 
+                              disabled={!is_prep || !isConnected}
+                              onClick={togglePrepModal}
+                            >Update</button>
+                          </span>
                           <span
                             className={`active ${
                               node_state === "Synced"
