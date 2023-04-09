@@ -1,0 +1,50 @@
+.writeMethodsMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.writeMethodContainer {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.writeMethodContainerClosed, .writeMethodTitle {
+  height: 40px;
+}
+
+.writeMethodContainerOpen {
+  height: auto;
+}
+
+.writeMethodTitle {
+  min-height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background-color: #efefef;
+  padding: 0 10px;
+}
+
+.writeMethodTitleLeft em {
+  font-style: italic;
+}
+/* .writeMethodTitle > p { */
+/*   margin: 0; */
+/*   padding: 0; */
+  /* font-size: 20px; */
+  /* font-weight: 600; */
+/* } */
+
+.writeMethodTitleIcon {
+  width: 40px;
+}
