@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import BigNumber from "bignumber.js";
 import styles from "./MiscContractComponents.module.css";
 
-
 function ReadMethodItems({
   methods,
   params,
@@ -136,13 +135,7 @@ function Inputs({ methodName, inputs, params, handleChange }) {
   });
 }
 
-function InputItem({
-  methodName,
-  params,
-  handleChange,
-  item,
-  index
-}) {
+function InputItem({ methodName, params, handleChange, item, index }) {
   const name = item["name"];
   const type = item["type"];
   const inputName = `${methodName}_${name}_${type}`;
@@ -341,7 +334,7 @@ function WriteMethodItem({
 //               {!!contractWriteInfo.error ? (
 //                 <div>{contractWriteInfo.error}</div>
 //               ) : (
-//                 <ListOfWriteMethods 
+//                 <ListOfWriteMethods
 //                 arrayOfMethods={contractWriteInfo.funcList}
 //                 />
 //               )}
@@ -387,9 +380,15 @@ function CollapsibleMethodItem({
 }) {
   const [valueState, setValueState] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const outputType = methodInput.readonly != null && methodInput.readonly === "0x1" ? methodInput.outputs[0].type : "";
+  const outputType =
+    methodInput.readonly != null && methodInput.readonly === "0x1"
+      ? methodInput.outputs[0].type
+      : "";
   // const outputType = methodInput.readonly != null && methodInput.readonly === "0x1" ? "foo" : "bar";
-  const parsedMethodOutput = methodInput.readonly != null && methodInput.readonly === "0x1" ? JSON.stringify(methodOutput.valueArray[0]) : "";
+  const parsedMethodOutput =
+    methodInput.readonly != null && methodInput.readonly === "0x1"
+      ? JSON.stringify(methodOutput.valueArray[0])
+      : "";
 
   function handleChange(e) {
     const { value } = e.target;
@@ -408,12 +407,13 @@ function CollapsibleMethodItem({
           : `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
       }
     >
-      <div
-        className={styles.writeMethodTitle}
-        onClick={toggleOpen}
-      >
+      <div className={styles.writeMethodTitle} onClick={toggleOpen}>
         <div className={styles.writeMethodTitleLeft}>
-          <span>{index + 1}.</span> <span>{methodName}</span> <span><em>{outputType}</em></span>{" "}<span>{parsedMethodOutput}</span>
+          <span>{index + 1}.</span> <span>{methodName}</span>{" "}
+          <span>
+            <em>{outputType}</em>
+          </span>{" "}
+          <span>{parsedMethodOutput}</span>
         </div>
         <div className={styles.writeMethodTitleLeft}>
           <svg
@@ -432,31 +432,37 @@ function CollapsibleMethodItem({
           </svg>
         </div>
       </div>
-      <div className={styles.writeMethodBody}>
-        {methodInput.inputs.map((input, index2) => {
-          return (
-            <div
-              className={styles.writeMethodBodyInput}
-              key={`writeMethod-element-${index2}`}
-            >
-              <span className={styles.writeMethodBodyInputName}>
-                {methodName}
-              </span>
-              <span className={styles.writeMethodBodyInputType}>
-                <input
-                  type="text"
-                  className="over"
-                  key={`writeMethod-${index2}`}
-                  name={`${methodName}_${input.name}_${input.type}`}
-                  placeholder={input.type}
-                  value={valueState}
-                  onChange={handleChange}
-                />
-              </span>
-            </div>
-          );
-        })}
-      </div>
+      {methodInput.inputs.length > 0 && (
+        <div className={styles.writeMethodBody}>
+          {methodInput.inputs.map((input, index2) => {
+            return (
+              <div
+                className={styles.writeMethodBodyInput}
+                key={`writeMethod-element-${index2}`}
+              >
+                <div className={styles.writeMethodBodyInputName}>
+                  {methodName}
+                </div>
+                <div className={styles.writeMethodBodyInputType}>
+                  <input
+                    type="text"
+                    className="over"
+                    key={`writeMethod-${index2}`}
+                    name={`${methodName}_${input.name}_${input.type}`}
+                    placeholder={`${input.name} ${input.type}`}
+                    value={valueState}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            );
+          })}
+          <div className={styles.methodInputButtonContainer}>
+            <button
+              className={styles.methodInputButton}>Query</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -471,7 +477,7 @@ function ReadMethodItems2({
   return (
     <ul className="list">
       {methods.readOnlyMethodsNameArray.map((methodName, index) => {
-        console.log('methods[methodName]');
+        console.log("methods[methodName]");
         console.log(methods[methodName]);
         return (
           <div key={`MethodItem-${methodName}-${index}`}>

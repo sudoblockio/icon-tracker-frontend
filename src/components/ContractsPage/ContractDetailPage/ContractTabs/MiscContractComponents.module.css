@@ -48,3 +48,22 @@
 .writeMethodTitleIcon {
   width: 40px;
 }
+
+.writeMethodBody {
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.methodInputButtonContainer {
+  margin: 10px 0;
+  align-self: flex-start;
+}
+.methodInputButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  font-weight: bold;
+}
