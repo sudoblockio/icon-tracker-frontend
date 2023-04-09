@@ -14,7 +14,6 @@ class Test_021_Verify_events_main_page_links_redirection:
     logger = LogGen.loggen()
 
     @pytest.mark.contract_page
-    @pytest.mark.standalone
     def test_021_Verify_events_main_page_links_redirection(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
