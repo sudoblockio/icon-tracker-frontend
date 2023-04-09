@@ -5,9 +5,13 @@ import ButtonSet from "./ButtonSet";
 import MiscComponents from "./MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 
-const { ReadMethodItems, ReadMethodItems2 } = MiscComponents;
+const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
+function ContractComponent({
+  contract,
+  contractReadWriteInfo,
+  icxCall
+}) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
 
@@ -44,11 +48,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
 
   const { data } = contract;
   const { address } = data;
-  //TODO: after finishing testing and refactoring we can remove 
-  // funcList and funcOutputs, then we can rename the methods with 
-  // names ending in "2" (readMethodItems2, createContractMethodsState2, etc)
-  // to the original names (readMethodItems, createContractMethodsState, etc)
-  const { loading, funcList, funcOutputs, error } = contractReadWriteInfo;
+  const { loading, error } = contractReadWriteInfo;
   const contractMethodsState = createContractMethodsState(contractReadWriteInfo)
 
   //TODO: remove this useEffect after testing and refactoring
@@ -66,44 +66,103 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
         handleActiveChange={setActiveSection}
       />
       <div className="code-box read">
-        <div className="title-group">
           {activeSection === 0 ? (
-            <span className="title">Read/Write Contract information</span>
-          ) : activeSection === 1 ? (
-            <span className="title">Read contract methods</span>
-          ) : activeSection === 2 ? (
-            <span className="title">Write contract events</span>
+        <div className="title-group">
+          <span 
+            className="title">Read/Write Contract methods
+          </span>
+          {loading ? (
+            <LoadingComponent height="322px" />
           ) : (
-            <span className="title">Read/Write Contract information</span>
+            <div className="scroll">
+              {!!error ? (
+                <ul className="list">
+                  <li>{error}</li>
+                </ul>
+              ) : (
+                <ReadMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClick}
+                  address={address}
+                />
+              )}
+            </div>
           )}
         </div>
-        {loading ? (
-          <LoadingComponent height="322px" />
-        ) : (
-          <div className="scroll">
-            {!!error ? (
-              <ul className="list">
-                <li>{error}</li>
-              </ul>
+          ) : activeSection === 1 ? (
+        <div className="title-group">
+            <span className="title">Read contract methods</span>
+            {loading ? (
+              <LoadingComponent height="322px" />
             ) : (
-              <ReadMethodItems2
-                methods={contractMethodsState}
-                params={params}
-                handleChange={handleChange}
-                handleClick={handleClick}
-                address={address}
-              />
-              // <ReadMethodItems
-              // funcList={funcList}
-              // funcOutputs={funcOutputs}
-              // params={params}
-              // handleChange={handleChange}
-              // handleClick={handleClick}
-              // address={address}
-              // />
+              <div className="scroll">
+                {!!error ? (
+                  <ul className="list">
+                    <li>{error}</li>
+                  </ul>
+                ) : (
+                  <ReadMethodItems
+                    methods={contractMethodsState}
+                    params={params}
+                    handleChange={handleChange}
+                    handleClick={handleClick}
+                    address={address}
+                  />
+                )}
+              </div>
             )}
-          </div>
-        )}
+        </div>
+          ) : activeSection === 2 ? (
+        <div className="title-group">
+            <span className="title">Write contract methods</span>
+            {loading ? (
+              <LoadingComponent height="322px" />
+            ) : (
+              <div className="scroll">
+                {!!error ? (
+                  <ul className="list">
+                    <li>{error}</li>
+                  </ul>
+                ) : (
+                  <WriteMethodItems
+                    methods={contractMethodsState}
+                    params={params}
+                    handleChange={handleChange}
+                    handleClick={handleClick}
+                    address={address}
+                  />
+                )}
+              </div>
+            )}
+        </div>
+          ) : (
+        <div className="title-group">
+            <span
+              className="title">Read/Write Contract methods
+            </span>
+            {loading ? (
+              <LoadingComponent height="322px" />
+            ) : (
+              <div className="scroll">
+                {!!error ? (
+                  <ul className="list">
+                    <li>{error}</li>
+                  </ul>
+                ) : (
+                  <ReadMethodItems
+                    methods={contractMethodsState}
+                    params={params}
+                    handleChange={handleChange}
+                    handleClick={handleClick}
+                    address={address}
+                  />
+                )}
+              </div>
+            )}
+        </div>
+          )}
       </div>
     </div>
   );

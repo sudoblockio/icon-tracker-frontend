@@ -1,7 +1,7 @@
 import React from "react";
 import BigNumber from "bignumber.js";
 
-function ReadMethodItems2({
+function ReadMethodItems({
   methods,
   params,
   handleChange,
@@ -13,7 +13,7 @@ function ReadMethodItems2({
       {methods.readOnlyMethodsNameArray.map((methodName, index) => {
         return (
           <div key={`MethodItem-${methodName}-${index}`}>
-            <ReadMethodItem2
+            <ReadMethodItem
               methodName={methodName}
               methodData={methods[methodName]}
               index={index}
@@ -29,7 +29,35 @@ function ReadMethodItems2({
   );
 }
 
-function ReadMethodItem2({
+function WriteMethodItems({
+  methods,
+  params,
+  handleChange,
+  handleClick,
+  address
+}) {
+  return (
+    <ul className="list">
+      {methods.writeMethodsNameArray.map((methodName, index) => {
+        return (
+          <div key={`MethodItem-${methodName}-${index}`}>
+            <ReadMethodItem
+              methodName={methodName}
+              methodData={methods[methodName]}
+              index={index}
+              params={params}
+              handleChange={handleChange}
+              handleClick={handleClick}
+              address={address}
+            />
+          </div>
+        );
+      })}
+    </ul>
+  );
+}
+
+function ReadMethodItem({
   methodName,
   methodData,
   index,
@@ -41,9 +69,6 @@ function ReadMethodItem2({
   const outputs = methodData.outputs;
   const inputs = methodData.inputs;
   const isQuery = inputs.inputs.length > 0;
-  console.log("inputs");
-  console.log(inputs);
-  console.log(methodData);
 
   function handleButtonClick() {
     handleClick(address, methodName, inputs.inputs, index);
@@ -55,7 +80,7 @@ function ReadMethodItem2({
         <span className="label">
           {index + 1}. {methodName} >{" "}
         </span>
-        <Inputs2
+        <Inputs
           methodName={methodName}
           inputs={inputs.inputs}
           params={params}
@@ -72,9 +97,9 @@ function ReadMethodItem2({
       </li>
       ,
       <li key="li1" className="result">
-        <OutputTypes2 func={inputs} />
+        <OutputTypes func={inputs} />
         {!isEmptyOutput(outputs) && (
-          <OutputResults2
+          <OutputResults
             methodName={methodName}
             func={inputs}
             outputs={outputs}
@@ -83,7 +108,7 @@ function ReadMethodItem2({
       </li>
     </>
   ) : (
-    <Outputs2
+    <Outputs
       key={index}
       methodName={methodName}
       func={inputs}
@@ -93,11 +118,11 @@ function ReadMethodItem2({
   );
 }
 
-function Inputs2({ methodName, inputs, params, handleChange }) {
+function Inputs({ methodName, inputs, params, handleChange }) {
   return inputs.map((item, index) => {
     return (
       <span key={`Inputs-${methodName}-${index}`}>
-        <InputItem2
+        <InputItem
           methodName={methodName}
           params={params}
           handleChange={handleChange}
@@ -109,7 +134,13 @@ function Inputs2({ methodName, inputs, params, handleChange }) {
   });
 }
 
-function InputItem2({ methodName, params, handleChange, item, index }) {
+function InputItem({
+  methodName,
+  params,
+  handleChange,
+  item,
+  index
+}) {
   const name = item["name"];
   const type = item["type"];
   const inputName = `${methodName}_${name}_${type}`;
@@ -128,7 +159,7 @@ function InputItem2({ methodName, params, handleChange, item, index }) {
   );
 }
 
-function OutputTypes2({ func }) {
+function OutputTypes({ func }) {
   const list = func["outputs"];
   return list.map((output, index) => {
     const type = output["type"];
@@ -140,7 +171,7 @@ function OutputTypes2({ func }) {
   });
 }
 
-function OutputResults2({ methodName, func, outputs }) {
+function OutputResults({ methodName, func, outputs }) {
   const name = methodName;
   const { valueArray, error } = outputs;
   return (
@@ -163,7 +194,7 @@ function OutputResults2({ methodName, func, outputs }) {
   );
 }
 
-function Outputs2({ methodName, func, outputs, index }) {
+function Outputs({ methodName, func, outputs, index }) {
   const { valueArray, error } = outputs;
   if (error) {
     return (
@@ -188,111 +219,54 @@ function Outputs2({ methodName, func, outputs, index }) {
   }
 }
 
-function ReadMethodItems({
-  funcList,
-  funcOutputs,
-  params,
-  handleChange,
-  handleClick,
-  address
-}) {
-  return (
-    <ul className="list">
-      {funcList.map((func, index) => {
-        return (
-          <div key={`MethodItem-${index}`}>
-            <ReadMethodItem
-              func={func}
-              index={index}
-              funcOutputs={funcOutputs}
-              params={params}
-              handleChange={handleChange}
-              handleClick={handleClick}
-              address={address}
-            />
-          </div>
-        );
-      })}
-    </ul>
-  );
+function isEmptyOutput(outputs) {
+  if (!outputs) {
+    return true;
+  } else {
+    const { valueArray, error } = outputs;
+    return valueArray.length === 0 && !error;
+  }
 }
 
-function ReadMethodItem({
-  func,
-  index,
-  funcOutputs,
-  params,
-  handleChange,
-  handleClick,
-  address
-}) {
-  const outputs = funcOutputs[index];
-  const inputs = func["inputs"];
-  const isQuery = inputs.length > 0;
-  const funcName = func["name"];
-  return isQuery ? (
-    <>
-      <li key="li0" className="input">
-        <span className="label">
-          {index + 1}. {funcName} >{" "}
-        </span>
-        <Inputs
-          inputs={inputs}
-          params={params}
-          handleChange={handleChange}
-          funcName={funcName}
-        />
-        <button
-          key="button"
-          className="btn-type-query"
-          onClick={() => {
-            handleClick(address, funcName, inputs, index);
-          }}
-        >
-          Query
-        </button>
-      </li>
-      ,
-      <li key="li1" className="result">
-        <OutputTypes func={func} />
-        {!isEmptyOutput(outputs) && (
-          <OutputResults func={func} outputs={outputs} />
-        )}
-      </li>
-    </>
-  ) : (
-    <Outputs key={index} func={func} outputs={outputs} index={index} />
-  );
+function getOutValue(type, value) {
+  switch (type) {
+    case "int":
+      return new BigNumber(value).toString(10);
+    case "str":
+      return value;
+    default:
+      return JSON.stringify(value);
+  }
 }
 
-function WriteMethodItems({
-  funcList,
-  funcOutputs,
-  params,
-  handleChange,
-  handleClick,
-  address
-}) {
-  return (
-    <ul className="list">
-      {funcList.map((func, index) => {
-        return (
-          <div key={`MethodItem-${index}`}>
-            <WriteMethodItem
-              func={func}
-              index={index}
-              funcOutputs={funcOutputs}
-              params={params}
-              handleChange={handleChange}
-              handleClick={handleClick}
-              address={address}
-            />
-          </div>
-        );
-      })}
-    </ul>
-  );
-}
+// function WriteMethodItems({
+//   funcList,
+//   funcOutputs,
+//   params,
+//   handleChange,
+//   handleClick,
+//   address
+// }) {
+//   return (
+//     <ul className="list">
+//       {funcList.map((func, index) => {
+//         return (
+//           <div key={`MethodItem-${index}`}>
+//             <WriteMethodItem
+//               func={func}
+//               index={index}
+//               funcOutputs={funcOutputs}
+//               params={params}
+//               handleChange={handleChange}
+//               handleClick={handleClick}
+//               address={address}
+//             />
+//           </div>
+//         );
+//       })}
+//     </ul>
+//   );
+// }
 
 function WriteMethodItem({
   func,
@@ -344,124 +318,8 @@ function WriteMethodItem({
   );
 }
 
-function isEmptyOutput(outputs) {
-  if (!outputs) {
-    return true;
-  } else {
-    const { valueArray, error } = outputs;
-    return valueArray.length === 0 && !error;
-  }
-}
-
-function getOutValue(type, value) {
-  switch (type) {
-    case "int":
-      return new BigNumber(value).toString(10);
-    case "str":
-      return value;
-    default:
-      return JSON.stringify(value);
-  }
-}
-
-function InputItem({ funcName, inputs, params, handleChange, item, index }) {
-  const name = item["name"];
-  const type = item["type"];
-  const inputName = `${funcName}_${name}_${type}`;
-  const placeholder = `${name} (${type})`;
-  const value = params[inputName] || "";
-  return (
-    <input
-      type="text"
-      className="over"
-      key={index}
-      name={inputName}
-      placeholder={placeholder}
-      value={value}
-      onChange={handleChange}
-    />
-  );
-}
-
-function Inputs({ funcName, inputs, params, handleChange }) {
-  return inputs.map((item, index) => {
-    return (
-      <span key={`Inputs-${funcName}-${index}`}>
-        <InputItem
-          funcName={funcName}
-          inputs={inputs}
-          params={params}
-          handleChange={handleChange}
-          item={item}
-          index={index}
-        />
-      </span>
-    );
-  });
-}
-
-function OutputTypes({ func }) {
-  const list = func["outputs"];
-  return list.map((output, index) => {
-    const type = output["type"];
-    return (
-      <p key={index}>
-        ┗<em key={index}>{type}</em>
-      </p>
-    );
-  });
-}
-
-function OutputResults({ func, outputs }) {
-  const name = func["name"];
-  const { valueArray, error } = outputs;
-  return (
-    <div>
-      <p>[ {name} method response ]</p>
-      {error ? (
-        <p className="red">>> {error}</p>
-      ) : (
-        valueArray.map((value, i) => {
-          const outType = func["outputs"][i]["type"];
-          const outValue = getOutValue(outType, value);
-          return (
-            <p key={i}>
-              >><em>{outType}</em>: {outValue}
-            </p>
-          );
-        })
-      )}
-    </div>
-  );
-}
-
-function Outputs({ func, outputs, index }) {
-  const { valueArray, error } = outputs;
-  if (error) {
-    return (
-      <li key={index}>
-        {index + 1}. {func["name"]} > <span>{error}</span>
-      </li>
-    );
-  } else {
-    return (
-      <li key={index}>
-        {index + 1}. {func["name"]} >{" "}
-        {valueArray.map((value, i) => {
-          const outType = func["outputs"][i]["type"];
-          const outValue = getOutValue(outType, value);
-          return [
-            <span key="span">{outValue}</span>,
-            <em key="em">{outType}</em>
-          ];
-        })}
-      </li>
-    );
-  }
-}
-
 const MiscComponents = {
   ReadMethodItems,
-  ReadMethodItems2
+  WriteMethodItems
 };
 export default MiscComponents;
