@@ -58,15 +58,9 @@
 }
 
 .writeMethodTitleRight {}
-/* .writeMethodTitle > p { */
-/*   margin: 0; */
-/*   padding: 0; */
-  /* font-size: 20px; */
-  /* font-weight: 600; */
-/* } */
 
 .writeMethodTitleIcon {
-  width: 40px;
+  width: 25px;
 }
 
 .writeMethodTitleIconRotated {
@@ -90,4 +84,16 @@
   border: 1px solid #9f9f9f;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.writeMethodBodyOutput {
+  padding: 5px 10px;
+}
+
+.writeMethodBodyOutputError {
+  background-color: #fbebeb;
+}
+
+.writeMethodBodyOutputSuccess {
+  background-color: #e4f2de;
 }

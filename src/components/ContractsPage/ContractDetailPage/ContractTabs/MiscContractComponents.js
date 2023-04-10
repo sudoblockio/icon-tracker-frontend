@@ -376,9 +376,13 @@ function CollapsibleMethodItem({
   methodInput,
   methodName,
   methodOutput,
-  index
+  index,
+  params,
+  handleChangeParent,
+  handleClick,
+  address
 }) {
-  const [valueState, setValueState] = useState("");
+  // const [valueState, setValueState] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const outputType =
     methodInput.readonly != null && methodInput.readonly === "0x1"
@@ -398,19 +402,23 @@ function CollapsibleMethodItem({
         : false
       : true;
 
-  function handleChange(e) {
-    const { value } = e.target;
-    setValueState(value);
-  }
+  // function handleChange(e) {
+  //   const { value } = e.target;
+  //   setValueState(value);
+  // }
 
   function toggleOpen() {
     setIsOpen(state => !state);
   }
 
-  if (methodName === "claimableICX") {
-    console.log(methodName);
-    console.log(methodInput);
+  function handleButtonClick() {
+    handleClick(address, methodName, methodInput.inputs, index);
   }
+
+  console.log("method name");
+  console.log(methodName);
+  console.log(methodInput);
+  console.log(methodOutput);
   return (
     <div
       className={
@@ -467,6 +475,12 @@ function CollapsibleMethodItem({
       {methodInput.inputs.length > 0 && (
         <div className={styles.writeMethodBody}>
           {methodInput.inputs.map((input, index2) => {
+            const name = input["name"];
+            const type = input["type"];
+            const inputName = `${methodName}_${name}_${type}`;
+            const placeholder = `${name} (${type})`;
+            const value = params[inputName] || "";
+
             return (
               <div
                 className={styles.writeMethodBodyInput}
@@ -480,20 +494,35 @@ function CollapsibleMethodItem({
                     type="text"
                     className="over"
                     key={`writeMethod-${index2}`}
-                    name={`${methodName}_${input.name}_${input.type}`}
-                    placeholder={`${input.name} (${input.type})`}
-                    value={valueState}
-                    onChange={handleChange}
+                    name={inputName}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={handleChangeParent}
                   />
                 </div>
               </div>
             );
           })}
           <div className={styles.methodInputButtonContainer}>
-            <button className={styles.methodInputButton}>Query</button>
+            <button
+              className={styles.methodInputButton}
+              onClick={handleButtonClick}
+            >
+              Query
+            </button>
           </div>
         </div>
       )}
+      <div
+        className={
+          methodOutput.error === ""
+            ? `${styles.writeMethodBodyOutput} ${styles.writeMethodBodyOutputSuccess}`
+            : `${styles.writeMethodOutput} ${styles.writeMethodOutputError}`
+        }
+      >
+        <p>Response:</p>
+        <p>{JSON.stringify(methodOutput.valueArray[0])}</p>
+      </div>
     </div>
   );
 }
@@ -515,6 +544,10 @@ function ReadMethodItems2({
               methodName={methodName}
               methodOutput={methods[methodName].outputs}
               index={index}
+              params={params}
+              handleChangeParent={handleChange}
+              handleClick={handleClick}
+              address={address}
             />
           </div>
         );
