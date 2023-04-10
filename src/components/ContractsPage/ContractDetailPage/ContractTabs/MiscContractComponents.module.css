@@ -30,14 +30,34 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   background-color: #efefef;
   padding: 0 10px;
+}
+
+.writeMethodTitleExpandable {
+  cursor: pointer;
+}
+
+.writeMethodLeft {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .writeMethodTitleLeft em {
   font-style: italic;
 }
+
+.writeMethodTitleLeft > span {
+  margin-right: 5px;
+}
+
+.writeMethodTitleLeftOutput {
+  font-weight: bold;
+}
+
+.writeMethodTitleRight {}
 /* .writeMethodTitle > p { */
 /*   margin: 0; */
 /*   padding: 0; */
@@ -47,6 +67,10 @@
 
 .writeMethodTitleIcon {
   width: 40px;
+}
+
+.writeMethodTitleIconRotated {
+  transform: rotate(180deg);
 }
 
 .writeMethodBody {

@@ -384,11 +384,19 @@ function CollapsibleMethodItem({
     methodInput.readonly != null && methodInput.readonly === "0x1"
       ? methodInput.outputs[0].type
       : "";
-  // const outputType = methodInput.readonly != null && methodInput.readonly === "0x1" ? "foo" : "bar";
   const parsedMethodOutput =
     methodInput.readonly != null && methodInput.readonly === "0x1"
       ? JSON.stringify(methodOutput.valueArray[0])
       : "";
+  const isExpandable =
+    methodInput.readonly != null && methodInput.readonly === "0x1"
+      ? methodInput.inputs.length > 0
+        ? true
+        : methodInput.outputs[0].type === "dict" ||
+          methodInput.outputs[0].type === "list"
+        ? true
+        : false
+      : true;
 
   function handleChange(e) {
     const { value } = e.target;
@@ -399,38 +407,62 @@ function CollapsibleMethodItem({
     setIsOpen(state => !state);
   }
 
+  if (methodName === "claimableICX") {
+    console.log(methodName);
+    console.log(methodInput);
+  }
   return (
     <div
       className={
-        isOpen
+        !isExpandable
+          ? `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
+          : isOpen
           ? `${styles.writeMethodContainer} ${styles.writeMethodContainerOpen}`
           : `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
       }
     >
-      <div className={styles.writeMethodTitle} onClick={toggleOpen}>
+      <div
+        className={
+          isExpandable
+            ? `${styles.writeMethodTitle} ${styles.writeMethodTitleExpandable}`
+            : `${styles.writeMethodTitle}`
+        }
+        onClick={toggleOpen}
+      >
         <div className={styles.writeMethodTitleLeft}>
-          <span>{index + 1}.</span> <span>{methodName}</span>{" "}
+          <span>{index + 1}.</span>
+          <span>{methodName}</span>{" "}
+          {!isExpandable && (
+            <span className={styles.writeMethodTitleLeftOutput}>
+              {parsedMethodOutput}
+            </span>
+          )}
           <span>
             <em>{outputType}</em>
           </span>{" "}
-          <span>{parsedMethodOutput}</span>
         </div>
-        <div className={styles.writeMethodTitleLeft}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={styles.writeMethodTitleIcon}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-            />
-          </svg>
-        </div>
+        {isExpandable && (
+          <div className={styles.writeMethodTitleRight}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className={
+                !isOpen
+                  ? `${styles.writeMethodTitleIcon}`
+                  : `${styles.writeMethodTitleIcon} ${styles.writeMethodTitleIconRotated}`
+              }
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </div>
+        )}
       </div>
       {methodInput.inputs.length > 0 && (
         <div className={styles.writeMethodBody}>
@@ -449,7 +481,7 @@ function CollapsibleMethodItem({
                     className="over"
                     key={`writeMethod-${index2}`}
                     name={`${methodName}_${input.name}_${input.type}`}
-                    placeholder={`${input.name} ${input.type}`}
+                    placeholder={`${input.name} (${input.type})`}
                     value={valueState}
                     onChange={handleChange}
                   />
@@ -458,8 +490,7 @@ function CollapsibleMethodItem({
             );
           })}
           <div className={styles.methodInputButtonContainer}>
-            <button
-              className={styles.methodInputButton}>Query</button>
+            <button className={styles.methodInputButton}>Query</button>
           </div>
         </div>
       )}
@@ -477,8 +508,6 @@ function ReadMethodItems2({
   return (
     <ul className="list">
       {methods.readOnlyMethodsNameArray.map((methodName, index) => {
-        console.log("methods[methodName]");
-        console.log(methods[methodName]);
         return (
           <div key={`MethodItem-${methodName}-${index}`}>
             <CollapsibleMethodItem
