@@ -1,0 +1,19 @@
+.buttonSet {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.button {
+  margin: 0 0.5rem;
+  height: 40px;
+  min-width: 40px;
+  color: #299fac;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #08909f;
+  color: #fff;
+}
