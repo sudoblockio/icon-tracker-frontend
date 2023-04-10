@@ -12,6 +12,7 @@
   background-color: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
+  font-weight: bold;
 }
 
 .button:hover {
