@@ -23,14 +23,7 @@ import { getBalance } from "../../../redux/store/iiss";
 function ContractInfo(props) {
   const [verified_data, setVerified_Data] = useState("");
   const [cxBalance, setCxBalance] = useState(0);
-  useEffect(() => {
-    const payload = { contractAddr: props.match.params.contractId };
-    props.getTokenSummary(payload);
-    props.contractDetail(props.match.params.contractId);
-    getSocialMediaLinks(props.match.params.contractId);
-    props.contractTxList(props.match.params.contractId);
-    getCxBalance(props.match.params.contractId);
-  }, []);
+
   const getCxBalance = async addr => {
     const result = await getBalance(addr);
     setCxBalance(Number(Number(result) / Math.pow(10, 18)).toFixed(3));
@@ -69,6 +62,7 @@ function ContractInfo(props) {
     github: "",
     facebook: ""
   };
+
   const getSocialMediaLinks = async contract => {
     const socialLinksMap = await cxSocialMedia(contract);
     let data = socialLinksMap.data;
@@ -81,15 +75,26 @@ function ContractInfo(props) {
       }
     });
   };
+
   const onSocialClick = async link => {
     if (isUrl(link)) {
       window.open(link, "_blank");
     }
   };
 
+  useEffect(() => {
+    const payload = { contractAddr: props.match.params.contractId };
+    props.getTokenSummary(payload);
+    props.contractDetail(props.match.params.contractId);
+    getSocialMediaLinks(props.match.params.contractId);
+    props.contractTxList(props.match.params.contractId);
+    getCxBalance(props.match.params.contractId);
+  }, [props.match.params.contractId]);
+
   const { contract, walletAddress, contractDetails } = props;
   const { loading, data } = contract;
   let ircVersion, reportedCount;
+
   const Contents = () => {
     if (loading) {
       return <LoadingComponent height="206px" />;

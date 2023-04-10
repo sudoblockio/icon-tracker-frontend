@@ -1,6 +1,6 @@
 {
     "name": "icon-tracker",
-    "version": "0.2.16",
+    "version": "0.2.17",
     "private": true,
     "dependencies": {
         "@babel/core": "7.2.2",
