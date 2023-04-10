@@ -1,0 +1,99 @@
+.writeMethodsMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.writeMethodContainer {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.writeMethodContainerClosed, .writeMethodTitle {
+  height: 40px;
+}
+
+.writeMethodContainerOpen {
+  height: auto;
+}
+
+.writeMethodTitle {
+  min-height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #efefef;
+  padding: 0 10px;
+}
+
+.writeMethodTitleExpandable {
+  cursor: pointer;
+}
+
+.writeMethodLeft {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.writeMethodTitleLeft em {
+  font-style: italic;
+}
+
+.writeMethodTitleLeft > span {
+  margin-right: 5px;
+}
+
+.writeMethodTitleLeftOutput {
+  font-weight: bold;
+}
+
+.writeMethodTitleRight {}
+
+.writeMethodTitleIcon {
+  width: 25px;
+}
+
+.writeMethodTitleIconRotated {
+  transform: rotate(180deg);
+}
+
+.writeMethodBody {
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.methodInputButtonContainer {
+  margin: 10px 0;
+  align-self: flex-start;
+}
+.methodInputButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.writeMethodBodyOutput {
+  padding: 5px 10px;
+}
+
+.writeMethodBodyOutputError {
+  background-color: #fbebeb;
+}
+
+.writeMethodBodyOutputSuccess {
+  background-color: #e4f2de;
+}

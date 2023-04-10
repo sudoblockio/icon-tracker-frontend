@@ -27,7 +27,7 @@ export default function* contractsSaga() {
   yield fork(watchIcxGetSrore);
   yield fork(watchIcxCall);
   yield fork(watchReadContractInformation);
-  yield fork(watchWriteContractInformation);
+  // yield fork(watchWriteContractInformation);
 }
 
 function* watchContractList() {
@@ -82,9 +82,9 @@ function* watchReadContractInformation() {
   yield takeLatest(AT.readContractInformation, readContractInformationFunc);
 }
 
-function* watchWriteContractInformation() {
-  yield takeLatest(AT.writeContractInformation, writeContractInformationFunc);
-}
+// function* watchWriteContractInformation() {
+//   yield takeLatest(AT.writeContractInformation, writeContractInformationFunc);
+// }
 
 export function* contractListFunc(action) {
   try {
@@ -320,11 +320,17 @@ export function* readContractInformationFunc(action) {
     }
 
     const abiData = score;
+    // console.log('abidata read');
+    // console.log(abiData);
     const readOnlyFunc = (abiData || []).filter(
       func => func["type"] === "function" && func["readonly"] === "0x1"
     );
+    const writeFunc = (abiData || []).filter(
+      func => func["type"] === "function" && func["readonly"] !== "0x1"
+    );
     const { address } = action.payload;
     const funcList = [...readOnlyFunc];
+    const writeFuncList = [...writeFunc];
     const _funcOutputs = yield all(
       readOnlyFunc.map(func => {
         if (func["inputs"].length === 0) {
@@ -363,61 +369,9 @@ export function* readContractInformationFunc(action) {
         });
       }
     });
-    const payload = { funcList, funcOutputs };
+    const payload = { funcList, funcOutputs, writeFuncList };
     yield put({ type: AT.readContractInformationFulfilled, payload });
   } catch (e) {
     yield put({ type: AT.readContractInformationRejected, error: e.message });
-  }
-}
-
-export function* writeContractInformationFunc(action) {
-  try {
-    const score = yield call(ICX_GET_CONTRACT, action.payload.address);
-
-    if (score.length === 0) {
-      const { message } = score.error;
-      throw new Error(message);
-    }
-
-    const abiData = score;
-    const readOnlyFunc = (abiData || []).filter(
-      func => func["type"] === "function" && func["readonly"] === "0x1"
-    );
-    const writeFunc = (abiData || []).filter(
-      func => func["type"] === "function" && func["readonly"] !== "0x1"
-    );
-    const { address } = action.payload;
-    const funcList = [...writeFunc];
-    const _funcOutputs = yield all(
-      writeFunc.map(func => {
-        return "";
-      })
-    );
-    const funcOutputs = [];
-    _funcOutputs.forEach(output => {
-      if (output === "") {
-        funcOutputs.push({
-          valueArray: [],
-          error: ""
-        });
-      } else if (output.status === 200) {
-        const { result } = output.data;
-        const valueArray = [result];
-        funcOutputs.push({
-          valueArray,
-          error: ""
-        });
-      } else {
-        const { message } = output.error;
-        funcOutputs.push({
-          valueArray: [],
-          error: message
-        });
-      }
-    });
-    const payload = { funcList, funcOutputs };
-    yield put({ type: AT.writeContractInformationFulfilled, payload });
-  } catch (e) {
-    yield put({ type: AT.writeContractInformationRejected, error: e.message });
   }
 }

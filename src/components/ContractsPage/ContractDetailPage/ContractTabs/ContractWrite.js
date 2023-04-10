@@ -4,11 +4,12 @@ import { LoadingComponent } from "../../../../components";
 import styles from "./ContractWrite.module.css";
 
 function ContractWrite({ contract, contractWriteInfo }) {
+  console.log('contractWriteInfo');
+  console.log(contractWriteInfo);
   const [paramsState, setParamsState] = useState({});
   const { data } = contract;
   const { address: address } = data;
-  const { loading, funcList, error } = contractWriteInfo;
-  console.log(funcList, "funcList");
+  const loading = contractWriteInfo != null ? contractWriteInfo.loading : true;
 
   return (
     <div className="contents">
@@ -20,13 +21,15 @@ function ContractWrite({ contract, contractWriteInfo }) {
           <LoadingComponent height="322px" />
         ) : (
           <div className="scroll">
-            <ul className="list">
-              {!!error ? (
-                <li>{error}</li>
+            <div className="list">
+              {!!contractWriteInfo.error ? (
+                <div>{contractWriteInfo.error}</div>
               ) : (
-                <ListOfWriteMethods arrayOfMethods={funcList} />
+                <ListOfWriteMethods 
+                arrayOfMethods={contractWriteInfo.funcList}
+                />
               )}
-            </ul>
+            </div>
           </div>
         )}
       </div>
@@ -48,7 +51,12 @@ function ListOfWriteMethods({ arrayOfMethods }) {
     <div className={styles.writeMethodsMain}>
       {arrayOfMethods.map((writeMethod, index) => {
         return (
+          <div
+            key={`writeMethods-${index}`}
+            style={{ width: "100%" }}
+          >
           <CollapsibleMethodItem writeMethod={writeMethod} index={index} />
+          </div>
         );
       })}
     </div>
@@ -75,7 +83,6 @@ function CollapsibleMethodItem({ writeMethod, index }) {
           ? `${styles.writeMethodContainer} ${styles.writeMethodContainerOpen}`
           : `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
       }
-      key={`writeMethods-${index}`}
       onClick={toggleOpen}
     >
       <div className={styles.writeMethodTitle}>

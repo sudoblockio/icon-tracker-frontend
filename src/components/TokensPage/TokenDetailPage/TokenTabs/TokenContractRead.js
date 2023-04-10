@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-  ContractRead
+  ContractComponent
 } from '../../../../components'
 
 class TokenContractRead extends Component {
   render() {
-    return <ContractRead {...this.props}/>
+    return <ContractComponent {...this.props}/>
   }
 }
 
