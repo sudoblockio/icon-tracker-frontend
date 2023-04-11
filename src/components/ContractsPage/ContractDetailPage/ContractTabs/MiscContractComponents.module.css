@@ -81,9 +81,18 @@
 .methodInputButton {
   margin: 0 5px;
   padding: 5px 10px;
-  border: 1px solid #9f9f9f;
+  /* border: 1px solid #9f9f9f; */
+  border: none;
   border-radius: 5px;
   font-weight: bold;
+  width: 80px;
+  height: 30px;
+}
+
+.methodInputButton:hover {
+  cursor: pointer;
+  background-color: #08909f;
+  color: #fff;
 }
 
 .writeMethodBodyOutput {
@@ -96,4 +105,31 @@
 
 .writeMethodBodyOutputSuccess {
   background-color: #e4f2de;
+}
+
+.writeMethodBodyInputType > input {
+  height: 26px;
+  font-size: 12px;
+  color: #4d4d4d;
+  border-style: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px !important;
+  padding: 0 9px;
+  min-width: 50%;
+  margin: 0 1px 5px;
+}
+
+.writeMethodBodyInputType > input:focus {
+  outline: none;
+  border: 1px solid #1aaaba;
+  box-shadow: inset 0 2px 1px 0 rgba(0,0,0,0.15);
+}
+
+.writeMethodBodyInputType > input:hover {
+  box-shadow: inset 0 2px 1px 0 rgba(0,0,0,0.15);
+  border: 1px solid #1aaaba;
+}
+
+.writeMethodBodyInputType > input::placeholder {
+  color: #9f9f9f;
 }

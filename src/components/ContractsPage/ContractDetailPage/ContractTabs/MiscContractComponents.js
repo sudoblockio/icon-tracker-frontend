@@ -487,12 +487,11 @@ function CollapsibleMethodItem({
                 key={`writeMethod-element-${index2}`}
               >
                 <div className={styles.writeMethodBodyInputName}>
-                  {methodName}
+                  {placeholder}
                 </div>
                 <div className={styles.writeMethodBodyInputType}>
                   <input
                     type="text"
-                    className="over"
                     key={`writeMethod-${index2}`}
                     name={inputName}
                     placeholder={placeholder}
