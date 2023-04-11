@@ -28,9 +28,6 @@ const ContractDetailPage = props => {
     address => {
       props.readContractInformation({ address });
     },
-    address => {
-      props.writeContractInformation({ address });
-    },
     contractAddr => {
       props.contractEventLogList({ contractAddr, page: 1, count: 10 });
     }
