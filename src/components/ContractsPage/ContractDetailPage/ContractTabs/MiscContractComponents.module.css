@@ -107,6 +107,10 @@
   background-color: #e4f2de;
 }
 
+.writeMethodBodyInputName {
+  margin-bottom: 5px;
+}
+
 .writeMethodBodyInputType > input {
   height: 26px;
   font-size: 12px;
