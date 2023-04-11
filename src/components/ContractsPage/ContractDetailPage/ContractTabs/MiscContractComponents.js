@@ -546,7 +546,9 @@ function CollapsibleMethodItem({
           }
         >
           <p>Response:</p>
-          <p>{responseState}</p>
+          <p
+            className={styles.writeMethodBodyOutputResponseContent}
+          >{responseState}</p>
         </div>
       )}
     </div>

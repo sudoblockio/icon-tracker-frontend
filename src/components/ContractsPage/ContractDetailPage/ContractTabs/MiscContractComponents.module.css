@@ -99,6 +99,10 @@
   padding: 5px 10px;
 }
 
+.writeMethodBodyOutputResponseContent {
+  word-break: break-all;
+}
+
 .writeMethodBodyOutputError {
   background-color: #fbebeb;
 }
