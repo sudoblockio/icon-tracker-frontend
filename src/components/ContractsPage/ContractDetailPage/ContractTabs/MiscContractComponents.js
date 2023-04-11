@@ -384,6 +384,8 @@ function CollapsibleMethodItem({
 }) {
   // const [valueState, setValueState] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [resultIsOpen, setResultIsOpen] = useState(false);
+  const [responseState, setResponseState] = useState("");
   const outputType =
     methodInput.readonly != null && methodInput.readonly === "0x1"
       ? methodInput.outputs[0].type
@@ -402,18 +404,41 @@ function CollapsibleMethodItem({
         : false
       : true;
 
-  // function handleChange(e) {
-  //   const { value } = e.target;
-  //   setValueState(value);
-  // }
-
   function toggleOpen() {
     setIsOpen(state => !state);
   }
 
   function handleButtonClick() {
     handleClick(address, methodName, methodInput.inputs, index);
+    setResultIsOpen(true);
   }
+
+  function parseResponse(response) {
+    if (response.error === "") {
+      const parsedResponse = JSON.stringify(response.valueArray);
+      console.log('parsed response');
+      console.log(parsedResponse);
+      return parsedResponse;
+    } else {
+      return response.error;
+    }
+  }
+
+  useEffect(() => {
+    if (!isOpen) {
+      setResultIsOpen(false);
+    } else {
+      if (methodInput.inputs.length === 0) {
+        setResultIsOpen(true);
+      }
+    }
+  }, [isOpen, methodInput.inputs]);
+
+  useEffect(() => {
+    const parsedResponse = parseResponse(methodOutput);
+    setResponseState(parsedResponse);
+
+  }, [methodOutput]);
 
   console.log("method name");
   console.log(methodName);
@@ -487,12 +512,11 @@ function CollapsibleMethodItem({
                 key={`writeMethod-element-${index2}`}
               >
                 <div className={styles.writeMethodBodyInputName}>
-                  {methodName}
+                  {placeholder}
                 </div>
                 <div className={styles.writeMethodBodyInputType}>
                   <input
                     type="text"
-                    className="over"
                     key={`writeMethod-${index2}`}
                     name={inputName}
                     placeholder={placeholder}
@@ -513,16 +537,20 @@ function CollapsibleMethodItem({
           </div>
         </div>
       )}
-      <div
-        className={
-          methodOutput.error === ""
-            ? `${styles.writeMethodBodyOutput} ${styles.writeMethodBodyOutputSuccess}`
-            : `${styles.writeMethodOutput} ${styles.writeMethodOutputError}`
-        }
-      >
-        <p>Response:</p>
-        <p>{JSON.stringify(methodOutput.valueArray[0])}</p>
-      </div>
+      {resultIsOpen && (
+        <div
+          className={
+            methodOutput.error === ""
+              ? `${styles.writeMethodBodyOutput} ${styles.writeMethodBodyOutputSuccess}`
+              : `${styles.writeMethodBodyOutput} ${styles.writeMethodBodyOutputError}`
+          }
+        >
+          <p>Response:</p>
+          <p
+            className={styles.writeMethodBodyOutputResponseContent}
+          >{responseState}</p>
+        </div>
+      )}
     </div>
   );
 }

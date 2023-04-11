@@ -89,12 +89,6 @@ export function readContractInformationAction(payload) {
   };
 }
 
-export function writeContractInformationAction(payload) {
-  return {
-    type: actionTypes.writeContractInformation,
-    payload
-  };
-}
 // API
 
 const { CONTRACTS_PREFIX, ADDRESSES_PREFIX, TRANSACTIONS_PREFIX } = prefixes;
@@ -448,33 +442,6 @@ export function contractsReducer(state = initialState, action) {
           error: action.error
         }
       };
-    // case actionTypes.writeContractInformation:
-    //   return {
-    //     ...state,
-    //     contractWriteInfo: {
-    //       ...state.contractWriteInfo,
-    //       loading: true,
-    //       error: ""
-    //     }
-    //   };
-    // case actionTypes.writeContractInformationFulfilled:
-    //   return {
-    //     ...state,
-    //     contractWriteInfo: {
-    //       ...action.payload,
-    //       loading: false,
-    //       error: ""
-    //     }
-    //   };
-    // case actionTypes.writeContractInformationRejected:
-    //   return {
-    //     ...state,
-    //     contractWriteInfo: {
-    //       ...state.contractWriteInfo,
-    //       loading: false,
-    //       error: action.error
-    //     }
-    //   };
 
     default: {
       return state;
