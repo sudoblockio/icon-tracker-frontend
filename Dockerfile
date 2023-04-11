@@ -1,5 +1,5 @@
 # build environment
-FROM node:12.22.4-alpine as build
+FROM node:16.19.1-alpine3.17 as build
 
 ARG REACT_APP_NETWORK_NAME
 ENV REACT_APP_NETWORK_NAME ${REACT_APP_NETWORK_NAME:-mainnet}
