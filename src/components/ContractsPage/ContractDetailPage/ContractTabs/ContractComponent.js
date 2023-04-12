@@ -5,7 +5,7 @@ import ButtonSet from "./ButtonSet";
 import MiscComponents from "./MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 
-const { ReadMethodItems, WriteMethodItems, ReadMethodItems2 } = MiscComponents;
+const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
 function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
   const [params, setParams] = useState({});
@@ -78,7 +78,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     <li>{error}</li>
                   </ul>
                 ) : (
-                  <ReadMethodItems2
+                  <ReadMethodItems
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
@@ -103,7 +103,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     <li>{error}</li>
                   </ul>
                 ) : (
-                  <ReadMethodItems2
+                  <ReadMethodItems
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
@@ -153,7 +153,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     <li>{error}</li>
                   </ul>
                 ) : (
-                  <ReadMethodItems2
+                  <ReadMethodItems
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
