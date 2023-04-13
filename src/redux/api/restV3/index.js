@@ -1,116 +1,101 @@
-import {
-    getMainInfo,
-    getMainChart,
-} from './main'
+import { getMainInfo, getMainChart } from "./main";
 
 // import {
 //     searchData,
 // } from './search'
 
 import {
-    addressList,
-    addressInfo,
-    addressTxList,
-    addressInternalTxList,
-    addressTokenTxList,
-    addressVotedList
-} from '../../store/addresses'
+  addressList,
+  addressInfo,
+  addressTxList,
+  addressInternalTxList,
+  addressTokenTxList,
+  addressVotedList
+} from "../../store/addresses";
+
+import { blockList, blockInfo, blockTxList } from "../../store/blocks";
 
 import {
-    blockList,
-    blockInfo,
-    blockTxList,
-} from '../../store/blocks'
+  contractList,
+  contractInfo,
+  contractDetail,
+  contractTxList,
+  contractInternalTxList,
+  contractTokenTxList,
+  contractEventLogList
+} from "../../store/contracts";
 
 import {
-    contractList,
-    contractInfo,
-    contractDetail,
-    contractTxList,
-    contractInternalTxList,
-    contractTokenTxList,
-    contractEventLogList,
-} from '../../store/contracts'
-
-import { 
-    transactionEventLogList,
-    transactionRecentTx,
-    transactionTxDetail,
-    transactionInternalTxList
-} from '../../store/transactions'
+  transactionEventLogList,
+  transactionRecentTx,
+  transactionTxDetail,
+  transactionInternalTxList
+} from "../../store/transactions";
 
 import {
-    tokenList,
-    tokenTxList,
-    tokenSummary,
-    tokenTransfersList,
-    tokenHoldersList
-} from './token'
+  tokenList,
+  tokenTxList,
+  tokenSummary,
+  tokenTransfersList,
+  tokenHoldersList
+} from "./token";
 
 import {
-    // icxGetScore,
-    icxCall,
-    getTransactionResult,
-    getTransaction,
-    getTransactionResultNotSdk
-} from './icx'
+  // icxGetScore,
+  icxCall,
+  getTransactionResult,
+  getTransaction,
+  getTransactionResultNotSdk
+} from "./icx";
 
-import{
-    reportScam
-} from './report';
+import { icxSendTransaction } from "../jsProvider/icx";
 
-import{
-    getPReps,
-    getIISSInfo,
-    getDelegation,
-    addressReward
-} from '../../store/iiss';
+import { reportScam } from "./report";
+
+import {
+  getPReps,
+  getIISSInfo,
+  getDelegation,
+  addressReward
+} from "../../store/iiss";
 
 export {
-    getMainInfo,
-    getMainChart,
-
-    addressList,
-    addressInfo,
-    addressTxList,
-    addressInternalTxList,
-    addressTokenTxList,
-    addressVotedList,
-    
-    blockList,
-    blockInfo,
-    blockTxList,
-
-    contractList,
-    contractInfo,
-    contractDetail,
-    contractTxList,
-    contractInternalTxList,
-    contractTokenTxList,
-    contractEventLogList,
-
-    transactionRecentTx,
-    transactionTxDetail,
-    transactionEventLogList,
-    transactionInternalTxList,
-
-    tokenList,
-    tokenTxList,
-    tokenSummary,
-    tokenTransfersList,
-    tokenHoldersList,
-
-    // icxGetScore,
-    icxCall,
-    getTransactionResult,
-    getTransaction,
-
-    reportScam,
-
-    getPReps,
-    getIISSInfo,
-    getDelegation,
-    addressReward,
-
-    getTransactionResultNotSdk
-}
+  getMainInfo,
+  getMainChart,
+  addressList,
+  addressInfo,
+  addressTxList,
+  addressInternalTxList,
+  addressTokenTxList,
+  addressVotedList,
+  blockList,
+  blockInfo,
+  blockTxList,
+  contractList,
+  contractInfo,
+  contractDetail,
+  contractTxList,
+  contractInternalTxList,
+  contractTokenTxList,
+  contractEventLogList,
+  transactionRecentTx,
+  transactionTxDetail,
+  transactionEventLogList,
+  transactionInternalTxList,
+  tokenList,
+  tokenTxList,
+  tokenSummary,
+  tokenTransfersList,
+  tokenHoldersList,
+  // icxGetScore,
+  icxCall,
+  getTransactionResult,
+  getTransaction,
+  icxSendTransaction,
+  reportScam,
+  getPReps,
+  getIISSInfo,
+  getDelegation,
+  addressReward,
+  getTransactionResultNotSdk
+};

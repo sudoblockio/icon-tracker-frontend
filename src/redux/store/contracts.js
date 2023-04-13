@@ -82,6 +82,13 @@ export function icxCallAction(payload) {
   };
 }
 
+export function icxSendTransactionAction(payload) {
+  return {
+    type: actionTypes.icxSendTransaction,
+    payload
+  };
+}
+
 export function readContractInformationAction(payload) {
   return {
     type: actionTypes.readContractInformation,
@@ -413,6 +420,19 @@ export function contractsReducer(state = initialState, action) {
         }
       };
     case actionTypes.icxCallRejected:
+      return state;
+
+    case actionTypes.icxSendTransaction:
+      return state;
+    case actionTypes.icxSendTransactionFulfilled:
+      return {
+        ...state,
+        contractReadInfo: {
+          ...state.contractReadInfo,
+          writeFuncOutputs: action.payload.writeFuncOutputs
+        }
+      };
+    case actionTypes.icxSendTransactionRejected:
       return state;
 
     case actionTypes.readContractInformation:

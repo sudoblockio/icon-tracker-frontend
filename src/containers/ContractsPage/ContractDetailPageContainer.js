@@ -11,6 +11,7 @@ import {
   contractEventLogListAction,
   icxGetScoreAction,
   icxCallAction,
+  icxSendTransactionAction,
   readContractInformationAction
 } from "../../redux/store/contracts";
 import { tokenSummary } from "../../redux/actions/tokensActions";
@@ -41,6 +42,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(contractEventLogListAction(payload)),
     icxGetScore: payload => dispatch(icxGetScoreAction(payload)),
     icxCall: payload => dispatch(icxCallAction(payload)),
+    icxSendTransaction: payload => 
+    dispatch(icxSendTransactionAction(payload)),
     readContractInformation: payload =>
       dispatch(readContractInformationAction(payload))
   };

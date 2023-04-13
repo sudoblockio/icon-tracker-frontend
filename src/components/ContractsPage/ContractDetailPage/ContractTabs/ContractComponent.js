@@ -4,10 +4,19 @@ import { LoadingComponent } from "../../../../components";
 import ButtonSet from "./ButtonSet";
 import MiscComponents from "./MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
+import { customMethod } from "../../../../utils/rawTxMaker";
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
+const HARDCODED_NID_FIX_THIS = 2;
+
+function ContractComponent({
+  contract,
+  contractReadWriteInfo,
+  icxCall,
+  icxSendTransaction,
+  walletAddress
+}) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
 
@@ -19,16 +28,48 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
     });
   };
 
-  const handleClick = (address, method, inputs, index) => {
-    console.log(address, "params address");
-    const paramsData = makeParams(method, inputs);
-    icxCall({
-      address,
-      method,
-      params: paramsData,
-      index
-    });
-  };
+  function handleClickOnReadonly(
+    address, 
+    method, 
+    inputs, 
+    index, 
+  ) {
+      console.log(address, "params address");
+      const paramsData = makeParams(method, inputs);
+      icxCall({
+        address,
+        method,
+        params: paramsData,
+        index
+      });
+  }
+
+  function handleClickOnWrite(
+    address,
+    method,
+    inputs,
+    index
+  ) {
+    // makeTxCallRpcObj
+    const nid = HARDCODED_NID_FIX_THIS;
+
+    if (walletAddress === "") {
+      alert("Please connect to wallet first");
+    } else {
+      const paramsData = makeParams(method, inputs);
+      const rawMethodCall = customMethod(
+        walletAddress,
+        address,
+        method,
+        paramsData,
+        nid
+      );
+      icxSendTransaction({
+        params: { ...rawMethodCall },
+        index: index
+      });
+    }
+  }
 
   const makeParams = (funcName, inputs) => {
     const result = {};
@@ -82,7 +123,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnReadonly}
                     address={address}
                   />
                 )}
@@ -107,7 +148,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnReadonly}
                     address={address}
                   />
                 )}
@@ -132,7 +173,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnWrite}
                     address={address}
                   />
                 )}
@@ -157,7 +198,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnReadonly}
                     address={address}
                   />
                 )}
