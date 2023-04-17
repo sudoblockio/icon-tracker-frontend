@@ -24,7 +24,7 @@ export function requestAddress() {
 }
 
 export function requestJsonRpc(rawTransaction, id = 50889) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     window.removeEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
     window.addEventListener("ICONEX_RELAY_RESPONSE", eventHandler, false);
     window.dispatchEvent(
@@ -44,6 +44,8 @@ export function requestJsonRpc(rawTransaction, id = 50889) {
       console.log("in event handler");
       const { type, payload } = event.detail;
       console.log(event, "connect payload");
+      console.log(payload);
+      console.log(type);
       if (type === "RESPONSE_JSON-RPC") {
         window.removeEventListener(
           "ICONEX_RELAY_RESPONSE",
@@ -51,6 +53,13 @@ export function requestJsonRpc(rawTransaction, id = 50889) {
           false
         );
         resolve(payload);
+      } else if (type === "CANCEL_JSON-RPC") {
+        window.removeEventListener(
+          "ICONEX_RELAY_RESPONSE",
+          eventHandler,
+          false
+        );
+        reject(type);
       }
     }
   });

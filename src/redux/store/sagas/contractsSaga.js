@@ -276,11 +276,9 @@ export function* icxGetSroreFunc(action) {
 
 //TODO
 export function* icxSendTransactionFunc(action) {
-  console.log('icxSendTransactionFunc');
   try {
     // change this to the payload for icxSendTransaction
     const { params, index } = action.payload;
-    console.log(action.payload);
     const writeFuncOutputs = yield select(
       state => state.contracts.contractReadInfo.writeFuncOutputs
     );
@@ -359,8 +357,6 @@ export function* readContractInformationFunc(action) {
     }
 
     const abiData = score;
-    // console.log('abidata read');
-    // console.log(abiData);
     const readOnlyFunc = (abiData || []).filter(
       func => func["type"] === "function" && func["readonly"] === "0x1"
     );
@@ -370,7 +366,7 @@ export function* readContractInformationFunc(action) {
     const { address } = action.payload;
     const funcList = [...readOnlyFunc];
     const writeFuncList = [...writeFunc];
-    const writeFuncOutputs = Array.from(writeFuncList.length, () => {
+    const writeFuncOutputs = Array.from(writeFuncList, () => {
       return { valueArray: [], error: "" };
     });
     const _funcOutputs = yield all(
@@ -411,7 +407,12 @@ export function* readContractInformationFunc(action) {
         });
       }
     });
-    const payload = { funcList, funcOutputs, writeFuncList, writeFuncOutputs };
+    const payload = {
+      funcList,
+      funcOutputs,
+      writeFuncList,
+      writeFuncOutputs
+    };
     yield put({ type: AT.readContractInformationFulfilled, payload });
   } catch (e) {
     yield put({ type: AT.readContractInformationRejected, error: e.message });

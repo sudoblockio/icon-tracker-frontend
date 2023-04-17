@@ -246,18 +246,19 @@ const initialState = {
   contractReadInfo: {
     loading: false,
     funcList: [],
+    funcOutputs: [],
+    funcError: [],
     writeFuncList: [],
-    funcOutputs: [],
-    funcError: [],
-    error: ""
-  },
-  contractWriteInfo: {
-    loading: false,
-    funcList: [],
-    funcOutputs: [],
-    funcError: [],
+    writeFuncOutputs: [],
     error: ""
   }
+  // contractWriteInfo: {
+  //   loading: false,
+  //   funcList: [],
+  //   funcOutputs: [],
+  //   funcError: [],
+  //   error: ""
+  // }
 };
 
 export function contractsReducer(state = initialState, action) {
@@ -411,6 +412,7 @@ export function contractsReducer(state = initialState, action) {
 
     case actionTypes.icxCall:
       return state;
+
     case actionTypes.icxCallFulfilled:
       return {
         ...state,
@@ -419,11 +421,13 @@ export function contractsReducer(state = initialState, action) {
           funcOutputs: action.payload.funcOutputs
         }
       };
+
     case actionTypes.icxCallRejected:
       return state;
 
     case actionTypes.icxSendTransaction:
       return state;
+
     case actionTypes.icxSendTransactionFulfilled:
       return {
         ...state,
@@ -432,6 +436,7 @@ export function contractsReducer(state = initialState, action) {
           writeFuncOutputs: action.payload.writeFuncOutputs
         }
       };
+
     case actionTypes.icxSendTransactionRejected:
       return state;
 

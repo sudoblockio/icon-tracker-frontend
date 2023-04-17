@@ -213,7 +213,13 @@ function ContractComponent({
 
 function createContractMethodsState(contractReadWriteInfo) {
   //
-  const { funcList, funcOutputs, writeFuncList } = contractReadWriteInfo;
+  const { 
+    funcList,
+    funcOutputs,
+    writeFuncList,
+    writeFuncOutputs
+  } = contractReadWriteInfo;
+
   const result = {
     readOnlyMethodsNameArray: [],
     writeMethodsNameArray: []
@@ -232,7 +238,8 @@ function createContractMethodsState(contractReadWriteInfo) {
     const funcName = func["name"];
     result.writeMethodsNameArray.push(funcName);
     const inputs = { ...func };
-    const outputs = { error: "", valueArray: [] };
+    
+    const outputs = writeFuncOutputs[index];
     result[funcName] = {
       inputs,
       outputs
