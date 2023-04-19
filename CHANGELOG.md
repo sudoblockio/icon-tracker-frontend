@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.17](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.16...v0.2.17) (2023-04-06)
+
+
+### Bug Fixes
+
+* contract header cache [#225](https://github.com/sudoblockio/icon-tracker-frontend/issues/225) ([1e13d9d](https://github.com/sudoblockio/icon-tracker-frontend/commit/1e13d9d7b2b9ec3604aa37b87d6f6cde655c1171))
+* trace integration for all tx and view logs button [#154](https://github.com/sudoblockio/icon-tracker-frontend/issues/154) [#64](https://github.com/sudoblockio/icon-tracker-frontend/issues/64) ([3730fb1](https://github.com/sudoblockio/icon-tracker-frontend/commit/3730fb1d1ae5fd5569a509f2e53691f7aacf7c6a))
+
 ## [0.2.16](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.15...v0.2.16) (2023-03-16)
 
 
