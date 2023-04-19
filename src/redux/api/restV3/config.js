@@ -18,7 +18,7 @@ export async function walletApiInstance() {
 }
 
 export async function getTrackerApiUrl() {
-  return config.origin;
+  return config.trackerBaseUrl;
   // if (configJson && configJson.TRACKER_API_URL) {
   //   return configJson.TRACKER_API_URL;
   // }
@@ -29,7 +29,7 @@ export async function getSocketUrl() {
 }
 
 export async function getWalletApiUrl() {
-  return config.apiBaseUrl;
+  return config.walletBaseUrl;
 
   // if (configJson && configJson.WALLET_API_URL) {
   //   return configJson.WALLET_API_URL;
