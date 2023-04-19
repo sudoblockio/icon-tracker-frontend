@@ -3,11 +3,13 @@ const { origin, hostname } = window.location;
 const isLocal = hostname === "localhost";
 
 let config = {
-  origin: isLocal ? "https://tracker.icon.community/" : origin,
+  trackerBaseUrl: isLocal ? "https://tracker.icon.community/" : origin,
   hostname,
 };
 
-const ApiEndPointMap = {
+const socketEndPoint = `wss://${isLocal ? "tracker.icon.community" : hostname}`;
+
+const apiEndPointMap = {
   localhost: "https://api.icon.community",
   "tracker.icon.community": "https://api.icon.community",
 
@@ -31,15 +33,21 @@ const ApiEndPointMap = {
   "tracker.lisbon.geometry.io": "https://lisbon.net.solidwallet.io", // RM
 };
 
-const socketEndPoint = `wss://${isLocal ? "tracker.icon.community" : hostname}`;
+const networkHostnameMap = {
+  BERLIN: "tracker.berlin.icon.community",
+};
 
 switch (process.env.REACT_APP_ENV) {
   case "PROD":
-    config = { ...config, apiBaseUrl: ApiEndPointMap[hostname], socketUrl: socketEndPoint };
+    config = {
+      ...config,
+      walletBaseUrl: apiEndPointMap[hostname],
+      socketUrl: socketEndPoint,
+    };
     break;
 
-  case "CUSTOM":
-    config = { ...config, apiBaseUrl: process.env.REACT_APP_API_BASE_URL, socketUrl: process.env.REACT_APP_SOCKET_URL };
+  case "BERLIN":
+    config = { ...config, walletBaseUrl: apiEndPointMap[networkHostnameMap["BERLIN"]], socketUrl: socketEndPoint };
     break;
 
   default:
