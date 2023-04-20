@@ -28,27 +28,17 @@ function ContractComponent({
     });
   };
 
-  function handleClickOnReadonly(
-    address, 
-    method, 
-    inputs, 
-    index, 
-  ) {
-      const paramsData = makeParams(method, inputs);
-      icxCall({
-        address,
-        method,
-        params: paramsData,
-        index
-      });
+  function handleClickOnReadonly(address, method, inputs, index) {
+    const paramsData = makeParams(method, inputs);
+    icxCall({
+      address,
+      method,
+      params: paramsData,
+      index
+    });
   }
 
-  function handleClickOnWrite(
-    address,
-    method,
-    inputs,
-    index
-  ) {
+  function handleClickOnWrite(address, method, inputs, index) {
     // makeTxCallRpcObj
     const nid = HARDCODED_NID_FIX_THIS;
 
@@ -111,21 +101,29 @@ function ContractComponent({
             </span>
             {loading ? (
               <LoadingComponent height="322px" />
+            ) : !!error ? (
+              <div className="scroll">
+                <ul className="list">
+                  <li>{error}</li>
+                </ul>
+              </div>
             ) : (
               <div className="scroll">
-                {!!error ? (
-                  <ul className="list">
-                    <li>{error}</li>
-                  </ul>
-                ) : (
-                  <ReadMethodItems
-                    methods={contractMethodsState}
-                    params={params}
-                    handleChange={handleChange}
-                    handleClick={handleClickOnReadonly}
-                    address={address}
-                  />
-                )}
+                <ReadMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnReadonly}
+                  address={address}
+                />
+                <WriteMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnWrite}
+                  address={address}
+                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                />
               </div>
             )}
           </div>
@@ -186,21 +184,29 @@ function ContractComponent({
             </span>
             {loading ? (
               <LoadingComponent height="322px" />
+            ) : !!error ? (
+              <div className="scroll">
+                <ul className="list">
+                  <li>{error}</li>
+                </ul>
+              </div>
             ) : (
               <div className="scroll">
-                {!!error ? (
-                  <ul className="list">
-                    <li>{error}</li>
-                  </ul>
-                ) : (
-                  <ReadMethodItems
-                    methods={contractMethodsState}
-                    params={params}
-                    handleChange={handleChange}
-                    handleClick={handleClickOnReadonly}
-                    address={address}
-                  />
-                )}
+                <ReadMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnReadonly}
+                  address={address}
+                />
+                <WriteMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnWrite}
+                  address={address}
+                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                />
               </div>
             )}
           </div>
@@ -212,7 +218,7 @@ function ContractComponent({
 
 function createContractMethodsState(contractReadWriteInfo) {
   //
-  const { 
+  const {
     funcList,
     funcOutputs,
     writeFuncList,
@@ -237,7 +243,7 @@ function createContractMethodsState(contractReadWriteInfo) {
     const funcName = func["name"];
     result.writeMethodsNameArray.push(funcName);
     const inputs = { ...func };
-    
+
     const outputs = writeFuncOutputs[index];
     result[funcName] = {
       inputs,

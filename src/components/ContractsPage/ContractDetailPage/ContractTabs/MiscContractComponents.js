@@ -7,7 +7,8 @@ function ReadMethodItems({
   params,
   handleChange,
   handleClick,
-  address
+  address,
+  startIndex = 0
 }) {
   return (
     <ul className="list">
@@ -34,6 +35,7 @@ function ReadMethodItems({
               handleClick={handleClick}
               address={address}
               isExpandable={isExpandable}
+              startIndex={startIndex}
             />
           </div>
         );
@@ -47,7 +49,8 @@ function WriteMethodItems({
   params,
   handleChange,
   handleClick,
-  address
+  address,
+  startIndex = 0
 }) {
   return (
     <ul className="list">
@@ -65,6 +68,7 @@ function WriteMethodItems({
               address={address}
               isExpandable={true}
               alwaysShowButton={true}
+              startIndex={startIndex}
             />
           </div>
         );
@@ -83,6 +87,7 @@ function CollapsableComponent({
   handleClick,
   address,
   isExpandable,
+  startIndex,
   alwaysShowButton = false
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -149,7 +154,7 @@ function CollapsableComponent({
         onClick={toggleOpen}
       >
         <div className={styles.writeMethodTitleLeft}>
-          <span>{index + 1}.</span>
+          <span>{index + 1 + startIndex}.</span>
           <span>{methodName}</span>{" "}
           {!isExpandable && (
             <span className={styles.writeMethodTitleLeftOutput}>
@@ -213,7 +218,7 @@ function CollapsableComponent({
               </div>
             );
           })}
-        {methodInput.inputs.length > 0 || alwaysShowButton && (
+        {(methodInput.inputs.length > 0 || alwaysShowButton) && (
           <div className={styles.methodInputButtonContainer}>
             <button
               className={styles.methodInputButton}
