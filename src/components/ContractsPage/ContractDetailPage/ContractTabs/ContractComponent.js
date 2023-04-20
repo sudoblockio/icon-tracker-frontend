@@ -34,7 +34,6 @@ function ContractComponent({
     inputs, 
     index, 
   ) {
-      console.log(address, "params address");
       const paramsData = makeParams(method, inputs);
       icxCall({
         address,
