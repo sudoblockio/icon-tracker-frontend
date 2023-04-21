@@ -1,3 +1,4 @@
+
 {
     "name": "icon-tracker",
     "version": "0.2.17",
@@ -93,11 +94,10 @@
         "workbox-webpack-plugin": "3.6.3"
     },
     "scripts": {
-      "start-prod": "REACT_APP_ENV=PROD node scripts/start.js",
-      "start-berlin": "REACT_APP_ENV=BERLIN node scripts/start.js",
-        "build": "node scripts/build.js",
-        "test": "node scripts/test.js --env=jsdom",
-        "test:coverage": "node scripts/test.js --env=jsdom --watchAll=False  --coverage --coverageDirectory=output/coverage/jest"
+      "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid node scripts/start.js",
+      "build": "node scripts/build.js",
+      "test": "node scripts/test.js --env=jsdom",
+      "test:coverage": "node scripts/test.js --env=jsdom --watchAll=False  --coverage --coverageDirectory=output/coverage/jest"
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -150,8 +150,7 @@
       "web.jsx",
       "jsx",
       "node"
-    ]
-  },
+  ],
   "babel": {
     "presets": [
       "react-app",

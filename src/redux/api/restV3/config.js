@@ -18,18 +18,18 @@ export async function walletApiInstance() {
 }
 
 export async function getTrackerApiUrl() {
-  return config.trackerBaseUrl;
+  return config.apiEndpoint;
   // if (configJson && configJson.TRACKER_API_URL) {
   //   return configJson.TRACKER_API_URL;
   // }
 }
 
 export async function getSocketUrl() {
-  return config.socketUrl;
+  return config.wssEndpoint;
 }
 
 export async function getWalletApiUrl() {
-  return config.walletBaseUrl;
+  return config.rpcEndpoint;
 
   // if (configJson && configJson.WALLET_API_URL) {
   //   return configJson.WALLET_API_URL;

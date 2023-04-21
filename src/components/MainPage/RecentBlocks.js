@@ -30,7 +30,7 @@ class RecentBlocks extends Component {
     // this.recentBx = blockListData.data
     // this.setState({recentBx: this.recentBx, bxRows: blockListData.data})
 
-    this.bxsocket = new WebSocket(`${config.socketUrl}/ws/v1/blocks`);
+    this.bxsocket = new WebSocket(`${config.wssEndpoint}/ws/v1/blocks`);
 
     this.bxsocket.onopen = async (event) => {
       console.log("connection established");
