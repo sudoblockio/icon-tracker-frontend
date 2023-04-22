@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { convertHexToValue, numberWithCommas } from '../../utils/utils'
 import { LoadingComponent, TransactionLink } from '../../components'
 import { transactionRecentTx } from '../../redux/store/transactions'
-import configJson from '../../config'
+import config from '../../config'
 
 class RecentTransactions extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class RecentTransactions extends Component {
         const txListData = await transactionRecentTx()
         this.recentTx = txListData.data
         this.setState({recentTx: this.recentTx, txRows: txListData.data})
-        this.txsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/transactions");
+        this.txsocket = new WebSocket(`${config.wssEndpoint}`+"/ws/v1/transactions");
         
         this.txsocket.onopen = () => {
             this.state.txRows? this.state.txRows.push(this.state.recentTx) : console.log("no rows")
@@ -63,7 +63,7 @@ class RecentTransactions extends Component {
             if (this.state.play === false) {
                 this.txsocket.close()
             } else {
-                this.txsocket = new WebSocket(`${configJson.TRACKER_WS_URL}`+"/ws/v1/transactions");
+                this.txsocket = new WebSocket(`${config.wssEndpoint}`+"/ws/v1/transactions");
                 this.txsocket.onmessage = async (event) =>  {
                     this.latestTx = event.data
                     this.setState({liveTrClass:"flat"})

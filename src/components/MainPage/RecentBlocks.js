@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { numberWithCommas } from "../../utils/utils";
 import { LoadingComponent, BlockLink } from "../../components";
 import { blockList } from "../../redux/store/blocks";
-import configJson from "../../config";
-import config from "../../config/config";
+import config from "../../config";
 
 class RecentBlocks extends Component {
   constructor(props) {
