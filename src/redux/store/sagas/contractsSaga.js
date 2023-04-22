@@ -333,13 +333,15 @@ export function* icxCallFunc(action) {
       const valueArray = [result];
       funcOutputs[index] = {
         valueArray,
-        error: ""
+        error: "",
+        state: 1
       };
     } else {
       const { message } = outputs.error;
       funcOutputs[index] = {
         valueArray: [],
-        error: message
+        error: message,
+        state: 1
       };
     }
     const payload = { funcOutputs };
@@ -392,20 +394,23 @@ export function* readContractInformationFunc(action) {
       if (output === "") {
         funcOutputs.push({
           valueArray: [],
-          error: ""
+          error: "",
+          state: 0
         });
       } else if (output.status === 200) {
         const { result } = output.data;
         const valueArray = [result];
         funcOutputs.push({
           valueArray,
-          error: ""
+          error: "",
+          state: 1
         });
       } else {
         const { message } = output.error;
         funcOutputs.push({
           valueArray: [],
-          error: message
+          error: message,
+          state: 1
         });
       }
     });

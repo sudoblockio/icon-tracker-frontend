@@ -131,8 +131,6 @@ function CollapsableComponent({
   }, [isOpen, methodInput.inputs]);
 
   useEffect(() => {
-    console.log('method output');
-    console.log(methodOutput);
     const parsedResponse = parseResponse(methodOutput);
     setResponseState(parsedResponse);
   }, [methodOutput]);
