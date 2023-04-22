@@ -23,7 +23,9 @@ function ContractTabs(props) {
     contractWriteInfo,
     changeTab,
     history,
-    icxCall
+    icxCall,
+    icxSendTransaction,
+    walletAddress
   } = props;
 
   const { loading, data } = contract;
@@ -78,8 +80,9 @@ function ContractTabs(props) {
           <ContractComponent
             contract={contract}
             contractReadWriteInfo={contractReadInfo}
-            // contractWriteInfo={contractWriteInfo}
             icxCall={icxCall}
+            icxSendTransaction={icxSendTransaction}
+            walletAddress={walletAddress}
           />
         );
       case 5:

@@ -11,6 +11,7 @@ import {
   contractEventLogList as CONTRACT_EVENT_LOG_LIST_API
 } from "../contracts";
 import { icxCall as ICX_CALL_API } from "../../api/restV3";
+import { icxSendTransaction as ICX_SEND_TRANSACTION_API } from "../../api/restV3";
 import { getContractABI as ICX_GET_CONTRACT } from "../../store/iiss";
 
 export default function* contractsSaga() {
@@ -26,6 +27,7 @@ export default function* contractsSaga() {
   yield fork(watchContractEventLogList);
   yield fork(watchIcxGetSrore);
   yield fork(watchIcxCall);
+  yield fork(watchIcxSendTransaction);
   yield fork(watchReadContractInformation);
   // yield fork(watchWriteContractInformation);
 }
@@ -82,9 +84,9 @@ function* watchReadContractInformation() {
   yield takeLatest(AT.readContractInformation, readContractInformationFunc);
 }
 
-// function* watchWriteContractInformation() {
-//   yield takeLatest(AT.writeContractInformation, writeContractInformationFunc);
-// }
+function* watchIcxSendTransaction() {
+  yield takeLatest(AT.icxSendTransaction, icxSendTransactionFunc);
+}
 
 export function* contractListFunc(action) {
   try {
@@ -272,6 +274,43 @@ export function* icxGetSroreFunc(action) {
   }
 }
 
+//TODO
+export function* icxSendTransactionFunc(action) {
+  try {
+    // change this to the payload for icxSendTransaction
+    const { params, index } = action.payload;
+    const writeFuncOutputs = yield select(
+      state => state.contracts.contractReadInfo.writeFuncOutputs
+    );
+    // change this to the api call for icxSendTransaction
+    const outputs = yield call(ICX_SEND_TRANSACTION_API, {
+      params: params,
+      index: index
+    });
+
+    if (outputs.status === 200) {
+      const { result } = outputs.data;
+      const valueArray = [result];
+      writeFuncOutputs[index] = {
+        valueArray,
+        error: "",
+        state: writeFuncOutputs[index].state + 1
+      };
+    } else {
+      const { message } = outputs.error;
+      writeFuncOutputs[index] = {
+        valueArray: [],
+        error: message,
+        state: writeFuncOutputs[index].state + 1
+      };
+    }
+    const payload = { writeFuncOutputs };
+    yield put({ type: AT.icxSendTransactionFulfilled, payload });
+  } catch (e) {
+    yield put({ type: AT.icxSendTransactionRejected });
+  }
+}
+
 export function* icxCallFunc(action) {
   try {
     const { address, method, params } = action.payload;
@@ -294,13 +333,15 @@ export function* icxCallFunc(action) {
       const valueArray = [result];
       funcOutputs[index] = {
         valueArray,
-        error: ""
+        error: "",
+        state: 1
       };
     } else {
       const { message } = outputs.error;
       funcOutputs[index] = {
         valueArray: [],
-        error: message
+        error: message,
+        state: 1
       };
     }
     const payload = { funcOutputs };
@@ -320,8 +361,6 @@ export function* readContractInformationFunc(action) {
     }
 
     const abiData = score;
-    // console.log('abidata read');
-    // console.log(abiData);
     const readOnlyFunc = (abiData || []).filter(
       func => func["type"] === "function" && func["readonly"] === "0x1"
     );
@@ -331,6 +370,9 @@ export function* readContractInformationFunc(action) {
     const { address } = action.payload;
     const funcList = [...readOnlyFunc];
     const writeFuncList = [...writeFunc];
+    const writeFuncOutputs = Array.from(writeFuncList, () => {
+      return { valueArray: [], error: "", state: 0 };
+    });
     const _funcOutputs = yield all(
       readOnlyFunc.map(func => {
         if (func["inputs"].length === 0) {
@@ -352,24 +394,32 @@ export function* readContractInformationFunc(action) {
       if (output === "") {
         funcOutputs.push({
           valueArray: [],
-          error: ""
+          error: "",
+          state: 0
         });
       } else if (output.status === 200) {
         const { result } = output.data;
         const valueArray = [result];
         funcOutputs.push({
           valueArray,
-          error: ""
+          error: "",
+          state: 1
         });
       } else {
         const { message } = output.error;
         funcOutputs.push({
           valueArray: [],
-          error: message
+          error: message,
+          state: 1
         });
       }
     });
-    const payload = { funcList, funcOutputs, writeFuncList };
+    const payload = {
+      funcList,
+      funcOutputs,
+      writeFuncList,
+      writeFuncOutputs
+    };
     yield put({ type: AT.readContractInformationFulfilled, payload });
   } catch (e) {
     yield put({ type: AT.readContractInformationRejected, error: e.message });
