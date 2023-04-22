@@ -293,13 +293,15 @@ export function* icxSendTransactionFunc(action) {
       const valueArray = [result];
       writeFuncOutputs[index] = {
         valueArray,
-        error: ""
+        error: "",
+        state: writeFuncOutputs[index].state + 1
       };
     } else {
       const { message } = outputs.error;
       writeFuncOutputs[index] = {
         valueArray: [],
-        error: message
+        error: message,
+        state: writeFuncOutputs[index].state + 1
       };
     }
     const payload = { writeFuncOutputs };
@@ -367,7 +369,7 @@ export function* readContractInformationFunc(action) {
     const funcList = [...readOnlyFunc];
     const writeFuncList = [...writeFunc];
     const writeFuncOutputs = Array.from(writeFuncList, () => {
-      return { valueArray: [], error: "" };
+      return { valueArray: [], error: "", state: 0 };
     });
     const _funcOutputs = yield all(
       readOnlyFunc.map(func => {

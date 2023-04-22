@@ -131,6 +131,8 @@ function CollapsableComponent({
   }, [isOpen, methodInput.inputs]);
 
   useEffect(() => {
+    console.log('method output');
+    console.log(methodOutput);
     const parsedResponse = parseResponse(methodOutput);
     setResponseState(parsedResponse);
   }, [methodOutput]);
@@ -229,7 +231,7 @@ function CollapsableComponent({
           </div>
         )}
       </div>
-      {resultIsOpen && (
+      {(resultIsOpen && methodOutput.state > 0) && (
         <div
           className={
             methodOutput.error === ""
