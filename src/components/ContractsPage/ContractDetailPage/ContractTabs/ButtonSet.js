@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./ButtonSet.module.css";
 
 function ButtonSet({ activeButton, handleActiveChange }) {
-
   const handleClick = index => {
     handleActiveChange(index);
   };
@@ -21,13 +20,26 @@ function ButtonSet({ activeButton, handleActiveChange }) {
 
   return (
     <div className={styles.buttonSet}>
-      <button className={styles.button} onClick={clickAll}>
+      <button
+        className={`${styles.button} ${
+          activeButton === 0 ? styles.activeButton : ""
+        }`}
+        onClick={clickAll}
+      >
         All
       </button>
-      <button className={styles.button} onClick={clickRead}>
+      <button
+        className={`${styles.button} ${
+          activeButton === 1 ? styles.activeButton : ""
+        }`}
+        onClick={clickRead}>
         Read Contract
       </button>
-      <button className={styles.button} onClick={clickWrite}>
+      <button
+        className={`${styles.button} ${
+          activeButton === 2 ? styles.activeButton : ""
+        }`}
+        onClick={clickWrite}>
         Write Contract
       </button>
     </div>

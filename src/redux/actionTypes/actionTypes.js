@@ -176,6 +176,10 @@ const actionTypes = {
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
 
+  icxSendTransaction: 'ICX_SEND_TRANSACTION',
+  icxSendTransactionFulfilled: 'ICX_SEND_TRANSACTION_FULFILLED',
+  icxSendTransactionRejected: 'ICX_SEND_TRANSACTION_REJECTED',
+
   reportScam: 'REPORT_ADDRESS',
   reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
   reportScamRejected: 'REPORT_ADDRESS_REJECTED',

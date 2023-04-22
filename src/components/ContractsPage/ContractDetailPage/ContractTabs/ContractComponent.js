@@ -4,10 +4,19 @@ import { LoadingComponent } from "../../../../components";
 import ButtonSet from "./ButtonSet";
 import MiscComponents from "./MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
+import { customMethod } from "../../../../utils/rawTxMaker";
 
-const { ReadMethodItems, WriteMethodItems, ReadMethodItems2 } = MiscComponents;
+const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
+const HARDCODED_NID_FIX_THIS = 2;
+
+function ContractComponent({
+  contract,
+  contractReadWriteInfo,
+  icxCall,
+  icxSendTransaction,
+  walletAddress
+}) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
 
@@ -19,8 +28,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
     });
   };
 
-  const handleClick = (address, method, inputs, index) => {
-    console.log(address, "params address");
+  function handleClickOnReadonly(address, method, inputs, index) {
     const paramsData = makeParams(method, inputs);
     icxCall({
       address,
@@ -28,7 +36,29 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
       params: paramsData,
       index
     });
-  };
+  }
+
+  function handleClickOnWrite(address, method, inputs, index) {
+    // makeTxCallRpcObj
+    const nid = HARDCODED_NID_FIX_THIS;
+
+    if (walletAddress === "") {
+      alert("Please connect to wallet first");
+    } else {
+      const paramsData = makeParams(method, inputs);
+      const rawMethodCall = customMethod(
+        walletAddress,
+        address,
+        method,
+        paramsData,
+        nid
+      );
+      icxSendTransaction({
+        params: { ...rawMethodCall },
+        index: index
+      });
+    }
+  }
 
   const makeParams = (funcName, inputs) => {
     const result = {};
@@ -71,21 +101,29 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
             </span>
             {loading ? (
               <LoadingComponent height="322px" />
+            ) : !!error ? (
+              <div className="scroll">
+                <ul className="list">
+                  <li>{error}</li>
+                </ul>
+              </div>
             ) : (
               <div className="scroll">
-                {!!error ? (
-                  <ul className="list">
-                    <li>{error}</li>
-                  </ul>
-                ) : (
-                  <ReadMethodItems2
-                    methods={contractMethodsState}
-                    params={params}
-                    handleChange={handleChange}
-                    handleClick={handleClick}
-                    address={address}
-                  />
-                )}
+                <ReadMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnReadonly}
+                  address={address}
+                />
+                <WriteMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnWrite}
+                  address={address}
+                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                />
               </div>
             )}
           </div>
@@ -103,11 +141,11 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     <li>{error}</li>
                   </ul>
                 ) : (
-                  <ReadMethodItems2
+                  <ReadMethodItems
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnReadonly}
                     address={address}
                   />
                 )}
@@ -132,7 +170,7 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
                     methods={contractMethodsState}
                     params={params}
                     handleChange={handleChange}
-                    handleClick={handleClick}
+                    handleClick={handleClickOnWrite}
                     address={address}
                   />
                 )}
@@ -146,21 +184,29 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
             </span>
             {loading ? (
               <LoadingComponent height="322px" />
+            ) : !!error ? (
+              <div className="scroll">
+                <ul className="list">
+                  <li>{error}</li>
+                </ul>
+              </div>
             ) : (
               <div className="scroll">
-                {!!error ? (
-                  <ul className="list">
-                    <li>{error}</li>
-                  </ul>
-                ) : (
-                  <ReadMethodItems2
-                    methods={contractMethodsState}
-                    params={params}
-                    handleChange={handleChange}
-                    handleClick={handleClick}
-                    address={address}
-                  />
-                )}
+                <ReadMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnReadonly}
+                  address={address}
+                />
+                <WriteMethodItems
+                  methods={contractMethodsState}
+                  params={params}
+                  handleChange={handleChange}
+                  handleClick={handleClickOnWrite}
+                  address={address}
+                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                />
               </div>
             )}
           </div>
@@ -172,7 +218,13 @@ function ContractComponent({ contract, contractReadWriteInfo, icxCall }) {
 
 function createContractMethodsState(contractReadWriteInfo) {
   //
-  const { funcList, funcOutputs, writeFuncList } = contractReadWriteInfo;
+  const {
+    funcList,
+    funcOutputs,
+    writeFuncList,
+    writeFuncOutputs
+  } = contractReadWriteInfo;
+
   const result = {
     readOnlyMethodsNameArray: [],
     writeMethodsNameArray: []
@@ -191,7 +243,8 @@ function createContractMethodsState(contractReadWriteInfo) {
     const funcName = func["name"];
     result.writeMethodsNameArray.push(funcName);
     const inputs = { ...func };
-    const outputs = { error: "", valueArray: [] };
+
+    const outputs = writeFuncOutputs[index];
     result[funcName] = {
       inputs,
       outputs

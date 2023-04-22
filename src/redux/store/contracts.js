@@ -82,6 +82,13 @@ export function icxCallAction(payload) {
   };
 }
 
+export function icxSendTransactionAction(payload) {
+  return {
+    type: actionTypes.icxSendTransaction,
+    payload
+  };
+}
+
 export function readContractInformationAction(payload) {
   return {
     type: actionTypes.readContractInformation,
@@ -239,18 +246,19 @@ const initialState = {
   contractReadInfo: {
     loading: false,
     funcList: [],
+    funcOutputs: [],
+    funcError: [],
     writeFuncList: [],
-    funcOutputs: [],
-    funcError: [],
-    error: ""
-  },
-  contractWriteInfo: {
-    loading: false,
-    funcList: [],
-    funcOutputs: [],
-    funcError: [],
+    writeFuncOutputs: [],
     error: ""
   }
+  // contractWriteInfo: {
+  //   loading: false,
+  //   funcList: [],
+  //   funcOutputs: [],
+  //   funcError: [],
+  //   error: ""
+  // }
 };
 
 export function contractsReducer(state = initialState, action) {
@@ -404,6 +412,7 @@ export function contractsReducer(state = initialState, action) {
 
     case actionTypes.icxCall:
       return state;
+
     case actionTypes.icxCallFulfilled:
       return {
         ...state,
@@ -412,7 +421,23 @@ export function contractsReducer(state = initialState, action) {
           funcOutputs: action.payload.funcOutputs
         }
       };
+
     case actionTypes.icxCallRejected:
+      return state;
+
+    case actionTypes.icxSendTransaction:
+      return state;
+
+    case actionTypes.icxSendTransactionFulfilled:
+      return {
+        ...state,
+        contractReadInfo: {
+          ...state.contractReadInfo,
+          writeFuncOutputs: action.payload.writeFuncOutputs
+        }
+      };
+
+    case actionTypes.icxSendTransactionRejected:
       return state;
 
     case actionTypes.readContractInformation:
