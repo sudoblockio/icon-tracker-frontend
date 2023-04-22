@@ -1,6 +1,6 @@
 import { walletApiInstance, trackerApiInstance, getWalletApiUrl } from "../api/restV3/config";
 import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from "../../utils/utils";
-import { nodeApiUrl } from "../../config";
+import config from "../../config";
 import IconService from "icon-sdk-js";
 import { requestJsonRpc } from "../../utils/connect";
 
@@ -470,7 +470,7 @@ const nodeId = {
   "https://lisbon.net.solidwallet.io": "0x2",
   "https://api.icon.geometry.io": "0x1",
 };
-export const VerificationScore = score[nodeApiUrl];
+export const VerificationScore = score[config.rpcEndpoint];
 
 export async function sendTransaction({
   fromAddress,
@@ -534,7 +534,7 @@ export async function sendTransaction({
     github_release: `${github_release}`,
   },
 }) {
-  const nid = nodeId[nodeApiUrl];
+  const nid = nodeId[config.rpcEndpoint];
   const { IconConverter, IconBuilder, IconAmount } = IconService;
   const builder = new IconBuilder.CallTransactionBuilder();
   const txData = builder

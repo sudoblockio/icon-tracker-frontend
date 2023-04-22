@@ -93,7 +93,7 @@ describe('config', () => {
       });
 
       test('assertion', () => {
-        config = require('../../config/config');
+        config = require('./config');
         assertion(config.default);
       });
     });
