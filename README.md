@@ -21,36 +21,74 @@ npm install
 
 ##### Run development mode:
 
+**Mainnet** 
 ```sh
 npm start
 ```
 
-### Build
+**Testnets**
+```shell
+npm run start --network=lisbon
+```
 
-##### Run build:
+**Custom**
+```shell
+npm run start \
+  --rpc-endpoint=https://lisbon.net.solidwallet.io \
+  --api-endpoint=https://tracker.lisbon.icon.community/ \
+  --wss-endpoint=wss://tracker.lisbon.icon.community/ \
+  --nid=42
+```
+
+Note: In order to run a full tracker on a custom network, you need to also run an indexer on that network. See the [icon-tracker](https://github.com/sudoblockio/icon-tracker). 
+
+In short, you will need to configure the docker compose to point to a custom goloop node and run the whole stack. From there you will have an exposed IP running the APIs which you need to then set within these variables. 
+
+Better directions and tooling exist within the [icon-tracker](https://github.com/sudoblockio/icon-tracker) repo. 
+
+### Build:
 
 ```sh
 # build files to './build'
 npm run build
 ```
 
-### Set API URL
+### Test:
 
-1. First, You can set Tracker and Wallet API URL in script.
+**Unit**
 ```sh
-# set Tracker and Wallet API URL separately
-TRACKER_API_URL=[CUSTOM_URL] WALLET_API_URL=[CUSTOM_URL] npm run build
+npm run test
 ```
 
-2. Second, You can set Tracker and Wallet API URL in config.json.
-if you set both script and config.json, url is script will be applied.
-```json
-{
-    "TRACKER_API_URL":"CUSTOM_URL",
-    "WALLET_API_URL":"CUSTOM_URL"
-}
+**e2e**
+
+Coming soon...
+
+### Set Endpoints 
+
+1. Command line - Also see custom network above
+
+```shell
+npm run start --network=berlin
 ```
 
-3. Third, if the custom configuaration is not detected, each url is set to default value
-> TRACKER_API_URL: https://tracker.icon.foundation (production) / http://trackerlocaldev.icon.foundation (development)
-> WALLET_API_URL: http://trackerlocaldev.icon.foundation
+2. Environment Variables
+
+```shell
+export \
+  REACT_APP_RPC_ENDPOINT=https://lisbon.net.solidwallet.io \
+  REACT_APP_API_ENDPOINT=https://tracker.lisbon.icon.community/ \
+  REACT_APP_WSS_ENDPOINT=wss://tracker.lisbon.icon.community/ \
+  REACT_APP_NID=42
+```
+
+3. `.env` File 
+
+**./.env** 
+
+```dotenv
+REACT_APP_RPC_ENDPOINT=https://lisbon.net.solidwallet.io
+REACT_APP_API_ENDPOINT=https://tracker.lisbon.icon.community/
+REACT_APP_WSS_ENDPOINT=wss://tracker.lisbon.icon.community/
+REACT_APP_NID=42
+```
