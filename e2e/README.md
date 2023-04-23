@@ -19,6 +19,17 @@ export REACT_APP_RPC_ENDPOINT=localhost:9000
 pytest -v -s -m "main_page" --html=e2e/reports/report.html --capture=tee-sys e2e/test_cases/
 ```
 
+### Running on Custom Networks
+
+TODO: Need to be able to inject env vars before setting up app. 
+
+[#248](https://github.com/sudoblockio/icon-tracker-frontend/issues/248)
+
+```shell
+export REACT_APP_RPC_ENDPOINT=localhost:9000
+pytest -v -s -m "main_page" --html=e2e/reports/report.html --capture=tee-sys e2e/testCases/
+```
+
 ## Running on different networks 
 
 To change the network, change the `config/config.ini` -> baseurl which modifies the window the tracker is running on. 
