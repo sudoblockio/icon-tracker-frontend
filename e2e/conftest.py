@@ -1,3 +1,4 @@
+import os
 import pytest
 from selenium import webdriver
 
@@ -40,3 +41,14 @@ def pytest_configure(config):
 def pytest_metadata(metadata):
     metadata.pop("JAVA_HOME", None)
     metadata.pop("Plugins", None)
+
+
+@pytest.fixture()
+def setup_custom_network():
+    """Fixture for running on a custom network."""
+    os.environ["REACT_APP_RPC_ENDPOINT"] = "localhost:9000"
+    os.environ["REACT_APP_NID"] = "3"
+    yield
+
+    del os.environ["REACT_APP_RPC_ENDPOINT"]
+    del os.environ["REACT_APP_NID"]
