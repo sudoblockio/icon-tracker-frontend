@@ -2,6 +2,13 @@ import configparser
 
 config = configparser.RawConfigParser()
 config.read('./e2e/configuration/config.ini')
+import os
+
+config = configparser.RawConfigParser()
+config_file = os.path.join(
+    os.path.dirname(__file__), "../../e2e/configuration/config.ini"
+)
+config.read(config_file)
 
 class ReadConfig:
     @staticmethod

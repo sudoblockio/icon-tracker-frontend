@@ -31,7 +31,7 @@ const actionTypes = {
   addressInternalTxList: 'ADDRESS_INTERNAL_TX_LIST',
   addressInternalTxListFulfilled: 'ADDRESS_INTERNAL_TX_LIST_FULFILLED',
   addressInternalTxListRejected: 'ADDRESS_INTERNAL_TX_LIST_REJECTED',
-  
+
   addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
   addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
   addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
@@ -55,7 +55,7 @@ const actionTypes = {
   transactionEventLogList: 'TRANSACTION_EVENT_LOG_LIST',
   transactionEventLogListFulfilled: 'TRANSACTION_EVENT_LOG_LIST_FULFILLED',
   transactionEventLogListRejected: 'TRANSACTION_EVENT_LOG_LIST_REJECTED',
-  
+
   transactionInternalTxList: 'TRANSACTION_INTERNAL_TX_LIST',
   transactionInternalTxListFulfilled: 'TRANSACTION_INTERNAL_TX_LIST_FULFILLED',
   transactionInternalTxListRejected: 'TRANSACTION_INTERNAL_TX_LIST_REJECTED',
@@ -63,7 +63,7 @@ const actionTypes = {
   contractList: 'SELECT_CONTRACT_LIST',
   contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
   contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
-  
+
   contractListSearch: 'SELECT_CONTRACT_LIST_SEARCH',
   contractListSearchFulfilled: 'SELECT_CONTRACT_LIST_SEARCH_FULFILLED',
   contractListSearchRejected: 'SELECT_CONTRACT_LIST_SEARCH_REJECTED',
@@ -127,7 +127,7 @@ const actionTypes = {
   addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
   addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
 
-  
+
   icxGetScore: 'ICX_GET_SCORE',
   icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
   icxGetScoreRejected: 'ICX_GET_SCORE_REJECTED',
@@ -144,11 +144,11 @@ const actionTypes = {
   tokenList: 'TOKEN_LIST',
   tokenListFulfilled: 'TOKEN_LIST_FULFILLED',
   tokenListRejected: 'TOKEN_LIST_REJECTED',
-  
+
   tokenListSearch: 'TOKEN_LIST_SEARCH',
   tokenListSearchFulfilled: 'TOKEN_LIST_FULFILLED_SEARCH',
   tokenListSearchRejected: 'TOKEN_LIST_REJECTED_SEARCH',
-  
+
   tokenTxList: 'TOKEN_TX_LIST',
   tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
   tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
@@ -176,12 +176,16 @@ const actionTypes = {
   icxCallFulfilled: 'ICX_CALL_FULFILLED',
   icxCallRejected: 'ICX_CALL_REJECTED',
 
+  icxSendTransaction: 'ICX_SEND_TRANSACTION',
+  icxSendTransactionFulfilled: 'ICX_SEND_TRANSACTION_FULFILLED',
+  icxSendTransactionRejected: 'ICX_SEND_TRANSACTION_REJECTED',
+
   reportScam: 'REPORT_ADDRESS',
   reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
   reportScamRejected: 'REPORT_ADDRESS_REJECTED',
 
   setBannerOption: 'SET_BANNER_OPTION',
-  
+
   setAddress: 'SET_ADDRESS',
   setAddressSuccess :'SET_ADDRESS_SUCCESS',
   setNotification: 'SET_NOTIFICATION',

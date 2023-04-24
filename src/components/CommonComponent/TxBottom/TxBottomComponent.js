@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
+import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
+import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
   render() {
@@ -38,12 +40,13 @@ class TxBottomComponent extends Component {
       } else if (txTypeIsBonder(txType)) {
         return (
           <div className="contents">
-            <TxBottomTitle
+            <CustomHeader
+              txData={txData}
               txType={txType}
-              listSize={Number(txData.length)}
-              totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+              totalCount={totalCount}
               goAllTx={goAllTx}
-              fromAddr={"hello"}
+              bondMap={this.props.bondMap}
+              address={this.props.address}
             />
             <div className="table-box">
               <table className={tableClassName}>
@@ -134,4 +137,33 @@ function txTypeIsBonder(txType) {
   ];
 
   return ar.includes(txType);
+}
+
+function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function toggleModal() {
+    console.log('click on modal');
+    setIsModalOpen(!isModalOpen);
+  }
+  return (
+    <>
+      <BondersModal
+        bondMap={bondMap}
+        address={address}
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+      />
+      <div className={customStyles.headerContainer}>
+        <TxBottomTitle
+          txType={txType}
+          listSize={Number(txData.length)}
+          totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+          goAllTx={goAllTx}
+          fromAddr={"hello"}
+        />
+        <button onClick={toggleModal}>Update</button>
+      </div>
+    </>
+  )
 }

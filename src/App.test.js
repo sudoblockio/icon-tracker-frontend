@@ -8,6 +8,7 @@ import {makeUrl} from './utils/utils'
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
 
 it('Table values do not change unexpectedly', () => {
