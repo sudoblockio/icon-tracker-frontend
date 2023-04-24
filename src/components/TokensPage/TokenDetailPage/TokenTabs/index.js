@@ -27,7 +27,7 @@ class TokenTabs extends Component {
     }
 
     render() {
-        const { on, token, tokenTransfers, tokenHolders, contractReadInfo } = this.props
+        const { on, token, tokenTransfers, tokenHolders, contractInfo } = this.props
         const { loading, data } = token
         const { address } = data
         return (
@@ -61,7 +61,7 @@ class TokenTabs extends Component {
                             return (
                                 <TokenContractRead
                                     contract={{ data: { address } }}
-                                    contractReadInfo={contractReadInfo}
+                                    contractInfo={contractInfo}
                                     icxCall={this.props.icxCall}
                                 />
                             )

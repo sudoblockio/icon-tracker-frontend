@@ -1,5 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+e2e/reports/report.html
+
 # dependencies
 /node_modules
 
@@ -15,11 +17,15 @@ yarn.lock
 
 # misc
 .DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+old-env-files/.env
+
+.env*
+
+# These env files have been depracated in favor of logic in config.js and pure env vars
+#.env.local
+#.env.development.local
+#.env.test.local
+#.env.production.local
 
 npm-debug.log*
 yarn-debug.log*
@@ -30,6 +36,6 @@ yarn-error.log*
 .vscode
 .output
 .idea
-
 .vimrc
 *.swp*
+.eslintrc*

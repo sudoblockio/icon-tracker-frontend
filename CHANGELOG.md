@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.17](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.16...v0.2.17) (2023-04-06)
+
+
+### Bug Fixes
+
+* contract header cache [#225](https://github.com/sudoblockio/icon-tracker-frontend/issues/225) ([1e13d9d](https://github.com/sudoblockio/icon-tracker-frontend/commit/1e13d9d7b2b9ec3604aa37b87d6f6cde655c1171))
+* trace integration for all tx and view logs button [#154](https://github.com/sudoblockio/icon-tracker-frontend/issues/154) [#64](https://github.com/sudoblockio/icon-tracker-frontend/issues/64) ([3730fb1](https://github.com/sudoblockio/icon-tracker-frontend/commit/3730fb1d1ae5fd5569a509f2e53691f7aacf7c6a))
+
+## [0.2.16](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.15...v0.2.16) (2023-03-16)
+
+
+### Bug Fixes
+
+* bonded tab in address page [#202](https://github.com/sudoblockio/icon-tracker-frontend/issues/202) ([ac1b7da](https://github.com/sudoblockio/icon-tracker-frontend/commit/ac1b7da429710edbca3f5ccee745419a3fef8e9f))
+* This commits fixes [#200](https://github.com/sudoblockio/icon-tracker-frontend/issues/200). The solution implemented to fix this issue is that now when someone clicks on an address in the bonders tab the state of the current active tab gets reset to the first tab (Transactions) ([d6a47be](https://github.com/sudoblockio/icon-tracker-frontend/commit/d6a47be84d586cf159ff0dba0ba27e6c3bce9d77))
+* This commits fixes [#200](https://github.com/sudoblockio/icon-tracker-frontend/issues/200). The solution implemented to fix this issue is that now when someone clicks on an address in the bonders tab the state of the current active tab gets reset to the first tab (Transactions) ([b31bb89](https://github.com/sudoblockio/icon-tracker-frontend/commit/b31bb895e02b69b826e10960bdaa00c89feec153))
+* voters address were opening on new tab [#201](https://github.com/sudoblockio/icon-tracker-frontend/issues/201) ([4f6e0c2](https://github.com/sudoblockio/icon-tracker-frontend/commit/4f6e0c2a08d16f6fadda1f34ed7f8f087b17fe57))
+
 ## [0.2.15](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.14...v0.2.15) (2023-03-10)
 
 

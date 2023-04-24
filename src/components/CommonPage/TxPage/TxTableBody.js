@@ -460,3 +460,4 @@ class TxTableBody extends Component {
 }
 
 export default TxTableBody;
+

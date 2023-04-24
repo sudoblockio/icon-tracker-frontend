@@ -13,7 +13,7 @@ import BlockDetailPage from './BlocksPage/BlockDetailPage'
 
 import ContractListPage from './ContractsPage/ContractListPage'
 import ContractDetailPage from './ContractsPage/ContractDetailPage'
-import ContractRead from './ContractsPage/ContractDetailPage/ContractTabs/ContractRead'
+import ContractComponent from './ContractsPage/ContractDetailPage/ContractTabs/ContractComponent'
 
 import TransactionListPage from './TransactionsPage/TransactionListPage'
 import TransactionDetailPage from './TransactionsPage/TransactionDetailPage'
@@ -82,7 +82,7 @@ export {
 
   ContractListPage,
   ContractDetailPage,
-  ContractRead,
+  ContractComponent,
 
   TransactionListPage,
   TransactionDetailPage,

@@ -1,7 +1,12 @@
 import configparser
+import os
 
 config = configparser.RawConfigParser()
-config.read('./e2e/configuration/config.ini')
+config_file = os.path.join(
+    os.path.dirname(__file__), "../../e2e/configuration/config.ini"
+)
+config.read(config_file)
+
 
 class ReadConfig:
     @staticmethod
@@ -35,4 +40,3 @@ class ReadConfig:
     @staticmethod
     def getContractMainUrl():
         return config.get('contract url', 'contract_main_url')
-

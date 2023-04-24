@@ -16,7 +16,7 @@ function mapStateToProps(state) {
   return {
     url: state.router.location,
     ...state.tokens,
-    contractReadInfo: state.contracts.contractReadInfo
+    contractInfo: state.contracts.contractInfo
   };
 }
 

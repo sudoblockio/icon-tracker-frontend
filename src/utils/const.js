@@ -86,7 +86,7 @@ export const CONTRACT_TABS = [
   "Internal Transactions",
   "Token Transfers",
   "Code",
-  "Read Contract",
+  "Contract",
   "Events",
 ];
 export const BLOCK_TABS = ["Transactions", "Internal Transactions"];

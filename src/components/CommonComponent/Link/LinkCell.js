@@ -25,3 +25,4 @@ const LinkCell = ({ pageType, to, label, aClassName, onClick, onClickTab }) => {
 }
 
 export default LinkCell;
+
