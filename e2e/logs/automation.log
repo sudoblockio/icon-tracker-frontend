@@ -2516,3 +2516,49 @@
 04/23/2023 05:03:44 PM: INFO: >>verifying network proposal detail page
 04/23/2023 05:03:44 PM: INFO: >>waiting for element to be visible
 04/23/2023 05:03:44 PM: INFO: ********Finished execution Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+04/24/2023 04:37:32 PM: INFO: ********Starting test case Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+04/24/2023 04:37:32 PM: INFO: >>waiting for governance tab to be visible
+04/24/2023 04:37:32 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:33 PM: INFO: >>waiting for network proposal to be visible
+04/24/2023 04:37:33 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:33 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:33 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:33 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>clicking on applied cta in network proposal item in list
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: >>verifying network proposal detail page
+04/24/2023 04:37:35 PM: INFO: >>waiting for element to be visible
+04/24/2023 04:37:35 PM: INFO: ********Finished execution Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
