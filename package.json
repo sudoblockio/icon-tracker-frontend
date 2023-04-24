@@ -1,6 +1,6 @@
 {
     "name": "icon-tracker",
-    "version": "0.2.15",
+    "version": "0.2.17",
     "private": true,
     "dependencies": {
         "@babel/core": "7.2.2",
@@ -34,7 +34,6 @@
         "eslint-plugin-jsx-a11y": "6.1.2",
         "eslint-plugin-react": "7.12.4",
         "express": "^4.16.3",
-        "extract-text-webpack-plugin": "3.0.2",
         "file-loader": "2.0.0",
         "fs-extra": "7.0.1",
         "history": "^4.7.2",
@@ -83,11 +82,10 @@
         "sass": "^1.53.0",
         "sass-loader": "^10.1.1",
         "style-loader": "0.23.1",
-        "sw-precache-webpack-plugin": "0.11.4",
         "terser-webpack-plugin": "1.2.2",
         "url-loader": "1.1.2",
         "web3-utils": "^1.0.0-beta.34",
-        "webpack": "4.28.3",
+        "webpack": "4.36.0",
         "webpack-dev-server": "3.1.14",
         "webpack-manifest-plugin": "2.0.4",
         "whatwg-fetch": "2.0.3",
