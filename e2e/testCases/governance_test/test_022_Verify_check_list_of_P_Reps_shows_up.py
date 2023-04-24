@@ -11,7 +11,6 @@ class Test_022_Verify_check_list_of_P_Reps_shows_up:
     logger = LogGen.loggen()
 
     @pytest.mark.governance
-    @pytest.mark.standalone
     def test_022_Verify_check_list_of_P_Reps_shows_up(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
