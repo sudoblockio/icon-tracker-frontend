@@ -174,5 +174,4 @@ const config = {
   region: region,
 }
 
-console.log(config)
 export default config;

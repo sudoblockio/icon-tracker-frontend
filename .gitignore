@@ -1,7 +1,5 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-e2e/reports/report.html
-
 # dependencies
 /node_modules
 
@@ -11,6 +9,12 @@ yarn.lock
 # testing
 /output/
 /coverage
+
+# e2e testing
+e2e/reports/report.html
+e2e/logs/automation.log
+__pycache__
+env
 
 # production
 /build
