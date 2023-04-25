@@ -1,9 +1,9 @@
 .PHONY: help
 
-dev:
+dev:  ## Run the dev environment
 	npm run start
 
-test-all: test-unit test-e2e
+test-all: test-unit test-e2e  ## Run all the tests
 
 test-unit: ## Run unit tests
 	npm test -- --watchAll=false

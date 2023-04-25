@@ -62,7 +62,16 @@ npm run test
 
 **e2e**
 
-Coming soon...
+The e2e tests run with selenium and pytest. To run them, you will first need to have
+ python installed with the virtual environment module. Then run: 
+
+```shell
+python3 -m venv env
+source env/bin/activate
+pip install -r e2e/requirements.txt
+# Then you can run the tests 
+make test-e2e
+```
 
 ### Set Endpoints 
 
