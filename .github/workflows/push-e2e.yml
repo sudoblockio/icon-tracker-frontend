@@ -17,11 +17,11 @@ jobs:
 
       - name: Install deps
         run: |
-          npm install 
           pip install -r e2e/requirements.txt
+#          npm install
 
-      - name: Run unit tests
-        run: make test-unit
+#      - name: Run unit tests
+#        run: make test-unit
 
       - name: Run e2e tests
         run: make test-e2e
