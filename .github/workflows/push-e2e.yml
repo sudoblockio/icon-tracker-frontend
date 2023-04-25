@@ -15,6 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install deps
+        run: |
+          npm install 
+          pip install -r e2e/requirements.txt
+
       - name: Run unit tests
         run: make test-unit
 
