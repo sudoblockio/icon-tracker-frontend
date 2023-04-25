@@ -12,6 +12,8 @@ import BlockListPage from './BlocksPage/BlockListPage'
 import BlockDetailPage from './BlocksPage/BlockDetailPage'
 
 import ContractListPage from './ContractsPage/ContractListPage'
+import ContractExplorerPage from './ContractsPage/ContractExplorerPage'
+import ContractsPageSelector from './ContractsPage/ContractsPageSelector'
 import ContractDetailPage from './ContractsPage/ContractDetailPage'
 import ContractComponent from './ContractsPage/ContractDetailPage/ContractTabs/ContractComponent'
 
@@ -82,6 +84,8 @@ export {
 
   ContractListPage,
   ContractDetailPage,
+  ContractExplorerPage,
+  ContractsPageSelector,
   ContractComponent,
 
   TransactionListPage,
