@@ -8,7 +8,7 @@
 
 .mainContainer {
   max-width: 1200px;
-  min-width: 800px;
+  min-width: 600px;
   width: 80%;
 }
 
@@ -39,6 +39,10 @@
   /* margin: 10px; */
 }
 
+.inputItemHalfSize {
+  width: 50%;
+}
+
 .inputItemContent,
 .dropdownItemContent {
   display: flex;
@@ -59,11 +63,17 @@
   padding: 0 10px;
 }
 
+.inputItemContentSmall > .inputItemInput {
+  width: 60px;
+}
+
 .inputItemInput {
+  width: 300px;
   color: #000 !important;
 }
 
 .dropdownItemSelect {
+  width: 100px;
   background-image: linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%);
     /* linear-gradient(to right, #ccc, #ccc); */
@@ -78,4 +88,20 @@
   height: 1px;
   background-color: #e0e0e0;
   margin: 10px 0;
+}
+
+.separatorVertical {
+  align-self: stretch;
+  /* min-height: 1em; */
+  /* height: 100%; */
+  width: 1px;
+  background-color: #e0e0e0;
+  margin: 0 40px;
+}
+
+.customNetworkItem {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  /* justify-content: space-between */
 }
