@@ -5,14 +5,39 @@ import styles from "./ContractExplorerPage.module.css";
 
 const { ReadMethod, WriteMethod } = MiscComponents;
 
+const initialInputItemsState = {
+  address: "cx0000000000000000000000000000000000000000",
+  endpoint: "http://localhost:9000",
+  nid: "3"
+};
 function ContractExplorerPage(props) {
   const [activeSection, setActiveSection] = useState(0);
   const [networkState, setNetworkState] = useState("mainnet");
+  const [inputItemsState, setInputItemsState] = useState(initialInputItemsState);
 
   function onNetworkChange(e) {
     console.log(e.target.value);
     setNetworkState(e.target.value);
   }
+
+  function handleInputChange(event, label) {
+    console.log('event target');
+    console.log(event.target);
+    event.persist();
+    setInputItemsState(state => {
+      return {
+        ...state,
+        [label]: event.target.value
+      }
+    })
+  }
+
+  function handleAddressInputChange(event) {
+    handleInputChange(event, "address");
+  }
+
+  console.log('contract explorer props');
+  console.log(props);
 
   return (
     <div className={styles.main}>
@@ -22,7 +47,11 @@ function ContractExplorerPage(props) {
           <div
             className={`${styles.pageContentHeader} ${styles.paperContainer}`}
           >
-            <InputItem label={`Address`} />
+            <InputItem
+              label={`Address`}
+              value={inputItemsState.address}
+              onValueChange={handleAddressInputChange}
+            />
             <Separator />
             <DropdownItem label={`Network`} onSelectChange={onNetworkChange} />
             {networkState === "custom" && (
@@ -31,6 +60,8 @@ function ContractExplorerPage(props) {
                 <CustomNetworkItem
                   endpointLabel={`Endpoint`}
                   endpointNid={`NID`}
+                  values={inputItemsState}
+                  onValuesChange={handleInputChange}
                 />
               </>
             )}
@@ -49,6 +80,8 @@ function ContractExplorerPage(props) {
 
 function InputItem({
   label,
+  value,
+  onValueChange,
   useSmall = false,
   placeholder = "cx0000..",
   halfSize = false
@@ -67,6 +100,8 @@ function InputItem({
           className={styles.inputItemInput}
           type="text"
           placeholder={placeholder}
+          value={value}
+          onChange={onValueChange}
         />
       </div>
     </div>
@@ -89,12 +124,36 @@ function DropdownItem({ label, onSelectChange }) {
   );
 }
 
-function CustomNetworkItem({ endpointLabel, endpointNid }) {
+function CustomNetworkItem({
+  endpointLabel,
+  endpointNid,
+  values,
+  onValuesChange
+}) {
+
+  function handleEndpointChange(event) {
+    onValuesChange(event, "endpoint");
+  }
+
+  function handleNidChange(event) {
+    onValuesChange(event, "nid");
+  }
+
   return (
     <div className={styles.customNetworkItem}>
-      <InputItem label={endpointLabel} />
+      <InputItem
+        label={endpointLabel}
+        value={values.endpoint}
+        onValueChange={handleEndpointChange}
+      />
       <Separator useVertical={true} />
-      <InputItem label={endpointNid} useSmall={true} placeholder="3" />
+      <InputItem 
+        label={endpointNid} 
+        useSmall={true} 
+        placeholder="3" 
+        value={values.nid}
+        onValueChange={handleNidChange}
+      />
     </div>
   );
 }
