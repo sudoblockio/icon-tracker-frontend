@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
-import ButtonSet from "./ButtonSet";
-import MiscComponents from "./MiscContractComponents";
+import ButtonSet from "../../MiscComponents/ButtonSet";
+import MiscComponents from "../../MiscComponents/MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 import { customMethod } from "../../../../utils/rawTxMaker";
 

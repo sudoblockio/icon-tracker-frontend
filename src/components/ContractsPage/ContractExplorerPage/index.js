@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import MiscComponents from "./MiscContractComponents";
-import ButtonSet from "./ButtonSet";
+import React, { useState, useEffect } from "react";
+import MiscComponents from "../MiscComponents/MiscContractComponents";
+import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
+import { isCxAddress } from "../../../utils/utils";
 
 const { ReadMethod, WriteMethod } = MiscComponents;
 
@@ -13,7 +14,10 @@ const initialInputItemsState = {
 function ContractExplorerPage(props) {
   const [activeSection, setActiveSection] = useState(0);
   const [networkState, setNetworkState] = useState("mainnet");
-  const [inputItemsState, setInputItemsState] = useState(initialInputItemsState);
+  const [inputItemsState, setInputItemsState] = useState(
+    initialInputItemsState
+  );
+  const [cxAbi, setCxAbi] = useState(null);
 
   function onNetworkChange(e) {
     console.log(e.target.value);
@@ -21,22 +25,56 @@ function ContractExplorerPage(props) {
   }
 
   function handleInputChange(event, label) {
-    console.log('event target');
+    console.log("event target");
     console.log(event.target);
     event.persist();
     setInputItemsState(state => {
       return {
         ...state,
         [label]: event.target.value
-      }
-    })
+      };
+    });
   }
 
   function handleAddressInputChange(event) {
     handleInputChange(event, "address");
   }
 
-  console.log('contract explorer props');
+  useEffect(() => {
+    const isValidCxAddress = isCxAddress(inputItemsState.address);
+
+    if (isValidCxAddress) {
+      if (networkState === "custom") {
+        // TODO: put logic for custom network here
+      } else {
+        props.readContractInformation(
+          {
+            address: inputItemsState.address
+          },
+          networkState
+        );
+        props.icxGetScore(
+          {
+            address: inputItemsState.address
+          },
+          networkState
+        );
+      }
+    }
+  }, [networkState, inputItemsState]);
+
+  useEffect(() => {
+    if (!props.contractAbi.loading) {
+      setCxAbi(props.contractAbi.data);
+    }
+  }, [props.contractAbi]);
+
+  // useEffect(() => {
+  //   console.log('updated contract abi');
+  //   console.log(cxAbi);
+  // }, [cxAbi]);
+
+  console.log("contract explorer props");
   console.log(props);
 
   return (
@@ -87,7 +125,13 @@ function InputItem({
   halfSize = false
 }) {
   return (
-    <div className={halfSize ? `${styles.inputItem} ${styles.inputItemHalfSize}` : `${styles.inputItem}`}>
+    <div
+      className={
+        halfSize
+          ? `${styles.inputItem} ${styles.inputItemHalfSize}`
+          : `${styles.inputItem}`
+      }
+    >
       <div className={styles.inputItemLabel}>{label}</div>
       <div
         className={
@@ -130,7 +174,6 @@ function CustomNetworkItem({
   values,
   onValuesChange
 }) {
-
   function handleEndpointChange(event) {
     onValuesChange(event, "endpoint");
   }
@@ -147,10 +190,10 @@ function CustomNetworkItem({
         onValueChange={handleEndpointChange}
       />
       <Separator useVertical={true} />
-      <InputItem 
-        label={endpointNid} 
-        useSmall={true} 
-        placeholder="3" 
+      <InputItem
+        label={endpointNid}
+        useSmall={true}
+        placeholder="3"
         value={values.nid}
         onValueChange={handleNidChange}
       />
