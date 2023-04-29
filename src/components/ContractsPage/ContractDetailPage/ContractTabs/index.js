@@ -19,7 +19,6 @@ function ContractTabs(props) {
     contractEvents,
     contractAbi,
     contractReadInfo,
-    contractWriteInfo,
     changeTab,
     history,
     icxCall,

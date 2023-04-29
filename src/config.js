@@ -40,8 +40,6 @@ if (isLocal) {
 
 const defaultSettings = defaults[0]
 
-console.log('defaults');
-console.log(defaultsCopy);
 network = defaultSettings['network']
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || defaultSettings['apiEndpoint'];
 const rpcEndpoint = process.env.REACT_APP_RPC_ENDPOINT || defaultSettings['rpcEndpoint'];
@@ -91,5 +89,5 @@ const config = {
   }
 }
 
-console.log(config)
+// console.log(config)
 export default config;
