@@ -18,6 +18,17 @@
   margin-bottom: 20px;
 }
 
+.contractContainer {
+  font-size: 12px;
+}
+
+.titleContainer {
+}
+
+.titleItem {
+  font-size: 12px;
+}
+
 .pageContent {
   width: 100%;
 }
