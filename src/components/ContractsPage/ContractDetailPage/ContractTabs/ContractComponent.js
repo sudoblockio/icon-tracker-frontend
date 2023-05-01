@@ -6,10 +6,12 @@ import MiscComponents from "../../MiscComponents/MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 import { customMethod } from "../../../../utils/rawTxMaker";
 import { makeParams, createContractMethodsState } from "../../contractUtils";
+import config from "../../../../config";
 
+const { nid } = config;
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-const HARDCODED_NID_FIX_THIS = 2;
+// const HARDCODED_NID_FIX_THIS = 2;
 
 function ContractComponent({
   contract,
@@ -41,7 +43,7 @@ function ContractComponent({
 
   function handleClickOnWrite(address, method, inputs, index) {
     // makeTxCallRpcObj
-    const nid = HARDCODED_NID_FIX_THIS;
+    // const nid = HARDCODED_NID_FIX_THIS;
 
     if (walletAddress === "") {
       alert("Please connect to wallet first");
@@ -54,6 +56,8 @@ function ContractComponent({
         paramsData,
         nid
       );
+      console.log("rawMethodCall");
+      console.log(rawMethodCall);
       icxSendTransaction({
         params: { ...rawMethodCall },
         index: index
