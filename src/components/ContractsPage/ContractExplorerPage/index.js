@@ -195,6 +195,7 @@ function ContractExplorerPage({
                         handleClick={handleClickOnWrite}
                         address={address}
                         startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                        showEvents={true}
                       />
                     </div>
                   )
@@ -247,6 +248,7 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={address}
+                        showEvents={true}
                       />
                     </div>
                   )
@@ -281,6 +283,7 @@ function ContractExplorerPage({
                         handleClick={handleClickOnWrite}
                         address={address}
                         startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                        showEvents={true}
                       />
                     </div>
                   )

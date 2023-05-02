@@ -50,7 +50,8 @@ function WriteMethodItems({
   handleChange,
   handleClick,
   address,
-  startIndex = 0
+  startIndex = 0,
+  showEvents = false
 }) {
   return (
     <ul className="list">
@@ -69,6 +70,7 @@ function WriteMethodItems({
               isExpandable={true}
               alwaysShowButton={true}
               startIndex={startIndex}
+              showEvents={showEvents}
             />
           </div>
         );
@@ -88,7 +90,8 @@ function CollapsableComponent({
   address,
   isExpandable,
   startIndex,
-  alwaysShowButton = false
+  alwaysShowButton = false,
+  showEvents = false
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
@@ -188,48 +191,55 @@ function CollapsableComponent({
           </div>
         )}
       </div>
-      <div className={styles.writeMethodBody}>
-        {methodInput.inputs.length > 0 &&
-          methodInput.inputs.map((input, index2) => {
-            const name = input["name"];
-            const type = input["type"];
-            const inputName = `${methodName}_${name}_${type}`;
-            const placeholder = `${name} (${type})`;
-            const value = params[inputName] || "";
+      <div className={styles.writeMethodBodyOuterContainer}>
+        <div className={styles.writeMethodBody}>
+          {methodInput.inputs.length > 0 &&
+            methodInput.inputs.map((input, index2) => {
+              const name = input["name"];
+              const type = input["type"];
+              const inputName = `${methodName}_${name}_${type}`;
+              const placeholder = `${name} (${type})`;
+              const value = params[inputName] || "";
 
-            return (
-              <div
-                className={styles.writeMethodBodyInput}
-                key={`writeMethod-element-${index2}`}
+              return (
+                <div
+                  className={styles.writeMethodBodyInput}
+                  key={`writeMethod-element-${index2}`}
+                >
+                  <div className={styles.writeMethodBodyInputName}>
+                    {placeholder}
+                  </div>
+                  <div className={styles.writeMethodBodyInputType}>
+                    <input
+                      type="text"
+                      key={`writeMethod-${index2}`}
+                      name={inputName}
+                      placeholder={placeholder}
+                      value={value}
+                      onChange={handleChangeParent}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          {(methodInput.inputs.length > 0 || alwaysShowButton) && (
+            <div className={styles.methodInputButtonContainer}>
+              <button
+                className={styles.methodInputButton}
+                onClick={handleButtonClick}
               >
-                <div className={styles.writeMethodBodyInputName}>
-                  {placeholder}
-                </div>
-                <div className={styles.writeMethodBodyInputType}>
-                  <input
-                    type="text"
-                    key={`writeMethod-${index2}`}
-                    name={inputName}
-                    placeholder={placeholder}
-                    value={value}
-                    onChange={handleChangeParent}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        {(methodInput.inputs.length > 0 || alwaysShowButton) && (
-          <div className={styles.methodInputButtonContainer}>
-            <button
-              className={styles.methodInputButton}
-              onClick={handleButtonClick}
-            >
-              Query
-            </button>
+                Query
+              </button>
+            </div>
+          )}
+        </div>
+        {showEvents && (
+          <div className={styles.writeMethodBodyEvents}>
+            <div>PLACEHOLDER FOR EVENT LOGS</div>
           </div>
         )}
       </div>
-      {(resultIsOpen && methodOutput.state > 0) && (
+      {resultIsOpen && methodOutput.state > 0 && (
         <div
           className={
             methodOutput.error === ""

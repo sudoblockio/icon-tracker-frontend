@@ -67,11 +67,27 @@
   transform: rotate(180deg);
 }
 
+.writeMethodBodyOuterContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  width: 100%;
+  /* height: 0; */
+  /* overflow: hidden; */
+  /* transition: height 0.5s ease; */
+}
+
+.writeMethodBodyEvents {
+  flex: 50%;
+}
+
 .writeMethodBody {
   padding: 10px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+  flex: 50%;
 }
 
 .methodInputButtonContainer {
@@ -124,6 +140,8 @@
   border-radius: 2px !important;
   padding: 0 9px;
   min-width: 50%;
+  width: 80%;
+  max-width: 500px;
   margin: 0 1px 5px;
 }
 
