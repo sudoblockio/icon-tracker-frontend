@@ -23,9 +23,6 @@ const initialInputItemsState = {
 };
 
 function ContractExplorerPage({
-  readContractInformation, 
-  contract,
-  walletAddress,
   wallet,
   icxSendTransaction
 }) {
@@ -39,8 +36,9 @@ function ContractExplorerPage({
   const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
 
-  const { data } = contract;
-  const { address } = data;
+  console.log('props');
+  console.log(wallet);
+  console.log(icxSendTransaction);
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -81,12 +79,12 @@ function ContractExplorerPage({
 
   function handleClickOnWrite(address, method, inputs, index) {
 
-    if (walletAddress === "") {
+    if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
       const paramsData = makeParams(params, method, inputs);
       const rawMethodCall = customMethod(
-        walletAddress,
+        wallet,
         address,
         method,
         paramsData,
@@ -135,12 +133,6 @@ function ContractExplorerPage({
       if (networkState === "custom") {
         // TODO: put logic for custom network here
       } else {
-        readContractInformation(
-          {
-            address: inputItemsState.address
-          },
-          networkState
-        );
         getAbi();
       }
     }
@@ -208,14 +200,14 @@ function ContractExplorerPage({
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
-                        address={address}
+                        address={inputItemsState.address}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
-                        address={address}
+                        address={inputItemsState.address}
                         startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
                         showEvents={true}
                       />
@@ -243,7 +235,7 @@ function ContractExplorerPage({
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
-                        address={address}
+                        address={inputItemsState.address}
                       />
                     </div>
                   )
@@ -269,7 +261,7 @@ function ContractExplorerPage({
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
-                        address={address}
+                        address={inputItemsState.address}
                         showEvents={true}
                       />
                     </div>
@@ -296,14 +288,14 @@ function ContractExplorerPage({
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
-                        address={address}
+                        address={inputItemsState.address}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
-                        address={address}
+                        address={inputItemsState.address}
                         startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
                         showEvents={true}
                       />
