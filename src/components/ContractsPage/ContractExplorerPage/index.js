@@ -12,6 +12,7 @@ import {
 } from "../contractUtils";
 import config from "../../../config";
 import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
+import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
 const { nid } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
@@ -23,8 +24,7 @@ const initialInputItemsState = {
 };
 
 function ContractExplorerPage({
-  wallet,
-  icxSendTransaction
+  wallet
 }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
@@ -38,7 +38,6 @@ function ContractExplorerPage({
 
   console.log('props');
   console.log(wallet);
-  console.log(icxSendTransaction);
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -77,7 +76,7 @@ function ContractExplorerPage({
     });
   }
 
-  function handleClickOnWrite(address, method, inputs, index) {
+  async function handleClickOnWrite(address, method, inputs, index) {
 
     if (wallet === "") {
       alert("Please connect to wallet first");
@@ -92,10 +91,12 @@ function ContractExplorerPage({
       )
       console.log('rawMethodCall');
       console.log(rawMethodCall);
-      icxSendTransaction({
+      const response = await icxSendTransaction({
         params: { ...rawMethodCall },
         index: index
       })
+      console.log('response');
+      console.log(response);
     }
   }
 
