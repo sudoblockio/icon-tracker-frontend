@@ -96,6 +96,7 @@ function CollapsableComponent({
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
   const [responseState, setResponseState] = useState("");
+  const [eventlogState, setEventlogState] = useState("");
   const outputType =
     methodInput.readonly != null && methodInput.readonly === "0x1"
       ? methodInput.outputs[0].type
@@ -104,6 +105,10 @@ function CollapsableComponent({
     methodInput.readonly != null && methodInput.readonly === "0x1"
       ? JSON.stringify(methodOutput.valueArray[0])
       : "";
+
+  function handleEventlogChange(txHash) {
+    //
+  }
 
   function toggleOpen() {
     setIsOpen(state => !state);
@@ -136,6 +141,8 @@ function CollapsableComponent({
   useEffect(() => {
     const parsedResponse = parseResponse(methodOutput);
     setResponseState(parsedResponse);
+    console.log('response state');
+    console.log(responseState);
   }, [methodOutput]);
 
   return (
@@ -234,9 +241,10 @@ function CollapsableComponent({
           )}
         </div>
         {showEvents && (
-          <div className={styles.writeMethodBodyEvents}>
-            <div>PLACEHOLDER FOR EVENT LOGS</div>
-          </div>
+          <EventlogComponent 
+            value={eventlogState}
+            onValueChange={handleEventlogChange}
+          />
         )}
       </div>
       {resultIsOpen && methodOutput.state > 0 && (
@@ -253,6 +261,19 @@ function CollapsableComponent({
           </p>
         </div>
       )}
+    </div>
+  );
+}
+
+function EventlogComponent({ value, onValueChange }) {
+  return (
+    <div className={styles.eventlogMain}>
+      <textarea 
+        className={styles.eventlogTextarea} 
+        placeholder="Event logs"
+        value={value}
+        onChange={onValueChange}
+      />
     </div>
   );
 }

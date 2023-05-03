@@ -5,7 +5,14 @@ import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
 import { isCxAddress } from "../../../utils/utils";
 import { customMethod } from "../../../utils/rawTxMaker";
-import { makeParams, createContractMethodsState } from "../contractUtils";
+import {
+  makeParams,
+  createContractMethodsState,
+  localReadContractInformationFunc
+} from "../contractUtils";
+import config from "../../../config";
+import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
+const { nid } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
@@ -16,12 +23,8 @@ const initialInputItemsState = {
 };
 
 function ContractExplorerPage({
-  icxCall,
   readContractInformation, 
-  icxGetScore, 
-  contractAbi,
   contract,
-  contractReadInfo,
   walletAddress,
   wallet,
   icxSendTransaction
@@ -32,16 +35,12 @@ function ContractExplorerPage({
   const [inputItemsState, setInputItemsState] = useState(
     initialInputItemsState
   );
+  const [contractAbi, setContractAbi] = useState(null);
   const [cxAbi, setCxAbi] = useState(null);
+  const [contractReadInfo, setContractReadInfo] = useState(null);
 
-  console.log('updated contract read write info');
-  console.log(contractReadInfo);
   const { data } = contract;
   const { address } = data;
-  const { loading, error } = contractReadInfo;
-  const contractMethodsState = createContractMethodsState(
-    contractReadInfo
-  );
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -81,7 +80,6 @@ function ContractExplorerPage({
   }
 
   function handleClickOnWrite(address, method, inputs, index) {
-    const nid = 2;
 
     if (walletAddress === "") {
       alert("Please connect to wallet first");
@@ -94,6 +92,12 @@ function ContractExplorerPage({
         paramsData,
         nid
       )
+      console.log('rawMethodCall');
+      console.log(rawMethodCall);
+      icxSendTransaction({
+        params: { ...rawMethodCall },
+        index: index
+      })
     }
   }
 
@@ -102,7 +106,30 @@ function ContractExplorerPage({
   }
 
   useEffect(() => {
+    //TODO: modify this section to work on any network (mainnet, lisbon, berlin, etc);
     const isValidCxAddress = isCxAddress(inputItemsState.address);
+    setContractAbi(null);
+
+    async function getAbi() {
+        const abi = await icxGetScore(
+          {
+            address: inputItemsState.address
+          },
+          networkState
+        );
+      console.log('abi');
+      console.log(abi);
+
+      if (abi.error == null) {
+        const f = await localReadContractInformationFunc(abi.data.result, inputItemsState.address);
+        const g = createContractMethodsState(f);
+        console.log('df');
+        console.log(f);
+        console.log(g);
+        setContractReadInfo(g);
+      }
+        setContractAbi(abi);
+    }
 
     if (isValidCxAddress) {
       if (networkState === "custom") {
@@ -114,21 +141,16 @@ function ContractExplorerPage({
           },
           networkState
         );
-        icxGetScore(
-          {
-            address: inputItemsState.address
-          },
-          networkState
-        );
+        getAbi();
       }
     }
   }, [networkState, inputItemsState]);
 
-  useEffect(() => {
-    if (!contractAbi.loading) {
-      setCxAbi(contractAbi.data);
-    }
-  }, [contractAbi]);
+  // useEffect(() => {
+  //   if (!contractAbi.loading) {
+  //     setCxAbi(contractAbi.data);
+  //   }
+  // }, [contractAbi]);
 
   useEffect(() => {
   }, []);
@@ -171,30 +193,30 @@ function ContractExplorerPage({
                   <span className={styles.titleItem}>
                     Read/Write Contract Methods
                   </span>
-                  {loading ? (
+                  {contractAbi == null ? (
                     <LoadingComponent height="322px" />
-                  ) : !!error ? (
+                  ) : contractAbi.error != null ? (
                     <div className="scroll">
                       <ul className="list">
-                        <li>{error}</li>
+                        <li>{contractAbi.error.message}</li>
                       </ul>
                     </div>
                   ) : (
                     <div className="scroll">
                       <ReadMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
                         address={address}
                       />
                       <WriteMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={address}
-                        startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                        startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
                         showEvents={true}
                       />
                     </div>
@@ -206,18 +228,18 @@ function ContractExplorerPage({
                   <span className={styles.titleItem}>
                     Read Contract Methods
                   </span>
-                  {loading ? (
+                  {contractAbi == null ? (
                     <LoadingComponent height="322px" />
-                  ) : !!error ? (
+                  ) : contractAbi.error != null ? (
                     <div className="scroll">
                       <ul className="list">
-                        <li>{error}</li>
+                        <li>{contractAbi.error.message}</li>
                       </ul>
                     </div>
                   ) : (
                     <div className="scroll">
                       <ReadMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
@@ -232,18 +254,18 @@ function ContractExplorerPage({
                   <span className={styles.titleItem}>
                     Write Contract Methods
                   </span>
-                  {loading ? (
+                  {contractAbi == null ? (
                     <LoadingComponent height="322px" />
-                  ) : !!error ? (
+                  ) : contractAbi.error != null ? (
                     <div className="scroll">
                       <ul className="list">
-                        <li>{error}</li>
+                        <li>{contractAbi.error.message}</li>
                       </ul>
                     </div>
                   ) : (
                     <div className="scroll">
                       <WriteMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
@@ -259,30 +281,30 @@ function ContractExplorerPage({
                   <span className={styles.titleItem}>
                     Read/ Write Contract Methods
                   </span>
-                  {loading ? (
+                  {contractAbi == null ? (
                     <LoadingComponent height="322px" />
-                  ) : !!error ? (
+                  ) : contractAbi.error != null ? (
                     <div className="scroll">
                       <ul className="list">
-                        <li>{error}</li>
+                        <li>{contractAbi.error.message}</li>
                       </ul>
                     </div>
                   ) : (
                     <div className="scroll">
                       <ReadMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
                         address={address}
                       />
                       <WriteMethodItems
-                        methods={contractMethodsState}
+                        methods={contractReadInfo}
                         params={params}
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={address}
-                        startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                        startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
                         showEvents={true}
                       />
                     </div>
