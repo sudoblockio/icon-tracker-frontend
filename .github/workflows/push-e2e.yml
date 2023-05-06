@@ -1,0 +1,27 @@
+name: push-e2e
+
+on:
+  push:
+    tags:
+      - e2e
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.source.outputs.TAG }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        run: |
+          pip install -r e2e/requirements.txt
+#          npm install
+
+#      - name: Run unit tests
+#        run: make test-unit
+
+      - name: Run e2e tests
+        run: make test-e2e
