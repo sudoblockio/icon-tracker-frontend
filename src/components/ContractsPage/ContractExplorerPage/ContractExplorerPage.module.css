@@ -1,0 +1,118 @@
+.main {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.mainContainer {
+  max-width: 1200px;
+  min-width: 600px;
+  width: 80%;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.contractContainer {
+  font-size: 12px;
+}
+
+.titleContainer {
+}
+
+.titleItem {
+  font-size: 12px;
+}
+
+.pageContent {
+  width: 100%;
+}
+
+.paperContainer {
+  width: 100%;
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.inputItem,
+.dropdownItem {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  /* margin: 10px; */
+}
+
+.inputItemHalfSize {
+  width: 50%;
+}
+
+.inputItemContent,
+.dropdownItemContent {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 30px;
+}
+
+.inputItemInput,
+.dropdownItemSelect {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-style: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px !important;
+  padding: 0 10px;
+}
+
+.inputItemContentSmall > .inputItemInput {
+  width: 60px;
+}
+
+.inputItemInput {
+  width: 300px;
+  color: #000 !important;
+}
+
+.dropdownItemSelect {
+  width: 100px;
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+    /* linear-gradient(to right, #ccc, #ccc); */
+  background-position: calc(100% - 20px),
+    calc(100% - 15px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+}
+
+.separatorVertical {
+  align-self: stretch;
+  /* min-height: 1em; */
+  /* height: 100%; */
+  width: 1px;
+  background-color: #e0e0e0;
+  margin: 0 40px;
+}
+
+.customNetworkItem {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  /* justify-content: space-between */
+}
