@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import BigNumber from "bignumber.js";
+// import BigNumber from "bignumber.js";
+import { is0xHash } from "../../../utils/utils";
+import {
+  getTransactionResultFromRPCNotSdk,
+  getTxResultWaited
+} from "../../../redux/api/restV3/icx";
 import styles from "./MiscContractComponents.module.css";
 
 function ReadMethodItems({
@@ -8,6 +13,7 @@ function ReadMethodItems({
   handleChange,
   handleClick,
   address,
+  network,
   startIndex = 0
 }) {
   return (
@@ -36,6 +42,7 @@ function ReadMethodItems({
               address={address}
               isExpandable={isExpandable}
               startIndex={startIndex}
+              network={network}
             />
           </div>
         );
@@ -50,6 +57,7 @@ function WriteMethodItems({
   handleChange,
   handleClick,
   address,
+  network,
   startIndex = 0,
   showEvents = false
 }) {
@@ -71,6 +79,7 @@ function WriteMethodItems({
               alwaysShowButton={true}
               startIndex={startIndex}
               showEvents={showEvents}
+              network={network}
             />
           </div>
         );
@@ -90,6 +99,7 @@ function CollapsableComponent({
   address,
   isExpandable,
   startIndex,
+  network,
   alwaysShowButton = false,
   showEvents = false
 }) {
@@ -139,8 +149,28 @@ function CollapsableComponent({
   }, [isOpen, methodInput.inputs]);
 
   useEffect(() => {
+    async function getLogFromTx() {
+      const response = await getTxResultWaited(
+        methodOutput.valueArray[0],
+        network
+      );
+      let parsedEventlog = "";
+
+      if (response.error === "") {
+        parsedEventlog = JSON.stringify(response.error);
+      } else {
+        parsedEventlog = JSON.stringify(response.data.result.eventLogs);
+      }
+      setEventlogState(parsedEventlog);
+    }
     const parsedResponse = parseResponse(methodOutput);
     setResponseState(parsedResponse);
+
+    if (methodOutput.error === "") {
+      if (is0xHash(methodOutput.valueArray[0])) {
+        getLogFromTx();
+      }
+    }
   }, [methodOutput]);
 
   return (
@@ -239,7 +269,7 @@ function CollapsableComponent({
           )}
         </div>
         {showEvents && (
-          <EventlogComponent 
+          <EventlogComponent
             value={eventlogState}
             onValueChange={handleEventlogChange}
           />
@@ -266,8 +296,8 @@ function CollapsableComponent({
 function EventlogComponent({ value, onValueChange }) {
   return (
     <div className={styles.eventlogMain}>
-      <textarea 
-        className={styles.eventlogTextarea} 
+      <textarea
+        className={styles.eventlogTextarea}
         placeholder="Event logs"
         value={value}
         onChange={onValueChange}

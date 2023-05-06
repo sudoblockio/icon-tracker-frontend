@@ -10,7 +10,7 @@ export function makeParams(params, funcName, inputs) {
     result[name] = value;
   });
   return result;
-};
+}
 
 export function createContractMethodsState(contractReadWriteInfo) {
   //
@@ -52,10 +52,10 @@ export function createContractMethodsState(contractReadWriteInfo) {
 
 export async function localReadContractInformationFunc(score, cxAddress) {
   const readOnlyFunc = (score || []).filter(
-    func => func["type"] == "function" && func["readonly"] === "0x1"
+    func => func["type"] === "function" && func["readonly"] === "0x1"
   );
   const writeFunc = (score || []).filter(
-    func => func["type"] == "function" && func["readonly"] !== "0x0"
+    func => func["type"] === "function" && func["readonly"] !== "0x1"
   );
   const funcList = [...readOnlyFunc];
   const writeFuncList = [...writeFunc];
@@ -79,7 +79,7 @@ export async function localReadContractInformationFunc(score, cxAddress) {
     } else {
       _funcOutputs.push("");
     }
-  } 
+  }
 
   const funcOutputs = [];
   _funcOutputs.forEach(output => {
@@ -112,7 +112,7 @@ export async function localReadContractInformationFunc(score, cxAddress) {
     funcOutputs,
     writeFuncList,
     writeFuncOutputs
-  }
+  };
 
   return result;
 }

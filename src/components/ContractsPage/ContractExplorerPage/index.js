@@ -11,7 +11,10 @@ import {
   localReadContractInformationFunc
 } from "../contractUtils";
 import config from "../../../config";
-import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
+import { 
+  icxGetScore,
+  icxCall
+} from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
 const { nid } = config;
 
@@ -23,9 +26,7 @@ const initialInputItemsState = {
   nid: "3"
 };
 
-function ContractExplorerPage({
-  wallet
-}) {
+function ContractExplorerPage({ wallet }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
   const [networkState, setNetworkState] = useState("mainnet");
@@ -36,7 +37,7 @@ function ContractExplorerPage({
   const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
 
-  console.log('props');
+  console.log("props");
   console.log(wallet);
 
   function handleParamsChange(event) {
@@ -45,28 +46,15 @@ function ContractExplorerPage({
       return {
         ...state,
         [name]: value
-      }
+      };
     });
   }
 
-  function handleClickOnReadonly(address, method, inputs, index) {
-    const paramsData = makeParams(params, method, inputs);
-    icxCall({
-      address,
-      method,
-      params: paramsData,
-      index
-    })
-  }
-
   function onNetworkChange(e) {
-    console.log(e.target.value);
     setNetworkState(e.target.value);
   }
 
   function handleInputChange(event, label) {
-    console.log("event target");
-    console.log(event.target);
     event.persist();
     setInputItemsState(state => {
       return {
@@ -76,8 +64,40 @@ function ContractExplorerPage({
     });
   }
 
-  async function handleClickOnWrite(address, method, inputs, index) {
+  async function handleClickOnReadonly(address, method, inputs, index) {
+    const paramsData = makeParams(params, method, inputs);
+    console.log("paramsData");
+    console.log(paramsData);
+    const response = await icxCall(
+      {
+        from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
+        to: address,
+        dataType: "call",
+        data: {
+          method: method,
+          params: paramsData
+        }
+      },
+      networkState
+    );
 
+    console.log("icx call response");
+    console.log(response);
+
+    setContractReadInfo(state => {
+      const prevState = { ...state };
+      console.log("method");
+      console.log(method);
+      prevState[method].outputs = {
+        error: response.error == null ? "" : response.error.message,
+        valueArray: response.data == null ? "" : [response.data.result],
+        state: 1
+      };
+      return prevState;
+    });
+  }
+
+  async function handleClickOnWrite(address, method, inputs, index) {
     if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
@@ -88,15 +108,29 @@ function ContractExplorerPage({
         method,
         paramsData,
         nid
-      )
-      console.log('rawMethodCall');
+      );
+      console.log("rawMethodCall");
       console.log(rawMethodCall);
+      //TODO: modify this section to update the method with
+      //the responses
       const response = await icxSendTransaction({
         params: { ...rawMethodCall },
         index: index
-      })
-      console.log('response');
+      });
+      console.log("response");
       console.log(response);
+
+      setContractReadInfo(state => {
+        const prevState = { ...state };
+        console.log("method");
+        console.log(method);
+        prevState[method].outputs = {
+          error: response.error.message,
+          valueArray: [response.data.result],
+          state: 1
+        };
+        return prevState;
+      });
     }
   }
 
@@ -110,24 +144,27 @@ function ContractExplorerPage({
     setContractAbi(null);
 
     async function getAbi() {
-        const abi = await icxGetScore(
-          {
-            address: inputItemsState.address
-          },
-          networkState
-        );
-      console.log('abi');
+      const abi = await icxGetScore(
+        {
+          address: inputItemsState.address
+        },
+        networkState
+      );
+      console.log("abi");
       console.log(abi);
 
       if (abi.error == null) {
-        const f = await localReadContractInformationFunc(abi.data.result, inputItemsState.address);
+        const f = await localReadContractInformationFunc(
+          abi.data.result,
+          inputItemsState.address
+        );
         const g = createContractMethodsState(f);
-        console.log('df');
+        console.log("df");
         console.log(f);
         console.log(g);
         setContractReadInfo(g);
       }
-        setContractAbi(abi);
+      setContractAbi(abi);
     }
 
     if (isValidCxAddress) {
@@ -138,15 +175,6 @@ function ContractExplorerPage({
       }
     }
   }, [networkState, inputItemsState]);
-
-  // useEffect(() => {
-  //   if (!contractAbi.loading) {
-  //     setCxAbi(contractAbi.data);
-  //   }
-  // }, [contractAbi]);
-
-  useEffect(() => {
-  }, []);
 
   return (
     <div className={styles.main}>
@@ -202,6 +230,7 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
+                        network={networkState}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}
@@ -209,12 +238,14 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={inputItemsState.address}
-                        startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
+                        startIndex={
+                          contractReadInfo.readOnlyMethodsNameArray.length
+                        }
                         showEvents={true}
+                        network={networkState}
                       />
                     </div>
-                  )
-                  }
+                  )}
                 </div>
               ) : activeSection === 1 ? (
                 <div className={styles.titleContainer}>
@@ -237,10 +268,10 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
+                        network={networkState}
                       />
                     </div>
-                  )
-                  }
+                  )}
                 </div>
               ) : activeSection === 2 ? (
                 <div className={styles.titleContainer}>
@@ -263,11 +294,14 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={inputItemsState.address}
+                        startIndex={
+                          contractReadInfo.readOnlyMethodsNameArray.length
+                        }
                         showEvents={true}
+                        network={networkState}
                       />
                     </div>
-                  )
-                  }
+                  )}
                 </div>
               ) : (
                 <div className={styles.titleContainer}>
@@ -290,6 +324,7 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
+                        network={networkState}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}
@@ -297,12 +332,14 @@ function ContractExplorerPage({
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={inputItemsState.address}
-                        startIndex={contractReadInfo.readOnlyMethodsNameArray.length}
+                        startIndex={
+                          contractReadInfo.readOnlyMethodsNameArray.length
+                        }
                         showEvents={true}
+                        network={networkState}
                       />
                     </div>
-                  )
-                  }
+                  )}
                 </div>
               )}
             </div>

@@ -1,4 +1,3 @@
-import { randomUint32 } from '../../../utils/utils'
 import { requestJsonRpc } from "../../../utils/connect";
 
 export async function icxSendTransaction({ params, index }) {
@@ -10,12 +9,12 @@ export async function icxSendTransaction({ params, index }) {
   };
   try {
     result.data = await requestJsonRpc(params.params);
-    console.log('result success');
+    console.log("result success");
   } catch (error) {
-    console.log('result error');
+    console.log("result error");
     console.log(error);
     result.status = 500;
-    result.error.message = error;;
+    result.error.message = error;
   }
   return result;
 }

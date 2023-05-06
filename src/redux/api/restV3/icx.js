@@ -112,3 +112,60 @@ export async function getTransactionResultNotSdk(txHash, label = "default") {
     return undefined;
   }
 }
+
+async function sleep(time = 1000) {
+  await new Promise(resolve => {
+    setTimeout(resolve, time);
+  });
+}
+
+export async function getTxResultWaited(txHash, label = "default", waitSeconds = 5) {
+  const result = {
+    error: '',
+    result: ''
+  };
+  for (let i = 0; i < waitSeconds; i++) {
+    const response = await getTransactionResultFromRPCNotSdk(txHash, label);
+    if (!!response && response.error == null) {
+      result.result = response;
+      result.error = '';
+      return result;
+    }  else {
+      result.error = response.error;
+    }
+    await sleep(1000);
+  }
+
+  return result;
+}
+
+export async function getTransactionResultFromRPCNotSdk(txHash, label = "default") {
+  const walletApi = await walletApiInstance(label);
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      method: "icx_getTransactionResult",
+      params: {
+        "txHash": txHash
+      },
+      id: randomUint32()
+    };
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
