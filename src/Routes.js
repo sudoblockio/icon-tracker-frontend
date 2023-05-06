@@ -7,7 +7,7 @@ import MainPage from './pages/MainPage';
 import AddressListPage from './pages/AddressListPage';
 import AddressDetailPage from './pages/AddressDetailPage';
 import ContractDetailPage from './pages/ContractDetailPage'
-import ContractListPage from './pages/ContractListPage'
+import ContractsPageSelector from './pages/ContractsPageSelector';
 import BlockListPage from './pages/BlockListPage';
 import BlockDetailPage from './pages/BlockDetailPage';
 import TransactionListPage from './pages/TransactionListPage';
@@ -65,8 +65,11 @@ class Routes extends Component {
                 <Route onEnter={window.scroll(0, 0)} path='/transaction/:txHash' component={TransactionDetailPage} exact />
                 <Route onEnter={window.scroll(0, 0)} path='/transaction/trace/:txHash' component={TraceTransactionPage} />
 
-                <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}`} component={ContractListPage} exact />
-                <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractListPage} />
+                {/* TODO: this next route is for new implementation
+                  * of the single page
+                  */}
+                <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}`} component={ContractsPageSelector} exact />
+                <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.CONTRACTS}/:pageId`} component={ContractsPageSelector} />
                 <Route onEnter={window.scroll(0, 0)} path='/contract/:contractId' component={ContractDetailPage} exact />
 
                 <Route onEnter={window.scroll(0, 0)} path={`/${SEARCH_TYPE.TOKENS}`} component={TokenListPage} exact />

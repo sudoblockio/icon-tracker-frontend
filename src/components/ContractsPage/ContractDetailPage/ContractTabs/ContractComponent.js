@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import BigNumber from "bignumber.js";
 import { LoadingComponent } from "../../../../components";
-import ButtonSet from "./ButtonSet";
-import MiscComponents from "./MiscContractComponents";
+import ButtonSet from "../../MiscComponents/ButtonSet";
+import MiscComponents from "../../MiscComponents/MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 import { customMethod } from "../../../../utils/rawTxMaker";
+import { makeParams, createContractMethodsState } from "../../contractUtils";
+import config from "../../../../config";
 
+const { nid } = config;
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-const HARDCODED_NID_FIX_THIS = 2;
+// const HARDCODED_NID_FIX_THIS = 2;
 
 function ContractComponent({
   contract,
@@ -29,7 +32,7 @@ function ContractComponent({
   };
 
   function handleClickOnReadonly(address, method, inputs, index) {
-    const paramsData = makeParams(method, inputs);
+    const paramsData = makeParams(params, method, inputs);
     icxCall({
       address,
       method,
@@ -40,12 +43,12 @@ function ContractComponent({
 
   function handleClickOnWrite(address, method, inputs, index) {
     // makeTxCallRpcObj
-    const nid = HARDCODED_NID_FIX_THIS;
+    // const nid = HARDCODED_NID_FIX_THIS;
 
     if (walletAddress === "") {
       alert("Please connect to wallet first");
     } else {
-      const paramsData = makeParams(method, inputs);
+      const paramsData = makeParams(params, method, inputs);
       const rawMethodCall = customMethod(
         walletAddress,
         address,
@@ -53,24 +56,14 @@ function ContractComponent({
         paramsData,
         nid
       );
+      console.log("rawMethodCall");
+      console.log(rawMethodCall);
       icxSendTransaction({
         params: { ...rawMethodCall },
         index: index
       });
     }
   }
-
-  const makeParams = (funcName, inputs) => {
-    const result = {};
-    inputs.forEach(item => {
-      const name = item["name"];
-      const type = item["type"];
-      const inputName = `${funcName}_${name}_${type}`;
-      const value = params[inputName] || "";
-      result[name] = value;
-    });
-    return result;
-  };
 
   const { data } = contract;
   const { address } = data;
@@ -214,44 +207,6 @@ function ContractComponent({
       </div>
     </div>
   );
-}
-
-function createContractMethodsState(contractReadWriteInfo) {
-  //
-  const {
-    funcList,
-    funcOutputs,
-    writeFuncList,
-    writeFuncOutputs
-  } = contractReadWriteInfo;
-
-  const result = {
-    readOnlyMethodsNameArray: [],
-    writeMethodsNameArray: []
-  };
-  funcList.forEach((func, index) => {
-    const funcName = func["name"];
-    result.readOnlyMethodsNameArray.push(funcName);
-    const inputs = { ...func };
-    const outputs = funcOutputs[index];
-    result[funcName] = {
-      inputs,
-      outputs
-    };
-  });
-  writeFuncList.forEach((func, index) => {
-    const funcName = func["name"];
-    result.writeMethodsNameArray.push(funcName);
-    const inputs = { ...func };
-
-    const outputs = writeFuncOutputs[index];
-    result[funcName] = {
-      inputs,
-      outputs
-    };
-  });
-
-  return result;
 }
 
 export default ContractComponent;

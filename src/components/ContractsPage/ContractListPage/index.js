@@ -4,6 +4,9 @@ import {
 } from '../../../components'
 
 class ContractListPage extends Component {
+	constructor(props) {
+		super(props);
+	}
 	
 	render() {
 
@@ -11,4 +14,4 @@ class ContractListPage extends Component {
 		return <SearchPage {...this.props} type="contract"/>
 	}
 }
-export default ContractListPage
+export default ContractListPage;

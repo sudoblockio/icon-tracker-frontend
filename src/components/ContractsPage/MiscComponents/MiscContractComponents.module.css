@@ -1,0 +1,191 @@
+.writeMethodsMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.writeMethodContainer {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.writeMethodContainerClosed, .writeMethodTitle {
+  height: 40px;
+}
+
+.writeMethodContainerOpen {
+  height: auto;
+}
+
+.writeMethodTitle {
+  min-height: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 0 10px;
+}
+
+.writeMethodTitleExpandable {
+  cursor: pointer;
+}
+
+.writeMethodLeft {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.writeMethodTitleLeft em {
+  font-style: italic;
+}
+
+.writeMethodTitleLeft > span {
+  margin-right: 5px;
+}
+
+.writeMethodTitleLeftOutput {
+  font-weight: bold;
+}
+
+.writeMethodTitleRight {}
+
+.writeMethodTitleIcon {
+  width: 25px;
+}
+
+.writeMethodTitleIconRotated {
+  transform: rotate(180deg);
+}
+
+.writeMethodBodyOuterContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  width: 100%;
+  /* height: 0; */
+  /* overflow: hidden; */
+  /* transition: height 0.5s ease; */
+}
+
+.writeMethodBodyOuterContainer > div {
+  flex: 50%;
+}
+
+.writeMethodBody {
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  flex: 50%;
+}
+
+.methodInputButtonContainer {
+  margin: 10px 0;
+  align-self: flex-start;
+}
+.methodInputButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  /* border: 1px solid #9f9f9f; */
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 80px;
+  height: 30px;
+}
+
+.methodInputButton:hover {
+  cursor: pointer;
+  background-color: #08909f;
+  color: #fff;
+}
+
+.writeMethodBodyOutput {
+  padding: 5px 10px;
+}
+
+.writeMethodBodyOutputResponseContent {
+  word-break: break-all;
+}
+
+.writeMethodBodyOutputError {
+  background-color: #fbebeb;
+}
+
+.writeMethodBodyOutputSuccess {
+  background-color: #e4f2de;
+}
+
+.writeMethodBodyInputName {
+  margin-bottom: 5px;
+}
+
+.writeMethodBodyInputType > input {
+  height: 26px;
+  font-size: 12px;
+  color: #4d4d4d;
+  border-style: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px !important;
+  padding: 0 9px;
+  min-width: 50%;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 1px 5px;
+}
+
+.writeMethodBodyInputType > input:focus {
+  outline: none;
+  border: 1px solid #1aaaba;
+  box-shadow: inset 0 2px 1px 0 rgba(0,0,0,0.15);
+}
+
+.writeMethodBodyInputType > input:hover {
+  box-shadow: inset 0 2px 1px 0 rgba(0,0,0,0.15);
+  border: 1px solid #1aaaba;
+}
+
+.writeMethodBodyInputType > input::placeholder {
+  color: #9f9f9f;
+}
+
+.eventlogMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.eventlogTextarea {
+  width: 80%;
+  height: 80%;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  overflow-y: scroll;
+  font-size: 12px;
+}
+
+.eventlogTextarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.eventlogTextarea::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.eventlogTextarea::-webkit-scrollbar-thumb {
+  background-color: #1aaaba;
+  outline: 1px solid #1aaaba;
+}

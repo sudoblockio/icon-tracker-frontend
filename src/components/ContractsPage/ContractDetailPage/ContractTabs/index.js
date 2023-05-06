@@ -6,7 +6,6 @@ import ContractTokenTransfers from "./ContractTokenTransfers";
 import ContractCode from "./ContractCode";
 import ContractComponent from "./ContractComponent";
 import ContractEvents from "./ContractEvents";
-import ContractWrite from "./ContractWrite";
 import { NoBox, TabTable } from "../../../../components";
 import { TX_TYPE, CONTRACT_TABS } from "../../../../utils/const";
 
@@ -20,7 +19,6 @@ function ContractTabs(props) {
     contractEvents,
     contractAbi,
     contractReadInfo,
-    contractWriteInfo,
     changeTab,
     history,
     icxCall,

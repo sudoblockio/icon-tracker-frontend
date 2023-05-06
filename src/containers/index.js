@@ -5,6 +5,7 @@ import AddressDetailPageContainer from './AddressesPage/AddressDetailPageContain
 
 import ContractDetailPageContainer from './ContractsPage/ContractDetailPageContainer'
 import ContractListPageContainer from './ContractsPage/ContractListPageContainer'
+import ContractsPageSelectorContainer from './ContractsPage/ContractsPageSelectorContainer'
 
 import BlockListPageContainer from './BlocksPage/BlockListPageContainer'
 import BlockDetailPageContainer from './BlocksPage/BlockDetailPageContainer'
@@ -31,6 +32,7 @@ export {
 
   ContractDetailPageContainer,
   ContractListPageContainer,
+  ContractsPageSelectorContainer,
 
   BlockListPageContainer,
   BlockDetailPageContainer,
