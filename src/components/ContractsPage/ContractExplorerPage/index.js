@@ -16,7 +16,7 @@ import {
   icxCall
 } from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
-const { nid } = config;
+const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
@@ -241,7 +241,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
@@ -297,7 +297,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
@@ -335,7 +335,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
