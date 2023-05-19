@@ -74,6 +74,18 @@
   padding: 0 10px;
 }
 
+.borderGray {
+  border: 1px solid #e0e0e0;
+}
+
+.borderRed {
+  border: 1px solid #f44336;
+}
+
+.borderGreen {
+  border: 1px solid #4caf50;
+}
+
 .inputItemContentSmall > .inputItemInput {
   width: 60px;
 }

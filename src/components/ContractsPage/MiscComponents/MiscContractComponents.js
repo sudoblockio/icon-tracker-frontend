@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import BigNumber from "bignumber.js";
+import { TransactionLink } from "../../../components";
 import { is0xHash } from "../../../utils/utils";
 import {
   getTransactionResultFromRPCNotSdk,
@@ -80,6 +80,7 @@ function WriteMethodItems({
               startIndex={startIndex}
               showEvents={showEvents}
               network={network}
+              isReadonly={false}
             />
           </div>
         );
@@ -101,7 +102,8 @@ function CollapsableComponent({
   startIndex,
   network,
   alwaysShowButton = false,
-  showEvents = false
+  showEvents = false,
+  isReadonly = true
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
@@ -284,9 +286,17 @@ function CollapsableComponent({
           }
         >
           <p>Response:</p>
+          {isReadonly ? (
           <p className={styles.writeMethodBodyOutputResponseContent}>
             {responseState}
           </p>
+          ) : (
+            <TransactionLink
+              to={JSON.parse(responseState)[0]}
+              label={JSON.parse(responseState)[0]}
+              onClick={() => console.log('click')}
+            />
+          )}
         </div>
       )}
     </div>
