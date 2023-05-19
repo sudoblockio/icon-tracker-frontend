@@ -3,7 +3,7 @@ import MiscComponents from "../MiscComponents/MiscContractComponents";
 import { LoadingComponent } from "../../../components";
 import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
-import { isCxAddress } from "../../../utils/utils";
+import { isCxAddress, isValidUrl } from "../../../utils/utils";
 import { customMethod } from "../../../utils/rawTxMaker";
 import {
   makeParams,
@@ -169,6 +169,21 @@ function ContractExplorerPage({ wallet }) {
 
     if (isValidCxAddress) {
       if (networkState === "custom") {
+        let a = [
+          'https://ctz.solidwallet.io/api/v3',
+          'localhost:3000/api/v3',
+          'http://localhost:3000/api/v3',
+          'http://localhost/api/v3',
+          'http://localhost:9000/api/v3',
+          'https://api.espanicon.team/',
+          "https://",
+          "https://foo.bar",
+          "foo.",
+          "https://fgoo."
+        ];
+        a.map(url => {
+          console.log(url, isValidUrl(url));
+        });
         // TODO: put logic for custom network here
       } else {
         getAbi();
@@ -356,8 +371,23 @@ function InputItem({
   onValueChange,
   useSmall = false,
   placeholder = "cx0000..",
-  halfSize = false
+  halfSize = false,
+  borderStyle = null
 }) {
+  let borderColorClass;
+
+  if (borderStyle == null) {
+    borderColorClass = styles.borderGray;
+  } else {
+    if (borderStyle === true) {
+      borderColorClass = styles.borderGreen;
+    } else if (borderStyle === false) {
+      borderColorClass = styles.borderRed;
+    } else {
+      borderColorClass = styles.borderGray;
+    }
+  }
+
   return (
     <div
       className={
@@ -375,7 +405,7 @@ function InputItem({
         }
       >
         <input
-          className={styles.inputItemInput}
+          className={`${styles.inputItemInput} ${borderColorClass}`}
           type="text"
           placeholder={placeholder}
           value={value}
@@ -408,6 +438,15 @@ function CustomNetworkItem({
   values,
   onValuesChange
 }) {
+  console.log('custom network item', values.endpoint, isValidUrl(values.endpoint));
+  // useEffect(() => {
+  //   if (values.endpoint === "custom") {
+  //     setUrlState(values.nid);
+  //   } else {
+  //     setUrlState(null);
+  //   }
+  // }, [values.endpoint, values.nid]);
+
   function handleEndpointChange(event) {
     onValuesChange(event, "endpoint");
   }
@@ -422,6 +461,8 @@ function CustomNetworkItem({
         label={endpointLabel}
         value={values.endpoint}
         onValueChange={handleEndpointChange}
+        borderStyle={isValidUrl(values.endpoint)}
+        
       />
       <Separator useVertical={true} />
       <InputItem
