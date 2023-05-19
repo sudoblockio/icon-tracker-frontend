@@ -3,7 +3,7 @@ import MiscComponents from "../MiscComponents/MiscContractComponents";
 import { LoadingComponent } from "../../../components";
 import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
-import { isCxAddress } from "../../../utils/utils";
+import { isCxAddress, isValidUrl } from "../../../utils/utils";
 import { customMethod } from "../../../utils/rawTxMaker";
 import {
   makeParams,
@@ -11,18 +11,15 @@ import {
   localReadContractInformationFunc
 } from "../contractUtils";
 import config from "../../../config";
-import { 
-  icxGetScore,
-  icxCall
-} from "../../../redux/api/restV3/icx";
+import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
-const { nid } = config;
+const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
 const initialInputItemsState = {
   address: "cx0000000000000000000000000000000000000000",
-  endpoint: "http://localhost:9000",
+  endpoint: "",
   nid: "3"
 };
 
@@ -36,9 +33,7 @@ function ContractExplorerPage({ wallet }) {
   const [contractAbi, setContractAbi] = useState(null);
   const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
-
-  console.log("props");
-  console.log(wallet);
+  const [endpointInputHasFocus, setEndpointInputHasFocus] = useState(null);
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -48,6 +43,11 @@ function ContractExplorerPage({ wallet }) {
         [name]: value
       };
     });
+  }
+
+  function handleFocusChange(hasFocus) {
+    console.log("hasFocus", hasFocus);
+    setEndpointInputHasFocus(hasFocus);
   }
 
   function onNetworkChange(e) {
@@ -143,20 +143,59 @@ function ContractExplorerPage({ wallet }) {
     const isValidCxAddress = isCxAddress(inputItemsState.address);
     setContractAbi(null);
 
-    async function getAbi() {
-      const abi = await icxGetScore(
+    async function getAbi(address, networkState, endpoint = "") {
+      let abi = {
+        error: {
+          message: ""
+        }
+      };
+      const response = await icxGetScore(
         {
-          address: inputItemsState.address
+          address: address
         },
-        networkState
+        networkState,
+        endpoint
       );
-      console.log("abi");
-      console.log(abi);
+
+      // TODO: to improve error handling for the icxGetScore 
+      // response, validate if the response is an object with a
+      // data param with the following shape:
+      // {
+      //   jsonrpc: "2.0",
+      //   result: Array<AbiItem>,
+      //   id: 1234
+      // }
+      //
+      // where AbiItem is defined as:
+      // {
+      //   type: "function" | "event",
+      //   name: string,
+      //   inputs: Array<{ type: string, name: string }>,
+      //   outputs: Array<{ type: string, name: string }>,
+      // }
+      //
+      // possible logic for this can be:
+      //
+      // if (typeof response === "object" 
+      //      && response.data != null
+      //      ) {
+      //      if (response.data.result != null) {
+      //        if (Array.isArray(response.data.result)) {
+      //          if (isValidAbi(response.data.result)) {
+      //
+      // And define the function 'isValidAbi' with a logic to check
+      // if the response.data.result is an array of AbiItem
+      //
+      if (typeof response === "string") {
+        abi.error.message = response
+      } else {
+        abi = { ...response }
+      }
 
       if (abi.error == null) {
         const f = await localReadContractInformationFunc(
           abi.data.result,
-          inputItemsState.address
+          address
         );
         const g = createContractMethodsState(f);
         console.log("df");
@@ -169,12 +208,22 @@ function ContractExplorerPage({ wallet }) {
 
     if (isValidCxAddress) {
       if (networkState === "custom") {
-        // TODO: put logic for custom network here
+        if (
+          endpointInputHasFocus === false &&
+          isValidUrl(inputItemsState.endpoint)
+        ) {
+          // TODO: add code to fetch abi from custom url here
+          getAbi(
+            inputItemsState.address,
+            networkState,
+            inputItemsState.endpoint
+          );
+        }
       } else {
-        getAbi();
+        getAbi(inputItemsState.address, networkState, inputItemsState.endpoint);
       }
     }
-  }, [networkState, inputItemsState]);
+  }, [networkState, inputItemsState, endpointInputHasFocus]);
 
   return (
     <div className={styles.main}>
@@ -199,6 +248,7 @@ function ContractExplorerPage({ wallet }) {
                   endpointNid={`NID`}
                   values={inputItemsState}
                   onValuesChange={handleInputChange}
+                  handleFocusChange={handleFocusChange}
                 />
               </>
             )}
@@ -241,7 +291,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
@@ -297,7 +347,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
@@ -335,7 +385,7 @@ function ContractExplorerPage({ wallet }) {
                         startIndex={
                           contractReadInfo.readOnlyMethodsNameArray.length
                         }
-                        showEvents={true}
+                        showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
                       />
                     </div>
@@ -356,8 +406,36 @@ function InputItem({
   onValueChange,
   useSmall = false,
   placeholder = "cx0000..",
-  halfSize = false
+  halfSize = false,
+  borderStyle = null,
+  handleFocusChange = null
 }) {
+  let borderColorClass;
+
+  if (borderStyle == null) {
+    borderColorClass = styles.borderGray;
+  } else {
+    if (borderStyle === true) {
+      borderColorClass = styles.borderGreen;
+    } else if (borderStyle === false) {
+      borderColorClass = styles.borderRed;
+    } else {
+      borderColorClass = styles.borderGray;
+    }
+  }
+
+  function handleOnFocus() {
+    if (handleFocusChange != null) {
+      handleFocusChange(true);
+    }
+  }
+
+  function handleOnBlur() {
+    if (handleFocusChange != null) {
+      handleFocusChange(false);
+    }
+  }
+
   return (
     <div
       className={
@@ -375,11 +453,13 @@ function InputItem({
         }
       >
         <input
-          className={styles.inputItemInput}
+          className={`${styles.inputItemInput} ${borderColorClass}`}
           type="text"
           placeholder={placeholder}
           value={value}
           onChange={onValueChange}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
         />
       </div>
     </div>
@@ -406,7 +486,8 @@ function CustomNetworkItem({
   endpointLabel,
   endpointNid,
   values,
-  onValuesChange
+  onValuesChange,
+  handleFocusChange
 }) {
   function handleEndpointChange(event) {
     onValuesChange(event, "endpoint");
@@ -422,6 +503,9 @@ function CustomNetworkItem({
         label={endpointLabel}
         value={values.endpoint}
         onValueChange={handleEndpointChange}
+        borderStyle={isValidUrl(values.endpoint)}
+        handleFocusChange={handleFocusChange}
+        placeholder={"localhost:9080"}
       />
       <Separator useVertical={true} />
       <InputItem

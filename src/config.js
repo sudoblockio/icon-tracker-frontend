@@ -86,6 +86,9 @@ const config = {
       network: defaultsCopy[3]["network"],
       region: defaultsCopy[3]["region"],
     }
+  },
+  features: {
+    CONTRACT_WRITE_EVENTLOG_ENABLED: false
   }
 }
 export default config;

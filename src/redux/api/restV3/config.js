@@ -4,15 +4,19 @@ import configJson from "../../../config.js";
 import config from "../../../config.js";
 import defaults from "../../../configData";
 
-export async function trackerApiInstance(label="default") {
+export async function trackerApiInstance(label = "default") {
   const apiUrl = await getTrackerApiUrl(label);
   return axios.create({
     baseURL: apiUrl
   });
 }
 
-export async function walletApiInstance(label="default") {
-  const apiUrl = await getWalletApiUrl(label);
+export async function walletApiInstance(label = "default", customUrl = "") {
+  let apiUrl = customUrl;
+  if (label !== "custom") {
+    apiUrl = await getWalletApiUrl(label);
+  }
+
   return axios.create({
     baseURL: apiUrl
   });
