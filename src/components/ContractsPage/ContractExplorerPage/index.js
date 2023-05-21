@@ -64,7 +64,7 @@ function ContractExplorerPage({ wallet }) {
     });
   }
 
-  async function handleClickOnReadonly(address, method, inputs, index) {
+  async function handleClickOnReadonly(address, method, inputs, index, networkState, endpoint) {
     const paramsData = makeParams(params, method, inputs);
     console.log("paramsData");
     console.log(paramsData);
@@ -78,7 +78,8 @@ function ContractExplorerPage({ wallet }) {
           params: paramsData
         }
       },
-      networkState
+      networkState,
+      endpoint
     );
 
     console.log("icx call response");
@@ -157,7 +158,7 @@ function ContractExplorerPage({ wallet }) {
         endpoint
       );
 
-      // TODO: to improve error handling for the icxGetScore 
+      // TODO: to improve error handling for the icxGetScore
       // response, validate if the response is an object with a
       // data param with the following shape:
       // {
@@ -176,7 +177,7 @@ function ContractExplorerPage({ wallet }) {
       //
       // possible logic for this can be:
       //
-      // if (typeof response === "object" 
+      // if (typeof response === "object"
       //      && response.data != null
       //      ) {
       //      if (response.data.result != null) {
@@ -187,15 +188,17 @@ function ContractExplorerPage({ wallet }) {
       // if the response.data.result is an array of AbiItem
       //
       if (typeof response === "string") {
-        abi.error.message = response
+        abi.error.message = response;
       } else {
-        abi = { ...response }
+        abi = { ...response };
       }
 
       if (abi.error == null) {
         const f = await localReadContractInformationFunc(
           abi.data.result,
-          address
+          address,
+          networkState,
+          endpoint
         );
         const g = createContractMethodsState(f);
         console.log("df");
@@ -281,6 +284,7 @@ function ContractExplorerPage({ wallet }) {
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}
@@ -319,6 +323,7 @@ function ContractExplorerPage({ wallet }) {
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                     </div>
                   )}
@@ -375,6 +380,7 @@ function ContractExplorerPage({ wallet }) {
                         handleClick={handleClickOnReadonly}
                         address={inputItemsState.address}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                       <WriteMethodItems
                         methods={contractReadInfo}

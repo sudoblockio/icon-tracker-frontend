@@ -14,7 +14,8 @@ function ReadMethodItems({
   handleClick,
   address,
   network,
-  startIndex = 0
+  startIndex = 0,
+  endpoint
 }) {
   return (
     <ul className="list">
@@ -43,6 +44,7 @@ function ReadMethodItems({
               isExpandable={isExpandable}
               startIndex={startIndex}
               network={network}
+              endpoint={endpoint}
             />
           </div>
         );
@@ -103,7 +105,8 @@ function CollapsableComponent({
   network,
   alwaysShowButton = false,
   showEvents = false,
-  isReadonly = true
+  isReadonly = true,
+  endpoint= ""
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
@@ -127,7 +130,7 @@ function CollapsableComponent({
   }
 
   function handleButtonClick() {
-    handleClick(address, methodName, methodInput.inputs, index);
+    handleClick(address, methodName, methodInput.inputs, index, network, endpoint);
     setResultIsOpen(true);
   }
 
