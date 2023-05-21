@@ -35,8 +35,8 @@ export async function icxGetScore(params, label = "default", customUrl = "") {
   });
 }
 
-export async function icxCall(params, label = "default") {
-  const walletApi = await walletApiInstance(label);
+export async function icxCall(params, label = "default", customUrl = "") {
+  const walletApi = await walletApiInstance(label, customUrl);
   return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",

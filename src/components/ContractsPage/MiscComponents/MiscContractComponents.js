@@ -14,7 +14,8 @@ function ReadMethodItems({
   handleClick,
   address,
   network,
-  startIndex = 0
+  startIndex = 0,
+  endpoint
 }) {
   return (
     <ul className="list">
@@ -43,6 +44,7 @@ function ReadMethodItems({
               isExpandable={isExpandable}
               startIndex={startIndex}
               network={network}
+              endpoint={endpoint}
             />
           </div>
         );
@@ -59,8 +61,12 @@ function WriteMethodItems({
   address,
   network,
   startIndex = 0,
-  showEvents = false
+  showEvents = false,
+  endpoint 
 }) {
+  console.log('on write method');
+  console.log(methods);
+  console.log(startIndex);
   return (
     <ul className="list">
       {methods.writeMethodsNameArray.map((methodName, index) => {
@@ -80,6 +86,7 @@ function WriteMethodItems({
               startIndex={startIndex}
               showEvents={showEvents}
               network={network}
+              endpoint={endpoint}
               isReadonly={false}
             />
           </div>
@@ -103,7 +110,8 @@ function CollapsableComponent({
   network,
   alwaysShowButton = false,
   showEvents = false,
-  isReadonly = true
+  isReadonly = true,
+  endpoint= ""
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
@@ -127,7 +135,7 @@ function CollapsableComponent({
   }
 
   function handleButtonClick() {
-    handleClick(address, methodName, methodInput.inputs, index);
+    handleClick(address, methodName, methodInput.inputs, index, network, endpoint);
     setResultIsOpen(true);
   }
 
