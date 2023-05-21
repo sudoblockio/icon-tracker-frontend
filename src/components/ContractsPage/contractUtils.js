@@ -50,7 +50,7 @@ export function createContractMethodsState(contractReadWriteInfo) {
   return result;
 }
 
-export async function localReadContractInformationFunc(score, cxAddress) {
+export async function localReadContractInformationFunc(score, cxAddress, networkState, endpoint) {
   const readOnlyFunc = (score || []).filter(
     func => func["type"] === "function" && func["readonly"] === "0x1"
   );
@@ -67,14 +67,18 @@ export async function localReadContractInformationFunc(score, cxAddress) {
     const func = readOnlyFunc[i];
     if (func["inputs"].length === 0) {
       //TODO: make icx call here
-      const a = await icxCall({
+      const a = await icxCall(
+      {
         from: "hx23ada4a4b444acf8706a6f50bbc9149be1781e13",
         to: cxAddress,
         dataType: "call",
         data: {
           method: func["name"]
         }
-      });
+      },
+      networkState,
+      endpoint
+      );
       _funcOutputs.push(a);
     } else {
       _funcOutputs.push("");
