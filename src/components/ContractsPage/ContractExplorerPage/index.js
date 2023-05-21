@@ -98,7 +98,7 @@ function ContractExplorerPage({ wallet }) {
     });
   }
 
-  async function handleClickOnWrite(address, method, inputs, index) {
+  async function handleClickOnWrite(address, method, inputs, index, networkState, endpoint) {
     if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
@@ -114,10 +114,12 @@ function ContractExplorerPage({ wallet }) {
       console.log(rawMethodCall);
       //TODO: modify this section to update the method with
       //the responses
-      const response = await icxSendTransaction({
-        params: { ...rawMethodCall },
-        index: index
-      });
+      const response = await icxSendTransaction(
+        {
+          params: { ...rawMethodCall },
+          index: index
+        }
+      );
       console.log("response");
       console.log(response);
 
@@ -297,6 +299,7 @@ function ContractExplorerPage({ wallet }) {
                         }
                         showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                     </div>
                   )}
@@ -349,11 +352,9 @@ function ContractExplorerPage({ wallet }) {
                         handleChange={handleParamsChange}
                         handleClick={handleClickOnWrite}
                         address={inputItemsState.address}
-                        startIndex={
-                          contractReadInfo.readOnlyMethodsNameArray.length
-                        }
                         showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                     </div>
                   )}
@@ -393,6 +394,7 @@ function ContractExplorerPage({ wallet }) {
                         }
                         showEvents={CONTRACT_WRITE_EVENTLOG_ENABLED}
                         network={networkState}
+                        endpoint={inputItemsState.endpoint}
                       />
                     </div>
                   )}

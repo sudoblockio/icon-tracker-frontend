@@ -61,8 +61,12 @@ function WriteMethodItems({
   address,
   network,
   startIndex = 0,
-  showEvents = false
+  showEvents = false,
+  endpoint 
 }) {
+  console.log('on write method');
+  console.log(methods);
+  console.log(startIndex);
   return (
     <ul className="list">
       {methods.writeMethodsNameArray.map((methodName, index) => {
@@ -82,6 +86,7 @@ function WriteMethodItems({
               startIndex={startIndex}
               showEvents={showEvents}
               network={network}
+              endpoint={endpoint}
               isReadonly={false}
             />
           </div>
