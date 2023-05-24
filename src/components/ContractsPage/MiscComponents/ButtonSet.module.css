@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 15px;
+  align-items: center;
 }
 
 .button {
@@ -23,4 +24,14 @@
 
 .activeButton {
   border: 1px solid #08909f;
+}
+
+.expand {
+  /* border: 1px solid #08909f; */
+  margin-left: auto;
+}
+
+.expand:hover {
+  transform: translateY(-1px);
+  cursor: pointer;
 }

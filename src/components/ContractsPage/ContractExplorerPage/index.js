@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MiscComponents from "../MiscComponents/MiscContractComponents";
+import queryString from "query-string";
 import { LoadingComponent } from "../../../components";
 import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
@@ -13,22 +14,38 @@ import {
 import config from "../../../config";
 import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
-const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED } = config;
+const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED, network } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
-const initialInputItemsState = {
-  address: "cx0000000000000000000000000000000000000000",
-  endpoint: "",
-  nid: "3"
-};
+function getInitialInputState(url) {
+  const qs = queryString.parse(url.search);
+  const initialInputState = {
+    address: qs.address || "cx0000000000000000000000000000000000000000",
+    endpoint: "",
+    nid: "3"
+  };
+  return initialInputState;
+}
 
-function ContractExplorerPage({ wallet }) {
+function getNetworkState(network) {
+  const f = ["mainnet", "berlin", "lisbon"];
+
+  console.log("network");
+  console.log(network);
+  if (f.includes(network)) {
+    return network;
+  } else {
+    return "mainnet";
+  }
+}
+
+function ContractExplorerPage({ wallet, url }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
-  const [networkState, setNetworkState] = useState("mainnet");
+  const [networkState, setNetworkState] = useState(getNetworkState(network));
   const [inputItemsState, setInputItemsState] = useState(
-    initialInputItemsState
+    getInitialInputState(url)
   );
   const [contractAbi, setContractAbi] = useState(null);
   const [cxAbi, setCxAbi] = useState(null);
@@ -64,7 +81,14 @@ function ContractExplorerPage({ wallet }) {
     });
   }
 
-  async function handleClickOnReadonly(address, method, inputs, index, networkState, endpoint) {
+  async function handleClickOnReadonly(
+    address,
+    method,
+    inputs,
+    index,
+    networkState,
+    endpoint
+  ) {
     const paramsData = makeParams(params, method, inputs);
     console.log("paramsData");
     console.log(paramsData);
@@ -98,7 +122,14 @@ function ContractExplorerPage({ wallet }) {
     });
   }
 
-  async function handleClickOnWrite(address, method, inputs, index, networkState, endpoint) {
+  async function handleClickOnWrite(
+    address,
+    method,
+    inputs,
+    index,
+    networkState,
+    endpoint
+  ) {
     if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
@@ -114,12 +145,10 @@ function ContractExplorerPage({ wallet }) {
       console.log(rawMethodCall);
       //TODO: modify this section to update the method with
       //the responses
-      const response = await icxSendTransaction(
-        {
-          params: { ...rawMethodCall },
-          index: index
-        }
-      );
+      const response = await icxSendTransaction({
+        params: { ...rawMethodCall },
+        index: index
+      });
       console.log("response");
       console.log(response);
 
@@ -244,7 +273,11 @@ function ContractExplorerPage({ wallet }) {
               onValueChange={handleAddressInputChange}
             />
             <Separator />
-            <DropdownItem label={`Network`} onSelectChange={onNetworkChange} />
+            <DropdownItem
+              label={`Network`} 
+              value={networkState}
+              onSelectChange={onNetworkChange}
+            />
             {networkState === "custom" && (
               <>
                 <Separator />
@@ -474,12 +507,16 @@ function InputItem({
   );
 }
 
-function DropdownItem({ label, onSelectChange }) {
+function DropdownItem({ label, value, onSelectChange }) {
   return (
     <div className={styles.dropdownItem}>
       <div className={styles.dropdownItemLabel}>{label}</div>
       <div className={styles.dropdownItemContent}>
-        <select className={styles.dropdownItemSelect} onChange={onSelectChange}>
+        <select
+          className={styles.dropdownItemSelect} 
+          onChange={onSelectChange}
+          value={value || "mainnet"}
+        >
           <option value="mainnet">Mainnet</option>
           <option value="berlin">Berlin</option>
           <option value="lisbon">Lisbon</option>
