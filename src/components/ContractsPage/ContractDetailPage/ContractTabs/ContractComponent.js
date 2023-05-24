@@ -8,7 +8,7 @@ import { customMethod } from "../../../../utils/rawTxMaker";
 import { makeParams, createContractMethodsState } from "../../contractUtils";
 import config from "../../../../config";
 
-const { nid } = config;
+const { nid, network } = config;
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
 
 // const HARDCODED_NID_FIX_THIS = 2;
@@ -65,12 +65,20 @@ function ContractComponent({
     }
   }
 
+  function handleButtonExpand() {
+    console.log('handleButtonExpand');
+    console.log(data.address);
+  }
+
   const { data } = contract;
   const { address } = data;
   const { loading, error } = contractReadWriteInfo;
   const contractMethodsState = createContractMethodsState(
     contractReadWriteInfo
   );
+
+  console.log('contract address');
+  console.log(address);
 
   //TODO: remove this useEffect after testing and refactoring
   useEffect(() => {
@@ -85,6 +93,8 @@ function ContractComponent({
       <ButtonSet
         activeButton={activeSection}
         handleActiveChange={setActiveSection}
+        showExpand={true}
+        contract={address}
       />
       <div className={customStyles.contractContainer}>
         {activeSection === 0 ? (
