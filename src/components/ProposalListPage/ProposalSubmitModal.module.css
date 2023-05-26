@@ -1,0 +1,169 @@
+/* styles/appSection.module.css */
+.main {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.topSection {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 800px;
+  align-self: center;
+}
+.topSectionInfo,
+.modalContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+.topSectionInfo > p,
+.bottomSection p {
+  margin: 2px 0px;
+}
+
+.topSectionLogo {
+  max-width: 150px;
+}
+
+.bottomSection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  /* align-items: flex-start; */
+}
+.bottomSectionRow:first-child {
+  flex: 2;
+  max-width: 200px;
+}
+.bottomSectionRow:nth-child(2) {
+  flex: 1;
+  max-width: 400px;
+}
+.bottomSectionRow {
+  padding: 10px;
+}
+.defaultSection {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.defaultSection > h2 {
+  /* margin: 5px; */
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.codeBlockContainer2 {
+  align-self: center;
+  /* width: 100%; */
+  max-width: 80%;
+  padding: 10px;
+  font-size: 0.6rem;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  margin: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-x: scroll;
+}
+
+.button {
+  margin: 4px;
+  height: 30px;
+  width: 80px;
+  background-color: #c2c2c2;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #c2c2c2;
+  transform: translateY(-1px);
+  color: #299fac;
+}
+
+.setPrepForm {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.setPrepForm .button {
+  align-self: flex-start;
+}
+.table {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  /* align-self: center; */
+  /* border: 1px solid #d6d3d1; */
+  padding: 10px;
+}
+.tableRow {
+  justify-content: space-between;
+  margin: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.tableRow > * {
+}
+
+.tableRow > input {
+}
+
+.tableRowLabel {
+  /* margin: 0 4px; */
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.tableRowInput {
+  height: 35px !important;
+  flex: 2 !important;
+  border: 2px solid #c2c2c2 !important;
+  border-radius: 4px !important;
+}
+
+.tableRowInput::placeholder {
+  color: #c2c2c2;
+}
+
+.tableRowInputValid {
+  /* border: 1px solid #d6d3d1; */
+  border: 1px solid green;
+  width: 60%;
+}
+.tableRowInputInvalid {
+  border: 1px solid red;
+  width: 60%;
+}
+
+/* .tableSetPrep > * { */
+/*   /1* flex: 1; *1/ */
+/* } */
+/* .tableSetPrep tr { */
+/*   display: flex; */
+/*   flex-flow: column nowrap; */
+/*   align-items: flex-end; */
+/* } */
+/* .tableSetPrep > thead { */
+/*   margin-right: 5px; */
+/* } */
