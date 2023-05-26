@@ -6,6 +6,9 @@ import {
 } from "../../utils/rawTxMaker";
 import { requestJsonRpc } from "../../utils/connect";
 import utils from "../../utils/utils2";
+import config from "../../config";
+
+const { nid } = config;
 
 // Constants
 const {
@@ -22,10 +25,6 @@ const initPrepDetailsForm = {
   nodeAddress: ""
 };
 
-// this NID is hardcoded to lisbon testnet until a way to fix the nid
-// depending on the network is developed
-const HARDCODED_NID_FIX_THIS = 2;
-
 const {
   parsePrepFormInputs,
   samples
@@ -37,8 +36,6 @@ const {
 
 export default function PrepModal({ prepInfo, isOpen, onClose }) {
   const [prepDetailsForm, setPrepDetailsForm] = useState(initPrepDetailsForm);
-
-  const nid = HARDCODED_NID_FIX_THIS;
 
   function handlePrepFormSubmit() {
     handleFormSubmit("prep");
@@ -103,21 +100,17 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
               <div className={styles.defaultSection}>
                 <h2>Update Prep on-chain data:</h2>
                 <p>
+                </p>
+                <p>
+                  Use the following form to update your{" "}
                   <a
                     href="https://docs.icon.community/icon-stack/client-apis/json-rpc-api/v3#setprep"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Prep on-chain data
-                  </a>{" "}
-                  can be updated according to the following format:
-                </p>
-                <div className={styles.codeBlockContainer2}>
-                  <pre className={styles.codeBlockPre}>{SETPREP}</pre>
-                </div>
-                <p>
-                  Use the following form to update your Prep data, a transaction
-                  will be signed with your node address using your preferred wallet,
+                    Prep data
+                  </a>
+                  , a transaction will be signed with your node address using your preferred wallet,
                   you can see the details of the transaction before submitting it in
                   the wallet popup window.
                 </p>

@@ -4214,6 +4214,8 @@ input[type='text']:focus.over {
 .tab-holder ul {
   border-bottom: 1px solid #4d4d4d;
   font-size: 0;
+  display: flex;
+  justify-content: space-between;
 }
 .tab-holder li {
   display: inline-block;
@@ -4221,7 +4223,7 @@ input[type='text']:focus.over {
   padding: 20px 0;
   position: relative;
   text-align: center;
-  width: 165px;
+  /* width: 165px; */
   cursor: pointer;
   font-size: 16px;
   font-family: 'Montserrat';
