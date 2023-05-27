@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getProposals } from "../../redux/store/iiss";
 import {
   ProposalType,
@@ -11,7 +12,6 @@ import {
 import { LoadingComponent } from "../../components";
 import imgNoProposal from "../../style/image/img-no-proposal.png";
 import { SortHolder } from "../../components";
-import ProposalSubmitModal from "./ProposalSubmitModal";
 import styles from "./index.module.css";
 
 class ProposalListPage extends Component {
@@ -22,6 +22,10 @@ class ProposalListPage extends Component {
     pageNo: 1,
     modalIsOpen: false
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   async setProposals({ pageNo, pageSize }) {
     try {
@@ -54,13 +58,16 @@ class ProposalListPage extends Component {
   };
 
   toggleModalState = () => {
-    console.log('modal state');
+    console.log("modal state");
     console.log(this.state.modalIsOpen);
-    this.setState( { modalIsOpen: !this.state.modalIsOpen });
-  }
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  };
 
   render() {
     const { loading, proposals, modalIsOpen } = this.state;
+    const { walletAddress } = this.props;
+    console.log("wallet address");
+    console.log(walletAddress);
 
     return (
       <div className="content-wrap">
@@ -69,11 +76,6 @@ class ProposalListPage extends Component {
         {!loading && (
           <div className="screen0">
             <div className="wrap-holder">
-              {modalIsOpen === true ? (
-                <ProposalSubmitModal isOpen={this.state.modalIsOpen} onClose={this.toggleModalState} useSmall={false}/>
-              ) : (
-                <></>
-              )}
               <div
                 style={{
                   display: "flex",
@@ -84,10 +86,9 @@ class ProposalListPage extends Component {
                 <p className="title" style={{ marginLeft: 0 }}>
                   Network Proposal
                 </p>
-                <button 
-                  className={styles.button}
-                  onClick={this.toggleModalState}
-                >Submit New Proposal</button>
+                <Link to={"/proposal-submit"}>
+                  <button className={styles.button}>Submit New Proposal</button>
+                </Link>
               </div>
 
               <div

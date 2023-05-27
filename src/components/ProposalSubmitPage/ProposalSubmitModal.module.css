@@ -1,0 +1,13 @@
+/* styles/appSection.module.css */
+.main {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}

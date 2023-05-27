@@ -8,15 +8,14 @@ import config from "../../config";
 
 const { nid } = config;
 
-export default function ProposalSubmitModal({ isOpen, onClose }) {
+export default function ProposalSubmitModal({ isOpen, onClose, walletAddress }) {
 
   return (
     <div>
       <GenericModal isOpen={isOpen} onClose={onClose} useSmall={false}>
         <div>
           <div className={styles.main}>
-            <div className={styles.defaultSection}></div>
-            <div className={styles.defaultSection}>
+            <div className={styles.title}>
               <h2>Create Proposal:</h2>
             </div>
           </div>
