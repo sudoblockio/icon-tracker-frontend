@@ -25,6 +25,14 @@ const typesOfProposals = [
   "call"
 ];
 
+function getContentOfType(type) {
+  try {
+    return JSON.stringify(proposalTypesData[type], null, 3);
+  } catch (e) {
+    return ""
+  }
+}
+
 const proposalTypesData = {
   text: {
     name: "text",
@@ -156,7 +164,8 @@ const proposalTypesData = {
 const utils = {
   typesOfProposals,
   proposalTypesData,
-  stripString
+  stripString,
+  getContentOfType
 };
 
 export default utils;

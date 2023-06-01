@@ -7,23 +7,42 @@ import utils from "./utils";
 import config from "../../config";
 
 const { nid } = config;
-const { typesOfProposals, proposalTypesData, stripString } = utils;
+const {
+  typesOfProposals,
+  proposalTypesData,
+  stripString,
+  getContentOfType
+} = utils;
 
 function ProposalSubmitPage({ walletAddress }) {
-  const [typeState, setTypeState] = useState("mainnet");
+  const [typeState, setTypeState] = useState("text");
+  const [valueState, setValueState] = useState(getContentOfType("text"));
+  const [titleState, setTitleValue] = useState("Proposal Title");
+  const [descriptionState, setDescriptionState] = useState(
+    "Network Proposal description"
+  );
 
-  function handleTypeChange() {
-    console.log("type state change");
+  function handleTextareaValueChange(newValueState) {
+    console.log("value state change");
+    console.log(typeof newValueState);
+    console.log(newValueState);
+    setValueState(newValueState);
   }
 
   function handleTitleInputChange(evt) {
-    console.log("input change");
-    console.log(evt);
+    setTitleValue(evt.target.value);
   }
 
-  function onDropdownChange(evt) {
+  function handleDescriptionChange(evt) {
+    console.log("description changed");
+    setDescriptionState(evt.target.value);
+  }
+
+  function handleTypeChange(evt) {
     console.log("dropdown change");
+    console.log(evt.target.value);
     setTypeState(evt.target.value);
+    setValueState(getContentOfType(evt.target.value));
   }
 
   function handleSubmitClick() {
@@ -42,7 +61,7 @@ function ProposalSubmitPage({ walletAddress }) {
             <input
               type="text"
               name={"name"}
-              value={"value"}
+              value={titleState}
               onChange={handleTitleInputChange}
               placeholder={"placeholder"}
               className={styles.containerItemInput}
@@ -53,38 +72,48 @@ function ProposalSubmitPage({ walletAddress }) {
             <textarea
               type="text"
               name={"name"}
-              value={"value"}
-              onChange={handleTitleInputChange}
+              value={descriptionState}
+              onChange={handleDescriptionChange}
               placeholder={"placeholder"}
               className={styles.containerItemTextarea}
             />
           </div>
           <div className={styles.containerItem}>
             <p className={styles.containerItemTitle}>Type</p>
-            <DropdownItem value={typeState} onSelectChange={onDropdownChange} />
+            <DropdownItem value={typeState} onSelectChange={handleTypeChange} />
           </div>
           <div className={styles.containerItem}>
             <p className={styles.containerItemTitle}>Value</p>
-            <textarea
-              type="text"
-              name={"name"}
-              value={"value"}
-              onChange={handleTitleInputChange}
-              placeholder={"placeholder"}
-              className={styles.containerItemTextarea}
+            <TextAreaValueItem
+              value={valueState}
+              onChange={handleTextareaValueChange}
             />
           </div>
           <div className={styles.containerItem}>
-            <button 
-              className={styles.submitButton}
-              onClick={handleSubmitClick}
-            >
+            <button className={styles.submitButton} onClick={handleSubmitClick}>
               Submit
             </button>
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function TextAreaValueItem({ value, onChange }) {
+  function handleChange(evt) {
+    onChange(evt.target.value);
+  }
+
+  return (
+    <textarea
+      type="text"
+      name={"textAreaValueItem"}
+      value={value}
+      onChange={handleChange}
+      placeholder={""}
+      className={styles.containerItemTextarea}
+    />
   );
 }
 
@@ -98,11 +127,8 @@ function DropdownItem({ value, onSelectChange }) {
           value={value || "text"}
         >
           {typesOfProposals.map(type => {
-            return (
-              <option value={type}>{type}</option>
-            )
-          })
-          }
+            return <option value={type}>{type}</option>;
+          })}
         </select>
       </div>
     </div>
