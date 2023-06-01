@@ -58,7 +58,7 @@
   flex-flow: row nowrap;
   align-items: center;
 }
-
+/* OLD CODE */
 /* .dropdownItemContent { */
 /*   display: flex; */
 /*   flex-flow: column nowrap; */
@@ -76,24 +76,63 @@
 /*   margin-left: 30px; */
 /* } */
 
-.dropdownItemSelect {
-  width: 300px;
-  height: 30px;
-  border: none;
-  border-style: none;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px !important;
-  padding: 0 10px;
+/* OLD CODE V2 */
+/* .dropdownItemSelect { */
+/*   /1* width: 300px; *1/ */
+/*   width: auto; */
+/*   height: 30px; */
+/*   border: none; */
+/*   border-style: none; */
+/*   border: 1px solid #e0e0e0; */
+/*   border-radius: 4px !important; */
+/*   padding: 0 10px; */
+/* } */
+
+/* .dropdownItemSelect { */
+/*   width: 100px; */
+/*   background-image: linear-gradient(45deg, transparent 50%, gray 50%), */
+/*     linear-gradient(135deg, gray 50%, transparent 50%); */
+/*   background-position: calc(100% - 20px), calc(100% - 15px), */
+/*     calc(100% - 2.5em) 0.5em; */
+/*   background-size: 5px 5px, 5px 5px, 1px 1.5em; */
+/*   background-repeat: no-repeat; */
+/* } */
+
+.dropdownItemContent {
+  position: relative;
+  display: inline-block;
 }
 
 .dropdownItemSelect {
-  width: 100px;
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-    linear-gradient(135deg, gray 50%, transparent 50%);
-  background-position: calc(100% - 20px), calc(100% - 15px),
-    calc(100% - 2.5em) 0.5em;
-  background-size: 5px 5px, 5px 5px, 1px 1.5em;
-  background-repeat: no-repeat;
+  display: inline-block;
+  padding: 4px 3px 3px 5px;
+  margin: 0;
+  outline: none;
+  line-height: 1.2;
+  background: #e2e2e2;
+  /* color: #fff; */
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+}
+
+.dropdownItemContent:after {
+  content: "▼";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 60%;
+  line-height: 25px;
+  padding: 0 7px;
+  background: #e2e2e2;
+  /* color: #fff; */
+  pointer-events: none;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+}
+
+.no-pointer-events .dropdownItemContent:after {
+  content: none;
 }
 
 .submitButton {

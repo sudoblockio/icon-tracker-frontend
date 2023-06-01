@@ -3,10 +3,11 @@ import { withRouter } from "react-router-dom";
 import styles from "./index.module.css";
 import { chainMethods } from "../../utils/rawTxMaker";
 import { requestJsonRpc } from "../../utils/connect";
-import utils from "../../utils/utils2";
+import utils from "./utils";
 import config from "../../config";
 
 const { nid } = config;
+const { typesOfProposals, proposalTypesData, stripString } = utils;
 
 function ProposalSubmitPage({ walletAddress }) {
   const [typeState, setTypeState] = useState("mainnet");
@@ -94,11 +95,14 @@ function DropdownItem({ value, onSelectChange }) {
         <select
           className={styles.dropdownItemSelect}
           onChange={onSelectChange}
-          value={value || "mainnet"}
+          value={value || "text"}
         >
-          <option value="mainnet">Mainnet</option>
-          <option value="berlin">Berlin</option>
-          <option value="lisbon">Lisbon</option>
+          {typesOfProposals.map(type => {
+            return (
+              <option value={type}>{type}</option>
+            )
+          })
+          }
         </select>
       </div>
     </div>
