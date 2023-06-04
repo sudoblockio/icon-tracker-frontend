@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./index.module.css";
-import { chainMethods } from "../../utils/rawTxMaker";
+import { governanceMethods } from "../../utils/rawTxMaker";
 import { requestJsonRpc } from "../../utils/connect";
 import utils from "./utils";
 import config from "../../config";
+import Web3Utils from "web3-utils";
 
-const { nid } = config;
+const nid = 3;
+// const { nid } = config;
 const {
   typesOfProposals,
   proposalTypesData,
   stripString,
   getContentOfType
 } = utils;
+
+const  {
+  submitNetworkProposal
+} = governanceMethods
 
 function ProposalSubmitPage({ walletAddress }) {
   const [typeState, setTypeState] = useState("text");
@@ -45,8 +51,30 @@ function ProposalSubmitPage({ walletAddress }) {
     setValueState(getContentOfType(evt.target.value));
   }
 
-  function handleSubmitClick() {
+  async function handleSubmitClick() {
     console.log("submit clicked");
+    console.log('value state');
+    console.log(typeof valueState);
+    console.log(valueState);
+    console.log(nid);
+    const p0 = JSON.parse(valueState);
+    const p1 = [p0];
+    const p2 = JSON.stringify(p1);
+    const parsedValue = Web3Utils.fromUtf8(p2);
+    const rawTransaction = submitNetworkProposal(
+      walletAddress,
+      {
+        title: typeState,
+        description: descriptionState,
+        value: parsedValue
+      },
+      nid
+    );
+    console.log("rawTransaction");
+    console.log(rawTransaction);
+    const response = await requestJsonRpc(rawTransaction.params);
+    console.log('response');
+    console.log(response);
   }
 
   return (

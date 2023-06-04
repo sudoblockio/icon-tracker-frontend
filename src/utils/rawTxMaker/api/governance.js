@@ -1,7 +1,7 @@
 // rawTxMaker/api/governance.js
 //
 // Imports
-import { scores, makeTxCallRPCObj } from "./helpers"
+import { scores, makeTxCallRPCObj } from "./helpers";
 
 // Governance methods
 /*
@@ -18,25 +18,43 @@ function voteNetworkProposal(proposalId, vote, prepAddress, nid) {
     },
     nid
   );
-};
+}
 
 /*
  *
  */
 function approveNetworkProposal(proposalId, prepAddress, nid) {
   return voteNetworkProposal(proposalId, "0x1", prepAddress, nid);
-};
+}
 
 /*
  *
  */
 function rejectNetworkProposal(proposalId, prepAddress, nid) {
   return voteNetworkProposal(proposalId, "0x0", prepAddress, nid);
-};
-
-const governanceMethods= {
-  voteNetworkProposal, 
-  approveNetworkProposal,
-  rejectNetworkProposal
 }
+
+function submitNetworkProposal(from, params, nid, sl = 2000000) {
+  console.log('submitNetworkProposal');
+  console.log(from);
+  console.log(params);
+  console.log(nid);
+
+  return makeTxCallRPCObj(
+    from,
+    scores.mainnet.governance2,
+    "registerProposal",
+    params,
+    nid,
+    sl,
+    100
+  );
+}
+
+const governanceMethods = {
+  voteNetworkProposal,
+  approveNetworkProposal,
+  rejectNetworkProposal,
+  submitNetworkProposal
+};
 export default governanceMethods;

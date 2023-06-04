@@ -9,6 +9,10 @@ function stripString(string, length = 6) {
   }
 }
 
+function makeNetworkProposalRpcObj(title, description, value) {
+  //
+}
+
 const typesOfProposals = [
   "text",
   "revision",
