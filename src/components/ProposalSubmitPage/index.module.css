@@ -53,6 +53,14 @@
   border-radius: 4px !important;
 }
 
+.containerItemTextareaValid {
+  border-color: #4caf50 !important;
+}
+
+.containerItemTextareaInvalid {
+  border-color: #f44336 !important;
+}
+
 .dropdownItem {
   display: flex;
   flex-flow: row nowrap;

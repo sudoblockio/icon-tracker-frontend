@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./index.module.css";
 import { governanceMethods } from "../../utils/rawTxMaker";
@@ -16,9 +16,7 @@ const {
   getContentOfType
 } = utils;
 
-const  {
-  submitNetworkProposal
-} = governanceMethods
+const { submitNetworkProposal } = governanceMethods;
 
 function ProposalSubmitPage({ walletAddress }) {
   const [typeState, setTypeState] = useState("text");
@@ -27,6 +25,7 @@ function ProposalSubmitPage({ walletAddress }) {
   const [descriptionState, setDescriptionState] = useState(
     "Network Proposal description"
   );
+  const [valueIsValidJSON, setValueIsValidJSON] = useState(true);
 
   function handleTextareaValueChange(newValueState) {
     console.log("value state change");
@@ -53,7 +52,7 @@ function ProposalSubmitPage({ walletAddress }) {
 
   async function handleSubmitClick() {
     console.log("submit clicked");
-    console.log('value state');
+    console.log("value state");
     console.log(typeof valueState);
     console.log(valueState);
     console.log(nid);
@@ -73,10 +72,23 @@ function ProposalSubmitPage({ walletAddress }) {
     console.log("rawTransaction");
     console.log(rawTransaction);
     const response = await requestJsonRpc(rawTransaction.params);
-    console.log('response');
+    console.log("response");
     console.log(response);
   }
 
+  useEffect(() => {
+    let valueParsed;
+    console.log("value changed");
+    console.log(valueState);
+    try {
+      valueParsed = JSON.parse(valueState);
+      console.log(valueParsed);
+      setValueIsValidJSON(true);
+    } catch (e) {
+      console.log("value cannot be parsed by JSON.parse");
+      setValueIsValidJSON(false);
+    }
+  }, [valueState]);
   return (
     <div className={styles.main}>
       <div className={styles.content}>
@@ -115,6 +127,7 @@ function ProposalSubmitPage({ walletAddress }) {
             <TextAreaValueItem
               value={valueState}
               onChange={handleTextareaValueChange}
+              borderStyle={valueIsValidJSON ? "green" : "red"}
             />
           </div>
           <div className={styles.containerItem}>
@@ -128,7 +141,13 @@ function ProposalSubmitPage({ walletAddress }) {
   );
 }
 
-function TextAreaValueItem({ value, onChange }) {
+function TextAreaValueItem({ value, onChange, borderStyle = null }) {
+  const classname =
+    borderStyle == null
+      ? styles.containerItemTextarea
+      : borderStyle === "green"
+      ? `${styles.containerItemTextarea} ${styles.containerItemTextareaValid}`
+      : `${styles.containerItemTextarea} ${styles.containerItemTextareaInvalid}`;
   function handleChange(evt) {
     onChange(evt.target.value);
   }
@@ -140,7 +159,7 @@ function TextAreaValueItem({ value, onChange }) {
       value={value}
       onChange={handleChange}
       placeholder={""}
-      className={styles.containerItemTextarea}
+      className={classname}
     />
   );
 }
