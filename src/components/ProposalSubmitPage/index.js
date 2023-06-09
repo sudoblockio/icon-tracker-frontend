@@ -51,29 +51,34 @@ function ProposalSubmitPage({ walletAddress }) {
   }
 
   async function handleSubmitClick() {
-    console.log("submit clicked");
-    console.log("value state");
-    console.log(typeof valueState);
-    console.log(valueState);
-    console.log(nid);
-    const p0 = JSON.parse(valueState);
-    const p1 = [p0];
-    const p2 = JSON.stringify(p1);
-    const parsedValue = Web3Utils.fromUtf8(p2);
-    const rawTransaction = submitNetworkProposal(
-      walletAddress,
-      {
-        title: typeState,
-        description: descriptionState,
-        value: parsedValue
-      },
-      nid
-    );
-    console.log("rawTransaction");
-    console.log(rawTransaction);
-    const response = await requestJsonRpc(rawTransaction.params);
-    console.log("response");
-    console.log(response);
+    if (!valueIsValidJSON) {
+      alert("value is not valid json");
+      return;
+    } else {
+      console.log("submit clicked");
+      console.log("value state");
+      console.log(typeof valueState);
+      console.log(valueState);
+      console.log(nid);
+      const p0 = JSON.parse(valueState);
+      const p1 = [p0];
+      const p2 = JSON.stringify(p1);
+      const parsedValue = Web3Utils.fromUtf8(p2);
+      const rawTransaction = submitNetworkProposal(
+        walletAddress,
+        {
+          title: typeState,
+          description: descriptionState,
+          value: parsedValue
+        },
+        nid
+      );
+      console.log("rawTransaction");
+      console.log(rawTransaction);
+      const response = await requestJsonRpc(rawTransaction.params);
+      console.log("response");
+      console.log(response);
+    }
   }
 
   useEffect(() => {
