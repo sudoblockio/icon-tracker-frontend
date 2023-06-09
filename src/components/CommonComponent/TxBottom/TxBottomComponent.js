@@ -162,7 +162,10 @@ function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address })
           goAllTx={goAllTx}
           fromAddr={"hello"}
         />
-        <button onClick={toggleModal}>Update</button>
+        <button 
+          onClick={toggleModal}
+          className={customStyles.button}
+        >Update</button>
       </div>
     </>
   )

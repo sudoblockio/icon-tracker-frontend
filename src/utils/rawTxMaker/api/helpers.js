@@ -24,7 +24,8 @@ function makeTxCallRPCObj(
   method,
   paramsObj,
   nid,
-  stepLimit = 2000000
+  stepLimit = 2000000,
+  value = null
 ) {
   let txObj = makeJSONRPCRequestObj("icx_sendTransaction");
   txObj["params"] = {
@@ -42,6 +43,12 @@ function makeTxCallRPCObj(
     }
   };
 
+  if (value != null) {
+    txObj["params"]["value"] = decimalToHex(100*10**18);
+  }
+
+  console.log('txObj');
+  console.log(txObj);
   return txObj;
 };
 

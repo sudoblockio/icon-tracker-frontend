@@ -1,12 +1,8 @@
-.buttonUpdatePrep {
-  color: white;
-}
-
 .button {
   margin: 0 0.5rem 0 0;
   height: 40px;
   min-width: 40px;
-  color: #299fac;
+  color: #299fac !important;
   background-color: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
@@ -16,5 +12,11 @@
 
 .button:hover {
   background-color: #08909f;
-  color: #fff;
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+.button > a:hover {
+  text-decoration: none;
+  color: #4d4d4d;
 }
