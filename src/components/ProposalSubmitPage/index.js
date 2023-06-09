@@ -96,41 +96,60 @@ function ProposalSubmitPage({ walletAddress }) {
           <h2>Create Proposal</h2>
         </div>
         <div className={styles.container}>
-          <div className={styles.containerItem}>
-            <p className={styles.containerItemTitle}>Title</p>
-            <input
-              type="text"
-              name={"name"}
-              value={titleState}
-              onChange={handleTitleInputChange}
-              placeholder={"placeholder"}
-              className={styles.containerItemInput}
-            />
+          <div className={styles.tableRow}>
+            <div className={styles.titleContainer}>
+              <p className={styles.tableRowTitle}>Title</p>
+            </div>
+            <div className={styles.valueContainer}>
+              <input
+                type="text"
+                name={"name"}
+                value={titleState}
+                onChange={handleTitleInputChange}
+                placeholder={"placeholder"}
+                className={styles.tableRowInput}
+              />
+            </div>
           </div>
-          <div className={styles.containerItem}>
-            <p className={styles.containerItemTitle}>Description</p>
-            <textarea
-              type="text"
-              name={"name"}
-              value={descriptionState}
-              onChange={handleDescriptionChange}
-              placeholder={"placeholder"}
-              className={styles.containerItemTextarea}
-            />
+          <div className={styles.tableRow}>
+            <div className={styles.titleContainer}>
+              <p className={styles.tableRowTitle}>Description</p>
+            </div>
+            <div className={styles.valueContainer}>
+              <textarea
+                type="text"
+                name={"name"}
+                value={descriptionState}
+                onChange={handleDescriptionChange}
+                placeholder={"placeholder"}
+                className={styles.tableRowTextarea}
+              />
+            </div>
           </div>
-          <div className={styles.containerItem}>
-            <p className={styles.containerItemTitle}>Type</p>
-            <DropdownItem value={typeState} onSelectChange={handleTypeChange} />
+          <div className={styles.tableRow}>
+            <div className={styles.titleContainer}>
+              <p className={styles.tableRowTitle}>Type</p>
+            </div>
+            <div className={styles.valueContainer}>
+              <DropdownItem
+                value={typeState}
+                onSelectChange={handleTypeChange}
+              />
+            </div>
           </div>
-          <div className={styles.containerItem}>
-            <p className={styles.containerItemTitle}>Value</p>
-            <TextAreaValueItem
-              value={valueState}
-              onChange={handleTextareaValueChange}
-              borderStyle={valueIsValidJSON ? "green" : "red"}
-            />
+          <div className={styles.tableRow}>
+            <div className={styles.titleContainer}>
+              <p className={styles.tableRowTitle}>Value</p>
+            </div>
+            <div className={styles.valueContainer}>
+              <TextAreaValueItem
+                value={valueState}
+                onChange={handleTextareaValueChange}
+                borderStyle={valueIsValidJSON ? "green" : "red"}
+              />
+            </div>
           </div>
-          <div className={styles.containerItem}>
+          <div className={styles.containerButton}>
             <button className={styles.submitButton} onClick={handleSubmitClick}>
               Submit
             </button>
@@ -144,10 +163,10 @@ function ProposalSubmitPage({ walletAddress }) {
 function TextAreaValueItem({ value, onChange, borderStyle = null }) {
   const classname =
     borderStyle == null
-      ? styles.containerItemTextarea
+      ? styles.tableRowTextarea
       : borderStyle === "green"
-      ? `${styles.containerItemTextarea} ${styles.containerItemTextareaValid}`
-      : `${styles.containerItemTextarea} ${styles.containerItemTextareaInvalid}`;
+      ? `${styles.tableRowTextarea} ${styles.tableRowTextareaValid}`
+      : `${styles.tableRowTextarea} ${styles.tableRowTextareaInvalid}`;
   function handleChange(evt) {
     onChange(evt.target.value);
   }

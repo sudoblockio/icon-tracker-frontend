@@ -93,13 +93,6 @@ class Header extends Component {
                     >
                       <span>Network Proposal</span>
                     </li>
-                    <li
-                      onClick={() => {
-                        this.props.history.push("/proposal-submit");
-                      }}
-                    >
-                      <span>Submit Proposal</span>
-                    </li>
                   </ol>
                 </li>
               </ul>
