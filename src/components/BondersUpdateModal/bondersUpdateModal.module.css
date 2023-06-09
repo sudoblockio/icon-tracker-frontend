@@ -5,9 +5,6 @@
   display: flex;
   flex-flow: column nowrap;
 }
-.main > h2 {
-  margin: 5px;
-}
 
 .topSection {
   display: flex;
@@ -62,6 +59,21 @@
   flex-flow: column nowrap;
 }
 
+.defaultSection > p {
+  margin: 5px 0px;
+}
+
+.defaultSection > ul {
+  margin-top: 5px;
+}
+
+.defaultSection > h2 {
+  /* margin: 5px; */
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
 .codeBlockContainer2 {
   align-self: center;
   /* width: 100%; */
@@ -76,24 +88,40 @@
   flex-flow: column nowrap;
   overflow-x: scroll;
 }
+
 .button {
   margin: 4px;
   height: 30px;
   width: 80px;
+  background-color: #c2c2c2;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
 }
+
+.button:hover {
+  background-color: #c2c2c2;
+  transform: translateY(-1px);
+  color: #299fac;
+}
+
 .setPrepForm {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
 }
 .setPrepForm .button {
-  align-self: flex-end;
+  align-self: flex-start;
 }
 .table {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
   /* align-self: center; */
-  /* justify-content: center; */
-  border: 1px solid #d6d3d1;
+  /* border: 1px solid #d6d3d1; */
   padding: 10px;
 }
 .tableRow {
@@ -102,12 +130,30 @@
   display: flex;
   flex-flow: row nowrap;
 }
+
+.tableRow > * {
+}
+
+.tableRow > input {
+}
+
 .tableRowLabel {
-  margin: 0px 4px;
+  /* margin: 0 4px; */
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 .tableRowInput {
-  border-radius: 4px;
+  height: 35px !important;
+  flex: 2 !important;
+  border: 2px solid #c2c2c2 !important;
+  border-radius: 4px !important;
 }
+
+.tableRowInput::placeholder {
+  color: #c2c2c2;
+}
+
 .tableRowInputValid {
   /* border: 1px solid #d6d3d1; */
   border: 1px solid green;
