@@ -228,6 +228,15 @@ function checkIfPrepNeedToVote(arrayOfPreps, localPrep) {
   return result;
 }
 
+function getInitialBonderState(bondersArray) {
+  let result = {};
+  for (let i = 0; i < 10; i++) {
+    const label = `bonder${i + 1}`;
+    result[label] = bondersArray[i] || "";
+  }
+  return result;
+}
+
 const utils = {
   data,
   samples,
@@ -243,7 +252,8 @@ const utils = {
   getProposalVotes,
   MAX_WAIT_PERIOD,
   initialTxResultState,
-  checkIfPrepNeedToVote
+  checkIfPrepNeedToVote,
+  getInitialBonderState
 };
 
 export default utils;

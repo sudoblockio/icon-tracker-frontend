@@ -25,7 +25,11 @@ const initBonderForm = {
   bonder10: ""
 };
 
-const { parseBonderFormInputs, isValidICONAddress } = utils;
+const {
+  parseBonderFormInputs,
+  isValidICONAddress,
+  getInitialBonderState
+} = utils;
 
 export default function BondersModal({ bondMap, address, isOpen, onClose }) {
   const [bonderListState, setBonderListState] = useState([]);
@@ -78,7 +82,11 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
       const bonderListData = await getBonders(payload);
 
       if (bonderListData != null && bonderListData.length != null) {
+        const initBonderState = getInitialBonderState(bonderListData);
+        console.log("initBonderState");
+        console.log(initBonderState);
         setBonderListState(bonderListData);
+        setBonderForm(initBonderState);
       }
     }
     if (bondMap != null) {
@@ -103,23 +111,10 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
                 <p>
                   You can use the following form to update your{" "}
                   <i>bonderList</i> configuration, a transaction will be signed
-                  with your address using your preffered wallet software, the
+                  with your address using your preferred wallet software, the
                   details of the transaction will be shown in the wallet popup
                   window before approving the transaction.
                 </p>
-                <p>Current wallets allowed to place bond for your node:</p>
-                <ul>
-                  {bonderListState.map((wallet, index) => {
-                    return (
-                      <li key={`${wallet}-${index}`}>
-                        {/* <a href={utils.parseBonderWallet(wallet)} target="_blank"> */}
-                        {/*   {wallet} */}
-                        {/* </a> */}
-                        {wallet}
-                      </li>
-                    );
-                  })}
-                </ul>
                 <div className={styles.setPrepForm}>
                   <div className={styles.table}>
                     {[
