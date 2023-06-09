@@ -370,15 +370,19 @@ function AddressInfo(props) {
                             );
                           })}
 
-                          <span className={compStyles.buttonUpdatePrep}>
-                            <button
-                              disabled={!is_prep || !isConnected}
-                              onClick={togglePrepModal}
-                              className={compStyles.button}
-                            >
-                              Update
-                            </button>
-                          </span>
+                          {is_prep && isConnected ? (
+                            <span className={compStyles.buttonUpdatePrep}>
+                              <button
+                                disabled={!is_prep || !isConnected}
+                                onClick={togglePrepModal}
+                                className={compStyles.button}
+                              >
+                                Update
+                              </button>
+                            </span>
+                          ) : (
+                            <></>
+                          )}
                           <span
                             className={`active ${
                               node_state === "Synced"
