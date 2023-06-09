@@ -7,8 +7,8 @@ import utils from "./utils";
 import config from "../../config";
 import Web3Utils from "web3-utils";
 
-const nid = 3;
-// const { nid } = config;
+// const nid = 3;
+const { nid } = config;
 const {
   typesOfProposals,
   proposalTypesData,
