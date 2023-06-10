@@ -35,11 +35,6 @@ function rejectNetworkProposal(proposalId, prepAddress, nid) {
 }
 
 function submitNetworkProposal(from, params, nid, sl = 2000000) {
-  console.log('submitNetworkProposal');
-  console.log(from);
-  console.log(params);
-  console.log(nid);
-
   return makeTxCallRPCObj(
     from,
     scores.mainnet.governance2,

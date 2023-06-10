@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import styles from "./index.module.css";
 import { governanceMethods } from "../../utils/rawTxMaker";
 import { requestJsonRpc } from "../../utils/connect";
+import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
+import { addressInfo } from "../../redux/store/addresses";
 import utils from "./utils";
 import config from "../../config";
 import Web3Utils from "web3-utils";
+import GenericModal from "../GenericModal/genericModal";
+import { LoadingComponent } from "../../components";
 
-// const nid = 3;
+// const nid = 3; // USE FOR TESTING ON LOCAL NETWORK ONLY
 const { nid } = config;
 const {
   typesOfProposals,
@@ -18,7 +22,11 @@ const {
 
 const { submitNetworkProposal } = governanceMethods;
 
-function ProposalSubmitPage({ walletAddress }) {
+function ProposalSubmitPage(props) {
+  const { walletAddress } = props;
+  console.log("props on create proposal page");
+  console.log(props);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [typeState, setTypeState] = useState("text");
   const [valueState, setValueState] = useState(getContentOfType("text"));
   const [titleState, setTitleValue] = useState("Proposal Title");
@@ -26,6 +34,15 @@ function ProposalSubmitPage({ walletAddress }) {
     "Network Proposal description"
   );
   const [valueIsValidJSON, setValueIsValidJSON] = useState(true);
+  const [txResponse, setTxResponse] = useState(getTxResponseInitValues());
+  const [walletIsPrep, setWalletIsPrep] = useState(false);
+
+  function closeModal() {
+    setModalIsOpen(false);
+    const txResponseInitValues = getTxResponseInitValues();
+    // txResponseInitValues.error.message = "";
+    setTxResponse(txResponseInitValues);
+  }
 
   function handleTextareaValueChange(newValueState) {
     console.log("value state change");
@@ -53,13 +70,10 @@ function ProposalSubmitPage({ walletAddress }) {
   async function handleSubmitClick() {
     if (!valueIsValidJSON) {
       alert("value is not valid json");
-      return;
+    } else if (walletIsPrep === false) {
+      alert("Wallet is not logged or is not a P-Rep");
     } else {
-      console.log("submit clicked");
-      console.log("value state");
-      console.log(typeof valueState);
-      console.log(valueState);
-      console.log(nid);
+      setModalIsOpen(true);
       const p0 = JSON.parse(valueState);
       const p1 = [p0];
       const p2 = JSON.stringify(p1);
@@ -67,35 +81,72 @@ function ProposalSubmitPage({ walletAddress }) {
       const rawTransaction = submitNetworkProposal(
         walletAddress,
         {
-          title: typeState,
+          title: titleState,
           description: descriptionState,
           value: parsedValue
         },
         nid
       );
-      console.log("rawTransaction");
-      console.log(rawTransaction);
-      const response = await requestJsonRpc(rawTransaction.params);
-      console.log("response");
-      console.log(response);
+      const response = await icxSendTransaction({
+        rawTx: rawTransaction,
+        index: 0
+      });
+
+      if (response.error.message === "CANCEL_JSON-RPC") {
+        closeModal();
+      } else {
+        setTxResponse(response);
+      }
     }
   }
 
   useEffect(() => {
     let valueParsed;
-    console.log("value changed");
-    console.log(valueState);
     try {
       valueParsed = JSON.parse(valueState);
-      console.log(valueParsed);
       setValueIsValidJSON(true);
     } catch (e) {
       console.log("value cannot be parsed by JSON.parse");
       setValueIsValidJSON(false);
     }
   }, [valueState]);
+
+  useEffect(() => {
+    async function getWalletInfo(wallet) {
+      let walletInfo;
+      try {
+        walletInfo = await addressInfo({
+          address: wallet,
+          limit: 10,
+          skip: 0
+        });
+
+        setWalletIsPrep(walletInfo.data.is_prep);
+      } catch (e) {
+        walletInfo = null;
+      }
+
+      if (walletInfo != null) {
+      }
+      console.log("wallet info");
+      console.log(walletInfo);
+    }
+    console.log('proposal submit walletAddress');
+    console.log(walletAddress)
+    if (typeof walletAddress === "string" && walletAddress !== "") {
+      getWalletInfo(walletAddress);
+    }
+  }, []);
+
   return (
     <div className={styles.main}>
+      {modalIsOpen && (
+        <ResponseModal
+          isOpen={modalIsOpen}
+          onClose={closeModal}
+          response={txResponse}
+        />
+      )}
       <div className={styles.content}>
         <div className={styles.title}>
           <h2>Create Proposal</h2>
@@ -197,13 +248,64 @@ function DropdownItem({ value, onSelectChange }) {
           onChange={onSelectChange}
           value={value || "text"}
         >
-          {typesOfProposals.map(type => {
-            return <option value={type}>{type}</option>;
+          {typesOfProposals.map((type, index) => {
+            return (
+              <option key={`${type}-${index}`} value={type}>
+                {type}
+              </option>
+            );
           })}
         </select>
       </div>
     </div>
   );
+}
+
+function ResponseModal({ isOpen, onClose, response }) {
+  console.log("response");
+  console.log(response);
+  const errorResponse = response.error != null ? response.error.message : "";
+  const loading =
+    (errorResponse == null || errorResponse === "") && response.data == null;
+
+  const successResponse = response.data != null ? response.data.result : null;
+  const route =
+    typeof successResponse === "string"
+      ? `/transaction/${successResponse}`
+      : "/404";
+  return (
+    <GenericModal isOpen={true} onClose={onClose} useSmall={true}>
+      {loading ? (
+        <div>
+          <LoadingComponent height={"300px"} />
+        </div>
+      ) : errorResponse === "" ? (
+        <div>
+          <p>Transaction result:</p>
+          <Link to={route}>
+            <p>{successResponse}</p>
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <p>Error Response:</p>
+          <p>{errorResponse}</p>
+        </div>
+      )}
+    </GenericModal>
+  );
+}
+
+function getTxResponseInitValues() {
+  const result = {
+    status: 200,
+    data: null,
+    index: 0,
+    error: { message: "" }
+  };
+
+  const stringified = JSON.stringify(result);
+  return JSON.parse(stringified);
 }
 
 export default withRouter(ProposalSubmitPage);
