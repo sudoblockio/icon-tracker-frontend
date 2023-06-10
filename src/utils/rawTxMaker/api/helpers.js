@@ -43,8 +43,8 @@ function makeTxCallRPCObj(
     }
   };
 
-  if (value != null) {
-    txObj["params"]["value"] = decimalToHex(100*10**18);
+  if (value != null && typeof value === "number") {
+    txObj["params"]["value"] = decimalToHex(value*10**18);
   }
 
   console.log('txObj');

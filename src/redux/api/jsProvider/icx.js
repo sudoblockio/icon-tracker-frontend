@@ -1,6 +1,6 @@
 import { requestJsonRpc } from "../../../utils/connect";
 
-export async function icxSendTransaction({ params, index }) {
+export async function icxSendTransaction({ rawTx, index }) {
   const result = {
     status: 200,
     data: null,
@@ -8,7 +8,7 @@ export async function icxSendTransaction({ params, index }) {
     error: { message: "" }
   };
   try {
-    result.data = await requestJsonRpc(params.params);
+    result.data = await requestJsonRpc(rawTx.params);
     console.log("result success");
   } catch (error) {
     console.log("result error");
