@@ -104,8 +104,7 @@ function ProposalDetailPage(props) {
         return { ...currentState, endingBlockHeight: date };
       });
     } else {
-      const difference =
-        Number(res.data.number) - Number(currentBlockHeight);
+      const difference = Number(res.data.number) - Number(currentBlockHeight);
       const sum = difference * 2;
       const latestDate = new Date().valueOf();
       const totalSum = sum + latestDate;
@@ -234,8 +233,7 @@ function ProposalDetailPage(props) {
         });
 
         await getStartBlockHeight(proposal.startBlockHeight);
-        await getLastBlockHeight(proposal.endBlockHeight, data.height );
-
+        await getLastBlockHeight(proposal.endBlockHeight, data.height);
       } catch (e) {
         console.error(e);
         setPageState(currentState => {
@@ -255,8 +253,16 @@ function ProposalDetailPage(props) {
       {!loading && (
         <div className="screen0">
           <div className="wrap-holder">
-            <p className="title">Network Proposal Details</p>
-            <button>Vote</button>
+            <div
+              style={{
+                display: "flex",
+                flexFlow: "row nowrap",
+                justifyContent: "space-between"
+              }}
+            >
+              <p className="title">Network Proposal Details</p>
+              <button>Vote</button>
+            </div>
             <div className="contents">
               <div className="table-box">
                 <table className="table-typeB">
