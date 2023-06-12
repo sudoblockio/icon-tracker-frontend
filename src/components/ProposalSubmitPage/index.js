@@ -11,8 +11,8 @@ import Web3Utils from "web3-utils";
 import GenericModal from "../GenericModal/genericModal";
 import { LoadingComponent } from "../../components";
 
-// const nid = 3; // USE FOR TESTING ON LOCAL NETWORK ONLY
-const { nid } = config;
+const nid = 3; // USE FOR TESTING ON LOCAL NETWORK ONLY
+// const { nid } = config;
 const {
   typesOfProposals,
   proposalTypesData,
@@ -70,8 +70,8 @@ function ProposalSubmitPage(props) {
   async function handleSubmitClick() {
     if (!valueIsValidJSON) {
       alert("value is not valid json");
-    } else if (walletIsPrep === false) {
-      alert("Wallet is not logged or is not a P-Rep");
+    // } else if (walletIsPrep === false) {
+    //   alert("Wallet is not logged or is not a P-Rep");
     } else {
       setModalIsOpen(true);
       const p0 = JSON.parse(valueState);

@@ -25,6 +25,16 @@ import { blockInfo } from "../../redux/store/blocks";
 import { getLastBlock, getPRepsRPC } from "../../redux/store/iiss";
 import { addressInfo } from "../../redux/store/addresses";
 import CustomButton from "./CustomButton";
+import { governanceMethods } from "../../utils/rawTxMaker";
+import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
+import config from "../../config";
+
+// USE THE FOLLOWING FLAG FOR TESTING
+const USE_TESTING_PARAMS = true;
+
+const nid = USE_TESTING_PARAMS ? 3 : config.nid;
+
+const { approveNetworkProposal, rejectNetworkProposal } = governanceMethods;
 
 function ProposalDetailPage(props) {
   const [state, setPageState] = useState({
@@ -37,9 +47,12 @@ function ProposalDetailPage(props) {
     endingBlockHeight: "",
     prepsList: null,
     showVoteButton: false,
-    walletInfo: null
+    walletInfo: null,
+    votedAgree: false,
+    votedDisagree: false,
+    isVoter: false
   });
-  const { loading, error, proposal } = state;
+  const { loading, error, proposal, votedAgree, votedDisagree } = state;
   const { walletAddress } = props;
 
   const {
@@ -58,6 +71,8 @@ function ProposalDetailPage(props) {
 
   const { agree, disagree, noVote } = vote || {};
 
+  const buttonLabel =
+    !votedAgree && !votedDisagree ? "Cast Vote" : "Change Vote";
   const start = startBlockHeight
     ? IconConverter.toNumber(startBlockHeight)
     : "-";
@@ -95,13 +110,10 @@ function ProposalDetailPage(props) {
   }
 
   async function getLastBlockHeight(endBlockHeight, currentBlockHeight) {
-    console.log("getLastBlockHeight");
     const payload = {
       height: IconConverter.toNumber(endBlockHeight)
     };
-    console.log(payload);
     const res = await blockInfo(payload);
-    console.log(res);
     if (Number(currentBlockHeight) > Number(res.data.number)) {
       const date = new Date((res.data.timestamp / 1e6) * 1000);
 
@@ -166,12 +178,9 @@ function ProposalDetailPage(props) {
       });
     }
 
-    console.log({ abc: state.prepsList });
     if (vote && noVote && state.prepsList != null) {
       noVote.list.forEach(item => {
-        // console.log(e.address, item)
         const data = state.prepsList.filter(e => {
-          //   console.log(e.address, item, "adddd");
           return e.address === item;
         });
         if (!data[0]) {
@@ -181,7 +190,6 @@ function ProposalDetailPage(props) {
             name: "Unregistered Prop",
             answer: "No Vote"
           });
-          console.log({ address: item });
         } else {
           result.push({
             address: item,
@@ -224,8 +232,10 @@ function ProposalDetailPage(props) {
     const endBlockHeight = parseInt(endblockHeightAsHex, 16);
     const currentBlockHeight = currentBlockHeightAsNumber;
 
-    if(!true) {
-    // if (endBlockHeight < currentBlockHeight) {
+    const flowCondition = USE_TESTING_PARAMS
+      ? false
+      : endBlockHeight > currentBlockHeight;
+    if (flowCondition) {
       setPageState(currentState => {
         return {
           ...currentState,
@@ -241,14 +251,46 @@ function ProposalDetailPage(props) {
       });
     }
   }
-  function handleClickOnAccept() {
+  async function handleClickOnAccept() {
     //
-    console.log("click on accept");
+    if (
+      state.proposal.id != null &&
+      walletAddress != null &&
+      walletAddress != ""
+    ) {
+      const rawTransaction = approveNetworkProposal(
+        state.proposal.id,
+        walletAddress,
+        nid
+      );
+
+      const response = await icxSendTransaction({
+        rawTx: rawTransaction,
+        index: 0
+      });
+      console.log("network vote response", response);
+    }
   }
 
-  function handleClickOnReject() {
+  async function handleClickOnReject() {
     //
-    console.log("click on reject");
+    if (
+      state.proposal.id != null &&
+      walletAddress != null &&
+      walletAddress != ""
+    ) {
+      const rawTransaction = rejectNetworkProposal(
+        state.proposal.id,
+        walletAddress,
+        nid
+      );
+
+      const response = await icxSendTransaction({
+        rawTx: rawTransaction,
+        index: 0
+      });
+      console.log("network vote response", response);
+    }
   }
 
   useEffect(() => {
@@ -260,7 +302,6 @@ function ProposalDetailPage(props) {
           limit: 10,
           skip: 0
         });
-        // TODO: handle here what to do with the info of the prep
       } catch (e) {
         walletInfo = null;
       }
@@ -272,12 +313,9 @@ function ProposalDetailPage(props) {
     async function fetchInit() {
       try {
         const proposal = await getProposal(id);
-        console.log("proposal");
-        console.log(proposal);
         const data = await getLastBlock();
         const prepRpc = await getPRepsRPC();
 
-        console.log(data.height, "height======>");
         setPageState(currentState => {
           return {
             ...currentState,
@@ -306,6 +344,58 @@ function ProposalDetailPage(props) {
     }
   }, []);
 
+  useEffect(() => {
+    async function getVoters(height) {
+      let allPreps = null;
+      try {
+        allPreps = await getPRepsRPC(height);
+        if (allPreps.error != null) {
+          allPreps = await getPRepsRPC();
+        }
+      } catch (e) {
+        console.log("error in getVoters");
+      }
+      if (allPreps != null) {
+        return allPreps.preps
+          .filter(prep => {
+            return prep.grade === "0x0";
+          })
+          .map(prep => {
+            return prep.address;
+          });
+      } else {
+        return [];
+      }
+    }
+    async function asyncTask() {
+      const { agree, disagree, noVote } = state.proposal.vote;
+      const votedAgree =
+        agree.list != null ? agree.list.includes(walletAddress) : false;
+      const votedDisagree =
+        disagree.list != null ? disagree.list.includes(walletAddress) : false;
+      const voters = await getVoters(state.proposal.startBlockHeight);
+      const isVoter = USE_TESTING_PARAMS ? true : voters.includes(walletAddress);
+      setPageState(currentState => {
+        return {
+          ...currentState,
+          votedAgree: votedAgree,
+          votedDisagree: votedDisagree,
+          isVoter: isVoter
+        };
+      });
+    }
+    if (
+      state.proposal != null &&
+      state.proposal.vote != null &&
+      typeof walletAddress === "string" &&
+      walletAddress !== "" &&
+      state.prepsList != null &&
+      state.prepsList.length > 0
+    ) {
+      asyncTask();
+    }
+  }, [state.proposal, walletAddress]);
+
   return error ? (
     <NotFoundPage error={error} />
   ) : (
@@ -322,8 +412,9 @@ function ProposalDetailPage(props) {
               }}
             >
               <p className="title">Network Proposal Details</p>
-              {state.showVoteButton && (
+              {state.showVoteButton && state.isVoter && (
                 <CustomButton
+                  label={buttonLabel}
                   handleAccept={handleClickOnAccept}
                   handleReject={handleClickOnReject}
                 />

@@ -1,5 +1,14 @@
-import { walletApiInstance, trackerApiInstance, getWalletApiUrl } from "../api/restV3/config";
-import { randomUint32, makeUrl, makeRewardsUrl, convertHexToValue } from "../../utils/utils";
+import {
+  walletApiInstance,
+  trackerApiInstance,
+  getWalletApiUrl
+} from "../api/restV3/config";
+import {
+  randomUint32,
+  makeUrl,
+  makeRewardsUrl,
+  convertHexToValue
+} from "../../utils/utils";
 import config from "../../config";
 import IconService from "icon-sdk-js";
 import { requestJsonRpc } from "../../utils/connect";
@@ -9,10 +18,10 @@ export async function getStats() {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/stats`)
-      .then((result) => {
+      .then(result => {
         resolve(result.data);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -32,7 +41,9 @@ export async function coinGeckoMarketCap() {
 
 export async function coinGeckoCurrentUSD() {
   try {
-    const icondetail = await fetch("https://api.coingecko.com/api/v3/coins/icon");
+    const icondetail = await fetch(
+      "https://api.coingecko.com/api/v3/coins/icon"
+    );
     const data = await icondetail.json();
     return data.market_data.current_price.usd;
   } catch (e) {
@@ -45,10 +56,10 @@ export async function getSrcCodeLink(addr) {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/contracts/${addr}`)
-      .then((result) => {
+      .then(result => {
         resolve(result.data.source_code_link);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -59,10 +70,10 @@ export async function getVerSrcCodeLink(addr) {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/contracts/${addr}`)
-      .then((result) => {
+      .then(result => {
         resolve(result.data.verified_source_code_link);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -84,10 +95,10 @@ export async function getContractListCount() {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/contracts`)
-      .then((result) => {
+      .then(result => {
         resolve(result);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -98,10 +109,10 @@ export async function getContractABI(addr) {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/contracts/${addr}`)
-      .then((result) => {
+      .then(result => {
         resolve(result.data.abi);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -116,15 +127,20 @@ export async function prepList(grade) {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/governance/preps`)
-      .then((result) => {
-        const nameSorted = (result.data || []).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+      .then(result => {
+        const nameSorted = (result.data || []).sort((a, b) =>
+          a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+        );
         const delegatedSorted = nameSorted.sort((b, a) =>
           a.delegated < b.delegated ? -1 : a.delegated > b.delegated ? 1 : 0
         );
-        const _data = delegatedSorted.map((item, index) => ({ ...item, rank: index + 1 }));
+        const _data = delegatedSorted.map((item, index) => ({
+          ...item,
+          rank: index + 1
+        }));
         resolve(_data);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -135,10 +151,10 @@ export async function getPReps() {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/governance/preps`)
-      .then((result) => {
+      .then(result => {
         resolve(result);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -149,10 +165,10 @@ export async function getDelegationPrep(address) {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/governance/preps/${address}`)
-      .then((result) => {
+      .then(result => {
         resolve(result);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -160,28 +176,28 @@ export async function getDelegationPrep(address) {
 
 export async function getPublicTreasury() {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_getBalance",
       params: {
-        address: "hx1000000000000000000000000000000000000000",
-      },
+        address: "hx1000000000000000000000000000000000000000"
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -191,25 +207,25 @@ export async function getPublicTreasury() {
 export async function getTotalSupply() {
   // return new Promise(() => {});
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
-      method: "icx_getTotalSupply",
+      method: "icx_getTotalSupply"
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -219,7 +235,7 @@ export async function getTotalSupply() {
 export async function getDelegation(payload) {
   let input = payload.address ? payload : { address: `${payload}` };
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -231,29 +247,28 @@ export async function getDelegation(payload) {
         data: {
           method: "getDelegation",
           params: {
-            address: input.address,
-          },
-        },
-      },
+            address: input.address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
-        console.log(response, "here");
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error, "here");
         resolve({
-          error: { message: error.message },
+          error: { message: error.message }
         });
       });
   });
 }
 
-export async function getPRepsRPC() {
+export async function getPRepsRPC(height = null) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -263,21 +278,30 @@ export async function getPRepsRPC() {
         to: "cx0000000000000000000000000000000000000000",
         dataType: "call",
         data: {
-          method: "getPReps",
-        },
-      },
+          method: "getPReps"
+        }
+      }
     };
+
+    if (
+      height != null &&
+      typeof height === "string" &&
+      height.slice(0, 2) === "0x"
+    ) {
+      param.params["height"] = height;
+    }
+
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
         resolve({
           error: {
-            message: error.message,
-          },
+            message: error.message
+          }
         });
       });
   });
@@ -285,7 +309,7 @@ export async function getPRepsRPC() {
 
 export async function getTokenTotalSupply(address) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -294,23 +318,23 @@ export async function getTokenTotalSupply(address) {
         to: `${address}`,
         dataType: "call",
         data: {
-          method: "totalSupply",
-        },
-      },
+          method: "totalSupply"
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -319,7 +343,7 @@ export async function getTokenTotalSupply(address) {
 
 export async function getTokenDecimals(address) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -328,23 +352,23 @@ export async function getTokenDecimals(address) {
         to: `${address}`,
         dataType: "call",
         data: {
-          method: "decimals",
-        },
-      },
+          method: "decimals"
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -353,7 +377,7 @@ export async function getTokenDecimals(address) {
 
 export async function getBonders(payload) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -364,24 +388,24 @@ export async function getBonders(payload) {
         data: {
           method: "getBonderList",
           params: {
-            address: payload.address,
-          },
-        },
-      },
+            address: payload.address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result.bonderList);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -390,7 +414,7 @@ export async function getBonders(payload) {
 
 export async function getBondList(payload) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -401,24 +425,24 @@ export async function getBondList(payload) {
         data: {
           method: "getBond",
           params: {
-            address: payload.address,
-          },
-        },
-      },
+            address: payload.address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result.bonds);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -427,7 +451,7 @@ export async function getBondList(payload) {
 
 export async function getIISSInfo() {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -437,23 +461,23 @@ export async function getIISSInfo() {
         to: "cx0000000000000000000000000000000000000000",
         dataType: "call",
         data: {
-          method: "getIISSInfo",
-        },
-      },
+          method: "getIISSInfo"
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -461,14 +485,16 @@ export async function getIISSInfo() {
 }
 
 const score = {
-  "https://berlin.net.solidwallet.io": "cx4a574176f82852487b547126b7a59874f5599acd",
-  "https://lisbon.net.solidwallet.io": "cx59fd09b8fd87ad82961c29c4ff5e44773f629330",
-  "https://api.icon.geometry.io": "cxfc514c18d8dd85f06e31509a1f231efc5d8939e0",
+  "https://berlin.net.solidwallet.io":
+    "cx4a574176f82852487b547126b7a59874f5599acd",
+  "https://lisbon.net.solidwallet.io":
+    "cx59fd09b8fd87ad82961c29c4ff5e44773f629330",
+  "https://api.icon.geometry.io": "cxfc514c18d8dd85f06e31509a1f231efc5d8939e0"
 };
 const nodeId = {
   "https://berlin.net.solidwallet.io": "0x7",
   "https://lisbon.net.solidwallet.io": "0x2",
-  "https://api.icon.geometry.io": "0x1",
+  "https://api.icon.geometry.io": "0x1"
 };
 export const VerificationScore = score[config.rpcEndpoint];
 
@@ -531,8 +557,8 @@ export async function sendTransaction({
     github_org: `${github_org}`,
     github_repo: `${github_repo}`,
     github_directory: `${github_directory}`,
-    github_release: `${github_release}`,
-  },
+    github_release: `${github_release}`
+  }
 }) {
   const nid = nodeId[config.rpcEndpoint];
   const { IconConverter, IconBuilder, IconAmount } = IconService;
@@ -558,7 +584,7 @@ export async function sendTransaction({
 
 export async function getBalanceOf(owner, tokenContract) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_call",
@@ -569,24 +595,24 @@ export async function getBalanceOf(owner, tokenContract) {
         data: {
           method: "balanceOf",
           params: {
-            _owner: owner,
-          },
-        },
-      },
+            _owner: owner
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.message) {
           resolve(error.response);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -597,7 +623,7 @@ export async function getPRep(address) {
   if (!address) return {};
 
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
@@ -609,17 +635,17 @@ export async function getPRep(address) {
         data: {
           method: "getPRep",
           params: {
-            address,
-          },
-        },
-      },
+            address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         resolve({});
       });
   });
@@ -627,25 +653,25 @@ export async function getPRep(address) {
 
 export async function getLastBlock() {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       method: "icx_getLastBlock",
-      id: randomUint32(),
+      id: randomUint32()
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -658,18 +684,18 @@ export const getFailMessage = async (txHash, type) => {
     id: randomUint32(),
     method: "debug_getTrace",
     params: {
-      txHash: `${txHash}`,
-    },
+      txHash: `${txHash}`
+    }
   };
   try {
     const apiUrl = await getWalletApiUrl();
     const response = await fetch(`${apiUrl}/api/v3d`, {
       method: "POST",
-      body: JSON.stringify(param),
+      body: JSON.stringify(param)
     });
     const data = await response.json();
     const errorList = [];
-    data.result.logs.map((log) => {
+    data.result.logs.map(log => {
       errorList.push(log.msg);
     });
     return type === "wholemsg" ? data : errorList;
@@ -680,7 +706,7 @@ export const getFailMessage = async (txHash, type) => {
 
 export async function getStepPrice() {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
@@ -689,16 +715,16 @@ export async function getStepPrice() {
         to: "cx0000000000000000000000000000000000000001",
         dataType: "call",
         data: {
-          method: "getStepPrice",
-        },
-      },
+          method: "getStepPrice"
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         // if (!!error.response) {
         //     resolve(error.response.data);
         // }
@@ -734,7 +760,7 @@ export async function prepMain() {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(makeUrl(`/v1/iiss/prep/main`, { count: 22 }))
-      .then((result) => {
+      .then(result => {
         const { data } = result.data;
         const _data = data.map((item, index) => {
           if (!item.rank) {
@@ -744,7 +770,7 @@ export async function prepMain() {
         });
         resolve(_data);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -755,7 +781,7 @@ export async function prepSub() {
   return new Promise((resolve, reject) => {
     trackerApi
       .get(makeUrl(`/v1/iiss/prep/sub`, { count: 100 }))
-      .then((result) => {
+      .then(result => {
         const { data } = result.data;
         const _data = data.map((item, index) => {
           if (!item.rank) {
@@ -765,7 +791,7 @@ export async function prepSub() {
         });
         resolve(_data);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
@@ -773,7 +799,7 @@ export async function prepSub() {
 
 export async function getStake(address) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
@@ -785,24 +811,24 @@ export async function getStake(address) {
         data: {
           method: "getStake",
           params: {
-            address,
-          },
-        },
-      },
+            address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -811,7 +837,7 @@ export async function getStake(address) {
 
 export async function queryIScore(address) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
@@ -823,24 +849,24 @@ export async function queryIScore(address) {
         data: {
           method: "queryIScore",
           params: {
-            address,
-          },
-        },
-      },
+            address
+          }
+        }
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -849,28 +875,28 @@ export async function queryIScore(address) {
 
 export async function getBalance(address) {
   const walletApi = await walletApiInstance();
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const param = {
       jsonrpc: "2.0",
       id: randomUint32(),
       method: "icx_getBalance",
       params: {
-        address,
-      },
+        address
+      }
     };
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         if (!!error.response) {
           resolve(error.response.data);
         } else {
           resolve({
             error: {
-              message: error.message,
-            },
+              message: error.message
+            }
           });
         }
       });
@@ -878,7 +904,7 @@ export async function getBalance(address) {
 }
 
 export async function getProposals(payload) {
-  return new Promise(async (resolve) => {
+  return new Promise(async resolve => {
     // const mock = {
     //     "proposals": [
     //         {
@@ -919,11 +945,14 @@ export async function getProposals(payload) {
 
     let params = {
       start: "0x0",
-      size: "0xA",
+      size: "0xA"
     };
 
     if (payload) {
-      if (payload.pageNo) params.start = `0x${((payload.pageNo - 1) * payload.pageSize).toString(16)}`;
+      if (payload.pageNo)
+        params.start = `0x${((payload.pageNo - 1) * payload.pageSize).toString(
+          16
+        )}`;
       if (payload.pageSize) params.size = `0x${payload.pageSize.toString(16)}`;
     }
 
@@ -940,15 +969,15 @@ export async function getProposals(payload) {
             dataType: "call",
             data: {
               method: "getProposals",
-              params,
-            },
-          },
+              params
+            }
+          }
         })
       )
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
         resolve({ proposals: [] });
       });
@@ -956,7 +985,7 @@ export async function getProposals(payload) {
 }
 
 export async function getProposal(id) {
-  return new Promise(async (resolve) => {
+  return new Promise(async resolve => {
     // const mock = {
     //     "id": id,
     //     "proposer": "hxbe258ceb872e08851f1f59694dac2558708ece11",
@@ -1063,16 +1092,16 @@ export async function getProposal(id) {
             data: {
               method: "getProposal",
               params: {
-                id: id,
-              },
-            },
-          },
+                id: id
+              }
+            }
+          }
         })
       )
-      .then((response) => {
+      .then(response => {
         resolve(response.data.result);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
         resolve({});
       });
@@ -1084,12 +1113,14 @@ export async function addressReward(payload) {
   console.log(payload, "reward api payload");
   return new Promise((resolve, reject) => {
     trackerApi
-      .get(makeRewardsUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
-      .then((result) => {
+      .get(
+        makeRewardsUrl(`/api/v1/governance/rewards/${payload.address}`, payload)
+      )
+      .then(result => {
         console.log(result, "what result");
         resolve(result);
       })
-      .catch((error) => {
+      .catch(error => {
         reject(error);
       });
   });
