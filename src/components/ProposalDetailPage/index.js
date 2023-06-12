@@ -23,6 +23,8 @@ import ReactJsonBeautify from "react-json-beautify";
 import "../../style-custom/react-json-beautify-custom.css";
 import { blockInfo } from "../../redux/store/blocks";
 import { getLastBlock, getPRepsRPC } from "../../redux/store/iiss";
+import { addressInfo } from "../../redux/store/addresses";
+import CustomButton from "./CustomButton";
 
 function ProposalDetailPage(props) {
   const [state, setPageState] = useState({
@@ -33,9 +35,12 @@ function ProposalDetailPage(props) {
     startTimeDate: "",
     currentBlockHeight: "",
     endingBlockHeight: "",
-    prepsList: null
+    prepsList: null,
+    showVoteButton: false,
+    walletInfo: null
   });
   const { loading, error, proposal } = state;
+  const { walletAddress } = props;
 
   const {
     id,
@@ -212,7 +217,58 @@ function ProposalDetailPage(props) {
     }
   }
 
+  function setVoteButtonVisibility(
+    endblockHeightAsHex,
+    currentBlockHeightAsNumber
+  ) {
+    const endBlockHeight = parseInt(endblockHeightAsHex, 16);
+    const currentBlockHeight = currentBlockHeightAsNumber;
+
+    if(!true) {
+    // if (endBlockHeight < currentBlockHeight) {
+      setPageState(currentState => {
+        return {
+          ...currentState,
+          showVoteButton: false
+        };
+      });
+    } else {
+      setPageState(currentState => {
+        return {
+          ...currentState,
+          showVoteButton: true
+        };
+      });
+    }
+  }
+  function handleClickOnAccept() {
+    //
+    console.log("click on accept");
+  }
+
+  function handleClickOnReject() {
+    //
+    console.log("click on reject");
+  }
+
   useEffect(() => {
+    async function getWalletInfo(wallet) {
+      let walletInfo;
+      try {
+        walletInfo = await addressInfo({
+          address: wallet,
+          limit: 10,
+          skip: 0
+        });
+        // TODO: handle here what to do with the info of the prep
+      } catch (e) {
+        walletInfo = null;
+      }
+      setPageState(currentState => {
+        return { ...currentState, walletInfo: walletInfo };
+      });
+    }
+
     async function fetchInit() {
       try {
         const proposal = await getProposal(id);
@@ -234,6 +290,7 @@ function ProposalDetailPage(props) {
 
         await getStartBlockHeight(proposal.startBlockHeight);
         await getLastBlockHeight(proposal.endBlockHeight, data.height);
+        setVoteButtonVisibility(proposal.endBlockHeight, data.height);
       } catch (e) {
         console.error(e);
         setPageState(currentState => {
@@ -243,6 +300,10 @@ function ProposalDetailPage(props) {
     }
     const id = getId(props.url.pathname);
     fetchInit();
+
+    if (typeof walletAddress === "string" && walletAddress !== "") {
+      getWalletInfo(walletAddress);
+    }
   }, []);
 
   return error ? (
@@ -261,7 +322,12 @@ function ProposalDetailPage(props) {
               }}
             >
               <p className="title">Network Proposal Details</p>
-              <button>Vote</button>
+              {state.showVoteButton && (
+                <CustomButton
+                  handleAccept={handleClickOnAccept}
+                  handleReject={handleClickOnReject}
+                />
+              )}
             </div>
             <div className="contents">
               <div className="table-box">
