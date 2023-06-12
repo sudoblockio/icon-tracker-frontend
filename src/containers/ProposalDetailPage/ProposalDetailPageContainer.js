@@ -9,6 +9,7 @@ import {
 function mapStateToProps(state) {
   return {
     url: state.router.location,
+    walletAddress: state.storage.walletAddress
   };
 }
 

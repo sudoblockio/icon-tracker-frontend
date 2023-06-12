@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { ProposalSubmitPage } from "../../components";
 import { withRouter } from "react-router-dom";
 import { setPopup } from "../../redux/store/popups";
-import { addressInfoAction } from "../../redux/store/addresses";
 
 function mapStateToProps(state) {
   return {
@@ -13,7 +12,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setPopup: payload => dispatch(setPopup(payload)),
-    addressInfo: payload => dispatch(addressInfoAction(payload))
   };
 }
 
