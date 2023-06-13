@@ -146,7 +146,7 @@ function ContractExplorerPage({ wallet, url }) {
       //TODO: modify this section to update the method with
       //the responses
       const response = await icxSendTransaction({
-        params: { ...rawMethodCall },
+        rawTx: { ...rawMethodCall },
         index: index
       });
       console.log("response");

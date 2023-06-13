@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CustomButton.module.css";
 
-export default function CustomButton({ handleAccept, handleReject }) {
-
+export default function CustomButton({
+  label,
+  handleAccept,
+  handleReject
+}) {
   function handleClickOnAccept(evt) {
     console.log("Accept button clicked");
     handleAccept();
@@ -14,23 +17,14 @@ export default function CustomButton({ handleAccept, handleReject }) {
   }
 
   return (
-    <div
-      className={styles.customButtonContainer}
-    >
-      <button 
-        className={styles.acceptButton}
-        onClick={handleClickOnAccept}
-      >Approve
+    <div className={styles.customButtonContainer}>
+      <button className={styles.acceptButton} onClick={handleClickOnAccept}>
+        Approve
       </button>
-      <button 
-        className={styles.rejectButton}
-        onClick={handleClickOnReject}
-      >Reject
+      <button className={styles.rejectButton} onClick={handleClickOnReject}>
+        Reject
       </button>
-      <button 
-        className={styles.voteButton}
-      >Cast Vote
-      </button>
+      <button className={styles.voteButton}>{label}</button>
     </div>
   );
 }

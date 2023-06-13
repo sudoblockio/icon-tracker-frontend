@@ -7,7 +7,7 @@ import { scores, makeTxCallRPCObj } from "./helpers";
 /*
  *
  */
-function voteNetworkProposal(proposalId, vote, prepAddress, nid) {
+function voteNetworkProposal(proposalId, vote, prepAddress, nid, sl = 2000000) {
   return makeTxCallRPCObj(
     prepAddress,
     scores.mainnet.governance2,
@@ -16,7 +16,8 @@ function voteNetworkProposal(proposalId, vote, prepAddress, nid) {
       id: proposalId,
       vote: vote
     },
-    nid
+    nid,
+    sl
   );
 }
 
@@ -34,7 +35,8 @@ function rejectNetworkProposal(proposalId, prepAddress, nid) {
   return voteNetworkProposal(proposalId, "0x0", prepAddress, nid);
 }
 
-function submitNetworkProposal(from, params, nid, sl = 2000000) {
+// 12500000000
+function submitNetworkProposal(from, params, nid, sl = 20000000000) {
   return makeTxCallRPCObj(
     from,
     scores.mainnet.governance2,
