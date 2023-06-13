@@ -29,8 +29,8 @@ import { governanceMethods } from "../../utils/rawTxMaker";
 import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
 import config from "../../config";
 
-// USE THE FOLLOWING FLAG FOR TESTING
-const USE_TESTING_PARAMS = true;
+// SET THE FOLLOWING FLAG AS true FOR TESTING
+const USE_TESTING_PARAMS = false;
 
 const nid = USE_TESTING_PARAMS ? 3 : config.nid;
 
@@ -110,22 +110,34 @@ function ProposalDetailPage(props) {
   }
 
   async function getLastBlockHeight(endBlockHeight, currentBlockHeight) {
-    const payload = {
-      height: IconConverter.toNumber(endBlockHeight)
-    };
-    const res = await blockInfo(payload);
-    if (Number(currentBlockHeight) > Number(res.data.number)) {
+    const endBlockHeightNumber = IconConverter.toNumber(endBlockHeight);
+    if (Number(currentBlockHeight) > endBlockHeightNumber) {
+      const payload = {
+        height: endBlockHeightNumber
+      };
+      console.log("blockInfo payload");
+      console.log(payload);
+      const res = await blockInfo(payload);
+      console.log("response");
+      console.log(res);
       const date = new Date((res.data.timestamp / 1e6) * 1000);
 
       setPageState(currentState => {
         return { ...currentState, endingBlockHeight: date };
       });
     } else {
-      const difference = Number(res.data.number) - Number(currentBlockHeight);
-      const sum = difference * 2;
+      const difference =
+        Number(endBlockHeightNumber) - Number(currentBlockHeight);
+      const miliseconds = difference * 2 * 1000;
       const latestDate = new Date().valueOf();
-      const totalSum = sum + latestDate;
-      const date = new Date((totalSum / 1e6) * 1000);
+      const totalSum = miliseconds + latestDate;
+      const date = new Date((totalSum));
+
+      // console.log('difference', difference);
+      // console.log('miliseconds', miliseconds);
+      // console.log('latestDate', latestDate);
+      // console.log('totalSum', totalSum);
+      // console.log('date', date);
       setPageState(currentState => {
         return { ...currentState, endingBlockHeight: date };
       });
@@ -374,7 +386,9 @@ function ProposalDetailPage(props) {
       const votedDisagree =
         disagree.list != null ? disagree.list.includes(walletAddress) : false;
       const voters = await getVoters(state.proposal.startBlockHeight);
-      const isVoter = USE_TESTING_PARAMS ? true : voters.includes(walletAddress);
+      const isVoter = USE_TESTING_PARAMS
+        ? true
+        : voters.includes(walletAddress);
       setPageState(currentState => {
         return {
           ...currentState,

@@ -11,8 +11,10 @@ import Web3Utils from "web3-utils";
 import GenericModal from "../GenericModal/genericModal";
 import { LoadingComponent } from "../../components";
 
-const nid = 3; // USE FOR TESTING ON LOCAL NETWORK ONLY
-// const { nid } = config;
+// SET THE FOLLOWING FLAG TO true FOR TESTING
+const USE_TESTING_PARAMS = false;
+const nid = USE_TESTING_PARAMS ? 3 : config.nid;
+
 const {
   typesOfProposals,
   proposalTypesData,
@@ -70,8 +72,8 @@ function ProposalSubmitPage(props) {
   async function handleSubmitClick() {
     if (!valueIsValidJSON) {
       alert("value is not valid json");
-    // } else if (walletIsPrep === false) {
-    //   alert("Wallet is not logged or is not a P-Rep");
+    } else if (walletIsPrep === false && USE_TESTING_PARAMS === false) {
+      alert("Wallet is not logged or is not a P-Rep");
     } else {
       setModalIsOpen(true);
       const p0 = JSON.parse(valueState);
@@ -131,8 +133,8 @@ function ProposalSubmitPage(props) {
       console.log("wallet info");
       console.log(walletInfo);
     }
-    console.log('proposal submit walletAddress');
-    console.log(walletAddress)
+    console.log("proposal submit walletAddress");
+    console.log(walletAddress);
     if (typeof walletAddress === "string" && walletAddress !== "") {
       getWalletInfo(walletAddress);
     }
@@ -162,7 +164,7 @@ function ProposalSubmitPage(props) {
                 name={"name"}
                 value={titleState}
                 onChange={handleTitleInputChange}
-                placeholder={"placeholder"}
+                placeholder={""}
                 className={styles.tableRowInput}
               />
             </div>
@@ -177,7 +179,7 @@ function ProposalSubmitPage(props) {
                 name={"name"}
                 value={descriptionState}
                 onChange={handleDescriptionChange}
-                placeholder={"placeholder"}
+                placeholder={""}
                 className={styles.tableRowTextarea}
               />
             </div>
