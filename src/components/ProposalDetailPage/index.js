@@ -25,6 +25,25 @@ import { blockInfo } from "../../redux/store/blocks";
 import { getLastBlock, getPRepsRPC } from "../../redux/store/iiss";
 import { addressInfo } from "../../redux/store/addresses";
 import CustomButton from "./CustomButton";
+<<<<<<< HEAD
+
+function ProposalDetailPage(props) {
+  const [state, setPageState] = useState({
+    loading: true,
+    error: false,
+    proposal: {},
+    tab: getTab(props.url.hash),
+    startTimeDate: "",
+    currentBlockHeight: "",
+    endingBlockHeight: "",
+    prepsList: null,
+    showVoteButton: false,
+    walletInfo: null
+  });
+  const { loading, error, proposal } = state;
+  const { walletAddress } = props;
+
+=======
 import { governanceMethods } from "../../utils/rawTxMaker";
 import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
 import config from "../../config";
@@ -55,6 +74,7 @@ function ProposalDetailPage(props) {
   const { loading, error, proposal, votedAgree, votedDisagree } = state;
   const { walletAddress } = props;
 
+>>>>>>> fidelve/dev
   const {
     id,
     contents,
@@ -71,8 +91,11 @@ function ProposalDetailPage(props) {
 
   const { agree, disagree, noVote } = vote || {};
 
+<<<<<<< HEAD
+=======
   const buttonLabel =
     !votedAgree && !votedDisagree ? "Cast Vote" : "Change Vote";
+>>>>>>> fidelve/dev
   const start = startBlockHeight
     ? IconConverter.toNumber(startBlockHeight)
     : "-";
@@ -110,6 +133,16 @@ function ProposalDetailPage(props) {
   }
 
   async function getLastBlockHeight(endBlockHeight, currentBlockHeight) {
+<<<<<<< HEAD
+    console.log("getLastBlockHeight");
+    const payload = {
+      height: IconConverter.toNumber(endBlockHeight)
+    };
+    console.log(payload);
+    const res = await blockInfo(payload);
+    console.log(res);
+    if (Number(currentBlockHeight) > Number(res.data.number)) {
+=======
     const endBlockHeightNumber = IconConverter.toNumber(endBlockHeight);
     if (Number(currentBlockHeight) > endBlockHeightNumber) {
       const payload = {
@@ -120,12 +153,20 @@ function ProposalDetailPage(props) {
       const res = await blockInfo(payload);
       console.log("response");
       console.log(res);
+>>>>>>> fidelve/dev
       const date = new Date((res.data.timestamp / 1e6) * 1000);
 
       setPageState(currentState => {
         return { ...currentState, endingBlockHeight: date };
       });
     } else {
+<<<<<<< HEAD
+      const difference = Number(res.data.number) - Number(currentBlockHeight);
+      const sum = difference * 2;
+      const latestDate = new Date().valueOf();
+      const totalSum = sum + latestDate;
+      const date = new Date((totalSum / 1e6) * 1000);
+=======
       const difference =
         Number(endBlockHeightNumber) - Number(currentBlockHeight);
       const miliseconds = difference * 2 * 1000;
@@ -138,6 +179,7 @@ function ProposalDetailPage(props) {
       // console.log('latestDate', latestDate);
       // console.log('totalSum', totalSum);
       // console.log('date', date);
+>>>>>>> fidelve/dev
       setPageState(currentState => {
         return { ...currentState, endingBlockHeight: date };
       });
@@ -190,9 +232,18 @@ function ProposalDetailPage(props) {
       });
     }
 
+<<<<<<< HEAD
+    console.log({ abc: state.prepsList });
+    if (vote && noVote && state.prepsList != null) {
+      noVote.list.forEach(item => {
+        // console.log(e.address, item)
+        const data = state.prepsList.filter(e => {
+          //   console.log(e.address, item, "adddd");
+=======
     if (vote && noVote && state.prepsList != null) {
       noVote.list.forEach(item => {
         const data = state.prepsList.filter(e => {
+>>>>>>> fidelve/dev
           return e.address === item;
         });
         if (!data[0]) {
@@ -202,6 +253,10 @@ function ProposalDetailPage(props) {
             name: "Unregistered Prop",
             answer: "No Vote"
           });
+<<<<<<< HEAD
+          console.log({ address: item });
+=======
+>>>>>>> fidelve/dev
         } else {
           result.push({
             address: item,
@@ -236,6 +291,41 @@ function ProposalDetailPage(props) {
       console.log("JSON Parsing Error: ", e);
     }
   }
+<<<<<<< HEAD
+
+  function setVoteButtonVisibility(
+    endblockHeightAsHex,
+    currentBlockHeightAsNumber
+  ) {
+    const endBlockHeight = parseInt(endblockHeightAsHex, 16);
+    const currentBlockHeight = currentBlockHeightAsNumber;
+
+    if(!true) {
+    // if (endBlockHeight < currentBlockHeight) {
+      setPageState(currentState => {
+        return {
+          ...currentState,
+          showVoteButton: false
+        };
+      });
+    } else {
+      setPageState(currentState => {
+        return {
+          ...currentState,
+          showVoteButton: true
+        };
+      });
+    }
+  }
+  function handleClickOnAccept() {
+    //
+    console.log("click on accept");
+  }
+
+  function handleClickOnReject() {
+    //
+    console.log("click on reject");
+=======
 
   function setVoteButtonVisibility(
     endblockHeightAsHex,
@@ -303,6 +393,7 @@ function ProposalDetailPage(props) {
       });
       console.log("network vote response", response);
     }
+>>>>>>> fidelve/dev
   }
 
   useEffect(() => {
@@ -314,6 +405,10 @@ function ProposalDetailPage(props) {
           limit: 10,
           skip: 0
         });
+<<<<<<< HEAD
+        // TODO: handle here what to do with the info of the prep
+=======
+>>>>>>> fidelve/dev
       } catch (e) {
         walletInfo = null;
       }
@@ -325,9 +420,18 @@ function ProposalDetailPage(props) {
     async function fetchInit() {
       try {
         const proposal = await getProposal(id);
+<<<<<<< HEAD
+        console.log("proposal");
+        console.log(proposal);
         const data = await getLastBlock();
         const prepRpc = await getPRepsRPC();
 
+        console.log(data.height, "height======>");
+=======
+        const data = await getLastBlock();
+        const prepRpc = await getPRepsRPC();
+
+>>>>>>> fidelve/dev
         setPageState(currentState => {
           return {
             ...currentState,
@@ -356,6 +460,8 @@ function ProposalDetailPage(props) {
     }
   }, []);
 
+<<<<<<< HEAD
+=======
   useEffect(() => {
     async function getVoters(height) {
       let allPreps = null;
@@ -410,6 +516,7 @@ function ProposalDetailPage(props) {
     }
   }, [state.proposal, walletAddress]);
 
+>>>>>>> fidelve/dev
   return error ? (
     <NotFoundPage error={error} />
   ) : (
@@ -426,9 +533,14 @@ function ProposalDetailPage(props) {
               }}
             >
               <p className="title">Network Proposal Details</p>
+<<<<<<< HEAD
+              {state.showVoteButton && (
+                <CustomButton
+=======
               {state.showVoteButton && state.isVoter && (
                 <CustomButton
                   label={buttonLabel}
+>>>>>>> fidelve/dev
                   handleAccept={handleClickOnAccept}
                   handleReject={handleClickOnReject}
                 />
