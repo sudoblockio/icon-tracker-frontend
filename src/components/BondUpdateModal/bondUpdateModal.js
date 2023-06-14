@@ -7,23 +7,7 @@ import {
   chainMethods
 } from "../../utils/rawTxMaker";
 import { getBonders } from "../../redux/store/iiss";
-// import NodeButlerSDK from "../utils/customLib";
-// import { v4 as uuidv4 } from "uuid";
 import utils from "../../utils/utils2";
-
-// const nodeButlerLib = new NodeButlerSDK();
-// const {
-//   getPrep,
-//   parsePrepData,
-//   getBonderList,
-//   getPrepFromNB,
-//   parsePrepFromNB,
-//   getPrepLogoUrl,
-//   setBonderList,
-//   getParsedTxResult,
-//   makeTxCallRPCObj,
-//   setPrep
-// } = nodeButlerLib;
 
 // Constants
 const {

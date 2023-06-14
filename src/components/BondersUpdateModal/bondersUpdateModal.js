@@ -153,13 +153,13 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
                       );
                     })}
                   </div>
-                  <button
-                    className={styles.button}
-                    onClick={handleBonderFormSubmit}
-                  >
-                    Submit
-                  </button>
                 </div>
+                <button
+                  className={styles.button}
+                  onClick={handleBonderFormSubmit}
+                >
+                  Submit
+                </button>
               </div>
             </div>
           </div>

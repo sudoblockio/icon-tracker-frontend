@@ -98,6 +98,11 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                   your preferred wallet, you can see the details of the
                   transaction before submitting it in the wallet popup window.
                 </p>
+                <p>
+                  <span className={styles.bold}>Note:</span> you only need to
+                  define the fields that you want to change the rest wont be
+                  modified in the network.
+                </p>
                 <div className={styles.setPrepForm}>
                   <div className={styles.table}>
                     {[
@@ -154,13 +159,13 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                       );
                     })}
                   </div>
-                  <button
-                    className={styles.button}
-                    onClick={handlePrepFormSubmit}
-                  >
-                    Update
-                  </button>
                 </div>
+                <button
+                  className={styles.button}
+                  onClick={handlePrepFormSubmit}
+                >
+                  Update
+                </button>
               </div>
             </div>
           </div>

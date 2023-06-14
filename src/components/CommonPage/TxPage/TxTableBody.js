@@ -9,13 +9,24 @@ import {
   isHxAddress,
   convertHexToValue,
   epochToFromNow,
-  convertLoopToIcxDecimal,
+  convertLoopToIcxDecimal
 } from "../../../utils/utils";
 
-import { TransactionLink, AddressLink, BlockLink, AddressCell, AddressSet, AmountCell } from "../../../components";
+import {
+  TransactionLink,
+  AddressLink,
+  BlockLink,
+  AddressCell,
+  AddressSet,
+  AmountCell
+} from "../../../components";
 import { TX_TYPE } from "../../../utils/const";
 import { getTokenTotalSupply } from "../../../redux/store/iiss";
-import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from "../../../utils/utils";
+import {
+  getBadgeTitle,
+  convertNumberToText,
+  addUnregisteredStyle
+} from "../../../utils/utils";
 
 const TxAddressCell = ({ isError, address }) => {
   let _address, className;
@@ -24,7 +35,14 @@ const TxAddressCell = ({ isError, address }) => {
     className = "no";
   } else {
     const _isHxAddress = isHxAddress(address);
-    _address = _isHxAddress ? <AddressLink to={address} label={<span className="ellipsis">{address}</span>} /> : address;
+    _address = _isHxAddress ? (
+      <AddressLink
+        to={address}
+        label={<span className="ellipsis">{address}</span>}
+      />
+    ) : (
+      address
+    );
     className = `${isError ? "icon error" : ""} ${_isHxAddress ? "on" : ""}`;
   }
   return (
@@ -41,7 +59,14 @@ const TxHashCell = ({ isError, txHash }) => {
     className = "no";
   } else {
     const _is0xHash = is0xHash(txHash);
-    _txHash = _is0xHash ? <TransactionLink to={txHash} label={<span className="ellipsis">{txHash}</span>} /> : txHash;
+    _txHash = _is0xHash ? (
+      <TransactionLink
+        to={txHash}
+        label={<span className="ellipsis">{txHash}</span>}
+      />
+    ) : (
+      txHash
+    );
     className = `${isError ? "icon error" : ""} ${_is0xHash ? "on" : ""}`;
   }
   return (
@@ -55,7 +80,9 @@ const TxHashCell = ({ isError, txHash }) => {
 const TokenCell = ({ name, address }) => {
   return (
     <td>
-      <span className="ellipsis">{tokenText(name, undefined, address, "ellipsis")}</span>
+      <span className="ellipsis">
+        {tokenText(name, undefined, address, "ellipsis")}
+      </span>
     </td>
   );
 };
@@ -68,7 +95,7 @@ const DateCell = ({ date, isDate, type }) => {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
+    second: "2-digit"
   }).format(formatDate);
   let className, dateText;
   if (!isValidData(date)) {
@@ -84,7 +111,13 @@ const DateCell = ({ date, isDate, type }) => {
   }
 
   return (
-    <td className={className}>{type === "Age" ? dateText : type === "Date Time (UTC)" ? changedDate : dateText}</td>
+    <td className={className}>
+      {type === "Age"
+        ? dateText
+        : type === "Date Time (UTC)"
+        ? changedDate
+        : dateText}
+    </td>
   );
 };
 
@@ -105,8 +138,15 @@ class TxTableBody extends Component {
     super(props);
   }
   render() {
-    const TableRow = (_props) => {
-      const { txType, data, address, currentUSD, totalSupply, age } = this.props;
+    const TableRow = _props => {
+      const {
+        txType,
+        data,
+        address,
+        currentUSD,
+        totalSupply,
+        age
+      } = this.props;
       const bigNumPercentage = new BigNumber(data.balance / totalSupply);
       const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12));
       const isError = Number(data.status) === 0;
@@ -146,7 +186,9 @@ class TxTableBody extends Component {
             <tr>
               <TxAddressCell isError={isError} address={data.address} />
               <td className="plus">
-                <span>{Number(Number(data.value) / Math.pow(10, 18)).toFixed()}</span>
+                <span>
+                  {Number(Number(data.value) / Math.pow(10, 18)).toFixed()}
+                </span>
                 <em>ICX</em>
               </td>
             </tr>
@@ -162,7 +204,12 @@ class TxTableBody extends Component {
               >
                 {data.address}
               </td>
-              <AmountCell amount={Number(Number(data.value) / Math.pow(10, 18)).toFixed() || 0} symbol="ICX" />
+              <AmountCell
+                amount={
+                  Number(Number(data.value) / Math.pow(10, 18)).toFixed() || 0
+                }
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.ADDRESS_TX:
@@ -172,14 +219,19 @@ class TxTableBody extends Component {
               <BlockCell height={data.block_number} />
               <DateCell date={data.block_timestamp} />
               <AddressSet
-                fromAddr={data.from_address !== "None" ? data.from_address : "-"}
+                fromAddr={
+                  data.from_address !== "None" ? data.from_address : "-"
+                }
                 toAddr={data.to_address !== "None" ? data.to_address : "-"}
                 address={address}
                 txType={data.type}
                 targetContractAddr={data.targetContractAddr}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
               <MethodCell method={data.method} />
             </tr>
           );
@@ -190,7 +242,9 @@ class TxTableBody extends Component {
               <BlockCell height={data.block_number} />
               <DateCell date={data.block_timestamp} />
               <AddressSet
-                fromAddr={data.from_address !== "None" ? data.from_address : "-"}
+                fromAddr={
+                  data.from_address !== "None" ? data.from_address : "-"
+                }
                 toAddr={data.to_address !== "None" ? data.to_address : "-"}
                 address={address}
                 txType={data.type}
@@ -212,8 +266,14 @@ class TxTableBody extends Component {
                 txType={data.txType}
                 targetContractAddr={data.contractAddr}
               />
-              <AmountCell amount={Number(data.value_decimal)} symbol={data.contractSymbol} />
-              <TokenCell name={data.token_contract_name} address={data.token_contract_address} />
+              <AmountCell
+                amount={Number(data.value_decimal)}
+                symbol={data.contractSymbol}
+              />
+              <TokenCell
+                name={data.token_contract_name}
+                address={data.token_contract_address}
+              />
             </tr>
           );
         case TX_TYPE.CONTRACT_TX:
@@ -230,7 +290,10 @@ class TxTableBody extends Component {
                 targetContractAddr={address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
               <MethodCell method={data.method} />
             </tr>
           );
@@ -264,8 +327,14 @@ class TxTableBody extends Component {
                 targetContractAddr={address}
               />
               <AmountCell amount={data.value_decimal} symbol={data.symbol} />
-              <TokenCell name={data.token_contract_name} address={data.token_contract_address} />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <TokenCell
+                name={data.token_contract_name}
+                address={data.token_contract_address}
+              />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.BLOCK_TX:
@@ -273,13 +342,18 @@ class TxTableBody extends Component {
             <tr>
               <TxHashCell isError={isError} txHash={data.hash} />
               <AddressSet
-                fromAddr={data.from_address !== "None" ? data.from_address : "-"}
+                fromAddr={
+                  data.from_address !== "None" ? data.from_address : "-"
+                }
                 toAddr={data.to_address !== "None" ? data.to_address : "-"}
                 txType={data.type}
                 targetContractAddr={data.to_address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.BLOCK_INTTX:
@@ -287,13 +361,18 @@ class TxTableBody extends Component {
             <tr>
               <TxHashCell isError={isError} txHash={data.hash} />
               <AddressSet
-                fromAddr={data.from_address !== "None" ? data.from_address : "-"}
+                fromAddr={
+                  data.from_address !== "None" ? data.from_address : "-"
+                }
                 toAddr={data.to_address !== "None" ? data.to_address : "-"}
                 txType={data.type}
                 targetContractAddr={data.to_address}
               />
               <AmountCell amount={convertHexToValue(data.value)} symbol="ICX" />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.TRANSACTIONS:
@@ -301,14 +380,25 @@ class TxTableBody extends Component {
             <tr>
               <TxHashCell isError={isError} txHash={data.hash || data.txHash} />
               <BlockCell height={data.block_number || data.height} />
-              <DateCell type={age} date={data.block_timestamp || data.createDate} />
+              <DateCell
+                type={age}
+                date={data.block_timestamp || data.createDate}
+              />
               <AddressSet
-                fromAddr={data.from_address !== "None" ? data.from_address : "-"}
+                fromAddr={
+                  data.from_address !== "None" ? data.from_address : "-"
+                }
                 toAddr={data.to_address !== "None" ? data.to_address : "-"}
                 txType={data.txType}
                 targetContractAddr={data.targetContractAddr}
               />
-              <AmountCell amount={convertHexToValue(data.value) || convertHexToValue(data.amount)} symbol="ICX" />
+              <AmountCell
+                amount={
+                  convertHexToValue(data.value) ||
+                  convertHexToValue(data.amount)
+                }
+                symbol="ICX"
+              />
               <AmountCell amount={data.fee} symbol="ICX" />
               <MethodCell method={data.method} />
             </tr>
@@ -325,8 +415,14 @@ class TxTableBody extends Component {
                 targetContractAddr={data.token_contract_address}
               />
               <AmountCell amount={data.value_decimal} symbol={data.symbol} />
-              <TokenCell name={data.token_contract_name} address={data.token_contract_address} />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <TokenCell
+                name={data.token_contract_name}
+                address={data.token_contract_address}
+              />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.TOKEN_TX:
@@ -340,8 +436,14 @@ class TxTableBody extends Component {
                 txType={data.txType}
                 targetContractAddr={data.to_address}
               />
-              <AmountCell amount={data.value_decimal} symbol={data.token_contract_name} />
-              <AmountCell amount={convertHexToValue(data.transaction_fee)} symbol="ICX" />
+              <AmountCell
+                amount={data.value_decimal}
+                symbol={data.token_contract_name}
+              />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fee)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.ADDRESSES:
@@ -349,7 +451,11 @@ class TxTableBody extends Component {
             <tr>
               <AddressCell targetAddr={data.address} txType={data.txType} />
               <AmountCell amount={data.balance.toFixed()} symbol="ICX" />
-              <AmountCell amount={Number(data.balance * currentUSD).toFixed()} decimal={3} symbol="USD" />
+              <AmountCell
+                amount={Number(data.balance * currentUSD).toFixed()}
+                decimal={3}
+                symbol="USD"
+              />
               <td>
                 <span>{multiplied.toFixed(3)}</span>
                 <em>%</em>
@@ -367,8 +473,14 @@ class TxTableBody extends Component {
               <td>
                 <BlockLink label={data.hash} to={data.number} ellipsis />
               </td>
-              <AmountCell amount={convertHexToValue(data.transaction_amount)} symbol="ICX" />
-              <AmountCell amount={convertHexToValue(data.transaction_fees)} symbol="ICX" />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_amount)}
+                symbol="ICX"
+              />
+              <AmountCell
+                amount={convertHexToValue(data.transaction_fees)}
+                symbol="ICX"
+              />
             </tr>
           );
         case TX_TYPE.CONTRACT_EVENTS:
@@ -380,7 +492,10 @@ class TxTableBody extends Component {
                 </span>
                 <br />
                 <span>
-                  <BlockLink label={`# ${data.block_number}`} to={data.block_number} />
+                  <BlockLink
+                    label={`# ${data.block_number}`}
+                    to={data.block_number}
+                  />
                 </span>
                 <p>{epochToFromNow(data.block_timestamp)}</p>
               </td>
@@ -420,12 +535,18 @@ class TxTableBody extends Component {
           return (
             <tr>
               <td>{this.props.rank}</td>
-              <AddressCell targetAddr={data.address} txType={data.txType} spanNoEllipsis />
+              <AddressCell
+                targetAddr={data.address}
+                txType={data.txType}
+                spanNoEllipsis
+              />
               <AmountCell amount={data.balance} symbol={data.symbol} />
               <td>
                 <span>
                   {data.balance && this.props.totalSupply
-                    ? Number((data.balance / this.props.totalSupply) * 100).toFixed(4)
+                    ? Number(
+                        (data.balance / this.props.totalSupply) * 100
+                      ).toFixed(4)
                     : "-"}
                 </span>
                 <em>%</em>
@@ -434,14 +555,14 @@ class TxTableBody extends Component {
           );
         case TX_TYPE.ADDRESS_BONDERS: // TODO: HERE!
           console.log(this.props.bondMap[data] > 0, "bonder bonder data");
-          console.log('this.props');
-          console.log(this.props)
+          console.log("this.props");
+          console.log(this.props);
           return (
             <tr>
-              <AddressCell 
-                targetAddr={data} 
-                txType={data.txType} 
-                spanNoEllipsis 
+              <AddressCell
+                targetAddr={data}
+                txType={data.txType}
+                spanNoEllipsis
                 onClickTab={this.props.onClickTab}
               />
               {/* <TxAddressCell isError={isError} address={data} /> */}
@@ -460,4 +581,3 @@ class TxTableBody extends Component {
 }
 
 export default TxTableBody;
-

@@ -62,11 +62,8 @@ function WriteMethodItems({
   network,
   startIndex = 0,
   showEvents = false,
-  endpoint 
+  endpoint
 }) {
-  console.log('on write method');
-  console.log(methods);
-  console.log(startIndex);
   return (
     <ul className="list">
       {methods.writeMethodsNameArray.map((methodName, index) => {
@@ -111,7 +108,7 @@ function CollapsableComponent({
   alwaysShowButton = false,
   showEvents = false,
   isReadonly = true,
-  endpoint= ""
+  endpoint = ""
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [resultIsOpen, setResultIsOpen] = useState(false);
@@ -135,13 +132,24 @@ function CollapsableComponent({
   }
 
   function handleButtonClick() {
-    handleClick(address, methodName, methodInput.inputs, index, network, endpoint);
+    handleClick(
+      address,
+      methodName,
+      methodInput.inputs,
+      index,
+      network,
+      endpoint
+    );
     setResultIsOpen(true);
   }
 
   function parseResponse(response) {
+    console.log("response");
+    console.log(response);
     if (response.error === "") {
-      const parsedResponse = JSON.stringify(response.valueArray);
+      const parsedResponse = isReadonly
+        ? JSON.stringify(response.valueArray)
+        : response.valueArray[0];
       return parsedResponse;
     } else {
       return response.error;
@@ -174,6 +182,7 @@ function CollapsableComponent({
       setEventlogState(parsedEventlog);
     }
     const parsedResponse = parseResponse(methodOutput);
+    console.log("parsed Response: ", parsedResponse);
     setResponseState(parsedResponse);
 
     if (methodOutput.error === "") {
@@ -295,15 +304,19 @@ function CollapsableComponent({
         >
           <p>Response:</p>
           {isReadonly ? (
-          <p className={styles.writeMethodBodyOutputResponseContent}>
-            {responseState}
-          </p>
+            <p className={styles.writeMethodBodyOutputResponseContent}>
+              {responseState}
+            </p>
+          ) : methodOutput.error === "" ? (
+            <div>
+              <TransactionLink
+                to={responseState}
+                label={responseState}
+                onClick={() => console.log("click")}
+              />
+            </div>
           ) : (
-            <TransactionLink
-              to={JSON.parse(responseState)[0]}
-              label={JSON.parse(responseState)[0]}
-              onClick={() => console.log('click')}
-            />
+            <p>{responseState}</p>
           )}
         </div>
       )}

@@ -1,14 +1,19 @@
 import React, { useState, Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
-import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
+import {
+  TxTableHead,
+  TxTableBody,
+  LoadingComponent,
+  NoBox
+} from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
 import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
 import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
   render() {
-    const { 
+    const {
       txData,
       txType,
       goAllTx,
@@ -24,9 +29,9 @@ class TxBottomComponent extends Component {
 
     let tableBodyData;
 
-    if (txTypeIsBonder(txType)) {
-      tableBodyData = txData.filter((f) => {
-        return this.props.bondMap[f] !== null
+    if (txTypeIsBonderOrBonded(txType)) {
+      tableBodyData = txData.filter(f => {
+        return this.props.bondMap[f] !== null;
       });
       totalCount = tableBodyData.length;
     } else if (txType === "addressdelegations") {
@@ -37,7 +42,7 @@ class TxBottomComponent extends Component {
       console.log(txType, "tx comp props bonder");
       if (loading) {
         return <LoadingComponent height="349px" />;
-      } else if (txTypeIsBonder(txType)) {
+      } else if (txTypeIsBonderOrBonded(txType)) {
         return (
           <div className="contents">
             <CustomHeader
@@ -72,10 +77,14 @@ class TxBottomComponent extends Component {
             </div>
           </div>
         );
-      } else if ((!tableBodyData || tableBodyData.length === 0) && txType !== "addressBonded") {
+      } else if (
+        (!tableBodyData || tableBodyData.length === 0) &&
+        txType !== "addressBonded"
+      ) {
         return <NoBox text={noBoxText} />;
       } else {
-        const { from_address, to_address } = tableBodyData[0] || this.props.txData;
+        const { from_address, to_address } =
+          tableBodyData[0] || this.props.txData;
 
         return (
           <div className="contents">
@@ -128,22 +137,34 @@ class TxBottomComponent extends Component {
 
 export default withRouter(TxBottomComponent);
 
-function txTypeIsBonder(txType) {
-  const ar = [
-    "addressbonded",
-    "addressbonders",
-    "addressBonded",
-    "addressBonders"
-  ];
+function txTypeIsBonderOrBonded(txType) {
+  return txTypeIsBonder(txType) || txTypeIsBonded(txType);
+}
+
+function txTypeIsBonded(txType) {
+  const ar = ["addressbonded", "addressBonded"];
 
   return ar.includes(txType);
 }
 
-function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address }) {
+function txTypeIsBonder(txType) {
+  const ar = ["addressbonders", "addressBonders"];
+
+  return ar.includes(txType);
+}
+
+function CustomHeader({
+  txData,
+  txType,
+  totalCount,
+  goAllTx,
+  bondMap,
+  address
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function toggleModal() {
-    console.log('click on modal');
+    console.log("click on modal");
     setIsModalOpen(!isModalOpen);
   }
   return (
@@ -158,15 +179,18 @@ function CustomHeader({ txData, txType, totalCount, goAllTx, bondMap, address })
         <TxBottomTitle
           txType={txType}
           listSize={Number(txData.length)}
-          totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+          totalSize={
+            txType === "addressBonders" ? totalCount : Number(txData.length)
+          }
           goAllTx={goAllTx}
           fromAddr={"hello"}
         />
-        <button 
-          onClick={toggleModal}
-          className={customStyles.button}
-        >Update</button>
+        {txTypeIsBonder(txType) && (
+          <button onClick={toggleModal} className={customStyles.button}>
+            Update
+          </button>
+        )}
       </div>
     </>
-  )
+  );
 }

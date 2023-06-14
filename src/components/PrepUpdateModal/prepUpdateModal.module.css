@@ -82,21 +82,21 @@
 }
 
 .button {
-  margin: 4px;
-  height: 30px;
-  width: 80px;
-  background-color: #c2c2c2;
-  border: none;
+  margin: 0 0.5rem 0 0;
+  height: 40px;
+  min-width: 40px;
+  color: #299fac;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
   border-radius: 4px;
   font-weight: bold;
-  color: #fff;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .button:hover {
-  background-color: #c2c2c2;
-  transform: translateY(-1px);
-  color: #299fac;
+  background-color: #08909f;
+  color: #fff;
 }
 
 .setPrepForm {
@@ -156,14 +156,6 @@
   width: 60%;
 }
 
-/* .tableSetPrep > * { */
-/*   /1* flex: 1; *1/ */
-/* } */
-/* .tableSetPrep tr { */
-/*   display: flex; */
-/*   flex-flow: column nowrap; */
-/*   align-items: flex-end; */
-/* } */
-/* .tableSetPrep > thead { */
-/*   margin-right: 5px; */
-/* } */
+.bold {
+  font-weight: bold;
+}
