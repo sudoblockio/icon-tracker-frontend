@@ -11,7 +11,6 @@
   border-radius: 4px;
   color: #fff;
   font-size: 16px;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -19,29 +18,25 @@
   background-color: #2196f3;
   width: 120px;
 }
-
-.acceptButton {
-  background-color: #4caf50;
+.acceptButton, .rejectButton {
+  width: 60px;
+  cursor: pointer;
   width: 60px;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 50%;
+  width: 49%;
   opacity: 0;
   z-index: 999;
   font-size: 13px;
 }
+.acceptButton {
+  background-color: #4caf50;
+  left: 0;
+}
 
 .rejectButton {
   background-color: #f44336;
-  width: 60px;
-  position: absolute;
-  top: 0;
   right: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 999;
-  font-size: 13px;
 }
 
 .customButtonContainer:hover .voteButton {

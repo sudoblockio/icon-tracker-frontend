@@ -31,8 +31,6 @@ function getInitialInputState(url) {
 function getNetworkState(network) {
   const f = ["mainnet", "berlin", "lisbon"];
 
-  console.log("network");
-  console.log(network);
   if (f.includes(network)) {
     return network;
   } else {
@@ -90,8 +88,6 @@ function ContractExplorerPage({ wallet, url }) {
     endpoint
   ) {
     const paramsData = makeParams(params, method, inputs);
-    console.log("paramsData");
-    console.log(paramsData);
     const response = await icxCall(
       {
         from: "hxbe258ceb872e08851f1f59694dac2558708ece11",
@@ -106,13 +102,8 @@ function ContractExplorerPage({ wallet, url }) {
       endpoint
     );
 
-    console.log("icx call response");
-    console.log(response);
-
     setContractReadInfo(state => {
       const prevState = { ...state };
-      console.log("method");
-      console.log(method);
       prevState[method].outputs = {
         error: response.error == null ? "" : response.error.message,
         valueArray: response.data == null ? "" : [response.data.result],
@@ -141,24 +132,18 @@ function ContractExplorerPage({ wallet, url }) {
         paramsData,
         nid
       );
-      console.log("rawMethodCall");
-      console.log(rawMethodCall);
       //TODO: modify this section to update the method with
       //the responses
       const response = await icxSendTransaction({
         rawTx: { ...rawMethodCall },
         index: index
       });
-      console.log("response");
-      console.log(response);
 
       setContractReadInfo(state => {
         const prevState = { ...state };
-        console.log("method");
-        console.log(method);
         prevState[method].outputs = {
-          error: response.error.message,
-          valueArray: [response.data.result],
+          error: response.error == null ? "" : response.error.message,
+          valueArray: response.data == null ? "" : [response.data.result],
           state: 1
         };
         return prevState;
@@ -188,6 +173,9 @@ function ContractExplorerPage({ wallet, url }) {
         networkState,
         endpoint
       );
+
+      console.log("result of icxGetScore");
+      console.log(response);
 
       // TODO: to improve error handling for the icxGetScore
       // response, validate if the response is an object with a
@@ -225,17 +213,17 @@ function ContractExplorerPage({ wallet, url }) {
       }
 
       if (abi.error == null) {
-        const f = await localReadContractInformationFunc(
+        const abiStateFromRedux = await localReadContractInformationFunc(
           abi.data.result,
           address,
           networkState,
           endpoint
         );
-        const g = createContractMethodsState(f);
-        console.log("df");
-        console.log(f);
-        console.log(g);
-        setContractReadInfo(g);
+        const abiStateParsed = createContractMethodsState(abiStateFromRedux);
+        console.log("Abi data parsed:");
+        console.log(abiStateFromRedux);
+        console.log(abiStateParsed);
+        setContractReadInfo(abiStateParsed);
       }
       setContractAbi(abi);
     }
@@ -274,7 +262,7 @@ function ContractExplorerPage({ wallet, url }) {
             />
             <Separator />
             <DropdownItem
-              label={`Network`} 
+              label={`Network`}
               value={networkState}
               onSelectChange={onNetworkChange}
             />
@@ -513,7 +501,7 @@ function DropdownItem({ label, value, onSelectChange }) {
       <div className={styles.dropdownItemLabel}>{label}</div>
       <div className={styles.dropdownItemContent}>
         <select
-          className={styles.dropdownItemSelect} 
+          className={styles.dropdownItemSelect}
           onChange={onSelectChange}
           value={value || "mainnet"}
         >
