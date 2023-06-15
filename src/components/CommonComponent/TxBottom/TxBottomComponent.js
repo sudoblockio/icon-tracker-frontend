@@ -9,6 +9,7 @@ import {
 } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
 import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
+import BondedModal from "../../BondUpdateModal/bondUpdateModal";
 import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
@@ -161,19 +162,38 @@ function CustomHeader({
   bondMap,
   address
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBondersModalOpen, setIsBondersModalOpen] = useState(false);
+  const [isBondedModalOpen, setIsBondedModalOpen] = useState(false);
 
-  function toggleModal() {
-    console.log("click on modal");
-    setIsModalOpen(!isModalOpen);
+  function openBondersModal() {
+    closeBondedModal();
+    setIsBondersModalOpen(true);
+  }
+
+  function closeBondersModal() {
+    setIsBondersModalOpen(false);
+  }
+
+  function openBondedModal() {
+    closeBondersModal();
+    setIsBondedModalOpen(true);
+  }
+
+  function closeBondedModal() {
+    setIsBondedModalOpen(false);
   }
   return (
     <>
       <BondersModal
         bondMap={bondMap}
         address={address}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
+        isOpen={isBondersModalOpen}
+        onClose={closeBondersModal}
+      />
+      <BondedModal
+        address={address}
+        isOpen={isBondedModalOpen}
+        onClose={closeBondedModal}
       />
       <div className={customStyles.headerContainer}>
         <TxBottomTitle
@@ -185,10 +205,16 @@ function CustomHeader({
           goAllTx={goAllTx}
           fromAddr={"hello"}
         />
-        {txTypeIsBonder(txType) && (
-          <button onClick={toggleModal} className={customStyles.button}>
+        {txTypeIsBonded(txType) ? (
+          <button onClick={openBondedModal} className={customStyles.button}>
             Update
           </button>
+        ) : txTypeIsBonder(txType) ? (
+          <button onClick={openBondersModal} className={customStyles.button}>
+            Update
+          </button>
+        ) : (
+          <></>
         )}
       </div>
     </>

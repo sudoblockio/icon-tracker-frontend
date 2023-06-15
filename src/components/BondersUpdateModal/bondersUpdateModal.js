@@ -103,7 +103,7 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
           <div>
             <div className={styles.main}>
               <div className={styles.defaultSection}>
-                <h2>Bonded Info:</h2>
+                <h2>Bonders Info:</h2>
                 <p>
                   A maximum of 10 addresses are allowed to be added to the{" "}
                   <i>bonderList</i> of your node.

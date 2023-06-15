@@ -6,6 +6,7 @@ export default function GenericModal({
   onClose,
   useSmall = false,
   children,
+  style = {}
 }) {
   function handleOnClose() {
     onClose();
@@ -22,6 +23,7 @@ export default function GenericModal({
       onClick={handleOnClose}
     >
       <div
+        style={style}
         className={
           useSmall
             ? `${styles.main} ${styles.mainSmall}`
