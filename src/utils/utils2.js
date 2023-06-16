@@ -237,6 +237,11 @@ function getInitialBonderState(bondersArray) {
   return result;
 }
 
+function convertToLoopInHex(value) {
+  const result = value * 10 ** 18;
+  return `0x${result.toString(16)}`;
+}
+
 const utils = {
   data,
   samples,
@@ -253,7 +258,8 @@ const utils = {
   MAX_WAIT_PERIOD,
   initialTxResultState,
   checkIfPrepNeedToVote,
-  getInitialBonderState
+  getInitialBonderState,
+  convertToLoopInHex
 };
 
 export default utils;

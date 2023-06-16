@@ -11,36 +11,92 @@ import config from "../../config";
 const { nid } = config;
 
 // Constants
-const { setBonderList } = chainMethods;
+const { setBonderList, setBond } = chainMethods;
 
 const { parseBonderFormInputs, isValidICONAddress } = utils;
 
-export default function BondedModal({ address, isOpen, onClose }) {
+export default function BondedModal({
+  address,
+  isOpen,
+  onClose,
+  walletAddress
+}) {
   const [bondListState, setBondListState] = useState([]);
   const [maxAmountToBond, setMaxAmountToBond] = useState("0");
+  const [txResponse, setTxResponse] = useState("");
+
+  function handleOnClose() {
+    setTxResponse("");
+    onClose();
+  }
 
   async function handleFormSubmit() {
-    // let inputData = null;
-    // let txData = null;
-    // switch (type) {
-    //   case "bond":
-    //     inputData = parseBonderFormInputs(bonderForm);
-    //     if (inputData == null || inputData.length === 0) {
-    //     } else {
-    //       txData = setBonderList(address, inputData, nid);
-    //     }
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // // dispatch event to wallet
-    // if (txData == null) {
-    //   alert("Data for transaction is invalid");
-    // } else {
-    //   const walletResponse = await requestJsonRpc(txData.params);
-    //   console.log("wallet response");
-    //   console.log(walletResponse);
-    // }
+    setTxResponse("");
+    const allAddressesAndValuesAreValid = bondListState.every(
+      bondObj => bondObj.addressIsValid && bondObj.valueIsValid
+    );
+
+    console.log(
+      `all addresses and values are valid:`,
+      allAddressesAndValuesAreValid
+    );
+    console.log("walletAddress");
+    console.log(walletAddress);
+
+    if (allAddressesAndValuesAreValid) {
+      if (walletAddress === "" || walletAddress == null) {
+        alert("Invalid logged wallet address");
+      } else {
+        const parsedBonded = bondListState.map(bondObj => {
+          const parsed = {
+            address: bondObj.address
+          };
+          parsed.value = utils.convertToLoopInHex(bondObj.value);
+          return parsed;
+        });
+
+        console.log("parsedBonded");
+        console.log(parsedBonded);
+        const txData = setBond(walletAddress, parsedBonded, nid);
+        console.log("txData");
+        console.log(txData);
+
+        try {
+          const txResult = await requestJsonRpc(txData.params);
+          console.log("response from wallet");
+          console.log(txResult);
+          if (txResult.result != null) {
+            setTxResponse(txResult.result);
+          } else if (txResult.error != null) {
+            if (typeof txResult.error === "string") {
+              setTxResponse(txResult.error);
+            } else if (typeof txResult.error === "object") {
+              if (txResult.error.message != null) {
+                setTxResponse(txResult.error.message);
+              } else {
+                setTxResponse(JSON.stringify(txResult.error));
+              }
+            } else {
+              throw new Error("Unknown error");
+            }
+          } else {
+            throw new Error("Unknown error");
+          }
+        } catch (e) {
+          console.log("error from wallet");
+          console.log(e);
+          if (typeof e === "string") {
+            setTxResponse(e);
+          } else if (typeof e === "object" && e.message != null) {
+            setTxResponse(e.message);
+          } else {
+            setTxResponse(JSON.stringify(e));
+          }
+        }
+      }
+    } else {
+      alert("Please fix all invalid fields before submitting");
+    }
   }
 
   function handleAddressChange(index, evt) {
@@ -113,7 +169,7 @@ export default function BondedModal({ address, isOpen, onClose }) {
         <GenericModal
           style={{ minWidth: "780px" }}
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={handleOnClose}
           useSmall={true}
         >
           <div>
@@ -189,6 +245,11 @@ export default function BondedModal({ address, isOpen, onClose }) {
                 </button>
               </div>
             </div>
+            {txResponse != null && txResponse != "" ? (
+              <p>Result: {txResponse}</p>
+            ) : (
+              <></>
+            )}
           </div>
         </GenericModal>
       ) : (

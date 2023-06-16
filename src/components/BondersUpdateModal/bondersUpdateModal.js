@@ -34,6 +34,7 @@ const {
 export default function BondersModal({ bondMap, address, isOpen, onClose }) {
   const [bonderListState, setBonderListState] = useState([]);
   const [bonderForm, setBonderForm] = useState(initBonderForm);
+  const [txResponse, setTxResponse] = useState("");
 
   function handleFormInputChange(evnt) {
     const { value, name } = evnt.target;
@@ -46,11 +47,17 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
     });
   }
 
+  function handleOnClose() {
+    setTxResponse("");
+    onClose();
+  }
+
   function handleBonderFormSubmit() {
     handleFormSubmit("bond");
   }
 
   async function handleFormSubmit(type) {
+    setTxResponse("");
     let inputData = null;
     let txData = null;
 
@@ -70,9 +77,40 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
     if (txData == null) {
       alert("Data for transaction is invalid");
     } else {
-      const walletResponse = await requestJsonRpc(txData.params);
-      console.log("wallet response");
-      console.log(walletResponse);
+      try {
+        console.log("JSON RPC request");
+        console.log(txData);
+        const walletResponse = await requestJsonRpc(txData.params);
+        console.log("wallet response");
+        console.log(walletResponse);
+        if (walletResponse.result != null) {
+          setTxResponse(walletResponse.result);
+        } else if (walletResponse.error != null) {
+          if (typeof walletResponse.error === "string") {
+            setTxResponse(walletResponse.error);
+          } else if (typeof walletResponse.error === "object") {
+            if (walletResponse.error.message != null) {
+              setTxResponse(walletResponse.error.message);
+            } else {
+              setTxResponse(JSON.stringify(walletResponse.error));
+            }
+          } else {
+            throw new Error("Unknown error");
+          }
+        } else {
+          throw new Error("Unknown error");
+        }
+      } catch (e) {
+        console.log("error from wallet");
+        console.log(e);
+        if (typeof e === "string") {
+          setTxResponse(e);
+        } else if (typeof e === "object" && e.message != null) {
+          setTxResponse(e.message);
+        } else {
+          setTxResponse(JSON.stringify(e));
+        }
+      }
     }
   }
 
@@ -99,7 +137,7 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
   return (
     <div>
       {bondMap != null ? (
-        <GenericModal isOpen={isOpen} onClose={onClose} useSmall={true}>
+        <GenericModal isOpen={isOpen} onClose={handleOnClose} useSmall={true}>
           <div>
             <div className={styles.main}>
               <div className={styles.defaultSection}>
@@ -162,6 +200,11 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
                 </button>
               </div>
             </div>
+            {txResponse != null && txResponse !== "" ? (
+              <p>Result: {txResponse}</p>
+            ) : (
+              <></>
+            )}
           </div>
         </GenericModal>
       ) : (
