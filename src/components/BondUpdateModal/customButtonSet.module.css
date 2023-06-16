@@ -1,0 +1,28 @@
+.buttonSet {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 55px;
+  height: 30px;
+  margin: 10px;
+}
+
+.plusButton, .minusButton {
+  color: #299fac;
+  background-color: #fff;
+  border: 1px solid #08909f;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.plusButton:hover, .minusButton:hover {
+  background-color: #08909f;
+  color: #fff;
+}
+

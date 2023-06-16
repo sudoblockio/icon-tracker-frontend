@@ -115,6 +115,12 @@
 .setPrepForm .button {
   align-self: flex-start;
 }
+
+.tableTitle {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
 .table {
   width: 100%;
   /* min-width: 720px; */
@@ -148,9 +154,17 @@
   color: #808080;
   background-color: #f7f7f7;
 }
-.tableRow > div > input {
+.input {
   width: 100%;
   border: 1px solid #d6d3d1;
+}
+
+.inputValid {
+  border: 1px solid #4caf50;
+}
+
+.inputInvalid {
+  border: 1px solid #f44336;
 }
 
 .tableRowLabel {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./bondUpdateModal.module.css";
 import GenericModal from "../GenericModal/genericModal";
+import CustomButtonSet from "./customButtonSet";
 import { chainMethods } from "../../utils/rawTxMaker";
-import { getBondList } from "../../redux/store/iiss";
+import { getBondList, getStake2, getDelegation } from "../../redux/store/iiss";
 import { requestJsonRpc } from "../../utils/connect";
 import utils from "../../utils/utils2";
 import config from "../../config";
@@ -12,21 +13,11 @@ const { nid } = config;
 // Constants
 const { setBonderList } = chainMethods;
 
-const { parseBonderFormInputs } = utils;
+const { parseBonderFormInputs, isValidICONAddress } = utils;
 
 export default function BondedModal({ address, isOpen, onClose }) {
   const [bondListState, setBondListState] = useState([]);
-
-  // function handleFormInputChange(evnt) {
-  //   const { value, name } = evnt.target;
-
-  //   setBonderForm(bonderState => {
-  //     let newState = { ...bonderState };
-  //     newState[name] = value;
-
-  //     return newState;
-  //   });
-  // }
+  const [maxAmountToBond, setMaxAmountToBond] = useState("0");
 
   async function handleFormSubmit() {
     // let inputData = null;
@@ -53,52 +44,66 @@ export default function BondedModal({ address, isOpen, onClose }) {
   }
 
   function handleAddressChange(index, evt) {
-    console.log("on handle address");
     const { value, name } = evt.target;
     setBondListState(prevState => {
       const newState = [...prevState];
       newState[index].address = value;
+      newState[index].addressIsValid = checkIfValidAddress(value);
       return newState;
     });
   }
 
   function handleValueChange(index, evt) {
-    console.log("on handle value");
-    console.log("on handle address");
     const { value, name } = evt.target;
     setBondListState(prevState => {
       const newState = [...prevState];
       newState[index].value = value;
+      newState[index].valueIsValid = checkIfValidValue(value);
       return newState;
     });
   }
+
+  function handleClickAddRow() {
+    setBondListState(prevState => {
+      const newState = [...prevState];
+      newState.push({
+        address: "",
+        value: "",
+        addressIsValid: false,
+        valueIsValid: false
+      });
+      return newState;
+    });
+  }
+
+  function handleClickRemoveRow() {
+    setBondListState(prevState => {
+      const newState = [...prevState];
+      newState.pop();
+      return newState;
+    });
+  }
+
   useEffect(() => {
-    async function getBondedData() {
+    async function fetchInit() {
       const payload = { address };
       const bondList = await getBondList(payload);
-      console.log("bondList");
-      console.log(bondList);
-      const parsedBondList = bondList.map(bond => {
-        return {
-          address: bond.address,
-          value: parseInt(bond.value) / 10 ** 18
-        };
-      });
+      const stake = await getStake2(payload.address);
+      const delegation = await getDelegation(payload);
+      const maxAmountToBond = parseStakeVoteAndBond(
+        stake,
+        delegation,
+        bondList
+      );
 
+      const parsedMaxAmountToBond =
+        maxAmountToBond == null ? "null" : maxAmountToBond.toString();
+      const parsedBondList = parseBondList(bondList);
+      setMaxAmountToBond(maxAmountToBond);
       setBondListState(parsedBondList);
-      // setBondListState(prevState => {
-      //   const newState = {};
-      //   bondList.map(bond => {
-      //     newState[bond.address] = parseInt(bond.value) / 10 ** 18;
-      //   });
-      //   return {
-      //     ...prevState,
-      //     ...newState
-      //   };
-      // });
     }
     if (address != null) {
-      getBondedData();
+      fetchInit();
     }
   }, [address]);
 
@@ -116,11 +121,16 @@ export default function BondedModal({ address, isOpen, onClose }) {
               <div className={styles.defaultSection}>
                 <h2>Bonded Info:</h2>
                 <p>
-                  Description of this modal window and how to change the list of
-                  preps that are bonded with this address
+                  Use the following form to update the bondlist related to your
+                  wallet address.
                 </p>
+                <p>
+                  The max amount shown below is the total staked ICX minus the
+                  total delegated ICX in your wallet.
+                </p>
+                <p>Max amount available to bond: {maxAmountToBond} ICX</p>
                 <div>
-                  <p>Table of bonded preps:</p>
+                  <p className={styles.tableTitle}>Table of bonded preps:</p>
                 </div>
                 <div className={styles.table}>
                   <div className={`${styles.tableRow} ${styles.tableHead}`}>
@@ -139,7 +149,11 @@ export default function BondedModal({ address, isOpen, onClose }) {
                             type="text"
                             name={address.address}
                             value={address.address}
-                            className={styles.input}
+                            className={
+                              address.addressIsValid
+                                ? `${styles.input} ${styles.inputValid}`
+                                : `${styles.input} ${styles.inputInvalid}`
+                            }
                             onChange={evt => {
                               handleAddressChange(index, evt);
                             }}
@@ -151,7 +165,11 @@ export default function BondedModal({ address, isOpen, onClose }) {
                             type="text"
                             name={address.value}
                             value={address.value}
-                            className={styles.input}
+                            className={
+                              address.valueIsValid
+                                ? `${styles.input} ${styles.inputValid}`
+                                : `${styles.input} ${styles.inputInvalid}`
+                            }
                             onChange={evt => {
                               handleValueChange(index, evt);
                             }}
@@ -162,6 +180,10 @@ export default function BondedModal({ address, isOpen, onClose }) {
                     );
                   })}
                 </div>
+                <CustomButtonSet
+                  handlePlus={handleClickAddRow}
+                  handleMinus={handleClickRemoveRow}
+                />
                 <button className={styles.button} onClick={handleFormSubmit}>
                   Submit
                 </button>
@@ -174,4 +196,52 @@ export default function BondedModal({ address, isOpen, onClose }) {
       )}
     </div>
   );
+}
+
+function checkIfValidAddress(address) {
+  try {
+    return isValidICONAddress(address);
+  } catch (e) {
+    console.log("Error validating address");
+    return false;
+  }
+}
+
+function checkIfValidValue(value) {
+  return !isNaN(value);
+}
+
+function parseBondList(bondList) {
+  const result = [];
+  try {
+    bondList.map(bond => {
+      const parsed = {
+        address: bond.address,
+        value: parseInt(bond.value) / 10 ** 18,
+        addressIsValid: checkIfValidAddress(bond.address),
+        valueIsValid: checkIfValidValue(bond.value)
+      };
+      result.push(parsed);
+    });
+  } catch (e) {
+    console.log("Error parsing bondlist");
+  }
+
+  return result;
+}
+
+function parseStakeVoteAndBond(stake, vote, bond) {
+  try {
+    console.log("on parse");
+    console.log(stake);
+    console.log(vote);
+    console.log(bond);
+    const parsedStake = parseInt(stake.stake) / 10 ** 18;
+    const parsedVote = parseInt(vote.totalDelegated) / 10 ** 18;
+
+    return parsedStake - parsedVote;
+  } catch (e) {
+    console.log("Error running parseStateVoteAndBond");
+    return null;
+  }
 }
