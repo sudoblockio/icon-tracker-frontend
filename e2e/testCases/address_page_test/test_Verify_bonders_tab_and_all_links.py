@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_007_Verify_bonders_tab_and_all_links:
+class TestVerifyBondersTabAndAlLinks:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

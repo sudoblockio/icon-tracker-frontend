@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_013_Verify_pagination_in_transaction_list_view_input_type:
+class TestVerifyPaginationInTransactionListViewInputType:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

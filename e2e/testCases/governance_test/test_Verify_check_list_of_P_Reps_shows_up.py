@@ -6,7 +6,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_022_Verify_check_list_of_P_Reps_shows_up:
+class TestVerifyCheckListOfPRepsShowsUp:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

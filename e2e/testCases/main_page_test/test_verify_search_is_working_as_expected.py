@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_002_Verify_search_is_working_as_expected:
+class TestVerifySearchIsWorkingAsExpected:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

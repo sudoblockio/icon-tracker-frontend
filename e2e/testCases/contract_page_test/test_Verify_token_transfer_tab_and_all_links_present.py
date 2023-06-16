@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_014_Verify_token_transfer_tab_and_all_links_present:
+class TestVerifyTokenTransferTabAndAllLinksPresent:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

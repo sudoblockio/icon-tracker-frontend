@@ -7,7 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_018_Verify_read_contract_contents:
+class TestVerifyReadContractContents:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

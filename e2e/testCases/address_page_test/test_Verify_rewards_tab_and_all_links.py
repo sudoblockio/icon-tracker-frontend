@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_006_Verify_rewards_tab_and_all_links:
+class TestVerifyRewardsTabAndAllLinks:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = "https://tracker.icon.community/addressreward"

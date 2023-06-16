@@ -7,7 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_017_Verify_code_tab_contents:
+class TestVerifyCodeTabContents:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

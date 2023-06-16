@@ -7,7 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_005_Verify_voters_tab_and_all_links_redirection:
+class TestVerifyVotersTabAndAllLinksRedirection:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = "https://tracker.icon.community/addressvoters/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"

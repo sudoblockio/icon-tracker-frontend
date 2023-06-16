@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_010_Verify_contract_page_name_and_contractor_link_linkable:
+class TestVerifyContractPageNameAndContractorLinkLinkable:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

@@ -7,7 +7,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_004_Verify_address_page_token_transfer:
+class TestVerifyAddressPageTokenTransfer:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = "https://tracker.icon.community/addresstokentx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"

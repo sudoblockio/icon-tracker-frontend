@@ -6,7 +6,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_023_Verify_paging_works_network_proposal_list:
+class TestVerifyPagingWorksNetworkProposalList:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

@@ -9,7 +9,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_015_Verify_token_transfer_list_view_list_counts:
+class TestVerifyTokenTransferListViewListCounts:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

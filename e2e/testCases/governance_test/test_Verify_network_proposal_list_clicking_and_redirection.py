@@ -6,7 +6,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_025_Verify_network_proposal_list_clicking_and_redirection:
+class TestVerifyNetworkProposalListClickingAndRedirection:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 

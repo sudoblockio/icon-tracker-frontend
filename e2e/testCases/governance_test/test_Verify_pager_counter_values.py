@@ -6,7 +6,7 @@ from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 
 
-class Test_024_Verify_pager_counter_values:
+class TestVerifyPagerCounterValues:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
