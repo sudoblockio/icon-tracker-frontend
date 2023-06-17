@@ -9,6 +9,7 @@ import {
 } from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
 import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
+import BondedModal from "../../BondUpdateModal/bondUpdateModal";
 import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
@@ -21,8 +22,12 @@ class TxBottomComponent extends Component {
       tableClassName,
       noBoxText,
       tokenTotal,
-      onClickTab
+      onClickTab,
+      wallet,
+      walletAddress
     } = this.props;
+    console.log("props on TxBottomComponent");
+    console.log(this.props);
     const { data, listSize, totalSize, loading } = txData;
 
     let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
@@ -52,6 +57,8 @@ class TxBottomComponent extends Component {
               goAllTx={goAllTx}
               bondMap={this.props.bondMap}
               address={this.props.address}
+              walletAddress={this.props.walletAddress}
+              wallet={wallet}
             />
             <div className="table-box">
               <table className={tableClassName}>
@@ -159,21 +166,46 @@ function CustomHeader({
   totalCount,
   goAllTx,
   bondMap,
-  address
+  address,
+  walletAddress,
+  wallet
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBondersModalOpen, setIsBondersModalOpen] = useState(false);
+  const [isBondedModalOpen, setIsBondedModalOpen] = useState(false);
+  const isLogged = walletAddress === address;
+  const isLoggedAsPrep = isLogged && wallet.data.is_prep;
 
-  function toggleModal() {
-    console.log("click on modal");
-    setIsModalOpen(!isModalOpen);
+  function openBondersModal() {
+    closeBondedModal();
+    setIsBondersModalOpen(true);
+  }
+
+  function closeBondersModal() {
+    setIsBondersModalOpen(false);
+  }
+
+  function openBondedModal() {
+    closeBondersModal();
+    setIsBondedModalOpen(true);
+  }
+
+  function closeBondedModal() {
+    setIsBondedModalOpen(false);
   }
   return (
     <>
       <BondersModal
         bondMap={bondMap}
         address={address}
-        isOpen={isModalOpen}
-        onClose={toggleModal}
+        isOpen={isBondersModalOpen}
+        onClose={closeBondersModal}
+        walletAddress={walletAddress}
+      />
+      <BondedModal
+        address={address}
+        isOpen={isBondedModalOpen}
+        onClose={closeBondedModal}
+        walletAddress={walletAddress}
       />
       <div className={customStyles.headerContainer}>
         <TxBottomTitle
@@ -185,10 +217,16 @@ function CustomHeader({
           goAllTx={goAllTx}
           fromAddr={"hello"}
         />
-        {txTypeIsBonder(txType) && (
-          <button onClick={toggleModal} className={customStyles.button}>
+        {(txTypeIsBonded(txType) && isLogged) ? (
+          <button onClick={openBondedModal} className={customStyles.button}>
             Update
           </button>
+        ) : (txTypeIsBonder(txType) && isLoggedAsPrep) ? (
+          <button onClick={openBondersModal} className={customStyles.button}>
+            Update
+          </button>
+        ) : (
+          <></>
         )}
       </div>
     </>
