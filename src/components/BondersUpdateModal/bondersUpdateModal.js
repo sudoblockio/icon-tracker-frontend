@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./bondersUpdateModal.module.css";
 import GenericModal from "../GenericModal/genericModal";
 import { chainMethods } from "../../utils/rawTxMaker";
@@ -201,7 +202,14 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
               </div>
             </div>
             {txResponse != null && txResponse !== "" ? (
-              <p>Result: {txResponse}</p>
+              <p>
+                Result:{" "}
+                <Link to={`/transaction/${txResponse}`}>
+                  <em style={{ fontSize: "12px" }}>
+                    {txResponse}
+                  </em>
+                </Link>
+              </p>
             ) : (
               <></>
             )}
