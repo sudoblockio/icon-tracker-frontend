@@ -42,6 +42,7 @@ function AddressTabs(props) {
   const {
     on,
     wallet,
+    walletAddress,
     addressInternalTx,
     walletTokenTx,
     addressDelegation,
@@ -319,6 +320,8 @@ function AddressTabs(props) {
                 }}
                 txType={TX_TYPE.ADDRESS_BONDED}
                 address={address}
+                wallet={wallet}
+                walletAddress={walletAddress}
               />
             );
           case ADDRESS_TABS[7]:
@@ -332,6 +335,8 @@ function AddressTabs(props) {
                 address={address}
                 bondMap={bondMap}
                 onClickTab={handleClickTab}
+                wallet={wallet}
+                walletAddress={walletAddress}
               />
             );
           default:

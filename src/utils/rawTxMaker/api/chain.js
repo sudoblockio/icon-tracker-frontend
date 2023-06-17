@@ -28,8 +28,23 @@ function setPrep(wallet, prepData, nid) {
     nid
   )
 }
+
+function setBond(wallet, arrayOfBonds, nid) {
+  return makeTxCallRPCObj(
+    wallet,
+    scores.mainnet.governance,
+    "setBond",
+    {
+      "bonds": [...arrayOfBonds]
+    },
+    nid
+  )
+}
+
 const chainMethods = {
   setBonderList,
-  setPrep
+  setPrep,
+  setBond
 }
+
 export default chainMethods;

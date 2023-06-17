@@ -797,6 +797,44 @@ export async function prepSub() {
   });
 }
 
+export async function getStake2(address) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      id: randomUint32(),
+      method: "icx_call",
+      params: {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getStake",
+          params: {
+            address: address
+          }
+        }
+      }
+    };
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
 export async function getStake(address) {
   const walletApi = await walletApiInstance();
   return new Promise(resolve => {
