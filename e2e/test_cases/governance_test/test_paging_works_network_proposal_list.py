@@ -2,8 +2,8 @@ import time
 
 import pytest
 
-from e2e.page_objects.GovernancePage import GovernancePage
-from e2e.page_objects.MainPage import MainPage
+from e2e.page_objects.governance_page import GovernancePage
+from e2e.page_objects.main_page import MainPage
 from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
 

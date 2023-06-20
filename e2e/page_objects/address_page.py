@@ -1,12 +1,7 @@
 import time
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
 from e2e.utilities.AutomationUtils import AutomationUtils
 from e2e.utilities.Logger import LogGen
-from selenium.webdriver.support import expected_conditions as EC
-
 from e2e.utilities.ReadProperties import ReadConfig
 
 
