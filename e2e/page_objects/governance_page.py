@@ -1,9 +1,8 @@
 import time
-
 from selenium.webdriver import ActionChains
 
-from e2e.utilities.AutomationUtils import AutomationUtils
-from e2e.utilities.Logger import LogGen
+from e2e.utilities.automation_utils import AutomationUtils
+from e2e.utilities.logger import LogGen
 
 
 class GovernancePage:

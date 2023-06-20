@@ -1,10 +1,8 @@
-
 import pytest
 
 from e2e.page_objects.contract_page import ContractPage
-
-from e2e.utilities.Logger import LogGen
-from e2e.utilities.ReadProperties import ReadConfig
+from e2e.utilities.logger import LogGen
+from e2e.utilities.read_properties import ReadConfig
 
 
 class TestVerifyReadContractContents:

@@ -1,7 +1,7 @@
 import time
 from selenium.webdriver.common.keys import Keys
-from e2e.utilities.Logger import LogGen
-from e2e.utilities.AutomationUtils import AutomationUtils
+from e2e.utilities.logger import LogGen
+from e2e.utilities.automation_utils import AutomationUtils
 from selenium.webdriver.common.action_chains import ActionChains
 
 
@@ -15,10 +15,7 @@ class MainPage:
         self.driver = driver
 
     def verify_main_page_card_numbers(self):
-        """
-              verify_main_page_card_numbers
-              - this method is used to verify main page card contains numeric values or not
-        """
+        """Verify main page card contains numeric values or not."""
         pass_array = []
         try:
             AutomationUtils.wait_for_element_to_load(self, self.number_cards_xpath % '4')
@@ -50,9 +47,8 @@ class MainPage:
 
     def enter_query_in_search_bar(self, query):
         """
-                enter_query_in_search_bar
-                -this method is used to enter query in a search bar
-                @param - query: search input needed to execute the search
+        Enter query in a search bar.
+        @param - query: search input needed to execute the search
         """
         try:
             self.logger.info(">>waiting for search bar to be visible")

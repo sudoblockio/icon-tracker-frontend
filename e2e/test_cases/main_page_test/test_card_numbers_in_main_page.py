@@ -1,8 +1,8 @@
 import pytest
 
 from e2e.page_objects.main_page import MainPage
-from e2e.utilities.Logger import LogGen
-from e2e.utilities.ReadProperties import ReadConfig
+from e2e.utilities.logger import LogGen
+from e2e.utilities.read_properties import ReadConfig
 
 
 class TestVerifyCardNumbersInMainPage:

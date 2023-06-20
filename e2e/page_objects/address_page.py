@@ -1,8 +1,8 @@
 import time
 
-from e2e.utilities.AutomationUtils import AutomationUtils
-from e2e.utilities.Logger import LogGen
-from e2e.utilities.ReadProperties import ReadConfig
+from e2e.utilities.automation_utils import AutomationUtils
+from e2e.utilities.logger import LogGen
+from e2e.utilities.read_properties import ReadConfig
 
 
 class AddressPage:

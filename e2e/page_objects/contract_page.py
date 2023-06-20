@@ -2,8 +2,8 @@ import time
 
 from selenium.webdriver.common.by import By
 
-from e2e.utilities.AutomationUtils import AutomationUtils
-from e2e.utilities.Logger import LogGen
+from e2e.utilities.automation_utils import AutomationUtils
+from e2e.utilities.logger import LogGen
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
@@ -47,19 +47,13 @@ class ContractPage:
         self.driver.find_element("xpath", self.contract_name_link).click()
 
     def click_creator_link(self):
-        """
-            click_creator_link
-            -this method is used to click on creator link in contract page
-        """
+        """Click on creator link in contract page."""
         self.logger.info(">>waiting for creator link to be visible")
         AutomationUtils.wait_for_element_to_load(self, self.contact_creator_link)
         self.driver.find_element("xpath", self.contact_creator_link).click()
 
     def verify_user_name_page(self):
-        """
-            verify_user_name_page
-            -this method is used to verify if user is in name page
-        """
+        """Verify if user is in name page."""
         self.logger.info(">>waiting for name page header to be visible")
         AutomationUtils.wait_for_element_to_load(self, self.contract_name_page_header)
 
@@ -71,10 +65,7 @@ class ContractPage:
             assert False
 
     def verify_contractor_page(self, value):
-        """
-            verify_contractor_page
-            -to verify if user is redirected to correct contractor page
-        """
+        """Verify if user is redirected to correct contractor page."""
         self.logger.info(">>waiting for creator link to be visible")
         if self.driver.find_element("xpath", self.contract_creator_text % value):
             assert True
