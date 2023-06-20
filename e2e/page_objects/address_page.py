@@ -34,9 +34,8 @@ class AddressPage:
 
     def verify_user_in_address_page(self, url):
         """
-                verify_user_in_address_page
-                -this method is used to verify user is redirected to address page when searching for appropriate data
-                @param - url: expected url for the result
+        Verify user is redirected to address page when searching for appropriate data
+        :param url: expected url for the result
         """
         try:
             self.logger.info(">>waiting for address title to be visible")
@@ -56,9 +55,8 @@ class AddressPage:
 
     def verify_no_rows_in_transaction(self, count):
         """
-                verify_no_rows_in_transaction
-                -this method is used to verify the row count in transaction table
-                @param count : number of items expected
+        Verify the row count in transaction table.
+        @param count : number of items expected
         """
         try:
             self.logger.info(">>trying to verify if number of columns in transaction table is as expected")
