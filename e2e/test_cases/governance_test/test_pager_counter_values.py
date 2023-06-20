@@ -3,16 +3,16 @@ import pytest
 from e2e.page_objects.governance_page import GovernancePage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifyPagerCounterValues:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
     @pytest.mark.governance
     def test_pager_counter_values(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.governancePageObj = GovernancePage(self.driver)
         self.logger.info("********Starting test case Test_024_Verify_pager_counter_values...*******")
         self.governancePageObj.hover_governance_tab()

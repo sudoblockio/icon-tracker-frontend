@@ -9,14 +9,13 @@ from e2e.config import config
 
 
 class TestVerifyRewardsTabAndAllLinks:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = f"{config.base_url}/addressreward"
 
     @pytest.mark.address_page
     def test_rewards_tab_and_all_links(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.addressPageObj = AddressPage(self.driver)
 

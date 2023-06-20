@@ -8,14 +8,13 @@ from e2e.config import config
 
 
 class TestVerifyAddressPageTransactionTable:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
     verifyUrl = f"{config.base_url}/addresstx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
 
     @pytest.mark.address_page
     def test_address_page_transaction_table(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.addressPageObj = AddressPage(self.driver)
 

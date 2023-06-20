@@ -5,16 +5,16 @@ from e2e.page_objects.main_page import MainPage
 from e2e.page_objects.address_page import AddressPage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifySearchIsWorkingAsExpected:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
     @pytest.mark.main_page
     def test_card_numbers_in_main_page(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.addressPageObj = AddressPage(self.driver)
 
@@ -26,7 +26,7 @@ class TestVerifySearchIsWorkingAsExpected:
 
             expected_url = ReadConfig.getExpectedUrl(i)
             self.addressPageObj.verify_user_in_address_page(url=expected_url)
-            self.driver.get(self.baseurl)
+            self.driver.get(config.base_url)
             time.sleep(3)
 
         self.logger.info("********Finished test case Test_002_Verify_search_is_working_as_expected...*******")

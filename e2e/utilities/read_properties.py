@@ -13,10 +13,6 @@ config.read(config_file)
 
 class ReadConfig:
     @staticmethod
-    def getBaseUrl():
-        return config.get('common info', 'baseurl')
-
-    @staticmethod
     def getQuery(count):
 
         if count == 1:

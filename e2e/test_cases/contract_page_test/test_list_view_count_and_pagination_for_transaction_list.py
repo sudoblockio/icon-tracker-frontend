@@ -4,16 +4,16 @@ from e2e.page_objects.contract_page import ContractPage
 from e2e.page_objects.main_page import MainPage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifyListViewCountAndPaginationForTransactionList:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
     @pytest.mark.contract_page
     def test_list_view_count_and_pagination_for_transaction_list(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.contractPageObj = ContractPage(self.driver)
 

@@ -5,17 +5,17 @@ from e2e.page_objects.main_page import MainPage
 from e2e.page_objects.address_page import AddressPage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifyDelegationTabInAddress:
-    baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
     @pytest.mark.address_page
     @pytest.mark.standalone
     def test_delegation_tab_in_address(self, setup):
         self.driver = setup
-        self.driver.get(self.baseurl)
+        self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.addressPageObj = AddressPage(self.driver)
 
