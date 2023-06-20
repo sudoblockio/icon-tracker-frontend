@@ -15,7 +15,6 @@ class TestVerifyDelegationTabInAddress:
 
     @pytest.mark.address_page
     @pytest.mark.standalone
-
     def test_delegation_tab_in_address(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
