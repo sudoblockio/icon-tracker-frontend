@@ -13,10 +13,10 @@ class TestVerifyContractPageNameAndContractorLinkLinkable:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
 
-    contractorValue = "hxf8f2d8f12abbbd4e70ae6e89d31b4f8301b56caf"
+    contractorValue = "cx44250a12074799e26fdeee75648ae47e2cc84219"
 
     @pytest.mark.contract_page
-    def test_010_Verify_contract_page_name_and_contractor_link_linkable(self, setup):
+    def test_contract_page_name_and_contractor_link_linkable(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

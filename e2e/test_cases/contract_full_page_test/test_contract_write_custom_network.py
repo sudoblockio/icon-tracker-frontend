@@ -14,7 +14,7 @@ class TestContractFullPageCustomNetwork:
     logger = LogGen.loggen()
 
     @pytest.mark.contract_page
-    def test_writing_to_custom_network(
+    def test_contract_write_custom_network(
             self,
             setup,
             setup_custom_network,

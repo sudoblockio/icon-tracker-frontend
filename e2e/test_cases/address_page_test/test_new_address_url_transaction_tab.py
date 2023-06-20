@@ -14,7 +14,7 @@ class TestVerifyNewAddressUrlTransactionTab:
     logger = LogGen.loggen()
 
     @pytest.mark.address_page
-    def test_008_Verify_new_address_url_transaction_tab(self, setup):
+    def test_new_address_url_transaction_tab(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

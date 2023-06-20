@@ -10,7 +10,7 @@ class TestVerifyCardNumbersInMainPage:
     logger = LogGen.loggen()
 
     @pytest.mark.main_page
-    def test_001_verify_card_numbers_in_main_page(self, setup):
+    def test_card_numbers_in_main_page(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

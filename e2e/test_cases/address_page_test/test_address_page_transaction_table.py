@@ -13,7 +13,7 @@ class TestVerifyAddressPageTransactionTable:
     verifyUrl = "https://tracker.icon.community/addresstx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
 
     @pytest.mark.address_page
-    def test_003_Verify_address_page_transaction_table(self, setup):
+    def test_address_page_transaction_table(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

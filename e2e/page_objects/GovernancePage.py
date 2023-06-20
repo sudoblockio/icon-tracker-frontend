@@ -16,7 +16,7 @@ class GovernancePage:
     network_count_cta = "//div[@class='sort-holder']"
     network_list_count_5 = "//div[@class='sort-holder']//ul//li[1]"
     network_list_count_10 = "//div[@class='sort-holder']//ul//li[2]"
-    network_total_list_count = "//span[@class='proposal-status applied']"
+    network_total_list_count = "//span[contains(@class, 'proposal-status')]"
     network_page_next_cta = "//span[@name='next']"
     network_page_prev_cta = "//span[@class='prev']"
     network_pages_count = "//input[@value='%s']"

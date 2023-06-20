@@ -14,7 +14,7 @@ class TestVerifyBondersTabAndAlLinks:
     logger = LogGen.loggen()
 
     @pytest.mark.address_page
-    def test_007_Verify_bonders_tab_and_all_links(self, setup):
+    def test_bonders_tab_and_all_links(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

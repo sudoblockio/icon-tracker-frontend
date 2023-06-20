@@ -11,7 +11,7 @@ class TestVerifyCheckListOfPRepsShowsUp:
     logger = LogGen.loggen()
 
     @pytest.mark.governance
-    def test_022_Verify_check_list_of_P_Reps_shows_up(self, setup):
+    def test_check_list_of_P_Reps_shows_up(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.governancePageObj = GovernancePage(self.driver)

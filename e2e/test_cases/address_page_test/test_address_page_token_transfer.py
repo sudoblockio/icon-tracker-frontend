@@ -13,7 +13,7 @@ class TestVerifyAddressPageTokenTransfer:
     verifyUrl = "https://tracker.icon.community/addresstokentx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
 
     @pytest.mark.address_page
-    def test_004_Verify_address_page_token_transfer(self, setup):
+    def test_address_page_token_transfer(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)

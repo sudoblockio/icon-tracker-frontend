@@ -12,7 +12,7 @@ class ContractPage:
     logger = LogGen.loggen()
 
     contract_name_link = "//a[contains(text(),'Balanced Dollar')]"
-    contact_creator_link = "//a[contains(text(),'hxf8f2d8f12abbbd4e70ae6e89d31b4f8301b56caf')]"
+    contact_creator_link = "//a[contains(text(),'cx44250a12074799e26fdeee75648ae47e2cc84219')]"
     contract_name_page_header = "//p[contains(text(),'Balanced Dollar')]"
     contract_creator_text = "//*[contains(text(),'%s')]"
     contract_transaction_tab_cta = "//li[contains(text(),'Transactions')][1]"

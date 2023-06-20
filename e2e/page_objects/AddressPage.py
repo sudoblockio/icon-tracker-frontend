@@ -316,6 +316,9 @@ class AddressPage:
         var = items[count].text
         self.logger.info(">>delegation value " + var)
         items[count].click()
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        time.sleep(3)
+        self.logger.info(">>delegation value " + self.driver.current_url)
         if var in self.driver.current_url:
             assert True
         else:

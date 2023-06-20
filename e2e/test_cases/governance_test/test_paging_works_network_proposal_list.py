@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from e2e.page_objects.GovernancePage import GovernancePage
@@ -11,7 +13,7 @@ class TestVerifyPagingWorksNetworkProposalList:
     logger = LogGen.loggen()
 
     @pytest.mark.governance
-    def test_023_Verify_paging_works_network_proposal_list(self, setup):
+    def test_paging_works_network_proposal_list(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.governancePageObj = GovernancePage(self.driver)

@@ -14,7 +14,9 @@ class TestVerifyDelegationTabInAddress:
     logger = LogGen.loggen()
 
     @pytest.mark.address_page
-    def test_009_Verify_delegation_tab_in_address(self, setup):
+    @pytest.mark.standalone
+
+    def test_delegation_tab_in_address(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.mainPageObj = MainPage(self.driver)
@@ -30,7 +32,6 @@ class TestVerifyDelegationTabInAddress:
             time.sleep(2)
 
             self.addressPageObj.verify_page_not_open_in_new_tab()
-
             self.driver.get(ReadConfig.getAddressUrl())
             time.sleep(3)
 

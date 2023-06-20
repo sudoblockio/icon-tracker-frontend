@@ -11,8 +11,7 @@ class TestVerifyNetworkProposalListClickingAndRedirection:
     logger = LogGen.loggen()
 
     @pytest.mark.governance
-    @pytest.mark.standalone
-    def test_025_Verify_network_proposal_list_clicking_and_redirection(self, setup):
+    def test_Verify_network_proposal_list_clicking_and_redirection(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.governancePageObj = GovernancePage(self.driver)

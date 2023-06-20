@@ -11,7 +11,7 @@ class TestVerifyPagerCounterValues:
     logger = LogGen.loggen()
 
     @pytest.mark.governance
-    def test_024_Verify_pager_counter_values(self, setup):
+    def test_pager_counter_values(self, setup):
         self.driver = setup
         self.driver.get(self.baseurl)
         self.governancePageObj = GovernancePage(self.driver)

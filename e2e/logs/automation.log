@@ -1,0 +1,1831 @@
+06/20/2023 10:03:46 PM: INFO: ********Starting test case Test_004_Verify_address_page_token_transfer...*******
+06/20/2023 10:03:58 PM: INFO: >>trying to click on token transfer
+06/20/2023 10:03:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:00 PM: INFO: >>clicked on token transfer
+06/20/2023 10:04:00 PM: INFO: >>trying to verify table in token transfer
+06/20/2023 10:04:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:00 PM: INFO: >>verified table
+06/20/2023 10:04:00 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 10:04:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:02 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 10:04:07 PM: INFO: >>transaction detail page verified
+06/20/2023 10:04:07 PM: INFO: >>redirected to expected URL
+06/20/2023 10:04:07 PM: INFO: ********Finished test case Test_004_Verify_address_page_token_transfer...*******
+06/20/2023 10:04:18 PM: INFO: ********Starting test case Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:04:18 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:04:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:25 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:04:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:27 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:28 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:32 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:04:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:04:33 PM: INFO: ********Finished execution Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:08:57 PM: INFO: ********Starting test case Test_001_Verify_card_numbers_in_main_page...*******
+06/20/2023 10:08:57 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:08:58 PM: INFO: >>verifying the numeric values in main page cards
+06/20/2023 10:09:02 PM: INFO: ********Finished execution Test_001_Verify_card_numbers_in_main_page...*******
+06/20/2023 10:09:12 PM: INFO: ********Starting test case Test_002_Verify_search_is_working_as_expected...*******
+06/20/2023 10:09:12 PM: INFO: >>waiting for search bar to be visible
+06/20/2023 10:09:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:16 PM: INFO: >>entered query in search bar
+06/20/2023 10:09:17 PM: INFO: >>Search operation initiated
+06/20/2023 10:09:17 PM: INFO: >>waiting for address title to be visible
+06/20/2023 10:09:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:23 PM: INFO: >>redirected to expected URL
+06/20/2023 10:09:29 PM: INFO: >>waiting for search bar to be visible
+06/20/2023 10:09:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:30 PM: INFO: >>entered query in search bar
+06/20/2023 10:09:30 PM: INFO: >>Search operation initiated
+06/20/2023 10:09:30 PM: INFO: >>waiting for address title to be visible
+06/20/2023 10:09:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:31 PM: INFO: >>redirected to expected URL
+06/20/2023 10:09:35 PM: INFO: >>waiting for search bar to be visible
+06/20/2023 10:09:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:35 PM: INFO: >>entered query in search bar
+06/20/2023 10:09:35 PM: INFO: >>Search operation initiated
+06/20/2023 10:09:35 PM: INFO: >>waiting for address title to be visible
+06/20/2023 10:09:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:09:35 PM: INFO: >>redirected to expected URL
+06/20/2023 10:09:39 PM: INFO: ********Finished test case Test_002_Verify_search_is_working_as_expected...*******
+06/20/2023 10:10:58 PM: INFO: ********Starting test case Test_022_Verify_check_list_of_P_Reps_shows_up...*******
+06/20/2023 10:10:58 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:10:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:10:59 PM: INFO: >>waiting for p-rep to be visible
+06/20/2023 10:10:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:01 PM: INFO: >>waiting for table to be visible
+06/20/2023 10:11:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:09 PM: INFO: ********Finished execution Test_022_Verify_check_list_of_P_Reps_shows_up...*******
+06/20/2023 10:11:19 PM: INFO: ********Starting test case Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:11:19 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:11:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:21 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:11:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:23 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:24 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:28 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:11:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:29 PM: INFO: ********Finished execution Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:11:41 PM: INFO: ********Starting test case Test_024_Verify_pager_counter_values...*******
+06/20/2023 10:11:41 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:11:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:47 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:11:47 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:49 PM: INFO: >>verifying the pager count
+06/20/2023 10:11:49 PM: INFO: >>waiting for next to be visible
+06/20/2023 10:11:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:11:51 PM: INFO: >>verifying the pager count
+06/20/2023 10:12:03 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:12:03 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:12:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:12:04 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:12:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:12:06 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:12:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:12:07 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:12:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:12:08 PM: INFO: >>network table list did not load
+06/20/2023 10:19:13 PM: INFO: ********Starting test case Test_024_Verify_pager_counter_values...*******
+06/20/2023 10:19:13 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:19:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:16 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:19:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:17 PM: INFO: >>verifying the pager count
+06/20/2023 10:19:17 PM: INFO: >>waiting for next to be visible
+06/20/2023 10:19:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:19 PM: INFO: >>verifying the pager count
+06/20/2023 10:19:19 PM: INFO: >>waiting for next to be visible
+06/20/2023 10:19:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:21 PM: INFO: >>verifying the pager count
+06/20/2023 10:19:21 PM: INFO: >>waiting for prev to be visible
+06/20/2023 10:19:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:22 PM: INFO: >>verifying the pager count
+06/20/2023 10:19:22 PM: INFO: ********Finished execution Test_024_Verify_pager_counter_values...*******
+06/20/2023 10:19:53 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:19:53 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:19:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:56 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:19:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:57 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:19:57 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:58 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:19:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:19:59 PM: INFO: >>network table list did not load
+06/20/2023 10:21:02 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:21:02 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:21:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:21:03 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:21:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:21:04 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:21:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:24:26 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:24:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:24:26 PM: INFO: >>network table list did not load
+06/20/2023 10:24:39 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:24:39 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:24:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:24:42 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:24:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:24:43 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:24:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:04 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:28:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:04 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:28:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:07 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:28:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:07 PM: INFO: ********Finished execution Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:28:36 PM: INFO: ********Starting test case Test_022_Verify_check_list_of_P_Reps_shows_up...*******
+06/20/2023 10:28:36 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:28:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:37 PM: INFO: >>waiting for p-rep to be visible
+06/20/2023 10:28:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:39 PM: INFO: >>waiting for table to be visible
+06/20/2023 10:28:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:48 PM: INFO: ********Finished execution Test_022_Verify_check_list_of_P_Reps_shows_up...*******
+06/20/2023 10:28:58 PM: INFO: ********Starting test case Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:28:58 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:28:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:28:59 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:28:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:01 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:03 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>clicking on applied cta in network proposal item in list
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: >>verifying network proposal detail page
+06/20/2023 10:29:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:07 PM: INFO: ********Finished execution Test_025_Verify_network_proposal_list_clicking_and_redirection...*******
+06/20/2023 10:29:17 PM: INFO: ********Starting test case Test_024_Verify_pager_counter_values...*******
+06/20/2023 10:29:17 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:29:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:20 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:29:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:21 PM: INFO: >>verifying the pager count
+06/20/2023 10:29:21 PM: INFO: >>waiting for next to be visible
+06/20/2023 10:29:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:22 PM: INFO: >>verifying the pager count
+06/20/2023 10:29:22 PM: INFO: >>waiting for next to be visible
+06/20/2023 10:29:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:24 PM: INFO: >>verifying the pager count
+06/20/2023 10:29:25 PM: INFO: >>waiting for prev to be visible
+06/20/2023 10:29:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:26 PM: INFO: >>verifying the pager count
+06/20/2023 10:29:26 PM: INFO: ********Finished execution Test_024_Verify_pager_counter_values...*******
+06/20/2023 10:29:36 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:29:36 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:29:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:38 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:29:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:40 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:29:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:41 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:29:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:41 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:29:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:42 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:29:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:29:43 PM: INFO: ********Finished execution Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:30:43 PM: INFO: ********Starting test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 10:30:48 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:30:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:30:52 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:30:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:30:52 PM: INFO: >>checking transaction 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 10:30:59 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:30:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:01 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:01 PM: INFO: >>checking transaction 0x6563c1f566358bff51882387aa69660ded259abb95e49edc1a80e11ce5120186
+06/20/2023 10:31:05 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:07 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:07 PM: INFO: >>checking transaction 0x3a090c7e6746922862522428a67bd20a28837a428058e7020a737f573267ef11
+06/20/2023 10:31:10 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:12 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:12 PM: INFO: >>checking transaction 0x27d2dc3af785d492a2cd8187643fda0ec4ff518ad98debd4a6c4e4a05b14e11a
+06/20/2023 10:31:18 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:20 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:20 PM: INFO: >>checking transaction 0x6c3151f897080bbe5194f4097df8b8b278befefa7a1d77c14c24b7c6ff33d97e
+06/20/2023 10:31:24 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:26 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:26 PM: INFO: >>checking transaction 0xa6d3d0db2405d6413727e3a864c5b9b59ac90b2d89271f391dad8ecde67db7b3
+06/20/2023 10:31:29 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:31 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:31 PM: INFO: >>checking transaction 0xdeb64791d7d496275c4442fe0e839aeb04403024d6ecef7a2d13fc4b23de75f7
+06/20/2023 10:31:34 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:37 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:37 PM: INFO: >>checking transaction 0xc69f48aa5d3331e73397b8025c7204490397c8d3bbdfacdba6abbbe2898d6a5b
+06/20/2023 10:31:41 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:43 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:43 PM: INFO: >>checking transaction 0xbfdc8b4b852872f89ad5ef35e82100924586fb4531b94a5050146c0037422501
+06/20/2023 10:31:48 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:50 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 10:31:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:51 PM: INFO: >>checking transaction 0x6de92c6195ae67f61c7a3f4c597cf600054c1877608d938770c59d5efda01a0d
+06/20/2023 10:31:58 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:31:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:31:59 PM: INFO: ********Finished test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 10:32:08 PM: INFO: ********Starting test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 10:32:12 PM: INFO: >>clicking on code tab
+06/20/2023 10:32:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:32:15 PM: INFO: >>verifying the code block exists
+06/20/2023 10:32:18 PM: INFO: ********Finished test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 10:32:28 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:32:36 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:32:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:32:37 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:32:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:32:43 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 10:32:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:13 PM: INFO: ********Starting test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 10:33:19 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:23 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:23 PM: INFO: >>checking events 0x97a6b0ec3670f40480b321ce446e2ec990f90e230cafc7ceedea000b224f9712
+06/20/2023 10:33:30 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:32 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:32 PM: INFO: >>checking events 0x97a6b0ec3670f40480b321ce446e2ec990f90e230cafc7ceedea000b224f9712
+06/20/2023 10:33:35 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:37 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:37 PM: INFO: >>checking events 0x97a6b0ec3670f40480b321ce446e2ec990f90e230cafc7ceedea000b224f9712
+06/20/2023 10:33:41 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:43 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:43 PM: INFO: >>checking events 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 10:33:46 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:49 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:49 PM: INFO: >>checking events 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 10:33:54 PM: INFO: >>clicking on events tab
+06/20/2023 10:33:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:56 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:33:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:33:56 PM: INFO: >>checking events 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 10:34:00 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:02 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:34:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:02 PM: INFO: >>checking events 0xb7b79c0c68cb233d4feb115da8f6423ee6d86a1ae8ded9ab4f45e04d579572a0
+06/20/2023 10:34:06 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:08 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:34:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:08 PM: INFO: >>checking events 0xb7b79c0c68cb233d4feb115da8f6423ee6d86a1ae8ded9ab4f45e04d579572a0
+06/20/2023 10:34:14 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:16 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:34:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:16 PM: INFO: >>checking events 0xb7b79c0c68cb233d4feb115da8f6423ee6d86a1ae8ded9ab4f45e04d579572a0
+06/20/2023 10:34:20 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:24 PM: INFO: >>verifying all links in events tab
+06/20/2023 10:34:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:24 PM: INFO: >>checking events 0xb7b79c0c68cb233d4feb115da8f6423ee6d86a1ae8ded9ab4f45e04d579572a0
+06/20/2023 10:34:31 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:31 PM: INFO: ********Finished test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 10:34:41 PM: INFO: ********Starting test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 10:34:48 PM: INFO: >>clicking on events tab
+06/20/2023 10:34:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:50 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:34:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:51 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 10:34:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:52 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:34:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:53 PM: INFO: >>pagination initiated
+06/20/2023 10:34:53 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:34:56 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:34:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:34:57 PM: INFO: >>pagination initiated
+06/20/2023 10:34:57 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:35:00 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:35:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:01 PM: INFO: >>pagination initiated
+06/20/2023 10:35:01 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:35:04 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:35:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:04 PM: INFO: >>pagination initiated
+06/20/2023 10:35:04 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:35:07 PM: INFO: ********Finished test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 10:35:17 PM: INFO: ********Starting test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 10:35:23 PM: INFO: >>clicking on events tab
+06/20/2023 10:35:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:25 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:35:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:26 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 10:35:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:27 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 10:35:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:32 PM: INFO: >>length of list is +=25
+06/20/2023 10:35:32 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:35:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:37 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 10:35:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:42 PM: INFO: >>length of list is +=10
+06/20/2023 10:35:42 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:35:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:47 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 10:35:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:52 PM: INFO: >>length of list is +=25
+06/20/2023 10:35:52 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:35:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:35:56 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 10:36:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:01 PM: INFO: >>length of list is +=50
+06/20/2023 10:36:01 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:36:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:05 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 10:36:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:10 PM: INFO: >>length of list is +=100
+06/20/2023 10:36:10 PM: INFO: ********Finished test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 10:36:20 PM: INFO: ********Starting test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 10:36:26 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:36:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:28 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:36:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:30 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 10:36:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:30 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 10:36:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:35 PM: INFO: >>length of list is +=25
+06/20/2023 10:36:35 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:36:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:41 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 10:36:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:46 PM: INFO: >>length of list is +=10
+06/20/2023 10:36:46 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:36:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:50 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 10:36:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:55 PM: INFO: >>length of list is +=25
+06/20/2023 10:36:55 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:36:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:36:59 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 10:37:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:04 PM: INFO: >>length of list is +=50
+06/20/2023 10:37:04 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:37:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:09 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 10:37:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:14 PM: INFO: >>length of list is +=100
+06/20/2023 10:37:14 PM: INFO: ********Finished test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 10:37:23 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 10:37:30 PM: INFO: >>clicking on transaction tab
+06/20/2023 10:37:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:32 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:37:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:42 PM: INFO: ********Starting test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 10:37:47 PM: INFO: >>clicking on read contract tab
+06/20/2023 10:37:47 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:49 PM: INFO: >>verifying read contract list exist
+06/20/2023 10:37:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:37:50 PM: INFO: ********Finished test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 10:38:00 PM: INFO: ********Starting test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 10:38:05 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:38:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:08 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:38:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:09 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 10:38:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:10 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 10:38:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:15 PM: INFO: >>length of list is +=25
+06/20/2023 10:38:15 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:38:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:21 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 10:38:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:26 PM: INFO: >>length of list is +=10
+06/20/2023 10:38:26 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:38:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:30 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 10:38:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:35 PM: INFO: >>length of list is +=25
+06/20/2023 10:38:35 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:38:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:40 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 10:38:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:45 PM: INFO: >>length of list is +=50
+06/20/2023 10:38:45 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 10:38:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:49 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 10:38:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:38:54 PM: INFO: >>length of list is +=100
+06/20/2023 10:38:54 PM: INFO: ********Finished test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 10:39:06 PM: INFO: ********Starting test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 10:39:12 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:39:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:14 PM: INFO: >>clicking on all transactions cta
+06/20/2023 10:39:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:15 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 10:39:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:16 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:39:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:18 PM: INFO: >>pagination initiated
+06/20/2023 10:39:18 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:39:21 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:39:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:21 PM: INFO: >>pagination initiated
+06/20/2023 10:39:21 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:39:25 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:39:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:25 PM: INFO: >>pagination initiated
+06/20/2023 10:39:25 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:39:28 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 10:39:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:28 PM: INFO: >>pagination initiated
+06/20/2023 10:39:28 PM: INFO: >>verifying the page count from the URL
+06/20/2023 10:39:31 PM: INFO: ********Finished test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 10:39:42 PM: INFO: ********Starting test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 10:39:46 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:39:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:51 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:39:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:51 PM: INFO: >>checking token transfer 0x921949d623e0997927bc4d55472186733b6dd2c46e767621eac2592e42923618
+06/20/2023 10:39:57 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:39:57 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:59 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:39:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:39:59 PM: INFO: >>checking token transfer 0x921949d623e0997927bc4d55472186733b6dd2c46e767621eac2592e42923618
+06/20/2023 10:40:03 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:05 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:05 PM: INFO: >>checking token transfer 0x921949d623e0997927bc4d55472186733b6dd2c46e767621eac2592e42923618
+06/20/2023 10:40:08 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:10 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:10 PM: INFO: >>checking token transfer 0x921949d623e0997927bc4d55472186733b6dd2c46e767621eac2592e42923618
+06/20/2023 10:40:16 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:18 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:18 PM: INFO: >>checking token transfer 0x9413b695801a58009fa0d6dacfc988d20250c81ea6483b31da56a3a5e334e80a
+06/20/2023 10:40:21 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:24 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:24 PM: INFO: >>checking token transfer 0x9413b695801a58009fa0d6dacfc988d20250c81ea6483b31da56a3a5e334e80a
+06/20/2023 10:40:27 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:29 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:29 PM: INFO: >>checking token transfer 0x9413b695801a58009fa0d6dacfc988d20250c81ea6483b31da56a3a5e334e80a
+06/20/2023 10:40:32 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:34 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:34 PM: INFO: >>checking token transfer 0x901d5d050cae8490ba6f33555a0cb669c1b9cee2995961f7667be1b681c3f2b9
+06/20/2023 10:40:40 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:42 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:42 PM: INFO: >>checking token transfer 0x901d5d050cae8490ba6f33555a0cb669c1b9cee2995961f7667be1b681c3f2b9
+06/20/2023 10:40:50 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:52 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 10:40:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:52 PM: INFO: >>checking token transfer 0x901d5d050cae8490ba6f33555a0cb669c1b9cee2995961f7667be1b681c3f2b9
+06/20/2023 10:40:58 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 10:40:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:40:58 PM: INFO: ********Finished test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 10:49:55 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:50:05 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:50:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:07 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:50:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:14 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 10:50:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:45 PM: INFO: ********Starting test case Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:50:45 PM: INFO: >>waiting for governance tab to be visible
+06/20/2023 10:50:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:48 PM: INFO: >>waiting for network proposal to be visible
+06/20/2023 10:50:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:49 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:50:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:51 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:50:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:52 PM: INFO: >>waiting for network proposal counter to be visible
+06/20/2023 10:50:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:53 PM: INFO: >>waiting for network list to be visible
+06/20/2023 10:50:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:50:53 PM: INFO: ********Finished execution Test_023_Verify_paging_works_network_proposal_list...*******
+06/20/2023 10:51:14 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:51:23 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:51:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:51:25 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:51:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:51:31 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 10:51:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:52:34 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:52:43 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:52:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:52:45 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:52:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:56:18 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:56:26 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:56:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:56:28 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:56:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:57:26 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 10:57:36 PM: INFO: >>waiting for name link to be visible
+06/20/2023 10:57:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:57:37 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 10:57:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:57:43 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 10:57:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 10:57:46 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:02:25 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:02:33 PM: INFO: >>waiting for name link to be visible
+06/20/2023 11:02:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:02:35 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 11:02:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:02:40 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:02:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:02:44 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:02:44 PM: INFO: ********Finished test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:03:23 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:03:29 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:03:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:03:31 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:03:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:04:29 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:04:34 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:04:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:04:37 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:04:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:08 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:06:14 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:06:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:16 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:06:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:18 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:06:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:20 PM: INFO: >>pagination initiated
+06/20/2023 11:06:20 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:06:23 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:06:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:24 PM: INFO: >>pagination initiated
+06/20/2023 11:06:24 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:06:27 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:06:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:27 PM: INFO: >>pagination initiated
+06/20/2023 11:06:27 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:06:30 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:06:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:06:31 PM: INFO: >>pagination initiated
+06/20/2023 11:06:31 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:06:34 PM: INFO: ********Finished test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:07:41 PM: INFO: ********Starting test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 11:07:46 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:07:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:07:50 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:07:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:07:50 PM: INFO: >>checking transaction 0xba895d806e2ea5785386b6cae5da321acbde9307506d8c3c62dbf0df8d48a36f
+06/20/2023 11:07:56 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:07:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:07:59 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:07:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:07:59 PM: INFO: >>checking transaction 0x8ee2d904cff53241679c43a425d593cb90790c384839506fa5766497b22b00e8
+06/20/2023 11:08:03 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:05 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:05 PM: INFO: >>checking transaction 0x885e6aac02cb7d521bea3abe436ee5f37ba0d4bc428b31e6b3cc53af5c9eb1bc
+06/20/2023 11:08:08 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:10 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:10 PM: INFO: >>checking transaction 0xc487e17cfddaf80d90c9a808a12e2d5c1d52ea89fafca3280893e67835ac4748
+06/20/2023 11:08:16 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:18 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:18 PM: INFO: >>checking transaction 0x23839a977d13dc024aa9e76064a1a1ca768274e74ad905ac638e093099b1d008
+06/20/2023 11:08:22 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:24 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:24 PM: INFO: >>checking transaction 0x901d5d050cae8490ba6f33555a0cb669c1b9cee2995961f7667be1b681c3f2b9
+06/20/2023 11:08:27 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:29 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:29 PM: INFO: >>checking transaction 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 11:08:32 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:34 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:34 PM: INFO: >>checking transaction 0x6563c1f566358bff51882387aa69660ded259abb95e49edc1a80e11ce5120186
+06/20/2023 11:08:43 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:45 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:46 PM: INFO: >>checking transaction 0x3a090c7e6746922862522428a67bd20a28837a428058e7020a737f573267ef11
+06/20/2023 11:08:49 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:52 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:08:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:52 PM: INFO: >>checking transaction 0x27d2dc3af785d492a2cd8187643fda0ec4ff518ad98debd4a6c4e4a05b14e11a
+06/20/2023 11:08:56 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:08:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:08:57 PM: INFO: ********Finished test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 11:09:08 PM: INFO: ********Starting test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 11:09:12 PM: INFO: >>clicking on code tab
+06/20/2023 11:09:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:09:14 PM: INFO: >>verifying the code block exists
+06/20/2023 11:09:17 PM: INFO: ********Finished test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 11:09:27 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:09:36 PM: INFO: >>waiting for name link to be visible
+06/20/2023 11:09:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:09:37 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 11:09:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:09:45 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:09:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:09:48 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:09:49 PM: INFO: ********Finished test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:09:59 PM: INFO: ********Starting test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 11:10:03 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:08 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:08 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:10:15 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:17 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:17 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:10:20 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:23 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:23 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:10:26 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:28 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:28 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:10:31 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:34 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:34 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:10:39 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:41 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:41 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:10:46 PM: INFO: >>clicking on events tab
+06/20/2023 11:10:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:48 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:10:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:10:48 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:11:02 PM: INFO: >>clicking on events tab
+06/20/2023 11:11:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:05 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:11:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:05 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:11:13 PM: INFO: >>clicking on events tab
+06/20/2023 11:11:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:15 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:11:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:15 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:11:20 PM: INFO: >>clicking on events tab
+06/20/2023 11:11:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:22 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:11:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:22 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:11:27 PM: INFO: >>clicking on events tab
+06/20/2023 11:11:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:27 PM: INFO: ********Finished test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 11:11:37 PM: INFO: ********Starting test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 11:11:42 PM: INFO: >>clicking on events tab
+06/20/2023 11:11:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:45 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:11:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:45 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:11:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:48 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:11:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:51 PM: INFO: >>pagination initiated
+06/20/2023 11:11:51 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:11:54 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:11:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:55 PM: INFO: >>pagination initiated
+06/20/2023 11:11:55 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:11:58 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:11:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:11:58 PM: INFO: >>pagination initiated
+06/20/2023 11:11:58 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:12:01 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:12:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:02 PM: INFO: >>pagination initiated
+06/20/2023 11:12:02 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:12:05 PM: INFO: ********Finished test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 11:12:15 PM: INFO: ********Starting test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 11:12:20 PM: INFO: >>clicking on events tab
+06/20/2023 11:12:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:22 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:12:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:23 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:12:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:24 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:12:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:29 PM: INFO: >>length of list is +=25
+06/20/2023 11:12:29 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:12:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:34 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:12:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:40 PM: INFO: >>length of list is +=10
+06/20/2023 11:12:40 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:12:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:44 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:12:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:49 PM: INFO: >>length of list is +=25
+06/20/2023 11:12:49 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:12:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:53 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:12:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:12:58 PM: INFO: >>length of list is +=50
+06/20/2023 11:12:58 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:12:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:03 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:13:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:08 PM: INFO: >>length of list is +=100
+06/20/2023 11:13:08 PM: INFO: ********Finished test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 11:13:19 PM: INFO: ********Starting test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:13:25 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:13:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:27 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:13:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:29 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:13:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:31 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:13:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:36 PM: INFO: >>length of list is +=25
+06/20/2023 11:13:36 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:13:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:53 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:13:57 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:13:57 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:13:59 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:13:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:00 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:14:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:02 PM: INFO: >>pagination initiated
+06/20/2023 11:14:02 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:14:05 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:14:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:06 PM: INFO: >>pagination initiated
+06/20/2023 11:14:06 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:14:09 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:14:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:10 PM: INFO: >>pagination initiated
+06/20/2023 11:14:10 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:14:13 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:14:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:13 PM: INFO: >>pagination initiated
+06/20/2023 11:14:13 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:14:16 PM: INFO: ********Finished test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:14:26 PM: INFO: ********Starting test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 11:14:34 PM: INFO: >>clicking on read contract tab
+06/20/2023 11:14:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:36 PM: INFO: >>verifying read contract list exist
+06/20/2023 11:14:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:36 PM: INFO: ********Finished test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 11:14:46 PM: INFO: ********Starting test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 11:14:51 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:14:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:54 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:14:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:55 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:14:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:14:56 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:15:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:01 PM: INFO: >>length of list is +=25
+06/20/2023 11:15:01 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:15:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:07 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:15:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:12 PM: INFO: >>length of list is +=10
+06/20/2023 11:15:12 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:15:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:15 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:15:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:21 PM: INFO: >>length of list is +=25
+06/20/2023 11:15:21 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:15:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:25 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:15:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:30 PM: INFO: >>length of list is +=50
+06/20/2023 11:15:30 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:15:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:35 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:15:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:40 PM: INFO: >>length of list is +=100
+06/20/2023 11:15:40 PM: INFO: ********Finished test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 11:15:51 PM: INFO: ********Starting test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 11:15:56 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:15:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:58 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:15:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:15:59 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:15:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:00 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:16:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:02 PM: INFO: >>pagination initiated
+06/20/2023 11:16:02 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:16:05 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:16:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:06 PM: INFO: >>pagination initiated
+06/20/2023 11:16:06 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:16:09 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:16:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:09 PM: INFO: >>pagination initiated
+06/20/2023 11:16:09 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:16:12 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:16:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:12 PM: INFO: >>pagination initiated
+06/20/2023 11:16:12 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:16:16 PM: INFO: ********Finished test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 11:16:25 PM: INFO: ********Starting test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 11:16:31 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:16:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:36 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:16:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:36 PM: INFO: >>checking token transfer 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:16:42 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:16:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:45 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:16:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:46 PM: INFO: >>checking token transfer 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:16:50 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:16:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:52 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:16:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:52 PM: INFO: >>checking token transfer 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:16:55 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:16:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:58 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:16:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:16:58 PM: INFO: >>checking token transfer 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:17:01 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:03 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:03 PM: INFO: >>checking token transfer 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:17:06 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:08 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:08 PM: INFO: >>checking token transfer 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:17:12 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:14 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:14 PM: INFO: >>checking token transfer 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:17:17 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:19 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:19 PM: INFO: >>checking token transfer 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:17:24 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:26 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:26 PM: INFO: >>checking token transfer 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:17:30 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:33 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:17:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:34 PM: INFO: >>checking token transfer 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:17:39 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:17:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:17:39 PM: INFO: ********Finished test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 11:18:52 PM: INFO: ********Starting test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:18:56 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:18:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:18:58 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:18:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:18:59 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:18:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:01 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:19:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:06 PM: INFO: >>length of list is +=25
+06/20/2023 11:19:06 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:19:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:11 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:19:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:16 PM: INFO: >>length of list is +=10
+06/20/2023 11:19:16 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:19:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:25 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:19:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:30 PM: INFO: >>length of list is +=25
+06/20/2023 11:19:30 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:19:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:34 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:19:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:39 PM: INFO: >>length of list is +=50
+06/20/2023 11:19:39 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:19:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:44 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:19:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:19:49 PM: INFO: >>length of list is +=100
+06/20/2023 11:19:49 PM: INFO: ********Finished test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:20:27 PM: INFO: ********Starting test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 11:20:31 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:20:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:37 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:20:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:37 PM: INFO: >>checking transaction 0xba895d806e2ea5785386b6cae5da321acbde9307506d8c3c62dbf0df8d48a36f
+06/20/2023 11:20:43 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:20:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:45 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:20:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:46 PM: INFO: >>checking transaction 0x8ee2d904cff53241679c43a425d593cb90790c384839506fa5766497b22b00e8
+06/20/2023 11:20:49 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:20:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:52 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:20:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:52 PM: INFO: >>checking transaction 0x885e6aac02cb7d521bea3abe436ee5f37ba0d4bc428b31e6b3cc53af5c9eb1bc
+06/20/2023 11:20:55 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:20:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:57 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:20:57 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:20:57 PM: INFO: >>checking transaction 0xc487e17cfddaf80d90c9a808a12e2d5c1d52ea89fafca3280893e67835ac4748
+06/20/2023 11:21:02 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:04 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:05 PM: INFO: >>checking transaction 0x23839a977d13dc024aa9e76064a1a1ca768274e74ad905ac638e093099b1d008
+06/20/2023 11:21:08 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:10 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:10 PM: INFO: >>checking transaction 0x901d5d050cae8490ba6f33555a0cb669c1b9cee2995961f7667be1b681c3f2b9
+06/20/2023 11:21:13 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:15 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:15 PM: INFO: >>checking transaction 0x602f8942a64ca4d38ac8bbe49a727f39ca4f9c8e98a988bcd68faf424103850c
+06/20/2023 11:21:19 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:21 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:21 PM: INFO: >>checking transaction 0x6563c1f566358bff51882387aa69660ded259abb95e49edc1a80e11ce5120186
+06/20/2023 11:21:25 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:27 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:28 PM: INFO: >>checking transaction 0x3a090c7e6746922862522428a67bd20a28837a428058e7020a737f573267ef11
+06/20/2023 11:21:31 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:34 PM: INFO: >>verifying all links in transaction tab
+06/20/2023 11:21:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:34 PM: INFO: >>checking transaction 0x27d2dc3af785d492a2cd8187643fda0ec4ff518ad98debd4a6c4e4a05b14e11a
+06/20/2023 11:21:40 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:21:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:40 PM: INFO: ********Finished test case Test_011_Verify_all_links_in_transaction_tab_works_in_contract_page...*******
+06/20/2023 11:21:52 PM: INFO: ********Starting test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 11:21:58 PM: INFO: >>clicking on code tab
+06/20/2023 11:21:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:21:59 PM: INFO: >>verifying the code block exists
+06/20/2023 11:22:02 PM: INFO: ********Finished test case Test_017_Verify_code_tab_contents...*******
+06/20/2023 11:22:13 PM: INFO: ********Starting test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:22:20 PM: INFO: >>waiting for name link to be visible
+06/20/2023 11:22:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:22 PM: INFO: >>waiting for name page header to be visible
+06/20/2023 11:22:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:27 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:22:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:31 PM: INFO: >>waiting for creator link to be visible
+06/20/2023 11:22:31 PM: INFO: ********Finished test case Test_010_Verify_contract_page_name_and_contractor_link_linkable...*******
+06/20/2023 11:22:41 PM: INFO: ********Starting test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 11:22:45 PM: INFO: >>clicking on events tab
+06/20/2023 11:22:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:49 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:22:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:50 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:22:56 PM: INFO: >>clicking on events tab
+06/20/2023 11:22:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:59 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:22:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:22:59 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:23:02 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:04 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:04 PM: INFO: >>checking events 0x6b723b2128dba4b9fb295e662f58d91687675d73f01e8daf63b0360ca5f945cc
+06/20/2023 11:23:08 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:10 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:10 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:23:13 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:16 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:16 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:23:21 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:23 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:23 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:23:27 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:30 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:30 PM: INFO: >>checking events 0xbe3b62e76ca898b01b5017ef21ed9664f754c3de891783f24ae68fceaff24687
+06/20/2023 11:23:46 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:49 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:50 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:23:55 PM: INFO: >>clicking on events tab
+06/20/2023 11:23:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:58 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:23:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:23:58 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:24:02 PM: INFO: >>clicking on events tab
+06/20/2023 11:24:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:05 PM: INFO: >>verifying all links in events tab
+06/20/2023 11:24:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:05 PM: INFO: >>checking events 0xc08a38e6da18da56a302d9c67c826a61e1c37bdce0845ab9c9c954926d225126
+06/20/2023 11:24:09 PM: INFO: >>clicking on events tab
+06/20/2023 11:24:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:10 PM: INFO: ********Finished test case Test_021_Verify_events_main_page_links_redirection...*******
+06/20/2023 11:24:20 PM: INFO: ********Starting test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 11:24:26 PM: INFO: >>clicking on events tab
+06/20/2023 11:24:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:28 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:24:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:29 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:24:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:29 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:24:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:31 PM: INFO: >>pagination initiated
+06/20/2023 11:24:31 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:24:34 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:24:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:35 PM: INFO: >>pagination initiated
+06/20/2023 11:24:35 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:24:38 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:24:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:38 PM: INFO: >>pagination initiated
+06/20/2023 11:24:38 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:24:41 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:24:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:24:42 PM: INFO: >>pagination initiated
+06/20/2023 11:24:42 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:24:45 PM: INFO: ********Finished test case test_020_Verify_events_tab_list_pagination...*******
+06/20/2023 11:24:55 PM: INFO: ********Starting test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 11:24:59 PM: INFO: >>clicking on events tab
+06/20/2023 11:24:59 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:01 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:25:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:02 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:25:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:03 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:25:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:08 PM: INFO: >>length of list is +=25
+06/20/2023 11:25:08 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:25:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:14 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:25:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:19 PM: INFO: >>length of list is +=10
+06/20/2023 11:25:19 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:25:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:24 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:25:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:29 PM: INFO: >>length of list is +=25
+06/20/2023 11:25:29 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:25:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:33 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:25:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:38 PM: INFO: >>length of list is +=50
+06/20/2023 11:25:38 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:25:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:42 PM: INFO: >>verifying the total number of events in list view
+06/20/2023 11:25:47 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:25:48 PM: INFO: >>length of list is +=100
+06/20/2023 11:25:48 PM: INFO: ********Finished test case Test_019_Verify_events_tab_list_view_list_count...*******
+06/20/2023 11:25:57 PM: INFO: ********Starting test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:26:07 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:26:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:10 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:26:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:11 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:26:11 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:12 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:26:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:17 PM: INFO: >>length of list is +=25
+06/20/2023 11:26:17 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:26:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:32 PM: INFO: ********Starting test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:26:36 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:26:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:38 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:26:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:40 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:26:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:42 PM: INFO: >>pagination initiated
+06/20/2023 11:26:42 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:26:45 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:26:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:46 PM: INFO: >>pagination initiated
+06/20/2023 11:26:46 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:26:49 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:26:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:50 PM: INFO: >>pagination initiated
+06/20/2023 11:26:50 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:26:53 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:26:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:26:53 PM: INFO: >>pagination initiated
+06/20/2023 11:26:53 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:26:56 PM: INFO: ********Finished test case Test_013_Verify_pagination_in_transaction_list_view_input_type...*******
+06/20/2023 11:27:08 PM: INFO: ********Starting test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 11:27:12 PM: INFO: >>clicking on read contract tab
+06/20/2023 11:27:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:14 PM: INFO: >>verifying read contract list exist
+06/20/2023 11:27:14 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:15 PM: INFO: ********Finished test case Test_018_Verify_read_contract_contents...*******
+06/20/2023 11:27:25 PM: INFO: ********Starting test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 11:27:31 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:27:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:33 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:27:33 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:35 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:27:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:36 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:27:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:41 PM: INFO: >>length of list is +=25
+06/20/2023 11:27:41 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:27:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:46 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:27:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:52 PM: INFO: >>length of list is +=10
+06/20/2023 11:27:52 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:27:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:27:56 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:28:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:01 PM: INFO: >>length of list is +=25
+06/20/2023 11:28:01 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:28:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:05 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:28:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:10 PM: INFO: >>length of list is +=50
+06/20/2023 11:28:10 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:28:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:15 PM: INFO: >>verifying the total number of token transfer in list view
+06/20/2023 11:28:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:20 PM: INFO: >>length of list is +=100
+06/20/2023 11:28:20 PM: INFO: ********Finished test case Test_015_Verify_token_transfer_list_view_list_counts...*******
+06/20/2023 11:28:32 PM: INFO: ********Starting test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 11:28:37 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:28:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:38 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:28:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:40 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:28:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:42 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:28:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:43 PM: INFO: >>pagination initiated
+06/20/2023 11:28:43 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:28:46 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:28:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:47 PM: INFO: >>pagination initiated
+06/20/2023 11:28:47 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:28:50 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:28:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:50 PM: INFO: >>pagination initiated
+06/20/2023 11:28:50 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:28:53 PM: INFO: >>checking the pagination for transaction count
+06/20/2023 11:28:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:28:54 PM: INFO: >>pagination initiated
+06/20/2023 11:28:54 PM: INFO: >>verifying the page count from the URL
+06/20/2023 11:28:57 PM: INFO: ********Finished test case Test_016_Verify_token_transfer_list_view_pagination...*******
+06/20/2023 11:29:08 PM: INFO: ********Starting test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 11:29:13 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:13 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:17 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:17 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:23 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:26 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:26 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:29 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:31 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:31 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:31 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:35 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:35 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:37 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:37 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:42 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:44 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:44 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:44 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:48 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:50 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:50 PM: INFO: >>checking token transfer 0xeb9f895e9ffa84c5373b2e6def0057801c5fd6e04d9f6926c0c819032c51f944
+06/20/2023 11:29:53 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:55 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:29:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:29:55 PM: INFO: >>checking token transfer 0x58536ae0af1cdd1334c0324e510fc4abd5c515c13d4e2cb6fc7c88d262994869
+06/20/2023 11:29:58 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:29:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:00 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:30:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:01 PM: INFO: >>checking token transfer 0x58536ae0af1cdd1334c0324e510fc4abd5c515c13d4e2cb6fc7c88d262994869
+06/20/2023 11:30:08 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:30:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:10 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:30:10 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:10 PM: INFO: >>checking token transfer 0x58536ae0af1cdd1334c0324e510fc4abd5c515c13d4e2cb6fc7c88d262994869
+06/20/2023 11:30:18 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:30:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:26 PM: INFO: >>verifying all links in token transfer tab
+06/20/2023 11:30:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:27 PM: INFO: >>checking token transfer 0x58536ae0af1cdd1334c0324e510fc4abd5c515c13d4e2cb6fc7c88d262994869
+06/20/2023 11:30:42 PM: INFO: >>clicking on token_transfer tab
+06/20/2023 11:30:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:30:43 PM: INFO: ********Finished test case Test_014_Verify_token_transfer_tab_and_all_links_present...*******
+06/20/2023 11:31:26 PM: INFO: ********Starting test case Test_004_Verify_address_page_token_transfer...*******
+06/20/2023 11:31:34 PM: INFO: >>trying to click on token transfer
+06/20/2023 11:31:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:31:36 PM: INFO: >>clicked on token transfer
+06/20/2023 11:31:36 PM: INFO: >>trying to verify table in token transfer
+06/20/2023 11:31:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:31:36 PM: INFO: >>verified table
+06/20/2023 11:31:36 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:31:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:31:38 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:31:43 PM: INFO: >>transaction detail page verified
+06/20/2023 11:31:43 PM: INFO: >>redirected to expected URL
+06/20/2023 11:31:43 PM: INFO: ********Finished test case Test_004_Verify_address_page_token_transfer...*******
+06/20/2023 11:31:53 PM: INFO: ********Starting test case Test_003_Verify_address_page_transaction_table...*******
+06/20/2023 11:32:00 PM: INFO: >>trying to verify if number of columns in transaction table is as expected
+06/20/2023 11:32:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:02 PM: INFO: >>count verified as expected
+06/20/2023 11:32:02 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:32:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:05 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:32:10 PM: INFO: >>transaction detail page verified
+06/20/2023 11:32:10 PM: INFO: >>redirected to expected URL
+06/20/2023 11:32:10 PM: INFO: ********Finished test case Test_003_Verify_address_page_transaction_table...*******
+06/20/2023 11:32:20 PM: INFO: ********Starting test case Test_007_Verify_bonders_tab_and_all_links...*******
+06/20/2023 11:32:27 PM: INFO: >>trying to click on bonders tab
+06/20/2023 11:32:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:29 PM: INFO: >>clicked on bonders tab
+06/20/2023 11:32:29 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:32:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:29 PM: INFO: >>bonders value hxb86afed8db896012664b0fa6c874fe0e3001edaf
+06/20/2023 11:32:30 PM: INFO: >>trying to verify on bonded tab
+06/20/2023 11:32:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:32 PM: INFO: >>clicked on verify tab
+06/20/2023 11:32:37 PM: INFO: >>trying to click on bonders tab
+06/20/2023 11:32:37 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:37 PM: INFO: >>clicked on bonders tab
+06/20/2023 11:32:39 PM: INFO: ********Finished test case Test_007_Verify_bonders_tab_and_all_links...*******
+06/20/2023 11:32:49 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:32:54 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:32:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:58 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:32:58 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:32:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:32:58 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:33:00 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:33:11 PM: INFO: ********Starting test case Test_008_Verify_new_address_url_transaction_tab...*******
+06/20/2023 11:33:18 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:20 PM: INFO: >>transaction value 0x6b4a66c360247f8f36438c0c6e8433c813f9e834e4565b927df0db7d7dc4f344
+06/20/2023 11:33:30 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:30 PM: INFO: >>transaction value 0x8c81c650ea34fd84c41e5e703d7acb10161d351840564883b2d356fb9c523083
+06/20/2023 11:33:36 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:36 PM: INFO: >>transaction value 0x382e8f93f932392c1c1f1a583449fc118d8c92d4307d8e3c22446a93ecad1ede
+06/20/2023 11:33:41 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:41 PM: INFO: >>transaction value 0xae0a97b3f9f0c3b3cc4a154b1cc8abe7424293defdcb89f3ef60bb772a5d2ed5
+06/20/2023 11:33:47 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:47 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:47 PM: INFO: >>transaction value 0x46dae0e4c8495a75884d90d542c88fec9571f6b94bc22c39e74344f8ee3e1a4f
+06/20/2023 11:33:52 PM: INFO: >>verifying all the links in transaction tab
+06/20/2023 11:33:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:33:52 PM: INFO: >>transaction value 0xa6605c66472f45d75a035120bb3214f626a0d5b1315c670777048d70b4478ffd
+06/20/2023 11:33:59 PM: INFO: ********Finished test case Test_008_Verify_new_address_url_transaction_tab...*******
+06/20/2023 11:34:10 PM: INFO: ********Starting test case Test_006_Verify_rewards_tab_and_all_links...*******
+06/20/2023 11:34:15 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:34:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:20 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:34:20 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:34:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:20 PM: INFO: >>rewards value 0x86534525e34ef6230b23dc87e12cbf747259302434541eaf60ca6c64a4a7836e
+06/20/2023 11:34:30 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:34:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:30 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:34:32 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:34:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:33 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:34:38 PM: INFO: >>transaction detail page verified
+06/20/2023 11:34:38 PM: INFO: >>redirected to expected URL
+06/20/2023 11:34:38 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:34:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:38 PM: INFO: >>rewards value 0x92fcb14f5b5e7af4b5fbc08819c5e605e8842c741fed1059449e4c7753e5346c
+06/20/2023 11:34:42 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:34:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:43 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:34:45 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:34:45 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:45 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:34:50 PM: INFO: >>transaction detail page verified
+06/20/2023 11:34:50 PM: INFO: >>redirected to expected URL
+06/20/2023 11:34:50 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:34:50 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:50 PM: INFO: >>rewards value 0x9cb13080ae2ee10fcb73493a9d95880709d1671814e4a8df450eca6d68da877f
+06/20/2023 11:34:54 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:34:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:54 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:34:56 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:34:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:34:56 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:01 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:01 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:01 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:01 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:01 PM: INFO: >>rewards value 0x1904666835dc2406fc89d3c08523280fade58a04120b658f9406569530a7adbe
+06/20/2023 11:35:04 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:35:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:04 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:35:06 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:35:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:06 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:11 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:11 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:11 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:11 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:11 PM: INFO: >>rewards value 0x98a9a06abd82bc3b6ab614b30777d6d766b8552f87dad49cceed16caf2316145
+06/20/2023 11:35:15 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:35:15 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:15 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:35:17 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:35:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:17 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:22 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:22 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:22 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:22 PM: INFO: >>rewards value 0x91089da8b6ecf5a4996f6677144fb4178b16a9695f37f631564b0347d7f5a85f
+06/20/2023 11:35:26 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:35:26 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:26 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:35:28 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:35:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:28 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:34 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:34 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:34 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:34 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:34 PM: INFO: >>rewards value 0xab22ac6d78811b51122df5e49aaebbfa8a73129dfd5711fe4812f570d58fe65c
+06/20/2023 11:35:38 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:35:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:39 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:35:41 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:35:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:41 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:46 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:46 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:46 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:46 PM: INFO: >>rewards value 0x62011356ab41ac48cffb74fd073e7e04202211a0b30f3340fd46fe5f32c6919e
+06/20/2023 11:35:49 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:35:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:51 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:35:53 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:35:53 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:53 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:35:58 PM: INFO: >>transaction detail page verified
+06/20/2023 11:35:58 PM: INFO: >>redirected to expected URL
+06/20/2023 11:35:58 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:35:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:35:59 PM: INFO: >>rewards value 0xd22165076228eac00900a34d3659e456e0ec0eab81ea0bb984e0b0acb96fb993
+06/20/2023 11:36:05 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:36:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:05 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:36:07 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:36:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:07 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:36:12 PM: INFO: >>transaction detail page verified
+06/20/2023 11:36:12 PM: INFO: >>redirected to expected URL
+06/20/2023 11:36:12 PM: INFO: >>verifying all the links in rewards tab
+06/20/2023 11:36:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:12 PM: INFO: >>rewards value 0x5ee9d10ecea4a0dd2d8f5cf5f4d6f59aa4f2678509a5b8ca28b311cec3884d37
+06/20/2023 11:36:16 PM: INFO: >>trying to click on rewards tab
+06/20/2023 11:36:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:16 PM: INFO: >>clicked on rewards tab
+06/20/2023 11:36:18 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:36:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:18 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:36:23 PM: INFO: >>transaction detail page verified
+06/20/2023 11:36:23 PM: INFO: >>redirected to expected URL
+06/20/2023 11:36:23 PM: INFO: ********Finished test case Test_006_Verify_rewards_tab_and_all_links...*******
+06/20/2023 11:36:34 PM: INFO: ********Starting test case Test_005_Verify_voters_tab_and_all_links_redirection...*******
+06/20/2023 11:36:40 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:36:40 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:43 PM: INFO: >>clicked on voters tab
+06/20/2023 11:36:43 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:36:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:44 PM: INFO: >>voter value hx409884e7f8dbec5ea0032619d2bd1361d581db5e
+06/20/2023 11:36:48 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:36:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:49 PM: INFO: >>clicked on voters tab
+06/20/2023 11:36:49 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:36:49 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:50 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:36:55 PM: INFO: >>transaction detail page verified
+06/20/2023 11:36:55 PM: INFO: >>redirected to expected URL
+06/20/2023 11:36:55 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:36:55 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:55 PM: INFO: >>voter value hxf0a932b668fc48ee035ff357b906285f96ca6237
+06/20/2023 11:36:56 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:36:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:56 PM: INFO: >>clicked on voters tab
+06/20/2023 11:36:56 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:36:56 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:36:58 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:03 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:03 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:03 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:03 PM: INFO: >>voter value hx12c4c9f2333ff2b839d89f378bbdfe6051a91aa7
+06/20/2023 11:37:03 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:03 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:04 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:04 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:04 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:04 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:09 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:09 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:09 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:09 PM: INFO: >>voter value hxdc9f4608cce85322817d81ecf0218ff2bd485124
+06/20/2023 11:37:09 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:12 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:12 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:12 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:13 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:18 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:18 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:18 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:18 PM: INFO: >>voter value hx62d904390e5c629ad43217626ea5daa5e5657075
+06/20/2023 11:37:20 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:20 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:20 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:20 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:25 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:25 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:25 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:25 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:25 PM: INFO: >>voter value hxadb40f49052091de628258540ab814356bb65df8
+06/20/2023 11:37:29 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:29 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:30 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:30 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:31 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:36 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:36 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:36 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:36 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:37 PM: INFO: >>voter value hx1d4e52da61ae351bb37acf5468f1793e22882ed2
+06/20/2023 11:37:38 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:38 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:38 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:38 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:39 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:44 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:44 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:44 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:44 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:44 PM: INFO: >>voter value hxe190ebccbeca2fe4f5f30ef1cac005e168fd54f6
+06/20/2023 11:37:44 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:37:44 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:47 PM: INFO: >>clicked on voters tab
+06/20/2023 11:37:47 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:37:47 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:49 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:37:54 PM: INFO: >>transaction detail page verified
+06/20/2023 11:37:54 PM: INFO: >>redirected to expected URL
+06/20/2023 11:37:54 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:37:54 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:37:55 PM: INFO: >>voter value hxeee765d926e5977d2a5aeca69f4ffe9c4b1e1cb9
+06/20/2023 11:38:09 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:38:09 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:38:11 PM: INFO: >>clicked on voters tab
+06/20/2023 11:38:11 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:38:11 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:38:11 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:38:16 PM: INFO: >>transaction detail page verified
+06/20/2023 11:38:16 PM: INFO: >>redirected to expected URL
+06/20/2023 11:38:16 PM: INFO: >>verifying all the links in voters tab
+06/20/2023 11:38:16 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:38:16 PM: INFO: >>voter value hxe87d4d515005ae5f174b7074052df37868665009
+06/20/2023 11:38:27 PM: INFO: >>trying to click on voters tab
+06/20/2023 11:38:27 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:38:28 PM: INFO: >>clicked on voters tab
+06/20/2023 11:38:28 PM: INFO: >>trying to click on total transaction count cta
+06/20/2023 11:38:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:38:31 PM: INFO: >>trying to verify transaction detail page
+06/20/2023 11:38:37 PM: INFO: >>transaction detail page verified
+06/20/2023 11:38:37 PM: INFO: >>redirected to expected URL
+06/20/2023 11:38:37 PM: INFO: ********Finished test case Test_005_Verify_voters_tab_and_all_links_redirection...*******
+06/20/2023 11:39:14 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:39:19 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:39:19 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:22 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:39:22 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:39:22 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:22 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:39:23 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:39:33 PM: INFO: ********Starting test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:39:39 PM: INFO: >>clicking on transaction tab
+06/20/2023 11:39:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:41 PM: INFO: >>clicking on all transactions cta
+06/20/2023 11:39:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:42 PM: INFO: >>verifying the user is in transaction list view
+06/20/2023 11:39:42 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:43 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:39:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:48 PM: INFO: >>length of list is +=25
+06/20/2023 11:39:48 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:39:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:53 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:39:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:39:58 PM: INFO: >>length of list is +=10
+06/20/2023 11:39:58 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:39:58 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:02 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:40:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:07 PM: INFO: >>length of list is +=25
+06/20/2023 11:40:07 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:40:07 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:12 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:40:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:17 PM: INFO: >>length of list is +=50
+06/20/2023 11:40:17 PM: INFO: >>changing the count of transaction displayed in list view
+06/20/2023 11:40:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:27 PM: INFO: >>verifying the total number of transactions in list view
+06/20/2023 11:40:32 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:32 PM: INFO: >>length of list is +=100
+06/20/2023 11:40:32 PM: INFO: ********Finished test case Test_012_Verify_list_view_count_and_pagination_for_transaction_list...*******
+06/20/2023 11:40:44 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:40:51 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:40:51 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:52 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:40:52 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:40:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:40:53 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:40:53 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:41:59 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:42:05 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:42:05 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:42:08 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:42:08 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:42:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:42:08 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:42:09 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:43:36 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:43:59 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:44:06 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:44:06 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:44:08 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:44:08 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:44:08 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:44:08 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:44:08 PM: INFO: >>delegation url https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
+06/20/2023 11:46:11 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:46:20 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:46:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:46:20 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:46:20 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:46:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:46:21 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:46:21 PM: INFO: >>delegation url https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
+06/20/2023 11:46:25 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:48:11 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:48:17 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:48:17 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:48:20 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:48:20 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:48:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:48:20 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:48:20 PM: INFO: >>delegation url https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
+06/20/2023 11:48:24 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:50:15 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:50:21 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:50:21 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:50:23 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:50:23 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:50:23 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:50:24 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:50:52 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:51:00 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:51:00 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:51:02 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:51:02 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:51:02 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:51:02 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:51:02 PM: INFO: >>delegation url ['ACA014CBC2BC99E23DA4DB7D171B10BA']
+06/20/2023 11:51:06 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:51:44 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:51:48 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:51:48 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:51:52 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:51:52 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:51:52 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:51:52 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:53:21 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:53:28 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:53:28 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:53:30 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:53:30 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:53:30 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:53:30 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:53:30 PM: INFO: >>delegation url ['1AF3744B3F1EE270AA24E86E54EB4F1D', 'E109B2CFFF5973321F1FEA57E9D7D7EE']
+06/20/2023 11:53:34 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:54:38 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:54:43 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:54:43 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:54:46 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:54:46 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:54:46 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:54:46 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:54:47 PM: INFO: >>delegation url ['CA384B2FF95AEA95CAFA98D232AFB0F9', '9A4E5E14EA9CFE2595F6454CD510DDB0']
+06/20/2023 11:56:34 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:56:39 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:56:39 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:56:41 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:56:41 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:56:41 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:56:41 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:56:45 PM: INFO: >>redirected url is not as expected
+06/20/2023 11:57:15 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:57:20 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:57:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:57:24 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:57:24 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:57:24 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:57:24 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:57:31 PM: INFO: >>the page has been opened in new tab
+06/20/2023 11:58:11 PM: INFO: ********Starting test case Test_009_Verify_delegation_tab_in_address...*******
+06/20/2023 11:58:18 PM: INFO: >>trying to click on delegations tab
+06/20/2023 11:58:18 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:58:20 PM: INFO: >>clicked on delegations tab
+06/20/2023 11:58:20 PM: INFO: >>verifying all the links in delegations tab
+06/20/2023 11:58:20 PM: INFO: >>waiting for element to be visible
+06/20/2023 11:58:20 PM: INFO: >>delegation value hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:58:24 PM: INFO: >>delegation value https://tracker.icon.community/address/hx6f89b2c25c15f6294c79810221753131067ed3f8
+06/20/2023 11:58:26 PM: INFO: >>the page has been opened in new tab
