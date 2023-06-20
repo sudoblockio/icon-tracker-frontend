@@ -4,12 +4,13 @@ from e2e.page_objects.main_page import MainPage
 from e2e.page_objects.address_page import AddressPage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifyAddressPageTransactionTable:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
-    verifyUrl = "https://tracker.icon.community/addresstx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
+    verifyUrl = f"{config.base_url}/addresstx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
 
     @pytest.mark.address_page
     def test_address_page_transaction_table(self, setup):

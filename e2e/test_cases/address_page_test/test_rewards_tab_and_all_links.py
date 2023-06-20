@@ -5,12 +5,13 @@ from e2e.page_objects.main_page import MainPage
 from e2e.page_objects.address_page import AddressPage
 from e2e.utilities.logger import LogGen
 from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class TestVerifyRewardsTabAndAllLinks:
     baseurl = ReadConfig.getBaseUrl()
     logger = LogGen.loggen()
-    verifyUrl = "https://tracker.icon.community/addressreward"
+    verifyUrl = f"{config.base_url}/addressreward"
 
     @pytest.mark.address_page
     def test_rewards_tab_and_all_links(self, setup):
