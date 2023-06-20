@@ -1,7 +1,7 @@
 import pytest
 
 from e2e.page_objects.MainPage import MainPage
-from e2e.page_objects.AddressPage import AddressPage
+from e2e.page_objects.address_page import AddressPage
 
 from e2e.utilities.Logger import LogGen
 from e2e.utilities.ReadProperties import ReadConfig
