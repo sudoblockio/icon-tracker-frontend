@@ -1,6 +1,4 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-e2e/reports/report.html
 
 # dependencies
 /node_modules
@@ -39,3 +37,8 @@ yarn-error.log*
 .vimrc
 *.swp*
 .eslintrc*
+
+# e2e testing
+env
+__pycache__
+e2e/reports/report.html
