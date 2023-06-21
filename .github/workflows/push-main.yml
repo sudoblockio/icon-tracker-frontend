@@ -1,6 +1,6 @@
 name: push-main
 
-# 1. Run unit and integration tests
+# 1. Run unit and integration e2e
 # 2. Push containers to dockerhub with tag based on incrementing build number
 # 3. Recommit an update to the chart's deployments with the updated build number in the `deployment` branch
 
