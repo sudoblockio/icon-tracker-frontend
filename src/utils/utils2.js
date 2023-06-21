@@ -228,6 +228,20 @@ function checkIfPrepNeedToVote(arrayOfPreps, localPrep) {
   return result;
 }
 
+function getInitialBonderState(bondersArray) {
+  let result = {};
+  for (let i = 0; i < 10; i++) {
+    const label = `bonder${i + 1}`;
+    result[label] = bondersArray[i] || "";
+  }
+  return result;
+}
+
+function convertToLoopInHex(value) {
+  const result = value * 10 ** 18;
+  return `0x${result.toString(16)}`;
+}
+
 const utils = {
   data,
   samples,
@@ -243,7 +257,9 @@ const utils = {
   getProposalVotes,
   MAX_WAIT_PERIOD,
   initialTxResultState,
-  checkIfPrepNeedToVote
+  checkIfPrepNeedToVote,
+  getInitialBonderState,
+  convertToLoopInHex
 };
 
 export default utils;

@@ -1,38 +1,10 @@
-import { randomUint32 } from '../../../utils/utils'
 import { requestJsonRpc } from "../../../utils/connect";
 
-// export async function icxCall(params) {
-// console.log(params, "What params")
-//   // const walletApi = await walletApiInstance()
-//   return new Promise(resolve => {
-//     const param = {
-//       jsonrpc: "2.0",
-//       method: "icx_call",
-//       params: params,
-//       id: randomUint32()
-//     }
+export async function icxSendTransaction(payload) {
+  console.log("icxSendTransaction payload:", payload);
 
-    // walletApi.post(`/api/v3`, JSON.stringify(param))
-    //   .then(response => {
-
-    //     resolve(response);
-    //   })
-    //   .catch(error => {
-    //     if (!!error.response) {
-    //       resolve(error.response.data);
-    //     }
-    //     else {
-    //       resolve({
-    //         error: {
-    //           message: error.message
-    //         }
-    //       })
-    //     }
-    //   })
-  // });
-// }
-
-export async function icxSendTransaction({ params, index }) {
+  // payload will always have an 'index' field
+  const { index } = payload;
   const result = {
     status: 200,
     data: null,
@@ -40,13 +12,28 @@ export async function icxSendTransaction({ params, index }) {
     error: { message: "" }
   };
   try {
-    result.data = await requestJsonRpc(params.params);
-    console.log('result success');
-  } catch (error) {
-    console.log('result error');
-    console.log(error);
+    // validate the payload
+    const rawTx =
+      payload.params != null
+        ? payload.params
+        : payload.rawTx != null
+        ? payload.rawTx
+        : null;
+    if (rawTx == null) {
+      throw new Error("Invalid payload for icxSendTransaction");
+    }
+    result.data = await requestJsonRpc(rawTx.params);
+    console.log("result success");
+  } catch (e) {
+    console.log("result error");
+    console.log(e);
     result.status = 500;
-    result.error.message = error;;
+    result.error.message =
+      typeof e === "string"
+        ? e
+        : e.message != null && typeof e.message === "string"
+        ? e.message
+        : JSON.stringify(e);
   }
   return result;
 }

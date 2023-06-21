@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getProposals } from "../../redux/store/iiss";
-import { ProposalType, ProposalStatus, ProposalStatusClass, VIEW_NUMBER } from "../../utils/const";
+import {
+  ProposalType,
+  ProposalStatus,
+  ProposalStatusClass,
+  VIEW_NUMBER
+} from "../../utils/const";
 // import { valueToString, getTextFromHtml } from "../../utils/utils";
 import { LoadingComponent } from "../../components";
 import imgNoProposal from "../../style/image/img-no-proposal.png";
 import { SortHolder } from "../../components";
+import styles from "./index.module.css";
 
 class ProposalListPage extends Component {
   state = {
@@ -13,7 +20,12 @@ class ProposalListPage extends Component {
     proposals: [],
     pageSize: 10,
     pageNo: 1,
+    modalIsOpen: false
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   async setProposals({ pageNo, pageSize }) {
     try {
@@ -22,7 +34,8 @@ class ProposalListPage extends Component {
       const { proposals } = await getProposals({ pageNo, pageSize });
       let updateState = { loading: false };
 
-      if (proposals.length) this.setState({ ...updateState, proposals, pageNo, pageSize });
+      if (proposals.length)
+        this.setState({ ...updateState, proposals, pageNo, pageSize });
       else this.setState({ ...updateState });
     } catch (err) {
       console.log("Invalid page params", err);
@@ -30,19 +43,31 @@ class ProposalListPage extends Component {
   }
 
   async componentDidMount() {
-    this.setProposals({ pageNo: this.state.pageNo, pageSize: this.state.pageSize });
+    this.setProposals({
+      pageNo: this.state.pageNo,
+      pageSize: this.state.pageSize
+    });
   }
 
-  handleClickSortHolder = (count) => {
+  handleClickSortHolder = count => {
     this.setProposals({ pageNo: 1, pageSize: count });
   };
 
-  handleClickPage = (page) => {
+  handleClickPage = page => {
     this.setProposals({ pageNo: page, pageSize: this.state.pageSize });
   };
 
+  toggleModalState = () => {
+    console.log("modal state");
+    console.log(this.state.modalIsOpen);
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  };
+
   render() {
-    const { loading, proposals } = this.state;
+    const { loading, proposals, modalIsOpen } = this.state;
+    const { walletAddress } = this.props;
+    console.log("wallet address");
+    console.log(walletAddress);
 
     return (
       <div className="content-wrap">
@@ -51,11 +76,28 @@ class ProposalListPage extends Component {
         {!loading && (
           <div className="screen0">
             <div className="wrap-holder">
-              <p className="title" style={{ marginLeft: 0 }}>
-                Network Proposal
-              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexFlow: "row-nowrap",
+                  justifyContent: "space-between"
+                }}
+              >
+                <p className="title" style={{ marginLeft: 0 }}>
+                  Network Proposal
+                </p>
+                <Link to={"/proposal-submit"}>
+                  <button className={styles.button}>Submit New Proposal</button>
+                </Link>
+              </div>
 
-              <div style={{ marginBlock: "1em", display: "flex", justifyContent: "space-between" }}>
+              <div
+                style={{
+                  marginBlock: "1em",
+                  display: "flex",
+                  justifyContent: "space-between"
+                }}
+              >
                 <SortHolder
                   type="PROPOSALS"
                   key="SortHolder"
@@ -75,14 +117,24 @@ class ProposalListPage extends Component {
                   </li>
                   <li className="pageNum">
                     <p>Page</p>
-                    <input type="text" className="txt-type-page over" readOnly={true} value={this.state.pageNo} />
+                    <input
+                      type="text"
+                      className="txt-type-page over"
+                      readOnly={true}
+                      value={this.state.pageNo}
+                    />
                   </li>
                   <li
                     onClick={() => {
                       this.handleClickPage(this.state.pageNo + 1);
                     }}
                   >
-                    <span name="next" className={`next ${this.state.isEndPage ? "disabled" : ""}`}>
+                    <span
+                      name="next"
+                      className={`next ${
+                        this.state.isEndPage ? "disabled" : ""
+                      }`}
+                    >
                       <em className="img"></em>
                     </span>
                   </li>
@@ -96,8 +148,14 @@ class ProposalListPage extends Component {
                   </div>
                 ) : (
                   <div className="proposal-list">
-                    {(proposals || []).map((proposal) => {
-                      const { id, contents, vote, status, proposerName } = proposal;
+                    {(proposals || []).map(proposal => {
+                      const {
+                        id,
+                        contents,
+                        vote,
+                        status,
+                        proposerName
+                      } = proposal;
                       let { type, title } = contents;
                       // check if the value is an object, if it is, format properly.
                       // if (value.toString() === "[object Object]"){
@@ -105,14 +163,30 @@ class ProposalListPage extends Component {
                       // }
                       // const { description } = contents
                       const { agree, disagree, noVote } = vote;
-                      const allCount = Number(agree.count) + Number(disagree.count) + Number(noVote.count);
+                      const allCount =
+                        Number(agree.count) +
+                        Number(disagree.count) +
+                        Number(noVote.count);
                       // const allAmount = Number(agree.amount) + Number(disagree.amount)
-                      const allAmount = Number(agree.amount) + Number(disagree.amount) + Number(noVote.amount);
-                      const agreeCount = ((agree.count / allCount) * 100).toFixed();
-                      const disagreeCount = ((disagree.count / allCount) * 100).toFixed();
+                      const allAmount =
+                        Number(agree.amount) +
+                        Number(disagree.amount) +
+                        Number(noVote.amount);
+                      const agreeCount = (
+                        (agree.count / allCount) *
+                        100
+                      ).toFixed();
+                      const disagreeCount = (
+                        (disagree.count / allCount) *
+                        100
+                      ).toFixed();
                       const topCount = 100 - agreeCount - disagreeCount;
-                      const agreeAmount = !allAmount ? 0 : ((agree.amount / allAmount) * 100).toFixed();
-                      const disagreeAmount = !allAmount ? 0 : ((disagree.amount / allAmount) * 100).toFixed();
+                      const agreeAmount = !allAmount
+                        ? 0
+                        : ((agree.amount / allAmount) * 100).toFixed();
+                      const disagreeAmount = !allAmount
+                        ? 0
+                        : ((disagree.amount / allAmount) * 100).toFixed();
                       const topAmount = 100 - agreeAmount - disagreeAmount; //!allAmount ? 100 : 0
                       return (
                         <ul
@@ -123,11 +197,15 @@ class ProposalListPage extends Component {
                           }}
                         >
                           <li>
-                            <h3 className="label">{ProposalType[type]} Proposal</h3>
+                            <h3 className="label">
+                              {ProposalType[type]} Proposal
+                            </h3>
                             {/* <h1>{title}<br />{getTextFromHtml(description)}</h1> */}
                             <h1>{title}</h1>
                             <div>
-                              <span className={`proposal-status ${ProposalStatusClass[status]}`}>
+                              <span
+                                className={`proposal-status ${ProposalStatusClass[status]}`}
+                              >
                                 {ProposalStatus[status]}
                               </span>
                               <h3 className="proposer-name">
@@ -173,7 +251,10 @@ class ProposalListPage extends Component {
                               <div className="bar-container">
                                 <div
                                   className="bar-foreground"
-                                  style={{ height: `${agreeCount}%`, top: `${topCount}%` }}
+                                  style={{
+                                    height: `${agreeCount}%`,
+                                    top: `${topCount}%`
+                                  }}
                                 >
                                   {(VIEW_NUMBER || agreeCount >= 30) && (
                                     <span>
@@ -183,7 +264,10 @@ class ProposalListPage extends Component {
                                 </div>
                                 <div
                                   className="bar-background"
-                                  style={{ height: `${disagreeCount}%`, top: `${topCount}%` }}
+                                  style={{
+                                    height: `${disagreeCount}%`,
+                                    top: `${topCount}%`
+                                  }}
                                 >
                                   {(VIEW_NUMBER || disagreeCount >= 30) && (
                                     <span>
@@ -200,7 +284,10 @@ class ProposalListPage extends Component {
                               <div className="bar-container">
                                 <div
                                   className="bar-foreground"
-                                  style={{ height: `${agreeAmount}%`, top: `${topAmount}%` }}
+                                  style={{
+                                    height: `${agreeAmount}%`,
+                                    top: `${topAmount}%`
+                                  }}
                                 >
                                   {/* <div className="bar-foreground" style={{ height: `${agreeAmount}%`, top: `${noVoteAmount}%` }}> */}
                                   {(VIEW_NUMBER || agreeAmount >= 30) && (
@@ -211,7 +298,10 @@ class ProposalListPage extends Component {
                                 </div>
                                 <div
                                   className="bar-background"
-                                  style={{ height: `${disagreeAmount}%`, top: `${topAmount}%` }}
+                                  style={{
+                                    height: `${disagreeAmount}%`,
+                                    top: `${topAmount}%`
+                                  }}
                                 >
                                   {/* <div className="bar-background" style={{ height: `${disagreeAmount}%`, top: `${noVoteAmount}%` }}> */}
                                   {(VIEW_NUMBER || disagreeAmount >= 30) && (

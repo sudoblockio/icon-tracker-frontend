@@ -3,130 +3,11 @@
 // If the project is not run locally, then it will default to looking up conffig based on origin
 // If --region or --network is supplied via `npm run start --network lisbon`, then that is used
 // If environment variables are set (ie REACT_APP_RPC_ENDPOINT), use that
-
+import defaults from "./configData";
 const { origin, hostname } = window.location;
 
 const isLocal = hostname === "localhost";
-
-const defaults = [
-  //
-  // Global
-  //
-  {
-    region: "",
-    network: "mainnet",
-    origin: "https://tracker.icon.community",
-    rpcEndpoint: "https://api.icon.community",
-    apiEndpoint: "https://tracker.icon.community",
-    wssEndpoint: "wss://tracker.icon.community",
-    nid: 1
-  },
-  {
-    region: "",
-    network: "berlin",
-    origin: "https://tracker.berlin.icon.community",
-    rpcEndpoint: "https://api.berlin.icon.community",
-    apiEndpoint: "https://tracker.berlin.icon.community",
-    wssEndpoint: "wss://tracker.berlin.icon.community",
-    nid: 7
-  },
-  {
-    region: "",
-    network: "lisbon",
-    origin: "https://tracker.lisbon.icon.community",
-    rpcEndpoint: "https://api.lisbon.icon.community",
-    apiEndpoint: "https://tracker.lisbon.icon.community",
-    wssEndpoint: "wss://tracker.lisbon.icon.community",
-    nid: 2
-  },
-  {
-    region: "",
-    network: "sejong",
-    origin: "https://tracker.sejong.icon.community",
-    rpcEndpoint: "https://api.sejong.icon.community",
-    apiEndpoint: "https://tracker.sejong.icon.community",
-    wssEndpoint: "wss://tracker.sejong.icon.community",
-    nid: 83
-  },
-  //
-  // Ams
-  //
-  {
-    region: "ams",
-    network: "mainnet",
-    origin: "https://tracker.v2.mainnet.ams.vultr.icon.community",
-    rpcEndpoint: "https://api.mainnet.ams.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.mainnet.ams.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.mainnet.ams.vultr.icon.community",
-    nid: 1
-  },
-  {
-    region: "ams",
-    network: "berlin",
-    origin: "https://tracker.v2.berlin.ams.vultr.icon.community",
-    rpcEndpoint: "https://api.berlin.ams.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.berlin.ams.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.berlin.ams.vultr.icon.community",
-    nid: 7
-  },
-  {
-    region: "ams",
-    network: "lisbon",
-    origin: "https://tracker.v2.lisbon.ams.vultr.icon.community",
-    rpcEndpoint: "https://api.lisbon.ams.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.lisbon.ams.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.lisbon.ams.vultr.icon.community",
-    nid: 2
-  },
-  {
-    region: "ams",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.ams.vultr.icon.community",
-    rpcEndpoint: "https://api.sejong.ams.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.sejong.ams.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.sejong.ams.vultr.icon.community",
-    nid: 83
-  },
-  //
-  // Sng
-  //
-  {
-    region: "sng",
-    network: "mainnet",
-    origin: "https://tracker.v2.mainnet.sng.vultr.icon.community",
-    rpcEndpoint: "https://api.mainnet.sng.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.mainnet.sng.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.mainnet.sng.vultr.icon.community",
-    nid: 1
-  },
-  {
-    region: "sng",
-    network: "berlin",
-    origin: "https://tracker.v2.berlin.sng.vultr.icon.community",
-    rpcEndpoint: "https://api.berlin.sng.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.berlin.sng.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.berlin.sng.vultr.icon.community",
-    nid: 7
-  },
-  {
-    region: "sng",
-    network: "lisbon",
-    origin: "https://tracker.v2.lisbon.sng.vultr.icon.community",
-    rpcEndpoint: "https://api.lisbon.sng.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.lisbon.sng.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.lisbon.sng.vultr.icon.community",
-    nid: 2
-  },
-  {
-    region: "sng",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.sng.vultr.icon.community",
-    rpcEndpoint: "https://api.sejong.sng.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.sejong.sng.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.sejong.sng.vultr.icon.community",
-    nid: 83
-  },
-]
+const defaultsCopy = defaults.map((x) => Object.assign({}, x));
 
 // These are natural inputs via command line and are used to filter defaults
 let region = process.env.REACT_APP_REGION || "";
@@ -172,7 +53,42 @@ const config = {
   nid: nid,
   network: network,
   region: region,
+  setting: {
+    mainnet: {
+      apiEndpoint: defaultsCopy[0]["apiEndpoint"],
+      rpcEndpoint: defaultsCopy[0]["rpcEndpoint"],
+      wssEndpoint: defaultsCopy[0]["wssEndpoint"],
+      nid: defaultsCopy[0]["nid"],
+      network: defaultsCopy[0]["network"],
+      region: defaultsCopy[0]["region"],
+    },
+    berlin: {
+      apiEndpoint: defaultsCopy[1]["apiEndpoint"],
+      rpcEndpoint: defaultsCopy[1]["rpcEndpoint"],
+      wssEndpoint: defaultsCopy[1]["wssEndpoint"],
+      nid: defaultsCopy[1]["nid"],
+      network: defaultsCopy[1]["network"],
+      region: defaultsCopy[1]["region"],
+    },
+    lisbon: {
+      apiEndpoint: defaultsCopy[2]["apiEndpoint"],
+      rpcEndpoint: defaultsCopy[2]["rpcEndpoint"],
+      wssEndpoint: defaultsCopy[2]["wssEndpoint"],
+      nid: defaultsCopy[2]["nid"],
+      network: defaultsCopy[2]["network"],
+      region: defaultsCopy[2]["region"],
+    },
+    sejong: {
+      apiEndpoint: defaultsCopy[3]["apiEndpoint"],
+      rpcEndpoint: defaultsCopy[3]["rpcEndpoint"],
+      wssEndpoint: defaultsCopy[3]["wssEndpoint"],
+      nid: defaultsCopy[3]["nid"],
+      network: defaultsCopy[3]["network"],
+      region: defaultsCopy[3]["region"],
+    }
+  },
+  features: {
+    CONTRACT_WRITE_EVENTLOG_ENABLED: false
+  }
 }
-
-console.log(config)
 export default config;

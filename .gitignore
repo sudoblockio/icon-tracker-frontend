@@ -8,6 +8,12 @@ yarn.lock
 /output/
 /coverage
 
+# e2e testing
+e2e/reports/report.html
+e2e/logs/automation.log
+__pycache__
+env
+
 # production
 /build
 
@@ -35,6 +41,8 @@ yarn-error.log*
 .vimrc
 *.swp*
 .eslintrc*
+
+*.bkp
 
 # e2e testing
 env
