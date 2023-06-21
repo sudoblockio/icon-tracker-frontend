@@ -3,7 +3,7 @@ name: push-e2e
 on:
   push:
     tags:
-      - e2e
+      - e2e-*
 
 jobs:
   docker:
