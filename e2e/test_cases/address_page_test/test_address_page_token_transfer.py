@@ -3,13 +3,12 @@ import pytest
 from e2e.page_objects.main_page import MainPage
 from e2e.page_objects.address_page import AddressPage
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
 from e2e.config import config
 
 
 class TestVerifyAddressPageTokenTransfer:
     logger = LogGen.loggen()
-    verifyUrl = f"{config.base_url}/addresstokentx/hx0b047c751658f7ce1b2595da34d57a0e7dad357d"
+    verifyUrl = f"{config.base_url}/addresstokentx/{config.prep_address}"
 
     @pytest.mark.address_page
     def test_address_page_token_transfer(self, setup):
@@ -19,7 +18,7 @@ class TestVerifyAddressPageTokenTransfer:
         self.addressPageObj = AddressPage(self.driver)
 
         self.logger.info("********Starting test case Test_004_Verify_address_page_token_transfer...*******")
-        self.driver.get(ReadConfig.getExpectedUrl(1))
+        self.driver.get(config.prep_address_url)
 
         self.addressPageObj.click_on_token_transfer()
 

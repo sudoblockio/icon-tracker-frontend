@@ -3,7 +3,6 @@ import pytest
 from e2e.page_objects.contract_page import ContractPage
 from e2e.page_objects.main_page import MainPage
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
 from e2e.config import config
 
 
@@ -20,7 +19,7 @@ class TestVerifyPaginationInTransactionListViewInputType:
         self.logger.info("********Starting test case "
                          "Test_013_Verify_pagination_in_transaction_list_view_input_type"
                          "...*******")
-        self.driver.get(ReadConfig.getContractMainUrl())
+        self.driver.get(config.contract_contract_path)
 
         self.contractPageObj.click_transaction_tab()
 

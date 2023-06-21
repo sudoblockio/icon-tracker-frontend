@@ -2,7 +2,6 @@ import pytest
 
 from e2e.page_objects.main_page import MainPage
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
 from e2e.config import config
 
 

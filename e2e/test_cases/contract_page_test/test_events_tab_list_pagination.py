@@ -3,7 +3,6 @@ import pytest
 from e2e.page_objects.contract_page import ContractPage
 from e2e.page_objects.main_page import MainPage
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
 from e2e.config import config
 
 
@@ -20,7 +19,7 @@ class TestVerifyEventsTabListPagination:
         self.logger.info("********Starting test case "
                          "test_020_Verify_events_tab_list_pagination"
                          "...*******")
-        self.driver.get(ReadConfig.getContractMainUrl())
+        self.driver.get(config.contract_contract_path)
 
         self.contractPageObj.click_events_tab()
 

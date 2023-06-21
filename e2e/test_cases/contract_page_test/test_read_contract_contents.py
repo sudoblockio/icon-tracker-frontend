@@ -2,7 +2,6 @@ import pytest
 
 from e2e.page_objects.contract_page import ContractPage
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
 from e2e.config import config
 
 
@@ -18,7 +17,7 @@ class TestVerifyReadContractContents:
         self.logger.info("********Starting test case "
                          "Test_018_Verify_read_contract_contents"
                          "...*******")
-        self.driver.get(ReadConfig.getContractMainUrl())
+        self.driver.get(config.contract_contract_path)
 
         self.contractPageObj.click_read_contract_tab()
 

@@ -1,19 +1,19 @@
-
 import os
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+from e2e.config import config
 
 @pytest.fixture
 def setup(browser):
-    if browser == 'chrome':
-        driver = webdriver.Chrome()
-        print("Launching chrome browser.........")
-    elif browser == 'firefox':
+    if browser == 'firefox':
         driver = webdriver.Firefox()
         print("Launching firefox browser.........")
     else:
-        driver = webdriver.Chrome()
+        options = Options()
+        options.headless = config.headless
+        driver = webdriver.Chrome(options=options)
         print("Launching chrome browser.........")
     return driver
 

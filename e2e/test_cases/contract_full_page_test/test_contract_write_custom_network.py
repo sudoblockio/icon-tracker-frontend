@@ -1,10 +1,10 @@
-import time
 import pytest
 
 from e2e.page_objects.contract_page import ContractPage
 from e2e.page_objects.main_page import MainPage
 from e2e.utilities.logger import LogGen
 from e2e.config import config
+
 
 class TestContractFullPageCustomNetwork:
     logger = LogGen.loggen()
@@ -19,4 +19,3 @@ class TestContractFullPageCustomNetwork:
         self.driver.get(config.base_url)
         self.mainPageObj = MainPage(self.driver)
         self.contractPageObj = ContractPage(self.driver)
-
