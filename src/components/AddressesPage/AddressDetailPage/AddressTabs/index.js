@@ -16,9 +16,13 @@ import {
   addressRewardList,
   addressTokenTxList,
   addressVotedList,
-  addressInternalTxList,
+  addressInternalTxList
 } from "../../../../redux/store/addresses";
-import { getBondList, getBonders, getDelegation } from "../../../../redux/store/iiss";
+import {
+  getBondList,
+  getBonders,
+  getDelegation
+} from "../../../../redux/store/iiss";
 
 function AddressTabs(props) {
   const [bondList, setBondList] = useState("");
@@ -35,18 +39,30 @@ function AddressTabs(props) {
 
   const [tabs, setTabs] = useState([]);
 
-  const { on, wallet, addressInternalTx, walletTokenTx, addressDelegation, addressVoted, addressReward } = props;
+  const {
+    on,
+    wallet,
+    walletAddress,
+    addressInternalTx,
+    walletTokenTx,
+    addressDelegation,
+    addressVoted,
+    addressReward
+  } = props;
   const { loading, data } = wallet;
   const { address } = data;
+  console.log("walletAddress and address");
+  console.log(walletAddress);
+  console.log(address);
 
   let bondObj = {};
-  const getEachBond = async (addr) => {
+  const getEachBond = async addr => {
     try {
       let address = addr.address;
       const bondAmount = await getBondList(addr);
       const addressId = props.match.params.addressId;
 
-      const foundBond = bondAmount.find((f) => f.address === addressId);
+      const foundBond = bondAmount.find(f => f.address === addressId);
       if (foundBond) {
         bondObj[address] = Number(Number(foundBond.value) / Math.pow(10, 18));
       } else {
@@ -164,7 +180,7 @@ function AddressTabs(props) {
       let bonderListData = await getBonders(payload);
       setBonderList(bonderListData);
       if (bonderListData.length) {
-        bonderListData.map((bonder) => {
+        bonderListData.map(bonder => {
           getEachBond({ address: bonder });
         });
       }
@@ -197,14 +213,26 @@ function AddressTabs(props) {
     if (rewards ? rewards.data.length : null) {
       TABS.push(ADDRESS_TABS[5]);
     }
-    if (bondList ? bondList.length : null) {
+    // If the logged user is in the address page of the logged
+    // wallet show the bonded tab
+    if ((bondList ? bondList.length : null) || walletAddress === address) {
       TABS.push(ADDRESS_TABS[6]);
     }
     if (bonderList ? bonderList.length : null) {
       TABS.push(ADDRESS_TABS[7]);
     }
     setTabs(TABS);
-  }, [intTx, tokenTransfers, deleg, voted, rewards, bondList, bonderList]);
+  }, [
+    intTx,
+    tokenTransfers,
+    deleg,
+    voted,
+    rewards,
+    bondList,
+    bonderList,
+    walletAddress,
+    data.address
+  ]);
 
   useEffect(() => {
     listAddressTx();
@@ -225,7 +253,7 @@ function AddressTabs(props) {
       TABS={tabs}
       on={activeTabIndex}
       loading={false}
-      TableContents={(on) => {
+      TableContents={on => {
         switch (tabs[on]) {
           case ADDRESS_TABS[0]:
             return (
@@ -244,7 +272,9 @@ function AddressTabs(props) {
               <AddressInternalTransactions
                 txData={intTx}
                 goAllTx={() => {
-                  props.history.push(`/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`);
+                  props.history.push(
+                    `/${TX_TYPE.ADDRESS_INTERNAL_TX}/${address}`
+                  );
                 }}
                 txType={TX_TYPE.ADDRESS_INTERNAL_TX}
                 address={address}
@@ -266,7 +296,9 @@ function AddressTabs(props) {
               <AddressDelegation
                 txData={deleg}
                 goAllTx={() => {
-                  props.history.push(`/${TX_TYPE.ADDRESS_DELEGATIONS}/${address}`);
+                  props.history.push(
+                    `/${TX_TYPE.ADDRESS_DELEGATIONS}/${address}`
+                  );
                 }}
                 txType={TX_TYPE.ADDRESS_DELEGATION}
                 address={address}
@@ -303,6 +335,8 @@ function AddressTabs(props) {
                 }}
                 txType={TX_TYPE.ADDRESS_BONDED}
                 address={address}
+                wallet={wallet}
+                walletAddress={walletAddress}
               />
             );
           case ADDRESS_TABS[7]:
@@ -316,6 +350,8 @@ function AddressTabs(props) {
                 address={address}
                 bondMap={bondMap}
                 onClickTab={handleClickTab}
+                wallet={wallet}
+                walletAddress={walletAddress}
               />
             );
           default:

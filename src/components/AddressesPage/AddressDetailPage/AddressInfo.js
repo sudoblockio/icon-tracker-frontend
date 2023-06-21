@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { IconConverter, IconAmount } from "icon-sdk-js";
 
-import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from "../../../components";
+import {
+  CopyButton,
+  QrCodeButton,
+  LoadingComponent,
+  ReportButton
+} from "../../../components";
+import PrepUpdateModal from "../../../components/PrepUpdateModal/prepUpdateModal";
 import {
   numberWithCommas,
   convertNumberToText,
@@ -12,13 +18,22 @@ import {
   isUrl,
   addAt,
   addUnregisteredStyle,
-  sortArrOfObjects,
+  sortArrOfObjects
 } from "../../../utils/utils";
 import { SocialMediaType } from "../../../utils/const";
 import NotificationManager from "../../../utils/NotificationManager";
-import { prepList, getPRepsRPC, getBalanceOf, getBalance, getStake, getBondList } from "../../../redux/store/iiss";
+import {
+  prepList,
+  getPRepsRPC,
+  getBalanceOf,
+  getBalance,
+  getStake,
+  getBondList
+} from "../../../redux/store/iiss";
 import { contractDetail } from "../../../redux/store/contracts";
 import { addressTokens } from "../../../redux/store/addresses";
+
+import compStyles from "./AddressInfo.module.css";
 
 const _isNotificationAvailable = NotificationManager.available();
 
@@ -35,6 +50,7 @@ function AddressInfo(props) {
   const [addrBond, setAddrBond] = useState("");
 
   const [tokens, setTokens] = useState([]);
+  const [isPrepModalOpen, setIsPrepModalOpen] = useState(false);
 
   const { wallet, walletAddress } = props;
   const { loading, data, error } = wallet;
@@ -50,10 +66,20 @@ function AddressInfo(props) {
     node_state,
     total_blocks,
     validated_blocks,
-    website,
+    website
   } = prep || {};
 
-  let media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"];
+  let media = [
+    "twitter",
+    "wechat",
+    "youtube",
+    "telegram",
+    "steemit",
+    "reddit",
+    "keybase",
+    "github",
+    "facebook"
+  ];
   let checkLinks = {
     twitter: "",
     wechat: "",
@@ -63,35 +89,51 @@ function AddressInfo(props) {
     reddit: "",
     keybase: "",
     github: "",
-    facebook: "",
+    facebook: ""
   };
   let tokenName = {};
   let tokenMap = {};
 
-  const getAddrStake = async (addr) => {
+  function togglePrepModal() {
+    setIsPrepModalOpen(!isPrepModalOpen);
+  }
+
+  const getAddrStake = async addr => {
     const res = await getStake(addr);
     setStake(res.stake);
     setUnstakeList(res.unstakes);
   };
   let unstakeSum = 0;
   if (unstakeList && unstakeList.length !== 0) {
-    unstakeList.map((list) => {
+    unstakeList.map(list => {
       unstakeSum += Number(convertLoopToIcxDecimal(list.unstake));
     });
   }
-  const getContractName = async (tokenContract) => {
+  const getContractName = async tokenContract => {
     const res = await contractDetail(tokenContract);
     if (!res.data) return;
 
-    tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract);
+    tokenName[res.data.name] = await getBalanceOf(
+      props.match.params.addressId,
+      tokenContract
+    );
     tokenMap = Object.entries(tokenName);
 
-    const balance = await getBalanceOf(props.match.params.addressId, tokenContract);
+    const balance = await getBalanceOf(
+      props.match.params.addressId,
+      tokenContract
+    );
 
-    setTokens((prev) => {
-      const oldTokensWithLowerCaseName = [...prev].map((token) => ({ ...token, nameLower: token.name.toLowerCase() }));
+    setTokens(prev => {
+      const oldTokensWithLowerCaseName = [...prev].map(token => ({
+        ...token,
+        nameLower: token.name.toLowerCase()
+      }));
       const sortedTokenArray = sortArrOfObjects(
-        [...oldTokensWithLowerCaseName, { ...res.data, balance, nameLower: res.data.name.toLowerCase() }],
+        [
+          ...oldTokensWithLowerCaseName,
+          { ...res.data, balance, nameLower: res.data.name.toLowerCase() }
+        ],
         "nameLower",
         "asc"
       );
@@ -100,13 +142,15 @@ function AddressInfo(props) {
     });
   };
 
-  const getPrepSocialMedia = async (address) => {
+  const getPrepSocialMedia = async address => {
     const allPreps = await prepList();
-    const prepArray = allPreps.filter((preps) => preps.address === address);
+    const prepArray = allPreps.filter(preps => preps.address === address);
     const thisPrep = prepArray ? prepArray[0] : prepArray;
-    media.map((site) => {
+    media.map(site => {
       if (checkLinks && thisPrep) {
-        checkLinks[site] !== thisPrep[site] ? (checkLinks[site] = thisPrep[site]) : console.log("no links");
+        checkLinks[site] !== thisPrep[site]
+          ? (checkLinks[site] = thisPrep[site])
+          : console.log("no links");
       }
     });
     setLinks(checkLinks);
@@ -122,19 +166,27 @@ function AddressInfo(props) {
         );
     setTotalVoted(totalVoted);
     let tokenRes = await addressTokens(props.match.params.addressId);
-    tokenRes.status !== 204 ? tokenRes.data.forEach((contract) => getContractName(contract)) : console.log("no tokens");
+    tokenRes.status !== 204
+      ? tokenRes.data.forEach(contract => getContractName(contract))
+      : console.log("no tokens");
   };
 
   const getTokens = async () => {
     let tokenRes = await addressTokens(props.match.params.addressId);
 
     tokenRes.status === 200
-      ? tokenRes.data.forEach((contract) => {
-          contractDetail(contract).then((contractRes) => {
-            getBalanceOf(props.match.params.addressId, contract).then((balance) => {
-              console.log("Res-Token-Res", props.match.params.addressId, balance);
-              tokenMap[`${contractRes.data.name}`] = balance;
-            });
+      ? tokenRes.data.forEach(contract => {
+          contractDetail(contract).then(contractRes => {
+            getBalanceOf(props.match.params.addressId, contract).then(
+              balance => {
+                console.log(
+                  "Res-Token-Res",
+                  props.match.params.addressId,
+                  balance
+                );
+                tokenMap[`${contractRes.data.name}`] = balance;
+              }
+            );
           });
         })
       : console.log("no tokens");
@@ -145,7 +197,7 @@ function AddressInfo(props) {
     setAddrBalance(balanceData);
   };
 
-  const getAddrBond = async (addr) => {
+  const getAddrBond = async addr => {
     let payload = { address: `${addr}`, page: 1, count: 10 };
 
     const res = await getBondList(payload);
@@ -162,11 +214,11 @@ function AddressInfo(props) {
     setTokenMore(!tokenMore);
   };
 
-  const goBlock = (height) => {
+  const goBlock = height => {
     window.open("/block/" + height, "_blank");
   };
 
-  const onSocialClick = async (link) => {
+  const onSocialClick = async link => {
     if (isUrl(link)) {
       window.open(link, "_blank");
     }
@@ -174,6 +226,10 @@ function AddressInfo(props) {
   const clickShowBtn = () => {
     setShowNode("table-row");
   };
+
+  function enableUpdateButton() {
+    //
+  }
 
   useEffect(() => {
     getContractName();
@@ -193,8 +249,12 @@ function AddressInfo(props) {
 
   const produced = IconConverter.toNumber(total_blocks);
   const validated = IconConverter.toNumber(validated_blocks);
-  const productivity = !produced ? "None" : `${((validated / produced) * 100).toFixed(2)}%`;
-  const _lastGenerateBlockHeight = !last_updated_block ? "None" : IconConverter.toNumber(last_updated_block);
+  const productivity = !produced
+    ? "None"
+    : `${((validated / produced) * 100).toFixed(2)}%`;
+  const _lastGenerateBlockHeight = !last_updated_block
+    ? "None"
+    : IconConverter.toNumber(last_updated_block);
   // const tokenCxs = tokens ? tokens : [];
   const badge = getBadgeTitle(grade, node_state);
 
@@ -209,14 +269,30 @@ function AddressInfo(props) {
       const scam = reportedCount >= 100 ? true : false;
 
       let totalVotes;
-      !Number(delegated) ? (totalVotes = 0) : (totalVotes = Number(Number(delegated) / Number(totalVoted)));
+      !Number(delegated)
+        ? (totalVotes = 0)
+        : (totalVotes = Number(Number(delegated) / Number(totalVoted)));
+
       return (
         <div className="screen0">
+          <PrepUpdateModal
+            prepInfo={data.prep}
+            isOpen={isPrepModalOpen}
+            onClose={togglePrepModal}
+          />
           <div className="wrap-holder">
             {isConnected ? (
               <p className="title">
                 My Address
-                {is_prep && <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>}
+                {is_prep && (
+                  <span
+                    className={
+                      "title-tag" + addUnregisteredStyle(status, grade)
+                    }
+                  >
+                    {badge}
+                  </span>
+                )}
                 <span className="connected">
                   <i className="img" />
                   Connected to ICONex
@@ -228,7 +304,13 @@ function AddressInfo(props) {
                 Address
                 {is_prep && (
                   <>
-                    <span className={"title-tag" + addUnregisteredStyle(status, grade)}>{badge}</span>
+                    <span
+                      className={
+                        "title-tag" + addUnregisteredStyle(status, grade)
+                      }
+                    >
+                      {badge}
+                    </span>
                   </>
                 )}
               </p>
@@ -281,13 +363,26 @@ function AddressInfo(props) {
                                     <div key="div" className="help-layer">
                                       <p className="txt">{addAt(mediaValue)}</p>
                                       <div className="tri"></div>
-                                    </div>,
+                                    </div>
                                   ]
                                 )}
                               </span>
                             );
                           })}
 
+                          {is_prep && isConnected ? (
+                            <span className={compStyles.buttonUpdatePrep}>
+                              <button
+                                disabled={!is_prep || !isConnected}
+                                onClick={togglePrepModal}
+                                className={compStyles.button}
+                              >
+                                Update
+                              </button>
+                            </span>
+                          ) : (
+                            <></>
+                          )}
                           <span
                             className={`active ${
                               node_state === "Synced"
@@ -328,12 +423,14 @@ function AddressInfo(props) {
                           <span>
                             {productivity}
                             <em>
-                              ( {numberWithCommas(validated)} / {numberWithCommas(produced)} )
+                              ( {numberWithCommas(validated)} /{" "}
+                              {numberWithCommas(produced)} )
                             </em>
                           </span>
                         </td>
                         <td>Last Blockheight</td>
-                        {_lastGenerateBlockHeight === "None" || _lastGenerateBlockHeight < 0 ? (
+                        {_lastGenerateBlockHeight === "None" ||
+                        _lastGenerateBlockHeight < 0 ? (
                           <td>
                             <span>None</span>
                           </td>
@@ -353,19 +450,30 @@ function AddressInfo(props) {
                     )}
                     <tr className="">
                       <td>Address</td>
-                      <td colSpan={is_prep ? "3" : "1"} className={scam ? "scam" : ""}>
+                      <td
+                        colSpan={is_prep ? "3" : "1"}
+                        className={scam ? "scam" : ""}
+                      >
                         {scam && <span className="scam-tag">Scam</span>}
                         {_address}
                         <QrCodeButton address={data.address} />
-                        <CopyButton data={_address} title={"Copy Address"} isSpan />
+                        <CopyButton
+                          data={_address}
+                          title={"Copy Address"}
+                          isSpan
+                        />
                         <span
                           className="show-node-addr"
-                          style={is_prep ? { display: "" } : { display: "none" }}
+                          style={
+                            is_prep ? { display: "" } : { display: "none" }
+                          }
                           onClick={clickShowBtn}
                         >
                           Show node address
                         </span>
-                        {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
+                        {isValidNodeType(nodeType) && (
+                          <span className="crep">{`${nodeType}`}</span>
+                        )}
                         {!isConnected && <ReportButton address={address} />}
                       </td>
                     </tr>
@@ -395,14 +503,18 @@ function AddressInfo(props) {
                           <p>
                             <span>Available</span>
                             <span>
-                              {`${numberWithCommas(Number(addrBalance) / Math.pow(10, 18))}`}
+                              {`${numberWithCommas(
+                                Number(addrBalance) / Math.pow(10, 18)
+                              )}`}
                               <em>ICX</em>
                             </span>
                           </p>
                           <p>
                             <span>Staked</span>
                             <span>
-                              {`${convertNumberToText(stakeAmt / Math.pow(10, 18))}`}
+                              {`${convertNumberToText(
+                                stakeAmt / Math.pow(10, 18)
+                              )}`}
                               <em>ICX</em>
                             </span>
                           </p>
@@ -423,16 +535,24 @@ function AddressInfo(props) {
                           </p>
                           <div className="unstaking-list">
                             {unstakeList && unstakeList.length !== 0
-                              ? unstakeList.map((dataList) => {
+                              ? unstakeList.map(dataList => {
                                   return (
                                     <p>
                                       <span className="unstaking-item">
                                         <em>
                                           Target Block Height{" "}
-                                          {convertNumberToText(IconConverter.toNumber(dataList.unstakeBlockHeight))}
+                                          {convertNumberToText(
+                                            IconConverter.toNumber(
+                                              dataList.unstakeBlockHeight
+                                            )
+                                          )}
                                         </em>
                                         <span className="balance">
-                                          {convertNumberToText(convertLoopToIcxDecimal(dataList.unstake))}
+                                          {convertNumberToText(
+                                            convertLoopToIcxDecimal(
+                                              dataList.unstake
+                                            )
+                                          )}
                                         </span>
                                         <em>ICX</em>
                                       </span>
@@ -479,10 +599,13 @@ function AddressInfo(props) {
                                   props.history.push(`/token/${token.address}`);
                                 }}
                               >
-                                <span style={{ color: "#1aaaba" }}>{token.name}</span>
+                                <span style={{ color: "#1aaaba" }}>
+                                  {token.name}
+                                </span>
                               </em>
                               <span>{`${convertNumberToText(
-                                Number(token.balance) / Math.pow(10, Number(token.decimals))
+                                Number(token.balance) /
+                                  Math.pow(10, Number(token.decimals))
                               )}`}</span>
                             </p>
                           ))}

@@ -1,12 +1,20 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
-import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from "../../../components";
+import {
+  TxTableHead,
+  TxTableBody,
+  LoadingComponent,
+  NoBox
+} from "../../../components";
 import { getBondList } from "../../../redux/store/iiss";
+import BondersModal from "../../BondersUpdateModal/bondersUpdateModal";
+import BondedModal from "../../BondUpdateModal/bondUpdateModal";
+import customStyles from "./TxBottomComponent.module.css";
 
 class TxBottomComponent extends Component {
   render() {
-    const { 
+    const {
       txData,
       txType,
       goAllTx,
@@ -14,17 +22,21 @@ class TxBottomComponent extends Component {
       tableClassName,
       noBoxText,
       tokenTotal,
-      onClickTab
+      onClickTab,
+      wallet,
+      walletAddress
     } = this.props;
+    console.log("props on TxBottomComponent");
+    console.log(this.props);
     const { data, listSize, totalSize, loading } = txData;
 
     let totalCount = txData.headers ? txData.headers["x-total-count"] : 0;
 
     let tableBodyData;
 
-    if (txTypeIsBonder(txType)) {
-      tableBodyData = txData.filter((f) => {
-        return this.props.bondMap[f] !== null
+    if (txTypeIsBonderOrBonded(txType)) {
+      tableBodyData = txData.filter(f => {
+        return this.props.bondMap[f] !== null;
       });
       totalCount = tableBodyData.length;
     } else if (txType === "addressdelegations") {
@@ -35,15 +47,18 @@ class TxBottomComponent extends Component {
       console.log(txType, "tx comp props bonder");
       if (loading) {
         return <LoadingComponent height="349px" />;
-      } else if (txTypeIsBonder(txType)) {
+      } else if (txTypeIsBonderOrBonded(txType)) {
         return (
           <div className="contents">
-            <TxBottomTitle
+            <CustomHeader
+              txData={txData}
               txType={txType}
-              listSize={Number(txData.length)}
-              totalSize={txType === "addressBonders" ? totalCount : Number(txData.length)}
+              totalCount={totalCount}
               goAllTx={goAllTx}
-              fromAddr={"hello"}
+              bondMap={this.props.bondMap}
+              address={this.props.address}
+              walletAddress={this.props.walletAddress}
+              wallet={wallet}
             />
             <div className="table-box">
               <table className={tableClassName}>
@@ -69,10 +84,14 @@ class TxBottomComponent extends Component {
             </div>
           </div>
         );
-      } else if ((!tableBodyData || tableBodyData.length === 0) && txType !== "addressBonded") {
+      } else if (
+        (!tableBodyData || tableBodyData.length === 0) &&
+        txType !== "addressBonded"
+      ) {
         return <NoBox text={noBoxText} />;
       } else {
-        const { from_address, to_address } = tableBodyData[0] || this.props.txData;
+        const { from_address, to_address } =
+          tableBodyData[0] || this.props.txData;
 
         return (
           <div className="contents">
@@ -125,13 +144,91 @@ class TxBottomComponent extends Component {
 
 export default withRouter(TxBottomComponent);
 
-function txTypeIsBonder(txType) {
-  const ar = [
-    "addressbonded",
-    "addressbonders",
-    "addressBonded",
-    "addressBonders"
-  ];
+function txTypeIsBonderOrBonded(txType) {
+  return txTypeIsBonder(txType) || txTypeIsBonded(txType);
+}
+
+function txTypeIsBonded(txType) {
+  const ar = ["addressbonded", "addressBonded"];
 
   return ar.includes(txType);
+}
+
+function txTypeIsBonder(txType) {
+  const ar = ["addressbonders", "addressBonders"];
+
+  return ar.includes(txType);
+}
+
+function CustomHeader({
+  txData,
+  txType,
+  totalCount,
+  goAllTx,
+  bondMap,
+  address,
+  walletAddress,
+  wallet
+}) {
+  const [isBondersModalOpen, setIsBondersModalOpen] = useState(false);
+  const [isBondedModalOpen, setIsBondedModalOpen] = useState(false);
+  const isLogged = walletAddress === address;
+  const isLoggedAsPrep = isLogged && wallet.data.is_prep;
+
+  function openBondersModal() {
+    closeBondedModal();
+    setIsBondersModalOpen(true);
+  }
+
+  function closeBondersModal() {
+    setIsBondersModalOpen(false);
+  }
+
+  function openBondedModal() {
+    closeBondersModal();
+    setIsBondedModalOpen(true);
+  }
+
+  function closeBondedModal() {
+    setIsBondedModalOpen(false);
+  }
+  return (
+    <>
+      <BondersModal
+        bondMap={bondMap}
+        address={address}
+        isOpen={isBondersModalOpen}
+        onClose={closeBondersModal}
+        walletAddress={walletAddress}
+      />
+      <BondedModal
+        address={address}
+        isOpen={isBondedModalOpen}
+        onClose={closeBondedModal}
+        walletAddress={walletAddress}
+      />
+      <div className={customStyles.headerContainer}>
+        <TxBottomTitle
+          txType={txType}
+          listSize={Number(txData.length)}
+          totalSize={
+            txType === "addressBonders" ? totalCount : Number(txData.length)
+          }
+          goAllTx={goAllTx}
+          fromAddr={"hello"}
+        />
+        {txTypeIsBonded(txType) && isLogged ? (
+          <button onClick={openBondedModal} className={customStyles.button}>
+            Update
+          </button>
+        ) : txTypeIsBonder(txType) && isLoggedAsPrep ? (
+          <button onClick={openBondersModal} className={customStyles.button}>
+            Update
+          </button>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
+  );
 }

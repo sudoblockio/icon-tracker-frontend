@@ -1,27 +1,135 @@
-span.comment.default-style * { word-break: keep-all; }
-span.comment.default-style h1 { display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
-span.comment.default-style h2 { display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
-span.comment.default-style h3 { display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
-span.comment.default-style h4 { display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
-span.comment.default-style h5 { display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
-span.comment.default-style h6 { display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; }
+span.comment.default-style * {
+  word-break: keep-all;
+}
+span.comment.default-style h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+span.comment.default-style h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+span.comment.default-style h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+span.comment.default-style h4 {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+span.comment.default-style h5 {
+  display: block;
+  font-size: 0.83em;
+  margin-block-start: 1.67em;
+  margin-block-end: 1.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+span.comment.default-style h6 {
+  display: block;
+  font-size: 0.67em;
+  margin-block-start: 2.33em;
+  margin-block-end: 2.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
 
-span.comment.default-style p { display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; }
-span.comment.default-style blockquote { display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 40px; margin-inline-end: 40px; }
-span.comment.default-style pre { display: block; font-family: monospace; white-space: pre; margin: 1em 0px; }
+span.comment.default-style p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+span.comment.default-style blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+}
+span.comment.default-style pre {
+  display: block;
+  font-family: monospace;
+  white-space: pre;
+  margin: 1em 0px;
+}
 
-span.comment.default-style b { font-weight: bold; }
-span.comment.default-style u { text-decoration: underline; }
-span.comment.default-style i { font-style: italic; }
-span.comment.default-style s { text-decoration: line-through; }
-span.comment.default-style em { font-style: italic; }
-span.comment.default-style cite { font-style: italic; }
-span.comment.default-style big { font-size: larger; }
-span.comment.default-style small { font-size: smaller; }
-span.comment.default-style strong { font-weight: bold; }
-span.comment.default-style strike { text-decoration: line-through; }
-span.comment.default-style code { font-family: monospace; }
+span.comment.default-style b {
+  font-weight: bold;
+}
+span.comment.default-style u {
+  text-decoration: underline;
+}
+span.comment.default-style i {
+  font-style: italic;
+}
+span.comment.default-style s {
+  text-decoration: line-through;
+}
+span.comment.default-style em {
+  font-style: italic;
+}
+span.comment.default-style cite {
+  font-style: italic;
+}
+span.comment.default-style big {
+  font-size: larger;
+}
+span.comment.default-style small {
+  font-size: smaller;
+}
+span.comment.default-style strong {
+  font-weight: bold;
+}
+span.comment.default-style strike {
+  text-decoration: line-through;
+}
+span.comment.default-style code {
+  font-family: monospace;
+}
 
-span.comment.default-style ol { display: block; list-style-type: decimal; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 40px; }
-span.comment.default-style ul { display: block; list-style-type: disc; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 40px; }
-span.comment.default-style li { display: list-item; text-align: -webkit-match-parent; list-style: inherit;}
+span.comment.default-style ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+span.comment.default-style ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+span.comment.default-style li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style: inherit;
+}

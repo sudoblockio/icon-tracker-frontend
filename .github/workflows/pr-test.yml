@@ -1,6 +1,6 @@
 name: pr-test
 
-# 1. Runs tests
+# 1. Runs e2e
 # 2. Upload coverage
 
 on:
@@ -18,7 +18,7 @@ jobs:
       - name: Build the container
         run: docker build . -t www
 
-#      - name: Run unit tests
+#      - name: Run unit e2e
 #        run: docker run www yarn run test
 #
 #      - uses: codecov/codecov-action@v2
@@ -31,7 +31,7 @@ jobs:
 #      - name: Bring up stack
 #        run: make up
 #
-#      - name: Run integration tests
+#      - name: Run integration e2e
 #        run: docker run www yarn run test
 #
 #      - uses: codecov/codecov-action@v2

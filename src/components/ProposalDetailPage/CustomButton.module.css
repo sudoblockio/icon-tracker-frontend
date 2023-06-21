@@ -1,0 +1,52 @@
+.customButtonContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.voteButton,
+.acceptButton,
+.rejectButton {
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.voteButton {
+  background-color: #2196f3;
+  width: 120px;
+}
+.acceptButton, .rejectButton {
+  width: 60px;
+  cursor: pointer;
+  width: 60px;
+  position: absolute;
+  top: 0;
+  width: 49%;
+  opacity: 0;
+  z-index: 999;
+  font-size: 13px;
+}
+.acceptButton {
+  background-color: #4caf50;
+  left: 0;
+}
+
+.rejectButton {
+  background-color: #f44336;
+  right: 0;
+}
+
+.customButtonContainer:hover .voteButton {
+  opacity: 0;
+}
+
+.customButtonContainer:hover .acceptButton {
+  opacity: 1;
+}
+
+.customButtonContainer:hover .rejectButton {
+  opacity: 1;
+}

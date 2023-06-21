@@ -7,9 +7,16 @@ import {
   LoadingComponent,
   QrCodeButton,
   AddressLink,
-  ReportButton,
+  ReportButton
 } from "../../../components";
-import { convertNumberToText, numberWithCommas, tokenText, isValidData, isUrl, addAt } from "../../../utils/utils";
+import {
+  convertNumberToText,
+  numberWithCommas,
+  tokenText,
+  isValidData,
+  isUrl,
+  addAt
+} from "../../../utils/utils";
 import { cxSocialMedia } from "../../../redux/store/contracts";
 import { getBalance } from "../../../redux/store/iiss";
 
@@ -17,19 +24,33 @@ function ContractInfo(props) {
   const [verified_data, setVerified_Data] = useState("");
   const [cxBalance, setCxBalance] = useState(0);
 
-  const getCxBalance = async (addr) => {
+  const getCxBalance = async addr => {
     const result = await getBalance(addr);
     setCxBalance(Number(Number(result) / Math.pow(10, 18)).toFixed(3));
   };
-  const onMouseOver = (param) => {
-    window.dispatchEvent(new CustomEvent("CUSTOM_FX", { detail: { type: "CONTRACT_OVER", param } }));
+  const onMouseOver = param => {
+    window.dispatchEvent(
+      new CustomEvent("CUSTOM_FX", { detail: { type: "CONTRACT_OVER", param } })
+    );
   };
 
-  const onMouseOut = (param) => {
-    window.dispatchEvent(new CustomEvent("CUSTOM_FX", { detail: { type: "CONTRACT_OUT", param } }));
+  const onMouseOut = param => {
+    window.dispatchEvent(
+      new CustomEvent("CUSTOM_FX", { detail: { type: "CONTRACT_OUT", param } })
+    );
   };
 
-  const media = ["twitter", "wechat", "youtube", "telegram", "steemit", "reddit", "keybase", "github", "facebook"];
+  const media = [
+    "twitter",
+    "wechat",
+    "youtube",
+    "telegram",
+    "steemit",
+    "reddit",
+    "keybase",
+    "github",
+    "facebook"
+  ];
   const checkLinks = {
     twitter: "",
     wechat: "",
@@ -39,13 +60,14 @@ function ContractInfo(props) {
     reddit: "",
     keybase: "",
     github: "",
-    facebook: "",
+    facebook: ""
   };
-  const getSocialMediaLinks = async (contract) => {
+
+  const getSocialMediaLinks = async contract => {
     const socialLinksMap = await cxSocialMedia(contract);
     let data = socialLinksMap.data;
     setVerified_Data(data);
-    media.map((site) => {
+    media.map(site => {
       if (checkLinks && socialLinksMap) {
         return checkLinks[site] !== socialLinksMap.data[site]
           ? (checkLinks[site] = socialLinksMap.data[site])
@@ -53,7 +75,8 @@ function ContractInfo(props) {
       }
     });
   };
-  const onSocialClick = async (link) => {
+
+  const onSocialClick = async link => {
     if (isUrl(link)) {
       window.open(link, "_blank");
     }
@@ -95,9 +118,17 @@ function ContractInfo(props) {
                         {data.address}
                         <span>
                           {" "}
-                          <CopyButton data={data.address} title={"Copy Address"} isSpan />
+                          <CopyButton
+                            data={data.address}
+                            title={"Copy Address"}
+                            isSpan
+                          />
                         </span>
-                        {contractDetails.owner_address === walletAddress ? <QrCodeButton address={data.address} /> : ""}
+                        {contractDetails.owner_address === walletAddress ? (
+                          <QrCodeButton address={data.address} />
+                        ) : (
+                          ""
+                        )}
                         {verified_data.website && (
                           <span
                             className="home"
@@ -129,9 +160,11 @@ function ContractInfo(props) {
                                     [
                                       <i key="i" className="img tooltip"></i>,
                                       <div key="div" className="help-layer">
-                                        <p className="txt">{addAt(mediaValue)}</p>
+                                        <p className="txt">
+                                          {addAt(mediaValue)}
+                                        </p>
                                         <div className="tri"></div>
-                                      </div>,
+                                      </div>
                                     ]
                                   )}
                                 </span>
@@ -158,7 +191,9 @@ function ContractInfo(props) {
                       {isCreator && isCreateTx ? (
                         <td>
                           <span className="help address">Creator Address</span>
-                          <span className="help hash">Creator Transaction Hash</span>
+                          <span className="help hash">
+                            Creator Transaction Hash
+                          </span>
                           <span
                             className="link address ellipsis"
                             onMouseOver={() => {
@@ -180,7 +215,9 @@ function ContractInfo(props) {
                               onMouseOut("hash");
                             }}
                           >
-                            <TransactionLink to={contractDetails.creation_hash} />
+                            <TransactionLink
+                              to={contractDetails.creation_hash}
+                            />
                           </span>
                         </td>
                       ) : (
@@ -191,7 +228,9 @@ function ContractInfo(props) {
                       <td>Balance</td>
                       <td>{convertNumberToText(cxBalance || 0)} ICX</td>
                       <td>Transactions</td>
-                      <td>{numberWithCommas(props.contractTx.totalSize)} Txns</td>
+                      <td>
+                        {numberWithCommas(props.contractTx.totalSize)} Txns
+                      </td>
                     </tr>
 
                     {verified_data ? (
@@ -199,7 +238,9 @@ function ContractInfo(props) {
                         <td>Team Name</td>
                         <td>
                           {verified_data ? (
-                            <a href={`${window.location.origin}/address/${verified_data.p_rep_address}`}>
+                            <a
+                              href={`${window.location.origin}/address/${verified_data.p_rep_address}`}
+                            >
                               {verified_data.team_name}
                             </a>
                           ) : (
@@ -207,7 +248,9 @@ function ContractInfo(props) {
                           )}
                         </td>
                         <td>Description</td>
-                        <td>{verified_data ? verified_data.short_description : ""}</td>
+                        <td>
+                          {verified_data ? verified_data.short_description : ""}
+                        </td>
                       </tr>
                     ) : (
                       ""
@@ -249,7 +292,15 @@ class DetailButton extends Component {
 
 class TokenContractCell extends Component {
   render() {
-    const { tokenName, symbol, address, ircVersion, onMouseOver, onMouseOut, isToken } = this.props;
+    const {
+      tokenName,
+      symbol,
+      address,
+      ircVersion,
+      onMouseOver,
+      onMouseOut,
+      isToken
+    } = this.props;
     const Content = () => {
       if (isToken) {
         return (

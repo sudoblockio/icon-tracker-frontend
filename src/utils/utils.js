@@ -22,8 +22,8 @@ moment.updateLocale("en", {
     M: "%d month",
     MM: "%d months",
     y: "%d year",
-    yy: "%d years",
-  },
+    yy: "%d years"
+  }
 });
 
 export function getTextFromHtml(data) {
@@ -32,7 +32,7 @@ export function getTextFromHtml(data) {
   return data.replace(/(<([^>]+)>)/gi, "");
 }
 
-export const convertHexToValue = (hex) => {
+export const convertHexToValue = hex => {
   let value;
   if (hex === "0x0") {
     value = 0;
@@ -45,7 +45,7 @@ export const convertHexToValue = (hex) => {
   return Number(value);
 };
 
-export const epochToFromNow = (date) => {
+export const epochToFromNow = date => {
   let parsed = parseInt(date, 16);
   let prettyDate;
   typeof date === "string"
@@ -108,12 +108,16 @@ export function convertToExponentialText(num, round) {
 export function onlyDate(date) {
   if (!isValidData(date)) return "-";
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1;
-  return moment(date).utcOffset(timezoneOffset).format("YYYY-MM-DD");
+  return moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD");
 }
 
 export function getTimezoneMomentTime(date) {
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1;
-  return moment(date).utcOffset(timezoneOffset).format("YYYY-MM-DD HH:mm:ss");
+  return moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD HH:mm:ss");
 }
 
 export function getTimezoneMomentKSTTime(date) {
@@ -123,7 +127,9 @@ export function getTimezoneMomentKSTTime(date) {
 export function dateToUTC(date, showUTC, showAgo) {
   if (!date) return "-";
   const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1;
-  let result = moment(date).utcOffset(timezoneOffset).format("YYYY-MM-DD HH:mm:ss");
+  let result = moment(date)
+    .utcOffset(timezoneOffset)
+    .format("YYYY-MM-DD HH:mm:ss");
   if (showUTC) {
     result += ` (${getUTCString()})`;
   }
@@ -142,11 +148,17 @@ export function calcMaxPageNum(total, rowNum) {
   return Math.ceil(total / rowNum);
 }
 
-export function makeFromNowText(fistTime, firstText, secondTime, secondText, later) {
+export function makeFromNowText(
+  fistTime,
+  firstText,
+  secondTime,
+  secondText,
+  later
+) {
   const _secondTime = secondTime === 0 ? undefined : secondTime;
   const result = [
     fistTime && `${fistTime} ${firstText}${fistTime === 1 ? "" : "s"}`,
-    _secondTime && `${_secondTime} ${secondText}${_secondTime === 1 ? "" : "s"}`,
+    _secondTime && `${_secondTime} ${secondText}${_secondTime === 1 ? "" : "s"}`
   ];
 
   if (later) {
@@ -375,7 +387,14 @@ export function tokenText(name, symbol, address, spanClassName) {
   if (!address) {
     return text;
   } else {
-    return <TokenLink to={address} label={!spanClassName ? text : <span className={spanClassName}>{text}</span>} />;
+    return (
+      <TokenLink
+        to={address}
+        label={
+          !spanClassName ? text : <span className={spanClassName}>{text}</span>
+        }
+      />
+    );
   }
 }
 
@@ -392,8 +411,8 @@ export function getArrayState(step, state, action, dataType) {
             loading: true,
             page: Number(page) || state[dataType].page,
             count: Number(count) || state[dataType].count,
-            error: "",
-          },
+            error: ""
+          }
         };
       } else {
         return {
@@ -403,8 +422,8 @@ export function getArrayState(step, state, action, dataType) {
             loading: true,
             page: 1 || state[dataType].page,
             count: 10 || state[dataType].count,
-            error: "",
-          },
+            error: ""
+          }
         };
       }
     case REDUX_STEP.FULFILLED:
@@ -418,8 +437,8 @@ export function getArrayState(step, state, action, dataType) {
             data: data || [],
             listSize: 50000 || 0,
             totalSize: payload.headers ? payload.headers["x-total-count"] : 0,
-            error: "",
-          },
+            error: ""
+          }
         };
       } else {
         return {
@@ -430,8 +449,8 @@ export function getArrayState(step, state, action, dataType) {
             data: data || [],
             listSize: 50000 || 0,
             totalSize: payload.headers ? payload.headers["x-total-count"] : 0,
-            error: "",
-          },
+            error: ""
+          }
         };
       }
 
@@ -443,8 +462,8 @@ export function getArrayState(step, state, action, dataType) {
           ...state[dataType],
           loading: false,
           data: [],
-          error: error,
-        },
+          error: error
+        }
       };
     case REDUX_STEP.INIT:
       return {
@@ -456,8 +475,8 @@ export function getArrayState(step, state, action, dataType) {
           data: [],
           listSize: 0,
           totalSize: 0,
-          error: "",
-        },
+          error: ""
+        }
       };
     default:
       return state;
@@ -473,8 +492,8 @@ export function getObjectState(step, state, action, dataType) {
           ...state[dataType],
           loading: true,
           data: {},
-          error: "",
-        },
+          error: ""
+        }
       };
     case REDUX_STEP.FULFILLED:
       const { payload } = action;
@@ -485,8 +504,8 @@ export function getObjectState(step, state, action, dataType) {
           ...state[dataType],
           loading: false,
           data: data || {},
-          error: "",
-        },
+          error: ""
+        }
       };
     case REDUX_STEP.REJECTED:
       const { error, pending } = action;
@@ -497,8 +516,8 @@ export function getObjectState(step, state, action, dataType) {
           loading: false,
           data: {},
           error: error,
-          pending: pending,
-        },
+          pending: pending
+        }
       };
     case REDUX_STEP.INIT:
       return {
@@ -506,8 +525,8 @@ export function getObjectState(step, state, action, dataType) {
         [dataType]: {
           loading: false,
           data: {},
-          error: "",
-        },
+          error: ""
+        }
       };
     default:
       return state;
@@ -671,7 +690,7 @@ export function isImageData(data) {
 }
 
 export function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export function convertEngineToTracker(resultData, byHashData) {
@@ -679,7 +698,9 @@ export function convertEngineToTracker(resultData, byHashData) {
     return undefined;
   }
 
-  const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString();
+  const valueIcx = IconAmount.of(byHashData.value, IconAmount.Unit.LOOP)
+    .convertUnit(IconAmount.Unit.ICX)
+    .toString();
   const stepUsed = IconAmount.of(resultData.stepUsed);
   const stepPrice = IconAmount.of(resultData.stepPrice).toString();
   const { eventLogs, stepUsedDetails } = resultData;
@@ -697,13 +718,16 @@ export function convertEngineToTracker(resultData, byHashData) {
     stepUsedByTxn: stepUsed.toString(),
     stepUsedDetails,
     stepPrice,
-    fee: IconAmount.of(IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice), IconAmount.Unit.LOOP)
+    fee: IconAmount.of(
+      IconConverter.toBigNumber(stepUsed.value).multipliedBy(stepPrice),
+      IconAmount.Unit.LOOP
+    )
       .convertUnit(IconAmount.Unit.ICX)
       .toString(),
     dataType: byHashData.dataType,
     dataString: byHashData.data,
     tokenTxList: [],
-    internalTxList: [],
+    internalTxList: []
   };
 
   if (eventLogs.length === 0) {
@@ -716,22 +740,26 @@ export function convertEngineToTracker(resultData, byHashData) {
       result.tokenTxList.push({
         fromAddr: indexed[1],
         toAddr: indexed[2],
-        quantity: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+        quantity: IconAmount.of(indexed[3], IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .toString(),
         targetContractAddr: scoreAddress,
         symbol: "TOKENS",
-        tokenName: " - ",
+        tokenName: " - "
       });
     }
 
     if (indexed[0] === "ICXTransfer(Address,Address,int)") {
       result.internalTxList.push({
-        amount: IconAmount.of(indexed[3], IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).toString(),
+        amount: IconAmount.of(indexed[3], IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .toString(),
         contractAddr: scoreAddress,
         fromAddr: indexed[1],
         height: height,
         toAddr: indexed[2],
         txHash,
-        txIndex: index,
+        txIndex: index
       });
     }
   });
@@ -740,7 +768,9 @@ export function convertEngineToTracker(resultData, byHashData) {
 }
 
 export function convertLoopToIcxDecimal(loop) {
-  return IconAmount.of(loop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString();
+  return IconAmount.of(loop, IconAmount.Unit.LOOP)
+    .convertUnit(IconAmount.Unit.ICX)
+    .value.toString();
 }
 
 export function getBadgeTitle(grade, status) {
@@ -790,7 +820,7 @@ export function valueToString(value) {
 
   let result = "";
   if (typeof value === "object") {
-    Object.keys(value).forEach((key) => {
+    Object.keys(value).forEach(key => {
       result += (result !== "" ? ", " : "") + value[key];
     });
   }
@@ -799,9 +829,21 @@ export function valueToString(value) {
 }
 
 export function isUrl(text) {
-  const regexp =
-    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+  const regexp = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   return regexp.test(text);
+}
+
+export function isValidUrl(urlString, protocols) {
+  try {
+    const url = new URL(urlString);
+    return protocols
+      ? url.protocol
+        ? protocols.map(x => `${x.toLowerCase()}:`).includes(url.protocol)
+        : false
+      : true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export function addAt(text) {
@@ -818,6 +860,12 @@ export function closeEm(text) {
 }
 
 export function sortArrOfObjects(arr, param, type) {
-  if (type === "desc") return arr.sort((a, b) => (a[param] > b[param] ? -1 : b[param] > a[param] ? 1 : 0));
-  else if (type === "asc") return arr.sort((a, b) => (a[param] > b[param] ? 1 : b[param] > a[param] ? -1 : 0));
+  if (type === "desc")
+    return arr.sort((a, b) =>
+      a[param] > b[param] ? -1 : b[param] > a[param] ? 1 : 0
+    );
+  else if (type === "asc")
+    return arr.sort((a, b) =>
+      a[param] > b[param] ? 1 : b[param] > a[param] ? -1 : 0
+    );
 }
