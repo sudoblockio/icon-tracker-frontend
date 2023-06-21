@@ -8,11 +8,6 @@ yarn.lock
 /output/
 /coverage
 
-# e2e testing
-e2e/reports/report.html
-e2e/logs/automation.log
-__pycache__
-env
 
 # production
 /build
@@ -48,6 +43,7 @@ yarn-error.log*
 env
 __pycache__
 e2e/reports/report.html
+e2e/logs/automation.log
 .pytest_cache
 e2e/logs/*
 !e2e/logs/.gitkeep

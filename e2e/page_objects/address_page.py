@@ -87,9 +87,8 @@ class AddressPage:
         """Verify we successfully redirected to transaction detail page."""
         try:
             self.logger.info(">>trying to verify transaction detail page")
-            time.sleep(5)
+            time.sleep(config.default_sleep)
             var = self.driver.find_element("xpath", self.address_title).text
-            print("asdasdasdasdasdasdasdasdadsdfsdfdsfrfdf " + var)
             if title in var:
                 self.logger.info(">>transaction detail page verified")
                 assert True
@@ -196,7 +195,7 @@ class AddressPage:
         finally:
 
             self.driver.get(config.prep_address_url)
-            time.sleep(3)
+            time.sleep(config.default_sleep)
             self.click_on_rewards_tab()
 
     def click_on_bonders_tab(self):
@@ -223,7 +222,7 @@ class AddressPage:
                 assert False
         finally:
             self.driver.get(config.prep_address_url)
-            time.sleep(3)
+            time.sleep(config.default_sleep)
             self.click_on_bonders_tab()
 
     def verify_bonded_page_table(self):
@@ -276,7 +275,7 @@ class AddressPage:
         self.logger.info(">>delegation value " + var)
         items[count].click()
         self.driver.switch_to.window(self.driver.window_handles[1])
-        time.sleep(3)
+        time.sleep(config.default_sleep)
         self.logger.info(">>delegation value " + self.driver.current_url)
         if var in self.driver.current_url:
             assert True

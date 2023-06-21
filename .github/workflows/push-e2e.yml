@@ -15,6 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Run app
+        run: npm run start
+
       - name: Install deps
         run: |
           pip install -r e2e/requirements.txt
@@ -22,6 +25,9 @@ jobs:
 
 #      - name: Run unit tests
 #        run: make test-unit
+
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@v1
 
       - name: Run e2e tests
         run: make test-e2e
