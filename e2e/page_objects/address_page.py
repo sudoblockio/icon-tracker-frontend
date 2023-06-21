@@ -2,7 +2,7 @@ import time
 
 from e2e.utilities.automation_utils import AutomationUtils
 from e2e.utilities.logger import LogGen
-from e2e.utilities.read_properties import ReadConfig
+from e2e.config import config
 
 
 class AddressPage:
@@ -72,10 +72,7 @@ class AddressPage:
             assert False
 
     def click_total_transaction_count(self):
-        """
-               click_total_transaction_count
-               -this method is used to click on total transaction cta in address page table
-        """
+        """Click on total transaction count in address page table."""
         try:
             self.logger.info(">>trying to click on total transaction count cta")
             AutomationUtils.wait_for_element_to_load(self, self.address_total_transaction_cta)
@@ -87,10 +84,7 @@ class AddressPage:
             assert False
 
     def verify_transaction_detail_page(self, title):
-        """
-                verify_transaction_detail_page
-                -this method is used to verify we successfully redirected to transaction detail page
-        """
+        """Verify we successfully redirected to transaction detail page."""
         try:
             self.logger.info(">>trying to verify transaction detail page")
             time.sleep(5)
@@ -120,20 +114,12 @@ class AddressPage:
             assert False
 
     def click_on_token_transfer(self):
-        """
-            click_on_token_transfer
-            -this method is used to click on token transfer button
-        """
         self.logger.info(">>trying to click on token transfer")
         AutomationUtils.wait_for_element_to_load(self, self.address_token_transfer_cta)
         self.driver.find_element("xpath", self.address_token_transfer_cta).click()
         self.logger.info(">>clicked on token transfer")
 
     def verify_token_transfer_table(self):
-        """
-            verify_token_transfer_table
-            -this method is used to verify if the table with data is present or not in token tranfer
-        """
         self.logger.info(">>trying to verify table in token transfer")
         AutomationUtils.wait_for_element_to_load(self, self.address_token_transfer_table)
         var = self.driver.find_element("xpath", self.address_token_transfer_table)
@@ -175,7 +161,7 @@ class AddressPage:
                                           , 'redirected_url_is_different_voters.png')
                 assert False
         finally:
-            self.driver.get(ReadConfig.getExpectedUrl(1))
+            self.driver.get(config.prep_address_url)
             self.click_on_voters_tab()
 
     def click_on_rewards_tab(self):
@@ -208,25 +194,18 @@ class AddressPage:
                                           , 'redirected_url_is_different_rewards.png')
                 assert False
         finally:
-            self.driver.get(ReadConfig.getExpectedUrl(1))
+
+            self.driver.get(config.prep_address_url)
             time.sleep(3)
             self.click_on_rewards_tab()
 
     def click_on_bonders_tab(self):
-        """
-            click_on_bonders_tab
-            -this method is used to click on the bonders tab
-        """
         self.logger.info(">>trying to click on bonders tab")
         AutomationUtils.wait_for_element_to_load(self, self.address_bonders_cta)
         self.driver.find_element("xpath", self.address_bonders_cta).click()
         self.logger.info(">>clicked on bonders tab")
 
     def verify_all_links_in_bonders_tab_works(self, count):
-        """
-            verify_all_links_in_bonders_tab_works
-            -this method is used to verify all the links present in bonders tab is working as expected
-        """
         try:
             self.logger.info(">>verifying all the links in rewards tab")
             AutomationUtils.wait_for_element_to_load(self, self.address_bonders_list)
@@ -243,12 +222,11 @@ class AddressPage:
                                           , 'redirected_url_is_different_bonders.png')
                 assert False
         finally:
-            self.driver.get(ReadConfig.getExpectedUrl(1))
+            self.driver.get(config.prep_address_url)
             time.sleep(3)
             self.click_on_bonders_tab()
 
     def verify_bonded_page_table(self):
-        """Verify the bonded table."""
         self.logger.info(">>trying to verify on bonded tab")
         AutomationUtils.wait_for_element_to_load(self, self.address_bonded_table)
         if self.driver.find_element("xpath", self.address_bonded_table).is_displayed():
@@ -260,12 +238,6 @@ class AddressPage:
         self.logger.info(">>clicked on verify tab")
 
     def verify_all_links_in_transaction_new_address_url(self, count):
-        """
-        Verify all the links present in transaction tab is working as expected in
-         new address url
-         https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
-        """
-
         self.logger.info(">>verifying all the links in transaction tab")
         AutomationUtils.wait_for_element_to_load(self, self.address_transaction_new_table)
         items = self.driver.find_elements("xpath", self.address_transaction_new_table)
@@ -296,13 +268,7 @@ class AddressPage:
         self.driver.find_element("xpath", self.address_delegation_cta).click()
         self.logger.info(">>clicked on delegations tab")
 
-    def verify_all_links_in_delegation_table(self, count):
-        """
-        Verify all the links present in delegations tab are working as expected in
-         new address url
-         https://tracker.icon.community/address/hxb86afed8db896012664b0fa6c874fe0e3001edaf
-        """
-
+    def verify_all_links_in_delegation_table(self, count: int):
         self.logger.info(">>verifying all the links in delegations tab")
         AutomationUtils.wait_for_element_to_load(self, self.address_delegation_table)
         items = self.driver.find_elements("xpath", self.address_delegation_table)

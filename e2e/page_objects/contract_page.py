@@ -1,11 +1,12 @@
 import time
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 from e2e.utilities.automation_utils import AutomationUtils
 from e2e.utilities.logger import LogGen
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
+from e2e.config import config
 
 
 class ContractPage:
@@ -64,7 +65,7 @@ class ContractPage:
                                       , 'not_navigated_to_name_page.png')
             assert False
 
-    def verify_contractor_page(self, value):
+    def verify_contract_page(self, value):
         """Verify if user is redirected to correct contractor page."""
         self.logger.info(">>waiting for creator link to be visible")
         if self.driver.find_element("xpath", self.contract_creator_text % value):
@@ -202,7 +203,7 @@ class ContractPage:
 
     def verify_code_block_visible(self):
         self.logger.info(">>verifying the code block exists")
-        time.sleep(3)
+        time.sleep(config.default_sleep)
         if self.driver.find_element('xpath', self.contract_code_block):
             assert True
         else:
@@ -234,7 +235,7 @@ class ContractPage:
 
     def verify_total_number_in_events_list_view(self, count):
         self.logger.info(">>verifying the total number of events in list view")
-        time.sleep(5)
+        time.sleep(config.default_sleep)
         AutomationUtils.wait_for_element_to_load(self, self.contract_events_list_view)
         elements = self.driver.find_elements('xpath', self.contract_events_list_view)
         self.logger.info(">>length of list is +=" + str(len(elements)))
