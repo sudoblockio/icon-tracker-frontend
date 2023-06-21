@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.18](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.17...v0.2.18) (2023-06-21)
+
+
+### Bug Fixes
+
+* bonded tab in address page [#202](https://github.com/sudoblockio/icon-tracker-frontend/issues/202) ([b1cb0ab](https://github.com/sudoblockio/icon-tracker-frontend/commit/b1cb0ab5834df269512fc5abb04bf3334536baa2))
+* This commits fixes [#200](https://github.com/sudoblockio/icon-tracker-frontend/issues/200). The solution implemented to fix this issue is that now when someone clicks on an address in the bonders tab the state of the current active tab gets reset to the first tab (Transactions) ([8c9c917](https://github.com/sudoblockio/icon-tracker-frontend/commit/8c9c9176ff6e7e705d28aaad7143268de7be6188))
+
 ## [0.2.17](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.16...v0.2.17) (2023-04-06)
 
 
