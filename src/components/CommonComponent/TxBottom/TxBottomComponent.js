@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { withRouter } from "react-router-dom";
 import TxBottomTitle from "./TxBottomTitle";
 import {
@@ -217,11 +217,11 @@ function CustomHeader({
           goAllTx={goAllTx}
           fromAddr={"hello"}
         />
-        {(txTypeIsBonded(txType) && isLogged) ? (
+        {txTypeIsBonded(txType) && isLogged ? (
           <button onClick={openBondedModal} className={customStyles.button}>
             Update
           </button>
-        ) : (txTypeIsBonder(txType) && isLoggedAsPrep) ? (
+        ) : txTypeIsBonder(txType) && isLoggedAsPrep ? (
           <button onClick={openBondersModal} className={customStyles.button}>
             Update
           </button>

@@ -51,6 +51,9 @@ function AddressTabs(props) {
   } = props;
   const { loading, data } = wallet;
   const { address } = data;
+  console.log("walletAddress and address");
+  console.log(walletAddress);
+  console.log(address);
 
   let bondObj = {};
   const getEachBond = async addr => {
@@ -210,14 +213,26 @@ function AddressTabs(props) {
     if (rewards ? rewards.data.length : null) {
       TABS.push(ADDRESS_TABS[5]);
     }
-    if (bondList ? bondList.length : null) {
+    // If the logged user is in the address page of the logged
+    // wallet show the bonded tab
+    if ((bondList ? bondList.length : null) || walletAddress === address) {
       TABS.push(ADDRESS_TABS[6]);
     }
     if (bonderList ? bonderList.length : null) {
       TABS.push(ADDRESS_TABS[7]);
     }
     setTabs(TABS);
-  }, [intTx, tokenTransfers, deleg, voted, rewards, bondList, bonderList]);
+  }, [
+    intTx,
+    tokenTransfers,
+    deleg,
+    voted,
+    rewards,
+    bondList,
+    bonderList,
+    walletAddress,
+    data.address
+  ]);
 
   useEffect(() => {
     listAddressTx();
