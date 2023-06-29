@@ -30,7 +30,7 @@ class Footer extends Component {
 								<li className="brunch"><a target='_black' href="https://brunch.co.kr/@helloiconworld"><span className="img"></span></a></li>
 								<li className="twitter"><a target='_black' href="https://twitter.com/helloiconworld"><span className="img"></span></a></li>
 								<li className="facebook"><a target='_black' href="https://www.facebook.com/helloicon"><span className="img"></span></a></li>
-								<li className="github"><a target='_black' href="https://github.com/icon-project"><span className="img"></span></a></li>
+								<li className="github"><a target='_black' href="https://github.com/sudoblockio/icon-tracker-frontend"><span className="img"></span></a></li>
 							</ul>
 							<div className="mainnet"><p>{this.state.current}<i className="img"></i></p>
 								<ul>
