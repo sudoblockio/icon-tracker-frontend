@@ -66,9 +66,12 @@ The e2e tests run with selenium and pytest. To run them, you will first need to 
  python installed with the virtual environment module. Then run: 
 
 ```shell
+# Install e2e test dependencies (pytest / selenium)
 python3 -m venv env
 source env/bin/activate
 pip install -r e2e/requirements.txt
+# Run the application 
+npm run start 
 # Then you can run the tests 
 make test-e2e
 ```
