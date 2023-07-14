@@ -104,3 +104,24 @@ REACT_APP_API_ENDPOINT=https://tracker.lisbon.icon.community/
 REACT_APP_WSS_ENDPOINT=wss://tracker.lisbon.icon.community/
 REACT_APP_NID=42
 ```
+
+## Contributing 
+
+We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for within this repo to generate our [changelog](./CHANGELOG.md) and manage our release cycle. All commits should use one of these three prefixes:
+
+- feat: <commit message>
+  - Implement a new major feature to the tracker (ie a new page / view / data)
+  - Increments minor version 
+  - Should tag issue in commit message (ie `feat: add awesome page #123`)
+- fix: <commit message>
+  - Fix something / implement a small change per new standards (ie add some governance variable)
+  - Increments patch version
+  - Should tag issue in commit message (ie `fix: some page #123`)
+- chore: <commit message>
+  - All commits except for above 
+  - Does not increment version 
+  - No need to tag issue unless relevant (ie `chore: move some thing #123`)
+
+All contributions should be in the form of a PR with branch names suggestive of the issue being addressed (ie `fix-something`).
+
+[License](./LICENSE)
