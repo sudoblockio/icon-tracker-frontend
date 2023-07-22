@@ -169,7 +169,7 @@ class TxTableBody extends Component {
               <td
                 className="on"
                 onClick={() => {
-                  window.open("/address/" + data.address);
+                  window.open("/address/" + data.address, "_self");
                 }}
               >
                 {/* <span className={"prep-tag" + addUnregisteredStyle(data.status, data.grade)}>{badgeTitle}</span> */}
@@ -199,7 +199,7 @@ class TxTableBody extends Component {
               <td
                 className="on"
                 onClick={() => {
-                  window.open("/address/" + data.address);
+                  window.open("/address/" + data.address,  "_self");
                 }}
               >
                 {data.address}
