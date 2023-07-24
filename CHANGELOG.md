@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.19](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.18...v0.2.19) (2023-07-24)
+
+
+### Bug Fixes
+
+* add xyz origin to config ([168d8a2](https://github.com/sudoblockio/icon-tracker-frontend/commit/168d8a2867ba5f6df215be616fa31bfb55fc452c))
+
 ## [0.2.18](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.17...v0.2.18) (2023-06-21)
 
 
