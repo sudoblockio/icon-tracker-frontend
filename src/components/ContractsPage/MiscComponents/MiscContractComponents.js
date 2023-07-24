@@ -25,6 +25,8 @@ function ReadMethodItems({
           methods[methodName].inputs.readonly === "0x1"
             ? methods[methodName].inputs.inputs.length > 0
               ? true
+              : methods[methodName].inputs.outputs.length < 1
+              ? false
               : methods[methodName].inputs.outputs[0].type === "dict" ||
                 methods[methodName].inputs.outputs[0].type === "list"
               ? true
@@ -116,7 +118,9 @@ function CollapsableComponent({
   const [eventlogState, setEventlogState] = useState("");
   const outputType =
     methodInput.readonly != null && methodInput.readonly === "0x1"
-      ? methodInput.outputs[0].type
+      ? methodInput.outputs.length < 1
+        ? ""
+        : methodInput.outputs[0].type
       : "";
   const parsedMethodOutput =
     methodInput.readonly != null && methodInput.readonly === "0x1"
@@ -144,8 +148,6 @@ function CollapsableComponent({
   }
 
   function parseResponse(response) {
-    console.log("response");
-    console.log(response);
     if (response.error === "") {
       const parsedResponse = isReadonly
         ? JSON.stringify(response.valueArray)
@@ -182,7 +184,6 @@ function CollapsableComponent({
       setEventlogState(parsedEventlog);
     }
     const parsedResponse = parseResponse(methodOutput);
-    console.log("parsed Response: ", parsedResponse);
     setResponseState(parsedResponse);
 
     if (methodOutput.error === "") {
