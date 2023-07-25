@@ -315,7 +315,7 @@ class GovernancePage extends Component {
 											{!blackChecked && <th>Bonded<br/><em>Total Bond /<br/>% Bonded</em></th>}
 											{!blackChecked && <th>Total Votes</th>}
 											<th>Power</th>
-											<th>Monthly<br/> Rewards<br/><em>ICX / USD</em></th>
+											<th>Monthly<br/> Rewards<br/><em>ICX /<br/>USD</em></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -455,7 +455,7 @@ class TableRow extends Component {
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
 				<td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
 				<td><span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
-				<em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em></td>
+				<em>${numberWithCommas(Number(reward_monthly_usd).toFixed())}</em></td>
 			</tr>
 		)
 	}
