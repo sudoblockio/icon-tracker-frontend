@@ -34,16 +34,13 @@ const TxAddressCell = ({ isError, address }) => {
     _address = "-";
     className = "no";
   } else {
-    const _isHxAddress = isHxAddress(address);
-    _address = _isHxAddress ? (
+    _address = (
       <AddressLink
         to={address}
         label={<span className="ellipsis">{address}</span>}
       />
-    ) : (
-      address
-    );
-    className = `${isError ? "icon error" : ""} ${_isHxAddress ? "on" : ""}`;
+    )
+    className = `${isError ? "icon error" : "on"}`;
   }
   return (
     <td className={className}>
