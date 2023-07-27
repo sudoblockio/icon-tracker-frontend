@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.20](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.19...v0.2.20) (2023-07-25)
+
+
+### Bug Fixes
+
+* add reward column to governance table [#271](https://github.com/sudoblockio/icon-tracker-frontend/issues/271) ([d678f77](https://github.com/sudoblockio/icon-tracker-frontend/commit/d678f771a056b0e2b87244b2912fb91645937f70))
+
 ## [0.2.19](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.18...v0.2.19) (2023-07-24)
 
 
