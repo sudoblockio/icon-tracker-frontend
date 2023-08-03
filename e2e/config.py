@@ -20,6 +20,8 @@ class Config(BaseSettings):
     browser: str = "chrome"
     headless: bool = True
 
+    metadata: dict = {}
+
     class Config:
         case_sensitive = False
         env_prefix = 'e2e_'
