@@ -11,12 +11,12 @@ import {
     TX_TYPE,
     TOKEN_TABS,
 } from '../../../../utils/const'
-import {getTokenDecimals, getTokenTotalSupply} from '../../../../redux/store/iiss'
+import { getTokenDecimals, getTokenTotalSupply } from '../../../../redux/store/iiss'
 // import {tokenHoldersList, tokenTransfersList} from "../../../../redux/api/restV3";
 
 class TokenTabs extends Component {
 
-    async componentDidMount(){
+    async componentDidMount() {
         // this.transferCount = await tokenTransfersList({contractAddr: this.props.match.params.tokenId})
         // this.holdersCount = await tokenHoldersList({contractAddr: this.props.match.params.tokenId})
         // this.transferCount = this.transferCount.headers["x-total-count"]
@@ -61,7 +61,7 @@ class TokenTabs extends Component {
                             return (
                                 <TokenContractRead
                                     contract={{ data: { address } }}
-                                    contractInfo={contractInfo}
+                                    contractReadWriteInfo={contractInfo}
                                     icxCall={this.props.icxCall}
                                 />
                             )
