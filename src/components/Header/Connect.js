@@ -1,103 +1,122 @@
-import React, { Component } from 'react'
-import { requestAddress } from '../../utils/connect'
-import { CopyButton } from '../../components'
-import checkIconex from 'check-iconex'
-import NotificationManager from '../../utils/NotificationManager'
+import React, { useState, useEffect, Component } from "react";
+import { requestAddress } from "../../utils/connect";
+import { CopyButton } from "../../components";
+import checkIconex from "check-iconex";
+import NotificationManager from "../../utils/NotificationManager";
 
-class Connect extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            disabled: false,
-            walletAddress: this.props.walletAddress,
-        }
+import styles from "./Connect.module.css";
+
+const Connect = props => {
+  const [disabled, setDisabled] = useState(false);
+  const [walletAddress, setWalletAddress] = useState(props.walletAddress);
+  const [isHover, setIsHover] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(
+        1000,
+        2000
+      );
+      setDisabled(!(isChrome && iconexInstalled && hasIconWallet));
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (props.walletAddress !== walletAddress) {
+      setWalletAddress(props.walletAddress);
+      window.dispatchEvent(
+        new CustomEvent("CUSTOM_FX", { detail: { type: "SET_WALLET" } })
+      );
+    }
+  }, [props.walletAddress]);
+
+  const getWalletAddress = async () => {
+    if (disabled) {
+      window.open(
+        "https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel",
+        "_blank"
+      );
+      return;
     }
 
-    async componentDidMount() {
-        const { isChrome, iconexInstalled, hasIconWallet } = await checkIconex(1000, 2000)
-        this.setState({
-            disabled: !(isChrome && iconexInstalled && hasIconWallet),
-        })
+    if (walletAddress) {
+      return;
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.walletAddress !== this.props.walletAddress) {
-            this.setState(
-                {
-                    walletAddress: nextProps.walletAddress,
-                },
-                () => {
-                    window.dispatchEvent(
-                        new CustomEvent('CUSTOM_FX', {
-                            detail: { type: 'SET_WALLET' },
-                        }),
-                    )
-                },
-            )
-        }
-    }
+    const address = await requestAddress();
+    setWalletAddress(address);
+    window.dispatchEvent(
+      new CustomEvent("CUSTOM_FX", { detail: { type: "SET_WALLET" } })
+    );
+    props.setAddress(address);
+    props.history.push(`/address/${address}`);
+  };
 
-    getWalletAddress = async () => {
-        if (this.state.disabled) {
-            window.open('https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel', '_blank')
-            return
-        }
+  const disconnect = () => {
+    setWalletAddress(undefined);
+    props.clearWallet();
+    NotificationManager.deregisterServiceWorker();
+  };
 
-        if (this.state.walletAddress) {
-            return
-        }
-        
-        const walletAddress = await requestAddress()
-        this.setState({ walletAddress }, () => {
-            window.dispatchEvent(
-                new CustomEvent('CUSTOM_FX', {
-                    detail: { type: 'SET_WALLET' },
-                }),
-            )
-            this.props.setAddress(walletAddress)
-            this.props.history.push(`/address/${walletAddress}`)
-        })
-    }
+  const handleMouseEnter = e => {
+    setIsHover(true);
+  };
 
+  const handleMouseLeave = e => {
+    setIsHover(false);
+  };
 
-    disconnect = () => {
-        this.setState({ walletAddress: undefined }, () => {
-            this.props.clearWallet()
-            NotificationManager.deregisterServiceWorker()
-        })
-    }
+  return (
+    <div
+      className={
+        walletAddress ? `${styles.connect} ${styles.join}` : `${styles.connect}`
+      }
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span className={isHover ? "on" : ""}>
+        <em className="img" />
+      </span>
+      {walletAddress ? (
+        <div
+          className={styles.subMenu}
+          style={isHover ? { display: "block" } : { display: "none" }}
+        >
+          <p>
+            <span>Wallet Address</span>
+            <CopyButton
+              data={walletAddress}
+              title={"Copy Address"}
+              wallet={true}
+            />
+          </p>
+          <span className={styles.btn} onClick={disconnect}>
+            Disconnect
+          </span>
+          <span
+            className={styles.btn}
+            onClick={() => props.history.push(`/address/${walletAddress}`)}
+          >
+            View Details
+          </span>
+        </div>
+      ) : (
+        <div
+          className={styles.subMenu}
+          style={isHover ? { display: "block" } : { display: "none" }}
+        >
+          <div className={styles.connectionSelectContainer}>
+            <span className={styles.btn2} onClick={getWalletAddress}>
+              Connect with ICONEX or Hana.
+            </span>
+            <span className={styles.btn2}>Connect with Ledger</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-    render() {
-        const { walletAddress } = this.state
-        return (
-            <div className={`connect ${walletAddress ? 'join' : ''}`}>
-                <span onClick={this.getWalletAddress}>
-                    <em className="img" />
-                </span>
-                {walletAddress ? (
-                    <div className="sub-menu">
-                        <p>
-                            <span>Wallet Address</span>
-                            <CopyButton data={walletAddress} title={'Copy Address'} wallet={true} />
-                        </p>
-                        <span className="btn" onClick={this.disconnect}>
-                            Disconnect
-                        </span>
-                        <span
-                            className="btn"
-                            onClick={() => {
-                                this.props.history.push(`/address/${walletAddress}`)
-                            }}
-                        >
-                            View Details
-                        </span>
-                    </div>
-                ) : (
-                    ''
-                )}
-            </div>
-        )
-    }
-}
-
-export default Connect
+export default Connect;
