@@ -20,7 +20,7 @@ class Config(BaseSettings):
     browser: str = "chrome"
     headless: bool = True
 
-    metadata: dict = {}
+    _metadata: dict = {}
 
     class Config:
         case_sensitive = False
