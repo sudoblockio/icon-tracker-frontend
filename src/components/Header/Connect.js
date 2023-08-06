@@ -55,7 +55,22 @@ function Connect(props) {
       auth: loginData
     };
 
+    console.log("login data");
+    console.log(newLocalData);
     handleLocalDataChange(newLocalData);
+
+    //
+    const address = loginData.selectedWallet;
+    setWalletAddress(address);
+    window.dispatchEvent(
+      new CustomEvent("CUSTOM_FX", {
+        detail: { type: "SET_WALLET" }
+      })
+    );
+    props.setAddress(address);
+    props.history.push(`/address/${address}`);
+    closeLoginModal();
+    
   }
 
   //
@@ -101,15 +116,18 @@ function Connect(props) {
       return;
     }
 
-    const address = await requestAddress();
-    setWalletAddress(address);
-    window.dispatchEvent(
-      new CustomEvent("CUSTOM_FX", {
-        detail: { type: "SET_WALLET" }
-      })
-    );
-    props.setAddress(address);
-    props.history.push(`/address/${address}`);
+    // trigger the modal window to select which type of login
+    handleLogin();
+    // const address = await requestAddress();
+    // setWalletAddress(address);
+    // window.dispatchEvent(
+    //   new CustomEvent("CUSTOM_FX", {
+    //     detail: { type: "SET_WALLET" }
+    //   })
+    // );
+    // props.setAddress(address);
+    // props.history.push(`/address/${address}`);
+    //
   };
 
   const disconnect = () => {
@@ -120,11 +138,11 @@ function Connect(props) {
 
   return (
     <div className={`connect ${walletAddress ? "join" : ""}`}>
-        <LoginModal
-          isOpen={loginModalIsOpen}
-          onRequestClose={closeLoginModal}
-          onRetrieveData={getDataFromLoginModal}
-        />
+      <LoginModal
+        isOpen={loginModalIsOpen}
+        onRequestClose={closeLoginModal}
+        onRetrieveData={getDataFromLoginModal}
+      />
       <span onClick={getWalletAddress}>
         <em className="img" />
       </span>
@@ -154,25 +172,5 @@ function Connect(props) {
     </div>
   );
 }
-
-// function App() {
-
-//   return (
-//     <div className={styles["App"]}>
-//       <header className={styles["App-header"]}>
-//         <h2>Login with ICON</h2>
-//         <button className={styles["App-button-login"]} onClick={toggleLogin}>
-//           {localData.auth.successfulLogin ? <p>Log out</p> : <p>Log in</p>}
-//         </button>
-//         <LoginModal
-//           isOpen={loginModalIsOpen}
-//           onRequestClose={closeLoginModal}
-//           onRetrieveData={getDataFromLoginModal}
-//         />
-//         <p>Login data: {JSON.stringify(localData)}</p>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default Connect;

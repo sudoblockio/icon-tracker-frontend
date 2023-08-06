@@ -6,6 +6,7 @@ import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import { v4 as uuidv4 } from "uuid";
 import { getIcxBalance } from "./utils/lib";
 import GenericModal from "../GenericModal/genericModal";
+import { requestAddress } from "../../../utils/connect";
 
 import styles from "./LoginModal.module.css";
 import cancelImg from "../../../Assets/cancel-logo.png";
@@ -181,57 +182,13 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen }) {
     closeLedgerModal();
   }
 
-  useEffect(() => {
-    function iconexRelayResponseEventHandler(evnt) {
-      const { type, payload } = evnt.detail;
-      const localLoginData = getLoginDataInitState();
-
-      switch (type) {
-        case "RESPONSE_ADDRESS":
-          localLoginData.selectedWallet = payload;
-          localLoginData.methodUsed = LOGIN_METHODS.iconex;
-          localLoginData.successfulLogin = true;
-          break;
-
-        case "CANCEL":
-          console.log("ICONex/Hana wallet selection window closed by user");
-          break;
-
-        default:
-          console.error("Error on ICONEX_RELAY_RESPONSE");
-          console.error("type: " + type);
-          console.error("payload: ", payload);
-      }
-
-      // send data to parent component
-      handleLoginData(localLoginData);
-
-      // close LoginModal
-      closeModal();
-    }
-    // create event listener for Hana and ICONex wallets
-    window.addEventListener(
-      "ICONEX_RELAY_RESPONSE",
-      iconexRelayResponseEventHandler
-    );
-
-    // return the following function to perform cleanup of the event listener
-    // on component unmount
-    return function removeCustomEventListener() {
-      window.removeEventListener(
-        "ICONEX_RELAY_RESPONSE",
-        iconexRelayResponseEventHandler
-      );
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={styles.main}>
       <LoginSelectionModal
         isOpen={isOpen}
         closeModal={closeModal}
         handleLedgerLogin={handleLedgerLogin}
+        handleLoginData={handleLoginData}
       />
       <LedgerModal
         isOpen={ledgerModalOn}
@@ -250,16 +207,20 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen }) {
   );
 }
 
-function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin }) {
-  function handleIconLogin() {
-    // login with ICONex or Hana wallets
-    window.dispatchEvent(
-      new CustomEvent("ICONEX_RELAY_REQUEST", {
-        detail: {
-          type: "REQUEST_ADDRESS"
-        }
-      })
-    );
+function LoginSelectionModal({
+  isOpen,
+  closeModal,
+  handleLedgerLogin,
+  handleLoginData
+}) {
+  async function handleIconLogin() {
+    const address = await requestAddress();
+    const localLoginData = getLoginDataInitState();
+    localLoginData.selectedWallet = address;
+    localLoginData.methodUsed = LOGIN_METHODS.iconex;
+    localLoginData.successfulLogin = true;
+    // send data to parent component
+    handleLoginData(localLoginData);
   }
 
   return isOpen ? (
