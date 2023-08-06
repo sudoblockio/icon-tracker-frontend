@@ -1,15 +1,17 @@
 // Modal react component for login with ICON
 //
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Icx from "./utils/hw-app-icx/Icx2.js";
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import { v4 as uuidv4 } from "uuid";
 import { getIcxBalance } from "./utils/lib";
 import GenericModal from "../GenericModal/genericModal";
 
-import "@fontsource/lato";
 import styles from "./LoginModal.module.css";
+import cancelImg from "../../../Assets/cancel-logo.png";
+import hanaImg from "../../../Assets/hana-logo.jpg";
+import iconImg from "../../../Assets/icon-logo.png";
+import ledgerImg from "../../../Assets/ledger-logo.png";
 
 const customStyles = {
   content: {
@@ -272,20 +274,10 @@ function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin }) {
           </div>
           <div className={styles.bodySectionItem}>
             <span className={styles.bodySectionItemImg}>
-              <Image
-                src="/icon-logo.png"
-                alt="icon logo"
-                width={48}
-                height={48}
-              />
+              <img alt="" src={iconImg} />
             </span>
             <span className={styles.bodySectionItemImg}>
-              <Image
-                src="/hana-logo.jpg"
-                alt="icon logo"
-                width={48}
-                height={48}
-              />
+              <img alt="" src={hanaImg} />
             </span>
           </div>
         </div>
@@ -296,12 +288,7 @@ function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin }) {
           </div>
           <div className={styles.bodySectionItem}>
             <span className={styles.bodySectionItemImg}>
-              <Image
-                src="/ledger-logo.png"
-                alt="icon logo"
-                width={96}
-                height={48}
-              />
+              <img alt="" src={ledgerImg} />
             </span>
           </div>
         </div>
@@ -331,13 +318,7 @@ function LedgerModal({
       {ledgerModalIsWaiting ? (
         <div className={styles.ledger}>
           <div className={styles.ledgerSection}>
-            <Image
-              src="/icon-logo.png"
-              className={styles.ledgerLogo}
-              alt="icon logo"
-              width={48}
-              height={48}
-            />
+            <img src={iconImg} alt="" />
             <p>Connecting to ledger...</p>
           </div>
         </div>
@@ -384,13 +365,7 @@ function LedgerModal({
       ) : (
         <div className={styles.ledger}>
           <div className={styles.ledgerSection}>
-            <Image
-              src="/cancel-logo.png"
-              className={styles.ledgerLogo}
-              alt="icon logo"
-              width={48}
-              height={48}
-            />
+            <img src={cancelImg} alt="" />
             <p>
               Failed to connect Ledger, try refreshing the page and/or
               reconnecting device.

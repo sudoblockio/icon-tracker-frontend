@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bignumber.js": "^9.1.1",
+    "buffer": "^6.0.3",
     "chart.js": "^4.3.2",
     "check-iconex": "^0.0.8",
     "clipboard": "^2.0.11",
@@ -18,6 +19,7 @@
     "moment": "^2.29.4",
     "object-assign": "^4.1.1",
     "path": "^0.12.7",
+    "process": "^0.11.10",
     "qrcode": "^1.5.3",
     "query-string": "^8.1.0",
     "react": "^16.14.0",
@@ -37,14 +39,15 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.2.3",
     "sass": "^1.64.1",
+    "stream-browserify": "^3.0.0",
     "web-vitals": "^2.1.4",
     "web3-utils": "^4.0.3"
   },
   "scripts": {
-    "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -68,5 +71,8 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!(axios|query-string|decode-uri-component|split-on-first|filter-obj)/)"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }
