@@ -51,8 +51,10 @@ function Connect(props) {
   function getDataFromLoginModal(loginData) {
     // Callback function that gets called from within LoginModal
     // to pass login data into parent
+    console.log("####LOGIN DATA####");
+    console.log(loginData);
     const newLocalData = {
-      auth: loginData
+      auth: {...loginData}
     };
 
     console.log("login data");
@@ -60,7 +62,7 @@ function Connect(props) {
     handleLocalDataChange(newLocalData);
 
     //
-    const address = loginData.selectedWallet;
+    const address = newLocalData.auth.selectedWallet;
     setWalletAddress(address);
     window.dispatchEvent(
       new CustomEvent("CUSTOM_FX", {
@@ -118,16 +120,6 @@ function Connect(props) {
 
     // trigger the modal window to select which type of login
     handleLogin();
-    // const address = await requestAddress();
-    // setWalletAddress(address);
-    // window.dispatchEvent(
-    //   new CustomEvent("CUSTOM_FX", {
-    //     detail: { type: "SET_WALLET" }
-    //   })
-    // );
-    // props.setAddress(address);
-    // props.history.push(`/address/${address}`);
-    //
   };
 
   const disconnect = () => {

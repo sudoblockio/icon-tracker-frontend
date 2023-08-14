@@ -20,6 +20,7 @@
 .ledgerSection {
   display: flex;
   flex-flow: column;
+  flex: 1;
   /* align-items: center; */
   /* justify-content: space-between; */
   align-self: stretch;
@@ -39,12 +40,19 @@
   max-height: 300px;
   overflow-y: scroll;
 }
+
+.ledgerSectionWalletContent {
+  padding: 5px;
+}
+
 .ledgerSectionWalletSection {
   border-bottom: 2px solid grey;
   margin: 0px 10px 0px 0px;
   display: flex;
   flex-flow: row;
   cursor: pointer;
+  justify-content: space-between;
+  color: #000;
 }
 .ledgerAddressSelected {
   background-color: #d8d8d8;

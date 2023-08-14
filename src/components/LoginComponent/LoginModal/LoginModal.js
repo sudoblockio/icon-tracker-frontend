@@ -152,15 +152,17 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen }) {
     setIndexOfLedgerAddressSelected(walletIndex);
 
     // set wallet info on loginData
-    let newLoginData = loginData;
-    newLoginData.selectedWallet = ledgerAddressesState[walletIndex].icxAddress;
-    newLoginData.bip44Path = ledgerAddressesState[walletIndex].bip44Path;
-    setLoginData(newLoginData);
+    setLoginData(state => {
+      const newState = { ...state };
+      newState.selectedWallet = ledgerAddressesState[walletIndex].icxAddress;
+      newState.bip44Path = ledgerAddressesState[walletIndex].bip44Path;
+      return newState;
+    });
   }
 
   function handleLedgerWalletSelect() {
     // user selected a ledger wallet and clicked "select" button
-    let newLoginData = loginData;
+    const newLoginData = loginData;
     newLoginData.methodUsed = LOGIN_METHODS.ledger;
     newLoginData.successfulLogin = true;
 
@@ -176,11 +178,19 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen }) {
     const blankLoginData = getLoginDataInitState();
 
     // reset login data back to initial values
-    for (let label in loginData) {
-      loginData[label] = blankLoginData[label];
-    }
+    setLoginData(blankLoginData);
+    // and close modal
     closeLedgerModal();
   }
+
+  useEffect(() => {
+    // if loginData changes
+    // close modal
+    // if (loginData.successfulLogin) {
+    //   closeModal();
+    console.log("loginData changed");
+    console.log(loginData);
+  }, [loginData]);
 
   return (
     <div className={styles.main}>
