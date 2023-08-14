@@ -10,9 +10,9 @@ const LOCAL_KEY = "_UNIQUE_KEY_";
 function Connect(props) {
   const [disabled, setDisabled] = useState(false);
   const [walletAddress, setWalletAddress] = useState(props.walletAddress);
-    //
-    const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-    const [localData, setLocalData] = useState(utils.getInitLocalData());
+  //
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+  const [localData, setLocalData] = useState(utils.getInitLocalData());
 
   function toggleLogin() {
     // toggles between login and logout
@@ -54,7 +54,7 @@ function Connect(props) {
     console.log("####LOGIN DATA####");
     console.log(loginData);
     const newLocalData = {
-      auth: {...loginData}
+      auth: { ...loginData }
     };
 
     console.log("login data");
@@ -64,18 +64,39 @@ function Connect(props) {
     //
     const address = newLocalData.auth.selectedWallet;
     setWalletAddress(address);
-    window.dispatchEvent(
-      new CustomEvent("CUSTOM_FX", {
-        detail: { type: "SET_WALLET" }
-      })
-    );
+    // window.dispatchEvent(
+    //   new CustomEvent("CUSTOM_FX", {
+    //     detail: { type: "SET_WALLET" }
+    //   })
+    // );
     props.setAddress(address);
     props.history.push(`/address/${address}`);
     closeLoginModal();
-    
   }
 
   //
+  const getWalletAddress = async () => {
+    if (disabled) {
+      window.open(
+        "https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel",
+        "_blank"
+      );
+      return;
+    }
+
+    if (walletAddress) {
+      return;
+    }
+
+    // trigger the modal window to select which type of login
+    handleLogin();
+  };
+
+  const disconnect = () => {
+    setWalletAddress(undefined);
+    props.clearWallet();
+    NotificationManager.deregisterServiceWorker();
+  };
 
   useEffect(() => {
     const fetchIconexStatus = async () => {
@@ -105,28 +126,13 @@ function Connect(props) {
     }
   }, [props.walletAddress]);
 
-  const getWalletAddress = async () => {
-    if (disabled) {
-      window.open(
-        "https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel",
-        "_blank"
-      );
-      return;
-    }
-
-    if (walletAddress) {
-      return;
-    }
-
-    // trigger the modal window to select which type of login
-    handleLogin();
-  };
-
-  const disconnect = () => {
-    setWalletAddress(undefined);
-    props.clearWallet();
-    NotificationManager.deregisterServiceWorker();
-  };
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("CUSTOM_FX", {
+        detail: { type: "SET_WALLET" }
+      })
+    );
+  }, [walletAddress]);
 
   return (
     <div className={`connect ${walletAddress ? "join" : ""}`}>
