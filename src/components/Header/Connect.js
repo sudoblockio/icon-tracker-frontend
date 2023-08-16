@@ -61,15 +61,16 @@ function Connect(props) {
     console.log(newLocalData);
     handleLocalDataChange(newLocalData);
 
-    //
+    // fetch wallet address and type of wallet login used
     const address = newLocalData.auth.selectedWallet;
+    const walletType = newLocalData.auth.methodUsed;
+
+    // set wallet address on local component state
     setWalletAddress(address);
-    // window.dispatchEvent(
-    //   new CustomEvent("CUSTOM_FX", {
-    //     detail: { type: "SET_WALLET" }
-    //   })
-    // );
+
+    // set wallet address and type of wallet login on redux store
     props.setAddress(address);
+    props.setWalletType(walletType);
     props.history.push(`/address/${address}`);
     closeLoginModal();
   }
