@@ -2,7 +2,7 @@
 //
 // Functions
 export function getLocalKey() {
-  return "NB-3bfa24fc-763b-4369-a5ff-c229708817d1";
+  return "CT-7E4722532DCF35D6AE292B41426F56D2";
 }
 
 export function getLoginMethods() {

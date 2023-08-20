@@ -1,8 +1,6 @@
 // lib.js
 //
 // Imports
-// const customRequest = require("./customRequest");
-const customFetch = require("./customFetch");
 const SCORES = require("./scores");
 const { getBalance } = require("../../../../redux/store/iiss");
 
@@ -35,23 +33,6 @@ async function getIcxBalance(address, decimals = 2) {
   const balanceRaw = await getBalance(address);
   const parsedBalance = Number(fromHexInLoop(balanceRaw).toFixed(decimals));
   return parsedBalance;
-  // const JSONRPCObject = JSON.stringify({
-  //   ...makeJSONRPCRequestObj("icx_getBalance"),
-  //   params: {
-  //     address: address
-  //   }
-  // });
-
-  // const request = await customFetch(SCORES.apiRoutes.v3, JSONRPCObject);
-  // if (request == null) {
-  //   // Error was raised and handled inside customFetch, the returned value
-  //   // is null. Here we continue returning null and let the code logic
-  //   // after this handle the null values in the most appropiate way depending
-  //   // on the code logic
-  //   return request;
-  // } else {
-  //   return Number(fromHexInLoop(request.result).toFixed(decimals));
-  // }
 }
 
 module.exports = { getIcxBalance };
