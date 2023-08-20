@@ -1,12 +1,10 @@
 // Modal react component for login with ICON
 //
 import { useEffect, useState } from "react";
-import Icx from "./utils/hw-app-icx/Icx2.js";
-import TransportWebHID from "@ledgerhq/hw-transport-webhid";
-import { v4 as uuidv4 } from "uuid";
 import { getIcxBalance } from "./utils/lib";
 import GenericModal from "../GenericModal/genericModal";
 import { requestAddress } from "../../../utils/connect";
+import ledger from "../../../utils/ledger";
 
 import styles from "./LoginModal.module.css";
 import cancelImg from "../../../Assets/cancel-logo.png";
@@ -30,36 +28,7 @@ const LOGIN_METHODS = {
 };
 
 async function retrieveICONLedgerAddresses(count = 20) {
-  const PATH = "44'/4801368'/0'/0'";
-  // connects to a ledger device and retrieve a set amount of ICON
-  // addresses (count)
-  let addressesData = [
-    // {
-    //   bip44Path: "44'/4801368'/0'/0'/n'" // bip44 path of the address
-    //   icxAddress: 'hx49394...' // ICX address for the corresponding bip44path
-    // }
-  ];
-  try {
-    // connects to ledger device via webhid
-    const transport = await TransportWebHID.create();
-
-    const appIcx = new Icx(transport);
-    for (let i = 0; i < count; i++) {
-      let currentPath = PATH + `/${i.toString()}'`;
-      const icxAddress = await appIcx.getAddress(currentPath, false, true);
-
-      addressesData.push({
-        bip44Path: currentPath,
-        icxAddress: icxAddress.address.toString()
-      });
-    }
-
-    return addressesData;
-  } catch (err) {
-    // handles error
-    console.log(`Error: ${err}`);
-    throw new Error(err.message);
-  }
+  return await ledger.getAddresses(count);
 }
 
 function getLoginDataInitState() {
@@ -305,7 +274,7 @@ function LedgerModal({
                         ? `${styles.ledgerSectionWalletSection} ${styles.ledgerAddressSelected}`
                         : `${styles.ledgerSectionWalletSection}`
                     }
-                    key={uuidv4()}
+                    key={`ledger-wallet-${index}`}
                     onClick={() => onSelectLedgerWallet(index)}
                   >
                     <div className={styles.ledgerSectionWalletIndex}>

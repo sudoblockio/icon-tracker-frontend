@@ -202,6 +202,11 @@ function ContractExplorerPage({ wallet, url }) {
       //      if (response.data.result != null) {
       //        if (Array.isArray(response.data.result)) {
       //          if (isValidAbi(response.data.result)) {
+      //          ... do something
+      //          }
+      //        }
+      //      }
+      //    }
       //
       // And define the function 'isValidAbi' with a logic to check
       // if the response.data.result is an array of AbiItem
