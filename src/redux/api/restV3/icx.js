@@ -4,20 +4,23 @@ import IconService, { HttpProvider } from "icon-sdk-js";
 import { getWalletApiUrl } from "./config";
 import axios from "axios";
 
-export async function icxGetScore(params, label = "default", customUrl = "") {
+function makeJsonRpc(method, params) {
+  return {
+    jsonrpc: "2.0",
+    method: method,
+    params: params,
+    id: randomUint32()
+  };
+}
+async function makeRequest(params, method, label = "default", customUrl = "") {
   const walletApi = await walletApiInstance(label, customUrl);
   return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_getScoreApi",
-      params: params,
-      id: randomUint32()
-    };
+    const param = makeJsonRpc(method, params);
 
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
       .then(response => {
-        console.log('response for icx_getScoreApi', response);
+        console.log(`response for ${method}`, response);
         console.log(typeof response);
         resolve(response);
       })
@@ -34,34 +37,31 @@ export async function icxGetScore(params, label = "default", customUrl = "") {
       });
   });
 }
+export async function icxGetScore(params, label = "default", customUrl = "") {
+  return await makeRequest(params, "icx_getScoreApi", label, customUrl);
+}
 
 export async function icxCall(params, label = "default", customUrl = "") {
-  const walletApi = await walletApiInstance(label, customUrl);
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      params: params,
-      id: randomUint32()
-    };
+  return await makeRequest(params, "icx_call", label, customUrl);
+}
 
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
+export async function icxSendTransactionRaw(
+  params,
+  label = "default",
+  customUrl = ""
+) {
+  return await makeRequest(params, "icx_sendTransaction", label, customUrl);
+}
+
+export async function getTransactionResultFromRPCNotSdk(
+  txHash,
+  label = "default",
+  customUrl = ""
+) {
+  const params = {
+    txHash: txHash
+  };
+  return await makeRequest(params, "icx_sendTransaction", label, customUrl);
 }
 
 export async function getTransaction(txHash, label = "default") {
@@ -121,18 +121,22 @@ async function sleep(time = 1000) {
   });
 }
 
-export async function getTxResultWaited(txHash, label = "default", waitSeconds = 5) {
+export async function getTxResultWaited(
+  txHash,
+  label = "default",
+  waitSeconds = 5
+) {
   const result = {
-    error: '',
-    result: ''
+    error: "",
+    result: ""
   };
   for (let i = 0; i < waitSeconds; i++) {
     const response = await getTransactionResultFromRPCNotSdk(txHash, label);
     if (!!response && response.error == null) {
       result.result = response;
-      result.error = '';
+      result.error = "";
       return result;
-    }  else {
+    } else {
       result.error = response.error;
     }
     await sleep(1000);
@@ -141,33 +145,95 @@ export async function getTxResultWaited(txHash, label = "default", waitSeconds =
   return result;
 }
 
-export async function getTransactionResultFromRPCNotSdk(txHash, label = "default") {
-  const walletApi = await walletApiInstance(label);
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_getTransactionResult",
-      params: {
-        "txHash": txHash
-      },
-      id: randomUint32()
-    };
+// TODO: Following code was commented out because it old and was refactored to use makeRequest
+// delete after making sure the refactored code works
+//
+// export async function icxGetScore(params, label = "default", customUrl = "") {
+//   const walletApi = await walletApiInstance(label, customUrl);
+//   return new Promise(resolve => {
+//     const param = {
+//       jsonrpc: "2.0",
+//       method: "icx_getScoreApi",
+//       params: params,
+//       id: randomUint32()
+//     };
 
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
+//     walletApi
+//       .post(`/api/v3`, JSON.stringify(param))
+//       .then(response => {
+//         console.log('response for icx_getScoreApi', response);
+//         console.log(typeof response);
+//         resolve(response);
+//       })
+//       .catch(error => {
+//         if (!!error.response) {
+//           resolve(error.response.data);
+//         } else {
+//           resolve({
+//             error: {
+//               message: error.message
+//             }
+//           });
+//         }
+//       });
+//   });
+// }
+
+// export async function icxCall(params, label = "default", customUrl = "") {
+//   const walletApi = await walletApiInstance(label, customUrl);
+//   return new Promise(resolve => {
+//     const param = {
+//       jsonrpc: "2.0",
+//       method: "icx_call",
+//       params: params,
+//       id: randomUint32()
+//     };
+
+//     walletApi
+//       .post(`/api/v3`, JSON.stringify(param))
+//       .then(response => {
+//         resolve(response);
+//       })
+//       .catch(error => {
+//         if (!!error.response) {
+//           resolve(error.response.data);
+//         } else {
+//           resolve({
+//             error: {
+//               message: error.message
+//             }
+//           });
+//         }
+//       });
+//   });
+// }
+// export async function getTransactionResultFromRPCNotSdk(txHash, label = "default") {
+//   const walletApi = await walletApiInstance(label);
+//   return new Promise(resolve => {
+//     const param = {
+//       jsonrpc: "2.0",
+//       method: "icx_getTransactionResult",
+//       params: {
+//         "txHash": txHash
+//       },
+//       id: randomUint32()
+//     };
+
+//     walletApi
+//       .post(`/api/v3`, JSON.stringify(param))
+//       .then(response => {
+//         resolve(response);
+//       })
+//       .catch(error => {
+//         if (!!error.response) {
+//           resolve(error.response.data);
+//         } else {
+//           resolve({
+//             error: {
+//               message: error.message
+//             }
+//           });
+//         }
+//       });
+//   });
+// }

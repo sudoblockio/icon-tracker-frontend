@@ -7,15 +7,24 @@ function getIcxPath() {
 }
 
 async function signTransaction(serializedTx, accountPath) {
+  console.log('signing transaction with ledger');
+  console.log(serializedTx);
+  console.log(accountPath);
+  let transport = null;
   try {
-    const transport = await TransportWebHID.create();
+    transport = await TransportWebHID.create();
     const appIcx = new Icx(transport);
     const signature = await appIcx.signTransaction(accountPath, serializedTx);
     transport.close();
     return signature;
   } catch (error) {
+    console.log(error);
     console.log(`Error connecting to Ledger: ${error.message}`);
     throw new Error(`Error connecting to Ledger: ${error.message}`);
+  }
+
+  if (transport != null) {
+    transport.close();
   }
 }
 

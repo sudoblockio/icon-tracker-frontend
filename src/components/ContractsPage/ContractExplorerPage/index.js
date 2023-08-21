@@ -12,7 +12,11 @@ import {
   localReadContractInformationFunc
 } from "../contractUtils";
 import config from "../../../config";
-import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
+import {
+  icxGetScore,
+  icxCall,
+  icxSendTransactionRaw
+} from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
 import ledger from "../../../utils/ledger";
 const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED, network } = config;
@@ -138,6 +142,8 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
         paramsData,
         nid
       );
+      console.log("rawMethodCall");
+      console.log(rawMethodCall);
       if (walletType === "ICONEX") {
         // handle signing with ICONex
         const response = await icxSendTransaction({
@@ -156,10 +162,27 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
         });
       } else if (walletType === "LEDGER") {
         // handle signing with ledger
-        console.log('raw method call');
-        console.log(rawMethodCall);
+        // TODO: refactor to show modal window window to handle all the ledger interactions i.e signing, approving, error handling, etc;
+
         const serializedTx = ledger.getSerializedTx(rawMethodCall.params);
-        console.log(serializedTx);
+        try {
+          const signedTx = await ledger.signTransaction(
+            serializedTx,
+            bip44Path
+          );
+          rawMethodCall.params["signature"] = signedTx.signedRawTxBase64;
+          console.log("signed raw tx");
+          console.log(rawMethodCall);
+          const response = await icxSendTransactionRaw(
+            rawMethodCall.params,
+            networkState,
+            endpoint
+          );
+          console.log("response");
+          console.log(response);
+        } catch (e) {
+          alert(e);
+        }
       } else {
         alert(`ERROR: walletType ${walletType} not supported;`);
       }
