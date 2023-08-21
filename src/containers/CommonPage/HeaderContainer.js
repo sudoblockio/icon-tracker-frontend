@@ -4,14 +4,16 @@ import { search } from "../../redux/store/search";
 import {
   setAddress,
   clearWallet,
-  setWalletType
+  setWalletType,
+  setBip44Path
 } from "../../redux/actions/storageActions";
 
 function mapStateToProps(state) {
   return {
     loading: state.search.loading,
     walletAddress: state.storage.walletAddress,
-    walletType: state.storage.walletType
+    walletType: state.storage.walletType,
+    bip44Path: state.storage.bip44Path
   };
 }
 
@@ -20,7 +22,8 @@ function mapDispatchToProps(dispatch) {
     search: param => dispatch(search(param)),
     setAddress: payload => dispatch(setAddress(payload)),
     clearWallet: () => dispatch(clearWallet()),
-    setWalletType: payload => dispatch(setWalletType(payload))
+    setWalletType: payload => dispatch(setWalletType(payload)),
+    setBip44Path: payload => dispatch(setBip44Path(payload))
   };
 }
 

@@ -14,17 +14,12 @@ import {
 import { setPopup } from "../../redux/store/popups";
 
 function mapStateToProps(state) {
-  console.log(state, "whole state in ContractsPageSelectorContainer.js");
-  const copyLocation = JSON.parse(JSON.stringify(state.router.location));
-  console.log(state.router);
-  console.log(state.router.location);
-  console.log("copyLocation");
-  console.log(copyLocation);
-  console.log(copyLocation.pathname);
   return {
     url: state.router.location,
     ...state.contracts,
-    wallet: state.storage.walletAddress
+    wallet: state.storage.walletAddress,
+    walletType: state.storage.walletType,
+    bip44Path: state.storage.bip44Path,
   };
 }
 

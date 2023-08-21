@@ -1,8 +1,22 @@
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import Icx from "./hw-app-icx";
+import { generateHashKey } from "./utils";
 
 function getIcxPath() {
-  return "44'/4801368'/0'/0'"
+  return "44'/4801368'/0'/0'";
+}
+
+async function signTransaction(serializedTx, accountPath) {
+  try {
+    const transport = await TransportWebHID.create();
+    const appIcx = new Icx(transport);
+    const signature = await appIcx.signTransaction(accountPath, serializedTx);
+    transport.close();
+    return signature;
+  } catch (error) {
+    console.log(`Error connecting to Ledger: ${error.message}`);
+    throw new Error(`Error connecting to Ledger: ${error.message}`);
+  }
 }
 
 async function getAddresses(count = 20) {
@@ -27,9 +41,16 @@ async function getAddresses(count = 20) {
   }
 }
 
+function getSerializedTx(txObj) {
+  return generateHashKey(txObj);
+}
+
+
 const ledger = {
   getAddresses,
-  getIcxPath
-}
+  getIcxPath,
+  getSerializedTx,
+  signTransaction
+};
 
 export default ledger;

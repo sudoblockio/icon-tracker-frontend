@@ -33,3 +33,9 @@ export function setWalletType(payload) {
     payload
   };
 }
+export function setBip44Path(payload) {
+  return {
+    type: actionTypes.setBip44Path,
+    payload
+  };
+}

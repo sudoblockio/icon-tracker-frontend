@@ -5,7 +5,8 @@ const initialState = {
   walletAddress: "",
   walletNotification: false,
   walletLanding: false,
-  walletType: ""
+  walletType: "",
+  bip44Path: ""
 };
 
 function checkPayloadNotNull(payload, label) {
@@ -41,6 +42,11 @@ export function storageReducer(state = initialState, action) {
       return Object.assign({}, state, {
         walletType: payload
       });
+    case actionTypes.setBip44PathSuccess:
+      checkPayloadNotNull(payload, actionTypes.setBip44PathSuccess);
+      return Object.assign({}, state, {
+        bip44Path: payload
+      });
     case actionTypes.setNotificationSuccess:
       checkPayloadNotNull(payload, actionTypes.setNotificationSuccess);
       return Object.assign({}, state, {
@@ -51,7 +57,8 @@ export function storageReducer(state = initialState, action) {
         walletAddress: "",
         walletNotification: false,
         walletLanding: false,
-        walletType: ""
+        walletType: "",
+        bip44Path: ""
       });
     default: {
       return state;

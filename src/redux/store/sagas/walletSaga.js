@@ -40,6 +40,16 @@ function* setWalletType(action) {
   }
 }
 
+function* setBip44Path(action) {
+  try {
+    const { payload } = action;
+    if (payload) {
+      yield put({ type: AT.setBip44PathSuccess, payload });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
 function* watchSetAddress() {
   yield takeLatest(AT.setAddress, setAddress);
 }
@@ -56,9 +66,14 @@ function* watchWalletType() {
   yield takeLatest(AT.setWalletType, setWalletType);
 }
 
+function* watchBip44Path() {
+  yield takeLatest(AT.setBip44Path, setBip44Path);
+}
+
 export default function* walletSaga() {
   yield fork(watchSetAddress);
   yield fork(watchSetNotification);
   yield fork(watchClearWallet);
   yield fork(watchWalletType);
+  yield fork(watchBip44Path);
 }

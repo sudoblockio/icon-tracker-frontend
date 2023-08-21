@@ -14,6 +14,7 @@ import {
 import config from "../../../config";
 import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
+import ledger from "../../../utils/ledger";
 const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED, network } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
@@ -38,7 +39,7 @@ function getNetworkState(network) {
   }
 }
 
-function ContractExplorerPage({ wallet, url }) {
+function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
   const [networkState, setNetworkState] = useState(getNetworkState(network));
@@ -121,6 +122,11 @@ function ContractExplorerPage({ wallet, url }) {
     networkState,
     endpoint
   ) {
+    console.log("wallet, walletType, bip44Path");
+    console.log(wallet);
+    console.log(walletType);
+    console.log(bip44Path);
+
     if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
@@ -132,22 +138,31 @@ function ContractExplorerPage({ wallet, url }) {
         paramsData,
         nid
       );
-      //TODO: modify this section to update the method with
-      //the responses
-      const response = await icxSendTransaction({
-        rawTx: { ...rawMethodCall },
-        index: index
-      });
+      if (walletType === "ICONEX") {
+        // handle signing with ICONex
+        const response = await icxSendTransaction({
+          rawTx: { ...rawMethodCall },
+          index: index
+        });
 
-      setContractReadInfo(state => {
-        const prevState = { ...state };
-        prevState[method].outputs = {
-          error: response.error == null ? "" : response.error.message,
-          valueArray: response.data == null ? "" : [response.data.result],
-          state: 1
-        };
-        return prevState;
-      });
+        setContractReadInfo(state => {
+          const prevState = { ...state };
+          prevState[method].outputs = {
+            error: response.error == null ? "" : response.error.message,
+            valueArray: response.data == null ? "" : [response.data.result],
+            state: 1
+          };
+          return prevState;
+        });
+      } else if (walletType === "LEDGER") {
+        // handle signing with ledger
+        console.log('raw method call');
+        console.log(rawMethodCall);
+        const serializedTx = ledger.getSerializedTx(rawMethodCall.params);
+        console.log(serializedTx);
+      } else {
+        alert(`ERROR: walletType ${walletType} not supported;`);
+      }
     }
   }
 

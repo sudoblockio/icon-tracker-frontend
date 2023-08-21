@@ -64,6 +64,7 @@ function Connect(props) {
     // fetch wallet address and type of wallet login used
     const address = newLocalData.auth.selectedWallet;
     const walletType = newLocalData.auth.methodUsed;
+    const bip44Path = newLocalData.auth.bip44Path;
 
     // set wallet address on local component state
     setWalletAddress(address);
@@ -71,6 +72,7 @@ function Connect(props) {
     // set wallet address and type of wallet login on redux store
     props.setAddress(address);
     props.setWalletType(walletType);
+    props.setBip44Path(bip44Path);
     props.history.push(`/address/${address}`);
     closeLoginModal();
   }

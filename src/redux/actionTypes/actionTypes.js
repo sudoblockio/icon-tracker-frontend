@@ -182,7 +182,11 @@ const actionTypes = {
 
   // sets the type of wallet login
   setWalletType: "SET_WALLET_TYPE",
-  setWalletTypeSuccess: "SET_WALLET_TYPE_SUCCESS"
+  setWalletTypeSuccess: "SET_WALLET_TYPE_SUCCESS",
+
+  // sets the bip44 path when login with ledger device
+  setBip44Path: "SET_BIP44_PATH",
+  setBip44PathSuccess: "SET_BIP44_PATH_SUCCESS"
 };
 
 export default actionTypes;
