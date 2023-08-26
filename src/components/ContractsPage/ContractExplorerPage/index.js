@@ -6,6 +6,7 @@ import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
 import { isCxAddress, isValidUrl } from "../../../utils/utils";
 import { customMethod } from "../../../utils/rawTxMaker";
+import GenericModal from "../../GenericModal/genericModal";
 import {
   makeParams,
   createContractMethodsState,
@@ -19,6 +20,7 @@ import {
 } from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
 import ledger from "../../../utils/ledger";
+import iconImg from "../../../Assets/icon-logo.png";
 const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED, network } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
@@ -54,6 +56,11 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
   const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
   const [endpointInputHasFocus, setEndpointInputHasFocus] = useState(null);
+  const [ledgerWaitModalState, setLedgerWaitModalState] = useState(false);
+
+  function closeLedgerModal() {
+    setLedgerWaitModalState(false);
+  }
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -66,7 +73,6 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
   }
 
   function handleFocusChange(hasFocus) {
-    console.log("hasFocus", hasFocus);
     setEndpointInputHasFocus(hasFocus);
   }
 
@@ -126,10 +132,6 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
     networkState,
     endpoint
   ) {
-    console.log("wallet, walletType, bip44Path");
-    console.log(wallet);
-    console.log(walletType);
-    console.log(bip44Path);
 
     if (wallet === "") {
       alert("Please connect to wallet first");
@@ -142,8 +144,13 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
         paramsData,
         nid
       );
-      console.log("rawMethodCall");
-      console.log(rawMethodCall);
+
+      const txResult = {
+        error: "",
+        valueArray: [],
+        state: 0
+      };
+
       if (walletType === "ICONEX") {
         // handle signing with ICONex
         const response = await icxSendTransaction({
@@ -151,19 +158,15 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
           index: index
         });
 
-        setContractReadInfo(state => {
-          const prevState = { ...state };
-          prevState[method].outputs = {
-            error: response.error == null ? "" : response.error.message,
-            valueArray: response.data == null ? "" : [response.data.result],
-            state: 1
-          };
-          return prevState;
-        });
+        txResult.error = response.error == null ? "" : response.error.message;
+        txResult.valueArray =
+          response.data == null ? "" : [response.data.result];
+        txResult.state = 1;
       } else if (walletType === "LEDGER") {
         // handle signing with ledger
-        // TODO: refactor to show modal window window to handle all the ledger interactions i.e signing, approving, error handling, etc;
 
+        // Open modal window telling user to sign transaction on ledger
+        setLedgerWaitModalState(true);
         const serializedTx = ledger.getSerializedTx(rawMethodCall.params);
         try {
           const signedTx = await ledger.signTransaction(
@@ -171,21 +174,30 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
             bip44Path
           );
           rawMethodCall.params["signature"] = signedTx.signedRawTxBase64;
-          console.log("signed raw tx");
-          console.log(rawMethodCall);
           const response = await icxSendTransactionRaw(
             rawMethodCall.params,
             networkState,
             endpoint
           );
-          console.log("response");
-          console.log(response);
+          txResult.valueArray =
+            response.data == null ? "" : [response.data.result];
+          txResult.state = 1;
         } catch (e) {
-          alert(e);
+          txResult.error = e.message;
+          txResult.state = 1;
         }
+
+        // Close modal window
+        setLedgerWaitModalState(false);
       } else {
         alert(`ERROR: walletType ${walletType} not supported;`);
       }
+
+      setContractReadInfo(state => {
+        const prevState = { ...state };
+        prevState[method].outputs = { ...txResult };
+        return prevState;
+      });
     }
   }
 
@@ -211,9 +223,6 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
         networkState,
         endpoint
       );
-
-      console.log("result of icxGetScore");
-      console.log(response);
 
       // TODO: to improve error handling for the icxGetScore
       // response, validate if the response is an object with a
@@ -263,9 +272,6 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
           endpoint
         );
         const abiStateParsed = createContractMethodsState(abiStateFromRedux);
-        console.log("Abi data parsed:");
-        console.log(abiStateFromRedux);
-        console.log(abiStateParsed);
         setContractReadInfo(abiStateParsed);
       }
       setContractAbi(abi);
@@ -468,6 +474,18 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
           </div>
         </div>
       </div>
+      <GenericModal
+        isOpen={ledgerWaitModalState}
+        onClose={closeLedgerModal}
+        useSmall={true}
+      >
+        <div className={styles.ledgerWaitContainer}>
+          <div className={styles.ledgerSection}>
+            <img src={iconImg} alt="Ledger Icon" />
+            <p>Review transaction in your ledger device and approve..</p>
+          </div>
+        </div>
+      </GenericModal>
     </div>
   );
 }

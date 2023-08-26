@@ -553,7 +553,7 @@ class TxTableBody extends Component {
               </td>
             </tr>
           );
-        case TX_TYPE.ADDRESS_BONDERS: // TODO: HERE!
+        case TX_TYPE.ADDRESS_BONDERS:
           console.log(this.props.bondMap[data] > 0, "bonder bonder data");
           console.log("this.props");
           console.log(this.props);
