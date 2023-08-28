@@ -27,7 +27,7 @@ const LOGIN_METHODS = {
   ledger: "LEDGER"
 };
 
-async function retrieveICONLedgerAddresses(count = 20) {
+async function retrieveICONLedgerAddresses(count = 50) {
   return await ledger.getAddresses(count);
 }
 
