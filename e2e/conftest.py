@@ -3,7 +3,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from e2e.config import config
+from config import config
 
 @pytest.fixture
 def setup(browser):
@@ -11,9 +11,14 @@ def setup(browser):
         driver = webdriver.Firefox()
         print("Launching firefox browser.........")
     else:
-        options = Options()
-        options.headless = config.headless
-        driver = webdriver.Chrome(options=options)
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+        driver = webdriver.Chrome(executable_path='e2e/driver/chromedriver', chrome_options=chrome_options)
+
+        # options = Options()
+        # options.headless = config.headless
+        # driver = webdriver.Chrome(options=options)
         print("Launching chrome browser.........")
     return driver
 

@@ -21,9 +21,6 @@ class TestVerifyBondersTabAndAlLinks:
         self.driver.get(config.prep_address_url)
 
         self.addressPageObj.click_on_bonders_tab()
-
-        for i in range(0, 1, 1):
-            self.addressPageObj.verify_all_links_in_bonders_tab_works(count=i)
-            time.sleep(config.default_sleep)
+        self.addressPageObj.verify_all_links_in_bonders_tab_works(count=0)
 
         self.logger.info("********Finished test case Test_007_Verify_bonders_tab_and_all_links...*******")
