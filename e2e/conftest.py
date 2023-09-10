@@ -5,20 +5,15 @@ from selenium.webdriver.chrome.options import Options
 
 from config import config
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def setup(browser):
     if browser == 'firefox':
         driver = webdriver.Firefox()
         print("Launching firefox browser.........")
     else:
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-        driver = webdriver.Chrome(executable_path='e2e/driver/chromedriver', chrome_options=chrome_options)
-
-        # options = Options()
-        # options.headless = config.headless
-        # driver = webdriver.Chrome(options=options)
+        options = Options()
+        options.headless = config.headless
+        driver = webdriver.Chrome(options=options)
         print("Launching chrome browser.........")
     return driver
 
@@ -36,10 +31,10 @@ def browser(request):  # This will return the Browser value to setup method
 
 
 # It is hook for Adding Environment info to HTML Report
-def pytest_configure(config):
-    config._metadata['Project Name'] = 'Icontracker'
-    config._metadata['Module Name'] = 'Testing'
-    config._metadata['Tester'] = 'Hari'
+def pytest_configure():
+    config.metadata['Project Name'] = 'Icontracker'
+    config.metadata['Module Name'] = 'Testing'
+    config.metadata['Tester'] = 'Hari'
 
 
 # It is hook for delete/Modify Environment info to HTML Report

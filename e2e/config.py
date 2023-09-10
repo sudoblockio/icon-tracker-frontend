@@ -3,7 +3,7 @@ from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    base_url: str = "https://tracker.icon.community"
+    base_url: str = "http://localhost:3000"
 
     prep_address: str = "hxfba37e91ccc13ec1dab115811f73e429cde44d48"
     prep_address_url: str = f"{base_url}/address/{prep_address}"
@@ -20,7 +20,7 @@ class Config(BaseSettings):
     browser: str = "chrome"
     headless: bool = True
 
-    _metadata: dict = {}
+    metadata: dict = {}
 
     class Config:
         case_sensitive = False
