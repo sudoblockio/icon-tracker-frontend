@@ -29,7 +29,7 @@ class ContractPage:
     contract_token_transfer_list = "//td[contains(@class, ' on')]//a//*[@class='ellipsis']"
     contract_code_tab_cta = "//li[contains(text(),'Code')][1]"
     contract_code_block = "//*[contains(@class, 'code-box api')]"
-    contract_read_contract_tab_cta = "//li[contains(text(),'Read Contract')][1]"
+    contract_read_contract_tab_cta = "//li[contains(text(),'Contract')][1]"
     contract_read_contract_list = "//ul[@class='list']"
     contract_events_tab_cta = "//li[contains(text(),'Events')][1]"
     contract_events_list_view = "//td[contains(@class, 'on')]//span[@class='ellipsis']"
@@ -154,7 +154,7 @@ class ContractPage:
         self.logger.info(">>pagination initiated")
 
     def verify_page_count_from_url(self, expected_count):
-        self.logger.info(">>verifying the page count from the URL")
+        self.logger.info(">>verifying the page count from the URL "+str(expected_count))
         time.sleep(3)
         if str(expected_count) in self.driver.current_url:
             assert True
@@ -220,7 +220,7 @@ class ContractPage:
         self.logger.info(">>verifying read contract list exist")
         AutomationUtils.wait_for_element_to_load(self, self.contract_read_contract_list)
         element = self.driver.find_element('xpath', self.contract_read_contract_list)
-        items = element.find_elements(By.TAG_NAME, 'li')
+        items = element.find_elements(By.TAG_NAME, 'div')
         if len(items) > 0:
             assert True
         else:

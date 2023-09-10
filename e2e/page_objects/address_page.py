@@ -88,6 +88,7 @@ class AddressPage:
         try:
             self.logger.info(">>trying to verify transaction detail page")
             time.sleep(config.default_sleep)
+            AutomationUtils.wait_for_element_to_load(self, self.address_title)
             var = self.driver.find_element("xpath", self.address_title).text
             if title in var:
                 self.logger.info(">>transaction detail page verified")
@@ -274,7 +275,6 @@ class AddressPage:
         var = items[count].text
         self.logger.info(">>delegation value " + var)
         items[count].click()
-        self.driver.switch_to.window(self.driver.window_handles[1])
         time.sleep(config.default_sleep)
         self.logger.info(">>delegation value " + self.driver.current_url)
         if var in self.driver.current_url:
