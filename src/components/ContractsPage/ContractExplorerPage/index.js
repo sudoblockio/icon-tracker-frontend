@@ -6,14 +6,21 @@ import ButtonSet from "../MiscComponents/ButtonSet";
 import styles from "./ContractExplorerPage.module.css";
 import { isCxAddress, isValidUrl } from "../../../utils/utils";
 import { customMethod } from "../../../utils/rawTxMaker";
+import GenericModal from "../../GenericModal/genericModal";
 import {
   makeParams,
   createContractMethodsState,
   localReadContractInformationFunc
 } from "../contractUtils";
 import config from "../../../config";
-import { icxGetScore, icxCall } from "../../../redux/api/restV3/icx";
+import {
+  icxGetScore,
+  icxCall,
+  icxSendTransactionRaw
+} from "../../../redux/api/restV3/icx";
 import { icxSendTransaction } from "../../../redux/api/jsProvider/icx";
+import ledger from "../../../utils/ledger";
+import iconImg from "../../../Assets/icon-logo.png";
 const { nid, CONTRACT_WRITE_EVENTLOG_ENABLED, network } = config;
 
 const { ReadMethodItems, WriteMethodItems } = MiscComponents;
@@ -38,7 +45,7 @@ function getNetworkState(network) {
   }
 }
 
-function ContractExplorerPage({ wallet, url }) {
+function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
   const [params, setParams] = useState({});
   const [activeSection, setActiveSection] = useState(0);
   const [networkState, setNetworkState] = useState(getNetworkState(network));
@@ -49,6 +56,11 @@ function ContractExplorerPage({ wallet, url }) {
   const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
   const [endpointInputHasFocus, setEndpointInputHasFocus] = useState(null);
+  const [ledgerWaitModalState, setLedgerWaitModalState] = useState(false);
+
+  function closeLedgerModal() {
+    setLedgerWaitModalState(false);
+  }
 
   function handleParamsChange(event) {
     const { name, value } = event.target;
@@ -61,7 +73,6 @@ function ContractExplorerPage({ wallet, url }) {
   }
 
   function handleFocusChange(hasFocus) {
-    console.log("hasFocus", hasFocus);
     setEndpointInputHasFocus(hasFocus);
   }
 
@@ -121,6 +132,7 @@ function ContractExplorerPage({ wallet, url }) {
     networkState,
     endpoint
   ) {
+
     if (wallet === "") {
       alert("Please connect to wallet first");
     } else {
@@ -132,20 +144,58 @@ function ContractExplorerPage({ wallet, url }) {
         paramsData,
         nid
       );
-      //TODO: modify this section to update the method with
-      //the responses
-      const response = await icxSendTransaction({
-        rawTx: { ...rawMethodCall },
-        index: index
-      });
+
+      const txResult = {
+        error: "",
+        valueArray: [],
+        state: 0
+      };
+
+      if (walletType === "ICONEX") {
+        // handle signing with ICONex
+        const response = await icxSendTransaction({
+          rawTx: { ...rawMethodCall },
+          index: index
+        });
+
+        txResult.error = response.error == null ? "" : response.error.message;
+        txResult.valueArray =
+          response.data == null ? "" : [response.data.result];
+        txResult.state = 1;
+      } else if (walletType === "LEDGER") {
+        // handle signing with ledger
+
+        // Open modal window telling user to sign transaction on ledger
+        setLedgerWaitModalState(true);
+        const serializedTx = ledger.getSerializedTx(rawMethodCall.params);
+        try {
+          const signedTx = await ledger.signTransaction(
+            serializedTx,
+            bip44Path
+          );
+          rawMethodCall.params["signature"] = signedTx.signedRawTxBase64;
+          const response = await icxSendTransactionRaw(
+            rawMethodCall.params,
+            networkState,
+            endpoint
+          );
+          txResult.valueArray =
+            response.data == null ? "" : [response.data.result];
+          txResult.state = 1;
+        } catch (e) {
+          txResult.error = e.message;
+          txResult.state = 1;
+        }
+
+        // Close modal window
+        setLedgerWaitModalState(false);
+      } else {
+        alert(`ERROR: walletType ${walletType} not supported;`);
+      }
 
       setContractReadInfo(state => {
         const prevState = { ...state };
-        prevState[method].outputs = {
-          error: response.error == null ? "" : response.error.message,
-          valueArray: response.data == null ? "" : [response.data.result],
-          state: 1
-        };
+        prevState[method].outputs = { ...txResult };
         return prevState;
       });
     }
@@ -174,9 +224,6 @@ function ContractExplorerPage({ wallet, url }) {
         endpoint
       );
 
-      console.log("result of icxGetScore");
-      console.log(response);
-
       // TODO: to improve error handling for the icxGetScore
       // response, validate if the response is an object with a
       // data param with the following shape:
@@ -202,6 +249,11 @@ function ContractExplorerPage({ wallet, url }) {
       //      if (response.data.result != null) {
       //        if (Array.isArray(response.data.result)) {
       //          if (isValidAbi(response.data.result)) {
+      //          ... do something
+      //          }
+      //        }
+      //      }
+      //    }
       //
       // And define the function 'isValidAbi' with a logic to check
       // if the response.data.result is an array of AbiItem
@@ -220,9 +272,6 @@ function ContractExplorerPage({ wallet, url }) {
           endpoint
         );
         const abiStateParsed = createContractMethodsState(abiStateFromRedux);
-        console.log("Abi data parsed:");
-        console.log(abiStateFromRedux);
-        console.log(abiStateParsed);
         setContractReadInfo(abiStateParsed);
       }
       setContractAbi(abi);
@@ -425,6 +474,18 @@ function ContractExplorerPage({ wallet, url }) {
           </div>
         </div>
       </div>
+      <GenericModal
+        isOpen={ledgerWaitModalState}
+        onClose={closeLedgerModal}
+        useSmall={true}
+      >
+        <div className={styles.ledgerWaitContainer}>
+          <div className={styles.ledgerSection}>
+            <img src={iconImg} alt="Ledger Icon" />
+            <p>Review transaction in your ledger device and approve..</p>
+          </div>
+        </div>
+      </GenericModal>
     </div>
   );
 }

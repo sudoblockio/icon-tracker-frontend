@@ -146,3 +146,4 @@ resolve": "^1.10.0",
 * https://stackoverflow.com/questions/46566830/how-to-use-create-react-app-with-an-older-react-version
 * https://stackoverflow.com/questions/70594326/how-to-go-back-to-react-router-v5-from-react-router-v6-for-nested-dashboard
 * https://github.com/solana-labs/wallet-adapter/issues/499
+* https://github.com/terra-money/terra.js/issues/223

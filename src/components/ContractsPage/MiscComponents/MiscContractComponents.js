@@ -176,7 +176,7 @@ function CollapsableComponent({
       );
       let parsedEventlog = "";
 
-      if (response.error === "") {
+      if (response.error !== "") {
         parsedEventlog = JSON.stringify(response.error);
       } else {
         parsedEventlog = JSON.stringify(response.data.result.eventLogs);
