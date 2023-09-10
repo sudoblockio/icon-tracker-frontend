@@ -29,10 +29,7 @@ function fromHexInLoop(loopInHex) {
 // SCORE methods
 //
 // Governance methods
-async function getIcxBalance(address, decimals = 2) {
+export async function getIcxBalance(address, decimals = 2) {
   const balanceRaw = await getBalance(address);
-  const parsedBalance = Number(fromHexInLoop(balanceRaw).toFixed(decimals));
-  return parsedBalance;
+  return Number(fromHexInLoop(balanceRaw).toFixed(decimals));
 }
-
-module.exports = { getIcxBalance };
