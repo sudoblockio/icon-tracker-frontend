@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from config import config
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def setup(browser):
     if browser == 'firefox':
         driver = webdriver.Firefox()
