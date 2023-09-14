@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import TokenTransfers from './TokenTransfers'
 import TokenHolders from './TokenHolders'
 import TokenContractRead from './TokenContractRead'
+import ContractComponent from '../../../ContractsPage/ContractDetailPage/ContractTabs/ContractComponent';
 import {
     NoBox,
     TabTable
@@ -12,6 +13,8 @@ import {
     TOKEN_TABS,
 } from '../../../../utils/const'
 import { getTokenDecimals, getTokenTotalSupply } from '../../../../redux/store/iiss'
+import TokenTransactions from './TokenTransactions';
+import { tokenTxList } from '../../../../redux/api/restV3';
 // import {tokenHoldersList, tokenTransfersList} from "../../../../redux/api/restV3";
 
 class TokenTabs extends Component {
@@ -47,7 +50,25 @@ class TokenTabs extends Component {
                                     txType={TX_TYPE.TOKEN_TX}
                                 />
                             )
+                            // return (
+                            //     <TokenTransactions
+                            //         txData={tokenTxList}
+                            //         goAllTx={() => {
+                            //             this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${address}`);
+                            //         }}
+                            //         txType={TX_TYPE.TOKEN_TX}
+                            //         address={{ data: { address } }}
+                            //     />
+                            // );
                         case 1:
+                            return (
+                                <TokenTransfers
+                                    txData={tokenTransfers}
+                                    goAllTx={() => { this.props.history.push(`/${TX_TYPE.TOKEN_TX}/${address}`) }}
+                                    txType={TX_TYPE.TOKEN_TX}
+                                />
+                            )
+                        case 2:
                             const tokenTotal = this.tokenTotalSupply
                             return (
                                 <TokenHolders
@@ -57,12 +78,14 @@ class TokenTabs extends Component {
                                     tokenTotal={tokenTotal}
                                 />
                             )
-                        case 2:
+                        case 3:
                             return (
                                 <TokenContractRead
                                     contract={{ data: { address } }}
                                     contractReadWriteInfo={contractInfo}
                                     icxCall={this.props.icxCall}
+                                    icxSendTransaction={this.props.icxSendTransaction}
+                                    walletAddress={this.props.walletAddress}
                                 />
                             )
                         default:

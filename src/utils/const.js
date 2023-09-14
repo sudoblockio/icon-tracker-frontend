@@ -90,7 +90,7 @@ export const CONTRACT_TABS = [
   "Events",
 ];
 export const BLOCK_TABS = ["Transactions", "Internal Transactions"];
-export const TOKEN_TABS = ["Transactions", "Token Transfers", "Token Holders", "Read Contract"];
+export const TOKEN_TABS = ["Transactions", "Token Transfers", "Token Holders", "Contract"];
 export const TRANSACTION_TABS = ["Internal Transactions", "Events"];
 export const PROPOSAL_TABS = ["Total Voters", "Total Token Votes"];
 
