@@ -15,8 +15,8 @@ import { getTokenTotalSupply } from '../../redux/store/iiss';
 function mapStateToProps(state) {
   return {
     url: state.router.location,
-    ...state.tokens,
-    contractInfo: state.contracts.contractInfo
+    contractInfo: state.contracts.contractReadInfo,
+    ...state.tokens
   };
 }
 
