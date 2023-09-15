@@ -215,6 +215,7 @@ class AddressPage:
             items[count].click()
 
             self.verify_bonded_page_table()
+            time.sleep(config.default_sleep)
             if var in self.driver.current_url:
                 assert True
             else:
