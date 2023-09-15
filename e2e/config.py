@@ -5,6 +5,9 @@ from pydantic import BaseSettings
 class Config(BaseSettings):
     base_url: str = "http://localhost:3000"
 
+    token_address: str = "cx502c47463314f01e84b1b203c315180501eb2481"
+    token_address_url: str = f"{base_url}/token/{token_address}"
+
     prep_address: str = "hxfba37e91ccc13ec1dab115811f73e429cde44d48"
     prep_address_url: str = f"{base_url}/address/{prep_address}"
 
