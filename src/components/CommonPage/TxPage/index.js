@@ -88,7 +88,7 @@ class TxPage extends Component {
   getTxList = ({ page, count, urlIndex, sort }) => {
     const query = {
       page: isNumeric(page) ? page : 1,
-      count: isNumeric(count) ? count : 25
+      count: isNumeric(count) ? count : 10
     };
 
     if (sort) query.sort = sort;
@@ -185,6 +185,13 @@ class TxPage extends Component {
     if (sort) this.historyPush(1, count, sort);
     else this.historyPush(1, count);
   };
+
+  handleSortChange = (count) => {
+    this.setState({ count }, () => {
+      // After updating the state, trigger any necessary updates
+      this.getTxList({ page: 1, count, urlIndex: this.urlIndex });
+    });
+  }
 
   getTxListByPage = page => {
     const count = this.getCount();
@@ -307,6 +314,7 @@ class TxPage extends Component {
             key="SortHolder"
             count={count >= 100 ? 100 : count}
             getData={this.getTxListByCount}
+            onSortChange={this.handleSortChange}
           />,
           loading && (
             <LoadingComponent

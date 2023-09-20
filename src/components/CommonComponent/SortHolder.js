@@ -10,6 +10,10 @@ class SortHolder extends Component {
     window.dispatchEvent(new CustomEvent("CUSTOM_FX", { detail: { type: "SORT_LEAVE" } }));
   };
 
+  handleSortChange = (count) => {
+    this.props.onSortChange(count); // Pass the selected count to the parent
+  }
+
   render() {
     const SORT_TYPE_ARRAY = this.props.type === "PROPOSALS" ? SORT_TYPE_PROPOSALS : SORT_TYPE;
 
@@ -26,6 +30,7 @@ class SortHolder extends Component {
               key={index}
               onClick={() => {
                 this.props.getData(count);
+                this.handleSortChange(count);
               }}
             >
               <span>{count}</span>
