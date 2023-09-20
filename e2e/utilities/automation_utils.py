@@ -15,7 +15,7 @@ class AutomationUtils:
     def wait_for_element_to_load(self, xpath):
         self.logger.info(">>waiting for element to be visible")
         WebDriverWait(self.driver, config.default_timeout).until(
-            EC.presence_of_element_located((By.XPATH, xpath))
+            EC.element_to_be_clickable((By.XPATH, xpath))
         )
 
     @staticmethod

@@ -3,166 +3,76 @@
   "version": "0.2.20",
   "private": true,
   "dependencies": {
-    "@babel/core": "7.2.2",
-    "@svgr/webpack": "4.1.0",
-    "autoprefixer": "7.1.6",
-    "axios": "^0.24.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
-    "babel-loader": "8.0.5",
-    "babel-plugin-named-asset-import": "^0.3.1",
-    "babel-plugin-transform-remove-console": "^6.9.4",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react-app": "^7.0.2",
-    "bfj": "6.1.1",
-    "bignumber.js": "^7.2.1",
-    "case-sensitive-paths-webpack-plugin": "^2.2.0",
-    "chalk": "1.1.3",
-    "chart.js": "^2.7.2",
-    "check-iconex": "0.0.7",
-    "clipboard": "^1.7.1",
-    "css-loader": "1.0.0",
+    "@ledgerhq/hw-transport-webhid": "^6.27.17",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "bignumber.js": "^9.1.1",
+    "buffer": "^6.0.3",
+    "chart.js": "^4.3.2",
+    "check-iconex": "^0.0.8",
+    "clipboard": "^2.0.11",
     "deepcopy": "^2.1.0",
-    "dotenv": "^6.0.0",
-    "dotenv-expand": "4.2.0",
-    "env-cmd": "^10.1.0",
-    "eslint": "5.12.0",
-    "eslint-config-react-app": "^3.0.8",
-    "eslint-loader": "2.1.1",
-    "eslint-plugin-flowtype": "2.50.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-react": "7.12.4",
-    "express": "^4.16.3",
-    "file-loader": "2.0.0",
-    "fs-extra": "7.0.1",
-    "history": "^4.7.2",
-    "html-webpack-plugin": "^4.0.0-alpha.2",
+    "dotenv": "^16.3.1",
+    "history": "^5.3.0",
     "icon-sdk-js": "0.0.15",
-    "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
-    "jest-pnp-resolver": "1.0.2",
-    "jest-resolve": "23.6.0",
-    "jest-watch-typeahead": "^0.2.1",
-    "js-beautify": "^1.7.5",
-    "mini-css-extract-plugin": "0.5.0",
-    "moment": "^2.24.0",
-    "node": "^16.0.0",
-    "object-assign": "4.1.1",
-    "optimize-css-assets-webpack-plugin": "5.0.1",
+    "moment": "^2.29.4",
+    "object-assign": "^4.1.1",
     "path": "^0.12.7",
-    "pnp-webpack-plugin": "1.2.1",
-    "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
-    "postcss-preset-env": "6.5.0",
-    "postcss-safe-parser": "4.0.1",
-    "promise": "8.0.1",
-    "qrcode": "^1.2.0",
-    "query-string": "^5.1.1",
-    "raf": "3.4.0",
-    "react": "^16.2.0",
-    "react-app-polyfill": "^0.2.2",
-    "react-body-classname": "^1.2.0",
-    "react-dev-utils": "^8.0.0",
-    "react-dom": "^16.2.0",
-    "react-dropzone": "^10.1.5",
-    "react-icons": "^4.7.1",
+    "process": "^0.11.10",
+    "qrcode": "^1.5.3",
+    "query-string": "^8.1.0",
+    "react": "^16.14.0",
+    "react-body-classname": "^1.3.1",
+    "react-dom": "^16.14.0",
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.10.1",
     "react-json-beautify": "^1.0.0",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
+    "react-redux": "^5.1.2",
+    "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-test-renderer": "^16.0.0",
-    "react-to-print": "^2.5.0",
-    "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
+    "react-scripts": "5.0.1",
+    "react-test-renderer": "^16.14.0",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-localstorage": "^0.4.1",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.16.0",
-    "resolve": "^1.10.0",
-    "sass": "^1.53.0",
-    "sass-loader": "^10.1.1",
-    "style-loader": "0.23.1",
-    "terser-webpack-plugin": "1.2.2",
-    "url-loader": "1.1.2",
-    "web3-utils": "^1.0.0-beta.34",
-    "webpack": "4.36.0",
-    "webpack-dev-server": "3.1.14",
-    "webpack-manifest-plugin": "2.0.4",
-    "whatwg-fetch": "2.0.3",
-    "workbox-webpack-plugin": "3.6.3"
+    "redux-saga": "^1.2.3",
+    "sass": "^1.64.1",
+    "stream-browserify": "^3.0.0",
+    "web-vitals": "^2.1.4",
+    "web3-utils": "^4.0.3"
   },
   "scripts": {
-    "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "test:coverage": "node scripts/test.js --env=jsdom --watchAll=False  --coverage --coverageDirectory=output/coverage/jest"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "worker-loader": "^2.0.0"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "collectCoverageFrom": [
-    "src/**/*.{js,jsx,ts,tsx}",
-    "!src/**/*.d.ts"
-  ],
-  "resolver": "jest-pnp-resolver",
-  "setupFiles": [
-    "react-app-polyfill/jsdom"
-  ],
-  "testMatch": [
-    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-    "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
-  ],
-  "testEnvironment": "jsdom",
-  "testURL": "http://localhost",
-  "transform": {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-  },
-  "transformIgnorePatterns": [
-    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-    "^.+\\.module\\.(css|sass|scss)$"
-  ],
-  "moduleNameMapper": {
-    "^react-native$": "react-native-web",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-  },
-  "moduleFileExtensions": [
-    "web.js",
-    "js",
-    "web.ts",
-    "ts",
-    "web.tsx",
-    "tsx",
-    "json",
-    "web.jsx",
-    "jsx",
-    "node"
-  ],
-  "babel": {
-    "presets": [
-      "react-app",
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      "@babel/proposal-class-properties",
-      "@babel/proposal-object-rest-spread"
-    ]
+    "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios|query-string|decode-uri-component|split-on-first|filter-obj)/)"
+    ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }

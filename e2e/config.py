@@ -5,6 +5,9 @@ from pydantic import BaseSettings
 class Config(BaseSettings):
     base_url: str = "http://localhost:3000"
 
+    token_address: str = "cx502c47463314f01e84b1b203c315180501eb2481"
+    token_address_url: str = f"{base_url}/token/{token_address}"
+
     prep_address: str = "hxfba37e91ccc13ec1dab115811f73e429cde44d48"
     prep_address_url: str = f"{base_url}/address/{prep_address}"
 
@@ -16,9 +19,11 @@ class Config(BaseSettings):
     contract_address_path: str = f"{base_url}/address/{contract_address}"
 
     default_timeout: int = 5
-    default_sleep: int = 1
+    default_sleep: int = 3
     browser: str = "chrome"
     headless: bool = True
+
+    metadata: dict = {}
 
     class Config:
         case_sensitive = False

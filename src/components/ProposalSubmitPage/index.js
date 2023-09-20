@@ -7,7 +7,7 @@ import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
 import { addressInfo } from "../../redux/store/addresses";
 import utils from "./utils";
 import config from "../../config";
-import Web3Utils from "web3-utils";
+import { fromUtf8 } from "web3-utils";
 import GenericModal from "../GenericModal/genericModal";
 import { LoadingComponent } from "../../components";
 
@@ -79,7 +79,7 @@ function ProposalSubmitPage(props) {
       const p0 = JSON.parse(valueState);
       const p1 = [p0];
       const p2 = JSON.stringify(p1);
-      const parsedValue = Web3Utils.fromUtf8(p2);
+      const parsedValue = fromUtf8(p2);
       const rawTransaction = submitNetworkProposal(
         walletAddress,
         {

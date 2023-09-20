@@ -34,13 +34,16 @@ const TxAddressCell = ({ isError, address }) => {
     _address = "-";
     className = "no";
   } else {
-    _address = (
+    const _isHxAddress = isHxAddress(address);
+    _address = _isHxAddress ? (
       <AddressLink
         to={address}
         label={<span className="ellipsis">{address}</span>}
       />
-    )
-    className = `${isError ? "icon error" : "on"}`;
+    ) : (
+      address
+    );
+    className = `${isError ? "icon error" : ""} ${_isHxAddress ? "on" : ""}`;
   }
   return (
     <td className={className}>
@@ -550,7 +553,7 @@ class TxTableBody extends Component {
               </td>
             </tr>
           );
-        case TX_TYPE.ADDRESS_BONDERS: // TODO: HERE!
+        case TX_TYPE.ADDRESS_BONDERS:
           console.log(this.props.bondMap[data] > 0, "bonder bonder data");
           console.log("this.props");
           console.log(this.props);

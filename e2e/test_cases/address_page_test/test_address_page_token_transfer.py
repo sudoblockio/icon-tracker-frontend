@@ -26,7 +26,8 @@ class TestVerifyAddressPageTokenTransfer:
 
         self.addressPageObj.click_total_transaction_count()
 
-        self.addressPageObj.verify_transaction_detail_page(title="Token Transfers")
+        # The page title is formatted with Token Transfersfor and hence we are validating with same title
+        self.addressPageObj.verify_transaction_detail_page(title="Token Transfersfor")
 
         self.addressPageObj.verify_transaction_detail_page_url(url=self.verifyUrl)
         self.logger.info("********Finished test case Test_004_Verify_address_page_token_transfer...*******")

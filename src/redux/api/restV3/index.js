@@ -45,7 +45,8 @@ import {
   icxCall,
   getTransactionResult,
   getTransaction,
-  getTransactionResultNotSdk
+  getTransactionResultNotSdk,
+  icxSendTransactionRaw
 } from "./icx";
 
 import { icxSendTransaction } from "../jsProvider/icx";
