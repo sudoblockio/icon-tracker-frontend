@@ -88,7 +88,7 @@ class TxPage extends Component {
   getTxList = ({ page, count, urlIndex, sort }) => {
     const query = {
       page: isNumeric(page) ? page : 1,
-      count: isNumeric(count) ? count : 10
+      count: isNumeric(count) ? count : 25
     };
 
     if (sort) query.sort = sort;

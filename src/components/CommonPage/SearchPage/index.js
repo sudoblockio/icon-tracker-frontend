@@ -407,6 +407,10 @@ class SearchPage extends Component {
     }
   };
 
+  handleSortChange = (count) => {
+    this.getListByCount(count);
+  };
+
   render() {
     const list = this.props[this.getSearchTypeData()["list"]] || {};
     const tableClassName = this.getSearchTypeData()["tableClassName"] || "";
@@ -455,6 +459,7 @@ class SearchPage extends Component {
             key="SortHolder"
             count={count >= 100 ? 100 : this.state.count}
             getData={this.getListByCount}
+            onSortChange={this.handleSortChange}
           />,
           loading && (
             <LoadingComponent

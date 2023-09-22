@@ -63,6 +63,12 @@ class ProposalListPage extends Component {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
   };
 
+  handleSortChange = (count) => {
+    this.setState({ pageSize: count, pageNo: 1 }, () => {
+      this.setProposals({ pageNo: 1, pageSize: count });
+    });
+  };
+
   render() {
     const { loading, proposals, modalIsOpen } = this.state;
     const { walletAddress } = this.props;
@@ -103,6 +109,7 @@ class ProposalListPage extends Component {
                   key="SortHolder"
                   count={this.state.pageSize}
                   getData={this.handleClickSortHolder}
+                  onSortChange={this.handleSortChange}
                 />
 
                 <ul className="page">
