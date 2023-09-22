@@ -66,7 +66,7 @@ export const IRC_VERSION = {
   3: "IRC3",
 };
 
-export const SORT_TYPE = [10, 50, 100];
+export const SORT_TYPE = [10, 25, 50, 100];
 export const SORT_TYPE_PROPOSALS = [5, 10];
 export const STATUS_TYPE = ["All", "Active", "Pending", "Rejected"];
 export const TOKEN_STANDARDS = ["All", "irc2", "irc3", "irc31"];
