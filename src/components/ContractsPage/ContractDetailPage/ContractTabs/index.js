@@ -26,6 +26,8 @@ function ContractTabs(props) {
     walletAddress
   } = props;
 
+  console.log("contract detail page");
+  console.log(props);
   const { loading, data } = contract;
   const { address } = data;
 
