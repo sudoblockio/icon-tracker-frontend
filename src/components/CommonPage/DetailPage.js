@@ -60,6 +60,15 @@ class DetailPage extends Component {
         // Execute initial time for Internal TX
         this.props.getList[1](query);
       }
+      if(this.props.ROUTE === "/contract") {
+        // on a contract page execute to see if the contract
+        // has any token transfers
+        // and execute to fetch the contract methods and update
+        // the UI
+        this.props.getList[2](query);
+        this.props.getList[3](query);
+        this.props.getList[4](query);
+      }
       if (this.props.ROUTE === "/transaction") {
         this.props.tokenTxList &&
           this.props.tokenTxList({ transaction_hash: query });
