@@ -39,6 +39,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.2.3",
     "sass": "^1.64.1",
+    "serve": "^14.2.1",
     "stream-browserify": "^3.0.0",
     "web-vitals": "^2.1.4",
     "web3-utils": "^4.0.3"
@@ -57,9 +58,11 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "chrome >= 67",
+      "edge >= 79",
+      "firefox >= 68",
+      "opera >= 54",
+      "safari >= 14"
     ],
     "development": [
       "last 1 chrome version",
