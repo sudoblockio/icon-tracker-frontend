@@ -312,10 +312,9 @@ class GovernancePage extends Component {
 												this.props.setPopup({type:POPUP_TYPE.SPONSOR})
 											}}></i></th>
 											<th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
-											{!blackChecked && <th>Bonded<br/><em>Total Bond /<br/>% Bonded</em></th>}
+											{!blackChecked && <th>Bonded</th>}
 											{!blackChecked && <th>Total Votes</th>}
 											<th>Power</th>
-											<th>Monthly<br/> Rewards<br/><em>ICX /<br/>USD</em></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -409,8 +408,6 @@ class TableRow extends Component {
 			grade,
 			total_blocks,
 			validated_blocks,
-			reward_monthly, 
-			reward_monthly_usd,
 			stake,
 			delegated,
 			irep,
@@ -432,7 +429,6 @@ class TableRow extends Component {
 		const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
 		const badge = this.getBadge(grade, prep.node_state)
 		const rank = index + 1
-		const bondedRate = !totalVoted ? 0 : (20*(bonded / Math.pow(10, 18)).toFixed()) / prepVoted
 		return(
 			<tr>
 				<td className="rank"><span>{rank || '-'}</span></td>
@@ -449,13 +445,10 @@ class TableRow extends Component {
 				<td>{cps_governance ?'✓':'-'}</td>
 				<td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
 				<td><span>{ productivity !== "None" ? productivity : "0.00%"}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
-				{!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
-				<em>{Number(bondedRate*100).toFixed(1)}%</em></td>}
+				{!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span></td>}
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
 				<td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
-				<td><span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
-				<em>${numberWithCommas(Number(reward_monthly_usd).toFixed())}</em></td>
 			</tr>
 		)
 	}

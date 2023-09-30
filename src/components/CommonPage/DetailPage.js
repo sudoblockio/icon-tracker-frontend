@@ -20,15 +20,24 @@ class DetailPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { pathname: currentPath } = this.props.url;
-    const { pathname: nextPath } = nextProps.url;
+    const url = this.props.url;
+    const urlNext = nextProps.url;
+    const locationObj = Object.keys(url).includes("location")
+      ? url.location
+      : url;
+    const locationObjNext = Object.keys(urlNext).includes("location")
+      ? urlNext.location
+      : urlNext;
+
+    const { pathname: currentPath } = locationObj;
+    const { pathname: nextPath } = locationObjNext;
     const { ROUTE } = this.props;
     if (currentPath !== nextPath && startsWith(nextPath, ROUTE)) {
       this.setInitialData(nextProps.url);
       return;
     } else {
-      const { hash: currentHash } = this.props.url;
-      const { hash: nextHash } = nextProps.url;
+      const { hash: currentHash } = locationObj;
+      const { hash: nextHash } = locationObjNext;
       const { TABS: currentTabs } = this.props;
       const { TABS: nextTabs } = nextProps;
       if (currentHash !== nextHash || currentTabs.length !== nextTabs.length) {
@@ -38,14 +47,27 @@ class DetailPage extends Component {
   }
 
   setInitialData = url => {
-    const query = url.pathname.split("/")[2];
+    const locationObj = Object.keys(url).includes("location")
+      ? url.location
+      : url;
+    const { pathname, hash } = locationObj;
+    const query = pathname.split("/")[2];
     if (query) {
       const { TABS } = this.props;
       this.props.getInfo(query);
-      this.setTab(findTabIndex(TABS, url.hash), query);
+      this.setTab(findTabIndex(TABS, hash), query);
       if (this.props.ROUTE === "/block") {
         // Execute initial time for Internal TX
         this.props.getList[1](query);
+      }
+      if(this.props.ROUTE === "/contract") {
+        // on a contract page execute to see if the contract
+        // has any token transfers
+        // and execute to fetch the contract methods and update
+        // the UI
+        this.props.getList[2](query);
+        this.props.getList[3](query);
+        this.props.getList[4](query);
       }
       if (this.props.ROUTE === "/transaction") {
         this.props.tokenTxList &&
@@ -62,7 +84,11 @@ class DetailPage extends Component {
   };
 
   setList = (getListFunc, query) => {
-    const _query = query ? query : this.props.url.pathname.split("/")[2];
+    const locationObj = Object.keys(this.props.url).includes("location")
+      ? this.props.url.location
+      : this.props.url;
+    const { pathname } = locationObj;
+    const _query = query ? query : pathname.split("/")[2];
     if (typeof getListFunc === "function") {
       getListFunc(_query);
     }
@@ -70,7 +96,10 @@ class DetailPage extends Component {
 
   changeTab = index => {
     const { TABS, url } = this.props;
-    const { pathname } = url;
+    const locationObj = Object.keys(url).includes("location")
+      ? url.location
+      : url;
+    const { pathname } = locationObj;
     this.props.history.push(`${pathname}#${noSpaceLowerCase(TABS[index])}`);
   };
 

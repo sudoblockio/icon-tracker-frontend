@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ContractInfo from "./ContractInfo";
 import ContractTabs from "./ContractTabs";
 import { DetailPage } from "../../../components";
 import { CONTRACT_TABS } from "../../../utils/const";
 
 const ContractDetailPage = props => {
-  const { contract } = props;
+  console.log("contract detail page props");
+  console.log(props);
+  const { contract, contractTokenTx } = props;
   const { loading, error } = contract;
+  const [tabArrayStatus, setTabArrayStatus] = useState(
+    setTabArray(contractTokenTx)
+  );
+
+  useEffect(() => {
+    setTabArrayStatus(setTabArray(contractTokenTx));
+  }, [contractTokenTx]);
 
   const getInfo = addr => {
     props.contractInfo({ addr });
@@ -38,7 +47,7 @@ const ContractDetailPage = props => {
       {...props}
       loading={loading}
       error={error}
-      TABS={CONTRACT_TABS}
+      TABS={tabArrayStatus}
       ROUTE="/contract"
       getInfo={getInfo}
       getList={getList}
@@ -48,5 +57,14 @@ const ContractDetailPage = props => {
     />
   );
 };
+
+function setTabArray(arr) {
+  const result =
+    arr !== null && arr.data.length > 0
+      ? CONTRACT_TABS
+      : CONTRACT_TABS.filter(tabName => tabName !== "Token Transfers");
+
+  return result;
+}
 
 export default ContractDetailPage;

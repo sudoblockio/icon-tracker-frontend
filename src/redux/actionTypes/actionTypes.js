@@ -1,209 +1,192 @@
 const actionTypes = {
-  getMainInfo: 'GET_MAIN_INFO',
-  getMainInfoFulfilled: 'GET_MAIN_INFO_FULFILLED',
-  getMainInfoRejected: 'GET_MAIN_INFO_REJECTED',
+  getMainInfo: "GET_MAIN_INFO",
+  getMainInfoFulfilled: "GET_MAIN_INFO_FULFILLED",
+  getMainInfoRejected: "GET_MAIN_INFO_REJECTED",
+
+  getMainChart: "GET_MAIN_CHART",
+  getMainChartFulfilled: "GET_MAIN_CHART_FULFILLED",
+  getMainChartRejected: "GET_MAIN_CHART_REJECTED",
+
+  addressList: "ADDRESS_LIST",
+  addressListFulfilled: "ADDRESS_LIST_FULFILLED",
+  addressListRejected: "ADDRESS_LIST_REJECTED",
+
+  blockList: "BLOCK_LIST",
+  blockListFulfilled: "BLOCK_LIST_FULFILLED",
+  blockListRejected: "BLOCK_LIST_REJECTED",
+
+  transactionTxDetail: "TRANSACTION_TX_DETAIL",
+  transactionTxDetailFulfilled: "TRANSACTION_TX_DETAIL_FULFILLED",
+  transactionTxDetailRejected: "TRANSACTION_TX_DETAIL_REJECTED",
+
+  search: "SEARCH",
+  searchFulfilled: "SEARCH_FULFILLED",
+  searchRejected: "SEARCH_REJECTED",
+  searchErrorReset: "SEARCH_ERROR_RESET",
+
+  addressInfo: "ADDRESS_INFO",
+  addressInfoFulfilled: "ADDRESS_INFO_FULFILLED",
+  addressInfoRejected: "ADDRESS_INFO_REJECTED",
+
+  addressInternalTxList: "ADDRESS_INTERNAL_TX_LIST",
+  addressInternalTxListFulfilled: "ADDRESS_INTERNAL_TX_LIST_FULFILLED",
+  addressInternalTxListRejected: "ADDRESS_INTERNAL_TX_LIST_REJECTED",
+
+  addressTokenTxList: "ADDRESS_TOKEN_TX_LIST",
+  addressTokenTxListFulfilled: "ADDRESS_TOKEN_TX_LIST_FULFILLED",
+  addressTokenTxListRejected: "ADDRESS_TOKEN_TX_LIST_REJECTED",
+
+  blockInfo: "BLOCK_INFO",
+  blockInfoFulfilled: "BLOCK_INFO_FULFILLED",
+  blockInfoRejected: "BLOCK_INFO_REJECTED",
+
+  blockTxList: "BLOCK_TX_LIST",
+  blockTxListFulfilled: "BLOCL_TX_LIST_FULFILLED",
+  blockTxListRejected: "BLOCK_TX_LIST_REJECTED",
 
-  getMainChart: 'GET_MAIN_CHART',
-  getMainChartFulfilled: 'GET_MAIN_CHART_FULFILLED',
-  getMainChartRejected: 'GET_MAIN_CHART_REJECTED',
+  blockIntTxList: "BLOCK_INT_TX_LIST",
+  blockIntTxListFulfilled: "BLOCL_INT_TX_LIST_FULFILLED",
+  blockIntTxListRejected: "BLOCK_INT_TX_LIST_REJECTED",
 
-  addressList: 'ADDRESS_LIST',
-  addressListFulfilled: 'ADDRESS_LIST_FULFILLED',
-  addressListRejected: 'ADDRESS_LIST_REJECTED',
+  transactionRecentTx: "TRANSACTION_RECENT_TX",
+  transactionRecentTxFulfilled: "TRANSACTION_RECENT_TX_FULFILLED",
+  transactionRecentTxRejected: "TRANSACTION_RECENT_TX_REJECTED",
 
-  blockList: 'BLOCK_LIST',
-  blockListFulfilled: 'BLOCK_LIST_FULFILLED',
-  blockListRejected: 'BLOCK_LIST_REJECTED',
+  transactionEventLogList: "TRANSACTION_EVENT_LOG_LIST",
+  transactionEventLogListFulfilled: "TRANSACTION_EVENT_LOG_LIST_FULFILLED",
+  transactionEventLogListRejected: "TRANSACTION_EVENT_LOG_LIST_REJECTED",
 
-  transactionTxDetail: 'TRANSACTION_TX_DETAIL',
-  transactionTxDetailFulfilled: 'TRANSACTION_TX_DETAIL_FULFILLED',
-  transactionTxDetailRejected: 'TRANSACTION_TX_DETAIL_REJECTED',
+  transactionInternalTxList: "TRANSACTION_INTERNAL_TX_LIST",
+  transactionInternalTxListFulfilled: "TRANSACTION_INTERNAL_TX_LIST_FULFILLED",
+  transactionInternalTxListRejected: "TRANSACTION_INTERNAL_TX_LIST_REJECTED",
 
-  search: 'SEARCH',
-  searchFulfilled: 'SEARCH_FULFILLED',
-  searchRejected: 'SEARCH_REJECTED',
-  searchErrorReset: 'SEARCH_ERROR_RESET',
+  contractList: "SELECT_CONTRACT_LIST",
+  contractListFulfilled: "SELECT_CONTRACT_LIST_FULFILLED",
+  contractListRejected: "SELECT_CONTRACT_LIST_REJECTED",
 
-  addressInfo: 'ADDRESS_INFO',
-  addressInfoFulfilled: 'ADDRESS_INFO_FULFILLED',
-  addressInfoRejected: 'ADDRESS_INFO_REJECTED',
+  contractListSearch: "SELECT_CONTRACT_LIST_SEARCH",
+  contractListSearchFulfilled: "SELECT_CONTRACT_LIST_SEARCH_FULFILLED",
+  contractListSearchRejected: "SELECT_CONTRACT_LIST_SEARCH_REJECTED",
+
+  contractTokenTxList: "CONTRACT_TOKEN_TX_LIST",
+  contractTokenTxListFulfilled: "CONTRACT_TOKEN_TX_LIST_FULFILLED",
+  contractTokenTxListRejected: "CONTRACT_TOKEN_TX_LIST_REJECTED",
+
+  addressDelegationList: "ADDRESS_DELEGATION_LIST",
+  addressDelegationListFulfilled: "ADDRESS_DELEGATION_LIST_FULFILLED",
+  addressDelegationListRejected: "ADDRESS_DELEGATION_LIST_REJECTED",
+
+  addressVotedList: "ADDRESS_VOTED_LIST",
+  addressVotedListFulfilled: "ADDRESS_VOTED_LIST_FULFILLED",
+  addressVotedListRejected: "ADDRESS_VOTED_LIST_REJECTED",
+
+  addressRewardList: "ADDRESS_REWARD_LIST",
+  addressRewardListFulfilled: "ADDRESS_REWARD_LIST_FULFILLED",
+  addressRewardListRejected: "ADDRESS_REWARD_LIST_REJECTED",
+
+  contractInfo: "CONTRACT_INFO",
+  contractInfoFulfilled: "CONTRACT_INFO_FULFILLED",
+  contractInfoRejected: "CONTRACT_INFO_REJECTED",
+
+  contractDetail: "CONTRACT_DETAIL",
+  contractDetailFulfilled: "CONTRACT_DETAIL_FULFILLED",
+  contractDetailRejected: "CONTRACT_DETAIL_REJECTED",
+
+  contractDetailPopup: "CONTRACT_DETAIL_POPUP",
+  imageConverterPopup: "IMAGE_CONVERTER_POPUP",
+  contractVerificationPopup: "CONTRACT_VERIFICATION_POPUP",
+
+  contractTxList: "CONTRACT_TX_LIST",
+  contractTxListFulfilled: "CONTRACT_TX_LIST_FULFILLED",
+  contractTxListRejected: "CONTRACT_TX_LIST_REJECTED",
+
+  contractInternalTxList: "CONTRACT_INTERNAL_TX_LIST",
+  contractInternalTxListFulfilled: "CONTRACT_INTERNAL_TX_LIST_FULFILLED",
+  contractInternalTxListRejected: "CONTRACT_INTERNAL_TX_LIST_REJECTED",
 
-  addressInternalTxList: 'ADDRESS_INTERNAL_TX_LIST',
-  addressInternalTxListFulfilled: 'ADDRESS_INTERNAL_TX_LIST_FULFILLED',
-  addressInternalTxListRejected: 'ADDRESS_INTERNAL_TX_LIST_REJECTED',
+  contractEventLogList: "CONTRACT_EVENT_LOG_LIST",
+  contractEventLogListFulfilled: "CONTRACT_EVENT_LOG_LIST_FULFILLED",
+  contractEventLogListRejected: "CONTRACT_EVENT_LOG_LIST_REJECTED",
 
-  addressTokenTxList: 'ADDRESS_TOKEN_TX_LIST',
-  addressTokenTxListFulfilled: 'ADDRESS_TOKEN_TX_LIST_FULFILLED',
-  addressTokenTxListRejected: 'ADDRESS_TOKEN_TX_LIST_REJECTED',
+  addressTxList: "ADDRESS_TX_LIST",
+  addressTxListFulfilled: "ADDRESS_TX_LIST_FULFILLED",
+  addressTxListRejected: "ADDRESS_TX_LIST_REJECTED",
 
-  blockInfo: 'BLOCK_INFO',
-  blockInfoFulfilled: 'BLOCK_INFO_FULFILLED',
-  blockInfoRejected: 'BLOCK_INFO_REJECTED',
+  icxGetScore: "ICX_GET_SCORE",
+  icxGetScoreFulfilled: "ICX_GET_SCORE_FULFILLED",
+  icxGetScoreRejected: "ICX_GET_SCORE_REJECTED",
 
-  blockTxList: 'BLOCK_TX_LIST',
-  blockTxListFulfilled: 'BLOCL_TX_LIST_FULFILLED',
-  blockTxListRejected: 'BLOCK_TX_LIST_REJECTED',
+  tokenList: "TOKEN_LIST",
+  tokenListFulfilled: "TOKEN_LIST_FULFILLED",
+  tokenListRejected: "TOKEN_LIST_REJECTED",
 
-  blockIntTxList: 'BLOCK_INT_TX_LIST',
-  blockIntTxListFulfilled: 'BLOCL_INT_TX_LIST_FULFILLED',
-  blockIntTxListRejected: 'BLOCK_INT_TX_LIST_REJECTED',
+  tokenListSearch: "TOKEN_LIST_SEARCH",
+  tokenListSearchFulfilled: "TOKEN_LIST_FULFILLED_SEARCH",
+  tokenListSearchRejected: "TOKEN_LIST_REJECTED_SEARCH",
 
-  transactionRecentTx: 'TRANSACTION_RECENT_TX',
-  transactionRecentTxFulfilled: 'TRANSACTION_RECENT_TX_FULFILLED',
-  transactionRecentTxRejected: 'TRANSACTION_RECENT_TX_REJECTED',
+  tokenTxList: "TOKEN_TX_LIST",
+  tokenTxListFulfilled: "TOKEN_TX_LIST_FULFILLED",
+  tokenTxListRejected: "TOKEN_TX_LIST_REJECTED",
 
-  transactionEventLogList: 'TRANSACTION_EVENT_LOG_LIST',
-  transactionEventLogListFulfilled: 'TRANSACTION_EVENT_LOG_LIST_FULFILLED',
-  transactionEventLogListRejected: 'TRANSACTION_EVENT_LOG_LIST_REJECTED',
+  tokenSummary: "TOKEN_SUMMARY",
+  tokenSummaryFulfilled: "TOKEN_SUMMARY_FULFILLED",
+  tokenSummaryRejected: "TOKEN_SUMMARY_REJECTED",
 
-  transactionInternalTxList: 'TRANSACTION_INTERNAL_TX_LIST',
-  transactionInternalTxListFulfilled: 'TRANSACTION_INTERNAL_TX_LIST_FULFILLED',
-  transactionInternalTxListRejected: 'TRANSACTION_INTERNAL_TX_LIST_REJECTED',
+  tokenTransfersList: "TOKEN_TRANSFERS_LIST",
+  tokenTransfersListFulfilled: "TOKEN_TRANSFERS_LIST_FULFILLED",
+  tokenTransfersListRejected: "TOKEN_TRANSFERS_LIST_REJECTED",
 
-  contractList: 'SELECT_CONTRACT_LIST',
-  contractListFulfilled: 'SELECT_CONTRACT_LIST_FULFILLED',
-  contractListRejected: 'SELECT_CONTRACT_LIST_REJECTED',
+  tokenHoldersList: "TOKEN_HOLDERS_LIST",
+  tokenHoldersListFulfilled: "TOKEN_HOLDERS_LIST_FULFILLED",
+  tokenHoldersListRejected: "TOKEN_HOLDERS_LIST_REJECTED",
 
-  contractListSearch: 'SELECT_CONTRACT_LIST_SEARCH',
-  contractListSearchFulfilled: 'SELECT_CONTRACT_LIST_SEARCH_FULFILLED',
-  contractListSearchRejected: 'SELECT_CONTRACT_LIST_SEARCH_REJECTED',
+  initPopup: "INIT_POPUP",
+  setPopup: "SET_POPUP",
 
-  contractTokenTxList: 'CONTRACT_TOKEN_TX_LIST',
-  contractTokenTxListFulfilled: 'CONTRACT_TOKEN_TX_LIST_FULFILLED',
-  contractTokenTxListRejected: 'CONTRACT_TOKEN_TX_LIST_REJECTED',
+  readContractInformation: "READ_CONTRACT_INFORMATION",
+  readContractInformationFulfilled: "READ_CONTRACT_INFORMATION_FULFILLED",
+  readContractInformationRejected: "READ_CONTRACT_INFORMATION_REJECTED",
 
-  addressDelegationList: 'ADDRESS_DELEGATION_LIST',
-  addressDelegationListFulfilled: 'ADDRESS_DELEGATION_LIST_FULFILLED',
-  addressDelegationListRejected: 'ADDRESS_DELEGATION_LIST_REJECTED',
+  icxCall: "ICX_CALL",
+  icxCallFulfilled: "ICX_CALL_FULFILLED",
+  icxCallRejected: "ICX_CALL_REJECTED",
 
-  addressVotedList: 'ADDRESS_VOTED_LIST',
-  addressVotedListFulfilled: 'ADDRESS_VOTED_LIST_FULFILLED',
-  addressVotedListRejected: 'ADDRESS_VOTED_LIST_REJECTED',
+  icxSendTransaction: "ICX_SEND_TRANSACTION",
+  icxSendTransactionFulfilled: "ICX_SEND_TRANSACTION_FULFILLED",
+  icxSendTransactionRejected: "ICX_SEND_TRANSACTION_REJECTED",
 
-  addressRewardList: 'ADDRESS_REWARD_LIST',
-  addressRewardListFulfilled: 'ADDRESS_REWARD_LIST_FULFILLED',
-  addressRewardListRejected: 'ADDRESS_REWARD_LIST_REJECTED',
+  reportScam: "REPORT_ADDRESS",
+  reportScamFulfilled: "REPORT_ADDRESS_FULFILLED",
+  reportScamRejected: "REPORT_ADDRESS_REJECTED",
 
+  setBannerOption: "SET_BANNER_OPTION",
 
+  setAddress: "SET_ADDRESS",
+  setAddressSuccess: "SET_ADDRESS_SUCCESS",
+  setNotification: "SET_NOTIFICATION",
+  setNotificationSuccess: "SET_NOTIFICATION_SUCCESS",
+  clearWallet: "CLEAR_WALLET",
+  clearWalletSuccess: "CLEAR_WALLET_SUCCESS",
 
+  proposalInfo: "PROPOSAL_INFO",
+  proposalInfoFulfilled: "PROPOSAL_INFO_FULFILLED",
+  proposalInfoRejected: "PROPOSAL_INFO_REJECTED",
 
+  totalQuorum: "TOTAL_QUORUM",
+  totalQuorumFulfilled: "TOTAL_QUORUM_FULFILLED",
+  totalQuorumRejected: "TOTAL_QUORUM_REJECTED",
 
+  totalTokenVotes: "TOTAL_TOKEN_VOTES",
+  totalTokenVotesFulfilled: "TOTAL_TOKEN_VOTES_FULFILLED",
+  totalTokenVotesRejected: "TOTAL_TOKEN_VOTES_REJECTED",
 
+  // sets the type of wallet login
+  setWalletType: "SET_WALLET_TYPE",
+  setWalletTypeSuccess: "SET_WALLET_TYPE_SUCCESS",
 
+  // sets the bip44 path when login with ledger device
+  setBip44Path: "SET_BIP44_PATH",
+  setBip44PathSuccess: "SET_BIP44_PATH_SUCCESS"
+};
 
-
-
-
-
-
-
-
-
-  contractInfo: 'CONTRACT_INFO',
-  contractInfoFulfilled: 'CONTRACT_INFO_FULFILLED',
-  contractInfoRejected: 'CONTRACT_INFO_REJECTED',
-
-  contractDetail: 'CONTRACT_DETAIL',
-  contractDetailFulfilled: 'CONTRACT_DETAIL_FULFILLED',
-  contractDetailRejected: 'CONTRACT_DETAIL_REJECTED',
-
-  contractDetailPopup: 'CONTRACT_DETAIL_POPUP',
-  imageConverterPopup: 'IMAGE_CONVERTER_POPUP',
-  contractVerificationPopup: 'CONTRACT_VERIFICATION_POPUP',
-
-  contractTxList: 'CONTRACT_TX_LIST',
-  contractTxListFulfilled: 'CONTRACT_TX_LIST_FULFILLED',
-  contractTxListRejected: 'CONTRACT_TX_LIST_REJECTED',
-
-  contractInternalTxList: 'CONTRACT_INTERNAL_TX_LIST',
-  contractInternalTxListFulfilled: 'CONTRACT_INTERNAL_TX_LIST_FULFILLED',
-  contractInternalTxListRejected: 'CONTRACT_INTERNAL_TX_LIST_REJECTED',
-
-  contractEventLogList: 'CONTRACT_EVENT_LOG_LIST',
-  contractEventLogListFulfilled: 'CONTRACT_EVENT_LOG_LIST_FULFILLED',
-  contractEventLogListRejected: 'CONTRACT_EVENT_LOG_LIST_REJECTED',
-
-  addressTxList: 'ADDRESS_TX_LIST',
-  addressTxListFulfilled: 'ADDRESS_TX_LIST_FULFILLED',
-  addressTxListRejected: 'ADDRESS_TX_LIST_REJECTED',
-
-
-  icxGetScore: 'ICX_GET_SCORE',
-  icxGetScoreFulfilled: 'ICX_GET_SCORE_FULFILLED',
-  icxGetScoreRejected: 'ICX_GET_SCORE_REJECTED',
-
-
-
-
-
-
-
-
-
-
-  tokenList: 'TOKEN_LIST',
-  tokenListFulfilled: 'TOKEN_LIST_FULFILLED',
-  tokenListRejected: 'TOKEN_LIST_REJECTED',
-
-  tokenListSearch: 'TOKEN_LIST_SEARCH',
-  tokenListSearchFulfilled: 'TOKEN_LIST_FULFILLED_SEARCH',
-  tokenListSearchRejected: 'TOKEN_LIST_REJECTED_SEARCH',
-
-  tokenTxList: 'TOKEN_TX_LIST',
-  tokenTxListFulfilled: 'TOKEN_TX_LIST_FULFILLED',
-  tokenTxListRejected: 'TOKEN_TX_LIST_REJECTED',
-
-  tokenSummary: 'TOKEN_SUMMARY',
-  tokenSummaryFulfilled: 'TOKEN_SUMMARY_FULFILLED',
-  tokenSummaryRejected: 'TOKEN_SUMMARY_REJECTED',
-
-  tokenTransfersList: 'TOKEN_TRANSFERS_LIST',
-  tokenTransfersListFulfilled: 'TOKEN_TRANSFERS_LIST_FULFILLED',
-  tokenTransfersListRejected: 'TOKEN_TRANSFERS_LIST_REJECTED',
-
-  tokenHoldersList: 'TOKEN_HOLDERS_LIST',
-  tokenHoldersListFulfilled: 'TOKEN_HOLDERS_LIST_FULFILLED',
-  tokenHoldersListRejected: 'TOKEN_HOLDERS_LIST_REJECTED',
-
-  initPopup: 'INIT_POPUP',
-  setPopup: 'SET_POPUP',
-
-  readContractInformation: 'READ_CONTRACT_INFORMATION',
-  readContractInformationFulfilled: 'READ_CONTRACT_INFORMATION_FULFILLED',
-  readContractInformationRejected: 'READ_CONTRACT_INFORMATION_REJECTED',
-
-  icxCall: 'ICX_CALL',
-  icxCallFulfilled: 'ICX_CALL_FULFILLED',
-  icxCallRejected: 'ICX_CALL_REJECTED',
-
-  icxSendTransaction: 'ICX_SEND_TRANSACTION',
-  icxSendTransactionFulfilled: 'ICX_SEND_TRANSACTION_FULFILLED',
-  icxSendTransactionRejected: 'ICX_SEND_TRANSACTION_REJECTED',
-
-  reportScam: 'REPORT_ADDRESS',
-  reportScamFulfilled: 'REPORT_ADDRESS_FULFILLED',
-  reportScamRejected: 'REPORT_ADDRESS_REJECTED',
-
-  setBannerOption: 'SET_BANNER_OPTION',
-
-  setAddress: 'SET_ADDRESS',
-  setAddressSuccess :'SET_ADDRESS_SUCCESS',
-  setNotification: 'SET_NOTIFICATION',
-  setNotificationSuccess :'SET_NOTIFICATION_SUCCESS',
-  clearWallet: 'CLEAR_WALLET',
-  clearWalletSuccess: 'CLEAR_WALLET_SUCCESS',
-
-  proposalInfo: 'PROPOSAL_INFO',
-  proposalInfoFulfilled: 'PROPOSAL_INFO_FULFILLED',
-  proposalInfoRejected: 'PROPOSAL_INFO_REJECTED',
-
-  totalQuorum: 'TOTAL_QUORUM',
-  totalQuorumFulfilled: 'TOTAL_QUORUM_FULFILLED',
-  totalQuorumRejected: 'TOTAL_QUORUM_REJECTED',
-
-  totalTokenVotes: 'TOTAL_TOKEN_VOTES',
-  totalTokenVotesFulfilled: 'TOTAL_TOKEN_VOTES_FULFILLED',
-  totalTokenVotesRejected: 'TOTAL_TOKEN_VOTES_REJECTED',
-}
-
-export default actionTypes
+export default actionTypes;

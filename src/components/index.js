@@ -49,6 +49,7 @@ import AmountCell from "./CommonComponent/AmountCell";
 
 import TxBottom from "./CommonComponent/TxBottom";
 import TabTable from "./CommonComponent/TabTable";
+import TabTable2 from "./CommonComponent/TabTable2";
 
 import TxTableHead from "./CommonPage/TxPage/TxTableHead";
 import TxTableBody from "./CommonPage/TxPage/TxTableBody";
@@ -115,6 +116,7 @@ export {
   TxTableHead,
   TxTableBody,
   TabTable,
+  TabTable2,
   TxPage,
   SearchPage,
   DetailPage,

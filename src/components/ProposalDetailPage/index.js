@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { IconConverter } from "icon-sdk-js";
 import { PROPOSAL_TABS } from "../../utils/const";
@@ -41,7 +41,7 @@ function ProposalDetailPage(props) {
     loading: true,
     error: false,
     proposal: {},
-    tab: getTab(props.url.hash),
+    tab: getTab(props),
     startTimeDate: "",
     currentBlockHeight: "",
     endingBlockHeight: "",
@@ -73,12 +73,6 @@ function ProposalDetailPage(props) {
 
   const buttonLabel =
     !votedAgree && !votedDisagree ? "Cast Vote" : "Change Vote";
-  console.log('vote button');
-  console.log(buttonLabel);
-  console.log('votedAgree');
-  console.log(votedAgree);
-  console.log('votedDisagree');
-  console.log(votedDisagree);
 
   const start = startBlockHeight
     ? IconConverter.toNumber(startBlockHeight)
@@ -157,7 +151,13 @@ function ProposalDetailPage(props) {
     return pathname.split("/")[2];
   }
 
-  function getTab(hash) {
+  function getTab(props) {
+    const locationObject = Object.keys(props.url).includes("location")
+      ? props.url.location
+      : props.url;
+    console.log("locationObj");
+    console.log(locationObject);
+    const { hash } = locationObject;
     const index = findTabIndex(PROPOSAL_TABS, hash);
     return PROPOSAL_TABS[index === -1 ? 0 : index];
   }
@@ -356,7 +356,11 @@ function ProposalDetailPage(props) {
         });
       }
     }
-    const id = getId(props.url.pathname);
+
+    const locationObject = Object.keys(props.url).includes("location")
+      ? props.url.location
+      : props.url;
+    const id = getId(locationObject.pathname);
     fetchInit();
 
     if (typeof walletAddress === "string" && walletAddress !== "") {

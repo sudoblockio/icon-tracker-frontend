@@ -126,10 +126,13 @@ export function getTimezoneMomentKSTTime(date) {
 
 export function dateToUTC(date, showUTC, showAgo) {
   if (!date) return "-";
-  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1;
   let result = moment(date)
-    .utcOffset(timezoneOffset)
-    .format("YYYY-MM-DD HH:mm:ss");
+  .utcOffset(0)
+  .format("YYYY-MM-DD HH:mm:ss");
+  // const timezoneOffset = (new Date().getTimezoneOffset() / 60) * -1;
+  // let result = moment(date)
+  //   .utcOffset(timezoneOffset)
+  //   .format("YYYY-MM-DD HH:mm:ss");
   if (showUTC) {
     result += ` (${getUTCString()})`;
   }
