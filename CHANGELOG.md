@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.20...v0.3.0) (2023-10-03)
+
+
+### Features
+
+* bump create react app version - marker commmit ([6768b2b](https://github.com/sudoblockio/icon-tracker-frontend/commit/6768b2b7efff51fd3c305736e25c4d4353ad9c02))
+
+
+### Bug Fixes
+
+* "read contract" tab in tokens not working [#284](https://github.com/sudoblockio/icon-tracker-frontend/issues/284) ([0b7041d](https://github.com/sudoblockio/icon-tracker-frontend/commit/0b7041d5c10adb685984bbcbe60e2b646f3619e6))
+* adding updated production browser support for BigInt - per paulmillr/noble-ed25519[#23](https://github.com/sudoblockio/icon-tracker-frontend/issues/23) ([5f8a1e5](https://github.com/sudoblockio/icon-tracker-frontend/commit/5f8a1e5ef72d967faa7676ec6ae8055a5db703ad))
+* e2e Test cases fails for view list count scenarios [#315](https://github.com/sudoblockio/icon-tracker-frontend/issues/315) ([800010a](https://github.com/sudoblockio/icon-tracker-frontend/commit/800010a52c4b47288fc184511856b4284b2ae7b8))
+* In /token/&lt;&gt; there is no transactions tab [#205](https://github.com/sudoblockio/icon-tracker-frontend/issues/205) ([4759021](https://github.com/sudoblockio/icon-tracker-frontend/commit/4759021dbe2f182f0d7e88266dfb87120bf90bd7))
+* make contracts that stake clickable [#278](https://github.com/sudoblockio/icon-tracker-frontend/issues/278) ([28a6467](https://github.com/sudoblockio/icon-tracker-frontend/commit/28a6467eba1068d25ba3f8e1ee7f3793c0657ef5))
+* Replace "Read Contract" tab in /token/* view with "Contract" [#314](https://github.com/sudoblockio/icon-tracker-frontend/issues/314) ([5c59aca](https://github.com/sudoblockio/icon-tracker-frontend/commit/5c59aca8e243448b7a8d9daccaa99a363a898c2b))
+
 ## [0.2.20](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.19...v0.2.20) (2023-07-25)
 
 
