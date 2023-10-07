@@ -25,7 +25,7 @@ class TxPage extends Component {
     this.txType = "";
     this.urlIndex = "";
     this.pageId = 1;
-    this._getTxList = () => {};
+    this._getTxList = () => { };
     this.state = {
       currentUSD: 0,
       age: "Age"
@@ -149,7 +149,7 @@ class TxPage extends Component {
     const { pathname } = locationObj;
     this.txType = pathname.split("/")[1] || "";
     this._getTxList =
-      this.props[this.getTxTypeData()["getTxList"]] || (() => {});
+      this.props[this.getTxTypeData()["getTxList"]] || (() => { });
     switch (this.txType) {
       case TX_TYPE.CONTRACT_TX:
       case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -197,8 +197,14 @@ class TxPage extends Component {
     const count = this.getCount();
     const { sort } = queryString.parse(this.props.url.search);
 
-    if (sort) this.historyPush(page, count, sort);
-    else this.historyPush(page, count);
+    if (sort) {
+      this.historyPush(page, count, sort);
+    }
+    else { 
+      this.historyPush(page, count); 
+    }
+    this.pageId = page; 
+    window.location.reload();
   };
 
   historyPush = (page, count, sort) => {
@@ -329,7 +335,7 @@ class TxPage extends Component {
           ),
           <Pagination
             key="Pagination"
-            pageNum={page}
+            pageNum={Number(this.pageId)}
             maxPageNum={calcMaxPageNum(totalSize, count)}
             getData={this.getTxListByPage}
           />
