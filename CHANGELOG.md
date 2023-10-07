@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.0...v0.3.1) (2023-10-07)
+
+
+### Bug Fixes
+
+* pagination button on tx list view ([594d0c2](https://github.com/sudoblockio/icon-tracker-frontend/commit/594d0c2171a61156887bcb2e772e1e8db64e248d))
+
 ## [0.3.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.2.20...v0.3.0) (2023-10-03)
 
 
