@@ -315,6 +315,7 @@ class GovernancePage extends Component {
 											{!blackChecked && <th>Bonded</th>}
 											{!blackChecked && <th>Total Votes</th>}
 											<th>Power</th>
+											<th>Monthly<br/> Rewards<br/><em>ICX / USD</em></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -415,6 +416,7 @@ class TableRow extends Component {
 			node_state,
 			logo,
 			status,
+			reward_monthly, reward_monthly_usd,
 			sponsored_cps_grants,
 			cps_governance,
 			bonded,
@@ -449,6 +451,8 @@ class TableRow extends Component {
 				{!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
 				<div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
 				<td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
+				<td><span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
+				<em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em></td>
 			</tr>
 		)
 	}
