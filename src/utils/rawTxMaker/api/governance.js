@@ -7,7 +7,13 @@ import { scores, makeTxCallRPCObj } from "./helpers";
 /*
  *
  */
-function voteNetworkProposal(proposalId, vote, prepAddress, nid, sl = 20000000000) {
+function voteNetworkProposal(
+  proposalId,
+  vote,
+  prepAddress,
+  nid,
+  sl = 200000000000
+) {
   return makeTxCallRPCObj(
     prepAddress,
     scores.mainnet.governance2,
@@ -21,6 +27,18 @@ function voteNetworkProposal(proposalId, vote, prepAddress, nid, sl = 2000000000
   );
 }
 
+function applyNetworkProposal(proposalId, prepAddress, nid, sl = 20000000000) {
+  return makeTxCallRPCObj(
+    prepAddress,
+    scores.mainnet.governance2,
+    "applyProposal",
+    {
+      id: proposalId
+    },
+    nid,
+    sl
+  );
+}
 /*
  *
  */
@@ -52,6 +70,7 @@ const governanceMethods = {
   voteNetworkProposal,
   approveNetworkProposal,
   rejectNetworkProposal,
-  submitNetworkProposal
+  submitNetworkProposal,
+  applyNetworkProposal
 };
 export default governanceMethods;
