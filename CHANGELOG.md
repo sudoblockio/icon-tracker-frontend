@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.1...v0.3.2) (2023-10-12)
+
+
+### Bug Fixes
+
+* Bring back rewards into governance view [#341](https://github.com/sudoblockio/icon-tracker-frontend/issues/341) ([8717bf5](https://github.com/sudoblockio/icon-tracker-frontend/commit/8717bf5b99cc08176c5b99160d531e1d7c3a437d))
+
 ## [0.3.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.0...v0.3.1) (2023-10-07)
 
 
