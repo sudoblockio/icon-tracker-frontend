@@ -1,0 +1,17 @@
+.applyButtonContainer {
+  /* display: inline-block; */
+  /* position: relative; */
+}
+
+.applyButton {
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #2196f3;
+  width: 120px;
+  margin-right: 5px;
+  cursor: pointer;
+}
