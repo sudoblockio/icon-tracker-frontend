@@ -25,7 +25,7 @@ import { icxSendTransaction } from "../../redux/api/jsProvider/icx";
 import config from "../../config";
 
 // SET THE FOLLOWING FLAG AS true FOR TESTING
-const USE_TESTING_PARAMS = true;
+const USE_TESTING_PARAMS = false;
 
 const nid = USE_TESTING_PARAMS ? 3 : config.nid;
 
