@@ -16,6 +16,8 @@ class TokenDetailPage extends Component {
   render() {
     const { token } = this.props;
     const { loading, error } = token;
+    console.log('props check for contracts')
+    console.log(this.props)
 
     return (
       <DetailPage
@@ -39,6 +41,9 @@ class TokenDetailPage extends Component {
           },
           address => {
             this.props.readContractInformation({ address });
+          },
+          contractAddr => {
+            this.props.contractEventLogList({ contractAddr, page: 1, count: 10 });
           }
         ]}
         InfoComponent={TokenSummary}
