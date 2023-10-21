@@ -172,7 +172,7 @@ function ProposalDetailPage(props) {
                             <span>
                               {dateToUTC(
                                 IconConverter.toNumber(apply.timestamp) / 1000
-                              )}
+                              )} UTC
                             </span>
                           </p>
                         )}
@@ -212,11 +212,7 @@ function ProposalDetailPage(props) {
                               {"~"}
                               {new Date(
                                 state.startTimeDate
-                              ).toDateString()}{" "}
-                              {new Date(
-                                state.startTimeDate
-                              ).toLocaleTimeString()}{" "}
-                              UTC
+                              ).toString()}{" "}
                             </span>
                           </Link>{" "}
                         </td>
@@ -235,11 +231,7 @@ function ProposalDetailPage(props) {
                               {end} {"~"}
                               {new Date(
                                 state.endingBlockHeight
-                              ).toDateString()}{" "}
-                              {new Date(
-                                state.endingBlockHeight
-                              ).toLocaleTimeString()}{" "}
-                              UTC
+                              ).toString()}{" "}
                             </span>
                           </Link>{" "}
                         </td>
