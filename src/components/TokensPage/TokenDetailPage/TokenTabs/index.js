@@ -12,6 +12,7 @@ import {
 } from "../../../../redux/store/iiss";
 import TokenTransactions from "./TokenTransactions";
 import { tokenTxList } from "../../../../redux/api/restV3";
+import TokenEvents from "./TokenEvents";
 // import {tokenHoldersList, tokenTransfersList} from "../../../../redux/api/restV3";
 
 class TokenTabs extends Component {
@@ -36,10 +37,11 @@ class TokenTabs extends Component {
       tokenTransfers,
       tokenHolders,
       contractInfo,
-      contractTx
+      contractTx,
+      contractEvents,
     } = this.props;
 
-    console.log("token detail page");
+    console.log("token detail page props");
     console.log(this.props);
     const { loading, data } = token;
     const { address } = data;
@@ -95,6 +97,18 @@ class TokenTabs extends Component {
                   icxCall={this.props.icxCall}
                   icxSendTransaction={this.props.icxSendTransaction}
                   walletAddress={this.props.walletAddress}
+                />
+              );
+            case 4:
+              return (
+                <TokenEvents
+                  txData={contractEvents}
+                  goAllTx={() => {
+                    this.props.history.push(
+                      `/${TX_TYPE.CONTRACT_EVENTS}/${address}`
+                    );
+                  }}
+                  txType={TX_TYPE.CONTRACT_EVENTS}
                 />
               );
             default:

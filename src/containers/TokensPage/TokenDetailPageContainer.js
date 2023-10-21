@@ -10,15 +10,21 @@ import {
 import {
   icxCallAction,
   readContractInformationAction,
-  contractTxListAction
+  contractTxListAction,
+  contractEventLogListAction,
+  contractInfoAction,
+  contractDetailAction
 } from "../../redux/store/contracts";
 import { getTokenTotalSupply } from "../../redux/store/iiss";
 
 function mapStateToProps(state) {
+  console.log(state, "token cx state");
   return {
     url: state.router.location,
     contractInfo: state.contracts.contractReadInfo,
     contractTx: state.contracts.contractTx,
+    contractEvents: state.contracts.contractEvents,
+    contractDetails: state.contracts.contractDetail,
     ...state.tokens
   };
 }
@@ -28,6 +34,9 @@ function mapDispatchToProps(dispatch) {
     contractTxList: payload => dispatch(contractTxListAction(payload)),
     tokenTotalSupply: payload => dispatch(getTokenTotalSupply(payload)),
     tokenSummary: payload => dispatch(tokenSummary(payload)),
+    contractDetail: payload => dispatch(contractDetailAction(payload)),
+    contractEventLogList: payload =>
+      dispatch(contractEventLogListAction(payload)),
     tokenTransfersList: payload => dispatch(tokenTransfersList(payload)),
     tokenHoldersList: payload => dispatch(tokenHoldersList(payload)),
     icxCall: payload => dispatch(icxCallAction(payload)),
