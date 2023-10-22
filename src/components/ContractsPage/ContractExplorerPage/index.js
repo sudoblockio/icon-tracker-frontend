@@ -14,7 +14,7 @@ import {
 } from "../contractUtils";
 import config from "../../../config";
 import {
-  icxGetScore,
+  icxGetScoreFromRPC,
   icxCall,
   icxSendTransactionRaw
 } from "../../../redux/api/restV3/icx";
@@ -53,7 +53,7 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
     getInitialInputState(url)
   );
   const [contractAbi, setContractAbi] = useState(null);
-  const [cxAbi, setCxAbi] = useState(null);
+  // const [cxAbi, setCxAbi] = useState(null);
   const [contractReadInfo, setContractReadInfo] = useState(null);
   const [endpointInputHasFocus, setEndpointInputHasFocus] = useState(null);
   const [ledgerWaitModalState, setLedgerWaitModalState] = useState(false);
@@ -216,7 +216,7 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
           message: ""
         }
       };
-      const response = await icxGetScore(
+      const response = await icxGetScoreFromRPC(
         {
           address: address
         },
@@ -224,7 +224,7 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
         endpoint
       );
 
-      // TODO: to improve error handling for the icxGetScore
+      // TODO: to improve error handling for the icxGetScoreFromRPC
       // response, validate if the response is an object with a
       // data param with the following shape:
       // {

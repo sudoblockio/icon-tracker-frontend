@@ -12,6 +12,7 @@ import {
 import config from "../../config";
 import IconService from "icon-sdk-js";
 import { requestJsonRpc } from "../../utils/connect";
+import { icxGetScoreFromRPC } from "../api/restV3/icx";
 
 export async function getStats() {
   const trackerApi = await trackerApiInstance();
@@ -116,6 +117,18 @@ export async function getContractABI(addr) {
         reject(error);
       });
   });
+}
+
+export async function getContractABIFromRPC(addr) {
+  const response = await icxGetScoreFromRPC({
+    address: addr
+  });
+
+  if (response.data != null && response.data.result != null) {
+    return response.data.result;
+  }
+
+  return null;
 }
 
 export async function prepList(grade) {

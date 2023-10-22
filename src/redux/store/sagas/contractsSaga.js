@@ -12,7 +12,8 @@ import {
 } from "../contracts";
 import { icxCall as ICX_CALL_API } from "../../api/restV3";
 import { icxSendTransaction as ICX_SEND_TRANSACTION_API } from "../../api/restV3";
-import { getContractABI as ICX_GET_CONTRACT } from "../../store/iiss";
+// import { getContractABI as ICX_GET_CONTRACT } from "../../store/iiss";
+import { getContractABIFromRPC as ICX_GET_CONTRACT } from "../../store/iiss";
 
 export default function* contractsSaga() {
   yield fork(watchContractList);
@@ -25,7 +26,7 @@ export default function* contractsSaga() {
   yield fork(watchContractInternalTxList);
   yield fork(watchContractTokenTxList);
   yield fork(watchContractEventLogList);
-  yield fork(watchIcxGetSrore);
+  yield fork(watchIcxGetScore);
   yield fork(watchIcxCall);
   yield fork(watchIcxSendTransaction);
   yield fork(watchReadContractInformation);
@@ -72,8 +73,8 @@ function* watchContractEventLogList() {
   yield takeLatest(AT.contractEventLogList, contractEventLogListFunc);
 }
 
-function* watchIcxGetSrore() {
-  yield takeLatest(AT.icxGetScore, icxGetSroreFunc);
+function* watchIcxGetScore() {
+  yield takeLatest(AT.icxGetScore, icxGetScoreFunc);
 }
 
 function* watchIcxCall() {
@@ -260,7 +261,7 @@ export function* contractEventLogListFunc(action) {
   }
 }
 
-export function* icxGetSroreFunc(action) {
+export function* icxGetScoreFunc(action) {
   try {
     const payload = yield call(ICX_GET_CONTRACT, action.payload.address);
     if (payload.length !== 0) {
