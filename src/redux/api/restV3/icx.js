@@ -37,7 +37,7 @@ async function makeRequest(params, method, label = "default", customUrl = "") {
       });
   });
 }
-export async function icxGetScore(params, label = "default", customUrl = "") {
+export async function icxGetScoreFromRPC(params, label = "default", customUrl = "") {
   return await makeRequest(params, "icx_getScoreApi", label, customUrl);
 }
 

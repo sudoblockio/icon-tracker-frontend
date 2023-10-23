@@ -5,7 +5,11 @@ import ButtonSet from "../../MiscComponents/ButtonSet";
 import MiscComponents from "../../MiscComponents/MiscContractComponents";
 import customStyles from "./ContractComponent.module.css";
 import { customMethod } from "../../../../utils/rawTxMaker";
-import { makeParams, createContractMethodsState } from "../../contractUtils";
+import {
+  makeParams,
+  createContractMethodsState,
+  localReadContractInformationFunc
+} from "../../contractUtils";
 import config from "../../../../config";
 
 const { nid, network } = config;
@@ -56,18 +60,11 @@ function ContractComponent({
         paramsData,
         nid
       );
-      console.log("rawMethodCall");
-      console.log(rawMethodCall);
       icxSendTransaction({
         params: { ...rawMethodCall },
         index: index
       });
     }
-  }
-
-  function handleButtonExpand() {
-    console.log('handleButtonExpand');
-    console.log(data.address);
   }
 
   const { data } = contract;
@@ -77,16 +74,20 @@ function ContractComponent({
     contractReadWriteInfo
   );
 
-  console.log('contract address');
-  console.log(address);
-
   //TODO: remove this useEffect after testing and refactoring
   useEffect(() => {
-    console.log("contractReadWriteInfo and contractWriteInfo");
-    console.log(contractReadWriteInfo);
-    console.log("contract method state");
-    console.log(contractMethodsState);
+    const contractMethodsState = createContractMethodsState(
+      contractReadWriteInfo
+    );
   }, [contractReadWriteInfo]);
+
+  useEffect(() => {
+    // on initial rendering of the contract Tab force a redux
+    // state update to fetch the contract abi
+    const contractMethodsState = createContractMethodsState(
+      contractReadWriteInfo
+    );
+  }, []);
 
   return (
     <div className="contents">
@@ -125,7 +126,9 @@ function ContractComponent({
                   handleChange={handleChange}
                   handleClick={handleClickOnWrite}
                   address={address}
-                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                  startIndex={
+                    contractMethodsState.readOnlyMethodsNameArray.length
+                  }
                 />
               </div>
             )}
@@ -208,7 +211,9 @@ function ContractComponent({
                   handleChange={handleChange}
                   handleClick={handleClickOnWrite}
                   address={address}
-                  startIndex={contractMethodsState.readOnlyMethodsNameArray.length}
+                  startIndex={
+                    contractMethodsState.readOnlyMethodsNameArray.length
+                  }
                 />
               </div>
             )}
