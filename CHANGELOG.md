@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.2...v0.3.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* change out ABI request from backend to RPC for contract tab [#346](https://github.com/sudoblockio/icon-tracker-frontend/issues/346) ([7dc96c4](https://github.com/sudoblockio/icon-tracker-frontend/commit/7dc96c45eacba2528904e5ffb37bf6e3061ccfac))
+* events tab in token view and date in proposals [#83](https://github.com/sudoblockio/icon-tracker-frontend/issues/83) [#302](https://github.com/sudoblockio/icon-tracker-frontend/issues/302) ([#347](https://github.com/sudoblockio/icon-tracker-frontend/issues/347)) ([96b5cd9](https://github.com/sudoblockio/icon-tracker-frontend/commit/96b5cd9153a33898d125b73bf2c45fc9b91a7022))
+
 ## [0.3.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.1...v0.3.2) (2023-10-12)
 
 
