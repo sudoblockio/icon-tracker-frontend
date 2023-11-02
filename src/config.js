@@ -41,10 +41,38 @@ if (isLocal) {
 const defaultSettings = defaults[0]
 
 network = defaultSettings['network']
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || defaultSettings['apiEndpoint'];
-const rpcEndpoint = process.env.REACT_APP_RPC_ENDPOINT || defaultSettings['rpcEndpoint'];
-const wssEndpoint = process.env.REACT_APP_WSS_ENDPOINT || defaultSettings['wssEndpoint'];
-const nid = process.env.REACT_APP_NID || defaultSettings['nid'];
+
+// Check the path so that we can use parameters from that to inform backend components
+const searchParams = new URLSearchParams(window.location.search);
+
+// Set the apiEndpoint prioritizing the searchParams, then falling back to env vars, then defaults
+let apiEndpoint;
+if (searchParams.has('api_endpoint')) {
+  apiEndpoint = searchParams.get('api_endpoint');
+} else {
+  apiEndpoint = process.env.REACT_APP_API_ENDPOINT || defaultSettings['apiEndpoint']; // Fallback to default if not present
+}
+
+let rpcEndpoint;
+if (searchParams.has('rpc_endpoint')) {
+  rpcEndpoint = searchParams.get('rpc_endpoint');
+} else {
+  rpcEndpoint = process.env.REACT_APP_RPC_ENDPOINT || defaultSettings['rpcEndpoint'];
+}
+
+let wssEndpoint;
+if (searchParams.has('wss_endpoint')) {
+  wssEndpoint = searchParams.get('wss_endpoint');
+} else {
+  wssEndpoint = process.env.REACT_APP_WSS_ENDPOINT || defaultSettings['wssEndpoint'];
+}
+
+let nid;
+if (searchParams.has('nid')) {
+  nid = searchParams.get('nid');
+} else {
+  nid = process.env.REACT_APP_NID || defaultSettings['nid'];
+}
 
 const config = {
   apiEndpoint: apiEndpoint,
@@ -91,4 +119,15 @@ const config = {
     CONTRACT_WRITE_EVENTLOG_ENABLED: false
   }
 }
+
+console.log(`Config Params
+Is Local: ${isLocal}
+Location: ${window.location}
+Region: ${region}
+Network: ${network}
+API Endpoint: ${apiEndpoint}
+RPC Endpoint: ${rpcEndpoint}
+WSS Endpoint: ${wssEndpoint}`
+);
+
 export default config;
