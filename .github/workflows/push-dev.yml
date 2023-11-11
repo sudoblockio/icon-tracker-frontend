@@ -42,7 +42,6 @@
 #        with:
 #          context: .
 #          file: ./Dockerfile
-#          target: prod
 #          push: true
 #          tags: sudoblock/icon-tracker-frontend:dev, sudoblock/icon-tracker-frontend:${{ steps.source.outputs.TAG }}
 #
