@@ -4,5 +4,11 @@ services:
     build:
       context: ${FRONTEND_CONTEXT:-.}
       target: ${FRONTEND_CONTEXT:-prod}
+      args:
+        REACT_APP_NETWORK_NAME: ${REACT_APP_NETWORK_NAME:-mainnet}
+        REACT_APP_RPC_ENDPOINT: ${REACT_APP_RPC_ENDPOINT:-https://api.icon.community}
+        REACT_APP_API_ENDPOINT: ${REACT_APP_API_ENDPOINT:-https://tracker.icon.community}
+        REACT_APP_WSS_ENDPOINT: ${REACT_APP_WSS_ENDPOINT:-wss://tracker.icon.community}
+        REACT_APP_NID: ${REACT_APP_NID:-1}
     ports:
       - "8080:8080"
