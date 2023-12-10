@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import QrCode from 'qrcode';
+import React, { Component } from 'react'
+import QrCode from 'qrcode'
 
 const Id = 'qr'
 class QrCodeComponent extends Component {
@@ -7,18 +7,21 @@ class QrCodeComponent extends Component {
         this.drawQrCode()
     }
 
-    drawQrCode () {
+    drawQrCode() {
         const { text, scale } = this.props
         if (!text || !scale) return
 
         QrCode.toCanvas(
-            document.getElementById(Id), text, {
+            document.getElementById(Id),
+            text,
+            {
                 margin: 0,
                 scale: scale,
                 color: {
-                    light: '#0000'
-                }
-            }, (error) => {
+                    light: '#0000',
+                },
+            },
+            (error) => {
                 if (error) {
                     console.error(error)
                 }
@@ -27,10 +30,8 @@ class QrCodeComponent extends Component {
     }
 
     render() {
-        return (
-            <canvas id={Id}></canvas>
-        );
+        return <canvas id={Id}></canvas>
     }
 }
 
-export default QrCodeComponent;
+export default QrCodeComponent

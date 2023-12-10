@@ -23,19 +23,18 @@ class Scam extends Component {
             })
         }
     }
-    handleChange = e => {
+    handleChange = (e) => {
         if (e.target.value.length > 256) {
             this.setState({
                 refUrl: e.target.value.substr(0, 256),
             })
-        }
-        else {
+        } else {
             this.setState({
                 refUrl: e.target.value,
-            })    
-        }        
+            })
+        }
     }
-    readFile = file => {
+    readFile = (file) => {
         if (file && file[0]) {
             const fileName = file[0].name
             // if (!file[0].type.includes('image')) {
@@ -103,7 +102,9 @@ class Scam extends Component {
                 <div key="div" className="box">
                     {connectStatus === 2 ? (
                         <Fragment>
-                            <h2>The scam site URL or description. <span>(Optional)</span></h2>
+                            <h2>
+                                The scam site URL or description. <span>(Optional)</span>
+                            </h2>
                             <input
                                 type="text"
                                 className="txt-type over"
@@ -111,73 +112,120 @@ class Scam extends Component {
                                 onChange={this.handleChange}
                                 value={refUrl}
                             />
-                            <h3>Select a file or drag & drop to the area below. <span>(Optional)</span></h3>
-                            {dropBoxClass !== '' && (<Dropzone onDrop={file => { 
-                                this.readFile(file)
-                            }}>
-                                {({ getRootProps, getInputProps }) => (
-                                    <Fragment>
-                                        <div
-                                            className={`drop-box ${dropBoxClass}`}
-                                            {...getRootProps()}
-                                            onClick={() => {
-                                                return
-                                            }}
-                                        >
-                                            <Fragment>
-                                                <i className="img" />
-                                                <span className="ellipsis">{fileName}</span>
-                                                {dropBoxClass === 'error' && <span className="msg">{msg}</span>}
-                                                <i className="img" onClick={this.handleClickDelete} />
-                                            </Fragment>                                        
-                                            {dropBoxClass === '' && <span>Please drag your file here.<br/>(Maximum upload file is 5MB.)</span>}
-                                        </div>
-                                        <label htmlFor="file">Select file</label>
-                                        <input id="file" className="btn-type-normal select" {...getInputProps()} />
-                                    </Fragment>
-                                )}
-                            </Dropzone>)}
-                            {dropBoxClass === '' && <Dropzone onDrop={file => { 
-                                this.readFile(file)
-                            }}>
-                                {({ getRootProps, getInputProps }) => (
-                                    <Fragment>
-                                        <div
-                                            className={`drop-box ${dropBoxClass}`}
-                                            {...getRootProps()}
-                                            onClick={() => {
-                                                return
-                                            }}
-                                        >                                            
-                                            <span>Please drag your file here.<br/>(Maximum upload file is 5MB.)</span>
-                                        </div>
-                                        <label htmlFor="file">Select file</label>
-                                        <input id="file" className="btn-type-normal select" {...getInputProps()} />
-                                    </Fragment>
-                                )}
-                            </Dropzone>}
+                            <h3>
+                                Select a file or drag & drop to the area below.{' '}
+                                <span>(Optional)</span>
+                            </h3>
+                            {dropBoxClass !== '' && (
+                                <Dropzone
+                                    onDrop={(file) => {
+                                        this.readFile(file)
+                                    }}>
+                                    {({ getRootProps, getInputProps }) => (
+                                        <Fragment>
+                                            <div
+                                                className={`drop-box ${dropBoxClass}`}
+                                                {...getRootProps()}
+                                                onClick={() => {
+                                                    return
+                                                }}>
+                                                <Fragment>
+                                                    <i className="img" />
+                                                    <span className="ellipsis">{fileName}</span>
+                                                    {dropBoxClass === 'error' && (
+                                                        <span className="msg">{msg}</span>
+                                                    )}
+                                                    <i
+                                                        className="img"
+                                                        onClick={this.handleClickDelete}
+                                                    />
+                                                </Fragment>
+                                                {dropBoxClass === '' && (
+                                                    <span>
+                                                        Please drag your file here.
+                                                        <br />
+                                                        (Maximum upload file is 5MB.)
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <label htmlFor="file">Select file</label>
+                                            <input
+                                                id="file"
+                                                className="btn-type-normal select"
+                                                {...getInputProps()}
+                                            />
+                                        </Fragment>
+                                    )}
+                                </Dropzone>
+                            )}
+                            {dropBoxClass === '' && (
+                                <Dropzone
+                                    onDrop={(file) => {
+                                        this.readFile(file)
+                                    }}>
+                                    {({ getRootProps, getInputProps }) => (
+                                        <Fragment>
+                                            <div
+                                                className={`drop-box ${dropBoxClass}`}
+                                                {...getRootProps()}
+                                                onClick={() => {
+                                                    return
+                                                }}>
+                                                <span>
+                                                    Please drag your file here.
+                                                    <br />
+                                                    (Maximum upload file is 5MB.)
+                                                </span>
+                                            </div>
+                                            <label htmlFor="file">Select file</label>
+                                            <input
+                                                id="file"
+                                                className="btn-type-normal select"
+                                                {...getInputProps()}
+                                            />
+                                        </Fragment>
+                                    )}
+                                </Dropzone>
+                            )}
                             <div className="btn-holder full">
-                                <button className="btn-type-fill size-half" onClick={this.props.closeScam}>
+                                <button
+                                    className="btn-type-fill size-half"
+                                    onClick={this.props.closeScam}>
                                     <span>{'Cancel'}</span>
-                                </button>                                
-                                <button className="btn-type-normal size-half" disabled={dropBoxClass === 'error' ? true : false} onClick={this.handleSubmit}>
+                                </button>
+                                <button
+                                    className="btn-type-normal size-half"
+                                    disabled={dropBoxClass === 'error' ? true : false}
+                                    onClick={this.handleSubmit}>
                                     <span>Submit</span>
                                 </button>
                             </div>
                         </Fragment>
                     ) : (
                         <Fragment>
-                            <div className="icon">{connectStatus === 0 ? <img src={icon} alt="icon" /> : <img src={complete} alt="complete" />}</div>
+                            <div className="icon">
+                                {connectStatus === 0 ? (
+                                    <img src={icon} alt="icon" />
+                                ) : (
+                                    <img src={complete} alt="complete" />
+                                )}
+                            </div>
                             <p className="sub-title">Connect to ICONex</p>
                             <p className="txt">
-                                {connectStatus === 0 ? 'Reporting is only available after you connect the ICONex wallet.' : 'ICONex wallet is connected.'}
+                                {connectStatus === 0
+                                    ? 'Reporting is only available after you connect the ICONex wallet.'
+                                    : 'ICONex wallet is connected.'}
                             </p>
                             {connectStatus === 1 && <p className="address">{walletAddress}</p>}
                             <div className="btn-holder full">
-                                <button className="btn-type-fill size-half" onClick={this.props.closeScam}>
+                                <button
+                                    className="btn-type-fill size-half"
+                                    onClick={this.props.closeScam}>
                                     <span>{'Cancel'}</span>
                                 </button>
-                                <button className="btn-type-normal size-half" onClick={this.onClickNext}>
+                                <button
+                                    className="btn-type-normal size-half"
+                                    onClick={this.onClickNext}>
                                     <span>{connectStatus === 0 ? 'Connect' : 'Next'}</span>
                                 </button>
                             </div>
@@ -197,12 +245,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        reportScam: payload => dispatch(reportScam(payload)),
-        setAddress: payload => dispatch(setAddress(payload)),
+        reportScam: (payload) => dispatch(reportScam(payload)),
+        setAddress: (payload) => dispatch(setAddress(payload)),
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Scam)
+export default connect(mapStateToProps, mapDispatchToProps)(Scam)

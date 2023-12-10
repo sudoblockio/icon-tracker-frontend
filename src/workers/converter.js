@@ -1,26 +1,26 @@
 import { IconConverter } from 'icon-sdk-js'
 
-onmessage = message => {
+onmessage = (message) => {
     const { type, payload } = message.data
     switch (type) {
         case 'removeQuotes':
             postMessage({
                 type,
-                payload: payload.replace(/"/gi, ""),
+                payload: payload.replace(/"/gi, ''),
             })
-            break;
+            break
         case 'utf8ToHex':
             postMessage({
                 type,
                 payload: IconConverter.toHex(payload),
             })
-            break;
+            break
         case 'hexToUtf8':
             postMessage({
                 type,
                 payload: IconConverter.toUtf8(payload),
             })
-            break;
+            break
         default:
     }
 }

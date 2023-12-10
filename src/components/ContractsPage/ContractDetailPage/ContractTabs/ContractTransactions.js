@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
-import {
-  TxBottom
-} from '../../../../components'
+import React, { Component } from 'react'
+import { TxBottom } from '../../../../components'
 
 class ContractTransactions extends Component {
-  render() {
-    return <TxBottom {...this.props}/>
-  }
+    render() {
+        return <TxBottom {...this.props} />
+    }
 }
 
-export default ContractTransactions;
-
+export default ContractTransactions

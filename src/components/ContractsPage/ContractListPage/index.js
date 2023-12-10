@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import {
-	SearchPage
-} from '../../../components'
+import React, { Component } from 'react'
+import { SearchPage } from '../../../components'
 
 class ContractListPage extends Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
+    constructor(props) {
+        super(props)
+    }
 
-
-		return <SearchPage {...this.props} type="contract"/>
-	}
+    render() {
+        return <SearchPage {...this.props} type="contract" />
+    }
 }
-export default ContractListPage;
+export default ContractListPage

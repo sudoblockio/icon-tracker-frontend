@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { TokenDetailPageContainer } from '../containers'
 
 class TokenDetailPage extends Component {
-  render() {
-    return (
-      <TokenDetailPageContainer />
-    );
-  }
+    render() {
+        return <TokenDetailPageContainer />
+    }
 }
 
-export default TokenDetailPage;
+export default TokenDetailPage

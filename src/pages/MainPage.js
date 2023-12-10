@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { MainPageContainer } from '../containers'
 
 class MainPage extends Component {
-  render() {
-    return (
-      <MainPageContainer />
-    );
-  }
+    render() {
+        return <MainPageContainer />
+    }
 }
 
-export default MainPage;
+export default MainPage

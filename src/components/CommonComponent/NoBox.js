@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const NoBox = ({ text }) => {
     return (
@@ -6,7 +6,9 @@ const NoBox = ({ text }) => {
             <table className="table-type">
                 <tbody>
                     <tr>
-                        <td colSpan="7" className="notrans">{text}</td>
+                        <td colSpan="7" className="notrans">
+                            {text}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -14,4 +16,4 @@ const NoBox = ({ text }) => {
     )
 }
 
-export default NoBox;
+export default NoBox

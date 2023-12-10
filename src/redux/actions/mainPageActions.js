@@ -1,13 +1,13 @@
-import actionTypes from '../actionTypes/actionTypes';
+import actionTypes from '../actionTypes/actionTypes'
 
 export function getMainInfo() {
-  return {
-    type: actionTypes.getMainInfo
-  }
+    return {
+        type: actionTypes.getMainInfo,
+    }
 }
 
 export function getMainChart() {
-  return {
-    type: actionTypes.getMainChart
-  }
+    return {
+        type: actionTypes.getMainChart,
+    }
 }

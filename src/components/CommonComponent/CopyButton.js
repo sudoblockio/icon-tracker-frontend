@@ -42,23 +42,31 @@ class CopyButton extends Component {
                 if (!download) {
                     return (
                         <span
-                            className={`copy clipboard-btn ${style} ${disabled ? 'disabled' : ''} ${className}`}
+                            className={`copy clipboard-btn ${style} ${
+                                disabled ? 'disabled' : ''
+                            } ${className}`}
                             data-clipboard-text={data}
-                            onClick={this.handleClick}
-                        >
+                            onClick={this.handleClick}>
                             <i className="img" />
                         </span>
                     )
                 } else {
                     return (
                         <a href={download.link} download={download.name} className="download">
-                            <span className={`copy clipboard-btn download ${style} ${className}`} data-clipboard-text={data} onClick={this.handleClick} />
+                            <span
+                                className={`copy clipboard-btn download ${style} ${className}`}
+                                data-clipboard-text={data}
+                                onClick={this.handleClick}
+                            />
                         </a>
                     )
                 }
             } else if (wallet) {
                 return (
-                    <span className={`clipboard-btn ${style === 'on' ? 'complete' : ''} ${className}`} data-clipboard-text={data} onClick={this.handleClick}>
+                    <span
+                        className={`clipboard-btn ${style === 'on' ? 'complete' : ''} ${className}`}
+                        data-clipboard-text={data}
+                        onClick={this.handleClick}>
                         <em>{data}</em>
                         <em>{text}</em>
                     </span>
@@ -69,8 +77,7 @@ class CopyButton extends Component {
                         className={`btn-type clipboard-btn ${style} ${className}`}
                         data-clipboard-text={data}
                         onClick={this.handleClick}
-                        disabled={disabled}
-                    >
+                        disabled={disabled}>
                         {text}
                     </button>
                 )

@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import TransactionInfo from './TransactionInfo'
 import TransactionTabs from './TransactionTabs'
-import {
-    DetailPage
-} from '../../../components';
-import {
-    TRANSACTION_TABS
-} from '../../../utils/const'
+import { DetailPage } from '../../../components'
+import { TRANSACTION_TABS } from '../../../utils/const'
 
 class TransactionDetailPage extends Component {
-
     render() {
-        const { transaction } = this.props;
+        const { transaction } = this.props
         const { loading, error, pending } = transaction
 
         return (
@@ -22,14 +17,16 @@ class TransactionDetailPage extends Component {
                 error={error}
                 TABS={TRANSACTION_TABS}
                 ROUTE="/transaction"
-                getInfo={txHash => { this.props.transactionTxDetail({ txHash }) }}
+                getInfo={(txHash) => {
+                    this.props.transactionTxDetail({ txHash })
+                }}
                 getList={[
-                    txHash => {
+                    (txHash) => {
                         this.props.transactionInternalTxList({ txHash, page: 1, count: 10 })
-                    },                    
-                    txHash => {
+                    },
+                    (txHash) => {
                         this.props.transactionEventLogListAction({ txHash, page: 1, count: 10 })
-                    }
+                    },
                 ]}
                 InfoComponent={TransactionInfo}
                 TabsComponent={TransactionTabs}
@@ -38,4 +35,4 @@ class TransactionDetailPage extends Component {
     }
 }
 
-export default TransactionDetailPage;
+export default TransactionDetailPage

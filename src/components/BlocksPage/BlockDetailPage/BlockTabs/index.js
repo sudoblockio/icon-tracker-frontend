@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import BlockTransactions from './BlockTransactions'
-import {
-    TX_TYPE,
-    BLOCK_TABS,
-} from '../../../../utils/const'
-import {
-    NoBox,
-    TabTable
-} from '../../../../components'
+import { TX_TYPE, BLOCK_TABS } from '../../../../utils/const'
+import { NoBox, TabTable } from '../../../../components'
 
 class BlockTabs extends Component {
-
     render() {
         const { on, block, blockTx, blockIntTx } = this.props
-        console.log(this.props, "tx detail props")
+        console.log(this.props, 'tx detail props')
         const { loading, data } = block
-        console.log(block, "tx detail data")
+        console.log(block, 'tx detail data')
         const { number } = data
-        let BlockTabs = BLOCK_TABS;
-        if(blockIntTx && blockIntTx.data && blockIntTx.data.length === 0) {
-            BlockTabs = [BlockTabs[0]];
+        let BlockTabs = BLOCK_TABS
+        if (blockIntTx && blockIntTx.data && blockIntTx.data.length === 0) {
+            BlockTabs = [BlockTabs[0]]
         }
         return (
             <TabTable
@@ -29,26 +22,30 @@ class BlockTabs extends Component {
                 onClickTab={this.props.changeTab}
                 on={on}
                 loading={loading}
-                TableContents={on => {
+                TableContents={(on) => {
                     switch (on) {
                         case 0:
                             return (
-                                <BlockTransactions 
-                                    txData={blockTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)}} 
-                                    txType={TX_TYPE.BLOCK_TX} 
+                                <BlockTransactions
+                                    txData={blockTx}
+                                    goAllTx={() => {
+                                        this.props.history.push(`/${TX_TYPE.BLOCK_TX}/${number}`)
+                                    }}
+                                    txType={TX_TYPE.BLOCK_TX}
                                 />
                             )
                         case 1:
                             return (
-                                <BlockTransactions 
-                                    txData={blockIntTx} 
-                                    goAllTx={() => {this.props.history.push(`/${TX_TYPE.BLOCK_INTTX}/${number}`)}} 
-                                    txType={TX_TYPE.BLOCK_INTTX} 
+                                <BlockTransactions
+                                    txData={blockIntTx}
+                                    goAllTx={() => {
+                                        this.props.history.push(`/${TX_TYPE.BLOCK_INTTX}/${number}`)
+                                    }}
+                                    txType={TX_TYPE.BLOCK_INTTX}
                                 />
                             )
                         default:
-                            return <NoBox text="No Data"/>
+                            return <NoBox text="No Data" />
                     }
                 }}
             />
@@ -56,5 +53,4 @@ class BlockTabs extends Component {
     }
 }
 
-export default withRouter(BlockTabs);
-
+export default withRouter(BlockTabs)

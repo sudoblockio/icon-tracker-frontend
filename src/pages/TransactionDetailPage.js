@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { TransactionDetailPageContainer } from '../containers';
+import React, { Component } from 'react'
+import { TransactionDetailPageContainer } from '../containers'
 
 class TransactionDetailPage extends Component {
-  render() {
-    return (
-      <TransactionDetailPageContainer />
-    );
-  }
+    render() {
+        return <TransactionDetailPageContainer />
+    }
 }
 
-export default TransactionDetailPage;
+export default TransactionDetailPage

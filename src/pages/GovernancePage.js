@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { GovernancePageContainer } from '../containers'
 
 class GovernancePage extends Component {
-  render() {
-    return (
-      <GovernancePageContainer />
-    );
-  }
+    render() {
+        return <GovernancePageContainer />
+    }
 }
 
-export default GovernancePage;
+export default GovernancePage

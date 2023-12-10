@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { POPUP_TYPE } from '../../utils/const'
@@ -17,7 +16,9 @@ class ReportButton extends Component {
         const { disabled } = this.props
 
         return (
-            <span className={["btn-scam", disabled && "disabled"].join(" ") } onClick={this.handleClick}>
+            <span
+                className={['btn-scam', disabled && 'disabled'].join(' ')}
+                onClick={this.handleClick}>
                 Report scam
             </span>
         )
@@ -30,11 +31,8 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setPopup: payload => dispatch(setPopup(payload)),
+        setPopup: (payload) => dispatch(setPopup(payload)),
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(ReportButton)
+export default connect(mapStateToProps, mapDispatchToProps)(ReportButton)

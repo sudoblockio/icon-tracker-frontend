@@ -1,15 +1,8 @@
-import React from 'react';
+import React from 'react'
 import LinkCell from './LinkCell'
 
-const TransactionLink = ({  to, label, onClick }) => {
-  return (
-    <LinkCell
-      pageType="transaction"
-      to={to}
-      label={label}
-      onClick={onClick}
-    />
-  )
+const TransactionLink = ({ to, label, onClick }) => {
+    return <LinkCell pageType="transaction" to={to} label={label} onClick={onClick} />
 }
 
-export default TransactionLink;
+export default TransactionLink
