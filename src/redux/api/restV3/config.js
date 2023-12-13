@@ -30,8 +30,6 @@ export async function getTrackerApiUrl(label = 'default') {
             return config.setting.berlin.apiEndpoint
         case 'lisbon':
             return config.setting.lisbon.apiEndpoint
-        case 'sejong':
-            return config.setting.sejong.apiEndpoint
         case 'default':
         default:
             return config.apiEndpoint
@@ -49,8 +47,6 @@ export async function getSocketUrl(label = 'default') {
             return config.setting.berlin.wssEndpoint
         case 'lisbon':
             return config.setting.lisbon.wssEndpoint
-        case 'sejong':
-            return config.setting.sejong.wssEndpoint
         case 'default':
         default:
             return config.wssEndpoint
@@ -65,8 +61,6 @@ export async function getWalletApiUrl(label = 'default') {
             return config.setting.berlin.rpcEndpoint
         case 'lisbon':
             return config.setting.lisbon.rpcEndpoint
-        case 'sejong':
-            return config.setting.sejong.rpcEndpoint
         case 'default':
         default:
             return config.rpcEndpoint
@@ -85,8 +79,6 @@ export async function getNid(label = 'default') {
             return config.setting.berlin.nid
         case 'lisbon':
             return config.setting.lisbon.nid
-        case 'sejong':
-            return config.setting.sejong.nid
         case 'default':
         default:
             return config.nid

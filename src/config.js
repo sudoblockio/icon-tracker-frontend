@@ -76,14 +76,6 @@ const config = {
             network: defaultsCopy[2]['network'],
             region: defaultsCopy[2]['region'],
         },
-        sejong: {
-            apiEndpoint: defaultsCopy[3]['apiEndpoint'],
-            rpcEndpoint: defaultsCopy[3]['rpcEndpoint'],
-            wssEndpoint: defaultsCopy[3]['wssEndpoint'],
-            nid: defaultsCopy[3]['nid'],
-            network: defaultsCopy[3]['network'],
-            region: defaultsCopy[3]['region'],
-        },
     },
     features: {
         CONTRACT_WRITE_EVENTLOG_ENABLED: false,

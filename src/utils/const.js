@@ -98,14 +98,12 @@ export const NETWORK_HOST = {
     Mainnet: 'tracker.icon.community',
     Lisbon: 'tracker.lisbon.icon.community',
     Berlin: 'tracker.berlin.icon.community',
-    Sejong: 'tracker.sejong.icon.community',
 }
 
 export const NETWORK_NAME = {
     'tracker.icon.community': 'Mainnet',
     'tracker.lisbon.icon.community': 'Lisbon',
     'tracker.berlin.icon.community': 'Berlin',
-    'tracker.sejong.icon.community': 'Sejong',
 }
 
 export const POPUP_TYPE = {

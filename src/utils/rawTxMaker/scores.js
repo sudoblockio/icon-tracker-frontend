@@ -5,12 +5,6 @@ const mainnet = {
     governance2: 'cx0000000000000000000000000000000000000001',
     cps: 'cx9f4ab72f854d3ccdc59aa6f2c3e2215dd62e879f',
 }
-const sejong = {
-    //
-    governance: 'cx0000000000000000000000000000000000000000',
-    governance2: 'cx0000000000000000000000000000000000000001',
-    bnUSD: 'cx5838cb516d6156a060f90e9a3de92381331ff024',
-}
 const berlin = {
     //
     governance: 'cx0000000000000000000000000000000000000000',
@@ -28,13 +22,11 @@ const nid = {
     mainnet: 1,
     lisbon: 2,
     berlin: 7,
-    sejong: 83,
     local: 3,
 }
 
 const scores = {
     mainnet,
-    sejong,
     berlin,
     lisbon,
     nid,
