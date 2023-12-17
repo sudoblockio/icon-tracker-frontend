@@ -17,7 +17,8 @@ const defaults = [
     region: "",
     network: "berlin",
     origin: "https://tracker.berlin.icon.community",
-    rpcEndpoint: "https://api.berlin.icon.community",
+    // rpcEndpoint: "https://api.berlin.icon.community",
+    rpcEndpoint: "https://berlin.net.solidwallet.io",
     apiEndpoint: "https://tracker.berlin.icon.community",
     wssEndpoint: "wss://tracker.berlin.icon.community",
     nid: 7
