@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.3...v0.3.4) (2023-12-17)
+
+
+### Bug Fixes
+
+* stall in berlin - tmp fix ([f520c38](https://github.com/sudoblockio/icon-tracker-frontend/commit/f520c38669c52d91e111692d98e4879d816f264b))
+
 ## [0.3.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.2...v0.3.3) (2023-10-23)
 
 
