@@ -10,16 +10,12 @@
 
 ### Development Setup
 
-##### Install Modules
-
-You can install modules with npm:
+##### Local
 
 ```sh
 # Install dependencies
 npm install
 ```
-
-##### Run development mode:
 
 **Mainnet** 
 ```sh
@@ -34,13 +30,32 @@ npm run start --network=lisbon
 **Custom**
 ```shell
 npm run start \
-  --rpc-endpoint=https://lisbon.net.solidwallet.io \
-  --api-endpoint=https://tracker.lisbon.icon.community/ \
-  --wss-endpoint=wss://tracker.lisbon.icon.community/ \
+  --rpc-endpoint=https://api.lisbon.icon.community \
+  --api-endpoint=https://tracker.lisbon.icon.community \
+  --wss-endpoint=wss://tracker.lisbon.icon.community \
   --nid=42
 ```
 
-Note: In order to run a full tracker on a custom network, you need to also run an indexer on that network. See the [icon-tracker](https://github.com/sudoblockio/icon-tracker). 
+##### Docker
+
+In order to point the docker container at custom endpoints, will need to build the container with the appropriate environment variables set. 
+
+- To set to new network and use default endpoints set `REACT_APP_NETWORK_NAME` to mainnet, lisbon, or berlin
+- To run with a custom backend / endpoint set 
+  - REACT_APP_RPC_ENDPOINT  
+  - REACT_APP_API_ENDPOINT 
+  - REACT_APP_WSS_ENDPOINT
+
+After setting these environment variables run:
+
+```shell
+docker-compose build 
+docker-compose up -d 
+```
+
+#### Custom Backend Notes
+
+In order to run a full tracker on a custom network, you need to also run an indexer on that network. See the [icon-tracker](https://github.com/sudoblockio/icon-tracker). 
 
 In short, you will need to configure the docker compose to point to a custom goloop node and run the whole stack. From there you will have an exposed IP running the APIs which you need to then set within these variables. 
 
@@ -62,8 +77,7 @@ npm run test
 
 **e2e**
 
-The e2e tests run with selenium and pytest. To run them, you will first need to have
- python installed with the virtual environment module. Then run: 
+The e2e tests run with selenium and pytest. To run them, you will first need to have python installed with the virtual environment module. Then run: 
 
 ```shell
 # Install e2e test dependencies (pytest / selenium)
@@ -72,7 +86,7 @@ source env/bin/activate
 pip install -r e2e/requirements.txt
 # Run the application 
 npm run start 
-# Then you can run the tests 
+# Then you can run the tests in another terminal 
 make test-e2e
 ```
 
@@ -104,6 +118,10 @@ REACT_APP_API_ENDPOINT=https://tracker.lisbon.icon.community/
 REACT_APP_WSS_ENDPOINT=wss://tracker.lisbon.icon.community/
 REACT_APP_NID=42
 ```
+
+Env files will additionally need to be sourced (ie `source .env` to inject into docker container builds)
+
+See the [local](#local) and [docker](#docker) sections for additional information on how to run in both settings.  
 
 ## Contributing 
 
