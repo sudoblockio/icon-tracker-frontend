@@ -17,6 +17,7 @@ const defaults = [
     region: "",
     network: "berlin",
     origin: "https://tracker.berlin.icon.community",
+    // TODO: Rm this later
     // rpcEndpoint: "https://api.berlin.icon.community",
     rpcEndpoint: "https://berlin.net.solidwallet.io",
     apiEndpoint: "https://tracker.berlin.icon.community",
