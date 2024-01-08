@@ -24,6 +24,7 @@ import {
     getBalance,
     getStake,
     getBondList,
+    getPRep,
 } from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
@@ -46,6 +47,10 @@ function AddressInfo(props) {
 
     const [tokens, setTokens] = useState([])
     const [isPrepModalOpen, setIsPrepModalOpen] = useState(false)
+
+    const [commissionRate, setCommissionRate] = useState(null);
+    const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null);
+    const [maxCommissionRate, setMaxCommissionRate] = useState(null);
 
     const { wallet, walletAddress } = props
     const { loading, data, error } = wallet
@@ -149,10 +154,10 @@ function AddressInfo(props) {
         const totalVoted = !totalVotedLoop
             ? 0
             : IconConverter.toNumber(
-                  IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
-                      .convertUnit(IconAmount.Unit.ICX)
-                      .value.toString(10)
-              )
+                IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX)
+                    .value.toString(10)
+            )
         setTotalVoted(totalVoted)
         let tokenRes = await addressTokens(props.match.params.addressId)
         tokenRes.status !== 204
@@ -165,13 +170,13 @@ function AddressInfo(props) {
 
         tokenRes.status === 200
             ? tokenRes.data.forEach((contract) => {
-                  contractDetail(contract).then((contractRes) => {
-                      getBalanceOf(props.match.params.addressId, contract).then((balance) => {
-                          console.log('Res-Token-Res', props.match.params.addressId, balance)
-                          tokenMap[`${contractRes.data.name}`] = balance
-                      })
-                  })
-              })
+                contractDetail(contract).then((contractRes) => {
+                    getBalanceOf(props.match.params.addressId, contract).then((balance) => {
+                        console.log('Res-Token-Res', props.match.params.addressId, balance)
+                        tokenMap[`${contractRes.data.name}`] = balance
+                    })
+                })
+            })
             : console.log('no tokens')
     }
 
@@ -222,6 +227,22 @@ function AddressInfo(props) {
         getAddrStake(props.match.params.addressId)
         getAddrBond(props.match.params.addressId)
         getAddrBalance()
+        // Fetch additional P-Rep information including commission-related data
+        const fetchPrepInfo = async () => {
+            try {
+                const prepInfo = await getPRep(props.match.params.addressId);
+                if (prepInfo) {
+                    setCommissionRate(prepInfo.commissionRate);
+                    setMaxCommissionChangeRate(prepInfo.maxCommissionChangeRate);
+                    setMaxCommissionRate(prepInfo.maxCommissionRate);
+                }
+            } catch (error) {
+                console.error('Error fetching P-Rep information', error);
+            }
+        };
+
+        fetchPrepInfo();
+
     }, [props.match.params.addressId])
 
     const totalBal =
@@ -367,15 +388,14 @@ function AddressInfo(props) {
                                                         <></>
                                                     )}
                                                     <span
-                                                        className={`active ${
-                                                            node_state === 'Synced'
-                                                                ? 'on'
-                                                                : node_state === 'Inactive'
-                                                                  ? 'off'
-                                                                  : node_state === 'BlockSync'
+                                                        className={`active ${node_state === 'Synced'
+                                                            ? 'on'
+                                                            : node_state === 'Inactive'
+                                                                ? 'off'
+                                                                : node_state === 'BlockSync'
                                                                     ? 'Active'
                                                                     : 'Inactive'
-                                                        }`}>
+                                                            }`}>
                                                         <i></i>
                                                         {node_state}
                                                     </span>
@@ -414,7 +434,7 @@ function AddressInfo(props) {
                                                 </td>
                                                 <td>Last Blockheight</td>
                                                 {_lastGenerateBlockHeight === 'None' ||
-                                                _lastGenerateBlockHeight < 0 ? (
+                                                    _lastGenerateBlockHeight < 0 ? (
                                                     <td>
                                                         <span>None</span>
                                                     </td>
@@ -431,6 +451,24 @@ function AddressInfo(props) {
                                                         </span>
                                                     </td>
                                                 )}
+                                            </tr>
+                                        )}
+                                        {is_prep && (
+                                            <tr className="last">
+                                                <td>
+                                                    Commission %
+                                                    <br />
+                                                    (Max Change / Max Rate)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}
+                                                        <em>
+                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')} /{' '}
+                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')} )
+                                                        </em>
+                                                    </span>
+                                                </td>
                                             </tr>
                                         )}
                                         <tr className="">
@@ -478,11 +516,10 @@ function AddressInfo(props) {
                                                             <i className="coin icon"></i>ICX
                                                         </span>
                                                         <span>
-                                                            {`${
-                                                                totalBal
-                                                                    ? numberWithCommas(totalBal)
-                                                                    : 0
-                                                            }`}
+                                                            {`${totalBal
+                                                                ? numberWithCommas(totalBal)
+                                                                : 0
+                                                                }`}
                                                             <em>ICX</em>
                                                         </span>
                                                         <em
@@ -496,7 +533,7 @@ function AddressInfo(props) {
                                                         <span>
                                                             {`${numberWithCommas(
                                                                 Number(addrBalance) /
-                                                                    Math.pow(10, 18)
+                                                                Math.pow(10, 18)
                                                             )}`}
                                                             <em>ICX</em>
                                                         </span>
@@ -528,30 +565,30 @@ function AddressInfo(props) {
                                                     <div className="unstaking-list">
                                                         {unstakeList && unstakeList.length !== 0
                                                             ? unstakeList.map((dataList) => {
-                                                                  return (
-                                                                      <p>
-                                                                          <span className="unstaking-item">
-                                                                              <em>
-                                                                                  Target Block
-                                                                                  Height{' '}
-                                                                                  {convertNumberToText(
-                                                                                      IconConverter.toNumber(
-                                                                                          dataList.unstakeBlockHeight
-                                                                                      )
-                                                                                  )}
-                                                                              </em>
-                                                                              <span className="balance">
-                                                                                  {convertNumberToText(
-                                                                                      convertLoopToIcxDecimal(
-                                                                                          dataList.unstake
-                                                                                      )
-                                                                                  )}
-                                                                              </span>
-                                                                              <em>ICX</em>
-                                                                          </span>
-                                                                      </p>
-                                                                  )
-                                                              })
+                                                                return (
+                                                                    <p>
+                                                                        <span className="unstaking-item">
+                                                                            <em>
+                                                                                Target Block
+                                                                                Height{' '}
+                                                                                {convertNumberToText(
+                                                                                    IconConverter.toNumber(
+                                                                                        dataList.unstakeBlockHeight
+                                                                                    )
+                                                                                )}
+                                                                            </em>
+                                                                            <span className="balance">
+                                                                                {convertNumberToText(
+                                                                                    convertLoopToIcxDecimal(
+                                                                                        dataList.unstake
+                                                                                    )
+                                                                                )}
+                                                                            </span>
+                                                                            <em>ICX</em>
+                                                                        </span>
+                                                                    </p>
+                                                                )
+                                                            })
                                                             : ''}
                                                     </div>
                                                     <p>
@@ -601,10 +638,10 @@ function AddressInfo(props) {
                                                             </em>
                                                             <span>{`${convertNumberToText(
                                                                 Number(token.balance) /
-                                                                    Math.pow(
-                                                                        10,
-                                                                        Number(token.decimals)
-                                                                    )
+                                                                Math.pow(
+                                                                    10,
+                                                                    Number(token.decimals)
+                                                                )
                                                             )}`}</span>
                                                         </p>
                                                     ))}

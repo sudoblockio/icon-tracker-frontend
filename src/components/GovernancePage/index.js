@@ -9,6 +9,7 @@ import {
     prepList,
     getPRepsRPC,
     getTotalSupply,
+    getPRep
 } from '../../redux/store/iiss'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3'
 import { LoadingComponent } from '../../components'
@@ -73,6 +74,18 @@ class GovernancePage extends Component {
         const total_supply = await getTotalSupply()
         const icxSupply = Number(total_supply / Math.pow(10, 18))
 
+        // Fetch commission-related data for each prep in allPrep array
+        const commissionDataPromises = _allPrep.map(async (prep) => {
+            const commissionData = await getPRep(prep.address)
+            return { [prep.address]: commissionData }
+        })
+
+        // Wait for all commission data promises to resolve
+        const commissionDataArray = await Promise.all(commissionDataPromises);
+
+        // Combine commission data for each prep into a single object
+        const commissionData = commissionDataArray.reduce((acc, data) => ({ ...acc, ...data }), {});
+
         const { height, peer_id } = lastBlock || {}
         const allPrep = (_allPrep || []).map((prep) => {
             const index = preps.findIndex((p) => prep.address === p.address)
@@ -99,22 +112,22 @@ class GovernancePage extends Component {
         const totalStaked = !totalStakedLoop
             ? 0
             : IconConverter.toNumber(
-                  IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP)
-                      .convertUnit(IconAmount.Unit.ICX)
-                      .value.toString(10)
-              )
+                IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX)
+                    .value.toString(10)
+            )
         const totalVoted = !totalVotedLoop
             ? 0
             : IconConverter.toNumber(
-                  IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
-                      .convertUnit(IconAmount.Unit.ICX)
-                      .value.toString(10)
-              )
+                IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX)
+                    .value.toString(10)
+            )
         const stepPrice = !stepPriceLoop
             ? 0
             : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP)
-                  .convertUnit(IconAmount.Unit.ICX)
-                  .value.toString(10)
+                .convertUnit(IconAmount.Unit.ICX)
+                .value.toString(10)
         const IISSData = await getIISSInfo()
 
         this.setState({
@@ -132,6 +145,7 @@ class GovernancePage extends Component {
             Icps: IISSData.variable.Icps,
             Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
             Iprep: IISSData.variable.Iprep,
+            commissionData,
         })
     }
 
@@ -212,11 +226,12 @@ class GovernancePage extends Component {
             subChecked,
             restChecked,
             blackChecked,
+            commissionData,
         } = this.state
         const icxPublicTreasuryStr = this.state.supplyMetrics
             ? numberWithCommas(
-                  Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))
-              )
+                Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))
+            )
             : 0
         const totalStakedRate = !totalSupply ? '-' : (totalStaked / totalSupply) * 100
         const totalVotedRate = !totalSupply ? '-' : (totalVoted / totalSupply) * 100
@@ -224,20 +239,20 @@ class GovernancePage extends Component {
         const list = blackChecked
             ? blackPrep
             : allPrep.filter((p) => {
-                  return (
-                      (mainChecked && (p.grade === 0 || p.grade === '0x0')) ||
-                      (subChecked && (p.grade === 1 || p.grade === '0x1')) ||
-                      (restChecked && (p.grade === 2 || p.grade === '0x2'))
-                  )
-              })
+                return (
+                    (mainChecked && (p.grade === 0 || p.grade === '0x0')) ||
+                    (subChecked && (p.grade === 1 || p.grade === '0x1')) ||
+                    (restChecked && (p.grade === 2 || p.grade === '0x2'))
+                )
+            })
 
         const searched = !search
             ? list.sort((a, b) => b.power - a.power)
             : list.filter(
-                  (prep) =>
-                      prep.name.toLowerCase().includes(search.toLowerCase().trim()) ||
-                      prep.address.toLowerCase().includes(search.trim())
-              )
+                (prep) =>
+                    prep.name.toLowerCase().includes(search.toLowerCase().trim()) ||
+                    prep.address.toLowerCase().includes(search.trim())
+            )
 
         return (
             <div className="content-wrap governance">
@@ -277,11 +292,10 @@ class GovernancePage extends Component {
                                             </span>
                                         </div>
                                         <div
-                                            className={`bar${
-                                                totalStakedRate - totalVotedRate < 11
-                                                    ? ' small'
-                                                    : ''
-                                            }`}
+                                            className={`bar${totalStakedRate - totalVotedRate < 11
+                                                ? ' small'
+                                                : ''
+                                                }`}
                                             style={{ width: `${totalStakedRate}%` }}>
                                             {totalStakedRate > 8 && (
                                                 <span>
@@ -516,11 +530,17 @@ class GovernancePage extends Component {
                                                 {!blackChecked && <th>Bonded</th>}
                                                 {!blackChecked && <th>Total Votes</th>}
                                                 <th>Power</th>
-                                                <th>
+                                                <th style={{ whiteSpace: 'nowrap', padding: '5px' }}>
                                                     Monthly
                                                     <br /> Rewards
                                                     <br />
                                                     <em>ICX / USD</em>
+                                                </th>
+                                                <th style={{ whiteSpace: 'nowrap', padding: '10px' }}>
+                                                    Commission %<br />
+                                                    <em>(Max Change / <br />
+                                                        Max Rate)
+                                                    </em>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -530,6 +550,7 @@ class GovernancePage extends Component {
                                                     governanceStatus={this.getGovernanceStatus(
                                                         prep.address
                                                     )}
+                                                    commissionData={commissionData}
                                                     lastBlockHeight={height}
                                                     statusData={this.statusList}
                                                     key={index}
@@ -574,8 +595,8 @@ class TableRow extends Component {
             node_state === 'Synced'
                 ? 'prep-tag'
                 : node_state === 'Inactive'
-                  ? 'prep-tag off'
-                  : 'prep-tag block-synced'
+                    ? 'prep-tag off'
+                    : 'prep-tag block-synced'
         switch (grade) {
             case 0:
             case '0x0':
@@ -621,9 +642,17 @@ class TableRow extends Component {
             blackChecked,
             index,
             governanceStatus,
-
+            commissionData,
             statusData,
         } = this.props
+
+        const currentPrepCommissionData = this.props.commissionData[prep.address] || {};
+        const {
+            commissionRate,
+            maxCommissionRate,
+            maxCommissionChangeRate,
+        } = currentPrepCommissionData
+
         const {
             // rank,
             logo_256,
@@ -659,8 +688,8 @@ class TableRow extends Component {
             !total_blocks || Number(total_blocks) === 0
                 ? 'None'
                 : Number(validated_blocks) === 0
-                  ? '0.00%'
-                  : `${((Number(validated_blocks) / Number(total_blocks)) * 100).toFixed(2)}%`
+                    ? '0.00%'
+                    : `${((Number(validated_blocks) / Number(total_blocks)) * 100).toFixed(2)}%`
         const prepVoted = IconConverter.toNumber(delegated || 0)
         const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
         const badge = this.getBadge(grade, prep.node_state)
@@ -709,7 +738,7 @@ class TableRow extends Component {
                 <td>
                     <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
                     <em>
-                        {numberWithCommas(Number(validated_blocks))} /{' '}
+                        {numberWithCommas(Number(validated_blocks))}/ {' '}
                         {numberWithCommas(Number(total_blocks))}
                     </em>
                 </td>
@@ -730,6 +759,24 @@ class TableRow extends Component {
                 <td>
                     <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
                     <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
+                </td>
+                <td>
+                    {isNaN(commissionRate) && isNaN(maxCommissionChangeRate) && isNaN(maxCommissionRate) ? (
+                        '-'
+                    ) : (
+                        <>
+                            <em>
+                                <span>
+                                    {isNaN(commissionRate) ? '-' : numberWithCommas(Number(commissionRate / 100).toFixed())}
+                                </span>
+                            </em>
+                            <br />
+                            <em>
+                                {isNaN(maxCommissionChangeRate) ? '-' : numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed())}/{' '}
+                                {isNaN(maxCommissionRate) ? '-' : numberWithCommas(Number(maxCommissionRate / 100).toFixed())}
+                            </em>
+                        </>
+                    )}
                 </td>
             </tr>
         )
