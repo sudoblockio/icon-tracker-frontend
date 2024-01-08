@@ -41,10 +41,32 @@ function setBond(wallet, arrayOfBonds, nid) {
   )
 }
 
+function initCommissionRate(wallet, inputs, nid) {
+  return makeTxCallRPCObj(
+    wallet,
+    scores.mainnet.governance,
+    "initCommissionRate",
+    inputs,
+    nid
+  )
+}
+
+function setCommissionRate(wallet, inputs, nid) {
+  return makeTxCallRPCObj(
+    wallet,
+    scores.mainnet.governance,
+    "setCommissionRate",
+    inputs,
+    nid
+  )
+}
+
 const chainMethods = {
   setBonderList,
   setPrep,
-  setBond
+  setBond,
+  setCommissionRate,
+  initCommissionRate
 }
 
 export default chainMethods;

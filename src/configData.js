@@ -28,7 +28,8 @@ const defaults = [
     region: "",
     network: "lisbon",
     origin: "https://tracker.lisbon.icon.community",
-    rpcEndpoint: "https://api.lisbon.icon.community",
+    // rpcEndpoint: "https://api.lisbon.icon.community",
+    rpcEndpoint: "https://lisbon.net.solidwallet.io",
     apiEndpoint: "https://tracker.lisbon.icon.community",
     wssEndpoint: "wss://tracker.lisbon.icon.community",
     nid: 2

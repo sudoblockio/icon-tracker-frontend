@@ -279,6 +279,47 @@ export async function getDelegation(payload) {
   });
 }
 
+export async function getPRepRPC(address, height = null) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      method: "icx_call",
+      id: randomUint32(),
+      params: {
+        from: "hx0000000000000000000000000000000000000000",
+        to: "cx0000000000000000000000000000000000000000",
+        dataType: "call",
+        data: {
+          method: "getPRep",
+          params: { address: address }
+        }
+      }
+    };
+
+    if (
+      height != null &&
+      typeof height === "string" &&
+      height.slice(0, 2) === "0x"
+    ) {
+      param.params["height"] = height;
+    }
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        console.error(error);
+        resolve({
+          error: {
+            message: error.message
+          }
+        });
+      });
+  });
+}
 export async function getPRepsRPC(height = null) {
   const walletApi = await walletApiInstance();
   return new Promise(resolve => {

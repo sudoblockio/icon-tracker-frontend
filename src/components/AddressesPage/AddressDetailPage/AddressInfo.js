@@ -37,6 +37,9 @@ import compStyles from "./AddressInfo.module.css";
 
 const _isNotificationAvailable = NotificationManager.available();
 
+// setup the following variable to true to test the page
+const TEST_VARIABLE = true;
+
 function AddressInfo(props) {
   const [icxMore, setIcxMore] = useState(false);
   const [tokenMore, setTokenMore] = useState(false);
@@ -370,10 +373,14 @@ function AddressInfo(props) {
                             );
                           })}
 
-                          {is_prep && isConnected ? (
+                          {(is_prep && isConnected) || TEST_VARIABLE ? (
                             <span className={compStyles.buttonUpdatePrep}>
                               <button
-                                disabled={!is_prep || !isConnected}
+                                disabled={
+                                  TEST_VARIABLE === true
+                                    ? false
+                                    : !is_prep || !isConnected
+                                }
                                 onClick={togglePrepModal}
                                 className={compStyles.button}
                               >
