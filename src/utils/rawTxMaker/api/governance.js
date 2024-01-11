@@ -12,7 +12,7 @@ function voteNetworkProposal(
   vote,
   prepAddress,
   nid,
-  sl = 200000000000
+  sl = 200000000
 ) {
   return makeTxCallRPCObj(
     prepAddress,
