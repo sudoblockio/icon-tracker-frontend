@@ -245,122 +245,6 @@ export async function getTotalSupply() {
   });
 }
 
-export async function getDelegation(payload) {
-  let input = payload.address ? payload : { address: `${payload}` };
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getDelegation",
-          params: {
-            address: input.address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        console.error(error, "here");
-        resolve({
-          error: { message: error.message }
-        });
-      });
-  });
-}
-
-export async function getPRepRPC(address, height = null) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getPRep",
-          params: { address: address }
-        }
-      }
-    };
-
-    if (
-      height != null &&
-      typeof height === "string" &&
-      height.slice(0, 2) === "0x"
-    ) {
-      param.params["height"] = height;
-    }
-
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        console.error(error);
-        resolve({
-          error: {
-            message: error.message
-          }
-        });
-      });
-  });
-}
-export async function getPRepsRPC(height = null) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getPReps"
-        }
-      }
-    };
-
-    if (
-      height != null &&
-      typeof height === "string" &&
-      height.slice(0, 2) === "0x"
-    ) {
-      param.params["height"] = height;
-    }
-
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        console.error(error);
-        resolve({
-          error: {
-            message: error.message
-          }
-        });
-      });
-  });
-}
-
 export async function getTokenTotalSupply(address) {
   const walletApi = await walletApiInstance();
   return new Promise(resolve => {
@@ -407,115 +291,6 @@ export async function getTokenDecimals(address) {
         dataType: "call",
         data: {
           method: "decimals"
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
-
-export async function getBonders(payload) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getBonderList",
-          params: {
-            address: payload.address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result.bonderList);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
-
-export async function getBondList(payload) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getBond",
-          params: {
-            address: payload.address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result.bonds);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
-
-export async function getIISSInfo() {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      method: "icx_call",
-      id: randomUint32(),
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getIISSInfo"
         }
       }
     };
@@ -673,38 +448,6 @@ export async function getBalanceOf(owner, tokenContract) {
   });
 }
 
-export async function getPRep(address) {
-  if (!address) return {};
-
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getPRep",
-          params: {
-            address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        resolve({});
-      });
-  });
-}
-
 export async function getLastBlock() {
   const walletApi = await walletApiInstance();
   return new Promise(resolve => {
@@ -847,120 +590,6 @@ export async function prepSub() {
       })
       .catch(error => {
         reject(error);
-      });
-  });
-}
-
-export async function getStake2(address) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getStake",
-          params: {
-            address: address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
-
-export async function getStake(address) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "getStake",
-          params: {
-            address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
-      });
-  });
-}
-
-export async function queryIScore(address) {
-  const walletApi = await walletApiInstance();
-  return new Promise(resolve => {
-    const param = {
-      jsonrpc: "2.0",
-      id: randomUint32(),
-      method: "icx_call",
-      params: {
-        from: "hx0000000000000000000000000000000000000000",
-        to: "cx0000000000000000000000000000000000000000",
-        dataType: "call",
-        data: {
-          method: "queryIScore",
-          params: {
-            address
-          }
-        }
-      }
-    };
-    walletApi
-      .post(`/api/v3`, JSON.stringify(param))
-      .then(response => {
-        resolve(response.data.result);
-      })
-      .catch(error => {
-        if (!!error.response) {
-          resolve(error.response.data);
-        } else {
-          resolve({
-            error: {
-              message: error.message
-            }
-          });
-        }
       });
   });
 }
@@ -1214,6 +843,290 @@ export async function addressReward(payload) {
       })
       .catch(error => {
         reject(error);
+      });
+  });
+}
+///
+function makeRequestParams(
+  method,
+  params = null,
+  height = null,
+  contract = "cx0000000000000000000000000000000000000000"
+) {
+  const requestParam = {
+    jsonrpc: "2.0",
+    method: "icx_call",
+    id: randomUint32(),
+    params: {
+      from: "hx0000000000000000000000000000000000000000",
+      to: contract,
+      dataType: "call",
+      data: {
+        method: method
+      }
+    }
+  };
+
+  if (params != null) {
+    requestParam.params.data.params = params;
+  }
+  if (
+    height != null &&
+    typeof height === "string" &&
+    height.slice(0, 2) === "0x"
+  ) {
+    requestParam.params["height"] = height;
+  }
+
+  return requestParam;
+}
+
+export async function getDelegation(payload) {
+  let input = payload.address ? payload : { address: `${payload}` };
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getDelegation", {
+      address: input.address
+    });
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        console.error(error, "here");
+        resolve({
+          error: { message: error.message }
+        });
+      });
+  });
+}
+
+export async function getPRepRPC(address, height = null) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getPRep", { address: address }, height);
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        console.error(error);
+        resolve({
+          error: {
+            message: error.message
+          }
+        });
+      });
+  });
+}
+export async function getPRepsRPC(height = null) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getPReps", null, height);
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        console.error(error);
+        resolve({
+          error: {
+            message: error.message
+          }
+        });
+      });
+  });
+}
+
+export async function getBonders(payload) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getBonderList", {
+      address: payload.address
+    });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result.bonderList);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function getBondList(payload) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getBond", { address: payload.address });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result.bonds);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function getIISSInfo() {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getIISSInfo");
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function getRevision() {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getRevision");
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function getPRep(address) {
+  if (!address) return {};
+
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getPRep", { address });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        resolve({});
+      });
+  });
+}
+
+export async function getStake2(address) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getStake", { address: address });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function getStake(address) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("getStake", { address });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
+
+export async function queryIScore(address) {
+  const walletApi = await walletApiInstance();
+  return new Promise(resolve => {
+    const param = makeRequestParams("queryIScore", { address });
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
       });
   });
 }

@@ -13,7 +13,7 @@ function makeJSONRPCRequestObj(method) {
     method: method,
     id: Math.ceil(Math.random() * 1000)
   };
-};
+}
 
 /*
  *
@@ -22,7 +22,7 @@ function makeTxCallRPCObj(
   from,
   to,
   method,
-  paramsObj,
+  paramsObj = null,
   nid,
   stepLimit = 2000000,
   value = null
@@ -38,33 +38,35 @@ function makeTxCallRPCObj(
     timestamp: decimalToHex(new Date().getTime() * 1000),
     dataType: "call",
     data: {
-      method: method,
-      params: paramsObj
+      method: method
     }
   };
 
+  if (paramsObj != null) {
+    txObj["params"]["data"]["params"] = paramsObj;
+  }
   if (value != null && typeof value === "number") {
-    txObj["params"]["value"] = decimalToHex(value*10**18);
+    txObj["params"]["value"] = decimalToHex(value * 10 ** 18);
   }
 
-  console.log('txObj');
+  console.log("txObj");
   console.log(txObj);
   return txObj;
-};
+}
 
 /*
  *
  */
 function hexToDecimal(hex) {
   return parseInt(hex, 16);
-};
+}
 
 /*
  *
  */
 function decimalToHex(number) {
   return "0x" + number.toString(16);
-};
+}
 
 /*
  *
@@ -72,7 +74,7 @@ function decimalToHex(number) {
 function fromHexInLoop(loopInHex) {
   let loopInBase2 = hexToDecimal(loopInHex);
   return loopInBase2 / 10 ** 18;
-};
+}
 
 export {
   makeJSONRPCRequestObj,
@@ -81,5 +83,4 @@ export {
   decimalToHex,
   fromHexInLoop,
   scores
-}
-
+};

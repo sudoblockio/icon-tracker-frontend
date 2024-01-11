@@ -32,13 +32,20 @@ import {
 } from "../../../redux/store/iiss";
 import { contractDetail } from "../../../redux/store/contracts";
 import { addressTokens } from "../../../redux/store/addresses";
+import { getRevision } from "../../../redux/store/iiss";
+import { chainMethods } from "../../../utils/rawTxMaker";
+import { requestJsonRpc } from "../../../utils/connect";
+import config from "../../../config";
 
 import compStyles from "./AddressInfo.module.css";
 
+const { nid } = config;
+console.log("nid//..", nid);
+const { requestUnjail } = chainMethods;
 const _isNotificationAvailable = NotificationManager.available();
 
 // setup the following variable to true to test the page
-const TEST_VARIABLE = true;
+const TEST_VARIABLE = false;
 
 function AddressInfo(props) {
   const [icxMore, setIcxMore] = useState(false);
@@ -54,6 +61,7 @@ function AddressInfo(props) {
 
   const [tokens, setTokens] = useState([]);
   const [isPrepModalOpen, setIsPrepModalOpen] = useState(false);
+  const [chainCanJail, setChainCanJail] = useState(false);
 
   const { wallet, walletAddress } = props;
   const { loading, data, error } = wallet;
@@ -209,6 +217,17 @@ function AddressInfo(props) {
     }
   };
 
+  const getRev = async () => {
+    const rev = await getRevision();
+    // if chain revision is higher than rev 24 than unjail
+    // functionality is available
+    if (TEST_VARIABLE === true) {
+      setChainCanJail(true);
+    } else {
+      setChainCanJail(parseInt(rev, 16) > 24);
+    }
+  };
+
   const toggleIcxMore = () => {
     setIcxMore(!icxMore);
   };
@@ -234,6 +253,22 @@ function AddressInfo(props) {
     //
   }
 
+  async function executeUnjail() {
+    console.log("executeUnjail");
+    const txData = requestUnjail(props.match.params.addressId, nid);
+    console.log("txData");
+    console.log(txData);
+
+    try {
+      const txResult = await requestJsonRpc(txData.params);
+      console.log("response from wallet");
+      console.log(txResult);
+    } catch (err) {
+      console.log("error from wallet");
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getContractName();
     getTokens();
@@ -242,6 +277,7 @@ function AddressInfo(props) {
     getAddrStake(props.match.params.addressId);
     getAddrBond(props.match.params.addressId);
     getAddrBalance();
+    getRev();
   }, [props.match.params.addressId]);
 
   const totalBal =
@@ -404,6 +440,22 @@ function AddressInfo(props) {
                             <i></i>
                             {node_state}
                           </span>
+                          {(chainCanJail && is_prep && isConnected) ||
+                          TEST_VARIABLE ? (
+                            <span>
+                              <button
+                                disabled={
+                                  TEST_VARIABLE === true
+                                    ? false
+                                    : !is_prep || !isConnected
+                                }
+                                onClick={executeUnjail}
+                                className={compStyles.button}
+                              >
+                                Unjail
+                              </button>
+                            </span>
+                          ) : null}
                         </td>
                       </tr>
                     )}

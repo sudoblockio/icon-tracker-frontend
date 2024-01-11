@@ -1,7 +1,7 @@
 // rawTxMaker/api/chain.js
 //
 // Imports
-import { scores, makeTxCallRPCObj }  from "./helpers"
+import { scores, makeTxCallRPCObj } from "./helpers";
 
 // Chain methods
 /*
@@ -17,7 +17,7 @@ function setBonderList(prepAddress, arrayOfBonderAddresses, nid) {
     },
     nid
   );
-};
+}
 
 function setPrep(wallet, prepData, nid) {
   return makeTxCallRPCObj(
@@ -26,7 +26,7 @@ function setPrep(wallet, prepData, nid) {
     "setPRep",
     prepData,
     nid
-  )
+  );
 }
 
 function setBond(wallet, arrayOfBonds, nid) {
@@ -35,10 +35,10 @@ function setBond(wallet, arrayOfBonds, nid) {
     scores.mainnet.governance,
     "setBond",
     {
-      "bonds": [...arrayOfBonds]
+      bonds: [...arrayOfBonds]
     },
     nid
-  )
+  );
 }
 
 function initCommissionRate(wallet, inputs, nid) {
@@ -48,7 +48,7 @@ function initCommissionRate(wallet, inputs, nid) {
     "initCommissionRate",
     inputs,
     nid
-  )
+  );
 }
 
 function setCommissionRate(wallet, inputs, nid) {
@@ -58,7 +58,17 @@ function setCommissionRate(wallet, inputs, nid) {
     "setCommissionRate",
     inputs,
     nid
-  )
+  );
+}
+
+function requestUnjail(prepAddress, nid) {
+  return makeTxCallRPCObj(
+    prepAddress,
+    scores.mainnet.governance,
+    "requestUnjail",
+    null,
+    nid
+  );
 }
 
 const chainMethods = {
@@ -66,7 +76,8 @@ const chainMethods = {
   setPrep,
   setBond,
   setCommissionRate,
-  initCommissionRate
-}
+  initCommissionRate,
+  requestUnjail
+};
 
 export default chainMethods;
