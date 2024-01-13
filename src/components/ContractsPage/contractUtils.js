@@ -9,6 +9,28 @@ export function makeParams(params, funcName, inputs) {
     const value = params[inputName] || "";
     result[name] = value;
   });
+  let parsedParams = { ...result };
+  try {
+    parsedParams = JSON.parse(parseInputParams(result));
+  } catch (err) {
+    // if error is raised return unparsed (string) params
+  }
+  return parsedParams;
+}
+
+function parseInputParams(data) {
+  let result = "{";
+  const keys = Object.keys(data);
+
+  keys.forEach((key, index) => {
+    const value = data[key];
+    if (index === keys.length - 1) {
+      result += `"${key}":${value}`;
+    } else {
+      result += `"${key}":${value},`;
+    }
+  });
+  result += "}";
   return result;
 }
 

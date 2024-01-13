@@ -53,6 +53,8 @@ function ContractComponent({
       alert("Please connect to wallet first");
     } else {
       const paramsData = makeParams(params, method, inputs);
+      console.log('makeParams');
+      console.log(paramsData)
       const rawMethodCall = customMethod(
         walletAddress,
         address,
