@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import QrCodeComponent from '../CommonComponent/QrCode/QrCodeComponent';
+import React, { Component } from 'react'
+import QrCodeComponent from '../CommonComponent/QrCode/QrCodeComponent'
 
 class AddressQrCode extends Component {
-
     render() {
         const { data } = this.props
         const { address } = data
-        return ([
-            <h1 key='h1' className="title">Address</h1>,
-            <div key='div' className="qr">
-                <QrCodeComponent text={address} scale={5}/>
+        return [
+            <h1 key="h1" className="title">
+                Address
+            </h1>,
+            <div key="div" className="qr">
+                <QrCodeComponent text={address} scale={5} />
             </div>,
-            <p key='p'>{address}</p>,
-        ])
+            <p key="p">{address}</p>,
+        ]
     }
 }
 

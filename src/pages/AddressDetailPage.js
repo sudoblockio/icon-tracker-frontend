@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { AddressDetailPageContainer } from '../containers'
 
 class AddressDetailPage extends Component {
-  render() {
-    return (
-      <AddressDetailPageContainer />
-    );
-  }
+    render() {
+        return <AddressDetailPageContainer />
+    }
 }
 
-export default AddressDetailPage;
+export default AddressDetailPage

@@ -1,17 +1,9 @@
-
-import React, { Component } from 'react';
-import {
-  TxBottom
-} from '../../../../components'
+import React, { Component } from 'react'
+import { TxBottom } from '../../../../components'
 class AddressBonded extends Component {
-  
-
     render() {
-    return <TxBottom 
-      {...this.props}
-      />
-  }
+        return <TxBottom {...this.props} />
+    }
 }
 
-export default AddressBonded;
-
+export default AddressBonded

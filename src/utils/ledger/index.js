@@ -1,2 +1,2 @@
-import ledger from './ledger';
-export default ledger;
+import ledger from './ledger'
+export default ledger

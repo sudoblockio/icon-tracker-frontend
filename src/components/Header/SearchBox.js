@@ -8,8 +8,7 @@ class SearchBox extends Component {
         const mainTopSearchBar = document.getElementById('main-top-search-bar')
         if (mainTopSearchBar) {
             mainTopSearchBar.focus()
-        }
-        else {
+        } else {
             this.props.setPopup({
                 type: POPUP_TYPE.SEARCH,
                 data: { search: this.props.search },
@@ -33,11 +32,8 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setPopup: payload => dispatch(setPopup(payload)),
+        setPopup: (payload) => dispatch(setPopup(payload)),
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(SearchBox)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)

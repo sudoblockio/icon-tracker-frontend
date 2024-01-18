@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import { ContractDetailPageContainer } from '../containers'
 
 const ContractDetailPage = () => {
-      return <ContractDetailPageContainer />
-};
+    return <ContractDetailPageContainer />
+}
 
-export default ContractDetailPage;
+export default ContractDetailPage

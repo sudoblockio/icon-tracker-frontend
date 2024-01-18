@@ -1,4 +1,4 @@
-// File created to separate the data from the execution code of the 
+// File created to separate the data from the execution code of the
 // config.js file
 const defaults = [
   //
@@ -239,4 +239,4 @@ const defaults = [
   },
 ]
 
-export default defaults;
+export default defaults

@@ -17,7 +17,7 @@ class Banner extends Component {
         window.dispatchEvent(
             new CustomEvent('CUSTOM_FX', {
                 detail: { type: 'SET_BANNER' },
-            }),
+            })
         )
     }
 
@@ -27,14 +27,12 @@ class Banner extends Component {
 
     onCloseClick = () => {
         this.setState({ close: true })
-        const bannerExpireDate = this.state.checked
-            ? moment().add(7, 'day')
-            : undefined
+        const bannerExpireDate = this.state.checked ? moment().add(7, 'day') : undefined
         this.props.setBannerOption({ bannerExpireDate })
         window.dispatchEvent(
             new CustomEvent('CUSTOM_FX', {
                 detail: { type: 'SET_BANNER' },
-            }),
+            })
         )
     }
 
@@ -66,8 +64,7 @@ class Banner extends Component {
                             className="link"
                             href="https://icon.community/iconsensus/"
                             target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                            rel="noopener noreferrer">
                             <img src={bannerT} alt="banner_t" />
                         </a>
                         <i className="bubble" />
@@ -85,10 +82,7 @@ class Banner extends Component {
                             <label htmlFor="cbox-01" className="label _img">
                                 Do not show 7 days
                             </label>
-                            <i
-                                className="img close"
-                                onClick={this.onCloseClick}
-                            />
+                            <i className="img close" onClick={this.onCloseClick} />
                         </div>
                     </div>
                 </div>
@@ -105,11 +99,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setBannerOption: payload => dispatch(setBannerOption(payload)),
+        setBannerOption: (payload) => dispatch(setBannerOption(payload)),
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Banner)
+export default connect(mapStateToProps, mapDispatchToProps)(Banner)

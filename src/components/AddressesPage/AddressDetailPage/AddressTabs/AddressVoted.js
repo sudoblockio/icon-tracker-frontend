@@ -1,14 +1,10 @@
-
-import React, { Component } from 'react';
-import {
-  TxBottom
-} from '../../../../components'
+import React, { Component } from 'react'
+import { TxBottom } from '../../../../components'
 
 class AddressVoted extends Component {
-  render() {
-    return <TxBottom {...this.props}/>
-  }
+    render() {
+        return <TxBottom {...this.props} />
+    }
 }
 
-export default AddressVoted;
-
+export default AddressVoted

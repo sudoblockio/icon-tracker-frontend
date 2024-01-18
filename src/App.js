@@ -3,7 +3,6 @@ import { Provider } from 'react-redux'
 import { store, history } from './redux/store/store'
 import Routes from './Routes.js'
 import { ConnectedRouter } from 'react-router-redux'
-
 class App extends Component {
     render() {
         return (

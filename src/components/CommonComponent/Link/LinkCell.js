@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const LinkCell = ({ pageType, to, label, aClassName, onClick, onClickTab }) => {
     function handleOnClick() {
@@ -8,21 +8,15 @@ const LinkCell = ({ pageType, to, label, aClassName, onClick, onClickTab }) => {
         if (typeof onClickTab === 'function') {
             onClickTab(0)
         }
-        if (typeof onClick === 'function') { 
+        if (typeof onClick === 'function') {
             onClick()
         }
     }
     return (
-        <Link
-            className={aClassName}
-            to={`/${pageType}/${to}`}
-            onClick={handleOnClick}            
-            title={to}
-        >
+        <Link className={aClassName} to={`/${pageType}/${to}`} onClick={handleOnClick} title={to}>
             {label || to}
         </Link>
     )
 }
 
-export default LinkCell;
-
+export default LinkCell

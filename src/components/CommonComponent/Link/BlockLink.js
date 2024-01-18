@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import LinkCell from './LinkCell'
 
 const BlockLink = ({ to, label, ellipsis }) => {
-  return (
-    <LinkCell
-      pageType="block"
-      aClassName={`on ${ellipsis ? 'ellipsis' : ''}`}
-      to={to}
-      label={label}
-    />
-  )
+    return (
+        <LinkCell
+            pageType="block"
+            aClassName={`on ${ellipsis ? 'ellipsis' : ''}`}
+            to={to}
+            label={label}
+        />
+    )
 }
 
-export default BlockLink;
+export default BlockLink

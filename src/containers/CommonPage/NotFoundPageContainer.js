@@ -1,19 +1,21 @@
-import { connect } from 'react-redux';
-import { NotFoundPage } from '../../components';
+import { connect } from 'react-redux'
+import { NotFoundPage } from '../../components'
 import { searchErrorReset } from '../../redux/store/search'
 
 function mapStateToProps(state) {
-  return {
-    error: state.search.error,
-  };
+    return {
+        error: state.search.error,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    searchErrorReset: () => {dispatch(searchErrorReset())}
-  };
+    return {
+        searchErrorReset: () => {
+            dispatch(searchErrorReset())
+        },
+    }
 }
 
-const NotFoundPageContainer = connect(mapStateToProps, mapDispatchToProps)(NotFoundPage);
+const NotFoundPageContainer = connect(mapStateToProps, mapDispatchToProps)(NotFoundPage)
 
-export default NotFoundPageContainer;
+export default NotFoundPageContainer

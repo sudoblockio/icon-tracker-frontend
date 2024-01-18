@@ -1,26 +1,24 @@
 import React, { Component } from 'react'
 import { InfoSummary, RecentBlocks, RecentTransactions } from '../../components'
-import { search } from '../../redux/store/search';
+import { search } from '../../redux/store/search'
 import { connect } from 'react-redux'
 
 class MainPage extends Component {
-
     state = {
         value: '',
-        focused: false
+        focused: false,
     }
 
     input = null
     notFocus = true
     focused = false
 
-    handleChange = e => {
-        
+    handleChange = (e) => {
         const { value } = e.target
         this.setState({ value })
     }
-    
-    handleKeyDown = e => {
+
+    handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             this.props.search(this.state.value)
         }
@@ -29,12 +27,9 @@ class MainPage extends Component {
                 this.input.blur()
             })
         }
-        
     }
 
-
     render() {
-        
         return (
             <div className="content-wrap">
                 <div className="screen2">
@@ -42,16 +37,17 @@ class MainPage extends Component {
                         <div className="content">
                             <p>ICON Blockchain Explorer</p>
                             <div className="search-group txt fixing">
-                                <input id='main-top-search-bar'
-                                    ref={ref => { 
-                                        this.input = ref 
+                                <input
+                                    id="main-top-search-bar"
+                                    ref={(ref) => {
+                                        this.input = ref
                                         if (this.input) {
                                             this.input.onfocus = () => {
-                                                this.focused = true;
-                                            };
+                                                this.focused = true
+                                            }
                                             this.input.onblur = () => {
-                                                this.focused = false;
-                                            };
+                                                this.focused = false
+                                            }
                                         }
                                     }}
                                     type="text"
@@ -73,12 +69,14 @@ class MainPage extends Component {
                                 }}>
                                     <i className="img"></i>
                                 </span>} */}
-                                {this.state.value &&
-                                <em onMouseDown={() => {
-                                    this.setState({ value: '' })
-                                }}>
-                                    <i className="img"></i>
-                                </em>}
+                                {this.state.value && (
+                                    <em
+                                        onMouseDown={() => {
+                                            this.setState({ value: '' })
+                                        }}>
+                                        <i className="img"></i>
+                                    </em>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -94,7 +92,6 @@ class MainPage extends Component {
                     <div className="bg">
                         <div className="wrap-holder">
                             <ul className="content">
-                                
                                 <RecentBlocks {...this.props} />
                                 <RecentTransactions {...this.props} />
                             </ul>
@@ -107,13 +104,13 @@ class MainPage extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {}
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        search: param => dispatch(search(param))
-    };
+        search: (param) => dispatch(search(param)),
+    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

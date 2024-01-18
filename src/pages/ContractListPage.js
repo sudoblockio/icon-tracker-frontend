@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { ContractListPageContainer } from '../containers'
 
 class ContractListPage extends Component {
-  render() {
-    return (
-      <ContractListPageContainer />
-    );
-  }
+    render() {
+        return <ContractListPageContainer />
+    }
 }
 
-export default ContractListPage;
+export default ContractListPage

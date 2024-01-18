@@ -8,12 +8,12 @@ class QrCodeButton extends Component {
         const { address } = this.props
         this.props.setPopup({
             type: POPUP_TYPE.QR,
-            data: { address },  
+            data: { address },
         })
     }
 
-    render() {        
-        return  (
+    render() {
+        return (
             <span className="qrcode" onClick={this.handleClick}>
                 <i className="img" />
             </span>
@@ -27,11 +27,8 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setPopup: payload => dispatch(setPopup(payload)),
+        setPopup: (payload) => dispatch(setPopup(payload)),
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(QrCodeButton)
+export default connect(mapStateToProps, mapDispatchToProps)(QrCodeButton)
