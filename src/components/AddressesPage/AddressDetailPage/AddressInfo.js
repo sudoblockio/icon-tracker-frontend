@@ -254,10 +254,7 @@ function AddressInfo(props) {
   }
 
   async function executeUnjail() {
-    console.log("executeUnjail");
     const txData = requestUnjail(props.match.params.addressId, nid);
-    console.log("txData");
-    console.log(txData);
 
     try {
       const txResult = await requestJsonRpc(txData.params);
@@ -684,4 +681,3 @@ function AddressInfo(props) {
 }
 
 export default withRouter(AddressInfo);
-
