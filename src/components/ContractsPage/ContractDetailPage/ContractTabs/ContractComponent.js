@@ -49,16 +49,23 @@ function ContractComponent({
         // makeTxCallRpcObj
         // const nid = HARDCODED_NID_FIX_THIS;
 
-        if (walletAddress === '') {
-            alert('Please connect to wallet first')
-        } else {
-            const paramsData = makeParams(params, method, inputs)
-            const rawMethodCall = customMethod(walletAddress, address, method, paramsData, nid)
-            icxSendTransaction({
-                params: { ...rawMethodCall },
-                index: index,
-            })
-        }
+    if (walletAddress === "") {
+      alert("Please connect to wallet first");
+    } else {
+      const paramsData = makeParams(params, method, inputs);
+      console.log('makeParams');
+      console.log(paramsData)
+      const rawMethodCall = customMethod(
+        walletAddress,
+        address,
+        method,
+        paramsData,
+        nid
+      );
+      icxSendTransaction({
+        params: { ...rawMethodCall },
+        index: index
+      });
     }
 
     const { data } = contract
