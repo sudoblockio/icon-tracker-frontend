@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { NETWORK_NAME, NETWORK_HOST } from '../../utils/const'
 import { SUPPORT_URL } from '../../utils/const'
+import discordLogo from '../../../src/style-custom/discordLogo.png'
 
 class Footer extends Component {
     constructor(props) {
@@ -20,17 +21,33 @@ class Footer extends Component {
             <div className="footer-wrap">
                 <div className="screen0">
                     <div className="wrap-holder">
-                        <p>©2022 ICON Foundation</p>
+                        <p>©{new Date().getFullYear()} ICON Foundation</p>
                         <div className="sns">
                             <p className="mail">
-                                <span>Support & request to add the token homepage URL</span>
-                                <a href={SUPPORT_URL} rel="noopener noreferrer" target="_blank">
-                                    Contact us
+                                <a href="https://discord.com/channels/880651922682560582/888476176237080687" rel="noopener noreferrer" target="_blank">
+                                    Get Support
                                 </a>
                             </p>
                             <ul>
                                 <li className="icon">
-                                    <a target="_black" href="https://www.icon.foundation">
+                                    <a target="_black" href="https://www.icon.community/">
+                                        <span className="img"></span>
+                                    </a>
+                                </li>
+                                <li className="twitter">
+                                    <a target="_black" href="https://twitter.com/helloiconworld">
+                                        <span className="img"></span>
+                                    </a>
+                                </li>
+                                <li className="discord">
+                                    <a target="_blank" href="https://discord.com/channels/880651922682560582/1014165836740690110">
+                                        <span className="discord-icon" style={{ backgroundImage: `url(${discordLogo})`, }}></span>
+                                    </a>
+                                </li>
+                                <li className="github">
+                                    <a
+                                        target="_black"
+                                        href="https://github.com/icon-project">
                                         <span className="img"></span>
                                     </a>
                                 </li>
@@ -44,20 +61,8 @@ class Footer extends Component {
                                         <span className="img"></span>
                                     </a>
                                 </li>
-                                <li className="twitter">
-                                    <a target="_black" href="https://twitter.com/helloiconworld">
-                                        <span className="img"></span>
-                                    </a>
-                                </li>
                                 <li className="facebook">
                                     <a target="_black" href="https://www.facebook.com/helloicon">
-                                        <span className="img"></span>
-                                    </a>
-                                </li>
-                                <li className="github">
-                                    <a
-                                        target="_black"
-                                        href="https://github.com/sudoblockio/icon-tracker-frontend">
                                         <span className="img"></span>
                                     </a>
                                 </li>

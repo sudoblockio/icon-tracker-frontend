@@ -264,6 +264,20 @@
   background-position: -250px -150px;
 }
 
+.discord-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  filter: grayscale(100%) brightness(0.5);
+  background-color: transparent;
+}
+
+/* Hover style for Discord icon */
+.discord-icon:hover {
+  background-color: transparent;
+  filter: none;
+}
+
 .footer-wrap .wrap-holder .sns .icon .img:hover {
   background-position: 0px -200px;
 }
