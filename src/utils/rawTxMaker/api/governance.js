@@ -7,18 +7,24 @@ import { scores, makeTxCallRPCObj } from './helpers'
 /*
  *
  */
-function voteNetworkProposal(proposalId, vote, prepAddress, nid, sl = 200000000000) {
-    return makeTxCallRPCObj(
-        prepAddress,
-        scores.mainnet.governance2,
-        'voteProposal',
-        {
-            id: proposalId,
-            vote: vote,
-        },
-        nid,
-        sl
-    )
+function voteNetworkProposal(
+  proposalId,
+  vote,
+  prepAddress,
+  nid,
+  sl = 200000000
+) {
+  return makeTxCallRPCObj(
+    prepAddress,
+    scores.mainnet.governance2,
+    "voteProposal",
+    {
+      id: proposalId,
+      vote: vote
+    },
+    nid,
+    sl
+  );
 }
 
 function applyNetworkProposal(proposalId, prepAddress, nid, sl = 20000000000) {
