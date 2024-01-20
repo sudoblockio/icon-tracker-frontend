@@ -47,3 +47,7 @@ e2e/logs/automation.log
 .pytest_cache
 e2e/logs/*
 !e2e/logs/.gitkeep
+
+# misc
+.local
+*.old

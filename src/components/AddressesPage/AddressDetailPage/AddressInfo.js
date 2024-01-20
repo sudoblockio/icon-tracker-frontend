@@ -28,10 +28,18 @@ import {
 } from '../../../redux/store/iiss'
 import { contractDetail } from '../../../redux/store/contracts'
 import { addressTokens } from '../../../redux/store/addresses'
+import { getRevision } from "../../../redux/store/iiss";
+import { chainMethods } from "../../../utils/rawTxMaker";
+import { requestJsonRpc } from "../../../utils/connect";
+import config from "../../../config";
 
 import compStyles from './AddressInfo.module.css'
 
+const { nid } = config;
+const { requestUnjail } = chainMethods;
 const _isNotificationAvailable = NotificationManager.available()
+
+const TEST_VARIABLE = true;
 
 function AddressInfo(props) {
     const [icxMore, setIcxMore] = useState(false)
@@ -51,6 +59,7 @@ function AddressInfo(props) {
     const [commissionRate, setCommissionRate] = useState(null);
     const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null);
     const [maxCommissionRate, setMaxCommissionRate] = useState(null);
+    const [chainCanJail, setChainCanJail] = useState(false);
 
     const { wallet, walletAddress } = props
     const { loading, data, error } = wallet
@@ -219,6 +228,28 @@ function AddressInfo(props) {
         //
     }
 
+    async function getRev() {
+        const rev = await getRevision();
+        // if chain revision is higher than rev 25 then 
+        // unjail functionality is available
+        if(TEST_VARIABLE === true) {
+            setChainCanJail(true);
+        } else {
+            setChainCanJail(parseInt(rev, 16) >= 25);
+        }
+    }
+
+    async function executeUnjail() {
+        const txData = requestUnjail(props.match.params.addressId, nid);
+
+        try {
+            const txResult = await requestJsonRpc(txData.params);
+        } catch (err) {
+            console.log("Error from wallet");
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         getContractName()
         getTokens()
@@ -227,6 +258,7 @@ function AddressInfo(props) {
         getAddrStake(props.match.params.addressId)
         getAddrBond(props.match.params.addressId)
         getAddrBalance()
+        getRev();
         // Fetch additional P-Rep information including commission-related data
         const fetchPrepInfo = async () => {
             try {
@@ -399,6 +431,17 @@ function AddressInfo(props) {
                                                         <i></i>
                                                         {node_state}
                                                     </span>
+                                                    {(chainCanJail && is_prep && isConnected) || TEST_VARIABLE ? (
+                                                        <span>
+                                                            <button
+                                                                disabled={TEST_VARIABLE === true ? false : !is_prep || !isConnected}
+                                                                onClick={executeUnjail}
+                                                                className={compStyles.button}
+                                                            >
+                                                                Unjail
+                                                            </button>
+                                                        </span>
+                                                    ) : null}
                                                 </td>
                                             </tr>
                                         )}
