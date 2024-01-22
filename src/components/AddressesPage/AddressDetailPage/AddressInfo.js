@@ -73,6 +73,7 @@ function AddressInfo(props) {
         node_address,
         status,
         node_state,
+        jail_flags,
         total_blocks,
         validated_blocks,
         website,
@@ -203,6 +204,26 @@ function AddressInfo(props) {
         }
     }
 
+    // Jail flags are accumulative
+    const getJailBadges = (jail_flag) => {
+        let flagNames = [];
+
+        if (jail_flag & 1) {
+            flagNames.push(<span className={`jail-badge in-jail`}>{'Jail'}</span>);
+        }
+        if (jail_flag & 2) {
+            flagNames.push(<span className={`jail-badge unjailing`}>{'Unjailing'}</span>);
+        }
+        if (jail_flag & 4) {
+            flagNames.push(<span className={`jail-badge validation-failure`}>{'Validation Failure'}</span>);
+        }
+        if (jail_flag & 8) {
+            flagNames.push(<span className={`jail-badge double-sign`}>{'Double Sign'}</span>);
+        }
+
+        return flagNames;
+    }
+
     const toggleIcxMore = () => {
         setIcxMore(!icxMore)
     }
@@ -291,6 +312,7 @@ function AddressInfo(props) {
         : IconConverter.toNumber(last_updated_block)
     // const tokenCxs = tokens ? tokens : [];
     const badge = getBadgeTitle(grade, node_state)
+    const jailBadges = getJailBadges(parseInt(jail_flags, 16));
 
     const Content = () => {
         if (loading) {
@@ -405,7 +427,6 @@ function AddressInfo(props) {
                                                             </span>
                                                         )
                                                     })}
-
                                                     {is_prep && isConnected ? (
                                                         <span
                                                             className={compStyles.buttonUpdatePrep}>
@@ -431,6 +452,7 @@ function AddressInfo(props) {
                                                         <i></i>
                                                         {node_state}
                                                     </span>
+                                                    {jailBadges}
                                                     {(chainCanJail && is_prep && isConnected) || TEST_VARIABLE ? (
                                                         <span>
                                                             <button
