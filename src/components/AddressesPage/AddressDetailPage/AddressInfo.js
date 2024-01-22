@@ -498,17 +498,13 @@ function AddressInfo(props) {
                                         )}
                                         {is_prep && (
                                             <tr className="last">
-                                                <td>
-                                                    Commission %
-                                                    <br />
-                                                    (Max Change / Max Rate)
-                                                </td>
-                                                <td>
+                                                <td>Commission %<br />(Max Change / Max Rate)</td>
+                                                <td colSpan="3"> {/* This assumes you have 4 columns in total */}
                                                     <span>
-                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}
+                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate).toFixed(2) / 100) : 'Loading...'}%
                                                         <em>
-                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')} /{' '}
-                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')} )
+                                                        ( {maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate).toFixed(2) / 100) : 'Loading...'}% /{' '}
+                                                        {maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate).toFixed(2) / 100) : 'Loading...'}% )
                                                         </em>
                                                     </span>
                                                 </td>
