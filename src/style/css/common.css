@@ -3391,6 +3391,39 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
   background: #fff;
   border: 1px solid #ececec;
 }
+
+.jail-badge {
+  display: inline-block;
+  color: #1aaaba;
+  padding: 4px 10px 4px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  border: 1px solid #d8edf0;
+  vertical-align: middle;
+  margin-top: 10px;
+  height: 18px;
+}
+
+.jail-badge:before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #1aaaba;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.jail-badge.jail {
+  background: #ececec;
+  color: #1aaaba;
+}
+.jail-badge.unjailing {
+  background-color: white;
+  color: #1aaaba;
+  padding: 2px;
+  border-radius: 4px;
+}
 .table-typeP .ellipsis {
   width: 380px;
 }
