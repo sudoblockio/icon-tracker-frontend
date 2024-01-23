@@ -305,8 +305,10 @@ class Popup extends Component {
                     <div className="popup">
                         <h1 className="title">Sponsored Projects</h1>
                         <p className="txt">
-                            Sponsored Projects counts each time a team has invested their own ICX to
-                            support a project
+                            CPS funds development within the ecosystem with preps optionally
+                            participating on a council voting on which projects receive
+                            funding. Sponsored Projects counts each time a team has
+                            invested their own ICX to support a project.
                         </p>
                         <div className="btn-holder full">
                             <button

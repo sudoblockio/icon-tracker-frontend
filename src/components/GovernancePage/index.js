@@ -304,12 +304,7 @@ class GovernancePage extends Component {
                                             <th className="add">Add</th>
                                             <th className="rank"><span className="sort">Rank ↓</span></th>
                                             <th>Name</th>
-                                            <th>CPS<i style={{ marginLeft: '5px' }} className='img screamer' onClick={() => {
-                                                this.props.setPopup({
-                                                    type: POPUP_TYPE.GOVERNANCE
-                                                })
-                                            }}></i></th>
-                                            <th><span>Sponsored<br />Projects</span><i style={{ marginLeft: '5px' }} className="img screamer" onClick={() => {
+                                            <th>CPS Council /<div></div><span>Sponsored<br />Projects</span><i style={{ marginLeft: '5px' }} className="img screamer" onClick={() => {
                                                 this.props.setPopup({ type: POPUP_TYPE.SPONSOR })
                                             }}></i></th>
                                             <th>Productivity<br /><em>Produced /<br />(Produced + Missed)</em></th>
@@ -507,8 +502,7 @@ class TableRow extends Component {
                         </li>
                     </ul>
                 </td>
-                <td>{cps_governance ? '✓' : '-'}</td>
-                <td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
+                <td>{cps_governance ? (sponsored_cps_grants ? '✓' : 0) : '-'}</td>
                 <td>
                     <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
                     <em>
