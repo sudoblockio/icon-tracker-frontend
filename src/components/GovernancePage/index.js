@@ -451,32 +451,91 @@ class TableRow extends Component {
 
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
-        return(
-          <tr>
-              <td className="rank"><span>{rank || '-'}</span></td>
-              <td className={(Number(grade) > 2 || grade === '0x3') ? 'black' : 'on'}>
-                  <ul className="prep-info-list">
-                      <li>
-                          {mainBadge}
-                          {jailBadge}
-                      </li>
-                      <li>{logo_256 && <img src={logo_256} onError={this.onError} onLoad={this.loadImage} style={this.state.loaded ? {} : {display: "none"}} alt='logo'/>}</li>
-                      <li>
-                          <span className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{name}</span>
-                          <em className="ellipsis pointer" onClick={()=>{this.goAddress(address)}}>{address}</em>
-                      </li>
-                  </ul>
-              </td>
-              <td>{cps_governance ?'✓':'-'}</td>
-              <td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
-              <td><span>{ productivity !== "None" ? productivity : "0.00%"}</span><em>{numberWithCommas(Number(validated_blocks))} / {numberWithCommas(Number(total_blocks))}</em></td>
-              {!blackChecked && <td className={"bonded"}><span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span></td>}
-              {!blackChecked && <td><span>{Number(votedRate*100).toFixed(1)}%</span>
-                  <div><span>{numberWithCommas((prepVoted).toFixed(0))}</span></div></td>}
-              <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
-              <td><span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
-                  <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em></td>
-          </tr>
+        return (
+            <tr>
+                <td className="rank">
+                    <span>{rank || '-'}</span>
+                </td>
+                <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
+                    <ul>
+                        <li>{badge}</li>
+                        <li>
+                            {logo_256 ? (
+                                <img
+                                    src={logo_256 ? logo_256 : logo_svg}
+                                    onError={this.onError}
+                                    onLoad={this.loadImage}
+                                    style={this.state.loaded ? {} : { display: 'none' }}
+                                    alt="logo"
+                                />
+                            ) : (
+                                ''
+                            )}
+                        </li>
+                        <li>
+                            <span
+                                className="ellipsis pointer"
+                                onClick={() => {
+                                    this.goAddress(address)
+                                }}>
+                                {name}
+                            </span>
+                            <em
+                                className="ellipsis pointer"
+                                onClick={() => {
+                                    this.goAddress(address)
+                                }}>
+                                {address}
+                            </em>
+                        </li>
+                    </ul>
+                </td>
+                <td>{cps_governance ? '✓' : '-'}</td>
+                <td>{sponsored_cps_grants ? sponsored_cps_grants : 0}</td>
+                <td>
+                    <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
+                    <em>
+                        {numberWithCommas(Number(validated_blocks))}/ {' '}
+                        {numberWithCommas(Number(total_blocks))}
+                    </em>
+                </td>
+                {!blackChecked && (
+                    <td className={'bonded'}>
+                        <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
+                    </td>
+                )}
+                {!blackChecked && (
+                    <td>
+                        <span>{Number(votedRate * 100).toFixed(1)}%</span>
+                        <div>
+                            <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
+                        </div>
+                    </td>
+                )}
+                <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
+                <td>
+                    <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
+                    <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
+                </td>
+                <td>
+                    {isNaN(commissionRate) && isNaN(maxCommissionChangeRate) && isNaN(maxCommissionRate) ? (
+                        '-'
+                    ) : (
+                        <>
+                            <em>
+                                <span>
+                                    {isNaN(commissionRate) ? '-' : numberWithCommas(Number(commissionRate / 100).toFixed())}%
+                                </span>
+                            </em>
+                            <br />
+                            <em>
+                                {isNaN(maxCommissionChangeRate) ? '-' : numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed())}/{' '}
+                                {isNaN(maxCommissionRate) ? '-' : numberWithCommas(Number(maxCommissionRate / 100).toFixed())}
+                            </em>
+                        </>
+                    )}
+                </td>
+            </tr>
         )
     }
 }
