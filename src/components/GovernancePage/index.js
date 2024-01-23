@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
@@ -36,31 +36,31 @@ class GovernancePage extends Component {
     }
 
     checkedState = {}
-    getAdditionalData=async method=>{
-        const network=await getTrackerApiUrl()
-        const address=GetAddressForPrepList[network]
-        const params={
-            to:address,
-            dataType:'call',
-            data:{
-                method:method
+    getAdditionalData = async method => {
+        const network = await getTrackerApiUrl()
+        const address = GetAddressForPrepList[network]
+        const params = {
+            to: address,
+            dataType: 'call',
+            data: {
+                method: method
             }
         }
         const response = await icxCall(params);
         return response;
     }
 
-    governanceData=[];
+    governanceData = [];
     statusList = []
 
-    async componentWillMount(){
+    async componentWillMount() {
         // our endpoints
         this.governanceData = await getPReps();
         this.publicTreasury = await getPublicTreasury()
     }
     async componentDidMount() {
         const { data: preps } = await getPReps();
-        const {totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()
+        const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()
         const lastBlock = await getLastBlock()
         const stepPriceLoop = await getStepPrice()
         const _allPrep = await prepList()
@@ -85,7 +85,7 @@ class GovernancePage extends Component {
             return bp
         })
         const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
-        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex+1} ${allPrep[lastPrepIndex].name}`
+        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`
         const totalSupply = Number(icxSupply || 0)
         const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
         const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
@@ -114,7 +114,7 @@ class GovernancePage extends Component {
 
     handleChange = e => {
         const { type, value } = e.target
-        switch(type) {
+        switch (type) {
             case 'checkbox':
                 if (value === 'main') {
                     this.setState({
@@ -170,9 +170,9 @@ class GovernancePage extends Component {
         }
     }
     getGovernanceStatus = (address) => {
-        let result =false;
-        this.governanceData.data.forEach(item=>{
-            if(item.address===address){
+        let result = false;
+        this.governanceData.data.forEach(item => {
+            if (item.address === address) {
                 result = true;
             }
         })
@@ -207,146 +207,156 @@ class GovernancePage extends Component {
             return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
         })
 
-        const searched = !search ? list.sort((a,b) => b.power - a.power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+        const searched = !search ? list.sort((a, b) => b.power - a.power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
 
         return (
-          <div className="content-wrap governance">
-              <div className="screen0">
-                  {loading && <LoadingComponent height='400px'/>}
-                  {!loading && <div className="wrap-holder">
-                      <p className="title">Governance<span onClick={() => {this.props.setPopup({ type: POPUP_TYPE.ABOUT })}}><i className="img"></i>About Governance</span></p>
-                      <div className="contents">
-                          <div className="graph">
-                              <div className="txt"><span><i className="img"></i>Total Supply : {convertNumberToText(totalSupply, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
-                              <div className="bar-group">
-                                  <div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
-                                  <div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(2)}<em>%</em></span>}</div>
-                                  <div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(2)}<em>%</em></span>}</div>
-                              </div>
-                              <div className="total">
-                                  <p>Public Treasury <em>(ICX)</em></p>
-                                  <p><span>{numberWithCommas(Number(this.publicTreasury / Math.pow(10, 18)).toFixed(0))}</span></p>
+            <div className="content-wrap governance">
+                <div className="screen0">
+                    {loading && <LoadingComponent height='400px' />}
+                    {!loading && <div className="wrap-holder">
+                        <p className="title">Governance<span onClick={() => { this.props.setPopup({ type: POPUP_TYPE.ABOUT }) }}><i className="img"></i>About Governance</span></p>
+                        <div className="contents">
+                            <div className="graph">
+                                <div className="txt"><span><i className="img"></i>Total Supply : {convertNumberToText(totalSupply, 0)}</span><span><i className="img"></i>Staked : {convertNumberToText(totalStaked, 0)}</span><span><i className="img"></i>Voted : {convertNumberToText(totalVoted, 0)}</span></div>
+                                <div className="bar-group">
+                                    <div className="bar" style={{ width: "100%" }}><span>100<em>%</em></span></div>
+                                    <div className={`bar${totalStakedRate - totalVotedRate < 11 ? ' small' : ''}`} style={{ width: `${totalStakedRate}%` }}>{totalStakedRate > 8 && <span>{totalStakedRate.toFixed(2)}<em>%</em></span>}</div>
+                                    <div className="bar" style={{ width: `${totalVotedRate}%` }}>{totalVotedRate > 8 && <span>{totalVotedRate.toFixed(2)}<em>%</em></span>}</div>
+                                </div>
+                                <div className="total">
+                                    <p>Public Treasury <em>(ICX)</em></p>
+                                    <p><span>{numberWithCommas(Number(this.publicTreasury / Math.pow(10, 18)).toFixed(0))}</span></p>
 
 
-                              </div>
-                          </div>
-                          <ul>
-                              <li>
-                                  <div>
-                                      <p>Prep Reward Rate <em>(%)</em></p>
-                                      <p><span>{Number(this.state.Iprep/100)}</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div>
-                                      <p>CPS Reward Rate <em>(%)</em></p>
-                                      <p><span>{Number(this.state.Icps/100)}</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div>
-                                      <p>Prep Wage <em>(%)</em>
-                                      </p>
-                                      <p><span>{Number(this.state.Iwage)}</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div>
-                                      <p>Monthly Inflation <em>(ICX)</em></p>
-                                      <p><span>{numberWithCommas(Number(this.state.Iglobal))}</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div>
-                                      <p>Last Block{lastBlockPrepName && <span className='last-block-name-tag'>{lastBlockPrepName}</span>}</p>
-                                      <p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>}
-              </div>
-              <div className="screen2">
-                  {loading && <LoadingComponent height='500px'/>}
-                  {!loading && <div className="wrap-holder">
-                      <div className="contents">
-                          <div className="search-group">
-								<span>
-									<input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0 || p.grade === '0x0').length})</label>
-								</span>
-                              <span>
-									<input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1 || p.grade === '0x1').length})</label>
-								</span>
-                              <span>
-									<input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange}/>
-									<label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
-								</span>
-                              <span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange}/><i className="img"></i></span>
-                          </div>
-                          <div className="table-box">
-                              <table className="table-typeP">
-                                  <colgroup>
-                                      <col className="add" />
-                                      <col className="rank" />
-                                      <col />
-                                      <col />
-                                      <col />
-                                      <col />
-                                      <col />
-                                      <col />
-                                      <col />
-                                      <col />
-                                  </colgroup>
-                                  <thead>
-                                  <tr>
-                                      <th className="add">Add</th>
-                                      <th className="rank"><span className="sort">Rank ↓</span></th>
-                                      <th>Name</th>
-                                      <th>Governance<i style={{marginLeft:'5px'}} className='img screamer' onClick={()=>{
-                                          this.props.setPopup({
-                                              type:POPUP_TYPE.GOVERNANCE
-                                          })
-                                      }}></i></th>
-                                      <th><span>Sponsored<br/>Projects</span><i style={{marginLeft:'5px'}} className="img screamer" onClick={()=>{
-                                          this.props.setPopup({type:POPUP_TYPE.SPONSOR})
-                                      }}></i></th>
-                                      <th>Productivity<br/><em>Produced /<br/>(Produced + Missed)</em></th>
-                                      {!blackChecked && <th>Bonded</th>}
-                                      {!blackChecked && <th>Total Votes</th>}
-                                      <th>Power</th>
-                                      <th>Monthly<br/> Rewards<br/><em>ICX / USD</em></th>
-                                      <th>Commission<br/> Rate<br/><em>Max Change / Max Rate</em></th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <p>Prep Reward Rate <em>(%)</em></p>
+                                        <p><span>{Number(this.state.Iprep / 100)}</span></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <p>CPS Reward Rate <em>(%)</em></p>
+                                        <p><span>{Number(this.state.Icps / 100)}</span></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <p>Prep Wage <em>(%)</em>
+                                        </p>
+                                        <p><span>{Number(this.state.Iwage)}</span></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <p>Monthly Inflation <em>(ICX)</em></p>
+                                        <p><span>{numberWithCommas(Number(this.state.Iglobal))}</span></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <p>Last Block{lastBlockPrepName && <span className='last-block-name-tag'>{lastBlockPrepName}</span>}</p>
+                                        <p><span>{numberWithCommas(IconConverter.toNumber(height))}</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>}
+                </div>
+                <div className="screen2">
+                    {loading && <LoadingComponent height='500px' />}
+                    {!loading && <div className="wrap-holder">
+                        <div className="contents">
+                            <div className="search-group">
+                                <span>
+                                    <input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange} />
+                                    <label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0 || p.grade === '0x0').length})</label>
+                                </span>
+                                <span>
+                                    <input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange} />
+                                    <label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1 || p.grade === '0x1').length})</label>
+                                </span>
+                                <span>
+                                    <input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange} />
+                                    <label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
+                                </span>
+                                <span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange} /><i className="img"></i></span>
+                            </div>
+                            <div className="table-box">
+                                <table className="table-typeP">
+                                    <colgroup>
+                                        <col className="add" />
+                                        <col className="rank" />
+                                        <col />
+                                        <col />
+                                        <col />
+                                        <col />
+                                        <col />
+                                        <col />
+                                        <col />
+                                        <col />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th className="add">Add</th>
+                                            <th className="rank"><span className="sort">Rank ↓</span></th>
+                                            <th>Name</th>
+                                            <th>Governance<i style={{ marginLeft: '5px' }} className='img screamer' onClick={() => {
+                                                this.props.setPopup({
+                                                    type: POPUP_TYPE.GOVERNANCE
+                                                })
+                                            }}></i></th>
+                                            <th><span>Sponsored<br />Projects</span><i style={{ marginLeft: '5px' }} className="img screamer" onClick={() => {
+                                                this.props.setPopup({ type: POPUP_TYPE.SPONSOR })
+                                            }}></i></th>
+                                            <th>Productivity<br /><em>Produced /<br />(Produced + Missed)</em></th>
+                                            {!blackChecked && <th>Bonded</th>}
+                                            {!blackChecked && <th>Total Votes</th>}
+                                            <th>Power</th>
+                                            <th style={{ whiteSpace: 'nowrap', padding: '5px' }}>
+                                                Monthly
+                                                <br /> Rewards
+                                                <br />
+                                                <em>ICX / USD</em>
+                                            </th>
+                                            <th style={{ whiteSpace: 'nowrap', padding: '10px' }}>
+                                                Commission %<br />
+                                                <em>(Max Change / <br />
+                                                    Max Rate)
+                                                </em>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                  {searched.map((prep, index) => (
-                                    <TableRow
-                                      governanceStatus={this.getGovernanceStatus(prep.address)}
-                                      lastBlockHeight={height}
-                                      statusData = { this.statusList}
-                                      key={index}
-                                      index={index}
-                                      prep={prep}
-                                      totalStaked={totalStaked}
-                                      totalVoted={totalVoted}
-                                      rrep={rrep}
-                                      history={this.props.history}
-                                      blackChecked={blackChecked}
-                                    />
-                                  ))}
-                                  </tbody>
-                              </table>
-                          </div>
-                          <p className='prep-causion'>
-                              The detailed informations of P-Rep will be updated every UTC 00:00, UTC 06:00, UTC 12:00, and UTC 18:00. Please check the URL of the submitted JSON file for each P-Rep.
-                          </p>
-                      </div>
-                  </div>}
-              </div>
-          </div>
+                                        {searched.map((prep, index) => (
+                                            <TableRow
+                                                governanceStatus={this.getGovernanceStatus(prep.address)}
+                                                lastBlockHeight={height}
+                                                statusData={this.statusList}
+                                                key={index}
+                                                index={index}
+                                                prep={prep}
+                                                totalStaked={totalStaked}
+                                                totalVoted={totalVoted}
+                                                rrep={rrep}
+                                                history={this.props.history}
+                                                blackChecked={blackChecked}
+                                            />
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p className='prep-causion'>
+                                The detailed informations of P-Rep will be updated every UTC 00:00, UTC 06:00, UTC 12:00, and UTC 18:00. Please check the URL of the submitted JSON file for each P-Rep.
+                            </p>
+                        </div>
+                    </div>}
+                </div>
+            </div>
         )
     }
 }
@@ -360,11 +370,11 @@ class TableRow extends Component {
     }
 
     loadImage = () => {
-        this.setState({loaded: true})
+        this.setState({ loaded: true })
     }
-    getMainBadge = (grade, node_state ) => {
-        const className = node_state === 'Synced' ? 'prep-tag' : node_state === 'Inactive'? 'prep-tag off' : 'prep-tag block-synced'
-        switch(grade) {
+    getMainBadge = (grade, node_state) => {
+        const className = node_state === 'Synced' ? 'prep-tag' : node_state === 'Inactive' ? 'prep-tag off' : 'prep-tag block-synced'
+        switch (grade) {
             case 0:
             case '0x0':
                 return <span className={className}><i></i>Main P-Rep</span>
@@ -401,7 +411,7 @@ class TableRow extends Component {
         this.setState({ logoError: true })
     }
     loadImage = () => {
-        this.setState({loaded: true})
+        this.setState({ loaded: true })
     }
     render() {
         const {
@@ -447,7 +457,7 @@ class TableRow extends Component {
             // balance,
             // unstake,
         } = prep
-        const sugComRate = ( (1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2) ) * 100;
+        const sugComRate = ((1 / totalVoted * 100 * 12 * irep / 2) / ((rrep * 3 / 10000) + 1 / totalVoted * 100 * 12 * irep / 2)) * 100;
         const productivity = !total_blocks || Number(total_blocks) === 0 ? 'None' : (Number(validated_blocks) === 0 ? '0.00%' : `${(Number(validated_blocks) / Number(total_blocks) * 100).toFixed(2)}%`)
         const prepVoted = IconConverter.toNumber(delegated || 0)
         const votedRate = !totalVoted ? 0 : prepVoted / totalVoted
