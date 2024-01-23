@@ -1,15 +1,37 @@
 import { icxCall, icxGetScoreFromRPC } from '../../redux/api/restV3/icx'
 
 export function makeParams(params, funcName, inputs) {
-    const result = {}
-    inputs.forEach((item) => {
-        const name = item['name']
-        const type = item['type']
-        const inputName = `${funcName}_${name}_${type}`
-        const value = params[inputName] || ''
-        result[name] = value
-    })
-    return result
+  const result = {};
+  inputs.forEach(item => {
+    const name = item["name"];
+    const type = item["type"];
+    const inputName = `${funcName}_${name}_${type}`;
+    const value = params[inputName] || "";
+    result[name] = value;
+  });
+  let parsedParams = { ...result };
+  try {
+    parsedParams = JSON.parse(parseInputParams(result));
+  } catch (err) {
+    // if error is raised return unparsed (string) params
+  }
+  return parsedParams;
+}
+
+function parseInputParams(data) {
+  let result = "{";
+  const keys = Object.keys(data);
+
+  keys.forEach((key, index) => {
+    const value = data[key];
+    if (index === keys.length - 1) {
+      result += `"${key}":${value}`;
+    } else {
+      result += `"${key}":${value},`;
+    }
+  });
+  result += "}";
+  return result;
 }
 
 export function createContractMethodsState(contractReadWriteInfo) {

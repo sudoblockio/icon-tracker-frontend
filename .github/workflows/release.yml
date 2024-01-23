@@ -16,10 +16,10 @@ jobs:
         id: release-please
         with:
           release-type: expo  # https://github.com/googleapis/release-please#strategy-language-types-supported
-# TODO: https://github.com/sudoblockio/icon-tracker-frontend/issues/104
-#          extra-files: |
-#            src/global/global.go
-# TODO: Should be package.json -> test
+  # TODO: https://github.com/sudoblockio/icon-tracker-frontend/issues/104
+  #          extra-files: |
+  #            src/global/global.go
+  # TODO: Should be package.json -> test
 
   docker:
     runs-on: ubuntu-latest
@@ -65,12 +65,9 @@ jobs:
       matrix:
         include:
 
-          - cluster: prod-ams
-            network_name: mainnet
-            network_version: v2
-          - cluster: prod-ams
-            network_name: sejong
-            network_version: v2
+#          - cluster: prod-ams
+#            network_name: mainnet
+#            network_version: v2
           - cluster: prod-ams
             network_name: lisbon
             network_version: v2
@@ -82,9 +79,6 @@ jobs:
 #            network_version: v2
 #          - cluster: prod-sng
 #            network_name: berlin
-#            network_version: v2
-#          - cluster: prod-sng
-#            network_name: sejong
 #            network_version: v2
 #          - cluster: prod-sng
 #            network_name: lisbon
