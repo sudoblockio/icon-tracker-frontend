@@ -447,7 +447,7 @@ function AddressInfo(props) {
                                                         {node_state}
                                                     </span>
                                                     {jailBadges}
-                                                    {(chainCanJail && is_prep && isConnected) || TEST_VARIABLE ? (
+                                                    {(chainCanJail && is_prep && isConnected) ? (
                                                         <span>
                                                             <button
                                                                 disabled={!is_prep || !isConnected}
