@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, useState} from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
@@ -434,6 +434,9 @@ class TableRow extends Component {
             jail_flags,
             logo,
             status,
+            commission_rate,
+            max_commission_change_rate,
+            max_commission_rate,
             reward_monthly, reward_monthly_usd,
             sponsored_cps_grants,
             cps_governance,
@@ -458,7 +461,10 @@ class TableRow extends Component {
                 </td>
                 <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
                     <ul>
-                        <li>{badge}</li>
+                        <li>
+                            {mainBadge}
+                            {jailBadge}
+                        </li>
                         <li>
                             {logo_256 ? (
                                 <img
@@ -518,19 +524,19 @@ class TableRow extends Component {
                     <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
                 </td>
                 <td>
-                    {isNaN(commissionRate) && isNaN(maxCommissionChangeRate) && isNaN(maxCommissionRate) ? (
+                    {isNaN(commission_rate) && isNaN(max_commission_change_rate) && isNaN(max_commission_rate) ? (
                         '-'
                     ) : (
                         <>
                             <em>
                                 <span>
-                                    {isNaN(commissionRate) ? '-' : numberWithCommas(Number(commissionRate / 100).toFixed())}%
+                                    {isNaN(commission_rate) ? '-' : numberWithCommas(Number(commission_rate / 100).toFixed())}%
                                 </span>
                             </em>
                             <br />
                             <em>
-                                {isNaN(maxCommissionChangeRate) ? '-' : numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed())}/{' '}
-                                {isNaN(maxCommissionRate) ? '-' : numberWithCommas(Number(maxCommissionRate / 100).toFixed())}
+                                {isNaN(max_commission_change_rate) ? '-' : numberWithCommas(Number(max_commission_change_rate / 100).toFixed())}/{' '}
+                                {isNaN(max_commission_rate) ? '-' : numberWithCommas(Number(max_commission_rate / 100).toFixed())}
                             </em>
                         </>
                     )}
