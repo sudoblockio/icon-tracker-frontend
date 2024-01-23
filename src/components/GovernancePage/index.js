@@ -304,7 +304,7 @@ class GovernancePage extends Component {
                                             <th className="add">Add</th>
                                             <th className="rank"><span className="sort">Rank ↓</span></th>
                                             <th>Name</th>
-                                            <th>Governance<i style={{ marginLeft: '5px' }} className='img screamer' onClick={() => {
+                                            <th>CPS<i style={{ marginLeft: '5px' }} className='img screamer' onClick={() => {
                                                 this.props.setPopup({
                                                     type: POPUP_TYPE.GOVERNANCE
                                                 })
