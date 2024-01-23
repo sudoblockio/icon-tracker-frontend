@@ -530,13 +530,13 @@ class TableRow extends Component {
                         <>
                             <em>
                                 <span>
-                                    {isNaN(commission_rate) ? '-' : numberWithCommas(Number(commission_rate / 100).toFixed())}%
+                                    {isNaN(commission_rate) ? '-' : numberWithCommas(Number(commission_rate).toFixed())}%
                                 </span>
                             </em>
                             <br />
                             <em>
-                                {isNaN(max_commission_change_rate) ? '-' : numberWithCommas(Number(max_commission_change_rate / 100).toFixed())}/{' '}
-                                {isNaN(max_commission_rate) ? '-' : numberWithCommas(Number(max_commission_rate / 100).toFixed())}
+                                {isNaN(max_commission_change_rate) ? '-' : numberWithCommas(Number(max_commission_change_rate).toFixed())}/{' '}
+                                {isNaN(max_commission_rate) ? '-' : numberWithCommas(Number(max_commission_rate).toFixed())}
                             </em>
                         </>
                     )}
