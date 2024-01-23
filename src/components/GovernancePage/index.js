@@ -317,6 +317,7 @@ class GovernancePage extends Component {
                                       {!blackChecked && <th>Total Votes</th>}
                                       <th>Power</th>
                                       <th>Monthly<br/> Rewards<br/><em>ICX / USD</em></th>
+                                      <th>Commission<br/> Rate<br/><em>Max Change / Max Rate</em></th>
                                   </tr>
                                   </thead>
                                   <tbody>
