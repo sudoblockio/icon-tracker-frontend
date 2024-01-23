@@ -462,10 +462,10 @@ function AddressInfo(props) {
                                                 </td>
                                                 <td>
                                                     <span>
-                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}
+                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}%
                                                         <em>
-                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')} /{' '}
-                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')} )
+                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')}% /{' '}
+                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')}% )
                                                         </em>
                                                     </span>
                                                 </td>

@@ -767,7 +767,7 @@ class TableRow extends Component {
                         <>
                             <em>
                                 <span>
-                                    {isNaN(commissionRate) ? '-' : numberWithCommas(Number(commissionRate / 100).toFixed())}
+                                    {isNaN(commissionRate) ? '-' : numberWithCommas(Number(commissionRate / 100).toFixed())}%
                                 </span>
                             </em>
                             <br />
