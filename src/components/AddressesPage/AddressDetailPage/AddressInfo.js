@@ -664,7 +664,343 @@ function AddressInfo(props) {
                                   Math.pow(10, Number(token.decimals))
                               )}`}</span>
                             </p>
-                          ))}
+                        )}
+                        <div className="contents">
+                            <div className="table-box">
+                                <table className="table-typeB address">
+                                    <thead>
+                                        <tr>
+                                            <th>Address</th>
+                                            <th>value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {is_prep && (
+                                            <tr className="p-rep">
+                                                <td>Name</td>
+                                                <td colSpan="3">
+                                                    <span>{name}</span>
+                                                    {website && (
+                                                        <span
+                                                            className="home"
+                                                            onClick={() => {
+                                                                onSocialClick(website)
+                                                            }}>
+                                                            <i className="img"></i>
+                                                        </span>
+                                                    )}
+                                                    {SocialMediaType.map((type, index) => {
+                                                        const mediaValue = links[type]
+
+                                                        if (!mediaValue) {
+                                                            return null
+                                                        }
+
+                                                        return (
+                                                            <span
+                                                                key={index}
+                                                                className={type}
+                                                                onClick={() => {
+                                                                    onSocialClick(mediaValue)
+                                                                }}>
+                                                                {isUrl(mediaValue) ? (
+                                                                    <i className="img"></i>
+                                                                ) : (
+                                                                    [
+                                                                        <i
+                                                                            key="i"
+                                                                            className="img tooltip"></i>,
+                                                                        <div
+                                                                            key="div"
+                                                                            className="help-layer">
+                                                                            <p className="txt">
+                                                                                {addAt(mediaValue)}
+                                                                            </p>
+                                                                            <div className="tri"></div>
+                                                                        </div>,
+                                                                    ]
+                                                                )}
+                                                            </span>
+                                                        )
+                                                    })}
+
+                                                    {is_prep && isConnected ? (
+                                                        <span
+                                                            className={compStyles.buttonUpdatePrep}>
+                                                            <button
+                                                                disabled={!is_prep || !isConnected}
+                                                                onClick={togglePrepModal}
+                                                                className={compStyles.button}>
+                                                                Update
+                                                            </button>
+                                                        </span>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                    <span
+                                                        className={`active ${node_state === 'Synced'
+                                                            ? 'on'
+                                                            : node_state === 'Inactive'
+                                                                ? 'off'
+                                                                : node_state === 'BlockSync'
+                                                                    ? 'Active'
+                                                                    : 'Inactive'
+                                                            }`}>
+                                                        <i></i>
+                                                        {node_state}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        )}
+                                        {is_prep && (
+                                            <tr className="">
+                                                <td>Total Votes</td>
+                                                <td colSpan="3">
+                                                    <span>
+                                                        {convertNumberToText(delegated)}
+
+                                                        <em>
+                                                            ( {(totalVotes * 100).toPrecision(3)}% )
+                                                        </em>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        )}
+                                        {is_prep && (
+                                            <tr className="last">
+                                                <td>
+                                                    Productivity
+                                                    <br />
+                                                    (Produced / (Produced + Missed))
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {productivity}
+                                                        <em>
+                                                            ( {numberWithCommas(validated)} /{' '}
+                                                            {numberWithCommas(produced)} )
+                                                        </em>
+                                                    </span>
+                                                </td>
+                                                <td>Last Blockheight</td>
+                                                {_lastGenerateBlockHeight === 'None' ||
+                                                    _lastGenerateBlockHeight < 0 ? (
+                                                    <td>
+                                                        <span>None</span>
+                                                    </td>
+                                                ) : (
+                                                    <td>
+                                                        <span
+                                                            className="mint"
+                                                            onClick={() => {
+                                                                goBlock(_lastGenerateBlockHeight)
+                                                            }}>
+                                                            {numberWithCommas(
+                                                                _lastGenerateBlockHeight
+                                                            )}
+                                                        </span>
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        )}
+                                        {is_prep && (
+                                            <tr className="last">
+                                                <td>
+                                                    Commission %
+                                                    <br />
+                                                    (Max Change / Max Rate)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}%
+                                                        <em>
+                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')}% /{' '}
+                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')}% )
+                                                        </em>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        )}
+                                        <tr className="">
+                                            <td>Address</td>
+                                            <td
+                                                colSpan={is_prep ? '3' : '1'}
+                                                className={scam ? 'scam' : ''}>
+                                                {scam && <span className="scam-tag">Scam</span>}
+                                                {_address}
+                                                <QrCodeButton address={data.address} />
+                                                <CopyButton
+                                                    data={_address}
+                                                    title={'Copy Address'}
+                                                    isSpan
+                                                />
+                                                <span
+                                                    className="show-node-addr"
+                                                    style={
+                                                        is_prep
+                                                            ? { display: '' }
+                                                            : { display: 'none' }
+                                                    }
+                                                    onClick={clickShowBtn}>
+                                                    Show node address
+                                                </span>
+                                                {isValidNodeType(nodeType) && (
+                                                    <span className="crep">{`${nodeType}`}</span>
+                                                )}
+                                                {!isConnected && <ReportButton address={address} />}
+                                            </td>
+                                        </tr>
+                                        <tr className="node-addr" style={{ display: showNode }}>
+                                            <td>Node Address</td>
+                                            <td colSpan="3">
+                                                <i className="img node-addr"></i>
+                                                {node_address}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Balance</td>
+                                            <td colSpan="3" className="balance">
+                                                <div className={icxMore ? 'on' : ''}>
+                                                    <p>
+                                                        <span>
+                                                            <i className="coin icon"></i>ICX
+                                                        </span>
+                                                        <span>
+                                                            {`${totalBal
+                                                                ? numberWithCommas(totalBal)
+                                                                : 0
+                                                                }`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                        <em
+                                                            className="drop-btn"
+                                                            onClick={toggleIcxMore}>
+                                                            <i className="img"></i>
+                                                        </em>
+                                                    </p>
+                                                    <p>
+                                                        <span>Available</span>
+                                                        <span>
+                                                            {`${numberWithCommas(
+                                                                Number(addrBalance) /
+                                                                Math.pow(10, 18)
+                                                            )}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span>Staked</span>
+                                                        <span>
+                                                            {`${convertNumberToText(
+                                                                stakeAmt / Math.pow(10, 18)
+                                                            )}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
+
+                                                    <p>
+                                                        <span>Unstaking</span>
+                                                        <span>
+                                                            {`${convertNumberToText(unstakeSum)}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span>Bonded</span>
+                                                        <span>
+                                                            {`${addrBond}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
+                                                    <div className="unstaking-list">
+                                                        {unstakeList && unstakeList.length !== 0
+                                                            ? unstakeList.map((dataList) => {
+                                                                return (
+                                                                    <p>
+                                                                        <span className="unstaking-item">
+                                                                            <em>
+                                                                                Target Block
+                                                                                Height{' '}
+                                                                                {convertNumberToText(
+                                                                                    IconConverter.toNumber(
+                                                                                        dataList.unstakeBlockHeight
+                                                                                    )
+                                                                                )}
+                                                                            </em>
+                                                                            <span className="balance">
+                                                                                {convertNumberToText(
+                                                                                    convertLoopToIcxDecimal(
+                                                                                        dataList.unstake
+                                                                                    )
+                                                                                )}
+                                                                            </span>
+                                                                            <em>ICX</em>
+                                                                        </span>
+                                                                    </p>
+                                                                )
+                                                            })
+                                                            : ''}
+                                                    </div>
+                                                    <p>
+                                                        <span>Voted</span>
+                                                        <span>
+                                                            {`${convertNumberToText(delegated)}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span>I_SCORE</span>
+                                                        <span>
+                                                            {`${convertNumberToText(iscore)}`}
+                                                            <em>I-Score</em>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div className={tokenMore ? 'on' : ''}>
+                                                    <p>
+                                                        <span>
+                                                            <i className="coin"></i>Token
+                                                        </span>
+                                                        <span>
+                                                            {tokens.length}
+                                                            <em>Tokens</em>
+                                                        </span>
+                                                        <em
+                                                            className="drop-btn"
+                                                            onClick={toggleTokenMore}>
+                                                            <i className="img"></i>
+                                                        </em>
+                                                    </p>
+
+                                                    {tokens.map((token, index) => (
+                                                        <p key={index}>
+                                                            <em
+                                                                style={{ cursor: 'pointer' }}
+                                                                onClick={() => {
+                                                                    props.history.push(
+                                                                        `/token/${token.address}`
+                                                                    )
+                                                                }}>
+                                                                <span style={{ color: '#1aaaba' }}>
+                                                                    {token.name}
+                                                                </span>
+                                                            </em>
+                                                            <span>{`${convertNumberToText(
+                                                                Number(token.balance) /
+                                                                Math.pow(
+                                                                    10,
+                                                                    Number(token.decimals)
+                                                                )
+                                                            )}`}</span>
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                       </td>
                     </tr>
