@@ -39,8 +39,6 @@ const { nid } = config;
 const { requestUnjail } = chainMethods;
 const _isNotificationAvailable = NotificationManager.available()
 
-const TEST_VARIABLE = true;
-
 function AddressInfo(props) {
     const [icxMore, setIcxMore] = useState(false)
     const [tokenMore, setTokenMore] = useState(false)
@@ -251,13 +249,9 @@ function AddressInfo(props) {
 
     async function getRev() {
         const rev = await getRevision();
-        // if chain revision is higher than rev 25 then 
+        // if chain revision is higher than rev 25 then
         // unjail functionality is available
-        if(TEST_VARIABLE === true) {
-            setChainCanJail(true);
-        } else {
-            setChainCanJail(parseInt(rev, 16) >= 25);
-        }
+        setChainCanJail(parseInt(rev, 16) >= 25);
     }
 
     async function executeUnjail() {
@@ -456,7 +450,7 @@ function AddressInfo(props) {
                                                     {(chainCanJail && is_prep && isConnected) || TEST_VARIABLE ? (
                                                         <span>
                                                             <button
-                                                                disabled={TEST_VARIABLE === true ? false : !is_prep || !isConnected}
+                                                                disabled={!is_prep || !isConnected}
                                                                 onClick={executeUnjail}
                                                                 className={compStyles.button}
                                                             >
@@ -472,7 +466,7 @@ function AddressInfo(props) {
                                                 <td>Total Votes</td>
                                                 <td colSpan="3">
                                                     <span>
-                                                        {convertNumberToText(delegated)}
+                                                        {convertNumberToText(Math.round(delegated))}
 
                                                         <em>
                                                             ( {(totalVotes * 100).toPrecision(3)}% )
