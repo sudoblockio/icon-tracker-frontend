@@ -51,21 +51,21 @@ class Footer extends Component {
                                         <span className="img"></span>
                                     </a>
                                 </li>
-                                <li className="medium">
-                                    <a target="_black" href="https://medium.com/@helloiconworld">
-                                        <span className="img"></span>
-                                    </a>
-                                </li>
-                                <li className="brunch">
-                                    <a target="_black" href="https://brunch.co.kr/@helloiconworld">
-                                        <span className="img"></span>
-                                    </a>
-                                </li>
-                                <li className="facebook">
-                                    <a target="_black" href="https://www.facebook.com/helloicon">
-                                        <span className="img"></span>
-                                    </a>
-                                </li>
+                                {/*<li className="medium">*/}
+                                {/*    <a target="_black" href="https://medium.com/@helloiconworld">*/}
+                                {/*        <span className="img"></span>*/}
+                                {/*    </a>*/}
+                                {/*</li>*/}
+                                {/*<li className="brunch">*/}
+                                {/*    <a target="_black" href="https://brunch.co.kr/@helloiconworld">*/}
+                                {/*        <span className="img"></span>*/}
+                                {/*    </a>*/}
+                                {/*</li>*/}
+                                {/*<li className="facebook">*/}
+                                {/*    <a target="_black" href="https://www.facebook.com/helloicon">*/}
+                                {/*        <span className="img"></span>*/}
+                                {/*    </a>*/}
+                                {/*</li>*/}
                             </ul>
                             <div className="mainnet">
                                 <p>
