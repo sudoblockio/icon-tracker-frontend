@@ -206,11 +206,11 @@ function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin, handleLogi
                     </div>
                     <div className={styles.bodySectionItem}>
                         <span className={styles.bodySectionItemImg}>
-                            <img alt="" src={iconImg} />
-                        </span>
-                        <span className={styles.bodySectionItemImg}>
                             <img alt="" src={hanaImg} />
                         </span>
+                      <span className={styles.bodySectionItemImg}>
+                            <img alt="" src={iconImg} />
+                      </span>
                     </div>
                 </div>
                 <hr />
