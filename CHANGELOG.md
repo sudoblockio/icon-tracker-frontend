@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.5...v0.4.0) (2024-01-23)
+
+
+### Features
+
+* add jail badges to address page ([e11e0bc](https://github.com/sudoblockio/icon-tracker-frontend/commit/e11e0bccc1b1e76a21bed3a75d457abd8ce9a9ff))
+* add jail badges to governance table ([b911316](https://github.com/sudoblockio/icon-tracker-frontend/commit/b911316ded841fe0b738ee858c1cd56b5a65faf9))
+
+
+### Bug Fixes
+
+* conditional around showing the unjail button ([39594bc](https://github.com/sudoblockio/icon-tracker-frontend/commit/39594bc795ed26c629107976a83b0571b07c21ad))
+* iiss 4 governance stats - rm ivoter and swap for iwage ([f74eef6](https://github.com/sudoblockio/icon-tracker-frontend/commit/f74eef63850e7791ff10adc169f7403b843fa671))
+
 ## [0.3.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.4...v0.3.5) (2024-01-10)
 
 
