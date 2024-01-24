@@ -5,3 +5,8 @@
 /lib/module
 *.d.ts
 webpack.config.js
+config
+e2e
+scripts
+public
+output
