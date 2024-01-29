@@ -87,6 +87,38 @@ class Header extends Component {
                                         </li>
                                     </ol>
                                 </li>
+                                <li>
+                                    <span>
+                                        Tools
+                                        <em className="img" />
+                                    </span>
+                                    <ol className="sub-menu">
+                                        <li
+                                            onClick={() => {
+                                                this.props.history.push('/contracts/tool')
+                                            }}>
+                                            <span>Contract Explorer</span>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                window.open('https://testnet.btp2.24x365.online/', '_blank');
+                                            }}>
+                                            <span>BTP Explorer</span>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                this.props.history.push('/api/v1/docs')
+                                            }}>
+                                            <span>API Docs</span>
+                                        </li>
+                                        <li>
+                                            <span>Stats (Coming)</span>
+                                        </li>
+                                        <li>
+                                            <span>Explorer (Coming)</span>
+                                        </li>
+                                    </ol>
+                                </li>
                             </ul>
                             <div className="link-right">
                                 <SearchBox {...this.props} />
