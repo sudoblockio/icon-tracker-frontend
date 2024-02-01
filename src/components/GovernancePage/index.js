@@ -11,6 +11,7 @@ import { POPUP_TYPE } from '../../utils/const'
 import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
 
+import styles from "./index.module.css";
 class GovernancePage extends Component {
 
     state = {
@@ -466,7 +467,7 @@ class TableRow extends Component {
                     <span>{rank || '-'}</span>
                 </td>
                 <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
-                    <ul>
+                    <ul className={styles.custom001}>
                         <li>
                             {mainBadge}
                             {jailBadge}
