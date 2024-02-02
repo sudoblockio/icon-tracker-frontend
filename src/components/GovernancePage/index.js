@@ -506,7 +506,9 @@ class TableRow extends Component {
                         </li>
                     </ul>
                 </td>
-                <td>{cps_governance ? (sponsored_cps_grants ? '✓' : 0) : '-'}</td>
+                <td>
+                    {cps_governance ? (sponsored_cps_grants === 0 || sponsored_cps_grants === null ? '✓' : sponsored_cps_grants) : '-'}
+                </td>
                 <td>
                     <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
                     <em>
