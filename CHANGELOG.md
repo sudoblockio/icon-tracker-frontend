@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.1...v0.4.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* conditional on cps column ([09f8838](https://github.com/sudoblockio/icon-tracker-frontend/commit/09f8838657c2c8a30957626e29d276b7cbb46d67))
+
 ## [0.4.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.0...v0.4.1) (2024-02-02)
 
 
