@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.0...v0.4.1) (2024-02-02)
+
+
+### Bug Fixes
+
+* badges and cards per rev 24 ([17c98ae](https://github.com/sudoblockio/icon-tracker-frontend/commit/17c98ae6404e1a7cfccbf5aee6747193c928e5e1))
+* ci release to main ([20bbffd](https://github.com/sudoblockio/icon-tracker-frontend/commit/20bbffd4f3f99fb600b3167c10db94d94917c0f3))
+* commission rate when not set ([9990374](https://github.com/sudoblockio/icon-tracker-frontend/commit/9990374ff6c06f0b20d961e89e64bbfd0c6021d5))
+* fixed breaking css styles in governance page ([ac10a42](https://github.com/sudoblockio/icon-tracker-frontend/commit/ac10a425ce3a3a74fc3720441cfc9720415a5f9d))
+* update readme - marker commit ([ec7f501](https://github.com/sudoblockio/icon-tracker-frontend/commit/ec7f501a32098557b2bb3f794abd83141eda404b))
+
 ## [0.4.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.5...v0.4.0) (2024-01-23)
 
 
