@@ -10,8 +10,8 @@ import {
 import { POPUP_TYPE } from '../../utils/const'
 import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
-
 import styles from "./index.module.css";
+
 class GovernancePage extends Component {
 
     state = {
@@ -199,7 +199,10 @@ class GovernancePage extends Component {
             restChecked,
             blackChecked
         } = this.state
-        const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+
+        // Deprecated?
+        // const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+
         const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
         const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 
@@ -235,20 +238,20 @@ class GovernancePage extends Component {
                                 <li>
                                     <div>
                                         <p>Prep Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Iprep / 100)}</span></p>
+                                        <p><span>{Number(this.state.Iprep)}</span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p>CPS Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Icps / 100)}</span></p>
+                                        <p><span>{Number(this.state.Icps)}</span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p>Prep Wage <em>(%)</em>
                                         </p>
-                                        <p><span>{Number(this.state.Iwage)}</span></p>
+                                        <p><span>{this.state.Iwage !== undefined ? Number(this.state.Iwage) : 0}</span></p>
                                     </div>
                                 </li>
                                 <li>
@@ -388,7 +391,7 @@ class TableRow extends Component {
     getJailBadge = (jail_flag) => {
         let badgeText = '';
         let badgeClass = '';
-        if (jail_flag === 0) {
+        if (jail_flag === 0  || isNaN(jail_flag) ) {
             return false;
         }
         if ([2, 3, 6, 10].includes(jail_flag)) {
