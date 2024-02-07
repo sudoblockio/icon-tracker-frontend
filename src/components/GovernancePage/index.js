@@ -464,6 +464,8 @@ class TableRow extends Component {
 
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
+        const bondedRate = !totalVoted ? 0 : (20*(bonded / Math.pow(10, 18)).toFixed()) / prepVoted
+
         return (
             <tr>
                 <td className="rank">
@@ -519,6 +521,7 @@ class TableRow extends Component {
                 {!blackChecked && (
                     <td className={'bonded'}>
                         <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
+                        <em>{Number(bondedRate*100).toFixed(1)}%</em>
                     </td>
                 )}
                 {!blackChecked && (
