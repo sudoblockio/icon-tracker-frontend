@@ -312,8 +312,8 @@ class GovernancePage extends Component {
                                                 this.props.setPopup({ type: POPUP_TYPE.SPONSOR })
                                             }}></i></th>
                                             <th>Productivity<br /><em>Produced /<br />(Produced + Missed)</em></th>
-                                            {!blackChecked && <th>Bonded</th>}
-                                            {!blackChecked && <th>Total Votes</th>}
+                                            {!blackChecked && <th>Bonded /<br />% Bonded</th>}
+                                            {!blackChecked && <th>Votes /<br />% Total Votes</th>}
                                             <th>Power</th>
                                             <th style={{ whiteSpace: 'nowrap', padding: '5px' }}>
                                                 Monthly
@@ -526,10 +526,8 @@ class TableRow extends Component {
                 )}
                 {!blackChecked && (
                     <td>
-                        <span>{Number(votedRate * 100).toFixed(1)}%</span>
-                        <div>
-                            <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
-                        </div>
+                        <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
+                        <em>{Number(votedRate * 100).toFixed(1)}%</em>
                     </td>
                 )}
                 <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
