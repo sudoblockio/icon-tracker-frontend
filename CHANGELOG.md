@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.3...v0.4.4) (2024-02-07)
+
+
+### Bug Fixes
+
+* title in governance table with formatting ([e5fe254](https://github.com/sudoblockio/icon-tracker-frontend/commit/e5fe254a0a8a14df477e3d8ff7594d5efb4507db))
+
 ## [0.4.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.2...v0.4.3) (2024-02-07)
 
 
