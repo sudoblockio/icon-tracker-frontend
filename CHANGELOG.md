@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.2...v0.4.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* add back the bonded percent [#270](https://github.com/sudoblockio/icon-tracker-frontend/issues/270) ([8ee74ae](https://github.com/sudoblockio/icon-tracker-frontend/commit/8ee74ae4ba54a471ec171afc33d17979e4364ed6))
+* set default values for setCommissionRate and initCommissionRate to the equivalent commission rate that will maintain current reward distribution, and set max rate change to 10% to avoid drastic changes in short periods of time ([6bde43d](https://github.com/sudoblockio/icon-tracker-frontend/commit/6bde43d8dffad2cd289f8f8201594bd46850c4e2))
+
 ## [0.4.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.1...v0.4.2) (2024-02-02)
 
 
