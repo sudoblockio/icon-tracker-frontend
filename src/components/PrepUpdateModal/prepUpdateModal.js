@@ -225,7 +225,7 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                                                         <CommissionRateComponent
                                                             title="setCommissionRate"
                                                             paragraph="This command will allow you to modify the commission rate for your Validator."
-                                                            formItems={[["rate","50","Rate",""]]}
+                                                            formItems={[["rate","9.41","Rate",""]]}
                                                             handleValues={handleCommissionRateValues}
                                                         />
                                                         <button
@@ -240,9 +240,9 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                                                             title="initCommissionRate"
                                                             paragraph="This is a one time transaction to set the maximum commission rate and maximum commission rate change. You will not be able to change these parameters later. However, you will be able to change the commission rate later."
                                                             formItems={[
-                                                                ["rate","100","Rate:",""],
+                                                                ["rate","9.41","Rate:",""],
                                                                 ["maxRate","100","Max Commission Rate:",""],
-                                                                ["maxChangeRate","100","Max Commission Rate Change:",""]]}
+                                                                ["maxChangeRate","10","Max Commission Rate Change:",""]]}
                                                             handleValues={handleCommissionRateValues}
                                                         />
                                                         <button
