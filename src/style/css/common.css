@@ -464,12 +464,11 @@ body {
   display: inline-block;
 }
 .header-wrap .logo {
-  
-  background: url(../image/2022Logo.png)
+  background: url(../image/icon-tracker-logo.png)
   left top no-repeat;
   background-size: cover;
-  width: 130px;
-  height: 24px;
+  width: 160px;
+  height: 28px;
   display: inline-block;
   vertical-align: top;
   margin-top: 0px;
@@ -3088,7 +3087,7 @@ body {
 }
 .table-typeJ td:nth-child(9) {
   min-width: 120px ;
-  max-width: 120px; 
+  max-width: 120px;
   width: 120px;
 }
 .table-typeJ td:nth-child(1) .ellipsis {
@@ -4360,7 +4359,7 @@ input[type='text']:focus.over {
   height: 28px;
   cursor: pointer;
   z-index: 1;
-  
+
 }
 span#search-icon {
   margin-top: -26px;
@@ -5426,7 +5425,7 @@ span#search-icon {
   border: solid 2px #262626;
   overflow: hidden;
 }
-.verify{ 
+.verify{
   width: max-content !important;
   height: max-content !important;
   display:flex;
@@ -5437,12 +5436,12 @@ span#search-icon {
   /* padding: 1em; */
 }
 
-.cv-form-container { 
+.cv-form-container {
   grid-area: form;
   padding: 1.25em;
 }
 
-.upload { 
+.upload {
   grid-area: choosefile;
   padding: 1.25em;
 
