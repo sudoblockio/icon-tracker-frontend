@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.4...v0.4.5) (2024-02-14)
+
+
+### Bug Fixes
+
+* wrong order in the commission rate ([8c57ab7](https://github.com/sudoblockio/icon-tracker-frontend/commit/8c57ab7b5b869863c37d885303cf905dbdc2bb66))
+
 ## [0.4.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.3...v0.4.4) (2024-02-07)
 
 
