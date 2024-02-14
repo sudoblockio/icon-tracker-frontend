@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.5...v0.4.6) (2024-02-14)
+
+
+### Bug Fixes
+
+* update the logo ([280195f](https://github.com/sudoblockio/icon-tracker-frontend/commit/280195f3a99936eb0eb7f45616191c03c0bff188))
+
 ## [0.4.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.4...v0.4.5) (2024-02-14)
 
 
