@@ -519,8 +519,11 @@ function AddressInfo(props) {
                                                     <span>
                                                         {commissionRate !== undefined ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 0 }%
                                                         <em>
-                                                            ({numberWithCommas(maxCommissionRate !== undefined ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 0)}% /{' '}
-                                                            {numberWithCommas(maxCommissionChangeRate !== undefined ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 0)}% )
+                                                            (
+                                                            {numberWithCommas(maxCommissionChangeRate !== undefined ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 0)}%
+                                                            /{' '}
+                                                            {numberWithCommas(maxCommissionRate !== undefined ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 0)}%
+                                                            )
                                                         </em>
                                                     </span>
                                                 </td>
