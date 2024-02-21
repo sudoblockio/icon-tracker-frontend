@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.6...v0.4.7) (2024-02-21)
+
+
+### Bug Fixes
+
+* gov stats off by 100 ([7c0d7b4](https://github.com/sudoblockio/icon-tracker-frontend/commit/7c0d7b49f114a1fe69f614126fafa368c2dbbbc4))
+
 ## [0.4.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.5...v0.4.6) (2024-02-14)
 
 
