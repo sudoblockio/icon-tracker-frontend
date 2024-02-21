@@ -5777,7 +5777,7 @@ span#search-icon {
   padding-bottom: 12px;
 }
 .popup-wrap.sponsor .popup{
-  height:200px
+  height:230px
 }
 .popup-wrap.sponsor .txt {
   text-align: left;
@@ -5785,6 +5785,32 @@ span#search-icon {
   color: #808080;
   letter-spacing: -0.5px;
   line-height: 1.67;
+}
+.popup-wrap.power .title{
+    padding-bottom: 12px;
+}
+.popup-wrap.power .popup{
+    height:250px
+}
+.popup-wrap.power .txt {
+    text-align: left;
+    font-size: 14px;
+    color: #808080;
+    letter-spacing: -0.5px;
+    line-height: 1.67;
+}
+.popup-wrap.bond .title{
+    padding-bottom: 12px;
+}
+.popup-wrap.bond .popup{
+    height:300px
+}
+.popup-wrap.bond .txt {
+    text-align: left;
+    font-size: 14px;
+    color: #808080;
+    letter-spacing: -0.5px;
+    line-height: 1.67;
 }
 .size-half {
   width: 50% !important;

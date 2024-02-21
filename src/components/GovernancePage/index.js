@@ -312,9 +312,14 @@ class GovernancePage extends Component {
                                                 this.props.setPopup({ type: POPUP_TYPE.SPONSOR })
                                             }}></i></th>
                                             <th>Productivity<br /><em>Produced /<br />(Produced + Missed)</em></th>
-                                            {!blackChecked && <th>Bonded /<br />% Bonded</th>}
+                                            <th>Bonded /<br />% Bonded<i style={{ marginLeft: '5px' }} className="img screamer" onClick={() => {
+                                                this.props.setPopup({ type: POPUP_TYPE.BOND })
+                                            }}></i></th>
+
                                             {!blackChecked && <th>Votes /<br />% Total Votes</th>}
-                                            <th>Power</th>
+                                            <th>Power<i style={{ marginLeft: '5px' }} className="img screamer" onClick={() => {
+                                                this.props.setPopup({ type: POPUP_TYPE.POWER })
+                                            }}></i></th>
                                             <th style={{ whiteSpace: 'nowrap', padding: '5px' }}>
                                                 Monthly
                                                 <br /> Rewards

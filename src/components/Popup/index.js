@@ -89,6 +89,20 @@ class Popup extends Component {
                     })
                 )
                 break
+            case POPUP_TYPE.POWER:
+                window.dispatchEvent(
+                    new CustomEvent('CUSTOM_FX', {
+                        detail: { type: 'POPUP_OPEN', param: 'power' },
+                    })
+                )
+                break
+            case POPUP_TYPE.BOND:
+                window.dispatchEvent(
+                    new CustomEvent('CUSTOM_FX', {
+                        detail: { type: 'POPUP_OPEN', param: 'bond' },
+                    })
+                )
+                break
             default:
         }
     }
@@ -162,6 +176,22 @@ class Popup extends Component {
         window.dispatchEvent(
             new CustomEvent('CUSTOM_FX', {
                 detail: { type: 'POPUP_CLOSE', param: 'sponsor' },
+            })
+        )
+    }
+    closePower = () => {
+        this.props.initPopup()
+        window.dispatchEvent(
+            new CustomEvent('CUSTOM_FX', {
+                detail: { type: 'POPUP_CLOSE', param: 'power' },
+            })
+        )
+    }
+    closeBond = () => {
+        this.props.initPopup()
+        window.dispatchEvent(
+            new CustomEvent('CUSTOM_FX', {
+                detail: { type: 'POPUP_CLOSE', param: 'bond' },
             })
         )
     }
@@ -303,7 +333,7 @@ class Popup extends Component {
                 <div key="sponsor" className="popup-wrap sponsor" style={{ display: 'none' }}>
                     <div className="dimmed"></div>
                     <div className="popup">
-                        <h1 className="title">Sponsored Projects</h1>
+                        <h1 className="title">CPS + Sponsored Projects</h1>
                         <p className="txt">
                             CPS funds development within the ecosystem with preps optionally
                             participating on a council voting on which projects receive
@@ -319,7 +349,52 @@ class Popup extends Component {
                         </div>
                     </div>
                 </div>
+                <div key="power" className="popup-wrap power" style={{ display: 'none' }}>
+                    <div className="dimmed"></div>
+                    <div className="popup">
+                        <h1 className="title">Power</h1>
+                        <p className="txt">
+                            Power informs how many rewards are given to a team and is
+                            calculated as the total number of votes covered by bond x20
+                            (ie bond 5% of the total votes). If there are votes not
+                            covered by bond or bond not covered by votes it has no
+                            impact on power and hence rewards.
+                        </p>
+                        <div className="btn-holder full">
+                            <button
+                                className="btn-type-normal size-full"
+                                onClick={this.closePower}>
+                                <span>Confirm</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div key="bond" className="popup-wrap bond" style={{ display: 'none' }}>
+                    <div className="dimmed"></div>
+                    <div className="popup">
+                        <h1 className="title">Bond</h1>
+                        <p className="txt">
+                            In order for a team to get power and hence become a main
+                            P-Rep, they need to bond ICX to their address which is
+                            subject to slashing penalties if the P-Rep misbehaves.
+                            Check the docs for penalties associated with different
+                            infractions ranging from minor ones such as missing a
+                            series of governance votes / node going offline to major
+                            ones such as double-signing which can result in a
+                            substantial deduction of bond and disqualification of
+                            further block production.
+                        </p>
+                        <div className="btn-holder full">
+                            <button
+                                className="btn-type-normal size-full"
+                                onClick={this.closeBond}>
+                                <span>Confirm</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 {isSearch && (
+
                     <Search key="search" data={searchData} closeSearch={this.closeSearch} />
                 )}
             </React.Fragment>
