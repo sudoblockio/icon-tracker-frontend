@@ -238,13 +238,13 @@ class GovernancePage extends Component {
                                 <li>
                                     <div>
                                         <p>Prep Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Iprep)}</span></p>
+                                        <p><span>{Number(this.state.Iprep / 100)}</span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p>CPS Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Icps)}</span></p>
+                                        <p><span>{Number(this.state.Icps / 100)}</span></p>
                                     </div>
                                 </li>
                                 <li>
