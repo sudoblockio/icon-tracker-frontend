@@ -251,7 +251,7 @@ class GovernancePage extends Component {
                                     <div>
                                         <p>Prep Wage <em>(%)</em>
                                         </p>
-                                        <p><span>{this.state.Iwage !== undefined ? Number(this.state.Iwage) : 0}</span></p>
+                                        <p><span>{Number(this.state.Iwage) / 100}</span></p>
                                     </div>
                                 </li>
                                 <li>
