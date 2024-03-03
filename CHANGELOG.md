@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.7...v0.4.8) (2024-03-03)
+
+
+### Bug Fixes
+
+* gov wage stats off by 100 ([130b04d](https://github.com/sudoblockio/icon-tracker-frontend/commit/130b04df702cac500c8ebbf6d930097777fb46b7))
+
 ## [0.4.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.6...v0.4.7) (2024-02-21)
 
 
