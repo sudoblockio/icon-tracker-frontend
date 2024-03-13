@@ -102,6 +102,7 @@ const { CONTRACTS_PREFIX, ADDRESSES_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 
 export async function contractList(payload) {
     const trackerApi = await trackerApiInstance()
+    console.log('Contracts lists API', payload)
     return new Promise((resolve, reject) => {
         trackerApi
             .get(makeUrl(`${ADDRESSES_PREFIX}/contracts`, payload))
@@ -145,9 +146,11 @@ export async function contractDetail(payload) {
 export async function contractTxList(payload) {
     if (!payload.addr) payload = { addr: payload, count: 10, skip: 0 }
     const trackerApi = await trackerApiInstance()
+    const queryPayload = { ...payload }
+    delete queryPayload.addr
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.addr}`, payload))
+            .get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.addr}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
@@ -160,12 +163,16 @@ export async function contractTxList(payload) {
 export async function contractTokenTxList(payload) {
     if (!payload.addr) payload = { addr: payload, count: 10, skip: 0 }
     const trackerApi = await trackerApiInstance()
+
+    const queryPayload = { ...payload }
+    delete queryPayload.addr
+
     return new Promise((resolve, reject) => {
         trackerApi
             .get(
                 makeUrl(
                     `${TRANSACTIONS_PREFIX}/token-transfers/token-contract/${payload.addr}`,
-                    payload
+                    queryPayload
                 )
             )
             .then((result) => {
@@ -196,9 +203,13 @@ export async function contractEventLogList(payload) {
 
 export async function contractInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
+
+    const queryPayload = { ...payload }
+    delete queryPayload.addr
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.addr}`, payload))
+            .get(makeUrl(`${TRANSACTIONS_PREFIX}/internal/address/${payload.addr}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
