@@ -71,9 +71,13 @@ const { ADDRESSES_PREFIX, TRANSACTIONS_PREFIX } = prefixes
 export async function addressRewardList(payload) {
     console.log('hit this function')
     const trackerApi = await trackerApiInstance()
+
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`/api/v1/governance/rewards/${payload.address}`, payload))
+            .get(makeUrl(`/api/v1/governance/rewards/${payload.address}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
@@ -101,9 +105,13 @@ export async function addressRewardList(payload) {
 
 export async function addressList(payload) {
     const trackerApi = await trackerApiInstance()
+    console.log('API CALL', { payload })
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`${ADDRESSES_PREFIX}`, payload))
+            .get(makeUrl(`${ADDRESSES_PREFIX}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
@@ -115,9 +123,12 @@ export async function addressList(payload) {
 
 export async function addressInfo(payload) {
     const trackerApi = await trackerApiInstance()
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`${ADDRESSES_PREFIX}/details/${payload.address}`, payload))
+            .get(makeUrl(`${ADDRESSES_PREFIX}/details/${payload.address}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
@@ -129,6 +140,7 @@ export async function addressInfo(payload) {
 
 export async function addressTokens(payload) {
     const trackerApi = await trackerApiInstance()
+
     return new Promise((resolve, reject) => {
         trackerApi
             .get(`${ADDRESSES_PREFIX}/token-addresses/${payload.address || payload}`)
@@ -143,9 +155,12 @@ export async function addressTokens(payload) {
 
 export async function addressTxList(payload) {
     const trackerApi = await trackerApiInstance()
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.address}`, payload))
+            .get(makeUrl(`${TRANSACTIONS_PREFIX}/address/${payload.address}`, queryPayload))
             .then((result) => {
                 resolve(result)
             })
@@ -158,12 +173,17 @@ export async function addressTxList(payload) {
 export async function addressTokenTxList(payload) {
     console.trace(payload, 'Each payload')
     const trackerApi = await trackerApiInstance()
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
+    console.trace('API CALL')
+
     return new Promise((resolve, reject) => {
         trackerApi
             .get(
                 makeTokenUrl(
                     `${TRANSACTIONS_PREFIX}/token-transfers/address/${payload.address}`,
-                    payload
+                    queryPayload
                 )
             )
             .then((result) => {
@@ -177,12 +197,16 @@ export async function addressTokenTxList(payload) {
 
 export async function addressInternalTxList(payload) {
     const trackerApi = await trackerApiInstance()
+
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
             .get(
                 makeUrl(
                     `${TRANSACTIONS_PREFIX}/internal/address/${payload.address || payload.prep}`,
-                    payload
+                    queryPayload
                 )
             )
             .then((result) => {
@@ -198,9 +222,13 @@ export async function addressVotedList(payload) {
     console.log(payload, 'vote payload')
 
     const trackerApi = await trackerApiInstance()
+
+    const queryPayload = { ...payload }
+    delete queryPayload.address
+
     return new Promise((resolve, reject) => {
         trackerApi
-            .get(makeUrl(`/api/v1/governance/votes/${payload.address || payload}`, payload))
+            .get(makeUrl(`/api/v1/governance/votes/${payload.address || payload}`, queryPayload))
             .then((result) => {
                 console.log(result, 'what result')
                 resolve(result)

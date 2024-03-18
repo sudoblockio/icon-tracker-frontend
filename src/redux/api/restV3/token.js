@@ -3,6 +3,7 @@ import { trackerApiInstance } from './config'
 
 export async function tokenList(payload) {
     const trackerApi = await trackerApiInstance()
+    alert('API CALL')
     return new Promise((resolve, reject) => {
         trackerApi
             .get(makeTokenUrl('/api/v1/addresses/contracts', payload))
