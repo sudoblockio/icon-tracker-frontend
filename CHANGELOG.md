@@ -1,5 +1,66 @@
 # Changelog
 
+## [0.4.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.7...v0.4.8) (2024-03-03)
+
+
+### Bug Fixes
+
+* gov wage stats off by 100 ([130b04d](https://github.com/sudoblockio/icon-tracker-frontend/commit/130b04df702cac500c8ebbf6d930097777fb46b7))
+
+## [0.4.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.6...v0.4.7) (2024-02-21)
+
+
+### Bug Fixes
+
+* gov stats off by 100 ([7c0d7b4](https://github.com/sudoblockio/icon-tracker-frontend/commit/7c0d7b49f114a1fe69f614126fafa368c2dbbbc4))
+
+## [0.4.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.5...v0.4.6) (2024-02-14)
+
+
+### Bug Fixes
+
+* update the logo ([280195f](https://github.com/sudoblockio/icon-tracker-frontend/commit/280195f3a99936eb0eb7f45616191c03c0bff188))
+
+## [0.4.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.4...v0.4.5) (2024-02-14)
+
+
+### Bug Fixes
+
+* wrong order in the commission rate ([8c57ab7](https://github.com/sudoblockio/icon-tracker-frontend/commit/8c57ab7b5b869863c37d885303cf905dbdc2bb66))
+
+## [0.4.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.3...v0.4.4) (2024-02-07)
+
+
+### Bug Fixes
+
+* title in governance table with formatting ([e5fe254](https://github.com/sudoblockio/icon-tracker-frontend/commit/e5fe254a0a8a14df477e3d8ff7594d5efb4507db))
+
+## [0.4.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.2...v0.4.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* add back the bonded percent [#270](https://github.com/sudoblockio/icon-tracker-frontend/issues/270) ([8ee74ae](https://github.com/sudoblockio/icon-tracker-frontend/commit/8ee74ae4ba54a471ec171afc33d17979e4364ed6))
+* set default values for setCommissionRate and initCommissionRate to the equivalent commission rate that will maintain current reward distribution, and set max rate change to 10% to avoid drastic changes in short periods of time ([6bde43d](https://github.com/sudoblockio/icon-tracker-frontend/commit/6bde43d8dffad2cd289f8f8201594bd46850c4e2))
+
+## [0.4.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.1...v0.4.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* conditional on cps column ([09f8838](https://github.com/sudoblockio/icon-tracker-frontend/commit/09f8838657c2c8a30957626e29d276b7cbb46d67))
+
+## [0.4.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.0...v0.4.1) (2024-02-02)
+
+
+### Bug Fixes
+
+* badges and cards per rev 24 ([17c98ae](https://github.com/sudoblockio/icon-tracker-frontend/commit/17c98ae6404e1a7cfccbf5aee6747193c928e5e1))
+* ci release to main ([20bbffd](https://github.com/sudoblockio/icon-tracker-frontend/commit/20bbffd4f3f99fb600b3167c10db94d94917c0f3))
+* commission rate when not set ([9990374](https://github.com/sudoblockio/icon-tracker-frontend/commit/9990374ff6c06f0b20d961e89e64bbfd0c6021d5))
+* fixed breaking css styles in governance page ([ac10a42](https://github.com/sudoblockio/icon-tracker-frontend/commit/ac10a425ce3a3a74fc3720441cfc9720415a5f9d))
+* update readme - marker commit ([ec7f501](https://github.com/sudoblockio/icon-tracker-frontend/commit/ec7f501a32098557b2bb3f794abd83141eda404b))
+
 ## [0.4.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.3.5...v0.4.0) (2024-01-23)
 
 

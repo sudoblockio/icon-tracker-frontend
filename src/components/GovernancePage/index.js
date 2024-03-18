@@ -10,6 +10,7 @@ import {
 import { POPUP_TYPE } from '../../utils/const'
 import { getTrackerApiUrl } from '../../redux/api/restV3/config';
 import { GetAddressForPrepList } from '../../utils/const';
+import styles from "./index.module.css";
 
 class GovernancePage extends Component {
 
@@ -198,7 +199,10 @@ class GovernancePage extends Component {
             restChecked,
             blackChecked
         } = this.state
-        const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+
+        // Deprecated?
+        // const icxPublicTreasuryStr = this.state.supplyMetrics ? numberWithCommas(Math.floor(this.state.supplyMetrics.data.circulating_supply / Math.pow(10, 18))) : 0;
+
         const totalStakedRate = !totalSupply ? '-' : totalStaked / totalSupply * 100
         const totalVotedRate = !totalSupply ? '-' : totalVoted / totalSupply * 100
 
@@ -247,7 +251,7 @@ class GovernancePage extends Component {
                                     <div>
                                         <p>Prep Wage <em>(%)</em>
                                         </p>
-                                        <p><span>{Number(this.state.Iwage)}</span></p>
+                                        <p><span>{Number(this.state.Iwage) / 100}</span></p>
                                     </div>
                                 </li>
                                 <li>
@@ -308,8 +312,8 @@ class GovernancePage extends Component {
                                                 this.props.setPopup({ type: POPUP_TYPE.SPONSOR })
                                             }}></i></th>
                                             <th>Productivity<br /><em>Produced /<br />(Produced + Missed)</em></th>
-                                            {!blackChecked && <th>Bonded</th>}
-                                            {!blackChecked && <th>Total Votes</th>}
+                                            {!blackChecked && <th>Bonded /<br />% Bonded</th>}
+                                            {!blackChecked && <th>Votes /<br />% Total Votes</th>}
                                             <th>Power</th>
                                             <th style={{ whiteSpace: 'nowrap', padding: '5px' }}>
                                                 Monthly
@@ -387,7 +391,7 @@ class TableRow extends Component {
     getJailBadge = (jail_flag) => {
         let badgeText = '';
         let badgeClass = '';
-        if (jail_flag === 0) {
+        if (jail_flag === 0  || isNaN(jail_flag) ) {
             return false;
         }
         if ([2, 3, 6, 10].includes(jail_flag)) {
@@ -460,13 +464,15 @@ class TableRow extends Component {
 
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
+        const bondedRate = !totalVoted ? 0 : (20*(bonded / Math.pow(10, 18)).toFixed()) / prepVoted
+
         return (
             <tr>
                 <td className="rank">
                     <span>{rank || '-'}</span>
                 </td>
                 <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
-                    <ul>
+                    <ul className={styles.custom001}>
                         <li>
                             {mainBadge}
                             {jailBadge}
@@ -502,7 +508,9 @@ class TableRow extends Component {
                         </li>
                     </ul>
                 </td>
-                <td>{cps_governance ? (sponsored_cps_grants ? '✓' : 0) : '-'}</td>
+                <td>
+                    {cps_governance ? (sponsored_cps_grants === 0 || sponsored_cps_grants === null ? '✓' : sponsored_cps_grants) : '-'}
+                </td>
                 <td>
                     <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
                     <em>
@@ -513,14 +521,13 @@ class TableRow extends Component {
                 {!blackChecked && (
                     <td className={'bonded'}>
                         <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
+                        <em>{Number(bondedRate*100).toFixed(1)}%</em>
                     </td>
                 )}
                 {!blackChecked && (
                     <td>
-                        <span>{Number(votedRate * 100).toFixed(1)}%</span>
-                        <div>
-                            <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
-                        </div>
+                        <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
+                        <em>{Number(votedRate * 100).toFixed(1)}%</em>
                     </td>
                 )}
                 <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>

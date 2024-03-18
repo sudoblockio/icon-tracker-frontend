@@ -517,10 +517,13 @@ function AddressInfo(props) {
                                                 <td>Commission %<br />(Max Change / Max Rate)</td>
                                                 <td colSpan="3"> {/* This assumes you have 4 columns in total */}
                                                     <span>
-                                                        {commissionRate !== null ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 'Loading...'}%
+                                                        {commissionRate !== undefined ? numberWithCommas(Number(commissionRate / 100).toFixed()) : 0 }%
                                                         <em>
-                                                            ( {numberWithCommas(maxCommissionRate !== null ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 'Loading...')}% /{' '}
-                                                            {numberWithCommas(maxCommissionChangeRate !== null ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 'Loading...')}% )
+                                                            (
+                                                            {numberWithCommas(maxCommissionChangeRate !== undefined ? numberWithCommas(Number(maxCommissionChangeRate / 100).toFixed()) : 0)}%
+                                                            /{' '}
+                                                            {numberWithCommas(maxCommissionRate !== undefined ? numberWithCommas(Number(maxCommissionRate / 100).toFixed()) : 0)}%
+                                                            )
                                                         </em>
                                                     </span>
                                                 </td>
@@ -610,13 +613,6 @@ function AddressInfo(props) {
                                                             <em>ICX</em>
                                                         </span>
                                                     </p>
-                                                    <p>
-                                                        <span>Bonded</span>
-                                                        <span>
-                                                            {`${addrBond}`}
-                                                            <em>ICX</em>
-                                                        </span>
-                                                    </p>
                                                     <div className="unstaking-list">
                                                         {unstakeList && unstakeList.length !== 0
                                                             ? unstakeList.map((dataList) => {
@@ -646,6 +642,13 @@ function AddressInfo(props) {
                                                             })
                                                             : ''}
                                                     </div>
+                                                    <p>
+                                                        <span>Bonded</span>
+                                                        <span>
+                                                            {`${addrBond}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
                                                     <p>
                                                         <span>Voted</span>
                                                         <span>

@@ -53,13 +53,9 @@ docker-compose build
 docker-compose up -d 
 ```
 
-#### Custom Backend Notes
+#### Custom Backend 
 
-In order to run a full tracker on a custom network, you need to also run an indexer on that network. See the [icon-tracker](https://github.com/sudoblockio/icon-tracker). 
-
-In short, you will need to configure the docker compose to point to a custom goloop node and run the whole stack. From there you will have an exposed IP running the APIs which you need to then set within these variables. 
-
-Better directions and tooling exist within the [icon-tracker](https://github.com/sudoblockio/icon-tracker) repo. 
+Please reference [gochain-local-community](https://github.com/sudoblockio/gochain-local-community) for instructions on how to deploy / a custom backend along with this frontend. Comes up practically one click. 
 
 ### Build:
 
