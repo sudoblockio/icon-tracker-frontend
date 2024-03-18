@@ -613,13 +613,6 @@ function AddressInfo(props) {
                                                             <em>ICX</em>
                                                         </span>
                                                     </p>
-                                                    <p>
-                                                        <span>Bonded</span>
-                                                        <span>
-                                                            {`${addrBond}`}
-                                                            <em>ICX</em>
-                                                        </span>
-                                                    </p>
                                                     <div className="unstaking-list">
                                                         {unstakeList && unstakeList.length !== 0
                                                             ? unstakeList.map((dataList) => {
@@ -649,6 +642,13 @@ function AddressInfo(props) {
                                                             })
                                                             : ''}
                                                     </div>
+                                                    <p>
+                                                        <span>Bonded</span>
+                                                        <span>
+                                                            {`${addrBond}`}
+                                                            <em>ICX</em>
+                                                        </span>
+                                                    </p>
                                                     <p>
                                                         <span>Voted</span>
                                                         <span>
