@@ -194,7 +194,8 @@ class TxPage extends Component {
             this.historyPush(page, count)
         }
         this.pageId = page
-        window.location.reload()
+        this.getTxList({ page, count: this.getCount(), sort })
+        // window.location.reload()
     }
 
     historyPush = (page, count, sort) => {
@@ -263,6 +264,9 @@ class TxPage extends Component {
     handleClickSortHeader = (head) => {
         const count = this.getCount()
         this.historyPush(1, count, head)
+        // this.getTxListByPage(1)
+
+        this.getTxList({ page: 1, count: this.getCount(), sort: head })
     }
 
     render() {
@@ -325,7 +329,7 @@ class TxPage extends Component {
                     ),
                     <Pagination
                         key="Pagination"
-                        pageNum={Number(this.pageId)}
+                        pageNum={Number(this.props.match.params.pageId)}
                         maxPageNum={calcMaxPageNum(totalSize, count)}
                         getData={this.getTxListByPage}
                     />,

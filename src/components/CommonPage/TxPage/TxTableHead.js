@@ -9,6 +9,11 @@ const sortParams = {
     'No of Txns': 'transaction_count',
 }
 
+const sortParamsInverted = {
+    balance: 'Balance',
+    transaction_count: 'No of Txns',
+}
+
 const sortOrderEncoding = {
     asc: '-',
     dsc: '',
@@ -47,9 +52,24 @@ class TxTableHead extends Component {
         }
     }
 
+    componentDidMount() {
+        const params = new URLSearchParams(window.location.search)
+        const sort = params.get('sort')
+
+        const sortOrder = sort[0] === '-' ? 'dsc' : 'asc'
+        const sortKey = ['+', '-'].includes(sort[0]) ? sort.substring(1) : sort
+
+        this.setState((prev) => ({
+            ...prev,
+            sortOrder: { [sortParamsInverted[sortKey]]: sortOrder },
+        }))
+    }
+
     render() {
         const withClickAction = (name) => {
             const currOrder = this.state.sortOrder[name]
+            console.log({ currOrder, name })
+            console.log(this.state.sortOrder)
             return (
                 <th
                     style={{ cursor: 'pointer' }}
