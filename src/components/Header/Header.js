@@ -101,15 +101,57 @@ class Header extends Component {
                                         </li>
                                         <li
                                             onClick={() => {
-                                                window.open('https://testnet.btp2.24x365.online/', '_blank');
+                                                window.open(
+                                                    'https://testnet.btp2.24x365.online/',
+                                                    '_blank'
+                                                )
                                             }}>
                                             <span>BTP Explorer</span>
                                         </li>
-                                        <li
-                                            onClick={() => {
-                                                this.props.history.push('/api/v1/docs')
-                                            }}>
+                                        <li className="sub-sub-menu-toggle">
                                             <span>API Docs</span>
+                                            <ol className="sub-menu sub-sub-menu">
+                                                <li
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://tracker.icon.community/api/v1/docs/index.html'
+                                                        )
+                                                    }}>
+                                                    <span>Main</span>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://tracker.icon.community/api/v1/governance/docs'
+                                                        )
+                                                    }}>
+                                                    <span>Governance</span>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://tracker.icon.community/api/v1/contracts/docs'
+                                                        )
+                                                    }}>
+                                                    <span>Contracts</span>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://tracker.icon.community/api/v1/statistics/docs'
+                                                        )
+                                                    }}>
+                                                    <span>Stats</span>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://balanced.icon.community/api/v1/docs'
+                                                        )
+                                                    }}>
+                                                    <span>Balanced</span>
+                                                </li>
+                                            </ol>
                                         </li>
                                         <li>
                                             <span>Stats (Coming)</span>
