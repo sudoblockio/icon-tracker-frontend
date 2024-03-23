@@ -116,6 +116,8 @@ export const POPUP_TYPE = {
     COMMISSION: 'commission',
     GOVERNANCE: 'governance',
     SPONSOR: 'sponsor',
+    POWER: 'power',
+    BOND: 'bond',
     VERIFICATION: 'verification',
 }
 
