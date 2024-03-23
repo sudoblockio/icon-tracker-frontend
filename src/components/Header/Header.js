@@ -93,21 +93,6 @@ class Header extends Component {
                                         <em className="img" />
                                     </span>
                                     <ol className="sub-menu">
-                                        <li
-                                            onClick={() => {
-                                                this.props.history.push('/contracts/tool')
-                                            }}>
-                                            <span>Contract Explorer</span>
-                                        </li>
-                                        <li
-                                            onClick={() => {
-                                                window.open(
-                                                    'https://testnet.btp2.24x365.online/',
-                                                    '_blank'
-                                                )
-                                            }}>
-                                            <span>BTP Explorer</span>
-                                        </li>
                                         <li className="sub-sub-menu-toggle">
                                             <span>API Docs</span>
                                             <ol className="sub-menu sub-sub-menu">
@@ -150,6 +135,54 @@ class Header extends Component {
                                                         )
                                                     }}>
                                                     <span>Balanced</span>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                this.props.history.push('/contracts/tool')
+                                            }}>
+                                            <span>Contracts</span>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                window.open(
+                                                    // TODO: Update for testnets
+                                                    // mainnet -> https://xcallscan.xyz/
+                                                    // berlin -> https://testnet.xcallscan.xyz/
+                                                    // lisbon -> Greyed out
+                                                    'https://xcallscan.xyz/',
+                                                    '_blank'
+                                                )
+                                            }}>
+                                            <span>BTP Explorer</span>
+                                        </li>
+                                        <li className="sub-sub-menu-toggle">
+                                            <span>Monitors</span>
+                                            <ol className="sub-menu sub-sub-menu">
+                                                <li
+                                                    // TODO: Update for testnets
+                                                    // mainnet -> ?
+                                                    // berlin -> https://testnet.btp2.24x365.online/
+                                                    // lisbon -> Greyed out
+                                                    onClick={() => {
+                                                        window.open(
+                                                            'https://testnet.btp2.24x365.online/',
+                                                        )
+                                                    }}>
+                                                    <span>BTP</span>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        // TODO: Grey out for both lisbon and berlin
+                                                        window.open(
+                                                            'https://icon2.mon.solidwallet.io/',
+                                                        )
+                                                    }}>
+                                                    <span>Validators</span>
+                                                </li>
+                                                <li>
+                                                    <span>Metrics (Coming)</span>
                                                 </li>
                                             </ol>
                                         </li>
