@@ -568,22 +568,16 @@ body {
 }
 
 .sub-sub-menu-toggle {
-    position: relative;
+    position: relative !important;
 }
 .sub-sub-menu {
     position: absolute;
-    color: #fff;
-    display: none;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
-    font-size: 12px;
-    font-weight: 300;
-    background: #fff;
-    border-radius: 4px;
-    border-top-left-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    width: 150px;
     top: 0;
-    left: 100%;
+    left: 100% !important;
+}
+.sub-sub-menu-locked {
+    color: rgba(1, 1, 1, 0.3) !important;
+    pointer-events: none;
 }
 
 .header-wrap .sub-menu {
