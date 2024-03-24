@@ -219,13 +219,12 @@ class Header extends Component {
                                             }}>
                                             <span>BTP Explorer</span>
                                         </li>
-                                        <li className="sub-sub-menu-toggle">
-                                            <span
-                                                onMouseEnter={() => {
-                                                    this.handleHoverSubmenu('monitor')
-                                                }}>
-                                                Monitors
-                                            </span>
+                                        <li
+                                            onMouseEnter={() => {
+                                                this.handleHoverSubmenu('monitor')
+                                            }}
+                                            className="sub-sub-menu-toggle">
+                                            <span>Monitors</span>
                                             <ol
                                                 style={{
                                                     visibility: this.state.isHiddenMonitors
