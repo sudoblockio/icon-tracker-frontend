@@ -43,7 +43,7 @@ class Header extends Component {
                 case 'berlin':
                     return { isLocked: false, link: 'https://testnet.btp2.24x365.online/' }
                 case 'mainnet':
-                    return { isLocked: false, link: '' }
+                    return { isLocked: false, link: 'https://btp-mainnet-monitor.icon.community/' }
                 default:
                     return { isLocked: true, link: null }
             }
@@ -152,6 +152,19 @@ class Header extends Component {
                                     </span>
                                     <ol className="sub-menu">
                                         <li
+                                            onClick={() => {
+                                                this.props.history.push('/contracts/tool')
+                                            }}>
+                                            <span>Contracts</span>
+                                        </li>
+                                        <li
+                                            className={clsx(isBtpLocked && 'sub-sub-menu-locked')}
+                                            onClick={() => {
+                                                window.open(btpLink)
+                                            }}>
+                                            <span>BTP Explorer</span>
+                                        </li>
+                                        <li
                                             onMouseEnter={() => {
                                                 this.handleHoverSubmenu('docs')
                                             }}
@@ -207,19 +220,6 @@ class Header extends Component {
                                             </ol>
                                         </li>
                                         <li
-                                            onClick={() => {
-                                                this.props.history.push('/contracts/tool')
-                                            }}>
-                                            <span>Contracts</span>
-                                        </li>
-                                        <li
-                                            className={clsx(isBtpLocked && 'sub-sub-menu-locked')}
-                                            onClick={() => {
-                                                window.open(btpLink)
-                                            }}>
-                                            <span>BTP Explorer</span>
-                                        </li>
-                                        <li
                                             onMouseEnter={() => {
                                                 this.handleHoverSubmenu('monitor')
                                             }}
@@ -244,7 +244,7 @@ class Header extends Component {
                                                 <li
                                                     className={clsx(
                                                         isMonitorValidatorLocked &&
-                                                            'sub-sub-menu-locked'
+                                                        'sub-sub-menu-locked'
                                                     )}
                                                     onClick={() => {
                                                         window.open(monitorValidatorLink)
