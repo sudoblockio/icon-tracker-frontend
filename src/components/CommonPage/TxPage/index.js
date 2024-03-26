@@ -194,7 +194,8 @@ class TxPage extends Component {
       this.historyPush(page, count)
     }
     this.pageId = page
-    this.getTxList({ page, count: this.getCount(), sort })
+
+    this.getTxList({ page, count: this.getCount(), sort, urlIndex: this.urlIndex })
     // window.location.reload()
   }
 
