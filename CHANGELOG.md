@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.5.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.8...v0.5.0) (2024-03-26)
+
+
+### Features
+
+* added token balance in contracts page [#411](https://github.com/sudoblockio/icon-tracker-frontend/issues/411) ([7463b9b](https://github.com/sudoblockio/icon-tracker-frontend/commit/7463b9bd5ecf7a7b7618630ffa3864dacf62fc73))
+
+
+### Bug Fixes
+
+* [#402](https://github.com/sudoblockio/icon-tracker-frontend/issues/402) when unstaking, the target block height label is missplaced ([fcf4fd1](https://github.com/sudoblockio/icon-tracker-frontend/commit/fcf4fd1f6a56c317d38adc536c0e5da3e3beff33))
+* extra query params removed ([920b5dd](https://github.com/sudoblockio/icon-tracker-frontend/commit/920b5dd2b8075c3e38dd4014e7bd2486327560f0))
+* removed debug alert [#420](https://github.com/sudoblockio/icon-tracker-frontend/issues/420) ([ee79966](https://github.com/sudoblockio/icon-tracker-frontend/commit/ee79966fff86d31a750f97e4df46979675cfca37))
+* sort click default sort [#361](https://github.com/sudoblockio/icon-tracker-frontend/issues/361) ([63c3b3d](https://github.com/sudoblockio/icon-tracker-frontend/commit/63c3b3d57a6c979a8e8b9d0e16d30c9f8ff19990))
+* sort header click on common page (addresses) ([545b65d](https://github.com/sudoblockio/icon-tracker-frontend/commit/545b65d8e53d039e4f467be2e992af9dc38b65a6))
+* undo merge conflict changes  [#411](https://github.com/sudoblockio/icon-tracker-frontend/issues/411) ([b326f70](https://github.com/sudoblockio/icon-tracker-frontend/commit/b326f70a6818b52376e9b25b4b14c13795ec8812))
+
 ## [0.4.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.7...v0.4.8) (2024-03-03)
 
 
