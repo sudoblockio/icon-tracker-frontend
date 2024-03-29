@@ -1,7 +1,9 @@
 // rawTxMaker/api/helpers.js
 //
 // Imports
-import scores from "../scores";
+import { icxGetStepLimitEstimate } from '../../../redux/api/restV3/icx'
+import scores from '../scores'
+// import {} from "
 
 // General Functions
 /*
@@ -9,10 +11,10 @@ import scores from "../scores";
  */
 function makeJSONRPCRequestObj(method) {
   return {
-    jsonrpc: "2.0",
+    jsonrpc: '2.0',
     method: method,
-    id: Math.ceil(Math.random() * 1000)
-  };
+    id: Math.ceil(Math.random() * 1000),
+  }
 }
 
 /*
@@ -27,8 +29,8 @@ function makeTxCallRPCObj(
   stepLimit = 2000000,
   value = null
 ) {
-  let txObj = makeJSONRPCRequestObj("icx_sendTransaction");
-  txObj["params"] = {
+  let txObj = makeJSONRPCRequestObj('icx_sendTransaction')
+  const params = {
     from: from,
     to: to,
     stepLimit: decimalToHex(stepLimit),
@@ -36,44 +38,46 @@ function makeTxCallRPCObj(
     nonce: decimalToHex(Number(1)),
     version: decimalToHex(Number(3)),
     timestamp: decimalToHex(new Date().getTime() * 1000),
-    dataType: "call",
+    dataType: 'call',
     data: {
-      method: method
-    }
-  };
+      method: method,
+    },
+  }
+  const estimateStepLimit = icxGetStepLimitEstimate(params)
+  params.stepLimit = estimateStepLimit
+
+  txObj['params'] = params
 
   if (paramsObj != null) {
-    txObj["params"]["data"]["params"] = paramsObj;
+    txObj['params']['data']['params'] = paramsObj
   }
-  if (value != null && typeof value === "number") {
-    txObj["params"]["value"] = decimalToHex(value * 10 ** 18);
+  if (value != null && typeof value === 'number') {
+    txObj['params']['value'] = decimalToHex(value * 10 ** 18)
   }
 
-  console.log("txObj");
-  console.log(txObj);
-  return txObj;
+  return txObj
 }
 
 /*
  *
  */
 function hexToDecimal(hex) {
-  return parseInt(hex, 16);
+  return parseInt(hex, 16)
 }
 
 /*
  *
  */
 function decimalToHex(number) {
-  return "0x" + number.toString(16);
+  return '0x' + number.toString(16)
 }
 
 /*
  *
  */
 function fromHexInLoop(loopInHex) {
-  let loopInBase2 = hexToDecimal(loopInHex);
-  return loopInBase2 / 10 ** 18;
+  let loopInBase2 = hexToDecimal(loopInHex)
+  return loopInBase2 / 10 ** 18
 }
 
 export {
@@ -82,6 +86,5 @@ export {
   hexToDecimal,
   decimalToHex,
   fromHexInLoop,
-  scores
-};
-
+  scores,
+}
