@@ -142,6 +142,9 @@ export function utcDateInfo(date) {
 
 export function calcMaxPageNum(total, rowNum) {
   if (!Number(total)) return 1
+
+  const maxViewCount = 1000000
+  total = Math.min(Number(total), maxViewCount)
   return Math.ceil(total / rowNum)
 }
 
