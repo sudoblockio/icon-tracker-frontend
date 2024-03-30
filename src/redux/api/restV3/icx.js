@@ -1,14 +1,15 @@
 import { randomUint32 } from '../../../utils/utils'
 import { walletApiInstance } from './config'
 import IconService, { HttpProvider } from 'icon-sdk-js'
+
 import { getWalletApiUrl } from './config'
 import axios from 'axios'
 
-function makeJsonRpc(method, params) {
+function makeJsonRpc(method, parameters) {
   return {
     jsonrpc: '2.0',
     method: method,
-    params: params,
+    params: parameters,
     id: randomUint32(),
   }
 }
@@ -37,6 +38,33 @@ async function makeRequest(params, method, label = 'default', customUrl = '') {
       })
   })
 }
+
+async function makeDebugRequest(params, method, label = 'default', customUrl = '') {
+  const walletApi = await walletApiInstance(label, customUrl)
+  return new Promise((resolve) => {
+    const param = makeJsonRpc(method, params)
+
+    walletApi
+      .post(`/api/v3d`, param)
+      .then((response) => {
+        console.log(`response for ${method}`, response)
+        console.log(typeof response)
+        resolve(response)
+      })
+      .catch((error) => {
+        if (error.response) {
+          resolve(error.response.data)
+        } else {
+          resolve({
+            error: {
+              message: error.message,
+            },
+          })
+        }
+      })
+  })
+}
+
 export async function icxGetScoreFromRPC(params, label = 'default', customUrl = '') {
   return await makeRequest(params, 'icx_getScoreApi', label, customUrl)
 }
@@ -50,11 +78,15 @@ export async function icxSendTransactionRaw(params, label = 'default', customUrl
 }
 
 export async function icxGetStepLimitEstimate(params) {
-  const updatedParams = { ...params }
-  delete updatedParams.signature
-  delete updatedParams.stepLimit
-  const response = await makeRequest(updatedParams, 'debug_estimateStep')
-  return response.data.result
+  try {
+    const updatedParams = { ...params }
+    delete updatedParams.signature
+    delete updatedParams.stepLimit
+    const response = await makeDebugRequest(updatedParams, 'debug_estimateStep')
+    return parseInt(response.data.result)
+  } catch (err) {
+    return 2000000
+  }
 }
 
 export async function getTransactionResultFromRPCNotSdk(txHash, label = 'default', customUrl = '') {

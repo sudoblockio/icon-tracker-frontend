@@ -7,28 +7,22 @@ import { scores, makeTxCallRPCObj } from './helpers'
 /*
  *
  */
-function voteNetworkProposal(
-  proposalId,
-  vote,
-  prepAddress,
-  nid,
-  sl = 200000000
-) {
-  return makeTxCallRPCObj(
-    prepAddress,
-    scores.mainnet.governance2,
-    "voteProposal",
-    {
-      id: proposalId,
-      vote: vote
-    },
-    nid,
-    sl
-  );
+async function voteNetworkProposal(proposalId, vote, prepAddress, nid, sl = 200000000) {
+    return await makeTxCallRPCObj(
+        prepAddress,
+        scores.mainnet.governance2,
+        'voteProposal',
+        {
+            id: proposalId,
+            vote: vote,
+        },
+        nid,
+        sl
+    )
 }
 
-function applyNetworkProposal(proposalId, prepAddress, nid, sl = 20000000000) {
-    return makeTxCallRPCObj(
+async function applyNetworkProposal(proposalId, prepAddress, nid, sl = 20000000000) {
+    return await makeTxCallRPCObj(
         prepAddress,
         scores.mainnet.governance2,
         'applyProposal',
@@ -42,20 +36,20 @@ function applyNetworkProposal(proposalId, prepAddress, nid, sl = 20000000000) {
 /*
  *
  */
-function approveNetworkProposal(proposalId, prepAddress, nid) {
-    return voteNetworkProposal(proposalId, '0x1', prepAddress, nid)
+async function approveNetworkProposal(proposalId, prepAddress, nid) {
+    return await voteNetworkProposal(proposalId, '0x1', prepAddress, nid)
 }
 
 /*
  *
  */
-function rejectNetworkProposal(proposalId, prepAddress, nid) {
-    return voteNetworkProposal(proposalId, '0x0', prepAddress, nid)
+async function rejectNetworkProposal(proposalId, prepAddress, nid) {
+    return await voteNetworkProposal(proposalId, '0x0', prepAddress, nid)
 }
 
 // 12500000000
-function submitNetworkProposal(from, params, nid, sl = 20000000000) {
-    return makeTxCallRPCObj(
+async function submitNetworkProposal(from, params, nid, sl = 20000000000) {
+    return await makeTxCallRPCObj(
         from,
         scores.mainnet.governance2,
         'registerProposal',

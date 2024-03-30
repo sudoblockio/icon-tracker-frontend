@@ -20,7 +20,7 @@ function makeJSONRPCRequestObj(method) {
 /*
  *
  */
-function makeTxCallRPCObj(
+async function makeTxCallRPCObj(
   from,
   to,
   method,
@@ -29,7 +29,6 @@ function makeTxCallRPCObj(
   stepLimit = 2000000,
   value = null
 ) {
-  let txObj = makeJSONRPCRequestObj('icx_sendTransaction')
   const params = {
     from: from,
     to: to,
@@ -43,18 +42,19 @@ function makeTxCallRPCObj(
       method: method,
     },
   }
-  const estimateStepLimit = icxGetStepLimitEstimate(params)
-  params.stepLimit = estimateStepLimit
-
-  txObj['params'] = params
 
   if (paramsObj != null) {
-    txObj['params']['data']['params'] = paramsObj
+    params['data']['params'] = paramsObj
   }
   if (value != null && typeof value === 'number') {
-    txObj['params']['value'] = decimalToHex(value * 10 ** 18)
+    params['value'] = decimalToHex(value * 10 ** 18)
   }
 
+  const estimateStepLimit = await icxGetStepLimitEstimate(params)
+  params.stepLimit = decimalToHex(estimateStepLimit)
+
+  let txObj = makeJSONRPCRequestObj('icx_sendTransaction')
+  txObj['params'] = params
   return txObj
 }
 

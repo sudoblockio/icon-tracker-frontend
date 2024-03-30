@@ -50,7 +50,7 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
 
                 console.log('parsedBonded')
                 console.log(parsedBonded)
-                const txData = setBond(walletAddress, parsedBonded, nid)
+                const txData = await setBond(walletAddress, parsedBonded, nid)
                 console.log('txData')
                 console.log(txData)
 

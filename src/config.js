@@ -81,4 +81,5 @@ const config = {
         CONTRACT_WRITE_EVENTLOG_ENABLED: false,
     },
 }
+
 export default config
