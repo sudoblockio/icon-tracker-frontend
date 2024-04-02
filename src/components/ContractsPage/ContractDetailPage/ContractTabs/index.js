@@ -104,12 +104,6 @@ function ContractTabs(props) {
         contractTokenTx,
     ])
 
-    useEffect(() => {
-        console.log('active tab and tab array status', activeTab, tabArrayStatus)
-        console.log('tabcontent', tabContent)
-    })
-
-    console.log('active tab', on)
     return (
         <TabTable2
             onClickTab={handleTabClick}
