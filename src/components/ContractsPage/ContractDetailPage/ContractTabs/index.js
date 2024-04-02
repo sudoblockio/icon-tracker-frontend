@@ -8,6 +8,7 @@ import ContractComponent from './ContractComponent'
 import ContractEvents from './ContractEvents'
 import { NoBox, TabTable2 } from '../../../../components'
 import { TX_TYPE, CONTRACT_TABS } from '../../../../utils/const'
+import { findTabIndex } from '../../../../utils/utils'
 
 function ContractTabs(props) {
     const {
@@ -62,6 +63,19 @@ function ContractTabs(props) {
     }, [contractTokenTx])
 
     useEffect(() => {
+        if (!tabArrayStatus) return
+
+        const url = props.url
+        const locationObj = Object.keys(url).includes('location') ? url.location : url
+
+        const { hash } = locationObj
+        if (!hash) return handleTabClick(0)
+
+        const index = findTabIndex(tabArrayStatus, hash)
+        handleTabClick(index)
+    }, [tabArrayStatus])
+
+    useEffect(() => {
         setTabContent(
             getTabContent(
                 activeTab,
@@ -92,7 +106,7 @@ function ContractTabs(props) {
 
     useEffect(() => {
         console.log('active tab and tab array status', activeTab, tabArrayStatus)
-        console.log(tabContent)
+        console.log('tabcontent', tabContent)
     })
 
     console.log('active tab', on)
@@ -234,4 +248,5 @@ function getTabContent(
     }
     return content
 }
+
 export default withRouter(ContractTabs)
