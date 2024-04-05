@@ -10,7 +10,7 @@ import {
   ReportButton,
 } from '../../../components'
 import {
-  convertNumberToText,
+  // convertNumberToText,
   numberWithCommas,
   tokenText,
   isValidData,
@@ -18,8 +18,34 @@ import {
   addAt,
 } from '../../../utils/utils'
 import { cxSocialMedia } from '../../../redux/store/contracts'
-import { getBalance, getBondList } from '../../../redux/store/iiss'
+import {
+  getBalance,
+  //  getBondList
+} from '../../../redux/store/iiss'
 import AddrContractsBalRow from '../../shared/AddrContractsBalRow'
+
+const media = [
+  'twitter',
+  'wechat',
+  'youtube',
+  'telegram',
+  'steemit',
+  'reddit',
+  'keybase',
+  'github',
+  'facebook',
+]
+const checkLinks = {
+  twitter: '',
+  wechat: '',
+  youtube: '',
+  telegram: '',
+  steemit: '',
+  reddit: '',
+  keybase: '',
+  github: '',
+  facebook: '',
+}
 
 function ContractInfo(props) {
   const [verified_data, setVerified_Data] = useState('')
@@ -35,29 +61,6 @@ function ContractInfo(props) {
 
   const onMouseOut = (param) => {
     window.dispatchEvent(new CustomEvent('CUSTOM_FX', { detail: { type: 'CONTRACT_OUT', param } }))
-  }
-
-  const media = [
-    'twitter',
-    'wechat',
-    'youtube',
-    'telegram',
-    'steemit',
-    'reddit',
-    'keybase',
-    'github',
-    'facebook',
-  ]
-  const checkLinks = {
-    twitter: '',
-    wechat: '',
-    youtube: '',
-    telegram: '',
-    steemit: '',
-    reddit: '',
-    keybase: '',
-    github: '',
-    facebook: '',
   }
 
   const getSocialMediaLinks = async (contract) => {
@@ -90,46 +93,8 @@ function ContractInfo(props) {
 
   const { contract, walletAddress, contractDetails } = props
   const { loading, data } = contract
+  console.log('contract data', data)
   let ircVersion, reportedCount
-
-  //   const [icxMore, setIcxMore] = useState(false)
-  //   const toggleIcxMore = () => {
-  //     setIcxMore(!icxMore)
-  //   }
-
-  //   const [tokenMore, setTokenMore] = useState(false)
-  //   const toggleTokenMore = () => {
-  //     setTokenMore(!tokenMore)
-  //   }
-
-  //   const [addrBond, setAddrBond] = useState('')
-  //   const [addrBalance, setAddrBalance] = useState('')
-  //   const [stakeAmt, setStake] = useState('')
-  //   const [unstakeSum, setUnstakeSum] = useState('')
-  //   const [totalBal, setTotalBal] = useState(0)
-
-  //   const getAddrBond = async (addr) => {
-  //     let payload = { address: `${addr}`, page: 1, count: 10 }
-
-  //     const res = await getBondList(payload)
-  //     if (res.length != 0) {
-  //       setAddrBond(Number(res[0].value) / Math.pow(10, 18))
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     const tot =
-  //       Number(addrBond / Math.pow(10, 18)) +
-  //       Number(addrBalance / Math.pow(10, 18)) +
-  //       Number(stakeAmt / Math.pow(10, 18)) +
-  //       Number(unstakeSum / Math.pow(10, 18))
-
-  //     setTotalBal(tot)
-  //   }, [addrBond, addrBalance, stakeAmt, unstakeSum])
-
-  //   useEffect(() => {
-  //     getAddrBond(props.match.params.addressId)
-  //   }, [props.match.params.addressId])
 
   const Contents = () => {
     if (loading) {
@@ -254,7 +219,11 @@ function ContractInfo(props) {
                       <td>{numberWithCommas(props.contractTx.totalSize)} Txns</td>
                     </tr> */}
 
-                    <AddrContractsBalRow {...props} />
+                    <AddrContractsBalRow
+                      // delegated={delegated}
+                      // iscore={iscore}
+                      {...props}
+                    />
 
                     <tr>
                       <td>Transactions</td>
