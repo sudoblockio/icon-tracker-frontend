@@ -8,26 +8,26 @@ import {
   numberWithCommas,
   convertNumberToText,
   isValidNodeType,
-  convertLoopToIcxDecimal,
+  // convertLoopToIcxDecimal,
   getBadgeTitle,
   isUrl,
   addAt,
   addUnregisteredStyle,
-  sortArrOfObjects,
+  // sortArrOfObjects,
 } from '../../../utils/utils'
 import { SocialMediaType } from '../../../utils/const'
 import NotificationManager from '../../../utils/NotificationManager'
 import {
   prepList,
   getPRepsRPC,
-  getBalanceOf,
-  getBalance,
-  getStake,
-  getBondList,
+  // getBalanceOf,
+  // getBalance,
+  // getStake,
+  // getBondList,
   getPRep,
 } from '../../../redux/store/iiss'
-import { contractDetail } from '../../../redux/store/contracts'
-import { addressTokens } from '../../../redux/store/addresses'
+// import { contractDetail } from '../../../redux/store/contracts'
+// import { addressTokens } from '../../../redux/store/addresses'
 import { getRevision } from '../../../redux/store/iiss'
 import { chainMethods } from '../../../utils/rawTxMaker'
 import { requestJsonRpc } from '../../../utils/connect'
@@ -40,25 +40,54 @@ const { nid } = config
 const { requestUnjail } = chainMethods
 const _isNotificationAvailable = NotificationManager.available()
 
+let media = [
+  'twitter',
+  'wechat',
+  'youtube',
+  'telegram',
+  'steemit',
+  'reddit',
+  'keybase',
+  'github',
+  'facebook',
+]
+let checkLinks = {
+  twitter: '',
+  wechat: '',
+  youtube: '',
+  telegram: '',
+  steemit: '',
+  reddit: '',
+  keybase: '',
+  github: '',
+  facebook: '',
+}
+
 function AddressInfo(props) {
-  const [icxMore, setIcxMore] = useState(false)
-  const [tokenMore, setTokenMore] = useState(false)
   const [showNode, setShowNode] = useState('none')
   const [links, setLinks] = useState('')
   const [totalVoted, setTotalVoted] = useState('')
 
-  const [addrBalance, setAddrBalance] = useState('')
-  const [stakeAmt, setStake] = useState('')
-  const [unstakeList, setUnstakeList] = useState('')
-  const [addrBond, setAddrBond] = useState('')
-
-  const [tokens, setTokens] = useState([])
   const [isPrepModalOpen, setIsPrepModalOpen] = useState(false)
 
   const [commissionRate, setCommissionRate] = useState(null)
   const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null)
   const [maxCommissionRate, setMaxCommissionRate] = useState(null)
   const [chainCanJail, setChainCanJail] = useState(false)
+
+  // const [icxMore, setIcxMore] = useState(false)
+  // const [tokenMore, setTokenMore] = useState(false)
+
+  // const [addrBalance, setAddrBalance] = useState('')
+  // const [stakeAmt, setStake] = useState('')
+  // const [unstakeList, setUnstakeList] = useState('')
+  // const [addrBond, setAddrBond] = useState('')
+
+  // const [contractDetailResMap, setContractDetailResMap] = useState({})
+  // const [getBalOfMap, setGetBalOfMap] = useState({})
+  // const [addressTokensRes, setAddressTokensRes] = useState(null)
+  // const [isTokenBalLoading, setIsTokenBalLoading] = useState(true)
+  // const [tokens, setTokens] = useState([])
 
   const { wallet, walletAddress } = props
   const { loading, data, error } = wallet
@@ -78,71 +107,8 @@ function AddressInfo(props) {
     website,
   } = prep || {}
 
-  let media = [
-    'twitter',
-    'wechat',
-    'youtube',
-    'telegram',
-    'steemit',
-    'reddit',
-    'keybase',
-    'github',
-    'facebook',
-  ]
-  let checkLinks = {
-    twitter: '',
-    wechat: '',
-    youtube: '',
-    telegram: '',
-    steemit: '',
-    reddit: '',
-    keybase: '',
-    github: '',
-    facebook: '',
-  }
-  let tokenName = {}
-  let tokenMap = {}
-
   function togglePrepModal() {
     setIsPrepModalOpen(!isPrepModalOpen)
-  }
-
-  const getAddrStake = async (addr) => {
-    const res = await getStake(addr)
-    setStake(res.stake)
-    setUnstakeList(res.unstakes)
-  }
-  let unstakeSum = 0
-  if (unstakeList && unstakeList.length !== 0) {
-    unstakeList.map((list) => {
-      unstakeSum += Number(convertLoopToIcxDecimal(list.unstake))
-    })
-  }
-  const getContractName = async (tokenContract) => {
-    const res = await contractDetail(tokenContract)
-    if (!res.data) return
-
-    tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
-    tokenMap = Object.entries(tokenName)
-
-    const balance = await getBalanceOf(props.match.params.addressId, tokenContract)
-
-    setTokens((prev) => {
-      const oldTokensWithLowerCaseName = [...prev].map((token) => ({
-        ...token,
-        nameLower: token.name.toLowerCase(),
-      }))
-      const sortedTokenArray = sortArrOfObjects(
-        [
-          ...oldTokensWithLowerCaseName,
-          { ...res.data, balance, nameLower: res.data.name.toLowerCase() },
-        ],
-        'nameLower',
-        'asc'
-      )
-
-      return sortedTokenArray
-    })
   }
 
   const getPrepSocialMedia = async (address) => {
@@ -158,48 +124,28 @@ function AddressInfo(props) {
     })
     setLinks(checkLinks)
   }
-  const getVoted = async () => {
-    const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
-    const totalVoted = !totalVotedLoop
-      ? 0
-      : IconConverter.toNumber(
-          IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
-            .convertUnit(IconAmount.Unit.ICX)
-            .value.toString(10)
-        )
-    setTotalVoted(totalVoted)
-    let tokenRes = await addressTokens(props.match.params.addressId)
-    tokenRes.status !== 204
-      ? tokenRes.data.forEach((contract) => getContractName(contract))
-      : console.log('no tokens')
+
+  async function executeUnjail() {
+    const txData = requestUnjail(props.match.params.addressId, nid)
+
+    try {
+      await requestJsonRpc(txData.params)
+    } catch (err) {
+      console.log('Error from wallet')
+      console.log(err)
+    }
   }
 
-  const getTokens = async () => {
-    let tokenRes = await addressTokens(props.match.params.addressId)
-
-    tokenRes.status === 200
-      ? tokenRes.data.forEach((contract) => {
-          contractDetail(contract).then((contractRes) => {
-            getBalanceOf(props.match.params.addressId, contract).then((balance) => {
-              console.log('Res-Token-Res', props.match.params.addressId, balance)
-              tokenMap[`${contractRes.data.name}`] = balance
-            })
-          })
-        })
-      : console.log('no tokens')
-  }
-
-  const getAddrBalance = async () => {
-    const balanceData = await getBalance(props.match.params.addressId)
-    setAddrBalance(balanceData)
-  }
-
-  const getAddrBond = async (addr) => {
-    let payload = { address: `${addr}`, page: 1, count: 10 }
-
-    const res = await getBondList(payload)
-    if (res.length != 0) {
-      setAddrBond(Number(res[0].value) / Math.pow(10, 18))
+  async function fetchPrepInfo() {
+    try {
+      const prepInfo = await getPRep(props.match.params.addressId)
+      if (prepInfo) {
+        setCommissionRate(prepInfo.commissionRate)
+        setMaxCommissionChangeRate(prepInfo.maxCommissionChangeRate)
+        setMaxCommissionRate(prepInfo.maxCommissionRate)
+      }
+    } catch (error) {
+      console.error('Error fetching P-Rep information', error)
     }
   }
 
@@ -225,14 +171,6 @@ function AddressInfo(props) {
     return flagNames
   }
 
-  const toggleIcxMore = () => {
-    setIcxMore(!icxMore)
-  }
-
-  const toggleTokenMore = () => {
-    setTokenMore(!tokenMore)
-  }
-
   const goBlock = (height) => {
     window.open('/block/' + height, '_blank')
   }
@@ -246,8 +184,19 @@ function AddressInfo(props) {
     setShowNode('table-row')
   }
 
-  function enableUpdateButton() {
-    //
+  const getVoted = async () => {
+    if (totalVoted !== '') return
+
+    const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
+    const totVotd = !totalVotedLoop
+      ? 0
+      : IconConverter.toNumber(
+          IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
+            .convertUnit(IconAmount.Unit.ICX)
+            .value.toString(10)
+        )
+
+    setTotalVoted(totVotd)
   }
 
   async function getRev() {
@@ -257,48 +206,120 @@ function AddressInfo(props) {
     setChainCanJail(parseInt(rev, 16) >= 25)
   }
 
-  async function executeUnjail() {
-    const txData = requestUnjail(props.match.params.addressId, nid)
+  /*
 
-    try {
-      const txResult = await requestJsonRpc(txData.params)
-    } catch (err) {
-      console.log('Error from wallet')
-      console.log(err)
+  // function enableUpdateButton() {
+  
+  // }
+
+  const toggleIcxMore = () => {
+    setIcxMore(!icxMore)
+  }
+
+  const toggleTokenMore = () => {
+    setTokenMore(!tokenMore)
+  }
+
+  const getAddrBalance = async () => {
+    const balanceData = await getBalance(props.match.params.addressId)
+    setAddrBalance(balanceData)
+  }
+
+  const getAddrBond = async (addr) => {
+    let payload = { address: `${addr}`, page: 1, count: 10 }
+
+    const res = await getBondList(payload)
+    if (res.length != 0) {
+      setAddrBond(Number(res[0].value) / Math.pow(10, 18))
     }
   }
 
-  useEffect(() => {
-    getContractName()
-    getTokens()
-    getVoted()
-    getPrepSocialMedia(props.match.params.addressId)
-    getAddrStake(props.match.params.addressId)
-    getAddrBond(props.match.params.addressId)
-    getAddrBalance()
-    getRev()
-    // Fetch additional P-Rep information including commission-related data
-    const fetchPrepInfo = async () => {
-      try {
-        const prepInfo = await getPRep(props.match.params.addressId)
-        if (prepInfo) {
-          setCommissionRate(prepInfo.commissionRate)
-          setMaxCommissionChangeRate(prepInfo.maxCommissionChangeRate)
-          setMaxCommissionRate(prepInfo.maxCommissionRate)
-        }
-      } catch (error) {
-        console.error('Error fetching P-Rep information', error)
-      }
+  const getAddrStake = async (addr) => {
+    const res = await getStake(addr)
+    setStake(res.stake)
+    setUnstakeList(res.unstakes)
+  }
+  let unstakeSum = 0
+  if (unstakeList && unstakeList.length !== 0) {
+    unstakeList.map((list) => {
+      unstakeSum += Number(convertLoopToIcxDecimal(list.unstake))
+    })
+  }
+
+  const setTokenBal = async (tokenContract, { index, tokenCount }) => {
+    let res = {}
+    if (contractDetailResMap[tokenContract]) {
+      res = contractDetailResMap[tokenContract]
+    } else {
+      res = await contractDetail(tokenContract)
+      setContractDetailResMap(res)
+      if (!res.data) return
     }
 
-    fetchPrepInfo()
-  }, [props.match.params.addressId])
+    let getBalRes = {}
+    if (getBalOfMap[tokenContract]) {
+      getBalRes = getBalOfMap[tokenContract]
+    } else {
+      getBalRes = await getBalanceOf(props.match.params.addressId, tokenContract)
+      setGetBalOfMap((prev) => ({ ...prev, [tokenContract]: getBalRes }))
+    }
 
-  const totalBal =
-    Number(addrBond / Math.pow(10, 18)) +
-    Number(addrBalance / Math.pow(10, 18)) +
-    Number(stakeAmt / Math.pow(10, 18)) +
-    Number(unstakeSum / Math.pow(10, 18))
+    // tokenName[res.data.name] = getBalRes
+    setTokens((prev) => {
+      const oldTokensWithLowerCaseName = [...prev].map((token) => ({
+        ...token,
+        nameLower: token.name.toLowerCase(),
+      }))
+      const sortedTokenArray = sortArrOfObjects(
+        [
+          ...oldTokensWithLowerCaseName,
+          { ...res.data, balance: getBalRes, nameLower: res.data.name.toLowerCase() },
+        ],
+        'nameLower',
+        'asc'
+      )
+
+      return sortedTokenArray
+    })
+  }
+
+  useEffect(() => {
+    if (!addressTokensRes || !tokens) return
+
+    if (tokens.length >= addressTokensRes.data.length - 1) setIsTokenBalLoading(false)
+  }, [tokens, addressTokensRes])
+
+  async function fetchAddressTokens() {
+    let tokenRes = {}
+    if (addressTokensRes) {
+      tokenRes = addressTokensRes
+    } else {
+      tokenRes = await addressTokens(props.match.params.addressId)
+      setAddressTokensRes(tokenRes)
+    }
+
+    tokenRes?.data?.forEach((contract, index) => {
+      setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
+    })
+  }
+
+  */
+
+  useEffect(() => {
+    if (!props.match.params.addressId) return
+
+    getRev()
+    fetchPrepInfo()
+    getPrepSocialMedia(props.match.params.addressId)
+    getVoted()
+
+    // getContractName()
+    // getTokens()
+    // fetchAddressTokens()
+    // getAddrBalance()
+    // getAddrStake(props.match.params.addressId)
+    // getAddrBond(props.match.params.addressId)
+  }, [props.match.params.addressId])
 
   const produced = IconConverter.toNumber(total_blocks)
   const validated = IconConverter.toNumber(validated_blocks)
@@ -306,9 +327,19 @@ function AddressInfo(props) {
   const _lastGenerateBlockHeight = !last_updated_block
     ? 'None'
     : IconConverter.toNumber(last_updated_block)
-  // const tokenCxs = tokens ? tokens : [];
   const badge = getBadgeTitle(grade, node_state)
   const jailBadges = getJailBadges(parseInt(jail_flags, 16))
+
+  /*
+
+  // const tokenCxs = tokens ? tokens : [];
+  const totalBal =
+    Number(addrBond / Math.pow(10, 18)) +
+    Number(addrBalance / Math.pow(10, 18)) +
+    Number(stakeAmt / Math.pow(10, 18)) +
+    Number(unstakeSum / Math.pow(10, 18))
+
+  */
 
   const Content = () => {
     if (loading) {
@@ -670,7 +701,23 @@ function AddressInfo(props) {
                       </td>
                     </tr> */}
 
-                    <AddrContractsBalRow {...props} />
+                    <AddrContractsBalRow
+                      {...props}
+                      delegated={delegated}
+                      iscore={iscore}
+                      // loading={loading}
+                      // icxMore={icxMore}
+                      // totalBal={totalBal}
+                      // toggleIcxMore={toggleIcxMore}
+                      // addrBalance={addrBalance}
+                      // stakeAmt={stakeAmt}
+                      // unstakeSum={unstakeSum}
+                      // addrBond={addrBond}
+                      // tokenMore={tokenMore}
+                      // tokens={tokens}
+                      // toggleTokenMore={toggleTokenMore}
+                      // isTokenBalLoading={isTokenBalLoading}
+                    />
                   </tbody>
                 </table>
               </div>
