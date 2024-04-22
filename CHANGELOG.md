@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.0...v0.5.1) (2024-04-22)
+
+
+### Bug Fixes
+
+* percent bond rate in governance [#444](https://github.com/sudoblockio/icon-tracker-frontend/issues/444) ([b2068f2](https://github.com/sudoblockio/icon-tracker-frontend/commit/b2068f2ad457494beb901eaf46ca7afeabd085e1))
+* tokens loading slowly, refactor [#438](https://github.com/sudoblockio/icon-tracker-frontend/issues/438) ([6fd3365](https://github.com/sudoblockio/icon-tracker-frontend/commit/6fd33654be24dfed77dae1673b68e50cb8ca79b6))
+
 ## [0.5.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.8...v0.5.0) (2024-03-26)
 
 
