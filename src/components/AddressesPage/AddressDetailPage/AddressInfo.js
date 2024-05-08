@@ -5,29 +5,29 @@ import { IconConverter, IconAmount } from 'icon-sdk-js'
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from '../../../components'
 import PrepUpdateModal from '../../../components/PrepUpdateModal/prepUpdateModal'
 import {
-    numberWithCommas,
-    convertNumberToText,
-    isValidNodeType,
-    convertLoopToIcxDecimal,
-    getBadgeTitle,
-    isUrl,
-    addAt,
-    addUnregisteredStyle,
-    sortArrOfObjects,
+  numberWithCommas,
+  convertNumberToText,
+  isValidNodeType,
+  convertLoopToIcxDecimal,
+  getBadgeTitle,
+  isUrl,
+  addAt,
+  addUnregisteredStyle,
+  sortArrOfObjects,
 } from '../../../utils/utils'
 import { SocialMediaType } from '../../../utils/const'
 import NotificationManager from '../../../utils/NotificationManager'
 import {
-    prepList,
-    getPRepsRPC,
-    getBalanceOf,
-    getBalance,
-    getStake,
-    getBondList,
-    getPRep,
+  prepList,
+  getPRepsRPC,
+  getBalanceOf,
+  getBalance,
+  getStake,
+  getBondList,
+  getPRep,
 } from '../../../redux/store/iiss'
-import { contractDetail } from '../../../redux/store/contracts'
-import { addressTokens } from '../../../redux/store/addresses'
+// import { contractDetail } from '../../../redux/store/contracts'
+// import { addressTokens } from '../../../redux/store/addresses'
 import { getRevision } from '../../../redux/store/iiss'
 import { chainMethods } from '../../../utils/rawTxMaker'
 import { requestJsonRpc } from '../../../utils/connect'
@@ -40,566 +40,596 @@ const { nid } = config
 const { requestUnjail } = chainMethods
 const _isNotificationAvailable = NotificationManager.available()
 
+let media = [
+  'twitter',
+  'wechat',
+  'youtube',
+  'telegram',
+  'steemit',
+  'reddit',
+  'keybase',
+  'github',
+  'facebook',
+]
+let checkLinks = {
+  twitter: '',
+  wechat: '',
+  youtube: '',
+  telegram: '',
+  steemit: '',
+  reddit: '',
+  keybase: '',
+  github: '',
+  facebook: '',
+}
+
 function AddressInfo(props) {
-    const [icxMore, setIcxMore] = useState(false)
-    const [tokenMore, setTokenMore] = useState(false)
-    const [showNode, setShowNode] = useState('none')
-    const [links, setLinks] = useState('')
-    const [totalVoted, setTotalVoted] = useState('')
+  const [showNode, setShowNode] = useState('none')
+  const [links, setLinks] = useState('')
+  const [totalVoted, setTotalVoted] = useState('')
 
-    const [addrBalance, setAddrBalance] = useState('')
-    const [stakeAmt, setStake] = useState('')
-    const [unstakeList, setUnstakeList] = useState('')
-    const [addrBond, setAddrBond] = useState('')
+  const [isPrepModalOpen, setIsPrepModalOpen] = useState(false)
 
-    const [tokens, setTokens] = useState([])
-    const [isPrepModalOpen, setIsPrepModalOpen] = useState(false)
+  const [commissionRate, setCommissionRate] = useState(null)
+  const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null)
+  const [maxCommissionRate, setMaxCommissionRate] = useState(null)
+  const [chainCanJail, setChainCanJail] = useState(false)
 
-    const [commissionRate, setCommissionRate] = useState(null)
-    const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null)
-    const [maxCommissionRate, setMaxCommissionRate] = useState(null)
-    const [chainCanJail, setChainCanJail] = useState(false)
+  // const [icxMore, setIcxMore] = useState(false)
+  // const [tokenMore, setTokenMore] = useState(false)
 
-    const { wallet, walletAddress } = props
-    const { loading, data, error } = wallet
+  // const [addrBalance, setAddrBalance] = useState('')
+  // const [stakeAmt, setStake] = useState('')
+  // const [unstakeList, setUnstakeList] = useState('')
+  // const [addrBond, setAddrBond] = useState('')
 
-    const { prep, iscore } = data
-    const {
-        delegated,
-        grade,
-        last_updated_block,
-        name,
-        node_address,
-        status,
-        node_state,
-        jail_flags,
-        total_blocks,
-        validated_blocks,
-        website,
-    } = prep || {}
+  // const [contractDetailResMap, setContractDetailResMap] = useState({})
+  // const [getBalOfMap, setGetBalOfMap] = useState({})
+  // const [addressTokensRes, setAddressTokensRes] = useState(null)
+  // const [isTokenBalLoading, setIsTokenBalLoading] = useState(true)
+  // const [tokens, setTokens] = useState([])
 
-    let media = [
-        'twitter',
-        'wechat',
-        'youtube',
-        'telegram',
-        'steemit',
-        'reddit',
-        'keybase',
-        'github',
-        'facebook',
-    ]
-    let checkLinks = {
-        twitter: '',
-        wechat: '',
-        youtube: '',
-        telegram: '',
-        steemit: '',
-        reddit: '',
-        keybase: '',
-        github: '',
-        facebook: '',
+  const { wallet, walletAddress } = props
+  const { loading, data, error } = wallet
+
+  const { prep, iscore } = data
+  const {
+    delegated,
+    grade,
+    last_updated_block,
+    name,
+    node_address,
+    status,
+    node_state,
+    jail_flags,
+    total_blocks,
+    validated_blocks,
+    website,
+  } = prep || {}
+
+  function togglePrepModal() {
+    setIsPrepModalOpen(!isPrepModalOpen)
+  }
+
+  const getPrepSocialMedia = async (address) => {
+    const allPreps = await prepList()
+    const prepArray = allPreps.filter((preps) => preps.address === address)
+    const thisPrep = prepArray ? prepArray[0] : prepArray
+    media.map((site) => {
+      if (checkLinks && thisPrep) {
+        checkLinks[site] !== thisPrep[site]
+          ? (checkLinks[site] = thisPrep[site])
+          : console.log('no links')
+      }
+    })
+    setLinks(checkLinks)
+  }
+
+  async function executeUnjail() {
+    const txData = await requestUnjail(props.match.params.addressId, nid)
+
+    try {
+      await requestJsonRpc(txData.params)
+    } catch (err) {
+      console.log('Error from wallet')
+      console.log(err)
     }
-    let tokenName = {}
-    let tokenMap = {}
+  }
 
-    function togglePrepModal() {
-        setIsPrepModalOpen(!isPrepModalOpen)
+  async function fetchPrepInfo() {
+    try {
+      const prepInfo = await getPRep(props.match.params.addressId)
+      if (prepInfo) {
+        setCommissionRate(prepInfo.commissionRate)
+        setMaxCommissionChangeRate(prepInfo.maxCommissionChangeRate)
+        setMaxCommissionRate(prepInfo.maxCommissionRate)
+      }
+    } catch (error) {
+      console.error('Error fetching P-Rep information', error)
     }
+  }
 
-    const getAddrStake = async (addr) => {
-        const res = await getStake(addr)
-        setStake(res.stake)
-        setUnstakeList(res.unstakes)
+  // Jail flags are accumulative
+  const getJailBadges = (jail_flag) => {
+    let flagNames = []
+
+    if (jail_flag & 1) {
+      flagNames.push(<span className={`jail-badge in-jail`}>{'Jail'}</span>)
     }
-    let unstakeSum = 0
-    if (unstakeList && unstakeList.length !== 0) {
-        unstakeList.map((list) => {
-            unstakeSum += Number(convertLoopToIcxDecimal(list.unstake))
-        })
+    if (jail_flag & 2) {
+      flagNames.push(<span className={`jail-badge unjailing`}>{'Unjailing'}</span>)
     }
-    const getContractName = async (tokenContract) => {
-        const res = await contractDetail(tokenContract)
-        if (!res.data) return
-
-        tokenName[res.data.name] = await getBalanceOf(props.match.params.addressId, tokenContract)
-        tokenMap = Object.entries(tokenName)
-
-        const balance = await getBalanceOf(props.match.params.addressId, tokenContract)
-
-        setTokens((prev) => {
-            const oldTokensWithLowerCaseName = [...prev].map((token) => ({
-                ...token,
-                nameLower: token.name.toLowerCase(),
-            }))
-            const sortedTokenArray = sortArrOfObjects(
-                [
-                    ...oldTokensWithLowerCaseName,
-                    { ...res.data, balance, nameLower: res.data.name.toLowerCase() },
-                ],
-                'nameLower',
-                'asc'
-            )
-
-            return sortedTokenArray
-        })
+    if (jail_flag & 4) {
+      flagNames.push(
+        <span className={`jail-badge validation-failure`}>{'Validation Failure'}</span>
+      )
     }
-
-    const getPrepSocialMedia = async (address) => {
-        const allPreps = await prepList()
-        const prepArray = allPreps.filter((preps) => preps.address === address)
-        const thisPrep = prepArray ? prepArray[0] : prepArray
-        media.map((site) => {
-            if (checkLinks && thisPrep) {
-                checkLinks[site] !== thisPrep[site]
-                    ? (checkLinks[site] = thisPrep[site])
-                    : console.log('no links')
-            }
-        })
-        setLinks(checkLinks)
-    }
-    const getVoted = async () => {
-        const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
-        const totalVoted = !totalVotedLoop
-            ? 0
-            : IconConverter.toNumber(
-                  IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
-                      .convertUnit(IconAmount.Unit.ICX)
-                      .value.toString(10)
-              )
-        setTotalVoted(totalVoted)
-        let tokenRes = await addressTokens(props.match.params.addressId)
-        tokenRes.status !== 204
-            ? tokenRes.data.forEach((contract) => getContractName(contract))
-            : console.log('no tokens')
+    if (jail_flag & 8) {
+      flagNames.push(<span className={`jail-badge double-sign`}>{'Double Sign'}</span>)
     }
 
-    const getTokens = async () => {
-        let tokenRes = await addressTokens(props.match.params.addressId)
+    return flagNames
+  }
 
-        tokenRes.status === 200
-            ? tokenRes.data.forEach((contract) => {
-                  contractDetail(contract).then((contractRes) => {
-                      getBalanceOf(props.match.params.addressId, contract).then((balance) => {
-                          console.log('Res-Token-Res', props.match.params.addressId, balance)
-                          tokenMap[`${contractRes.data.name}`] = balance
-                      })
-                  })
-              })
-            : console.log('no tokens')
+  const goBlock = (height) => {
+    window.open('/block/' + height, '_blank')
+  }
+
+  const onSocialClick = async (link) => {
+    if (isUrl(link)) {
+      window.open(link, '_blank')
+    }
+  }
+  const clickShowBtn = () => {
+    setShowNode('table-row')
+  }
+
+  const getVoted = async () => {
+    if (totalVoted !== '') return
+
+    const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
+    const totVotd = !totalVotedLoop
+      ? 0
+      : IconConverter.toNumber(
+        IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .value.toString(10)
+      )
+
+    setTotalVoted(totVotd)
+  }
+
+  async function getRev() {
+    const rev = await getRevision()
+    // if chain revision is higher than rev 25 then
+    // unjail functionality is available
+    setChainCanJail(parseInt(rev, 16) >= 25)
+  }
+
+  /*
+
+  // function enableUpdateButton() {
+  
+  // }
+
+  const toggleIcxMore = () => {
+    setIcxMore(!icxMore)
+  }
+
+  const toggleTokenMore = () => {
+    setTokenMore(!tokenMore)
+  }
+
+  const getAddrBalance = async () => {
+    const balanceData = await getBalance(props.match.params.addressId)
+    setAddrBalance(balanceData)
+  }
+
+  const getAddrBond = async (addr) => {
+    let payload = { address: `${addr}`, page: 1, count: 10 }
+
+    const res = await getBondList(payload)
+    if (res.length != 0) {
+      setAddrBond(Number(res[0].value) / Math.pow(10, 18))
+    }
+  }
+
+  const getAddrStake = async (addr) => {
+    const res = await getStake(addr)
+    setStake(res.stake)
+    setUnstakeList(res.unstakes)
+  }
+  let unstakeSum = 0
+  if (unstakeList && unstakeList.length !== 0) {
+    unstakeList.map((list) => {
+      unstakeSum += Number(convertLoopToIcxDecimal(list.unstake))
+    })
+  }
+
+  const setTokenBal = async (tokenContract, { index, tokenCount }) => {
+    let res = {}
+    if (contractDetailResMap[tokenContract]) {
+      res = contractDetailResMap[tokenContract]
+    } else {
+      res = await contractDetail(tokenContract)
+      setContractDetailResMap(res)
+      if (!res.data) return
     }
 
-    const getAddrBalance = async () => {
-        const balanceData = await getBalance(props.match.params.addressId)
-        setAddrBalance(balanceData)
+    let getBalRes = {}
+    if (getBalOfMap[tokenContract]) {
+      getBalRes = getBalOfMap[tokenContract]
+    } else {
+      getBalRes = await getBalanceOf(props.match.params.addressId, tokenContract)
+      setGetBalOfMap((prev) => ({ ...prev, [tokenContract]: getBalRes }))
     }
 
-    const getAddrBond = async (addr) => {
-        let payload = { address: `${addr}`, page: 1, count: 10 }
+    // tokenName[res.data.name] = getBalRes
+    setTokens((prev) => {
+      const oldTokensWithLowerCaseName = [...prev].map((token) => ({
+        ...token,
+        nameLower: token.name.toLowerCase(),
+      }))
+      const sortedTokenArray = sortArrOfObjects(
+        [
+          ...oldTokensWithLowerCaseName,
+          { ...res.data, balance: getBalRes, nameLower: res.data.name.toLowerCase() },
+        ],
+        'nameLower',
+        'asc'
+      )
 
-        const res = await getBondList(payload)
-        if (res.length != 0) {
-            setAddrBond(Number(res[0].value) / Math.pow(10, 18))
-        }
+      return sortedTokenArray
+    })
+  }
+
+  useEffect(() => {
+    if (!addressTokensRes || !tokens) return
+
+    if (tokens.length >= addressTokensRes.data.length - 1) setIsTokenBalLoading(false)
+  }, [tokens, addressTokensRes])
+
+  async function fetchAddressTokens() {
+    let tokenRes = {}
+    if (addressTokensRes) {
+      tokenRes = addressTokensRes
+    } else {
+      tokenRes = await addressTokens(props.match.params.addressId)
+      setAddressTokensRes(tokenRes)
     }
 
-    // Jail flags are accumulative
-    const getJailBadges = (jail_flag) => {
-        let flagNames = []
+    tokenRes?.data?.forEach((contract, index) => {
+      setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
+    })
+  }
 
-        if (jail_flag & 1) {
-            flagNames.push(<span className={`jail-badge in-jail`}>{'Jail'}</span>)
-        }
-        if (jail_flag & 2) {
-            flagNames.push(<span className={`jail-badge unjailing`}>{'Unjailing'}</span>)
-        }
-        if (jail_flag & 4) {
-            flagNames.push(
-                <span className={`jail-badge validation-failure`}>{'Validation Failure'}</span>
-            )
-        }
-        if (jail_flag & 8) {
-            flagNames.push(<span className={`jail-badge double-sign`}>{'Double Sign'}</span>)
-        }
+  */
 
-        return flagNames
-    }
+  useEffect(() => {
+    if (!props.match.params.addressId) return
 
-    const toggleIcxMore = () => {
-        setIcxMore(!icxMore)
-    }
+    getRev()
+    fetchPrepInfo()
+    getPrepSocialMedia(props.match.params.addressId)
+    getVoted()
 
-    const toggleTokenMore = () => {
-        setTokenMore(!tokenMore)
-    }
+    // getContractName()
+    // getTokens()
+    // fetchAddressTokens()
+    // getAddrBalance()
+    // getAddrStake(props.match.params.addressId)
+    // getAddrBond(props.match.params.addressId)
+  }, [props.match.params.addressId])
 
-    const goBlock = (height) => {
-        window.open('/block/' + height, '_blank')
-    }
+  const produced = IconConverter.toNumber(total_blocks)
+  const validated = IconConverter.toNumber(validated_blocks)
+  const productivity = !produced ? 'None' : `${((validated / produced) * 100).toFixed(2)}%`
+  const _lastGenerateBlockHeight = !last_updated_block
+    ? 'None'
+    : IconConverter.toNumber(last_updated_block)
+  const badge = getBadgeTitle(grade, node_state)
+  const jailBadges = getJailBadges(parseInt(jail_flags, 16))
 
-    const onSocialClick = async (link) => {
-        if (isUrl(link)) {
-            window.open(link, '_blank')
-        }
-    }
-    const clickShowBtn = () => {
-        setShowNode('table-row')
-    }
+  /*
 
-    function enableUpdateButton() {
-        //
-    }
+  // const tokenCxs = tokens ? tokens : [];
+  const totalBal =
+    Number(addrBond / Math.pow(10, 18)) +
+    Number(addrBalance / Math.pow(10, 18)) +
+    Number(stakeAmt / Math.pow(10, 18)) +
+    Number(unstakeSum / Math.pow(10, 18))
 
-    async function getRev() {
-        const rev = await getRevision()
-        // if chain revision is higher than rev 25 then
-        // unjail functionality is available
-        setChainCanJail(parseInt(rev, 16) >= 25)
-    }
+  */
 
-    async function executeUnjail() {
-        const txData = await requestUnjail(props.match.params.addressId, nid)
+  const Content = () => {
+    if (loading) {
+      return <LoadingComponent height="206px" />
+    } else {
+      const { address, nodeType, reportedCount, is_prep } = data
+      const _address = address ? address : error
+      const isConnected = walletAddress === _address
+      const disabled = !_isNotificationAvailable
+      const scam = reportedCount >= 100 ? true : false
 
-        try {
-            const txResult = await requestJsonRpc(txData.params)
-        } catch (err) {
-            console.log('Error from wallet')
-            console.log(err)
-        }
-    }
+      let totalVotes
+      !Number(delegated)
+        ? (totalVotes = 0)
+        : (totalVotes = Number(Number(delegated) / Number(totalVoted)))
 
-    useEffect(() => {
-        getContractName()
-        getTokens()
-        getVoted()
-        getPrepSocialMedia(props.match.params.addressId)
-        getAddrStake(props.match.params.addressId)
-        getAddrBond(props.match.params.addressId)
-        getAddrBalance()
-        getRev()
-        // Fetch additional P-Rep information including commission-related data
-        const fetchPrepInfo = async () => {
-            try {
-                const prepInfo = await getPRep(props.match.params.addressId)
-                if (prepInfo) {
-                    setCommissionRate(prepInfo.commissionRate)
-                    setMaxCommissionChangeRate(prepInfo.maxCommissionChangeRate)
-                    setMaxCommissionRate(prepInfo.maxCommissionRate)
-                }
-            } catch (error) {
-                console.error('Error fetching P-Rep information', error)
-            }
-        }
+      return (
+        <div className="screen0">
+          <PrepUpdateModal
+            prepInfo={data.prep}
+            isOpen={isPrepModalOpen}
+            onClose={togglePrepModal}
+          />
+          <div className="wrap-holder">
+            {isConnected ? (
+              <p className="title">
+                My Address
+                {is_prep && (
+                  <span
+                    className={
+                      'title-tag' + addUnregisteredStyle(status, grade)
+                    }>
+                    {badge}
+                  </span>
+                )}
+                <span className="connected">
+                  <i className="img" />
+                  Connected to ICONex
+                </span>
+                <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
+              </p>
+            ) : (
+              <p className="title">
+                Address
+                {is_prep && (
+                  <>
+                    <span
+                      className={
+                        'title-tag' + addUnregisteredStyle(status, grade)
+                      }>
+                      {badge}
+                    </span>
+                  </>
+                )}
+              </p>
+            )}
+            <div className="contents">
+              <div className="table-box">
+                <table className="table-typeB address">
+                  <thead>
+                    <tr>
+                      <th>Address</th>
+                      <th>value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {is_prep && (
+                      <tr className="p-rep">
+                        <td>Name</td>
+                        <td colSpan="3">
+                          <span>{name}</span>
+                          {website && (
+                            <span
+                              className="home"
+                              onClick={() => {
+                                onSocialClick(website)
+                              }}>
+                              <i className="img"></i>
+                            </span>
+                          )}
 
-        fetchPrepInfo()
-    }, [props.match.params.addressId])
+                          {SocialMediaType.map((type, index) => {
+                            const mediaValue = links[type]
 
-    const totalBal =
-        Number(addrBond / Math.pow(10, 18)) +
-        Number(addrBalance / Math.pow(10, 18)) +
-        Number(stakeAmt / Math.pow(10, 18)) +
-        Number(unstakeSum / Math.pow(10, 18))
+                            if (!mediaValue) {
+                              return null
+                            }
 
-    const produced = IconConverter.toNumber(total_blocks)
-    const validated = IconConverter.toNumber(validated_blocks)
-    const productivity = !produced ? 'None' : `${((validated / produced) * 100).toFixed(2)}%`
-    const _lastGenerateBlockHeight = !last_updated_block
-        ? 'None'
-        : IconConverter.toNumber(last_updated_block)
-    // const tokenCxs = tokens ? tokens : [];
-    const badge = getBadgeTitle(grade, node_state)
-    const jailBadges = getJailBadges(parseInt(jail_flags, 16))
-
-    const Content = () => {
-        if (loading) {
-            return <LoadingComponent height="206px" />
-        } else {
-            const { address, nodeType, reportedCount, is_prep } = data
-            const _address = address ? address : error
-            const isConnected = walletAddress === _address
-            const disabled = !_isNotificationAvailable
-            const scam = reportedCount >= 100 ? true : false
-
-            let totalVotes
-            !Number(delegated)
-                ? (totalVotes = 0)
-                : (totalVotes = Number(Number(delegated) / Number(totalVoted)))
-
-            return (
-                <div className="screen0">
-                    <PrepUpdateModal
-                        prepInfo={data.prep}
-                        isOpen={isPrepModalOpen}
-                        onClose={togglePrepModal}
-                    />
-                    <div className="wrap-holder">
-                        {isConnected ? (
-                            <p className="title">
-                                My Address
-                                {is_prep && (
-                                    <span
-                                        className={
-                                            'title-tag' + addUnregisteredStyle(status, grade)
-                                        }>
-                                        {badge}
-                                    </span>
+                            return (
+                              <span
+                                key={index}
+                                className={type}
+                                onClick={() => {
+                                  onSocialClick(mediaValue)
+                                }}>
+                                {isUrl(mediaValue) ? (
+                                  <i className="img"></i>
+                                ) : (
+                                  [
+                                    <i
+                                      key="i"
+                                      className="img tooltip"></i>,
+                                    <div
+                                      key="div"
+                                      className="help-layer">
+                                      <p className="txt">
+                                        {addAt(mediaValue)}
+                                      </p>
+                                      <div className="tri"></div>
+                                    </div>,
+                                  ]
                                 )}
-                                <span className="connected">
-                                    <i className="img" />
-                                    Connected to ICONex
-                                </span>
-                                <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
-                            </p>
+                              </span>
+                            )
+                          })}
+                          {is_prep && isConnected ? (
+                            <span
+                              className={compStyles.buttonUpdatePrep}>
+                              <button
+                                disabled={!is_prep || !isConnected}
+                                onClick={togglePrepModal}
+                                className={compStyles.button}>
+                                Update
+                              </button>
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          <span
+                            className={`active ${node_state === 'Synced'
+                                ? 'on'
+                                : node_state === 'Inactive'
+                                  ? 'off'
+                                  : node_state === 'BlockSync'
+                                    ? 'Active'
+                                    : 'Inactive'
+                              }`}>
+                            <i></i>
+                            {node_state}
+                          </span>
+                          {jailBadges}
+                          {chainCanJail && is_prep && isConnected ? (
+                            <span>
+                              <button
+                                disabled={!is_prep || !isConnected}
+                                onClick={executeUnjail}
+                                className={compStyles.button}>
+                                Unjail
+                              </button>
+                            </span>
+                          ) : null}
+                        </td>
+                      </tr>
+                    )}
+                    {is_prep && (
+                      <tr className="">
+                        <td>Total Votes</td>
+                        <td colSpan="3">
+                          <span>
+                            {convertNumberToText(Math.round(delegated))}
+
+                            <em>
+                              ( {(totalVotes * 100).toPrecision(3)}% )
+                            </em>
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+                    {is_prep && (
+                      <tr className="last">
+                        <td>
+                          Productivity
+                          <br />
+                          (Produced / (Produced + Missed))
+                        </td>
+                        <td>
+                          <span>
+                            {productivity}
+                            <em>
+                              ( {numberWithCommas(validated)} /{' '}
+                              {numberWithCommas(produced)} )
+                            </em>
+                          </span>
+                        </td>
+                        <td>Last Blockheight</td>
+                        {_lastGenerateBlockHeight === 'None' ||
+                          _lastGenerateBlockHeight < 0 ? (
+                          <td>
+                            <span>None</span>
+                          </td>
                         ) : (
-                            <p className="title">
-                                Address
-                                {is_prep && (
-                                    <>
-                                        <span
-                                            className={
-                                                'title-tag' + addUnregisteredStyle(status, grade)
-                                            }>
-                                            {badge}
-                                        </span>
-                                    </>
-                                )}
-                            </p>
+                          <td>
+                            <span
+                              className="mint"
+                              onClick={() => {
+                                goBlock(_lastGenerateBlockHeight)
+                              }}>
+                              {numberWithCommas(
+                                _lastGenerateBlockHeight
+                              )}
+                            </span>
+                          </td>
                         )}
-                        <div className="contents">
-                            <div className="table-box">
-                                <table className="table-typeB address">
-                                    <thead>
-                                        <tr>
-                                            <th>Address</th>
-                                            <th>value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {is_prep && (
-                                            <tr className="p-rep">
-                                                <td>Name</td>
-                                                <td colSpan="3">
-                                                    <span>{name}</span>
-                                                    {website && (
-                                                        <span
-                                                            className="home"
-                                                            onClick={() => {
-                                                                onSocialClick(website)
-                                                            }}>
-                                                            <i className="img"></i>
-                                                        </span>
-                                                    )}
-
-                                                    {SocialMediaType.map((type, index) => {
-                                                        const mediaValue = links[type]
-
-                                                        if (!mediaValue) {
-                                                            return null
-                                                        }
-
-                                                        return (
-                                                            <span
-                                                                key={index}
-                                                                className={type}
-                                                                onClick={() => {
-                                                                    onSocialClick(mediaValue)
-                                                                }}>
-                                                                {isUrl(mediaValue) ? (
-                                                                    <i className="img"></i>
-                                                                ) : (
-                                                                    [
-                                                                        <i
-                                                                            key="i"
-                                                                            className="img tooltip"></i>,
-                                                                        <div
-                                                                            key="div"
-                                                                            className="help-layer">
-                                                                            <p className="txt">
-                                                                                {addAt(mediaValue)}
-                                                                            </p>
-                                                                            <div className="tri"></div>
-                                                                        </div>,
-                                                                    ]
-                                                                )}
-                                                            </span>
-                                                        )
-                                                    })}
-                                                    {is_prep && isConnected ? (
-                                                        <span
-                                                            className={compStyles.buttonUpdatePrep}>
-                                                            <button
-                                                                disabled={!is_prep || !isConnected}
-                                                                onClick={togglePrepModal}
-                                                                className={compStyles.button}>
-                                                                Update
-                                                            </button>
-                                                        </span>
-                                                    ) : (
-                                                        <></>
-                                                    )}
-                                                    <span
-                                                        className={`active ${
-                                                            node_state === 'Synced'
-                                                                ? 'on'
-                                                                : node_state === 'Inactive'
-                                                                ? 'off'
-                                                                : node_state === 'BlockSync'
-                                                                ? 'Active'
-                                                                : 'Inactive'
-                                                        }`}>
-                                                        <i></i>
-                                                        {node_state}
-                                                    </span>
-                                                    {jailBadges}
-                                                    {chainCanJail && is_prep && isConnected ? (
-                                                        <span>
-                                                            <button
-                                                                disabled={!is_prep || !isConnected}
-                                                                onClick={executeUnjail}
-                                                                className={compStyles.button}>
-                                                                Unjail
-                                                            </button>
-                                                        </span>
-                                                    ) : null}
-                                                </td>
-                                            </tr>
-                                        )}
-                                        {is_prep && (
-                                            <tr className="">
-                                                <td>Total Votes</td>
-                                                <td colSpan="3">
-                                                    <span>
-                                                        {convertNumberToText(Math.round(delegated))}
-
-                                                        <em>
-                                                            ( {(totalVotes * 100).toPrecision(3)}% )
-                                                        </em>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        )}
-                                        {is_prep && (
-                                            <tr className="last">
-                                                <td>
-                                                    Productivity
-                                                    <br />
-                                                    (Produced / (Produced + Missed))
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        {productivity}
-                                                        <em>
-                                                            ( {numberWithCommas(validated)} /{' '}
-                                                            {numberWithCommas(produced)} )
-                                                        </em>
-                                                    </span>
-                                                </td>
-                                                <td>Last Blockheight</td>
-                                                {_lastGenerateBlockHeight === 'None' ||
-                                                _lastGenerateBlockHeight < 0 ? (
-                                                    <td>
-                                                        <span>None</span>
-                                                    </td>
-                                                ) : (
-                                                    <td>
-                                                        <span
-                                                            className="mint"
-                                                            onClick={() => {
-                                                                goBlock(_lastGenerateBlockHeight)
-                                                            }}>
-                                                            {numberWithCommas(
-                                                                _lastGenerateBlockHeight
-                                                            )}
-                                                        </span>
-                                                    </td>
-                                                )}
-                                            </tr>
-                                        )}
-                                        {is_prep && (
-                                            <tr className="last">
-                                                <td>
-                                                    Commission %<br />
-                                                    (Max Change / Max Rate)
-                                                </td>
-                                                <td colSpan="3">
-                                                    {' '}
-                                                    {/* This assumes you have 4 columns in total */}
-                                                    <span>
-                                                        {commissionRate !== undefined
-                                                            ? numberWithCommas(
-                                                                  Number(
-                                                                      commissionRate / 100
-                                                                  ).toFixed()
-                                                              )
-                                                            : 0}
-                                                        %
-                                                        <em>
-                                                            (
-                                                            {numberWithCommas(
-                                                                maxCommissionChangeRate !==
-                                                                    undefined
-                                                                    ? numberWithCommas(
-                                                                          Number(
-                                                                              maxCommissionChangeRate /
-                                                                                  100
-                                                                          ).toFixed()
-                                                                      )
-                                                                    : 0
-                                                            )}
-                                                            % /{' '}
-                                                            {numberWithCommas(
-                                                                maxCommissionRate !== undefined
-                                                                    ? numberWithCommas(
-                                                                          Number(
-                                                                              maxCommissionRate /
-                                                                                  100
-                                                                          ).toFixed()
-                                                                      )
-                                                                    : 0
-                                                            )}
-                                                            % )
-                                                        </em>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        )}
-                                        <tr className="">
-                                            <td>Address</td>
-                                            <td
-                                                colSpan={is_prep ? '3' : '1'}
-                                                className={scam ? 'scam' : ''}>
-                                                {scam && <span className="scam-tag">Scam</span>}
-                                                {_address}
-                                                <QrCodeButton address={data.address} />
-                                                <CopyButton
-                                                    data={_address}
-                                                    title={'Copy Address'}
-                                                    isSpan
-                                                />
-                                                <span
-                                                    className="show-node-addr"
-                                                    style={
-                                                        is_prep
-                                                            ? { display: '' }
-                                                            : { display: 'none' }
-                                                    }
-                                                    onClick={clickShowBtn}>
-                                                    Show node address
-                                                </span>
-                                                {isValidNodeType(nodeType) && (
-                                                    <span className="crep">{`${nodeType}`}</span>
-                                                )}
-                                                {!isConnected && <ReportButton address={address} />}
-                                            </td>
-                                        </tr>
-                                        <tr className="node-addr" style={{ display: showNode }}>
-                                            <td>Node Address</td>
-                                            <td colSpan="3">
-                                                <i className="img node-addr"></i>
-                                                {node_address}
-                                            </td>
-                                        </tr>
-                                        {/* <tr>
+                      </tr>
+                    )}
+                    {is_prep && (
+                      <tr className="last">
+                        <td>
+                          Commission %<br />
+                          (Max Change / Max Rate)
+                        </td>
+                        <td colSpan="3">
+                          {' '}
+                          {/* This assumes you have 4 columns in total */}
+                          <span>
+                            {commissionRate !== undefined
+                              ? numberWithCommas(
+                                Number(
+                                  commissionRate / 100
+                                ).toFixed()
+                              )
+                              : 0}
+                            %
+                            <em>
+                              (
+                              {numberWithCommas(
+                                maxCommissionChangeRate !==
+                                  undefined
+                                  ? numberWithCommas(
+                                    Number(
+                                      maxCommissionChangeRate /
+                                      100
+                                    ).toFixed()
+                                  )
+                                  : 0
+                              )}
+                              % /{' '}
+                              {numberWithCommas(
+                                maxCommissionRate !== undefined
+                                  ? numberWithCommas(
+                                    Number(
+                                      maxCommissionRate /
+                                      100
+                                    ).toFixed()
+                                  )
+                                  : 0
+                              )}
+                              % )
+                            </em>
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+                    <tr className="">
+                      <td>Address</td>
+                      <td
+                        colSpan={is_prep ? '3' : '1'}
+                        className={scam ? 'scam' : ''}>
+                        {scam && <span className="scam-tag">Scam</span>}
+                        {_address}
+                        <QrCodeButton address={data.address} />
+                        <CopyButton
+                          data={_address}
+                          title={'Copy Address'}
+                          isSpan
+                        />
+                        <span
+                          className="show-node-addr"
+                          style={
+                            is_prep
+                              ? { display: '' }
+                              : { display: 'none' }
+                          }
+                          onClick={clickShowBtn}>
+                          Show node address
+                        </span>
+                        {isValidNodeType(nodeType) && (
+                          <span className="crep">{`${nodeType}`}</span>
+                        )}
+                        {!isConnected && <ReportButton address={address} />}
+                      </td>
+                    </tr>
+                    <tr className="node-addr" style={{ display: showNode }}>
+                      <td>Node Address</td>
+                      <td colSpan="3">
+                        <i className="img node-addr"></i>
+                        {node_address}
+                      </td>
+                    </tr>
+                    {/* <tr>
                       <td>Balance</td>
                       <td colSpan="3" className="balance">
                         <div className={icxMore ? 'on' : ''}>
@@ -716,17 +746,33 @@ function AddressInfo(props) {
                       </td>
                     </tr> */}
 
-                                        <AddrContractsBalRow {...props} />
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
+                    <AddrContractsBalRow
+                      {...props}
+                      delegated={delegated}
+                      iscore={iscore}
+                    // loading={loading}
+                    // icxMore={icxMore}
+                    // totalBal={totalBal}
+                    // toggleIcxMore={toggleIcxMore}
+                    // addrBalance={addrBalance}
+                    // stakeAmt={stakeAmt}
+                    // unstakeSum={unstakeSum}
+                    // addrBond={addrBond}
+                    // tokenMore={tokenMore}
+                    // tokens={tokens}
+                    // toggleTokenMore={toggleTokenMore}
+                    // isTokenBalLoading={isTokenBalLoading}
+                    />
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     }
-    return Content()
+  }
+  return Content()
 }
 
 export default withRouter(AddressInfo)

@@ -43,6 +43,15 @@ const defaults = [
     wssEndpoint: "wss://tracker.sejong.icon.community",
     nid: 83
   },
+  {
+    region: "",
+    network: "vigo",
+    origin: "",
+    rpcEndpoint: "https://vigo.net.solidwallet.io",
+    apiEndpoint: "",
+    wssEndpoint: "",
+    nid: 274
+  },
   //
   // Ams
   //

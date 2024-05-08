@@ -162,7 +162,7 @@ class Header extends Component {
                                             onClick={() => {
                                                 window.open(btpLink)
                                             }}>
-                                            <span>BTP Explorer</span>
+                                            <span>GMP Tracker</span>
                                         </li>
                                         <li
                                             onMouseEnter={() => {

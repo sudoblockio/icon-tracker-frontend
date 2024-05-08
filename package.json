@@ -1,6 +1,6 @@
 {
   "name": "icon-tracker",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "dependencies": {
     "@ledgerhq/hw-transport-webhid": "^6.27.17",
@@ -33,6 +33,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "react-test-renderer": "^16.14.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
