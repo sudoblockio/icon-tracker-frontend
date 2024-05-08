@@ -8,22 +8,22 @@ import {
   numberWithCommas,
   convertNumberToText,
   isValidNodeType,
-  // convertLoopToIcxDecimal,
+  convertLoopToIcxDecimal,
   getBadgeTitle,
   isUrl,
   addAt,
   addUnregisteredStyle,
-  // sortArrOfObjects,
+  sortArrOfObjects,
 } from '../../../utils/utils'
 import { SocialMediaType } from '../../../utils/const'
 import NotificationManager from '../../../utils/NotificationManager'
 import {
   prepList,
   getPRepsRPC,
-  // getBalanceOf,
-  // getBalance,
-  // getStake,
-  // getBondList,
+  getBalanceOf,
+  getBalance,
+  getStake,
+  getBondList,
   getPRep,
 } from '../../../redux/store/iiss'
 // import { contractDetail } from '../../../redux/store/contracts'
@@ -126,7 +126,7 @@ function AddressInfo(props) {
   }
 
   async function executeUnjail() {
-    const txData = requestUnjail(props.match.params.addressId, nid)
+    const txData = await requestUnjail(props.match.params.addressId, nid)
 
     try {
       await requestJsonRpc(txData.params)
@@ -191,10 +191,10 @@ function AddressInfo(props) {
     const totVotd = !totalVotedLoop
       ? 0
       : IconConverter.toNumber(
-          IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
-            .convertUnit(IconAmount.Unit.ICX)
-            .value.toString(10)
-        )
+        IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP)
+          .convertUnit(IconAmount.Unit.ICX)
+          .value.toString(10)
+      )
 
     setTotalVoted(totVotd)
   }
@@ -368,7 +368,12 @@ function AddressInfo(props) {
               <p className="title">
                 My Address
                 {is_prep && (
-                  <span className={'title-tag' + addUnregisteredStyle(status, grade)}>{badge}</span>
+                  <span
+                    className={
+                      'title-tag' + addUnregisteredStyle(status, grade)
+                    }>
+                    {badge}
+                  </span>
                 )}
                 <span className="connected">
                   <i className="img" />
@@ -381,7 +386,10 @@ function AddressInfo(props) {
                 Address
                 {is_prep && (
                   <>
-                    <span className={'title-tag' + addUnregisteredStyle(status, grade)}>
+                    <span
+                      className={
+                        'title-tag' + addUnregisteredStyle(status, grade)
+                      }>
                       {badge}
                     </span>
                   </>
@@ -431,9 +439,15 @@ function AddressInfo(props) {
                                   <i className="img"></i>
                                 ) : (
                                   [
-                                    <i key="i" className="img tooltip"></i>,
-                                    <div key="div" className="help-layer">
-                                      <p className="txt">{addAt(mediaValue)}</p>
+                                    <i
+                                      key="i"
+                                      className="img tooltip"></i>,
+                                    <div
+                                      key="div"
+                                      className="help-layer">
+                                      <p className="txt">
+                                        {addAt(mediaValue)}
+                                      </p>
                                       <div className="tri"></div>
                                     </div>,
                                   ]
@@ -442,7 +456,8 @@ function AddressInfo(props) {
                             )
                           })}
                           {is_prep && isConnected ? (
-                            <span className={compStyles.buttonUpdatePrep}>
+                            <span
+                              className={compStyles.buttonUpdatePrep}>
                               <button
                                 disabled={!is_prep || !isConnected}
                                 onClick={togglePrepModal}
@@ -454,15 +469,14 @@ function AddressInfo(props) {
                             <></>
                           )}
                           <span
-                            className={`active ${
-                              node_state === 'Synced'
+                            className={`active ${node_state === 'Synced'
                                 ? 'on'
                                 : node_state === 'Inactive'
-                                ? 'off'
-                                : node_state === 'BlockSync'
-                                ? 'Active'
-                                : 'Inactive'
-                            }`}>
+                                  ? 'off'
+                                  : node_state === 'BlockSync'
+                                    ? 'Active'
+                                    : 'Inactive'
+                              }`}>
                             <i></i>
                             {node_state}
                           </span>
@@ -487,7 +501,9 @@ function AddressInfo(props) {
                           <span>
                             {convertNumberToText(Math.round(delegated))}
 
-                            <em>( {(totalVotes * 100).toPrecision(3)}% )</em>
+                            <em>
+                              ( {(totalVotes * 100).toPrecision(3)}% )
+                            </em>
                           </span>
                         </td>
                       </tr>
@@ -503,12 +519,14 @@ function AddressInfo(props) {
                           <span>
                             {productivity}
                             <em>
-                              ( {numberWithCommas(validated)} / {numberWithCommas(produced)} )
+                              ( {numberWithCommas(validated)} /{' '}
+                              {numberWithCommas(produced)} )
                             </em>
                           </span>
                         </td>
                         <td>Last Blockheight</td>
-                        {_lastGenerateBlockHeight === 'None' || _lastGenerateBlockHeight < 0 ? (
+                        {_lastGenerateBlockHeight === 'None' ||
+                          _lastGenerateBlockHeight < 0 ? (
                           <td>
                             <span>None</span>
                           </td>
@@ -519,7 +537,9 @@ function AddressInfo(props) {
                               onClick={() => {
                                 goBlock(_lastGenerateBlockHeight)
                               }}>
-                              {numberWithCommas(_lastGenerateBlockHeight)}
+                              {numberWithCommas(
+                                _lastGenerateBlockHeight
+                              )}
                             </span>
                           </td>
                         )}
@@ -536,22 +556,35 @@ function AddressInfo(props) {
                           {/* This assumes you have 4 columns in total */}
                           <span>
                             {commissionRate !== undefined
-                              ? numberWithCommas(Number(commissionRate / 100).toFixed())
+                              ? numberWithCommas(
+                                Number(
+                                  commissionRate / 100
+                                ).toFixed()
+                              )
                               : 0}
                             %
                             <em>
                               (
                               {numberWithCommas(
-                                maxCommissionChangeRate !== undefined
+                                maxCommissionChangeRate !==
+                                  undefined
                                   ? numberWithCommas(
-                                      Number(maxCommissionChangeRate / 100).toFixed()
-                                    )
+                                    Number(
+                                      maxCommissionChangeRate /
+                                      100
+                                    ).toFixed()
+                                  )
                                   : 0
                               )}
                               % /{' '}
                               {numberWithCommas(
                                 maxCommissionRate !== undefined
-                                  ? numberWithCommas(Number(maxCommissionRate / 100).toFixed())
+                                  ? numberWithCommas(
+                                    Number(
+                                      maxCommissionRate /
+                                      100
+                                    ).toFixed()
+                                  )
                                   : 0
                               )}
                               % )
@@ -562,18 +595,30 @@ function AddressInfo(props) {
                     )}
                     <tr className="">
                       <td>Address</td>
-                      <td colSpan={is_prep ? '3' : '1'} className={scam ? 'scam' : ''}>
+                      <td
+                        colSpan={is_prep ? '3' : '1'}
+                        className={scam ? 'scam' : ''}>
                         {scam && <span className="scam-tag">Scam</span>}
                         {_address}
                         <QrCodeButton address={data.address} />
-                        <CopyButton data={_address} title={'Copy Address'} isSpan />
+                        <CopyButton
+                          data={_address}
+                          title={'Copy Address'}
+                          isSpan
+                        />
                         <span
                           className="show-node-addr"
-                          style={is_prep ? { display: '' } : { display: 'none' }}
+                          style={
+                            is_prep
+                              ? { display: '' }
+                              : { display: 'none' }
+                          }
                           onClick={clickShowBtn}>
                           Show node address
                         </span>
-                        {isValidNodeType(nodeType) && <span className="crep">{`${nodeType}`}</span>}
+                        {isValidNodeType(nodeType) && (
+                          <span className="crep">{`${nodeType}`}</span>
+                        )}
                         {!isConnected && <ReportButton address={address} />}
                       </td>
                     </tr>
@@ -705,18 +750,18 @@ function AddressInfo(props) {
                       {...props}
                       delegated={delegated}
                       iscore={iscore}
-                      // loading={loading}
-                      // icxMore={icxMore}
-                      // totalBal={totalBal}
-                      // toggleIcxMore={toggleIcxMore}
-                      // addrBalance={addrBalance}
-                      // stakeAmt={stakeAmt}
-                      // unstakeSum={unstakeSum}
-                      // addrBond={addrBond}
-                      // tokenMore={tokenMore}
-                      // tokens={tokens}
-                      // toggleTokenMore={toggleTokenMore}
-                      // isTokenBalLoading={isTokenBalLoading}
+                    // loading={loading}
+                    // icxMore={icxMore}
+                    // totalBal={totalBal}
+                    // toggleIcxMore={toggleIcxMore}
+                    // addrBalance={addrBalance}
+                    // stakeAmt={stakeAmt}
+                    // unstakeSum={unstakeSum}
+                    // addrBond={addrBond}
+                    // tokenMore={tokenMore}
+                    // tokens={tokens}
+                    // toggleTokenMore={toggleTokenMore}
+                    // isTokenBalLoading={isTokenBalLoading}
                     />
                   </tbody>
                 </table>

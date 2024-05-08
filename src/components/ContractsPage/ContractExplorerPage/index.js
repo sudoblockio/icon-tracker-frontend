@@ -116,7 +116,7 @@ function ContractExplorerPage({ wallet, url, walletType, bip44Path }) {
             alert('Please connect to wallet first')
         } else {
             const paramsData = makeParams(params, method, inputs)
-            const rawMethodCall = customMethod(wallet, address, method, paramsData, nid)
+            const rawMethodCall = await customMethod(wallet, address, method, paramsData, nid)
 
             const txResult = {
                 error: '',

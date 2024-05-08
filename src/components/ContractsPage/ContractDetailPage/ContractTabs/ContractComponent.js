@@ -45,15 +45,20 @@ function ContractComponent({
         })
     }
 
-    function handleClickOnWrite(address, method, inputs, index) {
-        // makeTxCallRpcObj
+    async function handleClickOnWrite(address, method, inputs, index) {
         // const nid = HARDCODED_NID_FIX_THIS;
 
         if (walletAddress === '') {
             alert('Please connect to wallet first')
         } else {
             const paramsData = makeParams(params, method, inputs)
-            const rawMethodCall = customMethod(walletAddress, address, method, paramsData, nid)
+            const rawMethodCall = await customMethod(
+                walletAddress,
+                address,
+                method,
+                paramsData,
+                nid
+            )
             icxSendTransaction({
                 params: { ...rawMethodCall },
                 index: index,

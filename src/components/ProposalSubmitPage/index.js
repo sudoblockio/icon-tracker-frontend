@@ -73,7 +73,7 @@ function ProposalSubmitPage(props) {
             const p1 = [p0]
             const p2 = JSON.stringify(p1)
             const parsedValue = fromUtf8(p2)
-            const rawTransaction = submitNetworkProposal(
+            const rawTransaction = await submitNetworkProposal(
                 walletAddress,
                 {
                     title: titleState,
@@ -209,8 +209,8 @@ function TextAreaValueItem({ value, onChange, borderStyle = null }) {
         borderStyle == null
             ? styles.tableRowTextarea
             : borderStyle === 'green'
-              ? `${styles.tableRowTextarea} ${styles.tableRowTextareaValid}`
-              : `${styles.tableRowTextarea} ${styles.tableRowTextareaInvalid}`
+            ? `${styles.tableRowTextarea} ${styles.tableRowTextareaValid}`
+            : `${styles.tableRowTextarea} ${styles.tableRowTextareaInvalid}`
     function handleChange(evt) {
         onChange(evt.target.value)
     }

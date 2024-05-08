@@ -5,7 +5,7 @@ import { chainMethods } from '../../utils/rawTxMaker'
 import { requestJsonRpc } from '../../utils/connect'
 import utils from '../../utils/utils2'
 import config from '../../config'
-import { getPRepRPC } from "../../redux/store/iiss";
+import { getPRepRPC } from '../../redux/store/iiss'
 
 const { nid } = config
 
@@ -28,17 +28,17 @@ const { SET_PREP_SAMPLE: SETPREP } = samples
 
 export default function PrepModal({ prepInfo, isOpen, onClose }) {
     const [prepDetailsForm, setPrepDetailsForm] = useState(initPrepDetailsForm)
-    const [prepRPCData, setPRepRPCData] = useState(null);
-    const [buttonDisabled, setButtonDisabled] = useState(true);
-    const [commissionRateValues, setCommissionRateValues] = useState([]);
-    const [walletResponse, setWalletResponse] = useState(null);
+    const [prepRPCData, setPRepRPCData] = useState(null)
+    const [buttonDisabled, setButtonDisabled] = useState(true)
+    const [commissionRateValues, setCommissionRateValues] = useState([])
+    const [walletResponse, setWalletResponse] = useState(null)
 
     function handlePrepFormSubmit() {
         handleFormSubmit('prep')
     }
 
     function handleCommissionRateSubmit() {
-        handleFormSubmit("commissionRate");
+        handleFormSubmit('commissionRate')
     }
 
     async function handleFormSubmit(type) {
@@ -53,26 +53,26 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
 
                 if (inputData == null) {
                 } else {
-                    txData = setPrep(prepInfo.address, inputData, nid)
+                    txData = await setPrep(prepInfo.address, inputData, nid)
                     console.log('txData')
                     console.log(txData)
                 }
                 break
-            case "commissionRate":
-                inputData = {};
-                commissionRateValues.forEach(item => {
-                    const num = Number(item[3]) * 100;
-                    inputData[item[0]] = "0x" + num.toString(16);
-                });
+            case 'commissionRate':
+                inputData = {}
+                commissionRateValues.forEach((item) => {
+                    const num = Number(item[3]) * 100
+                    inputData[item[0]] = '0x' + num.toString(16)
+                })
                 if (inputData == null) {
                 } else {
                     if (Object.keys(inputData).length > 1) {
-                        txData = initCommissionRate(prepInfo.address, inputData, nid);
+                        txData = await initCommissionRate(prepInfo.address, inputData, nid)
                     } else {
-                        txData = setCommissionRate(prepInfo.address, inputData, nid);
+                        txData = await setCommissionRate(prepInfo.address, inputData, nid)
                     }
                 }
-                break;
+                break
             default:
                 break
         }
@@ -82,11 +82,11 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
             alert('Data for transaction is invalid')
         } else {
             try {
-                const response = await requestJsonRpc(txData.params);
-                setWalletResponse(response);
+                const response = await requestJsonRpc(txData.params)
+                setWalletResponse(response)
             } catch (err) {
-                console.log("error on requestJsonRpc");
-                console.log(err);
+                console.log('error on requestJsonRpc')
+                console.log(err)
             }
         }
     }
@@ -103,25 +103,21 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     }
 
     function handleCommissionRateValues(valuesValidation, values) {
-        setButtonDisabled(!valuesValidation.every(item => item === true));
-        setCommissionRateValues(values);
+        setButtonDisabled(!valuesValidation.every((item) => item === true))
+        setCommissionRateValues(values)
     }
 
     async function getPRepRPCData() {
-        if (
-            prepInfo != null &&
-            prepInfo.address != null &&
-            typeof prepInfo.address == "string"
-        ) {
-            const prepRPC = await getPRepRPC(prepInfo.address);
-            setPRepRPCData(prepRPC);
+        if (prepInfo != null && prepInfo.address != null && typeof prepInfo.address == 'string') {
+            const prepRPC = await getPRepRPC(prepInfo.address)
+            setPRepRPCData(prepRPC)
         }
     }
-    
+
     useEffect(() => {
-        getPRepRPCData();
-    }, [prepInfo]);
-    
+        getPRepRPCData()
+    }, [prepInfo])
+
     return (
         <div>
             {prepInfo != null ? (
@@ -211,47 +207,67 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                                     <div>
                                         <div
                                             style={{
-                                                height: "2px",
-                                                width: "100%",
-                                                backgroundColor: "#d6d3d1",
-                                                marginTop: "20px",
-                                                marginBottom: "20px"
-                                            }}
-                                        ></div>
+                                                height: '2px',
+                                                width: '100%',
+                                                backgroundColor: '#d6d3d1',
+                                                marginTop: '20px',
+                                                marginBottom: '20px',
+                                            }}></div>
                                         {prepRPCData.commissionRate != null &&
-                                                prepRPCData.maxCommissionChangeRate != null &&
-                                                prepRPCData.maxCommissionRate != null ? (
-                                                    <div className={styles.defaultSection}>
-                                                        <CommissionRateComponent
-                                                            title="setCommissionRate"
-                                                            paragraph="This command will allow you to modify the commission rate for your Validator."
-                                                            formItems={[["rate","9.41","Rate",""]]}
-                                                            handleValues={handleCommissionRateValues}
-                                                        />
-                                                        <button
-                                                            className={buttonDisabled ? `${styles.button} ${styles.buttonDisabled}` : `${styles.button}`}
-                                                            onClick={handleCommissionRateSubmit}
-                                                            disabled={buttonDisabled}
-                                                        >Update</button>
-                                                    </div>
-                                                ) : (
-                                                    <div className={styles.defaultSection}>
-                                                        <CommissionRateComponent
-                                                            title="initCommissionRate"
-                                                            paragraph="This is a one time transaction to set the maximum commission rate and maximum commission rate change. You will not be able to change these parameters later. However, you will be able to change the commission rate later."
-                                                            formItems={[
-                                                                ["rate","9.41","Rate:",""],
-                                                                ["maxRate","100","Max Commission Rate:",""],
-                                                                ["maxChangeRate","10","Max Commission Rate Change:",""]]}
-                                                            handleValues={handleCommissionRateValues}
-                                                        />
-                                                        <button
-                                                            className={buttonDisabled ? `${styles.button} ${styles.buttonDisabled}` : `${styles.button}`}
-                                                            onClick={handleCommissionRateSubmit}
-                                                            disabled={buttonDisabled}
-                                                        >Update</button>
-                                                    </div>
-                                                )}
+                                        prepRPCData.maxCommissionChangeRate != null &&
+                                        prepRPCData.maxCommissionRate != null ? (
+                                            <div className={styles.defaultSection}>
+                                                <CommissionRateComponent
+                                                    title="setCommissionRate"
+                                                    paragraph="This command will allow you to modify the commission rate for your Validator."
+                                                    formItems={[['rate', '9.41', 'Rate', '']]}
+                                                    handleValues={handleCommissionRateValues}
+                                                />
+                                                <button
+                                                    className={
+                                                        buttonDisabled
+                                                            ? `${styles.button} ${styles.buttonDisabled}`
+                                                            : `${styles.button}`
+                                                    }
+                                                    onClick={handleCommissionRateSubmit}
+                                                    disabled={buttonDisabled}>
+                                                    Update
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div className={styles.defaultSection}>
+                                                <CommissionRateComponent
+                                                    title="initCommissionRate"
+                                                    paragraph="This is a one time transaction to set the maximum commission rate and maximum commission rate change. You will not be able to change these parameters later. However, you will be able to change the commission rate later."
+                                                    formItems={[
+                                                        ['rate', '9.41', 'Rate:', ''],
+                                                        [
+                                                            'maxRate',
+                                                            '100',
+                                                            'Max Commission Rate:',
+                                                            '',
+                                                        ],
+                                                        [
+                                                            'maxChangeRate',
+                                                            '10',
+                                                            'Max Commission Rate Change:',
+                                                            '',
+                                                        ],
+                                                    ]}
+                                                    handleValues={handleCommissionRateValues}
+                                                />
+                                                <button
+                                                    className={
+                                                        buttonDisabled
+                                                            ? `${styles.button} ${styles.buttonDisabled}`
+                                                            : `${styles.button}`
+                                                    }
+                                                    onClick={handleCommissionRateSubmit}
+                                                    disabled={buttonDisabled}>
+                                                    Update
+                                                </button>
+                                            </div>
+                                        )}
                                         {walletResponse != null ? (
                                             <div className={styles.txResult}>
                                                 <p>Transaction Result:</p>
@@ -271,85 +287,71 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
     )
 }
 
-function CommissionRateComponent({
-  title,
-  paragraph,
-  formItems,
-  handleValues
-}) {
-  const [formItemsState, setFormItemsState] = useState(formItems);
-  const [valuesValidation, setValuesValidation] = useState(
-    Array(formItems.length).fill(false)
-  );
-  function handleChange(evnt, index) {
-    const { value, name } = evnt.target;
-    const parsedValue = parseInt(value * 100);
-    if (
-      !Number.isNaN(parsedValue) &&
-      parsedValue >= 1 &&
-      parsedValue <= 10000
-    ) {
-      setValuesValidation(valuesValidation => {
-        const value2 = Number(value).toFixed(2);
-        const result = Number(value) - Number(value2) > 0 ? false : true;
-        const newState = [...valuesValidation];
-        newState[index] = result;
+function CommissionRateComponent({ title, paragraph, formItems, handleValues }) {
+    const [formItemsState, setFormItemsState] = useState(formItems)
+    const [valuesValidation, setValuesValidation] = useState(Array(formItems.length).fill(false))
+    function handleChange(evnt, index) {
+        const { value, name } = evnt.target
+        const parsedValue = parseInt(value * 100)
+        if (!Number.isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10000) {
+            setValuesValidation((valuesValidation) => {
+                const value2 = Number(value).toFixed(2)
+                const result = Number(value) - Number(value2) > 0 ? false : true
+                const newState = [...valuesValidation]
+                newState[index] = result
 
-        return newState;
-      });
-    } else {
-      setValuesValidation(valuesValidation => {
-        const newState = [...valuesValidation];
-        newState[index] = false;
+                return newState
+            })
+        } else {
+            setValuesValidation((valuesValidation) => {
+                const newState = [...valuesValidation]
+                newState[index] = false
 
-        return newState;
-      });
+                return newState
+            })
+        }
+        setFormItemsState((formItemsState) => {
+            const newState = [...formItemsState]
+            newState[index][3] = value
+
+            return newState
+        })
     }
-    setFormItemsState(formItemsState => {
-      const newState = [...formItemsState];
-      newState[index][3] = value;
 
-      return newState;
-    });
-  }
+    useEffect(() => {
+        handleValues(valuesValidation, formItemsState)
+    }, [valuesValidation, formItemsState])
 
-  useEffect(() => {
-    handleValues(valuesValidation, formItemsState);
-  }, [valuesValidation, formItemsState]);
-
-  return (
-    <div className={styles.defaultSection}>
-      <h2>{title}:</h2>
-      <p>{paragraph}</p>
-      <p>
-        Please enter the values in percent, 0-100, with at most 2 significant
-        figures (ie 0.01%).
-      </p>
-      {formItemsState.map((item, index) => (
-        <div key={`commission-item-${index}`} className={styles.tableRow}>
-          <div className={styles.tableRowLabel}>
-            <p>{item[2]}</p>
-          </div>
-          <input
-            type="text"
-            className={
-              valuesValidation[index]
-                ? `${styles.tableRowInput2} ${styles.inputGreen}`
-                : `${styles.tableRowInput2} ${styles.inputRed}`
-            }
-            placeholder={item[1]}
-            name={item[0]}
-            value={item[3]}
-            onChange={evt => {
-              handleChange(evt, index);
-            }}
-          />
+    return (
+        <div className={styles.defaultSection}>
+            <h2>{title}:</h2>
+            <p>{paragraph}</p>
+            <p>
+                Please enter the values in percent, 0-100, with at most 2 significant figures (ie
+                0.01%).
+            </p>
+            {formItemsState.map((item, index) => (
+                <div key={`commission-item-${index}`} className={styles.tableRow}>
+                    <div className={styles.tableRowLabel}>
+                        <p>{item[2]}</p>
+                    </div>
+                    <input
+                        type="text"
+                        className={
+                            valuesValidation[index]
+                                ? `${styles.tableRowInput2} ${styles.inputGreen}`
+                                : `${styles.tableRowInput2} ${styles.inputRed}`
+                        }
+                        placeholder={item[1]}
+                        name={item[0]}
+                        value={item[3]}
+                        onChange={(evt) => {
+                            handleChange(evt, index)
+                        }}
+                    />
+                </div>
+            ))}
+            <p style={{ fontSize: '0.6rem' }}>smallest value 0.01 biggest value 100</p>
         </div>
-      ))}
-      <p style={{ fontSize: "0.6rem" }}>
-        smallest value 0.01 biggest value 100
-      </p>
-    </div>
-  );
+    )
 }
-

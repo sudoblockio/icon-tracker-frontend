@@ -63,7 +63,7 @@ export default function BondersModal({ bondMap, address, isOpen, onClose }) {
                 inputData = parseBonderFormInputs(bonderForm)
                 if (inputData == null || inputData.length === 0) {
                 } else {
-                    txData = setBonderList(address, inputData, nid)
+                    txData = await setBonderList(address, inputData, nid)
                 }
                 break
             default:
