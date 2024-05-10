@@ -59,6 +59,8 @@ class DetailPage extends Component {
                 this.props.getList[2](query)
                 this.props.getList[3](query)
                 this.props.getList[4](query)
+                if (this.props.getList[5])
+                    this.props.getList[5](query)
             }
             if (this.props.ROUTE === '/transaction') {
                 this.props.tokenTxList && this.props.tokenTxList({ transaction_hash: query })
