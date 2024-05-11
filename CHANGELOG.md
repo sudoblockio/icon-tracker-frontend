@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.1...v0.5.2) (2024-05-11)
+
+
+### Bug Fixes
+
+* btp tracker to gmp tracker ([bed226e](https://github.com/sudoblockio/icon-tracker-frontend/commit/bed226eff2187a783c251c20f4e304bf31f2ea16))
+
 ## [0.5.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.0...v0.5.1) (2024-04-22)
 
 
