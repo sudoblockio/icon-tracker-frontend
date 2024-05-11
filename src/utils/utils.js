@@ -291,7 +291,7 @@ export function makeEventUrl(url, payload) {
   delete payload.count
   delete payload.page
   Object.keys(payload).forEach((key, index) => {
-    result += `?${key}=${payload[key]}`
+    result += `${index === 0 ? '?' : '&'}${key}=${payload[key]}`
   })
   return result
 }
