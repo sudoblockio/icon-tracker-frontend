@@ -200,32 +200,34 @@ function AddContractsBal(props) {
                             <em>ICX</em>
                         </span>
                     </p>
+
                     <div className="unstaking-list">
                         {unstakeList && unstakeList.length !== 0
                             ? unstakeList.map((dataList) => {
-                                  return (
-                                      <p>
-                                          <span className="unstaking-item">
-                                              <em>
-                                                  Target Block Height{' '}
-                                                  {convertNumberToText(
-                                                      IconConverter.toNumber(
-                                                          dataList.unstakeBlockHeight
-                                                      )
-                                                  )}
-                                              </em>
-                                              <span className="balance">
-                                                  {convertNumberToText(
-                                                      convertLoopToIcxDecimal(dataList.unstake)
-                                                  )}
-                                              </span>
-                                              <em>ICX</em>
-                                          </span>
-                                      </p>
-                                  )
-                              })
+                                return (
+                                    <p>
+                                        <span className="unstaking-item">
+                                            <em>
+                                                Target Block Height{' '}
+                                                {convertNumberToText(
+                                                    IconConverter.toNumber(
+                                                        dataList.unstakeBlockHeight
+                                                    )
+                                                )}
+                                            </em>
+                                            <span className="balance">
+                                                {convertNumberToText(
+                                                    convertLoopToIcxDecimal(dataList.unstake)
+                                                )}
+                                            </span>
+                                            <em>ICX</em>
+                                        </span>
+                                    </p>
+                                )
+                            })
                             : ''}
                     </div>
+
                     <p>
                         <span>Voted</span>
                         <span>
