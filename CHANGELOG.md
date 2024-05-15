@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.2...v0.5.3) (2024-05-15)
+
+
+### Bug Fixes
+
+* blockheight fix commit [#451](https://github.com/sudoblockio/icon-tracker-frontend/issues/451) ([e884176](https://github.com/sudoblockio/icon-tracker-frontend/commit/e88417623fe31725292e6d2b854df25e5f3bf8f4))
+
 ## [0.5.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.1...v0.5.2) (2024-05-11)
 
 
