@@ -148,11 +148,13 @@ function AddContractsBal(props) {
         setUnstakeSum(sum)
     }, [unstakeList])
 
+    console.log({ addrBalance, stakeAmt, unstakeSum })
+
     const totalBal =
         Number(addrBond / Math.pow(10, 18)) +
         Number(addrBalance / Math.pow(10, 18)) +
         Number(stakeAmt / Math.pow(10, 18)) +
-        Number(unstakeSum / Math.pow(10, 18))
+        Number(unstakeSum)
 
     return (
         <tr>
