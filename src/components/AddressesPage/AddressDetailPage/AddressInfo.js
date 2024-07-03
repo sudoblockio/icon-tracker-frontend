@@ -8,26 +8,15 @@ import {
   numberWithCommas,
   convertNumberToText,
   isValidNodeType,
-  convertLoopToIcxDecimal,
   getBadgeTitle,
   isUrl,
   addAt,
   addUnregisteredStyle,
-  sortArrOfObjects,
 } from '../../../utils/utils'
 import { SocialMediaType } from '../../../utils/const'
 import NotificationManager from '../../../utils/NotificationManager'
-import {
-  prepList,
-  getPRepsRPC,
-  getBalanceOf,
-  getBalance,
-  getStake,
-  getBondList,
-  getPRep,
-} from '../../../redux/store/iiss'
-// import { contractDetail } from '../../../redux/store/contracts'
-// import { addressTokens } from '../../../redux/store/addresses'
+import { prepList, getPRepsRPC, getPRep, getStake } from '../../../redux/store/iiss'
+
 import { getRevision } from '../../../redux/store/iiss'
 import { chainMethods } from '../../../utils/rawTxMaker'
 import { requestJsonRpc } from '../../../utils/connect'
@@ -35,6 +24,7 @@ import config from '../../../config'
 
 import compStyles from './AddressInfo.module.css'
 import AddrContractsBalRow from '../../shared/AddrContractsBalRow'
+import StakingModal from '../../StakingModal/StakingModal'
 
 const { nid } = config
 const { requestUnjail } = chainMethods
@@ -69,25 +59,12 @@ function AddressInfo(props) {
   const [totalVoted, setTotalVoted] = useState('')
 
   const [isPrepModalOpen, setIsPrepModalOpen] = useState(false)
+  const [isStakingModalOpen, setIsStakingModalOpen] = useState(false)
 
   const [commissionRate, setCommissionRate] = useState(null)
   const [maxCommissionChangeRate, setMaxCommissionChangeRate] = useState(null)
   const [maxCommissionRate, setMaxCommissionRate] = useState(null)
   const [chainCanJail, setChainCanJail] = useState(false)
-
-  // const [icxMore, setIcxMore] = useState(false)
-  // const [tokenMore, setTokenMore] = useState(false)
-
-  // const [addrBalance, setAddrBalance] = useState('')
-  // const [stakeAmt, setStake] = useState('')
-  // const [unstakeList, setUnstakeList] = useState('')
-  // const [addrBond, setAddrBond] = useState('')
-
-  // const [contractDetailResMap, setContractDetailResMap] = useState({})
-  // const [getBalOfMap, setGetBalOfMap] = useState({})
-  // const [addressTokensRes, setAddressTokensRes] = useState(null)
-  // const [isTokenBalLoading, setIsTokenBalLoading] = useState(true)
-  // const [tokens, setTokens] = useState([])
 
   const { wallet, walletAddress } = props
   const { loading, data, error } = wallet
@@ -111,6 +88,15 @@ function AddressInfo(props) {
     setIsPrepModalOpen(!isPrepModalOpen)
   }
 
+  const [stakedAmt, setStakedAmt] = useState(null)
+  // const [unstakeBlockHeight, setUnstakeList] = useState(null);
+
+  const getAddrStake = async (addr) => {
+    const res = await getStake(addr)
+    const stakedAmount = Number(res.stake / Math.pow(10, 18))
+    setStakedAmt(stakedAmount)
+  }
+
   const getPrepSocialMedia = async (address) => {
     const allPreps = await prepList()
     const prepArray = allPreps.filter((preps) => preps.address === address)
@@ -126,7 +112,7 @@ function AddressInfo(props) {
   }
 
   async function executeUnjail() {
-    const txData = await requestUnjail(props.match.params.addressId, nid)
+    const txData = requestUnjail(props.match.params.addressId, nid)
 
     try {
       await requestJsonRpc(txData.params)
@@ -206,104 +192,9 @@ function AddressInfo(props) {
     setChainCanJail(parseInt(rev, 16) >= 25)
   }
 
-  /*
-
-  // function enableUpdateButton() {
-  
-  // }
-
-  const toggleIcxMore = () => {
-    setIcxMore(!icxMore)
+  function toggleStakingModal() {
+    setIsStakingModalOpen((prev) => !prev)
   }
-
-  const toggleTokenMore = () => {
-    setTokenMore(!tokenMore)
-  }
-
-  const getAddrBalance = async () => {
-    const balanceData = await getBalance(props.match.params.addressId)
-    setAddrBalance(balanceData)
-  }
-
-  const getAddrBond = async (addr) => {
-    let payload = { address: `${addr}`, page: 1, count: 10 }
-
-    const res = await getBondList(payload)
-    if (res.length != 0) {
-      setAddrBond(Number(res[0].value) / Math.pow(10, 18))
-    }
-  }
-
-  const getAddrStake = async (addr) => {
-    const res = await getStake(addr)
-    setStake(res.stake)
-    setUnstakeList(res.unstakes)
-  }
-  let unstakeSum = 0
-  if (unstakeList && unstakeList.length !== 0) {
-    unstakeList.map((list) => {
-      unstakeSum += Number(convertLoopToIcxDecimal(list.unstake))
-    })
-  }
-
-  const setTokenBal = async (tokenContract, { index, tokenCount }) => {
-    let res = {}
-    if (contractDetailResMap[tokenContract]) {
-      res = contractDetailResMap[tokenContract]
-    } else {
-      res = await contractDetail(tokenContract)
-      setContractDetailResMap(res)
-      if (!res.data) return
-    }
-
-    let getBalRes = {}
-    if (getBalOfMap[tokenContract]) {
-      getBalRes = getBalOfMap[tokenContract]
-    } else {
-      getBalRes = await getBalanceOf(props.match.params.addressId, tokenContract)
-      setGetBalOfMap((prev) => ({ ...prev, [tokenContract]: getBalRes }))
-    }
-
-    // tokenName[res.data.name] = getBalRes
-    setTokens((prev) => {
-      const oldTokensWithLowerCaseName = [...prev].map((token) => ({
-        ...token,
-        nameLower: token.name.toLowerCase(),
-      }))
-      const sortedTokenArray = sortArrOfObjects(
-        [
-          ...oldTokensWithLowerCaseName,
-          { ...res.data, balance: getBalRes, nameLower: res.data.name.toLowerCase() },
-        ],
-        'nameLower',
-        'asc'
-      )
-
-      return sortedTokenArray
-    })
-  }
-
-  useEffect(() => {
-    if (!addressTokensRes || !tokens) return
-
-    if (tokens.length >= addressTokensRes.data.length - 1) setIsTokenBalLoading(false)
-  }, [tokens, addressTokensRes])
-
-  async function fetchAddressTokens() {
-    let tokenRes = {}
-    if (addressTokensRes) {
-      tokenRes = addressTokensRes
-    } else {
-      tokenRes = await addressTokens(props.match.params.addressId)
-      setAddressTokensRes(tokenRes)
-    }
-
-    tokenRes?.data?.forEach((contract, index) => {
-      setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
-    })
-  }
-
-  */
 
   useEffect(() => {
     if (!props.match.params.addressId) return
@@ -312,13 +203,7 @@ function AddressInfo(props) {
     fetchPrepInfo()
     getPrepSocialMedia(props.match.params.addressId)
     getVoted()
-
-    // getContractName()
-    // getTokens()
-    // fetchAddressTokens()
-    // getAddrBalance()
-    // getAddrStake(props.match.params.addressId)
-    // getAddrBond(props.match.params.addressId)
+    getAddrStake(props.match.params.addressId)
   }, [props.match.params.addressId])
 
   const produced = IconConverter.toNumber(total_blocks)
@@ -329,17 +214,6 @@ function AddressInfo(props) {
     : IconConverter.toNumber(last_updated_block)
   const badge = getBadgeTitle(grade, node_state)
   const jailBadges = getJailBadges(parseInt(jail_flags, 16))
-
-  /*
-
-  // const tokenCxs = tokens ? tokens : [];
-  const totalBal =
-    Number(addrBond / Math.pow(10, 18)) +
-    Number(addrBalance / Math.pow(10, 18)) +
-    Number(stakeAmt / Math.pow(10, 18)) +
-    Number(unstakeSum / Math.pow(10, 18))
-
-  */
 
   const Content = () => {
     if (loading) {
@@ -380,6 +254,27 @@ function AddressInfo(props) {
                   Connected to ICONex
                 </span>
                 <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
+                <span>
+                  <button
+                    onClick={toggleStakingModal}
+                    className={compStyles.button}>
+                    Stake
+                  </button>
+                </span>
+                {stakedAmt > 0 && (
+                  <span>
+                    <button
+                      onClick={() => {
+                        props.history.push(`/voting`)
+                      }}
+                      className={compStyles.button}>
+                      Vote
+                    </button>
+                  </span>
+                )}
+                {isStakingModalOpen && (
+                  <StakingModal onClose={toggleStakingModal} wallet={wallet} />
+                )}
               </p>
             ) : (
               <p className="title">
@@ -548,7 +443,8 @@ function AddressInfo(props) {
                     {is_prep && (
                       <tr className="last">
                         <td>
-                          Commission %<br />
+                          Commission %
+                          <br />
                           (Max Change / Max Rate)
                         </td>
                         <td colSpan="3">
@@ -610,8 +506,12 @@ function AddressInfo(props) {
                           className="show-node-addr"
                           style={
                             is_prep
-                              ? { display: '' }
-                              : { display: 'none' }
+                              ? {
+                                display: '',
+                              }
+                              : {
+                                display: 'none',
+                              }
                           }
                           onClick={clickShowBtn}>
                           Show node address
@@ -622,7 +522,11 @@ function AddressInfo(props) {
                         {!isConnected && <ReportButton address={address} />}
                       </td>
                     </tr>
-                    <tr className="node-addr" style={{ display: showNode }}>
+                    <tr
+                      className="node-addr"
+                      style={{
+                        display: showNode,
+                      }}>
                       <td>Node Address</td>
                       <td colSpan="3">
                         <i className="img node-addr"></i>

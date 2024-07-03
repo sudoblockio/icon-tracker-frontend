@@ -1,0 +1,313 @@
+.innerWrapper {
+    padding: 2em;
+    padding-inline: 2em;
+
+    h4 {
+        font-size: 18px;
+        margin-bottom: 0.3em;
+    }
+
+    .subtext {
+        font-size: 0.9rem;
+        color: rgba(1, 1, 1, 0.6);
+        margin-bottom: 1em;
+    }
+
+    form {
+        border: 1px solid rgba(1, 1, 1, 0.1);
+        padding-inline: 1.6em;
+        border-radius: 10px;
+        background-color: #fffbfb;
+        padding-top: 3em;
+
+        label {
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-bottom: 0.5em;
+        }
+
+        .voted {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1em;
+
+            .empty {
+                content: '';
+            }
+
+            .arrow {
+                display: inline-block;
+                transform: rotate(180deg) !important;
+            }
+
+            .votedData {
+                width: 300px;
+                text-align: left;
+
+                div {
+                    margin-top: 0.5em;
+                    padding-left: 0.5em;
+                    color: #299fac;
+                }
+            }
+
+            span {
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    color: #299fac;
+                }
+            }
+            div {
+                display: flex;
+                font-size: 14px;
+            }
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1em;
+
+            .card {
+                border: 1px solid rgba(1, 1, 1, 0.1);
+                width: 49%;
+                padding: 0.5em;
+                border-radius: 8px;
+
+                .label {
+                    font-size: 0.9rem !important;
+                    color: black;
+                }
+
+                .value {
+                    margin-top: 0.4em;
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    color: #299fac;
+                }
+            }
+
+            .inputWrapper {
+                display: flex;
+                flex-direction: column;
+                width: 49%;
+
+                input {
+                    width: 100%;
+                    border: 1px solid rgba(1, 1, 1, 0.1);
+                    background-color: rgba(186, 186, 186, 0.1);
+                    background-color: white;
+                    height: 40px !important;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .inputWrapper {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+
+            width: 250px;
+            width: 100%;
+
+            input {
+                padding-left: 10px;
+                width: 300px;
+                border: 1px solid rgba(1, 1, 1, 0.1);
+                background-color: rgba(186, 186, 186, 0.1);
+                background-color: white;
+                height: 40px;
+            }
+
+            input::placeholder {
+                color: rgba(1, 1, 1, 0.3);
+            }
+
+            .newPercent {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: rgba(1, 1, 1, 0.7);
+                font-weight: 500;
+            }
+        }
+
+        .error {
+            color: rgb(248, 65, 65);
+            font-size: 0.9rem;
+            margin-top: 0.5em;
+        }
+
+        .sliders {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-bottom: 4em;
+            height: 1.1em;
+            position: relative;
+
+            .sliderLabel {
+                display: inline-flex;
+                flex-direction: column;
+                font-size: 0.9rem;
+                position: absolute;
+                transform: translateX(-50%);
+
+                span {
+                    color: #299fac;
+                    text-align: right;
+                }
+                span.caption {
+                    font-size: 0.7rem;
+                    margin-bottom: 0.2em;
+                }
+                span.value {
+                    font-size: 0.9rem;
+                    font-weight: bold !important;
+                }
+            }
+
+            .votedBlock {
+                position: relative;
+                background-color: #299fac;
+                height: 100%;
+                border-radius: 20px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                z-index: 5;
+                display: inline-flex;
+                align-items: center;
+                padding-left: 0.2em;
+
+                .sliderLabel {
+                    top: 3.5em;
+                }
+
+                .bar {
+                    background-color: #66c4cd;
+                    width: 100%;
+                    height: 0.7em;
+                    border-radius: 20px;
+                }
+            }
+
+            .availBlock {
+                background-color: rgb(109, 109, 109) !important;
+                height: 100%;
+                border-radius: 20px;
+                z-index: 999999 !important;
+                position: absolute;
+                right: 0;
+                top: 0;
+
+                .sliderLabel {
+                    top: 3.5em;
+                    left: 10%;
+                }
+            }
+        }
+
+        .sliderWrapper {
+            .sliderLabel {
+                top: -3.5em;
+            }
+
+            .labels {
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+
+                span {
+                    margin: 0;
+                    color: black;
+                    font-weight: 600;
+                    font-size: 13px;
+                }
+            }
+
+            .slider {
+                height: 100%;
+            }
+
+            .track {
+                height: 100%;
+                background-color: #299fac;
+                border-radius: 20px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .thumb {
+                $size: 22px;
+                width: $size;
+                height: $size;
+                outline: none;
+                cursor: pointer !important;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                top: 103%;
+                background-color: rgb(176, 176, 176) !important;
+                box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.1);
+                z-index: 100 !important;
+            }
+        }
+
+        .sliderWrapper.avail {
+            .track {
+                background-color: grey !important;
+            }
+        }
+    }
+
+    .preFooter {
+        margin-top: 1em;
+        .row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 1.5em;
+
+            .computed {
+                width: 49%;
+                .caption {
+                    margin-bottom: 0.4em;
+                    color: rgba(1, 1, 1, 0.7);
+                }
+                .value {
+                    color: rgba(1, 1, 1, 0.4);
+                }
+            }
+        }
+    }
+
+    .footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 0.5em;
+
+        button {
+            height: 40px;
+            min-width: 150px;
+            color: white;
+            background-color: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #299fac;
+        }
+
+        button:first-child {
+            border: 1px solid #299fac;
+            color: #299fac;
+            background-color: #fff;
+            margin-right: 2em;
+        }
+    }
+}

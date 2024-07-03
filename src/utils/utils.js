@@ -858,3 +858,16 @@ export function sortArrOfObjects(arr, param, type) {
   else if (type === 'asc')
     return arr.sort((a, b) => (a[param] > b[param] ? 1 : b[param] > a[param] ? -1 : 0))
 }
+
+
+export function calculatePercentage(part, whole) {
+  if (typeof part !== 'number' || typeof whole !== 'number' || whole === 0) {
+    return 0;
+  }
+
+  return Number(((truncDecimal(part) / truncDecimal(whole)) * 100).toFixed(2));
+}
+
+function truncDecimal(value) {
+  return Number(value.toFixed(2))
+}
