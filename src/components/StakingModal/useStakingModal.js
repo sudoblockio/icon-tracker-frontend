@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getBondList, getDelegation, getStake } from '../../redux/store/iiss'
+import { getBondList, getDelegation, getStake, getStepPrice } from '../../redux/store/iiss'
 import config from '../../config'
 import scores from '../../utils/rawTxMaker/scores'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
@@ -15,6 +15,10 @@ export function useStakingModal(wallet) {
         totVoted: 0,
 
         stepLimit: 0,
+
+        stepPrice: null,
+        stepLimit: null,
+        unstakingTime: null,
 
         isLoading: true,
         isErrStaking: false,
@@ -33,8 +37,7 @@ export function useStakingModal(wallet) {
             unstakedAmount: prev.unstakedAmount - (newStake - prev.stakedAmount),
             available: prev.balance - prev.newStake,
         }))
-
-        calcStats();
+        calcStats(newStake)
     }
 
     async function handleSubmit(e) {
@@ -45,26 +48,33 @@ export function useStakingModal(wallet) {
             return
         }
 
-        const params = {
-            from: wallet.data.address,
-            to: scores[config.network].governance,
-            nid: config.nid,
-            data: {
-                method: 'setStake',
-                params: {
-                    value: decimalToHex(Number(state.newStake) * Math.pow(10, 18)),
+        try {
+            const params = {
+                from: wallet.data.address,
+                to: scores[config.network].governance,
+                nid: config.nid,
+                data: {
+                    method: 'setStake',
+                    params: {
+                        value: decimalToHex(Number(state.newStake) * Math.pow(10, 18)),
+                    },
                 },
-            },
+            }
+
+            const rawTx = await makeTxCallRPCObj(
+                params.from,
+                params.to,
+                params.data.method,
+                params.data.params,
+                params.nid
+            )
+
+            await requestJsonRpc(rawTx.params)
+        } catch (err) {
+
         }
 
-        const rawTx = await makeTxCallRPCObj(
-            params.from,
-            params.to,
-            params.data.method,
-            params.data.params,
-            params.nid
-        )
-        await requestJsonRpc(rawTx.params)
+
     }
 
     const getAddrStake = async () => {
@@ -96,7 +106,7 @@ export function useStakingModal(wallet) {
     }
 
 
-    const calcStats = async () => {
+    const calcStats = async (stakeAmt) => {
         const params = {
             from: wallet.data.address,
             to: scores[config.network].governance,
@@ -104,10 +114,12 @@ export function useStakingModal(wallet) {
             data: {
                 method: 'setStake',
                 params: {
-                    value: decimalToHex(Number(state.newStake) * Math.pow(10, 18)),
+                    value: decimalToHex(Number(stakeAmt) * Math.pow(10, 18)),
                 },
             },
         }
+
+        const stepPrice = Number(await getStepPrice());
 
         const rawTx = await makeTxCallRPCObj(
             params.from,
@@ -117,7 +129,7 @@ export function useStakingModal(wallet) {
             params.nid
         )
 
-        setState(prev => ({ ...prev, stepLimit: Number(rawTx.params.stepLimit) }))
+        setState(prev => ({ ...prev, stepLimit: Number(rawTx.params.stepLimit), stepPrice: Number(stepPrice / Math.pow(10, 18)) }))
     }
 
     function isNil(value) {
@@ -135,8 +147,6 @@ export function useStakingModal(wallet) {
 
     useEffect(() => {
         if (!wallet) return
-        console.log('wallet', wallet)
-
         Promise.all([getAddrStake(), getAddrDelegation(), getAddrBond()])
             .then((resp) => { })
             .catch((err) => {
@@ -150,6 +160,11 @@ export function useStakingModal(wallet) {
                 }))
             })
     }, [wallet])
+
+    useEffect(() => {
+        // if (!Number(state.stakedAmount)) return;
+        calcStats(state.stakedAmount);
+    }, [state.stakedAmount])
 
     return { state, handleChangeForm, handleSubmit, handleAfterSliderChange }
 }
