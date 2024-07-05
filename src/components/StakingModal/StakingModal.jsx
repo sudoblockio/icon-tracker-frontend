@@ -10,26 +10,31 @@ import { calculatePercentage, formatSeconds } from '../../utils/utils'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
-export default function StakingModal({ wallet, onClose }) {
-    const { state, handleChangeForm, handleSubmit, handleAfterSliderChange } =
-        useStakingModal(wallet)
+function getStyle({ width }) {
+    return { width: `${Number(width)}%`, minWidth: `${Number(width)}%` }
+}
 
-    function truncDecimal(value) {
-        return Number(value.toFixed(2))
-    }
+const formatNumber = (number, decimals) => {
+    return (Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals)
+}
+
+function truncDecimal(value) {
+    return Number(value.toFixed(2))
+}
+
+export default function StakingModal({ wallet, onClose }) {
+    const { state, handleChangeForm, handleSubmit, handleAfterSliderChange }
+        = useStakingModal(wallet)
+
+    const avail = state.balance - state.newStake;
 
     const newStakePercent = calculatePercentage(state.newStake, state.balance)
-    const availPercent = calculatePercentage(state.balance - state.newStake, state.balance)
+    const availPercent = calculatePercentage(avail, state.balance)
     const votedPercent = calculatePercentage(state.totVoted, state.balance)
 
+    const minStakePercent = calculatePercentage(state.minStake, state.balance);
+    console.log("aaa",{minStakePercent})
 
-    function getStyle({ width }) {
-        return { width: `${Number(width)}%`, minWidth: `${Number(width)}%` }
-    }
-
-    const formatNumber = (number, decimals) => {
-        return (Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
-    };
 
 
     return (
@@ -50,18 +55,19 @@ export default function StakingModal({ wallet, onClose }) {
                     </div>
                 ) : (
                     <form onChange={handleChangeForm} onSubmit={handleSubmit}>
-                        {
+                        {state.balance !== null &&
                             <div className={style.sliders}>
                                 {votedPercent > 0 &&
                                     <div className={style.votedBlock} style={getStyle({ width: votedPercent })}>
                                         <div className={style.bar}></div>
                                     </div>
                                 }
-                                {availPercent < 92 && <div className={style.sliderLabel}>
-                                    <span className={style.caption}>Voted</span>
-                                    <span className={style.value}>{votedPercent}%</span>
-                                </div>}
-
+                                {availPercent < 92 &&
+                                    <div className={style.sliderLabel}>
+                                        <span className={style.caption}>Voted</span>
+                                        <span className={style.value}>{votedPercent}%</span>
+                                    </div>
+                                }
 
                                 <div className={style.sliderWrapper} style={{ ...getStyle({ width: 100 - votedPercent }), }}>
                                     <div className={style.sliderLabel} style={{ left: `${newStakePercent}%`, top: '-3.5em' }}>
@@ -89,6 +95,7 @@ export default function StakingModal({ wallet, onClose }) {
                                         max={state.maxStake}
                                     />
                                 </div>
+
                                 {availPercent > 0 &&
                                     <div className={style.availBlock} style={getStyle({ width: availPercent })} ></div>
                                 }
@@ -96,7 +103,6 @@ export default function StakingModal({ wallet, onClose }) {
                                     <span className={style.caption}>Available</span>
                                     <span className={style.value}>  {availPercent}%</span>
                                 </div>
-
                             </div>}
 
 
@@ -117,7 +123,7 @@ export default function StakingModal({ wallet, onClose }) {
                                     value={state.newStakePercent}
                                     type="text"
                                     name="newStakePercent"
-                                    placeholder="Stake Amount"
+                                    placeholder="Stake Percent"
                                 />
                             </div>
                         </div>
@@ -138,17 +144,15 @@ export default function StakingModal({ wallet, onClose }) {
                                     Available  (ICX)
                                 </div>
                                 <div className={style.value}>
-                                    {truncDecimal(state.available)} ICX  ({availPercent}%)
+                                    {truncDecimal(avail)} ICX  ({availPercent}%)
                                 </div>
                             </div>
                         </div>
-
                         {state.isErrStaking && (
                             <div className={style.error}>
                                 Stake amount can't be less than already voted amount
                             </div>
                         )}
-
                     </form>
                 )}
 
@@ -182,13 +186,15 @@ export default function StakingModal({ wallet, onClose }) {
                                     <thead>
                                         <tr>
                                             <th>Target Blockheight</th>
+                                            <th>Amount</th>
                                             <th>Est Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {state.unstakes.map(({ target, timeInSec }) =>
+                                        {state.unstakes.map(({ target, timeInSec, amount }) =>
                                             <tr>
                                                 <td>{target}</td>
+                                                <td>{amount} ICX</td>
                                                 <td>{formatSeconds(timeInSec)}</td>
                                             </tr>
                                         )}

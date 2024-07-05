@@ -1,48 +1,71 @@
 import { useEffect, useState } from 'react'
-import { getBondList, getDelegation, getStake, getStepPrice } from '../../redux/store/iiss'
-import config from '../../config'
-import scores from '../../utils/rawTxMaker/scores'
-import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
-import { requestJsonRpc } from '../../utils/connect'
 
+import config from '../../config'
+
+import scores from '../../utils/rawTxMaker/scores'
+import { requestJsonRpc } from '../../utils/connect'
+import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
+import { getDelegation, getStake, getStepPrice } from '../../redux/store/iiss'
+
+function isNil(value) {
+    return value === null || value === undefined;
+}
 
 export function useStakingModal(wallet) {
     const [state, setState] = useState({
+        balance: null,
+
+        stakedAmount: 0,
+        unstakedAmount: 0,
+        totVoted: 0,
+        unstakes: [],
+        newStake: null,
+
         minStake: 0,
         maxStake: 0,
-        newStake: null,
-        totBonded: 0,
-        totVoted: 0,
-
-        stepLimit: 0,
 
         stepPrice: null,
-        stepLimit: null,
-        unstakes: [],
+        stepLimit: 0,
 
         isLoading: true,
         isErrStaking: false,
     })
 
+    async function getTx() {
+        const params = {
+            from: wallet.data.address,
+            to: scores[config.network].governance,
+            nid: config.nid,
+            data: {
+                method: 'setStake',
+                params: {
+                    value: decimalToHex(Number(state.newStake) * Math.pow(10, 18)),
+                },
+            },
+        }
+        const rawTx = await makeTxCallRPCObj(
+            params.from,
+            params.to,
+            params.data.method,
+            params.data.params,
+            params.nid
+        )
+        return rawTx;
+    }
+
+
     function handleChangeForm(e) {
         let { name, value } = e.target
 
-        if(name === "newStakePercent"){
-            setState(prev => ({...prev, "newStake": (value/100) * state.balance}))
+        if (name === "newStakePercent") {
+            setState(prev => ({ ...prev, "newStake": (value / 100) * state.balance }))
         }
-
 
         setState((prev) => ({ ...prev, [name]: value }))
     }
 
     function handleAfterSliderChange() {
         const newStake = Number(state.newStake)
-        setState((prev) => ({
-            ...prev,
-            stakedAmount: newStake,
-            unstakedAmount: prev.unstakedAmount - (newStake - prev.stakedAmount),
-            available: prev.balance - prev.newStake,
-        }))
         calcStats(newStake)
     }
 
@@ -55,44 +78,29 @@ export function useStakingModal(wallet) {
         }
 
         try {
-            const params = {
-                from: wallet.data.address,
-                to: scores[config.network].governance,
-                nid: config.nid,
-                data: {
-                    method: 'setStake',
-                    params: {
-                        value: decimalToHex(Number(state.newStake) * Math.pow(10, 18)),
-                    },
-                },
-            }
-
-            const rawTx = await makeTxCallRPCObj(
-                params.from,
-                params.to,
-                params.data.method,
-                params.data.params,
-                params.nid
-            )
-
+            const rawTx = await getTx();
             await requestJsonRpc(rawTx.params)
         } catch (err) {
-
+            console.log("Error")
         }
-
-
     }
+
+    const calcStats = async () => {
+        const rawTx = await getTx();
+        const stepPrice = Number(await getStepPrice());
+        setState(prev => ({ ...prev, stepLimit: Number(rawTx.params.stepLimit), stepPrice: Number(stepPrice / Math.pow(10, 18)) }))
+    }
+
 
     const getAddrStake = async () => {
         const res = await getStake(wallet.data.address)
         const stakedAmount = Number(res.stake / Math.pow(10, 18))
 
         const unstakes = res.unstakes.map(item => ({
+            amount: Number(item.unstake / Math.pow(10, 18)),
             target: Number(item.unstakeBlockHeight),
             timeInSec: item.remainingBlocks * 2
         }))
-
-        console.log("aaa", { unstakes })
 
         const unstakedAmount = res.unstakes.reduce(
             (accum, curr) => accum + Number(curr.unstake / Math.pow(10, 18)),
@@ -106,62 +114,9 @@ export function useStakingModal(wallet) {
         const totVoted = Number(res.totalDelegated / Math.pow(10, 18))
         setState((prev) => ({ ...prev, totVoted, minStake: totVoted }))
     }
-
-    const getAddrBond = async () => {
-        let payload = { address: `${wallet.data.address}` }
-
-        const res = await getBondList(payload)
-        if (res.length) {
-            const totBonded = Number(res[0].value) / Math.pow(10, 18)
-            setState((prev) => ({ ...prev, totBonded }))
-        } else {
-            setState((prev) => ({ ...prev, totBonded: 0, bondedPercent: 0 }))
-        }
-    }
-
-
-    const calcStats = async (stakeAmt) => {
-        const params = {
-            from: wallet.data.address,
-            to: scores[config.network].governance,
-            nid: config.nid,
-            data: {
-                method: 'setStake',
-                params: {
-                    value: decimalToHex(Number(stakeAmt) * Math.pow(10, 18)),
-                },
-            },
-        }
-
-        const stepPrice = Number(await getStepPrice());
-
-        const rawTx = await makeTxCallRPCObj(
-            params.from,
-            params.to,
-            params.data.method,
-            params.data.params,
-            params.nid
-        )
-
-        setState(prev => ({ ...prev, stepLimit: Number(rawTx.params.stepLimit), stepPrice: Number(stepPrice / Math.pow(10, 18)) }))
-    }
-
-    function isNil(value) {
-        return value === null || value === undefined;
-    }
-
-
-    useEffect(() => {
-        if (isNil(wallet) || isNil(state.stakedAmount) || isNil(state.unstakedAmount)) return
-
-
-        const balance = Number(wallet.data.available) + state.stakedAmount + state.unstakedAmount
-        setState((prev) => ({ ...prev, newStake: state.stakedAmount, maxStake: balance, balance }))
-    }, [state.stakedAmount, state.unstakedAmount, wallet])
-
     useEffect(() => {
         if (!wallet) return
-        Promise.all([getAddrStake(), getAddrDelegation(), getAddrBond()])
+        Promise.all([getAddrStake(), getAddrDelegation(),])
             .then((resp) => { })
             .catch((err) => {
                 console.log(err)
@@ -169,16 +124,22 @@ export function useStakingModal(wallet) {
             .finally(() => {
                 setState((prev) => ({
                     ...prev,
-                    available: Number(wallet.data.available),
                     isLoading: false,
                 }))
             })
     }, [wallet])
 
     useEffect(() => {
-        if (!Number(state.stakedAmount)) return;
-        calcStats(state.stakedAmount);
-    }, [state.stakedAmount])
+        if (state.balance === null) return;
+        calcStats();
+    }, [state.balance])
+
+    useEffect(() => {
+        if (isNil(wallet) || isNil(state.stakedAmount) || isNil(state.unstakedAmount)) return
+        const balance = Number(wallet.data.available) + state.stakedAmount + state.unstakedAmount
+        setState((prev) => ({ ...prev, newStake: state.stakedAmount, maxStake: balance, balance }))
+    }, [state.stakedAmount, state.unstakedAmount, wallet])
+
 
     return { state, handleChangeForm, handleSubmit, handleAfterSliderChange }
 }
