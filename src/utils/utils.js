@@ -871,3 +871,26 @@ export function calculatePercentage(part, whole) {
 function truncDecimal(value) {
   return Number(value.toFixed(2))
 }
+
+export function formatSeconds(totalSeconds) {
+  const days = Math.floor(totalSeconds / (24 * 3600));
+  const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  let formattedTime = '';
+  if (days > 0) {
+    formattedTime += `${days}d `;
+  }
+  if (hours > 0) {
+    formattedTime += `${hours}h `;
+  }
+  if (minutes > 0) {
+    formattedTime += `${minutes}m `;
+  }
+  // if (seconds > 0 || formattedTime === '') {
+  //   formattedTime += `${seconds}s`;
+  // }
+
+  return formattedTime.trim();
+}

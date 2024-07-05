@@ -18,14 +18,20 @@ export function useStakingModal(wallet) {
 
         stepPrice: null,
         stepLimit: null,
-        unstakingTime: null,
+        unstakes: [],
 
         isLoading: true,
         isErrStaking: false,
     })
 
     function handleChangeForm(e) {
-        const { name, value } = e.target
+        let { name, value } = e.target
+
+        if(name === "newStakePercent"){
+            setState(prev => ({...prev, "newStake": (value/100) * state.balance}))
+        }
+
+
         setState((prev) => ({ ...prev, [name]: value }))
     }
 
@@ -80,11 +86,19 @@ export function useStakingModal(wallet) {
     const getAddrStake = async () => {
         const res = await getStake(wallet.data.address)
         const stakedAmount = Number(res.stake / Math.pow(10, 18))
+
+        const unstakes = res.unstakes.map(item => ({
+            target: Number(item.unstakeBlockHeight),
+            timeInSec: item.remainingBlocks * 2
+        }))
+
+        console.log("aaa", { unstakes })
+
         const unstakedAmount = res.unstakes.reduce(
             (accum, curr) => accum + Number(curr.unstake / Math.pow(10, 18)),
             0
         )
-        setState((prev) => ({ ...prev, stakedAmount, unstakedAmount }))
+        setState((prev) => ({ ...prev, stakedAmount, unstakedAmount, unstakes }))
     }
 
     const getAddrDelegation = async () => {
@@ -162,7 +176,7 @@ export function useStakingModal(wallet) {
     }, [wallet])
 
     useEffect(() => {
-        // if (!Number(state.stakedAmount)) return;
+        if (!Number(state.stakedAmount)) return;
         calcStats(state.stakedAmount);
     }, [state.stakedAmount])
 

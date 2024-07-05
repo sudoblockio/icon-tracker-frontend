@@ -26,45 +26,6 @@
             margin-bottom: 0.5em;
         }
 
-        // .voted {
-        //     display: flex;
-        //     justify-content: space-between;
-        //     align-items: center;
-        //     margin-bottom: 1em;
-
-        //     .empty {
-        //         content: '';
-        //     }
-
-        //     .arrow {
-        //         display: inline-block;
-        //         transform: rotate(180deg) !important;
-        //     }
-
-        //     .votedData {
-        //         width: 300px;
-        //         text-align: left;
-
-        //         div {
-        //             margin-top: 0.5em;
-        //             padding-left: 0.5em;
-        //             color: #299fac;
-        //         }
-        //     }
-
-        //     span {
-        //         svg {
-        //             width: 20px;
-        //             height: 20px;
-        //             color: #299fac;
-        //         }
-        //     }
-        //     div {
-        //         display: flex;
-        //         font-size: 14px;
-        //     }
-        // }
-
         .row {
             display: flex;
             justify-content: space-between;
@@ -146,11 +107,11 @@
             display: flex;
             flex-direction: row;
             width: 100%;
-            
+
             margin-bottom: 4em;
             height: 1.1em;
             position: relative;
-             
+
             border-radius: 20px;
 
             .sliderLabel {
@@ -186,10 +147,6 @@
                 display: inline-flex;
                 align-items: center;
                 padding-left: 0.2em;
-
-                // .sliderLabel {
-                //     top: 3.5em;
-                // }
 
                 .bar {
                     background-color: #66c4cd;
@@ -237,8 +194,6 @@
                 height: 100%;
                 background-color: #299fac;
                 border-radius: 20px;
-                // border-top-left-radius: 0;
-                // border-bottom-left-radius: 0;
             }
 
             .thumb {
@@ -281,6 +236,14 @@
                 }
                 .value {
                     color: rgba(1, 1, 1, 0.4);
+
+                    table {
+                        th {
+                            text-align: left;
+                            font-size: 0.8rem;
+                            padding-bottom: 0.2em;
+                        }
+                    }
                 }
             }
         }

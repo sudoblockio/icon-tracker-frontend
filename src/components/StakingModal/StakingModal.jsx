@@ -6,7 +6,7 @@ import ReactSlider from 'react-slider'
 
 import { useStakingModal } from './useStakingModal'
 import GenericModal from '../GenericModal/genericModal'
-import { calculatePercentage } from '../../utils/utils'
+import { calculatePercentage, formatSeconds } from '../../utils/utils'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -21,7 +21,7 @@ export default function StakingModal({ wallet, onClose }) {
     const newStakePercent = calculatePercentage(state.newStake, state.balance)
     const availPercent = calculatePercentage(state.balance - state.newStake, state.balance)
     const votedPercent = calculatePercentage(state.totVoted, state.balance)
-    // const votedPercent = 10;
+
 
     function getStyle({ width }) {
         return { width: `${Number(width)}%`, minWidth: `${Number(width)}%` }
@@ -29,8 +29,8 @@ export default function StakingModal({ wallet, onClose }) {
 
     const formatNumber = (number, decimals) => {
         return (Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals)).toFixed(decimals);
-      };
-    
+    };
+
 
     return (
         <GenericModal onClose={onClose} isOpen={true}>
@@ -57,11 +57,11 @@ export default function StakingModal({ wallet, onClose }) {
                                         <div className={style.bar}></div>
                                     </div>
                                 }
-                                {availPercent < 92 &&     <div className={style.sliderLabel}>
+                                {availPercent < 92 && <div className={style.sliderLabel}>
                                     <span className={style.caption}>Voted</span>
                                     <span className={style.value}>{votedPercent}%</span>
                                 </div>}
-                             
+
 
                                 <div className={style.sliderWrapper} style={{ ...getStyle({ width: 100 - votedPercent }), }}>
                                     <div className={style.sliderLabel} style={{ left: `${newStakePercent}%`, top: '-3.5em' }}>
@@ -92,7 +92,7 @@ export default function StakingModal({ wallet, onClose }) {
                                 {availPercent > 0 &&
                                     <div className={style.availBlock} style={getStyle({ width: availPercent })} ></div>
                                 }
-                                <div className={style.sliderLabel} style={{left: `${100-availPercent}%`}}>
+                                <div className={style.sliderLabel} style={{ left: `${100 - availPercent}%` }}>
                                     <span className={style.caption}>Available</span>
                                     <span className={style.value}>  {availPercent}%</span>
                                 </div>
@@ -113,9 +113,10 @@ export default function StakingModal({ wallet, onClose }) {
                             <div className={style.inputWrapper}>
                                 <label>Enter the stake %</label>
                                 <input
-                                    value={newStakePercent}
+                                    defaultValue={newStakePercent}
+                                    value={state.newStakePercent}
                                     type="text"
-                                    name="newStake"
+                                    name="newStakePercent"
                                     placeholder="Stake Amount"
                                 />
                             </div>
@@ -163,10 +164,10 @@ export default function StakingModal({ wallet, onClose }) {
                         </div>
                         <div className={clsx(style.computed, style.step)}>
                             <div className={style.caption}>
-                               Estimated Maximum Fee
+                                Estimated Maximum Fee
                             </div>
                             <div className={style.value}>
-                               {formatNumber(state.stepLimit *  state.stepPrice, 8)} ICX
+                                {formatNumber(state.stepLimit * state.stepPrice, 8)} ICX
                             </div>
                         </div>
                     </div>
@@ -177,7 +178,22 @@ export default function StakingModal({ wallet, onClose }) {
                                 Estimated time to Unstake
                             </div>
                             <div className={style.value}>
-                                ------
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Target Blockheight</th>
+                                            <th>Est Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {state.unstakes.map(({ target, timeInSec }) =>
+                                            <tr>
+                                                <td>{target}</td>
+                                                <td>{formatSeconds(timeInSec)}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
