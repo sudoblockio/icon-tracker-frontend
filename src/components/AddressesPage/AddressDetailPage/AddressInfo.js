@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
+// import { Tooltip as ReactTooltip } from "react-tooltip";
+
+
 
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from '../../../components'
 import PrepUpdateModal from '../../../components/PrepUpdateModal/prepUpdateModal'
@@ -15,7 +18,7 @@ import {
 } from '../../../utils/utils'
 import { SocialMediaType } from '../../../utils/const'
 import NotificationManager from '../../../utils/NotificationManager'
-import { prepList, getPRepsRPC, getPRep, getStake } from '../../../redux/store/iiss'
+import { prepList, getPRepsRPC, getPRep, getStake, getBalance } from '../../../redux/store/iiss'
 
 import { getRevision } from '../../../redux/store/iiss'
 import { chainMethods } from '../../../utils/rawTxMaker'
@@ -196,9 +199,18 @@ function AddressInfo(props) {
     setIsStakingModalOpen((prev) => !prev)
   }
 
+  const [availBal, setAvailBal] = useState(0);
+  const [isShowStakingTooltip, setIsShowStakingTooltip] = useState(false);
+  const getAddrBalance = async () => {
+    const balanceData = await getBalance(props.match.params.addressId)
+    setAvailBal(Number(balanceData) / Math.pow(10, 18))
+  }
+  const isDisabledStake = availBal === 0;
+
   useEffect(() => {
     if (!props.match.params.addressId) return
 
+    getAddrBalance();
     getRev()
     fetchPrepInfo()
     getPrepSocialMedia(props.match.params.addressId)
@@ -254,12 +266,18 @@ function AddressInfo(props) {
                   Connected to ICONex
                 </span>
                 <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
-                <span>
+                <span className={compStyles.stakeSpan}>
+                  {isShowStakingTooltip && <div>* Minimum 1CX required to stake</div>}
                   <button
                     onClick={toggleStakingModal}
-                    className={compStyles.button}>
+                    className={compStyles.button}
+                    onMouseOver={() => { setIsShowStakingTooltip(isDisabledStake && true) }}
+                    onMouseOut={() => { setIsShowStakingTooltip(isDisabledStake && false) }}
+                    disabled={isDisabledStake}
+                  >
                     Stake
                   </button>
+
                 </span>
                 {stakedAmt > 0 && (
                   <span>
@@ -365,12 +383,12 @@ function AddressInfo(props) {
                           )}
                           <span
                             className={`active ${node_state === 'Synced'
-                                ? 'on'
-                                : node_state === 'Inactive'
-                                  ? 'off'
-                                  : node_state === 'BlockSync'
-                                    ? 'Active'
-                                    : 'Inactive'
+                              ? 'on'
+                              : node_state === 'Inactive'
+                                ? 'off'
+                                : node_state === 'BlockSync'
+                                  ? 'Active'
+                                  : 'Inactive'
                               }`}>
                             <i></i>
                             {node_state}

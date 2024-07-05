@@ -32,11 +32,6 @@ export default function StakingModal({ wallet, onClose }) {
     const availPercent = calculatePercentage(avail, state.balance)
     const votedPercent = calculatePercentage(state.totVoted, state.balance)
 
-    const minStakePercent = calculatePercentage(state.minStake, state.balance);
-    console.log("aaa",{minStakePercent})
-
-
-
     return (
         <GenericModal onClose={onClose} isOpen={true}>
             <div className={style.innerWrapper}>
