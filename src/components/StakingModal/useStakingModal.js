@@ -6,6 +6,7 @@ import scores from '../../utils/rawTxMaker/scores'
 import { requestJsonRpc } from '../../utils/connect'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
 import { getDelegation, getStake, getStepPrice } from '../../redux/store/iiss'
+import { calculatePercentage } from '../../utils/utils'
 
 function isNil(value) {
     return value === null || value === undefined;
@@ -57,12 +58,36 @@ export function useStakingModal(wallet) {
     function handleChangeForm(e) {
         let { name, value } = e.target
 
+
         if (name === "newStakePercent") {
             setState(prev => ({ ...prev, "newStake": (value / 100) * state.balance }))
         }
 
+        if (name === "newStake") {
+            setState(prev => ({ ...prev, "newStakePercent": calculatePercentage(value, state.balance) }))
+        }
+
         setState((prev) => ({ ...prev, [name]: value }))
     }
+
+    useEffect(() => {
+        const value = state.newStakePercent;
+        if (value < calculatePercentage(state.totVoted, state.balance) || value > 100) {
+            setState(prev => ({ ...prev, isErrStaking: true }))
+        } else {
+            setState(prev => ({ ...prev, isErrStaking: false }))
+        }
+    }, [state.newStakePercent])
+
+    useEffect(() => {
+        const value = state.newStake;
+        if (value <  state.minStake || value > state.maxStake) {
+            setState(prev => ({ ...prev, isErrStaking: true }))
+        } else {
+            setState(prev => ({ ...prev, isErrStaking: false }))
+        }
+    }, [state.newStake])
+
 
     function handleAfterSliderChange() {
         const newStake = Number(state.newStake)

@@ -1,5 +1,5 @@
 .innerWrapper {
-    padding: 2em;
+    padding-block: 1em;
     padding-inline: 2em;
 
     h4 {
@@ -13,12 +13,15 @@
         margin-bottom: 1em;
     }
 
+    
+
     form {
         border: 1px solid rgba(1, 1, 1, 0.1);
         padding-inline: 1.6em;
         border-radius: 10px;
         background-color: #fffbfb;
         padding-top: 3em;
+        padding-bottom: 1em;
 
         label {
             display: inline-block;
@@ -99,7 +102,7 @@
 
         .error {
             color: rgb(248, 65, 65);
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-top: 0.5em;
         }
 
@@ -222,6 +225,7 @@
 
     .preFooter {
         margin-top: 1em;
+        margin-bottom: 4em;
         .row {
             display: flex;
             justify-content: space-between;
@@ -249,28 +253,46 @@
         }
     }
 
+    position: relative;
     .footer {
+        position: absolute;
         display: flex;
         justify-content: flex-end;
-        margin-top: 0.5em;
+        bottom: 0;
 
+
+        width: calc(100% + 20px);
+        margin-left: -59px;
+        margin-bottom: -10px;;
+   
         button {
             height: 40px;
             min-width: 150px;
+            width: 50%;
             color: white;
             background-color: #fff;
             border: 1px solid #e2e2e2;
-            border-radius: 4px;
+            border-radius: 0px;
             font-weight: bold;
             cursor: pointer;
             background-color: #299fac;
+            
         }
 
         button:first-child {
-            border: 1px solid #299fac;
-            color: #299fac;
+            color: #636363;
             background-color: #fff;
-            margin-right: 2em;
+            background-color: #e2e2e2;   
+        }
+
+        button:last-child:hover{
+            background-color: #1b8692;
+        }   
+       
+
+        button:disabled{
+            background-color: rgb(196, 196, 196);
+            pointer-events: none;
         }
     }
 }

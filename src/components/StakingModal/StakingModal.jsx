@@ -26,14 +26,19 @@ export default function StakingModal({ wallet, onClose }) {
     const { state, handleChangeForm, handleSubmit, handleAfterSliderChange }
         = useStakingModal(wallet)
 
-    const avail = state.balance - state.newStake;
+    let avail = state.balance - state.newStake;
+    avail = Math.max(0, avail);
+    avail = Math.min(state.balance - state.totVoted, avail)
 
     const newStakePercent = calculatePercentage(state.newStake, state.balance)
     const availPercent = calculatePercentage(avail, state.balance)
     const votedPercent = calculatePercentage(state.totVoted, state.balance)
 
+   
+   
+
     return (
-        <GenericModal onClose={onClose} isOpen={true}>
+        <GenericModal onClose={onClose} isOpen={true} allowOutsideClick={true}>
             <div className={style.innerWrapper}>
                 <h4>Staking</h4>
                 <div className={style.subtext}>The amount of voted ICX cannot be unstaked</div>
@@ -65,10 +70,13 @@ export default function StakingModal({ wallet, onClose }) {
                                 }
 
                                 <div className={style.sliderWrapper} style={{ ...getStyle({ width: 100 - votedPercent }), }}>
-                                    <div className={style.sliderLabel} style={{ left: `${newStakePercent}%`, top: '-3.5em' }}>
-                                        <span className={style.caption}>Staked</span>
-                                        <span className={style.value}>  {newStakePercent}%</span>
-                                    </div>
+                                    {!state.isErrStaking &&
+                                        <div className={style.sliderLabel} style={{ left: `${newStakePercent}%`, top: '-3.5em' }}>
+                                            <span className={style.caption}>Staked</span>
+                                            <span className={style.value}>  {newStakePercent}%</span>
+                                        </div>
+                                    }
+
                                     <ReactSlider
                                         className={style.slider}
                                         thumbClassName={style.thumb}
@@ -94,10 +102,13 @@ export default function StakingModal({ wallet, onClose }) {
                                 {availPercent > 0 &&
                                     <div className={style.availBlock} style={getStyle({ width: availPercent })} ></div>
                                 }
-                                <div className={style.sliderLabel} style={{ left: `${100 - availPercent}%` }}>
-                                    <span className={style.caption}>Available</span>
-                                    <span className={style.value}>  {availPercent}%</span>
-                                </div>
+                                {!state.isErrStaking
+                                    && <div className={style.sliderLabel} style={{ left: `${100 - availPercent}%` }}>
+                                        <span className={style.caption}>Available</span>
+                                        <span className={style.value}>  {availPercent}%</span>
+                                    </div>
+                                }
+
                             </div>}
 
 
@@ -109,6 +120,7 @@ export default function StakingModal({ wallet, onClose }) {
                                     type="text"
                                     name="newStake"
                                     placeholder="Stake Amount"
+                                    style={{color: state.isErrStaking ? "red": "inherit"}}
                                 />
                             </div>
                             <div className={style.inputWrapper}>
@@ -119,6 +131,7 @@ export default function StakingModal({ wallet, onClose }) {
                                     type="text"
                                     name="newStakePercent"
                                     placeholder="Stake Percent"
+                                    style={{color: state.isErrStaking ? "red": "inherit"}}
                                 />
                             </div>
                         </div>
@@ -145,7 +158,7 @@ export default function StakingModal({ wallet, onClose }) {
                         </div>
                         {state.isErrStaking && (
                             <div className={style.error}>
-                                Stake amount can't be less than already voted amount
+                                Please enter valid stake amount. Stake amount cannot be less than voted amount.
                             </div>
                         )}
                     </form>
@@ -205,7 +218,7 @@ export default function StakingModal({ wallet, onClose }) {
 
                 <div className={style.footer}>
                     <button onClick={onClose}>Cancel</button>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button disabled={state.isErrStaking} onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </GenericModal >
