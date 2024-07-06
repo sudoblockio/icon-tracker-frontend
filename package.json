@@ -36,6 +36,7 @@
     "react-slider": "^2.0.6",
     "react-spinners": "^0.13.8",
     "react-test-renderer": "^16.14.0",
+    "react-toastify": "^7.0.4",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-localstorage": "^0.4.1",

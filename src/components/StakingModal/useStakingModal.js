@@ -7,12 +7,13 @@ import { requestJsonRpc } from '../../utils/connect'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
 import { getDelegation, getStake, getStepPrice } from '../../redux/store/iiss'
 import { calculatePercentage } from '../../utils/utils'
+import { toast } from 'react-toastify'
 
 function isNil(value) {
     return value === null || value === undefined;
 }
 
-export function useStakingModal(wallet) {
+export function useStakingModal(wallet, onClose) {
     const [state, setState] = useState({
         balance: null,
 
@@ -81,7 +82,7 @@ export function useStakingModal(wallet) {
 
     useEffect(() => {
         const value = state.newStake;
-        if (value <  state.minStake || value > state.maxStake) {
+        if (value < state.minStake || value > state.maxStake) {
             setState(prev => ({ ...prev, isErrStaking: true }))
         } else {
             setState(prev => ({ ...prev, isErrStaking: false }))
@@ -105,6 +106,8 @@ export function useStakingModal(wallet) {
         try {
             const rawTx = await getTx();
             await requestJsonRpc(rawTx.params)
+            toast.success("Success")
+            onClose();
         } catch (err) {
             console.log("Error")
         }

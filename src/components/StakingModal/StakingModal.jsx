@@ -24,7 +24,7 @@ function truncDecimal(value) {
 
 export default function StakingModal({ wallet, onClose }) {
     const { state, handleChangeForm, handleSubmit, handleAfterSliderChange }
-        = useStakingModal(wallet)
+        = useStakingModal(wallet, onClose)
 
     let avail = state.balance - state.newStake;
     avail = Math.max(0, avail);
@@ -34,8 +34,8 @@ export default function StakingModal({ wallet, onClose }) {
     const availPercent = calculatePercentage(avail, state.balance)
     const votedPercent = calculatePercentage(state.totVoted, state.balance)
 
-   
-   
+
+
 
     return (
         <GenericModal onClose={onClose} isOpen={true} allowOutsideClick={true}>
@@ -120,7 +120,7 @@ export default function StakingModal({ wallet, onClose }) {
                                     type="text"
                                     name="newStake"
                                     placeholder="Stake Amount"
-                                    style={{color: state.isErrStaking ? "red": "inherit"}}
+                                    style={{ color: state.isErrStaking ? "red" : "inherit" }}
                                 />
                             </div>
                             <div className={style.inputWrapper}>
@@ -131,7 +131,7 @@ export default function StakingModal({ wallet, onClose }) {
                                     type="text"
                                     name="newStakePercent"
                                     placeholder="Stake Percent"
-                                    style={{color: state.isErrStaking ? "red": "inherit"}}
+                                    style={{ color: state.isErrStaking ? "red" : "inherit" }}
                                 />
                             </div>
                         </div>
