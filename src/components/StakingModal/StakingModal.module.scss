@@ -13,8 +13,6 @@
         margin-bottom: 1em;
     }
 
-    
-
     form {
         border: 1px solid rgba(1, 1, 1, 0.1);
         padding-inline: 1.6em;
@@ -230,7 +228,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.9rem;
-            margin-bottom: 1.5em;
+            margin-bottom: 2.5em;
 
             .computed {
                 width: 49%;
@@ -242,6 +240,14 @@
                     color: rgba(1, 1, 1, 0.4);
 
                     table {
+                        width: 200%;
+
+                        th{
+                            min-width: 2em;
+                            max-width: 2em;
+                            // border: 1px solid red;
+                        }
+
                         th {
                             text-align: left;
                             font-size: 0.8rem;
@@ -260,11 +266,10 @@
         justify-content: flex-end;
         bottom: 0;
 
-
         width: calc(100% + 20px);
         margin-left: -59px;
-        margin-bottom: -10px;;
-   
+        margin-bottom: -10px;
+
         button {
             height: 40px;
             min-width: 150px;
@@ -276,21 +281,19 @@
             font-weight: bold;
             cursor: pointer;
             background-color: #299fac;
-            
         }
 
         button:first-child {
             color: #636363;
             background-color: #fff;
-            background-color: #e2e2e2;   
+            background-color: #e2e2e2;
         }
 
-        button:last-child:hover{
+        button:last-child:hover {
             background-color: #1b8692;
-        }   
-       
+        }
 
-        button:disabled{
+        button:disabled {
             background-color: rgb(196, 196, 196);
             pointer-events: none;
         }
