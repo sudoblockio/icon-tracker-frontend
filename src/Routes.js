@@ -21,6 +21,7 @@ import ProposalDetailPage from './pages/ProposalDetailPage'
 import ProposalSubmitPage from './pages/ProposalSubmitPage'
 import TxPage from './pages/TxPage'
 import TraceTransactionPage from './pages/TraceTransactionPage'
+import VotingPage from "./pages/VotingPage"
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
 import { getIsSolo } from './utils/utils'
 import BodyClassName from 'react-body-classname'
@@ -384,6 +385,14 @@ class Routes extends Component {
                                     path="/notfound"
                                     component={NotFoundPage}
                                 />
+
+                                <Route
+                                    path="/voting"
+                                    component={VotingPage}
+                                    onEnter={window.scroll(0, 0)}
+                                    exact
+                                />
+
                                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage} />
                             </Switch>
                         </div>
