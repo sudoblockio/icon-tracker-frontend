@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import styles from './index.module.css'
+import styles from './index.module.scss'
 import { governanceMethods } from '../../utils/rawTxMaker'
 import { requestJsonRpc } from '../../utils/connect'
 import { icxSendTransaction } from '../../redux/api/jsProvider/icx'
@@ -10,6 +10,7 @@ import config from '../../config'
 import { fromUtf8 } from 'web3-utils'
 import GenericModal from '../GenericModal/genericModal'
 import { LoadingComponent } from '../../components'
+import clsx from 'clsx'
 
 // SET THE FOLLOWING FLAG TO true FOR TESTING
 const USE_TESTING_PARAMS = false
@@ -21,8 +22,7 @@ const { submitNetworkProposal } = governanceMethods
 
 function ProposalSubmitPage(props) {
     const { walletAddress } = props
-    console.log('props on create proposal page')
-    console.log(props)
+
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [typeState, setTypeState] = useState('text')
     const [valueState, setValueState] = useState(getContentOfType('text'))
@@ -40,9 +40,6 @@ function ProposalSubmitPage(props) {
     }
 
     function handleTextareaValueChange(newValueState) {
-        console.log('value state change')
-        console.log(typeof newValueState)
-        console.log(newValueState)
         setValueState(newValueState)
     }
 
@@ -51,13 +48,10 @@ function ProposalSubmitPage(props) {
     }
 
     function handleDescriptionChange(evt) {
-        console.log('description changed')
         setDescriptionState(evt.target.value)
     }
 
     function handleTypeChange(evt) {
-        console.log('dropdown change')
-        console.log(evt.target.value)
         setTypeState(evt.target.value)
         setValueState(getContentOfType(evt.target.value))
     }
@@ -123,11 +117,8 @@ function ProposalSubmitPage(props) {
 
             if (walletInfo != null) {
             }
-            console.log('wallet info')
-            console.log(walletInfo)
         }
-        console.log('proposal submit walletAddress')
-        console.log(walletAddress)
+
         if (typeof walletAddress === 'string' && walletAddress !== '') {
             getWalletInfo(walletAddress)
         }
@@ -142,6 +133,8 @@ function ProposalSubmitPage(props) {
                 <div className={styles.title}>
                     <h2>Create Proposal</h2>
                 </div>
+
+
                 <div className={styles.container}>
                     <div className={styles.tableRow}>
                         <div className={styles.titleContainer}>
@@ -181,7 +174,7 @@ function ProposalSubmitPage(props) {
                             <DropdownItem value={typeState} onSelectChange={handleTypeChange} />
                         </div>
                     </div>
-                    <div className={styles.tableRow}>
+                    <div className={clsx(styles.tableRow, styles.valueRow)}>
                         <div className={styles.titleContainer}>
                             <p className={styles.tableRowTitle}>Value</p>
                         </div>
@@ -193,11 +186,19 @@ function ProposalSubmitPage(props) {
                             />
                         </div>
                     </div>
-                    <div className={styles.containerButton}>
-                        <button className={styles.submitButton} onClick={handleSubmitClick}>
-                            Submit
-                        </button>
+
+                    <div className={clsx(styles.tableRow, styles.valueRow)}>
+                        <div className={styles.titleContainer}>
+                        </div>
+                        <div className={styles.containerButton}>
+                            <button className={styles.submitButton} onClick={handleSubmitClick}>
+                                Submit
+                            </button>
+                        </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -209,8 +210,8 @@ function TextAreaValueItem({ value, onChange, borderStyle = null }) {
         borderStyle == null
             ? styles.tableRowTextarea
             : borderStyle === 'green'
-            ? `${styles.tableRowTextarea} ${styles.tableRowTextareaValid}`
-            : `${styles.tableRowTextarea} ${styles.tableRowTextareaInvalid}`
+                ? `${styles.tableRowTextarea} ${styles.tableRowTextareaValid}`
+                : `${styles.tableRowTextarea} ${styles.tableRowTextareaInvalid}`
     function handleChange(evt) {
         onChange(evt.target.value)
     }
@@ -249,8 +250,6 @@ function DropdownItem({ value, onSelectChange }) {
 }
 
 function ResponseModal({ isOpen, onClose, response }) {
-    console.log('response')
-    console.log(response)
     const errorResponse = response.error != null ? response.error.message : ''
     const loading = (errorResponse == null || errorResponse === '') && response.data == null
 
