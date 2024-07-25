@@ -8,7 +8,7 @@ import rootSaga from '../store/sagas/rootSaga'
 import { routerMiddleware } from 'react-router-redux'
 import persistState from 'redux-localstorage'
 
-const logger = createLogger()
+// const logger = createLogger()
 const history = createHistory()
 const routeMiddleware = routerMiddleware(history)
 const sagaMiddleware = createSagaMiddleware()
@@ -18,7 +18,7 @@ const store = createStore(
     composeWithDevTools(
         applyMiddleware(sagaMiddleware),
         applyMiddleware(routeMiddleware),
-        applyMiddleware(logger),
+        // applyMiddleware(logger),
         persistState(null, {
             slicer: () => (state) => {
                 return { storage: state.storage }

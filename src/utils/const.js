@@ -117,6 +117,7 @@ export const POPUP_TYPE = {
     GOVERNANCE: 'governance',
     SPONSOR: 'sponsor',
     VERIFICATION: 'verification',
+    STAKING: 'staking'
 }
 
 export const SEARCH_TYPE = {

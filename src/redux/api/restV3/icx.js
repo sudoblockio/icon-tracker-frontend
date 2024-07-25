@@ -47,8 +47,6 @@ async function makeDebugRequest(params, method, label = 'default', customUrl = '
     walletApi
       .post(`/api/v3d`, param)
       .then((response) => {
-        console.log(`response for ${method}`, response)
-        console.log(typeof response)
         resolve(response)
       })
       .catch((error) => {

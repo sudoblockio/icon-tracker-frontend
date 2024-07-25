@@ -3,6 +3,7 @@ import actionTypes from '../actionTypes/actionTypes'
 import { getState, makeUrl, makeEventUrl } from '../../utils/utils'
 import { REDUX_STEP, INITIAL_STATE } from '../../utils/const'
 import { prefixes } from '../../utils/const'
+import { getEventsByName, getParsedLog } from '../../libs/event-log-parser'
 
 // ACTIONS
 export function contractListAction(payload) {
@@ -185,14 +186,22 @@ export async function contractTokenTxList(payload) {
 }
 
 export async function contractEventLogList(payload) {
-  console.log(payload, 'the cx log payload')
   payload.contractAddr ? (payload.address = payload.contractAddr) : console.log('no contractAddr')
   delete payload.contractAddr
   const trackerApi = await trackerApiInstance()
+
+  /* To display more human readable event log*/
+  const contractData = await trackerApi.get(`${CONTRACTS_PREFIX}/${payload.address}`)
+  const abi = contractData.data.abi;
+  const eventsByName = getEventsByName(abi);
+
   return new Promise((resolve, reject) => {
     trackerApi
       .get(makeEventUrl(`/api/v1/logs`, payload))
       .then((result) => {
+        result.data.forEach(log => {
+          log.parsedLog = getParsedLog(log, eventsByName)
+        })
         resolve(result)
       })
       .catch((error) => {

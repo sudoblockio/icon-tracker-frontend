@@ -858,3 +858,39 @@ export function sortArrOfObjects(arr, param, type) {
   else if (type === 'asc')
     return arr.sort((a, b) => (a[param] > b[param] ? 1 : b[param] > a[param] ? -1 : 0))
 }
+
+
+export function calculatePercentage(part, whole) {
+  if (typeof part !== 'number' || typeof whole !== 'number' || whole === 0) {
+    return 0;
+  }
+
+  return Number(((truncDecimal(part) / truncDecimal(whole)) * 100).toFixed(2));
+}
+
+function truncDecimal(value) {
+  return Number(value.toFixed(2))
+}
+
+export function formatSeconds(totalSeconds) {
+  const days = Math.floor(totalSeconds / (24 * 3600));
+  const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  let formattedTime = '';
+  if (days > 0) {
+    formattedTime += `${days}d `;
+  }
+  if (hours > 0) {
+    formattedTime += `${hours}h `;
+  }
+  if (minutes > 0) {
+    formattedTime += `${minutes}m `;
+  }
+  // if (seconds > 0 || formattedTime === '') {
+  //   formattedTime += `${seconds}s`;
+  // }
+
+  return formattedTime.trim();
+}

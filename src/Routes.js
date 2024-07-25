@@ -25,6 +25,9 @@ import { TX_TYPE, SEARCH_TYPE } from './utils/const'
 import { getIsSolo } from './utils/utils'
 import BodyClassName from 'react-body-classname'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class Routes extends Component {
     constructor(props) {
         super(props)
@@ -42,11 +45,22 @@ class Routes extends Component {
         const isMain = window.location.pathname === '/'
         const isGovernance = window.location.pathname.includes('governance')
         const bodyClassName = isMain ? 'main-back' : isGovernance ? 'main-back' : ''
-        console.log(window.location.pathname.includes('trace'), 'pathname')
+        // console.log(window.location.pathname.includes('trace'), 'pathname')
         return (
             <BodyClassName className={bodyClassName}>
                 <div id="app-root">
                     {/* {isMain && !this.state.isSolo && <Banner />} */}
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={4000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        pauseOnHover
+                        theme="light"
+                    />
                     <div className="root">
                         <div className={`wrap ${isMain ? 'home' : 'sub'}`}>
                             <HeaderContainer />
