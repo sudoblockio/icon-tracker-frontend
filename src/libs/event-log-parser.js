@@ -26,7 +26,7 @@ function getParsedLog(log, eventsByName) {
             let value = item.value;
 
             if (item.type === "int") {
-                if (item.name !== "blockHeight" && item.name !== "block_height") {
+                if (item.name === "amount" || item.name === "rewards") {
                     value = parseFloat(Number(item.value / Math.pow(10, 18)).toFixed(4))
                 } else {
                     value = Number(item.value)
