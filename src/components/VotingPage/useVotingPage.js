@@ -123,8 +123,6 @@ export function useVotingPage(address, history) {
 
     useEffect(() => {
         const toUpdate = { ...state };
-        console.log({ abcd: state.totVotedPercent })
-
         toUpdate.validationErrors = {};
         if (state.totVotedAmt > state.maxVoteAmt) {
             toUpdate.validationErrors["amount"] = {};
@@ -186,6 +184,7 @@ export function useVotingPage(address, history) {
         const { preps, selectedMap } = state
         if (!preps || !selectedMap) return
 
+        console.log({ preps })
         const toUpdatePreps = [...preps]
         for (const prep of toUpdatePreps) {
             if (selectedMap[prep.address]) prep.isChecked = true

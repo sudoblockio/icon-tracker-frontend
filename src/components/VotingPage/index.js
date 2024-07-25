@@ -80,7 +80,7 @@ export default function VotingPage(props) {
                     </span>
 
 
-                    <div className={style.graph}>
+                    {/* <div className={style.graph}>
                         <div className={clsx(style.label, style.top)}>
                             <div>
                                 <span>{delegatedPercent}% Delegated</span>
@@ -96,7 +96,7 @@ export default function VotingPage(props) {
                             </div>
                         </div>
                         <div className={clsx(style.label, style.bottom)}></div>
-                    </div>
+                    </div> */}
 
                     {/* <div className={style.header}>
                         <div>
