@@ -6,7 +6,7 @@ import { IconConverter, IconAmount } from 'icon-sdk-js'
 
 
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from '../../../components'
-import PrepUpdateModal from '../../../components/PrepUpdateModal/prepUpdateModal'
+import PrepUpdateModal from '../../PrepUpdateModal/PrepUpdateModal'
 import {
   numberWithCommas,
   convertNumberToText,
@@ -246,7 +246,7 @@ function AddressInfo(props) {
         <div className="screen0">
           <PrepUpdateModal
             prepInfo={data.prep}
-            isOpen={isPrepModalOpen}
+            isOpen={true}
             onClose={togglePrepModal}
           />
           <div className="wrap-holder">
