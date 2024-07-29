@@ -27,73 +27,73 @@ const { parsePrepFormInputs, samples } = utils
 
 const { SET_PREP_SAMPLE: SETPREP } = samples
 
-const prepDefault = {
-    "details": "http://18.192.152.11/json",
-    "last_updated_block": 32874215,
-    "twitter": null,
-    "telegram": null,
-    "voting_power": 0.0,
-    "unvalidated_sequence_blocks": null,
-    "reward_monthly_usd": 16624.075211291558,
-    "max_commission_change_rate": 40.0,
-    "name": "LisbonNet14",
-    "node_address": "hxb53ba6f051e404419b59bfcee44cb3b15d55850f",
-    "last_updated_timestamp": null,
-    "youtube": null,
-    "wechat": null,
-    "delegated": 569185.8630985916,
-    "bonded": 7.481886154285715e+23,
-    "reward_daily": 1759.720039302589,
-    "max_commission_rate": 95.0,
-    "public_key": "0x02ee8478ce2f93350b200b9c34bb70e5ede6873c990982f088d233ba8050c0bf22",
-    "created_block": 32874215,
-    "facebook": null,
-    "api_endpoint": null,
-    "stake": 0.0,
-    "power": 1.3173744785271631e+24,
-    "reward_daily_usd": 554.1358403763853,
-    "commission_rate": 44.0,
-    "address": "hxb53ba6f051e404419b59bfcee44cb3b15d55850f",
-    "node_state": "Unknown",
-    "created_timestamp": null,
-    "github": null,
-    "metrics_endpoint": null,
-    "irep": 0.0,
-    "sponsored_cps_grants": null,
-    "stakers": 2,
-    "min_double_sign_height": 0,
-    "country": "DEU",
-    "status": "0x0",
-    "logo_256": null,
-    "p2p_endpoint": "18.192.152.11:7100",
-    "server_city": null,
-    "irep_updated_block_height": null,
-    "cps_governance": false,
-    "bonders": 1,
-    "has_public_key": true,
-    "city": "Frankfurt",
-    "penalty": "0x0",
-    "logo_1024": null,
-    "reddit": null,
-    "server_country": null,
-    "total_blocks": 8610883.0,
-    "failure_count": 0,
-    "jail_flags": "0x0",
-    "email": "banana@jinwoo.com",
-    "grade": "0x0",
-    "logo_svg": null,
-    "keybase": null,
-    "server_type": null,
-    "validated_blocks": 8603743.0,
-    "penalties": 0,
-    "unjail_request_height": 0,
-    "website": "http://18.192.152.11",
-    "steemit": null,
-    "voted": 0.0,
-    "reward_monthly": 52791.60117907767
-}
+// const prepDefault = {
+//     "details": "http://18.192.152.11/json",
+//     "last_updated_block": 32874215,
+//     "twitter": null,
+//     "telegram": null,
+//     "voting_power": 0.0,
+//     "unvalidated_sequence_blocks": null,
+//     "reward_monthly_usd": 16624.075211291558,
+//     "max_commission_change_rate": 40.0,
+//     "name": "LisbonNet14",
+//     "node_address": "hxb53ba6f051e404419b59bfcee44cb3b15d55850f",
+//     "last_updated_timestamp": null,
+//     "youtube": null,
+//     "wechat": null,
+//     "delegated": 569185.8630985916,
+//     "bonded": 7.481886154285715e+23,
+//     "reward_daily": 1759.720039302589,
+//     "max_commission_rate": 95.0,
+//     "public_key": "0x02ee8478ce2f93350b200b9c34bb70e5ede6873c990982f088d233ba8050c0bf22",
+//     "created_block": 32874215,
+//     "facebook": null,
+//     "api_endpoint": null,
+//     "stake": 0.0,
+//     "power": 1.3173744785271631e+24,
+//     "reward_daily_usd": 554.1358403763853,
+//     "commission_rate": 44.0,
+//     "address": "hxb53ba6f051e404419b59bfcee44cb3b15d55850f",
+//     "node_state": "Unknown",
+//     "created_timestamp": null,
+//     "github": null,
+//     "metrics_endpoint": null,
+//     "irep": 0.0,
+//     "sponsored_cps_grants": null,
+//     "stakers": 2,
+//     "min_double_sign_height": 0,
+//     "country": "DEU",
+//     "status": "0x0",
+//     "logo_256": null,
+//     "p2p_endpoint": "18.192.152.11:7100",
+//     "server_city": null,
+//     "irep_updated_block_height": null,
+//     "cps_governance": false,
+//     "bonders": 1,
+//     "has_public_key": true,
+//     "city": "Frankfurt",
+//     "penalty": "0x0",
+//     "logo_1024": null,
+//     "reddit": null,
+//     "server_country": null,
+//     "total_blocks": 8610883.0,
+//     "failure_count": 0,
+//     "jail_flags": "0x0",
+//     "email": "banana@jinwoo.com",
+//     "grade": "0x0",
+//     "logo_svg": null,
+//     "keybase": null,
+//     "server_type": null,
+//     "validated_blocks": 8603743.0,
+//     "penalties": 0,
+//     "unjail_request_height": 0,
+//     "website": "http://18.192.152.11",
+//     "steemit": null,
+//     "voted": 0.0,
+//     "reward_monthly": 52791.60117907767
+// }
 
-export default function PrepModal({ prepInfo = prepDefault, isOpen, onClose }) {
+export default function PrepModal({ prepInfo, isOpen, onClose }) {
     const [prepDetailsForm, setPrepDetailsForm] = useState(initPrepDetailsForm)
     const [prepRPCData, setPRepRPCData] = useState(null)
     const [buttonDisabled, setButtonDisabled] = useState(true)
@@ -187,7 +187,7 @@ export default function PrepModal({ prepInfo = prepDefault, isOpen, onClose }) {
 
     return (
         <div>
-            {true ? (
+            {prepInfo != null ? (
                 <GenericModal isOpen={isOpen} onClose={onClose} useSmall={true}>
                     <div>
                         <div className={styles.main}>
@@ -284,19 +284,20 @@ export default function PrepModal({ prepInfo = prepDefault, isOpen, onClose }) {
                                                 marginTop: '20px',
                                                 marginBottom: '20px',
                                             }}></div>
-                                        {! (prepRPCData.commissionRate != null &&
-                                            prepRPCData.maxCommissionChangeRate != null &&
-                                            prepRPCData.maxCommissionRate != null) ? (
-                                            <div className={clsx(styles.defaultSection, styles.commissionUpdateInputRow)}>
-                                                <CommissionRateComponent
-                                                    title="setCommissionRate"
-                                                    paragraph="This command will allow you to modify the commission rate for your Validator."
-                                                    formItems={[['rate', '9.41', 'Rate', '']]}
-                                                    handleValues={handleCommissionRateValues}
-                                                    buttonDisabled={buttonDisabled}
-                                                    handleCommissionRateSubmit={handleCommissionRateSubmit}
-                                                />
-                                                {/* <button
+                                        {
+                                            prepRPCData.commissionRate != null &&
+                                                prepRPCData.maxCommissionChangeRate != null &&
+                                                prepRPCData.maxCommissionRate != null ? (
+                                                <div className={clsx(styles.defaultSection, styles.commissionUpdateInputRow)}>
+                                                    <CommissionRateComponent
+                                                        title="setCommissionRate"
+                                                        paragraph="This command will allow you to modify the commission rate for your Validator."
+                                                        formItems={[['rate', '9.41', 'Rate', '']]}
+                                                        handleValues={handleCommissionRateValues}
+                                                        buttonDisabled={buttonDisabled}
+                                                        handleCommissionRateSubmit={handleCommissionRateSubmit}
+                                                    />
+                                                    {/* <button
                                                     className={
                                                         buttonDisabled
                                                             ? `${styles.button} ${styles.buttonDisabled}`
@@ -306,32 +307,32 @@ export default function PrepModal({ prepInfo = prepDefault, isOpen, onClose }) {
                                                     disabled={buttonDisabled}>
                                                     Update
                                                 </button> */}
-                                            </div>
-                                        ) : (
-                                            <div className={clsx(styles.defaultSection, styles.commissionUpdateInputRow)}>
-                                                <CommissionRateComponent
-                                                    title="initCommissionRate"
-                                                    paragraph="This is a one time transaction to set the maximum commission rate and maximum commission rate change. You will not be able to change these parameters later. However, you will be able to change the commission rate later."
-                                                    formItems={[
-                                                        ['rate', '9.41', 'Rate:', ''],
-                                                        [
-                                                            'maxRate',
-                                                            '100',
-                                                            'Max Commission Rate:',
-                                                            '',
-                                                        ],
-                                                        [
-                                                            'maxChangeRate',
-                                                            '10',
-                                                            'Max Commission Rate Change:',
-                                                            '',
-                                                        ],
-                                                    ]}
-                                                    handleValues={handleCommissionRateValues}
-                                                    buttonDisabled={buttonDisabled}
-                                                    handleCommissionRateSubmit={handleCommissionRateSubmit}
-                                                />
-                                                {/* <button
+                                                </div>
+                                            ) : (
+                                                <div className={clsx(styles.defaultSection, styles.commissionUpdateInputRow)}>
+                                                    <CommissionRateComponent
+                                                        title="initCommissionRate"
+                                                        paragraph="This is a one time transaction to set the maximum commission rate and maximum commission rate change. You will not be able to change these parameters later. However, you will be able to change the commission rate later."
+                                                        formItems={[
+                                                            ['rate', '9.41', 'Rate:', ''],
+                                                            [
+                                                                'maxRate',
+                                                                '100',
+                                                                'Max Commission Rate:',
+                                                                '',
+                                                            ],
+                                                            [
+                                                                'maxChangeRate',
+                                                                '10',
+                                                                'Max Commission Rate Change:',
+                                                                '',
+                                                            ],
+                                                        ]}
+                                                        handleValues={handleCommissionRateValues}
+                                                        buttonDisabled={buttonDisabled}
+                                                        handleCommissionRateSubmit={handleCommissionRateSubmit}
+                                                    />
+                                                    {/* <button
                                                     className={
                                                         buttonDisabled
                                                             ? `${styles.button} ${styles.buttonDisabled}`
@@ -341,8 +342,8 @@ export default function PrepModal({ prepInfo = prepDefault, isOpen, onClose }) {
                                                     disabled={buttonDisabled}>
                                                     Update
                                                 </button> */}
-                                            </div>
-                                        )}
+                                                </div>
+                                            )}
                                         {walletResponse != null ? (
                                             <div className={styles.txResult}>
                                                 <p>Transaction Result:</p>
