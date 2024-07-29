@@ -246,7 +246,7 @@ function AddressInfo(props) {
         <div className="screen0">
           <PrepUpdateModal
             prepInfo={data.prep}
-            isOpen={true}
+            isOpen={isPrepModalOpen}
             onClose={togglePrepModal}
           />
           <div className="wrap-holder">
