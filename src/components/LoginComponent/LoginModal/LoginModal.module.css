@@ -1,160 +1,226 @@
 /* LoginModal component styles */
 .main {
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
+
 .title {
+    color: black;
+    font-size: 1.3rem;
+    margin-top: 1em;
+    margin-bottom: 1.3em;
+
+    h2 {
+        width: 100%;
+        position: relative;
+        span {
+            position: absolute;
+            top: -1em;
+            right: 1em;
+            background-color: rgba(119, 119, 119, 0.2);
+            padding: 0 !important;
+            width: 1.5em;
+            height: 1.5em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
 }
+
 .ledger {
-  font-family: "Lato", sans-serif;
-  min-width: 250px;
-  min-height: 250px;
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  /* align-items: center; */
+    font-family: 'Lato', sans-serif;
+    min-width: 250px;
+    min-height: 250px;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    /* align-items: center; */
+
+    .ledgerSection {
+        display: flex;
+        flex-flow: column;
+        flex: 1;
+        /* align-items: center; */
+        /* justify-content: space-between; */
+        align-self: stretch;
+
+        > p {
+            margin-top: auto;
+            max-width: 250px;
+            text-align: center;
+            color: #000;
+            align-self: center;
+            padding-top: 10px;
+        }
+
+        > img {
+            margin-top: 40px;
+            align-self: center;
+        }
+    }
+
+    .ledgerSectionWallet {
+        max-height: 300px;
+        overflow-y: scroll;
+
+        .ledgerSectionWalletContent {
+            padding: 5px;
+        }
+
+        .ledgerSectionWalletSection {
+            border-bottom: 2px solid grey;
+            margin: 0 10px 0 0;
+            display: flex;
+            flex-flow: row;
+            cursor: pointer;
+            justify-content: space-between;
+            color: #000;
+
+            &:hover {
+                transform: translateY(1px);
+                background-color: #e8e8e8;
+                border-radius: 5px;
+            }
+
+            .ledgerSectionWalletIndex {
+                border-right: 2px solid grey;
+                padding-right: 5px;
+                margin: 5px;
+
+                > p {
+                    margin: 10px 0;
+                }
+            }
+
+            .ledgerSectionWalletAddress {
+                display: flex;
+                flex-flow: row;
+
+                > p {
+                    margin: 5px 0;
+                }
+            }
+
+            .ledgerSectionWalletBalance {
+                font-size: 12px;
+                color: grey;
+                text-align: right;
+                margin-right: 20px;
+
+                > p {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    .ledgerAddressSelected {
+        background-color: #d8d8d8;
+    }
 }
 
-.ledgerSection {
-  display: flex;
-  flex-flow: column;
-  flex: 1;
-  /* align-items: center; */
-  /* justify-content: space-between; */
-  align-self: stretch;
-}
-
-.ledgerSection > p {
-  margin-top: auto;
-  max-width: 250px;
-  text-align: center;
-  color: #000;
-  align-self: center;
-  padding-top: 10px;
-}
-.ledgerSection > img {
-  margin-top: 40px;
-  align-self: center;
-}
-.ledgerSectionWallet {
-  max-height: 300px;
-  overflow-y: scroll;
-}
-
-.ledgerSectionWalletContent {
-  padding: 5px;
-}
-
-.ledgerSectionWalletSection {
-  border-bottom: 2px solid grey;
-  margin: 0px 10px 0px 0px;
-  display: flex;
-  flex-flow: row;
-  cursor: pointer;
-  justify-content: space-between;
-  color: #000;
-}
-.ledgerAddressSelected {
-  background-color: #d8d8d8;
-}
-.ledgerSectionWalletSection:hover {
-  transform: translateY(1px);
-  background-color: #e8e8e8;
-  border-radius: 5px;
-}
-.ledgerSectionWalletIndex {
-  border-right: 2px solid grey;
-  padding-right: 5px;
-  margin: 5px;
-}
-
-.ledgerSectionWalletIndex > p {
-  margin: 10px 0px;
-}
-.ledgerSectionWalletAddress {
-  display: flex;
-  flex-flow: row;
-}
-.ledgerSectionWalletAddress > p {
-  margin: 5px 0px;
-}
-/* .ledger-section-wallet-address > p:first-child { */
-/*   border-right: 2px solid grey; */
-/*   padding-right: 4px; */
-/*   margin-right: 4px; */
-/* } */
-.ledgerSectionWalletBalance {
-  font-size: 12px;
-  color: grey;
-  text-align: right;
-  margin-right: 20px;
-}
-.ledgerSectionWalletBalance > p {
-  margin-top: 0px;
-}
 .ledgerSectionContainerBtn {
-  display: flex;
-  flex-flow: row;
-  justify-content: flex-end;
-  margin: 5px 10px 0px 0px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    margin: 5px 10px 0 0;
+
+    > button {
+        height: 40px;
+        width: 60px;
+        margin-left: 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: #5086bd;
+        color: #fff;
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
 }
-.ledgerSectionContainerBtn > button {
-  height: 40px;
-  width: 60px;
-  margin-left: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: #5086bd;
-  color: #fff;
-}
-.ledgerSectionContainerBtn > button:active {
-  transform: translateY(1px);
-}
+
 .ledgerLogo {
-  height: 100px;
-  width: 100px;
-  pointer-events: none;
+    height: 100px;
+    width: 100px;
+    pointer-events: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: ledger-logo-spin infinite 5s linear;
+    }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .ledgerLogo {
-    animation: ledger-logo-spin infinite 5s linear;
-  }
-}
+
 @keyframes ledger-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
+
 .body {
-}
-.bodySection {
-  display: flex;
-  flex-flow: row;
-  cursor: pointer;
-  align-items: center;
-}
-.bodySection:hover {
-  border: 2px solid black;
-}
-.bodySectionItem {
-  display: flex;
-  flex-flow: row nowrap;
-}
-.bodySectionItemImg > img {
-  height: 50px;
-  margin: 0px 5px;
-}
-.bodySectionItem > p {
-  margin-right: 10px;
-  color: #000;
-}
-.bodySectionItem:first-child {
-  margin-right: auto;
-}
-.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+    padding-bottom: 2em;
+
+    .bodySection {
+        display: flex;
+        flex-flow: column;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        padding: 2em;
+        border-radius: 5px;
+
+        box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.1);
+        width: 18em;
+
+        border: 2px solid rgb(236, 236, 236);
+        transition: border 0.2s;
+
+        &:hover {
+            border-color: #1aaaba;
+        }
+
+        .bodySectionItem {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            &:first-child {
+                height: 80px;
+            }
+
+            > p {
+                text-align: center;
+                color: #000;
+            }
+
+            .bodySectionItemImg {
+                margin: 0 15px;
+                height: 70px;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            &:first-child {
+                margin-bottom: 1.5em;
+            }
+        }
+
+        &:first-child {
+            .bodySectionItemImg {
+                height: 50px;
+            }
+        }
+    }
 }

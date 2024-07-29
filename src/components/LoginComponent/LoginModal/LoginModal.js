@@ -197,32 +197,33 @@ function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin, handleLogi
     return isOpen ? (
         <GenericModal isOpen={isOpen} onClose={closeModal} useSmall={true}>
             <div className={styles.title}>
-                <h2>Login with ICON</h2>
+                <h2>Login <span onClick={closeModal}>&times;</span></h2>
             </div>
             <div className={styles.body}>
                 <div className={styles.bodySection} onClick={handleIconLogin}>
                     <div className={styles.bodySectionItem}>
-                        <p>Login using ICONex | Hana wallet</p>
-                    </div>
-                    <div className={styles.bodySectionItem}>
                         <span className={styles.bodySectionItemImg}>
                             <img alt="" src={hanaImg} />
                         </span>
-                      <span className={styles.bodySectionItemImg}>
+                        <span className={styles.bodySectionItemImg}>
                             <img alt="" src={iconImg} />
-                      </span>
+                        </span>
+                    </div>
+                    <div className={styles.bodySectionItem}>
+                        <p>Login using ICONex / Hana wallet</p>
                     </div>
                 </div>
                 <hr />
                 <div className={styles.bodySection} onClick={handleLedgerLogin}>
                     <div className={styles.bodySectionItem}>
-                        <p>Login using Ledger</p>
-                    </div>
-                    <div className={styles.bodySectionItem}>
                         <span className={styles.bodySectionItemImg}>
                             <img alt="" src={ledgerImg} />
                         </span>
                     </div>
+                    <div className={styles.bodySectionItem}>
+                        <p>Login using Ledger</p>
+                    </div>
+
                 </div>
             </div>
         </GenericModal>
