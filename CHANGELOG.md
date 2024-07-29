@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.3...v0.6.0) (2024-07-29)
+
+
+### Features
+
+* wallet tooling-&gt; stake ([033c210](https://github.com/sudoblockio/icon-tracker-frontend/commit/033c21010ff254cd27bb5f97c5cfcb019b4fb6fb))
+
 ## [0.5.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.2...v0.5.3) (2024-05-15)
 
 
