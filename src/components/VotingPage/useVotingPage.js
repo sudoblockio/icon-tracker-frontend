@@ -7,7 +7,7 @@ import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpe
 import { getDelegation, getStake, getPReps } from '../../redux/store/iiss'
 
 import { requestJsonRpc } from '../../utils/connect'
-import { calculatePercentage } from '../../utils/utils'
+import { calculatePercentage, calculatePercentageWithoutTrunc } from '../../utils/utils'
 import { toast } from 'react-toastify'
 
 function findDelegInPreps(addr, preps) {
@@ -46,13 +46,12 @@ export function useVotingPage(address, history) {
             ...prev,
             selectedMap: {
                 ...prev.selectedMap,
-                [address]: { ...prev.selectedMap[address], voteAmt: Number(amt) },
+                [address]: { ...prev.selectedMap[address], voteAmt: Number(amt), votePercent: calculatePercentageWithoutTrunc(Number(amt), prev.stakedAmount) },
             },
         }))
     }
 
     function handleChangeVotePercent(address, value) {
-        console.log({ address, value })
         setState((prev) => ({
             ...prev,
             selectedMap: {
@@ -158,7 +157,7 @@ export function useVotingPage(address, history) {
                     selectedMap[address] = {
                         ...foundPrep,
                         voteAmt,
-                        votePercent: calculatePercentage(voteAmt, stakedAmount)
+                        votePercent: calculatePercentageWithoutTrunc(voteAmt, stakedAmount)
                     }
                 })
 

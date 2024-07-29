@@ -1,78 +1,122 @@
 .wrapper {
+    padding-top: 80px !important;
+
+    table {
+        width: 100%;
+
+        th,
+        td {
+            text-align: center;
+            padding-block: 10px !important;
+            padding-inline: 1em !important;
+            border-left: 0 !important;
+            border-right: 0 !important;
+        }
+        th:nth-child(1),
+        td:nth-child(1) {
+            max-width: 0.5em !important;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            text-align: left !important;
+        }
+    }
+
     h4 {
-        margin-bottom: 0.6em;
-        font-size: 0.9rem;
-        font-weight: 500;
+        margin-bottom: 1.5em;
+        font-size: 1rem;
+        font-weight: 600;
     }
 
-    .graph {
-        margin-bottom: 2em;
+    .tablesWrapper {
+        $prepWidth: 55%;
 
-        .label{
-            display: flex;
-            justify-content: space-between;
+        display: flex;
+        gap: 2%;
+        width: 100%;
+
+        .tableWrapper {
+            height: 550px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(1, 1, 1, 0.1);
+
+            position: relative;
+            .footer {
+                border-top: 1px solid rgba(1, 1, 1, 0.1);
+                position: absolute;
+                padding-block: 0.5em;
+                width: 100%;
+                padding-inline: 1em;
+                bottom: 0;
+
+                > div:first-child {
+                    color: rgb(158, 158, 158);
+                    font-size: 0.7rem;
+                }
+
+                .total {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .error {
+                        display: flex;
+                        align-items: center;
+
+                        color: red;
+                        font-size: 0.6rem;
+                        margin-top: 0em;
+                        height: 100%;
+                        height: 18px;
+                    }
+
+                    div {
+                        label {
+                            font-size: 0.7rem;
+                        }
+                        span {
+                            font-size: 0.7rem;
+                            margin-left: 0.3em;
+                            font-weight: bold;
+                        }
+                    }
+
+                    button {
+                        height: 25px;
+                        background-color: #299fac;
+                        color: white;
+                        border: 1px solid #e2e2e2;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        width: 60px;
+                        font-size: 0.7rem;
+                        padding: 0 !important;
+                    }
+
+                    button:hover {
+                        background-color: #1b8692;
+                    }
+                }
+            }
         }
 
-        .bar {
-            width: 100%;
-            height: 1.5em;
-            display: flex;
-            margin-block: 0.5em;
+        .prepsWrapper {
+            width: $prepWidth;
 
-            .delegated {
-                background-color: #299fac;
-                height: 100%;
-                border-top-left-radius: 20px;
-                border-bottom-left-radius: 20px;
-            }
-            .nonDelegated {
-                background-color: grey;
-                height: 100%;
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;
+            input[type='text'] {
+                margin-bottom: 0.8em;
+                width: 20em;
             }
         }
-    }
 
-    .btnFab {
-        position: fixed;
-        bottom: 20px;
-        right: 100px;
+        .votedWrapper {
+            width: calc(98% - #{$prepWidth});
 
-        button {
-            background-color: red;
-            width: 4em;
-            height: 4em;
-            border-radius: 50%;
-            border: none;
-            color: white;
-            cursor: pointer;
-
-            span {
-                font-weight: 600;
-            }
-        }
-    }
-
-    .summaryWrapper {
-        margin-bottom: 2em;
-
-        .footer {
-            padding-top: 1em;
-            display: flex;
-            justify-content: flex-end;
-
-            button {
-                height: 40px;
-                min-width: 150px;
-                color: white;
-                background-color: #fff;
-                border: 1px solid #e2e2e2;
-                border-radius: 4px;
-                font-weight: bold;
-                cursor: pointer;
-                background-color: #299fac;
-                margin-top: 1em;
+            .caption {
+                margin-bottom: 0.8em;
             }
         }
     }

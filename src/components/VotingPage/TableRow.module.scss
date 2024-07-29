@@ -1,5 +1,44 @@
-.custom001 {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-  
+.wrapper {
+    .custom001 {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    th,
+    td {
+        em,
+        span {
+            padding-top: 0.1em;
+            text-align: left !important;
+        }
+    }
+
+    .nameRow {
+        display: inline-flex;
+        align-items: center;
+
+        .img {
+            width: 30px;
+            background-image: none;
+
+            img {
+                width: 100%;
+                height: auto;
+                background-size: cover;
+            }
+        }
+
+        .nameAddr {
+            display: inline-flex;
+            flex-direction: column;
+            padding-left: 1em;
+
+            span.addr {
+                color: rgba(1, 1, 1, 0.4);
+                font-size: 0.6rem;
+                padding-top: 5px;
+                padding-left: 4px;
+            }
+        }
+    }
+}

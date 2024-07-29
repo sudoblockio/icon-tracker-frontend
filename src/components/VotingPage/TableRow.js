@@ -113,7 +113,7 @@ class TableRow extends Component {
         const bondedRate = !totalVoted ? 0 : (20 * (bonded / Math.pow(10, 18)).toFixed()) / (prepVoted + bonded / Math.pow(10, 18))
 
         return (
-            <tr>
+            <tr className={styles.wrapper}>
                 {/* <td className="rank">
                     <span>{rank || '-'}</span>
                 </td> */}
@@ -124,7 +124,34 @@ class TableRow extends Component {
                     />
                 </td>
                 <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
-                    <ul className={styles.custom001}>
+                    <span className={styles.nameRow}>
+                        <span className={styles.img}>
+                            {logo_256 ? (
+                                <img
+                                    src={logo_256 ? logo_256 : logo_svg}
+                                    onError={this.onError}
+                                    onLoad={this.loadImage}
+                                    style={this.state.loaded ? {} : { display: 'none' }}
+                                    alt="logo"
+                                />
+                            ) : (
+                                ''
+                            )}
+                        </span>
+                        <span className={styles.nameAddr}>
+                            <span>
+                                {mainBadge} {name}
+                            </span>
+
+                            <span className={styles.addr}>
+                                {address}
+                            </span>
+                        </span>
+                    </span>
+
+
+
+                    {/* <ul className={styles.custom001}>
                         <li>
                             {mainBadge}
                             {jailBadge}
@@ -158,9 +185,23 @@ class TableRow extends Component {
                                 {address}
                             </em>
                         </li>
-                    </ul>
+                    </ul> */}
                 </td>
-                <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td>
+
+
+                {/* <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td> */}
+
+                <td className={'bonded'}>
+                    <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
+                    <br />
+                    <em>{Number(bondedRate * 100).toFixed(1)}%</em>
+                </td>
+
+                <td>
+                    <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
+                    <br />
+                    <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
+                </td>
 
                 <td>
                     {isNaN(commission_rate) && isNaN(max_commission_change_rate) && isNaN(max_commission_rate) ? (
@@ -180,19 +221,13 @@ class TableRow extends Component {
                         </>
                     )}
                 </td>
-                <td>
-                    <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
-                    <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
-                </td>
+                {/* 
                 <td>
                     <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
-                    {/* <em>{Number(votedRate * 100).toFixed(1)}%</em> */}
-                </td>
+                    <em>{Number(votedRate * 100).toFixed(1)}%</em>
+                </td> */}
 
-                <td className={'bonded'}>
-                    <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
-                    <em>{Number(bondedRate * 100).toFixed(1)}%</em>
-                </td>
+
 
 
                 {/* <td>

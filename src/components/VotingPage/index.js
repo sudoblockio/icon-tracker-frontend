@@ -8,7 +8,7 @@ import Checkbox from 'rc-checkbox'
 import { calculatePercentage, numberWithCommas } from '../../utils/utils'
 import { useVotingPage } from './useVotingPage'
 import TableRow from './TableRow'
-import VotingPopup from './VotingPopup'
+import VotedTable from './VotedTable'
 
 export default function VotingPage(props) {
     const { walletAddress } = props
@@ -48,9 +48,14 @@ export default function VotingPage(props) {
     }
 
     const prepsList = state.preps
-    const votedList = Object.entries(state.selectedMap).map(([key, value]) => { return value })
 
-    const delegatedPercent = calculatePercentage(state.totVotedAmt, state.stakedAmount)
+    const votedList = Object.entries(state.selectedMap).map(([key, value]) => { return value })
+    let totVotedAmt = 0;
+    let totVotedPercent = 0;
+    votedList.forEach(item => {
+        totVotedAmt += Number(item.voteAmt)
+        totVotedPercent += Number(item.votePercent)
+    })
 
 
     return (
@@ -58,156 +63,90 @@ export default function VotingPage(props) {
             <div className="screen0">
                 <div className="wrap-holder">
 
-                    {state.isOpenPopup &&
-                        <VotingPopup
-                            updateAvailVoteAmt={updateAvailVoteAmt}
-                            handleChangeVoteAmt={handleChangeVoteAmt}
-                            handleChangeVotePercent={handleChangeVotePercent}
-                            state={state}
-                            handleDeleteVoted={handleDeleteVoted}
-                            onClose={toggleIsOpenPopup}
-                            onSubmit={handleSubmitVoting}
-                        />
-
-                    }
-
-                    <span onClick={toggleIsOpenPopup} className={style.btnFab}>
-                        <button>
-                            <span>
-                                ({votedList.length})
-                            </span>
-                        </button>
-                    </span>
-
-
-                    {/* <div className={style.graph}>
-                        <div className={clsx(style.label, style.top)}>
-                            <div>
-                                <span>{delegatedPercent}% Delegated</span>
-                            </div>
-                            <div>
-                                <span>{100 - delegatedPercent}% Non-delegated</span>
-                            </div>
-                        </div>
-                        <div className={style.bar}>
-                            <div className={style.delegated} style={{ width: `${delegatedPercent}%` }}>
-                            </div>
-                            <div className={style.nonDelegated} style={{ width: `${100 - delegatedPercent}%` }}>
-                            </div>
-                        </div>
-                        <div className={clsx(style.label, style.bottom)}></div>
-                    </div> */}
-
-                    {/* <div className={style.header}>
-                        <div>
-                            <span>Staked Amount</span>
-                            <span>{state.stakedAmount}</span>
-                        </div>
-                        <div>
-                            <span>Total Voted</span>
-                            <span>{state.totVotedAmt}</span>
-                        </div>
-                        <div>
-                            <span>Total Available</span>
-                            <span>{state.totAvailVoteAmt}</span>
-                        </div>
-                    </div> */}
-
-                    {/* <div className={style.summaryWrapper}>
-                        <h4>Selected P-Reps</h4>
-                        <table className="table-typeP">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Vote</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.entries(state.selectedMap).map(([key, value], index) => (
-                                    <>
-                                        <tr className={index === openRow && style.open}>
-                                            <td>{value.name}</td>
-                                            <td>
-                                                <input
-                                                    onFocus={handleInputOnFocus.bind(
-                                                        this,
-                                                        index,
-                                                        value.voteAmt
-                                                    )}
-                                                    onChange={(e) => {
-                                                        const { value: amount } = e.target
-                                                        handleChangeVoteAmt(value.address, amount)
-                                                    }}
-                                                    value={value.voteAmt}
-                                                    type="text"
-                                                    className={clsx('txt-type-search')}
-                                                />
-                                            </td>
-                                        </tr>
-
-                                        {index === openRow && (
-                                            <tr className={style.sliderWrapper}>
-                                                <td></td>
-                                                <td>
-                                                    <ReactSlider
-                                                        className={style.slider}
-                                                        thumbClassName={style.thumb}
-                                                        trackClassName={style.track}
-                                                        renderThumb={(props, state) => {
-                                                            return <div {...props}></div>
-                                                        }}
-                                                        onChange={(result, index) => {
-                                                            handleChangeVoteAmt(
-                                                                value.address,
-                                                                result
-                                                            )
-                                                        }}
-                                                        // onAfterChange={handleAfterSliderChange}
-                                                        value={value.voteAmt}
-                                                        min={0}
-                                                        max={state.currMax}
-                                                    />
-                                                    <div
-                                                        className={clsx(
-                                                            style.labels,
-                                                            style.bottomLabels
-                                                        )}>
-                                                        <span>{0} ICX</span>
-                                                        <span>{state.currMax} ICX</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </>
-                                ))}
-                            </tbody>
-                        </table>
-
-                        <div className={style.footer}>
-                            <button onClick={handleSubmitVoting}>Vote</button>
-                        </div>
-                    </div> */}
-
-                    <div className={style.prepsWrapper}>
-                        {/* <h4>P-Reps </h4> */}
-                        <table className="table-typeP">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Power</th>
-                                    <th>Commision</th>
-                                    <th>Monthly Reward</th>
-                                    <th>Votes</th>
-                                    <th>Bonded /<br />% Bonded</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {prepsList?.map((prep) => <TableRow onChangeCheckbox={onChangeCheckbox} prep={prep} />)}
-                            </tbody>
-                        </table>
+                    <div className={style.header}>
+                        <h4>Voting</h4>
                     </div>
+
+                    <div className={style.tablesWrapper}>
+                        <div className={style.prepsWrapper}>
+                            <input type="text" className="txt-type-search search-type-fix" placeholder='Search P-rep name/address' />
+                            <div className={style.tableWrapper}>
+                                <table className="table-typeP">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th>Bonded /<br />% Bonded</th>
+                                            <th>Monthly Rewards <br /> ICX/USD </th>
+                                            <th>Commision % <br /> (Max Change/Max Rate)</th>
+                                            {/* <th>Votes</th> */}
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {prepsList?.map((prep) => <TableRow onChangeCheckbox={onChangeCheckbox} prep={prep} />)}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div className={style.votedWrapper}>
+                            <div className={style.caption}>
+                                Voted Candidates
+                            </div>
+                            <div className={style.tableWrapper}>
+                                <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
+                                    handleChangeVoteAmt={handleChangeVoteAmt}
+                                    handleChangeVotePercent={handleChangeVotePercent}
+                                    state={state}
+                                    handleDeleteVoted={handleDeleteVoted}
+                                    onClose={toggleIsOpenPopup}
+                                    onSubmit={handleSubmitVoting}
+                                />
+                                <div className={style.footer}>
+                                    <div>Total</div>
+                                    <div className={clsx(style.total)}>
+                                        <div>
+                                            <label>ICX Amount:</label>
+                                            <span>
+                                                {totVotedAmt}
+                                            </span>
+                                            {(state.validationErrors.amount || state.validationErrors.percent) &&
+                                                <div className={style.error}>
+                                                    {
+                                                        state.validationErrors?.amount?.msg
+                                                    }
+                                                </div>}
+
+                                        </div>
+                                        <div>
+                                            <label>Percent:</label>
+                                            <span>
+                                                {totVotedPercent}
+                                            </span>
+                                            {(state.validationErrors.amount || state.validationErrors.percent) &&
+                                                <div className={style.error}>
+                                                    {
+                                                        state.validationErrors?.percent?.msg
+                                                    }
+                                                </div>}
+
+
+                                        </div>
+                                        <div className={style.button}>
+                                            <button onClick={handleSubmitVoting}>Vote</button>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

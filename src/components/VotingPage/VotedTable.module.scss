@@ -1,0 +1,137 @@
+.wrapper {
+    tr.open {
+        td {
+            border-bottom: none;
+            padding-bottom: 0em;
+        }
+    }
+
+    th.voteHeader {
+        position: relative;
+        $padd: 1em;
+
+        span {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        span:last-child {
+            right: $padd;
+        }
+        span:first-child {
+            left: $padd;
+        }
+    }
+
+    .nameRow {
+        display: inline-flex;
+        align-items: center;
+
+        .img {
+            width: 30px;
+            background-image: none;
+
+            img {
+                width: 100%;
+                height: auto;
+                background-size: cover;
+            }
+        }
+
+        .nameAddr {
+            display: inline-flex;
+            flex-direction: column;
+
+            span.addr {
+                color: rgba(1, 1, 1, 0.4);
+                font-size: 0.6rem;
+                padding-top: 5px;
+            }
+        }
+    }
+
+    td .vote.total {
+        padding-top: 2em;
+    }
+
+    td .vote {
+        display: flex;
+        span {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+
+            &:first-child {
+                margin-right: 1em;
+            }
+
+            label {
+                margin-bottom: 0.5em;
+            }
+
+            input {
+                width: 100%;
+            }
+        }
+
+        span:first-child {
+            width: 60%;
+        }
+    }
+
+    .sliderWrapper {
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+
+            span {
+                margin: 0;
+                color: black;
+                font-weight: 600;
+                font-size: 13px;
+            }
+        }
+
+        .bottomLabels {
+            top: 10px;
+        }
+
+        .topLabels {
+            top: -10px;
+            span {
+                font-weight: 500;
+            }
+        }
+
+        .slider {
+            height: 0.6em;
+        }
+
+        .track {
+            height: 100%;
+            background-color: #299fac;
+            border-radius: 5px;
+        }
+
+        .thumb {
+            $size: 15px;
+            width: $size;
+            height: $size;
+            outline: none;
+            cursor: pointer !important;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            position: relative;
+            top: -70%;
+
+            background-color: white;
+            border: 2px solid #299fac;
+
+            z-index: 999999 !important;
+        }
+    }
+}
