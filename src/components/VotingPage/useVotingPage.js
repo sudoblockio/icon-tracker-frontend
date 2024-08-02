@@ -4,11 +4,12 @@ import config from '../../config'
 import scores from '../../utils/rawTxMaker/scores'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
 
-import { getDelegation, getStake, getPReps } from '../../redux/store/iiss'
+import { getDelegation, getStake, getPReps, getPRepsRPC } from '../../redux/store/iiss'
 
 import { requestJsonRpc } from '../../utils/connect'
-import { calculatePercentage, calculatePercentageWithoutTrunc } from '../../utils/utils'
+import { calculatePercentageWithoutTrunc } from '../../utils/utils'
 import { toast } from 'react-toastify'
+import { IconConverter, IconAmount } from 'icon-sdk-js'
 
 function findDelegInPreps(addr, preps) {
     return preps.find((f) => f.address === addr)
@@ -25,8 +26,47 @@ export function useVotingPage(address, history) {
         isOpenPopup: false,
         validationErrors: { amount: null, percent: null },
 
+        sortKey: "bond_percent",
+        sortOrder: "-",
+
+        isLoadingPreps: false,
         delegatedOriginal: [],
     })
+
+
+
+
+    async function handleClickHeader(sortKey) {
+        function getNewSortOrder(sortKey) {
+            if (sortKey === state.sortKey) {
+                if (state.sortOrder === "-") {
+                    return ''
+                } else {
+                    return '-'
+                }
+            } else {
+                return '-'
+            }
+        }
+
+        setState(prev => ({ ...prev, isLoadingPreps: true }))
+
+        try {
+            const newSortOrder = getNewSortOrder(sortKey);
+            const newSortKey = `${newSortOrder}${sortKey}`
+
+            // console.log({ sortKey, stateKey: state.sortKey, stateOrder: state.sortOrder, newSortOrder, newSortKey })
+
+            const query = { sort: newSortKey }
+            const resp = await getPReps(query);
+
+            setState(prev => ({ ...prev, preps: resp.data, sortKey, sortOrder: newSortOrder }))
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setState(prev => ({ ...prev, isLoadingPreps: false }))
+        }
+    }
 
     function toggleIsOpenPopup() {
         setState(prev => ({ ...prev, isOpenPopup: !prev.isOpenPopup }))
@@ -140,11 +180,22 @@ export function useVotingPage(address, history) {
     }, [state.totVotedAmt, state.totVotedPercent])
 
 
+
+
     useEffect(() => {
         async function init() {
             try {
                 const selectedMap = {}
+
+                setState(prev => ({ ...prev, isLoadingPreps: true }))
+
                 const respPreps = await getPReps()
+                const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
+
+                const totalVoted = !totalVotedLoop ?
+                    0 :
+                    IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+
                 const { data: dataPreps } = respPreps
                 const delegationData = await getDelegation({ address })
                 const dataStake = await getStake(address)
@@ -170,6 +221,8 @@ export function useVotingPage(address, history) {
                     totAvailVoteAmt: stakedAmount,
                     totVotedAmt: 0,
                     stakedAmount,
+                    totalVoted,
+                    isLoadingPreps: false
                 }))
             } catch (err) {
                 console.log(err)
@@ -183,7 +236,6 @@ export function useVotingPage(address, history) {
         const { preps, selectedMap } = state
         if (!preps || !selectedMap) return
 
-        console.log({ preps })
         const toUpdatePreps = [...preps]
         for (const prep of toUpdatePreps) {
             if (selectedMap[prep.address]) prep.isChecked = true
@@ -226,6 +278,7 @@ export function useVotingPage(address, history) {
         handleSubmitVoting,
         toggleIsOpenPopup,
         handleChangeVotePercent,
-        handleDeleteVoted
+        handleDeleteVoted,
+        handleClickHeader
     }
 }

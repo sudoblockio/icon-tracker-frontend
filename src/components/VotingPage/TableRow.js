@@ -4,6 +4,7 @@ import { IconConverter, IconAmount } from 'icon-sdk-js'
 
 import styles from "./TableRow.module.scss"
 import Checkbox from "rc-checkbox"
+import clsx from "clsx"
 
 
 class TableRow extends Component {
@@ -112,6 +113,9 @@ class TableRow extends Component {
         const rank = index + 1
         const bondedRate = !totalVoted ? 0 : (20 * (bonded / Math.pow(10, 18)).toFixed()) / (prepVoted + bonded / Math.pow(10, 18))
 
+        const { bond_percent } = prep;
+
+
         return (
             <tr className={styles.wrapper}>
                 {/* <td className="rank">
@@ -123,6 +127,7 @@ class TableRow extends Component {
                         checked={prep.isChecked}
                     />
                 </td>
+
                 <td className={Number(grade) > 2 || grade === '0x3' ? 'black' : 'on'}>
                     <span className={styles.nameRow}>
                         <span className={styles.img}>
@@ -135,72 +140,28 @@ class TableRow extends Component {
                                     alt="logo"
                                 />
                             ) : (
-                                ''
+                                <div className={styles.defaultImage}></div>
                             )}
                         </span>
                         <span className={styles.nameAddr}>
                             <span>
-                                {mainBadge} {name}
+                                {mainBadge}
+                            </span>
+                            <span className={clsx(styles.name)}>
+                                {name}
                             </span>
 
-                            <span className={styles.addr}>
+                            <span className={clsx(styles.addr, "ellipsis pointer")}>
                                 {address}
                             </span>
                         </span>
                     </span>
-
-
-
-                    {/* <ul className={styles.custom001}>
-                        <li>
-                            {mainBadge}
-                            {jailBadge}
-                        </li>
-                        <li>
-                            {logo_256 ? (
-                                <img
-                                    src={logo_256 ? logo_256 : logo_svg}
-                                    onError={this.onError}
-                                    onLoad={this.loadImage}
-                                    style={this.state.loaded ? {} : { display: 'none' }}
-                                    alt="logo"
-                                />
-                            ) : (
-                                ''
-                            )}
-                        </li>
-                        <li>
-                            <span
-                                className="ellipsis pointer"
-                                onClick={() => {
-                                    this.goAddress(address)
-                                }}>
-                                {name}
-                            </span>
-                            <em
-                                className="ellipsis pointer"
-                                onClick={() => {
-                                    this.goAddress(address)
-                                }}>
-                                {address}
-                            </em>
-                        </li>
-                    </ul> */}
                 </td>
-
-
-                {/* <td>{numberWithCommas(Number(power / Math.pow(10, 18)).toFixed())}</td> */}
 
                 <td className={'bonded'}>
                     <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
                     <br />
-                    <em>{Number(bondedRate * 100).toFixed(1)}%</em>
-                </td>
-
-                <td>
-                    <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
-                    <br />
-                    <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
+                    <em>{bond_percent.toFixed(2)}%</em>
                 </td>
 
                 <td>
@@ -221,33 +182,20 @@ class TableRow extends Component {
                         </>
                     )}
                 </td>
-                {/* 
+
+                <td>
+                    <span>{numberWithCommas(Number(reward_monthly).toFixed())}</span>
+                    <br />
+                    <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
+                </td>
+
+
+
                 <td>
                     <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
                     <em>{Number(votedRate * 100).toFixed(1)}%</em>
-                </td> */}
-
-
-
-
-                {/* <td>
-                    {cps_governance ? (sponsored_cps_grants === 0 || sponsored_cps_grants === null ? '✓' : sponsored_cps_grants) : '-'}
-                </td> */}
-                {/* <td>
-                    <span>{productivity !== 'None' ? productivity : '0.00%'}</span>
-                    <em>
-                        {numberWithCommas(Number(validated_blocks))}/ {' '}
-                        {numberWithCommas(Number(total_blocks))}
-                    </em>
                 </td>
-              
-                {!blackChecked && (
-                    <td>
-                        <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
-                        <em>{Number(votedRate * 100).toFixed(1)}%</em>
-                    </td>
-                )} */}
-            </tr>
+            </tr >
         )
     }
 }

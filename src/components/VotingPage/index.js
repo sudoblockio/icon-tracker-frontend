@@ -1,14 +1,22 @@
-import { useEffect, useState } from 'react'
 import style from './VotingPage.module.scss'
 
 import clsx from 'clsx'
-import ReactSlider from 'react-slider'
-import Checkbox from 'rc-checkbox'
 
-import { calculatePercentage, numberWithCommas } from '../../utils/utils'
-import { useVotingPage } from './useVotingPage'
 import TableRow from './TableRow'
 import VotedTable from './VotedTable'
+
+import { useVotingPage } from './useVotingPage'
+import ClipLoader from 'react-spinners/ClipLoader'
+
+import { IoChevronUp, IoChevronDown } from "react-icons/io5";
+
+
+const TABLE_HEADERS = [
+    { name: ["Name"], sortKey: "name", },
+    { name: ["Bonded", "%Bonded"], sortKey: "bond_percent" },
+    { name: ["Commission %", "(Max Change/Max Rate)"], sortKey: "commission_rate" },
+    { name: ["Monthly Rewards", "ICX/USD"] },
+    { name: ["Votes"] }]
 
 export default function VotingPage(props) {
     const { walletAddress } = props
@@ -20,14 +28,9 @@ export default function VotingPage(props) {
         updateAvailVoteAmt,
         handleSubmitVoting,
         toggleIsOpenPopup,
-        handleDeleteVoted
+        handleDeleteVoted,
+        handleClickHeader
     } = useVotingPage(walletAddress, props.history)
-
-    const [openRow, setOpenRow] = useState(null)
-
-    const convert = (hex) => {
-        return numberWithCommas(Number(hex / Math.pow(10, 18)).toFixed())
-    }
 
     const isConnected = walletAddress.length > 0
     if (!isConnected) {
@@ -37,7 +40,6 @@ export default function VotingPage(props) {
 
 
     function handleInputOnFocus(index, votedAmt) {
-        setOpenRow(index)
         updateAvailVoteAmt(Number(votedAmt))
     }
 
@@ -57,12 +59,10 @@ export default function VotingPage(props) {
         totVotedPercent += Number(item.votePercent)
     })
 
-
     return (
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
                 <div className="wrap-holder">
-
                     <div className={style.header}>
                         <h4>Voting</h4>
                     </div>
@@ -72,20 +72,47 @@ export default function VotingPage(props) {
                             <input type="text" className="txt-type-search search-type-fix" placeholder='Search P-rep name/address' />
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Bonded /<br />% Bonded</th>
-                                            <th>Monthly Rewards <br /> ICX/USD </th>
-                                            <th>Commision % <br /> (Max Change/Max Rate)</th>
-                                            {/* <th>Votes</th> */}
-                                        </tr>
-                                    </thead>
+                                    {state.isLoadingPreps ?
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                minHeight: "500px"
+                                            }}>
+                                            <ClipLoader size={30} color="#299fac" />
+                                        </div>
+                                        :
+                                        <>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    {
+                                                        TABLE_HEADERS.map(({ name, sortKey }) =>
+                                                            <th
+                                                                onClick={sortKey ? handleClickHeader.bind(this, sortKey) : null}
+                                                                className={clsx(sortKey && "pointer")}
+                                                            >
+                                                                {name.map(n => <> {n} <br /> </>)}
+                                                                {sortKey === state.sortKey && <>
+                                                                    {state.sortOrder === "" ? <IoChevronUp /> : <IoChevronDown />}
+                                                                </>}
+                                                            </th>)
+                                                    }
+                                                </tr>
+                                            </thead>
 
-                                    <tbody>
-                                        {prepsList?.map((prep) => <TableRow onChangeCheckbox={onChangeCheckbox} prep={prep} />)}
-                                    </tbody>
+                                            <tbody>
+                                                {prepsList?.map((prep) =>
+                                                    <TableRow
+                                                        totalVoted={state.totalVoted}
+                                                        onChangeCheckbox={onChangeCheckbox}
+                                                        prep={prep}
+                                                    />
+                                                )}
+                                            </tbody>
+                                        </>}
+
                                 </table>
                             </div>
                         </div>
@@ -137,9 +164,6 @@ export default function VotingPage(props) {
                                             <button onClick={handleSubmitVoting}>Vote</button>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
 
@@ -149,6 +173,6 @@ export default function VotingPage(props) {
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

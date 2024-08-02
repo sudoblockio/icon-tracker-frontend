@@ -4,6 +4,13 @@
         flex-flow: row nowrap;
     }
 
+    .defaultImage {
+        width: 2.5em;
+        height: 2.5em;
+        background-color: rgb(220, 220, 220);
+        border-radius: 50%;
+    }
+
     th,
     td {
         em,
@@ -11,6 +18,10 @@
             padding-top: 0.1em;
             text-align: left !important;
         }
+    }
+
+    td:nth-child(2) {
+        max-width: 18em;
     }
 
     .nameRow {
@@ -33,11 +44,14 @@
             flex-direction: column;
             padding-left: 1em;
 
+            span.name {
+                padding-top: 5px;
+            }
             span.addr {
                 color: rgba(1, 1, 1, 0.4);
                 font-size: 0.6rem;
                 padding-top: 5px;
-                padding-left: 4px;
+                width: 15em;
             }
         }
     }

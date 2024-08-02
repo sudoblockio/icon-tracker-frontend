@@ -266,7 +266,7 @@ function AddressInfo(props) {
                   Connected to ICONex
                 </span>
                 <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
-                
+
                 <span className={compStyles.stakeSpan}>
                   {isShowStakingTooltip && <div>* Minimum 1CX required to stake</div>}
                   <button
