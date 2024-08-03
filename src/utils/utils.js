@@ -867,6 +867,13 @@ export function calculatePercentage(part, whole) {
 
   return Number(((truncDecimal(part) / truncDecimal(whole)) * 100).toFixed(2));
 }
+export function calculatePercentageWithoutTrunc(part, whole) {
+  if (typeof part !== 'number' || typeof whole !== 'number' || whole === 0) {
+    return 0;
+  }
+
+  return Number((((part) / (whole)) * 100));
+}
 
 function truncDecimal(value) {
   return Number(value.toFixed(2))

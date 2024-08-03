@@ -21,9 +21,12 @@ import ProposalDetailPage from './pages/ProposalDetailPage'
 import ProposalSubmitPage from './pages/ProposalSubmitPage'
 import TxPage from './pages/TxPage'
 import TraceTransactionPage from './pages/TraceTransactionPage'
+import VotingPage from "./pages/VotingPage"
 import { TX_TYPE, SEARCH_TYPE } from './utils/const'
 import { getIsSolo } from './utils/utils'
 import BodyClassName from 'react-body-classname'
+
+// import VotingPage from './pages/VotingPage'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,6 +90,13 @@ class Routes extends Component {
                                     onEnter={window.scroll(0, 0)}
                                     path="/address/:addressId"
                                     component={AddressDetailPage}
+                                    exact
+                                />
+
+                                <Route
+                                    onEnter={window.scroll(0, 0)}
+                                    path="/voting"
+                                    component={VotingPage}
                                     exact
                                 />
 
@@ -384,6 +394,14 @@ class Routes extends Component {
                                     path="/notfound"
                                     component={NotFoundPage}
                                 />
+
+                                <Route
+                                    path="/voting"
+                                    component={VotingPage}
+                                    onEnter={window.scroll(0, 0)}
+                                    exact
+                                />
+
                                 <Route onEnter={window.scroll(0, 0)} component={NotFoundPage} />
                             </Switch>
                         </div>

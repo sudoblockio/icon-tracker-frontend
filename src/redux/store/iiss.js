@@ -159,11 +159,12 @@ export async function prepList(grade) {
   });
 }
 
-export async function getPReps() {
+export async function getPReps(query) {
   const trackerApi = await trackerApiInstance();
+  console.log({ query })
   return new Promise((resolve, reject) => {
     trackerApi
-      .get(`/api/v1/governance/preps`)
+      .get(`/api/v1/governance/preps`, { params: query })
       .then(result => {
         resolve(result);
       })

@@ -25,6 +25,8 @@ import HeaderContainer from './CommonPage/HeaderContainer'
 import NotFoundPageContainer from './CommonPage/NotFoundPageContainer'
 import TxPageContainer from './CommonPage/TxPageContainer'
 
+import VotingPageContainer from './VotingPage/VotingPageContainer'
+
 export {
     MainPageContainer,
     AddressListPageContainer,
@@ -45,4 +47,5 @@ export {
     ProposalListPageContainer,
     ProposalDetailPageContainer,
     ProposalSubmitPageContainer,
+    VotingPageContainer
 }

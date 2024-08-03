@@ -127,7 +127,8 @@ export function useStakingModal(wallet, onClose) {
         const unstakes = res.unstakes.map(item => ({
             amount: Number(item.unstake / Math.pow(10, 18)),
             target: Number(item.unstakeBlockHeight),
-            timeInSec: item.remainingBlocks * 2
+            timeInSec: Number(item.remainingBlocks) * 2,
+            remainingBlocks: Number(item.remainingBlocks)
         }))
 
         const unstakedAmount = res.unstakes.reduce(
