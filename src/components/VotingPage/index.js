@@ -29,7 +29,8 @@ export default function VotingPage(props) {
         handleSubmitVoting,
         toggleIsOpenPopup,
         handleDeleteVoted,
-        handleClickHeader
+        handleClickHeader,
+        handleChangeSearch
     } = useVotingPage(walletAddress, props.history)
 
     const isConnected = walletAddress.length > 0
@@ -50,13 +51,14 @@ export default function VotingPage(props) {
     }
 
     const prepsList = state.preps
+    const { filteredPreps } = state;
 
     const votedList = Object.entries(state.selectedMap).map(([key, value]) => { return value })
     let totVotedAmt = 0;
     let totVotedPercent = 0;
     votedList.forEach(item => {
-        totVotedAmt += Number(item.voteAmt)
-        totVotedPercent += Number(item.votePercent)
+        totVotedAmt += Number(item.voteAmt) || 0
+        totVotedPercent += Number(item.votePercent) || 0
     })
 
     return (
@@ -69,7 +71,11 @@ export default function VotingPage(props) {
 
                     <div className={style.tablesWrapper}>
                         <div className={style.prepsWrapper}>
-                            <input type="text" className="txt-type-search search-type-fix" placeholder='Search P-rep name/address' />
+                            <input type="text"
+                                className="txt-type-search search-type-fix"
+                                placeholder='Search P-rep name/address'
+                                onChange={handleChangeSearch}
+                            />
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
                                     {state.isLoadingPreps ?
@@ -103,7 +109,7 @@ export default function VotingPage(props) {
                                             </thead>
 
                                             <tbody>
-                                                {prepsList?.map((prep) =>
+                                                {filteredPreps?.map((prep) =>
                                                     <TableRow
                                                         totalVoted={state.totalVoted}
                                                         onChangeCheckbox={onChangeCheckbox}

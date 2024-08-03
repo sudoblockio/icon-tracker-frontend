@@ -42,13 +42,12 @@ export default function VotedTable({
     // }
 
     const votedList = Object.entries(selectedMap).map(([key, value]) => { return value })
-    console.log({ votedList })
-    let totVotedAmt = 0;
-    let totVotedPercent = 0;
-    votedList.forEach(item => {
-        totVotedAmt += Number(item.voteAmt)
-        totVotedPercent += Number(item.votePercent)
-    })
+    // let totVotedAmt = 0;
+    // let totVotedPercent = 0;
+    // votedList.forEach(item => {
+    //     totVotedAmt += Number(item.voteAmt)
+    //     totVotedPercent += Number(item.votePercent)
+    // })
 
     return (
         <table className={clsx("table-typeP", style.wrapper)}>
@@ -68,7 +67,9 @@ export default function VotedTable({
                     <>
                         <tr className={index === openRow && style.open}>
                             <td onClick={handleDeleteVoted.bind(this, value)} >
-                                <RxCross2 />
+                                <span className={style.cross}>
+                                    <RxCross2 />
+                                </span>
                             </td>
                             <td className={Number(value.grade) > 2 || value.grade === '0x3' ? 'black' : 'on'}>
                                 <span className={style.nameRow}>
@@ -134,10 +135,6 @@ export default function VotedTable({
                                             return <div {...props}></div>
                                         }}
                                         onChange={(result, index) => {
-                                            // handleChangeVoteAmt(
-                                            //     value.address,
-                                            //     result
-                                            // )
                                             handleChangeVotePercent(value.address, result)
                                         }}
                                         value={value.votePercent}

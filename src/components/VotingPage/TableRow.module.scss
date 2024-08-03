@@ -11,6 +11,12 @@
         border-radius: 50%;
     }
 
+    .checkbox {
+        input {
+            cursor: pointer !important;
+        }
+    }
+
     th,
     td {
         em,

@@ -121,10 +121,12 @@ class TableRow extends Component {
                 {/* <td className="rank">
                     <span>{rank || '-'}</span>
                 </td> */}
-                <td>
+                <td style={{ cursor: "pointer" }}>
                     <Checkbox
                         onChange={this.props.onChangeCheckbox.bind(this, prep)}
                         checked={prep.isChecked}
+                        // style={{ cursor: "pointer" }}
+                        className={styles.checkbox}
                     />
                 </td>
 

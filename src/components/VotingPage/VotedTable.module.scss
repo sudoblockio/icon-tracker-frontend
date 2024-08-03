@@ -1,4 +1,16 @@
 .wrapper {
+    .cross {
+        $red: rgb(223, 58, 58);
+        color: $red;
+        border: 1px solid $red;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        padding: 2px;
+        cursor: pointer;
+    }
+
     tr.open {
         td {
             border-bottom: none;

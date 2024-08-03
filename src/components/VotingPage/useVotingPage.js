@@ -31,10 +31,22 @@ export function useVotingPage(address, history) {
 
         isLoadingPreps: false,
         delegatedOriginal: [],
+
+        searchString: '',
+        filteredPreps: []
     })
 
 
+    function handleChangeSearch(e) {
+        const { value } = e.target;
+        setState(prev => {
+            if (value === "")
+                return { ...prev, searchString: '', filteredPreps: prev.preps }
 
+            const filtered = prev.filteredPreps.filter(f => f.name.toLowerCase().includes(value.toLowerCase()));
+            return { ...prev, searchString: value, filteredPreps: filtered }
+        })
+    }
 
     async function handleClickHeader(sortKey) {
         function getNewSortOrder(sortKey) {
@@ -55,12 +67,12 @@ export function useVotingPage(address, history) {
             const newSortOrder = getNewSortOrder(sortKey);
             const newSortKey = `${newSortOrder}${sortKey}`
 
-            // console.log({ sortKey, stateKey: state.sortKey, stateOrder: state.sortOrder, newSortOrder, newSortKey })
-
             const query = { sort: newSortKey }
             const resp = await getPReps(query);
 
-            setState(prev => ({ ...prev, preps: resp.data, sortKey, sortOrder: newSortOrder }))
+            const filtered = resp.data.filter(f => f.name.toLowerCase().includes(state.searchString.toLowerCase()))
+
+            setState(prev => ({ ...prev, preps: resp.data, sortKey, sortOrder: newSortOrder, filteredPreps: filtered }))
         } catch (err) {
             console.log(err)
         } finally {
@@ -216,6 +228,7 @@ export function useVotingPage(address, history) {
                     ...prev,
                     delegatedOriginal: delegationData.delegations,
                     preps: dataPreps,
+                    filteredPreps: dataPreps,
                     selectedMap,
                     maxVoteAmt: stakedAmount,
                     totAvailVoteAmt: stakedAmount,
@@ -279,6 +292,7 @@ export function useVotingPage(address, history) {
         toggleIsOpenPopup,
         handleChangeVotePercent,
         handleDeleteVoted,
-        handleClickHeader
+        handleClickHeader,
+        handleChangeSearch
     }
 }
