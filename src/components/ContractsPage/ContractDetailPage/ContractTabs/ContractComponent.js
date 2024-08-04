@@ -84,12 +84,15 @@ function ContractComponent({
 
     return (
         <div className="contents">
-            <ButtonSet
-                activeButton={activeSection}
-                handleActiveChange={setActiveSection}
-                showExpand={true}
-                contract={address}
-            />
+            <div className={customStyles.btnContainer}>
+                <ButtonSet
+                    activeButton={activeSection}
+                    handleActiveChange={setActiveSection}
+                    showExpand={true}
+                    contract={address}
+                />
+            </div>
+
             <div className={customStyles.contractContainer}>
                 {activeSection === 0 ? (
                     <div className={customStyles.titleContainer}>

@@ -7,7 +7,15 @@ import {
     getContractABI,
     getContractABIFromRPC,
 } from '../../../../redux/store/iiss'
+
 import { CopyButton } from '../../../../components'
+
+import style from './ContractCode.module.scss'
+import clsx from 'clsx'
+import { ReactJsonBeautify } from 'react-json-beautify'
+import ReactJson from 'react-json-view'
+
+
 
 class ContractCode extends Component {
     constructor(props) {
@@ -16,6 +24,7 @@ class ContractCode extends Component {
             activeLink: '',
             updatedLink: '',
             cxABI: '',
+            activeTabIndex: 0
         }
     }
 
@@ -41,14 +50,22 @@ class ContractCode extends Component {
         }
     }
 
+    handleClickTab(tabIndex) {
+        this.setState({ activeTabIndex: tabIndex })
+    }
+
+
     render() {
         const { activeLink, updatedLink } = this.state
         const { contract } = this.props
         const { data } = contract
         const { name, symbol, newVersion } = data
+
+        const TABS = [{ name: "Contract ABI", key: "abi" }, { name: "Segemented ABI", key: "segmented" }]
+
         return (
-            <div className="contents">
-                <div className="table-box">
+            <div className={clsx("contents", style.wrapper)}>
+                {/* <div className={clsx("table-box", style.tableBox)}>
                     <table className="table-typeL">
                         <thead>
                             <tr>
@@ -68,47 +85,74 @@ class ContractCode extends Component {
                             </tr>
                         </tbody>
                     </table>
+                </div> */}
+
+
+
+                <div className={style.tabs}>
+                    {TABS.map((tab, index) =>
+                        <button
+                            className={clsx(this.state.activeTabIndex === index && style.active)}
+                            onClick={this.handleClickTab.bind(this, index)}
+                        >
+                            {tab.name}
+                        </button>)}
                 </div>
-                <div className="code-box api">
-                    <div className="title-group">
+
+                <div className={clsx(style.codeBox, "code-box api")}>
+                    {/* <div className="title-group">
                         <span className="title">Contract ABI</span>
                         <CopyButton
                             data={JSON.stringify(this.state.cxABI)}
                             title={'Copy ABI'}
                             disabled={''}
                         />
-                    </div>
-                    {
-                        <div className="scroll">
+                    </div> */}
+
+                    <div className="scroll">
+                        {this.state.cxABI &&
                             <p className="txt" style={{ whiteSpace: 'pre' }}>
-                                {JSON.stringify(this.state.cxABI, null, '\t')}
-                            </p>
-                        </div>
-                    }
+                                <ReactJson src={this.state.cxABI}
+                                    name={null}
+                                    collapsed={2}
+                                    displayObjectSize={false}
+                                    displayDataTypes={false}
+                                    enableClipboard={false}
+                                    displayArrayKey={false}
+                                    quotesOnKeys={false}
+                                    sortKeys={true}
+                                    // groupArraysAfterLength={5}
+                                    indentWidth={4} />
+
+                                {/* {JSON.stringify(this.state.cxABI, null, '\t')} */}
+                            </p>}
+
+                    </div>
+
                 </div>
             </div>
         )
     }
 }
 
-const DownloadLink = ({ link, name }) => {
-    const Content = () => {
-        if (link) {
-            return (
-                <td>
-                    <span>
-                        <i className="img" />
-                        <a href={link} download={name}>
-                            Download
-                        </a>
-                    </span>
-                </td>
-            )
-        } else {
-            return <td>-</td>
-        }
-    }
-    return Content()
-}
+// const DownloadLink = ({ link, name }) => {
+//     const Content = () => {
+//         if (link) {
+//             return (
+//                 <td>
+//                     <span>
+//                         <i className="img" />
+//                         <a href={link} download={name}>
+//                             Download
+//                         </a>
+//                     </span>
+//                 </td>
+//             )
+//         } else {
+//             return <td>-</td>
+//         }
+//     }
+//     return Content()
+// }
 
 export default withRouter(ContractCode)

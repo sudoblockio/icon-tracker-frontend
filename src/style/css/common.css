@@ -4291,13 +4291,14 @@ input[type='text']:focus.over {
     color: #1aaaba;
 }
 .tab-holder li.on {
-    font-weight: 700;
+    font-weight: 600;
+    color: #1aaaba;
 }
 .tab-holder li.on:after {
     content: '';
     display: block;
     height: 3px;
-    background: #4d4d4d;
+    background: #1aaaba;
     margin: 4px auto;
     position: absolute;
     width: 100%;
