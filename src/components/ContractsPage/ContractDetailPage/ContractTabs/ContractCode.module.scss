@@ -2,8 +2,12 @@
     margin-top: -33px;
 
     .tabs {
-        padding-block: 1em;
-        padding-left: 1em;
+        padding: 1em;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         button {
             padding-inline: 1em;
@@ -22,6 +26,40 @@
                 color: white;
             }
         }
+
+        .downloadBtn {
+            display: flex;
+            align-items: center;
+
+            cursor: pointer;
+            svg {
+                margin-right: 4px;
+            }
+
+            a {
+                color: #1aaaba !important;
+                display: inline-flex;
+                align-items: center;
+                font-weight: 600;
+                font-size: 0.9rem;
+
+                &:link {
+                    color: #1aaaba !important;
+                }
+
+                &:visited {
+                    color: #1aaaba !important;
+                }
+
+                &:hover {
+                    color: #1aaaba !important;
+                }
+
+                &:active {
+                    color: #1aaaba !important;
+                }
+            }
+        }
     }
 
     .codeBox {
@@ -31,5 +69,18 @@
         border-left: none;
         border-right: none;
         border-bottom: none;
+
+        position: relative;
+        .copyBtn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .segmented {
+            padding: 1em;
+        }
     }
 }

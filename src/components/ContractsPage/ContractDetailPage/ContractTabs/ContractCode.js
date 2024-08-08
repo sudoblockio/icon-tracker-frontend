@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
+import style from './ContractCode.module.scss'
+
+import clsx from 'clsx'
+import ReactJson from 'react-json-view'
 import { withRouter } from 'react-router-dom'
-import { makeDownloadLink, tokenText, isValidData } from '../../../../utils/utils'
+import { MdOutlineFileDownload } from "react-icons/md";
+
+import { makeDownloadLink, isValidData } from '../../../../utils/utils'
 import {
     getSrcCodeLink,
     getVerSrcCodeLink,
-    getContractABI,
     getContractABIFromRPC,
 } from '../../../../redux/store/iiss'
 
 import { CopyButton } from '../../../../components'
-
-import style from './ContractCode.module.scss'
-import clsx from 'clsx'
-import { ReactJsonBeautify } from 'react-json-beautify'
-import ReactJson from 'react-json-view'
-
-
 
 class ContractCode extends Component {
     constructor(props) {
@@ -33,7 +31,6 @@ class ContractCode extends Component {
         const { data } = contract
         const { address } = data
         this.getDownloadLink()
-        // const cxABICode = await getContractABI(address);
         const cxABICode = await getContractABIFromRPC(address)
         const srcCodeLink = await getSrcCodeLink(address)
         this.setState({ activeLink: srcCodeLink, cxABI: cxABICode })
@@ -61,73 +58,59 @@ class ContractCode extends Component {
         const { data } = contract
         const { name, symbol, newVersion } = data
 
+
+
         const TABS = [{ name: "Contract ABI", key: "abi" }, { name: "Segemented ABI", key: "segmented" }]
 
         return (
             <div className={clsx("contents", style.wrapper)}>
-                {/* <div className={clsx("table-box", style.tableBox)}>
-                    <table className="table-typeL">
-                        <thead>
-                            <tr>
-                                <th>Contract Name</th>
-                                <th>On-Chain Source Code </th>
-                                <th>Verified Source Code</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="">
-                                <td>{tokenText(name, symbol)}</td>
-                                <DownloadLink link={activeLink} name={`cx_src_code.zip`} />
-                                <DownloadLink
-                                    link={updatedLink}
-                                    name={`${name}_${newVersion}.zip`}
-                                />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
-
-
-
                 <div className={style.tabs}>
-                    {TABS.map((tab, index) =>
-                        <button
-                            className={clsx(this.state.activeTabIndex === index && style.active)}
-                            onClick={this.handleClickTab.bind(this, index)}
-                        >
-                            {tab.name}
-                        </button>)}
+                    <div>{
+                        TABS.map((tab, index) =>
+                            <button
+                                className={clsx(this.state.activeTabIndex === index && style.active)}
+                                onClick={this.handleClickTab.bind(this, index)}
+                            >
+                                {tab.name}
+                            </button>)
+                    }</div>
+
+                    <span className={style.downloadBtn}>
+                        <a href={activeLink}> <MdOutlineFileDownload size={20} /> Download On-Chain Source Code</a>
+                    </span>
                 </div>
 
                 <div className={clsx(style.codeBox, "code-box api")}>
-                    {/* <div className="title-group">
-                        <span className="title">Contract ABI</span>
-                        <CopyButton
-                            data={JSON.stringify(this.state.cxABI)}
-                            title={'Copy ABI'}
-                            disabled={''}
-                        />
-                    </div> */}
+                    {this.state.activeTabIndex === 0 &&
+                        <div className="scroll">
+                            <div className={style.copyBtn}>
+                                <CopyButton
+                                    data={JSON.stringify(this.state.cxABI)}
+                                    title={'Copy ABI'}
+                                    disabled={''}
+                                />
+                            </div>
 
-                    <div className="scroll">
-                        {this.state.cxABI &&
-                            <p className="txt" style={{ whiteSpace: 'pre' }}>
-                                <ReactJson src={this.state.cxABI}
-                                    name={null}
-                                    collapsed={2}
-                                    displayObjectSize={false}
-                                    displayDataTypes={false}
-                                    enableClipboard={false}
-                                    displayArrayKey={false}
-                                    quotesOnKeys={false}
-                                    sortKeys={true}
-                                    // groupArraysAfterLength={5}
-                                    indentWidth={4} />
+                            {this.state.cxABI ?
+                                <p className="txt" style={{ paddingInline: "1em !important" }}>
+                                    <ReactJson src={this.state.cxABI}
+                                        name={null}
+                                        collapsed={4}
+                                        displayObjectSize={false}
+                                        displayDataTypes={false}
+                                        enableClipboard={false}
+                                        displayArrayKey={false}
+                                        quotesOnKeys={false}
+                                        sortKeys={true}
+                                        indentWidth={4} />
+                                </p>
+                                :
+                                <p style={{ paddingInline: "1em !important" }}> loading ... </p>}
+                        </div>}
 
-                                {/* {JSON.stringify(this.state.cxABI, null, '\t')} */}
-                            </p>}
 
-                    </div>
+                    {this.state.activeTabIndex === 1 &&
+                        <div className={style.segmented}>Segmented</div>}
 
                 </div>
             </div>
