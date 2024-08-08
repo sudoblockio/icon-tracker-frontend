@@ -192,7 +192,7 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                     <div>
                         <div className={styles.main}>
                             <div className={styles.defaultSection}>
-                                <h2>Update Prep on-chain data</h2>
+                                <h2>Update Prep on-chain data <span onClick={onClose}>&times;</span> </h2>
                                 <p></p>
                                 <p>
                                     Use the following form to update your{' '}
