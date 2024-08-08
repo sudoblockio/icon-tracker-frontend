@@ -66,6 +66,22 @@
         color: black;
         margin-bottom: 20px;
         font-size: 1.2rem;
+
+        position: relative;
+        span {
+            position: absolute;
+            top: -5px;
+            right: 1em;
+            background-color: rgba(119, 119, 119, 0.2);
+            padding: 0 !important;
+            width: 1.5em;
+            height: 1.5em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
 
     p {
