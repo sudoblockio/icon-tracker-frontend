@@ -27,6 +27,75 @@
         margin-bottom: 1.5em;
         font-size: 1rem;
         font-weight: 600;
+
+        span.autoBtn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: none;
+            background-color: white;
+            border: 1px solid #1b8692;
+            color: #1b8692;
+            height: 30px;
+            width: 110px;
+            margin-left: 1em;
+            font-weight: 400;
+            font-size: 0.9rem;
+            position: relative;
+            cursor: pointer;
+
+            svg {
+                margin-right: 0.5em;
+            }
+
+            &:hover {
+                .votingDropdown {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .votingDropdown {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        position: absolute;
+        top: 28px;
+        left: 0;
+        background-color: white;
+        z-index: 100;
+        box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.2);
+        border: 1px solid rgba(1, 1, 1, 0.1);
+        padding: 1em;
+        border-radius: 10px;
+        display: none;
+
+        button {
+            border: none;
+            border-radius: 20px;
+            color: #299fac;
+            border: 1px solid #299fac;
+            background-color: white;
+            margin-bottom: 0.5em;
+            height: 35px;
+            width: 220px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.1s;
+            &:hover {
+                background-color: #299fac;
+                color: white;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     .tablesWrapper {

@@ -9,11 +9,20 @@ import { useVotingPage } from './useVotingPage'
 import ClipLoader from 'react-spinners/ClipLoader'
 
 import { IoChevronUp, IoChevronDown } from "react-icons/io5";
+import { CiCircleCheck } from "react-icons/ci";
+import { useState } from 'react'
+
+import { CiPercent } from "react-icons/ci";
+import { CiDollar } from "react-icons/ci";
+
+const AUTO_VOTING_OPTIONS = [
+    { label: "Auto vote by Bonded %", key: "1", icon: <CiPercent size={20} /> }, { label: "Auto vote by Rewards", key: "2", icon: <CiDollar size={20} /> }
+]
 
 
 const TABLE_HEADERS = [
     { name: ["Name"], sortKey: "name", },
-    { name: ["Bonded", "%Bonded"], sortKey: "bond_percent" },
+    { name: ["%Bonded", "Bonded"], sortKey: "bond_percent" },
     { name: ["Commission %", "(Max Change/Max Rate)"], sortKey: "commission_rate" },
     { name: ["Monthly Rewards", "ICX/USD"] },
     { name: ["Votes"] }]
@@ -32,6 +41,8 @@ export default function VotingPage(props) {
         handleClickHeader,
         handleChangeSearch
     } = useVotingPage(walletAddress, props.history)
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const isConnected = walletAddress.length > 0
     if (!isConnected) {
@@ -66,7 +77,34 @@ export default function VotingPage(props) {
             <div className="screen0">
                 <div className="wrap-holder">
                     <div className={style.header}>
-                        <h4>Voting</h4>
+                        <h4 >
+                            Voting
+                            <span
+                                // onMouseOver={setIsDropdownOpen.bind(this, true)}
+                                // onMouseOut={(e) => {
+                                // console.log(e.target)
+                                // }}
+                                className={style.autoBtn}>
+                                <span id="dropdown" >
+                                    <CiCircleCheck />  Auto Vote
+
+                                    <div
+                                        className={clsx(style.votingDropdown)}
+                                        onMouseOver={setIsDropdownOpen.bind(this, true)}
+                                    >
+
+                                        {
+                                            AUTO_VOTING_OPTIONS.map(({ label, icon }) =>
+                                                <button>{icon} {label}</button>)
+                                        }
+
+                                    </div>
+
+                                </span>
+
+                            </span>
+
+                        </h4>
                     </div>
 
                     <div className={style.tablesWrapper}>

@@ -160,10 +160,14 @@ class TableRow extends Component {
                     </span>
                 </td>
 
-                <td className={'bonded'}>
-                    <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
+                <td className={clsx('bonded', styles.bondedCol)}>
+                    <span>
+                        {bond_percent.toFixed(2)}%
+                    </span>
                     <br />
-                    <em>{bond_percent.toFixed(2)}%</em>
+                    <em>
+                        {numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}
+                    </em>
                 </td>
 
                 <td>
