@@ -1,0 +1,103 @@
+.wrapper {
+    padding: 1em;
+
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        position: relative;
+        span {
+            position: absolute;
+            top: -5px;
+            right: 1em;
+            background-color: rgba(119, 119, 119, 0.2);
+            padding: 0 !important;
+            width: 1.5em;
+            height: 1.5em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .inputWrapper {
+        &:first-child {
+            margin-bottom: 1.2em;
+        }
+
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.8em;
+
+        label {
+            width: 14em;
+        }
+
+        input {
+            border: none;
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid rgba(1, 1, 1, 0.2);
+            padding-left: 0.8em;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .checkboxes {
+        margin-top: 2em;
+        .checkboxWrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5em;
+
+            label {
+                margin-left: 0.5em;
+            }
+
+            input[type='checkbox']:checked {
+                background-color: #4caf50 !important; /* Change to the color you want */
+                border-color: #4caf50 !important; /* Change the border color if needed */
+            }
+
+            input[type='checkbox']:checked {
+                border-color: #4caf50 !important ; /* Color of the checkmark */
+            }
+
+            .checkbox {
+            }
+        }
+    }
+
+    .btnWrapper {
+        margin-top: 2em;
+        button {
+            background-color: #299fac;
+            color: white;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            width: 8em;
+            border-radius: 5px;
+        }
+    }
+}

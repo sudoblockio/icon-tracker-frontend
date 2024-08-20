@@ -1,4 +1,4 @@
-import style from './VotingPage.module.scss'
+import style from './index.module.scss'
 
 import clsx from 'clsx'
 
@@ -11,19 +11,12 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { IoChevronUp, IoChevronDown } from "react-icons/io5";
 import { CiCircleCheck } from "react-icons/ci";
 import { useState } from 'react'
-
-import { CiPercent } from "react-icons/ci";
-import { CiDollar } from "react-icons/ci";
-
-const AUTO_VOTING_OPTIONS = [
-    { label: "Auto vote by Bonded %", key: "1", icon: <CiPercent size={20} /> }, { label: "Auto vote by Rewards", key: "2", icon: <CiDollar size={20} /> }
-]
-
+import AutoVotePopup from './AutoVotePopup'
 
 const TABLE_HEADERS = [
     { name: ["Name"], sortKey: "name", },
-    { name: ["%Bonded", "Bonded"], sortKey: "bond_percent" },
     { name: ["Commission %", "(Max Change/Max Rate)"], sortKey: "commission_rate" },
+    { name: ["%Bonded", "Bonded"], sortKey: "bond_percent" },
     { name: ["Monthly Rewards", "ICX/USD"] },
     { name: ["Votes"] }]
 
@@ -42,7 +35,16 @@ export default function VotingPage(props) {
         handleChangeSearch
     } = useVotingPage(walletAddress, props.history)
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isOpenAutoVotePopup, setIsOpenAutoVotePopup] = useState(false);
+
+    function toggleAutoVotePopup(value) {
+        if (value) {
+            setIsOpenAutoVotePopup(value);
+            return;
+        }
+
+        setIsOpenAutoVotePopup(prev => !prev)
+    }
 
     const isConnected = walletAddress.length > 0
     if (!isConnected) {
@@ -61,7 +63,7 @@ export default function VotingPage(props) {
         handleInputOnFocus(selectedLen, 0)
     }
 
-    const prepsList = state.preps
+
     const { filteredPreps } = state;
 
     const votedList = Object.entries(state.selectedMap).map(([key, value]) => { return value })
@@ -80,29 +82,12 @@ export default function VotingPage(props) {
                         <h4 >
                             Voting
                             <span
-                                // onMouseOver={setIsDropdownOpen.bind(this, true)}
-                                // onMouseOut={(e) => {
-                                // console.log(e.target)
-                                // }}
                                 className={style.autoBtn}>
-                                <span id="dropdown" >
+                                <span onClick={toggleAutoVotePopup}>
                                     <CiCircleCheck />  Auto Vote
-
-                                    <div
-                                        className={clsx(style.votingDropdown)}
-                                        onMouseOver={setIsDropdownOpen.bind(this, true)}
-                                    >
-
-                                        {
-                                            AUTO_VOTING_OPTIONS.map(({ label, icon }) =>
-                                                <button>{icon} {label}</button>)
-                                        }
-
-                                    </div>
-
                                 </span>
-
                             </span>
+                            <AutoVotePopup isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} />
 
                         </h4>
                     </div>

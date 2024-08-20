@@ -160,17 +160,7 @@ class TableRow extends Component {
                     </span>
                 </td>
 
-                <td className={clsx('bonded', styles.bondedCol)}>
-                    <span>
-                        {bond_percent.toFixed(2)}%
-                    </span>
-                    <br />
-                    <em>
-                        {numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}
-                    </em>
-                </td>
-
-                <td>
+                <td className={clsx(styles.priorityCol)}>
                     {isNaN(commission_rate) && isNaN(max_commission_change_rate) && isNaN(max_commission_rate) ? (
                         '-'
                     ) : (
@@ -187,6 +177,17 @@ class TableRow extends Component {
                             </em>
                         </>
                     )}
+                </td>
+
+
+                <td className={clsx('bonded')}>
+                    <span>
+                        {bond_percent.toFixed(2)}%
+                    </span>
+                    <br />
+                    <em>
+                        {numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}
+                    </em>
                 </td>
 
                 <td>
