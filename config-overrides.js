@@ -1,9 +1,10 @@
-webpack = require("webpack");
+const webpack = require("webpack");
 
 module.exports = function override(config, env) {
   //do stuff with the webpack config...
   config.resolve.fallback = {
     ...config.resolve.fallback,
+    'process/browser': require.resolve('process/browser'),
     stream: require.resolve("stream-browserify"),
     buffer: require.resolve("buffer")
   };
