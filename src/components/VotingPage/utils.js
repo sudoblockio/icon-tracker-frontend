@@ -9,27 +9,44 @@ function calculatePercentageWithoutTrunc(part, whole) {
 }
 
 function getPrepsForAutoVote(oldState, payload) {
+    // console.log(oldState)
+    // console.log(payload)
     const toUpdate = { ...oldState, selectedMap: {} };
-    const { prepCount, commissionRateCutoff, overBondingCutoff, priority, voteAmt } = payload;
+    const { prepCount, commissionRateCutoff, overBondCutoff, priority, voteAmt, excludeJailed } = payload;
 
     const votePerPrep = voteAmt / prepCount;
-    const prepsFilteredSorted = toUpdate.preps.filter(f =>
-        f.commission_rate > commissionRateCutoff && f.bond_percent > overBondingCutoff
-    )
+
+
+    toUpdate.preps.filter(f => {
+        let condition = f.commission_rate > commissionRateCutoff && f.overBondPercent > overBondCutoff;
+        if (excludeJailed) {
+            condition = condition && f.isJailed === false
+        }
+
+        return condition;
+    })
+
+    const prepsFilteredSorted = toUpdate.preps.filter(f => {
+        let condition = f.commission_rate > commissionRateCutoff && f.overBondPercent > overBondCutoff;
+        if (excludeJailed) {
+            condition = condition && f.isJailed === false
+        }
+
+        return condition;
+    })
 
     switch (priority) {
         case "mostOptimised":
-            prepsFilteredSorted.sort((a, b) => b.comissionBondPercent - a.comissionBondPercent)
+            prepsFilteredSorted.sort((a, b) => b.commissionBondPercent - a.commissionBondPercent || b.commission_rate - a.commission_rate || b.bond_percent - a.bond_percent)
             break;
         case "commissionRate":
-            prepsFilteredSorted.sort((a, b) => b.commission_rate - a.commission_rate)
+            prepsFilteredSorted.sort((a, b) => b.commission_rate - a.commission_rate || b.delegated - a.delegated)
             break;
-        case "bondingPercent":
-            prepsFilteredSorted.sort((a, b) => b.bond_percent - a.bond_percent)
+        case "bondPercent":
+            prepsFilteredSorted.sort((a, b) => b.bond_percent - a.bond_percent || b.delegated - a.delegated)
             break;
         default:
             break;
-
     }
 
     const topNPreps = prepsFilteredSorted.slice(0, prepCount);

@@ -35,12 +35,6 @@ export function useVotingPage(address, history) {
 
         searchString: '',
         filteredPreps: [],
-
-        autoVote: {
-            sortedByComissionBond: [],
-            sortedByComission: [],
-            sortedByBond: []
-        }
     })
 
     function handleSubmitAutoVote(payload) {
@@ -160,7 +154,7 @@ export function useVotingPage(address, history) {
                 params.data.params,
                 params.nid
             )
-            const resp = await requestJsonRpc(rawTx.params)
+            await requestJsonRpc(rawTx.params)
             toast.success("Successful")
             toggleIsOpenPopup();
         } catch (err) {
@@ -223,7 +217,9 @@ export function useVotingPage(address, history) {
 
                 const { data: dataPreps } = respPreps
                 dataPreps.forEach(prep => {
-                    prep.comissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
+                    prep.commissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
+                    prep.overBondPercent = 100 - Number(prep.bond_percent)
+                    prep.isJailed = parseInt(prep.jail_flags, 16) !== 0
                 })
                 const delegationData = await getDelegation({ address })
                 const dataStake = await getStake(address)
@@ -242,7 +238,6 @@ export function useVotingPage(address, history) {
 
                 setState((prev) => ({
                     ...prev,
-                    comissionBondPercent: prev,
                     delegatedOriginal: delegationData.delegations,
                     preps: dataPreps,
                     filteredPreps: dataPreps,

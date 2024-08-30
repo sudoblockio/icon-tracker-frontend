@@ -58,7 +58,7 @@
         "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
-        "test-autovote": "react-app-rewired test ./src/components/VotingPage/useVotingPage.test.js",
+        "test-autovote": "react-app-rewired test ./src/components/VotingPage/tests/useVotingPage.test.js",
         "eject": "react-app-rewired eject"
     },
     "eslintConfig": {

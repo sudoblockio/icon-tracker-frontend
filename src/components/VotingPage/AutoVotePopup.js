@@ -3,7 +3,6 @@ import style from "./AutoVotePopup.module.scss"
 
 import parse from 'html-react-parser';
 import { Tooltip } from 'react-tooltip'
-import { IoIosInformationCircle } from "react-icons/io";
 import { MdInfoOutline } from "react-icons/md";
 
 
@@ -19,15 +18,22 @@ const CHECKBOX_OPTS = [
 const PRIORITY_OPTS = [
     { label: "Most Optimised", value: "mostOptimised" },
     { label: "Commission Rate", value: "commissionRate" },
-    { label: "Bonding Percent", value: "bondingPercent" },
+    { label: "Bond Percent", value: "bondPercent" },
 
 ]
+
+const INPUT_DEFAULT_VALUES = {
+    prepCount: 10,
+    commissionRateCutoff: 12.5,
+    overBondCutoff: 5
+    // voteAmt: 1000,
+}
 
 const INPUTS = [
     {
         name: "prepCount",
         label: "No. of validators",
-        defaultValue: 10,
+        defaultValue: INPUT_DEFAULT_VALUES["prepCount"],
         info: `<p>Number of validators(prep) nodes you want to split your vote across</p>`,
     },
     {
@@ -38,13 +44,13 @@ const INPUTS = [
     {
         name: "commissionRateCutoff",
         label: "Commission rate cutoff",
-        defaultValue: 12.5,
+        defaultValue: INPUT_DEFAULT_VALUES["commissionRateCutoff"],
         info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
     },
     {
-        name: "overBondingCutoff",
-        label: "Over bonding percent cutoff",
-        defaultValue: 10,
+        name: "overBondCutoff",
+        label: "Over bond percent cutoff",
+        defaultValue: INPUT_DEFAULT_VALUES["overBondCutoff"],
         info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
     }
 ]
@@ -52,11 +58,11 @@ const INPUTS = [
 export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
     const [state, setState] = useState({
         formData: {
-            prepCount: 10,
-            overBondingCutoff: 10,
-            commissionRateCutoff: 12.5,
+            prepCount: INPUT_DEFAULT_VALUES["prepCount"],
+            overBondCutoff: INPUT_DEFAULT_VALUES["overBondCutoff"],
+            commissionRateCutoff: INPUT_DEFAULT_VALUES["commissionRateCutoff"],
             priority: PRIORITY_OPTS[0],
-            voteAmt: 1000,
+            voteAmt: 0,
             excludeJailed: true
         }
     });
