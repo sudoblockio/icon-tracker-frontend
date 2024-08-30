@@ -32,17 +32,13 @@ export default function VotingPage(props) {
         toggleIsOpenPopup,
         handleDeleteVoted,
         handleClickHeader,
-        handleChangeSearch
+        handleChangeSearch,
+        handleSubmitAutoVote
     } = useVotingPage(walletAddress, props.history)
 
     const [isOpenAutoVotePopup, setIsOpenAutoVotePopup] = useState(false);
 
-    function toggleAutoVotePopup(value) {
-        if (value) {
-            setIsOpenAutoVotePopup(value);
-            return;
-        }
-
+    function toggleAutoVotePopup() {
         setIsOpenAutoVotePopup(prev => !prev)
     }
 
@@ -87,7 +83,7 @@ export default function VotingPage(props) {
                                     <CiCircleCheck />  Auto Vote
                                 </span>
                             </span>
-                            <AutoVotePopup isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} />
+                            <AutoVotePopup isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
 
                         </h4>
                     </div>
@@ -159,39 +155,37 @@ export default function VotingPage(props) {
                                     onClose={toggleIsOpenPopup}
                                     onSubmit={handleSubmitVoting}
                                 />
-                                <div className={style.footer}>
-                                    <div>Total</div>
-                                    <div className={clsx(style.total)}>
-                                        <div>
-                                            <label>ICX Amount:</label>
-                                            <span>
-                                                {totVotedAmt}
-                                            </span>
-                                            {(state.validationErrors.amount || state.validationErrors.percent) &&
-                                                <div className={style.error}>
-                                                    {
-                                                        state.validationErrors?.amount?.msg
-                                                    }
-                                                </div>}
+                            </div>
+                            <div className={style.footer}>
+                                <div>Total</div>
+                                <div className={clsx(style.total)}>
+                                    <div>
+                                        <label>ICX Amount:</label>
+                                        <span>
+                                            {totVotedAmt}
+                                        </span>
+                                        {(state.validationErrors.amount || state.validationErrors.percent) &&
+                                            <div className={style.error}>
+                                                {
+                                                    state.validationErrors?.amount?.msg
+                                                }
+                                            </div>}
 
-                                        </div>
-                                        <div>
-                                            <label>Percent:</label>
-                                            <span>
-                                                {totVotedPercent}
-                                            </span>
-                                            {(state.validationErrors.amount || state.validationErrors.percent) &&
-                                                <div className={style.error}>
-                                                    {
-                                                        state.validationErrors?.percent?.msg
-                                                    }
-                                                </div>}
-
-
-                                        </div>
-                                        <div className={style.button}>
-                                            <button onClick={handleSubmitVoting}>Vote</button>
-                                        </div>
+                                    </div>
+                                    <div>
+                                        <label>Percent:</label>
+                                        <span>
+                                            {totVotedPercent}
+                                        </span>
+                                        {(state.validationErrors.amount || state.validationErrors.percent) &&
+                                            <div className={style.error}>
+                                                {
+                                                    state.validationErrors?.percent?.msg
+                                                }
+                                            </div>}
+                                    </div>
+                                    <div className={style.button}>
+                                        <button onClick={handleSubmitVoting}>Vote</button>
                                     </div>
                                 </div>
                             </div>

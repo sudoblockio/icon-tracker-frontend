@@ -1,48 +1,49 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function DropdownMenu({ customStyles, ...props }) {
+export default function DropdownMenu({ customStyles, value, ...props }) {
     const defaultStyles = {
         container: (styles, { isFocused }) => ({
             ...styles,
-            width: "12em",
-            height: "35px",
+            width: "15.55em",
             borderRadius: "20px !important",
             cursor: "pointer !important",
+
+        }),
+        valueContainer: (base) => ({
+            ...base,
+            height: "40px !important",
         }),
         control: (styles, { isFocused }) => ({
             ...styles,
             boxShadow: "unset !important",
             borderColor: "rgba(1,1,1,0.2) !important",
-
             backgroundColor: "white",
             width: "100%",
-            minHeight: "0px",
             cursor: "pointer !important",
             borderRadius: "5px",
+
+
         }),
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
             return {
                 ...styles,
-
-                backgroundColor: isSelected ? "#a34791" : "white",
                 cursor: "pointer !important",
-                "&:hover": {
-                    backgroundColor: "rgba(1,1,1,0.1)",
-                },
+                height: "40px !important",
+                backgroundColor: isSelected ? '#299fac' : isFocused ? '#299fac90' : 'white',
+                color: isSelected ? 'white' : isFocused ? 'white' : 'black',
             };
         },
         input: (styles) => ({
             ...styles,
             color: "transparent",
-            height: "35px !important",
             cursor: "pointer !important",
+
         }),
         menu: (styles) => ({
             ...styles,
             cursor: "pointer !important",
         }),
-
     };
 
     const mergedStyles = customStyles
@@ -50,6 +51,8 @@ export default function DropdownMenu({ customStyles, ...props }) {
         : defaultStyles;
 
 
-    return <Select styles={mergedStyles} {...props} />;
+    return <Select
+        value={value}
+        styles={mergedStyles} {...props}
+    />;
 };
-

@@ -33,38 +33,46 @@
         }
     }
 
-    .row {
-        display: flex;
-    }
-
-    .inputWrapper {
-        &:first-child {
-            margin-bottom: 1.2em;
-        }
-
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.8em;
-
+    form {
         label {
-            width: 14em;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.4em;
+
+            span {
+                margin-right: 0.5em;
+                display: inline-block;
+            }
+
+            a {
+                cursor: pointer;
+                position: relative;
+                top: 2px;
+            }
         }
 
-        input {
-            border: none;
-            height: 35px;
-            border-radius: 5px;
-            border: 1px solid rgba(1, 1, 1, 0.2);
-            padding-left: 0.8em;
+        .inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 18em);
+            grid-template-rows: repeat(2, 5.5em);
+            gap: 0px 0px;
         }
 
-        &:last-child {
-            margin-bottom: 0;
+        .inputWrapper {
+            input {
+                width: calc(100% - 3em);
+                border: none;
+                height: 40px;
+                border-radius: 5px;
+                border: 1px solid rgba(1, 1, 1, 0.2);
+                padding-left: 0.8em;
+            }
         }
     }
 
     .checkboxes {
         margin-top: 2em;
+        z-index: 0;
         .checkboxWrapper {
             display: flex;
             align-items: center;
@@ -75,12 +83,12 @@
             }
 
             input[type='checkbox']:checked {
-                background-color: #4caf50 !important; /* Change to the color you want */
-                border-color: #4caf50 !important; /* Change the border color if needed */
+                background-color: #4caf50 !important;
+                border-color: #4caf50 !important;
             }
 
             input[type='checkbox']:checked {
-                border-color: #4caf50 !important ; /* Color of the checkmark */
+                border-color: #4caf50 !important ;
             }
 
             .checkbox {

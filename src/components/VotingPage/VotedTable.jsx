@@ -65,7 +65,7 @@ export default function VotedTable({
             <tbody>
                 {votedList.map((value, index) => (
                     <>
-                        <tr className={index === openRow && style.open}>
+                        <tr key={value.address} className={clsx(index === openRow && style.open)}>
                             <td onClick={handleDeleteVoted.bind(this, value)} >
                                 <span className={style.cross}>
                                     <RxCross2 />
@@ -148,12 +148,6 @@ export default function VotedTable({
                 ))}
             </tbody>
         </table>
-
-
-
-
-
-
     )
 };
 

@@ -1,70 +1,132 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import style from "./AutoVotePopup.module.scss"
-import GenericModal from "../GenericModal/genericModal"
+
+import parse from 'html-react-parser';
+import { Tooltip } from 'react-tooltip'
+import { IoIosInformationCircle } from "react-icons/io";
+import { MdInfoOutline } from "react-icons/md";
+
+
 import Checkbox from "../CommonComponent/Checkbox"
 import DropdownMenu from "../CommonComponent/DropdownMenu"
+import GenericModalV2 from "../GenericModalV2/GenericModal";
+
 
 const CHECKBOX_OPTS = [
     { label: "Exclude jailed candidates", type: "JAILED" },
-    // { label: "Exclude over bonded candidates", type: "OVERBONDED" },
-    // { label: "Exclude candidates with commision rate more than 10%", type: "COMMISSION" },
 ]
 
 const PRIORITY_OPTS = [
+    { label: "Most Optimised", value: "mostOptimised" },
     { label: "Commission Rate", value: "commissionRate" },
     { label: "Bonding Percent", value: "bondingPercent" },
+
 ]
 
-export default function AutoVotePopup({ isOpen, onClose }) {
-    function handleChangeCheckbox(type) {
+const INPUTS = [
+    {
+        name: "prepCount",
+        label: "No. of validators",
+        defaultValue: 10,
+        info: `<p>Number of validators(prep) nodes you want to split your vote across</p>`,
+    },
+    {
+        name: "voteAmt",
+        label: "Vote Amount",
+        info: `<p>Total amount of votes you want to delegate</p>`,
+    },
+    {
+        name: "commissionRateCutoff",
+        label: "Commission rate cutoff",
+        defaultValue: 12.5,
+        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+    },
+    {
+        name: "overBondingCutoff",
+        label: "Over bonding percent cutoff",
+        defaultValue: 10,
+        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+    }
+]
 
+export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
+    const [state, setState] = useState({
+        formData: {
+            prepCount: 10,
+            overBondingCutoff: 10,
+            commissionRateCutoff: 12.5,
+            priority: PRIORITY_OPTS[0],
+            voteAmt: 1000,
+            excludeJailed: true
+        }
+    });
+
+
+    function handleChangeCheckbox(type) {
+        setState(prev => ({ ...prev, formData: { ...prev.formData, excludeJailed: !prev.formData.excludeJailed } }))
     }
 
+    function handleChangeForm(e) {
+        const { name, value } = e.target;
+        setState(prev => ({ ...prev, formData: { ...prev.formData, [name]: Number(value) } }))
+    }
+
+    async function handleSubmitForm(e) {
+        e.preventDefault();
+        await onSubmit({ ...state.formData, priority: state.formData.priority.value })
+        onClose();
+    }
+
+    function handleChangePriority(e) {
+        setState(prev => ({ ...prev, formData: { ...prev.formData, priority: e } }))
+    }
+
+    useEffect(() => {
+        handleChangePriority(PRIORITY_OPTS[1])
+    }, [])
+
     return (
-        <GenericModal isOpen={isOpen} onClose={onClose}>
+        <GenericModalV2 isOpen={isOpen} onClose={onClose}>
             <div className={style.wrapper}>
                 <div className={style.header}>
                     <h4>Auto Vote</h4>
-                    <span>&times;</span>
+                    <span onClick={onClose}>&times;</span>
                 </div>
 
                 <div className={style.formWrapper}>
-                    <form>
+                    <form onChange={handleChangeForm} onSubmit={handleSubmitForm}>
+                        <div className={style.inputs}>
+                            {
+                                INPUTS.map(({ name, label, info, defaultValue }) =>
+                                    <div className={style.inputWrapper}>
+                                        <label>
+                                            <span>
+                                                {label}
+                                            </span>
+                                            <a id={`${name}-hover`}><MdInfoOutline /></a>
+                                        </label>
+                                        <input step="any" type="number" name={name} defaultValue={defaultValue} />
 
-                        {/* <div className={style.row}> */}
+                                        <Tooltip anchorSelect={`#${name}-hover`}>
+                                            {parse(info)}
+                                        </Tooltip>
+                                    </div>
+                                )
+                            }
+
+                        </div>
+
                         <div className={style.inputWrapper}>
                             <label>Priority</label>
-                            <DropdownMenu options={PRIORITY_OPTS} />
+                            <DropdownMenu value={state.formData.priority} onChange={handleChangePriority} options={PRIORITY_OPTS} />
                         </div>
-
-
-                        <div className={style.inputWrapper}>
-                            <label>Number of candidates</label>
-                            <input type="number" name="candidateCount" defaultValue={10} />
-                        </div>
-
-                        {/* </div> */}
-
-
-                        <div className={style.inputWrapper}>
-                            <label>Commission Rate Cut-off</label>
-                            <input type="number" name="commissionCutoff" defaultValue={12.5} />
-                        </div>
-
-                        <div className={style.inputWrapper}>
-                            <label>Over bonding percentage</label>
-                            <input type="number" name="overBonding" defaultValue={10} />
-                        </div>
-
-
 
                         <div className={style.checkboxes}>
                             {CHECKBOX_OPTS.map(item =>
                                 <div className={style.checkboxWrapper}>
-                                    <Checkbox checked={true} />
+                                    <Checkbox checked={state.formData.excludeJailed} onChange={handleChangeCheckbox} />
                                     <label>{item.label}</label>
                                 </div>
-
                             )}
                         </div>
 
@@ -74,7 +136,7 @@ export default function AutoVotePopup({ isOpen, onClose }) {
                     </form>
                 </div>
             </div>
-        </GenericModal>
+        </GenericModalV2>
     )
 };
 

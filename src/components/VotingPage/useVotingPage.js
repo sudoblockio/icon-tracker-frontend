@@ -10,6 +10,7 @@ import { requestJsonRpc } from '../../utils/connect'
 import { calculatePercentageWithoutTrunc } from '../../utils/utils'
 import { toast } from 'react-toastify'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
+import { getPrepsForAutoVote } from './utils'
 
 function findDelegInPreps(addr, preps) {
     return preps.find((f) => f.address === addr)
@@ -33,8 +34,20 @@ export function useVotingPage(address, history) {
         delegatedOriginal: [],
 
         searchString: '',
-        filteredPreps: []
+        filteredPreps: [],
+
+        autoVote: {
+            sortedByComissionBond: [],
+            sortedByComission: [],
+            sortedByBond: []
+        }
     })
+
+    function handleSubmitAutoVote(payload) {
+        const prevState = { ...state };
+        const newState = getPrepsForAutoVote(prevState, payload)
+        setState(newState)
+    }
 
 
     function handleChangeSearch(e) {
@@ -209,6 +222,9 @@ export function useVotingPage(address, history) {
                     IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
 
                 const { data: dataPreps } = respPreps
+                dataPreps.forEach(prep => {
+                    prep.comissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
+                })
                 const delegationData = await getDelegation({ address })
                 const dataStake = await getStake(address)
                 const stakedAmount = Number(dataStake.stake / Math.pow(10, 18))
@@ -226,6 +242,7 @@ export function useVotingPage(address, history) {
 
                 setState((prev) => ({
                     ...prev,
+                    comissionBondPercent: prev,
                     delegatedOriginal: delegationData.delegations,
                     preps: dataPreps,
                     filteredPreps: dataPreps,
@@ -237,6 +254,7 @@ export function useVotingPage(address, history) {
                     totalVoted,
                     isLoadingPreps: false
                 }))
+
             } catch (err) {
                 console.log(err)
             }
@@ -293,6 +311,8 @@ export function useVotingPage(address, history) {
         handleChangeVotePercent,
         handleDeleteVoted,
         handleClickHeader,
-        handleChangeSearch
+        handleChangeSearch,
+        handleSubmitAutoVote,
+        getPrepsForAutoVote
     }
 }
