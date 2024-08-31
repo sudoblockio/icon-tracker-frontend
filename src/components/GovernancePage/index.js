@@ -464,7 +464,7 @@ class TableRow extends Component {
 
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
-        const bondedRate = !totalVoted ? 0 : (20*(bonded / Math.pow(10, 18)).toFixed()) / (prepVoted + bonded / Math.pow(10, 18))
+        const bondedRate = !totalVoted ? 0 : prep.bond_percent
 
         return (
             <tr>

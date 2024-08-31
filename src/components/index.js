@@ -70,6 +70,7 @@ import GovernancePage from './GovernancePage'
 import ProposalListPage from './ProposalListPage'
 import ProposalSubmitPage from './ProposalSubmitPage'
 import ProposalDetailPage from './ProposalDetailPage'
+import VotingPage from './VotingPage'
 
 
 export {
@@ -131,4 +132,5 @@ export {
     ProposalListPage,
     ProposalDetailPage,
     ProposalSubmitPage,
+    VotingPage
 }

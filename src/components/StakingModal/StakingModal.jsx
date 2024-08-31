@@ -6,7 +6,7 @@ import ReactSlider from 'react-slider'
 
 import { useStakingModal } from './useStakingModal'
 import GenericModal from '../GenericModal/genericModal'
-import { calculatePercentage, formatSeconds } from '../../utils/utils'
+import { calculatePercentage, formatSeconds, numberWithCommas } from '../../utils/utils'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -195,14 +195,16 @@ export default function StakingModal({ wallet, onClose }) {
                                         <tr>
                                             <th>Target Blockheight</th>
                                             <th>Amount</th>
+                                            <th>Remaining Blocks</th>
                                             <th>Est Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {state.unstakes.map(({ target, timeInSec, amount }) =>
+                                        {state.unstakes.map(({ target, timeInSec, amount, remainingBlocks }) =>
                                             <tr>
-                                                <td>{target}</td>
+                                                <td>{numberWithCommas(target)}</td>
                                                 <td>{amount} ICX</td>
+                                                <td>{numberWithCommas(remainingBlocks)}</td>
                                                 <td>{formatSeconds(timeInSec)}</td>
                                             </tr>
                                         )}

@@ -1,0 +1,211 @@
+.wrapper {
+    padding-top: 80px !important;
+
+    table {
+        width: 100%;
+
+        th,
+        td {
+            text-align: center;
+            padding-block: 10px !important;
+            padding-inline: 1em !important;
+            border-left: 0 !important;
+            border-right: 0 !important;
+        }
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 1em !important;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            text-align: left !important;
+        }
+    }
+
+    h4 {
+        margin-bottom: 1.5em;
+        font-size: 1rem;
+        font-weight: 600;
+
+        span.autoBtn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: none;
+            background-color: white;
+            border: 1px solid #1b8692;
+            color: #1b8692;
+            height: 30px;
+            width: 110px;
+            margin-left: 1em;
+            font-weight: 400;
+            font-size: 0.9rem;
+            position: relative;
+            cursor: pointer;
+
+            svg {
+                margin-right: 0.5em;
+            }
+
+            &:hover {
+                .votingDropdown {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .votingDropdown {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        position: absolute;
+        top: 28px;
+        left: 0;
+        background-color: white;
+        z-index: 100;
+        box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.2);
+        border: 1px solid rgba(1, 1, 1, 0.1);
+        padding: 1em;
+        border-radius: 10px;
+        display: none;
+
+        button {
+            border: none;
+            border-radius: 20px;
+            color: #299fac;
+            border: 1px solid #299fac;
+            background-color: white;
+            margin-bottom: 0.5em;
+            height: 35px;
+            width: 220px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.1s;
+            &:hover {
+                background-color: #299fac;
+                color: white;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .tablesWrapper {
+        $prepWidth: 55%;
+
+        display: flex;
+        gap: 2%;
+        width: 100%;
+        height: 550px;
+
+        .tableWrapper {
+            height: 100%;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(1, 1, 1, 0.1);
+        }
+
+        .prepsWrapper {
+            width: $prepWidth;
+
+            input[type='text'] {
+                margin-bottom: 0.8em;
+                width: 20em;
+            }
+        }
+
+        .votedWrapper {
+            width: calc(98% - #{$prepWidth});
+            height: 100%;
+
+            // border: 1px solid red;
+
+            // position: relative;
+            $footerHeight: 4em;
+
+            .footer {
+                border: 1px solid rgba(1, 1, 1, 0.1);
+                // position: absolute;
+                height: $footerHeight;
+                width: 100%;
+                padding-inline: 1em;
+                // bottom: 0;
+                // border: 2px solid black !important;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                > div:first-child {
+                    color: rgb(158, 158, 158);
+                    font-size: 0.7rem;
+                }
+
+                .total {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .error {
+                        display: flex;
+                        align-items: center;
+
+                        color: red;
+                        font-size: 0.6rem;
+                        margin-top: 0em;
+                        height: 100%;
+                        height: 18px;
+                    }
+
+                    div {
+                        label {
+                            font-size: 0.7rem;
+                        }
+                        span {
+                            font-size: 0.7rem;
+                            margin-left: 0.3em;
+                            font-weight: bold;
+                        }
+                    }
+
+                    button {
+                        height: 25px;
+                        background-color: #299fac;
+                        color: white;
+                        border: 1px solid #e2e2e2;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        width: 60px;
+                        font-size: 0.7rem;
+                        padding: 0 !important;
+                    }
+
+                    button:hover {
+                        background-color: #1b8692;
+                    }
+                }
+            }
+
+            .tableWrapper {
+                // border: 1px solid blue !important;
+                height: calc(100% - #{$footerHeight + 2em});
+                overflow-y: auto;
+                border-radius: 0px;
+                border-bottom: none;
+            }
+
+            .caption {
+                margin-bottom: 0.8em;
+            }
+        }
+    }
+}

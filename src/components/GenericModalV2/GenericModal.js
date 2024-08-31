@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './genericModal.module.css'
+import styles from './GenericModal.module.css'
 
-export default function GenericModal({ isOpen, onClose, useSmall = false, children, style = {}, allowOutsideClick = true }) {
+export default function GenericModalV2({ isOpen, onClose, useSmall = false, children, style = {}, allowOutsideClick = true }) {
     function handleOnClose() {
         if (!allowOutsideClick)
             onClose()
