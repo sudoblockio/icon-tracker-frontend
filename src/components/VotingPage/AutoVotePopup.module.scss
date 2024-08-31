@@ -33,11 +33,23 @@
         }
     }
 
+    button:disabled {
+        background-color: rgba(1, 1, 1, 0.3) !important;
+        cursor: default !important;
+    }
+
     form {
+        p.error {
+            color: red;
+            font-size: 0.7rem;
+            margin-top: 0.4em;
+        }
+
         label {
             display: flex;
             align-items: center;
             margin-bottom: 0.4em;
+            font-size: 0.9rem;
 
             span {
                 margin-right: 0.5em;
@@ -54,7 +66,7 @@
         .inputs {
             display: grid;
             grid-template-columns: repeat(2, 18em);
-            grid-template-rows: repeat(2, 5.5em);
+            grid-template-rows: repeat(2, 5.8em);
             gap: 0px 0px;
         }
 

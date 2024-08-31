@@ -55,7 +55,7 @@ const INPUTS = [
     }
 ]
 
-export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
+export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt }) {
     const [state, setState] = useState({
         formData: {
             prepCount: INPUT_DEFAULT_VALUES["prepCount"],
@@ -64,6 +64,9 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
             priority: PRIORITY_OPTS[0],
             voteAmt: 0,
             excludeJailed: true
+        },
+        formErrors: {
+            voteAmt: { isError: false }
         }
     });
 
@@ -74,6 +77,35 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
 
     function handleChangeForm(e) {
         const { name, value } = e.target;
+
+        if (name === "voteAmt") {
+            if (value > maxVoteAmt) {
+                setState(prev => ({
+                    ...prev,
+                    formErrors: {
+                        ...prev.formErrors,
+                        voteAmt: {
+                            isError: true,
+                            message: `Amount can't be greather than ${maxVoteAmt} ICX`
+                        }
+                    }
+                }))
+            } else {
+                setState(prev => ({
+                    ...prev,
+                    formErrors: {
+                        ...prev.formErrors,
+                        voteAmt: {
+                            isError: false,
+                            message: ""
+                        }
+                    }
+                }))
+            }
+        }
+
+
+
         setState(prev => ({ ...prev, formData: { ...prev.formData, [name]: Number(value) } }))
     }
 
@@ -90,6 +122,8 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
     useEffect(() => {
         handleChangePriority(PRIORITY_OPTS[1])
     }, [])
+
+    const isSubmitDisabled = state.formErrors.voteAmt.isError
 
     return (
         <GenericModalV2 isOpen={isOpen} onClose={onClose}>
@@ -112,6 +146,14 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
                                             <a id={`${name}-hover`}><MdInfoOutline /></a>
                                         </label>
                                         <input step="any" type="number" name={name} defaultValue={defaultValue} />
+
+                                        {
+                                            name === "voteAmt" && state.formErrors.voteAmt.isError &&
+                                            <p className={style.error}>
+                                                {state.formErrors.voteAmt.message}
+                                            </p>
+                                        }
+
 
                                         <Tooltip anchorSelect={`#${name}-hover`}>
                                             {parse(info)}
@@ -137,7 +179,7 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit }) {
                         </div>
 
                         <div className={style.btnWrapper}>
-                            <button>Submit</button>
+                            <button disabled={isSubmitDisabled}>Submit</button>
                         </div>
                     </form>
                 </div>

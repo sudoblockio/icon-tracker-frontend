@@ -20,6 +20,21 @@ const TABLE_HEADERS = [
     { name: ["Monthly Rewards", "ICX/USD"] },
     { name: ["Votes"] }]
 
+const Loader = ({ height }) => {
+    return (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: height
+            }}>
+            <ClipLoader size={30} color="#299fac" />
+        </div>
+    )
+}
+
+
 export default function VotingPage(props) {
     const { walletAddress } = props
     const {
@@ -70,6 +85,8 @@ export default function VotingPage(props) {
         totVotedPercent += Number(item.votePercent) || 0
     })
 
+
+
     return (
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
@@ -78,12 +95,13 @@ export default function VotingPage(props) {
                         <h4 >
                             Voting
                             <span
+                                onClick={toggleAutoVotePopup}
                                 className={style.autoBtn}>
-                                <span onClick={toggleAutoVotePopup}>
+                                <span >
                                     <CiCircleCheck />  Auto Vote
                                 </span>
                             </span>
-                            <AutoVotePopup isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
+                            <AutoVotePopup maxVoteAmt={state.maxVoteAmt} isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
 
                         </h4>
                     </div>
@@ -98,15 +116,7 @@ export default function VotingPage(props) {
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
                                     {state.isLoadingPreps ?
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                minHeight: "500px"
-                                            }}>
-                                            <ClipLoader size={30} color="#299fac" />
-                                        </div>
+                                        <Loader height={"500px"} />
                                         :
                                         <>
                                             <thead>
@@ -147,14 +157,15 @@ export default function VotingPage(props) {
                                 Voted Candidates
                             </div>
                             <div className={style.tableWrapper}>
-                                <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
+                                {state.isLoadingPreps ? <Loader height={"400px"} /> : <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
                                     handleChangeVoteAmt={handleChangeVoteAmt}
                                     handleChangeVotePercent={handleChangeVotePercent}
                                     state={state}
                                     handleDeleteVoted={handleDeleteVoted}
                                     onClose={toggleIsOpenPopup}
                                     onSubmit={handleSubmitVoting}
-                                />
+                                />}
+
                             </div>
                             <div className={style.footer}>
                                 <div>Total</div>

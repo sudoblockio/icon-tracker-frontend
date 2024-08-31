@@ -155,9 +155,11 @@ export function useVotingPage(address, history) {
                 params.nid
             )
             await requestJsonRpc(rawTx.params)
-            toast.success("Successful")
+            toast.success("Transaction success")
+            init();
             toggleIsOpenPopup();
         } catch (err) {
+            toast.error("Transaction failed")
             console.log(err)
         }
     }
@@ -199,62 +201,60 @@ export function useVotingPage(address, history) {
     }, [state.totVotedAmt, state.totVotedPercent])
 
 
+    async function init() {
+        try {
+            const selectedMap = {}
 
+            setState(prev => ({ ...prev, isLoadingPreps: true }))
+
+            const respPreps = await getPReps()
+            const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
+
+            const totalVoted = !totalVotedLoop ?
+                0 :
+                IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+
+            const { data: dataPreps } = respPreps
+            dataPreps.forEach(prep => {
+                prep.commissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
+                prep.overBondPercent = 100 - Number(prep.bond_percent)
+                prep.isJailed = parseInt(prep.jail_flags, 16) !== 0
+            })
+            const delegationData = await getDelegation({ address })
+            const dataStake = await getStake(address)
+            const stakedAmount = Number(dataStake.stake / Math.pow(10, 18))
+
+            delegationData.delegations.forEach(({ address, value }) => {
+                const foundPrep = findDelegInPreps(address, dataPreps)
+                const voteAmt = Number(value / Math.pow(10, 18))
+
+                selectedMap[address] = {
+                    ...foundPrep,
+                    voteAmt,
+                    votePercent: calculatePercentageWithoutTrunc(voteAmt, stakedAmount)
+                }
+            })
+
+            setState((prev) => ({
+                ...prev,
+                delegatedOriginal: delegationData.delegations,
+                preps: dataPreps,
+                filteredPreps: dataPreps,
+                selectedMap,
+                maxVoteAmt: stakedAmount,
+                totAvailVoteAmt: stakedAmount,
+                totVotedAmt: 0,
+                stakedAmount,
+                totalVoted,
+                isLoadingPreps: false
+            }))
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
-        async function init() {
-            try {
-                const selectedMap = {}
-
-                setState(prev => ({ ...prev, isLoadingPreps: true }))
-
-                const respPreps = await getPReps()
-                const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
-
-                const totalVoted = !totalVotedLoop ?
-                    0 :
-                    IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-
-                const { data: dataPreps } = respPreps
-                dataPreps.forEach(prep => {
-                    prep.commissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
-                    prep.overBondPercent = 100 - Number(prep.bond_percent)
-                    prep.isJailed = parseInt(prep.jail_flags, 16) !== 0
-                })
-                const delegationData = await getDelegation({ address })
-                const dataStake = await getStake(address)
-                const stakedAmount = Number(dataStake.stake / Math.pow(10, 18))
-
-                delegationData.delegations.forEach(({ address, value }) => {
-                    const foundPrep = findDelegInPreps(address, dataPreps)
-                    const voteAmt = Number(value / Math.pow(10, 18))
-
-                    selectedMap[address] = {
-                        ...foundPrep,
-                        voteAmt,
-                        votePercent: calculatePercentageWithoutTrunc(voteAmt, stakedAmount)
-                    }
-                })
-
-                setState((prev) => ({
-                    ...prev,
-                    delegatedOriginal: delegationData.delegations,
-                    preps: dataPreps,
-                    filteredPreps: dataPreps,
-                    selectedMap,
-                    maxVoteAmt: stakedAmount,
-                    totAvailVoteAmt: stakedAmount,
-                    totVotedAmt: 0,
-                    stakedAmount,
-                    totalVoted,
-                    isLoadingPreps: false
-                }))
-
-            } catch (err) {
-                console.log(err)
-            }
-        }
-
         init()
     }, [address,])
 
