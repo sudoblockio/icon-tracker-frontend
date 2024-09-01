@@ -85,8 +85,6 @@ export default function VotingPage(props) {
         totVotedPercent += Number(item.votePercent) || 0
     })
 
-
-
     return (
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
@@ -95,6 +93,7 @@ export default function VotingPage(props) {
                         <h4 >
                             Voting
                             <button
+                                disabled={state.isLoadingPreps}
                                 onClick={toggleAutoVotePopup}
                                 className={style.autoBtn}
                             >
@@ -103,7 +102,11 @@ export default function VotingPage(props) {
                                 </span>
                                 <span>Auto Vote</span>
                             </button>
-                            <AutoVotePopup maxVoteAmt={state.maxVoteAmt} isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
+                            <AutoVotePopup
+                                maxVoteAmt={state.maxVoteAmt}
+                                isOpen={isOpenAutoVotePopup}
+                                onClose={toggleAutoVotePopup}
+                                onSubmit={handleSubmitAutoVote} />
 
                         </h4>
                     </div>
@@ -114,6 +117,7 @@ export default function VotingPage(props) {
                                 className="txt-type-search search-type-fix"
                                 placeholder='Search P-rep name/address'
                                 onChange={handleChangeSearch}
+                                value={state.searchString}
                             />
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
@@ -169,6 +173,7 @@ export default function VotingPage(props) {
                                         handleDeleteVoted={handleDeleteVoted}
                                         onClose={toggleIsOpenPopup}
                                         onSubmit={handleSubmitVoting}
+                                        handleChangeSearch={handleChangeSearch}
                                     />}
 
                             </div>

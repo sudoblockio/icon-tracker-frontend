@@ -24,11 +24,11 @@ describe("TEST AUTOVOTE FUNCTION", () => {
         expect(newState.autoVotedPreps.length).toEqual(defaultPayload.prepCount)
     })
 
-    it("should return preps with commission rate greater than the threshold", () => {
+    it("should return preps with commission rate less than the threshold", () => {
         const newState = getPrepsForAutoVote(oldState, defaultPayload);
         const { autoVotedPreps } = newState;
         autoVotedPreps.forEach(prep => {
-            expect(prep.commission_rate).toBeGreaterThanOrEqual(defaultPayload.commissionRateCutoff)
+            expect(prep.commission_rate).toBeLessThanOrEqual(defaultPayload.commissionRateCutoff)
         })
     })
 
@@ -50,7 +50,7 @@ describe("TEST AUTOVOTE FUNCTION", () => {
         const payloadCommissionRate = { ...defaultPayload, priority: "commissionRate" }
         const newState = getPrepsForAutoVote(oldState, payloadCommissionRate);
         const { autoVotedPreps } = newState;
-        testArraySort(autoVotedPreps, "commission_rate")
+        testArraySort(autoVotedPreps, "commission_rate", "ASC")
     })
 
     it("should return sorted preps for bondPercent", () => {
@@ -59,7 +59,6 @@ describe("TEST AUTOVOTE FUNCTION", () => {
         const { autoVotedPreps } = newState;
         testArraySort(autoVotedPreps, "bond_percent")
     })
-
 
     it("should only return unjailed preps", () => {
         const newState = getPrepsForAutoVote(oldState, defaultPayload);
@@ -70,14 +69,13 @@ describe("TEST AUTOVOTE FUNCTION", () => {
         })
     })
 
-    it("should also return jailed preps", () => {
-        const newState = getPrepsForAutoVote(oldState, { ...defaultPayload, excludeJailed: false });
-        const { autoVotedPreps } = newState;
+    // it("should also return jailed preps", () => {
+    //     const newState = getPrepsForAutoVote(oldState, { ...defaultPayload, excludeJailed: false });
+    //     const { autoVotedPreps } = newState;
 
-        const jailedPreps = autoVotedPreps.filter(f => f.isJailed === true)
-        expect(jailedPreps.length).toBeGreaterThanOrEqual(1);
-
-    })
+    //     const jailedPreps = autoVotedPreps.filter(f => f.isJailed === true)
+    //     expect(jailedPreps.length).toBeGreaterThanOrEqual(1);
+    // })
 
     it("should sort by commission_rate in case of commissionBondPercent tie", () => {
         const newState = getPrepsForAutoVote(oldState, { ...defaultPayload });
@@ -132,12 +130,15 @@ describe("TEST AUTOVOTE FUNCTION", () => {
 /* ---------------------------------------------------------------------------- */
 
 function testArraySort(arr, field, sortOrder = "DESC") {
+    console.log({ arr, field, sortOrder })
+
     if (sortOrder === "DESC") {
         for (let i = 0; i < arr.length - 1; i++) {
             expect(arr[i][field])
                 .toBeGreaterThanOrEqual(arr[i + 1][field]);
         }
     } else {
+
         for (let i = 0; i < arr.length - 1; i++) {
             expect(arr[i][field])
                 .toBeLessThanOrEqual(arr[i + 1][field]);

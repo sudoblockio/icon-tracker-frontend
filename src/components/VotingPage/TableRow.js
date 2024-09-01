@@ -48,7 +48,7 @@ class TableRow extends Component {
             badgeText = 'Jail';
             badgeClass = 'jail';
         }
-        return <div><span className={`jail-badge ${badgeClass}`}>{badgeText}</span></div>;
+        return <div><span style={{ marginTop: 0, display: "inline-flex !important", alignItems: "centre !important" }} className={`jail-badge ${badgeClass}`}>{badgeText}</span></div>;
     }
     goAddress = address => {
         this.props.history.push('/address/' + address)
@@ -147,7 +147,7 @@ class TableRow extends Component {
                         </span>
                         <span className={styles.nameAddr}>
                             <span>
-                                {mainBadge}
+                                {mainBadge} {jailBadge}
                             </span>
                             <span className={clsx(styles.name)}>
                                 {name}

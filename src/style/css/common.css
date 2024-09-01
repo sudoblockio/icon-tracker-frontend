@@ -3389,16 +3389,20 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
     background: #e6f8fa;
     font-size: 9px;
     color: #00a1b3;
-    padding: 4px 10px 4px 6px;
+    padding: 0 !important;
+    padding-inline: 8px !important;
+    padding-top: 3px !important;
+    /* padding: 4px 10px 4px 6px; */
     display: inline-block;
 }
 .table-typeP .prep-tag i {
     width: 6px;
     height: 6px;
     background: #1aaaba;
-    border-radius: 50%;
+    border-radius: 10px;
     display: inline-block;
     margin-right: 6px;
+    margin-top: 2px;
 }
 .table-typeP .prep-tag.off {
     border: 1px solid #d8edf0;
@@ -3416,13 +3420,16 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
 .jail-badge {
     display: inline-block;
     color: #1aaaba;
-    padding: 4px 10px 4px 6px;
-    border-radius: 4px;
+    /* padding: 4px 10px 4px 6px; */
+    margin: auto;
+    padding-inline: 8px;
+    border-radius: 10px;
     font-size: 9px;
     border: 1px solid #d8edf0;
     vertical-align: middle;
     margin-top: 10px;
     height: 18px;
+    padding-top: 3px !important;
 }
 
 .jail-badge:before {
@@ -3432,7 +3439,8 @@ table.table-typeP th .itag i{width:14px; height: 14px; background-position: -150
     background: #1aaaba;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 4px;
+    margin-top: 2px;
 }
 
 .jail-badge.jail {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import style from "./AutoVotePopup.module.scss"
 
 import parse from 'html-react-parser';
@@ -56,6 +56,8 @@ const INPUTS = [
 ]
 
 export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt }) {
+    const voteAmtRef = useRef();
+
     const [state, setState] = useState({
         formData: {
             prepCount: INPUT_DEFAULT_VALUES["prepCount"],
@@ -71,7 +73,7 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
     });
 
 
-    function handleChangeCheckbox(type) {
+    function handleChangeCheckbox() {
         setState(prev => ({ ...prev, formData: { ...prev.formData, excludeJailed: !prev.formData.excludeJailed } }))
     }
 
@@ -103,9 +105,6 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                 }))
             }
         }
-
-
-
         setState(prev => ({ ...prev, formData: { ...prev.formData, [name]: Number(value) } }))
     }
 
@@ -120,10 +119,15 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
     }
 
     useEffect(() => {
-        handleChangePriority(PRIORITY_OPTS[1])
+        handleChangePriority(PRIORITY_OPTS[0])
     }, [])
 
     const isSubmitDisabled = state.formErrors.voteAmt.isError
+
+    useEffect(() => {
+        console.log(voteAmtRef)
+        voteAmtRef.current.focus();
+    }, [isOpen])
 
     return (
         <GenericModalV2 isOpen={isOpen} onClose={onClose}>
@@ -145,8 +149,7 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                                             </span>
                                             <a id={`${name}-hover`}><MdInfoOutline /></a>
                                         </label>
-                                        <input step="any" type="number" name={name} defaultValue={defaultValue} />
-
+                                        <input ref={name === "voteAmt" ? voteAmtRef : null} step="any" type="number" name={name} defaultValue={defaultValue} />
                                         {
                                             name === "voteAmt" && state.formErrors.voteAmt.isError &&
                                             <p className={style.error}>

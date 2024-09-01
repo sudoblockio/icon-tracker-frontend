@@ -38,6 +38,17 @@
         }
     }
 
+    button:disabled {
+        background-color: rgb(180, 180, 180) !important;
+        cursor: default !important;
+        border: none;
+        color: white;
+
+        &:hover {
+            background-color: none;
+        }
+    }
+
     .tablesWrapper {
         $prepWidth: 55%;
         $prepTableHeight: 580px;
