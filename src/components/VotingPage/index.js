@@ -94,13 +94,15 @@ export default function VotingPage(props) {
                     <div className={style.header}>
                         <h4 >
                             Voting
-                            <span
+                            <button
                                 onClick={toggleAutoVotePopup}
-                                className={style.autoBtn}>
-                                <span >
-                                    <CiCircleCheck />  Auto Vote
+                                className={style.autoBtn}
+                            >
+                                <span>
+                                    <CiCircleCheck size={18} />
                                 </span>
-                            </span>
+                                <span>Auto Vote</span>
+                            </button>
                             <AutoVotePopup maxVoteAmt={state.maxVoteAmt} isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
 
                         </h4>
@@ -157,14 +159,17 @@ export default function VotingPage(props) {
                                 Voted Candidates
                             </div>
                             <div className={style.tableWrapper}>
-                                {state.isLoadingPreps ? <Loader height={"400px"} /> : <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
-                                    handleChangeVoteAmt={handleChangeVoteAmt}
-                                    handleChangeVotePercent={handleChangeVotePercent}
-                                    state={state}
-                                    handleDeleteVoted={handleDeleteVoted}
-                                    onClose={toggleIsOpenPopup}
-                                    onSubmit={handleSubmitVoting}
-                                />}
+                                {state.isLoadingPreps ?
+                                    <Loader height={"500px"} />
+                                    :
+                                    <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
+                                        handleChangeVoteAmt={handleChangeVoteAmt}
+                                        handleChangeVotePercent={handleChangeVotePercent}
+                                        state={state}
+                                        handleDeleteVoted={handleDeleteVoted}
+                                        onClose={toggleIsOpenPopup}
+                                        onSubmit={handleSubmitVoting}
+                                    />}
 
                             </div>
                             <div className={style.footer}>
