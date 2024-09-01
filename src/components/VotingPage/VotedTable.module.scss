@@ -55,6 +55,7 @@
         .nameAddr {
             display: inline-flex;
             flex-direction: column;
+            cursor: pointer;
 
             span.addr {
                 color: rgba(1, 1, 1, 0.4);
