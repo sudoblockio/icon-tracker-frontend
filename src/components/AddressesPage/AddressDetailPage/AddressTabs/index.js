@@ -10,7 +10,7 @@ import AddressReward from './AddressReward'
 import AddressBonded from './AddressBonded'
 import AddressBonders from './AddressBonders'
 import { TX_TYPE, ADDRESS_TABS } from '../../../../utils/const'
-import { NoBox, TabTable } from '../../../../components'
+import { NoBox, TabTable, TabTable2, TabTable3 } from '../../../../components'
 import { addressTxList } from '../../../../redux/store/addresses'
 import {
     addressRewardList,
@@ -243,7 +243,7 @@ function AddressTabs(props) {
     }, [props.match.params.addressId])
 
     return (
-        <TabTable
+        <TabTable2
             {...props}
             onClickTab={handleClickTab}
             TABS={tabs}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import TransactionEvents from './TransactionEvents'
 import TransactionInternalTransactions from './TransactionInternalTransactions'
-import { NoBox, TabTable } from '../../../../components'
+import { NoBox, TabTable, TabTable2 } from '../../../../components'
 import { TX_TYPE, TRANSACTION_TABS } from '../../../../utils/const'
 
 class TransactionTabs extends Component {
@@ -28,7 +28,7 @@ class TransactionTabs extends Component {
         }
         TABS = TRANSACTION_TABS
         return (
-            <TabTable
+            <TabTable2
                 {...this.props}
                 onClickTab={this.props.changeTab}
                 TABS={TABS}
