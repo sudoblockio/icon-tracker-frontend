@@ -85,8 +85,6 @@ export default function VotingPage(props) {
         totVotedPercent += Number(item.votePercent) || 0
     })
 
-
-
     return (
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
@@ -94,14 +92,21 @@ export default function VotingPage(props) {
                     <div className={style.header}>
                         <h4 >
                             Voting
-                            <span
+                            <button
+                                disabled={state.isLoadingPreps}
                                 onClick={toggleAutoVotePopup}
-                                className={style.autoBtn}>
-                                <span >
-                                    <CiCircleCheck />  Auto Vote
+                                className={style.autoBtn}
+                            >
+                                <span>
+                                    <CiCircleCheck size={18} />
                                 </span>
-                            </span>
-                            <AutoVotePopup maxVoteAmt={state.maxVoteAmt} isOpen={isOpenAutoVotePopup} onClose={toggleAutoVotePopup} onSubmit={handleSubmitAutoVote} />
+                                <span>Auto Vote</span>
+                            </button>
+                            <AutoVotePopup
+                                maxVoteAmt={state.maxVoteAmt}
+                                isOpen={isOpenAutoVotePopup}
+                                onClose={toggleAutoVotePopup}
+                                onSubmit={handleSubmitAutoVote} />
 
                         </h4>
                     </div>
@@ -112,6 +117,7 @@ export default function VotingPage(props) {
                                 className="txt-type-search search-type-fix"
                                 placeholder='Search P-rep name/address'
                                 onChange={handleChangeSearch}
+                                value={state.searchString}
                             />
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
@@ -157,14 +163,18 @@ export default function VotingPage(props) {
                                 Voted Candidates
                             </div>
                             <div className={style.tableWrapper}>
-                                {state.isLoadingPreps ? <Loader height={"400px"} /> : <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
-                                    handleChangeVoteAmt={handleChangeVoteAmt}
-                                    handleChangeVotePercent={handleChangeVotePercent}
-                                    state={state}
-                                    handleDeleteVoted={handleDeleteVoted}
-                                    onClose={toggleIsOpenPopup}
-                                    onSubmit={handleSubmitVoting}
-                                />}
+                                {state.isLoadingPreps ?
+                                    <Loader height={"500px"} />
+                                    :
+                                    <VotedTable updateAvailVoteAmt={updateAvailVoteAmt}
+                                        handleChangeVoteAmt={handleChangeVoteAmt}
+                                        handleChangeVotePercent={handleChangeVotePercent}
+                                        state={state}
+                                        handleDeleteVoted={handleDeleteVoted}
+                                        onClose={toggleIsOpenPopup}
+                                        onSubmit={handleSubmitVoting}
+                                        handleChangeSearch={handleChangeSearch}
+                                    />}
 
                             </div>
                             <div className={style.footer}>

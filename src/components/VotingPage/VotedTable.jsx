@@ -13,7 +13,7 @@ export default function VotedTable({
     updateAvailVoteAmt,
     handleChangeVotePercent,
     handleDeleteVoted,
-    onSubmit
+    handleChangeSearch
 }) {
     const { selectedMap } = state;
 
@@ -22,6 +22,12 @@ export default function VotedTable({
     function handleInputOnFocus(index, votedAmt) {
         setOpenRow(index)
         updateAvailVoteAmt(Number(votedAmt))
+    }
+
+
+    function onClickName(name) {
+        handleChangeSearch({ target: { value: "" } })
+        handleChangeSearch({ target: { value: name.toLowerCase() } })
     }
 
     // const getMainBadge = (grade, node_state) => {
@@ -49,6 +55,8 @@ export default function VotedTable({
     //     totVotedPercent += Number(item.votePercent)
     // })
 
+
+
     return (
         <table className={clsx("table-typeP", style.wrapper)}>
             <thead>
@@ -73,7 +81,7 @@ export default function VotedTable({
                             </td>
                             <td className={Number(value.grade) > 2 || value.grade === '0x3' ? 'black' : 'on'}>
                                 <span className={style.nameRow}>
-                                    <span className={style.nameAddr}>
+                                    <span onClick={onClickName.bind(this, value.name)} className={style.nameAddr}>
                                         <span>
                                             {value.name}
                                         </span>
@@ -113,7 +121,7 @@ export default function VotedTable({
                                                 const { value: percent } = e.target
                                                 handleChangeVotePercent(value.address, percent)
                                             }}
-                                            value={value.votePercent}
+                                            value={parseFloat((value.votePercent).toFixed(2))}
                                             type="text"
                                             className={clsx('txt-type-search')}
                                         />

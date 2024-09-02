@@ -56,6 +56,10 @@
             flex-direction: column;
             padding-left: 1em;
 
+            span:first-child {
+                display: inline-flex;
+            }
+
             span.name {
                 padding-top: 5px;
             }

@@ -6,7 +6,6 @@ function getEventsByName(ABI) {
             eventsByName[name.toLowerCase()] = item;
         }
     })
-
     return eventsByName;
 }
 
@@ -15,12 +14,13 @@ function getParsedLog(log, eventsByName) {
     const indexed = JSON.parse(log.indexed);
     const eventName = indexed[0].split("(")[0];
     const paramValues = indexed.splice(1);
-    const logSignature = eventsByName[eventName.toLowerCase()];
 
+
+    const logSignature = eventsByName[eventName.toLowerCase()];
 
     const parsed = {};
 
-    const params = logSignature.inputs.map((input, index) => ({ ...input, value: paramValues[index] }))
+    const params = logSignature?.inputs?.map((input, index) => ({ ...input, value: paramValues[index] })) || []
     params.forEach(item => {
         if (item.value) {
             let value = item.value;
