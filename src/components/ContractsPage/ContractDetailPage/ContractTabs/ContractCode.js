@@ -14,6 +14,9 @@ import {
 } from '../../../../redux/store/iiss'
 
 import { CopyButton } from '../../../../components'
+import { getSegmentedABI } from '../../../../libs/abi-parser'
+import { FaRegCircleCheck } from "react-icons/fa6";
+
 
 class ContractCode extends Component {
     constructor(props) {
@@ -22,9 +25,11 @@ class ContractCode extends Component {
             activeLink: '',
             updatedLink: '',
             cxABI: '',
-            activeTabIndex: 0
+            segmentedAbi: [],
+            activeTabIndex: 1
         }
     }
+
 
     async componentDidMount() {
         const { contract } = this.props
@@ -33,7 +38,8 @@ class ContractCode extends Component {
         this.getDownloadLink()
         const cxABICode = await getContractABIFromRPC(address)
         const srcCodeLink = await getSrcCodeLink(address)
-        this.setState({ activeLink: srcCodeLink, cxABI: cxABICode })
+        const segmentedAbi = getSegmentedABI(cxABICode);
+        this.setState({ activeLink: srcCodeLink, cxABI: cxABICode, segmentedAbi })
     }
 
     getDownloadLink = async () => {
@@ -54,13 +60,11 @@ class ContractCode extends Component {
 
     render() {
         const { activeLink, updatedLink } = this.state
-        const { contract } = this.props
-        const { data } = contract
-        const { name, symbol, newVersion } = data
+        // const { contract } = this.props
+        // const { data } = contract
+        // const { name, symbol, newVersion } = data
 
-
-
-        const TABS = [{ name: "Contract ABI", key: "abi" }, { name: "Segemented ABI", key: "segmented" }]
+        const TABS = [{ name: "Segemented ABI", key: "segmented" }, { name: "Contract ABI", key: "abi" }]
 
         return (
             <div className={clsx("contents", style.wrapper)}>
@@ -81,41 +85,94 @@ class ContractCode extends Component {
                 </div>
 
                 <div className={clsx(style.codeBox, "code-box api")}>
-                    {this.state.activeTabIndex === 0 &&
-                        <div className="scroll">
+                    {this.state.activeTabIndex === 1 &&
+                        <div>
                             <div className={style.copyBtn}>
                                 <CopyButton
                                     data={JSON.stringify(this.state.cxABI)}
                                     title={'Copy ABI'}
-                                    disabled={''}
+                                    disabled={false}
                                 />
                             </div>
 
                             {this.state.cxABI ?
-                                <p className="txt" style={{ paddingInline: "1em !important" }}>
+                                <div className={"json-abi"}>
                                     <ReactJson src={this.state.cxABI}
                                         name={null}
-                                        collapsed={4}
+                                        collapsed={2}
                                         displayObjectSize={false}
                                         displayDataTypes={false}
                                         enableClipboard={false}
                                         displayArrayKey={false}
                                         quotesOnKeys={false}
                                         sortKeys={true}
-                                        indentWidth={4} />
-                                </p>
+                                        indentWidth={4}
+                                    />
+                                </div>
                                 :
                                 <p style={{ paddingInline: "1em !important" }}> loading ... </p>}
                         </div>}
 
 
-                    {this.state.activeTabIndex === 1 &&
-                        <div className={style.segmented}>Segmented</div>}
+                    {this.state.activeTabIndex === 0 &&
+                        <div className={style.segmented}>
+                            <table className={clsx("table-typeC", style.segmentTable)}>
+                                <thead>
+                                    <tr>
+                                        <th> Name </th>
+                                        <th> Type </th>
+                                        <th> Inputs </th>
+                                        <th> Outputs </th>
+                                    </tr>
+                                </thead>
 
+                                <tbody>
+                                    {this.state.segmentedAbi.map(i =>
+                                        <tr>
+                                            <td>
+                                                {i.name}
+                                            </td>
+                                            <td className={style.type}>
+                                                {i.type}
+                                            </td>
+                                            <InputOutputRow abiItem={i} type="inputs" />
+                                            <td className={style.output}>
+                                                {i.outputs && i.outputs.length ? i.outputs[0].type : ""}
+                                            </td>
+                                        </tr>)}
+                                </tbody>
+                            </table>
+                        </div>}
                 </div>
             </div>
         )
     }
+}
+
+const InputOutputRow = ({ abiItem, type }) => {
+    return <td className={style.inputOutput}>
+        {abiItem[type]?.length ?
+            <table className={style.internalTable}>
+                <tr>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>indexed</th>
+                </tr>
+                {abiItem[type].map(({ name, indexed, type }) =>
+                    <tr>
+                        <td>{name}</td>
+                        <td>{type}</td>
+                        <td>
+                            {parseInt(indexed, 16) === 1 ? <FaRegCircleCheck /> : ""}
+                        </td>
+                    </tr>
+                )}
+            </table>
+            :
+            <span>
+            </span>
+        }
+    </td>
 }
 
 // const DownloadLink = ({ link, name }) => {

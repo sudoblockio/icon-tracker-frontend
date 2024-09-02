@@ -69,8 +69,10 @@
         border-left: none;
         border-right: none;
         border-bottom: none;
+        height: fit-content;
 
         position: relative;
+
         .copyBtn {
             position: absolute;
             right: 10px;
@@ -80,7 +82,78 @@
         }
 
         .segmented {
-            padding: 1em;
+            height: 100%;
+            overflow-y: auto;
+
+            > table {
+                th,
+                td {
+                    padding-left: 19px;
+                    text-align: left;
+                }
+
+                th:nth-child(1) {
+                    width: 25em;
+                }
+
+                td.type {
+                    width: 10em;
+                    text-align: center;
+                }
+
+                td.inputOutput {
+                    min-width: 20em;
+                    max-width: 20em;
+                    text-align: center;
+                }
+
+                td.output {
+                    width: 10em;
+                }
+            }
+
+            table {
+                height: 100%;
+
+                table {
+                    th {
+                        color: rgb(37, 37, 37);
+                        font-weight: 600;
+                        padding-bottom: 1em !important;
+                    }
+
+                    td {
+                        border-bottom: none;
+                    }
+
+                    th,
+                    td {
+                        padding-inline: 15px;
+                        padding-block: 5px;
+                        text-align: left;
+                        border: none;
+                    }
+
+                    td:first-child {
+                        min-width: 13em;
+                        width: 13em;
+                        max-width: 13em;
+                    }
+                    td:nth-child(2) {
+                        min-width: 8em;
+                        width: 8em;
+                        max-width: 8em;
+                    }
+
+                    th:last-child,
+                    td:last-child {
+                        svg {
+                            margin-left: 15px;
+                            color: rgb(95, 145, 253);
+                        }
+                    }
+                }
+            }
         }
     }
 }

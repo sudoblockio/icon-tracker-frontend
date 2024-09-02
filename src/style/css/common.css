@@ -6260,6 +6260,10 @@ h2.tx-title {
     font-weight: bold;
 }
 
+.json-abi > * > .expanded-icon {
+    display: none !important;
+}
+
 @-webkit-keyframes bubble {
     0% {
         -webkit-transform: translateY(5px);
