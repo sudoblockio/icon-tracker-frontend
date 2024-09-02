@@ -21,8 +21,6 @@ class TxBottomComponent extends Component {
             wallet,
             walletAddress,
         } = this.props
-        console.log('props on TxBottomComponent')
-        console.log(this.props)
         const { data, listSize, totalSize, loading } = txData
 
         let totalCount = txData.headers ? txData.headers['x-total-count'] : 0
@@ -39,7 +37,6 @@ class TxBottomComponent extends Component {
         } else tableBodyData = txData.data
 
         const Content = () => {
-            console.log(txType, 'tx comp props bonder')
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if (txTypeIsBonderOrBonded(txType)) {
@@ -95,9 +92,9 @@ class TxBottomComponent extends Component {
                             listSize={Number(tableBodyData.length)}
                             totalSize={
                                 txType === 'addressvoters' ||
-                                txType === 'addressreward' ||
-                                txType === 'addresstokentx' ||
-                                txType === 'addressinternaltx'
+                                    txType === 'addressreward' ||
+                                    txType === 'addresstokentx' ||
+                                    txType === 'addressinternaltx'
                                     ? totalCount
                                     : totalSize
                             }
