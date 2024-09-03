@@ -13,7 +13,7 @@ import {
     getContractABIFromRPC,
 } from '../../../../redux/store/iiss'
 
-import { CopyButton } from '../../../../components'
+import { CopyButton, LoadingComponent } from '../../../../components'
 import { getSegmentedABI } from '../../../../libs/abi-parser'
 import { FaRegCircleCheck } from "react-icons/fa6";
 
@@ -26,20 +26,35 @@ class ContractCode extends Component {
             updatedLink: '',
             cxABI: '',
             segmentedAbi: [],
-            activeTabIndex: 1
+            activeTabIndex: 0
         }
     }
 
+    fetchData = async (address) => {
+        if (!address) return;
+
+        this.getDownloadLink();
+        const cxABICode = await getContractABIFromRPC(address);
+        const srcCodeLink = await getSrcCodeLink(address);
+        const segmentedAbi = getSegmentedABI(cxABICode);
+        this.setState({ activeLink: srcCodeLink, cxABI: cxABICode, segmentedAbi });
+    };
 
     async componentDidMount() {
-        const { contract } = this.props
-        const { data } = contract
-        const { address } = data
-        this.getDownloadLink()
-        const cxABICode = await getContractABIFromRPC(address)
-        const srcCodeLink = await getSrcCodeLink(address)
-        const segmentedAbi = getSegmentedABI(cxABICode);
-        this.setState({ activeLink: srcCodeLink, cxABI: cxABICode, segmentedAbi })
+        const { contract } = this.props;
+        const { data } = contract;
+        const { address } = data;
+        this.fetchData(address);
+    }
+
+    async componentDidUpdate(prevProps) {
+        const { contract } = this.props;
+        const { data } = contract;
+        const { address } = data;
+
+        if (prevProps.contract.data.address !== address) {
+            this.fetchData(address);
+        }
     }
 
     getDownloadLink = async () => {
@@ -88,11 +103,12 @@ class ContractCode extends Component {
                     {this.state.activeTabIndex === 1 &&
                         <div>
                             <div className={style.copyBtn}>
-                                <CopyButton
+                                {this.state.cxABI && <CopyButton
                                     data={JSON.stringify(this.state.cxABI)}
                                     title={'Copy ABI'}
                                     disabled={false}
-                                />
+                                />}
+
                             </div>
 
                             {this.state.cxABI ?
@@ -110,39 +126,41 @@ class ContractCode extends Component {
                                     />
                                 </div>
                                 :
-                                <p style={{ paddingInline: "1em !important" }}> loading ... </p>}
+                                <div style={{ paddingInline: "1em !important", height: "10em" }}> <LoadingComponent /> </div>}
                         </div>}
 
 
                     {this.state.activeTabIndex === 0 &&
                         <div className={style.segmented}>
-                            <table className={clsx("table-typeC", style.segmentTable)}>
-                                <thead>
-                                    <tr>
-                                        <th> Name </th>
-                                        <th> Type </th>
-                                        <th> Inputs </th>
-                                        <th> Outputs </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {this.state.segmentedAbi.map(i =>
+                            {this.state.cxABI ?
+                                <table className={clsx("table-typeC", style.segmentTable)}>
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                {i.name}
-                                            </td>
-                                            <td className={style.type}>
-                                                {i.type}
-                                            </td>
-                                            <InputOutputRow abiItem={i} type="inputs" />
-                                            <td className={style.output}>
-                                                {i.outputs && i.outputs.length ? i.outputs[0].type : ""}
-                                            </td>
-                                        </tr>)}
-                                </tbody>
-                            </table>
-                        </div>}
+                                            <th> Name </th>
+                                            <th> Type </th>
+                                            <th> Inputs </th>
+                                            <th> Outputs </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {this.state.segmentedAbi.map(i =>
+                                            <tr>
+                                                <td>
+                                                    {i.name}
+                                                </td>
+                                                <td className={style.type}>
+                                                    {i.type}
+                                                </td>
+                                                <InputOutputRow abiItem={i} type="inputs" />
+                                                <td className={style.output}>
+                                                    {i.outputs && i.outputs.length ? i.outputs[0].type : ""}
+                                                </td>
+                                            </tr>)}
+                                    </tbody>
+                                </table> : <div style={{ paddingInline: "1em !important", height: "10em" }}> <LoadingComponent /> </div>}
+                        </div>
+                    }
                 </div>
             </div>
         )

@@ -16,6 +16,7 @@
             height: 35px;
             background-color: white !important;
             border-radius: 5px;
+            cursor: pointer;
 
             &:first-child {
                 margin-right: 1em;
@@ -79,6 +80,10 @@
             top: 10px;
             display: flex;
             justify-content: flex-end;
+
+            button {
+                z-index: 100 !important;
+            }
         }
 
         .segmented {
