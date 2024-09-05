@@ -101,11 +101,13 @@
                     width: 25em;
                 }
 
+                th.type,
                 td.type {
                     width: 10em;
                     text-align: center;
                 }
 
+                th.inputOutput,
                 td.inputOutput {
                     min-width: 20em;
                     max-width: 20em;
