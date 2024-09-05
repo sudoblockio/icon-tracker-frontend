@@ -137,15 +137,15 @@ class ContractCode extends Component {
                                     <thead>
                                         <tr>
                                             <th> Name </th>
-                                            <th> Type </th>
-                                            <th> Inputs </th>
+                                            <th className={style.type}> Type </th>
+                                            <th className={style.inputOutput}> Inputs </th>
                                             <th> Outputs </th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         {this.state.segmentedAbi.map(i =>
-                                            <tr>
+                                            <tr >
                                                 <td>
                                                     {i.name}
                                                 </td>
