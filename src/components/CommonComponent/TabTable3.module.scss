@@ -1,0 +1,14 @@
+.wrapper {
+    .container {
+        border: 1px solid rgba(1, 1, 1, 0.2);
+        border-radius: 10px;
+    }
+
+    .tabHolder {
+        border-bottom: 1px solid rgba(1, 1, 1, 0.2) !important;
+
+        ul {
+            border: none;
+        }
+    }
+}

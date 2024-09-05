@@ -50,6 +50,7 @@ import AmountCell from './CommonComponent/AmountCell'
 import TxBottom from './CommonComponent/TxBottom'
 import TabTable from './CommonComponent/TabTable'
 import TabTable2 from './CommonComponent/TabTable2'
+import TabTable3 from './CommonComponent/TabTable3'
 
 import TxTableHead from './CommonPage/TxPage/TxTableHead'
 import TxTableBody from './CommonPage/TxPage/TxTableBody'
@@ -70,6 +71,7 @@ import ProposalListPage from './ProposalListPage'
 import ProposalSubmitPage from './ProposalSubmitPage'
 import ProposalDetailPage from './ProposalDetailPage'
 import VotingPage from './VotingPage'
+
 
 export {
     MainPage,
@@ -117,6 +119,7 @@ export {
     TxTableBody,
     TabTable,
     TabTable2,
+    TabTable3,
     TxPage,
     SearchPage,
     DetailPage,

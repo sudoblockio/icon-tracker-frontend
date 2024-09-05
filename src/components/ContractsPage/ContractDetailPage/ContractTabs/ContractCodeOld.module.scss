@@ -1,0 +1,35 @@
+.wrapper {
+    margin-top: -33px;
+
+    .tabs {
+        padding-block: 1em;
+        padding-left: 1em;
+
+        button {
+            padding-inline: 1em;
+            color: #1aaaba;
+            border: 1px solid #1aaaba;
+            height: 35px;
+            background-color: white !important;
+            border-radius: 5px;
+
+            &:first-child {
+                margin-right: 1em;
+            }
+
+            &.active {
+                background-color: #1aaaba !important;
+                color: white;
+            }
+        }
+    }
+
+    .codeBox {
+        margin: 0 !important;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+}

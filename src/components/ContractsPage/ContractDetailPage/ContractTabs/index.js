@@ -6,9 +6,12 @@ import ContractTokenTransfers from './ContractTokenTransfers'
 import ContractCode from './ContractCode'
 import ContractComponent from './ContractComponent'
 import ContractEvents from './ContractEvents'
-import { NoBox, TabTable2 } from '../../../../components'
+import { NoBox, TabTable2, TabTable3 } from '../../../../components'
 import { TX_TYPE, CONTRACT_TABS } from '../../../../utils/const'
 import { findTabIndex } from '../../../../utils/utils'
+
+import ReactJson from 'react-json-view'
+
 
 function ContractTabs(props) {
     const {
@@ -105,7 +108,7 @@ function ContractTabs(props) {
     ])
 
     return (
-        <TabTable2
+        <TabTable3
             onClickTab={handleTabClick}
             TABS={tabArrayStatus}
             on={on}
@@ -113,7 +116,7 @@ function ContractTabs(props) {
             TableContents={null}
             {...props}>
             {tabContent}
-        </TabTable2>
+        </TabTable3>
     )
 }
 

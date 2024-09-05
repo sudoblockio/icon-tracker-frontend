@@ -6,7 +6,6 @@ import { numberWithCommas } from '../../../utils/utils'
 class TxPageTitle extends Component {
     render() {
         const { txType, listSize, totalSize, goAllTx, fromAddr, toAddr } = this.props
-        console.log(this.props, 'le bottom props')
 
         const Content = () => {
             const listSizeNum = listSize || 0

@@ -6,8 +6,10 @@ import { getBondList } from '../../../redux/store/iiss'
 import BondersModal from '../../BondersUpdateModal/bondersUpdateModal'
 import BondedModal from '../../BondUpdateModal/bondUpdateModal'
 import customStyles from './TxBottomComponent.module.css'
+import clsx from 'clsx'
 
 class TxBottomComponent extends Component {
+
     render() {
         const {
             txData,
@@ -35,6 +37,7 @@ class TxBottomComponent extends Component {
         } else if (txType === 'addressdelegations') {
             tableBodyData = txData.delegations
         } else tableBodyData = txData.data
+
 
         const Content = () => {
             if (loading) {
@@ -83,7 +86,6 @@ class TxBottomComponent extends Component {
                 return <NoBox text={noBoxText} />
             } else {
                 const { from_address, to_address } = tableBodyData[0] || this.props.txData
-
                 return (
                     <div className="contents">
                         <TxBottomTitle
@@ -103,8 +105,8 @@ class TxBottomComponent extends Component {
                             toAddr={to_address}
                         />
 
-                        <div className="table-box">
-                            <table className={tableClassName}>
+                        <div className={clsx("table-box", this.props.noBorder && customStyles.noBorder)}   >
+                            <table className={tableClassName} >
                                 <thead>
                                     <TxTableHead txType={txType} />
                                 </thead>
@@ -125,7 +127,7 @@ class TxBottomComponent extends Component {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div >
                 )
             }
         }

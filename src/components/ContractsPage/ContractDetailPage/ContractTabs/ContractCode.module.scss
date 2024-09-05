@@ -1,0 +1,164 @@
+.wrapper {
+    margin-top: -33px;
+
+    .tabs {
+        padding: 1em;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            padding-inline: 1em;
+            color: #1aaaba;
+            border: 1px solid #1aaaba;
+            height: 35px;
+            background-color: white !important;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:first-child {
+                margin-right: 1em;
+            }
+
+            &.active {
+                background-color: #1aaaba !important;
+                color: white;
+            }
+        }
+
+        .downloadBtn {
+            display: flex;
+            align-items: center;
+
+            cursor: pointer;
+            svg {
+                margin-right: 4px;
+            }
+
+            a {
+                color: #1aaaba !important;
+                display: inline-flex;
+                align-items: center;
+                font-weight: 600;
+                font-size: 0.9rem;
+
+                &:link {
+                    color: #1aaaba !important;
+                }
+
+                &:visited {
+                    color: #1aaaba !important;
+                }
+
+                &:hover {
+                    color: #1aaaba !important;
+                }
+
+                &:active {
+                    color: #1aaaba !important;
+                }
+            }
+        }
+    }
+
+    .codeBox {
+        margin: 0 !important;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        height: fit-content;
+
+        position: relative;
+
+        .copyBtn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                z-index: 100 !important;
+            }
+        }
+
+        .segmented {
+            height: 100%;
+            overflow-y: auto;
+
+            > table {
+                th,
+                td {
+                    padding-left: 19px;
+                    text-align: left;
+                }
+
+                th:nth-child(1) {
+                    width: 25em;
+                }
+
+                td.type {
+                    width: 10em;
+                    text-align: center;
+                }
+
+                td.inputOutput {
+                    min-width: 20em;
+                    max-width: 20em;
+                    text-align: center;
+                }
+
+                td.output {
+                    width: 10em;
+                }
+            }
+
+            table {
+                height: 100%;
+
+                table {
+                    th {
+                        color: rgb(37, 37, 37);
+                        font-weight: 600;
+                        padding-bottom: 1em !important;
+                    }
+
+                    td {
+                        border-bottom: none;
+                    }
+
+                    th,
+                    td {
+                        padding-inline: 15px;
+                        padding-block: 5px;
+                        text-align: left;
+                        border: none;
+                    }
+
+                    td:first-child {
+                        min-width: 13em;
+                        width: 13em;
+                        max-width: 13em;
+                    }
+                    td:nth-child(2) {
+                        min-width: 8em;
+                        width: 8em;
+                        max-width: 8em;
+                    }
+
+                    th:last-child,
+                    td:last-child {
+                        svg {
+                            margin-left: 15px;
+                            color: #1aaaba;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
