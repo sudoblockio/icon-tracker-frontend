@@ -115,7 +115,7 @@ class ContractCode extends Component {
                                 <div className={"json-abi"}>
                                     <ReactJson src={this.state.cxABI}
                                         name={null}
-                                        collapsed={2}
+                                        collapsed={4}
                                         displayObjectSize={false}
                                         displayDataTypes={false}
                                         enableClipboard={false}
@@ -145,7 +145,7 @@ class ContractCode extends Component {
 
                                     <tbody>
                                         {this.state.segmentedAbi.map(i =>
-                                            <tr >
+                                            <tr>
                                                 <td>
                                                     {i.name}
                                                 </td>
