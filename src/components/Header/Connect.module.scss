@@ -1,0 +1,83 @@
+.wrapper {
+    padding: 0 !important;
+
+    .dropdown {
+        .top {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+
+            &:hover {
+                .value {
+                    color: rgb(0, 0, 0) !important;
+                }
+            }
+
+            .caption {
+                padding-left: 0 !important;
+                display: inline-flex !important;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .value {
+                color: rgb(129, 129, 129) !important;
+                text-align: left;
+            }
+
+            em {
+                display: inline-block;
+                text-align: left;
+                width: 100%;
+                background: none !important;
+                margin: 0 !important;
+                color: rgb(102, 102, 102);
+            }
+
+            em:last-child {
+                margin-top: 0.1em !important;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            button {
+                width: 100%;
+                // height: 35px;
+                padding-block: 1em;
+                font-weight: 600;
+                // margin-bottom: 0.5em;
+                background-color: white !important;
+                border: none;
+                border-bottom: 1px solid rgb(235, 235, 235) !important;
+                text-align: left;
+                padding-left: 25px;
+
+                display: inline-flex;
+                color: rgb(80, 80, 80);
+                align-items: center;
+
+                cursor: pointer;
+
+                &:first-child {
+                    border-top: 1px solid rgb(235, 235, 235) !important;
+                }
+
+                &:hover {
+                    background-color: rgb(241, 241, 241) !important;
+                }
+
+                svg {
+                    margin-top: -0.1em;
+                    margin-right: 0.6em;
+                    color: #00b8cc;
+                }
+            }
+        }
+    }
+}
