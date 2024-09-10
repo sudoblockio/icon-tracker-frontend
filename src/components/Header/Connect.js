@@ -4,6 +4,11 @@ import { CopyButton } from '../../components'
 import checkIconex from 'check-iconex'
 import NotificationManager from '../../utils/NotificationManager'
 import { LoginModal, utils } from '../LoginComponent/LoginModal'
+import clsx from 'clsx'
+import style from "./Connect.module.scss"
+
+import { MdLockOpen, MdHowToVote } from "react-icons/md";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const LOCAL_KEY = '_UNIQUE_KEY_'
 
@@ -135,7 +140,7 @@ function Connect(props) {
     }, [walletAddress])
 
     return (
-        <div className={`connect ${walletAddress ? 'join' : ''}`}>
+        <div className={clsx(`connect ${walletAddress ? 'join' : ''}`, style.wrapper)}>
             <LoginModal
                 isOpen={loginModalIsOpen}
                 onRequestClose={closeLoginModal}
@@ -145,21 +150,44 @@ function Connect(props) {
                 <em className="img" />
             </span>
             {walletAddress ? (
-                <div className="sub-menu">
-                    <p>
-                        <span>Wallet Address</span>
-                        <CopyButton data={walletAddress} title={'Copy Address'} wallet={true} />
+                <div className={clsx("sub-menu", style.dropdown)} >
+                    <p className={style.top}>
+                        <span className={style.caption}>My Address</span>
+                        <span className={style.value}
+                            onClick={() => {
+                                props.history.push(`/address/${walletAddress}`)
+                            }}
+                        >
+                            {walletAddress}
+                        </span>
+
+                        {/* <CopyButton data={walletAddress} title={'Copy Address'} wallet={true} /> */}
                     </p>
-                    <span className="btn" onClick={disconnect}>
+
+                    <div className={style.buttons}>
+                        <button onClick={() => {
+                            props.history.push(`/address/${walletAddress}?isStaking=true`)
+                        }}>
+                            <MdLockOpen size={17} /> Staking
+                        </button>
+                        <button onClick={() => {
+                            props.history.push(`/voting`)
+                        }}>
+                            <MdHowToVote size={17} /> Voting
+                        </button>
+                        <button onClick={disconnect}> <IoLogOutOutline size={17} /> Disconnect</button>
+                    </div>
+
+                    {/* <span className="btn" onClick={disconnect}>
                         Disconnect
-                    </span>
-                    <span
+                    </span> */}
+                    {/* <span
                         className="btn"
                         onClick={() => {
                             props.history.push(`/address/${walletAddress}`)
                         }}>
                         View Details
-                    </span>
+                    </span> */}
                 </div>
             ) : null}
         </div>
