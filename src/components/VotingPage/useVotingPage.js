@@ -40,6 +40,7 @@ export function useVotingPage(address, history) {
     function handleSubmitAutoVote(payload) {
         const prevState = { ...state };
         const newState = getPrepsForAutoVote(prevState, payload)
+        console.log(newState)
         setState(newState)
     }
 
