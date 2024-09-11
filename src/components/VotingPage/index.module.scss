@@ -6,9 +6,13 @@
         margin-bottom: 2em;
 
         div {
-            // font-size: 0.9rem;
             cursor: pointer;
-            color: #299fac;
+            color: #606060;
+            font-size: 0.9rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
 
             &:last-child {
                 font-weight: bold;
@@ -17,8 +21,8 @@
         }
 
         span {
-            margin-inline: 0.2em;
-            margin-top: 2px;
+            margin-inline: 0.4em;
+            margin-top: 1px;
         }
     }
 

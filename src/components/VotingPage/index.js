@@ -91,9 +91,8 @@ export default function VotingPage(props) {
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
                 <div className="wrap-holder">
-
                     <div className={style.breadcrumbs}>
-                        <div>My Address</div>
+                        <div onClick={() => { props.history.push(`/address/${walletAddress}`) }} >My Address</div>
                         <span> <MdChevronRight /> </span>
                         <div>Voting</div>
                     </div>
@@ -212,9 +211,7 @@ export default function VotingPage(props) {
                                         </span>
                                         {(state.validationErrors.amount || state.validationErrors.percent) &&
                                             <div className={style.error}>
-                                                {
-                                                    state.validationErrors?.percent?.msg
-                                                }
+                                                {state.validationErrors?.percent?.msg}
                                             </div>}
                                     </div>
                                     <div className={style.button}>
