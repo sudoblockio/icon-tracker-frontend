@@ -130,12 +130,12 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
         handleChangePriority(PRIORITY_OPTS[0])
     }, [])
 
-    const isSubmitDisabled = state.formErrors.voteAmt.isError
 
     useEffect(() => {
-        console.log(voteAmtRef)
         voteAmtRef.current.focus();
     }, [isOpen])
+
+    const isSubmitDisabled = state.formErrors.voteAmt.isError
 
     return (
         <GenericModalV2 isOpen={isOpen} onClose={onClose}>

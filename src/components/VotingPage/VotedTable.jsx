@@ -105,7 +105,7 @@ export default function VotedTable({
                                                 const { value: amount } = e.target
                                                 handleChangeVoteAmt(value.address, amount)
                                             }}
-                                            value={value.voteAmt}
+                                            value={value.voteAmt ? value.voteAmt : 0}
                                             type="text"
                                             className={clsx('txt-type-search')}
                                         />
@@ -121,7 +121,7 @@ export default function VotedTable({
                                                 const { value: percent } = e.target
                                                 handleChangeVotePercent(value.address, percent)
                                             }}
-                                            value={parseFloat((value.votePercent).toFixed(2))}
+                                            value={parseFloat((value.votePercent ? value.votePercent : 0).toFixed(2))}
                                             type="text"
                                             className={clsx('txt-type-search')}
                                         />

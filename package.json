@@ -1,99 +1,102 @@
 {
-    "name": "icon-tracker",
-    "version": "0.5.3",
-    "private": true,
-    "dependencies": {
-        "@ledgerhq/hw-transport-webhid": "^6.27.17",
-        "@testing-library/jest-dom": "^5.17.0",
-        "@testing-library/user-event": "^13.5.0",
-        "axios": "^1.4.0",
-        "bignumber.js": "^9.1.1",
-        "buffer": "^6.0.3",
-        "chart.js": "^4.3.2",
-        "check-iconex": "^0.0.8",
-        "clipboard": "^2.0.11",
-        "clsx": "^2.1.0",
-        "deepcopy": "^2.1.0",
-        "dotenv": "^16.3.1",
-        "history": "^5.3.0",
-        "html-react-parser": "^5.1.13",
-        "icon-sdk-js": "0.0.15",
-        "moment": "^2.29.4",
-        "object-assign": "^4.1.1",
-        "path": "^0.12.7",
-        "process": "^0.11.10",
-        "qrcode": "^1.5.3",
-        "query-string": "^8.1.0",
-        "rc-checkbox": "^3.3.0",
-        "react": "^16.14.0",
-        "react-body-classname": "^1.3.1",
-        "react-dom": "^16.14.0",
-        "react-dropzone": "^14.2.3",
-        "react-icons": "^4.10.1",
-        "react-json-beautify": "^1.0.0",
-        "react-json-view": "^1.21.3",
-        "react-modal": "^3.16.1",
-        "react-redux": "^5.1.2",
-        "react-router-dom": "^4.3.1",
-        "react-router-redux": "^5.0.0-alpha.9",
-        "react-scripts": "5.0.1",
-        "react-select": "^5.8.0",
-        "react-slider": "^2.0.6",
-        "react-spinners": "^0.13.8",
-        "react-test-renderer": "^16.14.0",
-        "react-toastify": "^7.0.4",
-        "react-tooltip": "^5.28.0",
-        "redux": "^4.2.1",
-        "redux-devtools-extension": "^2.13.9",
-        "redux-localstorage": "^0.4.1",
-        "redux-logger": "^3.0.6",
-        "redux-saga": "^1.2.3",
-        "sass": "^1.64.1",
-        "serve": "^14.2.1",
-        "stream-browserify": "^3.0.0",
-        "web-vitals": "^2.1.4",
-        "web3-utils": "^4.0.3"
-    },
-    "scripts": {
-        "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-app-rewired start",
-        "build": "react-app-rewired build",
-        "test": "react-app-rewired test",
-        "test-autovote": "react-app-rewired test ./src/components/VotingPage/tests/useVotingPage.test.js",
-        "eject": "react-app-rewired eject"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            "chrome >= 67",
-            "edge >= 79",
-            "firefox >= 68",
-            "opera >= 54",
-            "safari >= 14"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "jest": {
-        "transformIgnorePatterns": [
-            "/node_modules/(?!(axios|query-string|decode-uri-component|split-on-first|filter-obj)/)"
-        ]
-    },
-    "devDependencies": {
-        "@babel/plugin-transform-modules-commonjs": "^7.24.8",
-        "@babel/preset-env": "^7.25.4",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "babel-jest": "^29.7.0",
-        "jest": "^27.5.1",
-        "jest-esm-transformer": "^1.0.0",
-        "react-app-rewired": "^2.2.1"
-    }
+  "name": "icon-tracker",
+  "version": "0.5.3",
+  "private": true,
+  "dependencies": {
+    "@ledgerhq/hw-transport-webhid": "^6.27.17",
+    "@sentry/cli": "^2.35.0",
+    "@sentry/react": "^8.28.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "bignumber.js": "^9.1.1",
+    "buffer": "^6.0.3",
+    "chart.js": "^4.3.2",
+    "check-iconex": "^0.0.8",
+    "clipboard": "^2.0.11",
+    "clsx": "^2.1.0",
+    "deepcopy": "^2.1.0",
+    "dotenv": "^16.3.1",
+    "history": "^5.3.0",
+    "html-react-parser": "^5.1.13",
+    "icon-sdk-js": "0.0.15",
+    "moment": "^2.29.4",
+    "object-assign": "^4.1.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "qrcode": "^1.5.3",
+    "query-string": "^8.1.0",
+    "rc-checkbox": "^3.3.0",
+    "react": "^16.14.0",
+    "react-body-classname": "^1.3.1",
+    "react-dom": "^16.14.0",
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.10.1",
+    "react-json-beautify": "^1.0.0",
+    "react-json-view": "^1.21.3",
+    "react-modal": "^3.16.1",
+    "react-redux": "^5.1.2",
+    "react-router-dom": "^4.3.1",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "react-slider": "^2.0.6",
+    "react-spinners": "^0.13.8",
+    "react-test-renderer": "^16.14.0",
+    "react-toastify": "^7.0.4",
+    "react-tooltip": "^5.28.0",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-localstorage": "^0.4.1",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.2.3",
+    "sass": "^1.64.1",
+    "serve": "^14.2.1",
+    "stream-browserify": "^3.0.0",
+    "web-vitals": "^2.1.4",
+    "web3-utils": "^4.0.3"
+  },
+  "scripts": {
+    "start": "REACT_APP_NETWORK=$npm_config_network REACT_APP_REGION=$npm_config_region REACT_APP_RPC_ENDPOINT=$npm_config_rpc_endpoint REACT_APP_API_ENDPOINT=$npm_config_api_endpoint REACT_APP_WSS_ENDPOINT=$npm_config_wss_endpoint REACT_APP_NID=$npm_config_nid react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "test-autovote": "react-app-rewired test ./src/components/VotingPage/tests/useVotingPage.test.js",
+    "eject": "react-app-rewired eject",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org sudoblock --project sudoblock-icon-tracker-web ./build && sentry-cli sourcemaps upload --org sudoblock --project sudoblock-icon-tracker-web ./build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "chrome >= 67",
+      "edge >= 79",
+      "firefox >= 68",
+      "opera >= 54",
+      "safari >= 14"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios|query-string|decode-uri-component|split-on-first|filter-obj)/)"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1",
+    "jest-esm-transformer": "^1.0.0",
+    "react-app-rewired": "^2.2.1"
+  }
 }

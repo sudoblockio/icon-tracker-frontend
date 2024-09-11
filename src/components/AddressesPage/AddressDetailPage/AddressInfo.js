@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-// import { Tooltip as ReactTooltip } from "react-tooltip";
-
-
-
 import { CopyButton, QrCodeButton, LoadingComponent, ReportButton } from '../../../components'
 import PrepUpdateModal from '../../PrepUpdateModal/PrepUpdateModal'
 import {
@@ -210,6 +206,8 @@ function AddressInfo(props) {
   useEffect(() => {
     if (!props.match.params.addressId) return
 
+    console.log({ match: props.match })
+
     getAddrBalance();
     getRev()
     fetchPrepInfo()
@@ -217,6 +215,12 @@ function AddressInfo(props) {
     getVoted()
     getAddrStake(props.match.params.addressId)
   }, [props.match.params.addressId])
+
+  useEffect(() => {
+    const params = new URLSearchParams(props.location.search);
+    const isStaking = params.get("isStaking") === "true";
+    setIsStakingModalOpen(isStaking)
+  }, [props.location.search])
 
   const produced = IconConverter.toNumber(total_blocks)
   const validated = IconConverter.toNumber(validated_blocks)
@@ -226,6 +230,9 @@ function AddressInfo(props) {
     : IconConverter.toNumber(last_updated_block)
   const badge = getBadgeTitle(grade, node_state)
   const jailBadges = getJailBadges(parseInt(jail_flags, 16))
+
+
+
 
   const Content = () => {
     if (loading) {

@@ -13,6 +13,7 @@ class TxBottom extends Component {
 
         return (
             <TxBottomComponent
+                noBorder={true}
                 txData={txData}
                 goAllTx={goAllTx}
                 txType={txType}

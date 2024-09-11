@@ -4,7 +4,7 @@ import TokenTransfers from './TokenTransfers'
 import TokenHolders from './TokenHolders'
 import TokenContractRead from './TokenContractRead'
 import ContractComponent from '../../../ContractsPage/ContractDetailPage/ContractTabs/ContractComponent'
-import { NoBox, TabTable } from '../../../../components'
+import { NoBox, TabTable, TabTable2 } from '../../../../components'
 import { TX_TYPE, TOKEN_TABS } from '../../../../utils/const'
 import { getTokenDecimals, getTokenTotalSupply } from '../../../../redux/store/iiss'
 import TokenTransactions from './TokenTransactions'
@@ -41,7 +41,7 @@ class TokenTabs extends Component {
         const { loading, data } = token
         const { address } = data
         return (
-            <TabTable
+            <TabTable2
                 {...this.props}
                 onClickTab={this.props.changeTab}
                 TABS={TOKEN_TABS}

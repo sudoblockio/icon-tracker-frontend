@@ -6,8 +6,10 @@ import { getBondList } from '../../../redux/store/iiss'
 import BondersModal from '../../BondersUpdateModal/bondersUpdateModal'
 import BondedModal from '../../BondUpdateModal/bondUpdateModal'
 import customStyles from './TxBottomComponent.module.css'
+import clsx from 'clsx'
 
 class TxBottomComponent extends Component {
+
     render() {
         const {
             txData,
@@ -21,8 +23,6 @@ class TxBottomComponent extends Component {
             wallet,
             walletAddress,
         } = this.props
-        console.log('props on TxBottomComponent')
-        console.log(this.props)
         const { data, listSize, totalSize, loading } = txData
 
         let totalCount = txData.headers ? txData.headers['x-total-count'] : 0
@@ -38,8 +38,8 @@ class TxBottomComponent extends Component {
             tableBodyData = txData.delegations
         } else tableBodyData = txData.data
 
+
         const Content = () => {
-            console.log(txType, 'tx comp props bonder')
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if (txTypeIsBonderOrBonded(txType)) {
@@ -86,7 +86,6 @@ class TxBottomComponent extends Component {
                 return <NoBox text={noBoxText} />
             } else {
                 const { from_address, to_address } = tableBodyData[0] || this.props.txData
-
                 return (
                     <div className="contents">
                         <TxBottomTitle
@@ -95,9 +94,9 @@ class TxBottomComponent extends Component {
                             listSize={Number(tableBodyData.length)}
                             totalSize={
                                 txType === 'addressvoters' ||
-                                txType === 'addressreward' ||
-                                txType === 'addresstokentx' ||
-                                txType === 'addressinternaltx'
+                                    txType === 'addressreward' ||
+                                    txType === 'addresstokentx' ||
+                                    txType === 'addressinternaltx'
                                     ? totalCount
                                     : totalSize
                             }
@@ -106,8 +105,8 @@ class TxBottomComponent extends Component {
                             toAddr={to_address}
                         />
 
-                        <div className="table-box">
-                            <table className={tableClassName}>
+                        <div className={clsx("table-box", this.props.noBorder && customStyles.noBorder)}   >
+                            <table className={tableClassName} >
                                 <thead>
                                     <TxTableHead txType={txType} />
                                 </thead>
@@ -128,7 +127,7 @@ class TxBottomComponent extends Component {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div >
                 )
             }
         }

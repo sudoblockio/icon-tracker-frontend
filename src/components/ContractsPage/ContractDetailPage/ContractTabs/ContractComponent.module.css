@@ -1,9 +1,15 @@
 .contractContainer {
-  font-size: 12px;
+    font-size: 12px;
+    padding-inline: 1em;
 }
 
-.titleContainer {}
+.btnContainer {
+    padding-inline: 1em;
+}
+
+.titleContainer {
+}
 
 .titleItem {
-  font-size: 12px;
+    font-size: 12px;
 }
