@@ -4,6 +4,7 @@ import style from "./AutoVotePopup.module.scss"
 import parse from 'html-react-parser';
 import { Tooltip } from 'react-tooltip'
 import { MdInfoOutline } from "react-icons/md";
+import ReactSlider from "react-slider";
 
 
 import Checkbox from "../CommonComponent/Checkbox"
@@ -35,25 +36,37 @@ const INPUTS = [
         label: "No. of validators",
         defaultValue: INPUT_DEFAULT_VALUES["prepCount"],
         info: `<p>Number of validators(prep) nodes you want to split your vote across</p>`,
+        unit: null,
     },
     {
         name: "voteAmt",
         label: "Vote Amount",
         info: `<p>Total amount of votes you want to delegate</p>`,
+        unit: `ICX`
     },
     {
         name: "commissionRateCutoff",
         label: "Commission rate cutoff",
         defaultValue: INPUT_DEFAULT_VALUES["commissionRateCutoff"],
-        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+        info: "<p>Only select validators with commission rate less than the cutoff</p>",
+        unit: '%'
     },
     {
         name: "overBondCutoff",
         label: "Over bond percent cutoff",
         defaultValue: INPUT_DEFAULT_VALUES["overBondCutoff"],
-        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+        info: "<p>Only select validators with over bonding % greater than the cutoff</p>",
+        unit: '%'
     }
 ]
+
+const PRIORITY_INFO = `<div className=${style.infoPopup}>
+                            <p>Validators will be selected based on the priority value chosen</p></br>  
+                            <p>Most Optimised  -  Balanced between low commission rate and high bonding %</p>  
+                            <p>Commission Rate - Validators with lower commission rate would be given more priority</p>
+                            <p>Bond Percent - Validators with higher bond % would be given more priority</p>
+                        </div>
+`
 
 export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt }) {
     const voteAmtRef = useRef();
@@ -64,7 +77,7 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
             overBondCutoff: INPUT_DEFAULT_VALUES["overBondCutoff"],
             commissionRateCutoff: INPUT_DEFAULT_VALUES["commissionRateCutoff"],
             priority: PRIORITY_OPTS[0],
-            voteAmt: 0,
+            voteAmt: 10,
             excludeJailed: true
         },
         formErrors: {
@@ -118,6 +131,11 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
         setState(prev => ({ ...prev, formData: { ...prev.formData, priority: e } }))
     }
 
+    function handleChangeVoteAmt(value) {
+        voteAmtRef.current.value = value;
+        setState(prev => ({ ...prev, formData: { ...prev.formData, voteAmt: value } }))
+    }
+
     useEffect(() => {
         handleChangePriority(PRIORITY_OPTS[0])
     }, [])
@@ -125,7 +143,9 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
 
     useEffect(() => {
         voteAmtRef.current.focus();
-    }, [isOpen])
+        voteAmtRef.current.value = maxVoteAmt;
+        setState(prev => ({ ...prev, formData: { ...prev.formData, voteAmt: maxVoteAmt } }))
+    }, [isOpen, maxVoteAmt])
 
     const isSubmitDisabled = state.formErrors.voteAmt.isError
 
@@ -137,11 +157,14 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                     <span onClick={onClose}>&times;</span>
                 </div>
 
+
+
+
                 <div className={style.formWrapper}>
                     <form onChange={handleChangeForm} onSubmit={handleSubmitForm}>
                         <div className={style.inputs}>
                             {
-                                INPUTS.map(({ name, label, info, defaultValue }) =>
+                                INPUTS.map(({ name, label, info, defaultValue, unit }) =>
                                     <div className={style.inputWrapper}>
                                         <label>
                                             <span>
@@ -149,14 +172,47 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                                             </span>
                                             <a id={`${name}-hover`}><MdInfoOutline /></a>
                                         </label>
-                                        <input ref={name === "voteAmt" ? voteAmtRef : null} step="any" type="number" name={name} defaultValue={defaultValue} />
-                                        {
-                                            name === "voteAmt" && state.formErrors.voteAmt.isError &&
-                                            <p className={style.error}>
-                                                {state.formErrors.voteAmt.message}
-                                            </p>
-                                        }
 
+                                        <div className={style.input}>
+                                            <input
+                                                ref={name === "voteAmt" ? voteAmtRef : null}
+                                                step="any"
+                                                type="number"
+                                                name={name}
+                                                defaultValue={defaultValue}
+                                            />
+                                            {unit && <span>{unit}</span>}
+                                        </div>
+
+
+                                        {name === "voteAmt" &&
+                                            <>
+                                                {state.formErrors.voteAmt.isError &&
+                                                    <p className={style.error}>
+                                                        {state.formErrors.voteAmt.message}
+                                                    </p>
+                                                }
+
+                                                <div className={style.sliderWrapper}>
+                                                    <ReactSlider
+                                                        className={style.slider}
+                                                        thumbClassName={style.thumb}
+                                                        trackClassName={style.track}
+                                                        renderThumb={(props, state) => {
+                                                            return <div {...props}></div>
+                                                        }}
+                                                        onChange={(result, index) => {
+                                                            handleChangeVoteAmt(result)
+                                                        }}
+                                                        value={state.formData.voteAmt}
+                                                        min={0}
+                                                        max={maxVoteAmt}
+
+                                                    />
+                                                </div>
+                                            </>
+
+                                        }
 
                                         <Tooltip anchorSelect={`#${name}-hover`}>
                                             {parse(info)}
@@ -168,7 +224,17 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                         </div>
 
                         <div className={style.inputWrapper}>
-                            <label>Priority</label>
+                            <label>
+                                <span>
+                                    Priority
+                                </span>
+                                <a id="priority-hover">
+                                    <MdInfoOutline />
+                                </a>
+                            </label>
+                            <Tooltip anchorSelect={`#priority-hover`}>
+                                {parse(PRIORITY_INFO)}
+                            </Tooltip>
                             <DropdownMenu value={state.formData.priority} onChange={handleChangePriority} options={PRIORITY_OPTS} />
                         </div>
 

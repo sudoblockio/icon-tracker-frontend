@@ -1,51 +1,81 @@
 .wrapper {
     padding-top: 80px !important;
 
-    h4 {
-        margin-bottom: 1.5em;
-        font-size: 1rem;
-        font-weight: 600;
+    .breadcrumbs {
+        display: flex;
+        margin-bottom: 2em;
 
-        .autoBtn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
+        div {
+            // font-size: 0.9rem;
             cursor: pointer;
-            border-radius: 8px;
-            background-color: none;
-            background-color: white;
-            border: 1px solid #1b8692;
-            color: #1b8692;
-            height: 30px;
-            width: 110px;
-            margin-left: 1em;
-            transition: all 0.2s;
+            color: #299fac;
 
-            span {
-                font-weight: 500;
+            &:last-child {
+                font-weight: bold;
+                color: black;
             }
+        }
 
-            svg {
-                margin-right: 0.5em;
-                position: relative;
-                top: 0.1em;
-            }
-
-            &:hover {
-                background-color: #1b8692;
-                color: white;
-            }
+        span {
+            margin-inline: 0.2em;
+            margin-top: 2px;
         }
     }
 
+    .autoBtn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: none;
+        background-color: white;
+        border: 1px solid #1b8692;
+        color: #1b8692;
+        height: 30px;
+        width: 10em;
+        margin-left: 1em;
+        transition: all 0.1s;
+
+        svg {
+            margin-right: 0.5em;
+            position: relative;
+            top: 0.1em;
+        }
+
+        &:hover {
+            background-color: #1b8692;
+            color: white;
+        }
+    }
+
+    h4 {
+        margin-bottom: 0.5em;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
     button:disabled {
-        background-color: rgb(180, 180, 180) !important;
+        background-color: rgba(201, 201, 201, 0.3) !important;
         cursor: default !important;
-        border: none;
-        color: white;
+        color: rgb(148, 148, 148) !important;
+        border: 1px solid rgb(182, 182, 182);
 
         &:hover {
             background-color: none;
+        }
+    }
+
+    .tableTop {
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        margin-bottom: 0.8em;
+        // border: 1px solid blue;
+
+        input {
+            margin: 0 !important;
+            height: 30px;
         }
     }
 
@@ -64,7 +94,6 @@
 
             table {
                 width: 100%;
-                // border: 1px solid black !important;
 
                 th,
                 td {
@@ -109,7 +138,7 @@
             width: calc(98% - #{$prepWidth});
 
             .caption {
-                margin-bottom: 0.8em;
+                margin-bottom: 1.1em;
                 height: 23px;
                 position: relative;
                 top: 0.5em;
@@ -151,7 +180,6 @@
                     .error {
                         display: flex;
                         align-items: center;
-
                         color: red;
                         font-size: 0.6rem;
                         margin-top: 0em;
@@ -161,7 +189,7 @@
 
                     div {
                         label {
-                            font-size: 0.7rem;
+                            font-size: 0.8rem;
                         }
                         span {
                             font-size: 0.7rem;
@@ -171,15 +199,15 @@
                     }
 
                     button {
-                        height: 25px;
+                        height: 30px;
                         background-color: #299fac;
                         color: white;
                         border: 1px solid #e2e2e2;
-                        border-radius: 10px;
+                        border-radius: 5px;
                         font-weight: bold;
                         cursor: pointer;
-                        width: 60px;
-                        font-size: 0.7rem;
+                        width: 10em;
+                        font-size: 0.8rem;
                         padding: 0 !important;
                     }
 
