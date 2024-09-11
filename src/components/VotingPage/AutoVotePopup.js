@@ -45,15 +45,23 @@ const INPUTS = [
         name: "commissionRateCutoff",
         label: "Commission rate cutoff",
         defaultValue: INPUT_DEFAULT_VALUES["commissionRateCutoff"],
-        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+        info: "<p>Only select validators with commission rate less than the cutoff</p>"
     },
     {
         name: "overBondCutoff",
         label: "Over bond percent cutoff",
         defaultValue: INPUT_DEFAULT_VALUES["overBondCutoff"],
-        info: "<p>Number of validators(prep) nodes you want to split your vote across</p>"
+        info: "<p>Only select validators with over bonding % greater than the cutoff</p>"
     }
 ]
+
+const PRIORITY_INFO = `<div className=${style.infoPopup}>
+                            <p>Validators will be selected based on the priority value chosen</p></br>  
+                            <p>Most Optimised  -  Balanced between low commission rate and high over bonding %</p>  
+                            <p>Commission Rate - Validators with lower commission rate would be given more priority</p>
+                            <p>Bond Percent - Validators with higher bond % would be given more priority</p>
+                        </div>
+`
 
 export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt }) {
     const voteAmtRef = useRef();
@@ -150,14 +158,12 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                                             <a id={`${name}-hover`}><MdInfoOutline /></a>
                                         </label>
                                         <input ref={name === "voteAmt" ? voteAmtRef : null} step="any" type="number" name={name} defaultValue={defaultValue} />
-                                        {
-                                            name === "voteAmt" && state.formErrors.voteAmt.isError &&
+                                        {name === "voteAmt" &&
+                                            state.formErrors.voteAmt.isError &&
                                             <p className={style.error}>
                                                 {state.formErrors.voteAmt.message}
                                             </p>
                                         }
-
-
                                         <Tooltip anchorSelect={`#${name}-hover`}>
                                             {parse(info)}
                                         </Tooltip>
@@ -168,7 +174,17 @@ export default function AutoVotePopup({ isOpen, onClose, onSubmit, maxVoteAmt })
                         </div>
 
                         <div className={style.inputWrapper}>
-                            <label>Priority</label>
+                            <label>
+                                <span>
+                                    Priority
+                                </span>
+                                <a id="priority-hover">
+                                    <MdInfoOutline />
+                                </a>
+                            </label>
+                            <Tooltip anchorSelect={`#priority-hover`}>
+                                {parse(PRIORITY_INFO)}
+                            </Tooltip>
                             <DropdownMenu value={state.formData.priority} onChange={handleChangePriority} options={PRIORITY_OPTS} />
                         </div>
 

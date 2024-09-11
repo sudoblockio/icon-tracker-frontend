@@ -5,7 +5,7 @@ export default function DropdownMenu({ customStyles, value, ...props }) {
     const defaultStyles = {
         container: (styles, { isFocused }) => ({
             ...styles,
-            width: "15.55em",
+            width: "26.3em",
             borderRadius: "20px !important",
             cursor: "pointer !important",
 

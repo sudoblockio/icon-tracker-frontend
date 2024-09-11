@@ -34,8 +34,9 @@
     }
 
     button:disabled {
-        background-color: rgba(1, 1, 1, 0.3) !important;
+        background-color: rgba(201, 201, 201, 0.3) !important;
         cursor: default !important;
+        color: rgb(88, 88, 88) !important;
     }
 
     form {
@@ -65,20 +66,26 @@
 
         .inputs {
             display: grid;
-            grid-template-columns: repeat(2, 18em);
-            grid-template-rows: repeat(2, 5.8em);
+            grid-template-columns: repeat(2, 14em);
+            grid-template-rows: repeat(2, 5em);
             gap: 0px 0px;
         }
 
         .inputWrapper {
             input {
-                width: calc(100% - 3em);
+                width: calc(100% - 2em);
                 border: none;
                 height: 40px;
                 border-radius: 5px;
                 border: 1px solid rgba(1, 1, 1, 0.2);
                 padding-left: 0.8em;
             }
+        }
+    }
+
+    .infoPopup {
+        p {
+            margin-bottom: 0.2em;
         }
     }
 
@@ -101,9 +108,6 @@
 
             input[type='checkbox']:checked {
                 border-color: #4caf50 !important ;
-            }
-
-            .checkbox {
             }
         }
     }

@@ -39,10 +39,10 @@
     }
 
     button:disabled {
-        background-color: rgb(180, 180, 180) !important;
+        background-color: rgba(201, 201, 201, 0.3) !important;
         cursor: default !important;
-        border: none;
-        color: white;
+        color: rgb(148, 148, 148) !important;
+        border: 1px solid rgb(182, 182, 182);
 
         &:hover {
             background-color: none;
