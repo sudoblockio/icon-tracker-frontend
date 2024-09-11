@@ -6,7 +6,6 @@ import ReactSlider from "react-slider";
 
 import { RxCross2 } from "react-icons/rx";
 
-
 export default function VotedTable({
     state,
     handleChangeVoteAmt,
@@ -48,14 +47,6 @@ export default function VotedTable({
     // }
 
     const votedList = Object.entries(selectedMap).map(([key, value]) => { return value })
-    // let totVotedAmt = 0;
-    // let totVotedPercent = 0;
-    // votedList.forEach(item => {
-    //     totVotedAmt += Number(item.voteAmt)
-    //     totVotedPercent += Number(item.votePercent)
-    // })
-
-
 
     return (
         <table className={clsx("table-typeP", style.wrapper)}>
@@ -72,8 +63,8 @@ export default function VotedTable({
             </thead>
             <tbody>
                 {votedList.map((value, index) => (
-                    <>
-                        <tr key={value.address} className={clsx(index === openRow && style.open)}>
+                    <React.Fragment key={value.address}>
+                        <tr className={clsx(index === openRow && style.open)}>
                             <td onClick={handleDeleteVoted.bind(this, value)} >
                                 <span className={style.cross}>
                                     <RxCross2 />
@@ -96,16 +87,12 @@ export default function VotedTable({
                                 <div className={style.vote}>
                                     <span>
                                         <input
-                                            onFocus={handleInputOnFocus.bind(
-                                                this,
-                                                index,
-                                                value.voteAmt
-                                            )}
+                                            onFocus={handleInputOnFocus.bind(this, index, value.voteAmt)}
                                             onChange={(e) => {
                                                 const { value: amount } = e.target
                                                 handleChangeVoteAmt(value.address, amount)
                                             }}
-                                            value={value.voteAmt ? value.voteAmt : 0}
+                                            value={value.voteAmt ? value.voteAmt.toFixed(2) : 0}
                                             type="text"
                                             className={clsx('txt-type-search')}
                                         />
@@ -152,7 +139,7 @@ export default function VotedTable({
                                 </td>
                             </tr>
                         )}
-                    </>
+                    </React.Fragment>
                 ))}
             </tbody>
         </table>

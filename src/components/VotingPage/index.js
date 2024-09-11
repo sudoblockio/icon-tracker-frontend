@@ -13,6 +13,8 @@ import { CiCircleCheck } from "react-icons/ci";
 import { useState } from 'react'
 import AutoVotePopup from './AutoVotePopup'
 
+import { MdChevronRight } from "react-icons/md";
+
 const TABLE_HEADERS = [
     { name: ["Name"], sortKey: "name", },
     { name: ["Commission %", "(Max Change/Max Rate)"], sortKey: "commission_rate" },
@@ -89,19 +91,16 @@ export default function VotingPage(props) {
         <div className={clsx(style.wrapper, 'content-wrap')}>
             <div className="screen0">
                 <div className="wrap-holder">
+
+                    <div className={style.breadcrumbs}>
+                        <div>My Address</div>
+                        <span> <MdChevronRight /> </span>
+                        <div>Voting</div>
+                    </div>
+
                     <div className={style.header}>
-                        <h4 >
+                        <h4>
                             Voting
-                            <button
-                                disabled={state.isLoadingPreps}
-                                onClick={toggleAutoVotePopup}
-                                className={style.autoBtn}
-                            >
-                                <span>
-                                    <CiCircleCheck size={18} />
-                                </span>
-                                <span>Auto Vote</span>
-                            </button>
                             <AutoVotePopup
                                 maxVoteAmt={state.maxVoteAmt}
                                 isOpen={isOpenAutoVotePopup}
@@ -113,12 +112,25 @@ export default function VotingPage(props) {
 
                     <div className={style.tablesWrapper}>
                         <div className={style.prepsWrapper}>
-                            <input type="text"
-                                className="txt-type-search search-type-fix"
-                                placeholder='Search P-rep name/address'
-                                onChange={handleChangeSearch}
-                                value={state.searchString}
-                            />
+                            <div className={style.tableTop}>
+                                <input type="text"
+                                    className="txt-type-search search-type-fix"
+                                    placeholder='Search validator name'
+                                    onChange={handleChangeSearch}
+                                    value={state.searchString}
+                                />
+                                <button
+                                    disabled={state.isLoadingPreps}
+                                    onClick={toggleAutoVotePopup}
+                                    className={style.autoBtn}
+                                >
+                                    <span>
+                                        <CiCircleCheck size={18} />
+                                    </span>
+                                    <span>Auto Vote</span>
+                                </button>
+                            </div>
+
                             <div className={style.tableWrapper}>
                                 <table className="table-typeP">
                                     {state.isLoadingPreps ?
@@ -160,7 +172,7 @@ export default function VotingPage(props) {
 
                         <div className={style.votedWrapper}>
                             <div className={style.caption}>
-                                Voted Candidates
+                                Selected validators for voting
                             </div>
                             <div className={style.tableWrapper}>
                                 {state.isLoadingPreps ?
@@ -183,7 +195,7 @@ export default function VotingPage(props) {
                                     <div>
                                         <label>ICX Amount:</label>
                                         <span>
-                                            {totVotedAmt}
+                                            {totVotedAmt.toFixed(2)}
                                         </span>
                                         {(state.validationErrors.amount || state.validationErrors.percent) &&
                                             <div className={style.error}>
@@ -196,7 +208,7 @@ export default function VotingPage(props) {
                                     <div>
                                         <label>Percent:</label>
                                         <span>
-                                            {totVotedPercent}
+                                            {totVotedPercent.toFixed(2)}
                                         </span>
                                         {(state.validationErrors.amount || state.validationErrors.percent) &&
                                             <div className={style.error}>
@@ -206,7 +218,7 @@ export default function VotingPage(props) {
                                             </div>}
                                     </div>
                                     <div className={style.button}>
-                                        <button onClick={handleSubmitVoting}>Vote</button>
+                                        <button onClick={handleSubmitVoting}>Submit Votes</button>
                                     </div>
                                 </div>
                             </div>
