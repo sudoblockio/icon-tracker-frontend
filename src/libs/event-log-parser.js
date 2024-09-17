@@ -11,16 +11,40 @@ function getEventsByName(ABI) {
 
 
 function getParsedLog(log, eventsByName) {
-    const indexed = JSON.parse(log.indexed);
+    const data = JSON.parse(log.data); // values for non indexed field
+    const indexed = JSON.parse(log.indexed); // values for indexed field
+
     const eventName = indexed[0].split("(")[0];
-    const paramValues = indexed.splice(1);
+    const paramValues = indexed.splice(1); //indexed
 
 
     const logSignature = eventsByName[eventName.toLowerCase()];
+    const inputs = logSignature.inputs;
 
+
+    const params = [];
     const parsed = {};
 
-    const params = logSignature?.inputs?.map((input, index) => ({ ...input, value: paramValues[index] })) || []
+    let isFinishedIndexed = false;
+    let i = 0;
+    while (!isFinishedIndexed) {
+        const input = inputs[i];
+        const value = paramValues[i];
+        params.push({ ...input, value })
+        if (!value) {
+            isFinishedIndexed = true;
+        } else {
+            i++;
+        }
+    }
+
+    let counter = 0;
+    for (let x = i; x < inputs.length; x++) {
+        const input = inputs[x];
+        const value = data[counter++]
+        params.push({ ...input, value })
+    }
+
     params.forEach(item => {
         if (item.value) {
             let value = item.value;
@@ -37,6 +61,7 @@ function getParsedLog(log, eventsByName) {
 
         }
     })
+
 
     return parsed;
 }
