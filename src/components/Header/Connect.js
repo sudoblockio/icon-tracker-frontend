@@ -151,15 +151,11 @@ function Connect(props) {
             </span>
             {walletAddress ? (
                 <div className={clsx("sub-menu", style.dropdown)} >
-                    <p className={style.top}>
+                    <p className={style.top} onClick={() => {
+                        props.history.push(`/address/${walletAddress}`)
+                    }}>
                         <span className={style.caption}>My Address</span>
-                        <span className={style.value}
-                            onClick={() => {
-                                props.history.push(`/address/${walletAddress}`)
-                            }}
-                        >
-                            {walletAddress}
-                        </span>
+                        <span className={style.value}>{walletAddress}</span>
 
                         {/* <CopyButton data={walletAddress} title={'Copy Address'} wallet={true} /> */}
                     </p>
@@ -174,6 +170,11 @@ function Connect(props) {
                             props.history.push(`/voting`)
                         }}>
                             <MdHowToVote size={17} /> Voting
+                        </button>
+                        <button onClick={() => {
+                            props.history.push(`/address/${walletAddress}?isBonding=true`)
+                        }}>
+                            <MdHowToVote size={17} /> Bonding
                         </button>
                         <button onClick={disconnect}> <IoLogOutOutline size={17} /> Disconnect</button>
                     </div>

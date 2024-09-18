@@ -1,8 +1,8 @@
-import React, { useState, Component } from 'react'
+import React, { useState, Component, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import TxBottomTitle from './TxBottomTitle'
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../components'
-import { getBondList } from '../../../redux/store/iiss'
+// import { getBondList } from '../../../redux/store/iiss'
 import BondersModal from '../../BondersUpdateModal/bondersUpdateModal'
 import BondedModal from '../../BondUpdateModal/bondUpdateModal'
 import customStyles from './TxBottomComponent.module.css'
@@ -22,8 +22,10 @@ class TxBottomComponent extends Component {
             onClickTab,
             wallet,
             walletAddress,
+            isBondingModalOpen
         } = this.props
         const { data, listSize, totalSize, loading } = txData
+
 
         let totalCount = txData.headers ? txData.headers['x-total-count'] : 0
 
@@ -54,6 +56,8 @@ class TxBottomComponent extends Component {
                             address={this.props.address}
                             walletAddress={this.props.walletAddress}
                             wallet={wallet}
+                            isBondingModalOpen={isBondingModalOpen}
+
                         />
                         <div className="table-box">
                             <table className={tableClassName}>
@@ -162,6 +166,7 @@ function CustomHeader({
     address,
     walletAddress,
     wallet,
+    isBondingModalOpen
 }) {
     const [isBondersModalOpen, setIsBondersModalOpen] = useState(false)
     const [isBondedModalOpen, setIsBondedModalOpen] = useState(false)
@@ -185,6 +190,12 @@ function CustomHeader({
     function closeBondedModal() {
         setIsBondedModalOpen(false)
     }
+
+    useEffect(() => {
+        console.log({ isBondingModalOpen })
+        setIsBondedModalOpen(isBondingModalOpen)
+    }, [isBondingModalOpen])
+
     return (
         <>
             <BondersModal

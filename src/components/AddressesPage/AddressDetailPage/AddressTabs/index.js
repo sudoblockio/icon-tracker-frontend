@@ -19,6 +19,7 @@ import {
     addressInternalTxList,
 } from '../../../../redux/store/addresses'
 import { getBondList, getBonders, getDelegation } from '../../../../redux/store/iiss'
+import { findTabIndex } from '../../../../utils/utils'
 
 function AddressTabs(props) {
     const [bondList, setBondList] = useState('')
@@ -45,11 +46,10 @@ function AddressTabs(props) {
         addressVoted,
         addressReward,
     } = props
+
+    // console.log("Address tabs props", props)
     const { loading, data } = wallet
     const { address } = data
-    console.log('walletAddress and address')
-    console.log(walletAddress)
-    console.log(address)
 
     let bondObj = {}
     const getEachBond = async (addr) => {
@@ -242,6 +242,25 @@ function AddressTabs(props) {
         listBonders()
     }, [props.match.params.addressId])
 
+    const [isBondingModalOpen, setIsBondingModalOpen] = useState(false);
+
+    useEffect(() => {
+        if (!Array.isArray(props.TABS)) {
+            return;
+        }
+
+
+        const params = new URLSearchParams(props.location.search);
+        const isBonding = params.get("isBonding") === "true";
+        setIsBondingModalOpen(isBonding)
+
+        if (isBonding) {
+            const index = findTabIndex(props.TABS, "#bonded")
+            setActiveTabIndex(index);
+        }
+
+    }, [props.location.search, props.TABS])
+
     return (
         <TabTable2
             {...props}
@@ -329,6 +348,7 @@ function AddressTabs(props) {
                                 address={address}
                                 wallet={wallet}
                                 walletAddress={walletAddress}
+                                isBondingModalOpen={isBondingModalOpen}
                             />
                         )
                     case ADDRESS_TABS[7]:

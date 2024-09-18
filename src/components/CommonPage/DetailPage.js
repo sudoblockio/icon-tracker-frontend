@@ -12,8 +12,8 @@ class DetailPage extends Component {
 
     componentDidMount() {
         this.setInitialData(this.props.url)
-    }
 
+    }
     componentWillReceiveProps(nextProps) {
         const url = this.props.url
         const urlNext = nextProps.url
@@ -33,16 +33,22 @@ class DetailPage extends Component {
             const { hash: nextHash } = locationObjNext
             const { TABS: currentTabs } = this.props
             const { TABS: nextTabs } = nextProps
+
+
+
             if (currentHash !== nextHash || currentTabs.length !== nextTabs.length) {
                 this.setTab(findTabIndex(nextTabs, nextHash))
             }
         }
     }
 
+
+
     setInitialData = (url) => {
         const locationObj = Object.keys(url).includes('location') ? url.location : url
         const { pathname, hash } = locationObj
         const query = pathname.split('/')[2]
+
         if (query) {
             const { TABS } = this.props
             this.props.getInfo(query)
@@ -97,6 +103,8 @@ class DetailPage extends Component {
         const { loading, error, pending } = this.props
         const isNotFoundPage = !loading && error !== '' && !isHxAddress(error) && !pending
 
+        console.log("Detail Page", this.state)
+
         const Content = () => {
             if (pending) {
                 return <PendingPage error={error} />
@@ -104,8 +112,6 @@ class DetailPage extends Component {
                 return <NotFoundPage error={error} />
             } else {
                 const { InfoComponent, TabsComponent } = this.props
-                console.log(this.props, 'the props detail page')
-
                 return (
                     <div className="content-wrap">
                         <InfoComponent {...this.props} />
