@@ -205,12 +205,12 @@ function LoginSelectionModal({ isOpen, closeModal, handleLedgerLogin, handleLogi
                         <span className={styles.bodySectionItemImg}>
                             <img alt="" src={hanaImg} />
                         </span>
-                        <span className={styles.bodySectionItemImg}>
+                        {/* <span className={styles.bodySectionItemImg}>
                             <img alt="" src={iconImg} />
-                        </span>
+                        </span> */}
                     </div>
                     <div className={styles.bodySectionItem}>
-                        <p>Login using ICONex / Hana wallet</p>
+                        <p>Login using Hana Wallet</p>
                     </div>
                 </div>
                 <hr />

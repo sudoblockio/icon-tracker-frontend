@@ -7,9 +7,12 @@ class TxBottom extends Component {
         const { txData, goAllTx, txType, address, tokenTotal, onClickTab, wallet, walletAddress } =
             this.props
 
+
         const tableClassName = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['className'] : ''
 
         const noBoxText = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['noBoxText'] : ''
+
+        console.log("props in txBottom", this.props);
 
         return (
             <TxBottomComponent
@@ -26,6 +29,7 @@ class TxBottom extends Component {
                 bondMap={this.props.bondMap ? this.props.bondMap : ''}
                 onClickTab={onClickTab}
                 walletAddress={walletAddress}
+                isBondingModalOpen={this.props.isBondingModalOpen}
             />
         )
     }
