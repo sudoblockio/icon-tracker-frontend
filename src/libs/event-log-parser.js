@@ -1,5 +1,6 @@
 function getEventsByName(ABI) {
     const eventsByName = {};
+    console.log({ ABI })
     ABI.forEach(item => {
         const { type, name } = item;
         if (type === "eventlog") {
@@ -19,7 +20,7 @@ function getParsedLog(log, eventsByName) {
 
 
     const logSignature = eventsByName[eventName.toLowerCase()];
-    const inputs = logSignature.inputs;
+    const inputs = logSignature?.inputs || [];
 
 
     const params = [];
@@ -46,7 +47,7 @@ function getParsedLog(log, eventsByName) {
     }
 
     params.forEach(item => {
-        if (item.value) {
+        if (item.value !== undefined && item.value !== null) {
             let value = item.value;
 
             if (item.type === "int") {
