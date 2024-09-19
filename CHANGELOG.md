@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.3...v0.6.0) (2024-09-18)
+
+
+### Features
+
+* wallet tooling-&gt; stake ([033c210](https://github.com/sudoblockio/icon-tracker-frontend/commit/033c21010ff254cd27bb5f97c5cfcb019b4fb6fb))
+* wallet tooling-&gt; voting ([0bc7eee](https://github.com/sudoblockio/icon-tracker-frontend/commit/0bc7eee9d9434f1f89e632bc04e43ac86b77819f))
+
+
+### Bug Fixes
+
+* pull bond percent from api in gov page ([8b3a55d](https://github.com/sudoblockio/icon-tracker-frontend/commit/8b3a55d01bc0ab2de0ef18849dc59c35a931f228))
+
 ## [0.5.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.2...v0.5.3) (2024-05-15)
 
 
