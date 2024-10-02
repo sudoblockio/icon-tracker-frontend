@@ -270,7 +270,7 @@ function AddressInfo(props) {
                 )}
                 <span className="connected">
                   <i className="img" />
-                  Connected to ICONex
+                  Connected to Wallet
                 </span>
                 <span className={`toggle${disabled ? ' disabled' : ''}`}></span>
 

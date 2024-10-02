@@ -84,9 +84,12 @@ function Connect(props) {
 
     //
     const getWalletAddress = async () => {
+
+        const url = `https://chromewebstore.google.com/detail/hana-wallet/jfdlamikmbghhapbgfoogdffldioobgl`;
         if (disabled) {
             window.open(
-                'https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel',
+                // 'https://chrome.google.com/webstore/detail/iconex/flpiciilemghbmfalicajoolhkkenfel',
+                url,
                 '_blank'
             )
             return
