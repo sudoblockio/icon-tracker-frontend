@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.0...v0.6.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* removed iconex mention ([d1748b8](https://github.com/sudoblockio/icon-tracker-frontend/commit/d1748b8cab60a726f979800e77914b3aff0c731a))
+
 ## [0.6.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.3...v0.6.0) (2024-09-18)
 
 
