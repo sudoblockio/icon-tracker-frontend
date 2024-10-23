@@ -256,12 +256,10 @@ class Header extends Component {
                                                 </li>
                                             </ol>
                                         </li>
-                                        <li>
-                                            <span>Stats (Coming)</span>
+                                        <li onClick={() => { window.open("https://icondashboard.com/") }}>
+                                            <span>Stats</span>
                                         </li>
-                                        <li>
-                                            <span>Explorer (Coming)</span>
-                                        </li>
+
                                     </ol>
                                 </li>
                             </ul>
