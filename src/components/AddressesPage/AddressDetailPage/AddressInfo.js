@@ -111,7 +111,7 @@ function AddressInfo(props) {
   }
 
   async function executeUnjail() {
-    const txData = requestUnjail(props.match.params.addressId, nid)
+    const txData = await requestUnjail(props.match.params.addressId, nid)
 
     try {
       await requestJsonRpc(txData.params)
