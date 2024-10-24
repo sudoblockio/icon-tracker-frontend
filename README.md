@@ -106,8 +106,7 @@ export \
 
 3. `.env` File 
 
-**./.env** 
-
+**./.env**
 ```dotenv
 REACT_APP_RPC_ENDPOINT=https://lisbon.net.solidwallet.io
 REACT_APP_API_ENDPOINT=https://tracker.lisbon.icon.community/
