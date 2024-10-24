@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.1...v0.6.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* release unjail fix ([093bfe7](https://github.com/sudoblockio/icon-tracker-frontend/commit/093bfe7ceb01c90eb1eefa23f8702bd6ee44df8d))
+
 ## [0.6.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.0...v0.6.1) (2024-10-02)
 
 
