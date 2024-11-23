@@ -36,15 +36,6 @@ const defaults = [
   },
   {
     region: "",
-    network: "sejong",
-    origin: "https://tracker.sejong.icon.community",
-    rpcEndpoint: "https://api.sejong.icon.community",
-    apiEndpoint: "https://tracker.sejong.icon.community",
-    wssEndpoint: "wss://tracker.sejong.icon.community",
-    nid: 83
-  },
-  {
-    region: "",
     network: "vigo",
     origin: "",
     rpcEndpoint: "https://vigo.net.solidwallet.io",
@@ -82,15 +73,36 @@ const defaults = [
     wssEndpoint: "wss://tracker.v2.lisbon.ams.vultr.icon.community",
     nid: 2
   },
-  {
-    region: "ams",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.ams.vultr.icon.community",
-    rpcEndpoint: "https://api.sejong.ams.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.sejong.ams.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.sejong.ams.vultr.icon.community",
-    nid: 83
-  },
+    //
+    // dev
+    //
+    {
+        region: "dev",
+        network: "mainnet",
+        origin: "https://dev.tracker.mainnet.icon.community",
+        rpcEndpoint: "https://dev.api.mainnet.icon.community",
+        apiEndpoint: "https://dev.tracker.mainnet.icon.community",
+        wssEndpoint: "wss://dev.tracker.mainnet.icon.community",
+        nid: 1
+    },
+    {
+        region: "dev",
+        network: "berlin",
+        origin: "https://dev.tracker.berlin.icon.community",
+        rpcEndpoint: "https://dev.api.berlin.icon.community",
+        apiEndpoint: "https://dev.tracker.berlin.icon.community",
+        wssEndpoint: "wss://dev.tracker.berlin.icon.community",
+        nid: 7
+    },
+    {
+        region: "dev",
+        network: "lisbon",
+        origin: "https://dev.tracker.lisbon.icon.community",
+        rpcEndpoint: "https://dev.api.lisbon.icon.community",
+        apiEndpoint: "https://dev.tracker.lisbon.icon.community",
+        wssEndpoint: "wss://dev.tracker.lisbon.icon.community",
+        nid: 2
+    },
   //
   // Sng
   //
@@ -120,15 +132,6 @@ const defaults = [
     apiEndpoint: "https://tracker.v2.lisbon.sng.vultr.icon.community",
     wssEndpoint: "wss://tracker.v2.lisbon.sng.vultr.icon.community",
     nid: 2
-  },
-  {
-    region: "sng",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.sng.vultr.icon.community",
-    rpcEndpoint: "https://api.sejong.sng.vultr.icon.community",
-    apiEndpoint: "https://tracker.v2.sejong.sng.vultr.icon.community",
-    wssEndpoint: "wss://tracker.v2.sejong.sng.vultr.icon.community",
-    nid: 83
   },
   //
   // Global
@@ -160,15 +163,6 @@ const defaults = [
     wssEndpoint: "wss://tracker.lisbon.iconblockchain.xyz",
     nid: 2
   },
-  {
-    region: "",
-    network: "sejong",
-    origin: "https://tracker.sejong.iconblockchain.xyz",
-    rpcEndpoint: "https://api.sejong.iconblockchain.xyz",
-    apiEndpoint: "https://tracker.sejong.iconblockchain.xyz",
-    wssEndpoint: "wss://tracker.sejong.iconblockchain.xyz",
-    nid: 83
-  },
   //
   // Ams
   //
@@ -199,15 +193,6 @@ const defaults = [
     wssEndpoint: "wss://tracker.v2.lisbon.ams.vultr.iconblockchain.xyz",
     nid: 2
   },
-  {
-    region: "ams",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.ams.vultr.iconblockchain.xyz",
-    rpcEndpoint: "https://api.sejong.ams.vultr.iconblockchain.xyz",
-    apiEndpoint: "https://tracker.v2.sejong.ams.vultr.iconblockchain.xyz",
-    wssEndpoint: "wss://tracker.v2.sejong.ams.vultr.iconblockchain.xyz",
-    nid: 83
-  },
   //
   // Sng
   //
@@ -237,15 +222,6 @@ const defaults = [
     apiEndpoint: "https://tracker.v2.lisbon.sng.vultr.iconblockchain.xyz",
     wssEndpoint: "wss://tracker.v2.lisbon.sng.vultr.iconblockchain.xyz",
     nid: 2
-  },
-  {
-    region: "sng",
-    network: "sejong",
-    origin: "https://tracker.v2.sejong.sng.vultr.iconblockchain.xyz",
-    rpcEndpoint: "https://api.sejong.sng.vultr.iconblockchain.xyz",
-    apiEndpoint: "https://tracker.v2.sejong.sng.vultr.iconblockchain.xyz",
-    wssEndpoint: "wss://tracker.v2.sejong.sng.vultr.iconblockchain.xyz",
-    nid: 83
   },
 ]
 
