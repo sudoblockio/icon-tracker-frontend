@@ -103,6 +103,66 @@ const defaults = [
         wssEndpoint: "wss://dev.tracker.lisbon.icon.community",
         nid: 2
     },
+    //
+    // cluster1
+    //
+    {
+        region: "cluster1",
+        network: "mainnet",
+        origin: "https://cluster1.tracker.mainnet.icon.community",
+        rpcEndpoint: "https://cluster1.api.mainnet.icon.community",
+        apiEndpoint: "https://cluster1.tracker.mainnet.icon.community",
+        wssEndpoint: "wss://cluster1.tracker.mainnet.icon.community",
+        nid: 1
+    },
+    {
+        region: "cluster1",
+        network: "berlin",
+        origin: "https://cluster1.tracker.berlin.icon.community",
+        rpcEndpoint: "https://cluster1.api.berlin.icon.community",
+        apiEndpoint: "https://cluster1.tracker.berlin.icon.community",
+        wssEndpoint: "wss://cluster1.tracker.berlin.icon.community",
+        nid: 7
+    },
+    {
+        region: "cluster1",
+        network: "lisbon",
+        origin: "https://cluster1.tracker.lisbon.icon.community",
+        rpcEndpoint: "https://cluster1.api.lisbon.icon.community",
+        apiEndpoint: "https://cluster1.tracker.lisbon.icon.community",
+        wssEndpoint: "wss://cluster1.tracker.lisbon.icon.community",
+        nid: 2
+    },
+    //
+    // cluster2
+    //
+    {
+        region: "cluster2",
+        network: "mainnet",
+        origin: "https://cluster2.tracker.mainnet.icon.community",
+        rpcEndpoint: "https://cluster2.api.mainnet.icon.community",
+        apiEndpoint: "https://cluster2.tracker.mainnet.icon.community",
+        wssEndpoint: "wss://cluster2.tracker.mainnet.icon.community",
+        nid: 1
+    },
+    {
+        region: "cluster2",
+        network: "berlin",
+        origin: "https://cluster2.tracker.berlin.icon.community",
+        rpcEndpoint: "https://cluster2.api.berlin.icon.community",
+        apiEndpoint: "https://cluster2.tracker.berlin.icon.community",
+        wssEndpoint: "wss://cluster2.tracker.berlin.icon.community",
+        nid: 7
+    },
+    {
+        region: "cluster2",
+        network: "lisbon",
+        origin: "https://cluster2.tracker.lisbon.icon.community",
+        rpcEndpoint: "https://cluster2.api.lisbon.icon.community",
+        apiEndpoint: "https://cluster2.tracker.lisbon.icon.community",
+        wssEndpoint: "wss://cluster2.tracker.lisbon.icon.community",
+        nid: 2
+    },
   //
   // Sng
   //
