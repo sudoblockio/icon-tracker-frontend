@@ -20,6 +20,7 @@ const initPrepDetailsForm = {
     city: '',
     website: '',
     details: '',
+    p2pEndpoint: '',
     nodeAddress: '',
 }
 
@@ -239,6 +240,12 @@ export default function PrepModal({ prepInfo, isOpen, onClose }) {
                                                 prepInfo.details,
                                                 'Details',
                                                 prepDetailsForm.details,
+                                            ],
+                                            [
+                                                'p2pEndpoint',
+                                                prepInfo.p2p_endpoint,
+                                                'p2p Endpoint',
+                                                prepDetailsForm.p2pEndpoint,
                                             ],
                                             [
                                                 'nodeAddress',
