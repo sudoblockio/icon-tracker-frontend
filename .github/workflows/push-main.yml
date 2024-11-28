@@ -69,6 +69,16 @@ jobs:
             network_name: lisbon
             network_version: v2
 
+          - cluster: cluster1
+            network_name: mainnet
+            network_version: v2
+          - cluster: cluster1
+            network_name: berlin
+            network_version: v2
+          - cluster: cluster1
+            network_name: lisbon
+            network_version: v2
+
     steps:
       - name: Checkout charts repo
         uses: actions/checkout@v2
