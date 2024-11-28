@@ -199,11 +199,9 @@ export async function contractEventLogList(payload) {
     trackerApi
       .get(makeEventUrl(`/api/v1/logs`, payload))
       .then((result) => {
-        console.log({ resultB4: result })
         result.data.forEach(log => {
           log.parsedLog = getParsedLog(log, eventsByName)
         })
-        console.log({ resultAfter: result })
         resolve(result)
       })
       .catch((error) => {

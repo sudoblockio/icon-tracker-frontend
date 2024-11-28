@@ -329,6 +329,8 @@ class TxTableHead extends Component {
         case TX_TYPE.TRANSACTION_EVENTS:
           return (
             <tr>
+              <th>TxHash / Block / Age</th>
+              <th>Method</th>
               <th>Event Logs</th>
             </tr>
           )

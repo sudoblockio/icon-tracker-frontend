@@ -58,7 +58,9 @@ function getParsedLog(log, eventsByName) {
                 }
             }
 
-            parsed[item.name] = value;
+            if (item.name) {
+                parsed[item.name] = value;
+            }
 
         }
     })
