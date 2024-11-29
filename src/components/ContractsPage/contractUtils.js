@@ -67,11 +67,22 @@ export function createContractMethodsState(contractReadWriteInfo) {
         result.writeMethodsNameArray.push(funcName)
         const inputs = { ...func }
 
+
+        if (inputs.payable === "0x1") {
+            if (!inputs.inputs.find(f => f.name === 'value')) {
+                inputs.inputs.push({ name: 'value', type: 'icx' })
+            }
+        }
+
+
+
         const outputs = writeFuncOutputs[index]
         result[funcName] = {
             inputs,
             outputs,
         }
+
+
     })
 
     return result

@@ -26,9 +26,14 @@ async function makeTxCallRPCObj(
   method,
   paramsObj = null,
   nid,
-  stepLimit = 2000000,
+  stepLimit,
   value = null
 ) {
+
+  if (!stepLimit) {
+    stepLimit = 2000000
+  }
+
   const params = {
     from: from,
     to: to,

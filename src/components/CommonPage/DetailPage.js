@@ -103,8 +103,6 @@ class DetailPage extends Component {
         const { loading, error, pending } = this.props
         const isNotFoundPage = !loading && error !== '' && !isHxAddress(error) && !pending
 
-        console.log("Detail Page", this.state)
-
         const Content = () => {
             if (pending) {
                 return <PendingPage error={error} />
