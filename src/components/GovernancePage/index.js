@@ -208,10 +208,24 @@ class GovernancePage extends Component {
 
 
         const list = blackChecked ? blackPrep : allPrep.filter(p => {
-            return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+            return (
+                mainChecked && (p.grade === 0 || p.grade === '0x0'))
+                || (subChecked && (p.grade === 1 || p.grade === '0x1'))
+                || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+            // || (p.grade === 3 || p.grade === "0x3")
         })
 
-        const searched = !search ? list.sort((a, b) => b.power - a.power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+
+        let searched = search ? list
+            .filter(prep =>
+                prep.name.toLowerCase().includes(search.toLowerCase().trim())
+                || prep.address.toLowerCase().includes(search.trim())
+            )
+            : list;
+
+        searched.sort((a, b) => {
+            return b.power - a.power;
+        });
 
         return (
             <div className="content-wrap governance">
@@ -391,7 +405,7 @@ class TableRow extends Component {
     getJailBadge = (jail_flag) => {
         let badgeText = '';
         let badgeClass = '';
-        if (jail_flag === 0  || isNaN(jail_flag) ) {
+        if (jail_flag === 0 || isNaN(jail_flag)) {
             return false;
         }
         if ([2, 3, 6, 10].includes(jail_flag)) {
@@ -521,7 +535,7 @@ class TableRow extends Component {
                 {!blackChecked && (
                     <td className={'bonded'}>
                         <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
-                        <em>{Number(bondedRate*100).toFixed(1)}%</em>
+                        <em>{Number(bondedRate * 100).toFixed(1)}%</em>
                     </td>
                 )}
                 {!blackChecked && (
