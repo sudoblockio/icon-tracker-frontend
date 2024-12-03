@@ -1,7 +1,17 @@
 function getEventsByName(ABI) {
     const eventsByName = {};
-    console.log({ ABI })
-    ABI.forEach(item => {
+
+    const baseMethods = [{
+        name: "ICXTransfer", type: "eventlog",
+        inputs: [
+            { type: "address", name: "_to" },
+            { type: "address", name: "_from" },
+            { type: "int", name: "amount" }
+        ]
+    }]
+
+    const AbiWithBaseMethods = [...ABI, ...baseMethods]
+    AbiWithBaseMethods.forEach(item => {
         const { type, name } = item;
         if (type === "eventlog") {
             eventsByName[name.toLowerCase()] = item;
@@ -58,9 +68,9 @@ function getParsedLog(log, eventsByName) {
                 }
             }
 
-            if (item.name) {
-                parsed[item.name] = value;
-            }
+            // if (item.name) {
+            parsed[item.name] = value;
+            // }
 
         }
     })
