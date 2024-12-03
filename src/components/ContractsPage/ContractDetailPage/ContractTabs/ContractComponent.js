@@ -52,12 +52,24 @@ function ContractComponent({
             alert('Please connect to wallet first')
         } else {
             const paramsData = makeParams(params, method, inputs)
+            let value = null;
+            if (paramsData.hasOwnProperty("value")) {
+                value = paramsData.value;
+                const valueInput = inputs.find(f => f.name === 'value' && f.type === "icx");
+                if (valueInput) {
+                    value = parseFloat(value);
+                }
+                delete paramsData.value;
+            }
+
+
             const rawMethodCall = await customMethod(
                 walletAddress,
                 address,
                 method,
                 paramsData,
-                nid
+                nid,
+                value
             )
             icxSendTransaction({
                 params: { ...rawMethodCall },
