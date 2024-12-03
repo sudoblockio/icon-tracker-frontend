@@ -41,9 +41,9 @@ class Header extends Component {
                 case 'lisbon':
                     return { isLocked: true, link: null }
                 case 'berlin':
-                    return { isLocked: false, link: 'https://testnet.btp2.24x365.online/' }
+                    return { isLocked: false, link: 'https://btp2-testnet-monitor.iconblockchain.xyz/' }
                 case 'mainnet':
-                    return { isLocked: false, link: 'https://btp-mainnet-monitor.icon.community/' }
+                    return { isLocked: false, link: 'https://btp2-mainnet-monitor.iconblockchain.xyz/' }
                 default:
                     return { isLocked: true, link: null }
             }

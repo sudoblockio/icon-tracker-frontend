@@ -10,8 +10,6 @@ class TxBottom extends Component {
         const tableClassName = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['className'] : ''
         const noBoxText = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['noBoxText'] : ''
 
-        console.log({ txData })
-
         return (
             <TxBottomComponent
                 noBorder={true}

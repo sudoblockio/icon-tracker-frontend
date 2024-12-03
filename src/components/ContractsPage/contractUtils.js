@@ -6,7 +6,14 @@ export function makeParams(params, funcName, inputs) {
         const name = item['name']
         const type = item['type']
         const inputName = `${funcName}_${name}_${type}`
-        const value = params[inputName] || ''
+
+        let value = params[inputName];
+
+        const inputNameSplit = inputName.split("_");
+        if (inputNameSplit[inputNameSplit.length - 1] === "[]str") {
+            value = JSON.parse(params[inputName])
+        }
+
         result[name] = value
     })
     let parsedParams = { ...result };
@@ -14,6 +21,7 @@ export function makeParams(params, funcName, inputs) {
         parsedParams = JSON.parse(parseInputParams(result));
     } catch (err) {
         // if error is raised return unparsed (string) params
+        console.log(err)
     }
 
     return parsedParams;
@@ -25,7 +33,7 @@ function parseInputParams(data) {
 
     keys.forEach((key, index) => {
         const value = data[key];
-        if (index === keys.length -1) {
+        if (index === keys.length - 1) {
             result += `"${key}":${value}`;
         } else {
             result += `"${key}":${value},`;
@@ -59,11 +67,22 @@ export function createContractMethodsState(contractReadWriteInfo) {
         result.writeMethodsNameArray.push(funcName)
         const inputs = { ...func }
 
+
+        if (inputs.payable === "0x1") {
+            if (!inputs.inputs.find(f => f.name === 'value')) {
+                inputs.inputs.push({ name: 'value', type: 'icx' })
+            }
+        }
+
+
+
         const outputs = writeFuncOutputs[index]
         result[funcName] = {
             inputs,
             outputs,
         }
+
+
     })
 
     return result

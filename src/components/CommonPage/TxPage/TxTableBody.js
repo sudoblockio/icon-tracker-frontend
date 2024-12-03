@@ -483,10 +483,41 @@ class TxTableBody extends Component {
                 case TX_TYPE.TRANSACTION_EVENTS:
                     return (
                         <tr>
-                            <td className="event-log-table">
+                            {/* <td className="event-log-table">
                                 {data.address}
                                 {data.indexed}
                                 {data.data}
+                            </td> */}
+                            <td className="on">
+                                <span className="ellipsis">
+                                    <TransactionLink to={data.transaction_hash} />
+                                </span>
+                                <br />
+                                <span>
+                                    <BlockLink
+                                        label={`# ${data.block_number}`}
+                                        to={data.block_number}
+                                    />
+                                </span>
+                                <p>{epochToFromNow(data.block_timestamp)}</p>
+                            </td>
+                            <td>{data.method}</td>
+                            <td className="event-log-table">
+                                <ReactJson
+                                    src={data.parsedLog}
+                                    name={null}
+                                    collapsed={2}
+                                    displayObjectSize={false}
+                                    displayDataTypes={false}
+                                    enableClipboard={false}
+                                    displayArrayKey={false}
+                                    quotesOnKeys={false}
+                                    sortKeys={true}
+                                    groupArraysAfterLength={5}
+                                    indentWidth={4}
+                                    theme={"rjv-default"}
+                                />
+
                             </td>
                         </tr>
                     )
