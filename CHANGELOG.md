@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.2...v0.6.3) (2024-12-03)
+
+
+### Bug Fixes
+
+* add dev endpoint to config ([ef1b125](https://github.com/sudoblockio/icon-tracker-frontend/commit/ef1b1251487ceb06d68190079795648b1a65aafa))
+* add p2p endpoint to setprep modal ([845c8f4](https://github.com/sudoblockio/icon-tracker-frontend/commit/845c8f4a56ce272543f1884211f76b37d64c8e47))
+
 ## [0.6.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.1...v0.6.2) (2024-10-24)
 
 
