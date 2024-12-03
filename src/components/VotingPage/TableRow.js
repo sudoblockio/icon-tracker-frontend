@@ -182,7 +182,7 @@ class TableRow extends Component {
 
                 <td className={clsx('bonded')}>
                     <span>
-                        {bond_percent.toFixed(2)}%
+                        {bond_percent?.toFixed(2)}%
                     </span>
                     <br />
                     <em>

@@ -40,7 +40,6 @@ export function useVotingPage(address, history) {
     function handleSubmitAutoVote(payload) {
         const prevState = { ...state };
         const newState = getPrepsForAutoVote(prevState, payload)
-        console.log(newState)
         setState(newState)
     }
 
@@ -209,6 +208,7 @@ export function useVotingPage(address, history) {
             setState(prev => ({ ...prev, isLoadingPreps: true }))
 
             const respPreps = await getPReps()
+            console.log({ respPreps })
             const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
 
             const totalVoted = !totalVotedLoop ?
@@ -221,6 +221,14 @@ export function useVotingPage(address, history) {
                 prep.overBondPercent = 100 - Number(prep.bond_percent)
                 prep.isJailed = parseInt(prep.jail_flags, 16) !== 0
             })
+
+            dataPreps.sort((a, b) => {
+                if (a.grade !== b.grade) {
+                    return a.grade - b.grade;
+                }
+                return b.power - a.power;
+            });
+
             const delegationData = await getDelegation({ address })
             const dataStake = await getStake(address)
             const stakedAmount = Number(dataStake.stake / Math.pow(10, 18))
