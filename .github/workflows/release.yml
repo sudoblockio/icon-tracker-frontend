@@ -65,22 +65,13 @@ jobs:
       matrix:
         include:
 
-#          - cluster: prod-ams
-#            network_name: mainnet
-#            network_version: v2
-#          - cluster: prod-ams
-#            network_name: lisbon
-#            network_version: v2
-#          - cluster: prod-ams
-#            network_name: berlin
-#            network_version: v2
-          - cluster: prod-sng
+          - cluster: cluster1
             network_name: mainnet
             network_version: v2
-          - cluster: prod-sng
+          - cluster: cluster1
             network_name: berlin
             network_version: v2
-          - cluster: prod-sng
+          - cluster: cluster1
             network_name: lisbon
             network_version: v2
 
