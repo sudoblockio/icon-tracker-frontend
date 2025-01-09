@@ -107,19 +107,66 @@ function AddContractsBal(props) {
     }
 
     async function fetchAddressTokens() {
-        let tokenRes = {}
-        if (addressTokensRes) {
-            tokenRes = addressTokensRes
-        } else {
-            tokenRes = await addressTokens(urlId)
-            setAddressTokensRes(tokenRes)
+        let tokenRes = addressTokensRes || (await addressTokens(urlId));
+        if (!addressTokensRes) {
+            setAddressTokensRes(tokenRes);
         }
 
-        if (tokenRes.status !== 204)
-            tokenRes?.data?.forEach((contract, index) => {
-                setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
-            })
+        if (tokenRes.status !== 204) {
+            const tokenData = tokenRes.data || [];
+            const tokenPromises = tokenData.map(async (contract) => {
+                const [contractDetails, balanceDetails] = await Promise.all([
+                    contractDetailResMap[contract]
+                        ? Promise.resolve(contractDetailResMap[contract])
+                        : contractDetail(contract).then((res) => {
+                            if (res?.data) setContractDetailResMap((prev) => ({ ...prev, [contract]: res }));
+                            return res;
+                        }),
+                    getBalOfMap[contract]
+                        ? Promise.resolve(getBalOfMap[contract])
+                        : getBalanceOf(urlId, contract).then((res) => {
+                            setGetBalOfMap((prev) => ({ ...prev, [contract]: res }));
+                            return res;
+                        })
+                ]);
+
+                if (!contractDetails?.data) return null; // Skip invalid contracts
+
+                return {
+                    ...contractDetails.data,
+                    balance: balanceDetails,
+                    nameLower: contractDetails.data.name.toLowerCase()
+                };
+            });
+
+            const tokenResults = (await Promise.all(tokenPromises)).filter(Boolean); // Filter out null values
+
+            // Sort and update tokens in a single state update
+            const sortedTokenArray = sortArrOfObjects(
+                [...tokenResults],
+                'nameLower',
+                'asc'
+            );
+
+            setTokens(sortedTokenArray);
+        }
     }
+
+
+    // async function fetchAddressTokens() {
+    //     let tokenRes = {}
+    //     if (addressTokensRes) {
+    //         tokenRes = addressTokensRes
+    //     } else {
+    //         tokenRes = await addressTokens(urlId)
+    //         setAddressTokensRes(tokenRes)
+    //     }
+
+    //     if (tokenRes.status !== 204)
+    //         tokenRes?.data?.forEach((contract, index) => {
+    //             setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
+    //         })
+    // }
 
     /************************************************** */
 

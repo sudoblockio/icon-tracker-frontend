@@ -59,39 +59,64 @@ class GovernancePage extends Component {
         this.governanceData = await getPReps();
         this.publicTreasury = await getPublicTreasury()
     }
+
+
     async componentDidMount() {
-        const { data: preps } = await getPReps();
-        const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()
-        const lastBlock = await getLastBlock()
-        const stepPriceLoop = await getStepPrice()
-        const _allPrep = await prepList()
-        const _blackPrep = await prepList(3)
+        const [
+            { data: preps },
+            { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop },
+            lastBlock,
+            stepPriceLoop,
+            _allPrep,
+            _blackPrep,
+            total_supply,
+            IISSData
+        ] = await Promise.all([
+            getPReps(),
+            getPRepsRPC(),
+            getLastBlock(),
+            getStepPrice(),
+            prepList(),
+            prepList(3),
+            getTotalSupply(),
+            getIISSInfo()
+        ]);
 
-        const total_supply = await getTotalSupply()
-        const icxSupply = Number(total_supply / Math.pow(10, 18))
+        const icxSupply = Number(total_supply / Math.pow(10, 18));
 
-        const { height, peer_id } = lastBlock || {}
+        const { height, peer_id } = lastBlock || {};
+
         const allPrep = (_allPrep || []).map(prep => {
-            const index = preps.findIndex(p => prep.address === p.address)
+            const index = preps.findIndex(p => prep.address === p.address);
             if (index !== -1) {
-                prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-                prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+                prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
+                prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
             }
-            prep.balance = Number(prep.balance)
-            return prep
-        })
+            prep.balance = Number(prep.balance);
+            return prep;
+        });
+
         const blackPrep = (_blackPrep || []).map(bp => {
-            bp.grade = 3
-            bp.status = bp.penaltyStatus
-            return bp
-        })
-        const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
-        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`
-        const totalSupply = Number(icxSupply || 0)
-        const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-        const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-        const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-        const IISSData = await getIISSInfo()
+            bp.grade = 3;
+            bp.status = bp.penaltyStatus;
+            return bp;
+        });
+
+        const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id);
+        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`;
+
+        const totalSupply = Number(icxSupply || 0);
+        const totalStaked = totalStakedLoop
+            ? IconConverter.toNumber(IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+            : 0;
+        const totalVoted = totalVotedLoop
+            ? IconConverter.toNumber(IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+            : 0;
+        const stepPrice = stepPriceLoop
+            ? IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+            : 0;
 
         this.setState({
             loading: false,
@@ -103,15 +128,15 @@ class GovernancePage extends Component {
             allPrep,
             blackPrep,
             lastBlockPrepName,
-            // Ivoter: IISSData.variable.Ivoter,
             Iwage: IISSData.variable.Iwage,
             Irelay: IISSData.variable.Irelay,
             Icps: IISSData.variable.Icps,
             Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
-            Iprep: IISSData.variable.Iprep,
-
-        })
+            Iprep: IISSData.variable.Iprep
+        });
     }
+
+
 
     handleChange = e => {
         const { type, value } = e.target
