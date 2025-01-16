@@ -96,7 +96,7 @@ function AddContractsBal(props) {
             const sortedTokenArray = sortArrOfObjects(
                 [
                     ...oldTokensWithLowerCaseName,
-                    { ...res.data, balance: getBalRes, nameLower: res.data.name.toLowerCase() },
+                    { ...res.data, balance: getBalRes, nameLower: res.data?.name?.toLowerCase() },
                 ],
                 'nameLower',
                 'asc'
@@ -135,7 +135,7 @@ function AddContractsBal(props) {
                 return {
                     ...contractDetails.data,
                     balance: balanceDetails,
-                    nameLower: contractDetails.data.name.toLowerCase()
+                    nameLower: contractDetails.data?.name?.toLowerCase()
                 };
             });
 
