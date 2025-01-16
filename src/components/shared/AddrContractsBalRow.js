@@ -11,7 +11,7 @@ import {
 import { getBalanceOf, getBalance, getStake, getBondList } from '../../redux/store/iiss'
 import { contractDetail } from '../../redux/store/contracts'
 import { addressTokens } from '../../redux/store/addresses'
-import { IconConverter, IconAmount } from 'icon-sdk-js'
+import { IconConverter, } from 'icon-sdk-js'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -70,42 +70,6 @@ function AddContractsBal(props) {
 
     /*******************************************************  */
 
-    const setTokenBal = async (tokenContract, { index, tokenCount }) => {
-        let res = {}
-        if (contractDetailResMap[tokenContract]) {
-            res = contractDetailResMap[tokenContract]
-        } else {
-            res = await contractDetail(tokenContract)
-            setContractDetailResMap(res)
-            if (!res.data) return
-        }
-
-        let getBalRes = {}
-        if (getBalOfMap[tokenContract]) {
-            getBalRes = getBalOfMap[tokenContract]
-        } else {
-            getBalRes = await getBalanceOf(urlId, tokenContract)
-            setGetBalOfMap((prev) => ({ ...prev, [tokenContract]: getBalRes }))
-        }
-
-        setTokens((prev) => {
-            const oldTokensWithLowerCaseName = [...prev].map((token) => ({
-                ...token,
-                nameLower: token.name.toLowerCase(),
-            }))
-            const sortedTokenArray = sortArrOfObjects(
-                [
-                    ...oldTokensWithLowerCaseName,
-                    { ...res.data, balance: getBalRes, nameLower: res.data?.name?.toLowerCase() },
-                ],
-                'nameLower',
-                'asc'
-            )
-
-            return sortedTokenArray
-        })
-    }
-
     async function fetchAddressTokens() {
         let tokenRes = addressTokensRes || (await addressTokens(urlId));
         if (!addressTokensRes) {
@@ -130,18 +94,18 @@ function AddContractsBal(props) {
                         })
                 ]);
 
-                if (!contractDetails?.data) return null; // Skip invalid contracts
+                // Skip invalid contracts
+                if (!contractDetails?.data) return null;
+                if (!contractDetails?.data.name) return null;
 
                 return {
                     ...contractDetails.data,
                     balance: balanceDetails,
-                    nameLower: contractDetails.data?.name?.toLowerCase()
+                    nameLower: contractDetails.data.name.toLowerCase()
                 };
             });
 
             const tokenResults = (await Promise.all(tokenPromises)).filter(Boolean); // Filter out null values
-
-            // Sort and update tokens in a single state update
             const sortedTokenArray = sortArrOfObjects(
                 [...tokenResults],
                 'nameLower',
@@ -153,26 +117,10 @@ function AddContractsBal(props) {
     }
 
 
-    // async function fetchAddressTokens() {
-    //     let tokenRes = {}
-    //     if (addressTokensRes) {
-    //         tokenRes = addressTokensRes
-    //     } else {
-    //         tokenRes = await addressTokens(urlId)
-    //         setAddressTokensRes(tokenRes)
-    //     }
 
-    //     if (tokenRes.status !== 204)
-    //         tokenRes?.data?.forEach((contract, index) => {
-    //             setTokenBal(contract, { index, tokenCount: tokenRes.data.length })
-    //         })
-    // }
-
-    /************************************************** */
 
     useEffect(() => {
         fetchAddressTokens()
-
         getAddrBalance()
         getAddrStake(urlId)
         getAddrBond(urlId)
