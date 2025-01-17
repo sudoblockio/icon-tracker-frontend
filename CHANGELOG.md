@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.3...v0.6.4) (2025-01-17)
+
+
+### Bug Fixes
+
+* ci target ([42bcc99](https://github.com/sudoblockio/icon-tracker-frontend/commit/42bcc99cada73a05c658cb2a2f976f764c382ff6))
+* governance and token loading bugs ([d5b796c](https://github.com/sudoblockio/icon-tracker-frontend/commit/d5b796c0f7c77c54bf67d85fe5ef8d7ce186e86a))
+* sentry environment ([3431845](https://github.com/sudoblockio/icon-tracker-frontend/commit/34318451aa55ec11a8259983a8a138d022055f2b))
+
 ## [0.6.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.2...v0.6.3) (2024-12-03)
 
 
