@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { ContractsPageSelectorContainer } from '../containers'
+import React, { Component } from 'react';
+import { ContractsPageSelectorContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 class ContractsPageSelector extends Component {
     render() {
-        return <ContractsPageSelectorContainer />
+        return (
+            <>
+                <PageHelmet title="Contract" />
+                <ContractsPageSelectorContainer />
+            </>
+        );
     }
 }
 
-export default ContractsPageSelector
+export default ContractsPageSelector;
