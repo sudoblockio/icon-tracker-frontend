@@ -1,0 +1,38 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .message {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .retryButton {
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #1aaaba;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0b8997;
+        }
+    }
+}

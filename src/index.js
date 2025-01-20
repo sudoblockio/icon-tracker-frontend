@@ -12,6 +12,7 @@ import './style-custom/shape.css'
 
 import * as Sentry from "@sentry/react";
 import config from './config'
+import ErrorBoundary from './components/ErrorBoundary'
 
 Sentry.init({
     dsn: config.sentryDSN,
@@ -38,8 +39,10 @@ Sentry.init({
 });
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <ErrorBoundary>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </ErrorBoundary>,
     document.getElementById('root')
 )
