@@ -1,0 +1,23 @@
+.tooltip {
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 1000;
+    // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    animation: fadeIn 0.2s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
