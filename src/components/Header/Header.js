@@ -64,6 +64,12 @@ class Header extends Component {
         }
         const { isLocked: isMonitorValidatorLocked, link: monitorValidatorLink } =
             getMonitorsValidator()
+
+
+        function handleSubmitConfigForm(values) {
+
+        }
+
         return (
             <div className="header-wrap">
                 <div className="wrap-holder">
@@ -261,6 +267,9 @@ class Header extends Component {
                                         </li>
 
                                     </ol>
+                                </li>
+                                <li>
+                                    <button>Update Config</button>
                                 </li>
                             </ul>
                             <div className="link-right">

@@ -92,7 +92,7 @@ class TransactionInfo extends Component {
 
     msgFormat = () => {
         if (this.state.msgList !== undefined) {
-            return this.state.msgList.map((msg) => {})
+            return this.state.msgList.map((msg) => { })
         }
     }
 
@@ -129,7 +129,6 @@ class TransactionInfo extends Component {
                     reportedCount,
                     // stepUsedDetails
                 } = data
-                console.log(data, 'values========>')
 
                 const _stepPrice = step_price || '0'
                 const stepPriceLoop = IconAmount.of(_stepPrice, IconAmount.Unit.LOOP)
@@ -206,14 +205,13 @@ class TransactionInfo extends Component {
                                                             label={numberWithCommas(block_number)}
                                                         />
                                                     </span>
-                                                    <em>{`(${
-                                                        this.state.lastBlock
+                                                    <em>{`(${this.state.lastBlock
                                                             ? Number(
-                                                                  this.state.lastBlock.height -
-                                                                      block_number
-                                                              )
+                                                                this.state.lastBlock.height -
+                                                                block_number
+                                                            )
                                                             : ' -'
-                                                    } Confirmation(s))`}</em>
+                                                        } Confirmation(s))`}</em>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -259,8 +257,8 @@ class TransactionInfo extends Component {
                                                 <td>{`${convertHexToValue(value)} ICX`}</td>
                                             </tr>
                                             {recentTokenTx &&
-                                            recentTokenTx.data &&
-                                            recentTokenTx.data.length ? (
+                                                recentTokenTx.data &&
+                                                recentTokenTx.data.length ? (
                                                 <tr>
                                                     <td>Token transfer</td>
                                                     <TokenTransferCell
