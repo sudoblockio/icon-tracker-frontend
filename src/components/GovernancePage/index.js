@@ -176,8 +176,20 @@ class GovernancePage extends Component {
                         .value.toString(10);
                 }
                 prep.balance = Number(prep.balance ?? 0);
-                return prep;
+                if (prep.delegated !== 0) {
+                    prep.apr = (prep.reward_monthly * 12 / prep.delegated) * 100;
+                    const monthlyRate = prep.apr / 12 / 100;
+                    // prep.apy = (Math.pow(1 + monthlyRate, 12) - 1) * 100;
+                }
+                else {
+                    prep.apr = 0;
+                    // prep.apy = 0
+                }
+
+                return prep
             });
+
+
 
             const blackPrep = _blackPrep.map(bp => ({
                 ...bp,
@@ -438,6 +450,7 @@ class GovernancePage extends Component {
                                         <col />
                                         <col />
                                         <col />
+                                        <col />
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -463,6 +476,7 @@ class GovernancePage extends Component {
                                                     Max Rate)
                                                 </em>
                                             </th>
+                                            <th>APR</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -545,9 +559,7 @@ class TableRow extends Component {
     onError = () => {
         this.setState({ logoError: true })
     }
-    loadImage = () => {
-        this.setState({ loaded: true })
-    }
+
     render() {
         const {
             logoError
@@ -601,6 +613,7 @@ class TableRow extends Component {
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
         const bondedRate = !totalVoted ? 0 : prep.bond_percent
+
 
         return (
             <tr>
@@ -688,6 +701,14 @@ class TableRow extends Component {
                             </em>
                         </>
                     )}
+                </td>
+                <td>
+                    <span>
+                        {prep.apr.toFixed(2)}%
+                        {/* / */}
+                        {/* <br /> */}
+                        {/* {prep.apy.toFixed(2)}% */}
+                    </span>
                 </td>
             </tr>
         )

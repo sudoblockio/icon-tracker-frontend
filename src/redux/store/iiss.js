@@ -13,6 +13,7 @@ import config from "../../config";
 import IconService from "icon-sdk-js";
 import { requestJsonRpc } from "../../utils/connect";
 import { icxGetScoreFromRPC } from "../api/restV3/icx";
+import { CHAIN_CONTRACT_ADDRESS } from "../../utils/const";
 
 export async function getStats() {
   const trackerApi = await trackerApiInstance();
@@ -1131,3 +1132,39 @@ export async function queryIScore(address) {
   });
 }
 
+
+
+
+export async function queryNetworkInfo() {
+  const walletApi = await walletApiInstance();
+
+  return new Promise(resolve => {
+    const param = {
+      jsonrpc: "2.0",
+      id: 1234,
+      method: "icx_call",
+      params: {
+        to: CHAIN_CONTRACT_ADDRESS,
+        dataType: "call",
+        data: { method: "getNetworkInfo" }
+      }
+    };
+
+    walletApi
+      .post(`/api/v3`, JSON.stringify(param))
+      .then(response => {
+        resolve(response.data.result);
+      })
+      .catch(error => {
+        if (!!error.response) {
+          resolve(error.response.data);
+        } else {
+          resolve({
+            error: {
+              message: error.message
+            }
+          });
+        }
+      });
+  });
+}
