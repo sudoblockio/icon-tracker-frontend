@@ -180,12 +180,12 @@ class Header extends Component {
                                                 <li
                                                     onClick={() => {
                                                         window.open(
-                                                            `${config.apiEndpoint}/api/v1/docs/index.html`
+                                                            `https://cluster1.tracker.${config.network}.icon.community/openapi/`
                                                         )
                                                     }}>
                                                     <span>Main</span>
                                                 </li>
-                                                <li
+                                                {/* <li
                                                     onClick={() => {
                                                         window.open(
                                                             `${config.apiEndpoint}/api/v1/governance/docs`
@@ -208,7 +208,7 @@ class Header extends Component {
                                                         )
                                                     }}>
                                                     <span>Stats</span>
-                                                </li>
+                                                </li> */}
                                                 <li
                                                     onClick={() => {
                                                         window.open(
