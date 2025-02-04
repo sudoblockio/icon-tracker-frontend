@@ -23,10 +23,10 @@ class TableRow extends Component {
         switch (grade) {
             case 0:
             case '0x0':
-                return <span className={className}><i></i>Main P-Rep</span>
+                return <span className={className}><i></i>Main Validators</span>
             case 1:
             case '0x1':
-                return <span className={className}><i></i>Sub P-Rep</span>
+                return <span className={className}><i></i>Sub Validators</span>
             case 2:
             case '0x2':
                 return <span className={className}><i></i>Candidate</span>

@@ -212,12 +212,12 @@ class Popup extends Component {
                     <div className="popup">
                         <h1 className="title">About Governance</h1>
                         <p className="txt">
-                            ICON Network is a blockchain network operated by Public Representative
-                            (P-Rep). Therefore, Users (ICONist) must vote for high qualified P-Reps
-                            so that ICON Network to be more stable. Each P-Reps can submit the
+                            ICON Network is a blockchain network operated by Public Representatives
+                            (Validators). Therefore, Users (ICONist) must vote for highly qualified validators
+                            more a more stable ICON Network. Each validator can submit the
                             Monthly Reward Variable for Representative (i_rep) that affects the
                             total reward amount for the ICON Network. Therefore, users should
-                            compare each i_reps submitted by each P-Reps and make right decision. In
+                            compare each i_reps submitted by each validator and make right decision. In
                             addition, users who have participated in the vote will receive reward
                             with Annual Delegation Reward Rate for Representative (r_rep).
                         </p>
@@ -257,7 +257,7 @@ class Popup extends Component {
                     <div className="popup">
                         <h1 className="title">Suggested Commission Rate</h1>
                         <p className="txt">
-                            Each Main P-Rep suggests a commission rate, then the ICON Network takes
+                            Each Main validator suggests a commission rate, then the ICON Network takes
                             an average to form the Global Commission Rate
                         </p>
                         <div className="btn-holder full">
@@ -272,9 +272,9 @@ class Popup extends Component {
                     <div className="popup">
                         <h1 className="title">Global Commission Rate</h1>
                         <p className="txt">
-                            The percentage of block rewards that go to P-Reps. For example, with a
+                            The percentage of block rewards that go to validators. For example, with a
                             20% commission rate, if 100 ICX inflation is created then 20 goes to
-                            P-Reps and 80 goes to voters.
+                            validators and 80 goes to voters.
                         </p>
                         <div className="btn-holder full">
                             <button className="btn-type-normal size-full" onClick={this.closeAbout}>
@@ -305,7 +305,7 @@ class Popup extends Component {
                     <div className="popup">
                         <h1 className="title">Sponsored Projects</h1>
                         <p className="txt">
-                            CPS funds development within the ecosystem with preps optionally
+                            CPS funds development within the ecosystem with validators optionally
                             participating on a council voting on which projects receive
                             funding. Sponsored Projects counts each time a team has
                             invested their own ICX to support a project.
@@ -314,6 +314,50 @@ class Popup extends Component {
                             <button
                                 className="btn-type-normal size-full"
                                 onClick={this.closeSponsor}>
+                                <span>Confirm</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div key="power" className="popup-wrap power" style={{ display: 'none' }}>
+                    <div className="dimmed"></div>
+                    <div className="popup">
+                        <h1 className="title">Power</h1>
+                        <p className="txt">
+                            Power informs how many rewards are given to a team and is
+                            calculated as the total number of votes covered by bond x20
+                            (ie bond 5% of the total votes). If there are votes not
+                            covered by bond or bond not covered by votes it has no
+                            impact on power and hence rewards.
+                        </p>
+                        <div className="btn-holder full">
+                            <button
+                                className="btn-type-normal size-full"
+                                onClick={this.closePower}>
+                                <span>Confirm</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div key="bond" className="popup-wrap bond" style={{ display: 'none' }}>
+                    <div className="dimmed"></div>
+                    <div className="popup">
+                        <h1 className="title">Bond</h1>
+                        <p className="txt">
+                            In order for a team to get power and hence become a main
+                            validator, they need to bond ICX to their address which is
+                            subject to slashing penalties if the validator misbehaves.
+                            Check the docs for penalties associated with different
+                            infractions ranging from minor ones such as missing a
+                            series of governance votes / node going offline to major
+                            ones such as double-signing which can result in a
+                            substantial deduction of bond and disqualification of
+                            further block production.
+                        </p>
+                        <div className="btn-holder full">
+                            <button
+                                className="btn-type-normal size-full"
+                                onClick={this.closeBond}>
                                 <span>Confirm</span>
                             </button>
                         </div>

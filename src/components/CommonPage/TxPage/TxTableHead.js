@@ -98,7 +98,7 @@ class TxTableHead extends Component {
         case TX_TYPE.ADDRESS_DELEGATION:
           return (
             <tr>
-              <th>P-Rep</th>
+              <th>Validator</th>
               <th>Voted</th>
             </tr>
           )

@@ -316,17 +316,17 @@ class GovernancePage extends Component {
                             <div className="search-group">
                                 <span>
                                     <input id="cbox-01" className="cbox-type" type="checkbox" name="main" value="main" checked={mainChecked} onChange={this.handleChange} />
-                                    <label htmlFor="cbox-01" className="label _img">Main P-Rep ({allPrep.filter(p => p.grade === 0 || p.grade === '0x0').length})</label>
+                                    <label htmlFor="cbox-01" className="label _img">Main Validators ({allPrep.filter(p => p.grade === 0 || p.grade === '0x0').length})</label>
                                 </span>
                                 <span>
                                     <input id="cbox-02" className="cbox-type" type="checkbox" name="sub" value='sub' checked={subChecked} onChange={this.handleChange} />
-                                    <label htmlFor="cbox-02" className="label _img">Sub P-Rep ({allPrep.filter(p => p.grade === 1 || p.grade === '0x1').length})</label>
+                                    <label htmlFor="cbox-02" className="label _img">Sub Validators ({allPrep.filter(p => p.grade === 1 || p.grade === '0x1').length})</label>
                                 </span>
                                 <span>
                                     <input id="cbox-03" className="cbox-type" type="checkbox" name="rest" value='rest' checked={restChecked} onChange={this.handleChange} />
                                     <label htmlFor="cbox-03" className="label _img">Candidate ({allPrep.filter(p => p.grade === 2 || p.grade === '0x2').length})</label>
                                 </span>
-                                <span className="search on"><input type="text" className="txt-type-search modified" placeholder="P-Rep name / Address" value={search} onChange={this.handleChange} /><i className="img"></i></span>
+                                <span className="search on"><input type="text" className="txt-type-search modified" placeholder="Validator name / Address" value={search} onChange={this.handleChange} /><i className="img"></i></span>
                             </div>
                             <div className="table-box">
                                 <table className="table-typeP">
@@ -415,10 +415,10 @@ class TableRow extends Component {
         switch (grade) {
             case 0:
             case '0x0':
-                return <span className={className}><i></i>Main P-Rep</span>
+                return <span className={className}><i></i>Main Validator</span>
             case 1:
             case '0x1':
-                return <span className={className}><i></i>Sub P-Rep</span>
+                return <span className={className}><i></i>Sub Validator</span>
             case 2:
             case '0x2':
                 return <span className={className}><i></i>Candidate</span>

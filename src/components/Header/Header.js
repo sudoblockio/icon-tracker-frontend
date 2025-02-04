@@ -135,7 +135,7 @@ class Header extends Component {
                                             onClick={() => {
                                                 this.props.history.push('/governance')
                                             }}>
-                                            <span>P-Rep List</span>
+                                            <span>Validator List</span>
                                         </li>
                                         <li
                                             onClick={() => {

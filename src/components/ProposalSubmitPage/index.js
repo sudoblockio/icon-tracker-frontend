@@ -60,7 +60,7 @@ function ProposalSubmitPage(props) {
         if (!valueIsValidJSON) {
             alert('value is not valid json')
         } else if (walletIsPrep === false && USE_TESTING_PARAMS === false) {
-            alert('Wallet is not logged or is not a P-Rep')
+            alert('Wallet is not logged or is not a validator')
         } else {
             setModalIsOpen(true)
             const p0 = JSON.parse(valueState)
