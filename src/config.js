@@ -43,11 +43,13 @@ const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || defaultSettings['apiEn
 const rpcEndpoint = process.env.REACT_APP_RPC_ENDPOINT || defaultSettings['rpcEndpoint']
 const wssEndpoint = process.env.REACT_APP_WSS_ENDPOINT || defaultSettings['wssEndpoint']
 const nid = process.env.REACT_APP_NID || defaultSettings['nid']
+const sentryDSN = "https://e099375e0cc5486d06ea737f0bfa8314@o4507871417073664.ingest.us.sentry.io/4507871432015872"
 
 const config = {
     apiEndpoint: apiEndpoint,
     rpcEndpoint: rpcEndpoint,
     wssEndpoint: wssEndpoint,
+    sentryDSN,
     nid: nid,
     network: network,
     region: region,
@@ -81,4 +83,5 @@ const config = {
         CONTRACT_WRITE_EVENTLOG_ENABLED: false,
     },
 }
+
 export default config

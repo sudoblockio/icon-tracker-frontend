@@ -1,5 +1,109 @@
 # Changelog
 
+## [0.6.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.3...v0.6.4) (2025-01-17)
+
+
+### Bug Fixes
+
+* ci target ([42bcc99](https://github.com/sudoblockio/icon-tracker-frontend/commit/42bcc99cada73a05c658cb2a2f976f764c382ff6))
+* governance and token loading bugs ([d5b796c](https://github.com/sudoblockio/icon-tracker-frontend/commit/d5b796c0f7c77c54bf67d85fe5ef8d7ce186e86a))
+* sentry environment ([3431845](https://github.com/sudoblockio/icon-tracker-frontend/commit/34318451aa55ec11a8259983a8a138d022055f2b))
+
+## [0.6.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.2...v0.6.3) (2024-12-03)
+
+
+### Bug Fixes
+
+* add dev endpoint to config ([ef1b125](https://github.com/sudoblockio/icon-tracker-frontend/commit/ef1b1251487ceb06d68190079795648b1a65aafa))
+* add p2p endpoint to setprep modal ([845c8f4](https://github.com/sudoblockio/icon-tracker-frontend/commit/845c8f4a56ce272543f1884211f76b37d64c8e47))
+
+## [0.6.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.1...v0.6.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* release unjail fix ([093bfe7](https://github.com/sudoblockio/icon-tracker-frontend/commit/093bfe7ceb01c90eb1eefa23f8702bd6ee44df8d))
+
+## [0.6.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.0...v0.6.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* removed iconex mention ([d1748b8](https://github.com/sudoblockio/icon-tracker-frontend/commit/d1748b8cab60a726f979800e77914b3aff0c731a))
+
+## [0.6.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.3...v0.6.0) (2024-09-18)
+
+
+### Features
+
+* wallet tooling-&gt; stake ([033c210](https://github.com/sudoblockio/icon-tracker-frontend/commit/033c21010ff254cd27bb5f97c5cfcb019b4fb6fb))
+* wallet tooling-&gt; voting ([0bc7eee](https://github.com/sudoblockio/icon-tracker-frontend/commit/0bc7eee9d9434f1f89e632bc04e43ac86b77819f))
+
+
+### Bug Fixes
+
+* pull bond percent from api in gov page ([8b3a55d](https://github.com/sudoblockio/icon-tracker-frontend/commit/8b3a55d01bc0ab2de0ef18849dc59c35a931f228))
+
+## [0.5.3](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.2...v0.5.3) (2024-05-15)
+
+
+### Bug Fixes
+
+* blockheight fix commit [#451](https://github.com/sudoblockio/icon-tracker-frontend/issues/451) ([e884176](https://github.com/sudoblockio/icon-tracker-frontend/commit/e88417623fe31725292e6d2b854df25e5f3bf8f4))
+
+## [0.5.2](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.1...v0.5.2) (2024-05-11)
+
+
+### Bug Fixes
+
+* btp tracker to gmp tracker ([bed226e](https://github.com/sudoblockio/icon-tracker-frontend/commit/bed226eff2187a783c251c20f4e304bf31f2ea16))
+
+## [0.5.1](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.5.0...v0.5.1) (2024-04-22)
+
+
+### Bug Fixes
+
+* percent bond rate in governance [#444](https://github.com/sudoblockio/icon-tracker-frontend/issues/444) ([b2068f2](https://github.com/sudoblockio/icon-tracker-frontend/commit/b2068f2ad457494beb901eaf46ca7afeabd085e1))
+* tokens loading slowly, refactor [#438](https://github.com/sudoblockio/icon-tracker-frontend/issues/438) ([6fd3365](https://github.com/sudoblockio/icon-tracker-frontend/commit/6fd33654be24dfed77dae1673b68e50cb8ca79b6))
+
+## [0.5.0](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.8...v0.5.0) (2024-03-26)
+
+
+### Features
+
+* added token balance in contracts page [#411](https://github.com/sudoblockio/icon-tracker-frontend/issues/411) ([7463b9b](https://github.com/sudoblockio/icon-tracker-frontend/commit/7463b9bd5ecf7a7b7618630ffa3864dacf62fc73))
+
+
+### Bug Fixes
+
+* [#402](https://github.com/sudoblockio/icon-tracker-frontend/issues/402) when unstaking, the target block height label is missplaced ([fcf4fd1](https://github.com/sudoblockio/icon-tracker-frontend/commit/fcf4fd1f6a56c317d38adc536c0e5da3e3beff33))
+* extra query params removed ([920b5dd](https://github.com/sudoblockio/icon-tracker-frontend/commit/920b5dd2b8075c3e38dd4014e7bd2486327560f0))
+* removed debug alert [#420](https://github.com/sudoblockio/icon-tracker-frontend/issues/420) ([ee79966](https://github.com/sudoblockio/icon-tracker-frontend/commit/ee79966fff86d31a750f97e4df46979675cfca37))
+* sort click default sort [#361](https://github.com/sudoblockio/icon-tracker-frontend/issues/361) ([63c3b3d](https://github.com/sudoblockio/icon-tracker-frontend/commit/63c3b3d57a6c979a8e8b9d0e16d30c9f8ff19990))
+* sort header click on common page (addresses) ([545b65d](https://github.com/sudoblockio/icon-tracker-frontend/commit/545b65d8e53d039e4f467be2e992af9dc38b65a6))
+* undo merge conflict changes  [#411](https://github.com/sudoblockio/icon-tracker-frontend/issues/411) ([b326f70](https://github.com/sudoblockio/icon-tracker-frontend/commit/b326f70a6818b52376e9b25b4b14c13795ec8812))
+
+## [0.4.8](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.7...v0.4.8) (2024-03-03)
+
+
+### Bug Fixes
+
+* gov wage stats off by 100 ([130b04d](https://github.com/sudoblockio/icon-tracker-frontend/commit/130b04df702cac500c8ebbf6d930097777fb46b7))
+
+## [0.4.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.6...v0.4.7) (2024-02-21)
+
+
+### Bug Fixes
+
+* gov stats off by 100 ([7c0d7b4](https://github.com/sudoblockio/icon-tracker-frontend/commit/7c0d7b49f114a1fe69f614126fafa368c2dbbbc4))
+
+## [0.4.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.5...v0.4.6) (2024-02-14)
+
+
+### Bug Fixes
+
+* update the logo ([280195f](https://github.com/sudoblockio/icon-tracker-frontend/commit/280195f3a99936eb0eb7f45616191c03c0bff188))
+
 ## [0.4.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.4.4...v0.4.5) (2024-02-14)
 
 

@@ -7,8 +7,9 @@ import { makeTxCallRPCObj } from './helpers'
 /*
  *
  */
-function customMethod(from, to, methodName, methodParams, nid) {
-    return makeTxCallRPCObj(from, to, methodName, methodParams, nid)
+async function customMethod(from, to, methodName, methodParams, nid, value = null) {
+  const RPCObj = await makeTxCallRPCObj(from, to, methodName, methodParams, nid, null, value)
+  return RPCObj
 }
 
 export default customMethod

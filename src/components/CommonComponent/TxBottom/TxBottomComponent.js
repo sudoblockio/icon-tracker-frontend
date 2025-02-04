@@ -1,13 +1,15 @@
-import React, { useState, Component } from 'react'
+import React, { useState, Component, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import TxBottomTitle from './TxBottomTitle'
 import { TxTableHead, TxTableBody, LoadingComponent, NoBox } from '../../../components'
-import { getBondList } from '../../../redux/store/iiss'
+// import { getBondList } from '../../../redux/store/iiss'
 import BondersModal from '../../BondersUpdateModal/bondersUpdateModal'
 import BondedModal from '../../BondUpdateModal/bondUpdateModal'
 import customStyles from './TxBottomComponent.module.css'
+import clsx from 'clsx'
 
 class TxBottomComponent extends Component {
+
     render() {
         const {
             txData,
@@ -20,10 +22,10 @@ class TxBottomComponent extends Component {
             onClickTab,
             wallet,
             walletAddress,
+            isBondingModalOpen
         } = this.props
-        console.log('props on TxBottomComponent')
-        console.log(this.props)
         const { data, listSize, totalSize, loading } = txData
+
 
         let totalCount = txData.headers ? txData.headers['x-total-count'] : 0
 
@@ -38,8 +40,8 @@ class TxBottomComponent extends Component {
             tableBodyData = txData.delegations
         } else tableBodyData = txData.data
 
+
         const Content = () => {
-            console.log(txType, 'tx comp props bonder')
             if (loading) {
                 return <LoadingComponent height="349px" />
             } else if (txTypeIsBonderOrBonded(txType)) {
@@ -54,6 +56,8 @@ class TxBottomComponent extends Component {
                             address={this.props.address}
                             walletAddress={this.props.walletAddress}
                             wallet={wallet}
+                            isBondingModalOpen={isBondingModalOpen}
+
                         />
                         <div className="table-box">
                             <table className={tableClassName}>
@@ -86,7 +90,6 @@ class TxBottomComponent extends Component {
                 return <NoBox text={noBoxText} />
             } else {
                 const { from_address, to_address } = tableBodyData[0] || this.props.txData
-
                 return (
                     <div className="contents">
                         <TxBottomTitle
@@ -95,9 +98,9 @@ class TxBottomComponent extends Component {
                             listSize={Number(tableBodyData.length)}
                             totalSize={
                                 txType === 'addressvoters' ||
-                                txType === 'addressreward' ||
-                                txType === 'addresstokentx' ||
-                                txType === 'addressinternaltx'
+                                    txType === 'addressreward' ||
+                                    txType === 'addresstokentx' ||
+                                    txType === 'addressinternaltx'
                                     ? totalCount
                                     : totalSize
                             }
@@ -106,8 +109,8 @@ class TxBottomComponent extends Component {
                             toAddr={to_address}
                         />
 
-                        <div className="table-box">
-                            <table className={tableClassName}>
+                        <div className={clsx("table-box", this.props.noBorder && customStyles.noBorder)}   >
+                            <table className={tableClassName} >
                                 <thead>
                                     <TxTableHead txType={txType} />
                                 </thead>
@@ -128,7 +131,7 @@ class TxBottomComponent extends Component {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div >
                 )
             }
         }
@@ -163,6 +166,7 @@ function CustomHeader({
     address,
     walletAddress,
     wallet,
+    isBondingModalOpen
 }) {
     const [isBondersModalOpen, setIsBondersModalOpen] = useState(false)
     const [isBondedModalOpen, setIsBondedModalOpen] = useState(false)
@@ -186,6 +190,12 @@ function CustomHeader({
     function closeBondedModal() {
         setIsBondedModalOpen(false)
     }
+
+    useEffect(() => {
+        console.log({ isBondingModalOpen })
+        setIsBondedModalOpen(isBondingModalOpen)
+    }, [isBondingModalOpen])
+
     return (
         <>
             <BondersModal

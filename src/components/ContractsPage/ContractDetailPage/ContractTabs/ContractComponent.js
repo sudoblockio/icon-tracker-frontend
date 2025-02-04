@@ -45,15 +45,32 @@ function ContractComponent({
         })
     }
 
-    function handleClickOnWrite(address, method, inputs, index) {
-        // makeTxCallRpcObj
+    async function handleClickOnWrite(address, method, inputs, index) {
         // const nid = HARDCODED_NID_FIX_THIS;
 
         if (walletAddress === '') {
             alert('Please connect to wallet first')
         } else {
             const paramsData = makeParams(params, method, inputs)
-            const rawMethodCall = customMethod(walletAddress, address, method, paramsData, nid)
+            let value = null;
+            if (paramsData.hasOwnProperty("value")) {
+                value = paramsData.value;
+                const valueInput = inputs.find(f => f.name === 'value' && f.type === "icx");
+                if (valueInput) {
+                    value = parseFloat(value);
+                }
+                delete paramsData.value;
+            }
+
+
+            const rawMethodCall = await customMethod(
+                walletAddress,
+                address,
+                method,
+                paramsData,
+                nid,
+                value
+            )
             icxSendTransaction({
                 params: { ...rawMethodCall },
                 index: index,
@@ -79,12 +96,15 @@ function ContractComponent({
 
     return (
         <div className="contents">
-            <ButtonSet
-                activeButton={activeSection}
-                handleActiveChange={setActiveSection}
-                showExpand={true}
-                contract={address}
-            />
+            <div className={customStyles.btnContainer}>
+                <ButtonSet
+                    activeButton={activeSection}
+                    handleActiveChange={setActiveSection}
+                    showExpand={true}
+                    contract={address}
+                />
+            </div>
+
             <div className={customStyles.contractContainer}>
                 {activeSection === 0 ? (
                     <div className={customStyles.titleContainer}>

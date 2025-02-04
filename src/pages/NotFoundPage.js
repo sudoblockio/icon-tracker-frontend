@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { NotFoundPageContainer } from '../containers'
+import React, { Component } from 'react';
+import { NotFoundPageContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 class NotFoundPage extends Component {
     render() {
-        return <NotFoundPageContainer />
+        return (
+            <>
+                <PageHelmet title="Page Not Found" />
+                <NotFoundPageContainer />
+            </>
+        );
     }
 }
 
-export default NotFoundPage
+export default NotFoundPage;

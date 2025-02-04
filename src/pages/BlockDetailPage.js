@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { BlockDetailPageContainer } from '../containers'
+import React, { Component } from 'react';
+import { BlockDetailPageContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 class BlockDetailPage extends Component {
     render() {
-        return <BlockDetailPageContainer />
+        return (
+            <>
+                <PageHelmet title="Block" />
+                <BlockDetailPageContainer />
+            </>
+        );
     }
 }
 
-export default BlockDetailPage
+export default BlockDetailPage;

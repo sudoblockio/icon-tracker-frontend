@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { BlockListPageContainer } from '../containers'
+import React, { Component } from 'react';
+import { BlockListPageContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 class BlockListPage extends Component {
     render() {
-        return <BlockListPageContainer />
+        return (
+            <>
+                <PageHelmet title="Blocks" />
+                <BlockListPageContainer />
+            </>
+        );
     }
 }
 
-export default BlockListPage
+export default BlockListPage;

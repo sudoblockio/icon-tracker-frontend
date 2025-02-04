@@ -139,7 +139,7 @@ export async function prepList(grade) {
   }
   return new Promise((resolve, reject) => {
     trackerApi
-      .get(`/api/v1/governance/preps`)
+      .get(`/api/v1/governance/preps?include_unregistered=true`)
       .then(result => {
         const nameSorted = (result.data || []).sort((a, b) =>
           a.name < b.name ? -1 : a.name > b.name ? 1 : 0
@@ -159,11 +159,12 @@ export async function prepList(grade) {
   });
 }
 
-export async function getPReps() {
+export async function getPReps(query) {
   const trackerApi = await trackerApiInstance();
+  console.log({ query })
   return new Promise((resolve, reject) => {
     trackerApi
-      .get(`/api/v1/governance/preps`)
+      .get(`/api/v1/governance/preps?include_unregistered=true`, { params: query })
       .then(result => {
         resolve(result);
       })

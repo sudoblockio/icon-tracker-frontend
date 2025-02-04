@@ -24,6 +24,8 @@ import { TX_TYPE } from '../../../utils/const'
 import { getTokenTotalSupply } from '../../../redux/store/iiss'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils'
 
+import ReactJson from 'react-json-view'
+
 const TxAddressCell = ({ isError, address }) => {
     let _address, className
     if (!isValidData(address)) {
@@ -457,20 +459,65 @@ class TxTableBody extends Component {
                             </td>
                             <td>{data.method}</td>
                             <td className="event-log-table">
-                                {data.address}
-                                {data.indexed}
-                                {data.data}
-                                {data.indexed}
+                                <ReactJson
+                                    src={data.parsedLog}
+                                    name={null}
+                                    collapsed={2}
+                                    displayObjectSize={false}
+                                    displayDataTypes={false}
+                                    enableClipboard={false}
+                                    displayArrayKey={false}
+                                    quotesOnKeys={false}
+                                    sortKeys={true}
+                                    groupArraysAfterLength={5}
+                                    indentWidth={4}
+                                />
+                                {/* {getParsedLogs(data)} */}
+                                {/* {data.address} */}
+                                {/* {data.indexed} */}
+                                {/* {data.data} */}
+                                {/* {data.indexed} */}
                             </td>
                         </tr>
                     )
                 case TX_TYPE.TRANSACTION_EVENTS:
                     return (
                         <tr>
-                            <td className="event-log-table">
+                            {/* <td className="event-log-table">
                                 {data.address}
                                 {data.indexed}
                                 {data.data}
+                            </td> */}
+                            <td className="on">
+                                <span className="ellipsis">
+                                    <TransactionLink to={data.transaction_hash} />
+                                </span>
+                                <br />
+                                <span>
+                                    <BlockLink
+                                        label={`# ${data.block_number}`}
+                                        to={data.block_number}
+                                    />
+                                </span>
+                                <p>{epochToFromNow(data.block_timestamp)}</p>
+                            </td>
+                            <td>{data.method}</td>
+                            <td className="event-log-table">
+                                <ReactJson
+                                    src={data.parsedLog}
+                                    name={null}
+                                    collapsed={2}
+                                    displayObjectSize={false}
+                                    displayDataTypes={false}
+                                    enableClipboard={false}
+                                    displayArrayKey={false}
+                                    quotesOnKeys={false}
+                                    sortKeys={true}
+                                    groupArraysAfterLength={5}
+                                    indentWidth={4}
+                                    theme={"rjv-default"}
+                                />
+
                             </td>
                         </tr>
                     )
@@ -501,8 +548,8 @@ class TxTableBody extends Component {
                                 <span>
                                     {data.balance && this.props.totalSupply
                                         ? Number(
-                                              (data.balance / this.props.totalSupply) * 100
-                                          ).toFixed(4)
+                                            (data.balance / this.props.totalSupply) * 100
+                                        ).toFixed(4)
                                         : '-'}
                                 </span>
                                 <em>%</em>

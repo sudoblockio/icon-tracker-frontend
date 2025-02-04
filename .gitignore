@@ -51,3 +51,6 @@ e2e/logs/*
 # misc
 .local
 *.old
+
+# Sentry Config File
+.sentryclirc

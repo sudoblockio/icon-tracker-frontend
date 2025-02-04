@@ -1,8 +1,14 @@
-import React from 'react'
-import { ContractDetailPageContainer } from '../containers'
+import React from 'react';
+import { ContractDetailPageContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 const ContractDetailPage = () => {
-    return <ContractDetailPageContainer />
-}
+    return (
+        <>
+            <PageHelmet title="Contract" />
+            <ContractDetailPageContainer />
+        </>
+    );
+};
 
-export default ContractDetailPage
+export default ContractDetailPage;

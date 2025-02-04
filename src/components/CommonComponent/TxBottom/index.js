@@ -8,11 +8,11 @@ class TxBottom extends Component {
             this.props
 
         const tableClassName = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['className'] : ''
-
         const noBoxText = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['noBoxText'] : ''
 
         return (
             <TxBottomComponent
+                noBorder={true}
                 txData={txData}
                 goAllTx={goAllTx}
                 txType={txType}
@@ -25,6 +25,7 @@ class TxBottom extends Component {
                 bondMap={this.props.bondMap ? this.props.bondMap : ''}
                 onClickTab={onClickTab}
                 walletAddress={walletAddress}
+                isBondingModalOpen={this.props.isBondingModalOpen}
             />
         )
     }

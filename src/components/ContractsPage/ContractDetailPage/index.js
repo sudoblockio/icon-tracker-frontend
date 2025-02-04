@@ -5,8 +5,8 @@ import { DetailPage } from '../../../components'
 import { CONTRACT_TABS } from '../../../utils/const'
 
 const ContractDetailPage = (props) => {
-    console.log('contract detail page props')
-    console.log(props)
+    console.log('contract detail page props', props);
+    // console.log(props)   
     const { contract, contractTokenTx } = props
     const { loading, error } = contract
     const [tabArrayStatus, setTabArrayStatus] = useState(setTabArray(contractTokenTx))

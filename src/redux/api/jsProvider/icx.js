@@ -3,6 +3,7 @@ import { requestJsonRpc } from '../../../utils/connect'
 export async function icxSendTransaction(payload) {
     console.log('icxSendTransaction payload:', payload)
 
+
     // payload will always have an 'index' field
     const { index } = payload
     const result = {
@@ -18,6 +19,8 @@ export async function icxSendTransaction(payload) {
         if (rawTx == null) {
             throw new Error('Invalid payload for icxSendTransaction')
         }
+
+
         result.data = await requestJsonRpc(rawTx.params)
         console.log('result success')
     } catch (e) {
@@ -28,8 +31,8 @@ export async function icxSendTransaction(payload) {
             typeof e === 'string'
                 ? e
                 : e.message != null && typeof e.message === 'string'
-                  ? e.message
-                  : JSON.stringify(e)
+                    ? e.message
+                    : JSON.stringify(e)
     }
     return result
 }

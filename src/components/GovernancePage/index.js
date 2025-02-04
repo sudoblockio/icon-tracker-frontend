@@ -59,39 +59,64 @@ class GovernancePage extends Component {
         this.governanceData = await getPReps();
         this.publicTreasury = await getPublicTreasury()
     }
+
+
     async componentDidMount() {
-        const { data: preps } = await getPReps();
-        const { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop } = await getPRepsRPC()
-        const lastBlock = await getLastBlock()
-        const stepPriceLoop = await getStepPrice()
-        const _allPrep = await prepList()
-        const _blackPrep = await prepList(3)
+        const [
+            { data: preps },
+            { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop },
+            lastBlock,
+            stepPriceLoop,
+            _allPrep,
+            _blackPrep,
+            total_supply,
+            IISSData
+        ] = await Promise.all([
+            getPReps(),
+            getPRepsRPC(),
+            getLastBlock(),
+            getStepPrice(),
+            prepList(),
+            prepList(3),
+            getTotalSupply(),
+            getIISSInfo()
+        ]);
 
-        const total_supply = await getTotalSupply()
-        const icxSupply = Number(total_supply / Math.pow(10, 18))
+        const icxSupply = Number(total_supply / Math.pow(10, 18));
 
-        const { height, peer_id } = lastBlock || {}
+        const { height, peer_id } = lastBlock || {};
+
         const allPrep = (_allPrep || []).map(prep => {
-            const index = preps.findIndex(p => prep.address === p.address)
+            const index = preps.findIndex(p => prep.address === p.address);
             if (index !== -1) {
-                prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-                prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+                prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
+                prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP)
+                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
             }
-            prep.balance = Number(prep.balance)
-            return prep
-        })
+            prep.balance = Number(prep.balance);
+            return prep;
+        });
+
         const blackPrep = (_blackPrep || []).map(bp => {
-            bp.grade = 3
-            bp.status = bp.penaltyStatus
-            return bp
-        })
-        const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id)
-        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`
-        const totalSupply = Number(icxSupply || 0)
-        const totalStaked = !totalStakedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalStakedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-        const totalVoted = !totalVotedLoop ? 0 : IconConverter.toNumber(IconAmount.of(totalVotedLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-        const stepPrice = !stepPriceLoop ? 0 : IconAmount.of(stepPriceLoop || 0x0, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-        const IISSData = await getIISSInfo()
+            bp.grade = 3;
+            bp.status = bp.penaltyStatus;
+            return bp;
+        });
+
+        const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id);
+        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`;
+
+        const totalSupply = Number(icxSupply || 0);
+        const totalStaked = totalStakedLoop
+            ? IconConverter.toNumber(IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+            : 0;
+        const totalVoted = totalVotedLoop
+            ? IconConverter.toNumber(IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+            : 0;
+        const stepPrice = stepPriceLoop
+            ? IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+            : 0;
 
         this.setState({
             loading: false,
@@ -103,15 +128,15 @@ class GovernancePage extends Component {
             allPrep,
             blackPrep,
             lastBlockPrepName,
-            // Ivoter: IISSData.variable.Ivoter,
             Iwage: IISSData.variable.Iwage,
             Irelay: IISSData.variable.Irelay,
             Icps: IISSData.variable.Icps,
             Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
-            Iprep: IISSData.variable.Iprep,
-
-        })
+            Iprep: IISSData.variable.Iprep
+        });
     }
+
+
 
     handleChange = e => {
         const { type, value } = e.target
@@ -208,10 +233,24 @@ class GovernancePage extends Component {
 
 
         const list = blackChecked ? blackPrep : allPrep.filter(p => {
-            return (mainChecked && (p.grade === 0 || p.grade === '0x0')) || (subChecked && (p.grade === 1 || p.grade === '0x1')) || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+            return (
+                mainChecked && (p.grade === 0 || p.grade === '0x0'))
+                || (subChecked && (p.grade === 1 || p.grade === '0x1'))
+                || (restChecked && (p.grade === 2 || p.grade === '0x2'))
+            // || (p.grade === 3 || p.grade === "0x3")
         })
 
-        const searched = !search ? list.sort((a, b) => b.power - a.power) : list.filter(prep => prep.name.toLowerCase().includes(search.toLowerCase().trim()) || prep.address.toLowerCase().includes(search.trim()))
+
+        let searched = search ? list
+            .filter(prep =>
+                prep.name.toLowerCase().includes(search.toLowerCase().trim())
+                || prep.address.toLowerCase().includes(search.trim())
+            )
+            : list;
+
+        searched.sort((a, b) => {
+            return b.power - a.power;
+        });
 
         return (
             <div className="content-wrap governance">
@@ -238,20 +277,20 @@ class GovernancePage extends Component {
                                 <li>
                                     <div>
                                         <p>Prep Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Iprep)}</span></p>
+                                        <p><span>{Number(this.state.Iprep / 100)}</span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p>CPS Reward Rate <em>(%)</em></p>
-                                        <p><span>{Number(this.state.Icps)}</span></p>
+                                        <p><span>{Number(this.state.Icps / 100)}</span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p>Prep Wage <em>(%)</em>
                                         </p>
-                                        <p><span>{this.state.Iwage !== undefined ? Number(this.state.Iwage) : 0}</span></p>
+                                        <p><span>{Number(this.state.Iwage) / 100}</span></p>
                                     </div>
                                 </li>
                                 <li>
@@ -396,7 +435,7 @@ class TableRow extends Component {
     getJailBadge = (jail_flag) => {
         let badgeText = '';
         let badgeClass = '';
-        if (jail_flag === 0  || isNaN(jail_flag) ) {
+        if (jail_flag === 0 || isNaN(jail_flag)) {
             return false;
         }
         if ([2, 3, 6, 10].includes(jail_flag)) {
@@ -469,7 +508,7 @@ class TableRow extends Component {
 
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
-        const bondedRate = !totalVoted ? 0 : (20*(bonded / Math.pow(10, 18)).toFixed()) / prepVoted
+        const bondedRate = !totalVoted ? 0 : prep.bond_percent
 
         return (
             <tr>
@@ -526,7 +565,7 @@ class TableRow extends Component {
                 {!blackChecked && (
                     <td className={'bonded'}>
                         <span>{numberWithCommas(Number(bonded / Math.pow(10, 18)).toFixed())}</span>
-                        <em>{Number(bondedRate*100).toFixed(1)}%</em>
+                        <em>{Number(bondedRate * 100).toFixed(1)}%</em>
                     </td>
                 )}
                 {!blackChecked && (

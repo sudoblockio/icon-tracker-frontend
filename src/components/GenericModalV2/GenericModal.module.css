@@ -1,0 +1,37 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(17, 17, 17, 0.7);
+    cursor: pointer;
+    padding: 40px 0px;
+    z-index: 999999;
+}
+.modalClosed {
+    display: none;
+}
+.modalOpen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main {
+    max-width: 800px;
+    max-height: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 2px solid #c7c7c7;
+    border-radius: 4px;
+    overflow-y: auto;
+    cursor: text;
+}
+.mainSmall {
+    min-height: 150px;
+    height: auto;
+    margin: 10px;
+}
+.mainBig {
+    /* height: 100%; */
+}

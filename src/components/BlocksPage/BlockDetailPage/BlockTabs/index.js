@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import BlockTransactions from './BlockTransactions'
 import { TX_TYPE, BLOCK_TABS } from '../../../../utils/const'
-import { NoBox, TabTable } from '../../../../components'
+import { NoBox, TabTable, TabTable2 } from '../../../../components'
 
 class BlockTabs extends Component {
     render() {
@@ -16,7 +16,7 @@ class BlockTabs extends Component {
             BlockTabs = [BlockTabs[0]]
         }
         return (
-            <TabTable
+            <TabTable2
                 {...this.props}
                 TABS={BlockTabs}
                 onClickTab={this.props.changeTab}

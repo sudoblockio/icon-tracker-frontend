@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './bondUpdateModal.module.css'
+import styles from './bondUpdateModal.module.scss'
 import GenericModal from '../GenericModal/genericModal'
 import CustomButtonSet from './customButtonSet'
 import { chainMethods } from '../../utils/rawTxMaker'
@@ -9,11 +9,13 @@ import { requestJsonRpc } from '../../utils/connect'
 import utils from '../../utils/utils2'
 import config from '../../config'
 
+import { CiCircleMinus } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa6";
+
 const { nid } = config
 
 // Constants
 const { setBonderList, setBond } = chainMethods
-
 const { parseBonderFormInputs, isValidICONAddress } = utils
 
 export default function BondedModal({ address, isOpen, onClose, walletAddress }) {
@@ -32,10 +34,6 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
             (bondObj) => bondObj.addressIsValid && bondObj.valueIsValid
         )
 
-        console.log(`all addresses and values are valid:`, allAddressesAndValuesAreValid)
-        console.log('walletAddress')
-        console.log(walletAddress)
-
         if (allAddressesAndValuesAreValid) {
             if (walletAddress === '' || walletAddress == null) {
                 alert('Invalid logged wallet address')
@@ -47,17 +45,9 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
                     parsed.value = utils.convertToLoopInHex(bondObj.value)
                     return parsed
                 })
-
-                console.log('parsedBonded')
-                console.log(parsedBonded)
-                const txData = setBond(walletAddress, parsedBonded, nid)
-                console.log('txData')
-                console.log(txData)
-
+                const txData = await setBond(walletAddress, parsedBonded, nid)
                 try {
                     const txResult = await requestJsonRpc(txData.params)
-                    console.log('response from wallet')
-                    console.log(txResult)
                     if (txResult.result != null) {
                         setTxResponse(txResult.result)
                     } else if (txResult.error != null) {
@@ -163,7 +153,7 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
                     <div>
                         <div className={styles.main}>
                             <div className={styles.defaultSection}>
-                                <h2>Bonded Info:</h2>
+                                <h2>Bonded Info <span onClick={handleOnClose}>&times;</span></h2>
                                 <p>
                                     Use the following form to update the bondlist related to your
                                     wallet address.
@@ -173,9 +163,12 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
                                     total delegated ICX in your wallet.
                                 </p>
                                 <p>Max amount available to bond: {maxAmountToBond} ICX</p>
+
+
                                 <div>
-                                    <p className={styles.tableTitle}>Table of bonded preps:</p>
+                                    <p className={styles.tableTitle}>Table of bonded preps</p>
                                 </div>
+
                                 <div className={styles.table}>
                                     <div className={`${styles.tableRow} ${styles.tableHead}`}>
                                         <div>
@@ -184,7 +177,11 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
                                         <div>
                                             <p>Amount</p>
                                         </div>
+                                        <div>
+
+                                        </div>
                                     </div>
+
                                     {bondListState.map((address, index) => {
                                         return (
                                             <div key={index} className={styles.tableRow}>
@@ -220,14 +217,22 @@ export default function BondedModal({ address, isOpen, onClose, walletAddress })
                                                         placeholder=""
                                                     />
                                                 </div>
+                                                <div className={styles.minusButton}>
+                                                    <CiCircleMinus onClick={handleClickRemoveRow} size={30} />
+                                                </div>
                                             </div>
                                         )
                                     })}
                                 </div>
-                                <CustomButtonSet
+
+                                <div className={styles.addBtnContainer}>
+                                    <button onClick={handleClickAddRow}>Add <FaPlus /> </button>
+                                </div>
+
+                                {/* <CustomButtonSet
                                     handlePlus={handleClickAddRow}
                                     handleMinus={handleClickRemoveRow}
-                                />
+                                /> */}
                                 <button className={styles.button} onClick={handleFormSubmit}>
                                     Submit
                                 </button>
@@ -286,10 +291,6 @@ function parseBondList(bondList) {
 
 function parseStakeVoteAndBond(stake, vote, bond) {
     try {
-        console.log('on parse')
-        console.log(stake)
-        console.log(vote)
-        console.log(bond)
         const parsedStake = parseInt(stake.stake) / 10 ** 18
         const parsedVote = parseInt(vote.totalDelegated) / 10 ** 18
 

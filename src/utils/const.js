@@ -119,6 +119,7 @@ export const POPUP_TYPE = {
     POWER: 'power',
     BOND: 'bond',
     VERIFICATION: 'verification',
+    STAKING: 'staking'
 }
 
 export const SEARCH_TYPE = {

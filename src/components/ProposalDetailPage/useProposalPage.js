@@ -198,7 +198,11 @@ function useProposalPage(props) {
     async function handleClickOnAccept() {
         //
         if (state.proposal.id != null && walletAddress != null && walletAddress != '') {
-            const rawTransaction = approveNetworkProposal(state.proposal.id, walletAddress, nid)
+            const rawTransaction = await approveNetworkProposal(
+                state.proposal.id,
+                walletAddress,
+                nid
+            )
 
             const response = await icxSendTransaction({
                 rawTx: rawTransaction,
@@ -211,7 +215,7 @@ function useProposalPage(props) {
     async function handleClickOnApply() {
         //
         if (state.proposal.id != null && walletAddress != null && walletAddress != '') {
-            const rawTransaction = applyNetworkProposal(state.proposal.id, walletAddress, nid)
+            const rawTransaction = await applyNetworkProposal(state.proposal.id, walletAddress, nid)
 
             const response = await icxSendTransaction({
                 rawTx: rawTransaction,
@@ -224,7 +228,11 @@ function useProposalPage(props) {
     async function handleClickOnReject() {
         //
         if (state.proposal.id != null && walletAddress != null && walletAddress != '') {
-            const rawTransaction = rejectNetworkProposal(state.proposal.id, walletAddress, nid)
+            const rawTransaction = await rejectNetworkProposal(
+                state.proposal.id,
+                walletAddress,
+                nid
+            )
 
             const response = await icxSendTransaction({
                 rawTx: rawTransaction,

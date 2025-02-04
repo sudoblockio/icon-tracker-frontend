@@ -1,0 +1,199 @@
+.wrapper {
+    padding: 1em;
+
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        position: relative;
+        span {
+            position: absolute;
+            top: -5px;
+            right: 1em;
+            background-color: rgba(119, 119, 119, 0.2);
+            padding: 0 !important;
+            width: 1.5em;
+            height: 1.5em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+
+    button:disabled {
+        background-color: rgba(201, 201, 201, 0.3) !important;
+        cursor: default !important;
+        color: rgb(88, 88, 88) !important;
+    }
+
+    form {
+        p.error {
+            color: red;
+            font-size: 0.7rem;
+            margin-top: 0.4em;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.4em;
+            font-size: 0.9rem;
+
+            span {
+                margin-right: 0.5em;
+                display: inline-block;
+            }
+
+            a {
+                cursor: pointer;
+                position: relative;
+                top: 2px;
+            }
+        }
+
+        .inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 14em);
+            grid-template-rows: repeat(2, 6em);
+            gap: 0px 1em;
+        }
+
+        .inputWrapper {
+            .input {
+                position: relative;
+
+                span {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    transform: translateY(-50%);
+                    color: rgb(158, 158, 158);
+                }
+            }
+
+            input {
+                width: calc(100%);
+                border: none;
+                height: 40px;
+                border-radius: 5px;
+                border: 1px solid rgba(1, 1, 1, 0.2);
+                padding-left: 0.8em;
+            }
+        }
+    }
+
+    .infoPopup {
+        p {
+            margin-bottom: 0.2em;
+        }
+    }
+
+    .checkboxes {
+        margin-top: 2em;
+        z-index: 0;
+        .checkboxWrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5em;
+
+            label {
+                margin-left: 0.5em;
+            }
+
+            input[type='checkbox']:checked {
+                background-color: #4caf50 !important;
+                border-color: #4caf50 !important;
+            }
+
+            input[type='checkbox']:checked {
+                border-color: #4caf50 !important ;
+            }
+        }
+    }
+
+    .sliderWrapper {
+        margin-top: 0.5em;
+        padding-inline: 2px;
+
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+
+            span {
+                margin: 0;
+                color: black;
+                font-weight: 600;
+                font-size: 13px;
+            }
+        }
+
+        .bottomLabels {
+            top: 10px;
+        }
+
+        .topLabels {
+            top: -10px;
+            span {
+                font-weight: 500;
+            }
+        }
+
+        .slider {
+            height: 0.5em;
+        }
+
+        .track {
+            height: 100%;
+            background-color: #299fac;
+            border-radius: 5px;
+        }
+
+        .thumb {
+            $size: 15px;
+            width: $size;
+            height: $size;
+            outline: none;
+            cursor: pointer !important;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            position: relative;
+            top: -43%;
+
+            background-color: white;
+            border: 2px solid #299fac;
+
+            z-index: 999999 !important;
+        }
+    }
+
+    .btnWrapper {
+        margin-top: 2em;
+        button {
+            background-color: #299fac;
+            color: white;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            width: 8em;
+            border-radius: 5px;
+        }
+    }
+}

@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { TransactionListPageContainer } from '../containers'
+import React, { Component } from 'react';
+import { TransactionListPageContainer } from '../containers';
+import PageHelmet from '../components/PageHelmet';
 
 class TransactionListPage extends Component {
     render() {
-        return <TransactionListPageContainer />
+        return (
+            <>
+                <PageHelmet title="Transactions" />
+                <TransactionListPageContainer />
+            </>
+        );
     }
 }
 
-export default TransactionListPage
+export default TransactionListPage;
