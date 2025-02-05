@@ -18,6 +18,8 @@ import {
 } from '../../../redux/store/iiss'
 import { TX_TYPE, TX_TYPE_DATA } from '../../../utils/const'
 import { calcMaxPageNum, isNumeric } from '../../../utils/utils'
+import { contractDetail } from '../../../redux/store/contracts'
+import { getEventsByName, getParsedLog } from '../../../libs/event-log-parser'
 
 class TxPage extends Component {
   constructor(props) {
@@ -25,10 +27,12 @@ class TxPage extends Component {
     this.txType = ''
     this.urlIndex = ''
     this.pageId = 1
-    this._getTxList = () => {}
+    this._getTxList = () => { }
     this.state = {
       currentUSD: 0,
       age: 'Age',
+      dataParsed: [],
+      isLoading: true,
     }
   }
 
@@ -38,6 +42,7 @@ class TxPage extends Component {
 
   async componentDidMount() {
     this.setInitialData(this.props.url)
+    this.parseLogs()
 
     if (this.txType === 'tokenholders') {
       const tokenDecimals = await getTokenDecimals(this.props.match.params.tokenId)
@@ -59,6 +64,12 @@ class TxPage extends Component {
     const { search: nextSearch } = nextProps.url
     if (currentPath !== nextPath || currentSearch !== nextSearch) {
       this.setInitialData(nextProps.url)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.parseLogs();
     }
   }
 
@@ -140,7 +151,7 @@ class TxPage extends Component {
 
     const { pathname } = locationObj
     this.txType = pathname.split('/')[1] || ''
-    this._getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => {})
+    this._getTxList = this.props[this.getTxTypeData()['getTxList']] || (() => { })
     switch (this.txType) {
       case TX_TYPE.CONTRACT_TX:
       case TX_TYPE.CONTRACT_INTERNAL_TX:
@@ -270,6 +281,43 @@ class TxPage extends Component {
     this.getTxList({ page: 1, count: this.getCount(), sort: head })
   }
 
+
+
+
+  async parseLogs() {
+    if (this.txType !== "contractevents" && this.txType !== "transactionevents") {
+      this.setState({ isLoading: false })
+      return;
+    }
+
+    if (!(this.getTxTypeData()['tx'])) {
+      this.setState({ isLoading: false })
+      return;
+    }
+
+    const tx = this.props[this.getTxTypeData()['tx']] || {}
+
+    if (!tx ||
+      (!Array.isArray(tx.data)) ||
+      (tx.data.length === 0)
+    ) {
+      this.setState({ isLoading: false })
+      return;
+    }
+
+    this.setState({ isLoading: true })
+    const toUpdate = [...tx.data];
+
+    const contractAddress = this.txType === "contractevents" ? this.urlIndex : toUpdate[0].address;
+    const contractData = await contractDetail(contractAddress)
+    const abi = contractData.data.abi;
+    for (const log of toUpdate) {
+      const eventsByName = getEventsByName(abi);
+      log.parsedLog = getParsedLog(log, eventsByName)
+    }
+    this.setState({ dataParsed: toUpdate, isLoading: false })
+  }
+
   render() {
     const tx = this.props[this.getTxTypeData()['tx']] || {}
     const className = this.getTxTypeData()['className'] || ''
@@ -280,7 +328,15 @@ class TxPage extends Component {
     if (!noData) {
       totalSize = data[0].number || totalSize
     }
+
+    let tableBodyData = data;
+    if (this.txType === "contractevents" || this.txType === "transactionevents") {
+      tableBodyData = this.state.isLoading ? tx.data : this.state.dataParsed;
+    }
+
     const TableContent = () => {
+
+
       if (noData) {
         return <NoBox text={noBoxText} />
       } else {
@@ -296,7 +352,7 @@ class TxPage extends Component {
                 />
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {tableBodyData.map((item, index) => (
                   <TxTableBody
                     age={this.state.age}
                     key={index}
@@ -306,6 +362,7 @@ class TxPage extends Component {
                     currentUSD={this.state ? this.state.currentUSD : 0}
                     totalSupply={this.state ? this.state.totalSupply : 0}
                     rank={index + 1}
+                    isLoading={this.state.isLoading}
                   />
                 ))}
               </tbody>
@@ -337,6 +394,8 @@ class TxPage extends Component {
         ]
       }
     }
+
+
 
     const Content = () => {
       if (loading && noData) {

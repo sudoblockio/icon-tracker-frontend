@@ -7,12 +7,13 @@ import BondersModal from '../../BondersUpdateModal/bondersUpdateModal'
 import BondedModal from '../../BondUpdateModal/bondUpdateModal'
 import customStyles from './TxBottomComponent.module.css'
 import clsx from 'clsx'
+import { TX_TYPE } from '../../../utils/const'
 
 class TxBottomComponent extends Component {
-
     render() {
         const {
             txData,
+            txDataParsed,
             txType,
             goAllTx,
             address,
@@ -21,16 +22,13 @@ class TxBottomComponent extends Component {
             tokenTotal,
             onClickTab,
             wallet,
-            walletAddress,
             isBondingModalOpen
         } = this.props
-        const { data, listSize, totalSize, loading } = txData
 
-
+        const { totalSize, loading } = txData
         let totalCount = txData.headers ? txData.headers['x-total-count'] : 0
 
         let tableBodyData
-
         if (txTypeIsBonderOrBonded(txType)) {
             tableBodyData = txData.filter((f) => {
                 return this.props.bondMap[f] !== null
@@ -38,7 +36,13 @@ class TxBottomComponent extends Component {
             totalCount = tableBodyData.length
         } else if (txType === 'addressdelegations') {
             tableBodyData = txData.delegations
-        } else tableBodyData = txData.data
+        }
+        else if (txType === TX_TYPE.TRANSACTION_EVENTS || txType === TX_TYPE.CONTRACT_EVENTS) {
+            tableBodyData = txDataParsed.isLoading ? txData.data : txDataParsed.data
+        }
+        else {
+            tableBodyData = txData.data
+        }
 
 
         const Content = () => {
@@ -110,7 +114,7 @@ class TxBottomComponent extends Component {
                         />
 
                         <div className={clsx("table-box", this.props.noBorder && customStyles.noBorder)}   >
-                            <table className={tableClassName} >
+                            <table className={clsx(tableClassName, txType)} >
                                 <thead>
                                     <TxTableHead txType={txType} />
                                 </thead>
@@ -125,6 +129,7 @@ class TxBottomComponent extends Component {
                                                 txType={txType}
                                                 address={address}
                                                 tokenTotal={tokenTotal}
+                                                isLoading={txDataParsed?.isLoading ?? null}
                                             />
                                         )
                                     })}
@@ -192,7 +197,6 @@ function CustomHeader({
     }
 
     useEffect(() => {
-        console.log({ isBondingModalOpen })
         setIsBondedModalOpen(isBondingModalOpen)
     }, [isBondingModalOpen])
 

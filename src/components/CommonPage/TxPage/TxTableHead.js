@@ -330,6 +330,7 @@ class TxTableHead extends Component {
           return (
             <tr>
               <th>TxHash / Block / Age</th>
+              <th>Address</th>
               <th>Method</th>
               <th>Event Logs</th>
             </tr>

@@ -199,10 +199,6 @@ export async function contractEventLogList(payload) {
     trackerApi
       .get(makeEventUrl(`/api/v1/logs`, payload))
       .then((result) => {
-        /* To display more human readable event log*/
-        result.data.forEach(log => {
-          log.parsedLog = getParsedLog(log, eventsByName)
-        })
         resolve(result)
       })
       .catch((error) => {

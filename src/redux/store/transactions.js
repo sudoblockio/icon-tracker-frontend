@@ -89,21 +89,10 @@ export async function transactionInternalTxList(payload) {
 
 export async function transactionEventLogList(payload) {
     const trackerApi = await trackerApiInstance()
-
-
-
     return new Promise((resolve, reject) => {
         trackerApi
             .get(`/api/v1/logs?transaction_hash=${payload.txHash}`)
             .then(async (result) => {
-                console.log("result b4", result)
-                const contractData = await trackerApi.get(`${CONTRACTS_PREFIX}/${result.data[0].address}`)
-                const abi = contractData.data.abi;
-                const eventsByName = getEventsByName(abi);
-                result.data.forEach(log => {
-                    log.parsedLog = getParsedLog(log, eventsByName)
-                })
-                console.log("result after", result)
                 resolve(result)
             })
             .catch((error) => {
@@ -111,6 +100,8 @@ export async function transactionEventLogList(payload) {
             })
     })
 }
+
+
 
 // REDUCER
 const initialState = {
