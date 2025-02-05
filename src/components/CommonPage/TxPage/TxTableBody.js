@@ -117,31 +117,34 @@ const MethodCell = ({ method }) => {
 
 const LogCell = ({ data, isLoading }) => {
     return <>
+        {data.data === "null" ? null : <>{data.data} <br />  <br /> </>}
+
         {data.parsedLog === null || data.parsedLog === undefined ?
             <>
-                {data.data === "null" ? null : data.data}
                 {data.indexed}
-
                 {isLoading &&
                     <span style={{ marginLeft: "10px" }}>
                         <ClipLoader color="grey" size={15} />
                     </span>}
             </>
             :
-            <ReactJson
-                src={data.parsedLog}
-                name={null}
-                collapsed={2}
-                displayObjectSize={false}
-                displayDataTypes={false}
-                enableClipboard={false}
-                displayArrayKey={false}
-                quotesOnKeys={false}
-                sortKeys={true}
-                groupArraysAfterLength={5}
-                indentWidth={4}
-                theme={"rjv-default"}
-            />}
+            <>
+                <ReactJson
+                    src={data.parsedLog}
+                    name={null}
+                    collapsed={2}
+                    displayObjectSize={false}
+                    displayDataTypes={false}
+                    enableClipboard={false}
+                    displayArrayKey={false}
+                    quotesOnKeys={false}
+                    sortKeys={true}
+                    groupArraysAfterLength={5}
+                    indentWidth={4}
+                    theme={"rjv-default"}
+                />
+            </>
+        }
     </>
 }
 

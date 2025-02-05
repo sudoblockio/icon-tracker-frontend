@@ -62,13 +62,24 @@ function getParsedLog(log, eventsByName) {
             }
         }
 
-        // Extract non-indexed parameters
-        if (nonIndexedValues) {
-            let nonIndexedCounter = 0;
-            for (let i = 0; i < eventABIInputs.length; i++) {
-                const currentInput = eventABIInputs[i];
-                const currentValue = nonIndexedValues[nonIndexedCounter++];
-                params.push({ ...currentInput, value: currentValue });
+        // // Extract non-indexed parameters
+        // if (nonIndexedValues) {
+        //     let nonIndexedCounter = 0;
+        //     for (let i = 0; i < eventABIInputs.length; i++) {
+        //         const currentInput = eventABIInputs[i];
+        //         const currentValue = nonIndexedValues[nonIndexedCounter++];
+        //         params.push({ ...currentInput, value: currentValue });
+        //     }
+        // }
+
+
+        function getIntValue(hex) {
+            const intVal = parseInt(hex, 16);
+
+            if (!isNaN(intVal)) {
+                return (intVal / 1e18)
+            } else {
+                return hex;
             }
         }
 
@@ -78,16 +89,16 @@ function getParsedLog(log, eventsByName) {
                     let formattedValue = param.value;
                     if (param.name) {
 
-                        // if (param.type === "int") {
-                        //     switch (param.name) {
-                        //         case "amount":
-                        //         case "rewards":
-                        //             formattedValue = getIntValue(param.value)
-                        //             break;
-                        //         default:
-                        //             break;
-                        //     }
-                        // }
+                        if (param.type === "int") {
+                            switch (param.name) {
+                                case "amount":
+                                case "rewards":
+                                    formattedValue = getIntValue(param.value)
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
                         parsedResult[param.name] = formattedValue;
                     }
