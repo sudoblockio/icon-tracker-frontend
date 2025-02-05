@@ -1,7 +1,21 @@
 const webpack = require("webpack");
+const { sentryWebpackPlugin } = require("@sentry/webpack-plugin");
 
 module.exports = function override(config, env) {
-  //do stuff with the webpack config...
+  if (env === "production") {
+    config.devtool = "source-map"
+    config.plugins.push(
+      sentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: "sudoblock",
+        project: "sudoblock-icon-tracker-web",
+        include: "./build",
+        urlPrefix: "~/static/js"
+      })
+    );
+  }
+
+
   config.resolve.fallback = {
     ...config.resolve.fallback,
     'process/browser': require.resolve('process/browser'),
@@ -19,7 +33,7 @@ module.exports = function override(config, env) {
     })
   ];
 
-  console.log(config.resolve);
-  console.log(config.plugins);
+
+
   return config;
 };

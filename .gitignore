@@ -54,3 +54,6 @@ e2e/logs/*
 
 # Sentry Config File
 .sentryclirc
+
+# Sentry Config File
+.env.sentry-build-plugin
