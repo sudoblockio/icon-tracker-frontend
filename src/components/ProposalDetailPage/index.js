@@ -274,10 +274,10 @@ function ProposalDetailPage(props) {
                                                                     }}>
                                                                     {(VIEW_NUMBER ||
                                                                         _agreeLength >= 25) && (
-                                                                        <span>
-                                                                            <em>{_agreeLength}</em>%
-                                                                        </span>
-                                                                    )}
+                                                                            <span>
+                                                                                <em>{_agreeLength}</em>%
+                                                                            </span>
+                                                                        )}
                                                                 </div>
                                                                 <div
                                                                     className="bar-background"
@@ -287,13 +287,13 @@ function ProposalDetailPage(props) {
                                                                     }}>
                                                                     {(VIEW_NUMBER ||
                                                                         _disagreeLength >= 25) && (
-                                                                        <span>
-                                                                            <em>
-                                                                                {_disagreeLength}
-                                                                            </em>
-                                                                            %
-                                                                        </span>
-                                                                    )}
+                                                                            <span>
+                                                                                <em>
+                                                                                    {_disagreeLength}
+                                                                                </em>
+                                                                                %
+                                                                            </span>
+                                                                        )}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -304,12 +304,12 @@ function ProposalDetailPage(props) {
                                                                     <em>{voteLength}</em>/
                                                                     {prepsLength}
                                                                 </span>{' '}
-                                                                P-Reps ({_voteLength}%)
+                                                                Validators ({_voteLength}%)
                                                             </p>
                                                             <p className="on">
                                                                 Agreed
                                                                 <span>
-                                                                    <em>{agreeLength}</em> P-Reps (
+                                                                    <em>{agreeLength}</em> Validators (
                                                                     {_agreeLength}
                                                                     %)
                                                                 </span>
@@ -317,7 +317,7 @@ function ProposalDetailPage(props) {
                                                             <p>
                                                                 Disagreed
                                                                 <span>
-                                                                    <em>{disagreeLength}</em> P-Reps
+                                                                    <em>{disagreeLength}</em> Validators
                                                                     ({_disagreeLength}%)
                                                                 </span>
                                                             </p>
@@ -335,10 +335,10 @@ function ProposalDetailPage(props) {
                                                                     }}>
                                                                     {(VIEW_NUMBER ||
                                                                         _agreeAmount >= 25) && (
-                                                                        <span>
-                                                                            <em>{_agreeAmount}</em>%
-                                                                        </span>
-                                                                    )}
+                                                                            <span>
+                                                                                <em>{_agreeAmount}</em>%
+                                                                            </span>
+                                                                        )}
                                                                 </div>
                                                                 <div
                                                                     className="bar-background"
@@ -348,13 +348,13 @@ function ProposalDetailPage(props) {
                                                                     }}>
                                                                     {(VIEW_NUMBER ||
                                                                         _disagreeAmount >= 25) && (
-                                                                        <span>
-                                                                            <em>
-                                                                                {_disagreeAmount}
-                                                                            </em>
-                                                                            %
-                                                                        </span>
-                                                                    )}
+                                                                            <span>
+                                                                                <em>
+                                                                                    {_disagreeAmount}
+                                                                                </em>
+                                                                                %
+                                                                            </span>
+                                                                        )}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -424,16 +424,14 @@ function ProposalDetailPage(props) {
                         <div className="contents">
                             {tabList.length === 0 ? (
                                 <NoBox
-                                    text={`No ${
-                                        state.tab === PROPOSAL_TABS[0] ? 'Voters' : 'Token Vote'
-                                    }`}
+                                    text={`No ${state.tab === PROPOSAL_TABS[0] ? 'Voters' : 'Token Vote'
+                                        }`}
                                 />
                             ) : (
                                 <div className="table-box">
                                     <table
-                                        className={`table-typeC proposal${
-                                            tabVotes ? ' votes' : ''
-                                        }`}>
+                                        className={`table-typeC proposal${tabVotes ? ' votes' : ''
+                                            }`}>
                                         <thead>
                                             <tr>
                                                 <th>Voter</th>
@@ -460,8 +458,8 @@ function ProposalDetailPage(props) {
                                                 const finalAmount =
                                                     _amount !== '--'
                                                         ? convertNumberToText(
-                                                              convertLoopToIcxDecimal(_amount)
-                                                          ).split('.')
+                                                            convertLoopToIcxDecimal(_amount)
+                                                        ).split('.')
                                                         : '-'
                                                 return (
                                                     <tr key={index}>
