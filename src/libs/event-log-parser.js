@@ -1,14 +1,17 @@
+
 function getEventsByName(ABI) {
     const eventsByName = {};
 
-    const baseMethods = [{
-        name: "ICXTransfer", type: "eventlog",
-        inputs: [
-            { type: "address", name: "_to" },
-            { type: "address", name: "_from" },
-            { type: "int", name: "amount" }
-        ]
-    }]
+    const baseMethods = [
+        {
+            name: "ICXTransfer", type: "eventlog",
+            inputs: [
+                { type: "address", name: "_to" },
+                { type: "address", name: "_from" },
+                { type: "int", name: "amount" }
+            ]
+        }
+    ]
 
     const AbiWithBaseMethods = [...ABI, ...baseMethods]
     AbiWithBaseMethods.forEach(item => {
@@ -22,8 +25,6 @@ function getEventsByName(ABI) {
 
 
 function getParsedLog(log, eventsByName) {
-    const parsedResult = {};
-
     try {
         const parsedResult = {};
 
@@ -34,6 +35,12 @@ function getParsedLog(log, eventsByName) {
 
         // Get event signature from the provided events map
         const eventABI = eventsByName[eventName.toLowerCase()];
+
+        if (!eventABI) {
+            console.warn(`Could not find ABI method ${eventName} in ${log.address}`)
+            return null;
+        }
+
         const eventABIInputs = eventABI?.inputs || [];
 
         const params = [];
@@ -65,39 +72,37 @@ function getParsedLog(log, eventsByName) {
             }
         }
 
-        for (let i = 0; i < params.length; i++) {
-            const param = params[i];
+        for (const param of params) {
             try {
                 if (param.value !== undefined && param.value !== null) {
                     let formattedValue = param.value;
-                    if (param.type === "int") {
-                        switch (param.name) {
-                            case "amount":
-                            case "rewards":
-                                formattedValue = parseFloat((param.value / 1e18).toFixed(4));
-                                break;
-                            default:
-                                formattedValue = Number(param.value);
-                                break;
-                        }
-                    }
                     if (param.name) {
+
+                        // if (param.type === "int") {
+                        //     switch (param.name) {
+                        //         case "amount":
+                        //         case "rewards":
+                        //             formattedValue = getIntValue(param.value)
+                        //             break;
+                        //         default:
+                        //             break;
+                        //     }
+                        // }
+
                         parsedResult[param.name] = formattedValue;
                     }
                 }
             } catch (err) {
                 console.log("Error while creating param while parsing log", err)
-                continue;
+                return null;
             }
         }
 
         return parsedResult;
-
     } catch (err) {
         console.error("Error while parsing log", err)
+        return null;
     }
-
-    return parsedResult;
 }
 
 

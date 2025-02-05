@@ -2987,6 +2987,9 @@ body {
 .table-typeH.log td span {
     color: #e6001b;
 }
+.table-typeH.log.transactionevents td:nth-child(2) .ellipsis {
+    width: 120px;
+}
 
 .table-typeI td:nth-child(1),
 .table-typeI td:nth-child(4) {

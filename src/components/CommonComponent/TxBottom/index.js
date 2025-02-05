@@ -4,7 +4,7 @@ import { TX_TYPE_DATA } from '../../../utils/const'
 
 class TxBottom extends Component {
     render() {
-        const { txData, goAllTx, txType, address, tokenTotal, onClickTab, wallet, walletAddress } =
+        const { txData, goAllTx, txType, address, tokenTotal, onClickTab, wallet, walletAddress, txDataParsed } =
             this.props
 
         const tableClassName = TX_TYPE_DATA[txType] ? TX_TYPE_DATA[txType]['className'] : ''
@@ -14,6 +14,7 @@ class TxBottom extends Component {
             <TxBottomComponent
                 noBorder={true}
                 txData={txData}
+                txDataParsed={txDataParsed}
                 goAllTx={goAllTx}
                 txType={txType}
                 address={address}

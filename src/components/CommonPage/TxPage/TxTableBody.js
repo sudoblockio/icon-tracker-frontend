@@ -25,6 +25,7 @@ import { getTokenTotalSupply } from '../../../redux/store/iiss'
 import { getBadgeTitle, convertNumberToText, addUnregisteredStyle } from '../../../utils/utils'
 
 import ReactJson from 'react-json-view'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const TxAddressCell = ({ isError, address }) => {
     let _address, className
@@ -114,13 +115,40 @@ const MethodCell = ({ method }) => {
     return method ? <td>{method}</td> : <td>-</td>
 }
 
+const LogCell = ({ data, isLoading }) => {
+    return <>
+        {data.parsedLog === null || data.parsedLog === undefined ?
+            <>
+                {data.data === "null" ? null : data.data}
+                {data.indexed}
+
+                {isLoading &&
+                    <span style={{ marginLeft: "10px" }}>
+                        <ClipLoader color="grey" size={15} />
+                    </span>}
+            </>
+            :
+            <ReactJson
+                src={data.parsedLog}
+                name={null}
+                collapsed={2}
+                displayObjectSize={false}
+                displayDataTypes={false}
+                enableClipboard={false}
+                displayArrayKey={false}
+                quotesOnKeys={false}
+                sortKeys={true}
+                groupArraysAfterLength={5}
+                indentWidth={4}
+                theme={"rjv-default"}
+            />}
+    </>
+}
+
 class TxTableBody extends Component {
-    constructor(props) {
-        super(props)
-    }
     render() {
         const TableRow = (_props) => {
-            const { txType, data, address, currentUSD, totalSupply, age } = this.props
+            const { txType, data, address, currentUSD, totalSupply, age, isLoading } = this.props
             const bigNumPercentage = new BigNumber(data.balance / totalSupply)
             const multiplied = new BigNumber(bigNumPercentage * Math.pow(10, 12))
             const isError = Number(data.status) === 0
@@ -459,35 +487,13 @@ class TxTableBody extends Component {
                             </td>
                             <td>{data.method}</td>
                             <td className="event-log-table">
-                                <ReactJson
-                                    src={data.parsedLog}
-                                    name={null}
-                                    collapsed={2}
-                                    displayObjectSize={false}
-                                    displayDataTypes={false}
-                                    enableClipboard={false}
-                                    displayArrayKey={false}
-                                    quotesOnKeys={false}
-                                    sortKeys={true}
-                                    groupArraysAfterLength={5}
-                                    indentWidth={4}
-                                />
-                                {/* {getParsedLogs(data)} */}
-                                {/* {data.address} */}
-                                {/* {data.indexed} */}
-                                {/* {data.data} */}
-                                {/* {data.indexed} */}
+                                <LogCell data={data} isLoading={isLoading} />
                             </td>
                         </tr>
                     )
                 case TX_TYPE.TRANSACTION_EVENTS:
                     return (
                         <tr>
-                            {/* <td className="event-log-table">
-                                {data.address}
-                                {data.indexed}
-                                {data.data}
-                            </td> */}
                             <td className="on">
                                 <span className="ellipsis">
                                     <TransactionLink to={data.transaction_hash} />
@@ -501,23 +507,15 @@ class TxTableBody extends Component {
                                 </span>
                                 <p>{epochToFromNow(data.block_timestamp)}</p>
                             </td>
+
+                            <AddressCell
+                                targetAddr={data.address}
+                                txType={data.txType}
+
+                            />
                             <td>{data.method}</td>
                             <td className="event-log-table">
-                                <ReactJson
-                                    src={data.parsedLog}
-                                    name={null}
-                                    collapsed={2}
-                                    displayObjectSize={false}
-                                    displayDataTypes={false}
-                                    enableClipboard={false}
-                                    displayArrayKey={false}
-                                    quotesOnKeys={false}
-                                    sortKeys={true}
-                                    groupArraysAfterLength={5}
-                                    indentWidth={4}
-                                    theme={"rjv-default"}
-                                />
-
+                                <LogCell data={data} isLoading={isLoading} />
                             </td>
                         </tr>
                     )
