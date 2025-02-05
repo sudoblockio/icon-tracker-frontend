@@ -133,13 +133,13 @@ export async function getContractABIFromRPC(addr) {
 
 export async function prepList(grade) {
   const trackerApi = await trackerApiInstance();
-  const payload = { count: 500 };
+  const payload = {};
   if (grade) {
     payload.grade = grade;
   }
   return new Promise((resolve, reject) => {
     trackerApi
-      .get(`/api/v1/governance/preps?include_unregistered=true`)
+      .get(`/api/v1/governance/preps?include_unregistered=true`, { params: payload })
       .then(result => {
         const nameSorted = (result.data || []).sort((a, b) =>
           a.name < b.name ? -1 : a.name > b.name ? 1 : 0
@@ -161,7 +161,6 @@ export async function prepList(grade) {
 
 export async function getPReps(query) {
   const trackerApi = await trackerApiInstance();
-  console.log({ query })
   return new Promise((resolve, reject) => {
     trackerApi
       .get(`/api/v1/governance/preps?include_unregistered=true`, { params: query })

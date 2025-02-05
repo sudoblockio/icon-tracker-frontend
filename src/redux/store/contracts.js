@@ -190,7 +190,7 @@ export async function contractEventLogList(payload) {
   delete payload.contractAddr
   const trackerApi = await trackerApiInstance()
 
-  /* To display more human readable event log*/
+
   const contractData = await trackerApi.get(`${CONTRACTS_PREFIX}/${payload.address}`)
   const abi = contractData.data.abi;
   const eventsByName = getEventsByName(abi);
@@ -199,6 +199,7 @@ export async function contractEventLogList(payload) {
     trackerApi
       .get(makeEventUrl(`/api/v1/logs`, payload))
       .then((result) => {
+        /* To display more human readable event log*/
         result.data.forEach(log => {
           log.parsedLog = getParsedLog(log, eventsByName)
         })

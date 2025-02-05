@@ -3,6 +3,8 @@ import { TransactionLink } from '../../../components'
 import { is0xHash } from '../../../utils/utils'
 import { getTransactionResultFromRPCNotSdk, getTxResultWaited } from '../../../redux/api/restV3/icx'
 import styles from './MiscContractComponents.module.css'
+import Tooltip from "../../Tooltip/Tooltip"
+
 
 function ReadMethodItems({
     methods,
@@ -19,15 +21,15 @@ function ReadMethodItems({
             {methods.readOnlyMethodsNameArray.map((methodName, index) => {
                 const isExpandable =
                     methods[methodName].inputs.readonly != null &&
-                    methods[methodName].inputs.readonly === '0x1'
+                        methods[methodName].inputs.readonly === '0x1'
                         ? methods[methodName].inputs.inputs.length > 0
                             ? true
                             : methods[methodName].inputs.outputs.length < 1
-                              ? false
-                              : methods[methodName].inputs.outputs[0].type === 'dict' ||
-                                  methods[methodName].inputs.outputs[0].type === 'list'
-                                ? true
-                                : false
+                                ? false
+                                : methods[methodName].inputs.outputs[0].type === 'dict' ||
+                                    methods[methodName].inputs.outputs[0].type === 'list'
+                                    ? true
+                                    : false
                         : true
                 return (
                     <div key={`MethodItem-${methodName}-${index}`}>
@@ -186,8 +188,8 @@ function CollapsableComponent({
                 !isExpandable
                     ? `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
                     : isOpen
-                      ? `${styles.writeMethodContainer} ${styles.writeMethodContainerOpen}`
-                      : `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
+                        ? `${styles.writeMethodContainer} ${styles.writeMethodContainerOpen}`
+                        : `${styles.writeMethodContainer} ${styles.writeMethodContainerClosed}`
             }>
             <div
                 className={
@@ -244,11 +246,14 @@ function CollapsableComponent({
                                 <div
                                     className={styles.writeMethodBodyInput}
                                     key={`writeMethod-element-${index2}`}>
+
                                     <div className={styles.writeMethodBodyInputName}>
                                         {placeholder}
                                     </div>
                                     <div className={styles.writeMethodBodyInputType}>
+                                        <Tooltip targetId="tooltip" content={`Format: ["source1", "source2", ...] (use double quotes)`} position="top" />
                                         <input
+                                            id={input.type === "[]str" ? "tooltip" : ""}
                                             type="text"
                                             key={`writeMethod-${index2}`}
                                             name={inputName}

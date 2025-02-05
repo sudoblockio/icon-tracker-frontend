@@ -54,86 +54,183 @@ class GovernancePage extends Component {
     governanceData = [];
     statusList = []
 
-    async componentWillMount() {
-        // our endpoints
-        this.governanceData = await getPReps();
-        this.publicTreasury = await getPublicTreasury()
-    }
+    // async componentWillMount() {
+    // our endpoints
+    // this.governanceData = await getPReps();
+    // this.publicTreasury = await getPublicTreasury()
+    // }
 
+
+    // async componentDidMount() {
+    //     const [
+    //         { data: preps },
+    //         { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop },
+    //         lastBlock,
+    //         stepPriceLoop,
+    //         // _allPrep,
+    //         _blackPrep,
+    //         total_supply,
+    //         IISSData
+    //     ] = await Promise.all([
+    //         getPReps(),
+    //         getPRepsRPC(),
+    //         getLastBlock(),
+    //         getStepPrice(),
+    //         // prepList(),
+    //         prepList(3),
+    //         getTotalSupply(),
+    //         getIISSInfo()
+    //     ]);
+
+    //     this.publicTreasury = await getPublicTreasury()
+    //     this.governanceData = preps ?? []
+
+    //     const icxSupply = Number(total_supply / Math.pow(10, 18));
+
+    //     const { height, peer_id } = lastBlock || {};
+
+    //     const allPrep = (preps || []).map(prep => {
+    //         const index = preps.findIndex(p => prep.address === p.address);
+    //         if (index !== -1) {
+    //             prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP)
+    //                 .convertUnit(IconAmount.Unit.ICX).value.toString(10);
+    //             prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP)
+    //                 .convertUnit(IconAmount.Unit.ICX).value.toString(10);
+    //         }
+    //         prep.balance = Number(prep.balance);
+    //         return prep;
+    //     });
+
+    //     const blackPrep = (_blackPrep || []).map(bp => {
+    //         bp.grade = 3;
+    //         bp.status = bp.penaltyStatus;
+    //         return bp;
+    //     });
+
+    //     const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id);
+    //     const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`;
+
+    //     const totalSupply = Number(icxSupply || 0);
+    //     const totalStaked = totalStakedLoop
+    //         ? IconConverter.toNumber(IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+    //         : 0;
+    //     const totalVoted = totalVotedLoop
+    //         ? IconConverter.toNumber(IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
+    //         : 0;
+    //     const stepPrice = stepPriceLoop
+    //         ? IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
+    //         : 0;
+
+    //     this.setState({
+    //         loading: false,
+    //         totalSupply,
+    //         totalStaked,
+    //         totalVoted,
+    //         height,
+    //         stepPrice,
+    //         allPrep,
+    //         blackPrep,
+    //         lastBlockPrepName,
+    //         Iwage: IISSData.variable.Iwage,
+    //         Irelay: IISSData.variable.Irelay,
+    //         Icps: IISSData.variable.Icps,
+    //         Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
+    //         Iprep: IISSData.variable.Iprep
+    //     });
+    // }
 
     async componentDidMount() {
-        const [
-            { data: preps },
-            { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop },
-            lastBlock,
-            stepPriceLoop,
-            _allPrep,
-            _blackPrep,
-            total_supply,
-            IISSData
-        ] = await Promise.all([
-            getPReps(),
-            getPRepsRPC(),
-            getLastBlock(),
-            getStepPrice(),
-            prepList(),
-            prepList(3),
-            getTotalSupply(),
-            getIISSInfo()
-        ]);
+        try {
+            const [
+                { data: preps = [] },
+                { totalStake: totalStakedLoop = 0, totalDelegated: totalVotedLoop = 0 },
+                { height = null, peer_id: lastPeerId = "" } = {},
+                stepPriceLoop = 0,
+                _blackPrep = [],
+                totalSupplyRaw = 0,
+                IISSData = {}
+            ] = await Promise.all([
+                getPReps(),
+                getPRepsRPC(),
+                getLastBlock(),
+                getStepPrice(),
+                prepList(3),
+                getTotalSupply(),
+                getIISSInfo()
+            ]);
 
-        const icxSupply = Number(total_supply / Math.pow(10, 18));
+            this.publicTreasury = await getPublicTreasury();
+            this.governanceData = preps ?? [];
 
-        const { height, peer_id } = lastBlock || {};
+            const icxSupply = Number(totalSupplyRaw) / 1e18;
 
-        const allPrep = (_allPrep || []).map(prep => {
-            const index = preps.findIndex(p => prep.address === p.address);
-            if (index !== -1) {
-                prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP)
-                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
-                prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP)
-                    .convertUnit(IconAmount.Unit.ICX).value.toString(10);
-            }
-            prep.balance = Number(prep.balance);
-            return prep;
-        });
+            const allPrep = preps.map(prep => {
+                const matchingPrep = preps.find(p => p.address === prep.address);
+                if (matchingPrep) {
+                    prep.stake = IconAmount.of(matchingPrep.stake ?? 0, IconAmount.Unit.LOOP)
+                        .convertUnit(IconAmount.Unit.ICX)
+                        .value.toString(10);
 
-        const blackPrep = (_blackPrep || []).map(bp => {
-            bp.grade = 3;
-            bp.status = bp.penaltyStatus;
-            return bp;
-        });
+                    prep.unstake = IconAmount.of(matchingPrep.unstake ?? 0, IconAmount.Unit.LOOP)
+                        .convertUnit(IconAmount.Unit.ICX)
+                        .value.toString(10);
+                }
+                prep.balance = Number(prep.balance ?? 0);
+                return prep;
+            });
 
-        const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id);
-        const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`;
+            const blackPrep = _blackPrep.map(bp => ({
+                ...bp,
+                grade: 3,
+                status: bp.penaltyStatus
+            }));
 
-        const totalSupply = Number(icxSupply || 0);
-        const totalStaked = totalStakedLoop
-            ? IconConverter.toNumber(IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-            : 0;
-        const totalVoted = totalVotedLoop
-            ? IconConverter.toNumber(IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-            : 0;
-        const stepPrice = stepPriceLoop
-            ? IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-            : 0;
+            const lastPrepIndex = allPrep.findIndex(prep => prep.address === lastPeerId);
+            const lastBlockPrepName = lastPrepIndex === -1
+                ? ""
+                : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex]?.name ?? ""}`;
 
-        this.setState({
-            loading: false,
-            totalSupply,
-            totalStaked,
-            totalVoted,
-            height,
-            stepPrice,
-            allPrep,
-            blackPrep,
-            lastBlockPrepName,
-            Iwage: IISSData.variable.Iwage,
-            Irelay: IISSData.variable.Irelay,
-            Icps: IISSData.variable.Icps,
-            Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
-            Iprep: IISSData.variable.Iprep
-        });
+            const totalSupply = icxSupply || 0;
+            const totalStaked = totalStakedLoop
+                ? IconConverter.toNumber(
+                    IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP)
+                        .convertUnit(IconAmount.Unit.ICX)
+                        .value.toString(10)
+                )
+                : 0;
+
+            const totalVoted = totalVotedLoop
+                ? IconConverter.toNumber(
+                    IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP)
+                        .convertUnit(IconAmount.Unit.ICX)
+                        .value.toString(10)
+                )
+                : 0;
+
+            const stepPrice = IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP)
+                .convertUnit(IconAmount.Unit.ICX)
+                .value.toString(10);
+
+            this.setState({
+                loading: false,
+                totalSupply,
+                totalStaked,
+                totalVoted,
+                height,
+                stepPrice,
+                allPrep,
+                blackPrep,
+                lastBlockPrepName,
+                Iwage: IISSData.variable.Iwage,
+                Irelay: IISSData.variable.Irelay,
+                Icps: IISSData.variable.Icps,
+                Iglobal: Number(IISSData.variable.Iglobal) / 1e18,
+                Iprep: IISSData.variable.Iprep
+            });
+        } catch (error) {
+            console.error("Error loading data:", error);
+            this.setState({ loading: false });
+        }
     }
 
 
@@ -197,7 +294,7 @@ class GovernancePage extends Component {
     }
     getGovernanceStatus = (address) => {
         let result = false;
-        this.governanceData.data.forEach(item => {
+        this.governanceData?.data?.forEach(item => {
             if (item.address === address) {
                 result = true;
             }

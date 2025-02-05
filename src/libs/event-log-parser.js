@@ -22,62 +22,84 @@ function getEventsByName(ABI) {
 
 
 function getParsedLog(log, eventsByName) {
-    const data = JSON.parse(log.data); // values for non indexed field
-    const indexed = JSON.parse(log.indexed); // values for indexed field
+    const parsedResult = {};
 
-    const eventName = indexed[0].split("(")[0];
-    const paramValues = indexed.splice(1); //indexed
+    try {
+        const parsedResult = {};
 
+        const indexedData = JSON.parse(log.indexed);
+        const eventName = indexedData[0].split("(")[0];
+        const indexedValues = indexedData.slice(1);
+        const nonIndexedValues = JSON.parse(log.data)
 
-    const logSignature = eventsByName[eventName.toLowerCase()];
-    const inputs = logSignature?.inputs || [];
+        // Get event signature from the provided events map
+        const eventABI = eventsByName[eventName.toLowerCase()];
+        const eventABIInputs = eventABI?.inputs || [];
 
+        const params = [];
 
-    const params = [];
-    const parsed = {};
+        // Extract indexed parameters
+        if (indexedValues) {
+            let indexedFinished = false;
+            let inputIndex = 0;
+            while (!indexedFinished) {
+                const currentInput = eventABIInputs[inputIndex];
+                const currentValue = indexedValues[inputIndex];
 
-    let isFinishedIndexed = false;
-    let i = 0;
-    while (!isFinishedIndexed) {
-        const input = inputs[i];
-        const value = paramValues[i];
-        params.push({ ...input, value })
-        if (!value) {
-            isFinishedIndexed = true;
-        } else {
-            i++;
-        }
-    }
-
-    let counter = 0;
-    for (let x = i; x < inputs.length; x++) {
-        const input = inputs[x];
-        const value = data[counter++]
-        params.push({ ...input, value })
-    }
-
-    params.forEach(item => {
-        if (item.value !== undefined && item.value !== null) {
-            let value = item.value;
-
-            if (item.type === "int") {
-                if (item.name === "amount" || item.name === "rewards") {
-                    value = parseFloat(Number(item.value / Math.pow(10, 18)).toFixed(4))
+                if (!currentValue) {
+                    indexedFinished = true;
                 } else {
-                    value = Number(item.value)
+                    params.push({ ...currentInput, value: currentValue });
+                    inputIndex++;
                 }
             }
-
-            // if (item.name) {
-            parsed[item.name] = value;
-            // }
-
         }
-    })
 
+        // Extract non-indexed parameters
+        if (nonIndexedValues) {
+            let nonIndexedCounter = 0;
+            for (let i = 0; i < eventABIInputs.length; i++) {
+                const currentInput = eventABIInputs[i];
+                const currentValue = nonIndexedValues[nonIndexedCounter++];
+                params.push({ ...currentInput, value: currentValue });
+            }
+        }
 
-    return parsed;
+        for (let i = 0; i < params.length; i++) {
+            const param = params[i];
+            try {
+                if (param.value !== undefined && param.value !== null) {
+                    let formattedValue = param.value;
+                    if (param.type === "int") {
+                        switch (param.name) {
+                            case "amount":
+                            case "rewards":
+                                formattedValue = parseFloat((param.value / 1e18).toFixed(4));
+                                break;
+                            default:
+                                formattedValue = Number(param.value);
+                                break;
+                        }
+                    }
+                    if (param.name) {
+                        parsedResult[param.name] = formattedValue;
+                    }
+                }
+            } catch (err) {
+                console.log("Error while creating param while parsing log", err)
+                continue;
+            }
+        }
+
+        return parsedResult;
+
+    } catch (err) {
+        console.error("Error while parsing log", err)
+    }
+
+    return parsedResult;
 }
+
 
 
 
