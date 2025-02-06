@@ -94,6 +94,8 @@ function ContractComponent({
         const contractMethodsState = createContractMethodsState(contractReadWriteInfo)
     }, [])
 
+    const isAbiEmpty = contractMethodsState.readOnlyMethodsNameArray.length === 0 && contractMethodsState.writeMethodsNameArray.length === 0
+
     return (
         <div className="contents">
             <div className={customStyles.btnContainer}>
@@ -105,52 +107,107 @@ function ContractComponent({
                 />
             </div>
 
-            <div className={customStyles.contractContainer}>
-                {activeSection === 0 ? (
-                    <div className={customStyles.titleContainer}>
-                        <span className={customStyles.titleItem}>Read/Write Contract methods</span>
-                        {loading ? (
-                            <LoadingComponent height="322px" />
-                        ) : error ? (
-                            <div className="scroll">
-                                <ul className="list">
-                                    <li>{error}</li>
-                                </ul>
-                            </div>
-                        ) : (
-                            <div className="scroll">
-                                <ReadMethodItems
-                                    methods={contractMethodsState}
-                                    params={params}
-                                    handleChange={handleChange}
-                                    handleClick={handleClickOnReadonly}
-                                    address={address}
-                                />
-                                <WriteMethodItems
-                                    methods={contractMethodsState}
-                                    params={params}
-                                    handleChange={handleChange}
-                                    handleClick={handleClickOnWrite}
-                                    address={address}
-                                    startIndex={
-                                        contractMethodsState.readOnlyMethodsNameArray.length
-                                    }
-                                />
-                            </div>
-                        )}
-                    </div>
-                ) : activeSection === 1 ? (
-                    <div className={customStyles.titleContainer}>
-                        <span className={customStyles.titleItem}>Read contract methods</span>
-                        {loading ? (
-                            <LoadingComponent height="322px" />
-                        ) : (
-                            <div className="scroll">
-                                {error ? (
+
+
+            {isAbiEmpty ? <div className='contract_nothing_show'><em>No methods found</em></div> :
+
+                <div className={customStyles.contractContainer}>
+                    {activeSection === 0 ? (
+                        <div className={customStyles.titleContainer}>
+                            <>
+                                {loading ? (
+                                    <LoadingComponent height="322px" />
+                                ) : error ? (
+                                    <div className="scroll">
+                                        <ul className="list">
+                                            <li>{error}</li>
+                                        </ul>
+                                    </div>
+
+                                ) : (
+                                    <div className="scroll">
+                                        <span className={customStyles.titleItem}>Read/Write Contract methods</span>
+                                        <ReadMethodItems
+                                            methods={contractMethodsState}
+                                            params={params}
+                                            handleChange={handleChange}
+                                            handleClick={handleClickOnReadonly}
+                                            address={address}
+                                        />
+                                        <WriteMethodItems
+                                            methods={contractMethodsState}
+                                            params={params}
+                                            handleChange={handleChange}
+                                            handleClick={handleClickOnWrite}
+                                            address={address}
+                                            startIndex={
+                                                contractMethodsState.readOnlyMethodsNameArray.length
+                                            }
+                                        />
+                                    </div>
+                                )}
+                            </>
+
+                        </div>
+                    ) : activeSection === 1 ? (
+                        <div className={customStyles.titleContainer}>
+                            <span className={customStyles.titleItem}>Read contract methods</span>
+                            {loading ? (
+                                <LoadingComponent height="322px" />
+                            ) : (
+                                <div className="scroll">
+                                    {error ? (
+                                        <ul className="list">
+                                            <li>{error}</li>
+                                        </ul>
+                                    ) : (
+                                        <ReadMethodItems
+                                            methods={contractMethodsState}
+                                            params={params}
+                                            handleChange={handleChange}
+                                            handleClick={handleClickOnReadonly}
+                                            address={address}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ) : activeSection === 2 ? (
+                        <div className={customStyles.titleContainer}>
+                            <span className={customStyles.titleItem}>Write contract methods</span>
+                            {loading ? (
+                                <LoadingComponent height="322px" />
+                            ) : (
+                                <div className="scroll">
+                                    {error ? (
+                                        <ul className="list">
+                                            <li>{error}</li>
+                                        </ul>
+                                    ) : (
+                                        <WriteMethodItems
+                                            methods={contractMethodsState}
+                                            params={params}
+                                            handleChange={handleChange}
+                                            handleClick={handleClickOnWrite}
+                                            address={address}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className={customStyles.titleContainer}>
+                            <span className={customStyles.titleItem}>Read/Write Contract methods</span>
+                            {loading ? (
+                                <LoadingComponent height="322px" />
+                            ) : error ? (
+                                <div className="scroll">
                                     <ul className="list">
                                         <li>{error}</li>
                                     </ul>
-                                ) : (
+                                </div>
+                            ) : (
+                                <div className="scroll">
                                     <ReadMethodItems
                                         methods={contractMethodsState}
                                         params={params}
@@ -158,68 +215,24 @@ function ContractComponent({
                                         handleClick={handleClickOnReadonly}
                                         address={address}
                                     />
-                                )}
-                            </div>
-                        )}
-                    </div>
-                ) : activeSection === 2 ? (
-                    <div className={customStyles.titleContainer}>
-                        <span className={customStyles.titleItem}>Write contract methods</span>
-                        {loading ? (
-                            <LoadingComponent height="322px" />
-                        ) : (
-                            <div className="scroll">
-                                {error ? (
-                                    <ul className="list">
-                                        <li>{error}</li>
-                                    </ul>
-                                ) : (
                                     <WriteMethodItems
                                         methods={contractMethodsState}
                                         params={params}
                                         handleChange={handleChange}
                                         handleClick={handleClickOnWrite}
                                         address={address}
+                                        startIndex={
+                                            contractMethodsState.readOnlyMethodsNameArray.length
+                                        }
                                     />
-                                )}
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className={customStyles.titleContainer}>
-                        <span className={customStyles.titleItem}>Read/Write Contract methods</span>
-                        {loading ? (
-                            <LoadingComponent height="322px" />
-                        ) : error ? (
-                            <div className="scroll">
-                                <ul className="list">
-                                    <li>{error}</li>
-                                </ul>
-                            </div>
-                        ) : (
-                            <div className="scroll">
-                                <ReadMethodItems
-                                    methods={contractMethodsState}
-                                    params={params}
-                                    handleChange={handleChange}
-                                    handleClick={handleClickOnReadonly}
-                                    address={address}
-                                />
-                                <WriteMethodItems
-                                    methods={contractMethodsState}
-                                    params={params}
-                                    handleChange={handleChange}
-                                    handleClick={handleClickOnWrite}
-                                    address={address}
-                                    startIndex={
-                                        contractMethodsState.readOnlyMethodsNameArray.length
-                                    }
-                                />
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            }
+
+
         </div>
     )
 }
