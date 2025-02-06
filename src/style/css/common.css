@@ -6264,6 +6264,12 @@ h2.tx-title {
     display: none !important;
 }
 
+.contract_nothing_show {
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 4px;
+}
+
 @-webkit-keyframes bubble {
     0% {
         -webkit-transform: translateY(5px);
