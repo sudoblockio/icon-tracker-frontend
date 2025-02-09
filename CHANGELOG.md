@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.4...v0.6.5) (2025-02-06)
+
+
+### Bug Fixes
+
+* added contract name api call to search [#156](https://github.com/sudoblockio/icon-tracker-frontend/issues/156) ([363882a](https://github.com/sudoblockio/icon-tracker-frontend/commit/363882aba045cccac17488ede238dc1a5bcb8536))
+* added sentry error boundary [#432](https://github.com/sudoblockio/icon-tracker-frontend/issues/432) ([b30247f](https://github.com/sudoblockio/icon-tracker-frontend/commit/b30247f16dbfc7fd9601336f0e29d907117bc86f))
+* added title to all pages [#449](https://github.com/sudoblockio/icon-tracker-frontend/issues/449) ([6d2a640](https://github.com/sudoblockio/icon-tracker-frontend/commit/6d2a6409bba4fe89857a1b026c5afdab7b76aec5))
+* fixed improper log parsing in contract and transactions [#528](https://github.com/sudoblockio/icon-tracker-frontend/issues/528) ([5e89cc3](https://github.com/sudoblockio/icon-tracker-frontend/commit/5e89cc3b32222ee1229c2410312072e5bf4eb41f))
+* handling non indexed field in event log [#528](https://github.com/sudoblockio/icon-tracker-frontend/issues/528) ([5d9090e](https://github.com/sudoblockio/icon-tracker-frontend/commit/5d9090e7061e1ffcd8d7a827cf8c44f889e4e0e4))
+* sentry optimisation [#536](https://github.com/sudoblockio/icon-tracker-frontend/issues/536) ([4dd77a7](https://github.com/sudoblockio/icon-tracker-frontend/commit/4dd77a7a34efbc1d3954e2c78645cabe932f180c))
+
 ## [0.6.4](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.3...v0.6.4) (2025-01-17)
 
 
