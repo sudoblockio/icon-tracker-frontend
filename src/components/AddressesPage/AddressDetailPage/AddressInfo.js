@@ -206,8 +206,6 @@ function AddressInfo(props) {
   useEffect(() => {
     if (!props.match.params.addressId) return
 
-    console.log({ match: props.match })
-
     getAddrBalance();
     getRev()
     fetchPrepInfo()
@@ -678,7 +676,6 @@ function AddressInfo(props) {
 
                     <AddrContractsBalRow
                       {...props}
-                      delegated={delegated}
                       iscore={iscore}
                     // loading={loading}
                     // icxMore={icxMore}

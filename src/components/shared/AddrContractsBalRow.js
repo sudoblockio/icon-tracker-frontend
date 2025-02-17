@@ -8,17 +8,19 @@ import {
     sortArrOfObjects,
 } from '../../utils/utils'
 
-import { getBalanceOf, getBalance, getStake, getBondList } from '../../redux/store/iiss'
+import { getBalanceOf, getBalance, getStake, getBondList, getDelegation } from '../../redux/store/iiss'
 import { contractDetail } from '../../redux/store/contracts'
 import { addressTokens } from '../../redux/store/addresses'
 import { IconConverter, } from 'icon-sdk-js'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
-function AddContractsBal(props) {
-    const { delegated, iscore, match } = props
+function AddrContractsBal(props) {
+    const { iscore, match } = props
 
     const urlId = match.params.addressId ? match.params.addressId : match.params.contractId
+
+    const [deleg, setDeleg] = useState(null)
 
     const [isTokenBalLoading, setIsTokenBalLoading] = useState(true)
 
@@ -116,14 +118,24 @@ function AddContractsBal(props) {
         }
     }
 
-
-
+    async function getDelegationData() {
+        const payload = { address: `${urlId}`, count: 10, page: 1 }
+        try {
+            let delegData = await getDelegation(payload)
+            const delegationSum = delegData.delegations.reduce((sum, item) =>
+                sum + Number(item.value), 0) / Math.pow(10, 18);
+            setDeleg(delegationSum)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
         fetchAddressTokens()
         getAddrBalance()
         getAddrStake(urlId)
         getAddrBond(urlId)
+        getDelegationData();
     }, [])
 
     useEffect(() => {
@@ -190,14 +202,6 @@ function AddContractsBal(props) {
                             <em>ICX</em>
                         </span>
                     </p>
-                    <p>
-                        <span>Bonded</span>
-                        <span>
-                            {addrBond ? addrBond : <span>&nbsp;</span>}
-                            <em>ICX</em>
-                        </span>
-                    </p>
-
                     <div className="unstaking-list">
                         {unstakeList && unstakeList.length !== 0
                             ? unstakeList.map((dataList) => {
@@ -216,19 +220,29 @@ function AddContractsBal(props) {
                                                 {convertNumberToText(
                                                     convertLoopToIcxDecimal(dataList.unstake)
                                                 )}
+                                                <em>ICX</em>
                                             </span>
-                                            <em>ICX</em>
+
                                         </span>
                                     </p>
                                 )
                             })
                             : ''}
                     </div>
+                    <p>
+                        <span>Bonded</span>
+                        <span>
+                            {addrBond ? addrBond : <span>&nbsp;</span>}
+                            <em>ICX</em>
+                        </span>
+                    </p>
+
+
 
                     <p>
                         <span>Voted</span>
                         <span>
-                            {`${convertNumberToText(delegated)}`}
+                            {`${convertNumberToText(deleg)}`}
                             <em>ICX</em>
                         </span>
                     </p>
@@ -284,4 +298,4 @@ function AddContractsBal(props) {
     )
 }
 
-export default withRouter(AddContractsBal)
+export default withRouter(AddrContractsBal)

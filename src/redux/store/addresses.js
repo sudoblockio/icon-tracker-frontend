@@ -177,8 +177,6 @@ export async function addressTokenTxList(payload) {
   delete queryPayload.address
   delete queryPayload.is_token
 
-  console.log('queryPayload', { queryPayload })
-
   return new Promise((resolve, reject) => {
     trackerApi
       .get(
@@ -221,8 +219,6 @@ export async function addressInternalTxList(payload) {
 }
 
 export async function addressVotedList(payload) {
-  console.log(payload, 'vote payload')
-
   const trackerApi = await trackerApiInstance()
 
   const queryPayload = { ...payload }
@@ -232,7 +228,6 @@ export async function addressVotedList(payload) {
     trackerApi
       .get(makeUrl(`/api/v1/governance/votes/${payload.address || payload}`, queryPayload))
       .then((result) => {
-        console.log(result, 'what result')
         resolve(result)
       })
       .catch((error) => {
@@ -264,7 +259,6 @@ export async function addressDelegationList(address) {
     walletApi
       .post(`/api/v3`, JSON.stringify(param))
       .then((response) => {
-        console.log(response, 'deleg response')
         resolve(response.data.result)
       })
       .catch((error) => {
