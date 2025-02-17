@@ -854,26 +854,35 @@ i.img.screamer {
 }
 
 .unstaking-list {
-    width: 517px !important;
+    width: 540px !important;
+    margin-block: 0.8em !important;
     overflow: visible !important;
     height: auto !important;
-    text-align: right;
 }
 
-.unstaking-list > p {
+.unstaking-list p {
     height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: right !important;
 }
 
 .unstaking-list .unstaking-item {
-    width: 400px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
     padding-top: 4px !important;
+    margin: 0 !important;
+    text-align: right !important;
+    padding-left: 13em;
 }
 
 .unstaking-list .unstaking-item em:first-child {
-    margin-right: 10px !important;
     font-size: 10px !important;
+}
+.unstaking-list .unstaking-item em:last-child {
 }
 
 .unstaking-list .unstaking-item span.balance {

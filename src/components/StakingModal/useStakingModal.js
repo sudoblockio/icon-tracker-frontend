@@ -65,12 +65,12 @@ export function useStakingModal(wallet, onClose) {
         }
 
         if (name === "newStake") {
-            setState(prev => ({ ...prev, "newStakePercent": calculatePercentage(value, state.balance) }))
+            const newStakePercent = calculatePercentage(parseFloat(value), state.balance)
+            setState(prev => ({ ...prev, "newStakePercent": newStakePercent }))
         }
 
         setState((prev) => ({ ...prev, [name]: value }))
     }
-
     useEffect(() => {
         const value = state.newStakePercent;
         if (value < calculatePercentage(state.totVoted, state.balance) || value > 100) {
@@ -166,7 +166,9 @@ export function useStakingModal(wallet, onClose) {
     useEffect(() => {
         if (isNil(wallet) || isNil(state.stakedAmount) || isNil(state.unstakedAmount)) return
         const balance = Number(wallet.data.available) + state.stakedAmount + state.unstakedAmount
-        setState((prev) => ({ ...prev, newStake: state.stakedAmount, maxStake: balance, balance }))
+        const gasBuffer = 1;
+        const maxStake = balance - gasBuffer;
+        setState((prev) => ({ ...prev, newStake: state.stakedAmount, maxStake, balance }))
     }, [state.stakedAmount, state.unstakedAmount, wallet])
 
 

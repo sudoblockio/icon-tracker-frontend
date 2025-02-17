@@ -34,8 +34,6 @@ class Header extends Component {
                     return { isLocked: true, link: null }
             }
         }
-        const { isLocked: isBtpLocked, link: btpLink } = getBTPExplorer()
-
         function getMonitorsBtp() {
             switch (network.toLowerCase()) {
                 case 'lisbon':
@@ -48,7 +46,22 @@ class Header extends Component {
                     return { isLocked: true, link: null }
             }
         }
-        const { isLocked: isMonitorBtpLocked, link: monitorBtpLink } = getMonitorsBtp()
+
+
+
+        function onClickApiDocs() {
+            switch (network.toLowerCase()) {
+                case 'mainnet':
+                    window.open(
+                        `https://tracker.icon.community/openapi/`
+                    )
+                    break;
+                default:
+                    window.open(
+                        `https://tracker.${network}.icon.community/openapi/`
+                    )
+            }
+        }
 
         function getMonitorsValidator() {
             switch (network.toLowerCase()) {
@@ -62,8 +75,11 @@ class Header extends Component {
                     return { isLocked: true, link: null }
             }
         }
+
         const { isLocked: isMonitorValidatorLocked, link: monitorValidatorLink } =
             getMonitorsValidator()
+        const { isLocked: isBtpLocked, link: btpLink } = getBTPExplorer()
+        const { isLocked: isMonitorBtpLocked, link: monitorBtpLink } = getMonitorsBtp()
         return (
             <div className="header-wrap">
                 <div className="wrap-holder">
@@ -178,11 +194,7 @@ class Header extends Component {
                                                 }}
                                                 className="sub-menu sub-sub-menu">
                                                 <li
-                                                    onClick={() => {
-                                                        window.open(
-                                                            `https://cluster1.tracker.${config.network}.icon.community/openapi/`
-                                                        )
-                                                    }}>
+                                                    onClick={onClickApiDocs}>
                                                     <span>Main</span>
                                                 </li>
                                                 {/* <li

@@ -107,8 +107,6 @@ function ContractComponent({
                 />
             </div>
 
-
-
             {isAbiEmpty ? <div className='contract_nothing_show'><em>No methods found</em></div> :
 
                 <div className={customStyles.contractContainer}>
