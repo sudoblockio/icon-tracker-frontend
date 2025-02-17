@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.5...v0.6.6) (2025-02-17)
+
+
+### Bug Fixes
+
+* address balance wrong voted amount fix & unstaking styles [#533](https://github.com/sudoblockio/icon-tracker-frontend/issues/533) ([3d04608](https://github.com/sudoblockio/icon-tracker-frontend/commit/3d046086b2d9f23eefcdfa8934dc9290c564684f))
+* updated max vote amount to include bonded amount [#554](https://github.com/sudoblockio/icon-tracker-frontend/issues/554) ([a8b66f3](https://github.com/sudoblockio/icon-tracker-frontend/commit/a8b66f3d8d501a472c08d6d00e7429c046994cd6))
+
 ## [0.6.5](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.4...v0.6.5) (2025-02-06)
 
 
