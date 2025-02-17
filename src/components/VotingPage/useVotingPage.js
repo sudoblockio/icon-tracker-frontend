@@ -4,7 +4,7 @@ import config from '../../config'
 import scores from '../../utils/rawTxMaker/scores'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
 
-import { getDelegation, getStake, getPReps, getPRepsRPC } from '../../redux/store/iiss'
+import { getDelegation, getStake, getPReps, getPRepsRPC, getBondList } from '../../redux/store/iiss'
 
 import { requestJsonRpc } from '../../utils/connect'
 import { calculatePercentageWithoutTrunc } from '../../utils/utils'
@@ -208,7 +208,6 @@ export function useVotingPage(address, history) {
             setState(prev => ({ ...prev, isLoadingPreps: true }))
 
             const respPreps = await getPReps()
-            console.log({ respPreps })
             const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
 
             const totalVoted = !totalVotedLoop ?
@@ -229,9 +228,16 @@ export function useVotingPage(address, history) {
                 return b.power - a.power;
             });
 
+
+
+            const resBond = await getBondList({ address })
+            const bondedAmount = resBond.reduce((acc, curr) => acc + Number(curr.value) / Math.pow(10, 18), 0)
+
             const delegationData = await getDelegation({ address })
             const dataStake = await getStake(address)
             const stakedAmount = Number(dataStake.stake / Math.pow(10, 18))
+            const gasBuffer = 1;
+
 
             delegationData.delegations.forEach(({ address, value }) => {
                 const foundPrep = findDelegInPreps(address, dataPreps)
@@ -250,8 +256,8 @@ export function useVotingPage(address, history) {
                 preps: dataPreps,
                 filteredPreps: dataPreps,
                 selectedMap,
-                maxVoteAmt: stakedAmount,
-                totAvailVoteAmt: stakedAmount,
+                maxVoteAmt: stakedAmount - bondedAmount - gasBuffer,
+                totAvailVoteAmt: stakedAmount - bondedAmount - gasBuffer,
                 totVotedAmt: 0,
                 stakedAmount,
                 totalVoted,
