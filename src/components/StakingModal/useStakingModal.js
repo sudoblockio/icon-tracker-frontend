@@ -166,8 +166,8 @@ export function useStakingModal(wallet, onClose) {
     useEffect(() => {
         if (isNil(wallet) || isNil(state.stakedAmount) || isNil(state.unstakedAmount)) return
         const balance = Number(wallet.data.available) + state.stakedAmount + state.unstakedAmount
-        const gasBuffer = 0.02; // 1% buffer for gas fees
-        const maxStake = balance * (1 - gasBuffer); // Reduce maxStake by 1%
+        const gasBuffer = 1;
+        const maxStake = balance - gasBuffer;
         setState((prev) => ({ ...prev, newStake: state.stakedAmount, maxStake, balance }))
     }, [state.stakedAmount, state.unstakedAmount, wallet])
 
