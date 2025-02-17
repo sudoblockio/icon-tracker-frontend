@@ -65,7 +65,8 @@ export function useStakingModal(wallet, onClose) {
         }
 
         if (name === "newStake") {
-            setState(prev => ({ ...prev, "newStakePercent": calculatePercentage(value, state.balance) }))
+            const newStakePercent = calculatePercentage(parseFloat(value), state.balance)
+            setState(prev => ({ ...prev, "newStakePercent": newStakePercent }))
         }
 
         setState((prev) => ({ ...prev, [name]: value }))
