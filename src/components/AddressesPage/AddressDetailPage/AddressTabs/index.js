@@ -192,32 +192,35 @@ function AddressTabs(props) {
     }
 
     useEffect(() => {
-        const TABS = []
-        TABS.push(ADDRESS_TABS[0])
-        if (intTx ? intTx.data.length : null) {
-            TABS.push(ADDRESS_TABS[1])
+        const TABS = [];
+
+        // Transactions tab is always visible
+        TABS.push(ADDRESS_TABS[0]);
+
+        // Add other tabs if they have data
+        if (intTx?.data?.length) {
+            TABS.push(ADDRESS_TABS[1]);
         }
-        if (tokenTransfers ? tokenTransfers.data.length : null) {
-            TABS.push(ADDRESS_TABS[2])
+        if (tokenTransfers?.data?.length) {
+            TABS.push(ADDRESS_TABS[2]);
         }
-        if (deleg ? deleg.delegations.length : null) {
-            TABS.push(ADDRESS_TABS[3])
+        if (deleg?.delegations?.length) {
+            TABS.push(ADDRESS_TABS[3]);
         }
-        if (voted ? voted.data.length : null) {
-            TABS.push(ADDRESS_TABS[4])
+        if (voted?.data?.length) {
+            TABS.push(ADDRESS_TABS[4]);
         }
-        if (rewards ? rewards.data.length : null) {
-            TABS.push(ADDRESS_TABS[5])
+        if (rewards?.data?.length) {
+            TABS.push(ADDRESS_TABS[5]);
         }
-        // If the logged user is in the address page of the logged
-        // wallet show the bonded tab
-        if ((bondList ? bondList.length : null) || walletAddress === address) {
-            TABS.push(ADDRESS_TABS[6])
+        if (bondList?.length || walletAddress === address) {
+            TABS.push(ADDRESS_TABS[6]);
         }
-        if (bonderList ? bonderList.length : null) {
-            TABS.push(ADDRESS_TABS[7])
+        if (bonderList?.length) {
+            TABS.push(ADDRESS_TABS[7]);
         }
-        setTabs(TABS)
+
+        setTabs(TABS);
     }, [
         intTx,
         tokenTransfers,
@@ -228,7 +231,7 @@ function AddressTabs(props) {
         bonderList,
         walletAddress,
         data.address,
-    ])
+    ]);
 
     useEffect(() => {
         listAddressTx()
