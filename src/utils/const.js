@@ -379,3 +379,6 @@ export const RELAY_REQUEST_CONST = {
     claim_reward: 32011,
     claim_sponsor_bond: 32012,
 }
+
+
+export const CHAIN_CONTRACT_ADDRESS = "cx0000000000000000000000000000000000000000"

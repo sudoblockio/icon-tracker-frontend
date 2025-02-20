@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom'
 import { numberWithCommas, convertNumberToText } from '../../utils/utils'
 import { IconConverter, IconAmount } from 'icon-sdk-js'
-import { getLastBlock, getStepPrice, getPublicTreasury, prepList, getPRepsRPC, getTotalSupply } from '../../redux/store/iiss'
+import { getLastBlock, getStepPrice, getPublicTreasury, prepList, getPRepsRPC, getTotalSupply, queryNetworkInfo } from '../../redux/store/iiss'
 import { getPReps, getIISSInfo, icxCall } from '../../redux/api/restV3';
 import {
     LoadingComponent,
@@ -54,91 +54,6 @@ class GovernancePage extends Component {
     governanceData = [];
     statusList = []
 
-    // async componentWillMount() {
-    // our endpoints
-    // this.governanceData = await getPReps();
-    // this.publicTreasury = await getPublicTreasury()
-    // }
-
-
-    // async componentDidMount() {
-    //     const [
-    //         { data: preps },
-    //         { totalStake: totalStakedLoop, totalDelegated: totalVotedLoop },
-    //         lastBlock,
-    //         stepPriceLoop,
-    //         // _allPrep,
-    //         _blackPrep,
-    //         total_supply,
-    //         IISSData
-    //     ] = await Promise.all([
-    //         getPReps(),
-    //         getPRepsRPC(),
-    //         getLastBlock(),
-    //         getStepPrice(),
-    //         // prepList(),
-    //         prepList(3),
-    //         getTotalSupply(),
-    //         getIISSInfo()
-    //     ]);
-
-    //     this.publicTreasury = await getPublicTreasury()
-    //     this.governanceData = preps ?? []
-
-    //     const icxSupply = Number(total_supply / Math.pow(10, 18));
-
-    //     const { height, peer_id } = lastBlock || {};
-
-    //     const allPrep = (preps || []).map(prep => {
-    //         const index = preps.findIndex(p => prep.address === p.address);
-    //         if (index !== -1) {
-    //             prep.stake = IconAmount.of(preps[index].stake || 0x0, IconAmount.Unit.LOOP)
-    //                 .convertUnit(IconAmount.Unit.ICX).value.toString(10);
-    //             prep.unstake = IconAmount.of(preps[index].unstake || 0x0, IconAmount.Unit.LOOP)
-    //                 .convertUnit(IconAmount.Unit.ICX).value.toString(10);
-    //         }
-    //         prep.balance = Number(prep.balance);
-    //         return prep;
-    //     });
-
-    //     const blackPrep = (_blackPrep || []).map(bp => {
-    //         bp.grade = 3;
-    //         bp.status = bp.penaltyStatus;
-    //         return bp;
-    //     });
-
-    //     const lastPrepIndex = allPrep.findIndex(prep => prep.address === peer_id);
-    //     const lastBlockPrepName = lastPrepIndex === -1 ? "" : `#${lastPrepIndex + 1} ${allPrep[lastPrepIndex].name}`;
-
-    //     const totalSupply = Number(icxSupply || 0);
-    //     const totalStaked = totalStakedLoop
-    //         ? IconConverter.toNumber(IconAmount.of(totalStakedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-    //         : 0;
-    //     const totalVoted = totalVotedLoop
-    //         ? IconConverter.toNumber(IconAmount.of(totalVotedLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10))
-    //         : 0;
-    //     const stepPrice = stepPriceLoop
-    //         ? IconAmount.of(stepPriceLoop, IconAmount.Unit.LOOP).convertUnit(IconAmount.Unit.ICX).value.toString(10)
-    //         : 0;
-
-    //     this.setState({
-    //         loading: false,
-    //         totalSupply,
-    //         totalStaked,
-    //         totalVoted,
-    //         height,
-    //         stepPrice,
-    //         allPrep,
-    //         blackPrep,
-    //         lastBlockPrepName,
-    //         Iwage: IISSData.variable.Iwage,
-    //         Irelay: IISSData.variable.Irelay,
-    //         Icps: IISSData.variable.Icps,
-    //         Iglobal: Number(IISSData.variable.Iglobal) / Math.pow(10, 18),
-    //         Iprep: IISSData.variable.Iprep
-    //     });
-    // }
-
     async componentDidMount() {
         try {
             const [
@@ -148,7 +63,8 @@ class GovernancePage extends Component {
                 stepPriceLoop = 0,
                 _blackPrep = [],
                 totalSupplyRaw = 0,
-                IISSData = {}
+                IISSData = {},
+                networkInfo
             ] = await Promise.all([
                 getPReps(),
                 getPRepsRPC(),
@@ -156,16 +72,25 @@ class GovernancePage extends Component {
                 getStepPrice(),
                 prepList(3),
                 getTotalSupply(),
-                getIISSInfo()
+                getIISSInfo(),
+                queryNetworkInfo()
             ]);
+
+
 
             this.publicTreasury = await getPublicTreasury();
             this.governanceData = preps ?? [];
 
             const icxSupply = Number(totalSupplyRaw) / 1e18;
 
+            const iGlobalDecimal = Number(IISSData.variable.Iglobal, 16) / 1e18;
+            const iPrepDecimal = Number(IISSData.variable.Iprep, 16) / 10000;
+            const totalPowerDecimal = parseInt(networkInfo.totalPower, 16) / 1e18;
+            const STAKING_AMOUNT = 10000;
+
             const allPrep = preps.map(prep => {
                 const matchingPrep = preps.find(p => p.address === prep.address);
+
                 if (matchingPrep) {
                     prep.stake = IconAmount.of(matchingPrep.stake ?? 0, IconAmount.Unit.LOOP)
                         .convertUnit(IconAmount.Unit.ICX)
@@ -175,8 +100,20 @@ class GovernancePage extends Component {
                         .convertUnit(IconAmount.Unit.ICX)
                         .value.toString(10);
                 }
+
+
+                const prepCommissRate = prep.commission_rate !== null ? prep.commission_rate / 100 : prep.commission_rate;
+                const prepPower = prep.power / 10 ** 18
+                const prepDelegated = prep.delegated
+                const fromIprep =
+                    (prepPower * iGlobalDecimal * iPrepDecimal) / totalPowerDecimal;
+                const totalStakersRewards = prepCommissRate !== null ? fromIprep * (1 - prepCommissRate) : fromIprep;
+                const monthlyStakersRewards = totalStakersRewards * (STAKING_AMOUNT / (prepDelegated + STAKING_AMOUNT))
+
                 prep.balance = Number(prep.balance ?? 0);
-                return prep;
+                prep.apr = ((monthlyStakersRewards * 12) / STAKING_AMOUNT) * 100
+
+                return prep
             });
 
             const blackPrep = _blackPrep.map(bp => ({
@@ -438,6 +375,7 @@ class GovernancePage extends Component {
                                         <col />
                                         <col />
                                         <col />
+                                        <col />
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -463,10 +401,10 @@ class GovernancePage extends Component {
                                                     Max Rate)
                                                 </em>
                                             </th>
+                                            <th style={{ minWidth: "100px !important" }}> APR</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {searched.map((prep, index) => (
                                             <TableRow
                                                 governanceStatus={this.getGovernanceStatus(prep.address)}
@@ -545,9 +483,7 @@ class TableRow extends Component {
     onError = () => {
         this.setState({ logoError: true })
     }
-    loadImage = () => {
-        this.setState({ loaded: true })
-    }
+
     render() {
         const {
             logoError
@@ -601,6 +537,7 @@ class TableRow extends Component {
         const jailBadge = this.getJailBadge(parseInt(prep.jail_flags, 16))
         const rank = index + 1
         const bondedRate = !totalVoted ? 0 : prep.bond_percent
+
 
         return (
             <tr>
@@ -688,6 +625,14 @@ class TableRow extends Component {
                             </em>
                         </>
                     )}
+                </td>
+                <td>
+                    <em>
+                        <span>
+                            {prep.apr.toFixed(2)} %
+
+                        </span>
+                    </em>
                 </td>
             </tr>
         )

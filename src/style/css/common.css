@@ -424,6 +424,9 @@ body {
     position: relative;
     padding: 0 50px;
 }
+.content-wrap.governance .wrap-holder {
+    width: 1500px;
+}
 .blank {
     height: 144px;
     position: relative;
