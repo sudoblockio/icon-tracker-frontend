@@ -1,64 +1,63 @@
 .buttonUpdatePrep {
-  color: white;
+    color: white;
 }
 
 .button {
-  margin: 0 0.5rem 0 0;
-  height: 40px;
-  min-width: 40px;
-  color: #299fac;
-  background-color: #fff;
-  border: 1px solid #e2e2e2;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
+    margin: 0 0.5rem 0 0;
+    height: 40px;
+    min-width: 40px;
+    color: #299fac;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .button:hover {
-  background-color: #08909f;
-  color: #fff;
+    background-color: #08909f;
+    color: #fff;
 }
 
-
- 
-.stakeSpan{
-  position: relative;
+.stakeSpan {
+    position: relative;
 }
-.stakeSpan div{
-  position: absolute;
-  right:0px;
-  transform: translateX(100%) translateY(38%);
-  bottom:0;
-  background-color: #f1f1f1;
-  color: red;
-  font-size: 0.9rem;
-  height: 50px;
-  min-width: 250px;
-  width: fit-content;
-  padding-inline: 2em;
-  display: flex;
-  justify-content: center;align-items: center;
-  box-shadow: 1px 1px 10px rgba(1,1,1,0.2);
-  /* border: 1px solid rgba(1,1,1,0.1); */
-  text-align: center;
-}
-
-.stakeSpan div::after{
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent #f1f1f1 transparent transparent;
+.stakeSpan div {
+    position: absolute;
+    right: 0px;
+    transform: translateX(100%) translateY(38%);
+    bottom: 0;
+    background-color: #f1f1f1;
+    color: red;
+    font-size: 0.9rem;
+    height: 50px;
+    min-width: 250px;
+    width: fit-content;
+    padding-inline: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 10px rgba(1, 1, 1, 0.2);
+    /* border: 1px solid rgba(1,1,1,0.1); */
+    text-align: center;
 }
 
-.stakeSpan button:disabled{
-  /* pointer-events: none; */
-  cursor: default;
-  color: grey;
+.stakeSpan div::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #f1f1f1 transparent transparent;
 }
-.stakeSpan button:disabled:hover{
-   background-color: inherit !important;
+
+.stakeSpan button:disabled {
+    /* pointer-events: none; */
+    cursor: default;
+    color: grey;
+}
+.stakeSpan button:disabled:hover {
+    background-color: inherit !important;
 }
