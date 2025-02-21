@@ -25,6 +25,7 @@ function ContractComponent({
     walletAddress,
 }) {
     const [params, setParams] = useState({})
+    const [payableValue, setPayableValue] = useState(null);
     const [activeSection, setActiveSection] = useState(0)
 
     const handleChange = (e) => {
@@ -33,6 +34,11 @@ function ContractComponent({
             ...params,
             [name]: value,
         })
+    }
+
+    const handleChangePayableValue = (e) => {
+        const { value } = e.target
+        setPayableValue(value)
     }
 
     function handleClickOnReadonly(address, method, inputs, index) {
@@ -52,17 +58,7 @@ function ContractComponent({
             alert('Please connect to wallet first')
         } else {
             const paramsData = makeParams(params, method, inputs)
-            let value = null;
-            if (paramsData.hasOwnProperty("value")) {
-                value = paramsData.value;
-                const valueInput = inputs.find(f => f.name === 'value' && f.type === "icx");
-                if (valueInput) {
-                    value = parseFloat(value);
-                }
-                delete paramsData.value;
-            }
-
-
+            let value = payableValue ? parseFloat(payableValue) : null;
             const rawMethodCall = await customMethod(
                 walletAddress,
                 address,
@@ -136,6 +132,7 @@ function ContractComponent({
                                             methods={contractMethodsState}
                                             params={params}
                                             handleChange={handleChange}
+                                            handleChangePayableValue={handleChangePayableValue}
                                             handleClick={handleClickOnWrite}
                                             address={address}
                                             startIndex={
