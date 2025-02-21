@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.7](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.6...v0.6.7) (2025-02-21)
+
+
+### Bug Fixes
+
+* added APR column to governance page [#513](https://github.com/sudoblockio/icon-tracker-frontend/issues/513) ([5d4c64a](https://github.com/sudoblockio/icon-tracker-frontend/commit/5d4c64ab7c96dd4bb3ce67e61dab1b1f1181f08c))
+* payable method added extra value field below data.params field [#435](https://github.com/sudoblockio/icon-tracker-frontend/issues/435) ([6d8a245](https://github.com/sudoblockio/icon-tracker-frontend/commit/6d8a24583c83efc833999734bcd517aa247e0ddd))
+
 ## [0.6.6](https://github.com/sudoblockio/icon-tracker-frontend/compare/v0.6.5...v0.6.6) (2025-02-17)
 
 
