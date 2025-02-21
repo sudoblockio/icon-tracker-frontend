@@ -58,6 +58,7 @@ function WriteMethodItems({
     methods,
     params,
     handleChange,
+    handleChangePayableValue,
     handleClick,
     address,
     network,
@@ -74,9 +75,11 @@ function WriteMethodItems({
                             methodInput={methods[methodName].inputs}
                             methodName={methodName}
                             methodOutput={methods[methodName].outputs}
+                            isPayableMethod={methods[methodName].isPayable}
                             index={index}
                             params={params}
                             handleChangeParent={handleChange}
+                            handleChangePayableValue={handleChangePayableValue}
                             handleClick={handleClick}
                             address={address}
                             isExpandable={true}
@@ -98,9 +101,11 @@ function CollapsableComponent({
     methodInput,
     methodName,
     methodOutput,
+    isPayableMethod,
     index,
     params,
     handleChangeParent,
+    handleChangePayableValue,
     handleClick,
     address,
     isExpandable,
@@ -242,6 +247,8 @@ function CollapsableComponent({
                             const placeholder = `${name} (${type})`
                             const value = params[inputName] || ''
 
+                            console.log({ methodName, isPayableMethod })
+
                             return (
                                 <div
                                     className={styles.writeMethodBodyInput}
@@ -265,6 +272,27 @@ function CollapsableComponent({
                                 </div>
                             )
                         })}
+
+                    {isPayableMethod &&
+                        <div className={styles.writeMethodBodyInputType}>
+                            <div style={{
+                                width: "100%",
+                                height: "1px",
+                                backgroundColor: "#d0d0d0",
+                                margin: "10px 0px 10px 0px",
+                            }}></div>
+                            {/* <div style={{ marginBottom: "10px" }}>Payable Method</div> */}
+                            <div className={styles.writeMethodBodyInputName}>
+                                Payable value (ICX)
+                            </div>
+                            <input
+                                type="text"
+                                name={"payableValue"}
+                                placeholder={"Payable value (icx)"}
+                                // value={10}
+                                onChange={handleChangePayableValue}
+                            />
+                        </div>}
                     {(methodInput.inputs.length > 0 || alwaysShowButton) && (
                         <div className={styles.methodInputButtonContainer}>
                             <button
