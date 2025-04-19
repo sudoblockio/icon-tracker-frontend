@@ -20,7 +20,9 @@ const TABLE_HEADERS = [
     { name: ["Commission %", "(Max Change/Max Rate)"], sortKey: "commission_rate" },
     { name: ["%Bonded", "Bonded"], sortKey: "bond_percent" },
     { name: ["Monthly Rewards", "ICX/USD"] },
-    { name: ["Votes"] }]
+    { name: ["Votes"] },
+    { name: ["APR"] }
+]
 
 const Loader = ({ height }) => {
     return (

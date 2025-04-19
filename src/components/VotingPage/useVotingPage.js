@@ -4,7 +4,7 @@ import config from '../../config'
 import scores from '../../utils/rawTxMaker/scores'
 import { decimalToHex, makeTxCallRPCObj } from '../../utils/rawTxMaker/api/helpers'
 
-import { getDelegation, getStake, getPReps, getPRepsRPC, getBondList } from '../../redux/store/iiss'
+import { getDelegation, getStake, getPReps, getPRepsRPC, getBondList, queryNetworkInfo, getIISSInfo } from '../../redux/store/iiss'
 
 import { requestJsonRpc } from '../../utils/connect'
 import { calculatePercentageWithoutTrunc } from '../../utils/utils'
@@ -209,6 +209,16 @@ export function useVotingPage(address, history) {
 
             const respPreps = await getPReps()
             const { totalDelegated: totalVotedLoop } = await getPRepsRPC()
+            const IISSData = await getIISSInfo()
+            const networkInfo = await queryNetworkInfo()
+
+            const iGlobalDecimal = Number(IISSData.variable.Iglobal, 16) / 1e18;
+            const iPrepDecimal = Number(IISSData.variable.Iprep, 16) / 10000;
+            const totalPowerDecimal = parseInt(networkInfo.totalPower, 16) / 1e18;
+            const STAKING_AMOUNT = 10000;
+
+
+
 
             const totalVoted = !totalVotedLoop ?
                 0 :
@@ -219,6 +229,17 @@ export function useVotingPage(address, history) {
                 prep.commissionBondPercent = Number(prep.commission_rate) * Number(prep.bond_percent)
                 prep.overBondPercent = 100 - Number(prep.bond_percent)
                 prep.isJailed = parseInt(prep.jail_flags, 16) !== 0
+
+                const prepCommissRate = prep.commission_rate !== null ? prep.commission_rate / 100 : prep.commission_rate;
+                const prepPower = prep.power / 10 ** 18
+                const prepDelegated = prep.delegated
+                const fromIprep =
+                    (prepPower * iGlobalDecimal * iPrepDecimal) / totalPowerDecimal;
+                const totalStakersRewards = prepCommissRate !== null ? fromIprep * (1 - prepCommissRate) : fromIprep;
+                const monthlyStakersRewards = totalStakersRewards * (STAKING_AMOUNT / (prepDelegated + STAKING_AMOUNT))
+
+                prep.balance = Number(prep.balance ?? 0);
+                prep.apr = ((monthlyStakersRewards * 12) / STAKING_AMOUNT) * 100
             })
 
             dataPreps.sort((a, b) => {

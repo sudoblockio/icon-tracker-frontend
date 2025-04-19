@@ -420,7 +420,7 @@ body {
 }
 .wrap-holder {
     margin: 0 auto;
-    width: 1260px;
+    width: 1360px;
     position: relative;
     padding: 0 50px;
 }
@@ -454,7 +454,7 @@ body {
     top: 0;
 }
 .header-wrap .wrap-holder {
-    max-width: 1260px;
+    max-width: 1360px;
     min-width: 980px;
     width: auto;
     height: 60px;
@@ -4275,7 +4275,7 @@ input[type='text']:focus.over {
 
 .tab-holder {
     font-size: 16px;
-    width: 1160px;
+    /* width: 1160px; */
     margin: 0 auto 33px;
     position: relative;
 }
