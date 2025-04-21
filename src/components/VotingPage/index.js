@@ -194,10 +194,21 @@ export default function VotingPage(props) {
                                 <div>Total</div>
                                 <div className={clsx(style.total)}>
                                     <div>
-                                        <label>ICX Amount:</label>
-                                        <span>
-                                            {totVotedAmt.toFixed(2)}
-                                        </span>
+                                        <div>
+                                            <label>ICX Voted</label>
+                                            <span>
+                                                {totVotedAmt.toFixed(2)}
+                                            </span>
+                                        </div>
+
+                                        <div>
+                                            <label>ICX Available</label>
+                                            <span>
+                                                {state.maxVoteAmt.toFixed(3)}
+                                            </span>
+                                        </div>
+
+
                                         {(state.validationErrors.amount || state.validationErrors.percent) &&
                                             <div className={style.error}>
                                                 {

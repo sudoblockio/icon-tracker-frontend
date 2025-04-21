@@ -136,7 +136,7 @@
         }
 
         .votedWrapper {
-            $footerHeight: 4em;
+            $footerHeight: 5em;
             $votedTableHeight: calc(#{$prepTableHeight} - #{$footerHeight});
 
             width: calc(98% - #{$prepWidth});
