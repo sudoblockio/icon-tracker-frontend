@@ -4,14 +4,17 @@ import ErrorFallback from './ErrorFallback';
 
 
 const ErrorBoundary = ({ children }) => {
+    function handleError(error, errorInfo) {
+        console.log({ error, errorInfo })
+        Sentry.captureException(error, { extra: errorInfo });
+    }
+
     return (
         <Sentry.ErrorBoundary
             fallback={({ error, resetErrorBoundary }) => (
                 <ErrorFallback error={error} resetErrorBoundary={resetErrorBoundary} />
             )}
-            onError={(error, errorInfo) => {
-                Sentry.captureException(error, { extra: errorInfo });
-            }}
+            onError={handleError}
         >
             {children}
         </Sentry.ErrorBoundary>
