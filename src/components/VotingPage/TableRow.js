@@ -195,12 +195,12 @@ class TableRow extends Component {
                     <br />
                     <em>{numberWithCommas(Number(reward_monthly_usd).toFixed())}</em>
                 </td>
-
-
-
                 <td>
                     <span>{numberWithCommas(prepVoted.toFixed(0))}</span>
                     <em>{Number(votedRate * 100).toFixed(1)}%</em>
+                </td>
+                <td>
+                    <span>{prep.apr?.toFixed(2)}%</span>
                 </td>
             </tr >
         )
