@@ -37,6 +37,10 @@ export function useVotingPage(address, history) {
         filteredPreps: [],
     })
 
+    function handleClearVoting() {
+        setState(prev => ({ ...prev, selectedMap: {} }))
+    }
+
     function handleSubmitAutoVote(payload) {
         const prevState = { ...state };
         const newState = getPrepsForAutoVote(prevState, payload)
@@ -125,15 +129,19 @@ export function useVotingPage(address, history) {
     }
 
     async function handleSubmitVoting() {
-        if (!Object.entries(state.selectedMap).length) return
+        let delegs = []
 
-        const delegs = []
-        for (const key in state.selectedMap) {
-            const prep = state.selectedMap[key]
-            delegs.push({
-                address: prep.address,
-                value: decimalToHex(Number(prep.voteAmt) * Math.pow(10, 18)),
-            })
+        if (!Object.entries(state.selectedMap).length) {
+            delegs = []
+        }
+        else {
+            for (const key in state.selectedMap) {
+                const prep = state.selectedMap[key]
+                delegs.push({
+                    address: prep.address,
+                    value: decimalToHex(Number(prep.voteAmt) * Math.pow(10, 18)),
+                })
+            }
         }
 
         const params = {
@@ -155,9 +163,11 @@ export function useVotingPage(address, history) {
                 params.nid
             )
             await requestJsonRpc(rawTx.params)
-            toast.success("Transaction success")
-            init();
             toggleIsOpenPopup();
+            toast.success("Transaction success")
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            await init();
+
         } catch (err) {
             toast.error("Transaction failed")
             console.log(err)
@@ -344,6 +354,7 @@ export function useVotingPage(address, history) {
         handleClickHeader,
         handleChangeSearch,
         handleSubmitAutoVote,
-        getPrepsForAutoVote
+        getPrepsForAutoVote,
+        handleClearVoting
     }
 }

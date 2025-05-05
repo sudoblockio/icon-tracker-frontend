@@ -136,7 +136,7 @@
         }
 
         .votedWrapper {
-            $footerHeight: 4em;
+            $footerHeight: 5em;
             $votedTableHeight: calc(#{$prepTableHeight} - #{$footerHeight});
 
             width: calc(98% - #{$prepWidth});
@@ -204,19 +204,33 @@
 
                     button {
                         height: 30px;
-                        background-color: #299fac;
-                        color: white;
+                        cursor: pointer;
+                        font-size: 0.8rem;
                         border: 1px solid #e2e2e2;
                         border-radius: 5px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        width: 10em;
-                        font-size: 0.8rem;
-                        padding: 0 !important;
                     }
 
-                    button:hover {
-                        background-color: #1b8692;
+                    button.clearBtn {
+                        width: 5em !important;
+                        margin-left: 0.5em;
+                        background-color: #cc0f0f;
+                        color: white;
+
+                        &:hover {
+                            background-color: #ff0000;
+                        }
+                    }
+
+                    button.submitBtn {
+                        background-color: #299fac;
+                        color: white;
+                        font-weight: bold;
+                        width: 9em;
+                        padding: 0 !important;
+
+                        &:hover {
+                            background-color: #1b8692;
+                        }
                     }
                 }
             }
